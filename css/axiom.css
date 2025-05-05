@@ -1551,6 +1551,12 @@ article.card:hover {
         display: flex;
     }
 
+    /* --- ADD THIS RULE --- */
+    /* Hide the standalone theme toggle button next to the nav links on small screens */
+    .navbar > button.theme-toggle {
+        display: none;
+    }
+
     /** hide first .nav-links element **/
     ul.nav-links:first-of-type {
         display: none;
@@ -1579,6 +1585,37 @@ article.card:hover {
 
     .nav-links a {
         padding: var(--a-padding-medium);
+    }
+
+    /* Inside @media (max-width: 768px) { ... } */
+
+    .navbar {
+        /* Ensure vertical alignment is centered for all items */
+        align-items: center;
+    }
+
+    .navbar .menu-toggle {
+        /* Ensure hamburger has consistent box model */
+        display: flex; /* Or block */
+        padding: var(--a-padding-small); /* Example padding */
+        line-height: 1; /* Prevent extra height */
+        /* Add other styles if needed */
+    }
+
+    .navbar > button.theme-toggle {
+        /* display: none; /* Keep this commented out if you want it visible */
+
+        /* --- Styles to apply IF keeping it visible --- */
+        display: inline-block; /* Or block */
+        font-size: 1.1rem;    /* Reduce icon size significantly */
+        margin-left: var(--a-margin-small); /* Adjust space next to hamburger */
+        padding: var(--a-padding-small); /* Match hamburger padding? */
+        line-height: 1;         /* Match hamburger line height */
+        /* vertical-align: middle; /* Might help alignment depending on elements */
+    }
+    /* --- THIS RULE MUST BE INSIDE THE MEDIA QUERY --- */
+    .navbar > button.theme-toggle {
+        display: none; /* Hide the standalone button */
     }
 }
 
