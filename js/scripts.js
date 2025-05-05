@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 lastFocusedElement = triggerElement || document.activeElement; // Store the element that opened the modal
                 modal.classList.add('active');
                 modal.setAttribute('aria-hidden', 'false');
-                // Basic focus management: focus the modal container or first focusable element
+                // Basic focus management - focus first focusable element inside
                 // More robust focus trapping is recommended for production
                 const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
                 const firstFocusable = focusableElements[0];
