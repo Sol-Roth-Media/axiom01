@@ -1,303 +1,267 @@
-:root,
-html[data-theme='light'],
-.light-theme {
+/**
+ * Axiom Framework - Color Variables (colors_vars.css)
+ * ---------------------------------------------------
+ * Defines color palettes, themes (light/dark + color schemes), semantic colors,
+ * and gradients using CSS variables.
+ *
+ * Accessibility Note: While these variables provide a flexible system,
+ * always test final color combinations using contrast checking tools
+ * (like WebAIM's Contrast Checker or browser developer tools) to ensure
+ * WCAG AA or AAA compliance, especially for text on backgrounds.
+ */
 
-    /* ... (other variables) ... */
-    /* ... other variables ... */
-    --a-color-step-large: 60;
-    --a-color-step-small: 30;
+/* ==========================================================================
+   Base Color Definitions & Calculations
+   ========================================================================== */
+:root {
+    /* --- Color Calculation Helpers --- */
+    --a-color-step-analogous: 30; /* Degrees between analogous colors */
+    --a-color-step-split-complement: 150; /* Degrees for split complementary */
+    --a-color-step-triadic: 120; /* Degrees for triadic */
 
-    /** Color Hues */
-    --a-color-primary-hue: 210; /* Updated to a blue hue */
-    --a-color-secondary-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-large)); /* Calculate secondary hue based on primary and step */
-    --a-color-tertiary-hue: calc(var(--a-color-secondary-hue) + var(--a-color-step-large)); /* Calculate tertiary hue based on secondary and step */
-    --a-color-complementary-hue: calc(var(--a-color-primary-hue) + 180); /* Complementary hue is 180 degrees from primary */
-    --a-color-analogous-1-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-small)); /* Analogous 1 is 30 degrees from primary */
-    --a-color-analogous-2-hue: calc(var(--a-color-primary-hue) - var(--a-color-step-small)); /* Analogous 2 is 30 degrees in the opposite direction */
+    /* --- Default Base Hues (Blue Scheme) --- */
+    --a-color-primary-hue-base: 210; /* Blue */
+    --a-color-secondary-hue-base: calc(var(--a-color-primary-hue-base) + var(--a-color-step-triadic)); /* Example: Triadic Secondary (Greenish) */
+    --a-color-tertiary-hue-base: calc(var(--a-color-primary-hue-base) - var(--a-color-step-triadic)); /* Example: Triadic Tertiary (Reddish) */
 
+    /* --- Active Hues (Initially set to base, overridden by themes) --- */
+    --a-color-primary-hue: var(--a-color-primary-hue-base);
+    --a-color-secondary-hue: var(--a-color-secondary-hue-base);
+    --a-color-tertiary-hue: var(--a-color-tertiary-hue-base);
+    /* Complementary & Analogous are always calculated from the *active* primary hue */
+    --a-color-complementary-hue: calc(var(--a-color-primary-hue) + 180);
+    --a-color-analogous-1-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-analogous));
+    --a-color-analogous-2-hue: calc(var(--a-color-primary-hue) - var(--a-color-step-analogous));
 
-    /* --a-color-secondary-hue: 30;
-    /* --a-color-tertiary-hue: 300;
+    /* --- Saturation --- */
+    --a-saturation-primary: 75%; /* Saturation for main colors */
+    --a-saturation-muted: 40%;   /* Less saturated variant */
+    --a-saturation-mono: 0%;     /* Grayscale */
 
+    /* --- Brightness & Core Palette (Defined within light/dark themes below) --- */
+    /* Placeholder values, these are properly defined in theme selectors */
+    --a-brightness-primary: 50%;
+    --a-brightness-container: 90%;
+    --a-brightness-on-primary: 100%;
+    --a-brightness-on-container: 10%;
+    --a-brightness-surface: 100%;
+    --a-brightness-on-surface: 5%;
+    --a-brightness-surface-variant: 95%;
+    --a-brightness-on-surface-variant: 15%;
+    --a-brightness-outline: 70%;
+    --a-brightness-code-bg: 96%;
+    --a-brightness-on-code-bg: 20%;
 
-    /* ... (other variables) ... */
+    /* --- Semantic Colors (Can be overridden per theme if needed) --- */
+    /* Ensure high contrast for text on these backgrounds */
+    --a-color-negative: hsl(0, 70%, 50%);   /* Red for errors */
+    --a-color-on-negative: hsl(0, 0%, 100%);
+    --a-color-negative-container: hsl(0, 70%, 95%);
+    --a-color-on-negative-container: hsl(0, 70%, 20%);
 
-    /** Primary Color */
+    --a-color-positive: hsl(120, 60%, 40%); /* Green for success */
+    --a-color-on-positive: hsl(0, 0%, 100%);
+    --a-color-positive-container: hsl(120, 60%, 95%);
+    --a-color-on-positive-container: hsl(120, 60%, 15%);
+
+    --a-color-informative: hsl(210, 70%, 50%); /* Blue for info */
+    --a-color-on-informative: hsl(0, 0%, 100%);
+    --a-color-informative-container: hsl(210, 70%, 95%);
+    --a-color-on-informative-container: hsl(210, 70%, 20%);
+
+    --a-color-notice: hsl(45, 90%, 50%);  /* Yellow/Orange for warnings */
+    --a-color-on-notice: hsl(45, 90%, 10%); /* Dark text on yellow */
+    --a-color-notice-container: hsl(45, 90%, 95%);
+    --a-color-on-notice-container: hsl(45, 90%, 25%);
+
+    /* --- Grayscale Colors --- */
+    /* Generated by varying brightness with 0% saturation */
+    --a-color-gray-1: hsl(0, var(--a-saturation-mono), 10%); /* Near black */
+    --a-color-gray-2: hsl(0, var(--a-saturation-mono), 20%);
+    --a-color-gray-3: hsl(0, var(--a-saturation-mono), 30%);
+    --a-color-gray-4: hsl(0, var(--a-saturation-mono), 40%);
+    --a-color-gray-5: hsl(0, var(--a-saturation-mono), 50%); /* Mid gray */
+    --a-color-gray-6: hsl(0, var(--a-saturation-mono), 60%);
+    --a-color-gray-7: hsl(0, var(--a-saturation-mono), 70%);
+    --a-color-gray-8: hsl(0, var(--a-saturation-mono), 80%);
+    --a-color-gray-9: hsl(0, var(--a-saturation-mono), 90%); /* Near white */
+}
+
+/* ==========================================================================
+   Core Color Palette Generation (Applied via HSL)
+   ========================================================================== */
+/* These variables apply the active hue, saturation, and brightness */
+/* --- Surface Colors --- */
+:root {
+    --a-color-surface: hsl(0, var(--a-saturation-mono), var(--a-brightness-surface));
+    --a-color-on-surface: hsl(0, var(--a-saturation-mono), var(--a-brightness-on-surface));
+    --a-color-surface-variant: hsl(0, var(--a-saturation-mono), var(--a-brightness-surface-variant));
+    --a-color-on-surface-variant: hsl(0, var(--a-saturation-mono), var(--a-brightness-on-surface-variant));
+    --a-color-surface-invert: hsl(0, var(--a-saturation-mono), calc(100% - var(--a-brightness-surface))); /* Opposite of surface */
+    --a-color-on-surface-invert: hsl(0, var(--a-saturation-mono), calc(100% - var(--a-brightness-on-surface))); /* Opposite of on-surface */
+    --a-color-outline: hsl(0, var(--a-saturation-mono), var(--a-brightness-outline));
+    --a-color-code-bg: hsl(0, var(--a-saturation-mono), var(--a-brightness-code-bg));
+    --a-color-on-code-bg: hsl(0, var(--a-saturation-mono), var(--a-brightness-on-code-bg));
+}
+/* --- Primary Color --- */
+:root {
     --a-color-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-container));
-
-    /* ... (other variables) ... */
-
-    /** Gray Colors */
-    --a-color-gray-1: hsl(0, 0%, 10%);
-    --a-color-gray-2: hsl(0, 0%, 20%);
-    --a-color-gray-3: hsl(0, 0%, 30%);
-    --a-color-gray-4: hsl(0, 0%, 40%);
-    --a-color-gray-5: hsl(0, 0%, 50%);
-    --a-color-gray-6: hsl(0, 0%, 60%);
-    --a-color-gray-7: hsl(0, 0%, 70%);
-    --a-color-gray-8: hsl(0, 0%, 80%);
-    --a-color-gray-9: hsl(0, 0%, 90%);
-    /** Color Brightness/Darkness */
-    --a-brightness-primary: 45%; /* Adjusted for green */
-    --a-brightness-primary-container: 35%; /* Adjusted for green */
-    --a-brightness-dark: 18%;
-    --a-brightness-near-black: 4%;
-    --a-brightness-text-on-dark: 98%;
-    /* For text on dark backgrounds */
-    --a-brightness-container: calc(100% - var(--a-brightness-dark));
-
-    /** Color Saturation */
-    --a-saturation-primary: 70%; /* Adjusted for green */
-    --a-saturation-mono: 0%;
-
-    /* Surface Colors */
-    --a-color-surface: hsl(0, 0%, 100%);
-    /* White */
-    --a-color-on-surface: hsl(0, 0%, 0%);
-    /* Black */
-    --a-color-surface-invert: hsl(0, 0%, 0%);
-    /* Black */
-    --a-color-on-surface-invert: hsl(0, 0%, 100%);
-    /* White */
-    --a-color-outline: hsl(0, 0%, 50%);
-    /* Example outline color */
-
-    /** Primary Color */
-    --a-color-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-container));
-
-    /* Mono */
-    --a-color-primary-mono: hsl(var(--a-color-primary-hue), var(--a-saturation-mono), var(--a-brightness-primary));
-    --a-color-on-primary-mono: hsl(var(--a-color-primary-hue), var(--a-saturation-mono), var(--a-brightness-text-on-dark));
-    --a-color-primary-container-mono: hsl(var(--a-color-primary-hue), var(--a-saturation-mono), var(--a-brightness-primary-container));
-    --a-color-on-primary-container-mono: hsl(var(--a-color-primary-hue), var(--a-saturation-mono), var(--a-brightness-container));
-
-    /** Secondary Color */
+    --a-color-on-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-on-primary));
+    --a-color-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-container));
+    --a-color-on-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-on-container));
+}
+/* --- Secondary Color --- */
+:root {
     --a-color-secondary: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-secondary: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-secondary-container: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-secondary-container: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-container));
-
-    /** Tertiary Color */
+    --a-color-on-secondary: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-on-primary));
+    --a-color-secondary-container: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-container));
+    --a-color-on-secondary-container: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-on-container));
+}
+/* --- Tertiary Color --- */
+:root {
     --a-color-tertiary: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-tertiary: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-tertiary-container: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-tertiary-container: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-container));
-
-    /** Complementary Color */
+    --a-color-on-tertiary: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-on-primary));
+    --a-color-tertiary-container: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-container));
+    --a-color-on-tertiary-container: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-on-container));
+}
+/* --- Complementary Color --- */
+:root {
     --a-color-complementary: hsl(var(--a-color-complementary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-complementary: hsl(var(--a-color-complementary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-complementary-container: hsl(var(--a-color-complementary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-complementary-container: hsl(var(--a-color-complementary-hue), var(--a-saturation-primary), var(--a-brightness-container));
-
-    /* Analogous Colors */
+    --a-color-on-complementary: hsl(var(--a-color-complementary-hue), var(--a-saturation-primary), var(--a-brightness-on-primary));
+    --a-color-complementary-container: hsl(var(--a-color-complementary-hue), var(--a-saturation-primary), var(--a-brightness-container));
+    --a-color-on-complementary-container: hsl(var(--a-color-complementary-hue), var(--a-saturation-primary), var(--a-brightness-on-container));
+}
+/* --- Analogous Colors --- */
+:root {
     --a-color-analogous-1: hsl(var(--a-color-analogous-1-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-analogous-1: hsl(var(--a-color-analogous-1-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-analogous-1-container: hsl(var(--a-color-analogous-1-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-analogous-1-container: hsl(var(--a-color-analogous-1-hue), var(--a-saturation-primary), var(--a-brightness-container));
-
+    --a-color-on-analogous-1: hsl(var(--a-color-analogous-1-hue), var(--a-saturation-primary), var(--a-brightness-on-primary));
+    --a-color-analogous-1-container: hsl(var(--a-color-analogous-1-hue), var(--a-saturation-primary), var(--a-brightness-container));
+    --a-color-on-analogous-1-container: hsl(var(--a-color-analogous-1-hue), var(--a-saturation-primary), var(--a-brightness-on-container));
     --a-color-analogous-2: hsl(var(--a-color-analogous-2-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-analogous-2: hsl(var(--a-color-analogous-2-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-analogous-2-container: hsl(var(--a-color-analogous-2-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-analogous-2-container: hsl(var(--a-color-analogous-2-hue), var(--a-saturation-primary), var(--a-brightness-container));
-
-
-    /* Semantic Colors */
-    --a-color-negative: #ba1a1a;
-    --a-color-on-negative: #ffffff;
-    --a-color-negative-container: #ffdad6;
-    --a-color-on-negative-container: #410002;
-
-    --a-color-positive: #00c005;
-    --a-color-on-positive: #ffffff;
-    --a-color-positive-container: #E6FFD6FF;
-    --a-color-on-positive-container: #004109;
-
-    --a-color-informative: #1a27ba;
-    --a-color-on-informative: #ffffff;
-    --a-color-informative-container: #d6e0ff;
-    --a-color-on-informative-container: #000b41;
-
-    --a-color-notice: #f67c2a;
-    --a-color-on-notice: #ffffff;
-    --a-color-notice-container: #ffebd6;
-    --a-color-on-notice-container: #412700;
-
-    /* Code */
-    --a-color-code-bg: #f5f5f5; /* Light gray background for code blocks */
-
-
-    /** Gradients */
-    /* Primary */
+    --a-color-on-analogous-2: hsl(var(--a-color-analogous-2-hue), var(--a-saturation-primary), var(--a-brightness-on-primary));
+    --a-color-analogous-2-container: hsl(var(--a-color-analogous-2-hue), var(--a-saturation-primary), var(--a-brightness-container));
+    --a-color-on-analogous-2-container: hsl(var(--a-color-analogous-2-hue), var(--a-saturation-primary), var(--a-brightness-on-container));
+}
+/* --- Gradients --- */
+/* (Gradients automatically use the active colors defined above) */
+:root {
     --a-gradient-primary: linear-gradient(135deg, var(--a-color-primary), var(--a-color-primary-container));
-    --a-gradient-on-primary: linear-gradient(135deg, var(--a-color-on-primary), var(--a-color-primary));
-    --a-gradient-primary-container: linear-gradient(135deg,  var(--a-color-primary-container), var(--a-color-on-primary-container));
-    --a-gradient-on-primary-container: linear-gradient(135deg, var(--a-color-on-primary-container), var(--a-color-primary-container));
-    --a-gradient-black-to-primary: linear-gradient(135deg, black, var(--a-color-primary)); /* Black to primary */
-    --a-gradient-primary-container-to-primary: linear-gradient(135deg, var(--a-color-primary-container), var(--a-color-primary)); /* Container to primary */
-
-    /* Secondary */
     --a-gradient-secondary: linear-gradient(135deg, var(--a-color-secondary), var(--a-color-secondary-container));
-    --a-gradient-on-secondary: linear-gradient(135deg, var(--a-color-on-secondary), var(--a-color-secondary));
-    --a-gradient-secondary-container: linear-gradient(135deg,  var(--a-color-secondary-container), var(--a-color-on-secondary-container));
-    --a-gradient-on-secondary-container: linear-gradient(135deg, var(--a-color-on-secondary-container), var(--a-color-secondary-container));
-    --a-gradient-black-to-secondary: linear-gradient(135deg, black, var(--a-color-secondary)); /* Black to secondary */
-    --a-gradient-secondary-container-to-secondary: linear-gradient(135deg, var(--a-color-secondary-container), var(--a-color-secondary)); /* Container to secondary */
-
-    /* Tertiary */
     --a-gradient-tertiary: linear-gradient(135deg, var(--a-color-tertiary), var(--a-color-tertiary-container));
-    --a-gradient-on-tertiary: linear-gradient(135deg, var(--a-color-on-tertiary), var(--a-color-tertiary));
-    --a-gradient-tertiary-container: linear-gradient(135deg,  var(--a-color-tertiary-container), var(--a-color-on-tertiary-container));
-    --a-gradient-on-tertiary-container: linear-gradient(135deg, var(--a-color-on-tertiary-container), var(--a-color-tertiary-container));
-    --a-gradient-black-to-tertiary: linear-gradient(135deg, black, var(--a-color-tertiary)); /* Black to tertiary */
-    --a-gradient-tertiary-container-to-tertiary: linear-gradient(135deg, var(--a-color-tertiary-container), var(--a-color-tertiary)); /* Container to tertiary */
-
-    /* Complementary */
     --a-gradient-complementary: linear-gradient(135deg, var(--a-color-complementary), var(--a-color-complementary-container));
-    --a-gradient-on-complementary: linear-gradient(135deg, var(--a-color-on-complementary), var(--a-color-complementary));
-    --a-gradient-complementary-container: linear-gradient(135deg,  var(--a-color-complementary-container), var(--a-color-on-complementary-container));
-    --a-gradient-on-complementary-container: linear-gradient(135deg, var(--a-color-on-complementary-container), var(--a-color-complementary-container));
-    --a-gradient-black-to-complementary: linear-gradient(135deg, black, var(--a-color-complementary)); /* Black to complementary */
-    --a-gradient-complementary-container-to-complementary: linear-gradient(135deg, var(--a-color-complementary-container), var(--a-color-complementary)); /* Container to complementary */
-
-    /* Analogous 1 */
     --a-gradient-analogous-1: linear-gradient(135deg, var(--a-color-analogous-1), var(--a-color-analogous-1-container));
-    --a-gradient-on-analogous-1: linear-gradient(135deg, var(--a-color-on-analogous-1), var(--a-color-analogous-1));
-    --a-gradient-analogous-1-container: linear-gradient(135deg,  var(--a-color-analogous-1-container), var(--a-color-on-analogous-1-container));
-    --a-gradient-on-analogous-1-container: linear-gradient(135deg, var(--a-color-on-analogous-1-container), var(--a-color-analogous-1-container));
-    --a-gradient-black-to-analogous-1: linear-gradient(135deg, black, var(--a-color-analogous-1)); /* Black to analogous-1 */
-    --a-gradient-analogous-1-container-to-analogous-1: linear-gradient(135deg, var(--a-color-analogous-1-container), var(--a-color-analogous-1)); /* Container to analogous-1 */
-
-    /* Analogous 2 */
     --a-gradient-analogous-2: linear-gradient(135deg, var(--a-color-analogous-2), var(--a-color-analogous-2-container));
-    --a-gradient-on-analogous-2: linear-gradient(135deg, var(--a-color-on-analogous-2), var(--a-color-analogous-2));
-    --a-gradient-analogous-2-container: linear-gradient(135deg,  var(--a-color-analogous-2-container), var(--a-color-on-analogous-2-container));
-    --a-gradient-on-analogous-2-container: linear-gradient(135deg, var(--a-color-on-analogous-2-container), var(--a-color-analogous-2-container));
-    --a-gradient-black-to-analogous-2: linear-gradient(135deg, black, var(--a-color-analogous-2)); /* Black to analogous-2 */
-    --a-gradient-analogous-2-container-to-analogous-2: linear-gradient(135deg, var(--a-color-analogous-2-container), var(--a-color-analogous-2)); /* Container to analogous-2 */
-    /* Multi-level */
-    --a-gradient-analogous-to-primary: linear-gradient(to right, var(--a-color-analogous-1), var(--a-color-primary));
-    --a-gradient-3-level: linear-gradient(to right, var(--a-color-analogous-1), var(--a-color-primary), var(--a-color-analogous-2));
-    --a-gradient-all-colors: linear-gradient(to right, var(--a-color-primary), var(--a-color-secondary), var(--a-color-tertiary), var(--a-color-complementary), var(--a-color-analogous-1), var(--a-color-analogous-2));
-    --a-gradient-primary-to-secondary: linear-gradient(to right, var(--a-color-primary), var(--a-color-secondary));
-    --a-gradient-secondary-to-tertiary: linear-gradient(to right, var(--a-color-secondary), var(--a-color-tertiary));
-    --a-gradient-analogous-1-to-analogous-2: linear-gradient(to right, var(--a-color-analogous-1), var(--a-color-analogous-2));
-    --a-gradient-primary-to-complementary: linear-gradient(to right, var(--a-color-primary), var(--a-color-complementary)); /* Primary to complementary */
-    --a-gradient-secondary-to-complementary: linear-gradient(to right, var(--a-color-secondary), var(--a-color-complementary)); /* Secondary to complementary */
-    --a-gradient-tertiary-to-complementary: linear-gradient(to right, var(--a-color-tertiary), var(--a-color-complementary)); /* Tertiary to complementary */
-    --a-gradient-primary-to-analogous-1: linear-gradient(to right, var(--a-color-primary), var(--a-color-analogous-1)); /* Primary to analogous 1 */
-    --a-gradient-secondary-to-analogous-2: linear-gradient(to right, var(--a-color-secondary), var(--a-color-analogous-2)); /* Secondary to analogous 2 */
-    --a-gradient-tertiary-to-analogous-1: linear-gradient(to right, var(--a-color-tertiary), var(--a-color-analogous-1)); /* Tertiary to analogous 1 */
-
-    /* Subtle */
-    --a-gradient-subtle-primary: linear-gradient(to right, var(--a-color-primary), var(--a-color-primary-container));
-    --a-gradient-subtle-secondary: linear-gradient(to right, var(--a-color-secondary), var(--a-color-secondary-container));
-    --a-gradient-subtle-tertiary: linear-gradient(to right, var(--a-color-tertiary), var(--a-color-tertiary-container));
-    --a-gradient-subtle-complementary: linear-gradient(to right, var(--a-color-complementary), var(--a-color-complementary-container));
-    --a-gradient-subtle-analogous-1: linear-gradient(to right, var(--a-color-analogous-1), var(--a-color-analogous-1-container));
-    --a-gradient-subtle-analogous-2: linear-gradient(to right, var(--a-color-analogous-2), var(--a-color-analogous-2-container));
-
-
-
-
+    --a-gradient-primary-to-secondary: linear-gradient(135deg, var(--a-color-primary), var(--a-color-secondary));
+    --a-gradient-primary-container-to-primary: linear-gradient(135deg, var(--a-color-primary-container), var(--a-color-primary));
+    /* Add other gradients as needed */
 }
 
-/* Dark Mode Colors */
-html[data-theme='dark'],
-.dark-theme {
-    --a-color-surface: hsl(0, 0%, 10%); /* Dark gray */
-    --a-color-on-surface: hsl(0, 0%, 95%); /* Light gray */
-    --a-color-surface-invert: hsl(0, 0%, 95%); /* Light gray */
-    --a-color-on-surface-invert: hsl(0, 0%, 10%); /* Dark gray */
-    --a-color-outline: hsl(0, 0%, 70%); /* Lighter outline for dark mode */
-    --a-color-code-bg: #2a2a2a;
 
-    .theme-toggle i{
-        color: black !important;
-        opacity: .75;
-    }
-
-    --a-brightness-primary: 40%; /* Adjusted for green */
-    --a-brightness-primary-container: 30%; /* Adjusted for green */
-    --a-brightness-dark: 13%;
-    --a-brightness-near-black: 2%;
-    --a-brightness-text-on-dark: 95%;
-    /* Adjust other colors as needed for dark mode */
-
-    button.outline{
-        //increase brightness;
-        filter: brightness(200%);
-    }
-
-    button.text {
-        filter: brightness(200%);
-    }
-}
-
-/* Blue Theme Colors */
-html[data-theme='blue'],
-.blue-theme {
-    --a-color-primary-hue: 220; /* Blue hue */
-    --a-color-secondary-hue: calc(var(--a-color-primary-hue) + (var(--a-color-step-large) * 2));
-    --a-color-tertiary-hue: calc(var(--a-color-secondary-hue) + (var(--a-color-step-large) * 2));
-
+/* ==========================================================================
+   Light Mode Theme Definitions
+   ========================================================================== */
+html[data-theme^='light'] { /* Target all themes starting with 'light' */
+    color-scheme: light; /* Inform browser */
+    /* --- Light Mode Brightness --- */
     --a-brightness-primary: 50%;
-    --a-brightness-primary-container: 40%;
-
-    --a-color-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-container));
-
-    --a-color-secondary: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-secondary: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-secondary-container: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-secondary-container: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-container));
-
-    --a-color-tertiary: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-tertiary: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-tertiary-container: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-tertiary-container: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-container));
-
-    /* Gradients */
-    --a-gradient-primary: linear-gradient(135deg, hsl(220, 70%, 50%), hsl(220, 80%, 40%));
-    --a-gradient-secondary: linear-gradient(135deg, hsl(274, 70%, 50%), hsl(274, 80%, 40%));
-    --a-gradient-tertiary: linear-gradient(135deg, hsl(328, 70%, 50%), hsl(328, 80%, 40%));
+    --a-brightness-container: 90%;
+    --a-brightness-on-primary: 100%;
+    --a-brightness-on-container: 10%;
+    --a-brightness-surface: 100%;
+    --a-brightness-on-surface: 5%;
+    --a-brightness-surface-variant: 95%;
+    --a-brightness-on-surface-variant: 15%;
+    --a-brightness-outline: 70%;
+    --a-brightness-code-bg: 96%;
+    --a-brightness-on-code-bg: 20%;
 }
 
-/* Gray Theme Colors */
-html[data-theme='gray'],
-.gray-theme {
-    --a-color-primary-hue: 0; /* Gray hue */
-    --a-color-secondary-hue: 240; /* Example secondary hue (blue) */
-    --a-color-tertiary-hue: 120; /* Example tertiary hue (green) */
+/* --- Light Mode Color Schemes --- */
+html[data-theme='light'], /* Default (Blue) */
+html[data-theme='light-blue'] {
+    --a-color-primary-hue: 210; /* Blue */
+    --a-color-secondary-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-triadic));
+    --a-color-tertiary-hue: calc(var(--a-color-primary-hue) - var(--a-color-step-triadic));
+}
 
-    --a-saturation-primary: 0%;
-    --a-brightness-primary: 50%;
-    --a-brightness-primary-container: 90%;
+html[data-theme='light-green'] {
+    --a-color-primary-hue: 145; /* Green */
+    --a-color-secondary-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-triadic));
+    --a-color-tertiary-hue: calc(var(--a-color-primary-hue) - var(--a-color-step-triadic));
+}
 
-    --a-color-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-mono), var(--a-brightness-near-black));
+html[data-theme='light-orange'] {
+    --a-color-primary-hue: 30; /* Orange */
+    --a-color-secondary-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-triadic));
+    --a-color-tertiary-hue: calc(var(--a-color-primary-hue) - var(--a-color-step-triadic));
+}
 
-    --a-color-secondary: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-secondary: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-secondary-container: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-secondary-container: hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), var(--a-brightness-container));
+html[data-theme='light-purple'] {
+    --a-color-primary-hue: 270; /* Purple */
+    --a-color-secondary-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-triadic));
+    --a-color-tertiary-hue: calc(var(--a-color-primary-hue) - var(--a-color-step-triadic));
+}
 
-    --a-color-tertiary: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
-    --a-color-on-tertiary: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-text-on-dark));
-    --a-color-tertiary-container: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
-    --a-color-on-tertiary-container: hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), var(--a-brightness-container));
 
-    /* Gradients (Example - adjust as needed) */
-    --a-gradient-primary: linear-gradient(135deg, hsl(0, 0%, 40%), hsl(0, 0%, 60%));
-    --a-gradient-secondary: linear-gradient(135deg, hsl(240, 50%, 50%), hsl(240, 60%, 60%));
-    --a-gradient-tertiary: linear-gradient(135deg, hsl(120, 50%, 50%), hsl(120, 60%, 60%));
+/* ==========================================================================
+   Dark Mode Theme Definitions
+   ========================================================================== */
+html[data-theme^='dark'] { /* Target all themes starting with 'dark' */
+    color-scheme: dark; /* Inform browser */
+    /* --- Dark Mode Brightness --- */
+    --a-brightness-primary: 60%;
+    --a-brightness-container: 25%;
+    --a-brightness-on-primary: 10%;
+    --a-brightness-on-container: 90%;
+    --a-brightness-surface: 10%;
+    --a-brightness-on-surface: 95%;
+    --a-brightness-surface-variant: 15%;
+    --a-brightness-on-surface-variant: 85%;
+    --a-brightness-outline: 40%;
+    --a-brightness-code-bg: 20%;
+    --a-brightness-on-code-bg: 85%;
+
+    /* --- Dark Mode Semantic Colors (Adjusted for contrast) --- */
+    --a-color-negative: hsl(0, 70%, 70%);
+    --a-color-on-negative: hsl(0, 70%, 10%);
+    --a-color-negative-container: hsl(0, 70%, 25%);
+    --a-color-on-negative-container: hsl(0, 70%, 90%);
+    --a-color-positive: hsl(120, 60%, 60%);
+    --a-color-on-positive: hsl(120, 60%, 10%);
+    --a-color-positive-container: hsl(120, 60%, 20%);
+    --a-color-on-positive-container: hsl(120, 60%, 90%);
+    --a-color-informative: hsl(210, 70%, 70%);
+    --a-color-on-informative: hsl(210, 70%, 10%);
+    --a-color-informative-container: hsl(210, 70%, 25%);
+    --a-color-on-informative-container: hsl(210, 70%, 90%);
+    --a-color-notice: hsl(45, 90%, 70%);
+    --a-color-on-notice: hsl(45, 90%, 15%);
+    --a-color-notice-container: hsl(45, 90%, 25%);
+    --a-color-on-notice-container: hsl(45, 90%, 90%);
+}
+
+/* --- Dark Mode Color Schemes --- */
+html[data-theme='dark'], /* Default (Blue) */
+html[data-theme='dark-blue'] {
+    --a-color-primary-hue: 210; /* Blue */
+    --a-color-secondary-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-triadic));
+    --a-color-tertiary-hue: calc(var(--a-color-primary-hue) - var(--a-color-step-triadic));
+}
+
+html[data-theme='dark-green'] {
+    --a-color-primary-hue: 145; /* Green */
+    --a-color-secondary-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-triadic));
+    --a-color-tertiary-hue: calc(var(--a-color-primary-hue) - var(--a-color-step-triadic));
+}
+
+html[data-theme='dark-orange'] {
+    --a-color-primary-hue: 30; /* Orange */
+    --a-color-secondary-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-triadic));
+    --a-color-tertiary-hue: calc(var(--a-color-primary-hue) - var(--a-color-step-triadic));
+}
+
+html[data-theme='dark-purple'] {
+    --a-color-primary-hue: 270; /* Purple */
+    --a-color-secondary-hue: calc(var(--a-color-primary-hue) + var(--a-color-step-triadic));
+    --a-color-tertiary-hue: calc(var(--a-color-primary-hue) - var(--a-color-step-triadic));
 }
