@@ -8,8 +8,12 @@
     align-items: baseline;
 }
 
+.logo span{
+    color: var(--a-color-on-primary-container);
+}
+
 .logo span:nth-child(1) { /* Target the "A" */
-    font-size: 2rem; /* Updated size */
+    font-size: 1.6rem; /* Updated size */
     font-weight: 900;
     font-style: italic;
     font-family: monospace;
@@ -17,7 +21,7 @@
 }
 
 .logo span:nth-child(2) { /* Target the "X" */
-    font-size: 2rem; /* Updated size */
+    font-size: 1.6rem; /* Updated size */
     font-weight: 700;
     font-family: monospace;
     font-style: italic;
@@ -25,13 +29,15 @@
 }
 
 .logo span:nth-child(3) { /* Target the "I" */
-    font-size: 1.4rem; /* Updated size */
+    font-size: 1.3rem; /* Updated size */
     font-weight: 700;
+    color: var(--a-color-positive); /* Example color */
    /** color: var(--a-color-gray-6); /* Example color */
+    font-family: monospace;
 }
 
 .logo span:nth-child(4) { /* Target the "O" */
-    font-size: 1.3rem; /* Updated size */
+    font-size: 1.2rem; /* Updated size */
     font-weight: 500;
     color: var(--a-color-positive); /* Example color */
     font-family: monospace;
@@ -39,7 +45,7 @@
 }
 
 .logo span:nth-child(5) { /* Target the "M" */
-    font-size: 1.4rem; /* Updated size */
+    font-size: 1.3rem; /* Updated size */
     font-weight: 700;
     color: var(--a-color-positive); /* Example color */
     font-family: monospace;
@@ -47,34 +53,34 @@
 }
 
 .logo span:nth-child(6) { /* Target the space */
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 800;
     font-family: monospace;
     margin-left: 2px;
 }
 
 .logo span:nth-child(7) { /* Target the "[" */
-    font-size: 2rem; /* Updated size */
+    font-size: 1.6rem; /* Updated size */
     font-weight: 800;
     /**color: var(--a-color-gray-2); /* Example color */
 }
 
 .logo span:nth-child(8) { /* Target the "01" */
-    font-size: 1.6rem; /* Updated size */
+    font-size: 1.4rem; /* Updated size */
     font-weight: 100;
     color: var(--a-color-positive); /* Example color */
     font-family: monospace;
 }
 
 .logo span:nth-child(9) { /* Target the "]" */
-    font-size: 2rem; /* Updated size */
+    font-size: 1.6rem; /* Updated size */
     font-weight: 200;
     font-family: "Roboto Light";
     /** color: var(--a-color-gray-2); /* Example color */
 }
 
 .navbar{
-    padding-bottom: 0;
+
 }
 
 
@@ -252,4 +258,78 @@ a.logo:hover{
 .gradient-swatch:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Navbar Enhancements --- */
+
+.navbar {
+    /* Ensure flex properties are set */
+    display: flex;
+    justify-content: space-between; /* Pushes logo left, links/toggle right */
+    align-items: center; /* Vertically align all items */
+    /* padding might need adjustment based on toggle size */
+}
+
+/* Logo Version Styling */
+
+.logo {
+    position: relative; /* Required for absolute positioning of child */
+    text-decoration: none;
+    padding-bottom: 1em; /* Add space below main logo text for the version */
+    /* Adjust '1em' as needed based on version font size */
+    line-height: 1.2; /* Adjust line height of main logo if needed */
+    /* Remove display:flex, flex-direction, align-items if you added them before */
+}
+
+.logo .version {
+    position: absolute; /* Take version number out of normal flow */
+    bottom: 0; /* Position it at the bottom of the logo's padding area */
+    left: 5px; /* Adjust horizontal indent as needed */
+    font-size: 0.90em; /* Keep it small */
+    font-weight: bolder;
+    color: var(--a-color-on-primary-container); /* Or appropriate color */
+    opacity: 0.8;
+    line-height: 1; /* Ensure tight line height */
+    /* Remove display: block and margin-top if previously set */
+    margin-left: 0 !important;
+}
+
+/* Style for the main logo text container if needed */
+.logo .logo-text {
+    display: inline-block; /* Or block, depending on desired wrapping */
+    margin: var(--a-margin-tiny);
+}
+
+/* Standalone Theme Toggle Button Styling */
+.navbar .theme-toggle {
+    background: none;
+    border: none;
+    color: var(--a-color-on-primary-container); /* Use appropriate navbar text color */
+    font-size: 1.5rem;      /* Adjust icon size as needed */
+    cursor: pointer;
+    padding: 0;             /* Remove default button padding */
+    margin-left: var(--a-margin-medium); /* Space between nav links and toggle */
+    /* Flex alignment is handled by .navbar's align-items: center */
+    line-height: 1; /* Prevent extra height */
+}
+
+.navbar .theme-toggle:hover {
+    opacity: 0.8; /* Optional hover effect */
+}
+
+/* Ensure nav links don't push toggle too far on smaller screens if needed */
+@media (max-width: 768px) {
+    /* The JS already handles showing/hiding .nav-links */
+    /* Adjust .theme-toggle position if needed when menu is open */
+    .navbar .theme-toggle {
+        /* Example: maybe hide it when mobile menu is open if it clashes */
+        /* .nav-links.open + & { display: none; } */
+        /* Or adjust margin */
+        margin-left: var(--a-margin-small);
+    }
+}
+
+/* Remove theme toggle from the list styling if it was previously an li */
+.nav-links .theme-toggle {
+    display: none; /* Hide it if it still exists as an li */
 }

@@ -1,9 +1,18 @@
-/* axiom.css */
+/* ========================================================================= */
+/* Axiom Framework Base Styles                                               */
+/* Refactored for consistent variable usage                                  */
+/* Depends on updated axiom_vars.css and colors_vars.css                     */
+/* ========================================================================= */
+
+/* --- Imports --- */
 @import url("colors_vars.css");
 @import url("axiom_vars.css");
-@import url("_reset.css");
+@import url("_reset.css"); /* Keep the reset */
 
-/* --- Body Styles --- */
+/* ========================================================================= */
+/* Base HTML Element Styles                                                  */
+/* ========================================================================= */
+
 body {
     font-family: var(--a-font-family-sans);
     font-size: var(--a-font-size-base);
@@ -17,861 +26,149 @@ body {
 }
 
 /* --- Headings --- */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-weight: 600;
+h1, h2, h3, h4, h5, h6 {
     font-family: var(--a-font-family-sans);
-    line-height: var(--a-line-height-base);
-    /* Remove top margin for headings */
-    /* margin: var(--a-margin-base); */
+    font-weight: var(--a-font-weight-bold);
+    line-height: var(--a-line-height-heading); /* Use heading line height */
+    margin-top: var(--a-heading-margin-top);
+    margin-bottom: var(--a-heading-margin-bottom);
+    padding: 0; /* Reset padding */
 }
 
-/* Heading sizes based on the scale variable */
-h1 {
-    font-size: var(--a-font-size-h1); /* Updated size */
-    /* padding: calc(2 * var(--a-padding-base)); */
-    padding-left: 0px;
-}
-
-h2 {
-    font-size: var(--a-font-size-h2); /* Updated size */
-    /* padding: var(--a-padding-base); */
-    padding-left: 0px;
-}
-
-h3 {
-    font-size: var(--a-font-size-h3); /* Updated size */
-    /* padding: var(--a-padding-base); */
-    padding-left: 0px;
-}
-
-h4 {
-    font-size: var(--a-font-size-h4);
-    font-weight: 600;
-    padding-left: 0px;
-}
-
-h5 {
-    font-size: var(--a-font-size-h5);
-    font-weight: 600;
-}
-
-h6 {
-    font-size: var(--a-font-size-h6);
-    font-weight: 600;
-}
+h1 { font-size: var(--a-font-size-h1); }
+h2 { font-size: var(--a-font-size-h2); }
+h3 { font-size: var(--a-font-size-h3); }
+h4 { font-size: var(--a-font-size-h4); }
+h5 { font-size: var(--a-font-size-h5); }
+h6 { font-size: var(--a-font-size-h6); }
 
 /* --- Paragraphs --- */
 p {
     margin-top: 0;
-    /* Remove top margin for paragraphs */
-    margin: calc(2 * var(--a-margin-base));
+    margin-bottom: var(--a-paragraph-margin-bottom);
+    line-height: var(--a-line-height-base); /* Ensure base line height */
 }
 
 /* --- Links --- */
 a {
     color: var(--a-color-primary);
     text-decoration: none;
+    transition: color 0.2s ease-in-out; /* Add smooth transition */
 }
-
-a:hover {
+a:hover, a:focus {
+    color: var(--a-color-primary-container); /* Example hover state */
     text-decoration: underline;
 }
 
 /* --- Lists --- */
-ul,
-ol {
-    margin: calc( 3 * var(--a-margin-base));
-    margin-left: 0px;
-    padding-left: var(--a-space-large);
-    list-style-position: outside;
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--a-block-element-margin-bottom);
+    padding-left: var(--a-space-large); /* Standard indent */
+    line-height: var(--a-line-height-base);
 }
-
-ul{
-    list-style: disc;
-}
-ol{
-    list-style: decimal;
-}
+ul { list-style: disc outside; }
+ol { list-style: decimal outside; }
 
 li {
-    margin-bottom: var(--a-margin-small);
+    margin-bottom: var(--a-margin-small); /* Space between list items */
+}
+li > ul, li > ol {
+    margin-top: var(--a-margin-small); /* Space before nested list */
+    margin-bottom: 0; /* No extra space after nested list within li */
 }
 
-/* --- Core Structure --- */
-/* Main */
-main {
-    --local-main-spacing: calc(.5 * var(--a-space-large));
-    padding: var(--local-main-spacing);
-    width: 100%;
-    margin: 0 auto;
+/* --- Definition Lists --- */
+dl {
+    margin-bottom: var(--a-block-element-margin-bottom);
 }
-
-/* Section */
-section {
-    --local-section-spacing: var(--a-space-small);
-    /* padding: var(--local-section-spacing);*/
-    max-width: 100%;
-    overflow: auto;
+dt {
+    font-weight: var(--a-font-weight-bold);
+    margin-top: var(--a-margin-base);
 }
-
-
-
-/* First section in main - remove top margin */
-main > section:first-of-type {
+dt:first-child {
     margin-top: 0;
 }
-
-/* Article */
-article {
-    --local-article-spacing: var(--a-space-medium);
-    padding: var(--local-article-spacing);
-    display: flex;
-    flex-direction: column;
+dd {
+    margin-left: var(--a-space-large);
+    margin-bottom: var(--a-margin-base);
 }
 
-/* Header */
-header {
-    background-color: var(--a-color-surface);
-    --local-header-spacing: var(--a-padding-base);
-    padding: var(--local-header-spacing);
-    margin-bottom: 0; /* Remove default margin-bottom */
-}
-
-/* --- Spacing between sections within main (Dynamic Columns) --- */
-
-/* --- Spacing between elements within header --- */
-header > * {
-    margin-bottom: var(--local-header-spacing);
-}
-
-header > *:last-child {
-    margin-bottom: 0;
-    /* Remove margin from the last element in header */
-}
-
-/* --- Spacing between elements within article or section--- */
-article > h2,
-section > h2,
-article > h3,
-section > h3,
-article > h4,
-section > h4,
-article > h5,
-section > h5,
-article > h6,
-section > h6 {
-    margin-top: var(--a-margin-large);
-    /* Space above headings */
-    margin-bottom: var(--a-margin-small);
-    /* Space below headings */
-}
-
-article > p,
-section > p,
-article > ul,
-section > ul,
-article > ol,
-section > ol,
-article > pre,
-section > pre,
-article > table,
-section > table,
-article > img,
-section > img,
-article > figure,
-section > figure {
-    margin-bottom: var(--a-margin-medium);
-    /* Consistent spacing below paragraphs, lists, etc. */
-}
-
-/* Remove margin from the last element in article and section */
-article > *:last-child,
-section > *:last-child {
-    margin-bottom: 0;
-}
-
-/* --- Additional Element Styles --- */
-/* Example: Blockquote */
+/* --- Blockquotes --- */
 blockquote {
-    border-left: 4px solid var(--a-color-outline);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-medium) 0;
-    /* Consistent margin top/bottom */
+    margin-left: var(--a-margin-small);
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: var(--a-block-element-margin-bottom);
+    padding: var(--a-padding-medium);
+    border-left: 4px solid var(--a-color-primary); /* Accent border */
     font-style: italic;
+    background-color: var(--a-color-surface-variant); /* Subtle background */
+    border-radius: 0 var(--a-border-radius-base) var(--a-border-radius-base) 0; /* Rounded corners */
+}
+blockquote p {
+    margin-bottom: var(--a-paragraph-margin-bottom);
+}
+blockquote footer {
+    font-style: normal;
+    font-size: var(--a-font-size-small);
+    color: var(--a-color-text-secondary); /* Assuming this variable exists */
+    margin-top: var(--a-margin-small);
+}
+blockquote footer cite {
+    font-style: normal; /* Cite usually isn't italic here */
 }
 
 /* --- Tables --- */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: var(--a-margin-medium);
-    /* Consistent spacing */
+    margin-bottom: var(--a-block-element-margin-bottom);
+    border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline); /* Add border to table */
+    font-size: var(--a-font-size-base); /* Ensure consistent font size */
 }
-
-th,
-td {
+caption {
     padding: var(--a-padding-small);
-    text-align: left;
-    border-bottom: var(--a-border-width-base) var(--a-border-style-base)
-    var(--a-color-outline);
+    font-style: italic;
+    caption-side: bottom;
+    color: var(--a-color-text-secondary);
 }
-
+th, td {
+    padding: var(--a-padding-small) var(--a-padding-base); /* Consistent padding */
+    text-align: left;
+    border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline); /* Border for cells */
+    vertical-align: top;
+}
 th {
-    font-weight: 600;
+    font-weight: var(--a-font-weight-bold);
+    background-color: var(--a-color-surface-variant); /* Subtle header background */
+}
+thead th {
+    border-bottom-width: calc(var(--a-border-width-base) * 2); /* Thicker bottom border for header */
 }
 
 /* --- Forms --- */
-/* Form Container */
-/* Labels */
-label {
-    display: block;
-    margin-bottom: calc( 2 * var(--a-margin-small));
-    font-weight: 400;
-    margin-top:  calc( 2 * var(--a-margin-small));
-    font-size: normal;
-}
-/* Form Layout */
 form {
-    display: grid;
-    grid-gap: var(--a-space-base);
+    display: grid; /* Keep grid layout */
+    grid-gap: var(--a-space-base); /* Use grid gap variable */
+    margin-bottom: var(--a-block-element-margin-bottom);
 }
-
-/** make sure div elements are right aligned for form submission actions */
-form div {
-  margin: calc(2 * var(--a-space-base));
-}
-
-form span {
-    margin: calc(2 * var(--a-space-base));
-    text-align: right;
-}
-
-@media (min-width: 768px) {
-    form {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
-    form > * {
-        grid-column: span 6;
-    }
-
-    /* Target the container of multiple buttons */
-    form > div > button {
-        grid-column: span 12; /* Make the button container span the whole row */
-    }
-
-    form > div > button[type="submit"],
-    form > div > button {
-        margin-left: auto; /* Right-align buttons within their container */
-    }
-}
-
-
-form > fieldset {
-    grid-column: 1 / -1;
-}
-
-/* Form Elements */
 fieldset {
-    border: 1px solid var(--a-color-outline);
-    padding: calc(var(--a-padding-base) * 6); /* Increased padding using calculation */
+    border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
     border-radius: var(--a-border-radius-base);
-    margin-top: calc(var(--a-margin-base) * 2);
-    margin-bottom: calc(var(--a-margin-base) * 2);
+    padding: var(--a-padding-large); /* Consistent padding */
+    margin: var(--a-margin-medium) 0; /* Consistent vertical margin */
 }
-
-/* ... other form styles ... */
-
-fieldset.inline-labels .form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: var(--a-margin-base);
-    text-align: left;
-}
-
-fieldset.inline-labels .form-group label {
-    margin-right: var(--a-margin-base);
-    white-space: nowrap; /* Prevent labels from wrapping */
-}
-
-fieldset.inline-labels .form-group input,
-fieldset.inline-labels .form-group textarea,
-fieldset.inline-labels .form-group select {
-    flex: 1;
-}
-
-.form-actions{
-    text-align: right;
-}
-
-/* hide aria-hidden data attribute
- */
-[aria-hidden="true"]{
-    /** visibility: hidden;**/
-    display: none;
-}
-
-/* hide aria-hidden data attribute
- */
-[aria-hidden="false"]{
-    /** visibility: visible; **/
-    display: none;
-}
-
-
-input{
-  min-width: var(--a-min-input-size);
-}
-
-.validation-message{
-    margin: var(--a-margin-base);
-    padding: var(--a-padding-base);
-
-}
-
-/* ... other form styles ... */
-
 legend {
-    font-weight: bold;
-    margin-bottom: var(--a-margin-base); /* Added spacing below legend */
+    font-weight: var(--a-font-weight-bold);
+    padding: 0 var(--a-padding-small); /* Padding around legend text */
+    margin-bottom: var(--a-margin-base); /* Space below legend */
 }
-
 label {
     display: block;
     margin-bottom: var(--a-margin-small);
+    font-weight: var(--a-font-weight-bold); /* Bolder labels */
 }
-
-input,
-textarea,
-select {
-    width: 100%;
-    padding: var(--a-padding-small);
-    border: 1px solid var(--a-color-outline);
-    border-radius: var(--a-border-radius-small);
-    margin-bottom: var(--a-margin-base); /* Added spacing below input fields */
-}
-/* ... rest of the form styles ... */
-legend {
-    font-weight: bold;
-}
-
-label {
-    display: block;
-    margin-bottom: var(--a-margin-small);
-}
-
-input,
-textarea,
-select {
-    width: 100%;
-    padding: var(--a-padding-small);
-    border: 1px solid var(--a-color-outline);
-    border-radius: var(--a-border-radius-small);
-}
-
-/* Form Validation */
-input:required {
-    border-color: var(--a-color-negative);
-}
-
-input:invalid {
-    border-color: var(--a-color-negative);
-}
-
-input:valid {
-    border-color: var(--a-color-positive);
-}
-input:invalid {
-    border-color: var(--a-color-negative);
-}
-.validation-message {
-    font-size: var(--a-font-size-small);
-    color: var(--a-color-negative);
-    margin-top: var(--a-space-small);
-}
-
-
-button {
-    transition: background-color 0.3s, transform 0.2s ease;
-}
-button:hover {
-    transform: translateY(-2px);
-}
-
-/** Tabs **/
-.tabs ul {
-    display: flex;
-    gap: var(--a-space-small);
-    border-bottom: 1px solid var(--a-color-outline);
-}
-.tabs li {
-    padding: var(--a-padding-small) var(--a-padding-medium);
-    cursor: pointer;
-}
-.tabs li[aria-selected="true"] {
-    border-bottom: 3px solid var(--a-color-primary);
-}
-.tab-panel {
-    margin-top: var(--a-space-medium);
-}
-
-/** Throbber */
-/* Throbber Container */
-.throbber {
-    display: inline-block;
-    width: 50px; /* Set desired size */
-    height: 50px; /* Set desired size */
-    position: relative;
-    margin: auto;
-}
-
-/* Throbber Circle */
-.throbber-circle {
-    width: 100%;
-    height: 100%;
-    border: 4px solid transparent; /* Outer border */
-    border-top-color: var(--a-color-primary); /* Loading color */
-    border-radius: 50%;
-    animation: throbber-spin 1s linear infinite; /* Continuous rotation */
-}
-
-.throbber .throbber-circle.inner {
-    width: 70%;
-    height: 70%;
-    border-width: 3px;
-    animation: throbber-spin-reverse 1.5s linear infinite; /* Reverse spin */
-}
-
-#loading {
-    display: none;
-}
-
-#loading.active {
-    display: inline-block;
-}
-
-
-@keyframes throbber-spin-reverse {
-    0% {
-        transform: rotate(360deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
-}
-
-/* Spin Animation */
-@keyframes throbber-spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-
-
-/* Throbber Container */
-.throbber-container {
-    text-align: center;
-    margin: var(--a-margin-large) 0;
-}
-
-/* Hide Throbber by Default */
-#loading-throbber {
-    display: none;
-    margin: var(--a-margin-medium) auto;
-}
-
-/* Show Throbber when Active */
-#loading-throbber.active {
-    display: inline-block;
-}
-
-/* Throbber Circle */
-.throbber-circle {
-    width: 50px;
-    height: 50px;
-    border: 4px solid transparent;
-    border-top-color: var(--a-color-primary);
-    border-radius: 50%;
-    animation: throbber-spin 1s linear infinite;
-}
-
-/* Example Container Styling */
-.example-container {
-    text-align: center;
-    margin-bottom: var(--a-margin-large);
-    padding: var(--a-padding-medium);
-    border: 1px solid var(--a-color-outline);
-    border-radius: var(--a-border-radius-base);
-    background-color: var(--a-color-surface);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Centered Throbber */
-.example-container .throbber {
-    margin: var(--a-margin-large) auto;
-}
-
-/* Prism Code Blocks */
-pre[class*="language-"] {
-    background-color: var(--a-color-code-bg);
-    color: var(--a-color-on-code-bg);
-    padding: var(--a-padding-medium);
-    margin-top: var(--a-margin-medium);
-    border-radius: var(--a-border-radius-base);
-    overflow-x: auto;
-    font-size: 0.85rem;
-}
-
-
-/* Spin Animation */
-@keyframes throbber-spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-hr {
-    margin: var(--a-margin-medium);
-    margin-bottom: calc(1 * var(--a-margin-large));
-}
-
-
-/** Alerts **/
-.alert {
-    padding: var(--a-padding-medium);
-    margin-bottom: var(--a-margin-medium);
-    border: 1px solid;
-    border-radius: var(--a-border-radius-base);
-    font-size: var(--a-font-size-base);
-}
-
-.alert-success {
-    background-color: var(--a-color-positive-container);
-    color: var(--a-color-on-positive-container);
-    border-color: var(--a-color-positive);
-}
-
-.alert-error {
-    background-color: var(--a-color-negative-container);
-    color: var(--a-color-on-negative-container);
-    border-color: var(--a-color-negative);
-}
-
-.alert-info {
-    background-color: var(--a-color-notice-container);
-    color: var(--a-color-on-notice-container);
-    border-color: var(--a-color-notice);
-}
-
-/** Breadcrumbs */
-.breadcrumbs {
-    display: flex;
-    font-size: var(--a-font-size-small);
-    margin-bottom: var(--a-margin-medium);
-}
-
-.breadcrumbs ol {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.breadcrumbs li {
-    margin-right: var(--a-margin-small);
-}
-
-.breadcrumbs li::after {
-    content: '/';
-    margin-left: var(--a-margin-small);
-}
-
-.breadcrumbs li:last-child::after {
-    content: '';
-}
-
-/** Tool Tip */
-.tooltip {
-    position: relative;
-    cursor: pointer;
-}
-
-.tooltip::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--a-color-on-surface);
-    color: var(--a-color-surface);
-    padding: var(--a-padding-small);
-    border-radius: var(--a-border-radius-small);
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s;
-}
-
-.tooltip:hover::after,
-.tooltip:focus::after {
-    opacity: 1;
-    visibility: visible;
-}
-
-/** Pagination */
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: var(--a-space-small);
-    margin-top: var(--a-margin-medium);
-}
-
-.pagination button {
-    padding: var(--a-padding-small) var(--a-padding-medium);
-    background-color: var(--a-color-surface);
-    border: 1px solid var(--a-color-outline);
-    border-radius: var(--a-border-radius-small);
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.pagination button.active {
-    background-color: var(--a-color-primary);
-    color: var(--a-color-on-primary);
-}
-
-.pagination button:hover:not(:disabled) {
-    background-color: var(--a-color-primary-container);
-}
-
-.pagination button:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
-/** Toast Notifications */
-.toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: var(--a-padding-medium);
-    background-color: var(--a-color-surface);
-    color: var(--a-color-on-surface);
-    border-radius: var(--a-border-radius-base);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease;
-}
-
-.toast-success {
-    background-color: var(--a-color-positive);
-}
-
-.toast-error {
-    background-color: var(--a-color-negative);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-}
-
-/** cards **/
-/* Card Container */
-article {
-    border: 1px solid var(--a-color-outline);
-    border-radius: var(--a-border-radius-base);
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    background-color: var(--a-color-surface);
-}
-
-/* Card Hover Effect */
-article:hover {
-    transform: translateY(-4px);
-}
-
-/* Card Header */
-article > header {
-    padding: var(--a-padding-medium);
-    background-color: var(--a-color-primary-container);
-    color: var(--a-color-on-primary-container);
-    border-bottom: 1px solid var(--a-color-outline);
-}
-
-/* Card Title */
-article > header > h4 {
-    margin: 0;
-    font-size: var(--a-font-size-h4);
-}
-
-/* Card Image */
-article > img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
-/* Card Body/Content */
-article > section {
-    padding: var(--a-padding-medium);
-}
-
-/* Card Description */
-article > section > p {
-    font-size: var(--a-font-size-base);
-    color: var(--a-color-text-secondary);
-    margin: 0;
-}
-
-/** Card Footer **/
-article > footer {
-    padding: var(--a-padding-medium);
-    background-color: var(--a-color-surface-variant);
-    border-top: 1px solid var(--a-color-outline);
-    text-align: center;
-}
-
-article > footer > button {
-    padding: var(--a-padding-small) var(--a-padding-medium);
-    border: none;
-    border-radius: var(--a-border-radius-base);
-    background-color: var(--a-color-primary);
-    color: var(--a-color-on-primary);
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-article > footer > button:hover {
-    background-color: var(--a-color-primary-container);
-}
-
-
-/** Accordion */
-/* Accordion Header */
-.accordion h3 {
-    cursor: pointer;
-    background-color: var(--a-color-primary-container);
-    color: var(--a-color-on-primary-container);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: calc(4 * var(--a-padding-base));
-    box-sizing: border-box; /* Include padding and border in width calculation */
-    width: 100%; /* Ensure it doesn't expand beyond the parent */
-    overflow: hidden; /* Prevent content overflow */
-
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-/* Accordion Header Hover */
-.accordion h3:hover {
-    background-color: var(--a-color-primary);
-    color: var(--a-color-on-primary);
-    transform: translateY(-2px);
-}
-
-/* Accordion Indicator (Arrow) */
-.accordion h3::after {
-    content: '▶'; /* Default closed arrow */
-    font-size: var(--a-font-size-base);
-    transform: rotate(0deg);
-    transition: transform 0.3s ease;
-}
-
-/* Expanded Indicator */
-.accordion h3[aria-expanded="true"]::after {
-    content: '▼'; /* Open arrow */
-    transform: rotate(90deg);
-}
-
-/* Accordion Panel */
-.accordion div {
-    padding: var(--a-padding-medium);
-    border: 1px solid var(--a-color-outline);
-    border-top: none;
-    border-radius: 0 0 var(--a-border-radius-base) var(--a-border-radius-base);
-    background-color: var(--a-color-surface);
-    color: var(--a-color-on-surface);
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
-}
-
-/* Show Panel when Expanded */
-.accordion h3[aria-expanded="true"] + div {
-    max-height: 300px; /* Set to a large enough value */
-    opacity: 1;
-}
-
-/** Progress Bar **/
-.progress-bar {
-    background: var(--a-color-surface);
-    border: 1px solid var(--a-color-outline);
-    border-radius: calc( 2 * var(--a-border-radius-base));
-    height: 40px;
-    width: 100%;
-    overflow: hidden;
-    margin-top: var(--a-margin-medium);
-}
-
-.progress {
-    height: 100%;
-    background: var(--a-color-primary);
-    width: 0;
-    transition: width 0.3s ease;
-}
-
-
-button.progress-btn:hover {
-    background-color: var(--a-color-secondary-container);
-    color: var(--a-color-on-secondary-container);
-}
-
-
-/** Drop Down Menu **/
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--a-color-surface);
-    padding: var(--a-padding-medium);
-    border: 1px solid var(--a-color-outline);
-    border-radius: var(--a-border-radius-base);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-menu.show {
-    display: block;
-    position: inherit;
-}
-
-.dropdown-toggle {
-    cursor: pointer;
-}
-
-/* Inputs, Textareas, Selects */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -888,1312 +185,1175 @@ input[type="datetime-local"],
 input[type="color"],
 textarea,
 select {
-    --input-spacing: var(--a-space-small);
     width: 100%;
-    padding: var(--input-spacing);
-    margin-bottom: var(--a-margin-base);
-    border: var(--a-border-width-base) var(--a-border-style-base)
-    var(--a-color-outline);
+    padding: var(--a-padding-small) var(--a-padding-base); /* Consistent padding */
+    margin-bottom: var(--a-margin-base); /* Space below inputs */
+    border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
     border-radius: var(--a-border-radius-base);
     font-family: inherit;
     font-size: inherit;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    line-height: 1.5;
+    line-height: var(--a-line-height-base); /* Ensure consistent line height */
+    background-color: var(--a-color-surface); /* Ensure background */
+    color: var(--a-color-on-surface); /* Ensure text color */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Add transitions */
+    min-width: var(--a-min-input-size); /* Keep min width */
 }
-
 textarea {
     resize: vertical;
-    /* Allow vertical resizing */
+    min-height: 100px; /* Example min height */
 }
-
 /* Focus state for inputs */
 input:focus,
 textarea:focus,
 select:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--a-color-primary);
-    /* Example focus style */
+    border-color: var(--a-color-primary); /* Highlight border */
+    box-shadow: 0 0 0 2px var(--a-color-primary-focus-ring, hsla(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 10%), 0.3)); /* Subtle focus ring */
 }
-
 /* Checkboxes and Radios */
 input[type="checkbox"],
 input[type="radio"] {
     margin-right: var(--a-margin-small);
     accent-color: var(--a-color-primary);
+    width: auto; /* Override width: 100% */
+    vertical-align: middle; /* Align with label text */
+}
+/* Add spacing for checkbox/radio labels */
+label input[type="checkbox"],
+label input[type="radio"] {
+    margin-right: var(--a-space-small);
 }
 
-
-legend {
-    font-weight: 600;
-    padding: 0 var(--a-padding-small);
+/* Form Grouping & Validation */
+.form-group {
+    margin-bottom: var(--a-margin-base); /* Space between form groups */
 }
+.form-group label {
+    /* Styles specific to labels within form groups if needed */
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+    margin-bottom: 0; /* Remove default margin when inside a group */
+}
+.validation-message {
+    display: none; /* Hide by default */
+    font-size: var(--a-font-size-small);
+    color: var(--a-color-negative);
+    margin-top: var(--a-margin-tiny);
+}
+/* Basic :invalid styling (can be enhanced with JS) */
+input:invalid,
+textarea:invalid,
+select:invalid {
+    border-color: var(--a-color-negative);
+}
+input:invalid + .validation-message, /* Show message for invalid sibling */
+textarea:invalid + .validation-message,
+select:invalid + .validation-message {
+    display: block;
+}
+/* Optional: valid styling */
+input:valid {
+    /* border-color: var(--a-color-positive); */ /* Can be too noisy */
+}
+
+/* Form Actions (Buttons) */
+.form-actions {
+    text-align: right; /* Align buttons right */
+    margin-top: var(--a-margin-medium);
+    grid-column: 1 / -1; /* Span full width in grid */
+}
+.form-actions button,
+.form-actions input[type="submit"],
+.form-actions input[type="reset"],
+.form-actions input[type="button"] {
+    margin-left: var(--a-margin-small); /* Space between buttons */
+    margin-bottom: 0; /* Remove bottom margin */
+}
+.form-actions button:first-child,
+.form-actions input:first-child {
+    margin-left: 0;
+}
+
+/* Inline labels adjustment */
+fieldset.inline-labels .form-group {
+    display: flex;
+    align-items: center; /* Align label and input */
+    gap: var(--a-space-base); /* Space between label and input */
+    margin-bottom: var(--a-margin-base);
+}
+fieldset.inline-labels .form-group label {
+    margin-bottom: 0; /* Remove bottom margin */
+    flex-basis: 150px; /* Example fixed width for labels */
+    flex-shrink: 0;
+    text-align: right;
+}
+fieldset.inline-labels .form-group input,
+fieldset.inline-labels .form-group textarea,
+fieldset.inline-labels .form-group select {
+    flex-grow: 1; /* Allow input to take remaining space */
+}
+fieldset.inline-labels .validation-message {
+    flex-basis: 100%; /* Make validation message span full width below */
+    margin-left: calc(150px + var(--a-space-base)); /* Align with input */
+}
+
+/* Responsive form layout */
+@media (min-width: 768px) {
+    form:not(:has(fieldset.inline-labels)) { /* Apply multi-column unless using inline labels */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    /* Make fieldsets span full width if needed */
+    form fieldset {
+        grid-column: 1 / -1;
+    }
+}
+
 
 /* --- Images and Figures --- */
 img {
     max-width: 100%;
     height: auto;
-    vertical-align: middle;
-    /* Prevents extra space below image */
+    vertical-align: middle; /* Prevents extra space below image */
+    display: block; /* Prevent inline spacing issues */
 }
-
 figure {
-    margin: 0;
-    /* Reset default figure margin */
+    margin: 0 0 var(--a-block-element-margin-bottom) 0; /* Consistent bottom margin */
 }
-
 figcaption {
     font-size: var(--a-font-size-small);
-    color: var(--a-color-text-secondary);
-    /* Assuming you define this variable */
+    color: var(--a-color-text-secondary); /* Assuming variable exists */
     margin-top: var(--a-margin-small);
     text-align: center;
-    /* Center caption text */
 }
 
 /* --- Code --- */
 code {
     font-family: var(--a-font-family-mono);
-    font-size: var(--a-font-size-small);
+    font-size: 0.9em; /* Slightly smaller than base */
     background-color: var(--a-color-code-bg);
+    color: var(--a-color-on-code-bg); /* Add variable for text color on code bg */
     padding: var(--a-padding-tiny) var(--a-padding-small);
-    border-radius: var(--a-border-radius-base);
-    white-space: pre-wrap;
+    border-radius: var(--a-border-radius-small);
+    white-space: pre-wrap; /* Allow wrapping for inline code */
+    word-break: break-word;
 }
-
 pre {
     font-family: var(--a-font-family-mono);
-    font-size: var(--a-font-size-small);
+    font-size: 0.9em;
     background-color: var(--a-color-code-bg);
-    padding: var(--a-padding-base);
+    color: var(--a-color-on-code-bg);
+    padding: var(--a-padding-base); /* Use padding var */
     border-radius: var(--a-border-radius-base);
-    overflow-x: auto;
-    margin: calc(1.2 * var(--a-margin-medium));
+    overflow-x: auto; /* Keep horizontal scroll */
+    margin-top: 0;
+    margin-bottom: var(--a-block-element-margin-bottom);
+    line-height: var(--a-line-height-base);
+    border: 1px solid var(--a-color-outline); /* Add subtle border */
 }
-
 pre code {
-    padding: 0;
-    background-color: transparent;
+    padding: 0; /* Reset padding */
+    background-color: transparent; /* Reset background */
+    border: none; /* Reset border */
+    white-space: pre; /* Preserve whitespace from pre */
+    word-break: normal; /* Don't break words in pre */
+    display: block; /* Ensure block display */
+    color: inherit; /* Inherit text color */
+    font-size: inherit; /* Inherit font size */
+}
+
+/* --- Horizontal Rule --- */
+hr {
     border: none;
-    white-space: pre-wrap;
+    border-top: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
+    margin: var(--a-margin-large) 0; /* Use margin vars for spacing */
+}
+
+/* --- Semantic Structure Elements --- */
+main {
+    /* Assuming full width by default, padding added via container or sections */
+    padding: var(--a-padding-small) 0; /* Example vertical padding */
+}
+section {
+    padding: var(--a-padding-small); /* Consistent section padding */
+    max-width: 100%; /* Keep max width */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+section > :is(h1, h2, h3, h4, h5, h6):first-child {
+    /* Your styles here */
+    /* Example: Remove top margin */
+    margin-top: 0;
+}
+
+.container > :is(h1, h2, h3, h4, h5, h6):first-child {
+    /* Your styles here */
+    /* Example: Remove top margin */
+    margin-top: 0;
 }
 
 
 
-button[type="submit"] {
-    margin-left: auto; /* Right-align submit buttons */
+section > h1:first-child,
+section > h2:first-child,
+section > h3:first-child,
+section > h4:first-child,
+section > h5:first-child,
+section > h6:first-child {
+    /* Your styles here */
+    /* Example: Remove top margin */
+    margin-top: 0;
 }
 
-button{
-    min-width: 100px;
-    margin-left: auto;
+main > section:last-of-type {
+    margin-bottom: 0;
+}
+article {
+    /* Basic article has no border/bg by default */
+    border: none;
+    padding: 0; /* Padding comes from parent or content */
+    margin-bottom: var(--a-block-element-margin-bottom); /* Space below article */
+    display: flex; /* Keep flex if needed for internal layout */
+    flex-direction: column;
+}
+article:last-child {
+    margin-bottom: 0;
+}
+header {
+    /* Specific styling for page/article/section headers */
+    padding: var(--a-padding-base) 0; /* Vertical padding, no horizontal */
+    margin-bottom: var(--a-margin-base); /* Space below header */
+    border-bottom: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline); /* Subtle separator */
+}
+header:first-child {
+    border-top: none;
+}
+footer {
+    /* Specific styling for page/article/section footers */
+    padding: var(--a-padding-base) 0; /* Vertical padding */
+    margin-top: var(--a-margin-large); /* Space above footer */
+    border-top: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline); /* Separator */
+    color: var(--a-color-text-secondary);
+    font-size: var(--a-font-size-small);
+}
+/* Specific header/footer within article/aside */
+article > header, aside > header {
+    padding: 0; /* Remove padding */
+    margin-bottom: var(--a-margin-base);
+    border: none; /* Remove border */
+}
+article > footer, aside > footer {
+    padding: 0;
+    margin-top: var(--a-margin-base);
+    border: none;
 }
 
-/* Primary Button */
-.button-primary,
+
+/* ========================================================================= */
+/* Component Styles                                                          */
+/* ========================================================================= */
+
+/* --- Buttons --- */
+/* Base Button Style (applied to button tag and .button class) */
 button,
-    /* Default button should be primary */
 a.button,
-    /* Links styled as buttons */
 input[type="submit"],
-input[type="button"]
-{
+input[type="button"],
+input[type="reset"] {
+    display: inline-flex; /* Use flex for icon alignment */
+    align-items: center;
+    justify-content: center;
+    padding: var(--a-padding-small) var(--a-padding-base); /* Base padding */
+    margin: var(--a-margin-tiny); /* Minimal margin around buttons */
+    font-family: var(--a-font-family-sans);
+    font-size: var(--a-font-size-base);
+    font-weight: var(--a-font-weight-bold);
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    border: var(--a-border-width-base) var(--a-border-style-base) transparent; /* Transparent border by default */
+    border-radius: var(--a-border-radius-base);
+    cursor: pointer;
+    user-select: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.1s ease;
+    vertical-align: middle; /* Align with text */
+    line-height: var(--a-line-height-base); /* Match base line height */
+    min-width: 100px; /* Keep min width */
+}
+/* Default Button Appearance (Primary) */
+button,
+a.button,
+input[type="submit"],
+input[type="button"],
+.button-primary { /* Explicit primary class */
     color: var(--a-color-on-primary);
     background-color: var(--a-color-primary);
-    margin-left: auto; /* Add this to the common button styles */
+    border-color: var(--a-color-primary); /* Match border */
 }
-
-button[type="reset"] {
-    background-color: var(--a-color-negative);
-    color: var(--a-color-on-negative);
-}
-
-.button-primary:hover,
-button:hover,
-a.button:hover,
-input[type="submit"]:hover,
-input[type="button"]:hover,
-input[type="reset"]:hover {
-    color: var(--a-color-on-primary-container);
-    background-color: var(--a-color-primary-container);
+button:hover, button:focus,
+a.button:hover, a.button:focus,
+input[type="submit"]:hover, input[type="submit"]:focus,
+input[type="button"]:hover, input[type="button"]:focus,
+.button-primary:hover, .button-primary:focus {
+    background-color: var(--a-color-primary-hover, hsl(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%))); /* Slightly lighter/darker */
+    border-color: var(--a-color-primary-hover, hsl(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    color: var(--a-color-on-primary);
     text-decoration: none;
-
-    /* Remove underline on hover */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
-.button-primary:focus,
-button:focus,
-a.button:focus,
-input[type="submit"]:focus,
-input[type="button"]:focus,
-input[type="reset"]:focus {
-    outline: 2px solid var(--a-color-primary);
-    outline-offset: 2px;
-    /* Visual focus indicator */
-}
-
-.button-primary:active,
 button:active,
 a.button:active,
 input[type="submit"]:active,
 input[type="button"]:active,
-input[type="reset"]:active {
-    /* Add styles for active state if needed */
+.button-primary:active {
+    transform: translateY(1px);
+    box-shadow: none;
 }
-
+/* Reset Button Specific */
+input[type="reset"], .button-reset { /* Add optional class */
+    color: var(--a-color-on-negative);
+    background-color: var(--a-color-negative);
+    border-color: var(--a-color-negative);
+}
+input[type="reset"]:hover, input[type="reset"]:focus,
+.button-reset:hover, .button-reset:focus {
+    background-color: var(--a-color-negative-hover, hsl(var(--a-color-negative-hue, 0), 70%, 40%)); /* Define hover color */
+    border-color: var(--a-color-negative-hover, hsl(var(--a-color-negative-hue, 0), 70%, 40%));
+    color: var(--a-color-on-negative);
+}
 /* Secondary Button */
 .button-secondary {
     color: var(--a-color-on-secondary);
     background-color: var(--a-color-secondary);
+    border-color: var(--a-color-secondary);
 }
-
-.button-secondary:hover {
-    color: var(--a-color-on-secondary-container);
-    background-color: var(--a-color-secondary-container);
+.button-secondary:hover, .button-secondary:focus {
+    background-color: var(--a-color-secondary-hover, hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    border-color: var(--a-color-secondary-hover, hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    color: var(--a-color-on-secondary);
 }
-
 /* Tertiary Button */
-.button-tertiary {
+.button-tertiary { /* Use class consistently */
     color: var(--a-color-on-tertiary);
     background-color: var(--a-color-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+.button-tertiary:hover, .button-tertiary:focus {
+    background-color: var(--a-color-tertiary-hover, hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    border-color: var(--a-color-tertiary-hover, hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    color: var(--a-color-on-tertiary);
 }
 
-.button-tertiary:hover {
-    color: var(--a-color-on-tertiary-container);
-    background-color: var(--a-color-tertiary-container);
-}
+/* Other Color Buttons (Complementary, Analogous) */
+.button-complementary { background-color: var(--a-color-complementary); color: var(--a-color-on-complementary); border-color: var(--a-color-complementary); }
+.button-complementary:hover, .button-complementary:focus { background-color: var(--a-color-complementary-hover); border-color: var(--a-color-complementary-hover); color: var(--a-color-on-complementary); }
+
+.button-analogous-1 { background-color: var(--a-color-analogous-1); color: var(--a-color-on-analogous-1); border-color: var(--a-color-analogous-1); }
+.button-analogous-1:hover, .button-analogous-1:focus { background-color: var(--a-color-analogous-1-hover); border-color: var(--a-color-analogous-1-hover); color: var(--a-color-on-analogous-1); }
+
+.button-analogous-2 { background-color: var(--a-color-analogous-2); color: var(--a-color-on-analogous-2); border-color: var(--a-color-analogous-2); }
+.button-analogous-2:hover, .button-analogous-2:focus { background-color: var(--a-color-analogous-2-hover); border-color: var(--a-color-analogous-2-hover); color: var(--a-color-on-analogous-2); }
+
 
 /* Outline Button */
 .button-outline {
-    color: var(--a-color-primary);
     background-color: transparent;
-    border-color: var(--a-color-primary);
+    border-color: currentColor; /* Use text color for border */
+    color: var(--a-color-primary); /* Default to primary text color */
 }
+.button-outline.button-primary { color: var(--a-color-primary); } /* Already default */
+.button-outline.button-secondary { color: var(--a-color-secondary); }
+.button-outline.button-tertiary { color: var(--a-color-tertiary); }
+.button-outline.button-complementary { color: var(--a-color-complementary); }
+.button-outline.button-analogous-1 { color: var(--a-color-analogous-1); }
+.button-outline.button-analogous-2 { color: var(--a-color-analogous-2); }
+.button-outline.button-negative { color: var(--a-color-negative); }
+.button-outline.button-positive { color: var(--a-color-positive); }
+/* Add other colors if needed */
 
-.button-outline:hover {
-    color: var(--a-color-on-primary);
-    background-color: var(--a-color-primary);
+.button-outline:hover, .button-outline:focus {
+    background-color: currentColor; /* Fill with text color on hover */
+    color: var(--a-color-surface); /* Change text color to contrast background */
+    border-color: currentColor; /* Keep border color */
 }
+/* Specific hover text colors if needed, e.g., for primary outline hover */
+.button-outline.button-primary:hover, .button-outline.button-primary:focus { color: var(--a-color-on-primary); }
+.button-outline.button-secondary:hover, .button-outline.button-secondary:focus { color: var(--a-color-on-secondary); }
+/* etc. */
+
+
+/* Text Button (Link-style) */
+.button-text { /* Use class instead of tag selector */
+    background: none;
+    border: none;
+    padding: var(--a-padding-small) var(--a-padding-small); /* Less padding */
+    font-weight: var(--a-font-weight-bold);
+    color: var(--a-color-primary); /* Default to primary link color */
+    text-decoration: none;
+    box-shadow: none;
+    min-width: auto; /* Remove min-width */
+}
+.button-text:hover, .button-text:focus {
+    color: var(--a-color-primary-container);
+    text-decoration: underline;
+    background: none; /* Ensure no background on hover */
+    box-shadow: none;
+}
+.button-text:active {
+    transform: none;
+}
+/* Text button variants */
+.button-text.button-secondary { color: var(--a-color-secondary); }
+.button-text.button-tertiary { color: var(--a-color-tertiary); }
+/* Add other color variants if needed */
+
+
+/* Semantic Buttons */
+.button-positive { background-color: var(--a-color-positive); color: var(--a-color-on-positive); border-color: var(--a-color-positive); }
+.button-positive:hover, .button-positive:focus { background-color: var(--a-color-positive-hover); border-color: var(--a-color-positive-hover); color: var(--a-color-on-positive); }
+
+.button-negative { background-color: var(--a-color-negative); color: var(--a-color-on-negative); border-color: var(--a-color-negative); }
+.button-negative:hover, .button-negative:focus { background-color: var(--a-color-negative-hover); border-color: var(--a-color-negative-hover); color: var(--a-color-on-negative); }
+
+.button-notice { background-color: var(--a-color-notice); color: var(--a-color-on-notice); border-color: var(--a-color-notice); }
+.button-notice:hover, .button-notice:focus { background-color: var(--a-color-notice-hover); border-color: var(--a-color-notice-hover); color: var(--a-color-on-notice); }
+
+.button-informative { background-color: var(--a-color-informative); color: var(--a-color-on-informative); border-color: var(--a-color-informative); }
+.button-informative:hover, .button-informative:focus { background-color: var(--a-color-informative-hover); border-color: var(--a-color-informative-hover); color: var(--a-color-on-informative); }
+
 
 /* Disabled Button */
-.button-disabled,
-    /* Class for disabled state */
 button:disabled,
-a.button.button-disabled,
+a.button:disabled, /* May not work directly, use class */
 input[type="submit"]:disabled,
 input[type="button"]:disabled,
-input[type="reset"]:disabled {
+input[type="reset"]:disabled,
+.button-disabled { /* Use class for `a` tags */
     opacity: 0.5;
     cursor: not-allowed;
-    pointer-events: none;
+    pointer-events: none; /* Prevent clicks */
+    box-shadow: none;
+    transform: none;
 }
 
 /* Button Sizes */
 .button-small {
-    padding: var(--a-padding-small) var(--a-padding-base);
+    padding: var(--a-padding-tiny) var(--a-padding-small);
     font-size: var(--a-font-size-small);
+    min-width: auto;
 }
-
 .button-large {
-    padding: var(--a-padding-large) var(--a-padding-xlarge);
-    font-size: var(--a-font-size-h5);
+    padding: var(--a-padding-base) var(--a-padding-large);
+    font-size: var(--a-font-size-h5); /* Example large size */
 }
 
-/* Icon Buttons */
+/* Buttons with Icons */
+button i, a.button i { /* Target icons within buttons */
+    margin-right: var(--a-margin-small); /* Space between icon and text */
+    font-size: 0.9em; /* Slightly smaller icon */
+    line-height: inherit; /* Ensure icon aligns */
+}
+/* If icon is the only content (Icon Button) */
 .button-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--a-padding-medium);
-    /* Adjust padding as needed */
-    line-height: 0;
-    /* Remove line-height for icon-only buttons */
+    padding: var(--a-padding-small); /* Square padding */
+    min-width: auto; /* Remove min-width */
 }
-
 .button-icon i {
-    font-size: 1.25em;
-    /* Adjust icon size as needed */
-    margin-right: var(--a-margin-small);
-}
-
-.button-icon span {
-    display: inline-block;
-    vertical-align: middle;
+    margin: 0; /* No margin if icon only */
+    font-size: 1.2em; /* Make icon slightly larger */
 }
 
 /* Block Buttons */
 .button-block {
-    display: block;
+    display: flex; /* Use flex to center content */
     width: 100%;
+    justify-content: center;
 }
 
-
-/* Link-style Buttons */
-.button-link {
-    background: none;
-    border: none;
-    padding: 0;
-    font-weight: inherit;
-    color: var(--a-color-primary);
-    text-decoration: underline;
+/* Button Group - for styling containers holding buttons */
+.button-group, .button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--a-space-small);
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+/* Optional: Remove margin from buttons inside group */
+.button-group button, .button-grid button {
+    margin: 0;
 }
 
-.button-link:hover {
-    color: var(--a-color-primary-container);
-    text-decoration: none;
-}
-
-/* Button Grid */
-.button-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--a-space-base);
-}
-
-.button-group {
-    padding: var(--a-padding-base);
-    border: 1px solid var(--a-color-outline);
-    border-radius: var(--a-border-radius-base);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.button-group h4 {
-    margin-top: 0;
-    color: var(--a-color-on-surface);
-    font-size: 1.2rem;
-}
-
-
-
-button.text {
-    background-color: transparent;
-    border: none;
-    padding: calc(var(--a-padding-base) * 2) var(--a-padding-ml); /* Double the base padding */
-    font-weight: 600;
-    color: var(--a-color-primary); /* Add color to text buttons */
-}
-
-button.text:hover {
-    text-decoration: underline;
-}
-
-/* Primary Button */
-.button-primary,
-button, /* Default button should be primary */
-a.button, /* Links styled as buttons */
-input[type="submit"],
-input[type="button"],
-input[type="reset"] {
-    background-color: var(
-            --a-color-primary
-    ); /* Set background color to primary */
-    color: var(--a-color-on-primary); /* Set text color to on-primary */
-    border: none;
-    padding: calc(var(--a-padding-base) * 3) calc(2 * var(--a-padding-ml)); /* Double the base padding */
-    border-radius: var(--a-border-radius-base);
-    font-size: inherit;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: var(--a-margin-base);
-    margin-left: auto;
-}
-
-/* Secondary Button */
-button.secondary {
-    background-color: var(
-            --a-color-secondary
-    ); /* Set background color to secondary */
-    color: var(--a-color-on-secondary); /* Set text color to on-secondary */
-    border: none;
-    padding: calc(var(--a-padding-base) * 2) var(--a-padding-ml); /* Double the base padding */
-    border-radius: var(--a-border-radius-small);
-    font-size: inherit;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-button.complementary{
-    background-color: var(--a-color-complementary);
-}
-
-button.analogous-1{
-    background-color: var(--a-color-analogous-1);
-}
-
-button.analogous-2{
-    background-color: var(--a-color-analogous-2);
-}
-
-/* ... other button styles ... */
-
-button.large {
-    font-size: calc(var(--a-font-size-base) * 2); /* Double font size */
-    padding: calc(var(--a-padding-base) * 4) calc(var(--a-padding-ml) * 2); /* Double padding */
-}
-
-button.small {
-    font-size: calc(var(--a-font-size-base) * 0.75) !important; /* 75% of font size */
-    padding: calc(var(--a-padding-small) * 0.75) calc(var(--a-padding-base) * 0.75); /* 75% of padding */
-}
-
-/* ... other button styles ... */
-
-button.outline {
-    background-color: transparent !important;
-    border: 2px solid currentColor !important; /* Use currentColor to inherit the text color */
-}
-
-button.primary.outline {
-    color: var(--a-color-primary); /* Set a default color for outline buttons */
-}
-
-button.secondary.outline {
-    color: var(--a-color-secondary); /* Set a default color for outline buttons */
-}
-
-button.tertiary.outline {
-    color: var(--a-color-tertiary); /* Set a default color for outline buttons */
-}
-
-button.complementary.outline {
-    color: var(
-            --a-color-complementary
-    ); /* Set a default color for outline buttons */
-}
-
-button.analogous-1.outline {
-    color: var(
-            --a-color-analogous-1
-    ); /* Set a default color for outline buttons */
-}
-
-button.analogous-2.outline {
-    color: var(
-            --a-color-analogous-2
-    ); /* Set a default color for outline buttons */
-}
-
-button.text.secondary {
-    color: var(--a-color-secondary);
-}
-
-/* Tertiary Button */
-button.tertiary {
-    background-color: var(
-            --a-color-tertiary
-    ); /* Set background color to tertiary */
-    color: var(--a-color-on-tertiary); /* Set text color to on-tertiary */
-    border: none;
-    padding: calc(var(--a-padding-base) * 2) var(--a-padding-ml); /* Double the base padding */
-    border-radius: var(--a-border-radius-small);
-    font-size: inherit;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-button.text.tertiary {
-    color: var(--a-color-tertiary);
-}
-
-button.text.complementary {
-    color: var(--a-color-complementary);
-}
-
-button.text.analogous-1 {
-    color: var(--a-color-analogous-1);
-}
-
-button.text.analogous-2 {
-    color: var(--a-color-analogous-2);
-}
-/* ... other button styles ... */
-
-button.text {
-    background-color: transparent;
-    border: none;
-    font-weight: 600;
-}
-
-button.text:hover {
-    text-decoration: underline;
-}
-
-button i {
-    margin-right: var(--a-margin-small);
-}
-
-button.positive {
-    background-color: var(--a-color-positive);
-    color: var(--a-color-on-positive);
-}
-button.negative {
-    background-color: var(--a-color-negative);
-    color: var(--a-color-on-negative);
-}
-button.notice {
-    background-color: var(--a-color-notice);
-    color: var(--a-color-on-notice);
-}
-button.informative {
-    background-color: var(--a-color-informative);
-    color: var(--a-color-on-informative);
-}
 
 /* --- Cards --- */
+/* Uses article.card selector */
 article.card {
-    --card-spacing: var(--a-padding-medium);
     background-color: var(--a-color-surface);
-    border: var(--a-border-width-base) var(--a-border-style-base)
-    var(--a-color-outline);
+    border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
     border-radius: var(--a-border-radius-base);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
-    padding: var(--card-spacing);
-    /* Default padding for card content */
-    margin-bottom: var(--a-margin-base);
-    /* Space between cards */
-    transition: box-shadow 0.2s ease-in-out; /* Add transition for hover effect */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1); /* Example subtle shadow */
+    padding: 0; /* Remove padding from article, apply to sections */
+    margin-bottom: var(--a-block-element-margin-bottom);
+    overflow: hidden; /* Ensure image corners are clipped */
+    display: flex; /* Keep flex if needed */
+    flex-direction: column;
+    transition: box-shadow 0.2s ease-in-out;
 }
-
-/* Card Hover Effect */
 article.card:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Bigger shadow on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.1); /* Slightly stronger shadow */
 }
-
-/* Card Header */
+/* Card Sections */
+.card-header, /* Use classes for sections */
+.card-content,
+.card-image,
+.card-footer {
+    padding: var(--a-padding-medium); /* Consistent padding for sections */
+}
 .card-header {
     font-size: var(--a-font-size-h4);
-    font-weight: 600;
-    padding-bottom: var(--a-padding-base);
-    margin-bottom: var(--card-spacing);
-    border-bottom: var(--a-border-width-base) var(--a-border-style-base)
-    var(--a-color-outline);
+    font-weight: var(--a-font-weight-bold);
+    padding-bottom: var(--a-padding-small); /* Less padding below header */
+    border-bottom: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
 }
-
-/* Card Image */
 .card-image {
-    margin-bottom: var(--card-spacing);
+    padding: 0; /* No padding around image */
+    margin: 0;
+    line-height: 0; /* Remove space below image */
 }
-
 .card-image img {
-    display: block;
+    border-radius: 0; /* Remove radius if inside */
     width: 100%;
-    height: auto;
-    border-top-left-radius: var(--a-border-radius-base);
-    border-top-right-radius: var(--a-border-radius-base);
-    transition: transform 0.2s ease-in-out; /* Add transition for hover effect */
 }
-
-/* Card Image Hover Effect */
-.card-image img:hover {
-    transform: scale(1.03); /* Slight zoom effect on hover */
-}
-
-/* Card Content */
 .card-content {
-    /* Add specific styles for card content if needed */
+    /* Styles for main content area */
 }
-
-/* Card Footer */
 .card-footer {
-    padding-top: var(--a-padding-base);
-    margin-top: var(--card-spacing);
-    border-top: var(--a-border-width-base) var(--a-border-style-base)
-    var(--a-color-outline);
+    padding-top: var(--a-padding-small); /* Less padding above footer */
+    border-top: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
     font-size: var(--a-font-size-small);
     color: var(--a-color-text-secondary);
+    background-color: var(--a-color-surface-variant); /* Subtle footer background */
+    text-align: right; /* Align footer content right */
+}
+.card-footer button {
+    margin: 0; /* Reset margin for buttons in footer */
+    margin-left: var(--a-margin-small);
 }
 
 
-
-/* Navbar Container */
-/* Navbar Container */
-/* Navbar Container */
+/* --- Navigation (Navbar) --- */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--a-padding-medium);
-    background-color: var(--a-color-primary-container);
+    padding: var(--a-padding-small) var(--a-padding-base); /* Consistent padding */
+    background-color: var(--a-color-primary-container); /* Example background */
     color: var(--a-color-on-primary-container);
-    position: sticky;
+    position: sticky; /* Keep sticky */
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
-
-.navbar i{
-    font-size: 32px;
-    font-weight: bolder;
-    margin: 0px;
-    padding: 0px;
-    line-height: .8;
-    cursor: pointer;
+/* Navbar Logo */
+.navbar .logo {
+    /* Styles defined elsewhere */
+    padding-bottom: 0; /* Reset padding for navbar */
 }
-
-.navbar i:hover{
-    opacity: .8;
+.navbar .logo .version {
+    /* Styles defined elsewhere */
+    position: static; /* Reset position for navbar */
+    display: inline;
+    margin-left: var(--a-margin-small);
 }
-
-/** Fixed links */
-.fixed-links{
-    position: absolute;
-    right: 120px;
-    top: 10px;
-    z-index: 1000;
-
-    ul{
-        list-style: none;
-        margin: 0px;
-        padding: 0px;
-        font-size: 30px;
-        color: var(--a-color-on-primary);
-        opacity: .8;
-        cursor: pointer;
-    }
-}
-
-.fixed-links:hover{
-    opacity: .9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-left: -1px;
-    margin-top: -2px;
-    padding-bottom: 2px;
-}
-
-
-/* Logo */
-.logo {
-    font-family: var(--a-font-family-sans);
-    font-size: var(--a-font-size-h4);
-    font-weight: bold;
-    text-decoration: none;
-    color: var(--a-color-on-primary-container);
-    display: flex;
-    gap: var(--a-space-tiny);
-    align-items: center;
-}
-
-/* Hamburger Menu Button */
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 30px;
-    height: 34px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1100;
-}
-
-.menu-toggle .bar {
-    width: 100%;
-    height: 2px;
-    background-color: var(--a-color-on-primary-container);
-    border-radius: var(--a-border-radius-small);
-    transition: transform 0.3s, opacity 0.3s;
-}
-
-/* Open State for Menu Toggle */
-.menu-toggle.open .bar:nth-child(1) {
-    transform: rotate(45deg) translateY(8px);
-}
-
-.menu-toggle.open .bar:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-toggle.open .bar:nth-child(3) {
-    transform: rotate(-45deg) translateY(-8px);
-}
-
-/* Navigation Links */
-.nav-links {
+/* Navbar Links */
+.navbar .nav-links {
     display: flex;
     list-style: none;
-    gap: var(--a-space-medium);
+    gap: var(--a-space-small); /* Gap between links */
     margin: 0;
     padding: 0;
 }
-
-/* Hidden Navigation Links for Small Screens */
-.nav-links.hidden {
-    display: none;
-}
-
-.nav-links.open {
-    display: flex!important;
-}
-
-/* Links */
-.nav-links a {
-    text-decoration: none;
+.navbar .nav-links a {
+    display: block;
+    padding: var(--a-padding-small) var(--a-padding-base);
     color: var(--a-color-on-primary-container);
-    font-weight: 600;
-    padding: var(--a-padding-small) var(--a-padding-medium);
+    text-decoration: none;
+    font-weight: var(--a-font-weight-bold);
     border-radius: var(--a-border-radius-base);
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
-
-.nav-links a:hover {
+.navbar .nav-links a:hover,
+.navbar .nav-links a:focus {
     background-color: var(--a-color-primary);
     color: var(--a-color-on-primary);
+    text-decoration: none;
+}
+/* Navbar Menu Toggle */
+.navbar .menu-toggle {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    justify-content: space-around; /* Space out bars */
+    width: 28px; /* Size */
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1100; /* Above nav links */
+}
+.navbar .menu-toggle .bar {
+    display: block;
+    width: 100%;
+    max-width: 40px;
+    height: 2px; /* Bar thickness */
+    background-color: var(--a-color-on-primary-container);
+    border-radius: var(--a-border-radius-small);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+/* Menu Toggle Open State */
+.navbar .menu-toggle.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg); /* Adjust translate based on height/spacing */
+}
+.navbar .menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+}
+.navbar .menu-toggle.open .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg); /* Adjust translate */
 }
 
-/* Responsive Navigation */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: flex;
-    }
+/* Standalone Theme Toggle */
+.navbar > button.theme-toggle {
+    /* Styles defined elsewhere */
+}
 
-    /* --- ADD THIS RULE --- */
-    /* Hide the standalone theme toggle button next to the nav links on small screens */
-    .navbar > button.theme-toggle {
-        display: none;
-    }
-
-    /** hide first .nav-links element **/
-    ul.nav-links:first-of-type {
-        display: none;
-    }
-
-    .nav-links.open{
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background-color: var(--a-color-primary-container);
-        width: 100%;
-        box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: var(--a-border-radius-base);
-        padding-bottom: var(--a-padding-large);
-        z-index: 1000;
-    }
-
-    .nav-links li {
-        text-align: center;
-        margin: var(--a-margin-small) 0;
-        width: 75%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .nav-links a {
-        padding: var(--a-padding-medium);
-    }
-
-    /* Inside @media (max-width: 768px) { ... } */
-
-    .navbar {
-        /* Ensure vertical alignment is centered for all items */
-        align-items: center;
-    }
-
+/* Responsive Navbar */
+@media (max-width: 768px) { /* Use your breakpoint variable */
     .navbar .menu-toggle {
-        /* Ensure hamburger has consistent box model */
-        display: flex; /* Or block */
-        padding: var(--a-padding-small); /* Example padding */
-        line-height: 1; /* Prevent extra height */
-        /* Add other styles if needed */
+        display: flex; /* Show hamburger */
     }
-
     .navbar > button.theme-toggle {
-        /* display: none; /* Keep this commented out if you want it visible */
-
-        /* --- Styles to apply IF keeping it visible --- */
-        display: inline-block; /* Or block */
-        font-size: 1.1rem;    /* Reduce icon size significantly */
-        margin-left: var(--a-margin-small); /* Adjust space next to hamburger */
-        padding: var(--a-padding-small); /* Match hamburger padding? */
-        line-height: 1;         /* Match hamburger line height */
-        /* vertical-align: middle; /* Might help alignment depending on elements */
+        display: none; /* Hide standalone toggle */
     }
-    /* --- THIS RULE MUST BE INSIDE THE MEDIA QUERY --- */
-    .navbar > button.theme-toggle {
-        display: none; /* Hide the standalone button */
+    .navbar .nav-links {
+        display: none; /* Hide links by default */
+        position: absolute;
+        top: 100%; /* Position below navbar */
+        right: 0;
+        width: 100%; /* Full width */
+        background-color: var(--a-color-primary-container);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        padding: var(--a-padding-base) 0; /* Vertical padding */
+        gap: 0; /* Reset gap */
     }
+    .navbar .nav-links.open {
+        display: flex; /* Show when open */
+    }
+    .navbar .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+    .navbar .nav-links a {
+        padding: var(--a-padding-base); /* Larger tap target */
+        border-radius: 0; /* No radius in dropdown */
+    }
+    .navbar .nav-links a:hover,
+    .navbar .nav-links a:focus {
+        /* Keep hover consistent */
+        background-color: var(--a-color-primary);
+        color: var(--a-color-on-primary);
+    }
+    /* Optional: Mobile theme toggle inside menu */
+    /* .navbar .nav-links .theme-toggle-mobile { display: block; ... } */
 }
 
-
-strong {
-    font-weight: bolder;
-}
 
 /* --- Grid System --- */
-
-/* Default to a single column layout */
+/* Base grid on main (optional default) */
 main {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: calc(.5 * var(--a-grid-gutter));
+    grid-template-columns: 1fr; /* Default single column */
+    grid-gap: var(--a-grid-gutter);
 }
-
-/* Responsive adjustments */
-@media (min-width: 768px) {
-    /* Two-column layout (2:1 ratio) for article and aside within a section */
-    main section > article + aside {
-        grid-template-columns: 2fr 1fr;
-    }
-    .fixed-links{
-        display: none;
-    }
+/* Explicit Row Class */
+.row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12 columns */
+    grid-gap: var(--a-grid-gutter);
+    margin-bottom: var(--a-block-element-margin-bottom); /* Space below rows */
+    /* Remove negative margins and padding on children if using gap */
 }
+/* Column Span Classes */
+.col-1 { grid-column: span 1; }
+.col-2 { grid-column: span 2; }
+.col-3 { grid-column: span 3; }
+.col-4 { grid-column: span 4; }
+.col-5 { grid-column: span 5; }
+.col-6 { grid-column: span 6; }
+.col-7 { grid-column: span 7; }
+.col-8 { grid-column: span 8; }
+.col-9 { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+/* Add responsive col-sm-*, col-md-*, etc. classes if needed */
 
-/* --- Grid Gutters --- */
-:root {
-    --a-grid-gutter: var(--a-space-large);
-    /* Default gutter */
-}
-/* --- Utility Classes for Overrides --- */
 
-/* Container - for controlling width and centering content */
+/* --- Utility Classes --- */
 .container {
     width: 100%;
     max-width: var(--a-layout-max-width);
     margin-left: auto;
     margin-right: auto;
+    padding-left: var(--a-padding-medium); /* Use padding vars */
+    padding-right: var(--a-padding-medium);
+}
+.full-bleed {
+    width: 100vw; /* Span full viewport width */
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding-left: 0 !important; /* Override padding */
+    padding-right: 0 !important;
+}
+.full-bleed > .container {
+    /* Ensure container within full-bleed keeps its padding */
     padding-left: var(--a-padding-medium);
     padding-right: var(--a-padding-medium);
 }
-
-.centerfy{
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
-.centerfy button{
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Full Bleed - for removing padding and margin */
-.full-bleed {
-    padding: 0 !important;
-}
-
-/* Full-bleed header - remove all padding */
 header.full-bleed {
-    padding: 0;
+    padding-top: 0; /* Remove padding if needed */
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+.centerfy { /* Center text and inline/inline-block children */
+    text-align: center;
+}
+.centerfy > * { /* Center block children */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* --- Hero Section --- */
 section.hero {
-    background-color: var(--a-color-primary-container);
-    background-image: var(--a-gradient-primary);
+    background-color: var(--a-color-primary-container); /* Base color */
+    background-image: var(--a-gradient-primary); /* Gradient overlay */
     color: var(--a-color-on-primary-container);
     text-align: center;
-    padding: var(--a-padding-xxlarge) 0; /* Set top padding to 0, bottom to size large */
+    padding: var(--a-padding-xxlarge) var(--a-padding-medium); /* Use padding vars */
+    margin-bottom: var(--a-margin-medium); /* Consistent spacing */
 }
-
 section.hero h1 {
-    font-size: calc(var(--a-font-size-h1) * 1.5);
-    margin-bottom: var(--a-margin-base);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: calc(var(--a-font-size-h1) * 1.2); /* Slightly larger hero H1 */
+    margin-top: 0;
+    margin-bottom: var(--a-margin-base); /* Space below H1 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
-
 section.hero p {
-    font-size: var(--a-font-size-h3);
-    margin-bottom: var(--a-margin-large);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: var(--a-font-size-h4); /* Larger paragraph */
+    margin-bottom: var(--a-margin-large); /* More space below paragraph */
+    max-width: 60ch; /* Limit line length for readability */
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
-
-section.hero code {
-    text-align: left;
+section.hero .button {
+    margin: var(--a-margin-small); /* Space around buttons */
 }
 
 /* --- Footer --- */
-footer {
+/* Page Footer */
+body > footer { /* More specific selector for main page footer */
     background-color: var(--a-color-surface-invert);
     color: var(--a-color-on-surface-invert);
     padding: var(--a-padding-medium);
     margin-top: var(--a-margin-large);
     text-align: center;
-    /* Center footer content */
+    font-size: var(--a-font-size-small);
 }
 
-/* --- Examples --- */
-.example {
-    background-color: var(--a-color-code-bg);
-    padding: var(--a-padding-base);
-    margin-bottom: var(--a-margin-base);
-    border: 1px solid var(--a-color-outline);
-}
-/* Color Swatches */
-.color-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--a-space-base);
-}
 
-.color-group {
-    padding: var(--a-padding-base);
-    border: 1px solid var(--a-color-outline);
+/* ========================================================================= */
+/* Component Styles (Continued)                                            */
+/* ========================================================================= */
+
+/* --- Alerts --- */
+.alert {
+    padding: var(--a-padding-base); /* Use padding var */
+    margin-bottom: var(--a-block-element-margin-bottom);
+    border: var(--a-border-width-base) solid; /* Use base width */
     border-radius: var(--a-border-radius-base);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: var(--a-font-size-base);
+    border-left-width: 4px; /* Thicker left border for emphasis */
+}
+.alert-success {
+    background-color: var(--a-color-positive-container);
+    color: var(--a-color-on-positive-container);
+    border-color: var(--a-color-positive);
+}
+.alert-error {
+    background-color: var(--a-color-negative-container);
+    color: var(--a-color-on-negative-container);
+    border-color: var(--a-color-negative);
+}
+.alert-info { /* Renamed from notice? Assuming info */
+    background-color: var(--a-color-informative-container);
+    color: var(--a-color-on-informative-container);
+    border-color: var(--a-color-informative);
+}
+.alert-warning { /* Add warning/notice style */
+    background-color: var(--a-color-notice-container);
+    color: var(--a-color-on-notice-container);
+    border-color: var(--a-color-notice);
 }
 
-.color-group h4 {
-    margin-top: 0;
-    color: var(--a-color-on-surface);
-    font-size: 1.2rem;
-}
 
-.color-swatch {
+/* --- Breadcrumbs --- */
+.breadcrumbs {
+    font-size: var(--a-font-size-small);
+    margin-bottom: var(--a-block-element-margin-bottom);
+    padding: var(--a-padding-small) 0; /* Add some padding */
+    border-bottom: 1px solid var(--a-color-outline); /* Subtle separator */
+}
+.breadcrumbs ol {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: var(--a-space-small); /* Gap between items */
+}
+.breadcrumbs li {
+    margin-bottom: 0; /* Reset list item margin */
+    display: inline-flex; /* Align items */
     align-items: center;
-    padding: var(--a-padding-medium);
-    margin-bottom: var(--a-margin-small);
-    border-radius: var(--a-border-radius-base);
-    min-height: 100px;
-    text-align: center;
-    transition: transform 0.2s ease;
+}
+.breadcrumbs li::after {
+    content: '/';
+    margin-left: var(--a-space-small); /* Space before separator */
+    color: var(--a-color-text-secondary);
+    display: inline-block; /* Needed for margin */
+}
+.breadcrumbs li:last-child::after {
+    content: ''; /* No separator after last item */
+    margin-left: 0;
+}
+.breadcrumbs a {
+    color: var(--a-color-primary);
+    text-decoration: none;
+}
+.breadcrumbs a:hover, .breadcrumbs a:focus {
+    text-decoration: underline;
+}
+.breadcrumbs [aria-current="page"] {
+    color: var(--a-color-on-surface); /* Current page text color */
+    font-weight: var(--a-font-weight-bold);
 }
 
-.color-swatch:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+/* --- Tooltip --- */
+.tooltip {
+    position: relative;
+    cursor: help; /* Indicate help available */
+    border-bottom: 1px dotted currentColor; /* Subtle indicator */
+}
+.tooltip::after { /* Using ::after for tooltip content */
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%; /* Position above */
+    left: 50%;
+    transform: translateX(-50%) translateY(-var(--a-space-tiny)); /* Move slightly up */
+    background-color: var(--a-color-surface-invert); /* Inverted colors */
+    color: var(--a-color-on-surface-invert);
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    border-radius: var(--a-border-radius-small);
+    white-space: nowrap;
+    font-size: var(--a-font-size-small);
+    z-index: 10; /* Ensure visibility */
+    /* Hidden state */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Prevent interaction */
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+.tooltip:hover::after,
+.tooltip:focus::after { /* Show on hover/focus */
+    opacity: 1;
+    visibility: visible;
 }
 
-.color-swatch.primary {
+/* --- Pagination --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: var(--a-space-small);
+    margin-top: var(--a-margin-medium);
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+.pagination button {
+    padding: var(--a-padding-small) var(--a-padding-base); /* Consistent padding */
+    background-color: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline); /* Use outline color */
+    border-radius: var(--a-border-radius-small);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    color: var(--a-color-primary); /* Use primary color for text */
+    min-width: auto; /* Allow natural width */
+    margin: 0; /* Reset margin */
+}
+.pagination button.active {
     background-color: var(--a-color-primary);
     color: var(--a-color-on-primary);
+    border-color: var(--a-color-primary);
+    cursor: default;
+    font-weight: var(--a-font-weight-bold);
 }
-.color-swatch.primary-container {
+.pagination button:hover:not(:disabled):not(.active) {
     background-color: var(--a-color-primary-container);
     color: var(--a-color-on-primary-container);
+    border-color: var(--a-color-primary-container);
 }
-.color-swatch.secondary {
-    background-color: var(--a-color-secondary);
-    color: var(--a-color-on-secondary);
+.pagination button:focus {
+    outline: 2px solid var(--a-color-primary);
+    outline-offset: 1px;
+    z-index: 1; /* Bring focus state above others */
 }
-.color-swatch.secondary-container {
-    background-color: var(--a-color-secondary-container);
-    color: var(--a-color-on-secondary-container);
+.pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: var(--a-color-surface-variant);
+    color: var(--a-color-text-secondary);
+    border-color: var(--a-color-outline);
 }
-.color-swatch.tertiary {
-    background-color: var(--a-color-tertiary);
-    color: var(--a-color-on-tertiary);
+
+/* --- Toast Notifications --- */
+.toast {
+    position: fixed;
+    bottom: var(--a-space-medium); /* Use space var */
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 250px;
+    max-width: 90%;
+    padding: var(--a-padding-base); /* Use padding var */
+    background-color: var(--a-color-surface-invert); /* Use inverted surface */
+    color: var(--a-color-on-surface-invert);
+    border-radius: var(--a-border-radius-base);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+    z-index: 2000; /* High z-index */
+    opacity: 0; /* Hidden by default, JS handles visibility */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
 }
-.color-swatch.tertiary-container {
-    background-color: var(--a-color-tertiary-container);
-    color: var(--a-color-on-tertiary-container);
+.toast.show { /* Class added by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0); /* Slide in */
 }
-.color-swatch.on-primary {
-    background-color: var(--a-color-on-primary);
+.toast-success { background-color: var(--a-color-positive); color: var(--a-color-on-positive); }
+.toast-error { background-color: var(--a-color-negative); color: var(--a-color-on-negative); }
+.toast-info { background-color: var(--a-color-informative); color: var(--a-color-on-informative); }
+.toast-warning { background-color: var(--a-color-notice); color: var(--a-color-on-notice); }
+
+
+/* --- Accordion --- */
+.accordion {
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+.accordion > div { /* Each accordion item */
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-base);
+    margin-bottom: var(--a-margin-small); /* Space between items */
+    overflow: hidden; /* Clip content when closed */
+}
+.accordion > div:last-child {
+    margin-bottom: 0;
+}
+.accordion h4 { /* Heading containing the button */
+    margin: 0;
+    font-size: var(--a-font-size-h5); /* Slightly smaller heading */
+}
+.accordion button[aria-controls] { /* The button itself */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: var(--a-padding-base); /* Use padding vars */
+    background-color: var(--a-color-surface-variant); /* Subtle background */
+    color: var(--a-color-on-surface-variant); /* Ensure contrast */
+    border: none;
+    border-radius: 0; /* No radius on button itself */
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: var(--a-font-weight-bold);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.accordion button[aria-controls]:hover,
+.accordion button[aria-controls]:focus {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    outline: none; /* Style focus on parent div? */
+}
+.accordion button[aria-controls]::after { /* Indicator Arrow */
+    content: '▼'; /* Down arrow */
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+    margin-left: var(--a-space-small);
+}
+.accordion button[aria-expanded="true"] {
+    background-color: var(--a-color-surface); /* Match panel background when open? */
+    color: var(--a-color-on-surface);
+    border-bottom: 1px solid var(--a-color-outline); /* Separator when open */
+}
+.accordion button[aria-expanded="true"]::after {
+    transform: rotate(-180deg); /* Point arrow up */
+}
+.accordion div[role="region"] { /* The content panel */
+    padding: var(--a-padding-base); /* Use padding vars */
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    border-top: none; /* Ensure no double border */
+    /* Transition handled by JS/hidden attribute or max-height */
+}
+.accordion div[role="region"]:not([hidden]) {
+    /* Add transition styles if using max-height */
+    /* max-height: 500px; transition: max-height 0.3s ease-out; */
+}
+
+
+/* --- Tabs --- */
+.tabs {
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+.tabs [role="tablist"] {
+    display: flex;
+    gap: var(--a-space-tiny); /* Minimal gap */
+    border-bottom: 2px solid var(--a-color-outline); /* Main underline */
+    padding: 0;
+    margin: 0 0 var(--a-margin-base) 0; /* Space below tablist */
+    list-style: none;
+}
+.tabs [role="tab"] {
+    padding: var(--a-padding-small) var(--a-padding-base);
+    cursor: pointer;
+    border: none;
+    border-bottom: 2px solid transparent; /* Transparent border for spacing */
+    margin-bottom: -2px; /* Overlap the main underline */
+    background: none;
     color: var(--a-color-primary);
+    font-weight: var(--a-font-weight-bold);
+    font-size: var(--a-font-size-base);
+    transition: border-color 0.2s ease, color 0.2s ease;
+    position: relative; /* For focus outline */
 }
-.color-swatch.on-primary-container {
-    background-color: var(--a-color-on-primary-container);
+.tabs [role="tab"]:hover,
+.tabs [role="tab"]:focus {
     color: var(--a-color-primary-container);
+    outline: none;
 }
-.color-swatch.on-secondary {
-    background-color: var(--a-color-on-secondary);
-    color: var(--a-color-secondary);
+.tabs [role="tab"]:focus-visible::after { /* Focus indicator */
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background-color: var(--a-color-primary);
 }
-.color-swatch.on-secondary-container {
-    background-color: var(--a-color-on-secondary-container);
-    color: var(--a-color-secondary-container);
+.tabs [role="tab"][aria-selected="true"] {
+    color: var(--a-color-on-surface); /* Active tab text color */
+    border-bottom-color: var(--a-color-primary); /* Highlight active tab */
+    font-weight: var(--a-font-weight-bold);
 }
-.color-swatch.on-tertiary {
-    background-color: var(--a-color-on-tertiary);
-    color: var(--a-color-tertiary);
+.tabs [role="tabpanel"] {
+    padding: var(--a-padding-base) 0; /* Padding for tab content */
 }
-.color-swatch.on-tertiary-container {
-    background-color: var(--a-color-on-tertiary-container);
-    color: var(--a-color-tertiary-container);
-}
-.color-swatch.gray-1 {
-    background-color: var(--a-color-gray-1);
-    color: white;
-}
-.color-swatch.gray-2 {
-    background-color: var(--a-color-gray-2);
-    color: white;
-}
-.color-swatch.gray-3 {
-    background-color: var(--a-color-gray-3);
-    color: white;
-}
-.color-swatch.gray-4 {
-    background-color: var(--a-color-gray-4);
-    color: white;
-}
-.color-swatch.gray-5 {
-    background-color: var(--a-color-gray-5);
-    color: black;
-}
-.color-swatch.gray-6 {
-    background-color: var(--a-color-gray-6);
-    color: black;
-}
-.color-swatch.gray-7 {
-    background-color: var(--a-color-gray-7);
-    color: black;
-}
-.color-swatch.gray-8 {
-    background-color: var(--a-color-gray-8);
-    color: black;
-}
-.color-swatch.gray-9 {
-    background-color: var(--a-color-gray-9);
-    color: black;
-}
-.color-swatch.complementary {
-    background-color: var(--a-color-complementary);
-    color: var(--a-color-on-complementary);
-}
-.color-swatch.complementary-container {
-    background-color: var(--a-color-complementary-container);
-    color: var(--a-color-on-complementary-container);
-}
-.color-swatch.on-complementary {
-    background-color: var(--a-color-on-complementary);
-    color: var(--a-color-complementary);
-}
-.color-swatch.on-complementary-container {
-    background-color: var(--a-color-on-complementary-container);
-    color: var(--a-color-complementary-container);
-}
-.color-swatch.analogous-1 {
-    background-color: var(--a-color-analogous-1);
-    color: var(--a-color-on-analogous-1);
-}
-.color-swatch.analogous-1-container {
-    background-color: var(--a-color-analogous-1-container);
-    color: var(--a-color-on-analogous-1-container);
-}
-.color-swatch.on-analogous-1 {
-    background-color: var(--a-color-on-analogous-1);
-    color: var(--a-color-analogous-1);
-}
-.color-swatch.on-analogous-1-container {
-    background-color: var(--a-color-on-analogous-1-container);
-    color: var(--a-color-analogous-1-container);
-}
-.color-swatch.analogous-2 {
-    background-color: var(--a-color-analogous-2);
-    color: var(--a-color-on-analogous-2);
-}
-.color-swatch.analogous-2-container {
-    background-color: var(--a-color-analogous-2-container);
-    color: var(--a-color-on-analogous-2-container);
-}
-.color-swatch.on-analogous-2 {
-    background-color: var(--a-color-on-analogous-2);
-    color: var(--a-color-analogous-2);
-}
-.color-swatch.on-analogous-2-container {
-    background-color: var(--a-color-on-analogous-2-container);
-    color: var(--a-color-analogous-2-container);
+.tabs [role="tabpanel"][hidden] {
+    display: none;
 }
 
-.color-name {
-    font-weight: 600;
-    margin-bottom: var(--a-margin-tiny);
+
+/* --- Dropdown Menu --- */
+.dropdown {
+    position: relative; /* Context for absolute positioning */
+    display: inline-block; /* Or block depending on usage */
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+.dropdown-toggle {
+    /* Use standard button styles */
+}
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position below toggle */
+    left: 0; /* Align left */
+    z-index: 1000; /* Ensure visibility */
+    background: var(--a-color-surface);
+    padding: var(--a-padding-small) 0; /* Vertical padding */
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-base);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 160px; /* Minimum width */
+    list-style: none;
+    margin: var(--a-space-tiny) 0 0 0; /* Small gap below toggle */
+}
+.dropdown-menu.show {
+    display: block; /* Show menu */
+}
+/* Dropdown Items */
+.dropdown-menu li {
+    margin-bottom: 0; /* Reset list item margin */
+}
+.dropdown-menu a,
+.dropdown-menu button { /* Can contain links or buttons */
+    display: block;
+    padding: var(--a-padding-small) var(--a-padding-base);
+    color: var(--a-color-on-surface);
+    text-decoration: none;
+    white-space: nowrap;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: var(--a-font-size-base);
+}
+.dropdown-menu a:hover, .dropdown-menu a:focus,
+.dropdown-menu button:hover, .dropdown-menu button:focus {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    text-decoration: none;
+    outline: none;
+}
+.dropdown-menu li[role="separator"] {
+    height: 1px;
+    background-color: var(--a-color-outline);
+    margin: var(--a-margin-tiny) 0;
+    padding: 0;
 }
 
-.color-value {
-    font-size: 0.8rem;
-    font-family: var(--a-font-family-mono);
+
+/* --- Progress Bar --- */
+.progress-bar {
+    background: var(--a-color-surface-variant); /* Background track */
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-large); /* More rounded */
+    height: 20px; /* Example height */
+    width: 100%;
+    overflow: hidden;
+    margin-top: var(--a-margin-small);
+    margin-bottom: var(--a-block-element-margin-bottom);
 }
-
-/* ... other styles ... */
-
-.color-swatch.secondary {
-    background-color: var(--a-color-secondary);
-    color: var(--a-color-on-secondary);
-}
-.color-swatch.secondary-container {
-    background-color: var(--a-color-secondary-container);
-    color: var(--a-color-on-secondary-container);
-}
-.color-swatch.on-secondary {
-    background-color: var(--a-color-on-secondary);
-    color: var(--a-color-secondary);
-}
-.color-swatch.on-secondary-container {
-    background-color: var(--a-color-on-secondary-container);
-    color: var(--a-color-secondary-container);
-}
-
-/* ... other styles ... */
-
-/* --- Standout Text --- */
-.standout {
-    font-size: var(--a-font-size-h4);
-    font-weight: 600;
-    color: var(--a-color-primary);
-}
-
-/* --- Grid Utility Classes --- */
-.row {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-gap: var(--a-grid-gutter);
-    margin-left: calc(-1 * var(--a-padding-medium));
-    margin-right: calc(-1 * var(--a-padding-medium));
-}
-
-.row > * {
-    padding-left: var(--a-padding-medium);
-    padding-right: var(--a-padding-medium);
-}
-
-/* Column Spans */
-.col-1 {
-    grid-column: span 1;
-}
-
-.col-2 {
-    grid-column: span 2;
-}
-
-.col-3 {
-    grid-column: span 3;
-}
-
-.col-4 {
-    grid-column: span 4;
-}
-
-.col-5 {
-    grid-column: span 5;
-}
-
-.col-6 {
-    grid-column: span 6;
-}
-
-.col-7 {
-    grid-column: span 7;
-}
-
-.col-8 {
-    grid-column: span 8;
-}
-
-.col-9 {
-    grid-column: span 9;
-}
-
-.col-10 {
-    grid-column: span 10;
-}
-
-.col-11 {
-    grid-column: span 11;
-}
-
-.col-12 {
-    grid-column: span 12;
-}
-
-/* Responsive Column Spans */
-@media (max-width: 575px) {
-    .col-sm-1 {
-        grid-column: span 1;
-    }
-
-    .col-sm-2 {
-        grid-column: span 2;
-    }
-
-    .col-sm-3 {
-        grid-column: span 3;
-    }
-
-    .col-sm-4 {
-        grid-column: span 4;
-    }
-
-    .col-sm-5 {
-        grid-column: span 5;
-    }
-
-    .col-sm-6 {
-        grid-column: span 6;
-    }
-
-    .col-sm-7 {
-        grid-column: span 7;
-    }
-
-    .col-sm-8 {
-        grid-column: span 8;
-    }
-
-    .col-sm-9 {
-        grid-column: span 9;
-    }
-
-    .col-sm-10 {
-        grid-column: span 10;
-    }
-
-    .col-sm-11 {
-        grid-column: span 11;
-    }
-
-    .col-sm-12 {
-        grid-column: span 12;
-    }
-}
-
-@media (min-width: 576px) and (max-width: 767px) {
-    .col-md-1 {
-        grid-column: span 1;
-    }
-
-    .col-md-2 {
-        grid-column: span 2;
-    }
-
-    .col-md-3 {
-        grid-column: span 3;
-    }
-
-    .col-md-4 {
-        grid-column: span 4;
-    }
-
-    .col-md-5 {
-        grid-column: span 5;
-    }
-
-    .col-md-6 {
-        grid-column: span 6;
-    }
-
-    .col-md-7 {
-        grid-column: span 7;
-    }
-
-    .col-md-8 {
-        grid-column: span 8;
-    }
-
-    .col-md-9 {
-        grid-column: span 9;
-    }
-
-    .col-md-10 {
-        grid-column: span 10;
-    }
-
-    .col-md-11 {
-        grid-column: span 11;
-    }
-
-    .col-md-12 {
-        grid-column: span 12;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .col-lg-1 {
-        grid-column: span 1;
-    }
-
-    .col-lg-2 {
-        grid-column: span 2;
-    }
-
-    .col-lg-3 {
-        grid-column: span 3;
-    }
-
-    .col-lg-4 {
-        grid-column: span 4;
-    }
-
-    .col-lg-5 {
-        grid-column: span 5;
-    }
-
-    .col-lg-6 {
-        grid-column: span 6;
-    }
-
-    .col-lg-7 {
-        grid-column: span 7;
-    }
-
-    .col-lg-8 {
-        grid-column: span 8;
-    }
-
-    .col-lg-9 {
-        grid-column: span 9;
-    }
-
-    .col-lg-10 {
-        grid-column: span 10;
-    }
-
-    .col-lg-11 {
-        grid-column: span 11;
-    }
-
-    .col-lg-12 {
-        grid-column: span 12;
-    }
-}
-
-@media (min-width: 992px) {
-    .col-xl-1 {
-        grid-column: span 1;
-    }
-
-    .col-xl-2 {
-        grid-column: span 2;
-    }
-
-    .col-xl-3 {
-        grid-column: span 3;
-    }
-
-    .col-xl-4 {
-        grid-column: span 4;
-    }
-
-    .col-xl-5 {
-        grid-column: span 5;
-    }
-
-    .col-xl-6 {
-        grid-column: span 6;
-    }
-
-    .col-xl-7 {
-        grid-column: span 7;
-    }
-
-    .col-xl-8 {
-        grid-column: span 8;
-    }
-
-    .col-xl-9 {
-        grid-column: span 9;
-    }
-
-    .col-xl-10 {
-        grid-column: span 10;
-    }
-
-    .col-xl-11 {
-        grid-column: span 11;
-    }
-    .col-xl-12 {
-        grid-column: span 12;
-    }
+.progress-bar .progress {
+    height: 100%;
+    background: var(--a-gradient-primary, var(--a-color-primary)); /* Use gradient if defined */
+    width: 0%; /* Set by style or JS */
+    transition: width 0.3s ease-out;
+    border-radius: inherit; /* Inherit parent radius */
+    display: flex; /* Allow text inside */
+    align-items: center;
+    justify-content: center;
+    color: var(--a-color-on-primary);
+    font-size: var(--a-font-size-small);
 }
