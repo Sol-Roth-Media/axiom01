@@ -6,10 +6,18 @@
     white-space: nowrap; /* Prevent the logo from wrapping */
     display: flex;
     align-items: baseline;
+    letter-spacing: .5rem;
+    margin-top: .5rem;
 }
 
+
+/* Logo size variants */
+.navbar.small .logo {
+    font-size: 1rem;
+    font-weight: bold;;
+}
 .logo span{
-    color: var(--a-color-on-primary-container);
+    /**color: var(--a-color-on-primary-container);**/
 }
 
 .logo span:nth-child(1) { /* Target the "A" */
@@ -87,10 +95,6 @@
 a.logo:hover{
     text-decoration: none;
     opacity: .9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-left: -1px;
-    margin-top: -2px;
-    padding-bottom: 2px;
 }
 
 /* Advanced Typography Examples */
@@ -287,7 +291,7 @@ a.logo:hover{
     left: 5px; /* Adjust horizontal indent as needed */
     font-size: 0.90em; /* Keep it small */
     font-weight: bolder;
-    color: var(--a-color-on-primary-container); /* Or appropriate color */
+    /** color: var(--a-color-on-primary-container); /* Or appropriate color */
     opacity: 0.8;
     line-height: 1; /* Ensure tight line height */
     /* Remove display: block and margin-top if previously set */
@@ -332,4 +336,54 @@ a.logo:hover{
 /* Remove theme toggle from the list styling if it was previously an li */
 .nav-links .theme-toggle {
     display: none; /* Hide it if it still exists as an li */
+}
+
+/* === Add to css/site.css === */
+
+.theme-switcher-container {
+    margin-left: var(--a-margin-medium); /* Space from logo */
+    margin-right: var(--a-margin-small); /* Space before menu items or toggle */
+    display: flex;
+    align-items: center;
+}
+
+.theme-switcher-container label.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+#theme-select {
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    border-radius: var(--a-border-radius-base);
+    border: 1px solid var(--a-color-outline);
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    font-family: inherit;
+    font-size: var(--a-font-size-small);
+    cursor: pointer;
+}
+
+#theme-select:focus {
+    outline: 2px solid var(--a-color-primary);
+    outline-offset: 1px;
+}
+
+/* On mobile, the select might be part of the collapsed menu, or hidden if space is tight */
+@media (max-width: 768px) { /* Your mobile breakpoint */
+    .theme-switcher-container {
+        /* Example: Hide it if it's in the main navbar area that gets replaced by hamburger */
+        /* display: none; */
+        /* Or, if you move it into the .nav-links for mobile, style accordingly */
+        margin-left: 0;
+        margin-right: 0;
+     /*  width: 100%; If it becomes a full-width item in mobile menu */
+    }
+    /* #theme-select { width: 100%; } */
 }

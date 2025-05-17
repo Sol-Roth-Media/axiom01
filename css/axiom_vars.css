@@ -1,18 +1,23 @@
-/* === axiom_vars.css (Suggestions) === */
-:root {
-    /** Spacing Scale (Example based on 4px/8px increments) */
-    --a-space-none: 0;
-    --a-space-tiny: 4px;     /* Replaced 1px */
-    --a-space-small: 8px;    /* Replaced 2px */
-    --a-space-base: 16px;    /* NEW or replace 8px */
-    --a-space-medium: 24px;  /* Replaced 12px? Keep or adjust */
-    --a-space-large: 32px;   /* Replaced 24px */
-    --a-space-xlarge: 48px;  /* Replaced 36px */
-    --a-space-xxlarge: 64px; /* Replaced 48px */
-    /* Removed --a-space-extreme: 98px; or adjust if needed */
-    /* Removed --a-space-ml: 12px; covered by scale */
+/* === Axiom - axiom_vars.css === */
+/* Beta Release Candidate - Reviewed May 15, 2025 */
 
-    /** Padding (Ensure these use the space vars directly) */
+:root {
+    /* Extract HSL components for color calculations */
+    --a-color-primary-h: 210; /* Hue value for primary color (adjust this to match your actual primary color) */
+    --a-color-primary-s: 80%; /* Saturation value for primary color */
+    --a-color-primary-l: 50%; /* Lightness value for primary color */
+
+    /** Spacing Scale */
+    --a-space-none: 0;
+    --a-space-tiny: 4px;
+    --a-space-small: 8px;
+    --a-space-base: 16px;
+    --a-space-medium: 24px;
+    --a-space-large: 32px;
+    --a-space-xlarge: 48px;
+    --a-space-xxlarge: 64px;
+
+    /** Padding (Derived from space vars) */
     --a-padding-tiny: var(--a-space-tiny);
     --a-padding-small: var(--a-space-small);
     --a-padding-base: var(--a-space-base);
@@ -21,24 +26,7 @@
     --a-padding-xlarge: var(--a-space-xlarge);
     --a-padding-xxlarge: var(--a-space-xxlarge);
 
-
-    /* --- Example: Reduce Vertical Rhythm Variables --- */
-    /* Original suggestions might have been larger */
-    --a-heading-margin-top: var(--a-margin-medium); /* Was potentially large? Try medium */
-    --a-heading-margin-bottom: var(--a-margin-base); /* Was potentially small? Try tiny or small */
-    --a-paragraph-margin-bottom: var(--a-margin-small); /* Was potentially base? Try small */
-    --a-block-element-margin-bottom: var(--a-margin-base); /* Keep base or try medium */
-
-    /* You might also need to adjust the core space values if the base is too large */
-    /* --a-space-tiny: 4px; */
-    /* --a-space-small: 8px; */
-    /* --a-space-base: 16px; */
-    /* --a-space-medium: 24px; */
-    /* --a-space-large: 32px; */
-    /* --a-space-xlarge: 48px; */
-    /* --a-space-xxlarge: 64px; */
-
-    /* --- Ensure Margin variables use the space vars --- */
+    /** Margin (Derived from space vars) */
     --a-margin-tiny: var(--a-space-tiny);
     --a-margin-small: var(--a-space-small);
     --a-margin-base: var(--a-space-base);
@@ -47,64 +35,58 @@
     --a-margin-xlarge: var(--a-space-xlarge);
     --a-margin-xxlarge: var(--a-space-xxlarge);
 
-    /* ... rest of axiom_vars.css ... */
+    /** Vertical Rhythm Variables */
+    /* These control default spacing between common block elements */
+    /* Adjust these if overall vertical spacing feels too tight/loose */
+    --a-heading-margin-top: var(--a-margin-medium);
+    --a-heading-margin-bottom: var(--a-margin-base);
+    --a-paragraph-margin-bottom: var(--a-margin-base); /* Increased for better separation from default 8px */
+    --a-block-element-margin-bottom: var(--a-margin-base);
 
-    /** Grid Gutter (Ensure it uses a space variable) */
-    --a-grid-gutter: var(--a-space-tiny); /* Example */
+    /** Grid Gutter */
+    /* --a-grid-gutter: var(--a-space-tiny); /* Original 4px - very tight */
+    --a-grid-gutter: var(--a-space-base); /* Suggested: 16px. Adjust to var(--a-space-medium) (24px) if more space is desired */
 
     /** Typography */
-    --a-font-family-sans: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; /* Added system fonts */
-    --a-font-family-mono: "Courier New", Courier, monospace; /* Keep or choose another */
-    --a-font-size-small: calc(var(--a-font-size-base) * .9);
+    --a-font-family-sans: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --a-font-family-mono: "Courier New", Courier, monospace;
     --a-font-size-base: 1rem; /* Typically 16px */
-    --a-line-height-base: 1.6; /* Good for readability */
-    --a-line-height-heading: 1.3; /* Slightly tighter for headings */
-    --a-heading-scale: 1.25; /* Example scale (Major Third), try 1.25, 1.414, 1.5, 1.618 */
+    --a-font-size-small: calc(var(--a-font-size-base) * 0.875); /* Common small size (14px if base is 16px) */
+    --a-line-height-base: 1.6;
+    --a-line-height-heading: 1.3;
+    --a-heading-scale: 1.15; /* Current scale: H1=~2.44rem, H2=~1.95rem, H3=~1.56rem, H4=~1.25rem, H5=1rem, H6=0.8rem */
     --a-font-weight-normal: 400;
-    --a-font-weight-medium: 500; /* Often unused, consider removing if not needed */
-    --a-font-weight-bold: 700;   /* Standard bold */
-    /* --a-font-weight-bolder: 900; /* Optional extra bold */
+    --a-font-weight-medium: 500;
+    --a-font-weight-bold: 700;
 
-    /* Calculated heading sizes (Recalculate based on new scale!) */
-    /* Example using 1.333 scale */
-    --a-font-size-h6: calc(var(--a-font-size-base) / var(--a-heading-scale)); /* ~0.75rem */
-    --a-font-size-h5: var(--a-font-size-base);                             /* 1rem */
-    --a-font-size-h4: calc(var(--a-font-size-base) * var(--a-heading-scale)); /* ~1.33rem */
-    --a-font-size-h3: calc(var(--a-font-size-h4) * var(--a-heading-scale));   /* ~1.77rem */
-    --a-font-size-h2: calc(var(--a-font-size-h3) * var(--a-heading-scale));   /* ~2.36rem */
-    --a-font-size-h1: calc(var(--a-font-size-h2) * var(--a-heading-scale));   /* ~3.15rem */
 
-    /* Calculated heading sizes */
-    --a-font-size-h1: calc(var(--a-font-size-base) * var(--a-heading-scale) * var(--a-heading-scale) * var(--a-heading-scale) * var(--a-heading-scale));
-    --a-font-size-h2: calc(var(--a-font-size-base) * var(--a-heading-scale) * var(--a-heading-scale) * var(--a-heading-scale));
-    --a-font-size-h3: calc(var(--a-font-size-base) * var(--a-heading-scale) * var(--a-heading-scale));
-    --a-font-size-h4: calc(var(--a-font-size-base)* var(--a-heading-scale));
-    --a-font-size-h5: calc(.9 * var(--a-font-size-base));
-    --a-font-size-h6: calc(.8 * var(--a-font-size-base));
-
-    /** Borders
-    Variables for border width, style, and radius.
-    */
+    /* --- Direct Heading Font Size Variables --- */
+    /* These are the direct values based on the scale. */
+    /* axiom.css will use these variable names directly for h1-h6 tags. */
+    --a-font-size-h6: calc(var(--a-font-size-base) / var(--a-heading-scale));          /* With 1.25 scale: 0.8rem */
+    --a-font-size-h5: var(--a-font-size-base);                                      /* 1rem */
+    --a-font-size-h4: calc(var(--a-font-size-base) * var(--a-heading-scale));        /* 1.25rem */
+    --a-font-size-h3: calc(var(--a-font-size-h4) * var(--a-heading-scale));          /* ~1.56rem */
+    --a-font-size-h2: calc(var(--a-font-size-h3) * var(--a-heading-scale));          /* ~1.95rem */
+    --a-font-size-h1: calc(var(--a-font-size-h2) * var(--a-heading-scale));
 
 
     /** Borders */
-    --a-border-width-base: 1px; /* Standard */
+    --a-border-width-base: 1px;
     --a-border-style-base: solid;
-    --a-border-radius-small: 3px;  /* Optional smaller radius */
-    --a-border-radius-base: 5px;   /* Example radius, adjust as desired */
-    --a-border-radius-large: 8px;  /* Optional larger radius */
+    --a-border-radius-small: 3px;
+    --a-border-radius-base: 5px;
+    --a-border-radius-large: 8px;
 
-    /** Layout
-    Variables related to the overall layout, such as the maximum content width.
-    */
+    /** Layout */
     --a-layout-max-width: 1200px;
 
-    /* Decoration */
-    --a-decorate-containers: false; /* Set to true to add borders to containers */
-
-    /** Minimum sizes */
+    /** Form Specific */
     --a-min-input-size: 260px;
+    --a-inline-label-width: 100px; /* From previous discussion */
+    --a-inline-validation-width: 160px; /* From previous discussion */
 
 
-
+    /* Decoration (Example - not actively used unless JS toggles it) */
+    --a-decorate-containers: false;
 }
