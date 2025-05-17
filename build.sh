@@ -38,7 +38,7 @@ fi
 
 # Concatenate CSS files in correct order
 echo "📦 Concatenating CSS files..."
-cat css/_reset.css css/_axiom_reset.css css/axiom_vars.css css/colors_vars.css css/axion_config.css css/colors.css css/axiom.css css/site.css css/logo.css > $RELEASE_DIR/css/axiom.css
+cat css/_reset.css css/_axiom_reset.css css/axiom_vars.css css/colors_vars.css css/axiom_config.css css/colors.css css/axiom.css css/alerts.css css/site.css css/logo.css > $RELEASE_DIR/css/axiom.css
 
 # Copy the individual CSS files as well (for modular usage)
 echo "📁 Copying individual CSS files..."

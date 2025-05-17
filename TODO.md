@@ -6,6 +6,7 @@ This document outlines pending tasks, improvements, and future features for the 
 
 - [x] Fix file naming inconsistency (axion_config.css → axiom_config.css)
 - [x] Fix theme switcher positioning on mobile displays
+- [x] Add alert styles for success, error, and info messages
 - [ ] Repair gradient displays and swatches in theme section
 - [ ] Fix navbar mobile menu toggle behavior and styling
 - [ ] Ensure all components render correctly across themes
