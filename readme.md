@@ -45,12 +45,32 @@ Axiom01 is designed to be lightweight and performant:
 - Optimized CSS with low specificity
 - Only the components you need
 
+### Components
+Axiom01 includes several ready-to-use components:
+- **Buttons**: Primary, secondary, outline variants
+- **Navigation**: Responsive navbar with mobile support
+- **Cards**: Flexible content containers
+- **Tabs**: Accessible tabbed interfaces
+- **Accordions**: Collapsible content panels
+- **Dropdowns**: Menu dropdown components
+- **Form elements**: Styled inputs, checkboxes, radio buttons
+- **Progress indicators**: Progress bars and loading throbbers
+
+### Grid System
+A flexible CSS Grid-based layout system with responsive breakpoints.
+
+### Theming System
+Axiom01 comes with multiple built-in themes. You can switch themes by:
+- Using the theme switcher dropdown
+- Toggling between light/dark modes
+- Setting a data-theme attribute on the html element
+
 
 ## Getting Started
 ### Installation
 Simply download or clone this repository:
 ``` bash
-git clone https://github.com/yourusername/axiom01.git
+git clone https://github.com/Sol-Roth-Media/axiom01.git
 ```
 #### Option 2: Using NPM
 If you're using Node.js, you can install Axiom01 via NPM:

@@ -29,6 +29,10 @@ This document outlines pending tasks, improvements, and future features for the 
     - [ ] Tabs implementation
     - [ ] Accordions implementation
     - [ ] Dropdowns implementation
+- [ ] Add Components and examples to the index.html page
+    - [ ] Cards
+    - [ ] Gradient Swatches
+    - [ ] Semantic Colors (buttons etc)
 - [ ] Enhance accessibility of all components:
     - [ ] Improve focus states
     - [ ] Add appropriate ARIA attributes
