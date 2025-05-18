@@ -1,5 +1,5 @@
 # Axiom01 UI Framework
-Welcome to Axiom01, a modern and flexible UI framework designed for building beautiful, accessible, and themeable web interfaces.
+Craft beautiful interfaces with less markup — Axiom01 enhances your HTML, not your class count.🔥</p>
 
 ## Overview
 Axiom01 is a lightweight CSS and JavaScript framework that focuses on:
