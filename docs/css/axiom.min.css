@@ -1,0 +1,2750 @@
+/* ========================================================================= */
+/* Axiom Framework Base Styles                                               */
+/* Refactored for consistent variable usage                                  */
+/* Depends on updated axiom_vars.css and colors_vars.css                     */
+/* ========================================================================= */
+
+/* --- Imports --- */
+@import url("axiom_config.css");     /* Central configuration */
+@import url("colors_vars.css");      /* Color variables */
+@import url("axiom_vars.css");       /* Core variables */
+@import url("_axiom_reset.css");
+
+
+/* ========================================================================= */
+/* Base HTML Element Styles                                                  */
+/* ========================================================================= */
+
+body {
+    font-family: var(--a-font-family-sans);
+    font-size: var(--a-font-size-base);
+    line-height: var(--a-line-height-base);
+    color: var(--a-color-on-surface);
+    background-color: var(--a-color-surface);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* --- Headings --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--a-font-family-sans);
+    font-weight: var(--a-font-weight-bold);
+    line-height: var(--a-line-height-heading);
+    margin-top: var(--a-heading-margin-top);
+    margin-bottom: var(--a-heading-margin-bottom);
+    padding: 0;
+}
+
+/* --- UPDATED FONT SIZE ASSIGNMENTS --- */
+/* Headings now use their direct corresponding variable from axiom_vars.css */
+h1 { font-size: var(--a-font-size-h1); }
+h2 { font-size: var(--a-font-size-h2); }
+h3 { font-size: var(--a-font-size-h3); }
+h4 { font-size: var(--a-font-size-h4); }
+h5 { font-size: var(--a-font-size-h5); }
+h6 { font-size: var(--a-font-size-h6); }
+/* --- Paragraphs --- */
+p {
+    margin-top: 0;
+    margin-bottom: var(--a-paragraph-margin-bottom);
+    line-height: var(--a-line-height-base); /* Ensure base line height */
+}
+
+/* --- Links --- */
+a {
+    color: var(--a-color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out; /* Add smooth transition */
+}
+a:hover, a:focus {
+    color: var(--a-color-primary-container); /* Example hover state */
+    text-decoration: underline;
+}
+
+/* --- Lists --- */
+ul, ol {
+    margin-top: 0;
+    margin-bottom: var(--a-block-element-margin-bottom);
+    padding-left: var(--a-space-large); /* Standard indent */
+    line-height: var(--a-line-height-base);
+}
+ul { list-style: disc outside; }
+ol { list-style: decimal outside; }
+
+li {
+    margin-bottom: var(--a-margin-small); /* Space between list items */
+}
+li > ul, li > ol {
+    margin-top: var(--a-margin-small); /* Space before nested list */
+    margin-bottom: 0; /* No extra space after nested list within li */
+}
+
+/* --- Definition Lists --- */
+dl {
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+dt {
+    font-weight: var(--a-font-weight-bold);
+    margin-top: var(--a-margin-base);
+}
+dt:first-child {
+    margin-top: 0;
+}
+dd {
+    margin-left: var(--a-space-large);
+    margin-bottom: var(--a-margin-base);
+}
+
+/* --- Blockquotes --- */
+blockquote {
+    margin-left: var(--a-margin-small);
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: var(--a-block-element-margin-bottom);
+    padding: var(--a-padding-medium);
+    border-left: 4px solid var(--a-color-primary); /* Accent border */
+    font-style: italic;
+    background-color: var(--a-color-surface-variant); /* Subtle background */
+    border-radius: 0 var(--a-border-radius-base) var(--a-border-radius-base) 0; /* Rounded corners */
+}
+blockquote p {
+    margin-bottom: var(--a-paragraph-margin-bottom);
+}
+blockquote footer {
+    font-style: normal;
+    font-size: var(--a-font-size-small);
+    color: var(--a-color-text-secondary); /* Assuming this variable exists */
+    margin-top: var(--a-margin-small);
+}
+blockquote footer cite {
+    font-style: normal; /* Cite usually isn't italic here */
+}
+
+/* --- Tables --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--a-block-element-margin-bottom);
+    border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline); /* Add border to table */
+    font-size: var(--a-font-size-base); /* Ensure consistent font size */
+}
+caption {
+    padding: var(--a-padding-small);
+    font-style: italic;
+    caption-side: bottom;
+    color: var(--a-color-text-secondary);
+}
+th, td {
+    padding: var(--a-padding-small) var(--a-padding-base); /* Consistent padding */
+    text-align: left;
+    border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline); /* Border for cells */
+    vertical-align: top;
+}
+th {
+    font-weight: var(--a-font-weight-bold);
+    background-color: var(--a-color-surface-variant); /* Subtle header background */
+}
+thead th {
+    border-bottom-width: calc(var(--a-border-width-base) * 2); /* Thicker bottom border for header */
+}
+
+/* --- Forms --- */
+form {
+    display: grid; /* Keep grid layout */
+    grid-gap: var(--a-space-base); /* Use grid gap variable */
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+fieldset {
+    border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
+    border-radius: var(--a-border-radius-base);
+    padding: var(--a-padding-large); /* Consistent padding */
+    margin: var(--a-margin-medium) 0; /* Consistent vertical margin */
+}
+legend {
+    font-weight: var(--a-font-weight-bold);
+    padding: 0 var(--a-padding-small); /* Padding around legend text */
+    margin-bottom: var(--a-margin-base); /* Space below legend */
+}
+label {
+    display: block;
+    margin-bottom: var(--a-margin-small);
+    font-weight: var(--a-font-weight-bold); /* Bolder labels */
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+textarea,
+select {
+    width: 100%;
+    padding: var(--a-padding-small) var(--a-padding-base); /* Consistent padding */
+    margin-bottom: var(--a-margin-base); /* Space below inputs */
+    border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
+    border-radius: var(--a-border-radius-base);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: var(--a-line-height-base); /* Ensure consistent line height */
+    background-color: var(--a-color-surface); /* Ensure background */
+    color: var(--a-color-on-surface); /* Ensure text color */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Add transitions */
+    min-width: var(--a-min-input-size); /* Keep min width */
+}
+textarea {
+    resize: vertical;
+    min-height: 100px; /* Example min height */
+}
+/* Focus state for inputs */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--a-color-primary); /* Highlight border */
+    box-shadow: 0 0 0 2px var(--a-color-primary-focus-ring, hsla(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 10%), 0.3)); /* Subtle focus ring */
+}
+/* Checkboxes and Radios */
+input[type="checkbox"],
+input[type="radio"] {
+    margin-right: var(--a-margin-small);
+    accent-color: var(--a-color-primary);
+    width: auto; /* Override width: 100% */
+    vertical-align: middle; /* Align with label text */
+}
+/* Add spacing for checkbox/radio labels */
+label input[type="checkbox"],
+label input[type="radio"] {
+    margin-right: var(--a-space-small);
+}
+
+/* Form Grouping & Validation */
+.form-group {
+    margin-bottom: var(--a-margin-base); /* Space between form groups */
+}
+.form-group label {
+    /* Styles specific to labels within form groups if needed */
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+    margin-bottom: 0; /* Remove default margin when inside a group */
+}
+.validation-message {
+    display: none; /* Hide by default */
+    font-size: var(--a-font-size-small);
+    color: var(--a-color-negative);
+    margin-top: var(--a-margin-tiny);
+}
+/* Basic :invalid styling (can be enhanced with JS) */
+input:invalid,
+textarea:invalid,
+select:invalid {
+    border-color: var(--a-color-negative);
+}
+input:invalid + .validation-message, /* Show message for invalid sibling */
+textarea:invalid + .validation-message,
+select:invalid + .validation-message {
+    display: block;
+}
+/* Optional: valid styling */
+input:valid {
+    /* border-color: var(--a-color-positive); */ /* Can be too noisy */
+}
+
+/* Form Actions (Buttons) */
+.form-actions {
+    text-align: right; /* Align buttons right */
+    margin-top: var(--a-margin-medium);
+    grid-column: 1 / -1; /* Span full width in grid */
+}
+.form-actions button,
+.form-actions input[type="submit"],
+.form-actions input[type="reset"],
+.form-actions input[type="button"] {
+    margin-left: var(--a-margin-small); /* Space between buttons */
+    margin-bottom: 0; /* Remove bottom margin */
+}
+.form-actions button:first-child,
+.form-actions input:first-child {
+    margin-left: 0;
+}
+
+/* Inline labels adjustment */
+fieldset.inline-labels .form-group {
+    display: flex;
+    align-items: center; /* Align label and input */
+    gap: var(--a-space-base); /* Space between label and input */
+    margin-bottom: var(--a-margin-base);
+}
+fieldset.inline-labels .form-group label {
+    margin-bottom: 0; /* Remove bottom margin */
+
+    flex-shrink: 0;
+    text-align: right;
+}
+fieldset.inline-labels .form-group input,
+fieldset.inline-labels .form-group textarea,
+fieldset.inline-labels .form-group select {
+    flex-grow: 1; /* Allow input to take remaining space */
+}
+fieldset.inline-labels .validation-message {
+    flex-basis: 100%; /* Make validation message span full width below */
+    margin-left: calc( var(--a-space-base)); /* Align with input */
+}
+
+/* Responsive form layout */
+@media (min-width: 768px) {
+    form:not(:has(fieldset.inline-labels)) { /* Apply multi-column unless using inline labels */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    /* Make fieldsets span full width if needed */
+    form fieldset {
+        grid-column: 1 / -1;
+    }
+}
+
+/** Colors */
+.primary{
+    background-color: var(--a-color-primary);
+    color: var(--a-color-on-primary);
+}
+.primary-container{
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+}
+
+.on-primary{
+    background-color: var(--a-color-on-primary);
+    color: var(--a-color-primary);
+}
+
+.on-primary-container{
+    background-color: var(--a-color-on-primary-container);
+    color: var(--a-color-primary-container);
+}
+
+.secondary{
+    background-color: var(--a-color-secondary);
+    color: var(--a-color-on-secondary);
+}
+.secondary-container{
+    background-color: var(--a-color-secondary-container);
+    color: var(--a-color-on-secondary-container);
+}
+
+.on-secondary{
+    background-color: var(--a-color-on-secondary);
+    color: var(--a-color-secondary);
+}
+
+.on-secondary-container{
+    background-color: var(--a-color-on-secondary-container);
+    color: var(--a-color-secondary-container);
+}
+
+.tertiary{
+    background-color: var(--a-color-tertiary);
+    color: var(--a-color-on-tertiary);
+}
+.tertiary-container{
+    background-color: var(--a-color-tertiary-container);
+    color: var(--a-color-on-tertiary-container);
+}
+
+.on-tertiary{
+    background-color: var(--a-color-on-tertiary);
+    color: var(--a-color-tertiary);
+}
+
+.on-tertiary-container{
+    background-color: var(--a-color-on-tertiary-container);
+    color: var(--a-color-tertiary-container);
+}
+
+/** Complementary Colors */
+.complementary{
+    background-color: var(--a-color-complementary);
+    color: var(--a-color-on-complementary);
+}
+.complementary-container{
+    background-color: var(--a-color-complementary-container);
+    color: var(--a-color-on-complementary-container);
+}
+
+.on-complementary{
+    background-color: var(--a-color-on-complementary);
+    color: var(--a-color-complementary);
+}
+
+.on-complementary-container{
+    background-color: var(--a-color-on-complementary-container);
+    color: var(--a-color-complementary-container);
+}
+
+/** Analogous Colors **/
+.analogous-1{
+    background-color: var(--a-color-analogous-1);
+    color: var(--a-color-on-analogous-1);
+}
+.analogous-1-container{
+    background-color: var(--a-color-analogous-1-container);
+    color: var(--a-color-on-analogous-1-container);
+}
+
+.on-analogous-1{
+    background-color: var(--a-color-on-canalogous-1);
+    color: var(--a-color-analogous-1);
+}
+
+.on-analogous-1-container{
+    background-color: var(--a-color-on-analogous-1-container);
+    color: var(--a-color-analogous-1-container);
+}
+
+.analogous-2{
+    background-color: var(--a-color-analogous-2);
+    color: var(--a-color-on-analogous-2);
+}
+.analogous-2-container{
+    background-color: var(--a-color-analogous-2-container);
+    color: var(--a-color-on-analogous-2-container);
+}
+
+.on-analogous-2{
+    background-color: var(--a-color-on-canalogous-2);
+    color: var(--a-color-analogous-2);
+}
+
+.on-analogous-2-container{
+    background-color: var(--a-color-on-analogous-2-container);
+    color: var(--a-color-analogous-2-container);
+}
+
+
+/* Gray Scale Swatches - 36 shades */
+/* Light to dark */
+.gray-1{background-color: var(--a-color-gray-1);}
+.gray-2{background-color: var(--a-color-gray-2);}
+.gray-3{background-color: var(--a-color-gray-3);}
+.gray-4{background-color: var(--a-color-gray-4);}
+.gray-5{background-color: var(--a-color-gray-5);}
+.gray-6{background-color: var(--a-color-gray-6);}
+.gray-7{background-color: var(--a-color-gray-7);}
+.gray-8{background-color: var(--a-color-gray-8);}
+.gray-9{background-color: var(--a-color-gray-9);}
+.gray-10{background-color: var(--a-color-gray-10);}
+.gray-11{background-color: var(--a-color-gray-11);}
+.gray-12{background-color: var(--a-color-gray-12);}
+.gray-13{background-color: var(--a-color-gray-13);}
+.gray-14{background-color: var(--a-color-gray-14);}
+.gray-15{background-color: var(--a-color-gray-15);}
+.gray-16{background-color: var(--a-color-gray-16);}
+.gray-17{background-color: var(--a-color-gray-17);}
+.gray-18{background-color: var(--a-color-gray-18);}
+.gray-19{background-color: var(--a-color-gray-19);}
+.gray-20{background-color: var(--a-color-gray-20);}
+.gray-21{background-color: var(--a-color-gray-21);}
+.gray-22{background-color: var(--a-color-gray-22);}
+.gray-23{background-color: var(--a-color-gray-23);}
+.gray-24{background-color: var(--a-color-gray-24);}
+.gray-25{background-color: var(--a-color-gray-25);}
+.gray-26{background-color: var(--a-color-gray-26);}
+.gray-27{background-color: var(--a-color-gray-27);}
+.gray-28{background-color: var(--a-color-gray-28);}
+.gray-29{background-color: var(--a-color-gray-29);}
+.gray-30{background-color: var(--a-color-gray-30);}
+.gray-31{background-color: var(--a-color-gray-31);}
+.gray-32{background-color: var(--a-color-gray-32);}
+.gray-33{background-color: var(--a-color-gray-33);}
+.gray-34{background-color: var(--a-color-gray-34);}
+.gray-35{background-color: var(--a-color-gray-35);}
+.gray-36{background-color: var(--a-color-gray-36);}
+
+
+
+
+/* Color swatch styling */
+.color-swatch {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80px;
+    padding: var(--a-padding-small);
+    border-radius: var(--a-border-radius-base);
+    transition: transform 0.2s ease;
+    color: var(--a-color-on-surface);
+    box-shadow: var(--a-shadow-sm);
+}
+
+/* Dark text for light backgrounds, light text for dark backgrounds */
+.gray-1, .gray-2, .gray-3, .gray-4, .gray-5, .gray-6, .gray-7, .gray-8,
+.gray-9, .gray-10, .gray-11, .gray-12, .gray-13, .gray-14, .gray-15, .gray-16, .gray-17, .gray-18 {
+    color: var(--a-color-on-light-surface);
+}
+
+.gray-19, .gray-20, .gray-21, .gray-22, .gray-23, .gray-24, .gray-25, .gray-26,
+.gray-27, .gray-28, .gray-29, .gray-30, .gray-31, .gray-32, .gray-33, .gray-34, .gray-35, .gray-36 {
+    color: var(--a-color-on-dark-surface);
+}
+
+.color-swatch:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--a-shadow-md);
+}
+
+.color-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.color-value {
+    font-family: var(--a-font-family-mono);
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.color-group div{
+    padding: var(--a-padding-base);
+}
+
+/** Gradients **/
+/* --- Color Swatches --- */
+
+/* Complementary Colors */
+.complementary-1 { background-color: var(--a-color-complementary-1); color: var(--a-color-on-light-surface); }
+.complementary-2 { background-color: var(--a-color-complementary-2); color: var(--a-color-on-light-surface); }
+.complementary-3 { background-color: var(--a-color-complementary-3); color: var(--a-color-on-light-surface); }
+.complementary-4 { background-color: var(--a-color-complementary-4); color: var(--a-color-on-light-surface); }
+.complementary-5 { background-color: var(--a-color-complementary-5); color: var(--a-color-on-light-surface); }
+.complementary-6 { background-color: var(--a-color-complementary-6); color: var(--a-color-on-dark-surface); }
+.complementary-7 { background-color: var(--a-color-complementary-7); color: var(--a-color-on-dark-surface); }
+.complementary-8 { background-color: var(--a-color-complementary-8); color: var(--a-color-on-dark-surface); }
+.complementary-9 { background-color: var(--a-color-complementary-9); color: var(--a-color-on-dark-surface); }
+
+.complementary-opposite-1 { background-color: var(--a-color-complementary-opposite-1); color: var(--a-color-on-light-surface); }
+.complementary-opposite-2 { background-color: var(--a-color-complementary-opposite-2); color: var(--a-color-on-light-surface); }
+.complementary-opposite-3 { background-color: var(--a-color-complementary-opposite-3); color: var(--a-color-on-light-surface); }
+.complementary-opposite-4 { background-color: var(--a-color-complementary-opposite-4); color: var(--a-color-on-light-surface); }
+.complementary-opposite-5 { background-color: var(--a-color-complementary-opposite-5); color: var(--a-color-on-light-surface); }
+.complementary-opposite-6 { background-color: var(--a-color-complementary-opposite-6); color: var(--a-color-on-dark-surface); }
+.complementary-opposite-7 { background-color: var(--a-color-complementary-opposite-7); color: var(--a-color-on-dark-surface); }
+.complementary-opposite-8 { background-color: var(--a-color-complementary-opposite-8); color: var(--a-color-on-dark-surface); }
+.complementary-opposite-9 { background-color: var(--a-color-complementary-opposite-9); color: var(--a-color-on-dark-surface); }
+
+/* Analogous 1 Colors */
+.analogous1-1 { background-color: var(--a-color-analogous1-1); color: var(--a-color-on-light-surface); }
+.analogous1-2 { background-color: var(--a-color-analogous1-2); color: var(--a-color-on-light-surface); }
+.analogous1-3 { background-color: var(--a-color-analogous1-3); color: var(--a-color-on-light-surface); }
+.analogous1-4 { background-color: var(--a-color-analogous1-4); color: var(--a-color-on-light-surface); }
+.analogous1-5 { background-color: var(--a-color-analogous1-5); color: var(--a-color-on-light-surface); }
+.analogous1-6 { background-color: var(--a-color-analogous1-6); color: var(--a-color-on-dark-surface); }
+.analogous1-7 { background-color: var(--a-color-analogous1-7); color: var(--a-color-on-dark-surface); }
+.analogous1-8 { background-color: var(--a-color-analogous1-8); color: var(--a-color-on-dark-surface); }
+.analogous1-9 { background-color: var(--a-color-analogous1-9); color: var(--a-color-on-dark-surface); }
+
+/* Analogous 2 Colors */
+.analogous2-1 { background-color: var(--a-color-analogous2-1); color: var(--a-color-on-light-surface); }
+.analogous2-2 { background-color: var(--a-color-analogous2-2); color: var(--a-color-on-light-surface); }
+.analogous2-3 { background-color: var(--a-color-analogous2-3); color: var(--a-color-on-light-surface); }
+.analogous2-4 { background-color: var(--a-color-analogous2-4); color: var(--a-color-on-light-surface); }
+.analogous2-5 { background-color: var(--a-color-analogous2-5); color: var(--a-color-on-light-surface); }
+.analogous2-6 { background-color: var(--a-color-analogous2-6); color: var(--a-color-on-dark-surface); }
+.analogous2-7 { background-color: var(--a-color-analogous2-7); color: var(--a-color-on-dark-surface); }
+.analogous2-8 { background-color: var(--a-color-analogous2-8); color: var(--a-color-on-dark-surface); }
+.analogous2-9 { background-color: var(--a-color-analogous2-9); color: var(--a-color-on-dark-surface); }
+
+/* Gradient Swatches */
+.gradient-primary {
+    background: var(--a-gradient-primary);
+    color: var(--a-color-on-dark-surface);
+}
+
+.gradient-primary-vertical {
+    background: var(--a-gradient-primary-vertical);
+    color: var(--a-color-on-dark-surface);
+}
+
+.gradient-complementary {
+    background: var(--a-gradient-complementary);
+    color: var(--a-color-on-dark-surface);
+}
+
+.gradient-analogous1 {
+    background: var(--a-gradient-analogous1);
+    color: var(--a-color-on-dark-surface);
+}
+
+.gradient-analogous2 {
+    background: var(--a-gradient-analogous2);
+    color: var(--a-color-on-dark-surface);
+}
+
+.gradient-rainbow {
+    background: var(--a-gradient-rainbow);
+    color: var(--a-color-on-dark-surface);
+}
+
+.gradient-sunset {
+    background: var(--a-gradient-sunset);
+    color: var(--a-color-on-dark-surface);
+}
+
+.gradient-ocean {
+    background: var(--a-gradient-ocean);
+    color: var(--a-color-on-dark-surface);
+}
+
+.gradient-forest {
+    background: var(--a-gradient-forest);
+    color: var(--a-color-on-dark-surface);
+}
+
+.gradient-nightsky {
+    background: var(--a-gradient-nightsky);
+    color: var(--a-color-on-dark-surface);
+}
+
+/* Gradient container styling */
+.gradient-swatch {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--a-padding-large);
+    margin-bottom: var(--a-margin-small);
+    border-radius: var(--a-border-radius-base);
+    min-height: 100px;
+    text-align: center;
+    transition: transform 0.2s ease;
+    box-shadow: var(--a-shadow-sm);
+}
+
+.gradient-swatch:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--a-shadow-md);
+}
+
+.gradient-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: var(--a-margin-tiny);
+}
+
+.gradient-value {
+    font-family: var(--a-font-family-mono);
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+
+/* --- Complementary Colors --- */
+.bg-complementary {
+    background-color: var(--a-color-complementary-5);
+    color: var(--a-color-on-light-surface);
+}
+
+.bg-complementary-opposite {
+    background-color: var(--a-color-complementary-opposite-5);
+    color: var(--a-color-on-light-surface);
+}
+
+/* --- Analogous Colors --- */
+.bg-analogous1 {
+    background-color: var(--a-color-analogous1-5);
+    color: var(--a-color-on-light-surface);
+}
+
+.bg-analogous2 {
+    background-color: var(--a-color-analogous2-5);
+    color: var(--a-color-on-light-surface);
+}
+
+/* --- Gradient Backgrounds --- */
+.bg-gradient-primary {
+    background: var(--a-gradient-primary);
+    color: var(--a-color-on-dark-surface);
+}
+
+.bg-gradient-primary-vertical {
+    background: var(--a-gradient-primary-vertical);
+    color: var(--a-color-on-dark-surface);
+}
+
+.bg-gradient-complementary {
+    background: var(--a-gradient-complementary);
+    color: var(--a-color-on-dark-surface);
+}
+
+.bg-gradient-analogous1 {
+    background: var(--a-gradient-analogous1);
+    color: var(--a-color-on-dark-surface);
+}
+
+.bg-gradient-analogous2 {
+    background: var(--a-gradient-analogous2);
+    color: var(--a-color-on-dark-surface);
+}
+
+.bg-gradient-rainbow {
+    background: var(--a-gradient-rainbow);
+    color: var(--a-color-on-dark-surface);
+}
+
+.bg-gradient-sunset {
+    background: var(--a-gradient-sunset);
+    color: var(--a-color-on-dark-surface);
+}
+
+.bg-gradient-ocean {
+    background: var(--a-gradient-ocean);
+    color: var(--a-color-on-dark-surface);
+}
+
+.bg-gradient-forest {
+    background: var(--a-gradient-forest);
+    color: var(--a-color-on-dark-surface);
+}
+
+.bg-gradient-nightsky {
+    background: var(--a-gradient-nightsky);
+    color: var(--a-color-on-dark-surface);
+}
+
+/* --- Images and Figures --- */
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle; /* Prevents extra space below image */
+    display: block; /* Prevent inline spacing issues */
+}
+figure {
+    margin: 0 0 var(--a-block-element-margin-bottom) 0; /* Consistent bottom margin */
+}
+figcaption {
+    font-size: var(--a-font-size-small);
+    color: var(--a-color-text-secondary); /* Assuming variable exists */
+    margin-top: var(--a-margin-small);
+    text-align: center;
+}
+
+/* --- Code --- */
+code {
+    font-family: var(--a-font-family-mono);
+    font-size: 0.9em; /* Slightly smaller than base */
+    background-color: var(--a-color-code-bg);
+    color: var(--a-color-on-code-bg); /* Add variable for text color on code bg */
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    border-radius: var(--a-border-radius-small);
+    white-space: pre-wrap; /* Allow wrapping for inline code */
+    word-break: break-word;
+}
+pre {
+    font-family: var(--a-font-family-mono);
+    font-size: 0.9em;
+    background-color: var(--a-color-code-bg);
+    color: var(--a-color-on-code-bg);
+    padding: var(--a-padding-base); /* Use padding var */
+    border-radius: var(--a-border-radius-base);
+    overflow-x: auto; /* Keep horizontal scroll */
+    margin-top: 0;
+    margin-bottom: var(--a-block-element-margin-bottom);
+    line-height: var(--a-line-height-base);
+    border: 1px solid var(--a-color-outline); /* Add subtle border */
+}
+pre code {
+    padding: 0; /* Reset padding */
+    background-color: transparent; /* Reset background */
+    border: none; /* Reset border */
+    white-space: pre; /* Preserve whitespace from pre */
+    word-break: normal; /* Don't break words in pre */
+    display: block; /* Ensure block display */
+    color: inherit; /* Inherit text color */
+    font-size: inherit; /* Inherit font size */
+}
+
+/* --- Horizontal Rule --- */
+hr {
+    border: none;
+    border-top: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
+    margin: var(--a-margin-large) 0; /* Use margin vars for spacing */
+}
+
+/* --- Semantic Structure Elements --- */
+main {
+    /* Assuming full width by default, padding added via container or sections */
+    padding: var(--a-padding-small) 0; /* Example vertical padding */
+}
+section {
+    padding: var(--a-padding-small); /* Consistent section padding */
+    max-width: 100%; /* Keep max width */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+section > :is(h1, h2, h3, h4, h5, h6):first-child {
+    /* Your styles here */
+    /* Example: Remove top margin */
+    margin-top: 0;
+}
+
+.container > :is(h1, h2, h3, h4, h5, h6):first-child {
+    /* Your styles here */
+    /* Example: Remove top margin */
+    margin-top: 0;
+}
+
+
+
+section > h1:first-child,
+section > h2:first-child,
+section > h3:first-child,
+section > h4:first-child,
+section > h5:first-child,
+section > h6:first-child {
+    /* Your styles here */
+    /* Example: Remove top margin */
+    margin-top: 0;
+}
+
+main > section:last-of-type {
+    margin-bottom: 0;
+}
+article {
+    /* Basic article has no border/bg by default */
+    border: none;
+    padding: 0; /* Padding comes from parent or content */
+    margin-bottom: var(--a-block-element-margin-bottom); /* Space below article */
+    display: flex; /* Keep flex if needed for internal layout */
+    flex-direction: column;
+}
+article:last-child {
+    margin-bottom: 0;
+}
+header {
+    /* Specific styling for page/article/section headers */
+    /* padding: var(--a-padding-base) 0; Vertical padding, no horizontal */
+    margin-bottom: var(--a-margin-base); /* Space below header */
+    border-bottom: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline); /* Subtle separator */
+}
+header:first-child {
+    border-top: none;
+}
+footer {
+    /* Specific styling for page/article/section footers */
+    padding: var(--a-padding-base) 0; /* Vertical padding */
+    margin-top: var(--a-margin-large); /* Space above footer */
+    border-top: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline); /* Separator */
+    color: var(--a-color-text-secondary);
+    font-size: var(--a-font-size-small);
+}
+/* Specific header/footer within article/aside */
+article > header, aside > header {
+    padding: 0; /* Remove padding */
+    margin-bottom: var(--a-margin-base);
+    border: none; /* Remove border */
+}
+article > footer, aside > footer {
+    padding: 0;
+    margin-top: var(--a-margin-base);
+    border: none;
+}
+
+
+/* ========================================================================= */
+/* Component Styles                                                          */
+/* ========================================================================= */
+
+/* Button Styles - Direct Element Styling */
+button, .button{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--a-padding-small) var(--a-padding-medium);
+    border-radius: var(--a-border-radius-base);
+    font-family: var(--a-font-family);
+    font-size: var(--a-font-size-base);
+    font-weight: var(--a-font-weight-medium);
+    text-align: center;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.1s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+    /* Remove default styles */
+    background: none;
+    outline: none;
+    /* Default colors - subtle variant */
+    background-color: var(--a-color-surface-variant);
+    color: var(--a-color-on-surface-variant);
+}
+
+/* Hover and active states */
+button:hover, .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /** background-color: var(--a-color-surface-variant-hover);m**/
+}
+
+button:active, .button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus state for accessibility */
+button:focus-visible, .button:focus-visible {
+    outline: 3px solid var(--a-color-primary);
+    outline-offset: 2px;
+}
+
+/* Disabled state */
+button:disabled, .button:disabled,
+button[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Primary variant */
+button.primary, .button.primary {
+    background-color: var(--a-color-primary);
+    color: var(--a-color-on-primary);
+    border-color: var(--a-color-primary);
+}
+
+button.primary:hover, .button.primary:hover{
+   /** background-color: var(--a-color-primary-dark);**/
+    border-color: var(--a-color-primary-dark);
+}
+
+/* Secondary variant */
+button.secondary {
+    background-color: var(--a-color-secondary);
+    color: var(--a-color-on-secondary);
+    border-color: var(--a-color-secondary);
+}
+
+button.secondary:hover {
+    /** background-color: var(--a-color-secondary-dark); */
+    border-color: var(--a-color-secondary-dark);
+}
+
+/* Tertiary variant */
+button.tertiary, .button.tertiary{
+    background-color: var(--a-color-tertiary);
+    color: var(--a-color-on-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+
+button.tertiary:hover, .button.tertiary:hover{
+    /** background-color: var(--a-color-tertiary-dark); **/
+    border-color: var(--a-color-tertiary-dark);
+}
+
+/* Outline variants */
+button.outline.primary, .button.outline.primary {
+    background-color: transparent;
+    color: var(--a-color-primary);
+    border-color: var(--a-color-primary);
+}
+
+button.outline.primary:hover, .button.outline.primary:hover {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+}
+
+button.outline.secondary, .button.outline.secondary{
+    background-color: transparent;
+    color: var(--a-color-secondary);
+    border-color: var(--a-color-secondary);
+}
+
+button.outline.secondary:hover {
+    background-color: var(--a-color-secondary-container);
+    color: var(--a-color-on-secondary-container);
+}
+
+button.outline.tertiary, .button.outline.tertiary{
+    background-color: transparent;
+    color: var(--a-color-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+
+button.outline.tertiary:hover, .button.outline.tertiary:hover{
+    background-color: var(--a-color-tertiary-container);
+    color: var(--a-color-on-tertiary-container);
+}
+
+/* Base Button Styles - Direct Element Styling */
+button, .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--a-padding-small) var(--a-padding-medium);
+    border-radius: var(--a-border-radius-base);
+    font-family: var(--a-font-family);
+    font-size: var(--a-font-size-base);
+    font-weight: var(--a-font-weight-medium);
+    text-align: center;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.1s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+    /* Remove default styles */
+    background: none;
+    outline: none;
+    /* Default colors - subtle variant */
+    background-color: var(--a-color-surface-variant);
+    color: var(--a-color-on-surface-variant);
+}
+
+/* Hover and active states */
+button:hover, .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /** background-color: var(--a-color-surface-variant-hover); **/
+}
+
+button:active, .button:active{
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus state for accessibility */
+button:focus-visible, .button:focus-visible{
+    outline: 3px solid var(--a-color-primary);
+    outline-offset: 2px;
+}
+
+/* Disabled state */
+button:disabled, .button:disabled,
+button[aria-disabled="true"], .button[aria-disabled="true"]  {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Color variants - Solid backgrounds */
+button.primary, .button.primary{
+    background-color: var(--a-color-primary);
+    color: var(--a-color-on-primary);
+    border-color: var(--a-color-primary);
+}
+
+button.primary:hover. .button.primary:hover {
+    background-color: var(--a-color-primary-dark);
+    border-color: var(--a-color-primary-dark);
+}
+
+button.secondary, .button.secondary {
+    background-color: var(--a-color-secondary);
+    color: var(--a-color-on-secondary);
+    border-color: var(--a-color-secondary);
+}
+
+button.secondary:hover, .button.secondary:hover{
+    /** background-color: var(--a-color-secondary-dark); **/
+    border-color: var(--a-color-secondary-dark);
+}
+
+button.tertiary, .button.tertiary{
+    background-color: var(--a-color-tertiary);
+    color: var(--a-color-on-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+
+button.tertiary:hover, .button.tertiary:hover{
+    /** background-color: var(--a-color-tertiary-dark); **/
+    border-color: var(--a-color-tertiary-dark);
+}
+
+button.positive, .button.positive{
+    background-color: var(--a-color-positive);
+    color: var(--a-color-on-positive);
+    border-color: var(--a-color-positive);
+}
+
+button.positive:hover, .button.positive:hover {
+    background-color: var(--a-color-positive-dark);
+    border-color: var(--a-color-positive-dark);
+}
+
+button.warning, .button.warning{
+    background-color: var(--a-color-warning);
+    color: var(--a-color-on-warning);
+    border-color: var(--a-color-warning);
+}
+
+button.warning:hover, .button.warning:hover{
+    background-color: var(--a-color-warning-dark);
+    border-color: var(--a-color-warning-dark);
+}
+
+button.negative, .button.negative  {
+    background-color: var(--a-color-negative);
+    color: var(--a-color-on-negative);
+    border-color: var(--a-color-negative);
+}
+
+button.negative:hover, .button.negative:hover {
+    background-color: var(--a-color-negative-dark);
+    border-color: var(--a-color-negative-dark);
+}
+
+/* Outline modifier - can be combined with color variants */
+button.outline, button.outline{
+    background-color: transparent;
+}
+
+/* Outline variant combinations */
+button.outline.primary, .button.outline.primary {
+    color: var(--a-color-primary);
+    border-color: var(--a-color-primary);
+}
+
+button.outline.primary:hover {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+}
+
+button.outline.secondary {
+    color: var(--a-color-secondary);
+    border-color: var(--a-color-secondary);
+}
+
+button.outline.secondary:hover {
+    background-color: var(--a-color-secondary-container);
+    color: var(--a-color-on-secondary-container);
+}
+
+button.outline.tertiary {
+    color: var(--a-color-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+
+button.outline.tertiary:hover {
+    background-color: var(--a-color-tertiary-container);
+    color: var(--a-color-on-tertiary-container);
+}
+
+button.outline.positive {
+    color: var(--a-color-positive);
+    border-color: var(--a-color-positive);
+}
+
+button.outline.positive:hover {
+    background-color: var(--a-color-positive-container);
+    color: var(--a-color-on-positive-container);
+}
+
+button.outline.warning {
+    color: var(--a-color-warning);
+    border-color: var(--a-color-warning);
+}
+
+button.outline.warning:hover {
+    background-color: var(--a-color-warning-container);
+    color: var(--a-color-on-warning-container);
+}
+
+button.outline.negative {
+    color: var(--a-color-negative);
+    border-color: var(--a-color-negative);
+}
+
+button.outline.negative:hover {
+    background-color: var(--a-color-negative-container);
+    color: var(--a-color-on-negative-container);
+}
+
+/* Ghost variant - another modifier */
+button.ghost {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button.ghost:hover {
+    background-color: rgba(var(--a-color-on-surface-rgb), 0.05);
+}
+
+/* Ghost combined with color variants */
+button.ghost.primary {
+    color: var(--a-color-primary);
+}
+
+button.ghost.primary:hover {
+    background-color: rgba(var(--a-color-primary-rgb), 0.1);
+}
+
+button.ghost.secondary {
+    color: var(--a-color-secondary);
+}
+
+button.ghost.secondary:hover {
+    background-color: rgba(var(--a-color-secondary-rgb), 0.1);
+}
+
+/* Size variant modifiers */
+button.small {
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    font-size: var(--a-font-size-small);
+}
+
+button.large {
+    padding: var(--a-padding-medium) var(--a-padding-large);
+    font-size: var(--a-font-size-large);
+}
+
+/* Icon button modifier */
+button.icon {
+    padding: var(--a-padding-small);
+    border-radius: 50%;
+    aspect-ratio: 1;
+}
+
+button.icon.small {
+    padding: var(--a-padding-tiny);
+}
+
+button.icon.large {
+    padding: var(--a-padding-medium);
+}
+
+/* Button with icon + text */
+button > svg,
+button > i {
+    margin-right: var(--a-margin-small);
+}
+
+button.icon-right > svg,
+button.icon-right > i {
+    margin-right: 0;
+    margin-left: var(--a-margin-small);
+}
+
+/* Full-width button modifier */
+button.full-width {
+    width: 100%;
+}
+
+/* Progress button for demos */
+button.progress-btn {
+    min-width: 200px;
+}
+
+/* Button group container */
+.button-group {
+    display: flex;
+    gap: var(--a-space-small);
+}
+
+.button-group.vertical {
+    flex-direction: column;
+}
+
+
+/* Ghost variant */
+button.ghost {
+    background-color: transparent;
+    color: var(--a-color-on-surface);
+    border-color: transparent;
+}
+
+button.ghost:hover {
+    background-color: rgba(var(--a-color-primary-rgb), 0.1);
+}
+
+/* Size variants */
+button.small {
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    font-size: var(--a-font-size-small);
+}
+
+button.large {
+    padding: var(--a-padding-medium) var(--a-padding-large);
+    font-size: var(--a-font-size-large);
+}
+
+/* Icon buttons */
+button.icon {
+    padding: var(--a-padding-small);
+    border-radius: 50%;
+    aspect-ratio: 1;
+}
+
+button.icon.small {
+    padding: var(--a-padding-tiny);
+}
+
+button.icon.large {
+    padding: var(--a-padding-medium);
+}
+
+/* Button with icon + text */
+button > svg,
+button > i {
+    margin-right: var(--a-margin-small);
+}
+
+button.icon-right > svg,
+button.icon-right > i {
+    margin-right: 0;
+    margin-left: var(--a-margin-small);
+}
+
+/* Special styles for UX demo buttons */
+button.progress-btn {
+    min-width: 200px;
+}
+
+/* Full-width button */
+button.full-width {
+    width: 100%;
+}
+
+/* Group of buttons */
+.button-group {
+    display: flex;
+    gap: var(--a-space-small);
+}
+
+.button-group.vertical {
+    flex-direction: column;
+}
+/* Reset Button Specific */
+input[type="reset"], .button-reset { /* Add optional class */
+    color: var(--a-color-on-negative);
+    background-color: var(--a-color-negative);
+    border-color: var(--a-color-negative);
+}
+input[type="reset"]:hover, input[type="reset"]:focus,
+.button-reset:hover, .button-reset:focus {
+    background-color: var(--a-color-negative-hover, hsl(var(--a-color-negative-hue, 0), 70%, 40%)); /* Define hover color */
+    border-color: var(--a-color-negative-hover, hsl(var(--a-color-negative-hue, 0), 70%, 40%));
+    color: var(--a-color-on-negative);
+}
+/* Secondary Button */
+.secondary {
+    color: var(--a-color-on-secondary);
+    background-color: var(--a-color-secondary);
+    border-color: var(--a-color-secondary);
+}
+.secondary:hover, .button-secondary:focus {
+    background-color: var(--a-color-secondary-hover, hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    border-color: var(--a-color-secondary-hover, hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    color: var(--a-color-on-secondary);
+}
+/* Tertiary Button */
+.tertiary { /* Use class consistently */
+    color: var(--a-color-on-tertiary);
+    background-color: var(--a-color-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+.tertiary:hover, .button-tertiary:focus {
+    background-color: var(--a-color-tertiary-hover, hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    border-color: var(--a-color-tertiary-hover, hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    color: var(--a-color-on-tertiary);
+}
+
+/* Other Color Buttons (Complementary, Analogous) */
+.complementary { background-color: var(--a-color-complementary); color: var(--a-color-on-complementary); border-color: var(--a-color-complementary); }
+.complementary:hover, .button-complementary:focus { background-color: var(--a-color-complementary-hover); border-color: var(--a-color-complementary-hover); color: var(--a-color-on-complementary); }
+
+.analogous-1 { background-color: var(--a-color-analogous-1); color: var(--a-color-on-analogous-1); border-color: var(--a-color-analogous-1); }
+.analogous-1:hover, .button-analogous-1:focus { background-color: var(--a-color-analogous-1-hover); border-color: var(--a-color-analogous-1-hover); color: var(--a-color-on-analogous-1); }
+
+.analogous-2 { background-color: var(--a-color-analogous-2); color: var(--a-color-on-analogous-2); border-color: var(--a-color-analogous-2); }
+.analogous-2:hover, .button-analogous-2:focus { background-color: var(--a-color-analogous-2-hover); border-color: var(--a-color-analogous-2-hover); color: var(--a-color-on-analogous-2); }
+
+
+/* Outline Button */
+.outline {
+    background-color: transparent;
+    border-color: currentColor; /* Use text color for border */
+    color: var(--a-color-primary); /* Default to primary text color */
+}
+.outline.primary { color: var(--a-color-primary); } /* Already default */
+.outline.secondary { color: var(--a-color-secondary); }
+.outline.tertiary { color: var(--a-color-tertiary); }
+.button-outline.button-complementary { color: var(--a-color-complementary); }
+.button-outline.button-analogous-1 { color: var(--a-color-analogous-1); }
+.button-outline.button-analogous-2 { color: var(--a-color-analogous-2); }
+.button-outline.button-negative { color: var(--a-color-negative); }
+.button-outline.button-positive { color: var(--a-color-positive); }
+/* Add other colors if needed */
+
+.button-outline:hover, .button-outline:focus {
+    background-color: currentColor; /* Fill with text color on hover */
+    color: var(--a-color-surface); /* Change text color to contrast background */
+    border-color: currentColor; /* Keep border color */
+}
+/* Specific hover text colors if needed, e.g., for primary outline hover */
+.button.outline.primary:hover, .button-outline.button-primary:focus { color: var(--a-color-on-primary); }
+.button.outline.secondary:hover, .button-outline.button-secondary:focus { color: var(--a-color-on-secondary); }
+/* etc. */
+
+
+/* Text Button (Link-style) */
+.button-text { /* Use class instead of tag selector */
+    background: none;
+    border: none;
+    padding: var(--a-padding-small) var(--a-padding-small); /* Less padding */
+    font-weight: var(--a-font-weight-bold);
+    color: var(--a-color-primary); /* Default to primary link color */
+    text-decoration: none;
+    box-shadow: none;
+    min-width: auto; /* Remove min-width */
+}
+.button-text:hover, .button-text:focus {
+    color: var(--a-color-primary-container);
+    text-decoration: underline;
+    background: none; /* Ensure no background on hover */
+    box-shadow: none;
+}
+.button-text:active {
+    transform: none;
+}
+/* Text button variants */
+.text.secondary { color: var(--a-color-secondary); }
+.text.tertiary { color: var(--a-color-tertiary); }
+/* Add other color variants if needed */
+
+
+/* Semantic Buttons */
+.positive { background-color: var(--a-color-positive); color: var(--a-color-on-positive); border-color: var(--a-color-positive); }
+.positive:hover, .button-positive:focus { background-color: var(--a-color-positive-hover); border-color: var(--a-color-positive-hover); color: var(--a-color-on-positive); }
+
+.negative { background-color: var(--a-color-negative); color: var(--a-color-on-negative); border-color: var(--a-color-negative); }
+.negative:hover, .button-negative:focus { background-color: var(--a-color-negative-hover); border-color: var(--a-color-negative-hover); color: var(--a-color-on-negative); }
+
+.notice { background-color: var(--a-color-notice); color: var(--a-color-on-notice); border-color: var(--a-color-notice); }
+.notice:hover, .button-notice:focus { background-color: var(--a-color-notice-hover); border-color: var(--a-color-notice-hover); color: var(--a-color-on-notice); }
+
+.informative { background-color: var(--a-color-informative); color: var(--a-color-on-informative); border-color: var(--a-color-informative); }
+.informative:hover, .button-informative:focus { background-color: var(--a-color-informative-hover); border-color: var(--a-color-informative-hover); color: var(--a-color-on-informative); }
+
+
+/* Disabled Button */
+button:disabled,
+a.button:disabled, /* May not work directly, use class */
+input[type="submit"]:disabled,
+input[type="button"]:disabled,
+input[type="reset"]:disabled,
+.disabled { /* Use class for `a` tags */
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none; /* Prevent clicks */
+    box-shadow: none;
+    transform: none;
+}
+
+/* Button Sizes */
+.small {
+    padding: var(--a-padding-tiny) var(--a-padding-tiny);
+    font-size: var(--a-font-size-small);
+    min-width: auto;
+}
+.large {
+    padding: var(--a-padding-base) var(--a-padding-large);
+    font-size: var(--a-font-size-h5); /* Example large size */
+}
+
+/* Buttons with Icons */
+button i, a.button i { /* Target icons within buttons */
+    margin-right: var(--a-margin-small); /* Space between icon and text */
+    font-size: 0.9em; /* Slightly smaller icon */
+    line-height: inherit; /* Ensure icon aligns */
+}
+/* If icon is the only content (Icon Button) */
+.icon {
+    padding: var(--a-padding-small); /* Square padding */
+    min-width: auto; /* Remove min-width */
+}
+.icon i {
+    margin: 0; /* No margin if icon only */
+    font-size: 1.2em; /* Make icon slightly larger */
+}
+
+/* Block Buttons */
+.button-block {
+    display: flex; /* Use flex to center content */
+    width: 100%;
+    justify-content: center;
+}
+
+/* Button Group - for styling containers holding buttons */
+.button-group, .button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--a-space-small);
+    margin-bottom: var(--a-block-element-margin-bottom);
+    align-items: baseline;
+}
+/* Optional: Remove margin from buttons inside group */
+.button-group button, .button-grid button {
+    margin: 0;
+}
+
+
+/* --- Cards --- */
+/* Uses article.card selector */
+article.card {
+    background-color: var(--a-color-surface);
+    border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
+    border-radius: var(--a-border-radius-base);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1); /* Example subtle shadow */
+    padding: 0; /* Remove padding from article, apply to sections */
+    margin-bottom: var(--a-block-element-margin-bottom);
+    overflow: hidden; /* Ensure image corners are clipped */
+    display: flex; /* Keep flex if needed */
+    flex-direction: column;
+    transition: box-shadow 0.2s ease-in-out;
+}
+article.card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.1); /* Slightly stronger shadow */
+}
+/* Card Sections */
+.card-header, /* Use classes for sections */
+.card-content,
+.card-image,
+.card-footer {
+    padding: var(--a-padding-medium); /* Consistent padding for sections */
+}
+.card-header {
+    font-size: var(--a-font-size-h4);
+    font-weight: var(--a-font-weight-bold);
+    padding-bottom: var(--a-padding-small); /* Less padding below header */
+    border-bottom: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
+}
+.card-image {
+    padding: 0; /* No padding around image */
+    margin: 0;
+    line-height: 0; /* Remove space below image */
+}
+.card-image img {
+    border-radius: 0; /* Remove radius if inside */
+    width: 100%;
+}
+.card-content {
+    /* Styles for main content area */
+}
+.card-footer {
+    padding-top: var(--a-padding-small); /* Less padding above footer */
+    border-top: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-outline);
+    font-size: var(--a-font-size-small);
+    color: var(--a-color-text-secondary);
+    background-color: var(--a-color-surface-variant); /* Subtle footer background */
+    text-align: right; /* Align footer content right */
+}
+.card-footer button {
+    margin: 0; /* Reset margin for buttons in footer */
+    margin-left: var(--a-margin-small);
+}
+
+
+/* === Card component with gradient background === */
+.card.card-gradient {
+    background-image: var(--a-gradient-primary);
+    color: var(--a-color-on-gradient);
+}
+
+/* === Gradient swatches for theme demo === */
+.gradient-swatch {
+    width: 100%;
+    height: 120px;
+    border-radius: var(--a-border-radius-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--a-space-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.gradient-name {
+    color: var(--a-color-on-gradient);
+    font-weight: var(--a-font-weight-medium);
+    z-index: 1;
+}
+
+/* === Section with gradient background === */
+section.gradient-bg {
+    background-image: var(--a-gradient-hero, var(--a-gradient-primary));
+    color: var(--a-color-on-gradient);
+    padding: var(--a-space-xlarge) var(--a-space-large);
+}
+
+
+/* === Theme Switcher Styles - Updated with vertical alignment === */
+
+.theme-switcher-container {
+    margin-left: var(--a-margin-medium); /* Space from logo */
+    margin-right: var(--a-margin-small); /* Space before menu items or toggle */
+    display: flex;
+    align-items: center; /* Centers items vertically */
+    height: 100%; /* Take full height of the parent container */
+}
+
+.theme-switcher-container label.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+#theme-select {
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    border-radius: var(--a-border-radius-base);
+    border: 1px solid var(--a-color-outline);
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    font-family: inherit;
+    font-size: var(--a-font-size-small);
+    cursor: pointer;
+    vertical-align: middle; /* Ensures text is vertically centered */
+    align-self: center; /* Additional centering in flex container */
+    margin-top: 0; /* Remove any default top margin */
+    margin-bottom: 0; /* Remove any default bottom margin */
+    height: auto; /* Allow natural height */
+    line-height: normal; /* Reset line height to avoid pushing text up */
+}
+
+/* Add focus styles for accessibility */
+#theme-select:focus {
+    outline: 2px solid var(--a-color-primary);
+    outline-offset: 1px;
+    box-shadow: 0 0 0 2px rgba(var(--a-color-primary-rgb), 0.2);
+}
+
+/* --- Navigation (Navbar) --- */
+/* Base navbar styling - medium size by default */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--a-padding-small) var(--a-padding-base);
+    background-color: var(--a-color-navbar-bg, var(--a-color-surface-variant));
+    box-shadow: var(--a-shadow-sm);
+    position: relative;
+    z-index: 1000;
+    height: var(--a-navbar-height, 64px);
+}
+
+/* Small navbar variant */
+.navbar.small {
+    height: 40px;
+    padding: 0.25rem var(--a-padding-small);
+}
+
+/* Large navbar variant */
+.navbar.large {
+    padding: var(--a-padding-base) var(--a-padding-large);
+}
+
+/* Logo styling - medium by default */
+.navbar .logo {
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: var(--a-color-navbar-text, var(--a-color-on-surface-variant));
+}
+
+/* Logo size variants */
+.navbar.small .logo {
+    font-size: 1rem;
+    margin-top: 1rem;
+    font-weight: bold;;
+    letter-spacing: .2rem;
+}
+
+.navbar.large .logo {
+    font-size: 1.3rem;
+}
+
+/* Nav links styling - medium by default */
+.navbar .nav-links {
+    display: flex;
+    gap: var(--a-space-small);
+}
+
+/* Nav links size variants */
+.navbar.small .nav-links {
+    gap: var(--a-space-tiny);
+}
+
+.navbar.large .nav-links {
+    gap: var(--a-space-medium);
+}
+
+/* Nav links items - medium by default */
+.navbar .nav-links a {
+    text-decoration: none;
+    color: var(--a-color-navbar-text, var(--a-color-on-surface-variant));
+    transition: color var(--a-transition-base);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--a-border-radius-small);
+    font-size: 0.95rem;
+}
+
+/* Nav links size variants */
+.navbar.small .nav-links a {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+}
+
+.navbar.large .nav-links a {
+    padding: var(--a-padding-small) var(--a-padding-base);
+    font-size: 1rem;
+}
+
+.navbar .nav-links a:hover,
+.navbar .nav-links a:focus {
+    color: var(--a-color-navbar-text-hover, var(--a-color-primary));
+}
+
+.navbar .nav-links a.active {
+    color: var(--a-color-primary);
+    font-weight: 500;
+}
+
+.navbar-actions {
+    display: flex;
+    gap: var(--a-space-small);
+    align-items: center;
+}
+
+/* Size variants for navbar actions */
+.navbar.small .navbar-actions {
+    gap: var(--a-space-tiny);
+}
+
+.navbar.large .navbar-actions {
+    gap: var(--a-space-medium);
+}
+
+/* Theme select dropdown styling - medium by default */
+.theme-select {
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--a-border-radius-small);
+    border: 1px solid var(--a-color-outline);
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* Theme select size variants */
+.navbar.small .theme-select {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.8rem;
+}
+
+.navbar.large .theme-select {
+    padding: var(--a-padding-small);
+    font-size: 1rem;
+}
+
+.theme-select:hover,
+.theme-select:focus {
+    border-color: var(--a-color-primary);
+    outline: none;
+}
+
+.theme-select option,
+.theme-select optgroup {
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+}
+
+/* Menu toggle button styling */
+.navbar .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    color: var(--a-color-menu-icon, var(--a-color-navbar-text-hover, var(--a-color-on-surface-variant)));
+    padding: 0.35rem;
+    border-radius: var(--a-border-radius-small);
+    transition: color var(--a-transition-base), background-color var(--a-transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Menu toggle size variants */
+.navbar.small .menu-toggle {
+    font-size: 1.1rem;
+    padding: 0.25rem;
+    margin-top: -.5rem;
+}
+
+.navbar.large .menu-toggle {
+    font-size: 1.5rem;
+    padding: var(--a-padding-small);
+}
+
+.navbar .menu-toggle:hover,
+.navbar .menu-toggle:focus {
+    color: var(--a-color-primary);
+    background-color: rgba(var(--a-color-primary-rgb), 0.1);
+}
+
+/* Theme toggle button - medium by default */
+.navbar .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--a-color-navbar-text, var(--a-color-on-surface-variant));
+    font-size: 1rem;
+    padding: 0.35rem;
+    border-radius: var(--a-border-radius-small);
+    transition: color var(--a-transition-base), background-color var(--a-transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Theme toggle size variants */
+.navbar.small .theme-toggle {
+    font-size: 0.9rem;
+    padding: 0.25rem;
+}
+
+.navbar.large .theme-toggle {
+    font-size: 1.2rem;
+    padding: var(--a-padding-small);
+}
+
+.navbar .theme-toggle:hover,
+.navbar .theme-toggle:focus {
+    color: var(--a-color-navbar-text-hover, var(--a-color-primary));
+    background-color: rgba(var(--a-color-primary-rgb), 0.1);
+}
+
+/* Desktop vs Mobile layout */
+@media (min-width: 769px) {
+    /* Hide menu toggle on desktop */
+    .navbar .menu-toggle {
+        display: none;
+    }
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .navbar .nav-links {
+        order: 3;
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        background-color: var(--a-color-navbar-bg, var(--a-color-surface-variant));
+        box-shadow: var(--a-shadow-md);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.2s ease;
+        z-index: 999;
+    }
+
+    .navbar .nav-links.open {
+        max-height: 500px;
+        opacity: 1;
+    }
+
+    /* Logo size variants */
+    .navbar.small .logo {
+        font-size: .5rem;
+        margin-top: .2rem;
+        font-weight: bold;;
+    }
+
+    /* Mobile nav links - medium by default */
+    .navbar .nav-links a {
+        padding: 0.75rem 1rem;
+        width: 100%;
+        display: block;
+        border-bottom: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+        font-size: 0.95rem;
+    }
+
+    /* Mobile nav links size variants */
+    .navbar.small .nav-links a {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .navbar.large .nav-links a {
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+    }
+
+    /* Mobile menu toggle - ensure it's visible */
+    .navbar .menu-toggle {
+        width: 2.2rem;
+        height: 2.2rem;
+        position: absolute;
+        right: 0px;
+    }
+
+    /* Mobile menu toggle size variants */
+    .navbar.small .menu-toggle {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    .navbar.large .menu-toggle {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    /* Fix the order of elements in mobile view */
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    .navbar .logo {
+        order: 1;
+    }
+
+    .navbar-actions {
+        order: 2;
+        margin-left: auto;
+    }
+
+    /* Hide theme select on mobile */
+    .theme-select {
+        display: none;
+    }
+}
+
+
+/** Modified navbar fix
+
+ */
+
+/* --- Navigation (Navbar) --- */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--a-padding-base);
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    position: relative;
+    height: var(--a-navbar-height, 64px);
+}
+
+/* Mobile Menu Toggle */
+.navbar .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--a-color-on-primary-container);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--a-padding-tiny);
+    border-radius: var(--a-border-radius-sm);
+    transition: background-color 0.2s;
+}
+
+.navbar .menu-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navbar .menu-toggle:focus {
+    outline: 2px solid var(--a-color-primary);
+    outline-offset: 2px;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: var(--a-space-medium);
+    align-items: center;
+}
+
+.navbar .nav-links a {
+    color: var(--a-color-on-primary-container);
+    text-decoration: none;
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    border-radius: var(--a-border-radius-sm);
+    transition: background-color 0.2s;
+}
+
+.navbar .nav-links a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navbar .nav-links a:focus {
+    outline: 2px solid var(--a-color-primary);
+    outline-offset: 2px;
+}
+
+.navbar .nav-links a.active {
+    font-weight: 600;
+    border-bottom: 2px solid currentColor;
+}
+
+/* Mobile Navigation Styles */
+@media (max-width: 768px) {
+    .navbar .menu-toggle {
+        display: block;
+        order: 3;
+        z-index: 1001;
+    }
+
+    .navbar .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--a-color-surface);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+        z-index: 1000;
+        box-shadow: var(--a-shadow-md);
+        border-bottom-left-radius: var(--a-border-radius-base);
+        border-bottom-right-radius: var(--a-border-radius-base);
+    }
+
+    .navbar .nav-links.open {
+        max-height: 500px;
+        opacity: 1;
+        padding: var(--a-padding-base);
+        overflow-y: auto;
+    }
+
+    .navbar .nav-links a {
+        width: 100%;
+        padding: var(--a-padding-small) var(--a-padding-base);
+        color: var(--a-color-on-surface);
+    }
+
+    /* Ensure theme switcher has correct placement */
+    .theme-switcher-container {
+        order: 2;
+        margin-left: auto;
+        margin-right: var(--a-margin-small);
+    }
+
+    /* Logo positioning */
+    .navbar .logo {
+        order: 1;
+    }
+}
+
+/* === Theme Switcher Styles - Updated with vertical alignment === */
+.theme-switcher-container {
+    margin-left: var(--a-margin-small);
+    margin-right: var(--a-margin-small);
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.theme-switcher-container label.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+#theme-select {
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    border-radius: var(--a-border-radius-base);
+    border: 1px solid var(--a-color-outline);
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    font-family: inherit;
+    font-size: var(--a-font-size-small);
+    cursor: pointer;
+    vertical-align: middle;
+    align-self: center;
+    height: auto;
+    line-height: normal;
+}
+
+#theme-select:focus {
+    outline: 2px solid var(--a-color-primary);
+    outline-offset: 1px;
+    box-shadow: 0 0 0 2px rgba(var(--a-color-primary-rgb), 0.2);
+}
+
+/* Mobile Specific Adjustments */
+@media (max-width: 768px) {
+    .theme-switcher-container {
+        margin-left: auto;
+        margin-right: var(--a-margin-small);
+    }
+
+    /* Keep theme select at a reasonable width on mobile */
+    #theme-select {
+        max-width: 120px;
+    }
+
+    /* Ensure navbar styles don't conflict */
+    .navbar .nav-links.open {
+        display: flex !important;
+        visibility: visible !important;
+    }
+}
+
+/* --- Grid System --- */
+/* Base grid on main (optional default) */
+main {
+    display: grid;
+    grid-template-columns: 1fr; /* Default single column */
+    grid-gap: var(--a-grid-gutter);
+}
+/* Explicit Row Class */
+.row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12 columns */
+    grid-gap: var(--a-grid-gutter);
+    margin-bottom: var(--a-block-element-margin-bottom); /* Space below rows */
+    /* Remove negative margins and padding on children if using gap */
+}
+/* Column Span Classes */
+.col-1 { grid-column: span 1; }
+.col-2 { grid-column: span 2; }
+.col-3 { grid-column: span 3; }
+.col-4 { grid-column: span 4; }
+.col-5 { grid-column: span 5; }
+.col-6 { grid-column: span 6; }
+.col-7 { grid-column: span 7; }
+.col-8 { grid-column: span 8; }
+.col-9 { grid-column: span 9; }
+.col-10 { grid-column: span 10; }
+.col-11 { grid-column: span 11; }
+.col-12 { grid-column: span 12; }
+/* Add responsive col-sm-*, col-md-*, etc. classes if needed */
+
+
+/* --- Utility Classes --- */
+.container {
+    width: 100%;
+    max-width: var(--a-layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--a-padding-medium); /* Use padding vars */
+    padding-right: var(--a-padding-medium);
+}
+.full-bleed {
+    width: 100vw; /* Span full viewport width */
+    max-width: 100%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding-left: 0 !important; /* Override padding */
+    padding-right: 0 !important;
+}
+.full-bleed > .container {
+    /* Ensure container within full-bleed keeps its padding */
+    padding-left: var(--a-padding-medium);
+    padding-right: var(--a-padding-medium);
+}
+header.full-bleed {
+    padding-top: 0; /* Remove padding if needed */
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+.centerfy { /* Center text and inline/inline-block children */
+    text-align: center;
+}
+.centerfy > * { /* Center block children */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Hero Section --- */
+/* === Hero Section === */
+section.hero {
+
+    padding: var(--a-space-xxlarge) var(--a-space-large);
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background-image: var(--a-gradient-hero, var(--a-gradient-primary)); /* Use hero-specific gradient */
+    color: var(--a-color-on-gradient, var(--a-color-on-primary)); /* Use content color for gradient backgrounds */
+}
+
+section.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.1;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+section.hero .hero-content {
+    max-width: 800px;
+    z-index: 1;
+}
+
+section.hero h1 {
+    font-size: 3rem;
+    margin-bottom: var(--a-space-large);
+    font-weight: 800;
+}
+
+section.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto var(--a-space-large);
+}
+
+section.hero .button-group {
+    display: flex;
+    gap: var(--a-space-medium);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+section.hero .button{
+    margin: var(--a-space-small);
+    padding: var(--a-space-small);
+}
+
+/* Ensure buttons have proper contrast on gradient backgrounds */
+section.hero .button.primary,  section.hero .button{
+    background-color: var(--a-color-surface);
+    color: var(--a-color-primary);
+    border-color: var(--a-color-surface);
+}
+
+section.hero .button.primary:hover {
+    background-color: var(--a-color-surface-variant);
+    border-color: var(--a-color-surface-variant);
+}
+
+section.hero .button.outline {
+    border-color: var(--a-color-surface);
+    color: var(--a-color-on-gradient);
+}
+
+section.hero .button.outline:hover {
+    background-color: var(--a-color-surface);
+    color: var(--a-color-primary);
+}
+
+/* --- Footer --- */
+/* Page Footer */
+body > footer { /* More specific selector for main page footer */
+    background-color: var(--a-color-surface-invert);
+    color: var(--a-color-on-surface-invert);
+    padding: var(--a-padding-medium);
+    margin-top: var(--a-margin-large);
+    text-align: center;
+    font-size: var(--a-font-size-small);
+}
+
+
+/* ========================================================================= */
+/* Component Styles (Continued)                                            */
+/* ========================================================================= */
+
+/* --- Alerts --- */
+.alert {
+    padding: var(--a-padding-base); /* Use padding var */
+    margin-bottom: var(--a-block-element-margin-bottom);
+    border: var(--a-border-width-base) solid; /* Use base width */
+    border-radius: var(--a-border-radius-base);
+    font-size: var(--a-font-size-base);
+    border-left-width: 4px; /* Thicker left border for emphasis */
+}
+.alert-success {
+    background-color: var(--a-color-positive-container);
+    color: var(--a-color-on-positive-container);
+    border-color: var(--a-color-positive);
+}
+.alert-error {
+    background-color: var(--a-color-negative-container);
+    color: var(--a-color-on-negative-container);
+    border-color: var(--a-color-negative);
+}
+.alert-info { /* Renamed from notice? Assuming info */
+    background-color: var(--a-color-informative-container);
+    color: var(--a-color-on-informative-container);
+    border-color: var(--a-color-informative);
+}
+.alert-warning { /* Add warning/notice style */
+    background-color: var(--a-color-notice-container);
+    color: var(--a-color-on-notice-container);
+    border-color: var(--a-color-notice);
+}
+
+
+/* --- Breadcrumbs --- */
+.breadcrumbs {
+    font-size: var(--a-font-size-small);
+    margin-bottom: var(--a-block-element-margin-bottom);
+    padding: var(--a-padding-small) 0; /* Add some padding */
+    border-bottom: 1px solid var(--a-color-outline); /* Subtle separator */
+}
+.breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: var(--a-space-small); /* Gap between items */
+}
+.breadcrumbs li {
+    margin-bottom: 0; /* Reset list item margin */
+    display: inline-flex; /* Align items */
+    align-items: center;
+}
+.breadcrumbs li::after {
+    content: '/';
+    margin-left: var(--a-space-small); /* Space before separator */
+    color: var(--a-color-text-secondary);
+    display: inline-block; /* Needed for margin */
+}
+.breadcrumbs li:last-child::after {
+    content: ''; /* No separator after last item */
+    margin-left: 0;
+}
+.breadcrumbs a {
+    color: var(--a-color-primary);
+    text-decoration: none;
+}
+.breadcrumbs a:hover, .breadcrumbs a:focus {
+    text-decoration: underline;
+}
+.breadcrumbs [aria-current="page"] {
+    color: var(--a-color-on-surface); /* Current page text color */
+    font-weight: var(--a-font-weight-bold);
+}
+
+/* --- Tooltip --- */
+.tooltip {
+    position: relative;
+    cursor: help; /* Indicate help available */
+    border-bottom: 1px dotted currentColor; /* Subtle indicator */
+}
+.tooltip::after { /* Using ::after for tooltip content */
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%; /* Position above */
+    left: 50%;
+    transform: translateX(-50%) translateY(-var(--a-space-tiny)); /* Move slightly up */
+    background-color: var(--a-color-surface-invert); /* Inverted colors */
+    color: var(--a-color-on-surface-invert);
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    border-radius: var(--a-border-radius-small);
+    white-space: nowrap;
+    font-size: var(--a-font-size-small);
+    z-index: 10; /* Ensure visibility */
+    /* Hidden state */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Prevent interaction */
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+.tooltip:hover::after,
+.tooltip:focus::after { /* Show on hover/focus */
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Pagination --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: var(--a-space-small);
+    margin-top: var(--a-margin-medium);
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+.pagination button {
+    padding: var(--a-padding-small) var(--a-padding-base); /* Consistent padding */
+    background-color: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline); /* Use outline color */
+    border-radius: var(--a-border-radius-small);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    color: var(--a-color-primary); /* Use primary color for text */
+    min-width: auto; /* Allow natural width */
+    margin: 0; /* Reset margin */
+}
+.pagination button.active {
+    background-color: var(--a-color-primary);
+    color: var(--a-color-on-primary);
+    border-color: var(--a-color-primary);
+    cursor: default;
+    font-weight: var(--a-font-weight-bold);
+}
+.pagination button:hover:not(:disabled):not(.active) {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    border-color: var(--a-color-primary-container);
+}
+.pagination button:focus {
+    outline: 2px solid var(--a-color-primary);
+    outline-offset: 1px;
+    z-index: 1; /* Bring focus state above others */
+}
+.pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: var(--a-color-surface-variant);
+    color: var(--a-color-text-secondary);
+    border-color: var(--a-color-outline);
+}
+
+/* --- Toast Notifications --- */
+.toast {
+    position: fixed;
+    bottom: var(--a-space-medium); /* Use space var */
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 250px;
+    max-width: 90%;
+    padding: var(--a-padding-base); /* Use padding var */
+    background-color: var(--a-color-surface-invert); /* Use inverted surface */
+    color: var(--a-color-on-surface-invert);
+    border-radius: var(--a-border-radius-base);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+    z-index: 2000; /* High z-index */
+    opacity: 0; /* Hidden by default, JS handles visibility */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+.toast.show { /* Class added by JS */
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0); /* Slide in */
+}
+.toast-success { background-color: var(--a-color-positive); color: var(--a-color-on-positive); }
+.toast-error { background-color: var(--a-color-negative); color: var(--a-color-on-negative); }
+.toast-info { background-color: var(--a-color-informative); color: var(--a-color-on-informative); }
+.toast-warning { background-color: var(--a-color-notice); color: var(--a-color-on-notice); }
+
+
+/* --- Accordion --- */
+.accordion {
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+.accordion > div { /* Each accordion item */
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-base);
+    margin-bottom: var(--a-margin-small); /* Space between items */
+    overflow: hidden; /* Clip content when closed */
+}
+.accordion > div:last-child {
+    margin-bottom: 0;
+}
+.accordion h4 { /* Heading containing the button */
+    margin: 0;
+    font-size: var(--a-font-size-h5); /* Slightly smaller heading */
+}
+.accordion button[aria-controls] { /* The button itself */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: var(--a-padding-base); /* Use padding vars */
+    background-color: var(--a-color-surface-variant); /* Subtle background */
+    color: var(--a-color-on-surface-variant); /* Ensure contrast */
+    border: none;
+    border-radius: 0; /* No radius on button itself */
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: var(--a-font-weight-bold);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.accordion button[aria-controls]:hover,
+.accordion button[aria-controls]:focus {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    outline: none; /* Style focus on parent div? */
+}
+.accordion button[aria-controls]::after { /* Indicator Arrow */
+    content: '▼'; /* Down arrow */
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+    transform: rotate(0deg);
+    margin-left: var(--a-space-small);
+}
+.accordion button[aria-expanded="true"] {
+    background-color: var(--a-color-surface); /* Match panel background when open? */
+    color: var(--a-color-on-surface);
+    border-bottom: 1px solid var(--a-color-outline); /* Separator when open */
+}
+.accordion button[aria-expanded="true"]::after {
+    transform: rotate(-180deg); /* Point arrow up */
+}
+.accordion div[role="region"] { /* The content panel */
+    padding: var(--a-padding-base); /* Use padding vars */
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    border-top: none; /* Ensure no double border */
+    /* Transition handled by JS/hidden attribute or max-height */
+}
+.accordion div[role="region"]:not([hidden]) {
+    /* Add transition styles if using max-height */
+    /* max-height: 500px; transition: max-height 0.3s ease-out; */
+}
+
+
+/* --- Tabs --- */
+.tabs {
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+.tabs [role="tablist"] {
+    display: flex;
+    gap: var(--a-space-tiny); /* Minimal gap */
+    border-bottom: 2px solid var(--a-color-outline); /* Main underline */
+    padding: 0;
+    margin: 0 0 var(--a-margin-base) 0; /* Space below tablist */
+    list-style: none;
+}
+.tabs [role="tab"] {
+    padding: var(--a-padding-small) var(--a-padding-base);
+    cursor: pointer;
+    border: none;
+    border-bottom: 2px solid transparent; /* Transparent border for spacing */
+    margin-bottom: -2px; /* Overlap the main underline */
+    background: none;
+    color: var(--a-color-primary);
+    font-weight: var(--a-font-weight-bold);
+    font-size: var(--a-font-size-base);
+    transition: border-color 0.2s ease, color 0.2s ease;
+    position: relative; /* For focus outline */
+}
+.tabs [role="tab"]:hover,
+.tabs [role="tab"]:focus {
+    color: var(--a-color-primary-container);
+    outline: none;
+}
+.tabs [role="tab"]:focus-visible::after { /* Focus indicator */
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background-color: var(--a-color-primary);
+}
+.tabs [role="tab"][aria-selected="true"] {
+    color: var(--a-color-on-surface); /* Active tab text color */
+    border-bottom-color: var(--a-color-primary); /* Highlight active tab */
+    font-weight: var(--a-font-weight-bold);
+}
+.tabs [role="tabpanel"] {
+    padding: var(--a-padding-base) 0; /* Padding for tab content */
+}
+.tabs [role="tabpanel"][hidden] {
+    display: none;
+}
+
+
+/* --- Dropdown Menu --- */
+.dropdown {
+    position: relative; /* Context for absolute positioning */
+    display: inline-block; /* Or block depending on usage */
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+.dropdown-toggle {
+    /* Use standard button styles */
+}
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Position below toggle */
+    left: 0; /* Align left */
+    z-index: 1000; /* Ensure visibility */
+    background: var(--a-color-surface);
+    padding: var(--a-padding-small) 0; /* Vertical padding */
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-base);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 160px; /* Minimum width */
+    list-style: none;
+    margin: var(--a-space-tiny) 0 0 0; /* Small gap below toggle */
+}
+.dropdown-menu.show {
+    display: block; /* Show menu */
+}
+/* Dropdown Items */
+.dropdown-menu li {
+    margin-bottom: 0; /* Reset list item margin */
+}
+.dropdown-menu a,
+.dropdown-menu button { /* Can contain links or buttons */
+    display: block;
+    padding: var(--a-padding-small) var(--a-padding-base);
+    color: var(--a-color-on-surface);
+    text-decoration: none;
+    white-space: nowrap;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: var(--a-font-size-base);
+}
+.dropdown-menu a:hover, .dropdown-menu a:focus,
+.dropdown-menu button:hover, .dropdown-menu button:focus {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    text-decoration: none;
+    outline: none;
+}
+.dropdown-menu li[role="separator"] {
+    height: 1px;
+    background-color: var(--a-color-outline);
+    margin: var(--a-margin-tiny) 0;
+    padding: 0;
+}
+
+
+/* --- Progress Bar --- */
+.progress-bar {
+    background: var(--a-color-surface-variant); /* Background track */
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-large); /* More rounded */
+    height: 20px; /* Example height */
+    width: 100%;
+    overflow: hidden;
+    margin-top: var(--a-margin-small);
+    margin-bottom: var(--a-block-element-margin-bottom);
+}
+.progress-bar .progress {
+    height: 100%;
+    background: var(--a-gradient-primary, var(--a-color-primary)); /* Use gradient if defined */
+    width: 0%; /* Set by style or JS */
+    transition: width 0.3s ease-out;
+    border-radius: inherit; /* Inherit parent radius */
+    display: flex; /* Allow text inside */
+    align-items: center;
+    justify-content: center;
+    color: var(--a-color-on-primary);
+    font-size: var(--a-font-size-small);
+}
+
+/** Cards **/
+/** CARDS **/
+/* Feature section styling */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.card {
+    background: var(--card-bg, rgba(255, 255, 255, 0.05));
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card .icon {
+    margin-bottom: 1.5rem;
+    color: var(--accent-color, #4C7BF4);
+    background: var(--icon-bg, rgba(76, 123, 244, 0.1));
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.description {
+    color: var(--text-color, #666);
+    line-height: 1.6;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--heading-color, #333);
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    color: var(--text-color, #666);
+    line-height: 1.6;
+}
+
+/* Add some subtle animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(6) { animation-delay: 0.6s; }
+
+/** Utility Classes */
+.center { text-align: center; margin-left: auto; margin-right: auto;}
