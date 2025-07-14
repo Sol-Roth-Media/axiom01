@@ -535,6 +535,104 @@ AxiomComponents.register('infiniteScroll', function initInfiniteScroll() {
   });
 });
 
+// --- Carousel/Slider Component ---
+/**
+ * Carousel/Slider component (Axiom01)
+ *
+ * Features:
+ * - Semantic markup: .carousel container, .track, .slide
+ * - Accessible: ARIA roles, keyboard navigation, focus management
+ * - Responsive: touch/swipe support, arrow controls, indicators
+ * - Progressive enhancement: works with basic HTML
+ */
+AxiomComponents.register('carousel', function initCarousel() {
+  const carousels = document.querySelectorAll('.carousel');
+  carousels.forEach(carousel => {
+    const track = carousel.querySelector('.track');
+    const slides = Array.from(track.children);
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
+    const indicators = carousel.querySelector('.indicators');
+    let current = 0;
+
+    // Accessibility roles
+    carousel.setAttribute('role', 'region');
+    carousel.setAttribute('aria-label', carousel.getAttribute('data-carousel-label') || 'Carousel');
+    track.setAttribute('role', 'list');
+    slides.forEach((slide, i) => {
+      slide.setAttribute('role', 'listitem');
+      slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+      slide.tabIndex = i === current ? 0 : -1;
+    });
+
+    // Update slide visibility
+    function updateSlides(newIndex) {
+      slides.forEach((slide, i) => {
+        slide.setAttribute('aria-hidden', i === newIndex ? 'false' : 'true');
+        slide.tabIndex = i === newIndex ? 0 : -1;
+        slide.classList.toggle('active', i === newIndex);
+      });
+      if (indicators) {
+        Array.from(indicators.children).forEach((dot, i) => {
+          dot.classList.toggle('active', i === newIndex);
+          dot.setAttribute('aria-current', i === newIndex ? 'true' : 'false');
+        });
+      }
+      current = newIndex;
+    }
+
+    // Prev/Next controls
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        updateSlides((current - 1 + slides.length) % slides.length);
+        slides[current].focus();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        updateSlides((current + 1) % slides.length);
+        slides[current].focus();
+      });
+    }
+
+    // Indicators
+    if (indicators) {
+      Array.from(indicators.children).forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          updateSlides(i);
+          slides[i].focus();
+        });
+      });
+    }
+
+    // Keyboard navigation
+    carousel.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') {
+        if (prevBtn) prevBtn.click();
+      } else if (e.key === 'ArrowRight') {
+        if (nextBtn) nextBtn.click();
+      }
+    });
+
+    // Touch/swipe support
+    let startX = null;
+    track.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+    });
+    track.addEventListener('touchend', e => {
+      if (startX !== null) {
+        const endX = e.changedTouches[0].clientX;
+        if (endX - startX > 40 && prevBtn) prevBtn.click();
+        else if (startX - endX > 40 && nextBtn) nextBtn.click();
+        startX = null;
+      }
+    });
+
+    // Initial state
+    updateSlides(current);
+  });
+});
+
 // --- Initialize all components when DOM is loaded ---
 document.addEventListener('DOMContentLoaded', function() {
   AxiomComponents.initAll();

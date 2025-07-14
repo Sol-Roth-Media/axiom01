@@ -467,3 +467,49 @@ Axiom01 is open source software licensed under the [MIT license](https://opensou
 - Created with accessibility and theming as core principles
 
 This is the first release (v0.1) of Axiom01. We're excited to see what you build with it!
+
+## Minimal CSS Philosophy
+
+Axiom01 is built on a minimal, semantic-first CSS philosophy:
+- **Semantic-First Styling:** Prefer semantic HTML elements (`header`, `section`, `footer`, `article`, etc.) over generic `div` containers. CSS targets these elements within components, reducing the need for extra classes.
+- **Minimal & Meaningful Classes:** Use classes only for unique values or variants (e.g., `.primary`, `.card`). Avoid long, hyphenated class names and utility class stacking. Use camelCase for unique value classes.
+- **Component Structure:** Structure components with semantic elements. For example:
+  ```html
+  <article class="card">
+    <header>Card Title</header>
+    <img src="..." alt="...">
+    <section>Card content goes here.</section>
+    <footer>Card actions</footer>
+  </article>
+  ```
+  The CSS will style these sections automatically based on their element type and parent class.
+- **Utility Classes:** Use utility classes for layout and color only when necessary (e.g., `.center`, `.primary`).
+
+### Example: Card Component
+
+**Before:**
+```html
+<div class="card card-header">
+  <div class="card-header">Title</div>
+  <div class="card-content">Content</div>
+  <div class="card-footer">Actions</div>
+</div>
+```
+
+**After:**
+```html
+<article class="card">
+  <header>Title</header>
+  <section>Content</section>
+  <footer>Actions</footer>
+</article>
+```
+
+**CSS:**
+```css
+.card header { /* styles for header */ }
+.card section { /* styles for content */ }
+.card footer { /* styles for footer */ }
+```
+
+By following these guidelines, your codebase will be cleaner, easier to maintain, and fully aligned with the Axiom01 philosophy

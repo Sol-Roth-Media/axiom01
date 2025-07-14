@@ -75,18 +75,18 @@
 
 &lt;!-- Modal Container --&gt;
 &lt;div id="example-modal" class="modal" aria-hidden="true"&gt;
-    &lt;div class="modal-content"&gt;
-        &lt;div class="modal-header"&gt;
+    &lt;div&gt;
+        &lt;header&gt;
             &lt;h3&gt;Modal Title&lt;/h3&gt;
             &lt;button class="modal-close" data-modal-close aria-label="Close"&gt;×&lt;/button&gt;
-        &lt;/div&gt;
-        &lt;div class="modal-body"&gt;
+        &lt;/header&gt;
+        &lt;section&gt;
             &lt;p&gt;Modal content goes here...&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class="modal-footer"&gt;
+        &lt;/section&gt;
+        &lt;footer&gt;
             &lt;button class="button" data-modal-close&gt;Cancel&lt;/button&gt;
             &lt;button class="button primary"&gt;Confirm&lt;/button&gt;
-        &lt;/div&gt;
+        &lt;/footer&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
             </div>
@@ -99,29 +99,29 @@
                 <button class="button" data-modal-target="example-modal">Open Modal</button>
                 
                 <!-- Modal Container -->
-                <div id="example-modal" class="modal" aria-hidden="true">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3>Example Modal</h3>
-                            <button class="modal-close" data-modal-close aria-label="Close">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <p>This is an example modal dialog created with the Axiom01 Modal component.</p>
-                            <p>Features:</p>
-                            <ul>
-                                <li>Accessible with proper ARIA attributes</li>
-                                <li>Keyboard navigation (Escape to close, Tab trap within modal)</li>
-                                <li>Click outside to close</li>
-                                <li>Focus management (returns focus to trigger element)</li>
-                                <li>Prevents background scrolling when open</li>
-                            </ul>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="button" data-modal-close>Close</button>
-                            <button class="button primary">Confirm</button>
-                        </div>
-                    </div>
-                </div>
+<div id="example-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div>
+        <header>
+            <h3>Example Modal</h3>
+            <button class="modal-close" data-modal-close aria-label="Close">×</button>
+        </header>
+        <section>
+            <p>This is an example modal dialog created with the Axiom01 Modal component.</p>
+            <p>Features:</p>
+            <ul>
+                <li>Accessible with proper ARIA attributes</li>
+                <li>Keyboard navigation (Escape to close, Tab trap within modal)</li>
+                <li>Click outside to close</li>
+                <li>Focus management (returns focus to trigger element)</li>
+                <li>Prevents background scrolling when open</li>
+            </ul>
+        </section>
+        <footer>
+            <button class="button" data-modal-close>Close</button>
+            <button class="button primary">Confirm</button>
+        </footer>
+    </div>
+</div>
             </div>
 
             <div class="alert info">
@@ -210,12 +210,107 @@ AxiomNotify.show('Custom notification', {
             </div>
         </div>
     </section>
+
+    <section id="datepicker-demo" class="component-demo">
+        <div class="container">
+            <h2>Datepicker Component Demo</h2>
+            <form>
+                <label for="demo-date">Choose a date:</label>
+                <input type="date" id="demo-date" class="axiom-datepicker" name="demo-date">
+            </form>
+            <p class="description">The Axiom01 Datepicker enhances <code>input[type='date']</code> fields for accessibility and usability. Click the calendar icon to select a date.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 id="infinite-scroll-component">Infinite Scroll Component</h2>
+            <p>The Infinite Scroll component automatically loads more content as the user scrolls near the bottom of a container. It is accessible, unobtrusive, and works with any semantic container (e.g., <code>&lt;div&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>).</p>
+
+            <div class="code-block">
+                <h3>Basic Usage</h3>
+                <ol>
+                    <li>Add the <code>axiom-infinite-scroll</code> class to any scrollable container.</li>
+                    <li>Optionally set <code>data-infinite-scroll-callback="functionName"</code> to call a global function when triggered.</li>
+                    <li>Or listen for the <code>axiom:infinite-scroll</code> event on the container.</li>
+                    <li>Adjust the trigger threshold with <code>data-infinite-scroll-threshold="value"</code> (pixels from bottom).</li>
+                </ol>
+                <pre><code class="language-html">&lt;div class="axiom-infinite-scroll" style="height: 300px; overflow-y: auto;"&gt;
+    &lt;!-- Content items here --&gt;
+&lt;/div&gt;</code></pre>
+                <pre><code class="language-js">// Listen for the event
+const container = document.querySelector('.axiom-infinite-scroll');
+container.addEventListener('axiom:infinite-scroll', function() {
+    // Load more content here
+});
+
+// Or use a callback
+function loadMoreContent(container) {
+    // Load more content here
+}
+// In HTML: data-infinite-scroll-callback="loadMoreContent"
+</code></pre>
+            </div>
+
+            <div class="example">
+                <h3>Live Example</h3>
+                <p>Scroll the container below to trigger infinite scroll and load more items:</p>
+                <div id="infinite-scroll-demo" class="axiom-infinite-scroll" style="height: 220px; overflow-y: auto; border: 1px solid var(--a-color-outline); border-radius: var(--a-border-radius-base); padding: 1rem; background: var(--a-color-surface-variant);" data-infinite-scroll-callback="demoLoadMoreItems">
+                    <!-- Initial items will be loaded by JS -->
+                </div>
+                <script>
+                // Demo: Infinite scroll loading
+                function demoLoadMoreItems(container) {
+                    if (!container._itemCount) container._itemCount = 0;
+                    for (let i = 0; i < 10; i++) {
+                        container._itemCount++;
+                        const item = document.createElement('div');
+                        item.className = 'infinite-item';
+                        item.style.padding = '0.5rem';
+                        item.style.borderBottom = '1px solid var(--a-color-outline)';
+                        item.textContent = 'Item #' + container._itemCount;
+                        container.appendChild(item);
+                    }
+                }
+                // Initial load
+                document.addEventListener('DOMContentLoaded', function() {
+                    const demo = document.getElementById('infinite-scroll-demo');
+                    if (demo) demoLoadMoreItems(demo);
+                });
+                </script>
+                <style>
+                .infinite-item:last-child { border-bottom: none; }
+                </style>
+            </div>
+
+            <div class="alert info">
+                <h3>Accessibility Features</h3>
+                <ul>
+                    <li>No impact on keyboard navigation</li>
+                    <li>Works with any semantic container</li>
+                    <li>Custom event and callback for flexible integration</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 </main>
 
-<footer>
-    <div class="container">
-        <p>&copy; 2025 Axiom01 UI Framework. MIT License.</p>
+<footer class="axiom-footer">
+  <div class="container" style="max-width: var(--a-layout-max-width); margin: 0 auto; padding: var(--a-padding-large) var(--a-padding-base); background: var(--a-color-surface-variant, #f8f9fa); color: var(--a-color-on-surface-variant, #222); border-radius: var(--a-border-radius-large); box-shadow: 0 2px 16px rgba(0,0,0,0.04); display: flex; flex-direction: column; align-items: center; gap: var(--a-space-small);">
+    <div style="font-size: 1.1rem; font-weight: 500; margin-bottom: var(--a-margin-small);">
+      &copy; 2025 <span style="color: var(--a-color-primary); font-weight: 700;">Axiom01</span> UI Framework
     </div>
+    <div style="font-size: 0.95rem; color: var(--a-color-muted, #666);">
+      <span>MIT License</span> &bull; <a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" style="color: var(--a-color-primary); text-decoration: underline;">GitHub</a>
+    </div>
+    <nav aria-label="Footer Navigation" style="margin-top: var(--a-margin-small);">
+      <ul style="display: flex; gap: var(--a-space-base); list-style: none; padding: 0; margin: 0;">
+        <li><a href="../index.html#about" style="color: var(--a-color-primary); text-decoration: none; font-weight: 500;">About</a></li>
+        <li><a href="../index.html#usage" style="color: var(--a-color-primary); text-decoration: none; font-weight: 500;">Get Started</a></li>
+        <li><a href="../index.html#components" style="color: var(--a-color-primary); text-decoration: none; font-weight: 500;">Components</a></li>
+      </ul>
+    </nav>
+  </div>
 </footer>
 
 <!-- Include the Axiom01 scripts -->

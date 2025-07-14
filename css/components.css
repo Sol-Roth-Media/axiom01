@@ -43,7 +43,7 @@
     transform: translateY(0);
 }
 
-.modal-header {
+.modal header {
     padding: var(--a-padding-medium) var(--a-padding-medium) var(--a-padding-small);
     border-bottom: var(--a-border-width-base) var(--a-border-style-base) rgba(0, 0, 0, 0.1);
     display: flex;
@@ -51,29 +51,29 @@
     justify-content: space-between;
 }
 
-.modal-header h2, 
-.modal-header h3 {
+.modal header h2,
+.modal header h3 {
     margin: 0;
     font-size: var(--a-font-size-h3);
     font-weight: var(--a-font-weight-medium);
 }
 
-.modal-body {
+.modal section {
     padding: var(--a-padding-medium);
 }
 
-.modal-footer {
+.modal footer {
     padding: var(--a-padding-small) var(--a-padding-medium) var(--a-padding-medium);
     border-top: var(--a-border-width-base) var(--a-border-style-base) rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: flex-end;
-    gap: var(--a-space-small);
+    gap: var(--a-grid-gutter);
 }
 
-.modal-close {
+.modal .closeBtn {
     background: transparent;
     border: none;
-    color: rgba(0, 0, 0, 0.5); /* Muted text color */
+    color: rgba(0, 0, 0, 0.5);
     font-size: 1.5rem;
     cursor: pointer;
     padding: var(--a-padding-tiny);
@@ -84,8 +84,8 @@
     transition: color 0.2s ease;
 }
 
-.modal-close:hover,
-.modal-close:focus {
+.modal .closeBtn:hover,
+.modal .closeBtn:focus {
     color: var(--a-color-on-surface);
 }
 
@@ -95,11 +95,11 @@
         width: 95%;
     }
 
-    .modal-footer {
+    .modal footer {
         flex-direction: column;
     }
 
-    .modal-footer button {
+    .modal footer button {
         width: 100%;
         margin-left: 0;
         margin-top: var(--a-space-small);
@@ -107,79 +107,79 @@
 }
 
 /* --- Notification System --- */
-.axiom-notifications {
+.notificationsContainer {
     position: fixed;
-    z-index: 1100; /* Higher z-index than modals */
+    z-index: 1100;
     display: flex;
     flex-direction: column;
-    gap: var(--a-space-small);
+    gap: var(--a-grid-gutter);
     width: 320px;
     max-width: 90vw;
-    pointer-events: none; /* Allow clicking through the container */
+    pointer-events: none;
 }
 
 /* Positioning variants */
-.axiom-notifications.top-right {
+.notificationsContainer.topRight {
     top: var(--a-space-medium);
     right: var(--a-space-medium);
 }
 
-.axiom-notifications.top-left {
+.notificationsContainer.topLeft {
     top: var(--a-space-medium);
     left: var(--a-space-medium);
 }
 
-.axiom-notifications.bottom-right {
+.notificationsContainer.bottomRight {
     bottom: var(--a-space-medium);
     right: var(--a-space-medium);
 }
 
-.axiom-notifications.bottom-left {
+.notificationsContainer.bottomLeft {
     bottom: var(--a-space-medium);
     left: var(--a-space-medium);
 }
 
-.axiom-notification {
+.notification {
     background-color: var(--a-color-surface);
     color: var(--a-color-on-surface);
     border-radius: var(--a-border-radius-base);
-    box-shadow: var(--a-shadow-medium, 0 4px 12px rgba(0, 0, 0, 0.15));
+    box-shadow: var(--a-shadow-medium, 0 4px 12px var(--a-shadow-color));
     padding: var(--a-padding-medium);
     display: flex;
     align-items: flex-start;
-    gap: var(--a-space-small);
+    gap: var(--a-grid-gutter);
     transform: translateX(100%);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
-    pointer-events: auto; /* Make the notification clickable */
+    pointer-events: auto;
     max-width: 100%;
     position: relative;
     overflow: hidden;
 }
 
 /* Position-specific animations */
-.top-right .axiom-notification {
+.top-right .notification {
     transform: translateX(100%);
 }
 
-.top-left .axiom-notification {
+.top-left .notification {
     transform: translateX(-100%);
 }
 
-.bottom-right .axiom-notification {
+.bottom-right .notification {
     transform: translateX(100%);
 }
 
-.bottom-left .axiom-notification {
+.bottom-left .notification {
     transform: translateX(-100%);
 }
 
-.axiom-notification.show {
+.notification.show {
     transform: translateX(0);
     opacity: 1;
 }
 
-.axiom-notification.hiding {
+.notification.hiding {
     animation: notification-hide 0.3s forwards;
 }
 
@@ -191,19 +191,19 @@
 }
 
 /* Notification types */
-.axiom-notification.success {
+.notification.success {
     border-left: 4px solid var(--a-color-success, #4caf50);
 }
 
-.axiom-notification.error {
+.notification.error {
     border-left: 4px solid var(--a-color-error, #f44336);
 }
 
-.axiom-notification.warning {
+.notification.warning {
     border-left: 4px solid var(--a-color-warning, #ff9800);
 }
 
-.axiom-notification.info {
+.notification.info {
     border-left: 4px solid var(--a-color-info, #2196f3);
 }
 
@@ -258,6 +258,82 @@
 }
 
 /* Dark theme adjustments */
-html[data-theme="dark"] .axiom-notification {
+html[data-theme="dark"] .notification {
     background-color: var(--a-color-surface-variant, #333);
+}
+
+/* Axiom01 Philosophy Section Styling */
+.axiom-philosophy {
+  margin: var(--a-margin-xxl, 2rem) auto;
+  max-width: 700px;
+  background: var(--a-color-surface, #fff);
+  border-radius: var(--a-radius-lg, 1rem);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  padding: var(--a-padding-xxl, 2rem) var(--a-padding-xxl, 2.5rem);
+  color: var(--a-color-on-surface, #222);
+  transition: background 0.3s, color 0.3s;
+}
+
+[data-theme="dark"] .axiom-philosophy {
+  background: var(--a-color-surface-dark, #222);
+  color: var(--a-color-on-surface-dark, #f4f4f4);
+}
+
+.axiom-philosophy header {
+  margin-bottom: var(--a-margin-base, 1rem);
+}
+.axiom-philosophy h2 {
+  font-size: var(--a-font-size-h3);
+  font-weight: var(--a-font-weight-bold);
+  margin: 0;
+}
+.axiom-philosophy ul {
+  list-style: disc inside;
+  margin: 0 0 var(--a-margin-base, 1rem) 0;
+  padding: 0;
+}
+.axiom-philosophy p {
+  margin: 0;
+  color: var(--a-color-muted, #888);
+  font-size: 1rem;
+}
+[data-theme="dark"] .axiom-philosophy p {
+  color: var(--a-color-muted-dark, #bbb);
+}
+.axiom-philosophy a {
+  color: var(--a-color-primary, #0077ff);
+  text-decoration: underline;
+}
+[data-theme="dark"] .axiom-philosophy a {
+  color: var(--a-color-primary-dark, #66aaff);
+}
+
+/* --- Logo Styles --- */
+.logo-text {
+  color: var(--a-color-on-surface, #222);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+
+[data-theme="dark"] .logo-text {
+  color: var(--a-color-on-surface-dark, #f4f4f4);
+}
+
+.logo-01 {
+  color: var(--a-color-primary, #00c005);
+  font-family: monospace;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .logo-01 {
+  color: var(--a-color-primary-dark, #00ff80);
+}
+
+fieldset.inline-labels .form-group {
+    display: flex;
+    align-items: center; /* Align label and input */
+    gap: var(--a-grid-gutter); /* Space between label and input */
+    margin-bottom: var(--a-margin-base);
 }
