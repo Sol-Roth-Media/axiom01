@@ -241,10 +241,28 @@ label input[type="radio"] {
     margin-bottom: 0; /* Remove default margin when inside a group */
 }
 .validationMessage {
-    display: none; /* Hide by default */
+    display: none;
     font-size: var(--a-font-size-small);
-    color: var(--a-color-negative);
     margin-top: var(--a-margin-tiny);
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    border-radius: var(--a-border-radius-small);
+    background: var(--a-color-surface);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.validationMessage.error {
+    color: var(--a-color-negative);
+    border-left: 3px solid var(--a-color-negative);
+    background: var(--a-color-negative-bg, #fff0f0);
+}
+.validationMessage.success {
+    color: var(--a-color-positive);
+    border-left: 3px solid var(--a-color-positive);
+    background: var(--a-color-positive-bg, #f0fff0);
+}
+.validationMessage.info {
+    color: var(--a-color-info, #2a7ae2);
+    border-left: 3px solid var(--a-color-info, #2a7ae2);
+    background: var(--a-color-info-bg, #f0f8ff);
 }
 /* Basic :invalid styling (can be enhanced with JS) */
 input:invalid,
@@ -2096,6 +2114,730 @@ button.full-width {
 }
 
 /* Group of buttons */
+.button-group {
+    display: flex;
+    gap: var(--a-space-small);
+}
+
+.button-group.vertical {
+    flex-direction: column;
+}
+/* Reset Button Specific */
+input[type="reset"], .button-reset { /* Add optional class */
+    color: var(--a-color-on-negative);
+    background-color: var(--a-color-negative);
+    border-color: var(--a-color-negative);
+}
+input[type="reset"]:hover, input[type="reset"]:focus,
+.button-reset:hover, .button-reset:focus {
+    background-color: var(--a-color-negative-hover, hsl(var(--a-color-negative-hue, 0), 70%, 40%)); /* Define hover color */
+    border-color: var(--a-color-negative-hover, hsl(var(--a-color-negative-hue, 0), 70%, 40%));
+    color: var(--a-color-on-negative);
+}
+/* Secondary Button */
+.secondary {
+    color: var(--a-color-on-secondary);
+    background-color: var(--a-color-secondary);
+    border-color: var(--a-color-secondary);
+}
+.secondary:hover, .button-secondary:focus {
+    background-color: var(--a-color-secondary-hover, hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    border-color: var(--a-color-secondary-hover, hsl(var(--a-color-secondary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    color: var(--a-color-on-secondary);
+}
+/* Tertiary Button */
+.tertiary { /* Use class consistently */
+    color: var(--a-color-on-tertiary);
+    background-color: var(--a-color-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+.tertiary:hover, .button-tertiary:focus {
+    background-color: var(--a-color-tertiary-hover, hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    border-color: var(--a-color-tertiary-hover, hsl(var(--a-color-tertiary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
+    color: var(--a-color-on-tertiary);
+}
+
+/* Other Color Buttons (Complementary, Analogous) */
+.complementary { background-color: var(--a-color-complementary); color: var(--a-color-on-complementary); border-color: var(--a-color-complementary); }
+.complementary:hover, .button-complementary:focus { background-color: var(--a-color-complementary-hover); border-color: var(--a-color-complementary-hover); color: var(--a-color-on-complementary); }
+
+.analogous-1 { background-color: var(--a-color-analogous-1); color: var(--a-color-on-analogous-1); border-color: var(--a-color-analogous-1); }
+.analogous-1:hover, .button-analogous-1:focus { background-color: var(--a-color-analogous-1-hover); border-color: var(--a-color-analogous-1-hover); color: var(--a-color-on-analogous-1); }
+
+.analogous-2 { background-color: var(--a-color-analogous-2); color: var(--a-color-on-analogous-2); border-color: var(--a-color-analogous-2); }
+.analogous-2:hover, .button-analogous-2:focus { background-color: var(--a-color-analogous-2-hover); border-color: var(--a-color-analogous-2-hover); color: var(--a-color-on-analogous-2); }
+
+
+/* Outline Button */
+.outline {
+    background-color: transparent;
+    border-color: currentColor; /* Use text color for border */
+    color: var(--a-color-primary); /* Default to primary text color */
+}
+.outline.primary { color: var(--a-color-primary); } /* Already default */
+.outline.secondary { color: var(--a-color-secondary); }
+.outline.tertiary { color: var(--a-color-tertiary); }
+.button-outline.button-complementary { color: var(--a-color-complementary); }
+.button-outline.button-analogous-1 { color: var(--a-color-analogous-1); }
+.button-outline.button-analogous-2 { color: var(--a-color-analogous-2); }
+.button-outline.button-negative { color: var(--a-color-negative); }
+.button-outline.button-positive { color: var(--a-color-positive); }
+/* Add other colors if needed */
+
+.button-outline:hover, .button-outline:focus {
+    background-color: currentColor; /* Fill with text color on hover */
+    color: var(--a-color-surface); /* Change text color to contrast background */
+    border-color: currentColor; /* Keep border color */
+}
+/* Specific hover text colors if needed, e.g., for primary outline hover */
+.button.outline.primary:hover, .button-outline.button-primary:focus { color: var(--a-color-on-primary); }
+.button.outline.secondary:hover, .button-outline.button-secondary:focus { color: var(--a-color-on-secondary); }
+/* etc. */
+
+
+/* Text Button (Link-style) */
+.button-text { /* Use class instead of tag selector */
+    background: none;
+    border: none;
+    padding: var(--a-padding-small) var(--a-padding-small); /* Less padding */
+    font-weight: var(--a-font-weight-bold);
+    color: var(--a-color-primary); /* Default to primary link color */
+    text-decoration: none;
+    box-shadow: none;
+    min-width: auto; /* Remove min-width */
+}
+.button-text:hover, .button-text:focus {
+    color: var(--a-color-primary-container);
+    text-decoration: underline;
+    background: none; /* Ensure no background on hover */
+    box-shadow: none;
+}
+.button-text:active {
+    transform: none;
+}
+/* Text button variants */
+.text.secondary { color: var(--a-color-secondary); }
+.text.tertiary { color: var(--a-color-tertiary); }
+/* Add other color variants if needed */
+
+
+/* Semantic Buttons */
+.positive { background-color: var(--a-color-positive); color: var(--a-color-on-positive); border-color: var(--a-color-positive); }
+.positive:hover, .button-positive:focus { background-color: var(--a-color-positive-hover); border-color: var(--a-color-positive-hover); color: var(--a-color-on-positive); }
+
+.negative { background-color: var(--a-color-negative); color: var(--a-color-on-negative); border-color: var(--a-color-negative); }
+.negative:hover, .button-negative:focus { background-color: var(--a-color-negative-hover); border-color: var(--a-color-negative-hover); color: var(--a-color-on-negative); }
+
+.notice { background-color: var(--a-color-notice); color: var(--a-color-on-notice); border-color: var(--a-color-notice); }
+.notice:hover, .button-notice:focus { background-color: var(--a-color-notice-hover); border-color: var(--a-color-notice-hover); color: var(--a-color-on-notice); }
+
+.informative { background-color: var(--a-color-informative); color: var(--a-color-on-informative); border-color: var(--a-color-informative); }
+.informative:hover, .button-informative:focus { background-color: var(--a-color-informative-hover); border-color: var(--a-color-informative-hover); color: var(--a-color-on-informative); }
+
+
+/* Disabled Button */
+button:disabled,
+a.button:disabled, /* May not work directly, use class */
+input[type="submit"]:disabled,
+input[type="button"]:disabled,
+input[type="reset"]:disabled,
+.disabled { /* Use class for `a` tags */
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none; /* Prevent clicks */
+    box-shadow: none;
+    transform: none;
+}
+
+/* Button Sizes */
+.small {
+    padding: var(--a-padding-tiny) var(--a-padding-tiny);
+    font-size: var(--a-font-size-small);
+    min-width: auto;
+}
+.large {
+    padding: var(--a-padding-base) var(--a-padding-large);
+    font-size: var(--a-font-size-h5); /* Example large size */
+}
+
+/* Buttons with Icons */
+button i, a.button i { /* Target icons within buttons */
+    margin-right: var(--a-margin-small); /* Space between icon and text */
+    font-size: 0.9em; /* Slightly smaller icon */
+    line-height: inherit; /* Ensure icon aligns */
+}
+/* If icon is the only content (Icon Button) */
+.icon {
+    padding: var(--a-padding-small); /* Square padding */
+    min-width: auto; /* Remove min-width */
+}
+.icon i {
+    margin: 0; /* No margin if icon only */
+    font-size: 1.2em; /* Make icon slightly larger */
+}
+
+/* Block Buttons */
+.button-block {
+    display: flex; /* Use flex to center content */
+    width: 100%;
+    justify-content: center;
+}
+
+/* Button Group - for styling containers holding buttons */
+.button-group, .button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--a-space-small);
+    margin-bottom: var(--a-block-element-margin-bottom);
+    align-items: baseline;
+}
+/* Optional: Remove margin from buttons inside group */
+.button-group button, .button-grid button {
+    margin: 0;
+}
+
+
+/* --- Cards --- */
+article.card {
+    background-color: var(--aColorSurface);
+    border: var(--aBorderWidthBase) var(--aBorderStyleBase) var(--aColorOutline);
+    border-radius: var(--aBorderRadiusBase);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+    padding: 0;
+    margin-bottom: var(--aBlockElementMarginBottom);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s ease-in-out;
+}
+article.card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.1);
+}
+.card header,
+.card section,
+.card img,
+.card footer {
+    padding: var(--aPaddingMedium);
+}
+.card header {
+    font-size: var(--aFontSizeH4);
+    font-weight: var(--aFontWeightBold);
+    padding-bottom: var(--aPaddingSmall);
+    border-bottom: var(--aBorderWidthBase) var(--aBorderStyleBase) var(--aColorOutline);
+}
+.card img {
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+}
+.card section {
+    /* Main content area styles */
+    font-size: var(--aFontSizeBase);
+    color: var(--aColorOnSurface);
+}
+.card footer {
+    padding-top: var(--aPaddingSmall);
+    border-top: var(--aBorderWidthBase) var(--aBorderStyleBase) var(--aColorOutline);
+    font-size: var(--aFontSizeSmall);
+    color: var(--aColorTextSecondary);
+    background-color: var(--aColorSurfaceVariant);
+    text-align: right;
+}
+.card footer button {
+    margin: 0;
+    margin-left: var(--aMarginSmall);
+}
+
+
+/* === Card component with gradient background === */
+.card.card-gradient {
+    background-image: var(--a-gradient-primary);
+    color: var(--a-color-on-gradient);
+}
+
+/* === Gradient swatches for theme demo === */
+.gradient-swatch {
+    width: 100%;
+    height: 120px;
+    border-radius: var(--a-border-radius-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--a-space-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.gradient-name {
+    color: var(--a-color-on-gradient);
+    font-weight: var(--a-font-weight-medium);
+    z-index: 1;
+}
+
+/* === Section with gradient background === */
+section.gradient-bg {
+    background-image: var(--a-gradient-hero, var(--a-gradient-primary));
+    color: var(--a-color-on-gradient);
+    padding: var(--a-space-xlarge) var(--a-space-large);
+}
+
+
+/* ========================================================================= */
+/* Hero Section - Improved Layout & Spacing                                  */
+/* ========================================================================= */
+.hero {
+    background: var(--a-gradient-hero, var(--a-gradient-primary));
+    color: var(--a-color-on-gradient);
+    padding-top: var(--a-space-xxlarge);
+    padding-bottom: var(--a-space-xxlarge);
+    margin-top: 0 !important;
+    margin-bottom: var(--a-space-large);
+    width: 100%;
+    box-sizing: border-box;
+}
+.hero > .container {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--a-space-large);
+    padding-right: var(--a-space-large);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+    box-sizing: border-box;
+}
+.hero h1 {
+    margin-bottom: var(--a-space-base);
+    font-size: calc(var(--a-font-size-h1) * 1.2);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+}
+.hero p {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--a-space-large);
+    color: var(--a-color-on-gradient, var(--a-color-on-primary));
+}
+.hero .button {
+    margin: 0 var(--a-space-small);
+    margin-bottom: var(--a-space-base);
+    font-size: 1.1rem;
+}
+.hero .button.primary {
+    font-weight: bold;
+}
+@media (max-width: 900px) {
+    .hero > .container {
+        max-width: 98vw;
+        padding-left: var(--a-space-base);
+        padding-right: var(--a-space-base);
+        min-height: 250px;
+    }
+    .hero h1 {
+        font-size: calc(var(--a-font-size-h1) * 1.05);
+    }
+    .hero p {
+        font-size: 1.05rem;
+    }
+}
+
+/* ========================================================================= */
+/* Component Styles                                                          */
+/* ========================================================================= */
+
+/* Button Styles - Direct Element Styling */
+button, .button{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--a-padding-small) var(--a-padding-medium);
+    border-radius: var(--a-border-radius-base);
+    font-family: var(--a-font-family);
+    font-size: var(--a-font-size-base);
+    font-weight: var(--a-font-weight-medium);
+    text-align: center;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.1s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+    /* Remove default styles */
+    background: none;
+    outline: none;
+    /* Default colors - subtle variant */
+    background-color: var(--a-color-surface-variant);
+    color: var(--a-color-on-surface-variant);
+}
+
+/* Hover and active states */
+button:hover, .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /** background-color: var(--a-color-surface-variant-hover);m**/
+}
+
+button:active, .button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus state for accessibility */
+button:focus-visible, .button:focus-visible {
+    outline: 3px solid var(--a-color-primary);
+    outline-offset: 2px;
+}
+
+/* Disabled state */
+button:disabled, .button:disabled,
+button[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Primary variant */
+button.primary, .button.primary {
+    background-color: var(--a-color-primary);
+    color: var(--a-color-on-primary);
+    border-color: var(--a-color-primary);
+}
+
+button.primary:hover, .button.primary:hover{
+   /** background-color: var(--a-color-primary-dark);**/
+    border-color: var(--a-color-primary-dark);
+}
+
+/* Secondary variant */
+button.secondary {
+    background-color: var(--a-color-secondary);
+    color: var(--a-color-on-secondary);
+    border-color: var(--a-color-secondary);
+}
+
+button.secondary:hover {
+    /** background-color: var(--a-color-secondary-dark); */
+    border-color: var(--a-color-secondary-dark);
+}
+
+/* Tertiary variant */
+button.tertiary, .button.tertiary{
+    background-color: var(--a-color-tertiary);
+    color: var(--a-color-on-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+
+button.tertiary:hover, .button.tertiary:hover{
+    /** background-color: var(--a-color-tertiary-dark); **/
+    border-color: var(--a-color-tertiary-dark);
+}
+
+/* Outline variants */
+button.outline.primary, .button.outline.primary {
+    background-color: transparent;
+    color: var(--a-color-primary);
+    border-color: var(--a-color-primary);
+}
+
+button.outline.primary:hover, .button.outline.primary:hover {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+}
+
+button.outline.secondary, .button.outline.secondary{
+    background-color: transparent;
+    color: var(--a-color-secondary);
+    border-color: var(--a-color-secondary);
+}
+
+button.outline.secondary:hover {
+    background-color: var(--a-color-secondary-container);
+    color: var(--a-color-on-secondary-container);
+}
+
+button.outline.tertiary, .button.outline.tertiary{
+    background-color: transparent;
+    color: var(--a-color-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+
+button.outline.tertiary:hover, .button.outline.tertiary:hover{
+    background-color: var(--a-color-tertiary-container);
+    color: var(--a-color-on-tertiary-container);
+}
+
+/* Base Button Styles - Direct Element Styling */
+button, .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--a-padding-small) var(--a-padding-medium);
+    border-radius: var(--a-border-radius-base);
+    font-family: var(--a-font-family);
+    font-size: var(--a-font-size-base);
+    font-weight: var(--a-font-weight-medium);
+    text-align: center;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.1s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    user-select: none;
+    /* Remove default styles */
+    background: none;
+    outline: none;
+    /* Default colors - subtle variant */
+    background-color: var(--a-color-surface-variant);
+    color: var(--a-color-on-surface-variant);
+}
+
+/* Hover and active states */
+button:hover, .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /** background-color: var(--a-color-surface-variant-hover); **/
+}
+
+button:active, .button:active{
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus state for accessibility */
+button:focus-visible, .button:focus-visible{
+    outline: 3px solid var(--a-color-primary);
+    outline-offset: 2px;
+}
+
+/* Disabled state */
+button:disabled, .button:disabled,
+button[aria-disabled="true"], .button[aria-disabled="true"]  {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Color variants - Solid backgrounds */
+button.primary, .button.primary{
+    background-color: var(--a-color-primary);
+    color: var(--a-color-on-primary);
+    border-color: var(--a-color-primary);
+}
+
+button.primary:hover. .button.primary:hover {
+    background-color: var(--a-color-primary-dark);
+    border-color: var(--a-color-primary-dark);
+}
+
+button.secondary, .button.secondary {
+    background-color: var(--a-color-secondary);
+    color: var(--a-color-on-secondary);
+    border-color: var(--a-color-secondary);
+}
+
+button.secondary:hover, .button.secondary:hover{
+    /** background-color: var(--a-color-secondary-dark); **/
+    border-color: var(--a-color-secondary-dark);
+}
+
+button.tertiary, .button.tertiary{
+    background-color: var(--a-color-tertiary);
+    color: var(--a-color-on-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+
+button.tertiary:hover, .button.tertiary:hover{
+    /** background-color: var(--a-color-tertiary-dark); **/
+    border-color: var(--a-color-tertiary-dark);
+}
+
+button.positive, .button.positive{
+    background-color: var(--a-color-positive);
+    color: var(--a-color-on-positive);
+    border-color: var(--a-color-positive);
+}
+
+button.positive:hover, .button.positive:hover {
+    background-color: var(--a-color-positive-dark);
+    border-color: var(--a-color-positive-dark);
+}
+
+button.warning, .button.warning{
+    background-color: var(--a-color-warning);
+    color: var(--a-color-on-warning);
+    border-color: var(--a-color-warning);
+}
+
+button.warning:hover, .button.warning:hover{
+    background-color: var(--a-color-warning-dark);
+    border-color: var(--a-color-warning-dark);
+}
+
+button.negative, .button.negative  {
+    background-color: var(--a-color-negative);
+    color: var(--a-color-on-negative);
+    border-color: var(--a-color-negative);
+}
+
+button.negative:hover, .button.negative:hover {
+    background-color: var(--a-color-negative-dark);
+    border-color: var(--a-color-negative-dark);
+}
+
+/* Outline modifier - can be combined with color variants */
+button.outline, button.outline{
+    background-color: transparent;
+}
+
+/* Outline variant combinations */
+button.outline.primary, .button.outline.primary {
+    color: var(--a-color-primary);
+    border-color: var(--a-color-primary);
+}
+
+button.outline.primary:hover {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+}
+
+button.outline.secondary {
+    color: var(--a-color-secondary);
+    border-color: var(--a-color-secondary);
+}
+
+button.outline.secondary:hover {
+    background-color: var(--a-color-secondary-container);
+    color: var(--a-color-on-secondary-container);
+}
+
+button.outline.tertiary {
+    color: var(--a-color-tertiary);
+    border-color: var(--a-color-tertiary);
+}
+
+button.outline.tertiary:hover {
+    background-color: var(--a-color-tertiary-container);
+    color: var(--a-color-on-tertiary-container);
+}
+
+button.outline.positive {
+    color: var(--a-color-positive);
+    border-color: var(--a-color-positive);
+}
+
+button.outline.positive:hover {
+    background-color: var(--a-color-positive-container);
+    color: var(--a-color-on-positive-container);
+}
+
+button.outline.warning {
+    color: var(--a-color-warning);
+    border-color: var(--a-color-warning);
+}
+
+button.outline.warning:hover {
+    background-color: var(--a-color-warning-container);
+    color: var(--a-color-on-warning-container);
+}
+
+button.outline.negative {
+    color: var(--a-color-negative);
+    border-color: var(--a-color-negative);
+}
+
+button.outline.negative:hover {
+    background-color: var(--a-color-negative-container);
+    color: var(--a-color-on-negative-container);
+}
+
+/* Ghost variant - another modifier */
+button.ghost {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button.ghost:hover {
+    background-color: rgba(var(--a-color-on-surface-rgb), 0.05);
+}
+
+/* Ghost combined with color variants */
+button.ghost.primary {
+    color: var(--a-color-primary);
+}
+
+button.ghost.primary:hover {
+    background-color: rgba(var(--a-color-primary-rgb), 0.1);
+}
+
+button.ghost.secondary {
+    color: var(--a-color-secondary);
+}
+
+button.ghost.secondary:hover {
+    background-color: rgba(var(--a-color-secondary-rgb), 0.1);
+}
+
+/* Size variant modifiers */
+button.small {
+    padding: var(--a-padding-tiny) var(--a-padding-small);
+    font-size: var(--a-font-size-small);
+}
+
+button.large {
+    padding: var(--a-padding-medium) var(--a-padding-large);
+    font-size: var(--a-font-size-large);
+}
+
+/* Icon button modifier */
+button.icon {
+    padding: var(--a-padding-small);
+    border-radius: 50%;
+    aspect-ratio: 1;
+}
+
+button.icon.small {
+    padding: var(--a-padding-tiny);
+}
+
+button.icon.large {
+    padding: var(--a-padding-medium);
+}
+
+/* Button with icon + text */
+button > svg,
+button > i {
+    margin-right: var(--a-margin-small);
+}
+
+button.icon-right > svg,
+button.icon-right > i {
+    margin-right: 0;
+    margin-left: var(--a-margin-small);
+}
+
+/* Full-width button modifier */
+button.full-width {
+    width: 100%;
+}
+
+/* Progress button for demos */
+button.progress-btn {
+    min-width: 200px;
+}
+
+/* Button group container */
 .button-group {
     display: flex;
     gap: var(--a-space-small);

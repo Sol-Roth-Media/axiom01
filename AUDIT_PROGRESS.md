@@ -133,6 +133,32 @@ Refactored the main site footer in index.html to use only semantic CSS variables
 - Document new patterns and variables in the styling guide.
 - Update this file after each major refactor or audit.
 
+# Axiom01 Documentation & Forms Enhancement Audit
+
+## Last Updated: 2025-07-14
+
+### Completed
+- Consolidated documentation to a single root readme.md
+- Expanded "Building Better Forms" section with:
+  - Basic, inline, and multi-field form examples
+  - Custom JS validation example
+  - Accessibility best practices
+  - Messaging states (error, success, info)
+  - Recommendations for further improvements
+- Updated references to remove obsolete docs/README.md
+
+### Recommendations (In Progress)
+- [ ] Add more live form examples to style-guide.html and examples/components.html
+- [ ] Expand JS validation to support async checks (e.g., username availability)
+- [ ] Add helper text and tooltips for complex fields
+- [ ] Create a dedicated accessibility checklist for forms
+- [ ] Expand documentation with troubleshooting and advanced patterns
+- [ ] Consider a form builder utility for rapid prototyping
+
+### Next Steps
+- Continue improving documentation and live examples
+- Track all changes and progress in this file for easy resumption
+
 ## Summary Checklist
 - [ ] Remove all legacy/utility-heavy classes from CSS
 - [ ] Refactor all custom components (modal, notification, datepicker) for semantic, accessible, variable-driven patterns

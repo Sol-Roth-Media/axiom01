@@ -478,3 +478,130 @@ Axiom01 is built on a minimal, semantic-first CSS philosophy:
 ```
 
 By following these guidelines, your codebase will be cleaner, easier to maintain, and fully aligned with the Axiom01 philosophy
+
+## Building Better Forms with Axiom01
+
+Axiom01 provides a robust, accessible, and flexible system for building forms. Key features include:
+
+### Semantic Structure & Grouping
+- Use `<form>`, `<fieldset>`, and `<legend>` for logical grouping.
+- Use `.formGroup` for spacing and organization of label/input pairs.
+- Inline labels supported via `fieldset.inline-labels`.
+
+### Validation & Messaging
+- Add `data-axiom-validate` to your `<form>` for real-time validation and messaging.
+- Validation messages are shown as users interact, with ARIA attributes for accessibility.
+- Error, success, and info states are visually distinct.
+
+### Example: Basic Form
+```html
+<form data-axiom-validate>
+  <fieldset>
+    <legend>Sign Up</legend>
+    <div class="formGroup">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+      <div class="validationMessage"></div>
+    </div>
+    <div class="formGroup">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required minlength="8" />
+      <div class="validationMessage"></div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="primary">Sign Up</button>
+    </div>
+  </fieldset>
+</form>
+```
+
+### Accessibility Best Practices
+- Labels are always associated with inputs via `for` and `id`.
+- Validation messages use `role="alert"` and are linked to fields with `aria-invalid`.
+- Keyboard navigation and focus states are clear and consistent.
+
+### Advanced: Custom Validation
+You can add custom validation logic by extending the JS or using the `setCustomValidity` API on inputs. Messages will be shown automatically.
+
+### Form Group Patterns
+- Use `.formGroup` for each label/input pair.
+- Use `.form-actions` for submit/reset buttons.
+- For horizontal forms, use `fieldset.inline-labels`.
+
+### Messaging States
+- Error: `.validationMessage.error`
+- Success: `.validationMessage.success`
+- Info: `.validationMessage.info`
+
+### Example: Inline Labels
+```html
+<fieldset class="inline-labels">
+  <div class="formGroup">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required />
+    <div class="validationMessage"></div>
+  </div>
+</fieldset>
+```
+
+### Example: Multi-Field Form with Custom Validation
+```html
+<form data-axiom-validate>
+  <fieldset>
+    <legend>Profile</legend>
+    <div class="formGroup">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" required />
+      <div class="validationMessage"></div>
+    </div>
+    <div class="formGroup">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" required />
+      <div class="validationMessage"></div>
+    </div>
+    <div class="formGroup">
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" min="1" max="120" required />
+      <div class="validationMessage"></div>
+    </div>
+    <div class="formGroup">
+      <label for="bio">Bio</label>
+      <textarea id="bio" name="bio" maxlength="200"></textarea>
+      <div class="validationMessage info">Max 200 characters.</div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="primary">Save</button>
+      <button type="reset">Reset</button>
+    </div>
+  </fieldset>
+</form>
+```
+
+### Example: Custom Validation (JS)
+```js
+// Add custom validation for matching passwords
+const password = document.getElementById('password');
+const confirm = document.getElementById('confirm');
+confirm.addEventListener('input', function() {
+  if (confirm.value !== password.value) {
+    confirm.setCustomValidity('Passwords do not match');
+  } else {
+    confirm.setCustomValidity('');
+  }
+});
+```
+
+### Accessibility Recommendations
+- Always use clear, descriptive labels.
+- Group related fields with `<fieldset>` and `<legend>`.
+- Use ARIA roles and attributes for dynamic messaging.
+- Ensure keyboard navigation and focus states are visible.
+
+### Recommendations for Further Improvement
+- Add support for async validation (e.g., username availability).
+- Provide helper text and tooltips for complex fields.
+- Expand documentation with accessibility checklists and troubleshooting.
+- Add more form examples to the style guide and live demos.
+- Consider adding a form builder utility for rapid prototyping.
+
+For more, see the [style guide](AXIOM01_STYLING_GUIDE.md) and live examples in [examples/components.html]

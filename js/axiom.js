@@ -633,6 +633,69 @@ AxiomComponents.register('carousel', function initCarousel() {
   });
 });
 
+// --- Form Validation Component
+/**
+ * Form Validation Component
+ * Features:
+ * - Real-time validation
+ * - Custom validation rules
+ * - Dynamic messaging (error, success, info)
+ * - Accessible ARIA attributes
+ */
+AxiomComponents.register('formValidation', function initFormValidation() {
+  const forms = document.querySelectorAll('form[data-axiom-validate]');
+  forms.forEach(form => {
+    form.setAttribute('novalidate', 'true'); // Prevent native browser validation UI
+    form.addEventListener('input', handleValidation);
+    form.addEventListener('blur', handleValidation, true);
+    form.addEventListener('submit', function(e) {
+      if (!validateForm(form)) {
+        e.preventDefault();
+      }
+    });
+  });
+
+  function handleValidation(e) {
+    const field = e.target;
+    validateField(field);
+  }
+
+  function validateForm(form) {
+    let valid = true;
+    const fields = form.querySelectorAll('input, textarea, select');
+    fields.forEach(field => {
+      if (!validateField(field)) {
+        valid = false;
+      }
+    });
+    return valid;
+  }
+
+  function validateField(field) {
+    if (!field.checkValidity) return true;
+    const message = field.validationMessage;
+    let msgEl = field.parentNode.querySelector('.validationMessage');
+    if (!msgEl) {
+      msgEl = document.createElement('div');
+      msgEl.className = 'validationMessage';
+      field.parentNode.appendChild(msgEl);
+    }
+    if (!field.validity.valid) {
+      msgEl.textContent = message;
+      msgEl.style.display = 'block';
+      field.setAttribute('aria-invalid', 'true');
+      msgEl.setAttribute('role', 'alert');
+      return false;
+    } else {
+      msgEl.textContent = '';
+      msgEl.style.display = 'none';
+      field.removeAttribute('aria-invalid');
+      msgEl.removeAttribute('role');
+      return true;
+    }
+  }
+});
+
 // --- Initialize all components when DOM is loaded ---
 document.addEventListener('DOMContentLoaded', function() {
   AxiomComponents.initAll();
