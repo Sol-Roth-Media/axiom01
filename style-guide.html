@@ -28,8 +28,8 @@
     }
     .card {
       background: var(--a-color-surface);
-      border-radius: var(--a-border-radius-large);
-      box-shadow: var(--a-shadow-large);
+      border-radius: var(--a-border-radius-base);
+      box-shadow: var(--a-shadow-base);
       padding: var(--a-padding-large);
       display: flex;
       flex-direction: column;
@@ -73,9 +73,9 @@
       }
     }
     .style-example {
-      background: var(--a-color-surface-variant);
-      border-radius: var(--a-border-radius-large);
-      box-shadow: var(--a-shadow-large);
+      background: var(--a-color-surface);
+      border-radius: var(--a-border-radius-base);
+      box-shadow: var(--a-shadow-base);
       padding: var(--a-padding-large);
       margin-bottom: var(--a-margin-xlarge);
     }
@@ -163,7 +163,7 @@
       <h2>Spacing: Padding, Margin, & Gaps</h2>
       <p>All spacing is managed with variables for consistency and easy theme switching. Use <code>var(--a-padding-*)</code>, <code>var(--a-margin-*)</code>, and <code>var(--a-grid-gutter)</code> for layout rhythm.</p>
       <div class="style-example" style="display: flex; gap: var(--a-grid-gutter);">
-        <div style="background: var(--a-color-primary-container); color: var(--a-color-on-primary-container); padding: var(--a-padding-large); border-radius: var(--a-border-radius-large);">Large Padding</div>
+        <div style="background: var(--a-color-primary-container); color: var(--a-color-on-primary-container); padding: var(--a-padding-large); border-radius: var(--a-border-radius-base);">Large Padding</div>
         <div style="background: var(--a-color-secondary-container); color: var(--a-color-on-secondary-container); padding: var(--a-padding-small); border-radius: var(--a-border-radius-base);">Small Padding</div>
       </div>
       <ul>
@@ -203,11 +203,11 @@
       <h2>Advanced Theming: Beyond Colors</h2>
       <p>Axiom01 themes can change more than colors: update radii, shadows, gradients, surface effects, and spacing for a unique look. Example: the <strong>Aesthetic</strong> theme below.</p>
       <div class="style-example">
-        <div style="background: var(--a-gradient-primary); color: var(--a-color-on-primary); padding: var(--a-padding-large); border-radius: var(--a-border-radius-xl); box-shadow: var(--a-shadow-xl); margin-bottom: var(--a-margin-base);">
+        <div style="background: var(--a-gradient-primary); color: var(--a-color-primary); padding: var(--a-padding-large); border-radius: var(--a-border-radius-base); box-shadow: var(--a-shadow-base); margin-bottom: var(--a-margin-base);">
           <h3 style="margin: 0;">Aesthetic Theme Demo</h3>
           <p>Gradients, large radii, soft shadows, and surface effects create a modern, aesthetic feel.</p>
         </div>
-        <div style="background: var(--a-color-surface-variant); color: var(--a-color-on-surface-variant); padding: var(--a-padding-large); border-radius: var(--a-border-radius-xl); box-shadow: var(--a-shadow-xl);">
+        <div style="background: var(--a-color-surface); color: var(--a-color-primary); padding: var(--a-padding-large); border-radius: var(--a-border-radius-base); box-shadow: var(--a-shadow-base);">
           <h4>Surface Variant</h4>
           <p>Use <code>var(--a-color-surface-variant)</code> for cards, modals, and overlays.</p>
         </div>
@@ -221,12 +221,229 @@
       </ul>
       <p>Switch themes by changing <code>data-theme="aesthetic"</code> on <code>&lt;html&gt;</code>. All variables update automatically.</p>
     </section>
+    <section class="style-guide-section" id="forms">
+      <h2>Forms & Validation</h2>
+      <div class="style-guide-demo">
+        <!-- Basic Form Example -->
+        <div class="style-example">
+          <h3>Basic Form</h3>
+          <form data-axiom-validate>
+            <fieldset>
+              <legend>Sign Up</legend>
+              <div class="formGroup">
+                <label for="sg-email">Email</label>
+                <input type="email" id="sg-email" name="email" required />
+                <div class="validationMessage"></div>
+              </div>
+              <div class="formGroup">
+                <label for="sg-password">Password</label>
+                <input type="password" id="sg-password" name="password" required minlength="8" />
+                <div class="validationMessage"></div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="primary">Sign Up</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <!-- Inline Labels Example -->
+        <div class="style-example">
+          <h3>Inline Labels</h3>
+          <form data-axiom-validate>
+            <fieldset class="inline-labels">
+              <legend>Inline Example</legend>
+              <div class="formGroup">
+                <label for="sg-username">Username</label>
+                <input type="text" id="sg-username" name="username" required />
+                <div class="validationMessage"></div>
+              </div>
+              <div class="formGroup">
+                <label for="sg-age">Age</label>
+                <input type="number" id="sg-age" name="age" min="1" max="120" required />
+                <div class="validationMessage"></div>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <button type="submit" class="primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <!-- Multi-Field Custom Validation Example -->
+        <div class="style-example">
+          <h3>Multi-Field with Custom Validation</h3>
+          <form data-axiom-validate id="sg-profile-form">
+            <fieldset>
+              <legend>Profile</legend>
+              <div class="formGroup">
+                <label for="sg-firstName">First Name</label>
+                <input type="text" id="sg-firstName" name="firstName" required />
+                <div class="validationMessage"></div>
+              </div>
+              <div class="formGroup">
+                <label for="sg-lastName">Last Name</label>
+                <input type="text" id="sg-lastName" name="lastName" required />
+                <div class="validationMessage"></div>
+              </div>
+              <div class="formGroup">
+                <label for="sg-password2">Password</label>
+                <input type="password" id="sg-password2" name="password" required minlength="8" />
+                <div class="validationMessage"></div>
+              </div>
+              <div class="formGroup">
+                <label for="sg-confirm">Confirm Password</label>
+                <input type="password" id="sg-confirm" name="confirm" required minlength="8" />
+                <div class="validationMessage"></div>
+              </div>
+              <div class="formGroup">
+                <label for="sg-bio">Bio</label>
+                <textarea id="sg-bio" name="bio" maxlength="200"></textarea>
+                <div class="validationMessage info">Max 200 characters.</div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="primary">Save</button>
+                <button type="reset">Reset</button>
+              </div>
+            </fieldset>
+          </form>
+          <script>
+            // Custom validation for password confirmation
+            document.addEventListener('DOMContentLoaded', function() {
+              var pw = document.getElementById('sg-password2');
+              var confirm = document.getElementById('sg-confirm');
+              if (pw && confirm) {
+                confirm.addEventListener('input', function() {
+                  if (confirm.value !== pw.value) {
+                    confirm.setCustomValidity('Passwords do not match');
+                  } else {
+                    confirm.setCustomValidity('');
+                  }
+                });
+              }
+            });
+          </script>
+        </div>
+        <!-- Helper Text & Tooltip Example -->
+        <div class="style-example">
+          <h3>Helper Text & Tooltips</h3>
+          <form data-axiom-validate>
+            <fieldset>
+              <legend>Helper Example</legend>
+              <div class="formGroup">
+                <label for="sg-email2">Email <span title="We'll never share your email." style="cursor: help; color: var(--a-color-primary);">&#9432;</span></label>
+                <input type="email" id="sg-email2" name="email2" required />
+                <div class="validationMessage"></div>
+                <div class="validationMessage info">We'll never share your email.</div>
+              </div>
+              <div class="formGroup">
+                <label for="sg-phone">Phone</label>
+                <input type="tel" id="sg-phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" />
+                <div class="validationMessage"></div>
+                <div class="validationMessage info">Format: 123-456-7890</div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="primary">Send</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <p>All forms above use <code>data-axiom-validate</code> for real-time validation and accessible messaging. See the <a href="readme.md#forms">documentation</a> for more patterns.</p>
+    </section>
+    <section class="style-guide-section" id="gradient-swatches">
+      <h2>Gradient Swatches</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--a-grid-gutter); margin-bottom: var(--a-margin-xlarge);">
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-primary); color: var(--a-color-on-primary-container); border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-primary</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-primary-vertical); color: var(--a-color-on-primary-container); border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-primary-vertical</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-primary-diagonal); color: var(--a-color-on-primary-container); border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-primary-diagonal</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-surface); color: var(--a-color-on-primary-container); border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-surface</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-hero); color: var(--a-color-on-primary-container); border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-hero</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-complementary); color: var(--a-color-on-primary-container); border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-complementary</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-analogous1); color: var(--a-color-on-primary-container); border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-analogous1</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-analogous2); color: var(--a-color-on-primary-container); border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-analogous2</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-rainbow); color: #222; border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-rainbow</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-sunset); color: #222; border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-sunset</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-ocean); color: #fff; border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-ocean</strong>
+        </div>
+        <div style="flex: 1 1 220px; min-width: 220px; max-width: 320px; background: var(--a-gradient-forest); color: #fff; border-radius: var(--a-border-radius-base); padding: var(--a-padding-large); margin-bottom: var(--a-margin-base);">
+          <strong>--a-gradient-forest</strong>
+        </div>
+      </div>
+      <p>All gradients above are defined in <code>css/colors_vars.css</code> and can be used for backgrounds, overlays, and accent elements.</p>
+    </section>
+    <section class="style-guide-section" id="tabs">
+      <h2>Tabs Component</h2>
+      <p>Tabs allow users to switch between different views or sections of content. Axiom01 tabs are accessible, keyboard-navigable, and fully themeable.</p>
+      <div class="tabs" data-axiom-tabs>
+        <div role="tablist" aria-label="Sample Tabs">
+          <button role="tab" aria-selected="true" aria-controls="tab-panel-1" id="tab-1">Tab One</button>
+          <button role="tab" aria-selected="false" aria-controls="tab-panel-2" id="tab-2">Tab Two</button>
+          <button role="tab" aria-selected="false" aria-controls="tab-panel-3" id="tab-3">Tab Three</button>
+        </div>
+        <div tabindex="0" role="tabpanel" id="tab-panel-1" aria-labelledby="tab-1">Content for Tab One.</div>
+        <div tabindex="0" role="tabpanel" id="tab-panel-2" aria-labelledby="tab-2" hidden>Content for Tab Two.</div>
+        <div tabindex="0" role="tabpanel" id="tab-panel-3" aria-labelledby="tab-3" hidden>Content for Tab Three.</div>
+      </div>
+      <p>Tabs are initialized automatically via <code>data-axiom-tabs</code> and support full keyboard navigation (arrow keys, Home/End, Tab).</p>
+    </section>
+    <section class="style-guide-section" id="accordions">
+      <h2>Accordions Component</h2>
+      <p>Accordions allow users to expand and collapse sections of content. Axiom01 accordions are accessible, keyboard-navigable, and use semantic markup.</p>
+      <div class="accordion" data-axiom-accordion>
+        <button class="accordion-header" aria-expanded="true" aria-controls="accordion-panel-1" id="accordion-1">Accordion One</button>
+        <div class="accordion-panel" id="accordion-panel-1" role="region" aria-labelledby="accordion-1">
+          <p>Content for Accordion One. Accordions use <code>aria-expanded</code> and <code>aria-controls</code> for accessibility.</p>
+        </div>
+        <button class="accordion-header" aria-expanded="false" aria-controls="accordion-panel-2" id="accordion-2">Accordion Two</button>
+        <div class="accordion-panel" id="accordion-panel-2" role="region" aria-labelledby="accordion-2" hidden>
+          <p>Content for Accordion Two.</p>
+        </div>
+        <button class="accordion-header" aria-expanded="false" aria-controls="accordion-panel-3" id="accordion-3">Accordion Three</button>
+        <div class="accordion-panel" id="accordion-panel-3" role="region" aria-labelledby="accordion-3" hidden>
+          <p>Content for Accordion Three.</p>
+        </div>
+      </div>
+      <p>Accordions are initialized automatically via <code>data-axiom-accordion</code> and support full keyboard navigation (arrow keys, Home/End, Tab).</p>
+    </section>
+    <section class="style-guide-section" id="dropdowns">
+      <h2>Dropdowns Component</h2>
+      <p>Dropdowns provide a list of options or actions that appear when triggered. Axiom01 dropdowns are accessible, keyboard-navigable, and use semantic markup.</p>
+      <div class="dropdown" data-axiom-dropdown>
+        <button class="dropdown-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="dropdown-list-1" id="dropdown-trigger-1">Dropdown Menu</button>
+        <ul class="dropdown-list" id="dropdown-list-1" role="listbox" tabindex="-1" hidden aria-labelledby="dropdown-trigger-1">
+          <li role="option" tabindex="0">Action One</li>
+          <li role="option" tabindex="0">Action Two</li>
+          <li role="option" tabindex="0">Action Three</li>
+        </ul>
+      </div>
+      <p>Dropdowns are initialized automatically via <code>data-axiom-dropdown</code> and support full keyboard navigation (arrow keys, Enter, Escape, Tab).</p>
+    </section>
   </main>
   <footer class="axiom-footer" style="margin-top: var(--a-margin-xlarge);">
     <div class="container" style="text-align: center; padding: var(--a-padding-large);">
       <span style="font-size: 1.1rem; font-weight: 500;">&copy; 2025 Axiom01 UI Framework</span>
       <br>
-      <span style="font-size: 0.95rem; color: var(--a-color-muted);">MIT License &bull; <a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" style="color: var(--a-color-primary); text-decoration: underline;">GitHub</a></span>
+      <span style="font-size: 0.95rem; color: var(--a-color-primary);">MIT License &bull; <a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" style="color: var(--a-color-primary); text-decoration: underline;">GitHub</a></span>
     </div>
   </footer>
 </body>

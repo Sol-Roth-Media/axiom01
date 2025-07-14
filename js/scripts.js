@@ -364,57 +364,75 @@ function initAccordion() {
 }
 
 /**
- * Initializes dropdown menu components
+ * Initializes dropdown menu components (Axiom01)
+ * - Targets .dropdown-trigger
+ * - Supports <li role="option"> items
+ * - Full keyboard navigation (Arrow keys, Enter, Escape, Tab)
+ * - ARIA and focus management
  */
 function initDropdowns() {
-    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
 
     // Close all dropdowns when clicking outside
     document.addEventListener('click', (event) => {
-        dropdownToggles.forEach(toggle => {
-            const menuId = toggle.getAttribute('aria-controls');
+        dropdownTriggers.forEach(trigger => {
+            const menuId = trigger.getAttribute('aria-controls');
             if (!menuId) return;
-
             const menu = document.getElementById(menuId);
-            if (!menu || !menu.classList.contains('show')) return;
-
-            const dropdownContainer = toggle.closest('.dropdown');
+            if (!menu || menu.hidden) return;
+            const dropdownContainer = trigger.closest('.dropdown');
             if (dropdownContainer && !dropdownContainer.contains(event.target)) {
-                menu.classList.remove('show');
-                menu.setAttribute('aria-hidden', 'true');
-                toggle.setAttribute('aria-expanded', 'false');
+                menu.hidden = true;
+                trigger.setAttribute('aria-expanded', 'false');
             }
         });
     });
 
-    // Setup dropdown toggles
-    dropdownToggles.forEach(toggle => {
-        const menuId = toggle.getAttribute('aria-controls');
+    dropdownTriggers.forEach(trigger => {
+        const menuId = trigger.getAttribute('aria-controls');
         if (!menuId) return;
-
         const menu = document.getElementById(menuId);
         if (!menu) return;
 
-        toggle.addEventListener('click', (event) => {
+        // Open/close on click
+        trigger.addEventListener('click', (event) => {
             event.stopPropagation();
-            const isOpen = menu.classList.toggle('show');
-            menu.setAttribute('aria-hidden', !isOpen);
-            toggle.setAttribute('aria-expanded', isOpen);
-
-            // Set focus to first menu item when opening
-            if (isOpen) {
-                const firstItem = menu.querySelector('a');
+            const isOpen = menu.hidden === false;
+            menu.hidden = isOpen;
+            trigger.setAttribute('aria-expanded', String(!isOpen));
+            if (!isOpen) {
+                // Focus first item
+                const firstItem = menu.querySelector('[role="option"]');
                 if (firstItem) setTimeout(() => firstItem.focus(), 100);
             }
         });
 
-        // Add keyboard support for menu items
-        const menuItems = menu.querySelectorAll('a');
+        // Keyboard navigation for trigger
+        trigger.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                if (menu.hidden) {
+                    trigger.click();
+                } else {
+                    const firstItem = menu.querySelector('[role="option"]');
+                    if (firstItem) firstItem.focus();
+                }
+            } else if (e.key === 'Escape') {
+                menu.hidden = true;
+                trigger.setAttribute('aria-expanded', 'false');
+                trigger.focus();
+            }
+        });
+
+        // Keyboard navigation for menu items
+        const menuItems = menu.querySelectorAll('[role="option"]');
         menuItems.forEach((item, index) => {
+            item.setAttribute('tabindex', '-1');
             item.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
-                    toggle.focus();
-                    toggle.click();
+                    menu.hidden = true;
+                    trigger.setAttribute('aria-expanded', 'false');
+                    trigger.focus();
                 } else if (e.key === 'ArrowDown') {
                     e.preventDefault();
                     const nextIndex = (index + 1) % menuItems.length;
@@ -423,7 +441,22 @@ function initDropdowns() {
                     e.preventDefault();
                     const prevIndex = (index - 1 + menuItems.length) % menuItems.length;
                     menuItems[prevIndex].focus();
+                } else if (e.key === 'Tab') {
+                    menu.hidden = true;
+                    trigger.setAttribute('aria-expanded', 'false');
+                } else if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                    menu.hidden = true;
+                    trigger.setAttribute('aria-expanded', 'false');
+                    trigger.focus();
                 }
+            });
+            // Click closes menu
+            item.addEventListener('click', () => {
+                menu.hidden = true;
+                trigger.setAttribute('aria-expanded', 'false');
+                trigger.focus();
             });
         });
     });
@@ -551,3 +584,10 @@ function initAxiom() {
 
 // Run all initializations after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initAxiom);
+
+// Call initDropdowns on DOMContentLoaded
+if (document.readyState !== 'loading') {
+    initDropdowns();
+} else {
+    document.addEventListener('DOMContentLoaded', initDropdowns);
+}

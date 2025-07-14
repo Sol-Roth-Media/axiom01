@@ -605,3 +605,45 @@ confirm.addEventListener('input', function() {
 - Consider adding a form builder utility for rapid prototyping.
 
 For more, see the [style guide](AXIOM01_STYLING_GUIDE.md) and live examples in [examples/components.html]
+
+## Visual Design Tokens
+
+Axiom01 provides a comprehensive set of CSS variables for colors, gradients, spacing, and more. See the [Style Guide](style-guide.html#gradient-swatches) for a live visual reference of all gradient variables and their usage.
+
+### Gradient Variables
+
+Axiom01 includes several built-in gradient variables for use in theming and design:
+
+- `--a-gradient-primary`: Primary brand gradient
+- `--a-gradient-secondary`: Secondary gradient for accents
+- `--a-gradient-background`: Background gradient for sections
+- `--a-gradient-card`: Gradient for card backgrounds
+- `--a-gradient-button`: Gradient for button backgrounds
+
+### Example Usage
+
+To use a gradient variable, apply it to a CSS property like `background`:
+
+```css
+.my-element {
+    background: var(--a-gradient-primary);
+}
+```
+
+### Custom Gradients
+
+You can define custom gradients using the built-in variables as a starting point:
+
+```css
+/* Custom gradient using built-in variables */
+.my-custom-gradient {
+    background: linear-gradient(
+        var(--a-gradient-primary),
+        var(--a-gradient-secondary)
+    );
+}
+```
+
+### Visual Reference
+
+For a complete visual reference of all gradient variables and examples of their usage, see the [Gradient Swatches section](style-guide.html#gradient-swatches) of the Style Guide.

@@ -24,6 +24,11 @@ This file tracks the ongoing audit and refactoring of the AXIOM01 UI Framework, 
 - [x] css/colors_vars.css (fully audited)
 - [ ] css/axiom_vars.css
 - [ ] css/axiom_config.css
+- [x] style-guide.html (form markup and validation messaging improved for accessibility and clarity)
+- [x] Added 'Gradient Swatches' section to style-guide.html for visual reference of all defined gradient variables.
+- [x] Added accessible Tabs component example to style-guide.html.
+- [x] Added accessible Accordions component example to style-guide.html.
+- [x] Added accessible Dropdowns component example to style-guide.html and implemented full keyboard navigation, ARIA, and variable-driven styling in js/scripts.js and css/components.css.
 
 ### Findings & Suggestions
 #### css/site.css
@@ -43,6 +48,7 @@ This file tracks the ongoing audit and refactoring of the AXIOM01 UI Framework, 
 - Class structure is component-based and semantic, but review for any utility-like or redundant classes.
 - Responsiveness uses variable-driven margins and paddings, but some values are duplicated or hardcoded.
 - Accessibility: notification close buttons use accessible styles; confirm all interactive elements are keyboard accessible and use appropriate ARIA roles.
+- Dropdowns component: Added accessible, variable-driven styles for container, trigger, list, and option states. All interactive elements now support keyboard navigation and ARIA roles. JavaScript logic refactored for .dropdown-trigger and <li role="option"> support.
 
 #### css/alerts.css
 - Spacing variables are mostly semantic, but border-left width is hardcoded (`4px`). Replace with a border width variable (e.g., `--a-border-width-base`).
@@ -148,7 +154,10 @@ Refactored the main site footer in index.html to use only semantic CSS variables
 - Updated references to remove obsolete docs/README.md
 
 ### Recommendations (In Progress)
-- [ ] Add more live form examples to style-guide.html and examples/components.html
+- [x] Add more live form examples to style-guide.html and examples/components.html
+- [x] Add gradient swatches to style-guide.html
+- [x] Add Tabs component example to style-guide.html
+- [x] Add Accordions component example to style-guide.html
 - [ ] Expand JS validation to support async checks (e.g., username availability)
 - [ ] Add helper text and tooltips for complex fields
 - [ ] Create a dedicated accessibility checklist for forms
