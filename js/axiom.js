@@ -376,6 +376,165 @@ AxiomComponents.register('notifications', function initNotifications() {
   }
 });
 
+// --- Date Picker Component ---
+/**
+ * Date Picker component
+ *
+ * Features:
+ * - Accessible, keyboard-friendly date selection
+ * - Minimal markup: input[type="date"] enhancement
+ * - Custom calendar popup, ARIA roles
+ * - Follows Axiom01 guidelines
+ */
+AxiomComponents.register('datepicker', function initDatePicker() {
+  const dateInputs = document.querySelectorAll('input[type="date"].axiom-datepicker');
+  dateInputs.forEach(input => {
+    // Only enhance if not native (fallback for browsers)
+    if (input.type !== 'date' || input.classList.contains('force-custom')) {
+      // Create calendar button
+      const wrapper = document.createElement('span');
+      wrapper.className = 'datepicker-wrapper';
+      input.parentNode.insertBefore(wrapper, input);
+      wrapper.appendChild(input);
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'datepicker-toggle';
+      btn.setAttribute('aria-label', 'Open calendar');
+      btn.innerHTML = '<i class="fa-regular fa-calendar"></i>';
+      wrapper.appendChild(btn);
+      // Create calendar popup
+      const calendar = document.createElement('div');
+      calendar.className = 'datepicker-calendar';
+      calendar.setAttribute('role', 'dialog');
+      calendar.setAttribute('aria-modal', 'true');
+      calendar.setAttribute('tabindex', '-1');
+      calendar.hidden = true;
+      wrapper.appendChild(calendar);
+      // Calendar rendering logic
+      function renderCalendar(selectedDate) {
+        // Basic calendar: current month, days grid
+        const today = selectedDate ? new Date(selectedDate) : new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        calendar.innerHTML = `<div class="datepicker-header">
+          <button type="button" class="datepicker-prev" aria-label="Previous month">&#8592;</button>
+          <span class="datepicker-title">${today.toLocaleString('default', { month: 'long' })} ${year}</span>
+          <button type="button" class="datepicker-next" aria-label="Next month">&#8594;</button>
+        </div>
+        <table class="datepicker-table" role="grid">
+          <thead><tr>${[...Array(7)].map((_,i)=>'<th>'+['Su','Mo','Tu','We','Th','Fr','Sa'][i]+'</th>').join('')}</tr></thead>
+          <tbody></tbody>
+        </table>`;
+        const tbody = calendar.querySelector('tbody');
+        let day = 1;
+        let started = false;
+        for (let r = 0; r < 6; r++) {
+          const tr = document.createElement('tr');
+          for (let c = 0; c < 7; c++) {
+            const td = document.createElement('td');
+            if (!started && c === firstDay.getDay()) started = true;
+            if (started && day <= lastDay.getDate()) {
+              td.textContent = day;
+              td.tabIndex = 0;
+              td.setAttribute('role', 'gridcell');
+              td.className = 'datepicker-day';
+              if (selectedDate && new Date(selectedDate).getDate() === day && new Date(selectedDate).getMonth() === month) {
+                td.classList.add('selected');
+              }
+              td.addEventListener('click', () => {
+                input.value = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+                calendar.hidden = true;
+                btn.setAttribute('aria-expanded', 'false');
+                input.dispatchEvent(new Event('change'));
+              });
+              day++;
+            }
+            tr.appendChild(td);
+          }
+          tbody.appendChild(tr);
+        }
+        // Prev/Next month
+        calendar.querySelector('.datepicker-prev').onclick = () => renderCalendar(new Date(year, month-1, 1));
+        calendar.querySelector('.datepicker-next').onclick = () => renderCalendar(new Date(year, month+1, 1));
+      }
+      // Open calendar
+      btn.addEventListener('click', () => {
+        calendar.hidden = !calendar.hidden;
+        btn.setAttribute('aria-expanded', String(!calendar.hidden));
+        if (!calendar.hidden) {
+          renderCalendar(input.value);
+          calendar.focus();
+        }
+      });
+      // Close on outside click
+      document.addEventListener('mousedown', (e) => {
+        if (!wrapper.contains(e.target)) {
+          calendar.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      // Keyboard navigation
+      calendar.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          calendar.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+          btn.focus();
+        }
+      });
+    }
+  });
+});
+
+// --- Infinite Scroll Component ---
+/**
+ * Infinite Scroll Component
+ *
+ * Usage:
+ * - Add class 'axiom-infinite-scroll' to any scrollable container (e.g. <div>, <main>, <section>)
+ * - Optionally set data-infinite-scroll-callback="functionName" to call a global function when triggered
+ * - Or listen for the 'axiom:infinite-scroll' event on the container
+ *
+ * Accessibility:
+ * - No impact on keyboard navigation
+ * - Works with any semantic container
+ */
+AxiomComponents.register('infiniteScroll', function initInfiniteScroll() {
+  const containers = document.querySelectorAll('.axiom-infinite-scroll');
+  containers.forEach(container => {
+    let loading = false;
+    let threshold = parseInt(container.getAttribute('data-infinite-scroll-threshold'), 10) || 200;
+    function onScroll() {
+      if (loading) return;
+      // Check if near bottom
+      const scrollable = container === document.body || container === document.documentElement ? document.documentElement : container;
+      const scrollTop = scrollable.scrollTop;
+      const scrollHeight = scrollable.scrollHeight;
+      const clientHeight = scrollable.clientHeight;
+      if (scrollHeight - scrollTop - clientHeight < threshold) {
+        loading = true;
+        // Fire custom event
+        const event = new CustomEvent('axiom:infinite-scroll', { bubbles: true });
+        container.dispatchEvent(event);
+        // Call callback if specified
+        const cbName = container.getAttribute('data-infinite-scroll-callback');
+        if (cbName && typeof window[cbName] === 'function') {
+          window[cbName](container);
+        }
+        // Reset loading after short delay (developer should set loading state for real use)
+        setTimeout(() => { loading = false; }, 500);
+      }
+    }
+    // Attach scroll listener
+    container.addEventListener('scroll', onScroll);
+    // If container is window, listen on window
+    if (container === document.body || container === document.documentElement) {
+      window.addEventListener('scroll', onScroll);
+    }
+  });
+});
+
 // --- Initialize all components when DOM is loaded ---
 document.addEventListener('DOMContentLoaded', function() {
   AxiomComponents.initAll();

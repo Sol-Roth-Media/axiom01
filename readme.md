@@ -202,6 +202,19 @@ Axiom01 includes several ready-to-use components:
 - **Form elements**: Styled inputs, checkboxes, radio buttons
 - **Progress indicators**: Progress bars and loading throbbers
 
+##### Suggested New Components
+
+The following components would make the Axiom01 UI framework more robust:
+
+1. **Carousel/Slider**: Interactive image or content sliders with navigation controls
+2. **Autocomplete**: Input field with suggestions as the user types
+3. **Date Picker**: Calendar-based date selection component
+4. **Tooltip (JS-enhanced)**: Enhanced tooltips with positioning and interaction
+5. **Form Validation**: Client-side form validation with error messaging
+6. **Infinite Scroll**: Automatically load more content as the user scrolls
+7. **Lightbox**: Image/media viewer with overlay and navigation
+8. **Drag and Drop**: Sortable lists and draggable elements
+
 #### JavaScript Component System
 
 Axiom01 includes a lightweight JavaScript component system that enhances HTML elements with interactive functionality. The system is designed to be unobtrusive, accessible, and easy to use.
