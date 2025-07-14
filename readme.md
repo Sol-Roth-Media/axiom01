@@ -55,6 +55,8 @@ Axiom01 includes several ready-to-use components:
 - **Dropdowns**: Menu dropdown components
 - **Form elements**: Styled inputs, checkboxes, radio buttons
 - **Progress indicators**: Progress bars and loading throbbers
+- **Alerts**: Accessible alert banners
+- **Datepicker**: Enhanced input[type='date'] with accessibility features
 
 ### Grid System
 A flexible CSS Grid-based layout system with responsive breakpoints.
@@ -201,6 +203,8 @@ Axiom01 includes several ready-to-use components:
 - **Dropdowns**: Menu dropdown components
 - **Form elements**: Styled inputs, checkboxes, radio buttons
 - **Progress indicators**: Progress bars and loading throbbers
+- **Alerts**: Accessible alert banners
+- **Datepicker**: Enhanced input[type='date'] with accessibility features
 
 ##### Suggested New Components
 
@@ -401,66 +405,27 @@ Axiom01 supports all modern browsers, including:
 - Safari (latest)
 - Edge (latest)
 
+## Documentation & Examples
+- [Style Guide](style-guide.html): Full documentation of variables, components, and usage
+- [Component Demos](examples/components.html): Live examples of all components
+- [Docs Folder](docs/): Contains minified assets and documentation for deployment
+
+## Accessibility & Performance
+Axiom01 is built for accessibility and speed:
+- All interactive components are ARIA-compliant
+- Keyboard navigation is supported throughout
+- Color contrast meets WCAG standards
+- Minimal, optimized CSS and JS
+
 ## Contributing
-Contributions to Axiom01 are welcome and appreciated! Here's how you can contribute:
-### Reporting Issues
-If you find a bug or have a feature request, please open an issue on the [GitHub repository](https://github.com/Sol-Roth-Media/axiom01/issues).
-### Development Process
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Coding Standards
-- Use consistent indentation (2 spaces)
-- Follow BEM methodology for CSS class naming
-- Add comments for any complex logic
-- Ensure new components are accessible
-
-#### CSS Commenting Conventions
-
-Axiom01 uses a structured commenting approach to make the CSS files more maintainable:
-
-1. **File Headers**: Each CSS file should begin with a header comment that describes its purpose:
-   ```
-   /* === Axiom - filename.css === */
-   /* Description of what this file contains and its purpose */
-   /* Version information or last updated date */
-   ```
-
-2. **Section Headers**: Major sections within files should be clearly marked:
-   ```
-   /* ========================================================================= */
-   /* Section Name                                                              */
-   /* ========================================================================= */
-   ```
-
-3. **Component Documentation**: Each component should have a brief description:
-   ```
-   /* --- Component Name --- */
-   /* Description of the component and how it should be used */
-   ```
-
-4. **Property Explanations**: Add comments for non-obvious CSS properties:
-   ```
-   .selector {
-       property: value; /* Explanation of why this specific value is used */
-   }
-   ```
-
-5. **Variable Usage**: When using variables, include comments about their purpose:
-   ```
-   .selector {
-       color: var(--a-color-primary); /* Uses primary brand color */
-       margin: var(--a-space-base);   /* Standard spacing */
-   }
-   ```
-
-Following these conventions makes the codebase more maintainable and helps new contributors understand the purpose of different CSS components.
+We welcome contributions! Please see CONTRIBUTING.md for guidelines.
 
 ## License
-Axiom01 is open source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Axiom01 is released under the MIT License. See LICENSE for details.
+
+## Links
+- [GitHub Repository](https://github.com/Sol-Roth-Media/axiom01)
+- [Live Demo](docs/index.html)
 
 ## Acknowledgments
 - Inspired by modern UI frameworks and design systems

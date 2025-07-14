@@ -48,45 +48,47 @@ This guide helps you (or any developer) create beautiful, maintainable sites and
 ```
 - For layout, use `.container` or semantic `<section>` with padding/margin variables for consistent gutters.
 
-## 5. Colors and Theming
-- Use color variables for backgrounds and text:
-  - `var(--a-color-primary)`, `var(--a-color-on-primary)`, `var(--a-color-surface)`, etc.
-  - Change theme by updating variables in `colors_vars.css` or switching theme classes on `<html>`.
+## 5. Theming & Customization
+- Use the built-in CSS variables in `axiom_vars.css` and `colors_vars.css` to customize colors, spacing, and typography.
+- Switch themes by setting `data-theme` on the `<html>` element or using the theme switcher component.
 - Example:
+```html
+<html data-theme="dark">
+```
+- Override variables in your own CSS to match your brand:
 ```css
-.card {
-  background-color: var(--a-color-surface);
-  color: var(--a-color-on-surface);
-}
-.button.primary {
-  background-color: var(--a-color-primary);
-  color: var(--a-color-on-primary);
+:root {
+  --a-color-primary: hsl(340, 75%, 50%);
+  --a-space-base: 18px;
 }
 ```
 
-## 6. Responsive Layouts
-- Use media queries with Axiom01 breakpoints:
-  - `@media (min-width: var(--a-breakpoint-md)) { ... }`
-- Layout containers and grids adapt with flex and grid, using spacing variables for gaps.
-- Example:
+## 6. Component Styling
+- Style all components (e.g., `.alert`, `.datepicker`, `.progress-bar`) using semantic selectors and variables.
+- Example for alerts:
 ```css
-@media (min-width: var(--a-breakpoint-md)) {
-  .card-group {
-    display: flex;
-    gap: var(--a-space-large);
-  }
+.alert {
+  background: var(--a-color-alert-bg);
+  color: var(--a-color-on-alert);
+  border-radius: var(--a-border-radius-base);
 }
 ```
-- Use percentage widths, flexbox, and grid for fluid layouts. Avoid fixed pixel values.
+- For datepicker enhancements, use `.axiom-datepicker` and ensure accessible focus states.
 
-## 7. Refactor Existing Code
-- Replace hyphenated class selectors (e.g., `.card-header`) with semantic selectors (e.g., `.card header`).
-- Remove unnecessary wrapper classes and elements.
-- Switch unique value classes to camelCase.
+## 7. Accessibility in Styling
+- Always provide visible focus states for interactive elements:
+```css
+button:focus, .axiom-datepicker:focus {
+  outline: 2px solid var(--a-color-primary);
+}
+```
+- Use ARIA attributes and roles in your markup for alerts, dialogs, and navigation.
+- Ensure color contrast meets WCAG standards (see style-guide.html for details).
 
-## 8. Test and Validate
-- Check your components in the browser to ensure styles apply as expected.
-- Use dev tools to inspect selectors and markup.
+## 8. Reference & Resources
+- See [style-guide.html](style-guide.html) for full documentation of variables, components, and usage.
+- For live examples, visit [examples/components.html](examples/components.html).
+- For accessibility guidelines, refer to the [Axiom01 Accessibility Section](style-guide.html#accessibility).
 
 ---
 
