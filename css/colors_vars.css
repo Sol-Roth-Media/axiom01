@@ -10,29 +10,56 @@ html {
     /* Default (light) theme values */
 
     /* Base HSL components for color generation */
-    --a-color-primary-hue: 220; /* Primary brand color hue */
-    --a-color-secondary-hue: 280; /* Secondary color hue */
-    --a-color-tertiary-hue: 180; /* Tertiary color hue */
-    --a-color-complementary-hue: 40; /* Complementary accent hue */
-    --a-color-analogous-1-hue: 200; /* Analogous color 1 */
-    --a-color-analogous-2-hue: 240; /* Analogous color 2 */
+    /* Using consistent naming convention with axiom_vars.css */
+    --a-color-primary-h: 220; /* Primary brand color hue */
+    --a-color-secondary-h: 280; /* Secondary color hue */
+    --a-color-tertiary-h: 180; /* Tertiary color hue */
+    --a-color-complementary-h: 40; /* Complementary accent hue */
+    --a-color-analogous1-h: 200; /* Analogous color 1 */
+    --a-color-analogous2-h: 240; /* Analogous color 2 */
 
-    /* Saturation levels */
-    --a-saturation-primary: 70%; /* Primary color saturation */
-    --a-saturation-secondary: 60%; /* Secondary color saturation */
-    --a-saturation-tertiary: 50%; /* Tertiary color saturation */
-    --a-saturation-mono: 5%; /* Monochromatic/neutral saturation */
+    /* For backwards compatibility */
+    --a-color-primary-hue: var(--a-color-primary-h);
+    --a-color-secondary-hue: var(--a-color-secondary-h);
+    --a-color-tertiary-hue: var(--a-color-tertiary-h);
+    --a-color-complementary-hue: var(--a-color-complementary-h);
+    --a-color-analogous-1-hue: var(--a-color-analogous1-h);
+    --a-color-analogous-2-hue: var(--a-color-analogous2-h);
 
-    /* Brightness levels */
-    --a-brightness-primary: 50%; /* Primary color brightness */
-    --a-brightness-primary-container: 90%; /* Container brightness */
-    --a-brightness-dark: 15%; /* Dark color brightness */
-    --a-brightness-near-black: 5%; /* Near black brightness */
-    --a-brightness-text-on-dark: 98%; /* Text on dark surfaces */
-    --a-brightness-container: 95%; /* Container brightness */
+    /* Saturation levels - using consistent naming convention */
+    --a-color-primary-s: 70%; /* Primary color saturation */
+    --a-color-secondary-s: 60%; /* Secondary color saturation */
+    --a-color-tertiary-s: 50%; /* Tertiary color saturation */
+    --a-color-mono-s: 5%; /* Monochromatic/neutral saturation */
+
+    /* For backwards compatibility */
+    --a-saturation-primary: var(--a-color-primary-s);
+    --a-saturation-secondary: var(--a-color-secondary-s);
+    --a-saturation-tertiary: var(--a-color-tertiary-s);
+    --a-saturation-mono: var(--a-color-mono-s);
+
+    /* Lightness/brightness levels - using consistent naming convention */
+    --a-color-primary-l: 50%; /* Primary color lightness */
+    --a-color-primary-container-l: 90%; /* Container lightness */
+    --a-color-dark-l: 15%; /* Dark color lightness */
+    --a-color-near-black-l: 5%; /* Near black lightness */
+    --a-color-text-on-dark-l: 98%; /* Text on dark surfaces */
+    --a-color-container-l: 95%; /* Container lightness */
+
+    /* For backwards compatibility */
+    --a-brightness-primary: var(--a-color-primary-l);
+    --a-brightness-primary-container: var(--a-color-primary-container-l);
+    --a-brightness-dark: var(--a-color-dark-l);
+    --a-brightness-near-black: var(--a-color-near-black-l);
+    --a-brightness-text-on-dark: var(--a-color-text-on-dark-l);
+    --a-brightness-container: var(--a-color-container-l);
 
     /* Standard color palette generation (used by all themes) */
     --a-color-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-primary));
+    --a-color-primary-dark: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) - 10%)); /* Darker variant of primary */
+    --a-color-primary-hover: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) - 5%)); /* Hover state for primary */
+    --a-color-primary-rgb: 33, 150, 243; /* RGB values for primary color - used for rgba() */
+
     --a-color-on-primary: hsl(var(--a-color-primary-hue), var(--a-saturation-mono), var(--a-brightness-text-on-dark));
     --a-color-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-primary-container));
     --a-color-on-primary-container: hsl(var(--a-color-primary-hue), var(--a-saturation-primary), var(--a-brightness-dark));
@@ -62,35 +89,39 @@ html {
     --a-color-on-error: hsl(0, 0%, 100%);
     --a-color-error-container: hsl(0, 90%, 95%);
     --a-color-on-error-container: hsl(0, 90%, 30%);
+    --a-color-negative: var(--a-color-error); /* Alias for error - for backwards compatibility */
+    --a-color-on-negative: var(--a-color-on-error);
+    --a-color-negative-container: var(--a-color-error-container);
+    --a-color-on-negative-container: var(--a-color-on-error-container);
 
     --a-color-success: hsl(145, 70%, 40%);
     --a-color-on-success: hsl(145, 0%, 100%);
     --a-color-success-container: hsl(145, 70%, 95%);
     --a-color-on-success-container: hsl(145, 80%, 25%);
+    --a-color-positive: var(--a-color-success); /* Alias for success - for backwards compatibility */
+    --a-color-on-positive: var(--a-color-on-success);
+    --a-color-positive-container: var(--a-color-success-container);
+    --a-color-on-positive-container: var(--a-color-on-success-container);
 
     --a-color-warning: hsl(40, 90%, 50%);
     --a-color-on-warning: hsl(40, 0%, 100%);
     --a-color-warning-container: hsl(40, 90%, 95%);
     --a-color-on-warning-container: hsl(40, 90%, 25%);
+    --a-color-notice: var(--a-color-warning); /* Alias for warning - for backwards compatibility */
+    --a-color-on-notice: var(--a-color-on-warning);
+    --a-color-notice-container: var(--a-color-warning-container);
+    --a-color-on-notice-container: var(--a-color-on-warning-container);
 
     --a-color-info: hsl(200, 90%, 45%);
     --a-color-on-info: hsl(200, 0%, 100%);
     --a-color-info-container: hsl(200, 90%, 95%);
     --a-color-on-info-container: hsl(200, 90%, 25%);
+    --a-color-informative: var(--a-color-info); /* Alias for info - for backwards compatibility */
+    --a-color-on-informative: var(--a-color-on-info);
+    --a-color-informative-container: var(--a-color-info-container);
+    --a-color-on-informative-container: var(--a-color-on-info-container);
 
-    /* Default gradient settings */
-    --a-gradient-primary: linear-gradient(135deg,
-    hsl(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 30%)),
-    hsl(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 35%)));
-
-    --a-gradient-surface: linear-gradient(135deg,
-    hsl(var(--a-color-primary-hue), var(--a-saturation-mono), 98%),
-    hsl(var(--a-color-primary-hue), var(--a-saturation-mono), 96%));
-
-    /* Hero section specific gradient (lighter for better text contrast) */
-    --a-gradient-hero: linear-gradient(135deg,
-    hsl(var(--a-color-primary-hue), calc(var(--a-saturation-primary) - 20%), 75%),
-    hsl(var(--a-color-primary-hue), calc(var(--a-saturation-primary) - 10%), 85%));
+    /* Default gradient settings - consolidated with other gradient definitions below */
 
     /* Default shadow settings */
     --a-shadow-color: rgba(0, 0, 0, 0.1);
@@ -155,124 +186,7 @@ html {
     --a-color-gray-30-rgb: 21, 21, 21;
 
 
-    /* Gray Scale Swatches - 36 shades */
-    /* Light to dark */
-    .gray-1{background-color: var(--a-color-gray-1);}
-    .gray-2{background-color: var(--a-color-gray-2);}
-    .gray-3{background-color: var(--a-color-gray-3);}
-    .gray-4{background-color: var(--a-color-gray-4);}
-    .gray-5{background-color: var(--a-color-gray-5);}
-    .gray-6{background-color: var(--a-color-gray-6);}
-    .gray-7{background-color: var(--a-color-gray-7);}
-    .gray-8{background-color: var(--a-color-gray-8);}
-    .gray-9{background-color: var(--a-color-gray-9);}
-    .gray-10{background-color: var(--a-color-gray-10);}
-    .gray-11{background-color: var(--a-color-gray-11);}
-    .gray-12{background-color: var(--a-color-gray-12);}
-    .gray-13{background-color: var(--a-color-gray-13);}
-    .gray-14{background-color: var(--a-color-gray-14);}
-    .gray-15{background-color: var(--a-color-gray-15);}
-    .gray-16{background-color: var(--a-color-gray-16);}
-    .gray-17{background-color: var(--a-color-gray-17);}
-    .gray-18{background-color: var(--a-color-gray-18);}
-    .gray-19{background-color: var(--a-color-gray-19);}
-    .gray-20{background-color: var(--a-color-gray-20);}
-    .gray-21{background-color: var(--a-color-gray-21);}
-    .gray-22{background-color: var(--a-color-gray-22);}
-    .gray-23{background-color: var(--a-color-gray-23);}
-    .gray-24{background-color: var(--a-color-gray-24);}
-    .gray-25{background-color: var(--a-color-gray-25);}
-    .gray-26{background-color: var(--a-color-gray-26);}
-    .gray-27{background-color: var(--a-color-gray-27);}
-    .gray-28{background-color: var(--a-color-gray-28);}
-    .gray-29{background-color: var(--a-color-gray-29);}
-    .gray-30{background-color: var(--a-color-gray-30);}
-    .gray-31{background-color: var(--a-color-gray-31);}
-    .gray-32{background-color: var(--a-color-gray-32);}
-    .gray-33{background-color: var(--a-color-gray-33);}
-    .gray-34{background-color: var(--a-color-gray-34);}
-    .gray-35{background-color: var(--a-color-gray-35);}
-    .gray-36{background-color: var(--a-color-gray-36);}
 
-    .complementary-1{background-color: var(--a-color-complementary-1);}
-    .complementary-2{background-color: var(--a-color-complementary-2);}
-    .complementary-3{background-color: var(--a-color-complementary-3);}
-    .complementary-4{background-color: var(--a-color-complementary-4);}
-    .complementary-5{background-color: var(--a-color-complementary-5);}
-    .complementary-6{background-color: var(--a-color-complementary-6);}
-    .complementary-7{background-color: var(--a-color-complementary-7);}
-    .complementary-8{background-color: var(--a-color-complementary-8);}
-    .complementary-9{background-color: var(--a-color-complementary-9);}
-
-    .complementary-opposite-1{background-color: var(--a-color-complementary-opposite-1);}
-    .complementary-opposite-2{background-color: var(--a-color-complementary-opposite-2);}
-    .complementary-opposite-3{background-color: var(--a-color-complementary-opposite-3);}
-    .complementary-opposite-4{background-color: var(--a-color-complementary-opposite-4);}
-    .complementary-opposite-5{background-color: var(--a-color-complementary-opposite-5);}
-    .complementary-opposite-6{background-color: var(--a-color-complementary-opposite-6);}
-    .complementary-opposite-7{background-color: var(--a-color-complementary-opposite-7);}
-    .complementary-opposite-8{background-color: var(--a-color-complementary-opposite-8);}
-    .complementary-opposite-9{background-color: var(--a-color-complementary-opposite-9);}
-
-    .analogous1-1{background-color: var(--a-color-analogous1-1)};
-    .analogous1-2{background-color: var(--a-color-analogous1-2)};
-    .analogous1-3{background-color: var(--a-color-analogous1-3)};
-    .analogous1-4{background-color: var(--a-color-analogous1-4)};
-    .analogous1-5{background-color: var(--a-color-analogous1-5)};
-    .analogous1-6{background-color: var(--a-color-analogous1-6)};
-    .analogous1-7{background-color: var(--a-color-analogous1-7)};
-    .analogous1-8{background-color: var(--a-color-analogous1-8)};
-    .analogous1-9{background-color: var(--a-color-analogous1-9)};
-
-    .analogous2-1{background-color: var(--a-color-analogous1-1)};
-    .analogous2-2{background-color: var(--a-color-analogous1-2)};
-    .analogous2-3{background-color: var(--a-color-analogous1-3)};
-    .analogous2-4{background-color: var(--a-color-analogous1-4)};
-    .analogous2-5{background-color: var(--a-color-analogous1-5)};
-    .analogous2-6{background-color: var(--a-color-analogous1-6)};
-    .analogous2-7{background-color: var(--a-color-analogous1-7)};
-    .analogous2-8{background-color: var(--a-color-analogous1-8)};
-    .analogous2-9{background-color: var(--a-color-analogous1-9)};
-
-    /* Color swatch styling */
-    .color-swatch {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 80px;
-        padding: var(--a-padding-small);
-        border-radius: var(--a-border-radius-base);
-        transition: transform 0.2s ease;
-        color: var(--a-color-on-surface);
-        box-shadow: var(--a-shadow-sm);
-    }
-
-    /* Dark text for light backgrounds, light text for dark backgrounds */
-    .gray-1, .gray-2, .gray-3, .gray-4, .gray-5, .gray-6, .gray-7, .gray-8,
-    .gray-9, .gray-10, .gray-11, .gray-12, .gray-13, .gray-14, .gray-15, .gray-16, .gray-17, .gray-18 {
-        color: var(--a-color-on-light-surface);
-    }
-
-    .gray-19, .gray-20, .gray-21, .gray-22, .gray-23, .gray-24, .gray-25, .gray-26,
-    .gray-27, .gray-28, .gray-29, .gray-30, .gray-31, .gray-32, .gray-33, .gray-34, .gray-35, .gray-36 {
-        color: var(--a-color-on-dark-surface);
-    }
-
-    .color-swatch:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--a-shadow-md);
-    }
-
-    .color-name {
-        font-weight: 600;
-        font-size: 0.9rem;
-    }
-
-    .color-value {
-        font-family: var(--a-font-family-mono);
-        font-size: 0.8rem;
-        opacity: 0.8;
-    }
 
     /** Gradients **/
     /* Complementary Colors */
@@ -297,39 +211,183 @@ html {
     --a-color-complementary-opposite-9: hsl(calc(var(--a-color-primary-h) + 180), var(--a-color-primary-s), 15%);
 
     /* Analogous 1 Colors (+30 degrees) */
-    --a-color-analogous1-1: hsl(calc(var(--a-color-primary-h) + 30), var(--a-color-primary-s), 95%);
-    --a-color-analogous1-2: hsl(calc(var(--a-color-primary-h) + 30), var(--a-color-primary-s), 85%);
-    --a-color-analogous1-3: hsl(calc(var(--a-color-primary-h) + 30), var(--a-color-primary-s), 75%);
-    --a-color-analogous1-4: hsl(calc(var(--a-color-primary-h) + 30), var(--a-color-primary-s), 65%);
-    --a-color-analogous1-5: hsl(calc(var(--a-color-primary-h) + 30), var(--a-color-primary-s), 55%);
-    --a-color-analogous1-6: hsl(calc(var(--a-color-primary-h) + 30), var(--a-color-primary-s), 45%);
-    --a-color-analogous1-7: hsl(calc(var(--a-color-primary-h) + 30), var(--a-color-primary-s), 35%);
-    --a-color-analogous1-8: hsl(calc(var(--a-color-primary-h) + 30), var(--a-color-primary-s), 25%);
-    --a-color-analogous1-9: hsl(calc(var(--a-color-primary-h) + 30), var(--a-color-primary-s), 15%);
+    --a-color-analogous1-1: hsl(calc(var(--a-color-analogous1-h)), var(--a-color-primary-s), 95%);
+    --a-color-analogous1-2: hsl(calc(var(--a-color-analogous1-h)), var(--a-color-primary-s), 85%);
+    --a-color-analogous1-3: hsl(calc(var(--a-color-analogous1-h)), var(--a-color-primary-s), 75%);
+    --a-color-analogous1-4: hsl(calc(var(--a-color-analogous1-h)), var(--a-color-primary-s), 65%);
+    --a-color-analogous1-5: hsl(calc(var(--a-color-analogous1-h)), var(--a-color-primary-s), 55%);
+    --a-color-analogous1-6: hsl(calc(var(--a-color-analogous1-h)), var(--a-color-primary-s), 45%);
+    --a-color-analogous1-7: hsl(calc(var(--a-color-analogous1-h)), var(--a-color-primary-s), 35%);
+    --a-color-analogous1-8: hsl(calc(var(--a-color-analogous1-h)), var(--a-color-primary-s), 25%);
+    --a-color-analogous1-9: hsl(calc(var(--a-color-analogous1-h)), var(--a-color-primary-s), 15%);
 
     /* Analogous 2 Colors (-30 degrees) */
-    --a-color-analogous2-1: hsl(calc(var(--a-color-primary-h) - 30), var(--a-color-primary-s), 95%);
-    --a-color-analogous2-2: hsl(calc(var(--a-color-primary-h) - 30), var(--a-color-primary-s), 85%);
-    --a-color-analogous2-3: hsl(calc(var(--a-color-primary-h) - 30), var(--a-color-primary-s), 75%);
-    --a-color-analogous2-4: hsl(calc(var(--a-color-primary-h) - 30), var(--a-color-primary-s), 65%);
-    --a-color-analogous2-5: hsl(calc(var(--a-color-primary-h) - 30), var(--a-color-primary-s), 55%);
-    --a-color-analogous2-6: hsl(calc(var(--a-color-primary-h) - 30), var(--a-color-primary-s), 45%);
-    --a-color-analogous2-7: hsl(calc(var(--a-color-primary-h) - 30), var(--a-color-primary-s), 35%);
-    --a-color-analogous2-8: hsl(calc(var(--a-color-primary-h) - 30), var(--a-color-primary-s), 25%);
-    --a-color-analogous2-9: hsl(calc(var(--a-color-primary-h) - 30), var(--a-color-primary-s), 15%);
+    --a-color-analogous2-1: hsl(calc(var(--a-color-analogous2-h)), var(--a-color-primary-s), 95%);
+    --a-color-analogous2-2: hsl(calc(var(--a-color-analogous2-h)), var(--a-color-primary-s), 85%);
+    --a-color-analogous2-3: hsl(calc(var(--a-color-analogous2-h)), var(--a-color-primary-s), 75%);
+    --a-color-analogous2-4: hsl(calc(var(--a-color-analogous2-h)), var(--a-color-primary-s), 65%);
+    --a-color-analogous2-5: hsl(calc(var(--a-color-analogous2-h)), var(--a-color-primary-s), 55%);
+    --a-color-analogous2-6: hsl(calc(var(--a-color-analogous2-h)), var(--a-color-primary-s), 45%);
+    --a-color-analogous2-7: hsl(calc(var(--a-color-analogous2-h)), var(--a-color-primary-s), 35%);
+    --a-color-analogous2-8: hsl(calc(var(--a-color-analogous2-h)), var(--a-color-primary-s), 25%);
+    --a-color-analogous2-9: hsl(calc(var(--a-color-analogous2-h)), var(--a-color-primary-s), 15%);
 
-    /* Gradients */
+    /* Gradient Definitions */
+    /* Primary gradients */
     --a-gradient-primary: linear-gradient(to right, var(--a-color-primary), var(--a-color-secondary));
     --a-gradient-primary-vertical: linear-gradient(to bottom, var(--a-color-primary), var(--a-color-secondary));
+    --a-gradient-primary-diagonal: linear-gradient(135deg,
+        hsl(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 30%)),
+        hsl(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 35%)));
+
+    /* Surface gradients */
+    --a-gradient-surface: linear-gradient(135deg,
+        hsl(var(--a-color-primary-hue), var(--a-saturation-mono), 98%),
+        hsl(var(--a-color-primary-hue), var(--a-saturation-mono), 96%));
+
+    /* Hero section specific gradient (lighter for better text contrast) */
+    --a-gradient-hero: linear-gradient(135deg,
+        hsl(var(--a-color-primary-hue), calc(var(--a-saturation-primary) - 20%), 75%),
+        hsl(var(--a-color-primary-hue), calc(var(--a-saturation-primary) - 10%), 85%));
+
+    /* Color scheme gradients */
     --a-gradient-complementary: linear-gradient(to right, var(--a-color-primary), var(--a-color-complementary-opposite-5));
     --a-gradient-analogous1: linear-gradient(to right, var(--a-color-primary), var(--a-color-analogous1-5));
     --a-gradient-analogous2: linear-gradient(to right, var(--a-color-primary), var(--a-color-analogous2-5));
+
+    /* Predefined color gradients */
     --a-gradient-rainbow: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
     --a-gradient-sunset: linear-gradient(to right, #ff7e5f, #feb47b);
     --a-gradient-ocean: linear-gradient(to right, #2193b0, #6dd5ed);
     --a-gradient-forest: linear-gradient(to right, #134e5e, #71b280);
     --a-gradient-nightsky: linear-gradient(to right, #0f2027, #203a43, #2c5364);
 
+}
+
+/* === Color Swatch Classes === */
+/* These classes were moved outside the :root selector for better organization */
+
+/* Gray Scale Swatches - 36 shades */
+/* Light to dark */
+.gray-1{background-color: var(--a-color-gray-1);}
+.gray-2{background-color: var(--a-color-gray-2);}
+.gray-3{background-color: var(--a-color-gray-3);}
+.gray-4{background-color: var(--a-color-gray-4);}
+.gray-5{background-color: var(--a-color-gray-5);}
+.gray-6{background-color: var(--a-color-gray-6);}
+.gray-7{background-color: var(--a-color-gray-7);}
+.gray-8{background-color: var(--a-color-gray-8);}
+.gray-9{background-color: var(--a-color-gray-9);}
+.gray-10{background-color: var(--a-color-gray-10);}
+.gray-11{background-color: var(--a-color-gray-11);}
+.gray-12{background-color: var(--a-color-gray-12);}
+.gray-13{background-color: var(--a-color-gray-13);}
+.gray-14{background-color: var(--a-color-gray-14);}
+.gray-15{background-color: var(--a-color-gray-15);}
+.gray-16{background-color: var(--a-color-gray-16);}
+.gray-17{background-color: var(--a-color-gray-17);}
+.gray-18{background-color: var(--a-color-gray-18);}
+.gray-19{background-color: var(--a-color-gray-19);}
+.gray-20{background-color: var(--a-color-gray-20);}
+.gray-21{background-color: var(--a-color-gray-21);}
+.gray-22{background-color: var(--a-color-gray-22);}
+.gray-23{background-color: var(--a-color-gray-23);}
+.gray-24{background-color: var(--a-color-gray-24);}
+.gray-25{background-color: var(--a-color-gray-25);}
+.gray-26{background-color: var(--a-color-gray-26);}
+.gray-27{background-color: var(--a-color-gray-27);}
+.gray-28{background-color: var(--a-color-gray-28);}
+.gray-29{background-color: var(--a-color-gray-29);}
+.gray-30{background-color: var(--a-color-gray-30);}
+.gray-31{background-color: var(--a-color-gray-31);}
+.gray-32{background-color: var(--a-color-gray-32);}
+.gray-33{background-color: var(--a-color-gray-33);}
+.gray-34{background-color: var(--a-color-gray-34);}
+.gray-35{background-color: var(--a-color-gray-35);}
+.gray-36{background-color: var(--a-color-gray-36);}
+
+/* Complementary color swatches */
+.complementary-1{background-color: var(--a-color-complementary-1);}
+.complementary-2{background-color: var(--a-color-complementary-2);}
+.complementary-3{background-color: var(--a-color-complementary-3);}
+.complementary-4{background-color: var(--a-color-complementary-4);}
+.complementary-5{background-color: var(--a-color-complementary-5);}
+.complementary-6{background-color: var(--a-color-complementary-6);}
+.complementary-7{background-color: var(--a-color-complementary-7);}
+.complementary-8{background-color: var(--a-color-complementary-8);}
+.complementary-9{background-color: var(--a-color-complementary-9);}
+
+/* Complementary opposite color swatches */
+.complementary-opposite-1{background-color: var(--a-color-complementary-opposite-1);}
+.complementary-opposite-2{background-color: var(--a-color-complementary-opposite-2);}
+.complementary-opposite-3{background-color: var(--a-color-complementary-opposite-3);}
+.complementary-opposite-4{background-color: var(--a-color-complementary-opposite-4);}
+.complementary-opposite-5{background-color: var(--a-color-complementary-opposite-5);}
+.complementary-opposite-6{background-color: var(--a-color-complementary-opposite-6);}
+.complementary-opposite-7{background-color: var(--a-color-complementary-opposite-7);}
+.complementary-opposite-8{background-color: var(--a-color-complementary-opposite-8);}
+.complementary-opposite-9{background-color: var(--a-color-complementary-opposite-9);}
+
+/* Analogous1 color swatches */
+.analogous1-1{background-color: var(--a-color-analogous1-1);}
+.analogous1-2{background-color: var(--a-color-analogous1-2);}
+.analogous1-3{background-color: var(--a-color-analogous1-3);}
+.analogous1-4{background-color: var(--a-color-analogous1-4);}
+.analogous1-5{background-color: var(--a-color-analogous1-5);}
+.analogous1-6{background-color: var(--a-color-analogous1-6);}
+.analogous1-7{background-color: var(--a-color-analogous1-7);}
+.analogous1-8{background-color: var(--a-color-analogous1-8);}
+.analogous1-9{background-color: var(--a-color-analogous1-9);}
+
+/* Analogous2 color swatches */
+.analogous2-1{background-color: var(--a-color-analogous2-1);}
+.analogous2-2{background-color: var(--a-color-analogous2-2);}
+.analogous2-3{background-color: var(--a-color-analogous2-3);}
+.analogous2-4{background-color: var(--a-color-analogous2-4);}
+.analogous2-5{background-color: var(--a-color-analogous2-5);}
+.analogous2-6{background-color: var(--a-color-analogous2-6);}
+.analogous2-7{background-color: var(--a-color-analogous2-7);}
+.analogous2-8{background-color: var(--a-color-analogous2-8);}
+.analogous2-9{background-color: var(--a-color-analogous2-9);}
+
+/* Color swatch styling */
+.color-swatch {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80px;
+    padding: var(--a-padding-small);
+    border-radius: var(--a-border-radius-base);
+    transition: transform 0.2s ease;
+    color: var(--a-color-on-surface);
+    box-shadow: var(--a-shadow-sm);
+}
+
+/* Dark text for light backgrounds, light text for dark backgrounds */
+.gray-1, .gray-2, .gray-3, .gray-4, .gray-5, .gray-6, .gray-7, .gray-8,
+.gray-9, .gray-10, .gray-11, .gray-12, .gray-13, .gray-14, .gray-15, .gray-16, .gray-17, .gray-18 {
+    color: var(--a-color-on-light-surface);
+}
+
+.gray-19, .gray-20, .gray-21, .gray-22, .gray-23, .gray-24, .gray-25, .gray-26,
+.gray-27, .gray-28, .gray-29, .gray-30, .gray-31, .gray-32, .gray-33, .gray-34, .gray-35, .gray-36 {
+    color: var(--a-color-on-dark-surface);
+}
+
+.color-swatch:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--a-shadow-md);
+}
+
+.color-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.color-value {
+    font-family: var(--a-font-family-mono);
+    font-size: 0.8rem;
+    opacity: 0.8;
 }
 
 /* === Light Theme === */
