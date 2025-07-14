@@ -1,0 +1,263 @@
+/* ========================================================================= */
+/* Axiom01 Component Styles                                                  */
+/* Additional components that extend the core framework                      */
+/* ========================================================================= */
+
+/* --- Modal Component --- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* High z-index for modals */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    border-radius: var(--a-border-radius-base);
+    box-shadow: var(--a-shadow-large, 0 10px 25px rgba(0, 0, 0, 0.2));
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal.open .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: var(--a-padding-medium) var(--a-padding-medium) var(--a-padding-small);
+    border-bottom: var(--a-border-width-base) var(--a-border-style-base) rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-header h2, 
+.modal-header h3 {
+    margin: 0;
+    font-size: var(--a-font-size-h3);
+    font-weight: var(--a-font-weight-medium);
+}
+
+.modal-body {
+    padding: var(--a-padding-medium);
+}
+
+.modal-footer {
+    padding: var(--a-padding-small) var(--a-padding-medium) var(--a-padding-medium);
+    border-top: var(--a-border-width-base) var(--a-border-style-base) rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--a-space-small);
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: rgba(0, 0, 0, 0.5); /* Muted text color */
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--a-padding-tiny);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: var(--a-color-on-surface);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer button {
+        width: 100%;
+        margin-left: 0;
+        margin-top: var(--a-space-small);
+    }
+}
+
+/* --- Notification System --- */
+.axiom-notifications {
+    position: fixed;
+    z-index: 1100; /* Higher z-index than modals */
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-small);
+    width: 320px;
+    max-width: 90vw;
+    pointer-events: none; /* Allow clicking through the container */
+}
+
+/* Positioning variants */
+.axiom-notifications.top-right {
+    top: var(--a-space-medium);
+    right: var(--a-space-medium);
+}
+
+.axiom-notifications.top-left {
+    top: var(--a-space-medium);
+    left: var(--a-space-medium);
+}
+
+.axiom-notifications.bottom-right {
+    bottom: var(--a-space-medium);
+    right: var(--a-space-medium);
+}
+
+.axiom-notifications.bottom-left {
+    bottom: var(--a-space-medium);
+    left: var(--a-space-medium);
+}
+
+.axiom-notification {
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    border-radius: var(--a-border-radius-base);
+    box-shadow: var(--a-shadow-medium, 0 4px 12px rgba(0, 0, 0, 0.15));
+    padding: var(--a-padding-medium);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--a-space-small);
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: auto; /* Make the notification clickable */
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Position-specific animations */
+.top-right .axiom-notification {
+    transform: translateX(100%);
+}
+
+.top-left .axiom-notification {
+    transform: translateX(-100%);
+}
+
+.bottom-right .axiom-notification {
+    transform: translateX(100%);
+}
+
+.bottom-left .axiom-notification {
+    transform: translateX(-100%);
+}
+
+.axiom-notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.axiom-notification.hiding {
+    animation: notification-hide 0.3s forwards;
+}
+
+@keyframes notification-hide {
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Notification types */
+.axiom-notification.success {
+    border-left: 4px solid var(--a-color-success, #4caf50);
+}
+
+.axiom-notification.error {
+    border-left: 4px solid var(--a-color-error, #f44336);
+}
+
+.axiom-notification.warning {
+    border-left: 4px solid var(--a-color-warning, #ff9800);
+}
+
+.axiom-notification.info {
+    border-left: 4px solid var(--a-color-info, #2196f3);
+}
+
+.notification-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.success .notification-icon {
+    color: var(--a-color-success, #4caf50);
+}
+
+.error .notification-icon {
+    color: var(--a-color-error, #f44336);
+}
+
+.warning .notification-icon {
+    color: var(--a-color-warning, #ff9800);
+}
+
+.info .notification-icon {
+    color: var(--a-color-info, #2196f3);
+}
+
+.notification-content {
+    flex-grow: 1;
+    word-break: break-word;
+}
+
+.notification-close {
+    background: transparent;
+    border: none;
+    color: rgba(0, 0, 0, 0.5); /* Muted text color */
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    margin-left: auto;
+}
+
+.notification-close:hover,
+.notification-close:focus {
+    color: var(--a-color-on-surface);
+}
+
+/* Dark theme adjustments */
+html[data-theme="dark"] .axiom-notification {
+    background-color: var(--a-color-surface-variant, #333);
+}

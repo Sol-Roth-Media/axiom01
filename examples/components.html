@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom01 - New Components Examples</title>
+    <meta name="description" content="Examples of new components for the Axiom01 UI framework">
+    <link rel="stylesheet" href="../css/axiom.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body class="axiom01">
+<header class="full-bleed">
+    <nav class="navbar small">
+        <a href="../index.html" class="logo" aria-label="Axiom Framework Home v0.1">
+            <div class="logo-text">
+                <span>[Ax</span>
+                <span><div style="color: #00c005; display: inline;">01</div>]</span>
+                <span></span>
+            </div>
+        </a>
+
+        <div class="theme-switcher-container">
+            <label for="theme-select" class="visually-hidden">Select Theme:</label>
+            <select id="theme-select" name="theme">
+            </select>
+        </div>
+
+        <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links-main">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <ul class="nav-links" id="nav-links-main">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#usage">Get started</a></li>
+            <li><a href="../index.html#components">Components</a></li>
+            <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        </ul>
+
+        <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode">
+            &#9728;
+        </button>
+    </nav>
+</header>
+
+<main>
+    <section class="section">
+        <div class="container">
+            <h1>New Axiom01 Components</h1>
+            <p class="subtitle">Examples of new components that extend the Axiom01 UI framework.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 id="modal-component">Modal Component</h2>
+            <p>The Modal component provides a way to display content in a layer that sits on top of the main page content. It's useful for dialogs, lightboxes, and other content that should appear in front of the main content.</p>
+
+            <div class="code-block">
+                <h3>Basic Usage</h3>
+                <p>To create a modal, you need:</p>
+                <ol>
+                    <li>A trigger element with <code>data-modal-target</code> attribute pointing to the modal's ID</li>
+                    <li>A modal container with the corresponding ID</li>
+                    <li>Close buttons with <code>data-modal-close</code> attribute</li>
+                </ol>
+                <pre><code class="language-html">&lt;!-- Modal Trigger --&gt;
+&lt;button data-modal-target="example-modal"&gt;Open Modal&lt;/button&gt;
+
+&lt;!-- Modal Container --&gt;
+&lt;div id="example-modal" class="modal" aria-hidden="true"&gt;
+    &lt;div class="modal-content"&gt;
+        &lt;div class="modal-header"&gt;
+            &lt;h3&gt;Modal Title&lt;/h3&gt;
+            &lt;button class="modal-close" data-modal-close aria-label="Close"&gt;×&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class="modal-body"&gt;
+            &lt;p&gt;Modal content goes here...&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="modal-footer"&gt;
+            &lt;button class="button" data-modal-close&gt;Cancel&lt;/button&gt;
+            &lt;button class="button primary"&gt;Confirm&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+
+            <div class="example">
+                <h3>Live Example</h3>
+                <p>Click the button below to open a modal dialog:</p>
+                
+                <!-- Modal Trigger -->
+                <button class="button" data-modal-target="example-modal">Open Modal</button>
+                
+                <!-- Modal Container -->
+                <div id="example-modal" class="modal" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Example Modal</h3>
+                            <button class="modal-close" data-modal-close aria-label="Close">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>This is an example modal dialog created with the Axiom01 Modal component.</p>
+                            <p>Features:</p>
+                            <ul>
+                                <li>Accessible with proper ARIA attributes</li>
+                                <li>Keyboard navigation (Escape to close, Tab trap within modal)</li>
+                                <li>Click outside to close</li>
+                                <li>Focus management (returns focus to trigger element)</li>
+                                <li>Prevents background scrolling when open</li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="button" data-modal-close>Close</button>
+                            <button class="button primary">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert info">
+                <h3>Accessibility Features</h3>
+                <p>The Modal component includes several accessibility features:</p>
+                <ul>
+                    <li>Proper ARIA attributes (<code>role="dialog"</code>, <code>aria-modal="true"</code>, etc.)</li>
+                    <li>Focus is trapped within the modal when open</li>
+                    <li>Focus returns to the trigger element when closed</li>
+                    <li>Escape key closes the modal</li>
+                    <li>Background scrolling is prevented when modal is open</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 id="notification-system">Notification System</h2>
+            <p>The Notification System provides a way to display toast notifications to users. It supports different types of notifications (success, error, info, warning) and can be configured with various options.</p>
+
+            <div class="code-block">
+                <h3>Basic Usage</h3>
+                <p>The Notification System is available globally as <code>AxiomNotify</code>:</p>
+                <pre><code class="language-javascript">// Show a basic notification
+AxiomNotify.show('This is a notification message');
+
+// Show a success notification
+AxiomNotify.success('Operation completed successfully!');
+
+// Show an error notification
+AxiomNotify.error('An error occurred!');
+
+// Show a warning notification
+AxiomNotify.warning('Warning: This action cannot be undone.');
+
+// Show an info notification
+AxiomNotify.info('Here is some information for you.');
+
+// Show a notification with custom options
+AxiomNotify.show('Custom notification', {
+    type: 'success',           // info, success, error, warning
+    duration: 3000,            // ms, 0 for no auto-dismiss
+    dismissible: true,         // whether user can dismiss with a close button
+    position: 'top-right',     // top-right, top-left, bottom-right, bottom-left
+    icon: true                 // whether to show an icon
+});</code></pre>
+            </div>
+
+            <div class="example">
+                <h3>Live Example</h3>
+                <p>Click the buttons below to show different types of notifications:</p>
+                
+                <div class="button-group">
+                    <button class="button" onclick="AxiomNotify.info('This is an info notification')">Info</button>
+                    <button class="button success" onclick="AxiomNotify.success('Operation completed successfully!')">Success</button>
+                    <button class="button error" onclick="AxiomNotify.error('An error occurred!')">Error</button>
+                    <button class="button warning" onclick="AxiomNotify.warning('Warning: This action cannot be undone.')">Warning</button>
+                </div>
+                
+                <div class="mt-4">
+                    <h4>Notification Position</h4>
+                    <div class="button-group">
+                        <button class="button" onclick="AxiomNotify.info('Top-right notification', {position: 'top-right'})">Top Right</button>
+                        <button class="button" onclick="AxiomNotify.info('Top-left notification', {position: 'top-left'})">Top Left</button>
+                        <button class="button" onclick="AxiomNotify.info('Bottom-right notification', {position: 'bottom-right'})">Bottom Right</button>
+                        <button class="button" onclick="AxiomNotify.info('Bottom-left notification', {position: 'bottom-left'})">Bottom Left</button>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <h4>Custom Options</h4>
+                    <button class="button primary" onclick="showCustomNotification()">Custom Notification</button>
+                </div>
+            </div>
+
+            <div class="alert info">
+                <h3>Accessibility Features</h3>
+                <p>The Notification System includes several accessibility features:</p>
+                <ul>
+                    <li>Proper ARIA attributes (<code>role="status"</code> or <code>role="alert"</code> for errors)</li>
+                    <li>Notifications can be dismissed with a close button</li>
+                    <li>Auto-dismissal can be disabled for important messages</li>
+                    <li>Visual indicators for different notification types</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Axiom01 UI Framework. MIT License.</p>
+    </div>
+</footer>
+
+<!-- Include the Axiom01 scripts -->
+<script src="../js/scripts.js"></script>
+<script src="../js/axiom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-markup.min.js"></script>
+
+<script>
+    // Custom notification example
+    function showCustomNotification() {
+        AxiomNotify.show('This is a custom notification with a longer duration and custom position', {
+            type: 'info',
+            duration: 10000,
+            position: 'bottom-right',
+            dismissible: true,
+            icon: true
+        });
+    }
+</script>
+</body>
+</html>

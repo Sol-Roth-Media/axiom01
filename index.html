@@ -691,13 +691,56 @@ function initAxiom() {
 // Run all initializations after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', initAxiom);</code></pre>
 
+				<p>The new components (Modal and Notification System) use a component registry pattern for initialization:</p>
+				<pre><code class="language-js">// Component Registry Pattern
+const AxiomComponents = {
+    initialized: false,
+    registry: {},
+
+    register: function(name, initFunction) {
+        this.registry[name] = initFunction;
+        return this;
+    },
+
+    initAll: function() {
+        Object.keys(this.registry).forEach(component => {
+            this.registry[component]();
+        });
+
+        this.initialized = true;
+    }
+};
+
+// Register components
+AxiomComponents.register('modal', initModal);
+AxiomComponents.register('notifications', initNotifications);
+
+// Initialize all components
+document.addEventListener('DOMContentLoaded', function() {
+    AxiomComponents.initAll();
+});</code></pre>
+
 				<h4>Using JavaScript Components</h4>
 				<p>To use Axiom01's JavaScript components:</p>
 				<ol>
-					<li>Include the <code>scripts.js</code> file in your HTML</li>
+					<li>Include the <code>scripts.js</code> file in your HTML for core components</li>
+					<li>Include the <code>axiom.js</code> file for the new components (Modal and Notification System)</li>
+					<li>Include the <code>components.css</code> file for styling the new components</li>
 					<li>Add the appropriate HTML markup for the component you want to use</li>
 					<li>The components will be automatically initialized when the page loads</li>
 				</ol>
+
+				<pre><code class="language-html">&lt;!-- Core Axiom CSS --&gt;
+&lt;link rel="stylesheet" href="css/axiom.css"&gt;
+
+&lt;!-- Component-specific CSS --&gt;
+&lt;link rel="stylesheet" href="css/components.css"&gt;
+
+&lt;!-- Core Axiom JavaScript --&gt;
+&lt;script src="js/scripts.js"&gt;&lt;/script&gt;
+
+&lt;!-- New Components JavaScript --&gt;
+&lt;script src="js/axiom.js"&gt;&lt;/script&gt;</code></pre>
 
 				<h4>Available JavaScript Components</h4>
 				<ul>
@@ -708,6 +751,8 @@ document.addEventListener('DOMContentLoaded', initAxiom);</code></pre>
 					<li><strong>Dropdown Menu:</strong> Interactive dropdown menus</li>
 					<li><strong>Progress Bar:</strong> Interactive progress indicators</li>
 					<li><strong>Loading Throbber:</strong> Animated loading indicators</li>
+					<li><strong><a href="examples/components.html#modal-component">Modal/Dialog:</a></strong> Accessible modal windows for displaying content that requires user interaction</li>
+					<li><strong><a href="examples/components.html#notification-system">Notification System:</a></strong> Centralized system for managing toast notifications</li>
 				</ul>
 
 				<h4>Customizing Components</h4>
@@ -741,17 +786,25 @@ function initAxiom() {
 				<h4>Suggested New Components</h4>
 				<p>The following components would make the Axiom01 UI framework more robust:</p>
 				<ul>
-					<li><strong>Modal/Dialog:</strong> Accessible modal windows for displaying content that requires user interaction</li>
 					<li><strong>Carousel/Slider:</strong> Interactive image or content sliders with navigation controls</li>
 					<li><strong>Autocomplete:</strong> Input field with suggestions as the user types</li>
 					<li><strong>Date Picker:</strong> Calendar-based date selection component</li>
 					<li><strong>Tooltip (JS-enhanced):</strong> Enhanced tooltips with positioning and interaction</li>
-					<li><strong>Notification System:</strong> Centralized system for managing toast notifications</li>
 					<li><strong>Form Validation:</strong> Client-side form validation with error messaging</li>
 					<li><strong>Infinite Scroll:</strong> Automatically load more content as the user scrolls</li>
 					<li><strong>Lightbox:</strong> Image/media viewer with overlay and navigation</li>
 					<li><strong>Drag and Drop:</strong> Sortable lists and draggable elements</li>
 				</ul>
+
+				<div class="alert success">
+					<h4>Recently Added Components</h4>
+					<p>Check out our newest components:</p>
+					<ul>
+						<li><strong><a href="examples/components.html#modal-component">Modal/Dialog</a></strong> - Accessible modal windows for displaying content</li>
+						<li><strong><a href="examples/components.html#notification-system">Notification System</a></strong> - Toast notifications for user feedback</li>
+					</ul>
+					<p><a href="examples/components.html" class="button small">View Examples</a></p>
+				</div>
 			</article>
 
 			<article aria-labelledby="throbber-heading">

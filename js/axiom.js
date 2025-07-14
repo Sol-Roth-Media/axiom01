@@ -1,0 +1,382 @@
+/**
+ * Axiom01 Framework Core JavaScript
+ * v0.1.3 - New Component Implementations
+ *
+ * This file contains the core JavaScript functionality for Axiom01 components.
+ * It follows the Axiom philosophy of minimal, accessible, and semantic-first design.
+ */
+
+// --- Component Registry ---
+const AxiomComponents = {
+  initialized: false,
+  registry: {},
+  
+  /**
+   * Register a component with the Axiom framework
+   * @param {string} name - Component name
+   * @param {Function} initFunction - Initialization function
+   */
+  register: function(name, initFunction) {
+    this.registry[name] = initFunction;
+    return this;
+  },
+  
+  /**
+   * Initialize all registered components
+   */
+  initAll: function() {
+    if (this.initialized) return;
+    
+    Object.keys(this.registry).forEach(component => {
+      try {
+        this.registry[component]();
+      } catch (error) {
+        console.error(`Error initializing ${component}:`, error);
+      }
+    });
+    
+    this.initialized = true;
+    console.log('Axiom01 components initialized');
+  }
+};
+
+// --- Modal Component ---
+/**
+ * Modal/Dialog component
+ * 
+ * Features:
+ * - Accessible with proper ARIA attributes
+ * - Keyboard navigation (Escape to close, Tab trap within modal)
+ * - Click outside to close
+ * - Focus management (returns focus to trigger element)
+ * - Prevents background scrolling when open
+ */
+AxiomComponents.register('modal', function initModal() {
+  const modalTriggers = document.querySelectorAll('[data-modal-target]');
+  
+  modalTriggers.forEach(trigger => {
+    const modalId = trigger.getAttribute('data-modal-target');
+    const modal = document.getElementById(modalId);
+    
+    if (!modal) {
+      console.warn(`Modal with ID "${modalId}" not found for trigger:`, trigger);
+      return;
+    }
+    
+    // Ensure modal has proper ARIA attributes
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    
+    if (!modal.hasAttribute('aria-labelledby')) {
+      const heading = modal.querySelector('h1, h2, h3, h4, h5, h6');
+      if (heading) {
+        const headingId = heading.id || `${modalId}-title`;
+        heading.id = headingId;
+        modal.setAttribute('aria-labelledby', headingId);
+      }
+    }
+    
+    // Find close buttons
+    const closeButtons = modal.querySelectorAll('[data-modal-close]');
+    
+    // Setup trigger click handler
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      openModal(modal, trigger);
+    });
+    
+    // Setup close button handlers
+    closeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        closeModal(modal, trigger);
+      });
+    });
+    
+    // Setup click outside to close
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal(modal, trigger);
+      }
+    });
+    
+    // Setup keyboard navigation
+    modal.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeModal(modal, trigger);
+      } else if (event.key === 'Tab') {
+        trapTabKey(event, modal);
+      }
+    });
+  });
+  
+  /**
+   * Opens a modal dialog
+   * @param {HTMLElement} modal - The modal element
+   * @param {HTMLElement} trigger - The element that triggered the modal
+   */
+  function openModal(modal, trigger) {
+    // Store the element that had focus before opening the modal
+    modal._previouslyFocused = document.activeElement;
+    
+    // Show the modal
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    
+    // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
+    
+    // Set focus to the first focusable element
+    const focusableElements = getFocusableElements(modal);
+    if (focusableElements.length) {
+      setTimeout(() => {
+        focusableElements[0].focus();
+      }, 50);
+    }
+    
+    // Dispatch custom event
+    modal.dispatchEvent(new CustomEvent('axiom:modal:open', {
+      bubbles: true,
+      detail: { modal, trigger }
+    }));
+  }
+  
+  /**
+   * Closes a modal dialog
+   * @param {HTMLElement} modal - The modal element
+   * @param {HTMLElement} trigger - The element that triggered the modal
+   */
+  function closeModal(modal, trigger) {
+    // Hide the modal
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    
+    // Restore background scrolling
+    document.body.style.overflow = '';
+    
+    // Return focus to the trigger element
+    if (modal._previouslyFocused) {
+      modal._previouslyFocused.focus();
+    }
+    
+    // Dispatch custom event
+    modal.dispatchEvent(new CustomEvent('axiom:modal:close', {
+      bubbles: true,
+      detail: { modal, trigger }
+    }));
+  }
+  
+  /**
+   * Traps the tab key inside the modal
+   * @param {Event} event - The keydown event
+   * @param {HTMLElement} modal - The modal element
+   */
+  function trapTabKey(event, modal) {
+    const focusableElements = getFocusableElements(modal);
+    
+    if (focusableElements.length === 0) return;
+    
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    
+    // If shift+tab on first element, move to last element
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } 
+    // If tab on last element, move to first element
+    else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  }
+  
+  /**
+   * Gets all focusable elements within a container
+   * @param {HTMLElement} container - The container element
+   * @returns {Array} Array of focusable elements
+   */
+  function getFocusableElements(container) {
+    return Array.from(container.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+  }
+});
+
+// --- Notification System ---
+/**
+ * Notification System component
+ * 
+ * Features:
+ * - Creates toast notifications
+ * - Supports different types (success, error, info, warning)
+ * - Auto-dismissal with configurable duration
+ * - Accessible with proper ARIA attributes
+ * - Animated entrance and exit
+ */
+AxiomComponents.register('notifications', function initNotifications() {
+  // Create notification container if it doesn't exist
+  let container = document.querySelector('.axiom-notifications');
+  
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'axiom-notifications';
+    container.setAttribute('aria-live', 'polite');
+    container.setAttribute('aria-relevant', 'additions');
+    document.body.appendChild(container);
+  }
+  
+  // Add to global namespace for easy access
+  window.AxiomNotify = {
+    /**
+     * Show a notification
+     * @param {string} message - The notification message
+     * @param {Object} options - Configuration options
+     */
+    show: function(message, options = {}) {
+      const defaults = {
+        type: 'info',           // info, success, error, warning
+        duration: 5000,         // ms, 0 for no auto-dismiss
+        dismissible: true,      // whether user can dismiss with a close button
+        position: 'top-right',  // top-right, top-left, bottom-right, bottom-left
+        icon: true              // whether to show an icon
+      };
+      
+      const settings = { ...defaults, ...options };
+      
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.className = `axiom-notification ${settings.type}`;
+      notification.setAttribute('role', 'status');
+      if (settings.type === 'error') {
+        notification.setAttribute('role', 'alert');
+      }
+      
+      // Add position class
+      container.className = `axiom-notifications ${settings.position}`;
+      
+      // Create content
+      let iconHtml = '';
+      if (settings.icon) {
+        // Use appropriate icon based on type
+        switch(settings.type) {
+          case 'success':
+            iconHtml = '<div class="notification-icon">✓</div>';
+            break;
+          case 'error':
+            iconHtml = '<div class="notification-icon">✕</div>';
+            break;
+          case 'warning':
+            iconHtml = '<div class="notification-icon">⚠</div>';
+            break;
+          default:
+            iconHtml = '<div class="notification-icon">ℹ</div>';
+        }
+      }
+      
+      // Create dismiss button if dismissible
+      let dismissButton = '';
+      if (settings.dismissible) {
+        dismissButton = '<button class="notification-close" aria-label="Dismiss notification">✕</button>';
+      }
+      
+      // Set content
+      notification.innerHTML = `
+        ${iconHtml}
+        <div class="notification-content">${message}</div>
+        ${dismissButton}
+      `;
+      
+      // Add to container
+      container.appendChild(notification);
+      
+      // Setup auto-dismiss
+      let dismissTimeout;
+      if (settings.duration > 0) {
+        dismissTimeout = setTimeout(() => {
+          dismissNotification(notification);
+        }, settings.duration);
+      }
+      
+      // Setup dismiss button
+      if (settings.dismissible) {
+        const closeButton = notification.querySelector('.notification-close');
+        closeButton.addEventListener('click', () => {
+          clearTimeout(dismissTimeout);
+          dismissNotification(notification);
+        });
+      }
+      
+      // Add entrance animation class
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 10);
+      
+      // Return the notification element for potential further manipulation
+      return notification;
+    },
+    
+    /**
+     * Show a success notification
+     * @param {string} message - The notification message
+     * @param {Object} options - Configuration options
+     */
+    success: function(message, options = {}) {
+      return this.show(message, { ...options, type: 'success' });
+    },
+    
+    /**
+     * Show an error notification
+     * @param {string} message - The notification message
+     * @param {Object} options - Configuration options
+     */
+    error: function(message, options = {}) {
+      return this.show(message, { ...options, type: 'error' });
+    },
+    
+    /**
+     * Show a warning notification
+     * @param {string} message - The notification message
+     * @param {Object} options - Configuration options
+     */
+    warning: function(message, options = {}) {
+      return this.show(message, { ...options, type: 'warning' });
+    },
+    
+    /**
+     * Show an info notification
+     * @param {string} message - The notification message
+     * @param {Object} options - Configuration options
+     */
+    info: function(message, options = {}) {
+      return this.show(message, { ...options, type: 'info' });
+    },
+    
+    /**
+     * Clear all notifications
+     */
+    clearAll: function() {
+      const notifications = container.querySelectorAll('.axiom-notification');
+      notifications.forEach(notification => {
+        dismissNotification(notification);
+      });
+    }
+  };
+  
+  /**
+   * Dismisses a notification with animation
+   * @param {HTMLElement} notification - The notification element
+   */
+  function dismissNotification(notification) {
+    notification.classList.add('hiding');
+    
+    // Remove after animation completes
+    notification.addEventListener('animationend', () => {
+      notification.remove();
+    });
+  }
+});
+
+// --- Initialize all components when DOM is loaded ---
+document.addEventListener('DOMContentLoaded', function() {
+  AxiomComponents.initAll();
+});
