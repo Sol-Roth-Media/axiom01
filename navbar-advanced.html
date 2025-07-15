@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Advanced Testing | Axiom Framework</title>
+  <link rel="stylesheet" href="css/axiom.css">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/alerts.css">
+  <link rel="stylesheet" href="navbar-fix.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <style>
+    /* Additional styles for advanced navbar features */
+    /* Dropdown menu styles */
+    .navbar .nav-links .dropdown {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .nav-links .dropdown > a {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .nav-links .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--a-color-surface);
+      min-width: 200px;
+      box-shadow: 0 4px 12px var(--a-shadow-color, rgba(0,0,0,0.12));
+      border-radius: var(--a-border-radius-base);
+      padding: var(--a-padding-small);
+      z-index: 100;
+      border: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+      margin-top: 2px;
+    }
+
+    .navbar .nav-links .dropdown:hover .dropdown-menu,
+    .navbar .nav-links .dropdown:focus-within .dropdown-menu {
+      display: block;
+    }
+
+    .navbar .nav-links .dropdown-menu a {
+      padding: var(--a-padding-small) var(--a-padding-base);
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .navbar .nav-links .dropdown-menu li {
+      height: auto;
+      margin-bottom: 2px;
+    }
+
+    /* Dropdown indicator */
+    .navbar .nav-links .dropdown > a i {
+      margin-left: 6px;
+      font-size: 0.8em;
+      transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .navbar .nav-links .dropdown:hover > a i,
+    .navbar .nav-links .dropdown:focus-within > a i {
+      transform: rotate(180deg);
+    }
+
+    /* Sticky navbar styles */
+    .navbar.sticky {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* Scroll-aware navbar styles */
+    .navbar.scroll-aware {
+      transition: padding 0.3s, background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .navbar.scroll-aware.scrolled {
+      padding: var(--a-padding-tiny) var(--a-padding-base);
+      background-color: var(--a-color-surface);
+      box-shadow: 0 4px 12px var(--a-shadow-color, rgba(0,0,0,0.2));
+    }
+
+    /* Search functionality styles */
+    .navbar .search-container {
+      position: relative;
+      margin-left: var(--a-margin-base);
+      order: 3;
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .search-container input {
+      padding: var(--a-padding-small);
+      border-radius: var(--a-border-radius-base);
+      border: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+      background-color: var(--a-color-surface);
+      color: var(--a-color-on-surface);
+      width: 180px;
+      height: 36px;
+      transition: width 0.3s, border-color 0.2s;
+      font-size: var(--a-font-size-small);
+    }
+
+    .navbar .search-container input:focus {
+      width: 220px;
+      border-color: var(--a-color-primary);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(var(--a-color-primary-rgb), 0.2);
+    }
+
+    .navbar .search-container button {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--a-color-on-surface);
+      cursor: pointer;
+      font-size: 0.9em;
+      height: 24px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Compact navbar styles */
+    .navbar.compact {
+      padding: var(--a-padding-tiny) var(--a-padding-base);
+    }
+
+    .navbar.compact .logo {
+      font-size: 0.9em;
+    }
+
+    .navbar.compact .nav-links a {
+      padding: var(--a-padding-tiny) var(--a-padding-small);
+    }
+
+    /* Improved layout for navbar elements */
+    .navbar {
+      flex-wrap: nowrap;
+      gap: var(--a-grid-gutter, 8px);
+      align-items: center;
+      height: auto;
+      min-height: 60px;
+      padding: var(--a-padding-small) var(--a-padding-large);
+      box-sizing: border-box;
+    }
+
+    .navbar .logo {
+      margin-right: var(--a-margin-small);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .theme-switcher-container {
+      margin-right: var(--a-margin-small);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Ensure proper spacing and alignment */
+    .navbar .nav-links {
+      flex: 1;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .navbar .nav-links li {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .navbar .search-container,
+    .navbar .theme-toggle {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .theme-toggle {
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      margin-left: var(--a-margin-small);
+      background-color: rgba(var(--a-color-primary-rgb), 0.05);
+      border-radius: 50%;
+      border: none;
+      color: var(--a-color-on-surface);
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+      font-size: 1.2rem;
+    }
+
+    .navbar .theme-toggle:hover,
+    .navbar .theme-toggle:focus {
+      background-color: rgba(var(--a-color-primary-rgb), 0.1);
+      color: var(--a-color-primary);
+    }
+
+    /* Mobile adjustments for advanced features */
+    @media (max-width: 900px) {
+      .navbar {
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: var(--a-padding-small);
+      }
+
+      /* Ensure proper ordering of elements */
+      .navbar .logo {
+        order: 1;
+        margin-right: auto;
+      }
+
+      .navbar .menu-toggle {
+        order: 3;
+        margin-left: var(--a-margin-small);
+      }
+
+      .navbar .theme-switcher-container {
+        order: 2;
+        margin-right: 0;
+      }
+
+      .navbar .nav-links {
+        order: 4;
+        width: 100%;
+        justify-content: flex-start;
+        height: auto;
+        margin-top: var(--a-margin-small);
+      }
+
+      .navbar .nav-links li {
+        height: auto;
+      }
+
+      .navbar .search-container {
+        order: 5;
+        width: 100%;
+        margin: var(--a-margin-small) 0;
+        height: auto;
+      }
+
+      .navbar .search-container input {
+        width: 100%;
+      }
+
+      .navbar .theme-toggle {
+        order: 6;
+        margin-left: auto;
+      }
+
+      /* Dropdown menu adjustments */
+      .navbar .nav-links .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        background-color: rgba(var(--a-color-primary-rgb), 0.05);
+        margin-left: var(--a-margin-base);
+        margin-top: var(--a-margin-tiny);
+        border-radius: var(--a-border-radius-small);
+        width: calc(100% - var(--a-margin-base));
+      }
+
+      /* Ensure dropdown indicator rotates properly on mobile */
+      .navbar .nav-links .dropdown:hover > a i,
+      .navbar .nav-links .dropdown:focus-within > a i {
+        transform: rotate(180deg);
+      }
+
+      /* Search container adjustments */
+      .navbar .search-container input,
+      .navbar .search-container input:focus {
+        width: 100%;
+        max-width: none;
+      }
+
+      /* Improve spacing between nav items */
+      .navbar .nav-links li {
+        width: 100%;
+      }
+
+      /* Adjust active indicator for mobile */
+      .navbar .nav-links a.active::after {
+        width: 4px;
+        height: 70%;
+        left: 0;
+        top: 15%;
+        transform: none;
+        border-radius: 0 var(--a-border-radius-small) var(--a-border-radius-small) 0;
+      }
+    }
+
+    /* Skip to main content link for accessibility */
+    .skip-to-content {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--a-color-primary);
+      color: var(--a-color-on-primary);
+      padding: var(--a-padding-small) var(--a-padding-base);
+      z-index: 1001;
+      transition: top 0.3s;
+    }
+
+    .skip-to-content:focus {
+      top: 0;
+    }
+
+    /* Example section styles */
+    .example-section {
+      margin: var(--a-margin-large) 0;
+      padding: var(--a-padding-large);
+      border: 1px solid var(--a-color-outline);
+      border-radius: var(--a-border-radius-base);
+      background-color: var(--a-color-surface);
+    }
+
+    .example-section h3 {
+      margin-top: 0;
+      border-bottom: 1px solid var(--a-color-outline);
+      padding-bottom: var(--a-padding-small);
+    }
+
+    .controls {
+      margin: var(--a-margin-base) 0;
+      display: flex;
+      gap: var(--a-grid-gutter);
+      flex-wrap: wrap;
+    }
+
+    .controls button {
+      padding: var(--a-padding-small) var(--a-padding-base);
+      background-color: var(--a-color-primary);
+      color: var(--a-color-on-primary);
+      border: none;
+      border-radius: var(--a-border-radius-small);
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .controls button:hover {
+      background-color: var(--a-color-primary-dark, var(--a-color-primary));
+    }
+
+    .controls label {
+      display: flex;
+      align-items: center;
+      gap: calc(var(--a-grid-gutter) / 2);
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip to main content link for accessibility -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <header class="full-bleed">
+    <!-- Advanced Navbar with new features -->
+    <nav class="navbar small sticky" id="advanced-navbar">
+      <!-- Logo -->
+      <a href="index.html" class="logo" aria-label="Axiom Framework Home v0.1">
+        <div class="logo-text">
+          <span>[Ax</span>
+          <span><span style="color: var(--a-color-primary, #00c005); display: inline;">01</span>]</span>
+          <span></span>
+        </div>
+        <small class="version">v0.1</small>
+      </a>
+
+      <!-- Theme Switcher -->
+      <div class="theme-switcher-container">
+        <label for="theme-select" class="visually-hidden">Select Theme:</label>
+        <select id="theme-select" name="theme"></select>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links-advanced">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="nav-links-advanced">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#usage">Get started</a></li>
+        <li><a href="index.html#typography">Docs</a></li>
+
+        <!-- Dropdown menu example -->
+        <li class="dropdown">
+          <a href="#" aria-haspopup="true" aria-expanded="false">Components <i class="fa-solid fa-chevron-down"></i></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="index.html#buttons" role="menuitem">Buttons</a></li>
+            <li><a href="index.html#cards" role="menuitem">Cards</a></li>
+            <li><a href="index.html#alerts" role="menuitem">Alerts</a></li>
+            <li><a href="index.html#forms" role="menuitem">Forms</a></li>
+          </ul>
+        </li>
+
+        <li><a href="navbar-docs.html">Navbar Docs</a></li>
+        <li><a href="navbar-advanced.html" class="active">Navbar Advanced</a></li>
+        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      </ul>
+
+      <!-- Search functionality -->
+      <div class="search-container">
+        <input type="text" placeholder="Search..." aria-label="Search">
+        <button type="button" aria-label="Submit search">
+          <i class="fa-solid fa-search"></i>
+        </button>
+      </div>
+
+      <!-- Theme Toggle Button -->
+      <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode">
+        &#9728;
+      </button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section>
+      <h1>Navbar Advanced Testing</h1>
+      <nav>
+        <a href="index.html">Back to Home</a> | 
+        <a href="navbar-docs.html">Basic Navbar Docs</a>
+      </nav>
+
+      <p>This page is dedicated to testing and showcasing advanced navbar features without affecting the existing navbar implementation. Use the controls below to toggle different features and experiment with new functionality.</p>
+
+      <div class="example-section">
+        <h3>Navbar Controls</h3>
+        <p>Toggle different navbar features to see how they work:</p>
+
+        <div class="controls">
+          <label>
+            <input type="checkbox" id="toggle-sticky" checked>
+            Sticky Navbar
+          </label>
+
+          <label>
+            <input type="checkbox" id="toggle-scroll-aware">
+            Scroll-Aware Behavior
+          </label>
+
+          <label>
+            <input type="checkbox" id="toggle-compact">
+            Compact Mode
+          </label>
+
+          <label>
+            <input type="checkbox" id="toggle-search" checked>
+            Search Functionality
+          </label>
+        </div>
+
+        <button id="reset-navbar">Reset All Features</button>
+      </div>
+
+      <div class="example-section">
+        <h3>Dropdown Menu Support</h3>
+        <p>The advanced navbar includes dropdown menu support. Hover over the "Components" link in the navbar to see the dropdown menu.</p>
+        <p>Features:</p>
+        <ul>
+          <li>Hover and focus-within activation</li>
+          <li>Keyboard navigation support</li>
+          <li>Proper ARIA attributes for accessibility</li>
+          <li>Mobile-responsive design</li>
+        </ul>
+      </div>
+
+      <div class="example-section">
+        <h3>Accessibility Enhancements</h3>
+        <p>The advanced navbar includes several accessibility improvements:</p>
+        <ul>
+          <li>Skip to main content link (try pressing Tab when the page loads)</li>
+          <li>Enhanced keyboard navigation</li>
+          <li>ARIA live regions for menu state announcements</li>
+          <li>Improved focus states for all interactive elements</li>
+        </ul>
+      </div>
+
+      <div class="example-section">
+        <h3>Scroll-Aware Behavior</h3>
+        <p>When enabled, the navbar will change appearance based on scroll position:</p>
+        <ul>
+          <li>Becomes more compact when scrolling down</li>
+          <li>Increases shadow depth for better visual hierarchy</li>
+          <li>Smooth transitions between states</li>
+        </ul>
+        <p>Try enabling the "Scroll-Aware Behavior" option and scroll down to see the effect.</p>
+      </div>
+
+      <div class="example-section">
+        <h3>Search Functionality</h3>
+        <p>The search input in the navbar demonstrates:</p>
+        <ul>
+          <li>Expandable search field on focus</li>
+          <li>Proper keyboard accessibility</li>
+          <li>Responsive design for mobile devices</li>
+        </ul>
+        <p>Note: This is a demonstration only and doesn't perform actual searches.</p>
+      </div>
+
+      <!-- Add more content to enable scrolling for testing scroll-aware behavior -->
+      <div style="height: 1000px; margin-top: 50px; padding: 20px; background-color: var(--a-color-surface-variant); border-radius: var(--a-border-radius-base);">
+        <h3>Scroll Down Area</h3>
+        <p>This area exists to provide enough content to test the scroll-aware navbar behavior. Scroll up and down to see how the navbar responds when the scroll-aware option is enabled.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/scripts.js"></script>
+  <script src="navbar-fix.js"></script>
+  <script>
+    // Advanced navbar functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const navbar = document.getElementById('advanced-navbar');
+      const toggleSticky = document.getElementById('toggle-sticky');
+      const toggleScrollAware = document.getElementById('toggle-scroll-aware');
+      const toggleCompact = document.getElementById('toggle-compact');
+      const toggleSearch = document.getElementById('toggle-search');
+      const resetButton = document.getElementById('reset-navbar');
+      const searchContainer = document.querySelector('.search-container');
+
+      // Initialize controls based on current state
+      toggleSticky.checked = navbar.classList.contains('sticky');
+      toggleScrollAware.checked = navbar.classList.contains('scroll-aware');
+      toggleCompact.checked = navbar.classList.contains('compact');
+      toggleSearch.checked = !searchContainer.style.display || searchContainer.style.display !== 'none';
+
+      // Toggle sticky navbar
+      toggleSticky.addEventListener('change', function() {
+        navbar.classList.toggle('sticky', this.checked);
+      });
+
+      // Toggle scroll-aware behavior
+      toggleScrollAware.addEventListener('change', function() {
+        navbar.classList.toggle('scroll-aware', this.checked);
+
+        if (this.checked) {
+          // Add scroll event listener
+          window.addEventListener('scroll', handleScroll);
+        } else {
+          // Remove scroll event listener and scrolled class
+          window.removeEventListener('scroll', handleScroll);
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Toggle compact mode
+      toggleCompact.addEventListener('change', function() {
+        navbar.classList.toggle('compact', this.checked);
+      });
+
+      // Toggle search functionality
+      toggleSearch.addEventListener('change', function() {
+        searchContainer.style.display = this.checked ? '' : 'none';
+      });
+
+      // Reset all features
+      resetButton.addEventListener('click', function() {
+        navbar.classList.remove('scroll-aware', 'scrolled', 'compact');
+        navbar.classList.add('sticky');
+        searchContainer.style.display = '';
+
+        // Update checkboxes
+        toggleSticky.checked = true;
+        toggleScrollAware.checked = false;
+        toggleCompact.checked = false;
+        toggleSearch.checked = true;
+
+        // Remove scroll event listener
+        window.removeEventListener('scroll', handleScroll);
+      });
+
+      // Handle scroll event for scroll-aware behavior
+      function handleScroll() {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+
+      // Initialize scroll event listener if scroll-aware is enabled
+      if (toggleScrollAware.checked) {
+        window.addEventListener('scroll', handleScroll);
+      }
+
+      // Enhance dropdown menu accessibility
+      const dropdowns = document.querySelectorAll('.dropdown');
+
+      dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('a');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        const menuItems = menu.querySelectorAll('a');
+
+        // Add keyboard navigation for dropdown
+        trigger.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            trigger.setAttribute('aria-expanded', 'true');
+            menu.style.display = 'block';
+            menuItems[0].focus();
+          }
+        });
+
+        // Add keyboard navigation within dropdown menu
+        menuItems.forEach((item, index) => {
+          item.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              menuItems[(index + 1) % menuItems.length].focus();
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              menuItems[(index - 1 + menuItems.length) % menuItems.length].focus();
+            } else if (e.key === 'Escape') {
+              e.preventDefault();
+              menu.style.display = 'none';
+              trigger.setAttribute('aria-expanded', 'false');
+              trigger.focus();
+            } else if (e.key === 'Tab' && !e.shiftKey && index === menuItems.length - 1) {
+              menu.style.display = 'none';
+              trigger.setAttribute('aria-expanded', 'false');
+            } else if (e.key === 'Tab' && e.shiftKey && index === 0) {
+              menu.style.display = 'none';
+              trigger.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) {
+            menu.style.display = '';
+            trigger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
+      // Add ARIA live region for menu state announcements
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      // Create ARIA live region
+      const liveRegion = document.createElement('div');
+      liveRegion.setAttribute('aria-live', 'polite');
+      liveRegion.setAttribute('class', 'visually-hidden');
+      document.body.appendChild(liveRegion);
+
+      // Announce menu state changes
+      menuToggle.addEventListener('click', function() {
+        setTimeout(() => {
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          liveRegion.textContent = isExpanded ? 'Navigation menu expanded' : 'Navigation menu collapsed';
+        }, 100);
+      });
+    });
+  </script>
+</body>
+</html>

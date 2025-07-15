@@ -31,18 +31,18 @@ This document outlines pending tasks, improvements, and future features for the 
 
 ## Component Enhancements
 
-- [ ] Add missing components mentioned in documentation:
-    - [ ] Accordions implementation
-    - [ ] Dropdowns implementation
+- [x] Add missing components mentioned in documentation:
+    - [x] Accordions implementation
+    - [x] Dropdowns implementation
 - [ ] Add Components and examples to the index.html page
     - [ ] Cards
-    - [ ] Gradient Swatches
+    - [x] Gradient Swatches
     - [ ] Semantic Colors (buttons etc)
-- [ ] Enhance accessibility of all components:
-    - [ ] Improve focus states
-    - [ ] Add appropriate ARIA attributes
-    - [ ] Ensure keyboard navigation works properly
-- [ ] Add animations for interactive components
+- [x] Enhance accessibility of all components:
+    - [x] Improve focus states
+    - [x] Add appropriate ARIA attributes
+    - [x] Ensure keyboard navigation works properly
+- [x] Add animations for interactive components
 - [ ] Fix inconsistencies between component examples and documentation
 
 ## Documentation
@@ -160,8 +160,8 @@ This document outlines pending tasks, improvements, and future features for the 
 - [x] Navigation
 - [x] Cards
 - [x] Tabs
-- [ ] Accordions
-- [ ] Dropdowns
+- [x] Accordions
+- [x] Dropdowns
 - [ ] Progress indicators
 - [x] Create dedicated grid-examples.html page to demonstrate semantic and custom grid layouts
 - [x] Add comprehensive grid system documentation and examples to AXIOM01_STYLING_GUIDE.md

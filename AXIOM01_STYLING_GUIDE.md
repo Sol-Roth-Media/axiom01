@@ -142,12 +142,16 @@ The Axiom01 Navbar is a responsive, accessible navigation component that follows
 
 ### HTML Structure
 ```html
-<nav class="navbar small">
+<!-- Skip to main content link for accessibility -->
+<a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+<nav class="navbar small sticky" id="advanced-navbar">
   <!-- Logo -->
-  <a href="#" class="logo" aria-label="Site Name">
+  <a href="#" class="logo" aria-label="Axiom Framework Home v0.1">
     <div class="logo-text">
       <span>[Ax</span>
-      <span><span style="color: #00c005;">01</span>]</span>
+      <span><span style="color: var(--a-color-primary, #00c005); display: inline;">01</span>]</span>
+      <span></span>
     </div>
     <small class="version">v0.1</small>
   </a>
@@ -159,18 +163,39 @@ The Axiom01 Navbar is a responsive, accessible navigation component that follows
   </div>
 
   <!-- Mobile Menu Toggle -->
-  <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links-id">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
+  <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links-main">
+    <i class="fa-solid fa-bars" aria-hidden="true"></i>
   </button>
 
   <!-- Navigation Links -->
-  <ul class="nav-links" id="nav-links-id">
-    <li><a href="#">Link 1</a></li>
-    <li><a href="#" class="active">Active Link</a></li>
-    <li><a href="#">Link 3</a></li>
+  <ul class="nav-links" id="nav-links-main">
+    <li><a href="#about">About</a></li>
+    <li><a href="#usage">Get started</a></li>
+    <li><a href="#typography">Docs</a></li>
+
+    <!-- Dropdown menu example -->
+    <li class="dropdown">
+      <a href="#components" aria-haspopup="true" aria-expanded="false">Components <i class="fa-solid fa-chevron-down"></i></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#buttons" role="menuitem">Buttons</a></li>
+        <li><a href="#cards" role="menuitem">Cards</a></li>
+        <li><a href="#alerts" role="menuitem">Alerts</a></li>
+        <li><a href="#forms" role="menuitem">Forms</a></li>
+      </ul>
+    </li>
+
+    <li><a href="components.html">Demo</a></li>
+    <li><a href="forms-advanced.html">Forms</a></li>
+    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener noreferrer">GitHub</a></li>
   </ul>
+
+  <!-- Search functionality (Optional) -->
+  <div class="search-container">
+    <input type="text" placeholder="Search..." aria-label="Search">
+    <button type="button" aria-label="Submit search">
+      <i class="fa-solid fa-search"></i>
+    </button>
+  </div>
 
   <!-- Theme Toggle Button (Optional) -->
   <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode">
@@ -183,18 +208,49 @@ The Axiom01 Navbar is a responsive, accessible navigation component that follows
 - Include `navbar.css` in your HTML head after the main Axiom01 CSS files
 - Include `navbar.js` before the closing body tag
 - Use the `.small` class for a more compact navbar
+- Use the `.sticky` class to make the navbar stick to the top of the viewport
 - Add the `.active` class to the current page's link
 - Ensure the `aria-controls` attribute on the menu toggle matches the `id` of the nav links
 - The navbar is responsive by default and will show a hamburger menu on screens smaller than 900px
+- Include Font Awesome for the hamburger icon and dropdown indicators
+
+### Advanced Features
+- **Dropdown Menus**: Use the `.dropdown` class on a list item to create a dropdown menu
+- **Search Functionality**: Include the `.search-container` div for a search input
+- **Sticky Navigation**: Add the `.sticky` class to make the navbar stick to the top of the viewport
+- **Scroll-Aware Behavior**: Add the `.scroll-aware` class to change the navbar appearance on scroll
+- **Compact Mode**: Add the `.compact` class for a more compact navbar
+- **Skip to Content**: Add a "Skip to main content" link with class `.skip-to-content` before the navbar
 
 ### Accessibility Features
-- ARIA attributes for screen readers (aria-label, aria-expanded, aria-controls)
-- Keyboard navigation support
+- ARIA attributes for screen readers (aria-label, aria-expanded, aria-controls, aria-haspopup)
+- Keyboard navigation support for all interactive elements
 - Focus states for interactive elements
 - Semantic HTML structure
 - Visually hidden labels for screen readers
+- Skip to content link for keyboard users
+- ARIA live regions for menu state announcements
 
-For more detailed documentation and examples, see [navbar-docs.html](navbar-docs.html).
+### ARIA Live Region Implementation
+For improved accessibility, the navbar includes an ARIA live region to announce menu state changes:
+
+```javascript
+// Create ARIA live region
+const liveRegion = document.createElement('div');
+liveRegion.setAttribute('aria-live', 'polite');
+liveRegion.setAttribute('class', 'visually-hidden');
+document.body.appendChild(liveRegion);
+
+// Announce menu state changes
+menuToggle.addEventListener('click', function() {
+  setTimeout(() => {
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    liveRegion.textContent = isExpanded ? 'Navigation menu expanded' : 'Navigation menu collapsed';
+  }, 100);
+});
+```
+
+For more detailed documentation and examples, see [navbar-docs.html](navbar-docs.html) and [navbar-advanced.html](navbar-advanced.html).
 
 ## 10. Reference & Resources
 - See [style-guide.html](style-guide.html) for full documentation of variables, components, and usage.
