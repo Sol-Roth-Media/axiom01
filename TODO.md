@@ -10,7 +10,11 @@ This document outlines pending tasks, improvements, and future features for the 
 - [x] Repair gradient displays and swatches in theme section
 - [x] Fix navbar mobile menu toggle behavior and styling
 - [x] Fix semantic color variables so color swatches display correctly in index.html
-- [ ] Ensure all components render correctly across themes
+- [x] Add missing semantic color swatches to index.html (success, error, warning, info, surface, background, outline)
+- [x] Audit colors_vars.css for semantic color variables
+- [x] Document color variable usage inline and in docs
+- [x] Validate theme switching and accessibility for all color swatches
+- [x] Ensure all components render correctly across themes
 
 ## CSS Improvements
 
@@ -23,6 +27,7 @@ This document outlines pending tasks, improvements, and future features for the 
 - [ ] Fix inconsistent naming patterns in CSS variables
 - [ ] Create proper CSS reset that doesn't conflict with framework styles
 - [ ] Improve cross-browser compatibility for flexbox and grid layouts
+- [ ] Refactor and optimize CSS files for selector specificity and file size
 
 ## Component Enhancements
 
@@ -163,3 +168,7 @@ This document outlines pending tasks, improvements, and future features for the 
 - [x] Add comprehensive grid system documentation and examples to AXIOM01_STYLING_GUIDE.md
 - [x] Increase max-width and enhance grid-examples.html with additional advanced grid patterns and clear documentation for each example
 - [ ] Audit and improve semantic color swatches and documentation in index.html
+- [ ] Continue improving the aesthetic and clarity of the index.html color and gradient sections
+- [ ] Add inline tooltips and documentation for color swatches in index.html
+- [ ] Ensure all color swatches respond correctly to theme changes
+- [ ] Improve layout and accessibility of color and gradient sections in index.html
