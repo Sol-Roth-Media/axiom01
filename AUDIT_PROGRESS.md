@@ -29,6 +29,12 @@ This file tracks the ongoing audit and refactoring of the AXIOM01 UI Framework, 
 - [x] Added accessible Tabs component example to style-guide.html.
 - [x] Added accessible Accordions component example to style-guide.html.
 - [x] Added accessible Dropdowns component example to style-guide.html and implemented full keyboard navigation, ARIA, and variable-driven styling in js/scripts.js and css/components.css.
+- [x] Fixed navbar mobile menu toggle behavior and styling (added responsive CSS for .navbar, .menu-toggle, and .nav-links; verified JS logic for accessibility and interaction).
+- [x] Added demo markup for alerts, buttons, cards, and modal to style-guide.html for theme rendering audit. Begin visual inspection of component rendering across all themes (in progress; verify alerts, buttons, cards, modal, tabs, accordions, dropdowns for consistency and accessibility).
+- [x] Created grid-examples.html to demonstrate semantic and custom grid layouts
+- [x] Expanded grid-examples.html with advanced grid patterns: nested grids, auto-fit/auto-fill, grid areas, alignment examples
+- [x] Increased max-width and added more advanced, clearly documented grid patterns to grid-examples.html for improved usability and clarity
+- [x] Added comprehensive grid system documentation and examples to AXIOM01_STYLING_GUIDE.md
 
 ### Findings & Suggestions
 #### css/site.css
@@ -39,6 +45,7 @@ This file tracks the ongoing audit and refactoring of the AXIOM01 UI Framework, 
 - Class structure is mostly semantic, but some utility-like classes and redundant/unused classes should be refactored or removed.
 - Responsiveness uses media queries and variable-driven margins, but some values are duplicated or hardcoded.
 - Accessibility: visually hidden styles for labels are present; confirm all interactive elements are keyboard accessible.
+- Standardized spacing variables in css/site.css: replaced all --a-space-* and hardcoded values with --a-padding-*, --a-margin-*, or --a-grid-gutter. Improved consistency for layout and component spacing.
 
 #### css/components.css
 - Spacing variables are inconsistently used (`--a-space-*`, hardcoded values, and some semantic variables). Standardize to `--a-padding-*`, `--a-margin-*`, or `--a-grid-gutter`.

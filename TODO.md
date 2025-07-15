@@ -8,7 +8,8 @@ This document outlines pending tasks, improvements, and future features for the 
 - [x] Fix theme switcher positioning on mobile displays
 - [x] Add alert styles for success, error, and info messages
 - [x] Repair gradient displays and swatches in theme section
-- [ ] Fix navbar mobile menu toggle behavior and styling
+- [x] Fix navbar mobile menu toggle behavior and styling
+- [x] Fix semantic color variables so color swatches display correctly in index.html
 - [ ] Ensure all components render correctly across themes
 
 ## CSS Improvements
@@ -158,3 +159,7 @@ This document outlines pending tasks, improvements, and future features for the 
 - [ ] Accordions
 - [ ] Dropdowns
 - [ ] Progress indicators
+- [x] Create dedicated grid-examples.html page to demonstrate semantic and custom grid layouts
+- [x] Add comprehensive grid system documentation and examples to AXIOM01_STYLING_GUIDE.md
+- [x] Increase max-width and enhance grid-examples.html with additional advanced grid patterns and clear documentation for each example
+- [ ] Audit and improve semantic color swatches and documentation in index.html

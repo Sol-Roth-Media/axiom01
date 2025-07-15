@@ -85,7 +85,59 @@ button:focus, .axiom-datepicker:focus {
 - Use ARIA attributes and roles in your markup for alerts, dialogs, and navigation.
 - Ensure color contrast meets WCAG standards (see style-guide.html for details).
 
-## 8. Reference & Resources
+## 8. Grid System: Semantic & Custom Layouts
+
+Axiom01 supports flexible grid layouts using CSS Grid and semantic HTML. You can build grids without classes (pure semantic) or with custom row/column classes for more control.
+
+### Semantic (Classless) Grid Example
+Use semantic elements and grid properties directly:
+```html
+<section style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--a-grid-gutter);">
+  <article>Column 1</article>
+  <article>Column 2</article>
+  <article>Column 3</article>
+</section>
+```
+- Use `var(--a-grid-gutter)` for consistent spacing.
+- Style child elements with variables for padding, background, etc.
+
+### Custom Row-Based Grid Example
+For more control, use row/column classes:
+```html
+<div class="a-row" style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--a-grid-gutter);">
+  <div class="a-col">Main Content</div>
+  <div class="a-col">Sidebar</div>
+</div>
+```
+- Adjust `grid-template-columns` for layout needs.
+- Use semantic markup inside columns.
+
+### Responsive Grid Example
+Make grids adapt to screen size:
+```html
+<div class="responsive-grid" style="display: grid; grid-template-columns: 1fr; gap: var(--a-grid-gutter);">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+<style>
+  @media (min-width: 600px) {
+    .responsive-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
+```
+- Use CSS variables and media queries for responsive layouts.
+
+**Best Practices:**
+- Prefer semantic HTML for accessibility and maintainability.
+- Use CSS variables for all spacing, colors, and typography.
+- Test grid layouts in multiple themes and screen sizes.
+
+See `grid-examples.html` for live demos.
+
+## 9. Reference & Resources
 - See [style-guide.html](style-guide.html) for full documentation of variables, components, and usage.
 - For live examples, visit [examples/components.html](examples/components.html).
 - For accessibility guidelines, refer to the [Axiom01 Accessibility Section](style-guide.html#accessibility).
