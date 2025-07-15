@@ -36,6 +36,18 @@ This file tracks the ongoing audit and refactoring of the AXIOM01 UI Framework, 
 - [x] Expanded grid-examples.html with advanced grid patterns: nested grids, auto-fit/auto-fill, grid areas, alignment examples
 - [x] Increased max-width and added more advanced, clearly documented grid patterns to grid-examples.html for improved usability and clarity
 - [x] Added comprehensive grid system documentation and examples to AXIOM01_STYLING_GUIDE.md
+- [x] Created navbar-docs.html for isolated Navbar testing and documentation.
+    - Linked from index.html navigation.
+    - Includes a list of improvement suggestions:
+        - Add keyboard navigation and focus states for accessibility.
+        - Make the menu-toggle button functional for mobile view.
+        - Provide visual feedback for active links.
+        - Allow theme switching to update navbar colors live.
+        - Consider adding a dropdown or mega-menu for more links.
+        - Improve logo accessibility and add version info back.
+        - Test responsiveness across devices and browsers.
+        - Document ARIA roles and attributes for screen readers.
+    - Next: Review and implement these suggestions in future audit cycles.
 
 ### Findings & Suggestions
 #### css/site.css

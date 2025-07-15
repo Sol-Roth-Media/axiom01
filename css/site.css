@@ -161,73 +161,65 @@
         flex-direction: column;
         position: absolute;
         top: 100%;
-        right: 0;
+        left: 0;
+        width: 100%;
         background: var(--a-color-surface, #fff);
-        box-shadow: var(--a-shadow-medium, 0 2px 4px rgba(0,0,0,0.1));
-        min-width: 180px;
-        max-width: 90vw;
-        border-radius: var(--a-border-radius-base, 5px);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s, visibility 0.2s, max-height 0.2s;
-        z-index: 1000;
+        box-shadow: 0 2px 8px var(--a-shadow-color, rgba(0,0,0,0.08));
+        z-index: 100;
+        padding: var(--a-padding-base);
     }
     .navbar .nav-links.open {
         display: flex;
-        opacity: 1;
-        visibility: visible;
-        max-height: 500px;
-        padding: var(--a-padding-base);
     }
-    .navbar .nav-links li {
-        margin-bottom: var(--a-margin-tiny);
+    .navbar .menu-toggle {
+        display: inline-flex;
     }
 }
 
-@media (min-width: 901px) {
-    .navbar .nav-links {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: var(--a-grid-gutter);
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    .navbar .nav-links li {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-    }
-    .navbar .nav-links a,
-    .navbar .nav-links button {
-        display: inline-block;
-        padding: var(--a-padding-small, 8px) var(--a-padding-base, 16px);
-        border-radius: var(--a-border-radius-base, 5px);
-        background: var(--a-color-surface, #fff);
-        color: var(--a-color-on-surface, #222);
-        text-decoration: none;
-        font-size: var(--a-font-size-base, 1rem);
-        font-weight: var(--a-font-weight-medium, 500);
-        border: none;
-        cursor: pointer;
-        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-        box-shadow: 0 1px 2px var(--a-shadow-color, rgba(0,0,0,0.08));
-        vertical-align: middle;
-    }
-    .navbar .nav-links a:hover,
-    .navbar .nav-links a:focus,
-    .navbar .nav-links button:hover,
-    .navbar .nav-links button:focus {
-        background: var(--a-color-primary-fade-active, rgba(0,0,0,0.05));
-        color: var(--a-color-primary, #007bff);
-        outline: none;
-    }
-    .menu-toggle {
-        display: none;
-    }
+/* Fix: Only show menu-toggle for the first navbar on small screens, and ensure the second navbar's toggle is visible and works independently. */
+
+/* Target the test navbar specifically for its toggle button and nav-links */
+@media (max-width: 900px) {
+  .navbar-test .menu-toggle {
+    display: inline-flex;
+  }
+  .navbar-test .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--a-color-surface, #fff);
+    box-shadow: 0 2px 8px var(--a-shadow-color, rgba(0,0,0,0.08));
+    z-index: 100;
+    padding: var(--a-padding-base);
+  }
+  .navbar-test .nav-links.open {
+    display: flex;
+  }
+}
+
+/* Ensure the main navbar's toggle only affects its own nav-links */
+@media (max-width: 900px) {
+  header.full-bleed .menu-toggle {
+    display: inline-flex;
+  }
+  header.full-bleed .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--a-color-surface, #fff);
+    box-shadow: 0 2px 8px var(--a-shadow-color, rgba(0,0,0,0.08));
+    z-index: 100;
+    padding: var(--a-padding-base);
+  }
+  header.full-bleed .nav-links.open {
+    display: flex;
+  }
 }
 
 /* Standalone Theme Toggle Button Styling */

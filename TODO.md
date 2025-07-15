@@ -173,3 +173,9 @@ This document outlines pending tasks, improvements, and future features for the 
 - [ ] Improve layout and accessibility of color and gradient sections in index.html
 
 - [ ] Review all relevant JS files for feature toggle compliance (e.g., --a-use-css-reset, --a-enable-animations, --a-enable-transitions, --a-enable-fonts)
+
+## Documentation & Testing
+- [x] Create dedicated documentation/testing page for Navbar (navbar-docs.html)
+    - [x] Link to navbar-docs.html from index.html
+    - [x] List improvement suggestions for Navbar
+    - [ ] Review and implement suggested improvements

@@ -208,13 +208,30 @@ function toggleTheme() {
 
 /**
  * Initializes the mobile menu functionality
+ * Handles both the main navbar and the test navbar in navbar-docs.html
  */
 function initMobileMenu() {
-    const menuToggle = document.querySelector('.navbar .menu-toggle');
-    const navLinks = document.querySelector('.navbar .nav-links');
+    // Initialize main navbar
+    initNavbarToggle('.navbar .menu-toggle', '.navbar .nav-links');
+
+    // Initialize main navbar in header (for index.html and navbar-docs.html)
+    initNavbarToggle('header.full-bleed .menu-toggle', '#nav-links-main');
+
+    // Initialize test navbar (for navbar-docs.html)
+    initNavbarToggle('.navbar-test .menu-toggle-test', '#nav-links-test');
+}
+
+/**
+ * Helper function to initialize a navbar toggle
+ * @param {string} toggleSelector - CSS selector for the toggle button
+ * @param {string} navLinksSelector - CSS selector for the navigation links
+ */
+function initNavbarToggle(toggleSelector, navLinksSelector) {
+    const menuToggle = document.querySelector(toggleSelector);
+    const navLinks = document.querySelector(navLinksSelector);
 
     if (!menuToggle || !navLinks) {
-        console.warn('Mobile menu elements not found:', { menuToggle, navLinks });
+        console.warn(`Mobile menu elements not found for selectors: ${toggleSelector}, ${navLinksSelector}`);
         return;
     }
 
@@ -591,3 +608,7 @@ if (document.readyState !== 'loading') {
 } else {
     document.addEventListener('DOMContentLoaded', initDropdowns);
 }
+
+// --- Mobile Menu Toggle (Main Navbar) ---
+// This code is now handled by initMobileMenu() function
+// The duplicate event listeners were causing conflicts
