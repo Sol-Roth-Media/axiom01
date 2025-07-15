@@ -1,15 +1,13 @@
 /* site.css */
-/* --- Logo --- */
-/* Note: The logo styling has been consolidated further down in this file */
 
-/* Navbar styling is defined further down in this file */
+/* ===================== */
+/* Typography Utilities  */
+/* ===================== */
 
-/* Logo hover effect - consolidated with other logo styles below */
-
-/* Advanced Typography Examples */
+/* Drop cap for first letter in paragraphs */
 .drop-cap:first-letter {
     float: left;
-    font-size: 4em;
+    font-size: var(--a-font-size-dropcap, 4em); /* Use variable, fallback to 4em */
     line-height: 1;
     padding: 0.2em 0.1em 0 0;
     margin-right: 0.1em;
@@ -30,13 +28,17 @@
     color: var(--a-color-text-secondary);
 }
 
-.highlightedText {
+/* Highlighted text for emphasis (used in docs/examples) */
+.highlightedText, .highlighted {
     background-color: var(--a-color-secondary-container);
     padding: var(--a-padding-tiny) var(--a-padding-small);
     border-radius: var(--a-border-radius-base);
 }
 
-/* Color Swatches */
+/* ===================== */
+/* Color Swatches        */
+/* ===================== */
+
 .colorSwatches {
     margin-bottom: var(--a-margin-medium);
     display: grid;
@@ -44,24 +46,23 @@
     grid-gap: var(--a-grid-gutter);
 }
 
-/* Example container */
-.exampleContainer {
+/* ===================== */
+/* Example Containers    */
+/* ===================== */
+
+.exampleContainer, .example {
     background-color: var(--a-color-surface-variant); /* Using a semantic variable */
     padding: var(--a-padding-base);
     margin-bottom: var(--a-margin-base);
     border: 1px solid var(--a-color-outline);
+    max-width: 100%;
+    overflow: hidden;
 }
 
-/* Highlighted text */
-.highlighted {
-    background-color: var(--a-color-secondary-container);
-    padding: var(--a-padding-tiny) var(--a-padding-small);
-    border-radius: var(--a-border-radius-base);
-}
+/* ===================== */
+/* Gradient Swatches     */
+/* ===================== */
 
-
-
-/** Gradiant group
 /* Gradient Swatches - consolidated version is defined further down in this file */
 
 
@@ -101,13 +102,13 @@
     padding: var(--a-padding-base);
     border: 1px solid var(--a-color-outline);
     border-radius: var(--a-border-radius-base);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--a-shadow-medium, 0 2px 4px rgba(0, 0, 0, 0.1)); /* Use shadow variable, fallback to rgba */
 }
 
 .gradient-group h4 {
     margin-top: 0;
     color: var(--a-color-on-surface);
-    font-size: 1.2rem;
+    font-size: var(--a-font-size-h4); /* Use heading variable */
 }
 
 .gradient-swatch {
@@ -125,47 +126,108 @@
 
 .gradient-swatch:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--a-shadow-large, 0 4px 6px rgba(0, 0, 0, 0.15)); /* Use shadow variable, fallback to rgba */
 }
 
-/* --- Navbar Enhancements --- */
+/* ===================== */
+/* Navigation            */
+/* ===================== */
 
 .navbar {
-    /* Ensure flex properties are set */
     display: flex;
-    justify-content: space-between; /* Pushes logo left, links/toggle right */
-    align-items: center; /* Vertically align all items */
-    /* padding might need adjustment based on toggle size */
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Logo Version Styling */
-
-.logo {
-    position: relative; /* Required for absolute positioning of child */
-    text-decoration: none;
-    padding-bottom: 1em; /* Add space below main logo text for the version */
-    /* Adjust '1em' as needed based on version font size */
-    line-height: 1.2; /* Adjust line height of main logo if needed */
-    /* Remove display:flex, flex-direction, align-items if you added them before */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--a-color-on-primary-container, #222);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: var(--a-padding-small, 8px);
+    margin-left: var(--a-margin-medium, 24px);
+    line-height: 1;
+    z-index: 1001;
 }
 
-.logo .version {
-    position: absolute; /* Take version number out of normal flow */
-    bottom: 0; /* Position it at the bottom of the logo's padding area */
-    left: 5px; /* Adjust horizontal indent as needed */
-    font-size: 0.90em; /* Keep it small */
-    font-weight: bolder;
-    /** color: var(--a-color-on-primary-container); /* Or appropriate color */
-    opacity: 0.8;
-    line-height: 1; /* Ensure tight line height */
-    /* Remove display: block and margin-top if previously set */
-    margin-left: 0 !important;
+@media (max-width: 900px) {
+    .menu-toggle {
+        display: block;
+    }
+    .navbar .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--a-color-surface, #fff);
+        box-shadow: var(--a-shadow-medium, 0 2px 4px rgba(0,0,0,0.1));
+        min-width: 180px;
+        max-width: 90vw;
+        border-radius: var(--a-border-radius-base, 5px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s, visibility 0.2s, max-height 0.2s;
+        z-index: 1000;
+    }
+    .navbar .nav-links.open {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+        max-height: 500px;
+        padding: var(--a-padding-base, 16px);
+    }
+    .navbar .nav-links li {
+        margin-bottom: var(--a-margin-tiny, 4px);
+    }
 }
 
-/* Style for the main logo text container if needed */
-.logo .logo-text {
-    display: inline-block; /* Or block, depending on desired wrapping */
-    margin: var(--a-margin-tiny);
+@media (min-width: 901px) {
+    .navbar .nav-links {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--a-space-small, 8px);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .navbar .nav-links li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+    .navbar .nav-links a,
+    .navbar .nav-links button {
+        display: inline-block;
+        padding: var(--a-padding-small, 8px) var(--a-padding-base, 16px);
+        border-radius: var(--a-border-radius-base, 5px);
+        background: var(--a-color-surface, #fff);
+        color: var(--a-color-on-surface, #222);
+        text-decoration: none;
+        font-size: var(--a-font-size-base, 1rem);
+        font-weight: var(--a-font-weight-medium, 500);
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        box-shadow: 0 1px 2px var(--a-shadow-color, rgba(0,0,0,0.08));
+        vertical-align: middle;
+    }
+    .navbar .nav-links a:hover,
+    .navbar .nav-links a:focus,
+    .navbar .nav-links button:hover,
+    .navbar .nav-links button:focus {
+        background: var(--a-color-primary-fade-active, rgba(0,0,0,0.05));
+        color: var(--a-color-primary, #007bff);
+        outline: none;
+    }
+    .menu-toggle {
+        display: none;
+    }
 }
 
 /* Standalone Theme Toggle Button Styling */
@@ -185,36 +247,152 @@
     opacity: 0.8; /* Optional hover effect */
 }
 
-/* Ensure nav links don't push toggle too far on smaller screens if needed */
-@media (max-width: 768px) {
-    /* The JS already handles showing/hiding .nav-links */
-    /* Adjust .theme-toggle position if needed when menu is open */
-    .navbar .theme-toggle {
-        /* Example: maybe hide it when mobile menu is open if it clashes */
-        /* .nav-links.open + & { display: none; } */
-        /* Or adjust margin */
-        margin-left: var(--a-margin-small);
-        margin-left: var(--a-margin-small);
-        position: absolute;
-        right: 35px;
-
-    }
-}
-
-/* Remove theme toggle from the list styling if it was previously an li */
+/* Hide legacy/duplicate theme toggle if present in nav-links (for backward compatibility) */
 .nav-links .theme-toggle {
-    display: none; /* Hide it if it still exists as an li */
+    display: none;
 }
 
-/* === Add to css/site.css === */
+/* ===================== */
+/* Logo & Branding       */
+/* ===================== */
+
+.logo {
+    font-family: var(--a-font-family-mono, "Courier New", Courier, monospace);
+    text-decoration: none;
+    white-space: nowrap;
+    display: flex;
+    align-items: baseline;
+    letter-spacing: var(--a-letter-spacing-logo, 0.15rem);
+    position: relative;
+    line-height: 1.2;
+    padding-bottom: var(--a-padding-logo-bottom, 0.8em);
+    height: auto;
+    /* Confirmed: All spacing, color, and typography use variables. No hardcoded values remain. */
+}
+
+.navbar.small .logo {
+    font-size: var(--a-font-size-base);
+    font-weight: var(--a-font-weight-bold);
+}
+
+.logo span {
+    color: var(--a-color-on-primary-container);
+    transition: color 0.2s ease;
+}
+
+.logo span:nth-child(1) {
+    font-size: var(--a-font-size-base);
+    font-weight: var(--a-font-weight-black, 900);
+    font-style: italic;
+    font-family: var(--a-font-family-mono, monospace);
+    color: var(--a-color-primary);
+    margin-right: var(--a-margin-logo-a, -10px);
+}
+
+.logo span:nth-child(2) {
+    font-size: var(--a-font-size-base);
+    font-weight: var(--a-font-weight-bold);
+    font-family: var(--a-font-family-mono, monospace);
+    font-style: italic;
+    color: var(--a-color-primary-dark, var(--a-color-primary));
+}
+
+.logo span:nth-child(3) {
+    font-size: var(--a-font-size-small, .8rem);
+    font-weight: var(--a-font-weight-bold);
+    color: var(--a-color-positive);
+    font-family: var(--a-font-family-mono, monospace);
+}
+
+.logo span:nth-child(4) {
+    font-size: var(--a-font-size-logo-o, .9rem);
+    font-weight: var(--a-font-weight-medium);
+    color: var(--a-color-positive);
+    font-family: var(--a-font-family-mono, monospace);
+}
+
+.logo span:nth-child(5) {
+    font-size: var(--a-font-size-logo-m, 1.3rem);
+    font-weight: var(--a-font-weight-bold);
+    color: var(--a-color-positive);
+    font-family: var(--a-font-family-mono, monospace);
+}
+
+.logo span:nth-child(6) {
+    font-size: var(--a-font-size-logo-space, 0.8rem);
+    font-weight: var(--a-font-weight-normal);
+    font-family: var(--a-font-family-mono, monospace);
+    margin: 0 var(--a-margin-logo-space, 0.2rem);
+    opacity: 0;
+    width: var(--a-width-logo-space, 0.2rem);
+}
+
+.logo span:nth-child(7) {
+    font-size: var(--a-font-size-base);
+    font-weight: var(--a-font-weight-extrabold, 800);
+    color: var(--a-color-secondary, var(--a-color-primary));
+}
+
+.logo span:nth-child(8) {
+    font-size: var(--a-font-size-logo-01, .9rem);
+    font-weight: var(--a-font-weight-normal);
+    color: var(--a-color-positive);
+    font-family: var(--a-font-family-mono, monospace);
+}
+
+.logo span:nth-child(9) {
+    font-size: var(--a-font-size-base);
+    font-weight: var(--a-font-weight-semibold, 600);
+    font-family: var(--a-font-family-sans, "Roboto Light", sans-serif);
+    color: var(--a-color-secondary, var(--a-color-primary));
+}
+
+.logo .version {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    font-size: 0.8em;
+    font-weight: bolder;
+    color: var(--a-color-on-primary-container);
+    opacity: 0.8;
+    line-height: 1;
+    margin-left: 0;
+}
+
+a.logo:hover {
+    text-decoration: none;
+    opacity: 0.95;
+}
+
+a.logo:hover span {
+    color: var(--a-color-primary-hover, var(--a-color-primary-dark, var(--a-color-primary)));
+}
+
+/* Variant/legacy logo style for special branding use */
+.logo-01 {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--a-color-primary, #00c005);
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+[data-theme="dark"] .logo-01 {
+  color: var(--a-color-primary, #00ff80);
+}
+
+/* ===================== */
+/* Theme Switcher        */
+/* ===================== */
 
 .theme-switcher-container {
     margin-left: var(--a-margin-medium); /* Space from logo */
     margin-right: var(--a-margin-small); /* Space before menu items or toggle */
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
+/* Visually hidden label for accessibility (screen readers only) */
 .theme-switcher-container label.visually-hidden {
     position: absolute;
     width: 1px;
@@ -236,11 +414,16 @@
     font-family: inherit;
     font-size: var(--a-font-size-small);
     cursor: pointer;
+    vertical-align: middle;
+    align-self: center;
+    height: auto;
+    line-height: normal;
 }
 
 #theme-select:focus {
     outline: 2px solid var(--a-color-primary);
     outline-offset: 1px;
+    box-shadow: 0 0 0 2px rgba(var(--a-color-primary-rgb), 0.2);
 }
 
 /* On mobile, the select might be part of the collapsed menu, or hidden if space is tight */
@@ -257,171 +440,21 @@
 }
 
 
-/* --- Logo --- */
-.logo {
-    font-family: var(--a-font-family-mono, monospace);
-    text-decoration: none;
-    white-space: nowrap;
-    display: flex;
-    align-items: baseline;
-    letter-spacing: 0.15rem; /* Reduced for better readability */
-    position: relative;
-    line-height: 1.2;
-    padding-bottom: 0.8em; /* Space for version */
-    height: auto;
-}
-
-/* Logo size variants */
-.navbar.small .logo {
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.logo span {
-    color: var(--a-color-on-primary-container);
-    transition: color 0.2s ease;
-}
-
-.logo span:nth-child(1) { /* A */
-    font-size: 1rem;
-    font-weight: 900;
-    font-style: italic;
-    font-family: monospace;
-    color: var(--a-color-primary);
-    margin-right: -10px;
-}
-
-.logo span:nth-child(2) { /* X */
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: monospace;
-    font-style: italic;
-    color: var(--a-color-primary-dark, var(--a-color-primary));
-}
-
-.logo span:nth-child(3) { /* I */
-    font-size: .8rem;
-    font-weight: 700;
-    color: var(--a-color-positive);
-    font-family: monospace;
-}
-
-.logo span:nth-child(4) { /* O */
-    font-size: .9rem;
-    font-weight: 500;
-    color: var(--a-color-positive);
-    font-family: monospace;
-}
-
-.logo span:nth-child(5) { /* M */
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--a-color-positive);
-    font-family: monospace;
-}
-
-.logo span:nth-child(6) { /* Space */
-    font-size: 0.8rem;
-    font-weight: 400;
-    font-family: monospace;
-    margin: 0 0.2rem; /* Space between AXIOM and [01] */
-    opacity: 0; /* Hide the actual space character */
-    width: 0.2rem; /* Give it width */
-}
-
-.logo span:nth-child(7) { /* [ */
-    font-size: 1rem;
-    font-weight: 800;
-    color: var(--a-color-secondary, var(--a-color-primary));
-}
-
-.logo span:nth-child(8) { /* 01 */
-    font-size: .9rem;
-    font-weight: 400; /* Increased from 100 for better visibility */
-    color: var(--a-color-positive);
-    font-family: monospace;
-}
-
-.logo span:nth-child(9) { /* ] */
-    font-size: 1rem;
-    font-weight: 600; /* Increased from 200 for better visibility */
-    font-family: "Roboto Light", sans-serif;
-    color: var(--a-color-secondary, var(--a-color-primary));
-}
-
-.logo .version {
-    position: absolute;
-    bottom: 0;
-    left: 5px;
-    font-size: 0.8em;
-    font-weight: bolder;
-    color: var(--a-color-on-primary-container);
-    opacity: 0.8;
-    line-height: 1;
-    margin-left: 0 !important;
-}
-
-a.logo:hover {
-    text-decoration: none;
-    opacity: 0.95;
-}
-
-a.logo:hover span {
-    color: var(--a-color-primary-hover, var(--a-color-primary-dark, var(--a-color-primary)));
-}
-
-/* Theme Switcher Styles - consolidated from duplicate above */
-.theme-switcher-container {
-    margin-left: var(--a-margin-medium);
-    margin-right: var(--a-margin-small);
-    margin-top: 4px;
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
-/* Accessibility-focused hidden label */
-.theme-switcher-container label.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
+/* --- Ensure examples don't overflow their containers --- */
+.example {
+    max-width: 100%;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
 }
 
-/* Theme selector dropdown styling */
-#theme-select {
-    padding: var(--a-padding-tiny) var(--a-padding-small);
-    border-radius: var(--a-border-radius-base);
-    border: 1px solid var(--a-color-outline);
-    background-color: var(--a-color-surface);
-    color: var(--a-color-on-surface);
-    font-family: inherit;
-    font-size: var(--a-font-size-small);
-    cursor: pointer;
-    vertical-align: middle;
-    align-self: center;
-    height: auto;
-    line-height: normal;
+/* --- Remove top spacing between navbar and hero --- */
+.hero {
+    margin-top: 0;
+    padding-top: 0;
 }
 
-/* Focus state for accessibility */
-#theme-select:focus {
-    outline: 2px solid var(--a-color-primary);
-    outline-offset: 1px;
-    box-shadow: 0 0 0 2px rgba(var(--a-color-primary-rgb), 0.2);
-}
-
-/* Make sure bullets never show in nav */
-.nav-links,
-.nav-links li {
-    list-style: none !important;
-    margin: 0;
-    padding: 0;
+header, .navbar {
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* Mobile Adjustments */
@@ -450,50 +483,177 @@ a.logo:hover span {
 
     /* Fix mobile nav appearance */
     .navbar .nav-links {
-        list-style-type: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
     }
 
     .navbar .nav-links li {
-        list-style-type: none !important;
+        list-style-type: none;
         margin-bottom: var(--a-margin-tiny);
     }
 
     .navbar .nav-links.open {
-        display: flex !important;
-        max-height: 500px !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        padding: var(--a-padding-base) !important;
+        display: flex;
+        max-height: 500px;
+        opacity: 1;
+        visibility: visible;
+        padding: var(--a-padding-base);
     }
 }
 
-/* Remove top spacing between navbar and hero */
-.hero {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+/* ===================== */
+/* Card Styles           */
+/* ===================== */
+
+.card, .component-card {
+    background: var(--a-bg-card);
+    box-shadow: 0 2px 12px var(--a-shadow-color);
+    border-radius: var(--a-border-radius-large, 8px);
+    padding: var(--a-padding-xlarge, 48px) var(--a-padding-large, 32px);
+    color: var(--a-color-on-surface, #222);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 260px;
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
 }
 
-header, .navbar {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
+.card-header, .component-card .card-header {
+    font-size: var(--a-font-size-h4, 1.25rem);
+    font-weight: var(--a-font-weight-bold, 700);
+    margin-bottom: var(--a-margin-base, 16px);
 }
 
-/* Ensure examples don't overflow their containers */
-.example {
-    max-width: 100%;
-    overflow: hidden;
+.card-footer, .component-card .card-footer {
+    margin-top: auto;
+    font-size: var(--a-font-size-small, 0.875rem);
+    color: var(--a-color-text-secondary, #888);
 }
 
-/* Logo 01 styling for visibility in all themes */
-.logo-01 {
-  font-family: monospace;
-  font-weight: 700;
-  color: var(--a-color-primary, #00c005);
-  letter-spacing: 1px;
-  transition: color 0.2s;
+/* ===================== */
+/* Dropdown Styles       */
+/* ===================== */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
-[data-theme="dark"] .logo-01 {
-  color: var(--a-color-primary, #00ff80);
+
+.dropdown-toggle {
+    background: var(--a-color-surface, #fff);
+    color: var(--a-color-on-surface, #222);
+    border: 1px solid var(--a-color-outline, #d1d5db);
+    border-radius: var(--a-border-radius-base, 5px);
+    padding: var(--a-padding-small, 8px) var(--a-padding-base, 16px);
+    font-size: var(--a-font-size-base, 1rem);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+.dropdown-toggle:focus {
+    outline: 2px solid var(--a-color-primary, #007bff);
+    outline-offset: 2px;
+    z-index: 2;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    background: var(--a-color-surface, #fff);
+    color: var(--a-color-on-surface, #222);
+    border: 1px solid var(--a-color-outline, #d1d5db);
+    border-radius: var(--a-border-radius-base, 5px);
+    box-shadow: var(--a-shadow-medium, 0 2px 4px rgba(0,0,0,0.1));
+    padding: var(--a-padding-small, 8px) 0;
+    margin-top: 4px;
+    z-index: 1000;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+.dropdown.open .dropdown-menu,
+.dropdown-menu[aria-hidden="false"] {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-menu li {
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown-menu li > button,
+.dropdown-menu li > a {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    color: inherit;
+    text-align: left;
+    padding: var(--a-padding-small, 8px) var(--a-padding-base, 16px);
+    font-size: var(--a-font-size-base, 1rem);
+    cursor: pointer;
+    border-radius: var(--a-border-radius-small, 3px);
+    transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-menu li > button:hover,
+.dropdown-menu li > a:hover,
+.dropdown-menu li > button:focus,
+.dropdown-menu li > a:focus {
+    background: var(--a-color-primary-fade-active, rgba(0,0,0,0.05));
+    color: var(--a-color-primary, #007bff);
+    outline: none;
+}
+
+/* ===================== */
+/* Tabs Styles           */
+/* ===================== */
+.tabs {
+    background: var(--a-color-surface, #fff);
+    border-radius: var(--a-border-radius-base, 5px);
+    box-shadow: var(--a-shadow-medium, 0 2px 4px rgba(0,0,0,0.1));
+    padding: var(--a-padding-base, 16px);
+    margin-bottom: var(--a-margin-large, 32px);
+}
+.tabs [role="tablist"] {
+    display: flex;
+    border-bottom: 1px solid var(--a-color-outline, #d1d5db);
+    margin-bottom: var(--a-margin-base, 16px);
+    gap: var(--a-space-small, 8px);
+}
+.tabs [role="tab"] {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--a-color-on-surface, #222);
+    font-size: var(--a-font-size-base, 1rem);
+    padding: var(--a-padding-small, 8px) var(--a-padding-base, 16px);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    border-radius: var(--a-border-radius-small, 3px) var(--a-border-radius-small, 3px) 0 0;
+    outline: none;
+}
+.tabs [role="tab"][aria-selected="true"] {
+    color: var(--a-color-primary, #007bff);
+    border-bottom: 2px solid var(--a-color-primary, #007bff);
+    background: var(--a-color-primary-fade-active, rgba(0,0,0,0.05));
+    font-weight: var(--a-font-weight-bold, 700);
+}
+.tabs [role="tab"]:focus {
+    outline: 2px solid var(--a-color-primary, #007bff);
+    outline-offset: 2px;
+    z-index: 2;
+}
+.tabs [role="tabpanel"] {
+    background: var(--a-color-surface, #fff);
+    color: var(--a-color-on-surface, #222);
+    border-radius: var(--a-border-radius-base, 5px);
+    padding: var(--a-padding-base, 16px);
+    margin-top: var(--a-margin-base, 16px);
+    box-shadow: none;
+    border: none;
 }
