@@ -166,6 +166,13 @@ Refactored the main site footer in index.html to use only semantic CSS variables
 - For font loading, only inject or apply custom fonts if --a-enable-fonts is true.
 - Add comments in JS to clarify where feature toggles are checked and enforced.
 
+#### Implementation Steps (Part 3)
+- Identify all locations in js/axiom.js and js/scripts.js where animations, transitions, font loading, or CSS reset are applied.
+- Refactor these locations to check the corresponding CSS variable using getComputedStyle before applying the feature.
+- Example: Only run animation logic if getComputedStyle(document.documentElement).getPropertyValue('--a-enable-animations').trim() === 'true'.
+- Add clear comments in JS code to indicate where feature toggles are checked and enforced.
+- Test all components and features to ensure toggles work as expected and do not break accessibility or usability.
+
 # Axiom01 Documentation & Forms Enhancement Audit
 
 ## Last Updated: 2025-07-14
@@ -201,6 +208,10 @@ Refactored the main site footer in index.html to use only semantic CSS variables
 - [ ] Validate ARIA roles and keyboard navigation for all interactive elements
 - [ ] Document new variables and patterns in the styling guide
 - [ ] Update this file after each major refactor or audit
+- [x] Refactor js/axiom.js and js/scripts.js to respect feature toggles for animations, transitions, font loading, and CSS reset
+- [x] Add runtime checks for CSS variable toggles in all relevant JS logic
+- [x] Add comments in JS code to clarify where feature toggles are checked
+- [x] Test all components and features to ensure toggles work as expected
 
 ## Documentation Links
 - [Styling Guide](AXIOM01_STYLING_GUIDE.md)

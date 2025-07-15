@@ -32,7 +32,6 @@ This document outlines pending tasks, improvements, and future features for the 
 ## Component Enhancements
 
 - [ ] Add missing components mentioned in documentation:
-    - [ ] Tabs implementation
     - [ ] Accordions implementation
     - [ ] Dropdowns implementation
 - [ ] Add Components and examples to the index.html page
@@ -160,7 +159,7 @@ This document outlines pending tasks, improvements, and future features for the 
 - [x] Buttons
 - [x] Navigation
 - [x] Cards
-- [ ] Tabs
+- [x] Tabs
 - [ ] Accordions
 - [ ] Dropdowns
 - [ ] Progress indicators
