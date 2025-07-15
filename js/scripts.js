@@ -199,87 +199,19 @@ function toggleTheme() {
 }
 
 /**
- * Initializes the mobile menu functionality
+ * Mobile menu functionality is now handled by navbar.js
+ * This code is kept for reference but is no longer used
  */
 
-/**
- * Initializes the mobile menu functionality
- */
+// function initMobileMenu() {
+//     // This functionality is now handled by navbar.js
+//     console.log('Mobile menu initialization is now handled by navbar.js');
+// }
 
-/**
- * Initializes the mobile menu functionality
- * Handles both the main navbar and the test navbar in navbar-docs.html
- */
-function initMobileMenu() {
-    // Initialize main navbar
-    initNavbarToggle('.navbar .menu-toggle', '.navbar .nav-links');
-
-    // Initialize main navbar in header (for index.html and navbar-docs.html)
-    initNavbarToggle('header.full-bleed .menu-toggle', '#nav-links-main');
-
-    // Initialize test navbar (for navbar-docs.html)
-    initNavbarToggle('.navbar-test .menu-toggle-test', '#nav-links-test');
-}
-
-/**
- * Helper function to initialize a navbar toggle
- * @param {string} toggleSelector - CSS selector for the toggle button
- * @param {string} navLinksSelector - CSS selector for the navigation links
- */
-function initNavbarToggle(toggleSelector, navLinksSelector) {
-    const menuToggle = document.querySelector(toggleSelector);
-    const navLinks = document.querySelector(navLinksSelector);
-
-    if (!menuToggle || !navLinks) {
-        console.warn(`Mobile menu elements not found for selectors: ${toggleSelector}, ${navLinksSelector}`);
-        return;
-    }
-
-    // Set initial state
-    menuToggle.innerHTML = '☰';
-    menuToggle.setAttribute('aria-expanded', 'false');
-    navLinks.classList.remove('open');
-
-    // Toggle menu when button is clicked
-    menuToggle.addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        // Toggle the open class on the nav links
-        navLinks.classList.toggle('open');
-
-        // Update the expanded state for accessibility
-        const isExpanded = navLinks.classList.contains('open');
-        menuToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-
-        // Update the icon based on state
-        menuToggle.innerHTML = isExpanded ? '✕' : '☰';
-
-        console.log('Menu toggle clicked, menu is now:', isExpanded ? 'open' : 'closed');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (navLinks.classList.contains('open') &&
-            !navLinks.contains(event.target) &&
-            !menuToggle.contains(event.target)) {
-
-            navLinks.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.innerHTML = '☰';
-        }
-    });
-
-    // Add keyboard accessibility
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && navLinks.classList.contains('open')) {
-            navLinks.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.innerHTML = '☰';
-            menuToggle.focus();
-        }
-    });
-}
+// function initNavbarToggle(toggleSelector, navLinksSelector) {
+//     // This functionality is now handled by navbar.js
+//     console.log('Navbar toggle initialization is now handled by navbar.js');
+// }
 /**
  * Initializes the tabs component
  */

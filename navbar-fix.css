@@ -1,0 +1,88 @@
+/* Navbar Fix for index.html */
+/* This CSS adds the necessary styles to make the navbar menu toggle work on small resolutions */
+
+/* Mobile menu toggle button */
+.navbar .menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--a-color-on-surface);
+  cursor: pointer;
+  padding: var(--a-padding-small);
+  margin-left: auto;
+  z-index: 101;
+  transition: color 0.2s;
+}
+
+.navbar .menu-toggle:hover,
+.navbar .menu-toggle:focus {
+  color: var(--a-color-primary);
+  outline: none;
+}
+
+.navbar .menu-toggle .bar {
+  display: block;
+  width: 24px;
+  height: 3px;
+  margin: 5px 0;
+  background-color: var(--a-color-on-surface);
+  transition: transform 0.3s, opacity 0.3s;
+  border-radius: 3px;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  /* Show menu toggle button */
+  .navbar .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Hide navigation links by default */
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--a-color-surface);
+    box-shadow: 0 2px 8px var(--a-shadow-color, rgba(0,0,0,0.08));
+    z-index: 100;
+    padding: var(--a-padding-base);
+  }
+
+  /* Show navigation links when open */
+  .navbar .nav-links.open {
+    display: flex;
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Adjust link styling for mobile */
+  .navbar .nav-links li {
+    width: 100%;
+    margin-bottom: var(--a-margin-tiny);
+  }
+
+  .navbar .nav-links a {
+    width: 100%;
+    padding: var(--a-padding-base);
+  }
+
+  /* Animate hamburger to X when menu is open */
+  .navbar .menu-toggle[aria-expanded="true"] .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .navbar .menu-toggle[aria-expanded="true"] .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar .menu-toggle[aria-expanded="true"] .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}

@@ -68,8 +68,8 @@ This guide helps you (or any developer) create beautiful, maintainable sites and
 - Example for alerts:
 ```css
 .alert {
-  background: var(--a-color-alert-bg);
-  color: var(--a-color-on-alert);
+  background: var(--a-color-surface);
+  color: var(--a-color-on-surface);
   border-radius: var(--a-border-radius-base);
 }
 ```
@@ -137,7 +137,66 @@ Make grids adapt to screen size:
 
 See `grid-examples.html` for live demos.
 
-## 9. Reference & Resources
+## 9. Navbar Component
+The Axiom01 Navbar is a responsive, accessible navigation component that follows the Axiom01 philosophy of semantic HTML, minimal classes, and consistent styling using CSS variables.
+
+### HTML Structure
+```html
+<nav class="navbar small">
+  <!-- Logo -->
+  <a href="#" class="logo" aria-label="Site Name">
+    <div class="logo-text">
+      <span>[Ax</span>
+      <span><span style="color: #00c005;">01</span>]</span>
+    </div>
+    <small class="version">v0.1</small>
+  </a>
+
+  <!-- Theme Switcher (Optional) -->
+  <div class="theme-switcher-container">
+    <label for="theme-select" class="visually-hidden">Select Theme:</label>
+    <select id="theme-select" name="theme"></select>
+  </div>
+
+  <!-- Mobile Menu Toggle -->
+  <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links-id">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <!-- Navigation Links -->
+  <ul class="nav-links" id="nav-links-id">
+    <li><a href="#">Link 1</a></li>
+    <li><a href="#" class="active">Active Link</a></li>
+    <li><a href="#">Link 3</a></li>
+  </ul>
+
+  <!-- Theme Toggle Button (Optional) -->
+  <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode">
+    &#9728;
+  </button>
+</nav>
+```
+
+### Usage Notes
+- Include `navbar.css` in your HTML head after the main Axiom01 CSS files
+- Include `navbar.js` before the closing body tag
+- Use the `.small` class for a more compact navbar
+- Add the `.active` class to the current page's link
+- Ensure the `aria-controls` attribute on the menu toggle matches the `id` of the nav links
+- The navbar is responsive by default and will show a hamburger menu on screens smaller than 900px
+
+### Accessibility Features
+- ARIA attributes for screen readers (aria-label, aria-expanded, aria-controls)
+- Keyboard navigation support
+- Focus states for interactive elements
+- Semantic HTML structure
+- Visually hidden labels for screen readers
+
+For more detailed documentation and examples, see [navbar-docs.html](navbar-docs.html).
+
+## 10. Reference & Resources
 - See [style-guide.html](style-guide.html) for full documentation of variables, components, and usage.
 - For live examples, visit [examples/components.html](examples/components.html).
 - For accessibility guidelines, refer to the [Axiom01 Accessibility Section](style-guide.html#accessibility).
