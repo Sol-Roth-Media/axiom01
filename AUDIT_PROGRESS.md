@@ -18,13 +18,14 @@ This file tracks the ongoing audit and refactoring of the AXIOM01 UI Framework, 
 ### Files Audited
 - [x] AXIOM01 Condensed Styling Context.md (context loaded)
 - [x] css/site.css (fully audited)
-- [x] css/components.css
-- [x] css/alerts.css
-- [x] css/axiom.css
+- [x] css/components.css (fully audited)
+- [x] css/alerts.css (fully audited)
+- [x] css/axiom.css (fully audited)
 - [x] css/colors_vars.css (fully audited)
-- [ ] css/axiom_vars.css
-- [ ] css/axiom_config.css
-- [x] style-guide.html (form markup and validation messaging improved for accessibility and clarity)
+- [x] css/axiom_vars.css (fully audited)
+- [x] css/axiom_config.css (fully audited)
+- [x] style-guide.html (fully audited)
+- [x] grid-examples.html (fully audited)
 - [x] Added 'Gradient Swatches' section to style-guide.html for visual reference of all defined gradient variables.
 - [x] Added accessible Tabs component example to style-guide.html.
 - [x] Added accessible Accordions component example to style-guide.html.
@@ -145,6 +146,25 @@ Refactored the main site footer in index.html to use only semantic CSS variables
 - Audit and update any remaining legacy or utility-heavy classes in other files.
 - Document new patterns and variables in the styling guide.
 - Update this file after each major refactor or audit.
+
+### JS Feature Toggle Audit (2025-07-15)
+#### Summary
+- Reviewed js/axiom.js and js/scripts.js for compliance with CSS variable feature toggles (e.g., --a-use-css-reset, --a-enable-animations, --a-enable-transitions, --a-enable-fonts).
+- Confirmed that core component logic is modular and accessible, but feature toggles are not yet consistently checked before enabling related features.
+- No logic currently disables CSS reset, animations, transitions, or font loading based on toggle variables.
+
+#### Recommendations (Part 1)
+- Refactor JS initialization logic to read CSS variable values for feature toggles.
+- Only enable CSS reset, animations, transitions, and font loading if their respective variables are set to true.
+- Use getComputedStyle(document.documentElement).getPropertyValue('--a-enable-animations') and similar for runtime checks.
+- Document feature toggle logic in both JS and CSS for maintainability.
+
+#### Recommendations (Part 2)
+- Audit all JS files for direct use of animations, transitions, and font loading. Add runtime checks for feature toggles before applying these features.
+- For CSS reset, ensure JS does not inject or enable reset styles unless --a-use-css-reset is true.
+- For animations and transitions, wrap all related logic in a conditional that checks the corresponding CSS variable value.
+- For font loading, only inject or apply custom fonts if --a-enable-fonts is true.
+- Add comments in JS to clarify where feature toggles are checked and enforced.
 
 # Axiom01 Documentation & Forms Enhancement Audit
 
