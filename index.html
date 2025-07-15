@@ -72,8 +72,8 @@
     </h1>
     <p style="max-width: 540px; margin-bottom: var(--a-margin-xlarge); font-size: var(--a-font-size-h4); color: var(--a-color-muted); text-align: center;">Craft beautiful interfaces with less markup — Axiom01 enhances your HTML, not your class count. <span aria-label="fire" role="img">🔥</span></p>
     <div style="display: flex; gap: var(--a-grid-gutter); flex-wrap: wrap; justify-content: center;">
-      <a href="#get-started" class="button" style="font-size: var(--a-font-size-base); padding: var(--a-padding-medium) var(--a-padding-xlarge); min-width: 160px; text-align: center;"> <i class="fa-solid fa-book" aria-hidden="true"></i> Read the Docs</a>
-      <a href="#usage" class="button primary" style="font-size: var(--a-font-size-base); padding: var(--a-padding-medium) var(--a-padding-xlarge); min-width: 160px; text-align: center;"> <i class="fa-solid fa-download" aria-hidden="true"></i> Get Axiom</a>
+      <a href="#get-started" class="button" style="font-size: var(--a-font-size-base); padding: var(--a-padding-small) var(--a-padding-large); min-width: 120px; text-align: center;"> <i class="fa-solid fa-book" aria-hidden="true"></i> Read the Docs</a>
+      <a href="#usage" class="button primary" style="font-size: var(--a-font-size-base); padding: var(--a-padding-small) var(--a-padding-large); min-width: 120px; text-align: center;"> <i class="fa-solid fa-download" aria-hidden="true"></i> Get Axiom</a>
     </div>
   </div>
 </section>
@@ -449,20 +449,23 @@ const availableThemes = [
 	</section>
 
 	<section id="grid-system" aria-labelledby="grid-heading">
-		<div class="container">
-			<h2 id="grid-heading">Axiom's Grid System</h2>
-			<p>Axiom's grid system is designed to be intuitive and classless for basic layouts. It automatically creates
-				layouts based on the nesting of semantic elements. Use the <code>.row</code> class for explicit multi-column
-				control.</p>
-			<br/>
-			<h3>Basic Grid Examples (Classless)</h3>
+<div class="container">
+	<h2 id="grid-heading">Axiom's Grid System</h2>
+	<p>Axiom's grid system is designed to be intuitive and classless for basic layouts. It automatically creates layouts based on the nesting of semantic elements. Use the <code>.row</code> class for explicit multi-column control.</p>
+	<br/>
+	<h3>Basic Grid Examples (Classless)</h3>
 
-			<h4>Single Column Layout</h4>
-			<p>Direct children of <code>&lt;main&gt;</code> like <code>&lt;section&gt;</code> or <code>&lt;article&gt;</code>
-				will typically stack vertically by default.</p>
-			<div class="example"><p>Content in a single column section within main.</p>
-			</div>
-			<pre><code class="language-html">
+		<h4>Single Column Layout</h4>
+		<p>Direct children of <code>&lt;main&gt;</code> like <code>&lt;section&gt;</code> or <code>&lt;article&gt;</code>
+			will typically stack vertically by default.</p>
+		<div class="example" aria-label="Single column example" style="margin-bottom:1.5em;">
+			<main>
+				<section>
+					<p>Content in a single column section within main.</p>
+				</section>
+			</main>
+		</div>
+		<pre><code class="language-html">
 &lt;main&gt;
     &lt;section&gt;
         &lt;p&gt;Content in a single column section within main.&lt;/p&gt;
@@ -470,22 +473,28 @@ const availableThemes = [
 &lt;/main&gt;
             </code></pre>
 
-			<h4>Unequal Columns (e.g., Main Content + Sidebar)</h4>
-			<p>Use an <code>&lt;article&gt;</code> and an <code>&lt;aside&gt;</code> as direct children of a <code>&lt;section&gt;</code>
-				to potentially create a main content/sidebar layout (behaviour might depend on specific CSS grid rules).</p>
-			<div class="example">
-				<section>
-					<article>
-						<h5>Main Content Area</h5>
-						<p>Lorem ipsum dolor sit amet...</p>
-					</article>
-					<aside>
-						<h5>Sidebar</h5>
-						<p>Sidebar content...</p>
-					</aside>
-				</section>
-			</div>
-			<pre><code class="language-html">
+		<h4>Unequal Columns (Main Content + Sidebar)</h4>
+		<p>Use an <code>&lt;article&gt;</code> and an <code>&lt;aside&gt;</code> as direct children of a <code>&lt;section&gt;</code>
+			to potentially create a main content/sidebar layout (behaviour might depend on specific CSS grid rules).
+			<span title=".row and .col-* classes provide explicit grid control">Tip: Use <code>.row</code> and <code>.col-*</code> for more control.</span>
+			<br>
+			<em>Note: On mobile devices, columns will stack vertically for better readability.</em>
+			<br>
+			<a href="grid-examples.html" target="_blank" rel="noopener" style="font-size:0.95em;">See advanced grid demos</a>
+		</p>
+		<div class="example" aria-label="Main content and sidebar example" style="margin-bottom:1.5em;">
+			<section style="display:grid; grid-template-columns:2fr 1fr; gap:var(--a-grid-gutter);">
+				<article style="background:var(--a-color-surface); padding:1em; border-radius:6px;">
+					<h5>Main Content Area</h5>
+					<p>Lorem ipsum dolor sit amet...</p>
+				</article>
+				<aside style="background:var(--a-color-surface-variant); padding:1em; border-radius:6px;">
+					<h5>Sidebar</h5>
+					<p>Sidebar content...</p>
+				</aside>
+			</section>
+		</div>
+		<pre><code class="language-html">
 &lt;main&gt;
     &lt;section&gt; &lt;!-- Wrapper for article+aside --&gt;
         &lt;article&gt;
@@ -500,21 +509,21 @@ const availableThemes = [
 &lt;/main&gt;
             </code></pre>
 
-			<h3>Explicit Grid Examples (Using `.row`)</h3>
+		<h3>Explicit Grid Examples (Using `.row`)</h3>
 
-			<h4>Two-Column Layout</h4>
-			<p>Use a <code>&lt;div class="row"&gt;</code> wrapper around direct child elements (like
-				<code>&lt;article&gt;</code>) to create an explicit 12-column grid row. Children will automatically take up
-				space. Use <code>.col-*</code> classes for specific spans.</p>
-			<div class="example">
-				<div class="row">
-					<article class="col-6"><p>Content in column 1 (col-6)</p>
-					</article>
-					<article class="col-6"><p>Content in column 2 (col-6)</p>
-					</article>
-				</div>
+		<h4>Two-Column Layout</h4>
+		<p>Use a <code>&lt;div class="row"&gt;</code> wrapper around direct child elements (like
+			<code>&lt;article&gt;</code>) to create an explicit 12-column grid row. Children will automatically take up
+			space. Use <code>.col-*</code> classes for specific spans.</p>
+		<div class="example" style="margin-bottom:1.5em;">
+			<div class="row" style="display:grid; grid-template-columns:repeat(2,1fr); gap:var(--a-grid-gutter);">
+				<article class="col-6" style="background:var(--a-color-surface); padding:1em; border-radius:6px;"><p>Content in column 1 (col-6)</p>
+				</article>
+				<article class="col-6" style="background:var(--a-color-surface-variant); padding:1em; border-radius:6px;"><p>Content in column 2 (col-6)</p>
+				</article>
 			</div>
-			<pre><code class="language-html">
+		</div>
+		<pre><code class="language-html">
 &lt;div class="row"&gt;
     &lt;article class="col-6"&gt;
         &lt;p&gt;Content in column 1 (col-6)&lt;/p&gt;
@@ -525,18 +534,18 @@ const availableThemes = [
 &lt;/div&gt;
             </code></pre>
 
-			<h4>Three-Column Layout</h4>
-			<div class="example">
-				<div class="row">
-					<article class="col-4"><p>Content in column 1 (col-4)</p>
-					</article>
-					<article class="col-4"><p>Content in column 2 (col-4)</p>
-					</article>
-					<article class="col-4"><p>Content in column 3 (col-4)</p>
-					</article>
-				</div>
+		<h4>Three-Column Layout</h4>
+		<div class="example" style="margin-bottom:1.5em;">
+			<div class="row" style="display:grid; grid-template-columns:repeat(3,1fr); gap:var(--a-grid-gutter);">
+				<article class="col-4" style="background:var(--a-color-surface); padding:1em; border-radius:6px;"><p>Content in column 1 (col-4)</p>
+				</article>
+				<article class="col-4" style="background:var(--a-color-surface-variant); padding:1em; border-radius:6px;"><p>Content in column 2 (col-4)</p>
+				</article>
+				<article class="col-4" style="background:var(--a-color-surface); padding:1em; border-radius:6px;"><p>Content in column 3 (col-4)</p>
+				</article>
 			</div>
-			<pre><code class="language-html">
+		</div>
+		<pre><code class="language-html">
 &lt;div class="row"&gt;
     &lt;article class="col-4"&gt;
         &lt;p&gt;Content in column 1 (col-4)&lt;/p&gt;
@@ -550,20 +559,20 @@ const availableThemes = [
 &lt;/div&gt;
             </code></pre>
 
-			<h4>Four-Column Layout</h4>
-			<div class="example">
-				<div class="row">
-					<article class="col-3"><p>Content in column 1 (col-3)</p>
-					</article>
-					<article class="col-3"><p>Content in column 2 (col-3)</p>
-					</article>
-					<article class="col-3"><p>Content in column 3 (col-3)</p>
-					</article>
-					<article class="col-3"><p>Content in column 4 (col-3)</p>
-					</article>
-				</div>
+		<h4>Four-Column Layout</h4>
+		<div class="example" style="margin-bottom:1.5em;">
+			<div class="row" style="display:grid; grid-template-columns:repeat(4,1fr); gap:var(--a-grid-gutter);">
+				<article class="col-3" style="background:var(--a-color-surface); padding:1em; border-radius:6px;"><p>Content in column 1 (col-3)</p>
+				</article>
+				<article class="col-3" style="background:var(--a-color-surface-variant); padding:1em; border-radius:6px;"><p>Content in column 2 (col-3)</p>
+				</article>
+				<article class="col-3" style="background:var(--a-color-surface); padding:1em; border-radius:6px;"><p>Content in column 3 (col-3)</p>
+				</article>
+				<article class="col-3" style="background:var(--a-color-surface-variant); padding:1em; border-radius:6px;"><p>Content in column 4 (col-3)</p>
+				</article>
 			</div>
-			<pre><code class="language-html">
+		</div>
+		<pre><code class="language-html">
 &lt;div class="row"&gt;
     &lt;article class="col-3"&gt;
         &lt;p&gt;Content in column 1 (col-3)&lt;/p&gt;
@@ -579,7 +588,7 @@ const availableThemes = [
     &lt;/article&gt;
 &lt;/div&gt;
             </code></pre>
-		</div>
+	</div>
 	</section>
 
 	<section id="typography" aria-labelledby="typography-heading">
@@ -1346,112 +1355,109 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 	<section id="colors" aria-labelledby="colors-heading">
-		<div class="container">
-			<h2 id="colors-heading">Colors</h2>
-			<p>Axiom01 provides a comprehensive color system with semantic color variables for consistency across your application.</p>
+  <div class="container">
+    <h2 id="colors-heading">Colors</h2>
+    <p>Axiom01 provides a comprehensive color system with semantic color variables for consistency across your application.</p>
 
-			<div class="code-block">
-				<h3>Color System Structure</h3>
-				<p>The color system is built on HSL components that make it easy to create cohesive color schemes:</p>
-				<pre><code class="language-css">/* Base HSL components */
---a-color-primary-h: 220;    /* Primary brand color hue */
---a-color-primary-s: 70%;    /* Primary color saturation */
---a-color-primary-l: 50%;    /* Primary color lightness */</code></pre>
-				<p>These components are used to generate the full color palette:</p>
-				<pre><code class="language-css">/* Generated colors */
---a-color-primary: hsl(var(--a-color-primary-h), var(--a-color-primary-s), var(--a-color-primary-l));
---a-color-on-primary: hsl(var(--a-color-primary-h), var(--a-saturation-mono), var(--a-brightness-text-on-dark));</code></pre>
-			</div>
+    <div class="code-block">
+      <h3>How to Use Semantic Color Variables</h3>
+      <p>Use semantic color variables for backgrounds, text, borders, and UI elements to ensure theme consistency and easy maintenance. Example usage:</p>
+      <pre><code class="language-css">background: var(--a-color-primary);
+color: var(--a-color-on-primary);
+border-color: var(--a-color-outline);</code></pre>
+      <ul>
+        <li>Prefer semantic variables (e.g., <code>--a-color-primary</code>, <code>--a-color-success</code>) over hardcoded values.</li>
+        <li>Use <code>--a-color-on-*</code> for text on colored backgrounds for optimal contrast.</li>
+        <li>Theme switching is automatic—semantic variables update across your UI.</li>
+      </ul>
+      <p class="tip" style="background:var(--a-color-info-container);color:var(--a-color-on-info-container);padding:0.75em 1em;border-radius:var(--a-border-radius-base);margin-top:1em;">Tip: Use semantic color variables for all UI elements to keep your design consistent and easily themeable.</p>
+    </div>
 
-			<div id="color-swatches">
-				<h3>Color Swatches</h3>
-				<p>Examples of generated color variables:</p>
-				<div class="color-grid">
-					<div class="color-group">
-						<h4>Primary</h4>
-						<div class="colorSwatch primary"><span class="color-name">Primary</span><span class="color-value">var(--a-color-primary)</span>
-						</div>
-						<div class="colorSwatch primary-container"><span class="color-name">Primary Container</span><span
-										class="color-value">var(--a-color-primary-container)</span></div>
-						<div class="colorSwatch on-primary"><span class="color-name">On Primary</span><span class="color-value">var(--a-color-on-primary)</span>
-						</div>
-						<div class="colorSwatch on-primary-container"><span class="color-name">On Primary Container</span><span
-										class="color-value">var(--a-color-on-primary-container)</span></div>
-					</div>
-					<div class="color-group">
-						<h4>Secondary</h4>
-						<div class="colorSwatch secondary"><span class="color-name">Secondary</span><span class="color-value">var(--a-color-secondary)</span>
-						</div>
-						<div class="colorSwatch secondary-container"><span class="color-name">Secondary Container</span><span
-										class="color-value">var(--a-color-secondary-container)</span></div>
-						<div class="colorSwatch on-secondary"><span class="color-name">On Secondary</span><span
-										class="color-value">var(--a-color-on-secondary)</span></div>
-						<div class="colorSwatch on-secondary-container"><span class="color-name">On Secondary Container</span><span
-										class="color-value">var(--a-color-on-secondary-container)</span></div>
-					</div>
-					<div class="color-group">
-						<h4>Tertiary</h4>
-						<div class="colorSwatch tertiary"><span class="color-name">Tertiary</span><span class="color-value">var(--a-color-tertiary)</span>
-						</div>
-						<div class="colorSwatch tertiary-container"><span class="color-name">Tertiary Container</span><span
-										class="color-value">var(--a-color-tertiary-container)</span></div>
-						<div class="colorSwatch on-tertiary"><span class="color-name">On Tertiary</span><span class="color-value">var(--a-color-on-tertiary)</span>
-						</div>
-						<div class="colorSwatch on-tertiary-container"><span class="color-name">On Tertiary Container</span><span class="color-value">var(--a-color-on-tertiary-container)</span></div>
-					</div>
-				</div>
-
-				<h3>Semantic Colors</h3>
-				<p>Axiom01 includes semantic colors for different states and meanings:</p>
-				<div class="color-grid">
-					<div class="color-group">
-						<h4>Success/Positive</h4>
-						<div class="colorSwatch" style="background-color: var(--a-color-success); color: var(--a-color-on-success);">
-							<span class="color-name">Success</span>
-							<span class="color-value">var(--a-color-success)</span>
-						</div>
-						<div class="colorSwatch" style="background-color: var(--a-color-success-container); color: var(--a-color-on-success-container);">
-							<span class="color-name">Success Container</span>
-							<span class="color-value">var(--a-color-success-container)</span>
-						</div>
-					</div>
-					<div class="color-group">
-						<h4>Error/Negative</h4>
-						<div class="colorSwatch" style="background-color: var(--a-color-error); color: var(--a-color-on-error);">
-							<span class="color-name">Error</span>
-							<span class="color-value">var(--a-color-error)</span>
-						</div>
-						<div class="colorSwatch" style="background-color: var(--a-color-error-container); color: var(--a-color-on-error-container);">
-							<span class="color-name">Error Container</span>
-							<span class="color-value">var(--a-color-error-container)</span>
-						</div>
-					</div>
-					<div class="color-group">
-						<h4>Warning/Notice</h4>
-						<div class="colorSwatch" style="background-color: var(--a-color-warning); color: var(--a-color-on-warning);">
-							<span class="color-name">Warning</span>
-							<span class="color-value">var(--a-color-warning)</span>
-						</div>
-						<div class="colorSwatch" style="background-color: var(--a-color-warning-container); color: var(--a-color-on-warning-container);">
-							<span class="color-name">Warning Container</span>
-							<span class="color-value">var(--a-color-warning-container)</span>
-						</div>
-					</div>
-					<div class="color-group">
-						<h4>Info/Informative</h4>
-						<div class="colorSwatch" style="background-color: var(--a-color-info); color: var(--a-color-on-info);">
-							<span class="color-name">Info</span>
-							<span class="color-value">var(--a-color-info)</span>
-						</div>
-						<div class="colorSwatch" style="background-color: var(--a-color-info-container); color: var(--a-color-on-info-container);">
-							<span class="color-name">Info Container</span>
-							<span class="color-value">var(--a-color-info-container)</span>
-						</div>
-					</div>
-				</div>
-			</div>
+    <div id="color-swatches-section" aria-labelledby="color-swatches-heading" style="margin-top:2em;">
+      <div class="container">
+        <h3 id="color-swatches-heading" style="margin-bottom:1em;">Semantic Color Swatches</h3>
+        <div id="color-swatches" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2em;">
+          <div class="color-swatch primary" style="background:var(--a-color-primary);color:var(--a-color-on-primary);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Primary</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-primary)</span>
+          </div>
+          <div class="color-swatch primary-container" style="background:var(--a-color-primary-container);color:var(--a-color-on-primary-container);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Primary Container</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-primary-container)</span>
+          </div>
+          <div class="color-swatch on-primary" style="background:var(--a-color-on-primary);color:var(--a-color-primary);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">On Primary</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-on-primary)</span>
+          </div>
+          <div class="color-swatch on-primary-container" style="background:var(--a-color-on-primary-container);color:var(--a-color-primary-container);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">On Primary Container</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-on-primary-container)</span>
+          </div>
+          <div class="color-swatch secondary" style="background:var(--a-color-secondary);color:var(--a-color-on-secondary);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Secondary</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-secondary)</span>
+          </div>
+          <div class="color-swatch secondary-container" style="background:var(--a-color-secondary-container);color:var(--a-color-on-secondary-container);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Secondary Container</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-secondary-container)</span>
+          </div>
+          <div class="color-swatch on-secondary" style="background:var(--a-color-on-secondary);color:var(--a-color-secondary);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">On Secondary</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-on-secondary)</span>
+          </div>
+          <div class="color-swatch on-secondary-container" style="background:var(--a-color-on-secondary-container);color:var(--a-color-secondary-container);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">On Secondary Container</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-on-secondary-container)</span>
+          </div>
+          <div class="color-swatch tertiary" style="background:var(--a-color-tertiary);color:var(--a-color-on-tertiary);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Tertiary</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-tertiary)</span>
+          </div>
+          <div class="color-swatch tertiary-container" style="background:var(--a-color-tertiary-container);color:var(--a-color-on-tertiary-container);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Tertiary Container</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-tertiary-container)</span>
+          </div>
+          <div class="color-swatch on-tertiary" style="background:var(--a-color-on-tertiary);color:var(--a-color-tertiary);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">On Tertiary</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-on-tertiary)</span>
+          </div>
+          <div class="color-swatch on-tertiary-container" style="background:var(--a-color-on-tertiary-container);color:var(--a-color-tertiary-container);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">On Tertiary Container</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-on-tertiary-container)</span>
+          </div>
+          <div class="color-swatch gray-1" style="background:var(--a-color-gray-1);color:var(--a-color-on-surface);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Gray 1</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-gray-1)</span>
+          </div>
+          <div class="color-swatch gray-2" style="background:var(--a-color-gray-2);color:var(--a-color-on-surface);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Gray 2</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-gray-2)</span>
+          </div>
+          <div class="color-swatch gray-3" style="background:var(--a-color-gray-3);color:var(--a-color-on-surface);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Gray 3</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-gray-3)</span>
+          </div>
+          <div class="color-swatch gray-4" style="background:var(--a-color-gray-4);color:var(--a-color-on-surface);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Gray 4</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-gray-4)</span>
+          </div>
+          <div class="color-swatch gray-5" style="background:var(--a-color-gray-5);color:var(--a-color-on-surface);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Gray 5</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-gray-5)</span>
+          </div>
+          <div class="color-swatch gray-6" style="background:var(--a-color-gray-6);color:var(--a-color-on-surface);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Gray 6</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-gray-6)</span>
+          </div>
+          <div class="color-swatch gray-7" style="background:var(--a-color-gray-7);color:var(--a-color-on-surface);border:2px solid var(--a-color-outline);box-shadow:0 2px 12px var(--a-shadow-color);border-radius:var(--a-border-radius-large);padding:1.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;transition:box-shadow 0.2s;">
+            <span class="color-name" style="font-weight:bold;">Gray 7</span>
+            <span class="color-value" style="font-size:0.95em;opacity:0.8;">var(--a-color-gray-7)</span>
+          </div>
+        </div>
+      </div>
 		</div>
 	</section>
+	<hr style="margin:2em 0;opacity:0.15;">
 
 	<section id="grayscale" aria-labelledby="grayscale-heading">
 		<div class="container">
