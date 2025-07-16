@@ -256,10 +256,10 @@ function getFeatureToggle(varName) {
 }
 
 // Example usage:
-const enableAnimations = getFeatureToggle('--a-enable-animations');
-const enableTransitions = getFeatureToggle('--a-enable-transitions');
-const enableFonts = getFeatureToggle('--a-enable-fonts');
-const useCssReset = getFeatureToggle('--a-use-css-reset');
+//const enableAnimations = getFeatureToggle('--a-enable-animations');
+//const enableTransitions = getFeatureToggle('--a-enable-transitions');
+//const enableFonts = getFeatureToggle('--a-enable-fonts');
+//const useCssReset = getFeatureToggle('--a-use-css-reset');
 
 // Use these toggles to conditionally enable/disable features throughout the script
 // Example: Only run animation logic if enableAnimations is true
@@ -608,6 +608,7 @@ function getCSSVariableBool(varName) {
     return value === 'true' || value === '1';
 }
 
+// Only declare enableAnimations and enableTransitions once, using getFeatureToggle or getCSSVariableBool
 const enableAnimations = getCSSVariableBool('--a-enable-animations');
 const enableTransitions = getCSSVariableBool('--a-enable-transitions');
 const enableFonts = getCSSVariableBool('--a-enable-fonts');

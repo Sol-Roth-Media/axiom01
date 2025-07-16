@@ -23,32 +23,28 @@
     <section class="component-demo">
       <h1>Tabs Component</h1>
       <p>Tabs allow users to switch between different views or content sections. Fully accessible and themeable with Axiom01.</p>
-      <div class="tab" role="tablist" aria-label="Sample Tabs">
-        <button role="tab" aria-selected="true" aria-controls="tab-panel-1" id="tab-1">Tab 1</button>
-        <button role="tab" aria-selected="false" aria-controls="tab-panel-2" id="tab-2">Tab 2</button>
-        <button role="tab" aria-selected="false" aria-controls="tab-panel-3" id="tab-3">Tab 3</button>
-      </div>
-      <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" style="display:block;">
+      <nav class="tabs" role="tablist" aria-label="Sample Tabs">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="tab-panel-1" id="tab-1">Tab 1</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="tab-panel-2" id="tab-2">Tab 2</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="tab-panel-3" id="tab-3">Tab 3</button>
+      </nav>
+      <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" class="tab-panel active">
         <p>This is the content for Tab 1.</p>
       </div>
-      <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" style="display:none;">
+      <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" class="tab-panel">
         <p>This is the content for Tab 2.</p>
       </div>
-      <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" style="display:none;">
+      <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" class="tab-panel">
         <p>This is the content for Tab 3.</p>
       </div>
       <script>
-        const tabs = document.querySelectorAll('.tab [role="tab"]');
-        const panels = [
-          document.getElementById('tab-panel-1'),
-          document.getElementById('tab-panel-2'),
-          document.getElementById('tab-panel-3')
-        ];
+        const tabs = document.querySelectorAll('.tabs [role="tab"]');
+        const panels = document.querySelectorAll('.tab-panel');
         tabs.forEach((tab, i) => {
           tab.addEventListener('click', () => {
             tabs.forEach((t, j) => {
               t.setAttribute('aria-selected', i === j);
-              panels[j].style.display = i === j ? 'block' : 'none';
+              panels[j].classList.toggle('active', i === j);
             });
           });
         });

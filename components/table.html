@@ -103,92 +103,137 @@
   </div>
 </section>
 
-<style>
-/* AXIOM01 Table Component Styles */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: var(--a-font-family-sans, 'Inter', Arial, sans-serif);
-  background: var(--a-color-surface, #fff);
-  color: var(--a-color-on-surface, #222);
-  box-shadow: var(--a-shadow-small, 0 2px 8px rgba(0,0,0,0.04));
-  border-radius: var(--a-border-radius-base, 8px);
-  overflow: hidden;
-}
-.table th {
-  padding: var(--a-padding-small, 0.75em) var(--a-padding-base, 1em);
-  text-align: left;
-  background: var(--a-color-surface-variant, #f7f7f7);
-  color: var(--a-color-on-surface-variant, #333);
-  font-weight: var(--a-font-weight-semibold, 600);
-}
-.table td {
-  padding: var(--a-padding-small, 0.75em) var(--a-padding-base, 1em);
-  text-align: left;
-}
-.table tr {
-  border-bottom: 1px solid var(--a-color-outline, #eee);
-}
-.table tr:last-child {
-  border-bottom: none;
-}
-.table tr:hover {
-  background: var(--a-color-surface-variant, #f0f8ff);
-}
-.table.zebra tr:nth-child(odd) {
-  background: var(--a-color-surface-variant, #f9f9f9);
-}
-.table-scroll {
-  width: 100%;
-  overflow-x: auto;
-}
-.table-scroll .table {
-  min-width: 600px;
-}
-@media (max-width: 600px) {
-  .table, .table th, .table td, .table tr {
-    display: block;
-    width: 100%;
-  }
-  .table th {
-    display: none;
-  }
-  .table tr {
-    margin-bottom: var(--a-margin-small, 1em);
-    box-shadow: var(--a-shadow-small, 0 1px 4px rgba(0,0,0,0.06));
-    border-radius: var(--a-border-radius-base, 8px);
-    background: var(--a-color-surface, #fff);
-  }
-  .table td {
-    position: relative;
-    padding-left: 50%;
-    min-height: 2.5em;
-    border-bottom: 1px solid var(--a-color-outline, #eee);
-  }
-  .table td:before {
-    position: absolute;
-    left: var(--a-padding-base, 1em);
-    top: var(--a-padding-small, 0.75em);
-    width: 45%;
-    white-space: nowrap;
-    font-weight: var(--a-font-weight-semibold, 600);
-    color: var(--a-color-on-surface-variant, #333);
-    content: attr(data-label);
-  }
-}
-</style>
-<script>
-// Responsive labels for mobile view
-const table = document.querySelector('.table');
-if (table) {
-  const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent);
-  table.querySelectorAll('tbody tr').forEach(row => {
-    Array.from(row.children).forEach((cell, i) => {
-      cell.setAttribute('data-label', headers[i]);
-    });
-  });
-}
-</script>
+<section class="component-docs">
+  <h2>Table Component</h2>
+  <h2>Overview</h2>
+  <p>The <strong>Table</strong> component displays tabular data with semantic HTML. It is responsive, accessible, and uses minimal classes. Style only the <code>table</code>, <code>th</code>, <code>td</code>, and <code>caption</code> elements directly. Avoid BEML and compound classes.</p>
+  <h3>Usage</h3>
+  <pre><code>&lt;table&gt;
+  &lt;caption&gt;Project Status&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Project&lt;/th&gt;
+      &lt;th&gt;Status&lt;/th&gt;
+      &lt;th&gt;Progress&lt;/th&gt;
+      &lt;th&gt;Owner&lt;/th&gt;
+      &lt;th&gt;Due Date&lt;/th&gt;
+      &lt;th&gt;Notes&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alpha&lt;/td&gt;
+      &lt;td&gt;In Progress&lt;/td&gt;
+      &lt;td&gt;60%&lt;/td&gt;
+      &lt;td&gt;Jane&lt;/td&gt;
+      &lt;td&gt;2025-08-01&lt;/td&gt;
+      &lt;td&gt;On track&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Beta&lt;/td&gt;
+      &lt;td&gt;Complete&lt;/td&gt;
+      &lt;td&gt;100%&lt;/td&gt;
+      &lt;td&gt;John&lt;/td&gt;
+      &lt;td&gt;2025-09-15&lt;/td&gt;
+      &lt;td&gt;Waiting for review&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+  <h3>Responsive Demo</h3>
+  <div style="overflow-x:auto;max-width:100vw;">
+    <table>
+      <caption>Project Status</caption>
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Status</th>
+          <th>Progress</th>
+          <th>Owner</th>
+          <th>Due Date</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Alpha</td>
+          <td>In Progress</td>
+          <td>60%</td>
+          <td>Jane</td>
+          <td>2025-08-01</td>
+          <td>On track</td>
+        </tr>
+        <tr>
+          <td>Beta</td>
+          <td>Complete</td>
+          <td>100%</td>
+          <td>John</td>
+          <td>2025-09-15</td>
+          <td>Waiting for review</td>
+        </tr>
+        <tr>
+          <td>Kappa</td>
+          <td>Complete</td>
+          <td>100%</td>
+          <td>Alex</td>
+          <td>2025-07-20</td>
+          <td>Done</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Accessibility & Usage Tips</h3>
+  <ul>
+    <li>Use semantic <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code>, and <code>&lt;caption&gt;</code> for structure.</li>
+    <li>Wrap tables in a <code>div</code> with <code>overflow-x:auto</code> for horizontal scrolling on small screens.</li>
+    <li>Use clear, descriptive column headers.</li>
+    <li>Provide a <code>&lt;caption&gt;</code> for accessibility.</li>
+    <li>Style only the semantic elements and use minimal classes.</li>
+  </ul>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--a-font-family-sans, 'Inter', Arial, sans-serif);
+      background: var(--a-color-surface, #fff);
+      color: var(--a-color-on-surface, #222);
+      box-shadow: var(--a-shadow-small, 0 2px 8px rgba(0,0,0,0.04));
+      border-radius: var(--a-border-radius-base, 8px);
+      overflow: hidden;
+      min-width: 600px;
+    }
+    th, td {
+      padding: var(--a-padding-small, 0.75em) var(--a-padding-base, 1em);
+      text-align: left;
+      border-bottom: 1px solid var(--a-color-outline, #eee);
+    }
+    th {
+      background: var(--a-color-surface-variant, #f4f4f4);
+      font-weight: 600;
+      color: var(--a-color-primary, #1976d2);
+    }
+    caption {
+      caption-side: top;
+      font-size: 1.1em;
+      font-weight: 500;
+      color: var(--a-color-muted, #888);
+      padding: 0.5em 0;
+      text-align: left;
+    }
+    @media (max-width: 700px) {
+      table {
+        min-width: 400px;
+        font-size: 0.95em;
+      }
+      th, td {
+        padding: 0.5em 0.5em;
+      }
+      caption {
+        font-size: 1em;
+      }
+    }
+  </style>
+</section>
 
 <!--
 Axiom01 Table Component Information:

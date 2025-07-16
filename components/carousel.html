@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../css/axiom.css">
   <link rel="stylesheet" href="../css/components.css">
 </head>
-<body>
+        <div class="track">
   <nav>
     <a href="../axiom01.html">Back to Axiom01 Docs</a>
   </nav>
@@ -19,32 +19,157 @@
     </section>
     <section>
       <h2>Example</h2>
-      <div class="carousel" role="region" aria-label="Image Carousel" tabindex="0" style="max-width:400px;margin:auto;">
-        <div class="carousel-track" style="display:flex;overflow-x:auto;scroll-snap-type:x mandatory;">
-          <div class="carousel-slide" style="min-width:100%;scroll-snap-align:start;padding:1rem;background:var(--a-color-surface);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-            <img src="../img/axiom.jpeg" alt="Slide 1" style="width:100%;border-radius:8px;">
-            <div style="text-align:center;margin-top:0.5rem;">Slide 1</div>
-          </div>
-          <div class="carousel-slide" style="min-width:100%;scroll-snap-align:start;padding:1rem;background:var(--a-color-surface);border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-            <img src="../img/axiom.jpeg" alt="Slide 2" style="width:100%;border-radius:8px;">
-            <div style="text-align:center;margin-top:0.5rem;">Slide 2</div>
-          </div>
+      <div class="carousel" role="region" aria-label="Image Carousel" tabindex="0">
+        <div class="track">
+          <section>
+            <figure>
+              <img src="../img/axiom.jpeg" alt="Slide 1">
+              <figcaption>Slide 1</figcaption>
+            </figure>
+          </section>
+          <section>
+            <figure>
+              <img src="../img/axiom.jpeg" alt="Slide 2">
+              <figcaption>Slide 2</figcaption>
+            </figure>
+          </section>
         </div>
-        <div class="carousel-controls" style="display:flex;justify-content:center;gap:1rem;margin-top:1rem;">
-          <button aria-label="Previous Slide" class="btn" onclick="carouselPrev()">&#8592;</button>
-          <button aria-label="Next Slide" class="btn" onclick="carouselNext()">&#8594;</button>
+        <div class="controls">
+          <button aria-label="Previous Slide" id="carousel-prev">&#8592;</button>
+          <button aria-label="Next Slide" id="carousel-next">&#8594;</button>
         </div>
       </div>
+      <pre><code>&lt;div class="carousel" role="region" aria-label="Image Carousel" tabindex="0"&gt;
+  &lt;div class="track"&gt;
+    &lt;section&gt;
+      &lt;figure&gt;
+        &lt;img src="../img/axiom.jpeg" alt="Slide 1"&gt;
+        &lt;figcaption&gt;Slide 1&lt;/figcaption&gt;
+      &lt;/figure&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+      &lt;figure&gt;
+        &lt;img src="../img/axiom.jpeg" alt="Slide 2"&gt;
+        &lt;figcaption&gt;Slide 2&lt;/figcaption&gt;
+      &lt;/figure&gt;
+    &lt;/section&gt;
+  &lt;/div&gt;
+  &lt;div class="controls"&gt;
+    &lt;button aria-label="Previous Slide" id="carousel-prev"&gt;&#8592;&lt;/button&gt;
+    &lt;button aria-label="Next Slide" id="carousel-next"&gt;&#8594;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
       <script>
-        // Simple carousel navigation demo
-        function carouselPrev() {
-          const track = document.querySelector('.carousel-track');
-          track.scrollBy({left: -track.offsetWidth, behavior: 'smooth'});
+        // Minimal carousel navigation for Axiom01 philosophy
+        const track = document.querySelector('.carousel .track');
+        const slides = track.querySelectorAll('section');
+        let currentIndex = 0;
+        function updateCarousel() {
+          slides.forEach((slide, idx) => {
+            slide.style.display = idx === currentIndex ? 'block' : 'none';
+          });
         }
-        function carouselNext() {
-          const track = document.querySelector('.carousel-track');
-          track.scrollBy({left: track.offsetWidth, behavior: 'smooth'});
+        document.getElementById('carousel-prev').addEventListener('click', () => {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          updateCarousel();
+        });
+        document.getElementById('carousel-next').addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateCarousel();
+        });
+        document.querySelector('.carousel').addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+          } else if (e.key === 'ArrowRight') {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+          }
+        });
+        updateCarousel();
+      </script>
+    </section>
+    <section>
+      <h2>Advanced Example</h2>
+      <p>This advanced carousel demonstrates mixed content, captions, and custom controls. You can use any semantic elements inside <code>section</code> for slides.</p>
+      <div class="carousel" role="region" aria-label="Advanced Carousel" tabindex="0">
+        <div class="track">
+          <section>
+            <figure>
+              <img src="../img/axiom.jpeg" alt="Axiom Logo">
+              <figcaption>Logo Slide</figcaption>
+            </figure>
+          </section>
+          <section>
+            <blockquote>“Axiom01: Minimal, semantic, accessible.”</blockquote>
+            <footer>— Style Guide</footer>
+          </section>
+          <section>
+            <figure>
+              <img src="../img/web_design_color_wheel.jpeg" alt="Color Wheel">
+              <figcaption>Color Theory</figcaption>
+            </figure>
+          </section>
+        </div>
+        <div class="controls">
+          <button aria-label="Previous Slide" id="adv-carousel-prev">&#8592;</button>
+          <button aria-label="Next Slide" id="adv-carousel-next">&#8594;</button>
+        </div>
+      </div>
+      <pre><code>&lt;div class="carousel" role="region" aria-label="Advanced Carousel" tabindex="0"&gt;
+  &lt;div class="track"&gt;
+    &lt;section&gt;
+      &lt;figure&gt;
+        &lt;img src="../img/axiom.jpeg" alt="Axiom Logo"&gt;
+        &lt;figcaption&gt;Logo Slide&lt;/figcaption&gt;
+      &lt;/figure&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+      &lt;blockquote&gt;“Axiom01: Minimal, semantic, accessible.”&lt;/blockquote&gt;
+      &lt;footer&gt;— Style Guide&lt;/footer&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+      &lt;figure&gt;
+        &lt;img src="../img/web_design_color_wheel.jpeg" alt="Color Wheel"&gt;
+        &lt;figcaption&gt;Color Theory&lt;/figcaption&gt;
+      &lt;/figure&gt;
+    &lt;/section&gt;
+  &lt;/div&gt;
+  &lt;div class="controls"&gt;
+    &lt;button aria-label="Previous Slide" id="adv-carousel-prev"&gt;&#8592;&lt;/button&gt;
+    &lt;button aria-label="Next Slide" id="adv-carousel-next"&gt;&#8594;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+      <script>
+        // Advanced carousel navigation
+        const advTrack = document.querySelector('.carousel[aria-label="Advanced Carousel"] .track');
+        const advSlides = advTrack.querySelectorAll('section');
+        let advIndex = 0;
+        function updateAdvCarousel() {
+          advSlides.forEach((slide, idx) => {
+            slide.style.display = idx === advIndex ? 'block' : 'none';
+          });
         }
+        document.getElementById('adv-carousel-prev').addEventListener('click', () => {
+          advIndex = (advIndex - 1 + advSlides.length) % advSlides.length;
+          updateAdvCarousel();
+        });
+        document.getElementById('adv-carousel-next').addEventListener('click', () => {
+          advIndex = (advIndex + 1) % advSlides.length;
+          updateAdvCarousel();
+        });
+        document.querySelector('.carousel[aria-label="Advanced Carousel"]')?.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') {
+            advIndex = (advIndex - 1 + advSlides.length) % advSlides.length;
+            updateAdvCarousel();
+          } else if (e.key === 'ArrowRight') {
+            advIndex = (advIndex + 1) % advSlides.length;
+            updateAdvCarousel();
+          }
+        });
+        updateAdvCarousel();
       </script>
     </section>
     <section>
@@ -77,4 +202,3 @@
   </main>
 </body>
 </html>
-

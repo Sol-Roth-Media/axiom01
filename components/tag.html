@@ -1,29 +1,82 @@
+<style>
+.tag {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  margin: 0.15em 0.3em 0.15em 0;
+  font-size: 0.95em;
+  font-weight: 500;
+  border-radius: var(--a-border-radius-base, 1em);
+  background: var(--a-color-surface-variant, #f4f4f4);
+  color: var(--a-color-on-surface, #222);
+  border: 1px solid var(--a-color-outline, #eee);
+  transition: background 0.2s, color 0.2s;
+}
+.tag.primary {
+  background: var(--a-color-primary, #1976d2);
+  color: var(--a-color-on-primary, #fff);
+}
+.tag.success {
+  background: var(--a-color-success, #388e3c);
+  color: var(--a-color-on-success, #fff);
+}
+.tag.removable button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1em;
+  margin-left: 0.5em;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.tag.removable button:focus {
+  outline: 2px solid var(--a-color-primary, #1976d2);
+}
+.tag:hover {
+  background: var(--a-color-surface, #fff);
+  color: var(--a-color-primary, #1976d2);
+  border-color: var(--a-color-primary, #1976d2);
+}
+@media (max-width: 600px) {
+  .tag {
+    font-size: 0.9em;
+    padding: 0.2em 0.5em;
+  }
+}
+</style>
 <!-- Axiom01 Tag Component Documentation & Demo -->
 <section class="component-docs">
   <h2>Tag Component</h2>
-  <p>The <strong>Tag</strong> component is used to display small, contextual labels, categories, or keywords. Tags can be styled, removable, and interactive.</p>
+  <h2>Overview</h2>
+  <p>The <strong>Tag</strong> component displays small, contextual labels, categories, or keywords. Tags are semantic, accessible, and use minimal classes. Removable tags use a button for interaction and accessibility.</p>
   <h3>Usage</h3>
   <pre><code>&lt;span class="tag"&gt;Example Tag&lt;/span&gt;
+&lt;span class="tag primary"&gt;Primary Tag&lt;/span&gt;
+&lt;span class="tag success"&gt;Success Tag&lt;/span&gt;
 &lt;span class="tag removable"&gt;Removable Tag &lt;button aria-label="Remove tag"&gt;&times;&lt;/button&gt;&lt;/span&gt;
 </code></pre>
   <h3>Demo</h3>
-  <div>
+  <div style="display:flex;flex-wrap:wrap;gap:0.5em 1em;align-items:center;">
     <span class="tag">Default Tag</span>
     <span class="tag primary">Primary Tag</span>
     <span class="tag success">Success Tag</span>
     <span class="tag removable">Removable Tag <button aria-label="Remove tag">&times;</button></span>
+    <span class="tag">Category</span>
+    <span class="tag">Keyword</span>
   </div>
   <h3>Options</h3>
   <ul>
-    <li><code>tag primary</code>, <code>tag success</code>, etc. for color variants</li>
+    <li><code>tag primary</code>, <code>tag success</code> for color variants</li>
     <li><code>tag removable</code> for removable tags</li>
   </ul>
   <h3>Accessibility</h3>
   <ul>
     <li>Removable tags use a button with <code>aria-label</code> for screen readers.</li>
+    <li>Tags use semantic <code>&lt;span&gt;</code> and <code>&lt;button&gt;</code> elements only.</li>
   </ul>
   <h3>Customization</h3>
   <ul>
-    <li>Style with semantic CSS variables: <code>--a-color-primary</code>, <code>--a-color-success</code>, etc.</li>
+    <li>Style with semantic CSS variables: <code>--a-color-primary</code>, <code>--a-color-success</code>, <code>--a-color-surface-variant</code>, etc.</li>
+    <li>Adjust border radius, font size, and spacing with CSS variables.</li>
   </ul>
 </section>

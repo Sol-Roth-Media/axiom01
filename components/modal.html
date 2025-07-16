@@ -19,6 +19,7 @@
     </section>
     <section>
       <h2>Example</h2>
+      <p><strong>Basic Modal:</strong> A modal dialog overlays the page and focuses user attention for important actions, confirmations, or forms. It is accessible, traps keyboard focus, and can be closed with Escape or by clicking outside. Use semantic markup and minimal classes for clarity and maintainability.</p>
       <button class="button" onclick="document.getElementById('demo-modal').classList.add('open')">Open Modal</button>
       <div class="modal" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
         <div class="modal-content">
@@ -30,16 +31,92 @@
             <p>This is a modal dialog. It traps focus and can be closed with Escape or by clicking outside.</p>
           </section>
           <footer>
-            <button class="button secondary" onclick="document.getElementById('demo-modal').classList.remove('open')">Close</button>
+            <button class="button" onclick="document.getElementById('demo-modal').classList.remove('open')">Close</button>
           </footer>
         </div>
       </div>
+      <pre><code>&lt;button class="button" onclick="document.getElementById('demo-modal').classList.add('open')"&gt;Open Modal&lt;/button&gt;
+&lt;div class="modal" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1"&gt;
+  &lt;div class="modal-content"&gt;
+    &lt;header&gt;
+      &lt;h3 id="modal-title"&gt;Example Modal&lt;/h3&gt;
+      &lt;button aria-label="Close" onclick="document.getElementById('demo-modal').classList.remove('open')"&gt;&amp;times;&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;section&gt;
+      &lt;p&gt;This is a modal dialog. It traps focus and can be closed with Escape or by clicking outside.&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;footer&gt;
+      &lt;button class="button" onclick="document.getElementById('demo-modal').classList.remove('open')"&gt;Close&lt;/button&gt;
+    &lt;/footer&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
       <script>
         // Basic focus trap and Escape key close for demo
         document.getElementById('demo-modal').addEventListener('keydown', function(e) {
           if (e.key === 'Escape') this.classList.remove('open');
         });
         document.getElementById('demo-modal').addEventListener('click', function(e) {
+          if (e.target === this) this.classList.remove('open');
+        });
+      </script>
+    </section>
+    <section>
+      <h2>Advanced Example</h2>
+      <p><strong>Advanced Modal:</strong> Modals can contain forms, multiple actions, and any semantic content. This example shows a contact form inside a modal, with Cancel and Send actions. All controls are accessible and keyboard-friendly.</p>
+      <button class="button" onclick="document.getElementById('adv-modal').classList.add('open')">Open Advanced Modal</button>
+      <div class="modal" id="adv-modal" role="dialog" aria-modal="true" aria-labelledby="adv-modal-title" tabindex="-1">
+        <div class="modal-content">
+          <header>
+            <h3 id="adv-modal-title">Contact Form</h3>
+            <button aria-label="Close" onclick="document.getElementById('adv-modal').classList.remove('open')">&times;</button>
+          </header>
+          <section>
+            <form>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" required>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </form>
+          </section>
+          <footer>
+            <button class="button" onclick="document.getElementById('adv-modal').classList.remove('open')">Cancel</button>
+            <button class="button" type="submit" form="contact-form">Send</button>
+          </footer>
+        </div>
+      </div>
+      <pre><code>&lt;button class="button" onclick="document.getElementById('adv-modal').classList.add('open')"&gt;Open Advanced Modal&lt;/button&gt;
+&lt;div class="modal" id="adv-modal" role="dialog" aria-modal="true" aria-labelledby="adv-modal-title" tabindex="-1"&gt;
+  &lt;div class="modal-content"&gt;
+    &lt;header&gt;
+      &lt;h3 id="adv-modal-title"&gt;Contact Form&lt;/h3&gt;
+      &lt;button aria-label="Close" onclick="document.getElementById('adv-modal').classList.remove('open')"&gt;&amp;times;&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;section&gt;
+      &lt;form&gt;
+        &lt;label for="name"&gt;Name&lt;/label&gt;
+        &lt;input id="name" name="name" type="text" required&gt;
+        &lt;label for="email"&gt;Email&lt;/label&gt;
+        &lt;input id="email" name="email" type="email" required&gt;
+        &lt;label for="message"&gt;Message&lt;/label&gt;
+        &lt;textarea id="message" name="message" required&gt;&lt;/textarea&gt;
+      &lt;/form&gt;
+    &lt;/section&gt;
+    &lt;footer&gt;
+      &lt;button class="button" onclick="document.getElementById('adv-modal').classList.remove('open')"&gt;Cancel&lt;/button&gt;
+      &lt;button class="button" type="submit" form="contact-form"&gt;Send&lt;/button&gt;
+    &lt;/footer&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+      <script>
+        // Advanced modal: Escape key and click outside to close
+        document.getElementById('adv-modal').addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') this.classList.remove('open');
+        });
+        document.getElementById('adv-modal').addEventListener('click', function(e) {
           if (e.target === this) this.classList.remove('open');
         });
       </script>
