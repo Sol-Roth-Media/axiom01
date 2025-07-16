@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axiom01 Component: Progress Bar</title>
+  <link rel="stylesheet" href="../css/axiom.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Axiom01 Home</a> |
+      <a href="card.html">Card</a> |
+      <a href="accordion.html">Accordion</a> |
+      <strong>Progress Bar</strong>
+    </nav>
+  </header>
+  <main>
+    <section class="component-demo">
+      <h1>Progress Bar Component</h1>
+      <p>The Progress Bar component visually indicates the completion status of a task. It can be updated dynamically with JavaScript.</p>
+      <h2>Demo</h2>
+      <div id="progress-bar-demo">
+        <label for="progress-bar-example">Upload Progress:</label>
+        <div class="progress-bar" id="progress-bar-example" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" aria-label="Upload progress">
+          <div class="progress" style="width: 25%;"></div>
+        </div>
+        <button type="button" class="progress-btn">Increase Progress (JS Example)</button>
+      </div>
+      <h2>Usage</h2>
+      <pre><code class="language-html">&lt;div class="progress-bar" id="prog-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"&gt;
+  &lt;div class="progress" style="width: 50%"&gt;&lt;/div&gt;
+&lt;/div&gt;
+      </code></pre>
+      <h2>JavaScript Example</h2>
+      <pre><code class="language-js">document.addEventListener('DOMContentLoaded', () => {
+  const progressButton = document.querySelector('.progress-btn');
+  const progressBar = document.getElementById('progress-bar-example');
+  const progressInner = progressBar.querySelector('.progress');
+  let progressValue = 25;
+
+  progressButton.addEventListener('click', () => {
+    progressValue = Math.min(progressValue + 10, 100);
+    progressInner.style.width = `${progressValue}%`;
+    progressBar.setAttribute('aria-valuenow', progressValue);
+    if (progressValue === 100) {
+      progressButton.textContent = 'Completed!';
+      progressButton.disabled = true;
+    }
+  });
+});
+      </code></pre>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>Uses <code>role="progressbar"</code> and ARIA attributes for screen readers.</li>
+        <li>Keyboard and screen reader accessible.</li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Axiom01 UI Framework</p>
+  </footer>
+  <script src="../js/scripts.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axiom01 Component: Forms</title>
+  <link rel="stylesheet" href="../css/axiom.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Axiom01 Home</a> |
+      <a href="card.html">Card</a> |
+      <a href="accordion.html">Accordion</a> |
+      <a href="progress-bar.html">Progress Bar</a> |
+      <strong>Forms</strong>
+    </nav>
+  </header>
+  <main>
+    <section class="component-demo">
+      <h1>Forms Component</h1>
+      <p>Forms are essential for user input. Axiom01 provides styled, accessible forms for basic and advanced use cases.</p>
+      <h2>Demo: Basic Form</h2>
+      <form class="form" id="basic-form-demo">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit">Submit</button>
+      </form>
+      <h2>Demo: Advanced Form</h2>
+      <form class="axiom-form" id="advanced-form-demo">
+        <fieldset>
+          <legend>Profile</legend>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+        </fieldset>
+        <fieldset>
+          <legend>Preferences</legend>
+          <label for="color">Favorite Color:</label>
+          <select id="color" name="color">
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+          </select>
+          <label><input type="checkbox" name="subscribe"> Subscribe to newsletter</label>
+        </fieldset>
+        <button type="submit">Save</button>
+      </form>
+      <h2>Demo: Search Form</h2>
+      <form class="axiom-form" id="search-form-demo">
+        <label for="search">Search:</label>
+        <input type="search" id="search" name="search" placeholder="Type to search..." required>
+        <button type="submit">Go</button>
+      </form>
+      <h2>Demo: Radio Group & Inline Labels</h2>
+      <form class="axiom-form" id="radio-form-demo">
+        <fieldset>
+          <legend>Choose a plan</legend>
+          <div class="form-group">
+            <label><input type="radio" name="plan" value="basic" required> Basic</label>
+            <label><input type="radio" name="plan" value="pro"> Pro</label>
+            <label><input type="radio" name="plan" value="enterprise"> Enterprise</label>
+          </div>
+        </fieldset>
+        <button type="submit">Select</button>
+      </form>
+      <h2>Demo: Grouped Fields & Help Text</h2>
+      <form class="axiom-form" id="grouped-form-demo">
+        <fieldset>
+          <legend>Contact Info</legend>
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="e.g. (555) 123-4567" pattern="\\(\\d{3}\\) \\d{3}-\\d{4}" required>
+            <small class="form-help">Format: (555) 123-4567</small>
+          </div>
+          <div class="form-group">
+            <label for="website">Website:</label>
+            <input type="url" id="website" name="website" placeholder="https://example.com">
+            <small class="form-help">Include https://</small>
+          </div>
+        </fieldset>
+        <button type="submit">Send</button>
+      </form>
+      <h2>Demo: File Upload</h2>
+      <form class="axiom-form" id="file-form-demo">
+        <label for="resume">Upload Resume:</label>
+        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+        <small class="form-help">PDF or Word format only</small>
+        <button type="submit">Upload</button>
+      </form>
+      <h2>Demo: Multi-step Form (Visual Only)</h2>
+      <form class="axiom-form" id="multistep-form-demo">
+        <fieldset>
+          <legend>Step 1: Personal</legend>
+          <label for="step1-name">Name:</label>
+          <input type="text" id="step1-name" name="step1-name" required>
+        </fieldset>
+        <fieldset>
+          <legend>Step 2: Details</legend>
+          <label for="step2-age">Age:</label>
+          <input type="number" id="step2-age" name="step2-age" min="1" max="120" required>
+        </fieldset>
+        <button type="submit">Finish</button>
+      </form>
+      <h2>Advanced Validation Example</h2>
+      <form class="axiom-form" id="validation-form-demo">
+        <label for="username-validate">Username:</label>
+        <input type="text" id="username-validate" name="username-validate" pattern="[A-Za-z0-9]{4,12}" required placeholder="4-12 letters or numbers">
+        <small class="form-help">Required. 4-12 alphanumeric characters.</small>
+        <label for="email-validate">Email:</label>
+        <input type="email" id="email-validate" name="email-validate" required placeholder="your@email.com">
+        <small class="form-help">Must be a valid email address.</small>
+        <button type="submit">Validate</button>
+      </form>
+      <script>
+      // Custom validation feedback for advanced validation form
+      document.getElementById('validation-form-demo').addEventListener('submit', function(e) {
+        var username = document.getElementById('username-validate');
+        if (!username.checkValidity()) {
+          username.classList.add('invalid');
+          username.setCustomValidity('Username must be 4-12 letters or numbers.');
+          e.preventDefault();
+        } else {
+          username.classList.remove('invalid');
+          username.setCustomValidity('');
+        }
+      });
+      </script>
+      <h2>Usage</h2>
+      <pre><code class="language-html">&lt;form class="axiom-form"&gt;
+  &lt;label for="field"&gt;Field&lt;/label&gt;
+  &lt;input type="text" id="field" name="field" required&gt;
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+      </code></pre>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>Labels are associated with inputs using <code>for</code> and <code>id</code>.</li>
+        <li>Fieldsets and legends group related fields.</li>
+        <li>Keyboard and screen reader accessible.</li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Axiom01 UI Framework</p>
+  </footer>
+  <script src="../js/scripts.js"></script>
+</body>
+</html>

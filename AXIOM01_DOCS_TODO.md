@@ -18,11 +18,17 @@ This document outlines a step-by-step plan to transform `axiom01-navbar-demo.htm
 
 ## 4. Component Documentation
 - [ ] Create individual sections for each core component (Button, Card, Alert, Modal, Navbar, Grid, etc.).
+- [ ] Add documentation and usage examples for Tag component.
+- [ ] Add documentation and usage examples for Tab Bar component.
 - [ ] For each component:
     - [ ] Add usage examples (HTML code + live demo).
     - [ ] List available classes, attributes, and options.
     - [ ] Show accessibility features.
     - [ ] Add customization tips (CSS variables, theming).
+- [ ] Add Notification and Datepicker component documentation pages to ./components
+- [ ] Link Notification and Datepicker docs in axiom01.html Component Gallery
+- [ ] Update AUDIT_PROGRESS.md after each addition
+- [ ] Ensure accessibility, semantic markup, and axiom01 styling in all new docs
 
 ## 5. Theming & Customization
 - [ ] Add a full theming guide with code samples.
@@ -62,6 +68,25 @@ This document outlines a step-by-step plan to transform `axiom01-navbar-demo.htm
 - [ ] Add “Back to Top” button.
 - [ ] Improve spacing, typography, and color contrast.
 - [ ] Make sure all demos are responsive and accessible.
+
+## Selective Component Loading in Axiom01
+
+To optimize bundle size and performance, you can load only the components you need:
+
+**JavaScript:**
+- Only register the components you use by commenting out or removing unused `AxiomComponents.register(...)` calls in `js/axiom.js`.
+- For advanced usage, split each component’s logic into separate JS files and import only the ones you need in your project.
+
+**CSS:**
+- Import only the CSS files for the components you use, instead of the entire `components.css`.
+- Example:
+  ```css
+  @import url("alerts.css");
+  @import url("navbar.css");
+  ```
+- Or, create a custom CSS bundle with only the styles you need.
+
+This approach helps keep your implementation lightweight and focused on the features you actually use.
 
 ---
 

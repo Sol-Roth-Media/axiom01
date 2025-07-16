@@ -680,3 +680,42 @@ if (document.readyState !== 'loading') {
 // --- Mobile Menu Toggle (Main Navbar) ---
 // This code is now handled by initMobileMenu() function
 // The duplicate event listeners were causing conflicts
+
+// Drawer (Mobile Navigation)
+document.addEventListener('DOMContentLoaded', function() {
+  var drawer = document.getElementById('drawer');
+  var toggle = document.getElementById('drawer-toggle');
+  if (drawer && toggle) {
+    toggle.addEventListener('click', function() {
+      drawer.classList.toggle('drawer-open');
+      // Add backdrop for accessibility
+      let backdrop = document.querySelector('.drawer-backdrop');
+      if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'drawer-backdrop';
+        document.body.appendChild(backdrop);
+      }
+      backdrop.classList.toggle('open', drawer.classList.contains('drawer-open'));
+      backdrop.onclick = function() {
+        drawer.classList.remove('drawer-open');
+        backdrop.classList.remove('open');
+      };
+    });
+    // Accessibility: close drawer with backdrop click or Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        drawer.classList.remove('drawer-open');
+        var backdrop = document.querySelector('.drawer-backdrop');
+        if (backdrop) backdrop.classList.remove('open');
+      }
+    });
+    // Ensure drawer closes when resizing to desktop
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900) {
+        drawer.classList.remove('drawer-open');
+        var backdrop = document.querySelector('.drawer-backdrop');
+        if (backdrop) backdrop.classList.remove('open');
+      }
+    });
+  }
+});

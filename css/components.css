@@ -74,7 +74,7 @@
     /* Confirmed: All spacing, color, and typography use variables. No hardcoded values remain. */
 }
 
-.modal .closeBtn {
+.modal button.close {
     background: transparent;
     border: none;
     color: var(--a-color-muted); /* Use semantic muted color variable */
@@ -88,8 +88,8 @@
     transition: color 0.2s ease;
 }
 
-.modal .closeBtn:hover,
-.modal .closeBtn:focus {
+.modal button.close:hover,
+.modal button.close:focus {
     color: var(--a-color-on-surface);
 }
 
@@ -350,7 +350,7 @@ fieldset.inline-labels .form-group {
   display: inline-block;
 }
 
-.dropdown-trigger {
+.dropdown button {
   background: var(--a-color-surface);
   color: var(--a-color-on-surface);
   border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-border, #ccc);
@@ -361,31 +361,36 @@ fieldset.inline-labels .form-group {
   transition: box-shadow 0.2s, border-color 0.2s;
   outline: none;
 }
-.dropdown-trigger:focus {
+.dropdown button:focus {
   border-color: var(--a-color-primary);
-  box-shadow: 0 0 0 2px var(--a-color-primary-fade, rgba(0, 123, 255, 0.2));
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }
 
-.dropdown-list {
+.dropdown ul {
   position: absolute;
   left: 0;
   top: 100%;
   min-width: 180px;
-  margin-top: var(--a-space-xsmall);
+  margin-top: var(--a-margin-tiny, 0.25rem);
   background: var(--a-color-surface);
   border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-border, #ccc);
   border-radius: var(--a-border-radius-base);
-  box-shadow: var(--a-shadow-medium, 0 4px 12px var(--a-shadow-color));
-  padding: var(--a-padding-xsmall) 0;
+  box-shadow: var(--a-shadow-medium, 0 4px 12px rgba(0, 0, 0, 0.1));
+  padding: var(--a-padding-tiny, 0.25rem) 0;
   z-index: 100;
   display: block;
-  /* Confirmed: All spacing, color, and typography use variables. No hardcoded values remain. */
+  list-style: none;
 }
-.dropdown-list[hidden] {
+.dropdown ul[hidden] {
   display: none;
 }
 
-.dropdown-list [role="option"] {
+.dropdown li {
+  margin: 0;
+}
+
+.dropdown li a, 
+.dropdown li button {
   padding: var(--a-padding-small) var(--a-padding-large);
   background: none;
   color: var(--a-color-on-surface);
@@ -396,16 +401,19 @@ fieldset.inline-labels .form-group {
   cursor: pointer;
   outline: none;
   transition: background 0.15s, color 0.15s;
-  /* Remove any hardcoded values, ensure all spacing and typography use variables */
+  display: block;
 }
-.dropdown-list [role="option"]:hover,
-.dropdown-list [role="option"]:focus {
-  background: var(--a-color-primary-fade);
+.dropdown li a:hover,
+.dropdown li a:focus,
+.dropdown li button:hover,
+.dropdown li button:focus {
+  background: rgba(0, 123, 255, 0.1);
   color: var(--a-color-primary);
 }
 
-.dropdown-list [role="option"]:active {
-  background: var(--a-color-primary-fade-active);
+.dropdown li a:active,
+.dropdown li button:active {
+  background: rgba(0, 123, 255, 0.2);
   color: var(--a-color-primary);
 }
 
@@ -454,3 +462,322 @@ fieldset.inline-labels .form-group {
   }
 }
 /* End Mobile Navbar Styles */
+
+/* --- Axiom01 Form Enhancements --- */
+.axiom-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-base, 1rem);
+  background: var(--a-color-surface);
+  padding: var(--a-padding-large);
+  border-radius: var(--a-border-radius-base);
+  box-shadow: var(--a-shadow-small, 0 2px 8px var(--a-shadow-color));
+}
+.axiom-form label {
+  font-weight: var(--a-font-weight-medium);
+  margin-bottom: var(--a-margin-tiny);
+}
+.axiom-form input,
+.axiom-form select,
+.axiom-form textarea {
+  padding: var(--a-padding-small);
+  border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-border, #ccc);
+  border-radius: var(--a-border-radius-base);
+  font-size: var(--a-font-size-base);
+  background: var(--a-color-surface);
+  color: var(--a-color-on-surface);
+  margin-bottom: var(--a-margin-small);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.axiom-form input:focus,
+.axiom-form select:focus,
+.axiom-form textarea:focus {
+  border-color: var(--a-color-primary);
+  box-shadow: 0 0 0 2px var(--a-color-primary-fade, rgba(0,123,255,0.15));
+}
+.axiom-form input.invalid {
+  border-color: var(--a-color-error);
+  box-shadow: 0 0 0 2px var(--a-color-error-fade, rgba(220,53,69,0.15));
+}
+.axiom-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-tiny, 0.25rem);
+  margin-bottom: var(--a-margin-base);
+}
+.axiom-form .form-help {
+  color: var(--a-color-muted);
+  font-size: var(--a-font-size-small);
+  margin-top: var(--a-margin-tiny);
+}
+.axiom-form fieldset {
+  border: var(--a-border-width-base) var(--a-border-style-base) var(--a-color-border, #eee);
+  border-radius: var(--a-border-radius-base);
+  padding: var(--a-padding-base);
+  margin-bottom: var(--a-margin-base);
+}
+.axiom-form legend {
+  font-size: var(--a-font-size-base);
+  font-weight: var(--a-font-weight-bold);
+  color: var(--a-color-primary);
+  margin-bottom: var(--a-margin-small);
+}
+.axiom-form button[type="submit"] {
+  background: var(--a-color-primary);
+  color: var(--a-color-on-primary);
+  border: none;
+  border-radius: var(--a-border-radius-base);
+  padding: var(--a-padding-small) var(--a-padding-large);
+  font-size: var(--a-font-size-base);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.axiom-form button[type="submit"]:hover,
+.axiom-form button[type="submit"]:focus {
+  background: var(--a-color-primary-dark);
+}
+
+/* --- Drawer (Mobile Navigation) --- */
+.drawer-open {
+  transform: translateX(0%) !important;
+}
+#drawer {
+  /* Already styled inline, but add here for framework use */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--a-color-surface);
+  box-shadow: var(--a-shadow-large);
+  border-radius: 0 var(--a-border-radius-large) var(--a-border-radius-large) 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+  z-index: 1000;
+}
+
+@media (max-width: 900px) {
+  #drawer {
+    width: 80vw;
+    min-width: 180px;
+    max-width: 320px;
+  }
+}
+
+.drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.3);
+  z-index: 999;
+  display: none;
+}
+.drawer-backdrop.open {
+  display: block;
+}
+
+/* ========================================================================= */
+/* Accordion Component (Axiom01)                                             */
+/* ========================================================================= */
+.accordion {
+  width: 100%;
+  border: var(--a-border-width-base, 1px) solid var(--a-color-outline, #ddd);
+  border-radius: var(--a-border-radius-base, 8px);
+  overflow: hidden;
+}
+
+.accordion > div {
+  border-bottom: var(--a-border-width-base, 1px) solid var(--a-color-outline, #ddd);
+}
+
+.accordion > div:last-child {
+  border-bottom: none;
+}
+
+.accordion h3 {
+  margin: 0;
+}
+
+.accordion button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--a-padding-medium, 1rem);
+  background-color: var(--a-color-surface, #fff);
+  color: var(--a-color-on-surface, #333);
+  border: none;
+  font-size: var(--a-font-size-base, 1rem);
+  font-weight: var(--a-font-weight-medium, 500);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.accordion button:hover {
+  background-color: var(--a-color-surface-variant, #f5f5f5);
+}
+
+.accordion button:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--a-color-primary, #007bff);
+}
+
+.accordion button::after {
+  content: '+';
+  font-size: var(--a-font-size-large, 1.25rem);
+  font-weight: var(--a-font-weight-bold, 700);
+  transition: transform 0.2s ease;
+}
+
+.accordion button[aria-expanded="true"]::after {
+  content: '−';
+}
+
+.accordion [role="region"] {
+  padding: var(--a-padding-medium, 1rem);
+  background-color: var(--a-color-surface, #fff);
+  border-top: var(--a-border-width-base, 1px) solid var(--a-color-outline, #ddd);
+}
+
+/* ========================================================================= */
+/* Tag Component (Axiom01)                                                   */
+/* ========================================================================= */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--a-padding-tiny, 0.25rem) var(--a-padding-small, 0.5rem);
+  font-size: var(--a-font-size-small, 0.875rem);
+  font-weight: var(--a-font-weight-medium, 500);
+  line-height: 1;
+  color: var(--a-color-on-surface, #333);
+  background-color: var(--a-color-surface-variant, #f0f0f0);
+  border-radius: var(--a-border-radius-small, 4px);
+  margin-right: var(--a-margin-tiny, 0.25rem);
+  margin-bottom: var(--a-margin-tiny, 0.25rem);
+}
+
+.tag.primary {
+  color: var(--a-color-on-primary, #fff);
+  background-color: var(--a-color-primary, #007bff);
+}
+
+.tag.success {
+  color: var(--a-color-on-success, #fff);
+  background-color: var(--a-color-success, #28a745);
+}
+
+.tag.warning {
+  color: var(--a-color-on-warning, #212529);
+  background-color: var(--a-color-warning, #ffc107);
+}
+
+.tag.error {
+  color: var(--a-color-on-error, #fff);
+  background-color: var(--a-color-error, #dc3545);
+}
+
+.tag.info {
+  color: var(--a-color-on-info, #fff);
+  background-color: var(--a-color-info, #17a2b8);
+}
+
+.tag button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  padding: 0;
+  margin-left: var(--a-margin-tiny, 0.25rem);
+  font-size: var(--a-font-size-small, 0.875rem);
+  font-weight: var(--a-font-weight-bold, 700);
+  line-height: 1;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.tag button:hover,
+.tag button:focus {
+  opacity: 1;
+}
+
+/* ========================================================================= */
+/* Table Component (Axiom01)                                                 */
+/* ========================================================================= */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--a-font-family-sans, 'Inter', Arial, sans-serif);
+  background: var(--a-color-surface, #fff);
+  color: var(--a-color-on-surface, #222);
+  box-shadow: var(--a-shadow-small, 0 2px 8px rgba(0,0,0,0.04));
+  border-radius: var(--a-border-radius-base, 8px);
+  overflow: hidden;
+}
+.table th, .table td {
+  padding: var(--a-padding-small, 0.75em) var(--a-padding-base, 1em);
+  text-align: left;
+}
+.table th {
+  background: var(--a-color-surface-variant, #f7f7f7);
+  color: var(--a-color-on-surface-variant, #333);
+  font-weight: var(--a-font-weight-semibold, 600);
+}
+.table tr {
+  border-bottom: 1px solid var(--a-color-outline, #eee);
+}
+.table tr:last-child {
+  border-bottom: none;
+}
+.table tr:hover {
+  background: var(--a-color-surface-variant, #f0f8ff);
+}
+.table.zebra tr:nth-child(odd) {
+  background: var(--a-color-surface-variant, #f9f9f9);
+}
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+.table-scroll .table {
+  min-width: 600px;
+}
+@media (max-width: 600px) {
+  .table, .table th, .table td, .table tr {
+    display: block;
+    width: 100%;
+  }
+  .table th {
+    display: none;
+  }
+  .table tr {
+    margin-bottom: var(--a-margin-small, 1em);
+    box-shadow: var(--a-shadow-small, 0 1px 4px rgba(0,0,0,0.06));
+    border-radius: var(--a-border-radius-base, 8px);
+    background: var(--a-color-surface, #fff);
+  }
+  .table td {
+    position: relative;
+    padding-left: 50%;
+    min-height: 2.5em;
+    border-bottom: 1px solid var(--a-color-outline, #eee);
+  }
+  .table td:before {
+    position: absolute;
+    left: var(--a-padding-base, 1em);
+    top: var(--a-padding-small, 0.75em);
+    width: 45%;
+    white-space: nowrap;
+    font-weight: var(--a-font-weight-semibold, 600);
+    color: var(--a-color-on-surface-variant, #333);
+    content: attr(data-label);
+  }
+}

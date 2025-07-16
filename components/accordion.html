@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axiom01 Component: Accordion</title>
+  <link rel="stylesheet" href="../css/axiom.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html">Axiom01 Home</a> |
+      <a href="card.html">Card</a> |
+      <a href="modal.html">Modal</a> |
+      <a href="notification.html">Notification</a> |
+      <strong>Accordion</strong>
+    </nav>
+  </header>
+  <main>
+    <section class="component-demo">
+      <h1>Accordion Component</h1>
+      <p>The Accordion component allows users to expand and collapse sections of content. It is fully accessible, using ARIA attributes and keyboard navigation.</p>
+      <h2>Demo</h2>
+      <div class="accordion" id="accordion-demo">
+        <div>
+          <h3>
+            <button type="button" aria-expanded="false" aria-controls="panel-1" id="trigger-1">
+              Section 1
+            </button>
+          </h3>
+          <div id="panel-1" role="region" aria-labelledby="trigger-1" hidden>
+            <p>Content for Section 1.</p>
+          </div>
+        </div>
+        <div>
+          <h3>
+            <button type="button" aria-expanded="false" aria-controls="panel-2" id="trigger-2">
+              Section 2
+            </button>
+          </h3>
+          <div id="panel-2" role="region" aria-labelledby="trigger-2" hidden>
+            <p>Content for Section 2.</p>
+          </div>
+        </div>
+        <div>
+          <h3>
+            <button type="button" aria-expanded="false" aria-controls="panel-3" id="trigger-3">
+              Section 3
+            </button>
+          </h3>
+          <div id="panel-3" role="region" aria-labelledby="trigger-3" hidden>
+            <p>Content for Section 3.</p>
+          </div>
+        </div>
+      </div>
+      <h2>Usage</h2>
+      <p>Use semantic HTML for structure. The <code>button</code> toggles the visibility of its associated panel.</p>
+      <pre><code class="language-html">&lt;div class="accordion"&gt;
+  &lt;div&gt;
+    &lt;h3&gt;
+      &lt;button type="button" aria-expanded="false" aria-controls="panel-1" id="trigger-1"&gt;
+        Section 1
+      &lt;/button&gt;
+    &lt;/h3&gt;
+    &lt;div id="panel-1" role="region" aria-labelledby="trigger-1" hidden&gt;
+      &lt;p&gt;Content for Section 1.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+      <h2>JavaScript Initialization</h2>
+      <p>Accordion functionality is enabled by the following JavaScript (included in <code>scripts.js</code>):</p>
+      <pre><code class="language-js">document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.accordion button').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const panel = document.getElementById(trigger.getAttribute('aria-controls'));
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', !expanded);
+      panel.toggleAttribute('hidden');
+    });
+  });
+});
+</code></pre>
+      <h2>Accessibility</h2>
+      <ul>
+        <li>Uses <code>aria-expanded</code> and <code>aria-controls</code> for state and association.</li>
+        <li>Panels use <code>role="region"</code> and <code>aria-labelledby</code> for screen readers.</li>
+        <li>Keyboard navigation is supported.</li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Axiom01 UI Framework</p>
+  </footer>
+  <script src="../js/scripts.js"></script>
+</body>
+</html>

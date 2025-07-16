@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axiom01 Modal Component Documentation</title>
+  <link rel="stylesheet" href="../css/axiom.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+  <nav>
+    <a href="../axiom01.html">Back to Axiom01 Docs</a>
+  </nav>
+  <main>
+    <h1>Modal Component</h1>
+    <section>
+      <h2>Overview</h2>
+      <p>The <strong>Modal</strong> component provides a dialog interface for user interactions, confirmations, and forms. It follows accessibility best practices and is styled with the axiom01 framework.</p>
+    </section>
+    <section>
+      <h2>Example</h2>
+      <button class="button" onclick="document.getElementById('demo-modal').classList.add('open')">Open Modal</button>
+      <div class="modal" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+        <div class="modal-content">
+          <header>
+            <h3 id="modal-title">Example Modal</h3>
+            <button aria-label="Close" onclick="document.getElementById('demo-modal').classList.remove('open')">&times;</button>
+          </header>
+          <section>
+            <p>This is a modal dialog. It traps focus and can be closed with Escape or by clicking outside.</p>
+          </section>
+          <footer>
+            <button class="button secondary" onclick="document.getElementById('demo-modal').classList.remove('open')">Close</button>
+          </footer>
+        </div>
+      </div>
+      <script>
+        // Basic focus trap and Escape key close for demo
+        document.getElementById('demo-modal').addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') this.classList.remove('open');
+        });
+        document.getElementById('demo-modal').addEventListener('click', function(e) {
+          if (e.target === this) this.classList.remove('open');
+        });
+      </script>
+    </section>
+    <section>
+      <h2>Style Guide</h2>
+      <ul>
+        <li>Use <code>.modal</code> with <code>role="dialog"</code>, <code>aria-modal="true"</code>, and <code>aria-labelledby</code> for accessibility.</li>
+        <li>Trap keyboard focus within the modal when open.</li>
+        <li>Support closing via Escape key and clicking outside the modal.</li>
+        <li>Use semantic elements styled via <code>.modal</code> and element selectors, following Axiom01 philosophy.</li>
+        <li>Style with axiom01 classes for consistency.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

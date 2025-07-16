@@ -312,3 +312,83 @@ By following these steps, your site will look great, be easy to maintain, and fu
 - **Semantic Usage**: All components use semantic HTML and variable-driven patterns; legacy/utility-heavy classes removed.
 - **Documentation Sync**: All docs now include direct links to style guide, grid examples, navbar docs, and component demos. Feature summaries and recent refactors are documented.
 - **Component Audits**: Medium-priority tasks for accessibility and documentation are complete; minor enhancements remain.
+
+## Ensuring New Components Follow Axiom01 Philosophy
+
+To maintain consistency and quality in the Axiom01 UI framework, follow these steps for every new component:
+
+1. **Use Semantic HTML**
+   - Structure with semantic elements: `<header>`, `<section>`, `<footer>`, `<nav>`, `<main>`, `<article>`, etc.
+   - Avoid unnecessary `<div>` wrappers; use containers only for layout or accessibility.
+
+2. **Minimal, Meaningful Classes**
+   - Assign a single class for the main component (e.g., `.card`, `.modal`, `.alert`).
+   - Use variant classes only when needed (e.g., `.alert.success`).
+   - Avoid stacking utility classes or long, hyphenated names.
+
+3. **Style with Element Selectors**
+   - Target semantic elements inside the main class in your CSS (e.g., `.card header`, `.modal section`).
+   - Use CSS variables for all colors, spacing, and typography.
+
+4. **Accessibility & Responsiveness**
+   - Add ARIA attributes where needed.
+   - Ensure components adapt to different themes and screen sizes.
+
+5. **Audit Checklist for New Components**
+   - [ ] Semantic HTML only
+   - [ ] One main class per component
+   - [ ] Element selectors in CSS
+   - [ ] All design tokens use CSS variables
+   - [ ] Accessibility and responsiveness tested
+
+6. **Documentation & Review**
+   - Update documentation to reflect these rules.
+   - Regularly audit new and existing components for compliance.
+   - Note any areas for further simplification or improvement.
+
+**Reference:**
+- See examples in this guide and in `/components` for best practices.
+- Use the audit checklist above before merging new components.
+
+## EXTREMELY IMPORTANT: Component Structure Examples
+
+Axiom01 components must use minimal, meaningful classes and semantic HTML. Do NOT use multiple classes or unnecessary wrappers. Use only the main class (e.g., `.tab`, `.button`, `.alert`, `.card`) and rely on element order and semantic tags.
+
+### Tabs (Correct)
+```html
+<nav class="tab" role="tablist">
+  <button role="tab" aria-selected="true">Tab 1</button>
+  <button role="tab">Tab 2</button>
+  <button role="tab">Tab 3</button>
+</nav>
+<section role="tabpanel">Tab 1 content</section>
+<section role="tabpanel" hidden>Tab 2 content</section>
+<section role="tabpanel" hidden>Tab 3 content</section>
+```
+
+### Button (Correct)
+```html
+<button class="button">Click Me</button>
+<button class="button primary">Primary</button>
+<button class="button success">Success</button>
+```
+
+### Alert (Correct)
+```html
+<div class="alert">Info message</div>
+<div class="alert success">Success message</div>
+<div class="alert error">Error message</div>
+```
+
+### Card (Correct)
+```html
+<article class="card">
+  <header>Title</header>
+  <section>Content</section>
+  <footer>Actions</footer>
+</article>
+```
+
+**Never use multiple classes like `.axiom-btn axiom-btn-primary` or `.axiom-alert axiom-alert-success`. Use `.button.primary`, `.alert.success`, etc. Only the main class and variant.**
+
+**Always use semantic elements and keep the structure minimal.**

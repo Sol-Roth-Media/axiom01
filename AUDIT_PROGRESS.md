@@ -323,3 +323,48 @@ This file should be updated after every major audit or refactor step. If the cha
 - Synced documentation: All major docs (readme.md, AXIOM01_STYLING_GUIDE.md, AUDIT_PROGRESS.md) now include direct links to style guide, grid examples, navbar docs, and component demos. Feature summaries and recent refactors are documented.
 - Completed: Synced readme.md, AXIOM01_STYLING_GUIDE.md, and AUDIT_PROGRESS.md with latest features and refactors. Added direct links to style guide and component demos in all docs.
 - Ready to proceed with remaining low-priority tasks: minor documentation enhancements, code cleanup, and accessibility/usability improvements as listed in CONSOLIDATED_TODO.md
+
+Modal, Notification, and Datepicker component documentation and links added to axiom01.html on 2025-07-16.
+
+Progress:
+- Modal component: documented and linked.
+- Notification component: documented and linked.
+- Datepicker component: documented and linked.
+
+Audit log:
+2025-07-16: Created notification.html and datepicker.html in ./components and linked in axiom01.html.
+
+## July 2025 Component Audit
+- Started comprehensive audit of all components in ./components directory to ensure they follow the Axiom01 style guide and philosophy.
+- Created TODO_COMPONENTS.md to track progress and document changes needed for each component.
+- Initial audit of button.html, modal.html, and table.html revealed several issues:
+  - button.html: Uses `.btn` class instead of `.button` class
+  - modal.html: Uses nested `.modal-content` div which might be unnecessary
+  - table.html: Uses `.a-table`, `.a-table-zebra`, `.a-table-scroll` classes instead of `.table`, `.table.zebra`, `.table-scroll`
+- Plan to systematically audit and fix all components to ensure they:
+  - Use semantic HTML elements
+  - Use minimal, meaningful classes (one main class per component)
+  - For variants, combine classes (e.g., `.alert.success`)
+  - Style with element selectors (e.g., `.card header`, `.card section`)
+  - Avoid unnecessary wrappers
+  - Ensure button elements don't require classes
+  - Replace BEML with simple compound classes
+
+Progress:
+- Total components: 25
+- Audited: 10 (button.html, modal.html, table.html, alert.html, card.html, dropdown.html, tag.html, accordion.html, navbar.html, navigation.html)
+- Fixed: 9 (button.html, modal.html, table.html, card.html, dropdown.html, tag.html, accordion.html, navbar.html, navigation.html)
+- Already compliant: 1 (alert.html)
+- Remaining: 15
+
+Updates:
+- button.html: Changed `.btn` class to `.button` class to follow style guide
+- modal.html: Reviewed and confirmed it follows style guide principles with semantic elements, updated CSS to change `.closeBtn` to `button.close`
+- table.html: Changed `.a-table`, `.a-table-zebra`, `.a-table-scroll` classes to `.table`, `.table.zebra`, `.table-scroll`, updated CSS to use semantic variables (--a-color-surface, --a-color-on-surface) instead of table-specific variables, and updated JavaScript to use new class names
+- alert.html: Reviewed and confirmed it already follows style guide principles with minimal classes and semantic structure, updated CSS to change `.closeBtn` to `button.close`
+- card.html: Changed to use semantic article element with header, section, footer structure, changed button class from .btn to .button, and removed inline styles
+- dropdown.html: Changed to use a single main class (.dropdown) instead of multiple classes, updated button to use .button class, simplified class structure and updated code examples, updated CSS to target elements directly (button, ul, li, a) instead of using additional classes (.dropdown-trigger, .dropdown-list)
+- tag.html: Changed `axiom-tag` to `tag`, removed BEML-style classes (`axiom-tag--primary` to `tag primary`), removed `axiom-tag-remove` class from button element, created CSS in components.css using semantic variables and targeting elements directly
+- accordion.html: Removed unnecessary classes (`accordion-item`, `accordion-trigger`, `accordion-panel`) and kept only the main class `accordion`, updated JavaScript to target elements directly, created CSS in components.css using semantic variables and targeting elements directly
+- navbar.html: Changed `.axiom-navbar-demo` to `.navbar`, removed `.dropdown-toggle` and `.dropdown-menu` classes, updated JavaScript to target elements directly (`.navbar .dropdown > a` instead of `.dropdown-toggle`), changed menu toggle to use `hidden` attribute instead of `.show` class
+- navigation.html: Changed `.axiom-btn` to `.button` in pagination section, removed `.dropdown-trigger` and `.dropdown-list` classes from dropdown menu, updated JavaScript to target elements directly (`.dropdown button` instead of `.dropdown-trigger`), updated CSS variables to use correct names (`--a-shadow-sm` instead of `--a-shadow-small`, `--a-color-surface-variant` instead of `--a-color-surface-container`), updated code examples to match the actual implementation

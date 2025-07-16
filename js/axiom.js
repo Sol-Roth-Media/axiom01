@@ -710,6 +710,41 @@ AxiomComponents.register('formValidation', function initFormValidation() {
   }
 });
 
+// --- Table Responsive Labels (Axiom01)
+// Adds data-label attributes for mobile accessibility
+function axiomTableResponsiveLabels() {
+  document.querySelectorAll('.table').forEach(function(table) {
+    var headers = Array.from(table.querySelectorAll('th')).map(function(th) { return th.textContent; });
+    table.querySelectorAll('tbody tr').forEach(function(row) {
+      Array.from(row.children).forEach(function(cell, i) {
+        cell.setAttribute('data-label', headers[i]);
+      });
+    });
+  });
+}
+
+AxiomComponents.register('table', axiomTableResponsiveLabels);
+
+// --- Component Registration Stubs ---
+AxiomComponents.register('accordion', function initAccordion() {/* TODO: Add accordion logic */});
+AxiomComponents.register('alert', function initAlert() {/* TODO: Add alert logic */});
+AxiomComponents.register('button', function initButton() {/* TODO: Add button logic */});
+AxiomComponents.register('card', function initCard() {/* TODO: Add card logic */});
+AxiomComponents.register('drawer', function initDrawer() {/* TODO: Add drawer logic */});
+AxiomComponents.register('dropdown', function initDropdown() {/* TODO: Add dropdown logic */});
+AxiomComponents.register('forms', function initForms() {/* TODO: Add forms logic */});
+AxiomComponents.register('hero', function initHero() {/* TODO: Add hero logic */});
+AxiomComponents.register('jump-menu', function initJumpMenu() {/* TODO: Add jump-menu logic */});
+AxiomComponents.register('media', function initMedia() {/* TODO: Add media logic */});
+AxiomComponents.register('navbar', function initNavbar() {/* TODO: Add navbar logic */});
+AxiomComponents.register('navigation', function initNavigation() {/* TODO: Add navigation logic */});
+AxiomComponents.register('progress-bar', function initProgressBar() {/* TODO: Add progress-bar logic */});
+AxiomComponents.register('sidebar', function initSidebar() {/* TODO: Add sidebar logic */});
+AxiomComponents.register('stepper', function initStepper() {/* TODO: Add stepper logic */});
+AxiomComponents.register('tabs', function initTabs() {/* TODO: Add tabs logic */});
+AxiomComponents.register('tag', function initTag() {/* TODO: Add tag logic */});
+AxiomComponents.register('tab-bar', function initTabBar() {/* TODO: Add tab-bar logic */});
+
 // --- Feature Toggle Helpers ---
 function isFeatureEnabled(varName) {
   return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() === 'true';
