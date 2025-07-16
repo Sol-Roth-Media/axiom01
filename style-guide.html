@@ -101,18 +101,35 @@
 </head>
 <body>
   <header class="full-bleed">
-    <nav class="navbar" style="background: var(--a-color-surface); box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-radius: var(--a-border-radius-large); padding: var(--a-padding-base) var(--a-padding-large);">
-      <a href="index.html" class="logo" aria-label="Axiom Framework Home">
-        <div class="logo-text" style="color: var(--a-color-on-surface);">[Axiom <span class="logo-01" style="color: var(--a-color-primary);">01</span>]</div>
+    <nav class="navbar small sticky" id="advanced-navbar">
+      <a href="index.html" class="logo" aria-label="Axiom Framework Home v0.1">
+        <div class="logo-text"><span>[Ax</span><span><span style="color: var(--a-color-primary, #00c005); display: inline;">01</span>]</span><span></span></div>
+        <small class="version">v0.1</small>
       </a>
-      <ul class="nav-links" style="color: var(--a-color-on-surface); font-weight: 500; font-size: 1.05rem;">
-        <li><a href="index.html" style="color: var(--a-color-on-surface);">Home</a></li>
-        <li><a href="#layout" style="color: var(--a-color-on-surface);">Layout</a></li>
-        <li><a href="#typography" style="color: var(--a-color-on-surface);">Typography</a></li>
-        <li><a href="#spacing" style="color: var(--a-color-on-surface);">Spacing</a></li>
-        <li><a href="#components" style="color: var(--a-color-on-surface);">Components</a></li>
-        <li><a href="#theming" style="color: var(--a-color-on-surface);">Theming</a></li>
+      <div class="theme-switcher-container">
+        <label for="theme-select" class="visually-hidden">Select Theme:</label>
+        <select id="theme-select" name="theme"></select>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links-advanced">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-links" id="nav-links-advanced">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#layout">Layout</a></li>
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#spacing">Spacing</a></li>
+        <li class="dropdown">
+          <a href="#components" aria-haspopup="true" aria-expanded="false">Components <i class="fa-solid fa-chevron-down"></i></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#buttons" role="menuitem">Buttons</a></li>
+            <li><a href="#cards" role="menuitem">Cards</a></li>
+            <li><a href="#alerts" role="menuitem">Alerts</a></li>
+            <li><a href="#forms" role="menuitem">Forms</a></li>
+          </ul>
+        </li>
+        <li><a href="#theming">Theming</a></li>
       </ul>
+      <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode">&#9728;</button>
     </nav>
   </header>
   <main class="container">
@@ -197,6 +214,9 @@
         <li>Use ARIA roles/attributes for accessibility.</li>
         <li>Combine classes for variants (e.g., <code>.alert.success</code>).</li>
         <li>Enhance native elements (e.g., <code>input[type='date']</code> for datepicker).</li>
+        <li><strong>Modal:</strong> Use <code>.modal</code> with <code>role="dialog"</code>, <code>aria-modal="true"</code>, <code>aria-labelledby</code>. Ensure keyboard navigation (Escape to close, Tab trap), focus management, and click-outside-to-close. See <code>js/axiom.js</code> for details.</li>
+        <li><strong>Notification:</strong> Use <code>.notification</code> or <code>AxiomNotify</code> with <code>role="status"</code> or <code>role="alert"</code>. Support dismissible notifications, keyboard navigation, and clear visual indicators. Avoid auto-dismiss for important messages.</li>
+        <li><strong>Datepicker:</strong> Enhance <code>input[type='date']</code> with <code>.axiom-datepicker</code> for accessibility. Use ARIA labels, keyboard navigation, and a calendar grid. See <code>js/axiom.js</code> for details.</li>
       </ul>
     </section>
     <section class="style-guide-section" id="theming">

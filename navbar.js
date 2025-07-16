@@ -72,6 +72,22 @@ function initAllNavbars() {
         }
       });
     });
+
+    // Add smooth scrolling for same-page navigation links
+    links.forEach(link => {
+      if (link.hash && link.getAttribute('href').startsWith('#')) {
+        link.addEventListener('click', function(event) {
+          const targetId = link.hash.slice(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            event.preventDefault();
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Optionally update the URL hash
+            history.pushState(null, '', link.hash);
+          }
+        });
+      }
+    });
   });
 
   // Close menus when clicking outside

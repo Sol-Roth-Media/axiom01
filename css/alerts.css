@@ -5,7 +5,7 @@
   padding: var(--a-padding-base);
   margin-bottom: var(--a-margin-base);
   border-radius: var(--a-border-radius-base);
-  border-left: var(--a-border-width-base) solid transparent;
+  border-left: var(--a-border-width-base, 4px) solid transparent; /* Standardized border width */
   display: flex;
   align-items: center;
   position: relative;
@@ -38,11 +38,27 @@
   justify-content: center;
 }
 
+/* Warning Alert */
+.alert.warning {
+  background-color: var(--a-color-warning-container);
+  color: var(--a-color-on-warning-container);
+  border-left-color: var(--a-color-warning);
+}
+
+.alert.warning::before {
+  content: '!';
+  color: var(--a-color-warning);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Error Alert */
 .alert.error {
-  background-color: var(--a-color-negative-container);
-  color: var(--a-color-on-negative-container);
-  border-left-color: var(--a-color-negative);
+  background-color: var(--a-color-error-container);
+  color: var(--a-color-on-error-container);
+  border-left-color: var(--a-color-error);
 }
 
 .alert.error::before {
@@ -71,20 +87,18 @@
   justify-content: center;
 }
 
-/* Warning Alert */
-.alert.warning {
-  background-color: var(--a-color-warning-container);
-  color: var(--a-color-on-warning-container);
-  border-left-color: var(--a-color-warning);
+/* Icon backgrounds for alert types (optional, can be customized) */
+.alert.success::before {
+  background-image: var(--a-icon-success, url('data:image/svg+xml;utf8,<svg fill=\'%2300c005\' viewBox=\'0 0 24 24\'><path d=\'M20 6L9 17l-5-5\'/></svg>'));
 }
-
 .alert.warning::before {
-  content: '⚠';
-  color: var(--a-color-warning);
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-image: var(--a-icon-warning, url('data:image/svg+xml;utf8,<svg fill=\'%23ff9800\' viewBox=\'0 0 24 24\'><path d=\'M1 21h22L12 2 1 21z\'/></svg>'));
+}
+.alert.error::before {
+  background-image: var(--a-icon-error, url('data:image/svg+xml;utf8,<svg fill=\'%23f44336\' viewBox=\'0 0 24 24\'><path d=\'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z\'/></svg>'));
+}
+.alert.info::before {
+  background-image: var(--a-icon-info, url('data:image/svg+xml;utf8,<svg fill=\'%232196f3\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><line x1=\'12\' y1=\'16\' x2=\'12\' y2=\'12\'/><line x1=\'12\' y1=\'8\' x2=\'12.01\' y2=\'8\'/></svg>'));
 }
 
 /* Dismissible Alerts */
@@ -94,8 +108,8 @@
 
 .alert .closeBtn {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: var(--a-margin-small, 0.5rem); /* Standardized top spacing */
+  right: var(--a-margin-small, 0.5rem); /* Standardized right spacing */
   border: none;
   background: transparent;
   font-size: var(--a-font-size-base);
@@ -133,5 +147,5 @@
 
 .alert.large {
   padding: var(--a-padding-medium);
-  font-size: var(--a-font-size-large);
+  font-size: var(--a-font-size-large, 1.25rem);
 }

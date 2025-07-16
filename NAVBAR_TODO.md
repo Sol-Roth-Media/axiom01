@@ -48,10 +48,13 @@
 ### Short-term (High Priority)
 
 1. **Accessibility Enhancements**:
-   - ~~Enhance keyboard navigation within the navbar~~ (Completed in navbar-advanced.html)
-   - ~~Improve visible focus states for all interactive elements~~ (Completed in navbar-advanced.html)
-   - ~~Add ARIA live regions to announce when the mobile menu is opened or closed~~ (Completed in navbar-advanced.html)
-   - ~~Add a "Skip to main content" link for keyboard users~~ (Completed in navbar-advanced.html)
+   - [x] All navbars now use ARIA attributes for menu toggles, dropdowns, and skip-to-content links
+   - [x] Keyboard navigation and focus states are implemented for all interactive elements
+   - [x] ARIA live regions announce menu state changes
+   - [x] All navigation links and dropdowns are accessible via keyboard
+   - [x] Mobile menu toggle is fully accessible and updates aria-expanded
+   - [ ] Continue testing with screen readers and assistive technologies for edge cases
+   - [ ] Document any remaining accessibility issues and solutions in AXIOM01_STYLING_GUIDE.md
 
 2. **Functionality Improvements**:
    - ~~Implement sticky navigation option~~ (Completed in navbar-advanced.html)

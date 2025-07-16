@@ -57,6 +57,42 @@ function initAllNavbars() {
       });
     }
   });
+
+  // --- Feature Toggle Utility ---
+  function getCSSVariableBool(varName) {
+    const value = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    return value === 'true';
+  }
+
+  // --- Feature Toggles ---
+  const AXIOM_FEATURES = {
+    enableAnimations: getCSSVariableBool('--a-enable-animations'),
+    enableTransitions: getCSSVariableBool('--a-enable-transitions'),
+    enableFonts: getCSSVariableBool('--a-enable-fonts'),
+    useCSSReset: getCSSVariableBool('--a-use-css-reset'),
+  };
+
+  // --- Feature Toggle Helper ---
+  function getFeatureToggle(varName) {
+    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() === 'true';
+  }
+  const enableTransitions = getFeatureToggle('--a-enable-transitions');
+
+  // Smooth scrolling for same-page navigation links
+  if (AXIOM_FEATURES.enableTransitions) {
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href').slice(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Optionally update the URL hash
+          history.pushState(null, '', `#${targetId}`);
+        }
+      });
+    });
+  }
 }
 
 /**
@@ -81,6 +117,10 @@ function initNavbarToggle(menuToggle, navLinks) {
     menuToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
     
     console.log('Menu toggle clicked, menu is now:', isExpanded ? 'open' : 'closed');
+
+    if (enableTransitions) {
+      navLinks.style.transition = 'max-height 0.3s';
+    }
   });
   
   // Add keyboard navigation for links

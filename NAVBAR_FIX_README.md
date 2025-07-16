@@ -1,80 +1,56 @@
-# Navbar Menu Toggle Fix for index.html
+# Advanced Navbar Implementation & Integration Guide
 
-## Issue
-The menu toggle button on the navbar component in index.html does not display the menu on small resolutions, while it works correctly on navbar-docs.html.
+## Overview
+The Axiom01 advanced navbar is now the default navigation component for index.html and all major pages. It provides:
+- Dropdown menu support with keyboard navigation and ARIA attributes
+- Search functionality
+- Sticky navigation option
+- Scroll-aware appearance
+- Font Awesome hamburger icon for mobile
+- Theme switcher and theme toggle button
+- Accessibility features (skip to content link, ARIA attributes, live region announcements)
+- Responsive design for all screen sizes
 
-## Update: Advanced Navbar Implementation
-The navbar in index.html has been replaced with the advanced navbar from navbar-advanced.html. This implementation includes:
-1. Dropdown menu support
-2. Search functionality
-3. Sticky navigation
-4. Improved accessibility features (skip to content link, ARIA attributes)
-5. Better mobile responsiveness
-
-## Root Cause of Original Issue
-The original issue was caused by missing CSS and JavaScript files that are required for the navbar component to function properly on small resolutions:
-
-1. The `navbar.css` file is not included in index.html, which contains the necessary styles for the mobile menu toggle.
-2. The `navbar.js` file is not included in index.html, which contains the necessary JavaScript functionality for the mobile menu toggle.
-
-## Solution
-There are two ways to fix this issue:
-
-### Option 1: Add the original navbar.css and navbar.js files to index.html
-This is the preferred solution if you can modify the original index.html file without issues:
-
-1. Add the following line to the head section of index.html (after the other CSS files):
+## Integration Steps
+1. **Include Styles**
+   Add to your `<head>` after other CSS files:
    ```html
    <link rel="stylesheet" href="css/navbar.css">
    ```
-
-2. Add the following line to the end of the body section of index.html (after scripts.js):
+2. **Include JavaScript**
+   Add before the closing `</body>` tag, after other scripts:
    ```html
    <script src="js/navbar.js"></script>
    ```
-
-### Option 2: Use the simplified navbar-fix.css and navbar-fix.js files
-If you're having issues modifying the original index.html file due to HTML structure issues, you can use the simplified versions of the navbar CSS and JavaScript files:
-
-1. Add the following line to the head section of index.html (after the other CSS files):
+3. **Font Awesome**
+   Ensure Font Awesome is included for icons:
    ```html
-   <link rel="stylesheet" href="navbar-fix.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
    ```
+4. **Navbar Markup**
+   Use the markup from index.html or navbar-advanced.html for full feature support. See those files for examples.
 
-2. Add the following line to the end of the body section of index.html (after scripts.js):
-   ```html
-   <script src="navbar-fix.js"></script>
-   ```
+## Features
+- **Dropdown Menus:** Add `.dropdown` to `<li>` for nested menus. Keyboard and ARIA support included.
+- **Search:** Add a `.search-container` for search input and button.
+- **Sticky & Scroll-Aware:** Add `.sticky` and `.scroll-aware` classes for advanced behavior.
+- **Theme Switcher:** Use `.theme-switcher-container` and `.theme-toggle` for theme selection and toggling.
+- **Accessibility:** Includes skip to content, ARIA attributes, live region announcements, and keyboard navigation.
+- **Mobile Menu:** Hamburger icon and menu toggle work on all screen sizes.
 
-## Files Created
-- `navbar-fix.css`: A simplified version of navbar.css that contains only the essential styles for the mobile menu toggle functionality.
-- `navbar-fix.js`: A simplified version of navbar.js that contains only the essential JavaScript functionality for the mobile menu toggle.
-- `index-fix.html`: A simplified version of index.html that includes the navbar-fix.css and navbar-fix.js files. This file is provided as a reference for how to implement the changes.
-- `index-new.html`: A new version of index.html with the advanced navbar from navbar-advanced.html. This file includes all the advanced features like dropdown menus, search functionality, and improved accessibility. Due to HTML structure issues in the original index.html, this new file was created instead of directly modifying the original.
+## Troubleshooting
+- If the menu toggle or dropdowns do not work, ensure both navbar.css and navbar.js are included and there are no conflicting scripts.
+- For legacy support, you may use navbar-fix.css and navbar-fix.js, but these are deprecated in favor of the advanced implementation.
+- Always use the markup structure from index.html or navbar-advanced.html for best results.
+- If icons do not appear, confirm Font Awesome is loaded after other CSS files.
+- For sticky/scroll-aware features, ensure the relevant classes are present in your markup.
 
-## Testing
-### Testing the Original Fix
-To test the original fix, open index.html in a browser and resize the window to a small resolution (less than 900px wide). The menu toggle button should now display the menu when clicked.
+## Legacy Files
+- `navbar-fix.css` and `navbar-fix.js` are retained for legacy support only. Use `navbar.css` and `navbar.js` for all new development.
 
-### Testing the Advanced Navbar
-To test the advanced navbar implementation:
-1. Open index-new.html in a browser
-2. Test the following features:
-   - Dropdown menu: Hover over the "Components" link to see the dropdown menu
-   - Search functionality: Click in the search box and type something
-   - Mobile menu: Resize the window to less than 900px wide and click the menu toggle button
-   - Accessibility: Press Tab when the page loads to see the "Skip to main content" link
-   - Sticky navigation: Scroll down the page to see the navbar stay at the top
-
-## Notes
-### Original Fix Notes
-- The navbar-fix.js file checks if navbar.js is already loaded to avoid conflicts.
-- The navbar-fix.css file contains only the essential styles for the mobile menu toggle functionality.
-- If you're using Option 2, make sure to place the navbar-fix.css and navbar-fix.js files in the same directory as index.html.
-
-### Advanced Navbar Notes
-- The advanced navbar implementation in index-new.html includes all the features from navbar-advanced.html.
-- The navigation links from the original index.html have been preserved, with the Components link converted to a dropdown menu.
-- The advanced navbar requires both navbar-fix.css and navbar-fix.js to function properly.
-- The HTML structure of index-new.html follows the Axiom style guide with proper semantic elements and accessibility features.
-- Due to HTML structure issues in the original index.html, a new file was created instead of directly modifying the original.
+## Documentation & Demos
+- [Style Guide (HTML)](style-guide.html)
+- [Component Demos](examples/components.html)
+- [Audit Progress](AUDIT_PROGRESS.md)
+- [AXIOM01_STYLING_GUIDE.md](AXIOM01_STYLING_GUIDE.md)
+- [Semantic Color & Gradient Swatches](index.html#colors)

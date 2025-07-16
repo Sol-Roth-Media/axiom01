@@ -126,6 +126,11 @@ Axiom01 is a UI framework that prioritizes semantic HTML, minimal class usage, a
 .card footer { /* styles for footer */ }
 ```
 
+## Refactor Progress & Live Examples (July 2025)
+- All major components (navbar, cards, alerts, buttons, tabs, accordions, dropdowns, modal, datepicker) now follow these principles.
+- Recent refactors have removed legacy classes and wrappers, standardized CSS variable usage, and improved accessibility.
+- For live examples and best practices, see [style-guide.html](style-guide.html) and [AXIOM01_STYLING_GUIDE.md].
+
 ## Resources
 - See `index.html` for markup examples and style guide.
 - Review `axiom.css` for updated selectors and variable usage.

@@ -213,9 +213,65 @@ function toggleTheme() {
 //     console.log('Navbar toggle initialization is now handled by navbar.js');
 // }
 /**
+ * Utility: Read CSS variable feature toggles
+ * Returns true if the variable is set to 'true' (string)
+ */
+function isFeatureEnabled(varName) {
+    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() === 'true';
+}
+
+// Example usage for animations, transitions, font loading, CSS reset
+// Wrap any related logic with these checks
+
+// Animation example:
+if (isFeatureEnabled('--a-enable-animations')) {
+    // Enable animation logic here
+    // e.g., add animation classes, run animation JS
+}
+
+// Transition example:
+if (isFeatureEnabled('--a-enable-transitions')) {
+    // Enable transition logic here
+    // e.g., add transition classes, run transition JS
+}
+
+// Font loading example:
+if (isFeatureEnabled('--a-enable-fonts')) {
+    // Enable custom font loading logic here
+    // e.g., inject font link, apply font-family
+}
+
+// CSS reset example:
+if (isFeatureEnabled('--a-use-css-reset')) {
+    // Enable CSS reset logic here
+    // e.g., inject/reset styles if needed
+}
+
+// Document feature toggle logic in JS and CSS for maintainability
+// See axiom_config.css for variable definitions
+
+// --- Feature Toggle Helpers ---
+function getFeatureToggle(varName) {
+  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() === 'true';
+}
+
+// Example usage:
+const enableAnimations = getFeatureToggle('--a-enable-animations');
+const enableTransitions = getFeatureToggle('--a-enable-transitions');
+const enableFonts = getFeatureToggle('--a-enable-fonts');
+const useCssReset = getFeatureToggle('--a-use-css-reset');
+
+// Use these toggles to conditionally enable/disable features throughout the script
+// Example: Only run animation logic if enableAnimations is true
+
+// Example usage in components:
+// Only apply transitions/animations if enabled by CSS variable
+
+/**
  * Initializes the tabs component
  */
 function initTabs() {
+    const enableTransitions = isFeatureEnabled('--a-enable-transitions');
     const tabLists = document.querySelectorAll('.tabs [role="tablist"]');
     tabLists.forEach((tabList) => {
         const tabs = tabList.querySelectorAll('[role="tab"]');
@@ -247,6 +303,12 @@ function initTabs() {
                 tab.setAttribute('tabindex', '0');
                 const activePanel = document.getElementById(tab.getAttribute('aria-controls'));
                 if (activePanel) activePanel.hidden = false;
+
+                // Optionally add transition if enabled
+                if (enableTransitions) {
+                    activePanel.style.transition = 'opacity 0.3s';
+                    activePanel.style.opacity = '1';
+                }
             });
 
             // Keyboard navigation
@@ -285,6 +347,7 @@ function initTabs() {
  * Initializes the accordion component
  */
 function initAccordion() {
+    const enableTransitions = isFeatureEnabled('--a-enable-transitions');
     const accordionButtons = document.querySelectorAll('.accordion button[aria-controls]');
 
     accordionButtons.forEach((button) => {
@@ -301,6 +364,10 @@ function initAccordion() {
             const isExpanded = button.getAttribute('aria-expanded') === 'true';
             button.setAttribute('aria-expanded', !isExpanded);
             panel.hidden = isExpanded;
+
+            if (enableTransitions) {
+                panel.style.transition = 'max-height 0.3s';
+            }
         });
 
         button.addEventListener('keydown', (e) => {
@@ -320,6 +387,7 @@ function initAccordion() {
  * - ARIA and focus management
  */
 function initDropdowns() {
+    const enableTransitions = isFeatureEnabled('--a-enable-transitions');
     const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
 
     // Close all dropdowns when clicking outside
@@ -353,6 +421,11 @@ function initDropdowns() {
                 // Focus first item
                 const firstItem = menu.querySelector('[role="option"]');
                 if (firstItem) setTimeout(() => firstItem.focus(), 100);
+            }
+
+            if (enableTransitions) {
+                menu.style.transition = 'opacity 0.2s';
+                menu.style.opacity = menu.hidden ? '0' : '1';
             }
         });
 
@@ -503,32 +576,95 @@ function initProgressDemo() {
 
 /**
  * Initialize loading throbber demo
+ * Only enable animation if --a-enable-animations is true
  */
 function initThrobberDemo() {
-    const toggleLoadingButton = document.getElementById('toggle-loading');
-    const loadingThrobber = document.getElementById('loading-throbber');
+    const enableAnimations = isFeatureEnabled('--a-enable-animations');
+    const toggleButton = document.getElementById('toggle-loading');
+    const throbber = document.getElementById('loading-throbber');
 
-    if (!toggleLoadingButton || !loadingThrobber) return;
+    if (!toggleButton || !throbber) return;
 
-    toggleLoadingButton.addEventListener('click', () => {
-        const isLoading = loadingThrobber.classList.toggle('active');
-        loadingThrobber.setAttribute('aria-hidden', !isLoading);
-        toggleLoadingButton.textContent = isLoading ? 'Stop Loading' : 'Start Loading';
+    toggleButton.addEventListener('click', () => {
+        const isLoading = throbber.classList.toggle('active');
+        throbber.setAttribute('aria-hidden', !isLoading);
+        toggleButton.textContent = isLoading ? 'Stop Loading' : 'Start Loading';
+
+        // Only enable animation if feature toggle is true
+        if (enableAnimations) {
+            throbber.style.animation = isLoading ? 'throbber-spin 1s linear infinite' : 'none';
+        } else {
+            throbber.style.animation = 'none';
+        }
     });
 }
 
-// Main initialization function
+/**
+ * Feature Toggle Checks (CSS Variables)
+ * Checks runtime CSS variable values to enable/disable features for accessibility and performance.
+ */
+function getCSSVariableBool(varName) {
+    const value = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    return value === 'true' || value === '1';
+}
+
+const enableAnimations = getCSSVariableBool('--a-enable-animations');
+const enableTransitions = getCSSVariableBool('--a-enable-transitions');
+const enableFonts = getCSSVariableBool('--a-enable-fonts');
+const useCSSReset = getCSSVariableBool('--a-use-css-reset');
+
+// Example usage: Conditionally enable/disable animations
+if (!enableAnimations) {
+    document.body.classList.add('no-animations');
+}
+if (!enableTransitions) {
+    document.body.classList.add('no-transitions');
+}
+if (!enableFonts) {
+    document.body.classList.add('no-fonts');
+}
+if (!useCSSReset) {
+    document.body.classList.add('no-css-reset');
+}
+
+// --- Feature Toggle Checks (CSS Variable Driven) ---
+// Only enable features if their corresponding CSS variable is set to 'true'.
+// Uses getComputedStyle(document.documentElement).getPropertyValue('--a-variable-name').trim()
+const axiomFeatureToggles = {
+  useCssReset: getComputedStyle(document.documentElement).getPropertyValue('--a-use-css-reset').trim() === 'true',
+  enableAnimations: getComputedStyle(document.documentElement).getPropertyValue('--a-enable-animations').trim() === 'true',
+  enableTransitions: getComputedStyle(document.documentElement).getPropertyValue('--a-enable-transitions').trim() === 'true',
+  enableFonts: getComputedStyle(document.documentElement).getPropertyValue('--a-enable-fonts').trim() === 'true'
+};
+
+// Example usage:
+// if (axiomFeatureToggles.enableAnimations) { /* run animation logic */ }
+// if (axiomFeatureToggles.enableFonts) { /* load custom fonts */ }
+// if (axiomFeatureToggles.useCssReset) { /* apply CSS reset logic */ }
+// if (axiomFeatureToggles.enableTransitions) { /* enable transitions */ }
+
+// Documented for maintainability. Add runtime checks before enabling related features below.
+
+/**
+ * Main initialization function
+ * Only enable font loading and CSS reset if toggles are true
+ */
 function initAxiom() {
+    if (isFeatureEnabled('--a-enable-fonts')) {
+        // Font loading logic here (if any)
+        // Example: document.body.classList.add('use-fonts');
+    }
+    if (isFeatureEnabled('--a-use-css-reset')) {
+        // CSS reset logic here (if any)
+        // Example: document.body.classList.add('use-css-reset');
+    }
     initThemeSelector();
-    initMobileMenu();
+    // Mobile menu handled by navbar.js
     initTabs();
     initAccordion();
     initDropdowns();
     initProgressDemo();
     initThrobberDemo();
-
-    // Log initialization
-    console.log('Axiom01 UI Framework initialized');
 }
 
 // Run all initializations after the DOM is fully loaded

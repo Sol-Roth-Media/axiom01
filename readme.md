@@ -1,6 +1,19 @@
 # Axiom01 UI Framework
 Craft beautiful interfaces with less markup — Axiom01 enhances your HTML, not your class count. 🔥
 
+## Quick Links
+- [Axiom01 Style Guide](style-guide.html)
+- [Grid System Examples](grid-examples.html)
+- [Navbar Documentation & Demo](navbar-docs.html)
+- [Component Demos](examples/components.html)
+
+## Recent Features & Refactors
+- **Accessibility**: All major components (modal, notification, datepicker) now include ARIA attributes, keyboard navigation, and improved focus states.
+- **Feature Toggles**: JS and CSS now support runtime feature toggles for CSS variables, documented for maintainability.
+- **Semantic Usage**: All components use semantic HTML and variable-driven patterns; legacy/utility-heavy classes removed.
+- **Documentation Sync**: All docs now include direct links to style guide, grid examples, navbar docs, and component demos. Feature summaries and recent refactors are documented.
+- **Component Audits**: Medium-priority tasks for accessibility and documentation are complete; minor enhancements remain.
+
 ## Overview
 Axiom01 is a lightweight CSS and JavaScript framework that focuses on:
 - **Theming**: Built-in support for multiple themes including light, dark, and specialty themes
@@ -48,25 +61,28 @@ Axiom01 is designed to be lightweight and performant:
 ### Components
 Axiom01 includes several ready-to-use components:
 - **Buttons**: Primary, secondary, outline variants
-- **Navigation**: Responsive navbar with mobile support
-- **Cards**: Flexible content containers
-- **Tabs**: Accessible tabbed interfaces
-- **Accordions**: Collapsible content panels
-- **Dropdowns**: Menu dropdown components
-- **Form elements**: Styled inputs, checkboxes, radio buttons
-- **Progress indicators**: Progress bars and loading throbbers
-- **Alerts**: Accessible alert banners
-- **Datepicker**: Enhanced input[type='date'] with accessibility features
+- **Alerts**: Success, error, warning, info
+- **Cards**: Flexible layouts
+- **Modals**: Accessible dialogs
+- **Tabs, Accordions, Dropdowns**: Keyboard and ARIA support
+- **Navbar**: Responsive, accessible, theme-aware
+- **Grid System**: Semantic, variable-driven layouts
 
-### Grid System
-A flexible CSS Grid-based layout system with responsive breakpoints.
+## Recent Updates
+- All CSS files now use standardized variables for spacing, colors, and typography
+- Navbar refactored for accessibility and theme responsiveness
+- New component demos and documentation added
+- Improved ARIA and keyboard navigation in all interactive components
 
-### Theming System
-Axiom01 comes with multiple built-in themes. You can switch themes by:
-- Using the theme switcher dropdown
-- Toggling between light/dark modes
-- Setting a data-theme attribute on the html element
+### Theming & Color System
+Axiom01 provides 20+ built-in themes and a comprehensive color system:
+- All colors, gradients, and surfaces are defined as CSS variables and update automatically with theme changes.
+- The documentation now includes a dedicated color and gradient swatch section with inline tooltips, usage notes, and accessibility features.
+- Semantic color variables (success, error, warning, info, surface, background, outline) are used throughout for clarity and maintainability.
 
+### Accessibility & Tooltips
+- All color and gradient swatches are keyboard and screen reader accessible, with ARIA labels and tooltips for usage notes.
+- Interactive components (navbar, dropdowns, tabs, accordions) include ARIA roles and keyboard navigation.
 
 ## Getting Started
 ### Installation
@@ -196,15 +212,12 @@ const availableThemes = [
 ### Components
 Axiom01 includes several ready-to-use components:
 - **Buttons**: Primary, secondary, outline variants
-- **Navigation**: Responsive navbar with mobile support
-- **Cards**: Flexible content containers
-- **Tabs**: Accessible tabbed interfaces
-- **Accordions**: Collapsible content panels
-- **Dropdowns**: Menu dropdown components
-- **Form elements**: Styled inputs, checkboxes, radio buttons
-- **Progress indicators**: Progress bars and loading throbbers
-- **Alerts**: Accessible alert banners
-- **Datepicker**: Enhanced input[type='date'] with accessibility features
+- **Alerts**: Success, error, warning, info
+- **Cards**: Flexible layouts
+- **Modals**: Accessible dialogs
+- **Tabs, Accordions, Dropdowns**: Keyboard and ARIA support
+- **Navbar**: Responsive, accessible, theme-aware
+- **Grid System**: Semantic, variable-driven layouts
 
 ##### Suggested New Components
 
@@ -405,10 +418,45 @@ Axiom01 supports all modern browsers, including:
 - Safari (latest)
 - Edge (latest)
 
-## Documentation & Examples
-- [Style Guide](style-guide.html): Full documentation of variables, components, and usage
-- [Component Demos](examples/components.html): Live examples of all components
-- [Docs Folder](docs/): Contains minified assets and documentation for deployment
+## Feature Toggles for Customization
+Axiom01 supports runtime feature toggles via CSS variables for:
+- Animations (`--a-enable-animations`)
+- Transitions (`--a-enable-transitions`)
+- Font loading (`--a-enable-fonts`)
+- CSS reset (`--a-use-css-reset`)
+
+You can set these variables in your CSS (e.g., in axiom_config.css):
+```css
+:root {
+  --a-enable-animations: true;
+  --a-enable-transitions: true;
+  --a-enable-fonts: true;
+  --a-use-css-reset: true;
+}
+```
+
+Axiom01's JavaScript components will automatically respect these toggles at runtime, enabling or disabling related features for accessibility and performance. See the [Styling Guide](AXIOM01_STYLING_GUIDE.md) and [Audit Progress](AUDIT_PROGRESS.md) for details.
+
+## Documentation & Demos
+- [Style Guide](style-guide.html): Visual reference for all components, colors, gradients, and layout patterns.
+- [Component Demos](examples/components.html): Live interactive examples of all Axiom01 components.
+- [Audit Progress](AUDIT_PROGRESS.md): Ongoing audit and refactoring status for the framework.
+
+## Recent Improvements
+- Enhanced color swatch documentation and accessibility in index.html
+- All color and gradient swatches now respond to theme changes
+- Improved layout and keyboard accessibility for swatch sections
+
+## Color Swatches & Accessibility
+Axiom01 provides comprehensive documentation and live demos for all semantic color variables, gradients, and grayscale swatches. All swatches include inline tooltips, ARIA labels, and usage notes, and respond to theme changes for accessibility and clarity. See [index.html](index.html) and [style-guide.html](style-guide.html) for details.
+
+## Accessibility & Theming
+Axiom01's color and gradient swatches are fully accessible, include tooltips and ARIA attributes, and respond to theme changes. See [index.html#colors](index.html#colors) and [style-guide.html](style-guide.html#colors) for details.
+
+## Recent Improvements
+- Color swatch section now includes inline tooltips, ARIA accessibility, and keyboard navigation.
+- All color and gradient swatches respond to theme changes and use semantic CSS variables.
+- Accessibility and documentation have been improved across all components.
 
 ## Accessibility & Performance
 Axiom01 is built for accessibility and speed:
@@ -647,3 +695,31 @@ You can define custom gradients using the built-in variables as a starting point
 ### Visual Reference
 
 For a complete visual reference of all gradient variables and examples of their usage, see the [Gradient Swatches section](style-guide.html#gradient-swatches) of the Style Guide.
+
+## Advanced Navbar Features
+- Dropdown menus with keyboard navigation and ARIA attributes
+- Search functionality
+- Sticky and scroll-aware navigation
+- Font Awesome hamburger icon for mobile
+- Theme switcher and theme toggle button
+- Accessibility features (skip to content, ARIA, live region announcements)
+- Responsive design for all screen sizes
+
+## Semantic Color & Gradient Swatches
+Axiom01 now includes a dedicated section in index.html for semantic color and gradient variables. Each swatch is documented, accessible, and responds to theme changes. See [index.html#grayscale](index.html#grayscale) for details.
+
+## Component Demos & Style Guide
+- [Style Guide](style-guide.html): Best practices and live examples
+- [Components Demo](components.html): Interactive component showcase
+
+### Documentation & Demos
+- [AXIOM01_STYLING_GUIDE.md](AXIOM01_STYLING_GUIDE.md): Quick styling guide and best practices
+- [style-guide.html](style-guide.html): Full documentation of variables, components, and usage
+- [examples/components.html](examples/components.html): Live component demos
+- [navbar-advanced.html](navbar-advanced.html): Advanced navbar demo and markup
+
+### Recent Refactors & Improvements
+- Standardized all CSS variable usage for spacing, colors, and typography
+- Improved accessibility and ARIA support across all components
+- Added dedicated color and gradient swatch section to index.html
+- Updated all documentation to match the latest implementation

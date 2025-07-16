@@ -26,15 +26,25 @@ const AxiomComponents = {
    */
   initAll: function() {
     if (this.initialized) return;
-    
+
+    // Respect feature toggles before initializing components
+    if (featureToggles.cssReset) {
+      // Optionally apply CSS reset logic here
+      // e.g., import or enable _axiom_reset.css
+    }
+
     Object.keys(this.registry).forEach(component => {
+      // Example: Only initialize animation-related components if enabled
+      if (component === 'animations' && !featureToggles.animations) return;
+      if (component === 'transitions' && !featureToggles.transitions) return;
+      if (component === 'fonts' && !featureToggles.fonts) return;
       try {
         this.registry[component]();
       } catch (error) {
         console.error(`Error initializing ${component}:`, error);
       }
     });
-    
+
     this.initialized = true;
     console.log('Axiom01 components initialized');
   }
@@ -306,11 +316,13 @@ AxiomComponents.register('notifications', function initNotifications() {
         });
       }
       
-      // Add entrance animation class
-      setTimeout(() => {
-        notification.classList.add('show');
-      }, 10);
-      
+      // Add entrance animation class only if enabled
+      if (isFeatureEnabled('--a-enable-animations')) {
+        setTimeout(() => {
+          notification.classList.add('show');
+        }, 10);
+      }
+
       // Return the notification element for potential further manipulation
       return notification;
     },
@@ -367,12 +379,14 @@ AxiomComponents.register('notifications', function initNotifications() {
    * @param {HTMLElement} notification - The notification element
    */
   function dismissNotification(notification) {
-    notification.classList.add('hiding');
-    
-    // Remove after animation completes
-    notification.addEventListener('animationend', () => {
+    if (isFeatureEnabled('--a-enable-animations')) {
+      notification.classList.add('hiding');
+      notification.addEventListener('animationend', () => {
+        notification.remove();
+      });
+    } else {
       notification.remove();
-    });
+    }
   }
 });
 
@@ -695,6 +709,25 @@ AxiomComponents.register('formValidation', function initFormValidation() {
     }
   }
 });
+
+// --- Feature Toggle Helpers ---
+function isFeatureEnabled(varName) {
+  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() === 'true';
+}
+
+// Define feature toggles based on CSS variables
+const featureToggles = {
+  animations: isFeatureEnabled('--a-enable-animations'),
+  transitions: isFeatureEnabled('--a-enable-transitions'),
+  fonts: isFeatureEnabled('--a-enable-fonts'),
+  cssReset: isFeatureEnabled('--a-use-css-reset')
+};
+
+// Example usage in component initialization:
+// Only run animation logic if featureToggles.animations is true
+// Only load custom fonts if featureToggles.fonts is true
+// Only apply CSS reset if featureToggles.cssReset is true
+// Only run transition logic if featureToggles.transitions is true
 
 // --- Initialize all components when DOM is loaded ---
 document.addEventListener('DOMContentLoaded', function() {

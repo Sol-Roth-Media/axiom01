@@ -48,7 +48,33 @@ This guide helps you (or any developer) create beautiful, maintainable sites and
 ```
 - For layout, use `.container` or semantic `<section>` with padding/margin variables for consistent gutters.
 
-## 5. Theming & Customization
+## 5. Color & Gradient Swatches
+Axiom01 provides accessible, theme-responsive color and gradient swatches. Each swatch includes:
+- Inline tooltips for quick reference
+- Usage notes for clarity
+- ARIA attributes for accessibility
+- Responsive styling for theme changes
+
+**Example:**
+```html
+<div class="color-swatch tooltip" role="listitem" tabindex="0" style="background: var(--a-color-primary);" aria-label="Primary color swatch" data-tooltip="Primary color: var(--a-color-primary)"><span class="color-name">Primary</span><span class="color-value">var(--a-color-primary)</span><span class="color-usage">Main brand color, buttons</span></div>
+```
+
+See [index.html](index.html#colors) for a live demo and documentation of all semantic color and gradient swatches.
+
+## 6. Accessibility for Swatches & Components
+- All swatches and interactive components must be keyboard and screen reader accessible.
+- Use `tabindex="0"`, ARIA labels, and tooltips for documentation and clarity.
+- Example:
+```html
+<div class="color-swatch primary tooltip" tabindex="0" aria-label="Primary color swatch" data-tooltip="Primary brand color. Used for main actions and highlights.">
+  <span class="color-name">Primary</span>
+  <span class="color-value">var(--a-color-primary)</span>
+</div>
+```
+- Ensure all interactive elements (navbar, dropdowns, tabs, accordions) include ARIA roles and keyboard navigation.
+
+## 7. Theming & Customization
 - Use the built-in CSS variables in `axiom_vars.css` and `colors_vars.css` to customize colors, spacing, and typography.
 - Switch themes by setting `data-theme` on the `<html>` element or using the theme switcher component.
 - Example:
@@ -63,7 +89,7 @@ This guide helps you (or any developer) create beautiful, maintainable sites and
 }
 ```
 
-## 6. Component Styling
+## 8. Component Styling
 - Style all components (e.g., `.alert`, `.datepicker`, `.progress-bar`) using semantic selectors and variables.
 - Example for alerts:
 ```css
@@ -75,7 +101,7 @@ This guide helps you (or any developer) create beautiful, maintainable sites and
 ```
 - For datepicker enhancements, use `.axiom-datepicker` and ensure accessible focus states.
 
-## 7. Accessibility in Styling
+## 9. Accessibility in Styling
 - Always provide visible focus states for interactive elements:
 ```css
 button:focus, .axiom-datepicker:focus {
@@ -85,7 +111,7 @@ button:focus, .axiom-datepicker:focus {
 - Use ARIA attributes and roles in your markup for alerts, dialogs, and navigation.
 - Ensure color contrast meets WCAG standards (see style-guide.html for details).
 
-## 8. Grid System: Semantic & Custom Layouts
+## 10. Grid System: Semantic & Custom Layouts
 
 Axiom01 supports flexible grid layouts using CSS Grid and semantic HTML. You can build grids without classes (pure semantic) or with custom row/column classes for more control.
 
@@ -137,7 +163,7 @@ Make grids adapt to screen size:
 
 See `grid-examples.html` for live demos.
 
-## 9. Navbar Component
+## 11. Navbar Component
 The Axiom01 Navbar is a responsive, accessible navigation component that follows the Axiom01 philosophy of semantic HTML, minimal classes, and consistent styling using CSS variables.
 
 ### HTML Structure
@@ -252,7 +278,12 @@ menuToggle.addEventListener('click', function() {
 
 For more detailed documentation and examples, see [navbar-docs.html](navbar-docs.html) and [navbar-advanced.html](navbar-advanced.html).
 
-## 10. Reference & Resources
+## 12. Component Demos & Style Guide
+- For live examples and best practices, see:
+  - [Style Guide](style-guide.html)
+  - [Components Demo](components.html)
+
+## 13. Reference & Resources
 - See [style-guide.html](style-guide.html) for full documentation of variables, components, and usage.
 - For live examples, visit [examples/components.html](examples/components.html).
 - For accessibility guidelines, refer to the [Axiom01 Accessibility Section](style-guide.html#accessibility).
@@ -265,3 +296,19 @@ For more detailed documentation and examples, see [navbar-docs.html](navbar-docs
 - Check `axiom.css` for updated selectors, spacing, and color variables.
 
 By following these steps, your site will look great, be easy to maintain, and fully embrace the Axiom01 philosophy.
+
+## Quick Links
+- [Axiom01 Style Guide](style-guide.html)
+- [Grid System Examples](grid-examples.html)
+- [Navbar Documentation & Demo](navbar-docs.html)
+- [Component Demos](examples/components.html)
+
+# Audit Sync Status
+- Documentation files (readme.md, AXIOM01_STYLING_GUIDE.md, AUDIT_PROGRESS.md) are now synced with latest features, refactors, and direct links to style guide and demos.
+
+## Recent Features & Refactors
+- **Accessibility**: All major components (modal, notification, datepicker) now include ARIA attributes, keyboard navigation, and improved focus states.
+- **Feature Toggles**: JS and CSS now support runtime feature toggles for CSS variables, documented for maintainability.
+- **Semantic Usage**: All components use semantic HTML and variable-driven patterns; legacy/utility-heavy classes removed.
+- **Documentation Sync**: All docs now include direct links to style guide, grid examples, navbar docs, and component demos. Feature summaries and recent refactors are documented.
+- **Component Audits**: Medium-priority tasks for accessibility and documentation are complete; minor enhancements remain.
