@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axiom01 Documentation - Navbar Demo</title>
+  <link rel="stylesheet" href="css/axiom.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root,
+    [data-theme="light"] {
+      --a-color-background: #fff;
+      --a-color-on-background: #222;
+    }
+    [data-theme="dark"] {
+      --a-color-background: #181a1b;
+      --a-color-on-background: #f4f4f4;
+    }
+    [data-theme="aesthetic"] {
+      --a-color-background: #fdf6f0;
+      --a-color-on-background: #3a2c2a;
+    }
+    [data-theme="cyberpunk"] {
+      --a-color-background: #0f0f1c;
+      --a-color-on-background: #f8ff00;
+    }
+    body {
+      margin: 0;
+      font-family: var(--a-font-family-sans, system-ui, sans-serif);
+      background: var(--a-color-background, #222; /* fallback to light background in light mode */
+      color: var(--a-color-on-background, #fff);
+    }
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: var(--a-color-surface, #fff);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 2rem;
+    }
+    .navbar .menu-toggle {
+      margin-left: auto;
+      order: 2;
+    }
+    .navbar .logo {
+      order: 0;
+    }
+    .navbar .nav-links {
+      order: 1;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: var(--a-color-primary, #007bff);
+      gap: 0.5rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--a-color-on-surface, #222);
+      font-weight: 500;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .nav-links a:hover {
+      background: var(--a-color-surface-variant, #f0f0f0);
+    }
+    .theme-switcher-container {
+      margin-left: 1.5rem;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--a-color-primary, #007bff);
+    }
+    @media (max-width: 900px) {
+      .navbar {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+      }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 220px;
+        height: 100vh;
+        background: var(--a-color-surface, #fff);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 1rem 1rem 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: right 0.3s;
+        z-index: 999;
+      }
+      .nav-links.open {
+        right: 0;
+      }
+      .menu-toggle {
+        display: block;
+        margin-left: auto;
+        order: 2;
+      }
+    }
+    @media (max-width: 600px) {
+      .docs-sidebar {
+        display: none !important;
+      }
+    }
+    .docs-sidebar {
+      top:80px;
+      align-self:flex-start;
+      min-width:220px;
+      background: var(--a-color-surface-variant, #f4f4f4);
+      border-radius:8px;
+      padding:1.5rem 1rem 1.5rem 1rem;
+      box-shadow:0 2px 8px rgba(0,0,0,0.04);
+      height:fit-content;
+      color: var(--a-color-on-surface, #222);
+    }
+    .hero-section,
+    section,
+    .card,
+    .alert {
+      background: var(--a-color-surface, #fff);
+      color: var(--a-color-on-surface, #222);
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--a-color-primary, #007bff);
+    }
+    pre, code {
+      color: var(--a-color-on-surface, #222);
+      background: var(--a-color-surface-variant, #f4f4f4);
+    }
+    @media (prefers-color-scheme: dark), [data-theme="dark"] {
+      body {
+        background: var(--a-color-background, #181a1b) !important; /* fallback to dark background in dark mode */
+        color: var(--a-color-on-background, #f4f4f4) !important;
+      }
+      .docs-sidebar {
+        background: var(--a-color-surface-variant, #222);
+        color: var(--a-color-on-surface, #f4f4f4);
+      }
+      .hero-section,
+      section,
+      .card,
+      .alert {
+        background: var(--a-color-surface, #181a1b);
+        color: var(--a-color-on-surface, #f4f4f4);
+      }
+      h1, h2, h3, h4, h5, h6 {
+        color: var(--a-color-primary, #7ab7ff);
+      }
+      pre, code {
+        color: var(--a-color-on-surface, #f4f4f4);
+        background: var(--a-color-surface-variant, #222);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="axiom-docs-header">
+    <h1>Axiom01 Framework Documentation & Showcase</h1>
+    <p>
+      <strong>Axiom01</strong> is a lightweight, modern CSS framework for rapid prototyping and production-ready web interfaces. This page demonstrates its features, components, and customization options.
+    </p>
+  </header>
+  <nav class="axiom-docs-toc">
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#installation">Installation & Setup</a></li>
+      <li><a href="#navbar-demo">Navbar Component</a></li>
+      <li><a href="#grid-system">Grid System</a></li>
+      <li><a href="#buttons">Buttons</a></li>
+      <li><a href="#alerts">Alerts</a></li>
+      <li><a href="#theming">Theming & Customization</a></li>
+      <li><a href="#accessibility">Accessibility</a></li>
+      <li><a href="#resources">Resources</a></li>
+    </ul>
+  </nav>
+  <section id="installation">
+    <h2>Installation & Setup</h2>
+    <p>To use Axiom01, include the following CSS files in your <code>&lt;head&gt;</code>:</p>
+    <pre><code>&lt;link rel="stylesheet" href="css/axiom.css"&gt;
+&lt;link rel="stylesheet" href="css/navbar.css"&gt;
+&lt;link rel="stylesheet" href="css/site.css"&gt;
+</code></pre>
+    <p>Optionally, add the Font Awesome CDN for icons:</p>
+    <pre><code>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"&gt;</code></pre>
+  </section>
+  <nav class="navbar" aria-label="Main Navigation">
+    <a href="#" class="logo" aria-label="Axiom Framework Home">
+      <span>[Ax</span><span style="color:var(--a-color-primary);">01</span><span>]</span>
+    </a>
+    <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#docs">Docs</a></li>
+      <li><a href="#components">Components</a></li>
+      <li><a href="#themes">Themes</a></li>
+      <li><a href="#accessibility">Accessibility</a></li>
+      <li><a href="#examples">Examples</a></li>
+      <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank">GitHub</a></li>
+    </ul>
+    <div class="theme-switcher-container">
+      <label for="theme-select" class="visually-hidden">Theme:</label>
+      <select id="theme-select">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="aesthetic">Aesthetic</option>
+        <option value="cyberpunk">Cyberpunk</option>
+      </select>
+    </div>
+  </nav>
+  <main style="display:flex;gap:2rem;padding:2rem;max-width:1200px;margin:auto;">
+    <!-- Sidebar Navigation -->
+    <nav class="docs-sidebar" aria-label="Documentation Table of Contents" style="position:sticky;top:80px;align-self:flex-start;min-width:220px;background:var(--a-color-surface-variant,#f4f4f4);border-radius:8px;padding:1.5rem 1rem 1.5rem 1rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);height:fit-content;">
+      <h3 style="margin-top:0;color:var(--a-color-primary);font-size:1.2rem;">Contents</h3>
+      <ul style="list-style:none;padding:0;margin:0;">
+        <li><a href="#hero" tabindex="0">Introduction</a></li>
+        <li><a href="#why-axiom" tabindex="0">Why Axiom01?</a></li>
+        <li><a href="#quickstart" tabindex="0">Quick Start</a></li>
+        <li><a href="#components" tabindex="0">Components</a></li>
+        <li><a href="#themes" tabindex="0">Themes</a></li>
+        <li><a href="#accessibility" tabindex="0">Accessibility</a></li>
+        <li><a href="#faq" tabindex="0">FAQ</a></li>
+        <li><a href="#community" tabindex="0">Community</a></li>
+      </ul>
+    </nav>
+    <div style="flex:1;min-width:0;">
+      <!-- Hero Section -->
+      <section id="hero" class="hero-section" style="text-align:center;padding:3rem 0 2rem 0;">
+        <h1 style="font-size:2.5rem;color:var(--a-color-primary);font-weight:bold;">Axiom01 UI Framework</h1>
+        <p style="font-size:1.25rem;max-width:600px;margin:1rem auto 2rem auto;">Build beautiful, accessible interfaces with less markup. Semantic-first, themeable, and fast.</p>
+        <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;">
+          <a href="#quickstart" class="btn primary" style="padding:0.75rem 1.5rem;">Get Started</a>
+          <a href="#components" class="btn" style="padding:0.75rem 1.5rem;">Component Demos</a>
+          <a href="https://github.com/Sol-Roth-Media/axiom01" class="btn" target="_blank" style="padding:0.75rem 1.5rem;"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+      </section>
+      <!-- Why Axiom01 Section -->
+      <section id="why-axiom" style="margin-bottom:2.5rem;text-align:center;">
+        <h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Why Axiom01?</h2>
+        <p style="max-width:700px;margin:auto;font-size:1.1rem;">Axiom01 is designed for developers who want semantic, maintainable, and accessible UI with minimal class clutter. Unlike utility-first frameworks, Axiom01 leverages CSS variables and semantic HTML for easier customization and better accessibility. <br><br><strong>Comparison:</strong></p>
+        <div style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1.5rem;">
+          <div style="background:var(--a-color-surface);border-radius:8px;padding:1rem 1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);min-width:220px;">
+            <h4 style="margin-top:0;color:var(--a-color-primary);">Axiom01</h4>
+            <ul style="text-align:left;line-height:1.7;font-size:1rem;">
+              <li>Semantic HTML</li>
+              <li>CSS variables for theming</li>
+              <li>Accessible by default</li>
+              <li>Minimal class usage</li>
+              <li>Easy theme switching</li>
+            </ul>
+          </div>
+          <div style="background:var(--a-color-surface);border-radius:8px;padding:1rem 1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);min-width:220px;">
+            <h4 style="margin-top:0;color:#888;">Utility Frameworks</h4>
+            <ul style="text-align:left;line-height:1.7;font-size:1rem;">
+              <li>Heavy class usage</li>
+              <li>Harder to customize themes</li>
+              <li>Accessibility requires extra effort</li>
+              <li>Higher learning curve</li>
+              <li>More markup bloat</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- Quick Start Section -->
+      <section id="quickstart" style="margin-bottom:2.5rem;">
+        <h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Quick Start</h2>
+        <ol style="font-size:1.1rem;line-height:1.7;max-width:700px;margin:auto;">
+          <li>Download or install Axiom01:
+            <pre style="background:#f8f9fa;padding:0.75rem;border-radius:6px;margin:0.5rem 0;"><code>npm install axiom01</code></pre>
+            <pre style="background:#f8f9fa;padding:0.75rem;border-radius:6px;margin:0.5rem 0;"><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axiom01@latest/css/axiom.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/axiom01@latest/js/axiom.js"&gt;&lt;/script&gt;</code></pre>
+          </li>
+          <li>Include the CSS and JS in your HTML:
+            <pre style="background:#f8f9fa;padding:0.75rem;border-radius:6px;margin:0.5rem 0;"><code>&lt;link rel="stylesheet" href="css/axiom.css"&gt;
+&lt;script src="js/axiom.js"&gt;&lt;/script&gt;</code></pre>
+          </li>
+          <li>Start using semantic HTML and Axiom components!</li>
+        </ol>
+        <h3 style="margin-top:2rem;color:var(--a-color-primary);">Hello World Example</h3>
+        <pre style="background:#f8f9fa;padding:0.75rem;border-radius:6px;margin:0.5rem 0;max-width:700px;margin:auto;"><code>&lt;main class="container"&gt;
+  &lt;h1&gt;Hello, Axiom01!&lt;/h1&gt;
+  &lt;button class="btn primary"&gt;Click Me&lt;/button&gt;
+&lt;/main&gt;</code></pre>
+        <h3 style="margin-top:2rem;color:var(--a-color-primary);">Troubleshooting</h3>
+        <ul style="font-size:1rem;line-height:1.7;max-width:700px;margin:auto;">
+          <li>If styles do not appear, check your CSS/JS file paths.</li>
+          <li>Make sure your HTML <code>&lt;body&gt;</code> uses <code>class="axiom01"</code> for theme support.</li>
+          <li>Use the theme switcher in the navbar to test different themes.</li>
+        </ul>
+      </section>
+
+      <!-- Component Demos Section -->
+      <section id="components" style="margin-bottom:2.5rem;">
+        <h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Component Demos</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:2rem;">
+          <div style="flex:1;min-width:220px;">
+            <h3>Buttons</h3>
+            <button class="btn primary">Primary</button>
+            <button class="btn secondary">Secondary</button>
+            <button class="btn success">Success</button>
+            <button class="btn danger">Danger</button>
+            <button class="btn outline">Outline</button>
+          </div>
+          <div style="flex:1;min-width:220px;">
+            <h3>Alerts</h3>
+            <div class="alert success"><i class="fas fa-check-circle"></i> Success! Everything worked.</div>
+            <div class="alert error"><i class="fas fa-exclamation-triangle"></i> Error! Something went wrong.</div>
+          </div>
+          <div style="flex:1;min-width:220px;">
+            <h3>Card</h3>
+            <article class="card" style="max-width:250px;">
+              <header><h4>Card Title</h4></header>
+              <section><p>This is a card using semantic HTML and Axiom styles.</p></section>
+              <footer><button class="btn primary">Action</button></footer>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Theming Demo Section -->
+      <section id="themes" style="margin-bottom:2.5rem;">
+        <h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Theming Demo</h2>
+        <p>Try switching themes using the selector in the navbar. All components update instantly!</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <div style="background:var(--a-color-primary);color:#fff;padding:1rem 2rem;border-radius:8px;">Primary</div>
+          <div style="background:var(--a-color-secondary);color:#fff;padding:1rem 2rem;border-radius:8px;">Secondary</div>
+          <div style="background:var(--a-color-success);color:#fff;padding:1rem 2rem;border-radius:8px;">Success</div>
+          <div style="background:var(--a-color-danger);color:#fff;padding:1rem 2rem;border-radius:8px;">Danger</div>
+        </div>
+      </section>
+
+      <!-- Accessibility Section -->
+      <section id="accessibility" style="margin-bottom:2.5rem;">
+        <h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Accessibility</h2>
+        <ul style="font-size:1.1rem;line-height:1.7;max-width:700px;margin:auto;">
+          <li>Semantic HTML and ARIA attributes built-in</li>
+          <li>Keyboard navigation for all components</li>
+          <li>WCAG-compliant color contrast in all themes</li>
+        </ul>
+      </section>
+
+      <!-- Footer -->
+      <footer style="text-align:center;padding:2rem 0;color:#888;font-size:1rem;">
+        <hr style="margin-bottom:1rem;">
+        <div>Axiom01 UI Framework &copy; 2025 &mdash; <a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank">GitHub</a></div>
+      </footer>
+    </div>
+  </main>
+  <section id="navbar-demo" style="margin-bottom:2.5rem;">
+    <h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Navbar Component</h2>
+    <p>The <strong>navbar</strong> is a responsive, accessible navigation bar. It supports logo, links, theme switcher, and mobile menu toggle out of the box.</p>
+    <h3>Example</h3>
+    <pre><code>&lt;nav class="navbar" aria-label="Main Navigation"&gt;
+  &lt;a href="#" class="logo"&gt;[Ax01]&lt;/a&gt;
+  &lt;button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links"&gt;
+    &lt;i class="fa-solid fa-bars"&gt;&lt;/i&gt;
+  &lt;/button&gt;
+  &lt;ul class="nav-links" id="nav-links"&gt;
+    &lt;li&gt;&lt;a href="#docs"&gt;Docs&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#components"&gt;Components&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#themes"&gt;Themes&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#accessibility"&gt;Accessibility&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#examples"&gt;Examples&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank"&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div class="theme-switcher-container"&gt;
+    &lt;select id="theme-select"&gt;
+      &lt;option value="light"&gt;Light&lt;/option&gt;
+      &lt;option value="dark"&gt;Dark&lt;/option&gt;
+      &lt;option value="aesthetic"&gt;Aesthetic&lt;/option&gt;
+      &lt;option value="cyberpunk"&gt;Cyberpunk&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+    <h3>Features</h3>
+    <ul>
+      <li>Sticky positioning and responsive layout</li>
+      <li>Accessible ARIA attributes</li>
+      <li>Theme switcher for instant style changes</li>
+      <li>Mobile menu toggle with smooth animation</li>
+    </ul>
+    <h3>Customization</h3>
+    <p>Customize colors, spacing, and logo via CSS variables or by editing <code>navbar.css</code>. Add or remove links as needed.</p>
+    <h3>Live Demo</h3>
+    <p>The navbar at the top of this page is fully interactive. Resize your browser or use the theme switcher to see it in action.</p>
+  </section>
+  <section id="grid-system" style="margin-bottom:2.5rem;">
+    <h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Grid System</h2>
+    <p>Axiom01 includes a simple, flexible grid system for layouts. Use <code>.row</code> and <code>.col</code> classes for responsive columns.</p>
+    <h3>Example</h3>
+    <pre><code>&lt;div class="row"&gt;
+  &lt;div class="col"&gt;Column 1&lt;/div&gt;
+  &lt;div class="col"&gt;Column 2&lt;/div&gt;
+  &lt;div class="col"&gt;Column 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <h3>Features</h3>
+    <ul>
+      <li>Responsive columns stack on small screens</li>
+      <li>Customizable via CSS variables</li>
+      <li>Supports nested grids</li>
+    </ul>
+    <h3>Advanced Example</h3>
+    <pre><code>&lt;div class="row"&gt;
+  &lt;div class="col col-2"&gt;2/12&lt;/div&gt;
+  &lt;div class="col col-8"&gt;8/12&lt;/div&gt;
+  &lt;div class="col col-2"&gt;2/12&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <p>Use <code>.col-N</code> for custom column widths (N = 1-12).</p>
+    <h3>Live Demo</h3>
+    <div class="row" style="margin-bottom:1rem;">
+      <div class="col" style="background:#e3eafc;padding:1rem;text-align:center;">Column 1</div>
+      <div class="col" style="background:#d1f7e3;padding:1rem;text-align:center;">Column 2</div>
+      <div class="col" style="background:#ffe3e3;padding:1rem;text-align:center;">Column 3</div>
+    </div>
+    <div class="row">
+      <div class="col col-2" style="background:#e3eafc;padding:1rem;text-align:center;">2/12</div>
+      <div class="col col-8" style="background:#d1f7e3;padding:1rem;text-align:center;">8/12</div>
+      <div class="col col-2" style="background:#ffe3e3;padding:1rem;text-align:center;">2/12</div>
+    </div>
+  </section>
+  <section id="buttons" style="margin-bottom:2.5rem;">
+    <h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Buttons</h2>
+    <p>Axiom01 provides several button styles for different actions. Use <code>btn</code> and a modifier class for color or style.</p>
+    <h3>Example</h3>
+    <pre><code>&lt;button class="btn primary"&gt;Primary&lt;/button&gt;
+&lt;button class="btn secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="btn success"&gt;Success&lt;/button&gt;
+&lt;button class="btn danger"&gt;Danger&lt;/button&gt;
+&lt;button class="btn outline"&gt;Outline&lt;/button&gt;</code></pre>
+    <h3>Features</h3>
+    <ul>
+      <li>Accessible focus states</li>
+      <li>Customizable via CSS variables</li>
+      <li>Works with <code>&lt;a&gt;</code> and <code>&lt;button&gt;</code> elements</li>
+    </ul>
+    <h3>Live Demo</h3>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <button class="btn primary">Primary</button>
+      <button class="btn secondary">Secondary</button>
+      <button class="btn success">Success</button>
+      <button class="btn danger">Danger</button>
+      <button class="btn outline">Outline</button>
+    </div>
+  </section>
+  <section id="alerts" style="margin-bottom:2.5rem;">
+    <h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Alerts</h2>
+    <p>Use alerts to display important messages. Available types: <code>success</code>, <code>error</code>, <code>info</code>, <code>warning</code>.</p>
+    <h3>Example</h3>
+    <pre><code>&lt;div class="alert success"&gt;Success!&lt;/div&gt;
+&lt;div class="alert error"&gt;Error!&lt;/div&gt;
+&lt;div class="alert info"&gt;Info message.&lt;/div&gt;
+&lt;div class="alert warning"&gt;Warning!&lt;/div&gt;</code></pre>
+    <h3>Features</h3>
+    <ul>
+      <li>Distinct colors for each alert type</li>
+      <li>Optional icons (Font Awesome recommended)</li>
+      <li>Dismissible with custom JS</li>
+    </ul>
+    <h3>Live Demo</h3>
+    <div style="display:flex;flex-direction:column;gap:0.5rem;max-width:400px;">
+      <div class="alert success"><i class="fas fa-check-circle"></i> Success! Everything worked.</div>
+      <div class="alert error"><i class="fas fa-exclamation-triangle"></i> Error! Something went wrong.</div>
+      <div class="alert info"><i class="fas fa-info-circle"></i> Info: This is an informational message.</div>
+      <div class="alert warning"><i class="fas fa-exclamation-circle"></i> Warning! Please check your input.</div>
+    </div>
+  </section>
+  <section id="theming" style="margin-bottom:2.5rem;">
+    <h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Theming & Customization</h2>
+    <p>Axiom01 uses CSS variables for easy theming. Switch themes using the selector in the navbar, or override variables in your own CSS.</p>
+    <h3>Example: Override Theme Colors</h3>
+    <pre><code>:root {
+  --a-color-primary: #e91e63;
+  --a-color-secondary: #009688;
+}</code></pre>
+    <h3>Available Themes</h3>
+    <ul>
+      <li>Light</li>
+      <li>Dark</li>
+      <li>Aesthetic</li>
+      <li>Cyberpunk</li>
+    </ul>
+    <h3>Custom Theme Example</h3>
+    <pre><code>[data-theme="mytheme"] {
+  --a-color-background: #222;
+  --a-color-on-background: #fff;
+  --a-color-primary: #ff9800;
+}</code></pre>
+    <p>Apply your theme by setting <code>data-theme="mytheme"</code> on <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code>.</p>
+  <script>
+    // Navbar mobile toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', function() {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', false);
+      });
+    });
+    // Theme switcher
+    const themeSelect = document.getElementById('theme-select');
+    themeSelect.addEventListener('change', function() {
+      document.documentElement.setAttribute('data-theme', this.value);
+    });
+    // Set initial theme
+    document.documentElement.setAttribute('data-theme', themeSelect.value);
+  </script>
+</body>
+</html>

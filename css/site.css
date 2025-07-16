@@ -343,60 +343,85 @@ a.logo:hover span {
 /* ===================== */
 
 .theme-switcher-container {
-    margin-left: var(--a-margin-medium); /* Space from logo */
-    margin-right: var(--a-margin-small); /* Space before menu items or toggle */
     display: flex;
     align-items: center;
-    height: 100%;
+    gap: 0.5em;
+    background: var(--a-color-surface-variant, #f4f4f4);
+    border-radius: 6px;
+    padding: 0.5em 1em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin: 1em auto;
+    max-width: 320px;
+    min-width: 180px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* Visually hidden label for accessibility (screen readers only) */
-.theme-switcher-container label.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+.theme-switcher-label {
+    font-weight: 500;
+    color: var(--a-color-primary, #007bff);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 1.1em;
+    min-width: 80px;
 }
 
 #theme-select {
-    padding: var(--a-padding-tiny) var(--a-padding-small);
-    border-radius: var(--a-border-radius-base);
-    border: 1px solid var(--a-color-outline);
-    background-color: var(--a-color-surface);
-    color: var(--a-color-on-surface);
-    font-family: inherit;
-    font-size: var(--a-font-size-small);
-    cursor: pointer;
-    vertical-align: middle;
-    align-self: center;
-    height: auto;
-    line-height: normal;
+    font-size: 1em;
+    border-radius: 6px;
+    border: 1px solid var(--a-color-surface-variant, #ccc);
+    padding: 0.4em 1.5em 0.4em 0.5em;
+    background: var(--a-color-surface, #fff);
+    color: var(--a-color-on-surface, #222);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    transition: border-color 0.2s;
+    min-width: 120px;
+    width: 100%;
+    max-width: 180px;
 }
 
 #theme-select:focus {
-    outline: 2px solid var(--a-color-primary);
-    outline-offset: 1px;
-    box-shadow: 0 0 0 2px rgba(var(--a-color-primary-rgb), 0.2);
+    outline: 2px solid var(--a-color-primary, #007bff);
+    border-color: var(--a-color-primary, #007bff);
 }
 
-/* On mobile, the select might be part of the collapsed menu, or hidden if space is tight */
-@media (max-width: 768px) { /* Your mobile breakpoint */
+@media (max-width: 900px) {
     .theme-switcher-container {
-        /* Example: Hide it if it's in the main navbar area that gets replaced by hamburger */
-        /* display: none; */
-        /* Or, if you move it into the .nav-links for mobile, style accordingly */
-        margin-left: 0;
-        margin-right: 0;
-     /*  width: 100%; If it becomes a full-width item in mobile menu */
+        max-width: 100%;
+        min-width: 0;
+        padding: 0.5em 0.5em;
+        margin: 1em 0;
     }
-    /* #theme-select { width: 100%; } */
+    .theme-switcher-label {
+        font-size: 1em;
+        min-width: 60px;
+    }
+    #theme-select {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        font-size: 1em;
+    }
 }
 
+@media (max-width: 600px) {
+    .theme-switcher-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.25em;
+        padding: 0.5em 0.25em;
+    }
+    .theme-switcher-label {
+        margin-bottom: 0.25em;
+        min-width: 0;
+    }
+    #theme-select {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+}
 
 /* --- Ensure examples don't overflow their containers --- */
 .example {
@@ -423,10 +448,12 @@ header, .navbar {
     }
 
     #theme-select {
-        max-width: 120px;
+       /** max-width: 120px;
         margin-right: 50px;
         min-width: 50px;
         margin-top: -18px;
+        **/
+
     }
 
     /* Compress logo spacing slightly on mobile */

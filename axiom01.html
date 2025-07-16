@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Axiom01 Documentation - Navbar Demo</title>
+	<link rel="stylesheet" href="css/axiom.css">
+	<link rel="stylesheet" href="css/navbar.css">
+	<link rel="stylesheet" href="css/site.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	<style>
+    :root,
+    [data-theme="light"] {
+      --a-color-background: #fff;
+      --a-color-on-background: #222;
+    }
+    [data-theme="dark"] {
+      --a-color-background: #181a1b;
+      --a-color-on-background: #f4f4f4;
+    }
+    [data-theme="aesthetic"] {
+      --a-color-background: #fdf6f0;
+      --a-color-on-background: #3a2c2a;
+    }
+    [data-theme="cyberpunk"] {
+      --a-color-background: #0f0f1c;
+      --a-color-on-background: #f8ff00;
+    }
+    body {
+      margin: 0;
+      font-family: var(--a-font-family-sans, system-ui, sans-serif);
+      background: var(--a-color-background, #222; /* fallback to light background in light mode */
+      color: var(--a-color-on-background, #fff);
+    }
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: var(--a-color-surface, #fff);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 2rem;
+    }
+    .navbar .menu-toggle {
+      margin-left: auto;
+      order: 2;
+    }
+    .navbar .logo {
+      order: 0;
+    }
+    .navbar .nav-links {
+      order: 1;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: var(--a-color-primary, #007bff);
+      gap: 0.5rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--a-color-on-surface, #222);
+      font-weight: 500;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .nav-links a:hover {
+      background: var(--a-color-surface-variant, #f0f0f0);
+    }
+    .theme-switcher-container {
+      margin-left: 1.5rem;
+      min-width: 120px;
+    }
+    #theme-select {
+      min-width: 120px;
+      padding: 0.4rem 1.5rem 0.4rem 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--a-color-surface-variant, #ccc);
+      background: var(--a-color-surface, #fff);
+      color: var(--a-color-on-surface, #222);
+      box-sizing: border-box;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--a-color-primary, #007bff);
+    }
+    @media (max-width: 900px) {
+      .navbar {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+      }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 220px;
+        height: 100vh;
+        background: var(--a-color-surface, #fff);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 1rem 1rem 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: right 0.3s;
+        z-index: 999;
+      }
+      .nav-links.open {
+        right: 0;
+      }
+      .menu-toggle {
+        display: block;
+        margin-left: auto;
+        order: 1;
+      }
+      .docs-sidebar{
+				display: none !important;
+			}
+    }
+
+		@media (min-width: 900px) {
+      .docs-sidebar {
+        top:80px;
+        align-self:flex-start;
+        min-width:220px;
+        background: var(--a-color-surface-variant, #f4f4f4);
+        border-radius:8px;
+        padding:1.5rem 1rem 1.5rem 1rem;
+        box-shadow:0 2px 8px rgba(0,0,0,0.04);
+        height:fit-content;
+        color: var(--a-color-on-surface, #222);
+      }
+    }
+
+
+    .hero-section,
+    section,
+    .card,
+    .alert {
+      background: var(--a-color-surface, #fff);
+      color: var(--a-color-on-surface, #222);
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--a-color-primary, #007bff);
+    }
+    pre, code {
+      color: var(--a-color-on-surface, #222);
+      background: var(--a-color-surface-variant, #f4f4f4);
+    }
+    @media (prefers-color-scheme: dark), [data-theme="dark"] {
+                                           body {
+                                             background: var(--a-color-background, #181a1b) !important; /* fallback to dark background in dark mode */
+                                             color: var(--a-color-on-background, #f4f4f4) !important;
+                                           }
+                                           .docs-sidebar {
+                                             background: var(--a-color-surface-variant, #222);
+                                             color: var(--a-color-on-surface, #f4f4f4);
+                                           }
+                                           .hero-section,
+                                           section,
+                                           .card,
+                                           .alert {
+                                             background: var(--a-color-surface, #181a1b);
+                                             color: var(--a-color-on-surface, #f4f4f4);
+                                           }
+                                           h1, h2, h3, h4, h5, h6 {
+                                             color: var(--a-color-primary, #7ab7ff);
+                                           }
+                                           pre, code {
+                                             color: var(--a-color-on-surface, #f4f4f4);
+                                             background: var(--a-color-surface-variant, #222);
+                                           }
+                                         }
+	</style>
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main Navigation">
+	<a href="#" class="logo" aria-label="Axiom Framework Home">
+		<span>[Ax</span><span style="color:var(--a-color-primary);">01</span><span>]</span>
+	</a>
+	<button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links">
+		<i class="fa-solid fa-bars" aria-hidden="true"></i>
+	</button>
+	<ul class="nav-links" id="nav-links">
+		<li><a href="#docs">Docs</a></li>
+		<li><a href="#components">Components</a></li>
+		<li><a href="#themes">Themes</a></li>
+		<li><a href="#accessibility">Accessibility</a></li>
+		<li><a href="#examples">Examples</a></li>
+		<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank">GitHub</a></li>
+	</ul>
+
+</nav>
+<main style="display:flex;gap:2rem;padding:2rem;max-width:1200px;margin:auto;">
+	<!-- Sidebar Navigation -->
+	<nav class="docs-sidebar" aria-label="Documentation Table of Contents" style="position:sticky;top:80px;align-self:flex-start;min-width:220px;background:var(--a-color-surface-variant,#f4f4f4);border-radius:8px;padding:1.5rem 1rem 1.5rem 1rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);height:fit-content;display:none;" id="docs-sidebar">
+		<h3 style="margin-top:0;color:var(--a-color-primary);font-size:1.2rem;">Contents</h3>
+		<ul style="list-style:none;padding:0;margin:0;">
+			<li><a href="#hero" tabindex="0">Introduction</a></li>
+			<li><a href="#why-axiom" tabindex="0">Why Axiom01?</a></li>
+			<li><a href="#quickstart" tabindex="0">Quick Start</a></li>
+			<li><a href="#components" tabindex="0">Components</a></li>
+			<li><a href="#themes" tabindex="0">Themes</a></li>
+			<li><a href="#accessibility" tabindex="0">Accessibility</a></li>
+			<li><a href="#faq" tabindex="0">FAQ</a></li>
+			<li><a href="#community" tabindex="0">Community</a></li>
+		</ul>
+	</nav>
+
+
+
+	<div style="flex:1;min-width:0;">
+
+		<section>
+			<div class="theme-switcher-container">
+  <label for="theme-select" class="theme-switcher-label" aria-label="Theme Switcher">
+    <span style="margin-right:0.5em;vertical-align:middle;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" style="display:inline-block;vertical-align:middle;"><circle cx="10" cy="10" r="9" stroke="var(--a-color-primary, #007bff)" stroke-width="2" fill="none"/><path d="M10 2v2M10 16v2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M2 10h2M16 10h2M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42" stroke="var(--a-color-primary, #007bff)" stroke-width="1.5"/></svg>
+    </span>
+    Theme:
+  </label>
+  <select id="theme-select">
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+    <option value="aesthetic">Aesthetic</option>
+    <option value="cyberpunk">Cyberpunk</option>
+  </select>
+</div>
+		</section>
+
+		<!-- Hero Section -->
+		<section id="hero" class="hero-section" style="text-align:center;padding:3rem 0 2rem 0;">
+			<h1 style="font-size:2.5rem;color:var(--a-color-primary);font-weight:bold;">Axiom01 UI Framework</h1>
+			<p style="font-size:1.25rem;max-width:600px;margin:1rem auto 2rem auto;">Build beautiful, accessible interfaces with less markup. Semantic-first, themeable, and fast.</p>
+			<div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;">
+				<a href="#quickstart" class="btn primary" style="padding:0.75rem 1.5rem;">Get Started</a>
+				<a href="#components" class="btn" style="padding:0.75rem 1.5rem;">Component Demos</a>
+				<a href="https://github.com/Sol-Roth-Media/axiom01" class="btn" target="_blank" style="padding:0.75rem 1.5rem;"><i class="fab fa-github"></i> GitHub</a>
+			</div>
+		</section>
+		<!-- Why Axiom01 Section -->
+		<section id="why-axiom" style="margin-bottom:2.5rem;text-align:center;">
+			<h2 style="color:var(--a-color-primary);font-size:2rem;margin-bottom:1rem;">Why Axiom01?</h2>
+			<p style="max-width:700px;margin:auto;font-size:1.1rem;">Axiom01 is designed for developers who want semantic, maintainable, and accessible UI with minimal class clutter. Unlike utility-first frameworks, Axiom01 leverages CSS variables and semantic HTML for easier customization and better accessibility. <br><br><strong>Comparison:</strong></p>
+			<div style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1.5rem;">
+				<div style="background:var(--a-color-surface);border-radius:8px;padding:1rem 1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);min-width:220px;">
+					<h4 style="margin-top:0;color:var(--a-color-primary);">Axiom01</h4>
+					<ul style="text-align:left;line-height:1.7;font-size:1rem;">
+						<li>Semantic HTML</li>
+						<li>CSS variables for theming</li>
+						<li>Accessible by default</li>
+						<li>Minimal class usage</li>
+						<li>Easy theme switching</li>
+					</ul>
+				</div>
+				<div style="background:var(--a-color-surface);border-radius:8px;padding:1rem 1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.04);min-width:220px;">
+					<h4 style="margin-top:0;color:#888;">Utility Frameworks</h4>
+					<ul style="text-align:left;line-height:1.7;font-size:1rem;">
+						<li>Heavy class usage</li>
+						<li>Harder to customize themes</li>
+						<li>Accessibility requires extra effort</li>
+						<li>Higher learning curve</li>
+						<li>More markup bloat</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+
+
+
+
+
+
+
+		<!-- Footer -->
+		<footer style="text-align:center;padding:2rem 0;color:#888;font-size:1rem;">
+			<hr style="margin-bottom:1rem;">
+			<div>Axiom01 UI Framework &copy; 2025 &mdash; <a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank">GitHub</a></div>
+		</footer>
+	</div>
+</main>
+
+
+	<script>
+      // Navbar mobile toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.getElementById('nav-links');
+      menuToggle.addEventListener('click', function() {
+          const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.setAttribute('aria-expanded', !expanded);
+          navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+              navLinks.classList.remove('open');
+              menuToggle.setAttribute('aria-expanded', false);
+          });
+      });
+      // Theme switcher
+      const themeSelect = document.getElementById('theme-select');
+      themeSelect.addEventListener('change', function() {
+          document.documentElement.setAttribute('data-theme', this.value);
+      });
+      // Set initial theme
+      document.documentElement.setAttribute('data-theme', themeSelect.value);
+      // Sidebar visibility handling
+      function handleSidebarVisibility() {
+    var sidebar = document.getElementById('docs-sidebar');
+    if (window.innerWidth <= 900) {
+      sidebar.style.display = 'none';
+    } else {
+      sidebar.style.display = '';
+    }
+  }
+  window.addEventListener('resize', handleSidebarVisibility);
+  window.addEventListener('DOMContentLoaded', handleSidebarVisibility);
+	</script>
+</section>
+
+</body>
+</html>
