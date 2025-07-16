@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customization - Axiom UI Framework</title>
+  <meta name="description" content="Learn how to customize the Axiom UI Framework to match your brand and design requirements.">
+  <link rel="stylesheet" href="../css/axiom.min.css">
+  <link rel="stylesheet" href="../css/alerts.css">
+  <link rel="stylesheet" href="../css/prism.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <script src="js/scripts.js" defer></script>
+  <style>
+    :root {
+      --doc-sidebar-width: 260px;
+      --doc-header-height: 60px;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--a-color-surface-variant, #f7f8fa);
+    }
+    
+    .doc-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--doc-header-height);
+      background-color: var(--a-color-primary, #1976D2);
+      color: var(--a-color-on-primary, #fff);
+      z-index: 100;
+      box-shadow: var(--a-shadow-medium);
+    }
+    
+    .doc-navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 var(--a-padding-large);
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .doc-logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: var(--a-font-weight-bold);
+      color: var(--a-color-on-primary);
+      text-decoration: none;
+    }
+    
+    .doc-logo span {
+      font-family: var(--a-font-family-mono);
+    }
+    
+    .doc-nav-links {
+      display: flex;
+      gap: var(--a-space-medium);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .doc-nav-links a {
+      color: var(--a-color-on-primary);
+      text-decoration: none;
+      font-weight: var(--a-font-weight-medium);
+      padding: var(--a-padding-small) 0;
+      position: relative;
+    }
+    
+    .doc-nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--a-color-on-primary);
+      transition: width 0.3s ease;
+    }
+    
+    .doc-nav-links a:hover::after,
+    .doc-nav-links a.active::after {
+      width: 100%;
+    }
+    
+    .doc-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--a-color-on-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    .doc-main {
+      display: flex;
+      margin-top: var(--doc-header-height);
+      flex: 1;
+    }
+    
+    .doc-sidebar {
+      width: var(--doc-sidebar-width);
+      background-color: var(--a-color-surface);
+      border-right: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+      padding: var(--a-padding-large);
+      position: fixed;
+      top: var(--doc-header-height);
+      bottom: 0;
+      overflow-y: auto;
+    }
+    
+    .doc-sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--a-space-medium);
+    }
+    
+    .doc-sidebar-section {
+      margin-bottom: var(--a-margin-large);
+    }
+    
+    .doc-sidebar-title {
+      font-weight: var(--a-font-weight-bold);
+      color: var(--a-color-muted);
+      margin-bottom: var(--a-margin-small);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .doc-sidebar-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--a-space-small);
+    }
+    
+    .doc-sidebar-links a {
+      color: var(--a-color-on-surface);
+      text-decoration: none;
+      padding: var(--a-padding-small);
+      border-radius: var(--a-border-radius-base);
+      transition: background-color 0.2s ease;
+      display: block;
+    }
+    
+    .doc-sidebar-links a:hover,
+    .doc-sidebar-links a.active {
+      background-color: var(--a-color-surface-variant);
+      color: var(--a-color-primary);
+    }
+    
+    .doc-content {
+      flex: 1;
+      padding: var(--a-padding-xlarge);
+      margin-left: var(--doc-sidebar-width);
+    }
+    
+    .doc-section {
+      max-width: 800px;
+      margin: 0 auto var(--a-margin-xxlarge);
+    }
+    
+    .doc-code-block {
+      background-color: var(--a-color-surface-variant);
+      border-radius: var(--a-border-radius-base);
+      padding: var(--a-padding-medium);
+      margin: var(--a-margin-medium) 0;
+      overflow-x: auto;
+      position: relative;
+    }
+    
+    .doc-code {
+      font-family: var(--a-font-family-mono);
+      font-size: 0.9rem;
+    }
+    
+    .doc-footer {
+      background-color: var(--a-color-surface);
+      padding: var(--a-padding-large);
+      text-align: center;
+      border-top: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+    }
+    
+    .color-swatch {
+      width: 100%;
+      height: 80px;
+      border-radius: var(--a-border-radius-base);
+      margin-bottom: var(--a-margin-small);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--a-padding-small);
+      color: #fff;
+      position: relative;
+      box-shadow: var(--a-shadow-sm);
+    }
+    
+    .color-swatch-name {
+      font-weight: var(--a-font-weight-bold);
+      font-size: 0.9rem;
+    }
+    
+    .color-swatch-value {
+      font-family: var(--a-font-family-mono);
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+    
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--a-space-medium);
+      margin: var(--a-margin-large) 0;
+    }
+    
+    .theme-preview {
+      border: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+      border-radius: var(--a-border-radius-base);
+      padding: var(--a-padding-medium);
+      margin-bottom: var(--a-margin-large);
+      background-color: var(--a-color-surface);
+    }
+    
+    .theme-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--a-margin-medium);
+    }
+    
+    .theme-preview-title {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+    
+    .theme-preview-button {
+      background: none;
+      border: none;
+      color: var(--a-color-primary);
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: var(--a-padding-small);
+      border-radius: var(--a-border-radius-base);
+      transition: background-color 0.2s ease;
+    }
+    
+    .theme-preview-button:hover {
+      background-color: var(--a-color-surface-variant);
+    }
+    
+    .theme-preview-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--a-space-medium);
+    }
+    
+    .theme-preview-row {
+      display: flex;
+      gap: var(--a-space-medium);
+    }
+    
+    .theme-preview-component {
+      flex: 1;
+    }
+    
+    .spacing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: var(--a-space-medium);
+      margin: var(--a-margin-large) 0;
+    }
+    
+    .spacing-item {
+      background-color: var(--a-color-surface);
+      border-radius: var(--a-border-radius-base);
+      padding: var(--a-padding-small);
+      box-shadow: var(--a-shadow-sm);
+      text-align: center;
+    }
+    
+    .spacing-demo {
+      background-color: var(--a-color-primary-container, #e3f2fd);
+      height: 40px;
+      margin-bottom: var(--a-margin-small);
+      border-radius: var(--a-border-radius-small);
+    }
+    
+    .spacing-name {
+      font-weight: var(--a-font-weight-bold);
+      font-size: 0.9rem;
+    }
+    
+    .spacing-value {
+      font-family: var(--a-font-family-mono);
+      font-size: 0.8rem;
+      color: var(--a-color-muted);
+    }
+    
+    @media (max-width: 900px) {
+      .doc-nav-links {
+        display: none;
+      }
+      
+      .doc-menu-toggle {
+        display: block;
+      }
+      
+      .doc-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 90;
+      }
+      
+      .doc-sidebar.open {
+        transform: translateX(0);
+      }
+      
+      .doc-content {
+        margin-left: 0;
+      }
+      
+      .doc-overlay {
+        position: fixed;
+        top: var(--doc-header-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 80;
+        display: none;
+      }
+      
+      .doc-overlay.open {
+        display: block;
+      }
+      
+      .theme-preview-row {
+        flex-direction: column;
+      }
+    }
+    
+    /* Theme toggle button */
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--a-color-on-primary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: var(--a-padding-small);
+      margin-right: var(--a-margin-small);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+    
+    .theme-toggle:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Code copy button */
+    .doc-copy-button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: var(--a-color-surface);
+      color: var(--a-color-muted);
+      border: none;
+      border-radius: var(--a-border-radius-small, 4px);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+    
+    .doc-copy-button:hover {
+      opacity: 1;
+      color: var(--a-color-primary);
+    }
+  </style>
+</head>
+<body>
+  <header class="doc-header">
+    <nav class="doc-navbar">
+      <a href="index.html" class="doc-logo">
+        <span>[Ax<span style="color: #fff;">01</span>]</span>
+      </a>
+      <ul class="doc-nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#getting-started">Getting Started</a></li>
+        <li><a href="components.html">Components</a></li>
+        <li><a href="customization.html" class="active">Customization</a></li>
+        <li><a href="index.html#layout">Layout</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+        🌙
+      </button>
+      <button class="doc-menu-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+  
+  <div class="doc-overlay"></div>
+  
+  <main class="doc-main">
+    <aside class="doc-sidebar">
+      <nav class="doc-sidebar-nav">
+        <div class="doc-sidebar-section">
+          <h2 class="doc-sidebar-title">Customization</h2>
+          <ul class="doc-sidebar-links">
+            <li><a href="#theming">Theming</a></li>
+            <li><a href="#colors">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#spacing">Spacing</a></li>
+            <li><a href="#borders">Borders & Shadows</a></li>
+            <li><a href="#css-variables">CSS Variables</a></li>
+            <li><a href="#custom-themes">Creating Custom Themes</a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+    
+    <div class="doc-content">
+      <section class="doc-section">
+        <h1>Customizing Axiom UI</h1>
+        <p>Axiom is designed to be highly customizable through CSS variables. This guide will show you how to customize the framework to match your brand and design requirements.</p>
+        
+        <section id="theming">
+          <h2>Theming</h2>
+          <p>Axiom comes with several built-in themes that you can use as a starting point for your own customizations. Themes are applied using the <code>data-theme</code> attribute on the <code>&lt;html&gt;</code> element.</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-html">&lt;!-- Default theme (light) --&gt;
+&lt;html lang="en" data-theme="light"&gt;
+
+&lt;!-- Dark theme --&gt;
+&lt;html lang="en" data-theme="dark"&gt;
+
+&lt;!-- Other available themes --&gt;
+&lt;html lang="en" data-theme="sunset"&gt;
+&lt;html lang="en" data-theme="aesthetic"&gt;
+&lt;html lang="en" data-theme="cyberpunk"&gt;</code></pre>
+          </div>
+          
+          <p>You can also switch themes dynamically using JavaScript:</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-javascript">// Switch to dark theme
+document.documentElement.setAttribute('data-theme', 'dark');
+
+// Switch to light theme
+document.documentElement.setAttribute('data-theme', 'light');</code></pre>
+          </div>
+          
+          <h3>Built-in Themes</h3>
+          <div class="theme-preview">
+            <div class="theme-preview-header">
+              <h4 class="theme-preview-title">Light Theme (Default)</h4>
+              <button class="theme-preview-button" data-theme="light">Apply Theme</button>
+            </div>
+            <div class="theme-preview-content">
+              <div class="theme-preview-row">
+                <div class="theme-preview-component">
+                  <button class="button primary">Primary Button</button>
+                </div>
+                <div class="theme-preview-component">
+                  <div class="alert success">Success Alert</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="theme-preview">
+            <div class="theme-preview-header">
+              <h4 class="theme-preview-title">Dark Theme</h4>
+              <button class="theme-preview-button" data-theme="dark">Apply Theme</button>
+            </div>
+            <div class="theme-preview-content">
+              <div class="theme-preview-row">
+                <div class="theme-preview-component">
+                  <button class="button primary">Primary Button</button>
+                </div>
+                <div class="theme-preview-component">
+                  <div class="alert success">Success Alert</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="theme-preview">
+            <div class="theme-preview-header">
+              <h4 class="theme-preview-title">Sunset Theme</h4>
+              <button class="theme-preview-button" data-theme="sunset">Apply Theme</button>
+            </div>
+            <div class="theme-preview-content">
+              <div class="theme-preview-row">
+                <div class="theme-preview-component">
+                  <button class="button primary">Primary Button</button>
+                </div>
+                <div class="theme-preview-component">
+                  <div class="alert success">Success Alert</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <section id="colors">
+          <h2>Colors</h2>
+          <p>Axiom uses a semantic color system based on CSS variables. The main color variables are:</p>
+          
+          <div class="color-grid">
+            <div>
+              <div class="color-swatch" style="background-color: var(--a-color-primary);">
+                <span class="color-swatch-name">Primary</span>
+                <span class="color-swatch-value">--a-color-primary</span>
+              </div>
+            </div>
+            <div>
+              <div class="color-swatch" style="background-color: var(--a-color-secondary);">
+                <span class="color-swatch-name">Secondary</span>
+                <span class="color-swatch-value">--a-color-secondary</span>
+              </div>
+            </div>
+            <div>
+              <div class="color-swatch" style="background-color: var(--a-color-tertiary);">
+                <span class="color-swatch-name">Tertiary</span>
+                <span class="color-swatch-value">--a-color-tertiary</span>
+              </div>
+            </div>
+            <div>
+              <div class="color-swatch" style="background-color: var(--a-color-success, #4caf50);">
+                <span class="color-swatch-name">Success</span>
+                <span class="color-swatch-value">--a-color-success</span>
+              </div>
+            </div>
+            <div>
+              <div class="color-swatch" style="background-color: var(--a-color-warning, #ff9800);">
+                <span class="color-swatch-name">Warning</span>
+                <span class="color-swatch-value">--a-color-warning</span>
+              </div>
+            </div>
+            <div>
+              <div class="color-swatch" style="background-color: var(--a-color-error, #f44336);">
+                <span class="color-swatch-name">Error</span>
+                <span class="color-swatch-value">--a-color-error</span>
+              </div>
+            </div>
+            <div>
+              <div class="color-swatch" style="background-color: var(--a-color-info, #2196f3);">
+                <span class="color-swatch-name">Info</span>
+                <span class="color-swatch-value">--a-color-info</span>
+              </div>
+            </div>
+            <div>
+              <div class="color-swatch" style="background-color: var(--a-color-surface, #ffffff); color: #000;">
+                <span class="color-swatch-name">Surface</span>
+                <span class="color-swatch-value">--a-color-surface</span>
+              </div>
+            </div>
+          </div>
+          
+          <p>To customize the colors, you can override these variables in your CSS:</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-css">:root {
+  --a-color-primary: #ff5722;
+  --a-color-secondary: #9c27b0;
+  --a-color-tertiary: #3f51b5;
+  --a-color-success: #4caf50;
+  --a-color-warning: #ff9800;
+  --a-color-error: #f44336;
+  --a-color-info: #2196f3;
+}</code></pre>
+          </div>
+        </section>
+        
+        <section id="typography">
+          <h2>Typography</h2>
+          <p>Axiom provides typography variables for font families, sizes, weights, and line heights. You can customize these to match your brand's typography.</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-css">:root {
+  /* Font families */
+  --a-font-family-sans: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --a-font-family-mono: "Courier New", Courier, monospace;
+  
+  /* Font sizes */
+  --a-font-size-base: 1rem;
+  --a-font-size-small: 0.875rem;
+  --a-font-size-large: 1.25rem;
+  --a-font-size-xlarge: 1.5rem;
+  
+  /* Heading sizes */
+  --a-font-size-h1: 2.5rem;
+  --a-font-size-h2: 2rem;
+  --a-font-size-h3: 1.75rem;
+  --a-font-size-h4: 1.5rem;
+  --a-font-size-h5: 1.25rem;
+  --a-font-size-h6: 1rem;
+  
+  /* Font weights */
+  --a-font-weight-normal: 400;
+  --a-font-weight-medium: 500;
+  --a-font-weight-bold: 700;
+  
+  /* Line heights */
+  --a-line-height-base: 1.6;
+  --a-line-height-heading: 1.3;
+}</code></pre>
+          </div>
+          
+          <p>Example of using custom fonts:</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-css">@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+:root {
+  --a-font-family-sans: 'Poppins', sans-serif;
+}</code></pre>
+          </div>
+        </section>
+        
+        <section id="spacing">
+          <h2>Spacing</h2>
+          <p>Axiom uses a consistent spacing scale for margins, padding, and gaps. The spacing variables are:</p>
+          
+          <div class="spacing-grid">
+            <div class="spacing-item">
+              <div class="spacing-demo" style="width: var(--a-space-tiny);"></div>
+              <div class="spacing-name">Tiny</div>
+              <div class="spacing-value">4px</div>
+            </div>
+            <div class="spacing-item">
+              <div class="spacing-demo" style="width: var(--a-space-small);"></div>
+              <div class="spacing-name">Small</div>
+              <div class="spacing-value">8px</div>
+            </div>
+            <div class="spacing-item">
+              <div class="spacing-demo" style="width: var(--a-space-base);"></div>
+              <div class="spacing-name">Base</div>
+              <div class="spacing-value">16px</div>
+            </div>
+            <div class="spacing-item">
+              <div class="spacing-demo" style="width: var(--a-space-medium);"></div>
+              <div class="spacing-name">Medium</div>
+              <div class="spacing-value">24px</div>
+            </div>
+            <div class="spacing-item">
+              <div class="spacing-demo" style="width: var(--a-space-large);"></div>
+              <div class="spacing-name">Large</div>
+              <div class="spacing-value">32px</div>
+            </div>
+            <div class="spacing-item">
+              <div class="spacing-demo" style="width: var(--a-space-xlarge);"></div>
+              <div class="spacing-name">X-Large</div>
+              <div class="spacing-value">48px</div>
+            </div>
+            <div class="spacing-item">
+              <div class="spacing-demo" style="width: var(--a-space-xxlarge);"></div>
+              <div class="spacing-name">XX-Large</div>
+              <div class="spacing-value">64px</div>
+            </div>
+          </div>
+          
+          <p>To customize the spacing scale, you can override these variables in your CSS:</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-css">:root {
+  --a-space-tiny: 4px;
+  --a-space-small: 8px;
+  --a-space-base: 16px;
+  --a-space-medium: 24px;
+  --a-space-large: 32px;
+  --a-space-xlarge: 48px;
+  --a-space-xxlarge: 64px;
+}</code></pre>
+          </div>
+        </section>
+        
+        <section id="borders">
+          <h2>Borders & Shadows</h2>
+          <p>Axiom provides variables for border widths, styles, radii, and shadows. You can customize these to match your design system.</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-css">:root {
+  /* Borders */
+  --a-border-width-base: 1px;
+  --a-border-style-base: solid;
+  --a-border-radius-small: 3px;
+  --a-border-radius-base: 5px;
+  --a-border-radius-large: 8px;
+  
+  /* Shadows */
+  --a-shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+  --a-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --a-shadow-medium: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --a-shadow-large: 0 4px 6px rgba(0, 0, 0, 0.15);
+}</code></pre>
+          </div>
+        </section>
+        
+        <section id="css-variables">
+          <h2>CSS Variables Reference</h2>
+          <p>Axiom uses a comprehensive set of CSS variables to control all aspects of the design system. Here's a reference of the most important variables:</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-css">:root {
+  /* Colors */
+  --a-color-primary: #1976D2;
+  --a-color-on-primary: #FFFFFF;
+  --a-color-primary-container: #1A4D8F;
+  --a-color-on-primary-container: #FFFFFF;
+  --a-color-secondary: #388E3C;
+  --a-color-on-secondary: #FFFFFF;
+  --a-color-secondary-container: #2E7D32;
+  --a-color-on-secondary-container: #FFFFFF;
+  --a-color-tertiary: #8E24AA;
+  --a-color-on-tertiary: #FFFFFF;
+  --a-color-tertiary-container: #6A1B9A;
+  --a-color-on-tertiary-container: #FFFFFF;
+  --a-color-success: #4caf50;
+  --a-color-warning: #ff9800;
+  --a-color-error: #f44336;
+  --a-color-info: #2196f3;
+  --a-color-surface: #FFFFFF;
+  --a-color-on-surface: #000000;
+  --a-color-surface-variant: #f5f5f5;
+  --a-color-outline: #d1d5db;
+  --a-color-muted: rgba(0, 0, 0, 0.5);
+  
+  /* Spacing */
+  --a-space-tiny: 4px;
+  --a-space-small: 8px;
+  --a-space-base: 16px;
+  --a-space-medium: 24px;
+  --a-space-large: 32px;
+  --a-space-xlarge: 48px;
+  --a-space-xxlarge: 64px;
+  
+  /* Typography */
+  --a-font-family-sans: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --a-font-family-mono: "Courier New", Courier, monospace;
+  --a-font-size-base: 1rem;
+  --a-font-size-small: 0.875rem;
+  --a-font-size-large: 1.25rem;
+  --a-font-size-xlarge: 1.5rem;
+  --a-font-size-h1: 2.5rem;
+  --a-font-size-h2: 2rem;
+  --a-font-size-h3: 1.75rem;
+  --a-font-size-h4: 1.5rem;
+  --a-font-size-h5: 1.25rem;
+  --a-font-size-h6: 1rem;
+  --a-font-weight-normal: 400;
+  --a-font-weight-medium: 500;
+  --a-font-weight-bold: 700;
+  --a-line-height-base: 1.6;
+  --a-line-height-heading: 1.3;
+  
+  /* Borders */
+  --a-border-width-base: 1px;
+  --a-border-style-base: solid;
+  --a-border-radius-small: 3px;
+  --a-border-radius-base: 5px;
+  --a-border-radius-large: 8px;
+  
+  /* Shadows */
+  --a-shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+  --a-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --a-shadow-medium: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --a-shadow-large: 0 4px 6px rgba(0, 0, 0, 0.15);
+  
+  /* Layout */
+  --a-layout-max-width: 1200px;
+  --a-grid-gutter: var(--a-space-base);
+}</code></pre>
+          </div>
+        </section>
+        
+        <section id="custom-themes">
+          <h2>Creating Custom Themes</h2>
+          <p>You can create your own custom themes by defining a set of CSS variables for a specific theme. Here's an example of how to create a custom theme:</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-css">/* Define your custom theme */
+[data-theme="brand"] {
+  --a-color-primary: #ff5722;
+  --a-color-on-primary: #ffffff;
+  --a-color-primary-container: #e64a19;
+  --a-color-on-primary-container: #ffffff;
+  --a-color-secondary: #9c27b0;
+  --a-color-on-secondary: #ffffff;
+  --a-color-secondary-container: #7b1fa2;
+  --a-color-on-secondary-container: #ffffff;
+  --a-color-tertiary: #3f51b5;
+  --a-color-on-tertiary: #ffffff;
+  --a-color-tertiary-container: #303f9f;
+  --a-color-on-tertiary-container: #ffffff;
+  --a-color-surface: #f5f5f5;
+  --a-color-on-surface: #212121;
+  --a-color-surface-variant: #e0e0e0;
+  --a-color-outline: #bdbdbd;
+  --a-color-muted: rgba(33, 33, 33, 0.5);
+}</code></pre>
+          </div>
+          
+          <p>Then, apply your custom theme using the <code>data-theme</code> attribute:</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-html">&lt;html lang="en" data-theme="brand"&gt;</code></pre>
+          </div>
+          
+          <p>You can also create a theme switcher that allows users to select their preferred theme:</p>
+          
+          <div class="doc-code-block">
+            <pre class="doc-code"><code class="language-javascript">// Theme switcher
+const themeSelect = document.getElementById('theme-select');
+
+// Add event listener to theme select
+themeSelect.addEventListener('change', function() {
+  // Set the theme
+  document.documentElement.setAttribute('data-theme', this.value);
+  
+  // Save the theme preference in localStorage
+  localStorage.setItem('preferred-theme', this.value);
+});
+
+// Check for saved theme preference
+const savedTheme = localStorage.getItem('preferred-theme');
+if (savedTheme) {
+  // Apply the saved theme
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  themeSelect.value = savedTheme;
+}</code></pre>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+  
+  <footer class="doc-footer">
+    <p>&copy; 2025 Axiom UI Framework. Minimal. Semantic. Flexible.</p>
+  </footer>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Theme preview buttons
+      const themeButtons = document.querySelectorAll('.theme-preview-button');
+      
+      themeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const theme = this.getAttribute('data-theme');
+          document.documentElement.setAttribute('data-theme', theme);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
