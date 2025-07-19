@@ -24,28 +24,109 @@
 </script>
 <body class="axiom01">
 <header>
-  <nav class="navbar" aria-label="Main Navigation">
-    <a href="index.html" class="logo" aria-label="Axiom Framework Home">
+  <nav class="navbar navbar-centered" aria-label="Main Navigation">
+    <a href="index.html" class="logo" aria-label="Axiom Framework Home" style="margin-right:1.2em;">
       <span>[Ax</span><span style="color:var(--a-color-primary);">01</span><span>]</span>
       <small class="version">v0.1</small>
     </a>
+    <span class="tagline">Semantic-first UI for modern web projects</span>
     <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links">
       <i class="fa-solid fa-bars" aria-hidden="true"></i>
     </button>
-    <ul class="nav-links" id="nav-links">
+    <ul class="nav-links" id="nav-links" style="gap:0.5em;">
       <li><a href="index.html">Home</a></li>
       <li><a href="components/card.html">Card</a></li>
       <li><a href="components/forms.html">Forms</a></li>
-      <li><a href="components/progress-bar.html">Progress Bar</a></li>
-      <li><a href="components/navbar.html">Navbar</a></li>
-      <li><a href="components/media.html">Media & File</a></li>
+      <li class="nav-dropdown" style="position:relative;">
+        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" style="padding:0.5em 1em;">More <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+        <ul class="dropdown-menu" style="display:none;position:absolute;top:100%;left:0;min-width:180px;background:var(--a-color-surface-variant,#222);color:var(--a-color-on-surface,#fff);box-shadow:0 2px 8px rgba(0,0,0,0.12);border-radius:6px;padding:0.5em 0;z-index:100;">
+          <li><a href="components/progress-bar.html" style="color:var(--a-color-on-surface,#fff);padding:0.5em 1em;display:block;">Progress Bar</a></li>
+          <li><a href="components/navbar.html" style="color:var(--a-color-on-surface,#fff);padding:0.5em 1em;display:block;">Navbar</a></li>
+          <li><a href="components/media.html" style="color:var(--a-color-on-surface,#fff);padding:0.5em 1em;display:block;">Media & File</a></li>
+        </ul>
+      </li>
+      <li><a href="#getting-started" class="button primary" style="margin-left:1em;">Get Started</a></li>
     </ul>
-    <div class="theme-switcher-container">
+    <script>
+      // Dropdown interaction for desktop
+      document.addEventListener('DOMContentLoaded', function() {
+        var dropdown = document.querySelector('.nav-dropdown');
+        var toggle = dropdown.querySelector('.dropdown-toggle');
+        var menu = dropdown.querySelector('.dropdown-menu');
+        toggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) {
+            menu.style.display = 'none';
+          }
+        });
+      });
+    </script>
+    <div class="theme-switcher-container" style="background:var(--a-color-surface-variant,#222);border-radius:6px;padding:0.5em 1em;box-shadow:0 2px 8px rgba(0,0,0,0.12);max-width:320px;min-width:120px;width:100%;color:var(--a-color-on-surface,#fff);">
       <label for="theme-select" class="visually-hidden">Select Theme:</label>
-      <select id="theme-select" name="theme" style="min-width:120px;max-width:220px;padding-right:2.5em;"></select>
-      <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode" style="padding:0.4em 0.7em; font-size:1.2em;">&#9728;</button>
+      <select id="theme-select" name="theme" style="min-width:140px;max-width:260px;padding-right:2.5em;background:var(--a-color-surface,#222);color:var(--a-color-on-surface,#fff);border-radius:6px;border:1px solid var(--a-color-outline,#444);font-size:1em;">
+      </select>
+      <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode" style="padding:0.4em 0.7em; font-size:1.2em;background:var(--a-color-surface,#222);color:var(--a-color-on-surface,#fff);border-radius:6px;border:1px solid var(--a-color-outline,#444);margin-left:0.5em;">&#9728;</button>
     </div>
   </nav>
+  <div class="tagline-mobile" style="display:block;text-align:center;font-size:1.05em;color:var(--a-color-muted,#888);font-weight:500;padding:0.5em 1em 0.5em 1em;max-width:100vw;word-break:break-word;background:var(--a-color-surface,#fff);border-bottom:1px solid var(--a-color-outline,#eee);">
+    <span class="tagline-text" style="color:var(--a-color-muted,#888);">Semantic-first UI for modern web projects</span>
+  </div>
+  <style>
+    @media (min-width: 900px) {
+      .navbar-centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5em;
+      }
+      .navbar-centered .logo {
+        margin-right: 1.2em;
+      }
+      .navbar-centered .nav-links {
+        display: flex;
+        gap: 0.5em;
+        align-items: center;
+      }
+      .navbar-centered .theme-switcher-container {
+        margin-left: 1.2em;
+      }
+    }
+    body[data-theme="dark"] .tagline-mobile {
+      background: var(--a-color-surface-variant,#222);
+      color: var(--a-color-on-surface,#fff);
+      border-bottom: 1px solid var(--a-color-outline,#444);
+    }
+    body[data-theme="dark"] .tagline-mobile .tagline-text {
+      color: var(--a-color-on-surface,#fff);
+    }
+    .nav-links > li {
+      margin-left: 0.2em;
+      margin-right: 0.2em;
+    }
+    .nav-links > li:first-child {
+      margin-left: 0.2em;
+    }
+    .nav-links > li:last-child {
+      margin-right: 0.2em;
+    }
+    .nav-dropdown .dropdown-menu {
+      background: var(--a-color-surface,#fff);
+      color: var(--a-color-on-surface,#222);
+    }
+    body[data-theme="dark"] .nav-dropdown .dropdown-menu {
+      background: var(--a-color-surface-variant,#222);
+      color: var(--a-color-on-surface,#fff);
+    }
+    .nav-dropdown .dropdown-menu a {
+      color: var(--a-color-on-surface,#222);
+    }
+    body[data-theme="dark"] .nav-dropdown .dropdown-menu a {
+      color: var(--a-color-on-surface,#fff);
+    }
+  </style>
 </header>
 <!-- END index.part1.html -->
 <script src="js/navbar.js"></script>
@@ -126,7 +207,7 @@
     <h2>Modern Card Variants</h2>
     <p>Cards can be customized for different use cases. Below are examples with status, links, and multiple actions. All cards use Axiom01's semantic structure, accessible labels, and visually balanced layout.</p>
     <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
-      <article class="card" style="padding:2rem 1.5rem 1.5rem 1.5rem; border-radius:var(--a-border-radius-large,8px); box-shadow:0 2px 8px var(--a-shadow-color,#eee); background:var(--a-bg-card,#fff); min-width:280px; max-width:340px; display:flex; flex-direction:column; justify-content:space-between;">
+      <article class="card" style="padding:2rem 1.5rem 1.5rem 1.5rem; border-radius:var(--a-border-radius-large,8px); box-shadow:0 2px 8px var(--a-shadow-color,#eee); background:var(--a-bg-card,#fff); min-width:280px; max-width:340px; display:flex; flex-direction:column; justify-content:space-between; transition:box-shadow 0.2s;">
         <header style="margin-bottom:1rem; display:flex; align-items:center; gap:0.5em;">
           <h3 style="margin:0; font-size:1.1em; font-weight:700;">Status Card</h3>
           <span class="badge" style="background:var(--a-color-info);color:#fff; font-size:0.85em; font-weight:600; border-radius:1em; padding:0.2em 0.8em; margin-left:0.5em;">Info</span>
@@ -139,7 +220,7 @@
           <button class="primary">View</button>
         </footer>
       </article>
-      <article class="card" style="padding:2rem 1.5rem 1.5rem 1.5rem; border-radius:var(--a-border-radius-large,8px); box-shadow:0 2px 8px var(--a-shadow-color,#eee); background:var(--a-bg-card,#fff); min-width:280px; max-width:340px; display:flex; flex-direction:column; justify-content:space-between;">
+      <article class="card" style="padding:2rem 1.5rem 1.5rem 1.5rem; border-radius:var(--a-border-radius-large,8px); box-shadow:0 2px 8px var(--a-shadow-color,#eee); background:var(--a-bg-card,#fff); min-width:280px; max-width:340px; display:flex; flex-direction:column; justify-content:space-between; transition:box-shadow 0.2s;">
         <header style="margin-bottom:1rem; display:flex; align-items:center; gap:0.5em;">
           <h3 style="margin:0; font-size:1.1em; font-weight:700;">Card with Multiple Actions</h3>
         </header>
@@ -151,7 +232,7 @@
           <button class="danger">Delete</button>
         </footer>
       </article>
-      <article class="card" style="padding:2rem 1.5rem 1.5rem 1.5rem; border-radius:var(--a-border-radius-large,8px); box-shadow:0 2px 8px var(--a-shadow-color,#eee); background:var(--a-bg-card,#fff); min-width:280px; max-width:340px; display:flex; flex-direction:column; justify-content:space-between;">
+      <article class="card" style="padding:2rem 1.5rem 1.5rem 1.5rem; border-radius:var(--a-border-radius-large,8px); box-shadow:0 2px 8px var(--a-shadow-color,#eee); background:var(--a-bg-card,#fff); min-width:280px; max-width:340px; display:flex; flex-direction:column; justify-content:space-between; transition:box-shadow 0.2s;">
         <header style="margin-bottom:1rem; display:flex; align-items:center; gap:0.5em;">
           <h3 style="margin:0; font-size:1.1em; font-weight:700;">Card with Footer Link</h3>
         </header>
