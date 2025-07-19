@@ -1,152 +1,81 @@
-/**
- * Axiom01 Navbar Component JavaScript
- * Handles mobile menu toggle functionality and accessibility
- */
+// Navbar Fix for index.html
+// This script adds the necessary functionality to make the navbar menu toggle work on small resolutions
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize all navbars on the page
-  initAllNavbars();
-});
+  console.log('Adding navbar functionality to index.html');
 
-/**
- * Initialize all navbar components on the page
- */
-function initAllNavbars() {
-  // Get all navbar elements
-  const navbars = document.querySelectorAll('.navbar');
-  
-  navbars.forEach(navbar => {
-    const menuToggle = navbar.querySelector('.menu-toggle');
-    const navLinks = navbar.querySelector('.nav-links');
-    
-    if (!menuToggle || !navLinks) {
-      console.warn('Navbar missing required elements:', navbar);
+  // Initialize the main navbar
+  const navbar = document.querySelector('.navbar-container');
+
+  if (navbar) {
+    const mobileToggle = navbar.querySelector('.mobile-toggle');
+    const navLinks = navbar.querySelector('.navbar-nav');
+
+    if (!mobileToggle || !navLinks) {
+      console.warn('Navbar missing required elements. Found mobile toggle:', !!mobileToggle, 'Found nav links:', !!navLinks);
       return;
     }
-    
-    initNavbarToggle(menuToggle, navLinks);
-  });
-  
-  // Close menus when clicking outside
-  document.addEventListener('click', function(event) {
-    const openNavLinks = document.querySelectorAll('.nav-links.open');
-    
-    openNavLinks.forEach(navLinks => {
-      const navbar = navLinks.closest('.navbar');
-      const menuToggle = navbar.querySelector('.menu-toggle');
-      
-      if (!navbar.contains(event.target) || event.target.closest('a')) {
-        navLinks.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  });
-  
-  // Close menus with Escape key
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-      const openNavLinks = document.querySelectorAll('.nav-links.open');
-      
-      openNavLinks.forEach(navLinks => {
-        const navbar = navLinks.closest('.navbar');
-        const menuToggle = navbar.querySelector('.menu-toggle');
-        
-        navLinks.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.focus();
-      });
-    }
-  });
 
-  // --- Feature Toggle Utility ---
-  function getCSSVariableBool(varName) {
-    const value = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-    return value === 'true';
-  }
+    // Set initial state
+    mobileToggle.setAttribute('aria-expanded', 'false');
 
-  // --- Feature Toggles ---
-  const AXIOM_FEATURES = {
-    enableAnimations: getCSSVariableBool('--a-enable-animations'),
-    enableTransitions: getCSSVariableBool('--a-enable-transitions'),
-    enableFonts: getCSSVariableBool('--a-enable-fonts'),
-    useCSSReset: getCSSVariableBool('--a-use-css-reset'),
-  };
+    // Toggle menu when button is clicked
+    mobileToggle.addEventListener('click', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
 
-  // --- Feature Toggle Helper ---
-  function getFeatureToggle(varName) {
-    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() === 'true';
-  }
-  const enableTransitions = getFeatureToggle('--a-enable-transitions');
+      // Toggle the open class on the nav links
+      navLinks.classList.toggle('open');
 
-  // Smooth scrolling for same-page navigation links
-  if (AXIOM_FEATURES.enableTransitions) {
-    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href').slice(1);
-        const target = document.getElementById(targetId);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          // Optionally update the URL hash
-          history.pushState(null, '', `#${targetId}`);
+      // Update the expanded state for accessibility
+      const isExpanded = navLinks.classList.contains('open');
+      mobileToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+
+      // Toggle the icon between bars and xmark
+      const iconElement = mobileToggle.querySelector('i');
+      if (iconElement) {
+        if (isExpanded) {
+          iconElement.classList.remove('fa-bars');
+          iconElement.classList.add('fa-xmark');
+        } else {
+          iconElement.classList.remove('fa-xmark');
+          iconElement.classList.add('fa-bars');
         }
-      });
+      }
+
+      console.log('Mobile menu toggle clicked, menu is now:', isExpanded ? 'open' : 'closed');
     });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!navbar.contains(event.target)) {
+        navLinks.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+
+        const iconElement = mobileToggle.querySelector('i');
+        if (iconElement) {
+          iconElement.classList.remove('fa-xmark');
+          iconElement.classList.add('fa-bars');
+        }
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        navLinks.classList.remove('open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+
+        const iconElement = mobileToggle.querySelector('i');
+        if (iconElement) {
+          iconElement.classList.remove('fa-xmark');
+          iconElement.classList.add('fa-bars');
+        }
+      }
+    });
+
+    console.log('Mobile navbar toggle initialized successfully');
+  } else {
+    console.warn('Main navbar container not found');
   }
-}
-
-/**
- * Initialize a single navbar toggle button
- * @param {HTMLElement} menuToggle - The menu toggle button
- * @param {HTMLElement} navLinks - The navigation links container
- */
-function initNavbarToggle(menuToggle, navLinks) {
-  // Set initial state
-  menuToggle.setAttribute('aria-expanded', 'false');
-  
-  // Toggle menu when button is clicked
-  menuToggle.addEventListener('click', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    // Toggle the open class on the nav links
-    navLinks.classList.toggle('open');
-    
-    // Update the expanded state for accessibility
-    const isExpanded = navLinks.classList.contains('open');
-    menuToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-    
-    console.log('Menu toggle clicked, menu is now:', isExpanded ? 'open' : 'closed');
-
-    if (enableTransitions) {
-      navLinks.style.transition = 'max-height 0.3s';
-    }
-  });
-  
-  // Add keyboard navigation for links
-  const links = navLinks.querySelectorAll('a');
-  
-  links.forEach((link, index) => {
-    link.addEventListener('keydown', function(event) {
-      let targetLink = null;
-      
-      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-        event.preventDefault();
-        targetLink = links[(index + 1) % links.length];
-      } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-        event.preventDefault();
-        targetLink = links[(index - 1 + links.length) % links.length];
-      } else if (event.key === 'Home') {
-        event.preventDefault();
-        targetLink = links[0];
-      } else if (event.key === 'End') {
-        event.preventDefault();
-        targetLink = links[links.length - 1];
-      }
-      
-      if (targetLink) {
-        targetLink.focus();
-      }
-    });
-  });
-}
+});

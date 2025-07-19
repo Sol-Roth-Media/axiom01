@@ -1,93 +1,30 @@
-<!-- Axiom01 Tab Bar Component Documentation & Demo -->
-<section class="component-docs">
-  <h2>Tab Bar Component</h2>
-  <h2>Overview</h2>
-  <p>The <strong>Tab Bar</strong> component provides a horizontal navigation bar for switching between different views or sections. Tabs are accessible, keyboard-navigable, and can be styled for active/inactive states. Use semantic <code>&lt;nav&gt;</code> and <code>&lt;button&gt;</code> elements for structure, and minimal classes for styling. Always ensure tabs have clear labels and are easy to navigate.</p>
-  <h3>Usage</h3>
-  <pre><code>&lt;nav class="tab-bar" role="tablist"&gt;
-  &lt;button class="tab" role="tab" aria-selected="true" tabindex="0"&gt;Tab 1&lt;/button&gt;
-  &lt;button class="tab" role="tab" tabindex="-1"&gt;Tab 2&lt;/button&gt;
-  &lt;button class="tab" role="tab" tabindex="-1"&gt;Tab 3&lt;/button&gt;
-&lt;/nav&gt;
-</code></pre>
-  <h3>Demo</h3>
-  <nav class="tabs" role="tablist" aria-label="Main Tabs">
-    <button class="tab" role="tab" aria-selected="true" tabindex="0">Home</button>
-    <button class="tab" role="tab" tabindex="-1">Profile</button>
-    <button class="tab" role="tab" tabindex="-1">Settings</button>
-  </nav>
-  <style>
-    .tabs {
-      display: flex;
-      gap: 0.5rem;
-      background: var(--a-tab-bg, var(--a-color-surface-container));
-      border-radius: var(--a-border-radius-base);
-      padding: 0.5rem 1rem;
-      box-shadow: var(--a-shadow-small);
-      margin-bottom: 1rem;
-    }
-    .tab {
-      background: var(--a-color-surface);
-      color: var(--a-tab-color, var(--a-color-on-surface));
-      border: none;
-      border-radius: var(--a-border-radius-base);
-      padding: 0.5rem 1.25rem;
-      font-size: var(--a-font-size-base, 1rem);
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      outline: none;
-    }
-    .tab[aria-selected="true"],
-    .tab.active {
-      background: var(--a-color-primary);
-      color: var(--a-color-on-primary);
-    }
-    .tab:hover,
-    .tab:focus {
-      background: var(--a-color-surface-variant);
-      color: var(--a-color-primary);
-    }
-  </style>
-  <script>
-    // Simple tab bar keyboard navigation
-    document.querySelectorAll('.tabs').forEach(tabBar => {
-      const tabs = tabBar.querySelectorAll('.tab');
-      tabBar.addEventListener('keydown', e => {
-        const current = Array.from(tabs).findIndex(tab => tab === document.activeElement);
-        if (e.key === 'ArrowRight') {
-          const next = (current + 1) % tabs.length;
-          tabs[next].focus();
-        } else if (e.key === 'ArrowLeft') {
-          const prev = (current - 1 + tabs.length) % tabs.length;
-          tabs[prev].focus();
-        }
-      });
-      tabs.forEach((tab, idx) => {
-        tab.addEventListener('click', () => {
-          tabs.forEach(t => {
-            t.setAttribute('aria-selected', 'false');
-            t.tabIndex = -1;
-          });
-          tab.setAttribute('aria-selected', 'true');
-          tab.tabIndex = 0;
-        });
-      });
-    });
-  </script>
-  <h3>Options</h3>
-  <ul>
-    <li>Use <code>aria-selected="true"</code> for the active tab.</li>
-    <li>Tabs can be styled with <code>tab primary</code>, <code>tab accent</code>, etc.</li>
-  </ul>
-  <h3>Accessibility</h3>
-  <ul>
-    <li>Tabs use <code>role="tablist"</code> and <code>role="tab"</code> for screen readers.</li>
-    <li>Keyboard navigation: left/right arrows to switch tabs.</li>
-    <li>Only the active tab should have <code>tabindex="0"</code>; others use <code>-1</code>.</li>
-  </ul>
-  <h3>Customization</h3>
-  <ul>
-    <li>Style with CSS variables: <code>--a-tab-bg</code>, <code>--a-tab-color</code>, etc.</li>
-  </ul>
-</section>
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom - Tab Bar Component</title>
+    <link rel="stylesheet" href="../css/axiom.css">
+    <link rel="stylesheet" href="../css/tab-bar.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Tab Bar Component</h1>
+
+        <p>The tab bar component provides a horizontal navigation bar for switching between different views or sections.</p>
+
+        <h2>Example</h2>
+
+        <div class="tab-bar" role="tablist">
+            <button class="tab active" role="tab" aria-selected="true" tabindex="0">Tab 1</button>
+            <button class="tab" role="tab" tabindex="-1">Tab 2</button>
+            <button class="tab" role="tab" tabindex="-1">Tab 3</button>
+        </div>
+
+    </div>
+
+    <script src="../js/axiom.js"></script>
+    <script src="../js/tab-bar.js"></script>
+</body>
+</html>

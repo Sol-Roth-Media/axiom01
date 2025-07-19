@@ -1,82 +1,170 @@
-/* ========================================================================= */
-/* Axiom01 Navbar Component                                                  */
-/* A responsive, accessible navbar component following Axiom01 philosophy    */
-/* ========================================================================= */
+/* Navbar Fix for index.html */
+/* This CSS adds the necessary styles to make the navbar menu toggle work on small resolutions */
 
-/* Base navbar container */
+/* Define RGB values for primary color to use in rgba() functions */
+:root {
+  /* Default RGB values for primary color (blue) */
+  --a-color-primary-rgb: 0, 123, 255;
+}
+
+/* RGB values for different themes */
+[data-theme="dark"] {
+  --a-color-primary-rgb: 33, 150, 243;
+}
+
+[data-theme="light"] {
+  --a-color-primary-rgb: 0, 123, 255;
+}
+
+[data-theme="aesthetic"], 
+[data-theme="light-aesthetic"], 
+[data-theme="dark-aesthetic"] {
+  --a-color-primary-rgb: 255, 105, 180;
+}
+
+[data-theme="purple-haze"] {
+  --a-color-primary-rgb: 138, 43, 226;
+}
+
+[data-theme="electric-neon"] {
+  --a-color-primary-rgb: 0, 255, 255;
+}
+
+[data-theme="cyberpunk"] {
+  --a-color-primary-rgb: 255, 215, 0;
+}
+
+/* Enhanced Navbar Styling */
 .navbar {
+  background-color: var(--a-color-surface, #fff);
+  border-bottom: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+  padding: var(--a-padding-small) var(--a-padding-base);
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 8px var(--a-shadow-color, rgba(0,0,0,0.05));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--a-padding-base) var(--a-padding-large);
-  background: var(--a-color-surface);
-  color: var(--a-color-on-surface);
-  position: relative;
-  width: 100%;
-  z-index: 100;
+  flex-wrap: wrap;
 }
 
-/* Small variant */
-.navbar.small {
-  padding: var(--a-padding-small) var(--a-padding-large);
-}
-
-/* Logo styling */
-.navbar .logo {
-  font-family: var(--a-font-family-mono, "Courier New", Courier, monospace), monospace;
-  text-decoration: none;
-  white-space: nowrap;
-  display: flex;
-  align-items: baseline;
-  letter-spacing: var(--a-letter-spacing-logo, 0.15rem);
-  position: relative;
-  line-height: 1.2;
-  padding-bottom: var(--a-padding-logo-bottom, 0.8em);
-  height: auto;
-}
-
-.navbar .logo-text {
-  color: var(--a-color-on-surface);
-  font-weight: var(--a-font-weight-bold);
-  font-size: var(--a-font-size-base);
-  letter-spacing: var(--a-letter-spacing-logo, 1px);
-  transition: color 0.2s;
-}
-
-/* Navigation links */
+/* Style for nav-links container */
 .navbar .nav-links {
   display: flex;
-  gap: var(--a-grid-gutter);
-  list-style: none;
+  list-style: none; /* Remove bullets */
   margin: 0;
   padding: 0;
-  transition: all 0.3s ease;
+  gap: var(--a-grid-gutter, 16px); /* Add spacing between items */
+  align-items: center;
 }
 
+/* Style for nav-links list items */
 .navbar .nav-links li {
   margin: 0;
   padding: 0;
 }
 
+/* Add a subtle hover effect to nav links */
 .navbar .nav-links a {
-  color: var(--a-color-on-surface);
-  text-decoration: none;
+  position: relative;
+  transition: color 0.2s, background-color 0.2s;
   padding: var(--a-padding-small) var(--a-padding-base);
   border-radius: var(--a-border-radius-small);
-  transition: background-color 0.2s, color 0.2s;
+  color: var(--a-color-on-surface, #222);
+  text-decoration: none;
   display: block;
 }
 
 .navbar .nav-links a:hover,
 .navbar .nav-links a:focus {
-  background-color: rgba(var(--a-color-primary-rgb, 0, 123, 255), 0.1);
-  color: var(--a-color-primary);
+  color: var(--a-color-primary, #007bff);
+  background-color: var(--a-color-primary-fade-active, rgba(0,0,0,0.05));
 }
 
+/* Enhanced active state styling */
 .navbar .nav-links a.active {
-  background-color: rgba(var(--a-color-primary-rgb, 0, 123, 255), 0.2);
-  color: var(--a-color-primary);
-  font-weight: var(--a-font-weight-medium);
+  background-color: rgba(var(--a-color-primary-rgb, 0, 123, 255), 0.15);
+  color: var(--a-color-primary, #007bff);
+  font-weight: var(--a-font-weight-medium, 500);
+  position: relative;
+}
+
+/* Add a subtle indicator for active links */
+.navbar .nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 3px;
+  background-color: var(--a-color-primary, #007bff);
+  border-radius: var(--a-border-radius-small) var(--a-border-radius-small) 0 0;
+}
+
+/* Enhanced theme toggle button */
+.navbar .theme-toggle {
+  background: none;
+  border: none;
+  color: var(--a-color-on-primary-container, var(--a-color-on-surface));
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: var(--a-padding-small);
+  margin-left: var(--a-margin-small);
+  transition: color 0.2s, transform 0.2s;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--a-color-primary-rgb, 0, 0, 0), 0.05);
+}
+
+.navbar .theme-toggle:hover,
+.navbar .theme-toggle:focus {
+  color: var(--a-color-primary, #007bff);
+  transform: scale(1.05);
+  background-color: rgba(var(--a-color-primary-rgb, 0, 0, 0), 0.1);
+}
+
+/* Enhanced Logo Styling */
+.navbar .logo {
+  transition: opacity 0.2s;
+  padding: var(--a-padding-small);
+  border-radius: var(--a-border-radius-base);
+}
+
+.navbar .logo:hover {
+  opacity: 0.9;
+  background-color: rgba(var(--a-color-primary-rgb, 0, 123, 255), 0.05);
+}
+
+.navbar .logo .logo-text span {
+  transition: color 0.3s;
+}
+
+/* Make the 01 in the logo use the primary color from the current theme */
+.navbar .logo .logo-text span span[style*="color"] {
+  color: var(--a-color-primary, #00c005) !important;
+  transition: color 0.3s;
+}
+
+/* Theme switcher container */
+.theme-switcher-container {
+  margin: 0 var(--a-margin-small);
+}
+
+#theme-select {
+  background-color: var(--a-color-surface, #fff);
+  color: var(--a-color-on-surface, #222);
+  border: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
+}
+
+#theme-select:hover,
+#theme-select:focus {
+  border-color: var(--a-color-primary, #007bff);
+  box-shadow: 0 0 0 2px rgba(var(--a-color-primary-rgb, 0, 123, 255), 0.2);
 }
 
 /* Mobile menu toggle button */
@@ -84,77 +172,23 @@
   display: none;
   background: none;
   border: none;
-  color: var(--a-color-on-surface);
+  color: var(--a-color-on-primary-container, var(--a-color-on-surface));
   cursor: pointer;
   padding: var(--a-padding-small);
   margin-left: auto;
   z-index: 101;
-  transition: color 0.2s;
+  transition: color 0.2s, background-color 0.2s;
+  /* Add a subtle background for better visibility */
+  background-color: rgba(var(--a-color-primary-rgb, 0, 0, 0), 0.05);
+  border-radius: var(--a-border-radius-base);
+  font-size: 1.5rem; /* Size for the Font Awesome icon */
 }
 
 .navbar .menu-toggle:hover,
 .navbar .menu-toggle:focus {
   color: var(--a-color-primary);
+  background-color: rgba(var(--a-color-primary-rgb, 0, 0, 0), 0.1);
   outline: none;
-}
-
-.navbar .menu-toggle .bar {
-  display: block;
-  width: 24px;
-  height: 3px;
-  margin: 5px 0;
-  background-color: var(--a-color-on-surface);
-  transition: transform 0.3s, opacity 0.3s;
-  border-radius: 3px;
-}
-
-/* Theme toggle button */
-.navbar .theme-toggle {
-  background: none;
-  border: none;
-  color: var(--a-color-on-surface);
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0;
-  margin-left: var(--a-margin-medium);
-  line-height: 1;
-  transition: color 0.2s;
-}
-
-.navbar .theme-toggle:hover,
-.navbar .theme-toggle:focus {
-  color: var(--a-color-primary);
-  outline: none;
-}
-
-/* Theme switcher container */
-.navbar .theme-switcher-container {
-  margin-left: var(--a-margin-medium);
-  margin-right: var(--a-margin-small);
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.navbar .theme-switcher-container select {
-  padding: var(--a-padding-tiny) var(--a-padding-small);
-  border-radius: var(--a-border-radius-base);
-  border: 1px solid var(--a-color-outline);
-  background-color: var(--a-color-surface);
-  color: var(--a-color-on-surface);
-  font-family: inherit;
-  font-size: var(--a-font-size-small);
-  cursor: pointer;
-  vertical-align: middle;
-  align-self: center;
-  height: auto;
-  line-height: normal;
-}
-
-.navbar .theme-switcher-container select:focus {
-  outline: 2px solid var(--a-color-primary);
-  outline-offset: 1px;
-  box-shadow: 0 0 0 2px rgba(var(--a-color-primary-rgb), 0.2);
 }
 
 /* Responsive styles */
@@ -162,9 +196,12 @@
   /* Show menu toggle button */
   .navbar .menu-toggle {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* Add padding for a larger touch target */
+    padding: var(--a-padding-small) var(--a-padding-base);
+    width: 40px;
+    height: 40px;
   }
 
   /* Hide navigation links by default */
@@ -175,127 +212,69 @@
     top: 100%;
     left: 0;
     width: 100%;
-    background: var(--a-color-surface);
-    box-shadow: 0 2px 8px var(--a-shadow-color, rgba(0,0,0,0.08));
+    /* Use theme-aware colors */
+    background: var(--a-color-surface-variant, var(--a-color-surface));
+    box-shadow: 0 4px 12px var(--a-shadow-color, rgba(0,0,0,0.12));
     z-index: 100;
-    padding: var(--a-padding-base);
+    padding: var(--a-padding-large);
+    /* Add border for better definition */
+    border-top: 2px solid var(--a-color-primary, #007bff);
+    /* Add smooth transition */
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateY(-10px);
+    opacity: 0;
+    gap: var(--a-grid-gutter, 8px); /* Consistent spacing between items */
   }
 
   /* Show navigation links when open */
   .navbar .nav-links.open {
     display: flex;
-    max-height: 500px;
+    max-height: 80vh; /* Limit height and allow scrolling for many items */
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
+    overflow-y: auto; /* Allow scrolling if many items */
   }
 
   /* Adjust link styling for mobile */
   .navbar .nav-links li {
     width: 100%;
     margin-bottom: var(--a-margin-tiny);
+    /* Add transition for hover effects */
+    transition: background-color 0.2s, transform 0.2s;
+  }
+
+  .navbar .nav-links li:hover {
+    background-color: var(--a-color-primary-fade-active, rgba(0,0,0,0.05));
+    transform: translateX(4px); /* Subtle movement on hover */
   }
 
   .navbar .nav-links a {
     width: 100%;
     padding: var(--a-padding-base);
-  }
-
-  /* Animate hamburger to X when menu is open */
-  .navbar .menu-toggle[aria-expanded="true"] .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-
-  .navbar .menu-toggle[aria-expanded="true"] .bar:nth-child(2) {
-    opacity: 0;
-  }
-
-  .navbar .menu-toggle[aria-expanded="true"] .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
-
-  /* Improved layout for theme switcher and menu toggle */
-  .navbar {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .navbar .logo {
-    order: 1;
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
-  .navbar .theme-switcher-container {
-    order: 2;
-    flex: 0 1 auto;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    max-width: 140px;
-  }
-
-  .navbar .menu-toggle {
-    order: 3;
-    flex: 0 1 auto;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  /* Prevent theme switcher from stretching full width or dropping down */
-  .navbar .theme-switcher-container select {
-    max-width: 120px;
-    width: auto;
-    margin: 0 auto;
+    /* Improve text styling */
+    color: var(--a-color-on-surface, #222);
+    font-weight: var(--a-font-weight-medium, 500);
+    transition: color 0.2s;
     display: block;
-  }
-}
-
-@media (max-width: 600px) {
-  .navbar {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
+    border-radius: var(--a-border-radius-small);
   }
 
-  .navbar .logo {
-    flex: 1 1 auto;
-    min-width: 0;
+  .navbar .nav-links a:hover,
+  .navbar .nav-links a:focus {
+    color: var(--a-color-primary, #007bff);
+    text-decoration: none;
   }
 
-  .navbar .theme-switcher-container {
-    flex: 0 1 auto;
-    margin: 0 auto;
-    max-width: 120px;
-    justify-content: center;
-    align-items: center;
+  /* Modify active state indicator for mobile */
+  .navbar .nav-links a.active::after {
+    width: 4px;
+    height: 70%;
+    left: 0;
+    top: 15%;
+    transform: none;
+    border-radius: 0 var(--a-border-radius-small) var(--a-border-radius-small) 0;
   }
 
-  .navbar .menu-toggle {
-    flex: 0 1 auto;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .navbar .theme-switcher-container select {
-    max-width: 100px;
-    width: auto;
-    margin: 0 auto;
-    display: block;
-  }
-}
-
-/* Accessibility helpers */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+  /* No need for hamburger animation as we're using Font Awesome icons that will be handled by JavaScript */
 }

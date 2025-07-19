@@ -1,0 +1,49 @@
+/* Axiom Paywall Component CSS */
+
+.paywall {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--a-border-radius-base);
+    border: 1px solid var(--a-color-outline);
+}
+
+.paywall-content {
+    max-height: 100px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.paywall-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, var(--a-color-surface));
+}
+
+.paywall.unlocked .paywall-content {
+    max-height: 1000px; /* Or a large enough value */
+}
+
+.paywall.unlocked .paywall-content::after {
+    display: none;
+}
+
+.paywall-gate {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--a-padding-large);
+    background: var(--a-color-surface);
+    text-align: center;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.paywall.unlocked .paywall-gate {
+    opacity: 0;
+    transform: translateY(100%);
+}
