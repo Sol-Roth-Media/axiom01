@@ -720,3 +720,82 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// Simple client-side documentation search
+const docPages = [
+  { title: 'Getting Started', url: 'index.getting-started.html' },
+  { title: 'Style Guide', url: 'index.style-guide.html' },
+  { title: 'Components Demo', url: 'index.components-demo.html' },
+  { title: 'Card Component', url: 'components/card.html' },
+  { title: 'Forms Component', url: 'components/forms.html' },
+  { title: 'Navbar', url: 'components/navbar.html' },
+  { title: 'Progress Bar', url: 'components/progress-bar.html' },
+  { title: 'Media & File', url: 'components/media.html' },
+  { title: 'Accordion', url: 'components/accordion.html' },
+  { title: 'Alert', url: 'components/alert.html' },
+  { title: 'Button', url: 'components/button.html' },
+  { title: 'Carousel', url: 'components/carousel.html' },
+  { title: 'Datepicker', url: 'components/datepicker.html' },
+  { title: 'Drawer', url: 'components/drawer.html' },
+  { title: 'Dropdown', url: 'components/dropdown.html' },
+  { title: 'Hero', url: 'components/hero.html' },
+  { title: 'Infinite Scroll', url: 'components/infinite-scroll.html' },
+  { title: 'Jump Menu', url: 'components/jump-menu.html' },
+  { title: 'Media', url: 'components/media.html' },
+  { title: 'Modal', url: 'components/modal.html' },
+  { title: 'Navigation', url: 'components/navigation.html' },
+  { title: 'Notification', url: 'components/notification.html' },
+  { title: 'Progress Throbber', url: 'components/progress-throbber.html' },
+  { title: 'Sidebar', url: 'components/sidebar.html' },
+  { title: 'Stepper', url: 'components/stepper.html' },
+  { title: 'Tab Bar', url: 'components/tab-bar.html' },
+  { title: 'Table', url: 'components/table.html' },
+  { title: 'Tabs', url: 'components/tabs.html' },
+  { title: 'Tag', url: 'components/tag.html' },
+  { title: 'Axiom01 Docs', url: 'axiom01-docs.html' },
+  { title: 'Axiom01 Navbar Demo', url: 'axiom01-navbar-demo.html' },
+  { title: 'Axiom01 Main', url: 'axiom01.html' },
+  { title: 'Grid System', url: 'grid-system.html' },
+  { title: 'Grid Examples', url: 'grid-examples.html' },
+  { title: 'Playground', url: 'playground.html' },
+  { title: 'Colors Advanced', url: 'colors-advanced.html' },
+  { title: 'CSS API', url: 'css-api.html' },
+  { title: 'Customization', url: 'axiom-docs-site/customization.html' },
+  { title: 'Docs Home', url: 'axiom-docs-site/index.html' },
+  { title: 'Docs Components', url: 'axiom-docs-site/components.html' },
+  { title: 'Docs Examples', url: 'axiom-docs-site/examples/components.html' },
+];
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('doc-search-form');
+  const input = document.getElementById('doc-search');
+  if (form && input) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const query = input.value.trim().toLowerCase();
+      if (!query) return;
+      const results = docPages.filter(page => page.title.toLowerCase().includes(query));
+      let resultHtml = '';
+      if (results.length) {
+        resultHtml = '<ul style="background:#fff;border-radius:8px;box-shadow:0 2px 8px #0002;padding:1em;max-width:320px;">' +
+          results.map(r => `<li><a href="${r.url}" style="color:#0077cc;">${r.title}</a></li>`).join('') + '</ul>';
+      } else {
+        resultHtml = '<div style="background:#fff;border-radius:8px;box-shadow:0 2px 8px #0002;padding:1em;max-width:320px;">No results found.</div>';
+      }
+      let resultBox = document.getElementById('doc-search-results');
+      if (!resultBox) {
+        resultBox = document.createElement('div');
+        resultBox.id = 'doc-search-results';
+        resultBox.style.position = 'absolute';
+        resultBox.style.top = '60px';
+        resultBox.style.right = '20px';
+        resultBox.style.zIndex = '9999';
+        document.body.appendChild(resultBox);
+      }
+      resultBox.innerHTML = resultHtml + '<button id="close-search-results" style="margin-top:0.5em;display:block;width:100%;background:#eee;border:none;padding:0.5em;border-radius:6px;cursor:pointer;">Close</button>';
+      document.getElementById('close-search-results').onclick = function() {
+        resultBox.remove();
+      };
+    });
+  }
+});

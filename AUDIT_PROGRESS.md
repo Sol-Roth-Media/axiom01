@@ -16,7 +16,7 @@
 - [x] Expand advanced theming and style guide examples
 - [x] Add interactive playground/demo page
 - [x] Improve mobile responsiveness further (navbar, hero, philosophy sections improved July 18, 2025)
-- [ ] Add more real-world usage examples
+- [x] Add more real-world usage examples (dashboard layout added July 18, 2025)
 - [ ] Add search functionality for docs
 
 ## Ongoing Tasks

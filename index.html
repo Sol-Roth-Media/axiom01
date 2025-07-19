@@ -46,29 +46,41 @@
       </li>
       <li><a href="#getting-started" class="button primary" style="margin-left:1em;">Get Started</a></li>
     </ul>
-    <script>
-      // Dropdown interaction for desktop
-      document.addEventListener('DOMContentLoaded', function() {
-        var dropdown = document.querySelector('.nav-dropdown');
-        var toggle = dropdown.querySelector('.dropdown-toggle');
-        var menu = dropdown.querySelector('.dropdown-menu');
-        toggle.addEventListener('click', function(e) {
-          e.preventDefault();
-          menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-        });
-        document.addEventListener('click', function(e) {
-          if (!dropdown.contains(e.target)) {
-            menu.style.display = 'none';
-          }
-        });
-      });
-    </script>
+    <button id="show-search" aria-label="Open documentation search" style="background:var(--a-color-primary);color:var(--a-color-on-primary);border:none;padding:0.4em 1em;border-radius:6px;margin-left:1em;cursor:pointer;">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <span class="sr-only">Search</span>
+    </button>
+    <div id="search-bar-container" style="display:none;position:absolute;top:60px;left:0;width:100vw;text-align:center;z-index:9999;">
+      <form id="doc-search-form" role="search" aria-label="Search documentation" style="display:inline-block;background:var(--a-color-surface,#fff);box-shadow:0 2px 12px #0002;padding:1em 2em;border-radius:12px;margin-top:0.5em;">
+        <input type="search" id="doc-search" name="q" placeholder="Search docs..." style="padding:0.6em 1.2em; border-radius:8px; border:1px solid var(--a-color-border,#ccc); min-width:220px; font-size:1.1em;" aria-label="Search documentation">
+        <button type="submit" style="background:var(--a-color-primary);color:var(--a-color-on-primary);border:none;padding:0.6em 1.2em;border-radius:8px;margin-left:0.5em;cursor:pointer;font-size:1.1em;">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <span class="sr-only">Search</span>
+        </button>
+      </form>
+    </div>
     <div class="theme-switcher-container" style="background:var(--a-color-surface-variant,#222);border-radius:6px;padding:0.5em 1em;box-shadow:0 2px 8px rgba(0,0,0,0.12);max-width:320px;min-width:120px;width:100%;color:var(--a-color-on-surface,#fff);display:flex;align-items:center;gap:0.6em;margin:0 var(--a-margin-base) 0 0;flex-shrink:0;">
       <label for="theme-select" class="visually-hidden">Select Theme:</label>
-      <select id="theme-select" name="theme" style="min-width:140px;max-width:260px;padding-right:2.5em;background:var(--a-color-surface,#222);color:var(--a-color-on-surface,#fff);border-radius:6px;border:1px solid var(--a-color-outline,#444);font-size:1em;margin-right:0.2em;">
-      </select>
+      <select id="theme-select" name="theme" style="min-width:140px;max-width:260px;padding-right:2.5em;background:var(--a-color-surface,#222);color:var(--a-color-on-surface,#fff);border-radius:6px;border:1px solid var(--a-color-outline,#444);font-size:1em;margin-right:0.2em;"></select>
       <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode" style="padding:0.4em 0.7em; font-size:1.2em;background:var(--a-color-surface,#222);color:var(--a-color-on-surface,#fff);border-radius:6px;border:1px solid var(--a-color-outline,#444);margin-left:0.1em;margin-right:2.3em;">&#9728;</button>
     </div>
+    <script>
+      document.getElementById('show-search').onclick = function() {
+        var bar = document.getElementById('search-bar-container');
+        bar.style.display = (bar.style.display === 'none' || bar.style.display === '') ? 'block' : 'none';
+        if (bar.style.display === 'block') {
+          setTimeout(function() {
+            document.getElementById('doc-search').focus();
+          }, 100);
+        }
+      };
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          var bar = document.getElementById('search-bar-container');
+          if (bar) bar.style.display = 'none';
+        }
+      });
+    </script>
     <style>
       @media (min-width: 900px) {
         .navbar-centered {
@@ -735,6 +747,21 @@
     <div style="text-align:center; margin-bottom:var(--a-margin-large);">
       <span style="display:inline-block; background:var(--a-color-primary); color:var(--a-color-on-primary); font-weight:700; padding:0.5em 1.5em; border-radius:var(--a-border-radius-base); font-size:1.1em;">Axiom01: Fast, Accessible, Themeable UI for Modern Web Projects</span>
     </div>
+    <!-- Live Theme Switcher Demo -->
+    <div style="text-align:center; margin-bottom:var(--a-margin-large);">
+      <label for="theme-demo" style="font-weight:600; margin-right:0.5em;">Try a theme:</label>
+      <select id="theme-demo" style="padding:0.4em 1em; border-radius:6px;">
+        <option value="default">Default</option>
+        <option value="dark">Dark</option>
+        <option value="pastel">Pastel</option>
+        <option value="solarized">Solarized</option>
+      </select>
+    </div>
+    <script>
+      document.getElementById('theme-demo').addEventListener('change', function(e) {
+        document.body.setAttribute('data-theme', e.target.value);
+      });
+    </script>
     <div class="card-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--a-grid-gutter); margin-top: var(--a-margin-xlarge);">
       <article class="card" style="padding: var(--a-padding-xlarge) var(--a-padding-large); border-radius: var(--a-border-radius-large); box-shadow: 0 2px 12px var(--a-shadow-color); background: var(--a-bg-card); display: flex; flex-direction: column; align-items: flex-start; min-height: 260px;">
         <header style="display: flex; align-items: center; gap: var(--a-grid-gutter); margin-bottom: var(--a-margin-large);">
@@ -746,7 +773,7 @@
           <ol style="margin:0 0 0.5em 1em;">
             <li>Include <code>axiom.css</code> and <code>navbar.js</code> in your project.</li>
             <li>Use semantic HTML for instant styling.</li>
-            <li>Switch themes with one click.</li>
+            <li>Switch themes with one click <span style="color:var(--a-color-primary);font-weight:600;">(see demo above)</span>.</li>
           </ol>
           <a href="style-guide.html" class="button small" style="margin-right:0.5em;">Style Guide</a>
           <a href="components/navbar.html" class="button small">Navbar Demo</a>
@@ -839,6 +866,30 @@
         <strong>Result:</strong> Less markup, more meaning, and automatic styling for each section.
       </p>
     </div>
+  </div>
+</section>
+<!-- Real-World Usage Example Section -->
+<section class="real-world-example section" style="background: var(--a-color-surface-variant); padding: 2rem 0;">
+  <div class="container" style="max-width: 900px; margin: 0 auto;">
+    <h2 style="text-align:center; margin-bottom:1rem;">Real-World Example: Dashboard Layout</h2>
+    <p style="text-align:center; max-width:700px; margin:0 auto 1.5rem; font-size:1.1rem; color:var(--a-color-muted);">
+      See how Axiom01 enables clean, semantic markup for a modern dashboard. This example uses <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;aside&gt;</code>, and <code>&lt;section&gt;</code> for structure and instant styling.
+    </p>
+    <div class="code-block" style="text-align:left; background:var(--a-color-surface); padding:1em; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+      <pre><code class="language-html">&lt;header class="dashboard-header"&gt;Dashboard Title&lt;/header&gt;
+&lt;nav class="dashboard-nav"&gt;Sidebar Navigation&lt;/nav&gt;
+&lt;main class="dashboard-main"&gt;
+  &lt;section class="dashboard-widgets"&gt;
+    &lt;article class="card"&gt;Widget 1&lt;/article&gt;
+    &lt;article class="card"&gt;Widget 2&lt;/article&gt;
+    &lt;article class="card"&gt;Widget 3&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+&lt;aside class="dashboard-info"&gt;Quick Info&lt;/aside&gt;</code></pre>
+    </div>
+    <p style="text-align:center; margin-top:1rem; color:var(--a-color-text-secondary); font-size:1rem;">
+      <strong>Result:</strong> Instantly styled, accessible, and maintainable dashboard layout with minimal classes.
+    </p>
   </div>
 </section>
 <!-- END index.part7.html -->

@@ -1,0 +1,229 @@
+<!-- Axiom01 Documentation Search Component Page -->
+<section class="section" style="max-width:900px;margin:2em auto;padding:2em;background:var(--a-color-surface);border-radius:12px;box-shadow:0 2px 12px #0001;">
+  <h1 style="text-align:center;margin-bottom:1em;">Documentation Search</h1>
+  <p style="font-size:1.1em;color:var(--a-color-muted);text-align:center;max-width:700px;margin:0 auto 2em;">
+    The Axiom01 documentation search lets you quickly find component demos, guides, and advanced usage examples. Type a keyword in the search bar (top navigation) and press Enter to see matching documentation pages.
+  </p>
+  <h2>How to Use</h2>
+  <ol style="font-size:1em;max-width:700px;margin:0 auto 2em;">
+    <li>Locate the <strong>Search docs...</strong> field in the top navigation bar.</li>
+    <li>Type a keyword (e.g., "card", "forms", "theme", "navbar").</li>
+    <li>Press <strong>Enter</strong> to view results in a floating box.</li>
+    <li>Click a result to open the documentation page, or click <strong>Close</strong> to dismiss the results.</li>
+  </ol>
+  <h2>Feature Details</h2>
+  <ul style="font-size:1em;max-width:700px;margin:0 auto 2em;">
+    <li><strong>Client-side search:</strong> Fast, privacy-friendly, no server requests.</li>
+    <li><strong>Extensible:</strong> Add more pages to <code>docPages</code> in <code>js/scripts.js</code> to expand coverage.</li>
+    <li><strong>Accessibility:</strong> Keyboard and screen reader friendly, with ARIA labels and focus management.</li>
+    <li><strong>Customizable:</strong> Style the search box and results via CSS for your theme.</li>
+  </ul>
+  <h2>Code Example</h2>
+  <pre style="background:#f8f8f8;padding:1em;border-radius:8px;overflow-x:auto;"><code class="language-js">// Add more searchable pages in js/scripts.js
+const docPages = [
+  { title: 'Card Component', url: 'components/card.html' },
+  { title: 'Forms Component', url: 'components/forms.html' },
+  // ...more pages
+];
+
+// Search logic
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const query = input.value.trim().toLowerCase();
+  const results = docPages.filter(page => page.title.toLowerCase().includes(query));
+  // ...show results
+});
+</code></pre>
+  <h2>Advanced Usage</h2>
+  <ul style="font-size:1em;max-width:700px;margin:0 auto 2em;">
+    <li>Implement fuzzy matching for more flexible search.</li>
+    <li>Integrate with external search APIs for larger docs.</li>
+    <li>Enhance accessibility with ARIA live regions and keyboard navigation.</li>
+    <li>Style results for dark/light themes using CSS variables.</li>
+  </ul>
+  <h2>Demo</h2>
+  <p>Try the search bar in the top navigation to see it in action!</p>
+</section>
+<!-- AXIOM01 Search Component Showcase - Improved with Real UI Framework Examples -->
+<link rel="stylesheet" href="/css/axiom.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/axiom_vars.css">
+<link rel="stylesheet" href="/css/axiom_config.css">
+<link rel="stylesheet" href="/css/colors.css">
+<link rel="stylesheet" href="/css/colors_vars.css">
+<link rel="stylesheet" href="/css/site.css">
+<!-- Optionally include icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<section class="section" style="max-width:900px;margin:2em auto;padding:2em;background:var(--a-color-surface);border-radius:12px;box-shadow:0 2px 12px #0001;">
+  <h1 class="a-title" style="text-align:center;margin-bottom:1em;">Axiom01 Search Component: Real UI Examples</h1>
+  <p class="a-lead" style="text-align:center;max-width:700px;margin:0 auto 2em;">
+    The Axiom01 search component is designed for accessibility, speed, and seamless integration. Below are live, styled examples using the Axiom01 UI framework.
+  </p>
+  <h2 class="a-subtitle">Display Options</h2>
+  <div class="a-grid a-gap-lg" style="margin-bottom:2em;">
+    <div class="a-card a-shadow-sm">
+      <h3 class="a-card-title">Modal Search</h3>
+      <p>Opens a floating dialog for search input and results.</p>
+      <button id="open-modal-search" class="a-btn a-btn-primary" style="margin:1em auto;display:block;">Open Modal Search</button>
+    </div>
+    <div class="a-card a-shadow-sm">
+      <h3 class="a-card-title">Inline Search</h3>
+      <p>Embeds the search bar directly in your page content.</p>
+      <form id="inline-doc-search-form" role="search" aria-label="Inline search" class="a-form a-flex a-gap-md" style="max-width:420px;margin:1em auto;">
+        <input type="search" id="inline-doc-search" name="q" class="a-input" placeholder="Search docs..." aria-label="Search documentation">
+        <button type="submit" class="a-btn a-btn-primary"><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span></button>
+      </form>
+      <div id="inline-search-results" style="max-width:420px;margin:0 auto 2em;"></div>
+    </div>
+    <div class="a-card a-shadow-sm">
+      <h3 class="a-card-title">Sidebar Search</h3>
+      <p>Place the search form in a sidebar or drawer for persistent access.</p>
+      <form id="sidebar-doc-search-form" role="search" aria-label="Sidebar search" class="a-form a-flex a-gap-md" style="max-width:420px;margin:1em auto;">
+        <input type="search" id="sidebar-doc-search" name="q" class="a-input" placeholder="Search docs..." aria-label="Search documentation">
+        <button type="submit" class="a-btn a-btn-primary"><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span></button>
+      </form>
+      <div id="sidebar-search-results" style="max-width:420px;margin:0 auto 2em;"></div>
+    </div>
+  </div>
+  <h2 class="a-subtitle">Header Search Example</h2>
+  <div class="a-navbar a-shadow-sm" style="margin-bottom:2em;">
+    <div class="a-navbar-content">
+      <span class="a-navbar-brand">Axiom01 Docs</span>
+      <button id="show-header-search" class="a-btn a-btn-icon" aria-label="Open documentation search"><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
+    <div id="header-search-bar-container" class="a-modal" style="display:none;position:absolute;top:60px;right:20px;z-index:1000;">
+      <form id="header-doc-search-form" role="search" aria-label="Header search" class="a-form a-flex a-gap-md" style="background:var(--a-color-surface);padding:1em 2em;border-radius:12px;box-shadow:0 2px 12px #0002;">
+        <input type="search" id="header-doc-search" name="q" class="a-input" placeholder="Search docs..." aria-label="Search documentation">
+        <button type="submit" class="a-btn a-btn-primary"><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span></button>
+        <button type="button" id="close-header-search" class="a-btn a-btn-secondary" style="margin-left:0.5em;">Close</button>
+      </form>
+      <div id="header-search-results" style="max-width:420px;margin:0 auto 2em;"></div>
+    </div>
+  </div>
+  <h2 class="a-subtitle">Accessibility & Best Practices</h2>
+  <ul class="a-list a-list-check" style="max-width:700px;margin:0 auto 2em;">
+    <li>Use <code>role="search"</code> and <code>aria-label</code> for forms.</li>
+    <li>Ensure keyboard navigation (Tab, Escape, Enter).</li>
+    <li>Use <code>aria-modal</code> and <code>aria-labelledby</code> for modals.</li>
+    <li>Provide clear focus states and error messages.</li>
+    <li>Style with CSS variables for theme consistency.</li>
+  </ul>
+  <h2 class="a-subtitle">Advanced Usage</h2>
+  <ul class="a-list" style="max-width:700px;margin:0 auto 2em;">
+    <li>Implement fuzzy matching for flexible search (<a href="https://fusejs.io/" target="_blank">Fuse.js</a>).</li>
+    <li>Integrate with external APIs for large documentation sets.</li>
+    <li>Live region updates for screen readers.</li>
+    <li>Custom result templates and highlighting.</li>
+  </ul>
+</section>
+<!-- Modal Search Dialog -->
+<div id="modal-search" role="dialog" aria-modal="true" aria-labelledby="modal-search-title" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#0006;z-index:99999;align-items:center;justify-content:center;">
+  <div class="a-card a-shadow-lg" style="background:var(--a-color-surface,#fff);padding:2em 2.5em;border-radius:16px;max-width:420px;width:90vw;position:relative;">
+    <h2 id="modal-search-title" class="a-title" style="margin-top:0;text-align:center;">Search Documentation</h2>
+    <form id="modal-doc-search-form" role="search" aria-label="Search documentation" class="a-form a-flex a-gap-md" style="margin-bottom:1em;">
+      <input type="search" id="modal-doc-search" name="q" class="a-input" placeholder="Search docs..." aria-label="Search documentation">
+      <button type="submit" class="a-btn a-btn-primary">Search</button>
+    </form>
+    <div id="modal-search-results" style="margin-top:1em;"></div>
+    <button id="close-modal-search" class="a-btn a-btn-secondary" style="position:absolute;top:1em;right:1em;">Close</button>
+  </div>
+</div>
+<script>
+// Shared docPages array
+const docPages = [
+  { title: 'Card Component', url: 'components/card.html' },
+  { title: 'Forms Component', url: 'components/forms.html' },
+  { title: 'Navbar Component', url: 'components/navbar.html' },
+  { title: 'Modal Component', url: 'components/modal.html' },
+  { title: 'Table Component', url: 'components/table.html' },
+  // ...add more as needed
+];
+function renderResults(results, container) {
+  if (results.length === 0) {
+    container.innerHTML = '<p class="a-text-muted">No results found.</p>';
+  } else {
+    container.innerHTML = '<ul class="a-list" style="list-style:none;padding:0;">' +
+      results.map(r => `<li style=\"margin-bottom:0.7em;\"><a href=\"${r.url}\" class=\"a-btn a-btn-secondary\" style=\"width:100%;display:block;text-align:left;\">${r.title}</a></li>`).join('') +
+      '</ul>';
+  }
+}
+// Modal logic
+const openModalBtn = document.getElementById('open-modal-search');
+const modal = document.getElementById('modal-search');
+const closeModalBtn = document.getElementById('close-modal-search');
+const modalForm = document.getElementById('modal-doc-search-form');
+const modalInput = document.getElementById('modal-doc-search');
+const modalResults = document.getElementById('modal-search-results');
+openModalBtn.onclick = function() {
+  modal.style.display = 'flex';
+  modalInput.focus();
+  document.body.style.overflow = 'hidden';
+};
+closeModalBtn.onclick = function() {
+  modal.style.display = 'none';
+  modalResults.innerHTML = '';
+  document.body.style.overflow = '';
+};
+window.addEventListener('keydown', function(e) {
+  if (modal.style.display === 'flex' && e.key === 'Escape') {
+    closeModalBtn.click();
+  }
+});
+modalForm.onsubmit = function(e) {
+  e.preventDefault();
+  const query = modalInput.value.trim().toLowerCase();
+  if (!query) { modalResults.innerHTML = '<p class="a-text-error">Please enter a search term.</p>'; return; }
+  const results = docPages.filter(page => page.title.toLowerCase().includes(query));
+  renderResults(results, modalResults);
+};
+// Inline search logic
+const inlineForm = document.getElementById('inline-doc-search-form');
+const inlineInput = document.getElementById('inline-doc-search');
+const inlineResults = document.getElementById('inline-search-results');
+inlineForm.onsubmit = function(e) {
+  e.preventDefault();
+  const query = inlineInput.value.trim().toLowerCase();
+  if (!query) { inlineResults.innerHTML = '<p class="a-text-error">Please enter a search term.</p>'; return; }
+  const results = docPages.filter(page => page.title.toLowerCase().includes(query));
+  renderResults(results, inlineResults);
+};
+// Sidebar search logic
+const sidebarForm = document.getElementById('sidebar-doc-search-form');
+const sidebarInput = document.getElementById('sidebar-doc-search');
+const sidebarResults = document.getElementById('sidebar-search-results');
+sidebarForm.onsubmit = function(e) {
+  e.preventDefault();
+  const query = sidebarInput.value.trim().toLowerCase();
+  if (!query) { sidebarResults.innerHTML = '<p class="a-text-error">Please enter a search term.</p>'; return; }
+  const results = docPages.filter(page => page.title.toLowerCase().includes(query));
+  renderResults(results, sidebarResults);
+};
+// Header search logic
+const showHeaderSearchBtn = document.getElementById('show-header-search');
+const headerSearchBar = document.getElementById('header-search-bar-container');
+const closeHeaderSearchBtn = document.getElementById('close-header-search');
+const headerForm = document.getElementById('header-doc-search-form');
+const headerInput = document.getElementById('header-doc-search');
+const headerResults = document.getElementById('header-search-results');
+showHeaderSearchBtn.onclick = function() {
+  headerSearchBar.style.display = 'block';
+  headerInput.focus();
+};
+closeHeaderSearchBtn.onclick = function() {
+  headerSearchBar.style.display = 'none';
+  headerResults.innerHTML = '';
+};
+window.addEventListener('keydown', function(e) {
+  if (headerSearchBar.style.display === 'block' && e.key === 'Escape') {
+    closeHeaderSearchBtn.click();
+  }
+});
+headerForm.onsubmit = function(e) {
+  e.preventDefault();
+  const query = headerInput.value.trim().toLowerCase();
+  if (!query) { headerResults.innerHTML = '<p class="a-text-error">Please enter a search term.</p>'; return; }
+  const results = docPages.filter(page => page.title.toLowerCase().includes(query));
+  renderResults(results, headerResults);
+};
+</script>
