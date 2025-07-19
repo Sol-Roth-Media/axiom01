@@ -2,25 +2,33 @@
 // This script adds the necessary functionality to make the navbar menu toggle work on small resolutions
 
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('Adding navbar functionality to index.html');
+  console.log('Navbar.js: DOMContentLoaded fired, initializing navbar functionality');
 
   // Initialize the main navbar
   const navbar = document.querySelector('.navbar-container');
+  console.log('Navbar.js: Found navbar container:', !!navbar);
 
   if (navbar) {
     const mobileToggle = navbar.querySelector('.mobile-toggle');
     const navLinks = navbar.querySelector('.navbar-nav');
 
+    console.log('Navbar.js: Found mobile toggle:', !!mobileToggle);
+    console.log('Navbar.js: Found nav links:', !!navLinks);
+    console.log('Navbar.js: Mobile toggle element:', mobileToggle);
+    console.log('Navbar.js: Nav links element:', navLinks);
+
     if (!mobileToggle || !navLinks) {
-      console.warn('Navbar missing required elements. Found mobile toggle:', !!mobileToggle, 'Found nav links:', !!navLinks);
+      console.error('Navbar missing required elements. Mobile toggle:', !!mobileToggle, 'Nav links:', !!navLinks);
       return;
     }
 
     // Set initial state
     mobileToggle.setAttribute('aria-expanded', 'false');
+    console.log('Navbar.js: Set initial aria-expanded to false');
 
     // Toggle menu when button is clicked
     mobileToggle.addEventListener('click', function(event) {
+      console.log('Navbar.js: Mobile toggle clicked!');
       event.preventDefault();
       event.stopPropagation();
 
@@ -43,7 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
 
-      console.log('Mobile menu toggle clicked, menu is now:', isExpanded ? 'open' : 'closed');
+      console.log('Navbar.js: Menu toggle completed. Menu is now:', isExpanded ? 'open' : 'closed');
+      console.log('Navbar.js: Nav links classes:', navLinks.className);
     });
 
     // Close mobile menu when clicking outside
@@ -74,8 +83,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    console.log('Mobile navbar toggle initialized successfully');
+    console.log('Navbar.js: Mobile navbar toggle initialized successfully');
   } else {
-    console.warn('Main navbar container not found');
+    console.error('Navbar.js: Main navbar container not found');
+  }
+
+  // Force initialization for Axiom Components if it exists
+  if (typeof window.AxiomComponents !== 'undefined' && window.AxiomComponents.Navbar) {
+    console.log('Navbar.js: Calling AxiomComponents.Navbar.init()');
+    window.AxiomComponents.Navbar.init();
   }
 });
