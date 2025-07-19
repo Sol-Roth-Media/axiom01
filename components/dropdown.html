@@ -3,66 +3,579 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Axiom01 Component: Dropdown Menu</title>
+  <title>Dropdown Component - Axiom01 Framework</title>
   <link rel="stylesheet" href="../css/axiom.css">
   <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="../css/site.css">
+  <style>
+    body {
+      padding: var(--a-padding-medium);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .example-section {
+      margin-bottom: var(--a-margin-large);
+    }
+    .dropdown-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--a-margin-large);
+      margin: var(--a-margin-base) 0;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="../index.html">Axiom01 Home</a> |
-      <a href="card.html">Card</a> |
-      <a href="accordion.html">Accordion</a> |
-      <a href="progress-bar.html">Progress Bar</a> |
-      <a href="forms.html">Forms</a> |
-      <a href="navbar.html">Navbar</a> |
-      <strong>Dropdown Menu</strong>
-    </nav>
-  </header>
+  <nav>
+    <a href="../index.html">← Back to Framework</a>
+  </nav>
+
   <main>
-    <section class="component-demo">
-      <h1>Dropdown Menu Component</h1>
-      <p>The Dropdown Menu provides a list of options that can be shown or hidden. It supports keyboard navigation and ARIA attributes for accessibility.</p>
-      <h2>Demo</h2>
-      <div class="dropdown">
-        <button aria-haspopup="true" aria-expanded="false" id="dropdownBtn">Select Option</button>
-        <ul aria-labelledby="dropdownBtn" hidden>
-          <li><a href="#option1">Option 1</a></li>
-          <li><a href="#option2">Option 2</a></li>
-          <li><a href="#option3">Option 3</a></li>
-        </ul>
+    <header>
+      <h1>Dropdown Component</h1>
+      <p>Accessible dropdown menus with keyboard navigation, focus management, and screen reader support. Perfect for navigation menus, action lists, and selection interfaces.</p>
+    </header>
+
+    <section class="example-section">
+      <h2>Basic Dropdown Menu</h2>
+      <p>Simple dropdown with navigation links and proper ARIA implementation.</p>
+
+      <div class="dropdown-grid">
+        <div class="dropdown" id="basic-dropdown">
+          <button class="dropdown-trigger" type="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="basic-menu"
+                  id="basic-trigger">
+            <span>Navigation Menu</span>
+            <span class="dropdown-icon" aria-hidden="true">▼</span>
+          </button>
+          <ul class="dropdown-menu"
+              id="basic-menu"
+              role="menu"
+              aria-labelledby="basic-trigger"
+              hidden>
+            <li role="none">
+              <a href="#home" role="menuitem" tabindex="-1">
+                <span class="menu-icon" aria-hidden="true">🏠</span>
+                Home
+              </a>
+            </li>
+            <li role="none">
+              <a href="#about" role="menuitem" tabindex="-1">
+                <span class="menu-icon" aria-hidden="true">ℹ️</span>
+                About
+              </a>
+            </li>
+            <li role="none">
+              <a href="#services" role="menuitem" tabindex="-1">
+                <span class="menu-icon" aria-hidden="true">⚙️</span>
+                Services
+              </a>
+            </li>
+            <li role="separator"></li>
+            <li role="none">
+              <a href="#contact" role="menuitem" tabindex="-1">
+                <span class="menu-icon" aria-hidden="true">📧</span>
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="dropdown" id="action-dropdown">
+          <button class="dropdown-trigger secondary" type="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="action-menu"
+                  id="action-trigger">
+            <span>Actions</span>
+            <span class="dropdown-icon" aria-hidden="true">▼</span>
+          </button>
+          <ul class="dropdown-menu"
+              id="action-menu"
+              role="menu"
+              aria-labelledby="action-trigger"
+              hidden>
+            <li role="none">
+              <button type="button" role="menuitem" tabindex="-1" class="menu-button">
+                <span class="menu-icon" aria-hidden="true">✏️</span>
+                Edit Item
+              </button>
+            </li>
+            <li role="none">
+              <button type="button" role="menuitem" tabindex="-1" class="menu-button">
+                <span class="menu-icon" aria-hidden="true">📋</span>
+                Copy Item
+              </button>
+            </li>
+            <li role="none">
+              <button type="button" role="menuitem" tabindex="-1" class="menu-button">
+                <span class="menu-icon" aria-hidden="true">📤</span>
+                Share Item
+              </button>
+            </li>
+            <li role="separator"></li>
+            <li role="none">
+              <button type="button" role="menuitem" tabindex="-1" class="menu-button danger">
+                <span class="menu-icon" aria-hidden="true">🗑️</span>
+                Delete Item
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-      <h2>Usage</h2>
-      <pre><code class="language-html">&lt;div class="dropdown"&gt;
-  &lt;button aria-haspopup="true" aria-expanded="false"&gt;Menu&lt;/button&gt;
-  &lt;ul hidden&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Item&lt;/a&gt;&lt;/li&gt;
+
+      <pre><code>&lt;div class="dropdown"&gt;
+  &lt;button class="dropdown-trigger" type="button"
+          aria-haspopup="true" aria-expanded="false"
+          aria-controls="menu-id" id="trigger-id"&gt;
+    &lt;span&gt;Menu Title&lt;/span&gt;
+    &lt;span class="dropdown-icon" aria-hidden="true"&gt;▼&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;ul class="dropdown-menu" id="menu-id" role="menu"
+      aria-labelledby="trigger-id" hidden&gt;
+    &lt;li role="none"&gt;
+      &lt;a href="#" role="menuitem" tabindex="-1"&gt;Menu Item&lt;/a&gt;
+    &lt;/li&gt;
   &lt;/ul&gt;
-&lt;/div&gt;
-      </code></pre>
-      <h2>JavaScript Example</h2>
-      <pre><code class="language-js">document.addEventListener('DOMContentLoaded', () => {
-  const dropdown = document.querySelector('.dropdown');
-  const toggle = dropdown.querySelector('button');
-  const menu = dropdown.querySelector('ul');
-  toggle.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', !expanded);
-    menu.hidden = expanded;
-  });
-});
-      </code></pre>
-      <h2>Accessibility</h2>
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="example-section">
+      <h2>Selection Dropdown</h2>
+      <p>Dropdown for selecting options with current selection display.</p>
+
+      <div class="dropdown-grid">
+        <div class="dropdown select" id="select-dropdown">
+          <button class="dropdown-trigger" type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="select-menu"
+                  id="select-trigger">
+            <span class="selected-value">Choose Priority...</span>
+            <span class="dropdown-icon" aria-hidden="true">▼</span>
+          </button>
+          <ul class="dropdown-menu"
+              id="select-menu"
+              role="listbox"
+              aria-labelledby="select-trigger"
+              hidden>
+            <li role="option" aria-selected="false" tabindex="-1" data-value="low">
+              <span class="option-icon" aria-hidden="true">🟢</span>
+              Low Priority
+            </li>
+            <li role="option" aria-selected="false" tabindex="-1" data-value="medium">
+              <span class="option-icon" aria-hidden="true">🟡</span>
+              Medium Priority
+            </li>
+            <li role="option" aria-selected="true" tabindex="0" data-value="high">
+              <span class="option-icon" aria-hidden="true">🔴</span>
+              High Priority
+            </li>
+            <li role="option" aria-selected="false" tabindex="-1" data-value="urgent">
+              <span class="option-icon" aria-hidden="true">🚨</span>
+              Urgent Priority
+            </li>
+          </ul>
+        </div>
+
+        <div class="dropdown select multi" id="multi-select-dropdown">
+          <button class="dropdown-trigger" type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="multi-menu"
+                  id="multi-trigger">
+            <span class="selected-value">Select Tags...</span>
+            <span class="dropdown-icon" aria-hidden="true">▼</span>
+          </button>
+          <ul class="dropdown-menu"
+              id="multi-menu"
+              role="listbox"
+              aria-labelledby="multi-trigger"
+              aria-multiselectable="true"
+              hidden>
+            <li role="option" aria-selected="false" tabindex="-1" data-value="frontend">
+              <span class="checkbox-icon" aria-hidden="true">☐</span>
+              Frontend
+            </li>
+            <li role="option" aria-selected="true" tabindex="0" data-value="backend">
+              <span class="checkbox-icon" aria-hidden="true">☑</span>
+              Backend
+            </li>
+            <li role="option" aria-selected="true" tabindex="-1" data-value="design">
+              <span class="checkbox-icon" aria-hidden="true">☑</span>
+              Design
+            </li>
+            <li role="option" aria-selected="false" tabindex="-1" data-value="testing">
+              <span class="checkbox-icon" aria-hidden="true">☐</span>
+              Testing
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <pre><code>&lt;div class="dropdown select"&gt;
+  &lt;button class="dropdown-trigger" aria-haspopup="listbox"&gt;
+    &lt;span class="selected-value"&gt;Choose option...&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;ul class="dropdown-menu" role="listbox"&gt;
+    &lt;li role="option" aria-selected="false" data-value="option1"&gt;
+      Option 1
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="example-section">
+      <h2>Accessibility Features</h2>
       <ul>
-        <li>Uses <code>aria-haspopup</code>, <code>aria-expanded</code>, and <code>aria-labelledby</code>.</li>
-        <li>Keyboard and screen reader accessible.</li>
+        <li><strong>ARIA Roles:</strong> Proper roles (<code>menu</code>, <code>listbox</code>, <code>menuitem</code>, <code>option</code>)</li>
+        <li><strong>State Management:</strong> <code>aria-expanded</code> indicates dropdown state</li>
+        <li><strong>Keyboard Navigation:</strong> Arrow keys, Enter/Space, Escape, Tab navigation</li>
+        <li><strong>Focus Management:</strong> Focus trap within open dropdown, return focus to trigger</li>
+        <li><strong>Screen Reader Support:</strong> Proper labeling and selection announcements</li>
+        <li><strong>Selection Indication:</strong> Visual and ARIA selection states</li>
       </ul>
     </section>
+
+    <section class="example-section">
+      <h2>Keyboard Interactions</h2>
+      <ul>
+        <li><strong>Space/Enter (on trigger):</strong> Open/close dropdown</li>
+        <li><strong>Escape:</strong> Close dropdown and return focus to trigger</li>
+        <li><strong>Down Arrow:</strong> Move focus to next option (open if closed)</li>
+        <li><strong>Up Arrow:</strong> Move focus to previous option (open if closed)</li>
+        <li><strong>Home:</strong> Move focus to first option</li>
+        <li><strong>End:</strong> Move focus to last option</li>
+        <li><strong>Enter/Space (on option):</strong> Select option and close dropdown</li>
+        <li><strong>Tab:</strong> Close dropdown and move to next focusable element</li>
+      </ul>
+    </section>
+
+    <section class="example-section">
+      <h2>CSS Implementation</h2>
+      <p>Dropdown styling using CSS variables and semantic selectors:</p>
+      <pre><code>.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--a-space-small);
+  padding: var(--a-padding-small) var(--a-padding-medium);
+  background: var(--a-color-surface);
+  border: var(--a-border-width-base) solid var(--a-color-outline);
+  border-radius: var(--a-border-radius-base);
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 100%;
+  background: var(--a-color-surface);
+  border: var(--a-border-width-base) solid var(--a-color-outline);
+  border-radius: var(--a-border-radius-base);
+  box-shadow: var(--a-shadow-large);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdown-menu [role="menuitem"],
+.dropdown-menu [role="option"] {
+  display: flex;
+  align-items: center;
+  gap: var(--a-space-small);
+  padding: var(--a-padding-small) var(--a-padding-medium);
+  cursor: pointer;
+}
+
+.dropdown-menu [role="menuitem"]:hover,
+.dropdown-menu [role="menuitem"]:focus,
+.dropdown-menu [role="option"]:hover,
+.dropdown-menu [role="option"]:focus {
+  background: var(--a-color-primary-container);
+  color: var(--a-color-on-primary-container);
+  outline: none;
+}
+
+.dropdown-trigger:hover {
+  background: var(--a-color-surface-variant);
+  color: var(--a-color-on-surface-variant);
+}
+
+.dropdown-menu [role="menuitem"]:focus,
+.dropdown-menu [role="option"]:focus {
+  background: var(--a-color-primary-container);
+  outline: none;
+}</code></pre>
+    </section>
+
+    <footer>
+      <p><strong>Best Practices:</strong></p>
+      <ul>
+        <li>Use appropriate ARIA roles for different dropdown types</li>
+        <li>Implement complete keyboard navigation patterns</li>
+        <li>Provide clear visual and programmatic selection states</li>
+        <li>Test with screen readers to ensure proper announcements</li>
+        <li>Consider dropdown positioning and viewport constraints</li>
+        <li>Handle focus management when opening/closing dropdowns</li>
+      </ul>
+    </footer>
   </main>
-  <footer>
-    <p>&copy; 2025 Axiom01 UI Framework</p>
-  </footer>
-  <script src="../js/scripts.js"></script>
+
+  <script>
+    // Enhanced Dropdown Implementation for Axiom01
+    class AxiomDropdown {
+      constructor(dropdownElement) {
+        this.dropdown = dropdownElement;
+        this.trigger = this.dropdown.querySelector('.dropdown-trigger');
+        this.menu = this.dropdown.querySelector('.dropdown-menu');
+        this.options = this.menu.querySelectorAll('[role="menuitem"], [role="option"]');
+        this.isSelect = this.dropdown.classList.contains('select');
+        this.isMultiSelect = this.dropdown.classList.contains('multi');
+        this.currentFocus = -1;
+        this.init();
+      }
+
+      init() {
+        this.trigger.addEventListener('click', () => this.toggle());
+        this.trigger.addEventListener('keydown', (e) => this.handleTriggerKeyDown(e));
+
+        this.options.forEach((option, index) => {
+          option.addEventListener('click', () => this.selectOption(index));
+          option.addEventListener('keydown', (e) => this.handleOptionKeyDown(e, index));
+        });
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+          if (!this.dropdown.contains(e.target)) {
+            this.close();
+          }
+        });
+
+        // Initialize selection display for select dropdowns
+        if (this.isSelect) {
+          this.updateSelectionDisplay();
+        }
+      }
+
+      toggle() {
+        const isOpen = this.trigger.getAttribute('aria-expanded') === 'true';
+        if (isOpen) {
+          this.close();
+        } else {
+          this.open();
+        }
+      }
+
+      open() {
+        this.trigger.setAttribute('aria-expanded', 'true');
+        this.menu.removeAttribute('hidden');
+
+        // Update trigger icon
+        const icon = this.trigger.querySelector('.dropdown-icon');
+        if (icon) icon.textContent = '▲';
+
+        // Set initial focus
+        this.currentFocus = this.findSelectedIndex();
+        if (this.currentFocus === -1) this.currentFocus = 0;
+        this.setFocus(this.currentFocus);
+
+        // Position dropdown if needed
+        this.positionDropdown();
+      }
+
+      close() {
+        this.trigger.setAttribute('aria-expanded', 'false');
+        this.menu.setAttribute('hidden', '');
+
+        // Update trigger icon
+        const icon = this.trigger.querySelector('.dropdown-icon');
+        if (icon) icon.textContent = '▼';
+
+        // Return focus to trigger
+        this.trigger.focus();
+        this.currentFocus = -1;
+      }
+
+      selectOption(index) {
+        const option = this.options[index];
+        const value = option.getAttribute('data-value') || option.textContent.trim();
+
+        if (this.isSelect) {
+          if (this.isMultiSelect) {
+            // Toggle selection for multi-select
+            const isSelected = option.getAttribute('aria-selected') === 'true';
+            option.setAttribute('aria-selected', !isSelected);
+
+            // Update checkbox icon
+            const checkboxIcon = option.querySelector('.checkbox-icon');
+            if (checkboxIcon) {
+              checkboxIcon.textContent = !isSelected ? '☑' : '☐';
+            }
+
+            // Update focus but don't close
+            this.setFocus(index);
+          } else {
+            // Single selection
+            this.options.forEach(opt => {
+              opt.setAttribute('aria-selected', 'false');
+              opt.setAttribute('tabindex', '-1');
+            });
+
+            option.setAttribute('aria-selected', 'true');
+            option.setAttribute('tabindex', '0');
+
+            this.close();
+          }
+
+          this.updateSelectionDisplay();
+        } else {
+          // Menu item clicked
+          this.close();
+          this.handleMenuItemAction(option, value);
+        }
+      }
+
+      handleMenuItemAction(option, value) {
+        // Dispatch custom event for menu actions
+        const event = new CustomEvent('dropdown:select', {
+          detail: { option, value, dropdown: this.dropdown }
+        });
+        this.dropdown.dispatchEvent(event);
+
+        console.log(`Menu action: ${value}`);
+      }
+
+      updateSelectionDisplay() {
+        if (!this.isSelect) return;
+
+        const selectedOptions = Array.from(this.options).filter(
+          opt => opt.getAttribute('aria-selected') === 'true'
+        );
+
+        const selectedValue = this.trigger.querySelector('.selected-value');
+
+        if (selectedOptions.length === 0) {
+          selectedValue.textContent = this.isMultiSelect ? 'Select items...' : 'Choose option...';
+        } else if (this.isMultiSelect) {
+          const selectedTexts = selectedOptions.map(opt =>
+            opt.textContent.trim().replace(/^[☐☑]\s*/, '')
+          );
+          selectedValue.textContent = selectedTexts.length > 2
+            ? `${selectedTexts.length} selected`
+            : selectedTexts.join(', ');
+        } else {
+          selectedValue.textContent = selectedOptions[0].textContent.trim()
+            .replace(/^[🟢🟡🔴🚨]\s*/, '');
+        }
+      }
+
+      handleTriggerKeyDown(e) {
+        switch (e.key) {
+          case 'ArrowDown':
+          case 'ArrowUp':
+            e.preventDefault();
+            this.open();
+            break;
+          case 'Enter':
+          case ' ':
+            e.preventDefault();
+            this.toggle();
+            break;
+        }
+      }
+
+      handleOptionKeyDown(e, index) {
+        switch (e.key) {
+          case 'ArrowDown':
+            e.preventDefault();
+            this.setFocus(index < this.options.length - 1 ? index + 1 : 0);
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            this.setFocus(index > 0 ? index - 1 : this.options.length - 1);
+            break;
+          case 'Home':
+            e.preventDefault();
+            this.setFocus(0);
+            break;
+          case 'End':
+            e.preventDefault();
+            this.setFocus(this.options.length - 1);
+            break;
+          case 'Enter':
+          case ' ':
+            e.preventDefault();
+            this.selectOption(index);
+            break;
+          case 'Escape':
+            e.preventDefault();
+            this.close();
+            break;
+          case 'Tab':
+            this.close();
+            break;
+        }
+      }
+
+      setFocus(index) {
+        if (index >= 0 && index < this.options.length) {
+          this.options.forEach(opt => opt.setAttribute('tabindex', '-1'));
+          this.options[index].setAttribute('tabindex', '0');
+          this.options[index].focus();
+          this.currentFocus = index;
+        }
+      }
+
+      findSelectedIndex() {
+        return Array.from(this.options).findIndex(
+          opt => opt.getAttribute('aria-selected') === 'true'
+        );
+      }
+
+      positionDropdown() {
+        const rect = this.dropdown.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const spaceBelow = viewportHeight - rect.bottom;
+        const spaceAbove = rect.top;
+
+        // If not enough space below, position above
+        if (spaceBelow < 200 && spaceAbove > spaceBelow) {
+          this.menu.style.top = 'auto';
+          this.menu.style.bottom = '100%';
+        } else {
+          this.menu.style.top = '100%';
+          this.menu.style.bottom = 'auto';
+        }
+      }
+    }
+
+    // Initialize all dropdowns
+    document.addEventListener('DOMContentLoaded', () => {
+      const dropdowns = document.querySelectorAll('.dropdown');
+      dropdowns.forEach(dropdown => {
+        new AxiomDropdown(dropdown);
+      });
+
+      // Example event listener for menu actions
+      document.addEventListener('dropdown:select', (e) => {
+        const { option, value, dropdown } = e.detail;
+        console.log(`Dropdown action: ${value} from dropdown:`, dropdown.id);
+
+        // Handle specific actions
+        if (value === 'delete') {
+          if (confirm('Are you sure you want to delete this item?')) {
+            console.log('Item deleted');
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>

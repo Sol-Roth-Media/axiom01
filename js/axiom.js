@@ -605,166 +605,1182 @@ AxiomComponents.register('carousel', function initCarousel() {
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
         updateSlides((current + 1) % slides.length);
-        slides[current].focus();
       });
     }
 
-    // Indicators
+    // Indicator controls
     if (indicators) {
       Array.from(indicators.children).forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-          updateSlides(i);
-          slides[i].focus();
-        });
+        dot.addEventListener('click', () => updateSlides(i));
       });
     }
 
     // Keyboard navigation
-    carousel.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft') {
-        if (prevBtn) prevBtn.click();
-      } else if (e.key === 'ArrowRight') {
-        if (nextBtn) nextBtn.click();
+    carousel.addEventListener('keydown', (e) => {
+      if (e.target === carousel || slides.includes(e.target)) {
+        switch (e.key) {
+          case 'ArrowLeft':
+            e.preventDefault();
+            updateSlides((current - 1 + slides.length) % slides.length);
+            break;
+          case 'ArrowRight':
+            e.preventDefault();
+            updateSlides((current + 1) % slides.length);
+            break;
+        }
       }
     });
 
     // Touch/swipe support
-    let startX = null;
-    track.addEventListener('touchstart', e => {
+    let startX, isDragging = false;
+    track.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
+      isDragging = true;
     });
-    track.addEventListener('touchend', e => {
-      if (startX !== null) {
-        const endX = e.changedTouches[0].clientX;
-        if (endX - startX > 40 && prevBtn) prevBtn.click();
-        else if (startX - endX > 40 && nextBtn) nextBtn.click();
-        startX = null;
+    track.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+    });
+    track.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          updateSlides((current + 1) % slides.length);
+        } else {
+          updateSlides((current - 1 + slides.length) % slides.length);
+        }
       }
+      isDragging = false;
     });
 
-    // Initial state
-    updateSlides(current);
+    // Auto-play if configured
+    const autoPlay = carousel.hasAttribute('data-autoplay');
+    if (autoPlay) {
+      const interval = parseInt(carousel.getAttribute('data-autoplay')) || 5000;
+      setInterval(() => {
+        if (!carousel.matches(':hover')) {
+          updateSlides((current + 1) % slides.length);
+        }
+      }, interval);
+    }
+
+    updateSlides(0);
   });
 });
 
-// --- Form Validation Component
+// --- Drawer/Sidebar Component ---
 /**
- * Form Validation Component
+ * Drawer/Sidebar component
+ *
  * Features:
- * - Real-time validation
- * - Custom validation rules
- * - Dynamic messaging (error, success, info)
- * - Accessible ARIA attributes
+ * - Focus management with focus trap when open
+ * - Escape key to close
+ * - Backdrop click handling
+ * - ARIA modal patterns for overlay drawers
+ * - Smooth animations and responsive behavior
  */
-AxiomComponents.register('formValidation', function initFormValidation() {
-  const forms = document.querySelectorAll('form[data-axiom-validate]');
-  forms.forEach(form => {
-    form.setAttribute('novalidate', 'true'); // Prevent native browser validation UI
-    form.addEventListener('input', handleValidation);
-    form.addEventListener('blur', handleValidation, true);
-    form.addEventListener('submit', function(e) {
-      if (!validateForm(form)) {
-        e.preventDefault();
-      }
-    });
-  });
+AxiomComponents.register('drawer', function initDrawer() {
+  const drawerTriggers = document.querySelectorAll('[data-drawer-target]');
 
-  function handleValidation(e) {
-    const field = e.target;
-    validateField(field);
-  }
+  drawerTriggers.forEach(trigger => {
+    const drawerId = trigger.getAttribute('data-drawer-target');
+    const drawer = document.getElementById(drawerId);
 
-  function validateForm(form) {
-    let valid = true;
-    const fields = form.querySelectorAll('input, textarea, select');
-    fields.forEach(field => {
-      if (!validateField(field)) {
-        valid = false;
-      }
-    });
-    return valid;
-  }
-
-  function validateField(field) {
-    if (!field.checkValidity) return true;
-    const message = field.validationMessage;
-    let msgEl = field.parentNode.querySelector('.validationMessage');
-    if (!msgEl) {
-      msgEl = document.createElement('div');
-      msgEl.className = 'validationMessage';
-      field.parentNode.appendChild(msgEl);
+    if (!drawer) {
+      console.warn(`Drawer with ID "${drawerId}" not found for trigger:`, trigger);
+      return;
     }
-    if (!field.validity.valid) {
-      msgEl.textContent = message;
-      msgEl.style.display = 'block';
-      field.setAttribute('aria-invalid', 'true');
-      msgEl.setAttribute('role', 'alert');
-      return false;
-    } else {
-      msgEl.textContent = '';
-      msgEl.style.display = 'none';
-      field.removeAttribute('aria-invalid');
-      msgEl.removeAttribute('role');
-      return true;
-    }
-  }
-});
 
-// --- Table Responsive Labels (Axiom01)
-// Adds data-label attributes for mobile accessibility
-function axiomTableResponsiveLabels() {
-  document.querySelectorAll('.table').forEach(function(table) {
-    var headers = Array.from(table.querySelectorAll('th')).map(function(th) { return th.textContent; });
-    table.querySelectorAll('tbody tr').forEach(function(row) {
-      Array.from(row.children).forEach(function(cell, i) {
-        cell.setAttribute('data-label', headers[i]);
+    // Ensure drawer has proper ARIA attributes
+    drawer.setAttribute('role', 'dialog');
+    drawer.setAttribute('aria-modal', 'true');
+    drawer.setAttribute('aria-hidden', 'true');
+
+    if (!drawer.hasAttribute('aria-labelledby')) {
+      const heading = drawer.querySelector('h1, h2, h3, h4, h5, h6');
+      if (heading) {
+        const headingId = heading.id || `${drawerId}-title`;
+        heading.id = headingId;
+        drawer.setAttribute('aria-labelledby', headingId);
+      }
+    }
+
+    // Find close buttons
+    const closeButtons = drawer.querySelectorAll('[data-drawer-close]');
+    const backdrop = drawer.querySelector('.drawer-backdrop') || drawer.parentNode.querySelector('.drawer-backdrop');
+
+    // Setup trigger click handler
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      openDrawer(drawer, trigger);
+    });
+
+    // Setup close button handlers
+    closeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        closeDrawer(drawer, trigger);
       });
     });
+
+    // Setup backdrop click to close
+    if (backdrop) {
+      backdrop.addEventListener('click', (event) => {
+        if (event.target === backdrop) {
+          closeDrawer(drawer, trigger);
+        }
+      });
+    }
+
+    // Setup keyboard navigation
+    drawer.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeDrawer(drawer, trigger);
+      } else if (event.key === 'Tab') {
+        trapTabKey(event, drawer);
+      }
+    });
   });
-}
 
-AxiomComponents.register('table', axiomTableResponsiveLabels);
+  /**
+   * Opens a drawer
+   * @param {HTMLElement} drawer - The drawer element
+   * @param {HTMLElement} trigger - The element that triggered the drawer
+   */
+  function openDrawer(drawer, trigger) {
+    // Store the element that had focus before opening the drawer
+    drawer._previouslyFocused = document.activeElement;
 
-// --- Component Registration Stubs ---
-AxiomComponents.register('accordion', function initAccordion() {/* TODO: Add accordion logic */});
-AxiomComponents.register('alert', function initAlert() {/* TODO: Add alert logic */});
-AxiomComponents.register('button', function initButton() {/* TODO: Add button logic */});
-AxiomComponents.register('card', function initCard() {/* TODO: Add card logic */});
-AxiomComponents.register('drawer', function initDrawer() {/* TODO: Add drawer logic */});
-AxiomComponents.register('dropdown', function initDropdown() {/* TODO: Add dropdown logic */});
-AxiomComponents.register('forms', function initForms() {/* TODO: Add forms logic */});
-AxiomComponents.register('hero', function initHero() {/* TODO: Add hero logic */});
-AxiomComponents.register('jump-menu', function initJumpMenu() {/* TODO: Add jump-menu logic */});
-AxiomComponents.register('media', function initMedia() {/* TODO: Add media logic */});
-AxiomComponents.register('navbar', function initNavbar() {/* TODO: Add navbar logic */});
-AxiomComponents.register('navigation', function initNavigation() {/* TODO: Add navigation logic */});
-AxiomComponents.register('progress-bar', function initProgressBar() {/* TODO: Add progress-bar logic */});
-AxiomComponents.register('sidebar', function initSidebar() {/* TODO: Add sidebar logic */});
-AxiomComponents.register('stepper', function initStepper() {/* TODO: Add stepper logic */});
-AxiomComponents.register('tabs', function initTabs() {/* TODO: Add tabs logic */});
-AxiomComponents.register('tag', function initTag() {/* TODO: Add tag logic */});
-AxiomComponents.register('tab-bar', function initTabBar() {/* TODO: Add tab-bar logic */});
+    // Show the drawer
+    drawer.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
 
-// --- Feature Toggle Helpers ---
-function isFeatureEnabled(varName) {
-  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() === 'true';
-}
+    // Prevent background scrolling if overlay drawer
+    if (drawer.classList.contains('overlay') || drawer.getAttribute('data-drawer-overlay') === 'true') {
+      document.body.style.overflow = 'hidden';
+    }
 
-// Define feature toggles based on CSS variables
+    // Set focus to the first focusable element or close button
+    const focusableElements = getFocusableElements(drawer);
+    if (focusableElements.length) {
+      setTimeout(() => {
+        const closeButton = drawer.querySelector('[data-drawer-close]');
+        if (closeButton) {
+          closeButton.focus();
+        } else {
+          focusableElements[0].focus();
+        }
+      }, 50);
+    }
+
+    // Dispatch custom event
+    drawer.dispatchEvent(new CustomEvent('axiom:drawer:open', {
+      bubbles: true,
+      detail: { drawer, trigger }
+    }));
+  }
+
+  /**
+   * Closes a drawer
+   * @param {HTMLElement} drawer - The drawer element
+   * @param {HTMLElement} trigger - The element that triggered the drawer
+   */
+  function closeDrawer(drawer, trigger) {
+    // Hide the drawer
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+
+    // Restore background scrolling
+    if (drawer.classList.contains('overlay') || drawer.getAttribute('data-drawer-overlay') === 'true') {
+      document.body.style.overflow = '';
+    }
+
+    // Return focus to the trigger element
+    if (drawer._previouslyFocused) {
+      drawer._previouslyFocused.focus();
+    }
+
+    // Dispatch custom event
+    drawer.dispatchEvent(new CustomEvent('axiom:drawer:close', {
+      bubbles: true,
+      detail: { drawer, trigger }
+    }));
+  }
+});
+
+// --- Progress Bar Component ---
+/**
+ * Progress Bar component
+ *
+ * Features:
+ * - ARIA live regions for progress announcements
+ * - Screen reader friendly completion messages
+ * - Real-time value updates
+ * - Customizable completion callbacks
+ */
+AxiomComponents.register('progressBar', function initProgressBar() {
+  const progressBars = document.querySelectorAll('.progress-bar');
+
+  progressBars.forEach(progressBar => {
+    const progressElement = progressBar.querySelector('.progress') || progressBar;
+
+    // Ensure proper ARIA attributes
+    progressElement.setAttribute('role', 'progressbar');
+    progressElement.setAttribute('aria-valuemin', progressElement.getAttribute('aria-valuemin') || '0');
+    progressElement.setAttribute('aria-valuemax', progressElement.getAttribute('aria-valuemax') || '100');
+
+    // Create live region for announcements if it doesn't exist
+    let liveRegion = progressBar.querySelector('.progress-live-region');
+    if (!liveRegion) {
+      liveRegion = document.createElement('div');
+      liveRegion.className = 'progress-live-region';
+      liveRegion.setAttribute('aria-live', 'polite');
+      liveRegion.setAttribute('aria-atomic', 'true');
+      liveRegion.style.position = 'absolute';
+      liveRegion.style.width = '1px';
+      liveRegion.style.height = '1px';
+      liveRegion.style.padding = '0';
+      liveRegion.style.margin = '-1px';
+      liveRegion.style.overflow = 'hidden';
+      liveRegion.style.clip = 'rect(0, 0, 0, 0)';
+      liveRegion.style.whiteSpace = 'nowrap';
+      liveRegion.style.border = '0';
+      progressBar.appendChild(liveRegion);
+    }
+
+    // Add update method to progress bar
+    progressBar.updateProgress = function(value, options = {}) {
+      const min = parseInt(progressElement.getAttribute('aria-valuemin')) || 0;
+      const max = parseInt(progressElement.getAttribute('aria-valuemax')) || 100;
+      const clampedValue = Math.max(min, Math.min(max, value));
+
+      // Update ARIA value
+      progressElement.setAttribute('aria-valuenow', clampedValue);
+
+      // Update visual progress (if using CSS custom properties)
+      progressElement.style.setProperty('--progress-value', clampedValue);
+      progressElement.style.setProperty('--progress-percent', `${(clampedValue / max) * 100}%`);
+
+      // Announce progress at intervals or completion
+      const shouldAnnounce = options.announce ||
+                            clampedValue === max ||
+                            clampedValue === min ||
+                            (clampedValue % (options.announceInterval || 25) === 0);
+
+      if (shouldAnnounce) {
+        const percentage = Math.round((clampedValue / max) * 100);
+        let message = `${percentage}% complete`;
+
+        if (clampedValue === max) {
+          message = options.completionMessage || 'Progress complete';
+
+          // Fire completion callback if provided
+          if (options.onComplete && typeof options.onComplete === 'function') {
+            options.onComplete(progressBar, clampedValue);
+          }
+
+          // Fire custom event
+          progressBar.dispatchEvent(new CustomEvent('axiom:progress:complete', {
+            bubbles: true,
+            detail: { value: clampedValue, percentage }
+          }));
+        }
+
+        liveRegion.textContent = message;
+      }
+
+      // Fire update event
+      progressBar.dispatchEvent(new CustomEvent('axiom:progress:update', {
+        bubbles: true,
+        detail: { value: clampedValue, percentage: (clampedValue / max) * 100 }
+      }));
+    };
+
+    // Initialize with current value if set
+    const initialValue = progressElement.getAttribute('aria-valuenow');
+    if (initialValue) {
+      progressBar.updateProgress(parseInt(initialValue));
+    }
+  });
+});
+
+// --- Search Component ---
+/**
+ * Search component
+ *
+ * Features:
+ * - Combobox ARIA patterns
+ * - Autocomplete accessibility
+ * - Keyboard navigation for results
+ * - Result announcements
+ * - Debounced input
+ * - Result highlighting
+ * - Search history support
+ */
+AxiomComponents.register('search', function initSearch() {
+  const searchContainers = document.querySelectorAll('.search-container');
+
+  searchContainers.forEach(container => {
+    const searchInput = container.querySelector('input[type="search"], input[data-search]');
+    const resultsContainer = container.querySelector('.search-results');
+
+    if (!searchInput) {
+      console.warn('Search container missing search input:', container);
+      return;
+    }
+
+    // Create results container if it doesn't exist
+    let results = resultsContainer;
+    if (!results) {
+      results = document.createElement('div');
+      results.className = 'search-results';
+      results.setAttribute('role', 'listbox');
+      results.setAttribute('aria-hidden', 'true');
+      results.style.display = 'none';
+      container.appendChild(results);
+    }
+
+    // Setup ARIA attributes
+    const searchId = searchInput.id || `search-${Math.random().toString(36).substr(2, 9)}`;
+    const resultsId = results.id || `${searchId}-results`;
+
+    searchInput.id = searchId;
+    results.id = resultsId;
+
+    searchInput.setAttribute('role', 'combobox');
+    searchInput.setAttribute('aria-expanded', 'false');
+    searchInput.setAttribute('aria-haspopup', 'listbox');
+    searchInput.setAttribute('aria-autocomplete', 'list');
+    searchInput.setAttribute('aria-controls', resultsId);
+
+    // Create live region for result announcements
+    let liveRegion = container.querySelector('.search-live-region');
+    if (!liveRegion) {
+      liveRegion = document.createElement('div');
+      liveRegion.className = 'search-live-region';
+      liveRegion.setAttribute('aria-live', 'polite');
+      liveRegion.setAttribute('aria-atomic', 'false');
+      liveRegion.style.position = 'absolute';
+      liveRegion.style.width = '1px';
+      liveRegion.style.height = '1px';
+      liveRegion.style.padding = '0';
+      liveRegion.style.margin = '-1px';
+      liveRegion.style.overflow = 'hidden';
+      liveRegion.style.clip = 'rect(0, 0, 0, 0)';
+      liveRegion.style.whiteSpace = 'nowrap';
+      liveRegion.style.border = '0';
+      container.appendChild(liveRegion);
+    }
+
+    let debounceTimer;
+    let selectedIndex = -1;
+    let searchHistory = JSON.parse(localStorage.getItem(`axiom-search-history-${searchId}`) || '[]');
+
+    // Debounced search function
+    function performSearch(query) {
+      // Fire custom search event
+      const searchEvent = new CustomEvent('axiom:search:query', {
+        bubbles: true,
+        detail: { query, container, input: searchInput, results }
+      });
+      container.dispatchEvent(searchEvent);
+
+      // If no custom handler, perform basic search
+      if (!searchEvent.defaultPrevented) {
+        // This would typically call an API or filter data
+        const mockResults = generateMockResults(query);
+        displayResults(mockResults);
+      }
+    }
+
+    // Display search results
+    function displayResults(resultItems) {
+      results.innerHTML = '';
+      selectedIndex = -1;
+
+      if (resultItems.length === 0) {
+        results.setAttribute('aria-hidden', 'true');
+        results.style.display = 'none';
+        searchInput.setAttribute('aria-expanded', 'false');
+        liveRegion.textContent = 'No results found';
+        return;
+      }
+
+      resultItems.forEach((item, index) => {
+        const resultElement = document.createElement('div');
+        resultElement.className = 'search-result';
+        resultElement.setAttribute('role', 'option');
+        resultElement.setAttribute('aria-selected', 'false');
+        resultElement.textContent = item.text || item;
+        resultElement.dataset.value = item.value || item;
+
+        resultElement.addEventListener('click', () => {
+          selectResult(item, resultElement);
+        });
+
+        results.appendChild(resultElement);
+      });
+
+      results.setAttribute('aria-hidden', 'false');
+      results.style.display = 'block';
+      searchInput.setAttribute('aria-expanded', 'true');
+
+      // Announce result count
+      liveRegion.textContent = `${resultItems.length} results available`;
+    }
+
+    // Select a search result
+    function selectResult(item, element) {
+      const value = item.value || item.text || item;
+      searchInput.value = value;
+
+      // Add to search history
+      if (!searchHistory.includes(value)) {
+        searchHistory.unshift(value);
+        searchHistory = searchHistory.slice(0, 10); // Keep last 10 searches
+        localStorage.setItem(`axiom-search-history-${searchId}`, JSON.stringify(searchHistory));
+      }
+
+      hideResults();
+
+      // Fire selection event
+      container.dispatchEvent(new CustomEvent('axiom:search:select', {
+        bubbles: true,
+        detail: { item, value, container, input: searchInput }
+      }));
+    }
+
+    // Hide search results
+    function hideResults() {
+      results.setAttribute('aria-hidden', 'true');
+      results.style.display = 'none';
+      searchInput.setAttribute('aria-expanded', 'false');
+      selectedIndex = -1;
+      updateSelectedResult();
+    }
+
+    // Update visually selected result
+    function updateSelectedResult() {
+      const resultElements = results.querySelectorAll('.search-result');
+      resultElements.forEach((el, index) => {
+        const isSelected = index === selectedIndex;
+        el.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+        el.classList.toggle('selected', isSelected);
+      });
+
+      if (selectedIndex >= 0) {
+        searchInput.setAttribute('aria-activedescendant', resultElements[selectedIndex].id || `result-${selectedIndex}`);
+      } else {
+        searchInput.removeAttribute('aria-activedescendant');
+      }
+    }
+
+    // Input event handler
+    searchInput.addEventListener('input', (event) => {
+      const query = event.target.value.trim();
+
+      clearTimeout(debounceTimer);
+
+      if (query.length === 0) {
+        hideResults();
+        return;
+      }
+
+      // Debounce search
+      debounceTimer = setTimeout(() => {
+        performSearch(query);
+      }, 300);
+    });
+
+    // Keyboard navigation
+    searchInput.addEventListener('keydown', (event) => {
+      const resultElements = results.querySelectorAll('.search-result');
+
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault();
+          if (results.style.display === 'block') {
+            selectedIndex = Math.min(selectedIndex + 1, resultElements.length - 1);
+            updateSelectedResult();
+          }
+          break;
+
+        case 'ArrowUp':
+          event.preventDefault();
+          if (results.style.display === 'block') {
+            selectedIndex = Math.max(selectedIndex - 1, -1);
+            updateSelectedResult();
+          }
+          break;
+
+        case 'Enter':
+          event.preventDefault();
+          if (selectedIndex >= 0 && resultElements[selectedIndex]) {
+            const resultData = resultElements[selectedIndex].dataset.value;
+            selectResult(resultData, resultElements[selectedIndex]);
+          }
+          break;
+
+        case 'Escape':
+          hideResults();
+          break;
+      }
+    });
+
+    // Click outside to close
+    document.addEventListener('click', (event) => {
+      if (!container.contains(event.target)) {
+        hideResults();
+      }
+    });
+
+    // Mock results generator (for demo purposes)
+    function generateMockResults(query) {
+      const mockData = [
+        'Apple', 'Apricot', 'Banana', 'Blueberry', 'Cherry', 'Date', 'Elderberry',
+        'Fig', 'Grape', 'Honeydew', 'Kiwi', 'Lemon', 'Mango', 'Nectarine',
+        'Orange', 'Papaya', 'Quince', 'Raspberry', 'Strawberry', 'Tangerine'
+      ];
+
+      return mockData
+        .filter(item => item.toLowerCase().includes(query.toLowerCase()))
+        .slice(0, 8)
+        .map(item => ({ text: item, value: item }));
+    }
+  });
+});
+
+// --- Media Component ---
+/**
+ * Media component
+ *
+ * Features:
+ * - Image galleries with keyboard navigation
+ * - Video controls with accessibility
+ * - Responsive images with lazy loading
+ * - Alt text management
+ * - Caption support
+ */
+AxiomComponents.register('media', function initMedia() {
+  // Initialize image galleries
+  const galleries = document.querySelectorAll('.image-gallery');
+
+  galleries.forEach(gallery => {
+    const images = Array.from(gallery.querySelectorAll('img'));
+    let currentIndex = 0;
+
+    // Setup gallery navigation
+    gallery.setAttribute('role', 'region');
+    gallery.setAttribute('aria-label', gallery.getAttribute('data-gallery-label') || 'Image gallery');
+
+    // Add navigation if multiple images
+    if (images.length > 1) {
+      const nav = document.createElement('div');
+      nav.className = 'gallery-nav';
+
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'gallery-prev';
+      prevBtn.setAttribute('aria-label', 'Previous image');
+      prevBtn.innerHTML = '‹';
+
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'gallery-next';
+      nextBtn.setAttribute('aria-label', 'Next image');
+      nextBtn.innerHTML = '›';
+
+      const counter = document.createElement('span');
+      counter.className = 'gallery-counter';
+      counter.setAttribute('aria-live', 'polite');
+
+      nav.appendChild(prevBtn);
+      nav.appendChild(counter);
+      nav.appendChild(nextBtn);
+      gallery.appendChild(nav);
+
+      // Update gallery display
+      function updateGallery(newIndex) {
+        images.forEach((img, i) => {
+          img.style.display = i === newIndex ? 'block' : 'none';
+          img.setAttribute('aria-hidden', i === newIndex ? 'false' : 'true');
+        });
+        counter.textContent = `${newIndex + 1} of ${images.length}`;
+        currentIndex = newIndex;
+      }
+
+      // Navigation handlers
+      prevBtn.addEventListener('click', () => {
+        updateGallery((currentIndex - 1 + images.length) % images.length);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        updateGallery((currentIndex + 1) % images.length);
+      });
+
+      // Keyboard navigation
+      gallery.addEventListener('keydown', (e) => {
+        switch (e.key) {
+          case 'ArrowLeft':
+            e.preventDefault();
+            updateGallery((currentIndex - 1 + images.length) % images.length);
+            break;
+          case 'ArrowRight':
+            e.preventDefault();
+            updateGallery((currentIndex + 1) % images.length);
+            break;
+        }
+      });
+
+      updateGallery(0);
+    }
+  });
+
+  // Initialize responsive images with lazy loading
+  const lazyImages = document.querySelectorAll('img[data-src]');
+
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove('lazy');
+          imageObserver.unobserve(img);
+        }
+      });
+    });
+
+    lazyImages.forEach(img => imageObserver.observe(img));
+  } else {
+    // Fallback for browsers without IntersectionObserver
+    lazyImages.forEach(img => {
+      img.src = img.dataset.src;
+      img.classList.remove('lazy');
+    });
+  }
+
+  // Enhanced video controls
+  const videoElements = document.querySelectorAll('video.axiom-media');
+
+  videoElements.forEach(video => {
+    // Add custom controls if specified
+    if (video.hasAttribute('data-custom-controls')) {
+      video.removeAttribute('controls');
+
+      const controlsContainer = document.createElement('div');
+      controlsContainer.className = 'custom-video-controls';
+
+      const playPauseBtn = document.createElement('button');
+      playPauseBtn.className = 'play-pause-btn';
+      playPauseBtn.setAttribute('aria-label', 'Play video');
+      playPauseBtn.innerHTML = '▶';
+
+      const progressBar = document.createElement('div');
+      progressBar.className = 'video-progress';
+      progressBar.setAttribute('role', 'slider');
+      progressBar.setAttribute('aria-label', 'Video progress');
+
+      const timeDisplay = document.createElement('span');
+      timeDisplay.className = 'time-display';
+      timeDisplay.setAttribute('aria-live', 'polite');
+
+      controlsContainer.appendChild(playPauseBtn);
+      controlsContainer.appendChild(progressBar);
+      controlsContainer.appendChild(timeDisplay);
+      video.parentNode.insertBefore(controlsContainer, video.nextSibling);
+
+      // Play/pause functionality
+      playPauseBtn.addEventListener('click', () => {
+        if (video.paused) {
+          video.play();
+          playPauseBtn.innerHTML = '⏸';
+          playPauseBtn.setAttribute('aria-label', 'Pause video');
+        } else {
+          video.pause();
+          playPauseBtn.innerHTML = '▶';
+          playPauseBtn.setAttribute('aria-label', 'Play video');
+        }
+      });
+
+      // Progress tracking
+      video.addEventListener('timeupdate', () => {
+        const progress = (video.currentTime / video.duration) * 100;
+        progressBar.style.setProperty('--progress', `${progress}%`);
+
+        const current = formatTime(video.currentTime);
+        const total = formatTime(video.duration);
+        timeDisplay.textContent = `${current} / ${total}`;
+      });
+    }
+  });
+
+  // Format time helper
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+});
+
+// --- Stepper Component ---
+/**
+ * Stepper component
+ *
+ * Features:
+ * - Progress indication through multi-step processes
+ * - Keyboard navigation between steps
+ * - Form integration with validation
+ * - ARIA live regions for step announcements
+ */
+AxiomComponents.register('stepper', function initStepper() {
+  const steppers = document.querySelectorAll('.stepper');
+
+  steppers.forEach(stepper => {
+    const steps = Array.from(stepper.querySelectorAll('.step'));
+    const nextBtn = stepper.querySelector('.stepper-next');
+    const prevBtn = stepper.querySelector('.stepper-prev');
+    const submitBtn = stepper.querySelector('.stepper-submit');
+    let currentStep = 0;
+
+    // Setup ARIA attributes
+    stepper.setAttribute('role', 'tablist');
+    stepper.setAttribute('aria-label', 'Step-by-step process');
+
+    // Create live region for announcements
+    const liveRegion = document.createElement('div');
+    liveRegion.className = 'stepper-live-region';
+    liveRegion.setAttribute('aria-live', 'polite');
+    liveRegion.setAttribute('aria-atomic', 'true');
+    liveRegion.style.position = 'absolute';
+    liveRegion.style.width = '1px';
+    liveRegion.style.height = '1px';
+    liveRegion.style.padding = '0';
+    liveRegion.style.margin = '-1px';
+    liveRegion.style.overflow = 'hidden';
+    liveRegion.style.clip = 'rect(0, 0, 0, 0)';
+    liveRegion.style.whiteSpace = 'nowrap';
+    liveRegion.style.border = '0';
+    stepper.appendChild(liveRegion);
+
+    // Setup step attributes
+    steps.forEach((step, index) => {
+      step.setAttribute('role', 'tabpanel');
+      step.setAttribute('aria-labelledby', `step-${index + 1}-header`);
+      step.id = step.id || `step-${index + 1}-panel`;
+
+      const header = step.querySelector('h1, h2, h3, h4, h5, h6');
+      if (header) {
+        header.id = `step-${index + 1}-header`;
+      }
+    });
+
+    // Update step visibility and state
+    function updateStepper(newStep) {
+      steps.forEach((step, index) => {
+        const isActive = index === newStep;
+        const isCompleted = index < newStep;
+        const isPending = index > newStep;
+
+        step.classList.toggle('active', isActive);
+        step.classList.toggle('completed', isCompleted);
+        step.classList.toggle('pending', isPending);
+        step.setAttribute('aria-current', isActive ? 'step' : 'false');
+        step.style.display = isActive ? 'block' : 'none';
+      });
+
+      // Update navigation buttons
+      if (prevBtn) {
+        prevBtn.disabled = newStep === 0;
+        prevBtn.setAttribute('aria-disabled', newStep === 0 ? 'true' : 'false');
+      }
+
+      if (nextBtn) {
+        const isLastStep = newStep === steps.length - 1;
+        nextBtn.style.display = isLastStep ? 'none' : 'inline-block';
+      }
+
+      if (submitBtn) {
+        const isLastStep = newStep === steps.length - 1;
+        submitBtn.style.display = isLastStep ? 'inline-block' : 'none';
+      }
+
+      currentStep = newStep;
+
+      // Announce step change
+      const stepTitle = steps[newStep].querySelector('h1, h2, h3, h4, h5, h6')?.textContent || `Step ${newStep + 1}`;
+      liveRegion.textContent = `${stepTitle}, step ${newStep + 1} of ${steps.length}`;
+
+      // Dispatch custom event
+      stepper.dispatchEvent(new CustomEvent('axiom:stepper:change', {
+        bubbles: true,
+        detail: { step: newStep, stepElement: steps[newStep] }
+      }));
+    }
+
+    // Navigation handlers
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const nextStep = currentStep + 1;
+        if (nextStep < steps.length) {
+          // Validate current step before proceeding
+          if (validateStep(steps[currentStep])) {
+            updateStepper(nextStep);
+          }
+        }
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const prevStep = currentStep - 1;
+        if (prevStep >= 0) {
+          updateStepper(prevStep);
+        }
+      });
+    }
+
+    // Keyboard navigation
+    stepper.addEventListener('keydown', (e) => {
+      switch (e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          if (currentStep > 0) {
+            updateStepper(currentStep - 1);
+          }
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          if (currentStep < steps.length - 1 && validateStep(steps[currentStep])) {
+            updateStepper(currentStep + 1);
+          }
+          break;
+        case 'Home':
+          e.preventDefault();
+          updateStepper(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          updateStepper(steps.length - 1);
+          break;
+      }
+    });
+
+    // Form validation helper
+    function validateStep(stepElement) {
+      const form = stepElement.querySelector('form');
+      if (!form) return true;
+
+      const requiredFields = form.querySelectorAll('[required]');
+      let isValid = true;
+
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          field.setAttribute('aria-invalid', 'true');
+          isValid = false;
+        } else {
+          field.setAttribute('aria-invalid', 'false');
+        }
+      });
+
+      // Fire validation event
+      const validationEvent = new CustomEvent('axiom:stepper:validate', {
+        bubbles: true,
+        detail: { stepElement, isValid, form }
+      });
+      stepper.dispatchEvent(validationEvent);
+
+      return isValid && !validationEvent.defaultPrevented;
+    }
+
+    // Initialize first step
+    updateStepper(0);
+  });
+});
+
+// --- Tag Component ---
+/**
+ * Tag component
+ *
+ * Features:
+ * - Interactive tags with removal functionality
+ * - Keyboard support for tag management
+ * - Chip management with input integration
+ * - Accessible tag selection and filtering
+ */
+AxiomComponents.register('tag', function initTag() {
+  // Initialize tag containers
+  const tagContainers = document.querySelectorAll('.tag-container');
+
+  tagContainers.forEach(container => {
+    const tagInput = container.querySelector('input[data-tag-input]');
+    const tagList = container.querySelector('.tag-list');
+    let tags = [];
+
+    // Setup ARIA attributes
+    container.setAttribute('role', 'group');
+    container.setAttribute('aria-label', 'Tag management');
+
+    if (tagList) {
+      tagList.setAttribute('role', 'list');
+      tagList.setAttribute('aria-label', 'Selected tags');
+    }
+
+    // Create tag element
+    function createTag(text, removable = true) {
+      const tag = document.createElement('span');
+      tag.className = 'tag';
+      tag.setAttribute('role', 'listitem');
+      tag.textContent = text;
+
+      if (removable) {
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'tag-remove';
+        removeBtn.setAttribute('aria-label', `Remove ${text} tag`);
+        removeBtn.innerHTML = '×';
+        removeBtn.tabIndex = 0;
+
+        removeBtn.addEventListener('click', () => {
+          removeTag(text);
+        });
+
+        removeBtn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            removeTag(text);
+          }
+        });
+
+        tag.appendChild(removeBtn);
+      }
+
+      return tag;
+    }
+
+    // Add tag
+    function addTag(text) {
+      if (!text.trim() || tags.includes(text)) return false;
+
+      tags.push(text);
+      const tagElement = createTag(text);
+      tagList.appendChild(tagElement);
+
+      // Announce addition
+      const announcement = `Added tag: ${text}`;
+      announceToScreenReader(announcement);
+
+      // Fire custom event
+      container.dispatchEvent(new CustomEvent('axiom:tag:add', {
+        bubbles: true,
+        detail: { tag: text, tags: [...tags] }
+      }));
+
+      return true;
+    }
+
+    // Remove tag
+    function removeTag(text) {
+      const index = tags.indexOf(text);
+      if (index > -1) {
+        tags.splice(index, 1);
+        const tagElement = Array.from(tagList.children).find(
+          el => el.textContent.replace('×', '').trim() === text
+        );
+        if (tagElement) {
+          tagElement.remove();
+        }
+
+        // Announce removal
+        const announcement = `Removed tag: ${text}`;
+        announceToScreenReader(announcement);
+
+        // Fire custom event
+        container.dispatchEvent(new CustomEvent('axiom:tag:remove', {
+          bubbles: true,
+          detail: { tag: text, tags: [...tags] }
+        }));
+      }
+    }
+
+    // Screen reader announcements
+    function announceToScreenReader(message) {
+      let liveRegion = container.querySelector('.tag-live-region');
+      if (!liveRegion) {
+        liveRegion = document.createElement('div');
+        liveRegion.className = 'tag-live-region';
+        liveRegion.setAttribute('aria-live', 'polite');
+        liveRegion.style.position = 'absolute';
+        liveRegion.style.width = '1px';
+        liveRegion.style.height = '1px';
+        liveRegion.style.padding = '0';
+        liveRegion.style.margin = '-1px';
+        liveRegion.style.overflow = 'hidden';
+        liveRegion.style.clip = 'rect(0, 0, 0, 0)';
+        liveRegion.style.whiteSpace = 'nowrap';
+        liveRegion.style.border = '0';
+        container.appendChild(liveRegion);
+      }
+      liveRegion.textContent = message;
+    }
+
+    // Tag input handling
+    if (tagInput) {
+      tagInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ',') {
+          e.preventDefault();
+          const value = tagInput.value.trim();
+          if (addTag(value)) {
+            tagInput.value = '';
+          }
+        } else if (e.key === 'Backspace' && !tagInput.value && tags.length > 0) {
+          // Remove last tag if input is empty and backspace is pressed
+          removeTag(tags[tags.length - 1]);
+        }
+      });
+
+      // Auto-complete functionality
+      tagInput.addEventListener('input', () => {
+        const query = tagInput.value.toLowerCase();
+        const suggestions = container.getAttribute('data-tag-suggestions');
+
+        if (suggestions) {
+          const suggestionList = JSON.parse(suggestions)
+            .filter(suggestion =>
+              suggestion.toLowerCase().includes(query) &&
+              !tags.includes(suggestion)
+            );
+
+          // Fire suggestion event
+          container.dispatchEvent(new CustomEvent('axiom:tag:suggest', {
+            bubbles: true,
+            detail: { query, suggestions: suggestionList }
+          }));
+        }
+      });
+    }
+
+    // Initialize with existing tags
+    const existingTags = tagList?.querySelectorAll('.tag');
+    existingTags?.forEach(tag => {
+      const text = tag.textContent.replace('×', '').trim();
+      if (text && !tags.includes(text)) {
+        tags.push(text);
+      }
+    });
+  });
+
+  // Initialize clickable filter tags
+  const filterTags = document.querySelectorAll('.tag[data-filter]');
+
+  filterTags.forEach(tag => {
+    tag.setAttribute('role', 'button');
+    tag.setAttribute('tabindex', '0');
+    tag.setAttribute('aria-pressed', 'false');
+
+    function toggleTag() {
+      const isPressed = tag.getAttribute('aria-pressed') === 'true';
+      tag.setAttribute('aria-pressed', (!isPressed).toString());
+      tag.classList.toggle('active', !isPressed);
+
+      // Fire filter event
+      tag.dispatchEvent(new CustomEvent('axiom:tag:filter', {
+        bubbles: true,
+        detail: {
+          tag: tag.dataset.filter,
+          active: !isPressed,
+          element: tag
+        }
+      }));
+    }
+
+    tag.addEventListener('click', toggleTag);
+    tag.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleTag();
+      }
+    });
+  });
+});
+
+// --- Feature Toggle System ---
 const featureToggles = {
-  animations: isFeatureEnabled('--a-enable-animations'),
-  transitions: isFeatureEnabled('--a-enable-transitions'),
-  fonts: isFeatureEnabled('--a-enable-fonts'),
-  cssReset: isFeatureEnabled('--a-use-css-reset')
+  animations: true,
+  transitions: true,
+  cssReset: false,
+  fonts: true,
+  darkMode: true,
+
+  /**
+   * Check if a feature is enabled
+   * @param {string} feature - Feature name
+   * @returns {boolean}
+   */
+  isEnabled: function(feature) {
+    return this[feature] === true;
+  },
+
+  /**
+   * Toggle a feature on/off
+   * @param {string} feature - Feature name
+   * @param {boolean} enabled - Whether to enable the feature
+   */
+  toggle: function(feature, enabled) {
+    this[feature] = enabled;
+    // Dispatch event for components to react to
+    document.dispatchEvent(new CustomEvent('axiom:feature:toggle', {
+      detail: { feature, enabled }
+    }));
+  }
 };
 
-// Example usage in component initialization:
-// Only run animation logic if featureToggles.animations is true
-// Only load custom fonts if featureToggles.fonts is true
-// Only apply CSS reset if featureToggles.cssReset is true
-// Only run transition logic if featureToggles.transitions is true
+// --- Utility Functions ---
+/**
+ * Check if a CSS feature is enabled via custom properties
+ * @param {string} property - CSS custom property name
+ * @returns {boolean}
+ */
+function isFeatureEnabled(property) {
+  const value = getComputedStyle(document.documentElement).getPropertyValue(property);
+  return value === 'true' || value === '1';
+}
 
-// --- Initialize all components when DOM is loaded ---
-document.addEventListener('DOMContentLoaded', function() {
+/**
+ * Gets all focusable elements within a container (shared utility)
+ * @param {HTMLElement} container - The container element
+ * @returns {Array} Array of focusable elements
+ */
+function getFocusableElements(container) {
+  return Array.from(container.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  )).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+}
+
+/**
+ * Trap tab key navigation within a container (shared utility)
+ * @param {Event} event - The keydown event
+ * @param {HTMLElement} container - The container element
+ */
+function trapTabKey(event, container) {
+  const focusableElements = getFocusableElements(container);
+
+  if (focusableElements.length === 0) return;
+
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+
+  // If shift+tab on first element, move to last element
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault();
+    lastElement.focus();
+  }
+  // If tab on last element, move to first element
+  else if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault();
+    firstElement.focus();
+  }
+}
+
+// --- Initialize Framework ---
+document.addEventListener('DOMContentLoaded', () => {
   AxiomComponents.initAll();
 });

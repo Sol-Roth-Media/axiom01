@@ -2,106 +2,417 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Alert Component Demo</title>
-  <link rel="stylesheet" href="../css/colors_vars.css">
-  <link rel="stylesheet" href="../css/alerts.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alert Component - Axiom01 Framework</title>
   <link rel="stylesheet" href="../css/axiom.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    body {
+      padding: var(--a-padding-medium);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .example-section {
+      margin-bottom: var(--a-margin-large);
+    }
+    .alert-grid {
+      display: grid;
+      gap: var(--a-margin-base);
+      margin: var(--a-margin-base) 0;
+    }
+  </style>
 </head>
 <body>
-  <h2>Alert Component Demo</h2>
-  <h2>Overview</h2>
-  <p>The <strong>Alert</strong> component displays important messages to users, such as confirmations, warnings, errors, and informational notes. Alerts use semantic color states and can include icons, links, and dismiss buttons for accessibility and usability.</p>
-  <h2>Examples</h2>
-  <p><strong>Basic Alerts:</strong> Use alerts to communicate status or feedback. Each alert uses a semantic color and <code>role="alert"</code> for accessibility.</p>
-  <section class="alert success" role="alert">
-    This is a success alert!
-  </section>
-  <section class="alert warning" role="alert">
-    This is a warning alert!
-  </section>
-  <section class="alert error" role="alert">
-    This is an error alert!
-  </section>
-  <section class="alert info" role="alert">
-    This is an info alert!
-  </section>
-  <pre><code>&lt;section class="alert success" role="alert"&gt;
-  This is a success alert!
-&lt;/section&gt;
-&lt;section class="alert error" role="alert"&gt;
-  This is an error alert!
-&lt;/section&gt;
-</code></pre>
-  <hr>
-  <p><strong>Advanced Alerts:</strong> Add a close button for dismissible alerts, icons for context, and extra content such as links or bold text.</p>
-  <section class="alert success" role="alert">
-    <span class="icon" aria-hidden="true">&#x2714;</span>
-    This is a success alert!
-    <button class="close" aria-label="Close" onclick="this.parentElement.style.display='none'">×</button>
-  </section>
-  <section class="alert warning" role="alert">
-    <span class="icon" aria-hidden="true">&#x26A0;</span>
-    This is a warning alert!
-    <button class="close" aria-label="Close" onclick="this.parentElement.style.display='none'">×</button>
-  </section>
-  <section class="alert error" role="alert">
-    <span class="icon" aria-hidden="true">&#x2716;</span>
-    This is an error alert!
-    <button class="close" aria-label="Close" onclick="this.parentElement.style.display='none'">×</button>
-  </section>
-  <section class="alert info" role="alert">
-    <span class="icon" aria-hidden="true">&#x2139;</span>
-    This is an info alert!
-    <button class="close" aria-label="Close" onclick="this.parentElement.style.display='none'">×</button>
-  </section>
-  <section class="alert info" role="alert">
-    <strong>Heads up!</strong> This is an advanced info alert with a close button and extra content.<br>
-    <a href="#" style="color:inherit;text-decoration:underline">Learn more</a>
-    <button class="close" aria-label="Close" onclick="this.parentElement.style.display='none'">×</button>
-  </section>
-  <pre><code>&lt;section class="alert success" role="alert"&gt;
-  &lt;span class="icon" aria-hidden="true"&gt;&#x2714;&lt;/span&gt;
-  This is a success alert!
-  &lt;button class="close" aria-label="Close" onclick="this.parentElement.style.display='none'"&gt;×&lt;/button&gt;
-&lt;/section&gt;
-&lt;section class="alert info" role="alert"&gt;
-  &lt;strong&gt;Heads up!&lt;/strong&gt; This is an advanced info alert with a close button and extra content.&lt;br&gt;
-  &lt;a href="#" style="color:inherit;text-decoration:underline"&gt;Learn more&lt;/a&gt;
-  &lt;button class="close" aria-label="Close" onclick="this.parentElement.style.display='none'"&gt;×&lt;/button&gt;
-&lt;/section&gt;
-</code></pre>
-  <h3>How to use the Alert Component</h3>
-  <p>
-    <strong>Usage:</strong> Place alerts anywhere you need to communicate status, feedback, or important information. Use semantic color classes for context, and add icons or close buttons for clarity and interactivity.<br>
-    <strong>Accessibility:</strong> Always use <code>role="alert"</code> for screen reader support, and label close buttons with <code>aria-label</code>. Icons should use <code>aria-hidden="true"</code> so they are not announced by screen readers.
-  </p>
-  <pre><code>&lt;!-- Success alert --&gt;
-&lt;section class="alert success" role="alert"&gt;
-  &lt;span class="icon" aria-hidden="true"&gt;&#x2714;&lt;/span&gt;
-  Operation successful!
-&lt;/section&gt;
+  <nav>
+    <a href="../index.html">← Back to Framework</a>
+  </nav>
 
-&lt;!-- Error alert with close button --&gt;
-&lt;section class="alert error" role="alert"&gt;
-  &lt;span class="icon" aria-hidden="true"&gt;&#x2716;&lt;/span&gt;
-  Something went wrong.
-  &lt;button class="close" aria-label="Close" onclick="this.parentElement.style.display='none'"&gt;×&lt;/button&gt;
-&lt;/section&gt;
+  <main>
+    <header>
+      <h1>Alert Component</h1>
+      <p>Accessible alert messages for user feedback with proper ARIA announcements, semantic colors, dismissal options, and comprehensive keyboard navigation.</p>
+    </header>
 
-&lt;!-- Info alert with extra content --&gt;
-&lt;section class="alert info" role="alert"&gt;
-  &lt;strong&gt;Heads up!&lt;/strong&gt; This is an info alert with a link and close button.&lt;br&gt;
-  &lt;a href="#" style="color:inherit;text-decoration:underline"&gt;Learn more&lt;/a&gt;
-  &lt;button class="close" aria-label="Close" onclick="this.parentElement.style.display='none'"&gt;×&lt;/button&gt;
-&lt;/section&gt;
-</code></pre>
-  <h3>Options</h3>
-  <ul>
-    <li><strong>Type:</strong> <code>success</code>, <code>warning</code>, <code>error</code>, <code>info</code></li>
-    <li><strong>Icon:</strong> Use <code>&lt;span class="icon"&gt;</code> for a semantic icon</li>
-    <li><strong>Close Button:</strong> Add <code>&lt;button class="close"&gt;</code> for dismissible alerts</li>
-    <li><strong>Extra Content:</strong> Add links, bold text, or other elements as needed</li>
-    <li><strong>Accessibility:</strong> Always use <code>role="alert"</code> and <code>aria-label</code> for close buttons</li>
-  </ul>
-</body>
-</html>
+    <section class="example-section">
+      <h2>Basic Alerts</h2>
+      <p>Standard alert messages with semantic color coding and proper accessibility attributes.</p>
+
+      <div class="alert-grid">
+        <div class="alert success" role="alert" aria-live="polite">
+          <span class="alert-icon" aria-hidden="true">✓</span>
+          <div class="alert-content">
+            <strong>Success!</strong> Your changes have been saved successfully.
+          </div>
+        </div>
+
+        <div class="alert info" role="alert" aria-live="polite">
+          <span class="alert-icon" aria-hidden="true">ℹ</span>
+          <div class="alert-content">
+            <strong>Information:</strong> Your session will expire in 5 minutes.
+          </div>
+        </div>
+
+        <div class="alert warning" role="alert" aria-live="polite">
+          <span class="alert-icon" aria-hidden="true">⚠</span>
+          <div class="alert-content">
+            <strong>Warning:</strong> Please review your information before submitting.
+          </div>
+        </div>
+
+        <div class="alert error" role="alert" aria-live="assertive">
+          <span class="alert-icon" aria-hidden="true">✗</span>
+          <div class="alert-content">
+            <strong>Error:</strong> Unable to save changes. Please try again.
+          </div>
+        </div>
+      </div>
+
+      <pre><code>&lt;div class="alert success" role="alert" aria-live="polite"&gt;
+  &lt;span class="alert-icon" aria-hidden="true"&gt;✓&lt;/span&gt;
+  &lt;div class="alert-content"&gt;
+    &lt;strong&gt;Success!&lt;/strong&gt; Your message here.
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="example-section">
+      <h2>Dismissible Alerts</h2>
+      <p>Alerts with close buttons and proper focus management for dismissal.</p>
+
+      <div class="alert-grid">
+        <div class="alert success dismissible" role="alert" aria-live="polite">
+          <span class="alert-icon" aria-hidden="true">✓</span>
+          <div class="alert-content">
+            <strong>Task completed!</strong> The document has been uploaded and processed.
+          </div>
+          <button class="alert-close" aria-label="Close success alert" data-alert-close>
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+
+        <div class="alert warning dismissible" role="alert" aria-live="polite">
+          <span class="alert-icon" aria-hidden="true">⚠</span>
+          <div class="alert-content">
+            <strong>Storage almost full:</strong> You're using 90% of your storage space.
+            <a href="#upgrade" class="alert-link">Upgrade now</a>
+          </div>
+          <button class="alert-close" aria-label="Close warning alert" data-alert-close>
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+
+        <div class="alert error dismissible" role="alert" aria-live="assertive">
+          <span class="alert-icon" aria-hidden="true">✗</span>
+          <div class="alert-content">
+            <strong>Connection failed:</strong> Check your internet connection and try again.
+            <button class="alert-action primary small">Retry</button>
+          </div>
+          <button class="alert-close" aria-label="Close error alert" data-alert-close>
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </div>
+
+      <pre><code>&lt;div class="alert warning dismissible" role="alert" aria-live="polite"&gt;
+  &lt;span class="alert-icon" aria-hidden="true"&gt;⚠&lt;/span&gt;
+  &lt;div class="alert-content"&gt;
+    &lt;strong&gt;Warning:&lt;/strong&gt; Message with &lt;a href="#" class="alert-link"&gt;link&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;button class="alert-close" aria-label="Close alert" data-alert-close&gt;
+    &lt;span aria-hidden="true"&gt;×&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="example-section">
+      <h2>Complex Alerts</h2>
+      <p>Alerts with multiple actions, lists, and rich content.</p>
+
+      <div class="alert-grid">
+        <div class="alert info dismissible" role="alert" aria-live="polite">
+          <span class="alert-icon" aria-hidden="true">📋</span>
+          <div class="alert-content">
+            <header>
+              <strong>System Update Available</strong>
+            </header>
+            <section>
+              <p>A new version (v2.1.3) is available with the following improvements:</p>
+              <ul>
+                <li>Enhanced security features</li>
+                <li>Performance improvements</li>
+                <li>Bug fixes for form validation</li>
+              </ul>
+            </section>
+            <footer>
+              <button class="alert-action primary small">Update Now</button>
+              <button class="alert-action secondary small">Later</button>
+            </footer>
+          </div>
+          <button class="alert-close" aria-label="Close update alert" data-alert-close>
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+
+        <div class="alert warning dismissible" role="alert" aria-live="polite">
+          <span class="alert-icon" aria-hidden="true">🛡️</span>
+          <div class="alert-content">
+            <header>
+              <strong>Security Notice</strong>
+            </header>
+            <section>
+              <p>We detected unusual activity on your account. Please verify:</p>
+              <ul>
+                <li>Recent login from new device</li>
+                <li>Password last changed 6 months ago</li>
+              </ul>
+            </section>
+            <footer>
+              <button class="alert-action danger small">Secure Account</button>
+              <button class="alert-action secondary small">Review Activity</button>
+            </footer>
+          </div>
+          <button class="alert-close" aria-label="Close security alert" data-alert-close>
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="example-section">
+      <h2>Alert Variants</h2>
+      <p>Different styling variants for various contexts.</p>
+
+      <div class="alert-grid">
+        <div class="alert success compact" role="alert" aria-live="polite">
+          <span class="alert-icon" aria-hidden="true">✓</span>
+          <div class="alert-content">Saved!</div>
+        </div>
+
+        <div class="alert info banner" role="alert" aria-live="polite">
+          <span class="alert-icon" aria-hidden="true">📢</span>
+          <div class="alert-content">
+            <strong>Maintenance Notice:</strong> Scheduled maintenance on Sunday 3-5 AM EST.
+          </div>
+          <button class="alert-close" aria-label="Close maintenance notice" data-alert-close>
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+
+        <div class="alert error inline" role="alert" aria-live="polite">
+          <span class="alert-icon" aria-hidden="true">✗</span>
+          <div class="alert-content">Invalid email format</div>
+        </div>
+      </div>
+
+      <pre><code>&lt;div class="alert success compact"&gt;...&lt;/div&gt;
+&lt;div class="alert info banner"&gt;...&lt;/div&gt;
+&lt;div class="alert error inline"&gt;...&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="example-section">
+      <h2>Accessibility Features</h2>
+      <ul>
+        <li><strong>ARIA Live Regions:</strong> <code>aria-live="polite"</code> for most alerts, <code>"assertive"</code> for errors</li>
+        <li><strong>Semantic Roles:</strong> <code>role="alert"</code> for immediate announcements</li>
+        <li><strong>Icon Accessibility:</strong> Icons marked with <code>aria-hidden="true"</code></li>
+        <li><strong>Close Button Labels:</strong> Descriptive <code>aria-label</code> for screen readers</li>
+        <li><strong>Keyboard Navigation:</strong> Close buttons accessible via Tab/Enter/Space</li>
+        <li><strong>Focus Management:</strong> Focus returns to appropriate element after dismissal</li>
+      </ul>
+    </section>
+
+    <section class="example-section">
+      <h2>Dynamic Alert Creation</h2>
+      <p>Examples of programmatically created alerts:</p>
+
+      <div style="margin: var(--a-margin-base) 0;">
+        <button class="primary" onclick="AxiomAlert.show('success', 'Operation completed successfully!')">
+          Show Success Alert
+        </button>
+        <button class="secondary" onclick="AxiomAlert.show('warning', 'This is a warning message with auto-dismiss.', {autoDismiss: 3000})">
+          Show Auto-dismiss Warning
+        </button>
+        <button class="danger" onclick="AxiomAlert.show('error', 'Critical error occurred!', {persistent: true})">
+          Show Persistent Error
+        </button>
+      </div>
+
+      <div id="alert-container" aria-live="polite" aria-atomic="false"></div>
+    </section>
+
+    <section class="example-section">
+      <h2>CSS Implementation</h2>
+      <p>Alert styling using CSS variables and semantic selectors:</p>
+      <pre><code>.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--a-space-small);
+  padding: var(--a-padding-medium);
+  border-radius: var(--a-border-radius-base);
+  border: var(--a-border-width-base) solid transparent;
+  background: var(--a-color-surface-variant);
+  color: var(--a-color-on-surface-variant);
+}
+
+.alert.success {
+  background: var(--a-color-success-container);
+  color: var(--a-color-on-success-container);
+  border-color: var(--a-color-success);
+}
+
+.alert.error {
+  background: var(--a-color-error-container);
+  color: var(--a-color-on-error-container);
+  border-color: var(--a-color-error);
+}
+
+.alert-icon {
+  flex-shrink: 0;
+  font-size: var(--a-font-size-icon-medium);
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: var(--a-padding-tiny);
+  color: inherit;
+}</code></pre>
+    </section>
+
+    <footer>
+      <p><strong>Best Practices:</strong></p>
+      <ul>
+        <li>Use <code>aria-live="assertive"</code> for critical errors, <code>"polite"</code> for other alerts</li>
+        <li>Provide clear, actionable messages with specific next steps</li>
+        <li>Include close buttons for dismissible alerts with descriptive labels</li>
+        <li>Use semantic colors that align with message importance</li>
+        <li>Test alerts with screen readers to ensure proper announcements</li>
+        <li>Consider auto-dismiss timing for non-critical alerts</li>
+      </ul>
+    </footer>
+  </main>
+
+  <script>
+    // Enhanced Alert Implementation for Axiom01
+    class AxiomAlert {
+      static container = null;
+
+      static init() {
+        // Initialize alert container if it doesn't exist
+        if (!this.container) {
+          this.container = document.getElementById('alert-container') ||
+                          this.createContainer();
+        }
+
+        // Set up event listeners for existing alerts
+        this.setupEventListeners();
+      }
+
+      static createContainer() {
+        const container = document.createElement('div');
+        container.id = 'alert-container';
+        container.setAttribute('aria-live', 'polite');
+        container.setAttribute('aria-atomic', 'false');
+        container.style.position = 'fixed';
+        container.style.top = 'var(--a-padding-medium)';
+        container.style.right = 'var(--a-padding-medium)';
+        container.style.zIndex = '1000';
+        container.style.maxWidth = '400px';
+        document.body.appendChild(container);
+        return container;
+      }
+
+      static setupEventListeners() {
+        // Handle close button clicks
+        document.addEventListener('click', (e) => {
+          if (e.target.matches('[data-alert-close]')) {
+            this.dismissAlert(e.target.closest('.alert'));
+          }
+        });
+
+        // Handle keyboard events for alerts
+        document.addEventListener('keydown', (e) => {
+          if (e.target.matches('[data-alert-close]') && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            this.dismissAlert(e.target.closest('.alert'));
+          }
+          if (e.key === 'Escape') {
+            const focusedAlert = e.target.closest('.alert');
+            if (focusedAlert && focusedAlert.querySelector('[data-alert-close]')) {
+              this.dismissAlert(focusedAlert);
+            }
+          }
+        });
+      }
+
+      static show(type, message, options = {}) {
+        const alert = this.createAlert(type, message, options);
+
+        if (options.target) {
+          options.target.appendChild(alert);
+        } else {
+          this.container.appendChild(alert);
+        }
+
+        // Trigger reflow for animation
+        alert.offsetHeight;
+        alert.classList.add('show');
+
+        // Auto-dismiss if specified
+        if (options.autoDismiss && !options.persistent) {
+          setTimeout(() => {
+            this.dismissAlert(alert);
+          }, options.autoDismiss);
+        }
+
+        return alert;
+      }
+
+      static createAlert(type, message, options) {
+        const alert = document.createElement('div');
+        alert.className = `alert ${type}${options.dismissible !== false ? ' dismissible' : ''}`;
+        alert.setAttribute('role', 'alert');
+        alert.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+
+        const icons = {
+          success: '✓',
+          info: 'ℹ',
+          warning: '⚠',
+          error: '✗'
+        };
+
+        alert.innerHTML = `
+          <span class="alert-icon" aria-hidden="true">${icons[type] || 'ℹ'}</span>
+          <div class="alert-content">
+            ${message}
+          </div>
+          ${options.dismissible !== false ? `
+            <button class="alert-close" aria-label="Close ${type} alert" data-alert-close>
+              <span aria-hidden="true">×</span>
+            </button>
+          ` : ''}
+        `;
+
+        // Add custom classes
+        if (options.className) {
+          alert.classList.add(...options.className.split(' '));
+        }
+
+        return alert;
+      }
+
+      static dismissAlert(alert, callback) {
+        if (!alert) return;
+
+        // Add dismiss animation
+        alert.style.transition = 'all 0.3s ease';
+        alert.style.opacity = '0';
+        alert.style.transform = 'translateX(100%)';
+
+        setTimeout(() => {
+          if

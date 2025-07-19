@@ -34,6 +34,41 @@ form.addEventListener('submit', function(e) {
   // ...show results
 });
 </code></pre>
+  <!-- Search Component Intro & Use Cases -->
+  <section class="section" style="max-width:900px;margin:2em auto 1em auto;padding:2em;background:var(--a-color-surface);border-radius:12px;box-shadow:0 2px 12px #0001;">
+    <h1 class="a-title" style="text-align:center;margin-bottom:1em;">Axiom01 Search Component</h1>
+    <p class="a-lead" style="text-align:center;max-width:700px;margin:0 auto 2em;">
+      The Axiom01 search component lets users quickly find documentation, demos, and guides. It is fast, accessible, and easy to integrate in any layout.
+    </p>
+    <h2 class="a-subtitle">Why Use This Component?</h2>
+    <ul class="a-list a-list-check" style="max-width:700px;margin:0 auto 2em;">
+      <li>Instant client-side search for docs and demos</li>
+      <li>Works in modals, headers, sidebars, and inline</li>
+      <li>Keyboard and screen reader friendly</li>
+      <li>Customizable for any theme or layout</li>
+      <li>Extensible with fuzzy search and API integration</li>
+    </ul>
+  </section>
+  <h2>Quick Start</h2>
+  <section class="section" style="max-width:900px;margin:2em auto 1em auto;padding:2em;background:var(--a-color-surface);border-radius:12px;box-shadow:0 2px 12px #0001;">
+    <p style="text-align:center;max-width:700px;margin:0 auto 2em;">Add a search form anywhere in your layout and connect it to your docs array:</p>
+    <pre style="background:#f8f8f8;padding:1em;border-radius:8px;overflow-x:auto;"><code class="language-html">&lt;form id="my-search-form" role="search" aria-label="Search documentation"&gt;
+  &lt;input type="search" id="my-search-input" name="q" placeholder="Search docs..."&gt;
+  &lt;button type="submit"&gt;Search&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+    <pre style="background:#f8f8f8;padding:1em;border-radius:8px;overflow-x:auto;"><code class="language-js">const docPages = [
+  { title: 'Card Component', url: 'components/card.html' },
+  // ...more pages
+];
+const form = document.getElementById('my-search-form');
+const input = document.getElementById('my-search-input');
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const query = input.value.trim().toLowerCase();
+  const results = docPages.filter(page => page.title.toLowerCase().includes(query));
+  // ...show results
+});</code></pre>
+  </section>
   <h2>Advanced Usage</h2>
   <ul style="font-size:1em;max-width:700px;margin:0 auto 2em;">
     <li>Implement fuzzy matching for more flexible search.</li>
@@ -101,21 +136,30 @@ form.addEventListener('submit', function(e) {
       <div id="header-search-results" style="max-width:420px;margin:0 auto 2em;"></div>
     </div>
   </div>
-  <h2 class="a-subtitle">Accessibility & Best Practices</h2>
-  <ul class="a-list a-list-check" style="max-width:700px;margin:0 auto 2em;">
-    <li>Use <code>role="search"</code> and <code>aria-label</code> for forms.</li>
-    <li>Ensure keyboard navigation (Tab, Escape, Enter).</li>
-    <li>Use <code>aria-modal</code> and <code>aria-labelledby</code> for modals.</li>
-    <li>Provide clear focus states and error messages.</li>
-    <li>Style with CSS variables for theme consistency.</li>
-  </ul>
-  <h2 class="a-subtitle">Advanced Usage</h2>
-  <ul class="a-list" style="max-width:700px;margin:0 auto 2em;">
-    <li>Implement fuzzy matching for flexible search (<a href="https://fusejs.io/" target="_blank">Fuse.js</a>).</li>
-    <li>Integrate with external APIs for large documentation sets.</li>
-    <li>Live region updates for screen readers.</li>
-    <li>Custom result templates and highlighting.</li>
-  </ul>
+  <!-- Accessibility & Customization Tips -->
+  <section class="section" style="max-width:900px;margin:2em auto 1em auto;padding:2em;background:var(--a-color-surface);border-radius:12px;box-shadow:0 2px 12px #0001;">
+    <h2 class="a-subtitle" style="text-align:center;margin-bottom:1em;">Accessibility & Customization Tips</h2>
+    <ul class="a-list a-list-check" style="max-width:700px;margin:0 auto 2em;">
+      <li>Use <code>role="search"</code> and <code>aria-label</code> for forms.</li>
+      <li>Ensure keyboard navigation (Tab, Escape, Enter) is supported.</li>
+      <li>Use <code>aria-modal</code> and <code>aria-labelledby</code> for modals.</li>
+      <li>Provide clear focus states and error messages for all inputs.</li>
+      <li>Style results and forms with CSS variables for instant theming.</li>
+      <li>Customize the <code>docPages</code> array to match your docs.</li>
+      <li>Preview and test search in all layouts (modal, header, sidebar, inline).</li>
+    </ul>
+  </section>
+  <!-- Troubleshooting & FAQ -->
+  <section class="section" style="max-width:900px;margin:2em auto 1em auto;padding:2em;background:var(--a-color-surface);border-radius:12px;box-shadow:0 2px 12px #0001;">
+    <h2 class="a-subtitle" style="text-align:center;margin-bottom:1em;">Troubleshooting & FAQ</h2>
+    <ul class="a-list" style="max-width:700px;margin:0 auto 2em;">
+      <li><strong>Search not working?</strong> Check that your <code>docPages</code> array is populated and your form IDs match your JS.</li>
+      <li><strong>Results not showing?</strong> Make sure your results container exists and is updated in your JS logic.</li>
+      <li><strong>Accessibility issues?</strong> Use ARIA roles and labels, and test with keyboard and screen readers.</li>
+      <li><strong>Want fuzzy search?</strong> Integrate <a href="https://fusejs.io/" target="_blank">Fuse.js</a> for advanced matching.</li>
+      <li><strong>Need to search external docs?</strong> Replace the filter logic with an API call and display results as needed.</li>
+    </ul>
+  </section>
 </section>
 <!-- Modal Search Dialog -->
 <div id="modal-search" role="dialog" aria-modal="true" aria-labelledby="modal-search-title" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#0006;z-index:99999;align-items:center;justify-content:center;">

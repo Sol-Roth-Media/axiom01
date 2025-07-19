@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Browser - Axiom01 Framework</title>
+  <link rel="stylesheet" href="../css/axiom.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <style>
+    body {
+      padding: var(--a-padding-medium);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .component-browser {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: var(--a-margin-large);
+      height: 80vh;
+      border: var(--a-border-width-base) solid var(--a-color-outline);
+      border-radius: var(--a-border-radius-base);
+      overflow: hidden;
+    }
+    .component-sidebar {
+      background: var(--a-color-surface-variant);
+      padding: var(--a-padding-medium);
+      overflow-y: auto;
+    }
+    .component-content {
+      background: var(--a-color-surface);
+      overflow-y: auto;
+      position: relative;
+    }
+    .component-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .component-item {
+      margin-bottom: var(--a-margin-small);
+    }
+    .component-link {
+      display: flex;
+      align-items: center;
+      gap: var(--a-space-small);
+      padding: var(--a-padding-small) var(--a-padding-medium);
+      text-decoration: none;
+      color: var(--a-color-on-surface-variant);
+      border-radius: var(--a-border-radius-base);
+      transition: all 0.2s ease;
+      font-weight: var(--a-font-weight-medium);
+    }
+    .component-link:hover,
+    .component-link.active {
+      background: var(--a-color-primary-container);
+      color: var(--a-color-on-primary-container);
+    }
+    .component-icon {
+      width: 20px;
+      text-align: center;
+    }
+    .loading-spinner {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: var(--a-font-size-large);
+      color: var(--a-color-primary);
+    }
+    .loading-spinner.show {
+      display: block;
+    }
+    .iframe-container {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .component-header {
+      padding: var(--a-padding-medium);
+      border-bottom: var(--a-border-width-base) solid var(--a-color-outline);
+      background: var(--a-color-surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .close-browser {
+      background: transparent;
+      border: none;
+      color: var(--a-color-on-surface);
+      cursor: pointer;
+      padding: var(--a-padding-small);
+      border-radius: var(--a-border-radius-base);
+      transition: background-color 0.2s ease;
+    }
+    .close-browser:hover {
+      background: var(--a-color-error-container);
+      color: var(--a-color-on-error-container);
+    }
+    @media (max-width: 768px) {
+      .component-browser {
+        grid-template-columns: 1fr;
+        height: 90vh;
+      }
+      .component-sidebar {
+        display: none;
+      }
+      .mobile-nav {
+        display: block;
+        padding: var(--a-padding-medium);
+        background: var(--a-color-surface-variant);
+      }
+    }
+    .mobile-nav {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html">← Back to Framework</a>
+  </nav>
+
+  <main>
+    <header>
+      <h1>Component Browser</h1>
+      <p>Interactive component documentation and examples. Browse components without losing context.</p>
+    </header>
+
+    <div class="component-browser" id="component-browser">
+      <aside class="component-sidebar">
+        <h3>Components</h3>
+        <ul class="component-list" id="component-list">
+          <li class="component-item">
+            <a href="#" class="component-link" data-component="button">
+              <span class="component-icon">🔘</span>
+              <span>Button</span>
+            </a>
+          </li>
+          <li class="component-item">
+            <a href="#" class="component-link" data-component="card">
+              <span class="component-icon">🃏</span>
+              <span>Card</span>
+            </a>
+          </li>
+          <li class="component-item">
+            <a href="#" class="component-link" data-component="modal">
+              <span class="component-icon">🪟</span>
+              <span>Modal</span>
+            </a>
+          </li>
+          <li class="component-item">
+            <a href="#" class="component-link" data-component="forms">
+              <span class="component-icon">📝</span>
+              <span>Forms</span>
+            </a>
+          </li>
+          <li class="component-item">
+            <a href="#" class="component-link" data-component="tabs">
+              <span class="component-icon">📑</span>
+              <span>Tabs</span>
+            </a>
+          </li>
+          <li class="component-item">
+            <a href="#" class="component-link" data-component="dropdown">
+              <span class="component-icon">📋</span>
+              <span>Dropdown</span>
+            </a>
+          </li>
+          <li class="component-item">
+            <a href="#" class="component-link" data-component="accordion">
+              <span class="component-icon">🪗</span>
+              <span>Accordion</span>
+            </a>
+          </li>
+          <li class="component-item">
+            <a href="#" class="component-link" data-component="alert">
+              <span class="component-icon">⚠️</span>
+              <span>Alert</span>
+            </a>
+          </li>
+          <li class="component-item">
+            <a href="#" class="component-link" data-component="progress-bar">
+              <span class="component-icon">📊</span>
+              <span>Progress Bar</span>
+            </a>
+          </li>
+          <li class="component-item">
+            <a href="#" class="component-link" data-component="navbar">
+              <span class="component-icon">🧭</span>
+              <span>Navbar</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <main class="component-content">
+        <div class="component-header">
+          <h2 id="current-component">Select a component</h2>
+          <button class="close-browser" id="close-browser" aria-label="Close component browser">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+
+        <div class="mobile-nav">
+          <select id="mobile-component-select">
+            <option value="">Select a component...</option>
+            <option value="button">Button</option>
+            <option value="card">Card</option>
+            <option value="modal">Modal</option>
+            <option value="forms">Forms</option>
+            <option value="tabs">Tabs</option>
+            <option value="dropdown">Dropdown</option>
+            <option value="accordion">Accordion</option>
+            <option value="alert">Alert</option>
+            <option value="progress-bar">Progress Bar</option>
+            <option value="navbar">Navbar</option>
+          </select>
+        </div>
+
+        <div class="loading-spinner" id="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i>
+          Loading component...
+        </div>
+
+        <iframe class="iframe-container" id="component-iframe" title="Component documentation"></iframe>
+      </main>
+    </div>
+  </main>
+
+  <script>
+    // Component Browser JavaScript
+    class ComponentBrowser {
+      constructor() {
+        this.currentComponent = null;
+        this.componentLinks = document.querySelectorAll('.component-link');
+        this.iframe = document.getElementById('component-iframe');
+        this.loadingSpinner = document.getElementById('loading-spinner');
+        this.currentComponentTitle = document.getElementById('current-component');
+        this.closeBrowser = document.getElementById('close-browser');
+        this.mobileSelect = document.getElementById('mobile-component-select');
+
+        this.init();
+      }
+
+      init() {
+        // Desktop component links
+        this.componentLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const component = link.getAttribute('data-component');
+            this.loadComponent(component);
+          });
+        });
+
+        // Mobile component select
+        this.mobileSelect.addEventListener('change', (e) => {
+          const component = e.target.value;
+          if (component) {
+            this.loadComponent(component);
+          }
+        });
+
+        // Close browser
+        this.closeBrowser.addEventListener('click', () => {
+          this.closeComponentBrowser();
+        });
+
+        // Iframe load event
+        this.iframe.addEventListener('load', () => {
+          this.hideLoading();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            this.closeComponentBrowser();
+          }
+        });
+
+        // Touch support for mobile
+        this.setupTouchSupport();
+      }
+
+      loadComponent(componentName) {
+        if (componentName === this.currentComponent) return;
+
+        this.showLoading();
+        this.currentComponent = componentName;
+
+        // Update active state
+        this.componentLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('data-component') === componentName);
+        });
+
+        // Update mobile select
+        this.mobileSelect.value = componentName;
+
+        // Update title
+        this.currentComponentTitle.textContent = componentName.charAt(0).toUpperCase() + componentName.slice(1) + ' Component';
+
+        // Load component in iframe
+        this.iframe.src = `${componentName}.html`;
+
+        // Update URL without page reload
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.set('component', componentName);
+        window.history.pushState({ component: componentName }, '', newUrl);
+      }
+
+      showLoading() {
+        this.loadingSpinner.classList.add('show');
+        this.iframe.style.opacity = '0.5';
+      }
+
+      hideLoading() {
+        this.loadingSpinner.classList.remove('show');
+        this.iframe.style.opacity = '1';
+      }
+
+      closeComponentBrowser() {
+        // This would be used when the component browser is embedded in index.html
+        if (window.parent !== window) {
+          window.parent.postMessage({ action: 'closeBrowser' }, '*');
+        } else {
+          // Navigate back to main page
+          window.location.href = '../index.html';
+        }
+      }
+
+      setupTouchSupport() {
+        // Add touch support for component links
+        this.componentLinks.forEach(link => {
+          link.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const component = link.getAttribute('data-component');
+            this.loadComponent(component);
+          });
+        });
+      }
+
+      // Method to be called from parent window (index.html)
+      openComponent(componentName) {
+        this.loadComponent(componentName);
+      }
+    }
+
+    // Initialize component browser
+    document.addEventListener('DOMContentLoaded', () => {
+      const browser = new ComponentBrowser();
+
+      // Check URL parameters for initial component
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialComponent = urlParams.get('component');
+      if (initialComponent) {
+        browser.loadComponent(initialComponent);
+      }
+
+      // Make browser available globally for parent window communication
+      window.componentBrowser = browser;
+    });
+
+    // Listen for messages from parent window
+    window.addEventListener('message', (event) => {
+      if (event.data.action === 'loadComponent') {
+        window.componentBrowser.openComponent(event.data.component);
+      }
+    });
+  </script>
+</body>
+</html>

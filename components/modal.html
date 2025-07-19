@@ -3,134 +3,347 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Axiom01 Modal Component Documentation</title>
+  <title>Modal Component - Axiom01 Framework</title>
   <link rel="stylesheet" href="../css/axiom.css">
   <link rel="stylesheet" href="../css/components.css">
+  <style>
+    body {
+      padding: var(--a-padding-medium);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .example-section {
+      margin-bottom: var(--a-margin-large);
+    }
+    .modal-trigger-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--a-margin-base);
+      margin: var(--a-margin-base) 0;
+    }
+  </style>
 </head>
 <body>
   <nav>
-    <a href="../axiom01.html">Back to Axiom01 Docs</a>
+    <a href="../index.html">← Back to Framework</a>
   </nav>
+
   <main>
-    <h1>Modal Component</h1>
-    <section>
-      <h2>Overview</h2>
-      <p>The <strong>Modal</strong> component provides a dialog interface for user interactions, confirmations, and forms. It follows accessibility best practices and is styled with the axiom01 framework.</p>
-    </section>
-    <section>
-      <h2>Example</h2>
-      <p><strong>Basic Modal:</strong> A modal dialog overlays the page and focuses user attention for important actions, confirmations, or forms. It is accessible, traps keyboard focus, and can be closed with Escape or by clicking outside. Use semantic markup and minimal classes for clarity and maintainability.</p>
-      <button class="button" onclick="document.getElementById('demo-modal').classList.add('open')">Open Modal</button>
-      <div class="modal" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+    <header>
+      <h1>Modal Component</h1>
+      <p>Modal dialogs provide focused user interactions with proper focus management, keyboard navigation, and accessibility features. Built following WCAG 2.1 AA standards.</p>
+    </header>
+
+    <section class="example-section">
+      <h2>Basic Modal</h2>
+      <p>Simple modal with proper focus trap, escape key handling, and backdrop dismiss.</p>
+
+      <div class="modal-trigger-grid">
+        <button class="primary" data-modal="basic-modal">Open Basic Modal</button>
+      </div>
+
+      <div class="modal" id="basic-modal" role="dialog" aria-modal="true" aria-labelledby="basic-modal-title" aria-hidden="true">
         <div class="modal-content">
           <header>
-            <h3 id="modal-title">Example Modal</h3>
-            <button aria-label="Close" onclick="document.getElementById('demo-modal').classList.remove('open')">&times;</button>
+            <h3 id="basic-modal-title">Basic Modal Dialog</h3>
+            <button class="modal-close" aria-label="Close modal" data-modal-close>&times;</button>
           </header>
           <section>
-            <p>This is a modal dialog. It traps focus and can be closed with Escape or by clicking outside.</p>
+            <p>This modal demonstrates proper accessibility features including focus trapping, keyboard navigation, and screen reader support.</p>
+            <p>Use Tab to navigate between focusable elements, Escape to close, or click the backdrop.</p>
           </section>
           <footer>
-            <button class="button" onclick="document.getElementById('demo-modal').classList.remove('open')">Close</button>
+            <button class="secondary" data-modal-close>Cancel</button>
+            <button class="primary">Confirm</button>
           </footer>
         </div>
       </div>
-      <pre><code>&lt;button class="button" onclick="document.getElementById('demo-modal').classList.add('open')"&gt;Open Modal&lt;/button&gt;
-&lt;div class="modal" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1"&gt;
+
+      <pre><code>&lt;button data-modal="basic-modal"&gt;Open Modal&lt;/button&gt;
+
+&lt;div class="modal" id="basic-modal" role="dialog" aria-modal="true"
+     aria-labelledby="basic-modal-title" aria-hidden="true"&gt;
   &lt;div class="modal-content"&gt;
     &lt;header&gt;
-      &lt;h3 id="modal-title"&gt;Example Modal&lt;/h3&gt;
-      &lt;button aria-label="Close" onclick="document.getElementById('demo-modal').classList.remove('open')"&gt;&amp;times;&lt;/button&gt;
+      &lt;h3 id="basic-modal-title"&gt;Modal Title&lt;/h3&gt;
+      &lt;button class="modal-close" aria-label="Close modal"
+              data-modal-close&gt;&times;&lt;/button&gt;
     &lt;/header&gt;
     &lt;section&gt;
-      &lt;p&gt;This is a modal dialog. It traps focus and can be closed with Escape or by clicking outside.&lt;/p&gt;
+      &lt;p&gt;Modal content goes here.&lt;/p&gt;
     &lt;/section&gt;
     &lt;footer&gt;
-      &lt;button class="button" onclick="document.getElementById('demo-modal').classList.remove('open')"&gt;Close&lt;/button&gt;
+      &lt;button data-modal-close&gt;Cancel&lt;/button&gt;
+      &lt;button class="primary"&gt;Confirm&lt;/button&gt;
     &lt;/footer&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-      <script>
-        // Basic focus trap and Escape key close for demo
-        document.getElementById('demo-modal').addEventListener('keydown', function(e) {
-          if (e.key === 'Escape') this.classList.remove('open');
-        });
-        document.getElementById('demo-modal').addEventListener('click', function(e) {
-          if (e.target === this) this.classList.remove('open');
-        });
-      </script>
+&lt;/div&gt;</code></pre>
     </section>
-    <section>
-      <h2>Advanced Example</h2>
-      <p><strong>Advanced Modal:</strong> Modals can contain forms, multiple actions, and any semantic content. This example shows a contact form inside a modal, with Cancel and Send actions. All controls are accessible and keyboard-friendly.</p>
-      <button class="button" onclick="document.getElementById('adv-modal').classList.add('open')">Open Advanced Modal</button>
-      <div class="modal" id="adv-modal" role="dialog" aria-modal="true" aria-labelledby="adv-modal-title" tabindex="-1">
+
+    <section class="example-section">
+      <h2>Form Modal</h2>
+      <p>Modal containing a form with proper validation and submission handling.</p>
+
+      <div class="modal-trigger-grid">
+        <button class="secondary" data-modal="form-modal">Open Form Modal</button>
+      </div>
+
+      <div class="modal" id="form-modal" role="dialog" aria-modal="true" aria-labelledby="form-modal-title" aria-hidden="true">
         <div class="modal-content">
           <header>
-            <h3 id="adv-modal-title">Contact Form</h3>
-            <button aria-label="Close" onclick="document.getElementById('adv-modal').classList.remove('open')">&times;</button>
+            <h3 id="form-modal-title">Contact Form</h3>
+            <button class="modal-close" aria-label="Close modal" data-modal-close>&times;</button>
           </header>
           <section>
-            <form>
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" required>
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" required>
-              <label for="message">Message</label>
-              <textarea id="message" name="message" required></textarea>
+            <form id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="contact-name">Name <span aria-label="required">*</span></label>
+                <input id="contact-name" name="name" type="text" required aria-describedby="name-error">
+                <div id="name-error" class="error-message" role="alert" aria-live="polite"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email">Email <span aria-label="required">*</span></label>
+                <input id="contact-email" name="email" type="email" required aria-describedby="email-error">
+                <div id="email-error" class="error-message" role="alert" aria-live="polite"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" rows="4" aria-describedby="message-help"></textarea>
+                <div id="message-help" class="help-text">Optional: Tell us more about your inquiry</div>
+              </div>
             </form>
           </section>
           <footer>
-            <button class="button" onclick="document.getElementById('adv-modal').classList.remove('open')">Cancel</button>
-            <button class="button" type="submit" form="contact-form">Send</button>
+            <button class="secondary" data-modal-close>Cancel</button>
+            <button class="primary" type="submit" form="contact-form">Send Message</button>
           </footer>
         </div>
       </div>
-      <pre><code>&lt;button class="button" onclick="document.getElementById('adv-modal').classList.add('open')"&gt;Open Advanced Modal&lt;/button&gt;
-&lt;div class="modal" id="adv-modal" role="dialog" aria-modal="true" aria-labelledby="adv-modal-title" tabindex="-1"&gt;
-  &lt;div class="modal-content"&gt;
-    &lt;header&gt;
-      &lt;h3 id="adv-modal-title"&gt;Contact Form&lt;/h3&gt;
-      &lt;button aria-label="Close" onclick="document.getElementById('adv-modal').classList.remove('open')"&gt;&amp;times;&lt;/button&gt;
-    &lt;/header&gt;
-    &lt;section&gt;
-      &lt;form&gt;
-        &lt;label for="name"&gt;Name&lt;/label&gt;
-        &lt;input id="name" name="name" type="text" required&gt;
-        &lt;label for="email"&gt;Email&lt;/label&gt;
-        &lt;input id="email" name="email" type="email" required&gt;
-        &lt;label for="message"&gt;Message&lt;/label&gt;
-        &lt;textarea id="message" name="message" required&gt;&lt;/textarea&gt;
-      &lt;/form&gt;
-    &lt;/section&gt;
-    &lt;footer&gt;
-      &lt;button class="button" onclick="document.getElementById('adv-modal').classList.remove('open')"&gt;Cancel&lt;/button&gt;
-      &lt;button class="button" type="submit" form="contact-form"&gt;Send&lt;/button&gt;
-    &lt;/footer&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-      <script>
-        // Advanced modal: Escape key and click outside to close
-        document.getElementById('adv-modal').addEventListener('keydown', function(e) {
-          if (e.key === 'Escape') this.classList.remove('open');
-        });
-        document.getElementById('adv-modal').addEventListener('click', function(e) {
-          if (e.target === this) this.classList.remove('open');
-        });
-      </script>
     </section>
-    <section>
-      <h2>Style Guide</h2>
+
+    <section class="example-section">
+      <h2>Confirmation Modal</h2>
+      <p>Modal for destructive actions requiring user confirmation.</p>
+
+      <div class="modal-trigger-grid">
+        <button class="danger" data-modal="confirm-modal">Delete Item</button>
+      </div>
+
+      <div class="modal" id="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" aria-hidden="true">
+        <div class="modal-content">
+          <header>
+            <h3 id="confirm-modal-title">Confirm Deletion</h3>
+            <button class="modal-close" aria-label="Close modal" data-modal-close>&times;</button>
+          </header>
+          <section>
+            <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+            <p><strong>Warning:</strong> All associated data will be permanently removed.</p>
+          </section>
+          <footer>
+            <button class="secondary" data-modal-close>Cancel</button>
+            <button class="danger" id="confirm-delete">Delete Forever</button>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+    <section class="example-section">
+      <h2>Accessibility Features</h2>
       <ul>
-        <li>Use <code>.modal</code> with <code>role="dialog"</code>, <code>aria-modal="true"</code>, and <code>aria-labelledby</code> for accessibility.</li>
-        <li>Trap keyboard focus within the modal when open.</li>
-        <li>Support closing via Escape key and clicking outside the modal.</li>
-        <li>Use semantic elements styled via <code>.modal</code> and element selectors, following Axiom01 philosophy.</li>
-        <li>Style with axiom01 classes for consistency.</li>
+        <li><strong>Focus Management:</strong> Focus is trapped within the modal and returned to trigger element on close</li>
+        <li><strong>Keyboard Navigation:</strong> Tab/Shift+Tab cycles through focusable elements, Escape closes modal</li>
+        <li><strong>ARIA Attributes:</strong> <code>role="dialog"</code>, <code>aria-modal="true"</code>, <code>aria-labelledby</code></li>
+        <li><strong>Screen Reader Support:</strong> Proper heading structure, error announcements, live regions</li>
+        <li><strong>Backdrop Dismiss:</strong> Click outside modal content to close (can be disabled for critical modals)</li>
+        <li><strong>Visual Focus:</strong> Clear focus indicators within modal content</li>
       </ul>
     </section>
+
+    <section class="example-section">
+      <h2>JavaScript Implementation</h2>
+      <p>Modal functionality with comprehensive accessibility:</p>
+      <pre><code>// Modal manager with focus trapping and accessibility
+const AxiomModal = {
+  activeModal: null,
+  focusableSelectors: 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+
+  open(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    this.activeModal = modal;
+    this.previousFocus = document.activeElement;
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+
+    this.trapFocus(modal);
+  },
+
+  close() {
+    if (!this.activeModal) return;
+
+    this.activeModal.classList.remove('open');
+    this.activeModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+
+    if (this.previousFocus) {
+      this.previousFocus.focus();
+    }
+
+    this.activeModal = null;
+  }
+};</code></pre>
+    </section>
+
+    <footer>
+      <p><strong>Best Practices:</strong></p>
+      <ul>
+        <li>Always provide a clear, descriptive modal title</li>
+        <li>Include a visible close button with proper aria-label</li>
+        <li>Use appropriate button variants (primary, secondary, danger)</li>
+        <li>Test keyboard navigation and screen reader compatibility</li>
+        <li>Consider backdrop dismiss behavior for different modal types</li>
+        <li>Validate forms within modals with clear error messages</li>
+      </ul>
+    </footer>
   </main>
+
+  <script>
+    // Enhanced Modal Implementation for Axiom01
+    class AxiomModal {
+      constructor() {
+        this.activeModal = null;
+        this.previousFocus = null;
+        this.focusableSelectors = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+        this.init();
+      }
+
+      init() {
+        // Initialize modal triggers
+        document.querySelectorAll('[data-modal]').forEach(trigger => {
+          trigger.addEventListener('click', (e) => {
+            const modalId = trigger.getAttribute('data-modal');
+            this.open(modalId);
+          });
+        });
+
+        // Initialize close buttons
+        document.querySelectorAll('[data-modal-close]').forEach(closeBtn => {
+          closeBtn.addEventListener('click', () => this.close());
+        });
+
+        // Global keyboard events
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.activeModal) {
+            this.close();
+          }
+          if (e.key === 'Tab' && this.activeModal) {
+            this.handleTabKey(e);
+          }
+        });
+
+        // Backdrop click handling
+        document.querySelectorAll('.modal').forEach(modal => {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              this.close();
+            }
+          });
+        });
+      }
+
+      open(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal || this.activeModal) return;
+
+        this.activeModal = modal;
+        this.previousFocus = document.activeElement;
+
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+
+        // Focus first focusable element
+        const firstFocusable = modal.querySelector(this.focusableSelectors);
+        if (firstFocusable) {
+          firstFocusable.focus();
+        }
+      }
+
+      close() {
+        if (!this.activeModal) return;
+
+        this.activeModal.classList.remove('open');
+        this.activeModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+
+        // Return focus to trigger element
+        if (this.previousFocus) {
+          this.previousFocus.focus();
+        }
+
+        this.activeModal = null;
+        this.previousFocus = null;
+      }
+
+      handleTabKey(e) {
+        const focusableElements = this.activeModal.querySelectorAll(this.focusableSelectors);
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    }
+
+    // Initialize modal system
+    document.addEventListener('DOMContentLoaded', () => {
+      new AxiomModal();
+    });
+
+    // Form handling example
+    document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Simple validation example
+      const name = document.getElementById('contact-name');
+      const email = document.getElementById('contact-email');
+
+      let isValid = true;
+
+      if (!name.value.trim()) {
+        document.getElementById('name-error').textContent = 'Name is required';
+        isValid = false;
+      } else {
+        document.getElementById('name-error').textContent = '';
+      }
+
+      if (!email.value.trim() || !email.validity.valid) {
+        document.getElementById('email-error').textContent = 'Valid email is required';
+        isValid = false;
+      } else {
+        document.getElementById('email-error').textContent = '';
+      }
+
+      if (isValid) {
+        alert('Form submitted successfully!');
+        // Close modal after successful submission
+        document.querySelector('[data-modal-close]').click();
+      }
+    });
+  </script>
 </body>
 </html>

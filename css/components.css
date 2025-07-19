@@ -1239,55 +1239,133 @@ legend {
 
 /* --- Card Component --- */
 .card {
-  background: var(--a-color-surface, #fff);
+  background: var(--a-color-surface-container, #f8f9fa);
   color: var(--a-color-on-surface, #222);
-  border-radius: var(--a-border-radius-base, 8px);
+  border-radius: var(--a-border-radius-large, 8px);
   box-shadow: var(--a-shadow-medium, 0 2px 8px rgba(0,0,0,0.08));
-  padding: var(--a-padding-base, 16px);
+  padding: var(--a-padding-large, 2rem);
   margin: var(--a-margin-base, 16px) 0;
+  min-width: 280px;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
-  gap: var(--a-space-small, 8px);
-  max-width: 400px;
+  justify-content: space-between;
+  transition: box-shadow 0.2s;
+  gap: var(--a-space-base, 1rem);
 }
 .card header {
+  margin-bottom: var(--a-margin-base, 1rem);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--a-space-small, 8px);
-  padding-bottom: var(--a-padding-tiny, 4px);
+  gap: 0.5em;
+  padding-bottom: var(--a-padding-small, 0.75rem);
+  padding-left: var(--a-padding-base, 1rem);
+  padding-right: var(--a-padding-base, 1rem);
+}
+.card h3 {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 700;
 }
 .card .badge {
-  background: var(--a-color-primary, #1976d2);
+  background: var(--a-color-success);
   color: #fff;
-  border-radius: var(--a-border-radius-small, 3px);
-  padding: 2px 8px;
-  font-size: 0.8em;
+  font-size: 0.85em;
   font-weight: 600;
-  margin-left: var(--a-space-small, 8px);
+  border-radius: 1em;
+  padding: 0.2em 0.8em;
+  margin-left: 0.5em;
 }
-.card img {
-  width: 100%;
-  border-radius: var(--a-border-radius-base, 8px) var(--a-border-radius-base, 8px) 0 0;
-  margin-bottom: var(--a-space-small, 8px);
-  object-fit: cover;
+.card .badge.info {
+  background: var(--a-color-info);
+}
+.card .icon {
+  margin-left: 8px;
+  color: var(--a-color-primary);
+  font-size: 1.1em;
 }
 .card section {
-  flex: 1 1 auto;
-  padding: 0;
+  flex: 1;
+  margin-bottom: var(--a-margin-base, 1rem);
+  padding-bottom: var(--a-padding-small, 0.75rem);
+  padding-left: var(--a-padding-base, 1rem);
+  padding-right: var(--a-padding-base, 1rem);
+}
+.card section p {
+  margin: 0 0 0.5em 0;
+  color: var(--a-color-on-surface);
+}
+.card section ul {
+  margin: 0 0 0.5em 1em;
+  font-size: 0.98em;
+  color: var(--a-color-muted);
+}
+.card-link {
+  color: var(--a-color-primary);
+  text-decoration: underline;
 }
 .card footer {
   display: flex;
-  gap: var(--a-space-small, 8px);
   justify-content: flex-end;
-  padding-top: var(--a-padding-tiny, 4px);
-  padding-bottom: var(--a-padding-base, 16px);
-  padding-left: var(--a-padding-base, 16px);
-  padding-right: var(--a-padding-base, 16px);
+  gap: 1em;
+  margin-top: var(--a-margin-base, 1em);
+  padding: var(--a-padding-small, 0.75rem) var(--a-padding-base, 1rem) var(--a-padding-small, 0.75rem) var(--a-padding-base, 1rem);
 }
-@media (max-width: 600px) {
-  .card {
-    max-width: 100%;
-    padding: var(--a-padding-small, 8px);
-  }
+.card-actions {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+  padding: 0;
+}
+.card-actions button,
+.card-actions .button {
+  margin: 0;
+}
+
+/* ========================================================================= */
+/* Button Component (Axiom01)                                                */
+/* ========================================================================= */
+button {
+  background: var(--a-color-surface-container);
+  color: var(--a-color-on-surface);
+  border: none;
+  border-radius: var(--a-border-radius-base);
+  padding: 0.5rem 1rem;
+  font-size: var(--a-font-size-base);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
+  display: inline-block;
+}
+button.primary {
+  background: var(--a-color-primary);
+  color: var(--a-color-on-primary);
+}
+button.primary:hover,
+button.primary:focus {
+  background: var(--a-color-primary-dark);
+  color: var(--a-color-on-primary);
+}
+button:disabled {
+  background: var(--a-color-surface-variant);
+  color: var(--a-color-muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+/* Deprecate legacy .button class */
+.button {
+  /* Deprecated: Use <button> or <button class="primary"> */
+  background: var(--a-color-primary);
+  color: var(--a-color-on-primary);
+  border: none;
+  border-radius: var(--a-border-radius-base);
+  padding: 0.5rem 1rem;
+  font-size: var(--a-font-size-base);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
+  display: inline-block;
+  opacity: 0.5;
 }

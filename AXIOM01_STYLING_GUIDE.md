@@ -1,394 +1,245 @@
-# Axiom01 Quick Styling Guide
+# Axiom01 Styling Guide - Updated July 2025
+*Comprehensive guide reflecting current implementation patterns*
 
-This guide helps you (or any developer) create beautiful, maintainable sites and components using the Axiom01 UI framework. It distills the core philosophy and practical steps from the style guide, index.html, and axiom.css.
+This guide helps developers create beautiful, maintainable components using the Axiom01 UI framework's semantic-first philosophy with modern accessibility standards.
 
-## 1. Use Semantic HTML
-- Structure your markup with semantic elements: `<header>`, `<section>`, `<footer>`, `<article>`, `<nav>`, `<main>`, etc.
-- Avoid unnecessary `<div>` wrappers. Only use containers for layout or accessibility.
+## 1. Semantic HTML Structure
 
-**Example:**
+### Core Principle
+Structure markup with semantic elements, avoiding unnecessary `<div>` wrappers. Only use containers for layout or accessibility needs.
+
+**Standard Component Pattern:**
 ```html
-<article class="card">
-  <header>Title</header>
-  <img src="..." alt="...">
-  <section>Content goes here.</section>
-  <footer>Actions</footer>
+<article class="component-name">
+  <header>
+    <h3>Component Title</h3>
+    <span class="badge" aria-label="Status indicator">New</span>
+  </header>
+  <section>
+    <p>Main content goes here with proper semantic structure.</p>
+  </section>
+  <footer>
+    <button class="primary">Primary Action</button>
+    <button class="secondary">Secondary Action</button>
+  </footer>
 </article>
 ```
 
 ## 2. Minimal, Meaningful Classes
-- Use a single class for the main component (e.g., `.card`, `.alert`, `.modal`).
-- For variants, combine classes (e.g., `.alert.success`).
-- Use camelCase for unique value classes (e.g., `.primaryContainer`).
-- Avoid long, hyphenated class names and stacking utility classes unless needed for variants.
 
-## 3. Style with Element Selectors
-- In your CSS, target semantic elements inside components:
+### Class Naming Strategy
+- **Single class** for main component (`.card`, `.modal`, `.button`)
+- **Variant classes** combined for modifications (`.button.primary`, `.card.elevated`)
+- **Semantic variants**: `.primary`, `.secondary`, `.danger`, `.large`, `.compact`
+- **Avoid**: Long hyphenated names, utility class stacking, BEM patterns
 
-```css
-.card header { /* styles for header */ }
-.card section { /* styles for content */ }
-.card footer { /* styles for footer */ }
+**Examples:**
+```html
+<!-- ✅ Good: Semantic and minimal -->
+<button class="primary large">Primary Action</button>
+<article class="card elevated">...</article>
+
+<!-- ❌ Avoid: Utility stacking -->
+<button class="btn btn-primary btn-lg btn-block">...</button>
 ```
-- Use CSS variables for colors, spacing, and typography.
 
-## 4. Spacing, Margin, and Padding
-- Use Axiom01's CSS variables for consistent spacing:
-  - `var(--a-padding-small)`, `var(--a-padding-medium)`, `var(--a-padding-large)` for padding.
-  - `var(--a-margin-small)`, `var(--a-margin-base)`, `var(--a-margin-large)` for margin.
-  - These variables cascade in axiom.css, so changing a variable updates spacing everywhere.
-- Example for a card:
+## 3. CSS Variable Architecture
+
+### Required Variable Usage
+All components must use CSS variables for consistency and theming:
+
+**Spacing Variables:**
 ```css
-.card header, .card section, .card footer {
+.component {
   padding: var(--a-padding-medium);
+  margin: var(--a-margin-base);
+  gap: var(--a-space-small);
 }
-.card footer {
-  margin-top: var(--a-margin-base);
-}
-```
-- For layout, use `.container` or semantic `<section>` with padding/margin variables for consistent gutters.
-
-## 5. Color & Gradient Swatches
-Axiom01 provides accessible, theme-responsive color and gradient swatches. Each swatch includes:
-- Inline tooltips for quick reference
-- Usage notes for clarity
-- ARIA attributes for accessibility
-- Responsive styling for theme changes
-
-**Example:**
-```html
-<div class="color-swatch tooltip" role="listitem" tabindex="0" style="background: var(--a-color-primary);" aria-label="Primary color swatch" data-tooltip="Primary color: var(--a-color-primary)"><span class="color-name">Primary</span><span class="color-value">var(--a-color-primary)</span><span class="color-usage">Main brand color, buttons</span></div>
 ```
 
-See [index.html](index.html#colors) for a live demo and documentation of all semantic color and gradient swatches.
-
-## 6. Accessibility for Swatches & Components
-- All swatches and interactive components must be keyboard and screen reader accessible.
-- Use `tabindex="0"`, ARIA labels, and tooltips for documentation and clarity.
-- Example:
-```html
-<div class="color-swatch primary tooltip" tabindex="0" aria-label="Primary color swatch" data-tooltip="Primary brand color. Used for main actions and highlights.">
-  <span class="color-name">Primary</span>
-  <span class="color-value">var(--a-color-primary)</span>
-</div>
-```
-- Ensure all interactive elements (navbar, dropdowns, tabs, accordions) include ARIA roles and keyboard navigation.
-
-## 7. Theming & Customization
-- Use the built-in CSS variables in `axiom_vars.css` and `colors_vars.css` to customize colors, spacing, and typography.
-- Switch themes by setting `data-theme` on the `<html>` element or using the theme switcher component.
-- Example:
-```html
-<html data-theme="dark">
-```
-- Override variables in your own CSS to match your brand:
+**Color Variables:**
 ```css
-:root {
-  --a-color-primary: hsl(340, 75%, 50%);
-  --a-space-base: 18px;
-}
-```
-
-## 8. Component Styling
-- Style all components (e.g., `.alert`, `.datepicker`, `.progress-bar`) using semantic selectors and variables.
-- Example for alerts:
-```css
-.alert {
+.component {
   background: var(--a-color-surface);
   color: var(--a-color-on-surface);
-  border-radius: var(--a-border-radius-base);
+  border-color: var(--a-color-outline);
+}
+
+.component.primary {
+  background: var(--a-color-primary);
+  color: var(--a-color-on-primary);
 }
 ```
-- For datepicker enhancements, use `.axiom-datepicker` and ensure accessible focus states.
 
-## 9. Accessibility in Styling
-- Always provide visible focus states for interactive elements:
+**Typography Variables:**
 ```css
-button:focus, .axiom-datepicker:focus {
-  outline: 2px solid var(--a-color-primary);
+.component header {
+  font-size: var(--a-font-size-h3);
+  font-weight: var(--a-font-weight-medium);
 }
 ```
-- Use ARIA attributes and roles in your markup for alerts, dialogs, and navigation.
-- Ensure color contrast meets WCAG standards (see style-guide.html for details).
 
-## 10. Grid System: Semantic & Custom Layouts
+## 4. Element Selector Strategy
 
-Axiom01 supports flexible grid layouts using CSS Grid and semantic HTML. You can build grids without classes (pure semantic) or with custom row/column classes for more control.
+### CSS Selector Patterns
+Target semantic elements within component contexts:
 
-### Semantic (Classless) Grid Example
-Use semantic elements and grid properties directly:
-```html
-<section style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--a-grid-gutter);">
-  <article>Column 1</article>
-  <article>Column 2</article>
-  <article>Column 3</article>
-</section>
+```css
+.card {
+  /* Base component styles */
+  background: var(--a-color-surface);
+  border-radius: var(--a-border-radius-base);
+  box-shadow: var(--a-shadow-base);
+}
+
+.card header {
+  padding: var(--a-padding-medium);
+  border-bottom: var(--a-border-width-base) solid var(--a-color-outline);
+}
+
+.card section {
+  padding: var(--a-padding-medium);
+}
+
+.card footer {
+  padding: var(--a-padding-medium);
+  display: flex;
+  gap: var(--a-space-small);
+  justify-content: flex-end;
+}
+
+.card.elevated {
+  box-shadow: var(--a-shadow-large);
+}
 ```
-- Use `var(--a-grid-gutter)` for consistent spacing.
-- Style child elements with variables for padding, background, etc.
 
-### Custom Row-Based Grid Example
-For more control, use row/column classes:
+## 5. Accessibility Implementation (WCAG 2.1 AA)
+
+### Required Accessibility Features
+
+**ARIA Attributes:**
 ```html
-<div class="a-row" style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--a-grid-gutter);">
-  <div class="a-col">Main Content</div>
-  <div class="a-col">Sidebar</div>
+<div class="modal" role="dialog" aria-modal="true" 
+     aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-content">
+    <header>
+      <h3 id="modal-title">Modal Title</h3>
+      <button aria-label="Close modal" data-modal-close>&times;</button>
+    </header>
+  </div>
 </div>
 ```
-- Adjust `grid-template-columns` for layout needs.
-- Use semantic markup inside columns.
 
-### Responsive Grid Example
-Make grids adapt to screen size:
-```html
-<div class="responsive-grid" style="display: grid; grid-template-columns: 1fr; gap: var(--a-grid-gutter);">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-</div>
-<style>
-  @media (min-width: 600px) {
-    .responsive-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-</style>
-```
-- Use CSS variables and media queries for responsive layouts.
-
-**Best Practices:**
-- Prefer semantic HTML for accessibility and maintainability.
-- Use CSS variables for all spacing, colors, and typography.
-- Test grid layouts in multiple themes and screen sizes.
-
-See `grid-examples.html` for live demos.
-
-## 11. Navbar Component
-The Axiom01 Navbar is a responsive, accessible navigation component that follows the Axiom01 philosophy of semantic HTML, minimal classes, and consistent styling using CSS variables.
-
-### HTML Structure
-```html
-<!-- Skip to main content link for accessibility -->
-<a href="#main-content" class="skip-to-content">Skip to main content</a>
-
-<nav class="navbar small sticky" id="advanced-navbar">
-  <!-- Logo -->
-  <a href="#" class="logo" aria-label="Axiom Framework Home v0.1">
-    <div class="logo-text">
-      <span>[Ax</span>
-      <span><span style="color: var(--a-color-primary, #00c005); display: inline;">01</span>]</span>
-      <span></span>
-    </div>
-    <small class="version">v0.1</small>
-  </a>
-
-  <!-- Theme Switcher (Optional) -->
-  <div class="theme-switcher-container">
-    <label for="theme-select" class="visually-hidden">Select Theme:</label>
-    <select id="theme-select" name="theme"></select>
-  </div>
-
-  <!-- Mobile Menu Toggle -->
-  <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links-main">
-    <i class="fa-solid fa-bars" aria-hidden="true"></i>
-  </button>
-
-  <!-- Navigation Links -->
-  <ul class="nav-links" id="nav-links-main">
-    <li><a href="#about">About</a></li>
-    <li><a href="#usage">Get started</a></li>
-    <li><a href="#typography">Docs</a></li>
-
-    <!-- Dropdown menu example -->
-    <li class="dropdown">
-      <a href="#components" aria-haspopup="true" aria-expanded="false">Components <i class="fa-solid fa-chevron-down"></i></a>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#buttons" role="menuitem">Buttons</a></li>
-        <li><a href="#cards" role="menuitem">Cards</a></li>
-        <li><a href="#alerts" role="menuitem">Alerts</a></li>
-        <li><a href="#forms" role="menuitem">Forms</a></li>
-      </ul>
-    </li>
-
-    <li><a href="components.html">Demo</a></li>
-    <li><a href="forms-advanced.html">Forms</a></li>
-    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-  </ul>
-
-  <!-- Search functionality (Optional) -->
-  <div class="search-container">
-    <input type="text" placeholder="Search..." aria-label="Search">
-    <button type="button" aria-label="Submit search">
-      <i class="fa-solid fa-search"></i>
-    </button>
-  </div>
-
-  <!-- Theme Toggle Button (Optional) -->
-  <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode">
-    &#9728;
-  </button>
-</nav>
+**Keyboard Navigation:**
+```css
+button:focus-visible {
+  outline: var(--a-border-width-focus) solid var(--a-color-focus);
+  outline-offset: var(--a-space-tiny);
+}
 ```
 
-### Usage Notes
-- Include `navbar.css` in your HTML head after the main Axiom01 CSS files
-- Include `navbar.js` before the closing body tag
-- Use the `.small` class for a more compact navbar
-- Use the `.sticky` class to make the navbar stick to the top of the viewport
-- Add the `.active` class to the current page's link
-- Ensure the `aria-controls` attribute on the menu toggle matches the `id` of the nav links
-- The navbar is responsive by default and will show a hamburger menu on screens smaller than 900px
-- Include Font Awesome for the hamburger icon and dropdown indicators
+**Icon Accessibility:**
+```html
+<!-- Decorative icons -->
+<span class="icon" aria-hidden="true">★</span>
 
-### Advanced Features
-- **Dropdown Menus**: Use the `.dropdown` class on a list item to create a dropdown menu
-- **Search Functionality**: Include the `.search-container` div for a search input
-- **Sticky Navigation**: Add the `.sticky` class to make the navbar stick to the top of the viewport
-- **Scroll-Aware Behavior**: Add the `.scroll-aware` class to change the navbar appearance on scroll
-- **Compact Mode**: Add the `.compact` class for a more compact navbar
-- **Skip to Content**: Add a "Skip to main content" link with class `.skip-to-content` before the navbar
+<!-- Functional icons need labels -->
+<button aria-label="Delete item">
+  <span class="icon" aria-hidden="true">×</span>
+</button>
+```
 
-### Accessibility Features
-- ARIA attributes for screen readers (aria-label, aria-expanded, aria-controls, aria-haspopup)
-- Keyboard navigation support for all interactive elements
-- Focus states for interactive elements
-- Semantic HTML structure
-- Visually hidden labels for screen readers
-- Skip to content link for keyboard users
-- ARIA live regions for menu state announcements
+## 6. Component Registration System
 
-### ARIA Live Region Implementation
-For improved accessibility, the navbar includes an ARIA live region to announce menu state changes:
+### JavaScript Integration
+Components use the Axiom registration system:
 
 ```javascript
-// Create ARIA live region
-const liveRegion = document.createElement('div');
-liveRegion.setAttribute('aria-live', 'polite');
-liveRegion.setAttribute('class', 'visually-hidden');
-document.body.appendChild(liveRegion);
-
-// Announce menu state changes
-menuToggle.addEventListener('click', function() {
-  setTimeout(() => {
-    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-    liveRegion.textContent = isExpanded ? 'Navigation menu expanded' : 'Navigation menu collapsed';
-  }, 100);
+AxiomComponents.register('componentName', function() {
+  // Component initialization
+  const components = document.querySelectorAll('.component-name');
+  
+  components.forEach(component => {
+    // Setup event listeners
+    // Handle accessibility features
+    // Manage component state
+  });
 });
 ```
 
-For more detailed documentation and examples, see [navbar-docs.html](navbar-docs.html) and [navbar-advanced.html](navbar-advanced.html).
+## 7. Form Accessibility Standards
 
-## 12. Component Demos & Style Guide
-- For live examples and best practices, see:
-  - [Style Guide](style-guide.html)
-  - [Components Demo](components.html)
+### Required Form Patterns
+```html
+<div class="form-group">
+  <label for="field-name">Field Label <span aria-label="required">*</span></label>
+  <input id="field-name" name="field" required 
+         aria-describedby="field-error field-help">
+  <div id="field-help" class="help-text">Helpful context for user</div>
+  <div id="field-error" class="error-message" role="alert" aria-live="polite"></div>
+</div>
+```
 
-## 13. Reference & Resources
-- See [style-guide.html](style-guide.html) for full documentation of variables, components, and usage.
-- For live examples, visit [examples/components.html](examples/components.html).
-- For accessibility guidelines, refer to the [Axiom01 Accessibility Section](style-guide.html#accessibility).
+## 8. Theme Compatibility Requirements
+
+### Multi-Theme Support
+All components must work across themes:
+- Light theme (default)
+- Dark theme  
+- High contrast themes
+- Specialty themes (forest, ocean, sunset)
+
+**Testing Requirement:**
+```css
+/* Component must work with theme switching */
+html[data-theme="dark"] .component {
+  /* Automatic through CSS variables */
+}
+```
+
+## 9. Performance Considerations
+
+### Efficient CSS Patterns
+```css
+/* ✅ Good: Minimal selectors, CSS variables */
+.component {
+  background: var(--a-color-surface);
+}
+
+.component header {
+  padding: var(--a-padding-medium);
+}
+
+/* ❌ Avoid: Deep nesting, hardcoded values */
+.component .header .title .text {
+  padding: 16px;
+}
+```
+
+## 10. Documentation Standards
+
+### Required Component Documentation
+Each component must include:
+1. **Basic usage example** with copy-paste code
+2. **Accessibility features** explanation  
+3. **CSS implementation** showing variable usage
+4. **Best practices** section
+5. **Keyboard navigation** instructions
+
+## Implementation Checklist
+
+For each component, verify:
+- [ ] Uses semantic HTML structure
+- [ ] Single meaningful class names
+- [ ] CSS variables for all styling
+- [ ] Element selectors within components  
+- [ ] WCAG 2.1 AA accessibility compliance
+- [ ] Keyboard navigation support
+- [ ] Screen reader compatibility
+- [ ] Theme compatibility across all themes
+- [ ] Component registration with framework
+- [ ] Comprehensive documentation
 
 ---
 
-**Resources:**
-- See `index.html` for markup examples.
-- Review `REFAC_STYLE_GUIDE.md` for philosophy and best practices.
-- Check `axiom.css` for updated selectors, spacing, and color variables.
-
-By following these steps, your site will look great, be easy to maintain, and fully embrace the Axiom01 philosophy.
-
-## Quick Links
-- [Axiom01 Style Guide](style-guide.html)
-- [Grid System Examples](grid-examples.html)
-- [Navbar Documentation & Demo](navbar-docs.html)
-- [Component Demos](examples/components.html)
-
-# Audit Sync Status
-- Documentation files (readme.md, AXIOM01_STYLING_GUIDE.md, AUDIT_PROGRESS.md) are now synced with latest features, refactors, and direct links to style guide and demos.
-
-## Recent Features & Refactors
-- **Accessibility**: All major components (modal, notification, datepicker) now include ARIA attributes, keyboard navigation, and improved focus states.
-- **Feature Toggles**: JS and CSS now support runtime feature toggles for CSS variables, documented for maintainability.
-- **Semantic Usage**: All components use semantic HTML and variable-driven patterns; legacy/utility-heavy classes removed.
-- **Documentation Sync**: All docs now include direct links to style guide, grid examples, navbar docs, and component demos. Feature summaries and recent refactors are documented.
-- **Component Audits**: Medium-priority tasks for accessibility and documentation are complete; minor enhancements remain.
-
-## Ensuring New Components Follow Axiom01 Philosophy
-
-To maintain consistency and quality in the Axiom01 UI framework, follow these steps for every new component:
-
-1. **Use Semantic HTML**
-   - Structure with semantic elements: `<header>`, `<section>`, `<footer>`, `<nav>`, `<main>`, `<article>`, etc.
-   - Avoid unnecessary `<div>` wrappers; use containers only for layout or accessibility.
-
-2. **Minimal, Meaningful Classes**
-   - Assign a single class for the main component (e.g., `.card`, `.modal`, `.alert`).
-   - Use variant classes only when needed (e.g., `.alert.success`).
-   - Avoid stacking utility classes or long, hyphenated names.
-
-3. **Style with Element Selectors**
-   - Target semantic elements inside the main class in your CSS (e.g., `.card header`, `.modal section`).
-   - Use CSS variables for all colors, spacing, and typography.
-
-4. **Accessibility & Responsiveness**
-   - Add ARIA attributes where needed.
-   - Ensure components adapt to different themes and screen sizes.
-
-5. **Audit Checklist for New Components**
-   - [ ] Semantic HTML only
-   - [ ] One main class per component
-   - [ ] Element selectors in CSS
-   - [ ] All design tokens use CSS variables
-   - [ ] Accessibility and responsiveness tested
-
-6. **Documentation & Review**
-   - Update documentation to reflect these rules.
-   - Regularly audit new and existing components for compliance.
-   - Note any areas for further simplification or improvement.
-
-**Reference:**
-- See examples in this guide and in `/components` for best practices.
-- Use the audit checklist above before merging new components.
-
-## EXTREMELY IMPORTANT: Component Structure Examples
-
-Axiom01 components must use minimal, meaningful classes and semantic HTML. Do NOT use multiple classes or unnecessary wrappers. Use only the main class (e.g., `.tab`, `.button`, `.alert`, `.card`) and rely on element order and semantic tags.
-
-### Tabs (Correct)
-```html
-<nav class="tab" role="tablist">
-  <button role="tab" aria-selected="true">Tab 1</button>
-  <button role="tab">Tab 2</button>
-  <button role="tab">Tab 3</button>
-</nav>
-<section role="tabpanel">Tab 1 content</section>
-<section role="tabpanel" hidden>Tab 2 content</section>
-<section role="tabpanel" hidden>Tab 3 content</section>
-```
-
-### Button (Correct)
-```html
-<button class="button">Click Me</button>
-<button class="button primary">Primary</button>
-<button class="button success">Success</button>
-```
-
-### Alert (Correct)
-```html
-<div class="alert">Info message</div>
-<div class="alert success">Success message</div>
-<div class="alert error">Error message</div>
-```
-
-### Card (Correct)
-```html
-<article class="card">
-  <header>Title</header>
-  <section>Content</section>
-  <footer>Actions</footer>
-</article>
-```
-
-**Never use multiple classes like `.axiom-btn axiom-btn-primary` or `.axiom-alert axiom-alert-success`. Use `.button.primary`, `.alert.success`, etc. Only the main class and variant.**
-
-**Always use semantic elements and keep the structure minimal.**
+**Updated:** July 19, 2025 - Reflects current Axiom01 implementation patterns and accessibility standards.

@@ -1,368 +1,626 @@
-<!-- index.part1.html: Part 1/10 of index.html -->
+<!-- index.header.html: Enhanced navbar for Axiom01 framework -->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Axiom - Craft beautiful interfaces with less markup</title>
-	<meta name="description" content="Axiom01 enhances your HTML, not your class count. A UI framework that prioritizes simplicity, flexibility and semantic meaning.">
+	<title>Axiom01 - Craft beautiful interfaces with less markup</title>
+	<meta name="description" content="Axiom01 enhances your HTML, not your class count. A semantic-first UI framework that prioritizes accessibility, flexibility and clean code.">
 	<link rel="stylesheet" href="css/axiom.css">
 	<link rel="stylesheet" href="css/site.css">
-	<link rel="stylesheet" href="css/alerts.css">
+	<link rel="stylesheet" href="css/components.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 				integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
 				crossorigin="anonymous" referrerpolicy="no-referrer"/>
+	<style>
+		/* Enhanced Navbar Styles */
+		.main-navbar {
+			background: var(--a-color-surface);
+			border-bottom: var(--a-border-width-base) solid var(--a-color-outline);
+			box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+			position: sticky;
+			top: 0;
+			z-index: 1000;
+		}
+
+		.navbar-container {
+			max-width: 1400px;
+			margin: 0 auto;
+			padding: 0 var(--a-padding-medium);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			min-height: 64px;
+			gap: var(--a-space-medium);
+		}
+
+		.navbar-brand {
+			display: flex;
+			align-items: center;
+			gap: var(--a-space-small);
+			text-decoration: none;
+			font-size: var(--a-font-size-h4);
+			font-weight: var(--a-font-weight-bold);
+			color: var(--a-color-on-surface);
+			transition: opacity 0.2s ease;
+			flex-shrink: 0;
+		}
+
+		.navbar-brand:hover {
+			opacity: 0.8;
+		}
+
+		.brand-logo {
+			font-family: 'Courier New', monospace;
+			font-size: var(--a-font-size-h3);
+		}
+
+		.brand-primary {
+			color: var(--a-color-primary);
+		}
+
+		.brand-version {
+			background: var(--a-color-primary-container);
+			color: var(--a-color-on-primary-container);
+			padding: var(--a-padding-tiny) var(--a-padding-small);
+			border-radius: var(--a-border-radius-base);
+			font-size: var(--a-font-size-small);
+			font-weight: var(--a-font-weight-medium);
+		}
+
+		.navbar-nav {
+			display: flex;
+			align-items: center;
+			gap: var(--a-space-small);
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			flex: 1;
+			justify-content: center;
+			overflow: hidden;
+		}
+
+		.nav-link {
+			padding: var(--a-padding-small) var(--a-padding-medium);
+			text-decoration: none;
+			color: var(--a-color-on-surface);
+			font-weight: var(--a-font-weight-medium);
+			border-radius: var(--a-border-radius-base);
+			transition: all 0.2s ease;
+			white-space: nowrap;
+		}
+
+		.nav-link:hover,
+		.nav-link:focus {
+			background: var(--a-color-surface-variant);
+			color: var(--a-color-primary);
+		}
+
+		.navbar-actions {
+			display: flex;
+			align-items: center;
+			gap: var(--a-space-small);
+			flex-shrink: 0;
+		}
+
+		.search-button,
+		.theme-toggle,
+		.mobile-toggle {
+			padding: var(--a-padding-small);
+			background: transparent;
+			border: var(--a-border-width-base) solid var(--a-color-outline);
+			border-radius: var(--a-border-radius-base);
+			color: var(--a-color-on-surface);
+			cursor: pointer;
+			transition: all 0.2s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 40px;
+			height: 40px;
+		}
+
+		.search-button:hover,
+		.search-button:focus {
+			background: var(--a-color-primary-container);
+			border-color: var(--a-color-primary);
+			color: var(--a-color-primary);
+		}
+
+		.theme-toggle:hover,
+		.theme-toggle:focus {
+			background: var(--a-color-secondary-container);
+			border-color: var(--a-color-secondary);
+			color: var(--a-color-secondary);
+		}
+
+		.mobile-toggle {
+			display: none;
+		}
+
+		.mobile-toggle:hover {
+			background: var(--a-color-primary-container);
+			border-color: var(--a-color-primary);
+			color: var(--a-color-primary);
+		}
+
+		.get-started-btn {
+			background: var(--a-color-primary);
+			color: var(--a-color-on-primary);
+			padding: var(--a-padding-small) var(--a-padding-medium);
+			border: none;
+			border-radius: var(--a-border-radius-base);
+			font-weight: var(--a-font-weight-medium);
+			text-decoration: none;
+			transition: all 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: var(--a-space-tiny);
+			white-space: nowrap;
+			font-size: var(--a-font-size-small);
+		}
+
+		.get-started-btn:hover,
+		.get-started-btn:focus {
+			background: var(--a-color-primary-variant);
+			transform: translateY(-1px);
+			box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+		}
+
+		/* Theme Switcher Dropdown */
+		.theme-switcher {
+			position: relative;
+		}
+
+		.theme-dropdown {
+			position: absolute;
+			top: calc(100% + var(--a-space-small));
+			right: 0;
+			background: var(--a-color-surface);
+			border: var(--a-border-width-base) solid var(--a-color-outline);
+			border-radius: var(--a-border-radius-base);
+			box-shadow: var(--a-shadow-large);
+			min-width: 200px;
+			z-index: 1001;
+			display: none;
+			padding: var(--a-padding-small);
+		}
+
+		.theme-dropdown.open {
+			display: block;
+		}
+
+		.theme-option {
+			display: flex;
+			align-items: center;
+			gap: var(--a-space-small);
+			padding: var(--a-padding-small) var(--a-padding-medium);
+			border: none;
+			background: transparent;
+			color: var(--a-color-on-surface);
+			width: 100%;
+			text-align: left;
+			border-radius: var(--a-border-radius-base);
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+		}
+
+		.theme-option:hover,
+		.theme-option:focus {
+			background: var(--a-color-surface-variant);
+		}
+
+		.theme-option.active {
+			background: var(--a-color-primary-container);
+			color: var(--a-color-on-primary-container);
+		}
+
+		/* Responsive Styles */
+		@media (max-width: 1024px) {
+			.navbar-nav {
+				gap: var(--a-space-tiny);
+			}
+
+			.nav-link {
+				padding: var(--a-padding-small);
+				font-size: var(--a-font-size-small);
+			}
+
+			.get-started-btn {
+				padding: var(--a-padding-small);
+			}
+
+			.get-started-btn .btn-text {
+				display: none;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.mobile-toggle {
+				display: flex;
+			}
+
+			.navbar-nav {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				right: 0;
+				background: var(--a-color-surface);
+				border-top: var(--a-border-width-base) solid var(--a-color-outline);
+				box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+				flex-direction: column;
+				gap: 0;
+				padding: var(--a-padding-medium);
+				display: none;
+				justify-content: flex-start;
+			}
+
+			.navbar-nav.open {
+				display: flex;
+			}
+
+			.nav-link {
+				width: 100%;
+				text-align: left;
+				padding: var(--a-padding-medium);
+				font-size: var(--a-font-size-base);
+			}
+
+			.get-started-btn {
+				width: 100%;
+				justify-content: center;
+				margin-top: var(--a-margin-base);
+				font-size: var(--a-font-size-base);
+			}
+
+			.get-started-btn .btn-text {
+				display: inline;
+			}
+		}
+
+		/* Search Modal */
+		.search-modal {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0,0,0,0.5);
+			z-index: 2000;
+			display: none;
+			align-items: flex-start;
+			justify-content: center;
+			padding-top: 10vh;
+		}
+
+		.search-modal.open {
+			display: flex;
+		}
+
+		.search-content {
+			background: var(--a-color-surface);
+			border-radius: var(--a-border-radius-large);
+			padding: var(--a-padding-large);
+			width: 90%;
+			max-width: 600px;
+			box-shadow: var(--a-shadow-large);
+		}
+
+		.search-input {
+			width: 100%;
+			padding: var(--a-padding-medium);
+			border: var(--a-border-width-base) solid var(--a-color-outline);
+			border-radius: var(--a-border-radius-base);
+			font-size: var(--a-font-size-h4);
+			margin-bottom: var(--a-margin-base);
+		}
+
+		.search-results {
+			max-height: 300px;
+			overflow-y: auto;
+		}
+
+		.search-result {
+			padding: var(--a-padding-medium);
+			border-radius: var(--a-border-radius-base);
+			margin-bottom: var(--a-margin-small);
+			cursor: pointer;
+			transition: background-color 0.2s ease;
+		}
+
+		.search-result:hover {
+			background: var(--a-color-surface-variant);
+		}
+	</style>
 </head>
-<!-- Google tag (gtag.js) -->
+
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-28PEW22G6H"></script>
 <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-28PEW22G6H');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-28PEW22G6H');
 </script>
+
 <body class="axiom01">
-<header>
-  <nav class="navbar navbar-centered" aria-label="Main Navigation">
-    <a href="index.html" class="logo" aria-label="Axiom Framework Home" style="margin-right:1.2em;">
-      <span>[Ax</span><span style="color:var(--a-color-primary);">01</span><span>]</span>
-      <small class="version">v0.1</small>
-    </a>
-    <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links" style="display:none;margin-right:var(--a-margin-base);vertical-align:middle;">
-      <i class="fa-solid fa-bars" aria-hidden="true"></i>
-    </button>
-    <ul class="nav-links" id="nav-links" style="gap:0.5em;">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="components/card.html">Card</a></li>
-      <li><a href="components/forms.html">Forms</a></li>
-      <li class="nav-dropdown" style="position:relative;">
-        <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" style="padding: .25em .5em; white-space:nowrap; display:inline-flex; align-items:center;">More <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-        <ul class="dropdown-menu" style="display:none;position:absolute;top:100%;left:0;min-width:180px;background:var(--a-color-surface-variant,#222);color:var(--a-color-on-surface,#fff);box-shadow:0 2px 8px rgba(0,0,0,0.12);border-radius:6px;padding:var(--a-padding-small,0.5em);z-index:100;">
-          <li><a href="components/progress-bar.html" style="color:var(--a-color-on-surface,#fff);padding:var(--a-padding-small,0.5em);display:block;">Progress Bar</a></li>
-          <li><a href="components/navbar.html" style="color:var(--a-color-on-surface,#fff);padding:var(--a-padding-small,0.5em);display:block;">Navbar</a></li>
-          <li><a href="components/media.html" style="color:var(--a-color-on-surface,#fff);padding:var(--a-padding-small,0.5em);display:block;">Media & File</a></li>
-        </ul>
-      </li>
-      <li><a href="#getting-started" class="button primary" style="margin-left:1em;">Get Started</a></li>
-    </ul>
-    <button id="show-search" aria-label="Open documentation search" style="background:var(--a-color-primary);color:var(--a-color-on-primary);border:none;padding:0.4em 1em;border-radius:6px;margin-left:1em;cursor:pointer;">
-      <i class="fa fa-search" aria-hidden="true"></i>
-      <span class="sr-only">Search</span>
-    </button>
-    <div id="search-bar-container" style="display:none;position:absolute;top:60px;left:0;width:100vw;text-align:center;z-index:9999;">
-      <form id="doc-search-form" role="search" aria-label="Search documentation" style="display:inline-block;background:var(--a-color-surface,#fff);box-shadow:0 2px 12px #0002;padding:1em 2em;border-radius:12px;margin-top:0.5em;">
-        <input type="search" id="doc-search" name="q" placeholder="Search docs..." style="padding:0.6em 1.2em; border-radius:8px; border:1px solid var(--a-color-border,#ccc); min-width:220px; font-size:1.1em;" aria-label="Search documentation">
-        <button type="submit" style="background:var(--a-color-primary);color:var(--a-color-on-primary);border:none;padding:0.6em 1.2em;border-radius:8px;margin-left:0.5em;cursor:pointer;font-size:1.1em;">
-          <i class="fa fa-search" aria-hidden="true"></i>
-          <span class="sr-only">Search</span>
-        </button>
-      </form>
-    </div>
-    <div class="theme-switcher-container" style="background:var(--a-color-surface-variant,#222);border-radius:6px;padding:0.5em 1em;box-shadow:0 2px 8px rgba(0,0,0,0.12);max-width:320px;min-width:120px;width:100%;color:var(--a-color-on-surface,#fff);display:flex;align-items:center;gap:0.6em;margin:0 var(--a-margin-base) 0 0;flex-shrink:0;">
-      <label for="theme-select" class="visually-hidden">Select Theme:</label>
-      <select id="theme-select" name="theme" style="min-width:140px;max-width:260px;padding-right:2.5em;background:var(--a-color-surface,#222);color:var(--a-color-on-surface,#fff);border-radius:6px;border:1px solid var(--a-color-outline,#444);font-size:1em;margin-right:0.2em;"></select>
-      <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode" style="padding:0.4em 0.7em; font-size:1.2em;background:var(--a-color-surface,#222);color:var(--a-color-on-surface,#fff);border-radius:6px;border:1px solid var(--a-color-outline,#444);margin-left:0.1em;margin-right:2.3em;">&#9728;</button>
-    </div>
-    <script>
-      document.getElementById('show-search').onclick = function() {
-        var bar = document.getElementById('search-bar-container');
-        bar.style.display = (bar.style.display === 'none' || bar.style.display === '') ? 'block' : 'none';
-        if (bar.style.display === 'block') {
-          setTimeout(function() {
-            document.getElementById('doc-search').focus();
-          }, 100);
-        }
-      };
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          var bar = document.getElementById('search-bar-container');
-          if (bar) bar.style.display = 'none';
-        }
-      });
-    </script>
-    <style>
-      @media (min-width: 900px) {
-        .navbar-centered {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 2.5em;
-        }
-        .navbar-centered .logo {
-          margin-right: 1.2em;
-        }
-        .navbar-centered .nav-links {
-          display: flex;
-          gap: 0.5em;
-          align-items: center;
-        }
-        .navbar-centered .theme-switcher-container {
-          margin-left: 1.2em;
-          background: #2a3a4d !important;
-          color: #fff !important;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
-          border-radius: 6px !important;
-        }
-      }
-      @media (min-width: 770px) and (max-width: 899px) {
-        .navbar-centered {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          width: 100%;
-        }
-        .navbar-centered .logo {
-          margin-right: 1em;
-          order: 1;
-        }
-        .navbar-centered .nav-links {
-          order: 2;
-        }
-        .navbar-centered .theme-switcher-container {
-          margin-left: auto !important;
-          margin-right: 0 !important;
-          order: 98;
-          background: #2a3a4d !important; /* More vibrant, pops against white */
-          color: #fff !important;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
-          border-radius: 6px !important;
-        }
-        .navbar-centered .menu-toggle {
-          display: inline-block !important;
-          order: 99;
-          margin-left: 0 !important;
-          width: 44px;
-          min-width: 44px;
-          max-width: 44px;
-        }
-      }
-      body[data-theme="dark"] .tagline-mobile {
-        background: var(--a-color-surface-variant,#222);
-        color: var(--a-color-on-surface,#fff);
-        border-bottom: 1px solid var(--a-color-outline,#444);
-      }
-      body[data-theme="dark"] .tagline-mobile .tagline-text {
-        color: var(--a-color-on-surface,#fff);
-      }
-      .nav-links > li {
-        margin-left: 0.2em;
-        margin-right: 0.2em;
-      }
-      .nav-links > li:first-child {
-        margin-left: 0.2em;
-      }
-      .nav-links > li:last-child {
-        margin-right: 0.2em;
-      }
-      .nav-dropdown .dropdown-menu {
-        background: var(--a-color-surface,#fff);
-        color: var(--a-color-on-surface,#222);
-      }
-      body[data-theme="dark"] .nav-dropdown .dropdown-menu {
-        background: var(--a-color-surface-variant,#222);
-        color: var(--a-color-on-surface,#fff);
-      }
-      .nav-dropdown .dropdown-menu a {
-        color: var(--a-color-on-surface,#222);
-      }
-      body[data-theme="dark"] .nav-dropdown .dropdown-menu a {
-        color: var(--a-color-on-surface,#fff);
-      }
-      @media (max-width: 900px) {
-        .menu-toggle {
-          display: inline-block !important;
-        }
-      }
-      @media (max-width: 770px) {
-        .theme-switcher-container {
-          background: #2a3a4d !important;
-          color: #fff !important;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
-          border-radius: 6px !important;
-        }
-      }
-      @media (max-width: 700px) {
-        .theme-switcher-container {
-          flex-direction: row !important;
-          align-items: center !important;
-          justify-content: flex-start !important;
-          max-width: 100vw !important;
-          min-width: 0 !important;
-          width: auto !important;
-          margin: 0 1em 0 0 !important;
-          padding: 0.5em 0.5em !important;
-          box-shadow: none !important;
-          background: transparent !important;
-          border-radius: 0 !important;
-          gap: var(--a-margin-base) !important;
-        }
-        #theme-select {
-          margin-right: var(--a-margin-base) !important;
-        }
-      }
-      @media (max-width: 600px) {
-        .theme-switcher-container {
-          gap: 0.3em !important;
-          padding: 0.5em 0.5em !important;
-          max-width: 180px !important;
-          flex-shrink:0 !important;
-        }
-        #theme-select {
-          margin-right: 0.2em !important;
-        }
-        .theme-toggle {
-          margin-left: 0.1em !important;
-          margin-right: 2.6em !important;
-        }
-        .menu-toggle {
-          margin: 0 !important;
-        }
-      }
-    </style>
-  </nav>
-  <div class="tagline-mobile" style="display:block;text-align:center;font-size:1.05em;color:var(--a-color-muted,#888);font-weight:500;padding:0.5em 1em 0.5em 1em;max-width:100vw;word-break:break-word;background:var(--a-color-surface,#fff);border-bottom:1px solid var(--a-color-outline,#eee);">
-    <span class="tagline-text" style="color:var(--a-color-muted,#888);">Semantic-first UI for modern web projects</span>
-  </div>
-  <style>
-    @media (min-width: 900px) {
-      .navbar-centered {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 2.5em;
-      }
-      .navbar-centered .logo {
-        margin-right: 1.2em;
-      }
-      .navbar-centered .nav-links {
-        display: flex;
-        gap: 0.5em;
-        align-items: center;
-      }
-      .navbar-centered .theme-switcher-container {
-        margin-left: 1.2em;
-        background: #2a3a4d !important;
-        color: #fff !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
-        border-radius: 6px !important;
-      }
-    }
-    @media (min-width: 770px) and (max-width: 899px) {
-      .navbar-centered {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        width: 100%;
-      }
-      .navbar-centered .logo {
-        margin-right: 1em;
-        order: 1;
-      }
-      .navbar-centered .nav-links {
-        order: 2;
-      }
-      .navbar-centered .theme-switcher-container {
-        margin-left: auto !important;
-        margin-right: 0 !important;
-        order: 98;
-        background: #2a3a4d !important; /* More vibrant, pops against white */
-        color: #fff !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
-        border-radius: 6px !important;
-      }
-      .navbar-centered .menu-toggle {
-        display: inline-block !important;
-        order: 99;
-        margin-left: 0 !important;
-        width: 44px;
-        min-width: 44px;
-        max-width: 44px;
-      }
-    }
-    body[data-theme="dark"] .tagline-mobile {
-      background: var(--a-color-surface-variant,#222);
-      color: var(--a-color-on-surface,#fff);
-      border-bottom: 1px solid var(--a-color-outline,#444);
-    }
-    body[data-theme="dark"] .tagline-mobile .tagline-text {
-      color: var(--a-color-on-surface,#fff);
-    }
-    .nav-links > li {
-      margin-left: 0.2em;
-      margin-right: 0.2em;
-    }
-    .nav-links > li:first-child {
-      margin-left: 0.2em;
-    }
-    .nav-links > li:last-child {
-      margin-right: 0.2em;
-    }
-    .nav-dropdown .dropdown-menu {
-      background: var(--a-color-surface,#fff);
-      color: var(--a-color-on-surface,#222);
-    }
-    body[data-theme="dark"] .nav-dropdown .dropdown-menu {
-      background: var(--a-color-surface-variant,#222);
-      color: var(--a-color-on-surface,#fff);
-    }
-    .nav-dropdown .dropdown-menu a {
-      color: var(--a-color-on-surface,#222);
-    }
-    body[data-theme="dark"] .nav-dropdown .dropdown-menu a {
-      color: var(--a-color-on-surface,#fff);
-    }
-    @media (max-width: 900px) {
-      .menu-toggle {
-        display: inline-block !important;
-      }
-    }
-    @media (max-width: 770px) {
-      .theme-switcher-container {
-        background: #2a3a4d !important;
-        color: #fff !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
-        border-radius: 6px !important;
-      }
-    }
-    @media (max-width: 700px) {
-      .theme-switcher-container {
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        max-width: 100vw !important;
-        min-width: 0 !important;
-        width: auto !important;
-        margin: 0 1em 0 0 !important;
-        padding: 0.5em 0.5em !important;
-        box-shadow: none !important;
-        background: transparent !important;
-        border-radius: 0 !important;
-        gap: var(--a-margin-base) !important;
-      }
-      #theme-select {
-        margin-right: var(--a-margin-base) !important;
-      }
-    }
-    @media (max-width: 600px) {
-      .theme-switcher-container {
-        gap: 0.3em !important;
-        padding: 0.5em 0.5em !important;
-        max-width: 180px !important;
-        flex-shrink:0 !important;
-      }
-      #theme-select {
-        margin-right: 0.2em !important;
-      }
-      .theme-toggle {
-        margin-left: 0.1em !important;
-        margin-right: 2.6em !important;
-      }
-      .menu-toggle {
-        margin: 0 !important;
-      }
-    }
-  </style>
+<header class="main-navbar">
+	<nav class="navbar-container" role="navigation" aria-label="Main Navigation">
+		<!-- Brand Logo -->
+		<a href="index.html" class="navbar-brand" aria-label="Axiom01 Framework Home">
+			<span class="brand-logo">
+				[Ax<span class="brand-primary">01</span>]
+			</span>
+			<span class="brand-version">v1.0</span>
+		</a>
+
+		<!-- Navigation Links -->
+		<ul class="navbar-nav" id="navbar-nav">
+			<li><a href="#home" class="nav-link">Home</a></li>
+			<li><a href="#components" class="nav-link">Components</a></li>
+			<li><a href="#documentation" class="nav-link">Docs</a></li>
+			<li><a href="#examples" class="nav-link">Examples</a></li>
+			<li><a href="https://github.com/axiom01/framework" class="nav-link" target="_blank" rel="noopener">
+				<i class="fab fa-github" aria-hidden="true"></i>
+				GitHub
+			</a></li>
+			<li><a href="#getting-started" class="get-started-btn">
+				<span class="btn-text">Get Started</span>
+				<i class="fas fa-arrow-right" aria-hidden="true"></i>
+			</a></li>
+		</ul>
+
+		<!-- Action Buttons -->
+		<div class="navbar-actions">
+			<button class="search-button" id="search-toggle" aria-label="Search documentation">
+				<i class="fas fa-search" aria-hidden="true"></i>
+			</button>
+
+			<div class="theme-switcher">
+				<button class="theme-toggle" id="theme-toggle" aria-label="Theme and settings">
+					<i class="fas fa-palette" aria-hidden="true"></i>
+				</button>
+
+				<div class="theme-dropdown" id="theme-dropdown" aria-label="Theme and settings options">
+					<h4 style="margin: 0 0 var(--a-margin-small) 0; padding: var(--a-padding-small) var(--a-padding-medium); font-size: var(--a-font-size-small); color: var(--a-color-on-surface-variant);">Appearance</h4>
+					<button class="theme-option active" data-theme="light" aria-pressed="true">
+						<i class="fas fa-sun" aria-hidden="true"></i>
+						<span>Light Mode</span>
+					</button>
+					<button class="theme-option" data-theme="dark" aria-pressed="false">
+						<i class="fas fa-moon" aria-hidden="true"></i>
+						<span>Dark Mode</span>
+					</button>
+					<button class="theme-option" data-theme="forest" aria-pressed="false">
+						<i class="fas fa-tree" aria-hidden="true"></i>
+						<span>Forest Theme</span>
+					</button>
+					<button class="theme-option" data-theme="ocean" aria-pressed="false">
+						<i class="fas fa-water" aria-hidden="true"></i>
+						<span>Ocean Theme</span>
+					</button>
+					<button class="theme-option" data-theme="sunset" aria-pressed="false">
+						<i class="fas fa-mountain-sun" aria-hidden="true"></i>
+						<span>Sunset Theme</span>
+					</button>
+					<hr style="border: none; border-top: var(--a-border-width-base) solid var(--a-color-outline); margin: var(--a-margin-small) 0;">
+					<h4 style="margin: 0 0 var(--a-margin-small) 0; padding: var(--a-padding-small) var(--a-padding-medium); font-size: var(--a-font-size-small); color: var(--a-color-on-surface-variant);">Settings</h4>
+					<button class="theme-option" id="toggle-animations">
+						<i class="fas fa-magic" aria-hidden="true"></i>
+						<span>Animations</span>
+						<span class="toggle-indicator">ON</span>
+					</button>
+					<button class="theme-option" id="toggle-font-size">
+						<i class="fas fa-text-height" aria-hidden="true"></i>
+						<span>Large Text</span>
+						<span class="toggle-indicator">OFF</span>
+					</button>
+				</div>
+			</div>
+
+			<button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="navbar-nav">
+				<i class="fas fa-bars" aria-hidden="true"></i>
+			</button>
+		</div>
+	</nav>
 </header>
-<!-- END index.part1.html -->
-<script src="js/navbar.js"></script>
+
+<!-- Search Modal -->
+<div class="search-modal" id="search-modal" aria-hidden="true">
+	<div class="search-content">
+		<input type="text" class="search-input" placeholder="Search documentation..." aria-label="Search input">
+		<div class="search-results" id="search-results">
+			<!-- Search results will be populated here -->
+		</div>
+	</div>
+</div>
+
+<script>
+	// Enhanced Navbar JavaScript
+	document.addEventListener('DOMContentLoaded', function() {
+		// Mobile menu toggle
+		const mobileToggle = document.getElementById('mobile-toggle');
+		const navbarNav = document.getElementById('navbar-nav');
+		const mobileIcon = mobileToggle.querySelector('i');
+
+		mobileToggle.addEventListener('click', function() {
+			const isOpen = navbarNav.classList.contains('open');
+
+			if (isOpen) {
+				navbarNav.classList.remove('open');
+				mobileToggle.setAttribute('aria-expanded', 'false');
+				mobileIcon.className = 'fas fa-bars';
+			} else {
+				navbarNav.classList.add('open');
+				mobileToggle.setAttribute('aria-expanded', 'true');
+				mobileIcon.className = 'fas fa-times';
+			}
+		});
+
+		// Theme toggle
+		const themeToggle = document.getElementById('theme-toggle');
+		const themeIcon = themeToggle.querySelector('i');
+		const html = document.documentElement;
+
+		themeToggle.addEventListener('click', function() {
+			const currentTheme = html.getAttribute('data-theme');
+			const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+			html.setAttribute('data-theme', newTheme);
+			localStorage.setItem('theme', newTheme);
+
+			// Update icon
+			if (newTheme === 'dark') {
+				themeIcon.className = 'fas fa-moon';
+				themeToggle.setAttribute('aria-label', 'Toggle light mode');
+			} else {
+				themeIcon.className = 'fas fa-sun';
+				themeToggle.setAttribute('aria-label', 'Toggle dark mode');
+			}
+		});
+
+		// Theme switcher dropdown
+		const themeSwitcher = document.querySelector('.theme-switcher');
+		const themeDropdown = document.getElementById('theme-dropdown');
+
+		themeSwitcher.addEventListener('click', function() {
+			const isOpen = themeDropdown.classList.contains('open');
+
+			if (isOpen) {
+				themeDropdown.classList.remove('open');
+			} else {
+				themeDropdown.classList.add('open');
+			}
+		});
+
+		// Theme option select
+		const themeOptions = document.querySelectorAll('.theme-option');
+
+		themeOptions.forEach(option => {
+			option.addEventListener('click', function() {
+				const selectedTheme = this.getAttribute('data-theme');
+
+				// Remove active class from all options
+				themeOptions.forEach(opt => opt.classList.remove('active'));
+
+				// Add active class to the selected option
+				this.classList.add('active');
+
+				// Set the theme
+				html.setAttribute('data-theme', selectedTheme);
+				localStorage.setItem('theme', selectedTheme);
+
+				// Update theme toggle button
+				if (selectedTheme === 'dark') {
+					themeIcon.className = 'fas fa-moon';
+					themeToggle.setAttribute('aria-label', 'Toggle light mode');
+				} else {
+					themeIcon.className = 'fas fa-sun';
+					themeToggle.setAttribute('aria-label', 'Toggle dark mode');
+				}
+			});
+		});
+
+		// Initialize theme from localStorage
+		const savedTheme = localStorage.getItem('theme') || 'light';
+		html.setAttribute('data-theme', savedTheme);
+		if (savedTheme === 'dark') {
+			themeIcon.className = 'fas fa-moon';
+			themeToggle.setAttribute('aria-label', 'Toggle light mode');
+		}
+
+		// Search functionality
+		const searchToggle = document.getElementById('search-toggle');
+		const searchModal = document.getElementById('search-modal');
+		const searchInput = document.querySelector('.search-input');
+		const searchResults = document.getElementById('search-results');
+
+		searchToggle.addEventListener('click', function(e) {
+			e.stopPropagation();
+			searchModal.classList.toggle('open');
+			if (searchModal.classList.contains('open')) {
+				searchInput.focus();
+			}
+		});
+
+		// Close search modal on backdrop click
+		searchModal.addEventListener('click', function(e) {
+			if (e.target === searchModal) {
+				searchModal.classList.remove('open');
+			}
+		});
+
+		// Close search modal on escape key
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape' && searchModal.classList.contains('open')) {
+				searchModal.classList.remove('open');
+			}
+		});
+
+		// Close theme dropdown on outside click
+		document.addEventListener('click', function(e) {
+			if (!themeSwitcher.contains(e.target)) {
+				themeDropdown.classList.remove('open');
+			}
+		});
+
+		// Mobile touch support for theme dropdown
+		themeSwitcher.addEventListener('touchstart', function(e) {
+			e.preventDefault();
+			const isOpen = themeDropdown.classList.contains('open');
+			themeDropdown.classList.toggle('open', !isOpen);
+		});
+
+		// Search input event listener
+		searchInput.addEventListener('input', function() {
+			const query = this.value.toLowerCase();
+
+			// Enhanced search with component results
+			if (query) {
+				const components = ['button', 'card', 'modal', 'forms', 'tabs', 'dropdown', 'accordion', 'alert'];
+				const filteredComponents = components.filter(comp => comp.includes(query));
+
+				searchResults.innerHTML = filteredComponents.map(comp =>
+					`<div class="search-result" data-component="${comp}">
+						<strong>${comp.charAt(0).toUpperCase() + comp.slice(1)} Component</strong>
+						<p>View ${comp} component documentation and examples</p>
+					</div>`
+				).join('');
+
+				// Add click handlers for search results
+				document.querySelectorAll('.search-result').forEach(result => {
+					result.addEventListener('click', function() {
+						const component = this.getAttribute('data-component');
+						searchModal.classList.remove('open');
+						// This will trigger the component browser we'll create next
+						loadComponent(component);
+					});
+				});
+			} else {
+				searchResults.innerHTML = '';
+			}
+		});
+
+		// Close mobile menu on link click
+		const navLinks = navbarNav.querySelectorAll('.nav-link');
+		navLinks.forEach(link => {
+			link.addEventListener('click', function() {
+				if (window.innerWidth <= 768) {
+					navbarNav.classList.remove('open');
+					mobileToggle.setAttribute('aria-expanded', 'false');
+					mobileIcon.className = 'fas fa-bars';
+				}
+			});
+		});
+
+		// Close mobile menu on outside click
+		document.addEventListener('click', function(e) {
+			if (!navbarNav.contains(e.target) && !mobileToggle.contains(e.target)) {
+				navbarNav.classList.remove('open');
+				mobileToggle.setAttribute('aria-expanded', 'false');
+				mobileIcon.className = 'fas fa-bars';
+			}
+		});
+	});
+</script>

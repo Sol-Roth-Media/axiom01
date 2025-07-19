@@ -1,0 +1,133 @@
+# Axiom01 Documentation & Demo Site Audit
+
+## Audit Checklist
+- [x] Index.html includes all major components and demos
+- [x] Style guide and theming showcase present
+- [x] Navigation links are clear and consistent
+- [x] Semantic color and gradient swatches included
+- [x] Grid system and layout examples present
+- [x] Accessibility features (ARIA, keyboard navigation) implemented
+- [x] Footer includes resource links
+- [x] JS code samples for interactive components included
+- [x] Demos for Carousel, Stepper, Sidebar, Drawer, Infinite Scroll, Tag, Table, Notification now present (see components/*.html)
+- [x] Demos for Accordion, Alert, Button, Card, Datepicker, Dropdown, Forms, Hero, Jump Menu, Media, Modal, Navbar, Navigation, Progress Bar, Progress Throbber, Tab Bar, Tabs
+
+## Component Audit Progress
+- **accordion.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **alert.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **button.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **card.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **datepicker.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **dropdown.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **forms.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **hero.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **jump-menu.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **media.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **modal.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **navbar.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **navigation.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **progress-bar.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **progress-throbber.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **tab-bar.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+- **tabs.html**
+  - [ ] Semantic markup
+  - [ ] Concise class names
+  - [ ] ARIA/accessibility
+  - [ ] CSS selector updates
+  - [ ] Documentation
+
+## Areas for Improvement
+- [x] Expand advanced theming and style guide examples
+- [x] Add interactive playground/demo page
+- [x] Improve mobile responsiveness further (navbar, hero, philosophy sections improved July 18, 2025)
+- [x] Add more real-world usage examples (dashboard layout added July 18, 2025)
+- [ ] Add search functionality for docs
+
+## Ongoing Tasks
+- [x] Continually update component demos as new features are added
+- [x] Audit accessibility and ARIA compliance for all components
+- [x] Update documentation and guides as framework evolves
+
+---
+
+_Last updated: July 19, 2025_
