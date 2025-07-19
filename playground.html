@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axiom01 Interactive Playground</title>
+  <meta name="description" content="Try out Axiom01 components and themes live. Interactive playground for UI demos.">
+  <link rel="stylesheet" href="css/axiom.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/colors_vars.css">
+  <link rel="stylesheet" href="css/axiom_config.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+  <header>
+    <nav class="navbar" aria-label="Playground Navigation">
+      <a href="index.html" class="logo" aria-label="Axiom Framework Home">
+        <span>[Ax<span style="color:var(--a-color-primary);">01</span>]</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="style-guide.html">Style Guide</a></li>
+        <li><a href="components.html">Components</a></li>
+        <li><a href="playground.html" class="active">Playground</a></li>
+      </ul>
+      <div class="theme-switcher-container">
+        <label for="theme-select" class="visually-hidden">Select Theme:</label>
+        <select id="theme-select" name="theme"></select>
+      </div>
+    </nav>
+  </header>
+  <main style="max-width:1200px;margin:2rem auto;padding:2rem;background:var(--a-color-surface);border-radius:var(--a-border-radius-large);box-shadow:var(--a-shadow-medium);">
+    <h1 style="text-align:center;margin-bottom:2rem;">Axiom01 Interactive Playground</h1>
+    <p style="text-align:center;max-width:700px;margin:0 auto 2rem;">Try out Axiom01 components and switch themes live. Click on a component below to interact with it and see the code.</p>
+    <section class="playground-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem;">
+      <div class="playground-demo">
+        <h2>Button Demo</h2>
+        <button class="primary">Primary Button</button>
+        <button>Default Button</button>
+        <button class="danger">Danger Button</button>
+        <button class="primary" disabled>Disabled</button>
+        <button class="primary"><span class="icon" aria-hidden="true">★</span> With Icon</button>
+        <button class="danger"><span class="icon" aria-hidden="true">!</span> Danger with Icon</button>
+        <button class="primary" onclick="alert('Clicked!')">Action Button</button>
+        <button class="show-code-btn" onclick="toggleCode('button-demo-code')">Show Code</button>
+        <pre id="button-demo-code" style="display:none;background:#222;color:#fff;padding:1em;border-radius:8px;overflow-x:auto;"><code>&lt;button class="primary"&gt;Primary Button&lt;/button&gt;
+&lt;button&gt;Default Button&lt;/button&gt;
+&lt;button class="danger"&gt;Danger Button&lt;/button&gt;
+&lt;button class="primary" disabled&gt;Disabled&lt;/button&gt;
+&lt;button class="primary"&gt;&lt;span class="icon" aria-hidden="true"&gt;★&lt;/span&gt; With Icon&lt;/button&gt;
+&lt;button class="danger"&gt;&lt;span class="icon" aria-hidden="true"&gt;!&lt;/span&gt; Danger with Icon&lt;/button&gt;
+&lt;button class="primary" onclick="alert('Clicked!')"&gt;Action Button&lt;/button&gt;</code></pre>
+      </div>
+      <div class="playground-demo">
+        <h2>Card Demo</h2>
+        <article class="card">
+          <header>Card Title</header>
+          <section>This is a simple card component.</section>
+          <footer><button class="primary">Action</button></footer>
+        </article>
+        <button class="show-code-btn" onclick="toggleCode('card-demo-code')">Show Code</button>
+        <pre id="card-demo-code" style="display:none;background:#222;color:#fff;padding:1em;border-radius:8px;overflow-x:auto;"><code>&lt;article class="card"&gt;
+  &lt;header&gt;Card Title&lt;/header&gt;
+  &lt;section&gt;This is a simple card component.&lt;/section&gt;
+  &lt;footer&gt;&lt;button class="primary"&gt;Action&lt;/button&gt;&lt;/footer&gt;
+&lt;/article&gt;</code></pre>
+      </div>
+      <div class="playground-demo">
+        <h2>Form Demo</h2>
+        <form>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="playground-demo">
+        <h2>Progress Bar Demo</h2>
+        <div class="progress-bar" style="width:300px;">
+          <div class="progress" style="width:70%;"></div>
+        </div>
+      </div>
+      <div class="playground-demo">
+        <h2>Tabs Demo</h2>
+        <section class="tabs">
+          <ul role="tablist" aria-label="Demo Tabs">
+            <li role="tab" id="tab1" aria-selected="true" aria-controls="panel1" tabindex="0">Tab 1</li>
+            <li role="tab" id="tab2" aria-selected="false" aria-controls="panel2" tabindex="-1">Tab 2</li>
+          </ul>
+          <div id="panel1" role="tabpanel" aria-labelledby="tab1" tabindex="0">Content for Tab 1.</div>
+          <div id="panel2" role="tabpanel" aria-labelledby="tab2" hidden tabindex="0">Content for Tab 2.</div>
+        </section>
+      </div>
+      <div class="playground-demo">
+        <h2>Accordion Demo</h2>
+        <section class="accordion" aria-label="Accordion Example">
+          <div>
+            <h4 id="accordion-item-1-header">
+              <button type="button" aria-expanded="false" aria-controls="accordion-item-1-content">Accordion Item 1</button>
+            </h4>
+            <section id="accordion-item-1-content" role="region" aria-labelledby="accordion-item-1-header" hidden>
+              <p>Content for the first accordion item.</p>
+            </section>
+          </div>
+          <div>
+            <h4 id="accordion-item-2-header">
+              <button type="button" aria-expanded="false" aria-controls="accordion-item-2-content">Accordion Item 2</button>
+            </h4>
+            <section id="accordion-item-2-content" role="region" aria-labelledby="accordion-item-2-header" hidden>
+              <p>This is the content for Accordion Item 2.</p>
+            </section>
+          </div>
+        </section>
+      </div>
+      <div class="playground-demo">
+        <h2>Modal Demo</h2>
+        <button id="open-modal-demo" class="btn">Open Modal</button>
+        <div class="modal" id="modal-demo" style="display:none;">
+          <div class="modal-content">
+            <header><h4>Modal Title</h4></header>
+            <section>This is a modal dialog.</section>
+            <footer><button id="close-modal-demo" class="btn">Close</button></footer>
+          </div>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var openBtn = document.getElementById('open-modal-demo');
+            var closeBtn = document.getElementById('close-modal-demo');
+            var modal = document.getElementById('modal-demo');
+            if (openBtn && closeBtn && modal) {
+              openBtn.addEventListener('click', function() {
+                modal.style.display = 'block';
+                modal.classList.add('open');
+              });
+              closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                modal.classList.remove('open');
+              });
+              // Optional: close modal on outside click
+              modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                  modal.style.display = 'none';
+                  modal.classList.remove('open');
+                }
+              });
+            }
+          });
+        </script>
+      </div>
+      <div class="playground-demo">
+        <h2>Notification Demo</h2>
+        <div class="alert success">Success! Your operation was completed.</div>
+        <div class="alert error">Error! Something went wrong.</div>
+        <div class="alert info">Info: This is an informational message.</div>
+      </div>
+      <div class="playground-demo">
+        <h2>Dropdown Demo</h2>
+        <div class="dropdown">
+          <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-menu-demo">Menu</button>
+          <ul class="dropdown-menu" id="dropdown-menu-demo" role="menu" aria-hidden="true">
+            <li role="none"><a href="#" role="menuitem">Edit</a></li>
+            <li role="none"><a href="#" role="menuitem">Duplicate</a></li>
+            <li role="separator"></li>
+            <li role="none"><a href="#" role="menuitem" style="color: var(--a-color-negative)">Delete</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="playground-demo">
+        <h2>Stepper Demo</h2>
+        <div class="stepper">
+          <div class="step active">Step 1</div>
+          <div class="step">Step 2</div>
+          <div class="step">Step 3</div>
+        </div>
+      </div>
+      <div class="playground-demo">
+        <h2>Carousel Demo</h2>
+        <div class="carousel">
+          <div class="carousel-item active">Item 1</div>
+          <div class="carousel-item">Item 2</div>
+          <div class="carousel-item">Item 3</div>
+        </div>
+      </div>
+      <div class="playground-demo">
+        <h2>Sidebar Demo</h2>
+        <aside class="sidebar">
+          <nav>
+            <ul>
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#">Profile</a></li>
+            </ul>
+          </nav>
+        </aside>
+      </div>
+      <div class="playground-demo">
+        <h2>Drawer Demo</h2>
+        <button id="open-drawer-demo" class="btn">Open Drawer</button>
+        <div class="drawer" id="drawer-demo" style="display:none;">
+          <nav>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Docs</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+          <button id="close-drawer-demo" class="btn" style="margin-top:1rem;">Close</button>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var openDrawerBtn = document.getElementById('open-drawer-demo');
+            var closeDrawerBtn = document.getElementById('close-drawer-demo');
+            var drawer = document.getElementById('drawer-demo');
+            if (openDrawerBtn && closeDrawerBtn && drawer) {
+              openDrawerBtn.addEventListener('click', function() {
+                drawer.style.display = 'block';
+                drawer.classList.add('open');
+              });
+              closeDrawerBtn.addEventListener('click', function() {
+                drawer.style.display = 'none';
+                drawer.classList.remove('open');
+              });
+              // Optional: close drawer on outside click
+              drawer.addEventListener('click', function(e) {
+                if (e.target === drawer) {
+                  drawer.style.display = 'none';
+                  drawer.classList.remove('open');
+                }
+              });
+            }
+          });
+        </script>
+      </div>
+      <div class="playground-demo">
+        <h2>Infinite Scroll Demo</h2>
+        <div class="infinite-scroll">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+        </div>
+      </div>
+      <div class="playground-demo">
+        <h2>Tag Demo</h2>
+        <span class="tag">Tag 1</span>
+        <span class="tag">Tag 2</span>
+        <span class="tag">Tag 3</span>
+      </div>
+      <div class="playground-demo">
+        <h2>Table Demo</h2>
+        <table class="table">
+          <thead>
+            <tr><th>Name</th><th>Email</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Alice</td><td>alice@example.com</td></tr>
+            <tr><td>Bob</td><td>bob@example.com</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="playground-demo">
+        <h2>Media Demo</h2>
+        <div class="media">
+          <img src="img/axiom.jpeg" alt="Demo Media" style="width:120px;border-radius:var(--a-border-radius-base);margin-right:1rem;">
+          <div>
+            <h3>Media Title</h3>
+            <p>Media components combine images, icons, and text for rich content blocks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="axiom-footer">
+    <div class="container" style="max-width: var(--a-layout-max-width); margin: 0 auto; padding: var(--a-padding-large) var(--a-padding-base); background: var(--a-color-surface-variant); color: var(--a-color-on-surface-variant); border-radius: var(--a-border-radius-large); box-shadow: 0 2px 16px var(--a-shadow-color, rgba(0,0,0,0.04)); display: flex; flex-direction: column; align-items: center; gap: var(--a-grid-gutter);">
+      <div style="font-size: var(--a-font-size-large); font-weight: var(--a-font-weight-medium); margin-bottom: var(--a-margin-small);">
+        &copy; 2025 <span style="color: var(--a-color-primary); font-weight: var(--a-font-weight-bold);">Axiom01</span> UI Framework
+      </div>
+      <div style="font-size: var(--a-font-size-base); color: var(--a-color-muted);">
+        <span>MIT License</span> &bull; <a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" style="color: var(--a-color-primary); text-decoration: underline;">GitHub</a>
+      </div>
+      <nav aria-label="Footer Navigation" style="margin-top: var(--a-margin-small);">
+        <ul style="display: flex; gap: var(--a-grid-gutter); list-style: none; padding: 0; margin: 0;">
+          <li><a href="index.html" style="color: var(--a-color-primary); text-decoration: none; font-weight: var(--a-font-weight-medium);">Home</a></li>
+          <li><a href="style-guide.html" style="color: var(--a-color-primary); text-decoration: none; font-weight: var(--a-font-weight-medium);">Style Guide</a></li>
+          <li><a href="components.html" style="color: var(--a-color-primary); text-decoration: none; font-weight: var(--a-font-weight-medium);">Components</a></li>
+          <li><a href="playground.html" style="color: var(--a-color-primary); text-decoration: none; font-weight: var(--a-font-weight-medium);">Playground</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+  <script src="js/scripts.js"></script>
+  <script>
+function toggleCode(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+  }
+}
+// Collapse/expand theme vars panel
+var panel = document.getElementById('theme-vars-panel');
+var collapseBtn = document.getElementById('collapse-vars-panel');
+var expandBtn = document.getElementById('expand-vars-panel');
+if (collapseBtn && panel && expandBtn) {
+  collapseBtn.onclick = function() {
+    panel.style.display = 'none';
+    expandBtn.style.display = 'block';
+  };
+  expandBtn.onclick = function() {
+    panel.style.display = 'block';
+    expandBtn.style.display = 'none';
+  };
+}
+</script>
+<div class="theme-vars-panel" id="theme-vars-panel" style="position:fixed;top:80px;right:20px;z-index:1000;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.12);padding:1.5em 1em;min-width:220px;max-width:320px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <h3 style="margin-top:0;">Theme Variables</h3>
+    <button id="collapse-vars-panel" title="Hide panel" style="background:none;border:none;font-size:1.5em;line-height:1;cursor:pointer;">&minus;</button>
+  </div>
+  <label>Primary Color <input type="color" id="var-primary" value="#007bff" style="width:40px;height:32px;vertical-align:middle;" onchange="document.documentElement.style.setProperty('--a-color-primary', this.value)"></label><br><br>
+  <label>Border Radius <input type="range" id="var-radius" min="0" max="32" value="10" style="width:120px;" onchange="document.documentElement.style.setProperty('--a-border-radius-base', this.value+'px')"></label><br><br>
+  <label>Spacing <input type="range" id="var-spacing" min="4" max="48" value="16" style="width:120px;" onchange="document.documentElement.style.setProperty('--a-space-base', this.value+'px')"></label>
+</div>
+<button id="expand-vars-panel" style="display:none;position:fixed;top:80px;right:20px;z-index:1000;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.12);padding:0.5em 1em;font-size:1.2em;cursor:pointer;">Show Theme Controls</button>
+</body>
+</html>

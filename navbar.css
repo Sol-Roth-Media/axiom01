@@ -70,6 +70,7 @@
   padding: var(--a-padding-small) var(--a-padding-base);
   border-radius: var(--a-border-radius-small);
   color: var(--a-color-on-surface, #222);
+  background: none;
   text-decoration: none;
   display: block;
 }
@@ -193,90 +194,24 @@
 
 /* Responsive styles */
 @media (max-width: 900px) {
-  /* Show menu toggle button */
   .navbar .menu-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Add padding for a larger touch target */
-    padding: var(--a-padding-small) var(--a-padding-base);
-    width: 40px;
-    height: 40px;
+    display: block !important;
   }
-
-  /* Hide navigation links by default */
   .navbar .nav-links {
     display: none;
     flex-direction: column;
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
-    /* Use theme-aware colors */
-    background: var(--a-color-surface-variant, var(--a-color-surface));
-    box-shadow: 0 4px 12px var(--a-shadow-color, rgba(0,0,0,0.12));
+    right: 0;
+    background: var(--a-color-surface);
+    box-shadow: var(--a-shadow-md);
     z-index: 100;
-    padding: var(--a-padding-large);
-    /* Add border for better definition */
-    border-top: 2px solid var(--a-color-primary, #007bff);
-    /* Add smooth transition */
-    transition: opacity 0.3s, transform 0.3s;
-    transform: translateY(-10px);
-    opacity: 0;
-    gap: var(--a-grid-gutter, 8px); /* Consistent spacing between items */
+    padding: 1em 0;
   }
-
-  /* Show navigation links when open */
   .navbar .nav-links.open {
     display: flex;
-    max-height: 80vh; /* Limit height and allow scrolling for many items */
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    overflow-y: auto; /* Allow scrolling if many items */
   }
-
-  /* Adjust link styling for mobile */
-  .navbar .nav-links li {
-    width: 100%;
-    margin-bottom: var(--a-margin-tiny);
-    /* Add transition for hover effects */
-    transition: background-color 0.2s, transform 0.2s;
-  }
-
-  .navbar .nav-links li:hover {
-    background-color: var(--a-color-primary-fade-active, rgba(0,0,0,0.05));
-    transform: translateX(4px); /* Subtle movement on hover */
-  }
-
-  .navbar .nav-links a {
-    width: 100%;
-    padding: var(--a-padding-base);
-    /* Improve text styling */
-    color: var(--a-color-on-surface, #222);
-    font-weight: var(--a-font-weight-medium, 500);
-    transition: color 0.2s;
-    display: block;
-    border-radius: var(--a-border-radius-small);
-  }
-
-  .navbar .nav-links a:hover,
-  .navbar .nav-links a:focus {
-    color: var(--a-color-primary, #007bff);
-    text-decoration: none;
-  }
-
-  /* Modify active state indicator for mobile */
-  .navbar .nav-links a.active::after {
-    width: 4px;
-    height: 70%;
-    left: 0;
-    top: 15%;
-    transform: none;
-    border-radius: 0 var(--a-border-radius-small) var(--a-border-radius-small) 0;
-  }
-
-  /* No need for hamburger animation as we're using Font Awesome icons that will be handled by JavaScript */
 }
 
 /* Skip to content link for accessibility */
@@ -293,4 +228,25 @@
 
 .skip-to-content:focus {
   top: 0;
+}
+
+[data-theme="light"] .navbar .nav-links a,
+[data-theme="light"] .navbar .menu-toggle,
+[data-theme="light"] .navbar .menu-toggle i {
+  color: #222 !important;
+}
+[data-theme="light"] .navbar .nav-links a:hover,
+[data-theme="light"] .navbar .nav-links a:focus {
+  color: #007bff !important;
+  background-color: rgba(0,123,255,0.08) !important;
+}
+[data-theme="dark"] .navbar .nav-links a,
+[data-theme="dark"] .navbar .menu-toggle,
+[data-theme="dark"] .navbar .menu-toggle i {
+  color: #f4f4f4 !important;
+}
+[data-theme="dark"] .navbar .nav-links a:hover,
+[data-theme="dark"] .navbar .nav-links a:focus {
+  color: #90cdf4 !important;
+  background-color: rgba(33,150,243,0.12) !important;
 }
