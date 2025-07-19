@@ -29,8 +29,7 @@
       <span>[Ax</span><span style="color:var(--a-color-primary);">01</span><span>]</span>
       <small class="version">v0.1</small>
     </a>
-    <span class="tagline">Semantic-first UI for modern web projects</span>
-    <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links">
+    <button class="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links" style="display:none;margin-right:var(--a-margin-base);vertical-align:middle;">
       <i class="fa-solid fa-bars" aria-hidden="true"></i>
     </button>
     <ul class="nav-links" id="nav-links" style="gap:0.5em;">
@@ -64,12 +63,100 @@
         });
       });
     </script>
-    <div class="theme-switcher-container" style="background:var(--a-color-surface-variant,#222);border-radius:6px;padding:0.5em 1em;box-shadow:0 2px 8px rgba(0,0,0,0.12);max-width:320px;min-width:120px;width:100%;color:var(--a-color-on-surface,#fff);">
+    <div class="theme-switcher-container" style="background:var(--a-color-surface-variant,#222);border-radius:6px;padding:0.5em 1em;box-shadow:0 2px 8px rgba(0,0,0,0.12);max-width:320px;min-width:120px;width:100%;color:var(--a-color-on-surface,#fff);display:flex;align-items:center;gap:0.4em;margin:0 var(--a-margin-base) 0 0;">
       <label for="theme-select" class="visually-hidden">Select Theme:</label>
       <select id="theme-select" name="theme" style="min-width:140px;max-width:260px;padding-right:2.5em;background:var(--a-color-surface,#222);color:var(--a-color-on-surface,#fff);border-radius:6px;border:1px solid var(--a-color-outline,#444);font-size:1em;">
       </select>
-      <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode" style="padding:0.4em 0.7em; font-size:1.2em;background:var(--a-color-surface,#222);color:var(--a-color-on-surface,#fff);border-radius:6px;border:1px solid var(--a-color-outline,#444);margin-left:0.5em;">&#9728;</button>
+      <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Light Mode" style="padding:0.4em 0.7em; font-size:1.2em;background:var(--a-color-surface,#222);color:var(--a-color-on-surface,#fff);border-radius:6px;border:1px solid var(--a-color-outline,#444);margin-left:0.2em;margin-right:1em;">&#9728;</button>
     </div>
+    <style>
+      @media (min-width: 900px) {
+        .navbar-centered {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 2.5em;
+        }
+        .navbar-centered .logo {
+          margin-right: 1.2em;
+        }
+        .navbar-centered .nav-links {
+          display: flex;
+          gap: 0.5em;
+          align-items: center;
+        }
+        .navbar-centered .theme-switcher-container {
+          margin-left: 1.2em;
+        }
+      }
+      body[data-theme="dark"] .tagline-mobile {
+        background: var(--a-color-surface-variant,#222);
+        color: var(--a-color-on-surface,#fff);
+        border-bottom: 1px solid var(--a-color-outline,#444);
+      }
+      body[data-theme="dark"] .tagline-mobile .tagline-text {
+        color: var(--a-color-on-surface,#fff);
+      }
+      .nav-links > li {
+        margin-left: 0.2em;
+        margin-right: 0.2em;
+      }
+      .nav-links > li:first-child {
+        margin-left: 0.2em;
+      }
+      .nav-links > li:last-child {
+        margin-right: 0.2em;
+      }
+      .nav-dropdown .dropdown-menu {
+        background: var(--a-color-surface,#fff);
+        color: var(--a-color-on-surface,#222);
+      }
+      body[data-theme="dark"] .nav-dropdown .dropdown-menu {
+        background: var(--a-color-surface-variant,#222);
+        color: var(--a-color-on-surface,#fff);
+      }
+      .nav-dropdown .dropdown-menu a {
+        color: var(--a-color-on-surface,#222);
+      }
+      body[data-theme="dark"] .nav-dropdown .dropdown-menu a {
+        color: var(--a-color-on-surface,#fff);
+      }
+      @media (max-width: 900px) {
+        .menu-toggle {
+          display: inline-block !important;
+        }
+      }
+      @media (max-width: 700px) {
+        .theme-switcher-container {
+          flex-direction: row !important;
+          align-items: center !important;
+          justify-content: flex-start !important;
+          max-width: 100vw !important;
+          min-width: 0 !important;
+          width: auto !important;
+          margin: 0 1em 0 0 !important;
+          padding: 0.5em 0.5em !important;
+          box-shadow: none !important;
+          background: transparent !important;
+          border-radius: 0 !important;
+          gap: var(--a-margin-base) !important;
+        }
+        #theme-select {
+          margin-right: var(--a-margin-base) !important;
+        }
+      }
+      @media (max-width: 600px) {
+        .theme-switcher-container {
+          gap: 0.2em !important;
+          padding: 0.5em 0.5em !important;
+          max-width: 180px !important;
+        }
+        .theme-toggle {
+          margin-left: 0.1em !important;
+          margin-right: 1em !important;
+        }
+      }
+    </style>
   </nav>
   <div class="tagline-mobile" style="display:block;text-align:center;font-size:1.05em;color:var(--a-color-muted,#888);font-weight:500;padding:0.5em 1em 0.5em 1em;max-width:100vw;word-break:break-word;background:var(--a-color-surface,#fff);border-bottom:1px solid var(--a-color-outline,#eee);">
     <span class="tagline-text" style="color:var(--a-color-muted,#888);">Semantic-first UI for modern web projects</span>
@@ -125,6 +212,41 @@
     }
     body[data-theme="dark"] .nav-dropdown .dropdown-menu a {
       color: var(--a-color-on-surface,#fff);
+    }
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: inline-block !important;
+      }
+    }
+    @media (max-width: 700px) {
+      .theme-switcher-container {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        max-width: 100vw !important;
+        min-width: 0 !important;
+        width: auto !important;
+        margin: 0 1em 0 0 !important;
+        padding: 0.5em 0.5em !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+        gap: var(--a-margin-base) !important;
+      }
+      #theme-select {
+        margin-right: var(--a-margin-base) !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .theme-switcher-container {
+        gap: 0.2em !important;
+        padding: 0.5em 0.5em !important;
+        max-width: 180px !important;
+      }
+      .theme-toggle {
+        margin-left: 0.1em !important;
+        margin-right: 1em !important;
+      }
     }
   </style>
 </header>
