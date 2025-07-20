@@ -9,9 +9,10 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "node build.js",
+    "build": "node build.js && node scripts/performance-monitor.js",
     "build:tokens": "node scripts/compile-tokens.js",
     "build:themes": "npm run build:tokens && npm run build",
+    "build:performance": "npm run build && node scripts/performance-monitor.js",
     "build:css": "npm run concat:css && npm run minify:css && npm run critical:css",
     "build:js": "npm run concat:js && npm run minify:js",
     "concat:css": "cat css/_reset.css css/_axiom_reset.css css/axiom_vars.css css/colors_vars.css css/axiom_config.css css/colors.css css/axiom.css > dist/css/axiom.css",
@@ -25,7 +26,10 @@
     "dev": "npm run build:themes && python3 -m http.server 8000",
     "lighthouse": "lighthouse http://localhost:8000 --output=html --output-path=lighthouse-report.html",
     "test": "npm run lint:css && npm run lint:js",
-    "theme-wizard": "npm run build:themes && open theme-customization-wizard.html"
+    "theme-wizard": "npm run build:themes && open theme-customization-wizard.html",
+    "playground": "npm run build:themes && open interactive-playground.html",
+    "performance": "node scripts/performance-monitor.js",
+    "analyze": "npm run build:performance"
   },
   "keywords": [
     "ui",
