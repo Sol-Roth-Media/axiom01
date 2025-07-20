@@ -9,12 +9,23 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "bash ./build.sh",
-    "lint:css": "echo 'CSS linting would run here'",
-    "lint:js": "echo 'JS linting would run here'",
-    "minify:css": "echo 'CSS minification would run here'",
-    "minify:js": "echo 'JS minification would run here'",
-    "test": "echo 'Tests would run here'"
+    "build": "node build.js",
+    "build:tokens": "node scripts/compile-tokens.js",
+    "build:themes": "npm run build:tokens && npm run build",
+    "build:css": "npm run concat:css && npm run minify:css && npm run critical:css",
+    "build:js": "npm run concat:js && npm run minify:js",
+    "concat:css": "cat css/_reset.css css/_axiom_reset.css css/axiom_vars.css css/colors_vars.css css/axiom_config.css css/colors.css css/axiom.css > dist/css/axiom.css",
+    "concat:js": "cat js/axiom.js js/theme-switcher.js js/navbar.js js/forms.js js/alert.js > dist/js/axiom.js",
+    "minify:css": "cleancss -o dist/css/axiom.min.css dist/css/axiom.css",
+    "minify:js": "terser dist/js/axiom.js --compress --mangle --source-map --output dist/js/axiom.min.js",
+    "critical:css": "critical --base dist --src index.html --css dist/css/axiom.css --target critical.css --width 1300 --height 900",
+    "purge:css": "purgecss --css dist/css/axiom.css --content '*.html' 'components/*.html' --output dist/css/",
+    "lint:css": "stylelint 'css/**/*.css'",
+    "lint:js": "eslint 'js/**/*.js'",
+    "dev": "npm run build:themes && python3 -m http.server 8000",
+    "lighthouse": "lighthouse http://localhost:8000 --output=html --output-path=lighthouse-report.html",
+    "test": "npm run lint:css && npm run lint:js",
+    "theme-wizard": "npm run build:themes && open theme-customization-wizard.html"
   },
   "keywords": [
     "ui",
@@ -32,7 +43,14 @@
     "url": "https://github.com/yourusername/axiom01.git"
   },
   "devDependencies": {
-    "comment": "These would be your actual dev dependencies for building/testing"
+    "clean-css-cli": "^5.6.2",
+    "terser": "^5.19.2",
+    "critical": "^6.1.0",
+    "purgecss": "^5.0.0",
+    "stylelint": "^15.10.2",
+    "stylelint-config-standard": "^34.0.0",
+    "eslint": "^8.45.0",
+    "lighthouse": "^10.4.0"
   },
   "engines": {
     "node": ">=14.0.0"

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom01 - Interactive Playground</title>
+    <link rel="stylesheet" href="css/axiom.css">
+    <link rel="stylesheet" href="css/tokens/all-themes.css">
+    <link rel="stylesheet" href="css/playground.css">
+    <!-- Code editor styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+</head>
+<body>
+    <div class="playground">
+        <!-- Header -->
+        <header class="playground-header">
+            <div class="playground-brand">
+                <h1>Axiom01 Playground</h1>
+                <p>Interactive component development environment</p>
+            </div>
+            <div class="playground-controls">
+                <select id="theme-selector" aria-label="Select theme">
+                    <option value="light">Light Theme</option>
+                    <option value="dark">Dark Theme</option>
+                    <option value="forest">Forest Theme</option>
+                    <option value="ocean">Ocean Theme</option>
+                    <option value="sunset">Sunset Theme</option>
+                </select>
+                <button id="share-code" class="primary">Share</button>
+                <button id="export-code" class="secondary">Export</button>
+            </div>
+        </header>
+
+        <div class="playground-layout">
+            <!-- Sidebar with component library -->
+            <aside class="playground-sidebar" aria-label="Component library">
+                <div class="sidebar-header">
+                    <h2>Components</h2>
+                    <input type="search" id="component-search" placeholder="Search components..." aria-label="Search components">
+                </div>
+
+                <div class="component-categories">
+                    <div class="category">
+                        <h3>Layout</h3>
+                        <ul class="component-list">
+                            <li><button class="component-item" data-component="card">Card</button></li>
+                            <li><button class="component-item" data-component="modal">Modal</button></li>
+                            <li><button class="component-item" data-component="drawer">Drawer</button></li>
+                            <li><button class="component-item" data-component="accordion">Accordion</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="category">
+                        <h3>Forms</h3>
+                        <ul class="component-list">
+                            <li><button class="component-item" data-component="button">Button</button></li>
+                            <li><button class="component-item" data-component="input">Input</button></li>
+                            <li><button class="component-item" data-component="select">Select</button></li>
+                            <li><button class="component-item" data-component="form">Form</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="category">
+                        <h3>Navigation</h3>
+                        <ul class="component-list">
+                            <li><button class="component-item" data-component="navbar">Navigation</button></li>
+                            <li><button class="component-item" data-component="breadcrumb">Breadcrumb</button></li>
+                            <li><button class="component-item" data-component="pagination">Pagination</button></li>
+                            <li><button class="component-item" data-component="tabs">Tabs</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="category">
+                        <h3>Feedback</h3>
+                        <ul class="component-list">
+                            <li><button class="component-item" data-component="alert">Alert</button></li>
+                            <li><button class="component-item" data-component="notification">Notification</button></li>
+                            <li><button class="component-item" data-component="progress">Progress</button></li>
+                            <li><button class="component-item" data-component="skeleton">Skeleton</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="category">
+                        <h3>Data Display</h3>
+                        <ul class="component-list">
+                            <li><button class="component-item" data-component="table">Table</button></li>
+                            <li><button class="component-item" data-component="timeline">Timeline</button></li>
+                            <li><button class="component-item" data-component="tag">Tag</button></li>
+                            <li><button class="component-item" data-component="empty-state">Empty State</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="category">
+                        <h3>Media</h3>
+                        <ul class="component-list">
+                            <li><button class="component-item" data-component="carousel">Carousel</button></li>
+                            <li><button class="component-item" data-component="media">Media</button></li>
+                            <li><button class="component-item" data-component="file-upload">File Upload</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main editing area -->
+            <main class="playground-main">
+                <div class="editor-tabs" role="tablist" aria-label="Code editor tabs">
+                    <button class="editor-tab active" role="tab" aria-selected="true" aria-controls="html-editor" id="html-tab">HTML</button>
+                    <button class="editor-tab" role="tab" aria-selected="false" aria-controls="css-editor" id="css-tab">CSS</button>
+                    <button class="editor-tab" role="tab" aria-selected="false" aria-controls="js-editor" id="js-tab">JavaScript</button>
+                </div>
+
+                <div class="editor-panels">
+                    <div class="editor-panel active" role="tabpanel" aria-labelledby="html-tab" id="html-editor-panel">
+                        <div class="editor-header">
+                            <h3>HTML</h3>
+                            <div class="editor-actions">
+                                <button id="format-html" class="editor-action" aria-label="Format HTML">🎨</button>
+                                <button id="copy-html" class="editor-action" aria-label="Copy HTML">📋</button>
+                            </div>
+                        </div>
+                        <textarea id="html-editor" aria-label="HTML code editor"></textarea>
+                    </div>
+
+                    <div class="editor-panel" role="tabpanel" aria-labelledby="css-tab" id="css-editor-panel">
+                        <div class="editor-header">
+                            <h3>CSS</h3>
+                            <div class="editor-actions">
+                                <button id="format-css" class="editor-action" aria-label="Format CSS">🎨</button>
+                                <button id="copy-css" class="editor-action" aria-label="Copy CSS">📋</button>
+                            </div>
+                        </div>
+                        <textarea id="css-editor" aria-label="CSS code editor"></textarea>
+                    </div>
+
+                    <div class="editor-panel" role="tabpanel" aria-labelledby="js-tab" id="js-editor-panel">
+                        <div class="editor-header">
+                            <h3>JavaScript</h3>
+                            <div class="editor-actions">
+                                <button id="format-js" class="editor-action" aria-label="Format JavaScript">🎨</button>
+                                <button id="copy-js" class="editor-action" aria-label="Copy JavaScript">📋</button>
+                            </div>
+                        </div>
+                        <textarea id="js-editor" aria-label="JavaScript code editor"></textarea>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Live preview area -->
+            <section class="playground-preview" aria-label="Live preview">
+                <div class="preview-header">
+                    <h2>Live Preview</h2>
+                    <div class="preview-controls">
+                        <button id="refresh-preview" class="preview-control" aria-label="Refresh preview">🔄</button>
+                        <button id="fullscreen-preview" class="preview-control" aria-label="Fullscreen preview">⛶</button>
+                        <select id="preview-size" aria-label="Preview size">
+                            <option value="100%">Desktop</option>
+                            <option value="768px">Tablet</option>
+                            <option value="375px">Mobile</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="preview-frame-container">
+                    <iframe id="preview-frame" title="Component preview" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+
+                <div class="preview-info" aria-live="polite" aria-atomic="true">
+                    <div class="preview-status">Ready</div>
+                    <div class="preview-dimensions" id="preview-dimensions"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Console/Output -->
+        <footer class="playground-console" id="console-panel">
+            <div class="console-header">
+                <h3>Console</h3>
+                <div class="console-controls">
+                    <button id="clear-console" class="console-control">Clear</button>
+                    <button id="toggle-console" class="console-control">Hide</button>
+                </div>
+            </div>
+            <div class="console-output" id="console-output" aria-live="polite"></div>
+        </footer>
+    </div>
+
+    <!-- Share Modal -->
+    <dialog id="share-modal" class="modal" aria-labelledby="share-title" aria-describedby="share-desc">
+        <article>
+            <header>
+                <h2 id="share-title">Share Your Code</h2>
+                <button class="close" aria-label="Close modal">&times;</button>
+            </header>
+            <section id="share-desc">
+                <p>Share this playground with others:</p>
+                <div class="share-options">
+                    <div class="share-option">
+                        <label for="share-url">Shareable URL:</label>
+                        <div class="input-group">
+                            <input type="url" id="share-url" readonly>
+                            <button id="copy-url" class="secondary">Copy</button>
+                        </div>
+                    </div>
+                    <div class="share-option">
+                        <label for="embed-code">Embed Code:</label>
+                        <textarea id="embed-code" readonly rows="4"></textarea>
+                        <button id="copy-embed" class="secondary">Copy Embed</button>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </dialog>
+
+    <!-- CodeMirror and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closetag.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+
+    <!-- Axiom01 core scripts -->
+    <script src="js/axiom.js"></script>
+    <script src="js/playground.js"></script>
+</body>
+</html>
