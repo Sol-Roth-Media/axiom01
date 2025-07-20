@@ -89,3 +89,50 @@ AxiomComponents.ThemeSwitcher = {
         });
     }
 };
+
+// Add theme demo functionality for the index.html theme showcase
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle theme demo cards in the interactive showcase
+    const themeDemoCards = document.querySelectorAll('.theme-demo-card');
+
+    themeDemoCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const theme = this.getAttribute('data-theme');
+            if (theme) {
+                // Remove active class from all cards
+                themeDemoCards.forEach(c => c.classList.remove('active'));
+                // Add active class to clicked card
+                this.classList.add('active');
+
+                // Apply theme to document
+                document.documentElement.setAttribute('data-theme', theme);
+
+                // Update the main theme switcher in navbar to match
+                const themeOptions = document.querySelectorAll('.theme-option');
+                themeOptions.forEach(option => {
+                    option.classList.remove('active');
+                    option.setAttribute('aria-pressed', 'false');
+                    if (option.getAttribute('data-theme') === theme) {
+                        option.classList.add('active');
+                        option.setAttribute('aria-pressed', 'true');
+                    }
+                });
+
+                console.log('Theme changed to:', theme);
+            }
+        });
+    });
+
+    // Handle "View All Themes" button
+    const viewAllThemesBtn = document.querySelector('.theme-showcase-cta button');
+    if (viewAllThemesBtn) {
+        viewAllThemesBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Trigger the theme switcher dropdown
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.click();
+            }
+        });
+    }
+});

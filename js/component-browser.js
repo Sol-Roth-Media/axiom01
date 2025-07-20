@@ -1,87 +1,142 @@
-// Axiom Component Browser JS
+// Axiom Component Browser JS - Redesigned for Horizontal Tabs + Permanent Iframe
 
-class ComponentBrowser {
-    constructor(element) {
-        console.log('ComponentBrowser: Constructor called.');
-        this.element = element;
-        this.sidebar = this.element.querySelector('.component-browser-sidebar');
-        this.content = this.element.querySelector('.component-browser-content');
-        this.iframe = this.content.querySelector('.component-browser-iframe');
-        this.list = this.sidebar.querySelector('.component-browser-list');
-        this.components = [
-            'accordion', 'alert', 'button', 'card', 'carousel', 'datepicker', 'drawer',
-            'dropdown', 'forms', 'hero', 'infinite-scroll', 'jump-menu', 'media', 'modal',
-            'navbar', 'notification', 'progress', 'search', 'stepper', 'tab-bar', 'tag',
-            'paywall', 'commerce', 'multi-step-form'
-        ];
-
+class ComponentBrowserRedesigned {
+    constructor() {
+        console.log('ComponentBrowser: Initializing redesigned browser...');
+        this.currentComponent = null;
         this.init();
     }
 
     init() {
-        console.log('ComponentBrowser: init() called.');
-        if (!this.list) {
-            console.error('ComponentBrowser: Component list element not found.');
+        // Find the new redesigned component browser
+        this.browserContainer = document.querySelector('.component-browser-redesigned');
+        if (!this.browserContainer) {
+            console.log('ComponentBrowser: No redesigned browser container found on this page');
             return;
         }
-        this.populateList();
-        this.links = this.list.querySelectorAll('a');
-        this.links.forEach(link => {
-            link.addEventListener('click', (e) => {
+
+        // Get the new elements
+        this.iframe = document.getElementById('component-preview-iframe');
+        this.title = document.getElementById('component-preview-title');
+        this.placeholder = document.getElementById('preview-placeholder');
+        this.openPageBtn = document.getElementById('open-component-page');
+        this.refreshBtn = document.getElementById('refresh-preview');
+
+        // Get all component tab buttons
+        this.componentTabs = document.querySelectorAll('.component-tab');
+
+        console.log('ComponentBrowser: Found', this.componentTabs.length, 'component tabs');
+        console.log('ComponentBrowser: iframe element:', !!this.iframe);
+        console.log('ComponentBrowser: placeholder element:', !!this.placeholder);
+
+        // Initialize event listeners
+        this.initComponentTabs();
+        this.initActionButtons();
+
+        console.log('ComponentBrowser: Redesigned browser initialized successfully');
+    }
+
+    initComponentTabs() {
+        console.log('ComponentBrowser: Setting up component tab event listeners...');
+
+        this.componentTabs.forEach((tab, index) => {
+            const src = tab.getAttribute('data-src');
+            const name = tab.getAttribute('data-name');
+
+            console.log(`ComponentBrowser: Setting up tab ${index + 1}: ${name} -> ${src}`);
+
+            tab.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log('ComponentBrowser: Component link clicked:', link.getAttribute('href'));
-                this.loadComponent(link.getAttribute('href'));
-                this.setActive(link);
+                console.log('ComponentBrowser: Tab clicked:', name, src);
+                this.loadComponent(src, name, tab);
             });
         });
+    }
 
-        if (this.links.length > 0) {
-            console.log('ComponentBrowser: Loading first component by default.');
-            this.loadComponent(this.links[0].getAttribute('href'));
-            this.setActive(this.links[0]);
-        } else {
-            console.warn('ComponentBrowser: No component links found to load.');
+    initActionButtons() {
+        // Open full page button
+        if (this.openPageBtn) {
+            this.openPageBtn.addEventListener('click', () => {
+                if (this.currentComponent && this.currentComponent.src) {
+                    window.open(this.currentComponent.src, '_blank');
+                }
+            });
+        }
+
+        // Refresh button
+        if (this.refreshBtn) {
+            this.refreshBtn.addEventListener('click', () => {
+                if (this.currentComponent && this.currentComponent.src) {
+                    this.refreshComponent();
+                }
+            });
         }
     }
 
-    populateList() {
-        console.log('ComponentBrowser: Populating component list.');
-        this.components.forEach(component => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = `components/${component}.html`;
-            a.textContent = component.charAt(0).toUpperCase() + component.slice(1);
-            li.appendChild(a);
-            this.list.appendChild(li);
-        });
-        console.log(`ComponentBrowser: Populated ${this.components.length} components.`);
-    }
+    loadComponent(src, name, tabElement) {
+        console.log('ComponentBrowser: Loading component:', name, 'from', src);
 
-    loadComponent(url) {
-        console.log('ComponentBrowser: Loading component into iframe:', url);
+        // Store current component info
+        this.currentComponent = { src, name, tab: tabElement };
+
+        // Update active tab
+        this.setActiveTab(tabElement);
+
+        // Update title
+        if (this.title) {
+            this.title.textContent = `${name} Component`;
+        }
+
+        // Hide placeholder and load iframe
+        this.showIframe();
+
         if (this.iframe) {
-            this.iframe.src = url;
-        } else {
-            console.error('ComponentBrowser: Iframe element not found.');
+            console.log('ComponentBrowser: Setting iframe src to:', src);
+            this.iframe.src = src;
         }
     }
 
-    setActive(activeLink) {
-        console.log('ComponentBrowser: Setting active link.');
-        this.links.forEach(link => {
-            link.classList.remove('active');
+    setActiveTab(activeTab) {
+        // Remove active class from all tabs
+        this.componentTabs.forEach(tab => {
+            tab.classList.remove('active');
         });
-        activeLink.classList.add('active');
+
+        // Add active class to clicked tab
+        if (activeTab) {
+            activeTab.classList.add('active');
+        }
+    }
+
+    showIframe() {
+        if (this.placeholder) {
+            this.placeholder.classList.add('hidden');
+        }
+        console.log('ComponentBrowser: Iframe should now be visible with placeholder hidden');
+    }
+
+    refreshComponent() {
+        if (this.currentComponent && this.iframe) {
+            console.log('ComponentBrowser: Refreshing component:', this.currentComponent.name);
+            this.iframe.src = this.currentComponent.src;
+        }
     }
 }
 
-window.AxiomComponents = window.AxiomComponents || {};
-AxiomComponents.ComponentBrowser = {
-    init: function() {
-        console.log('AxiomComponents.ComponentBrowser.init called.');
-        const componentBrowserElements = document.querySelectorAll('.component-browser');
-        componentBrowserElements.forEach(element => {
-            new ComponentBrowser(element);
-        });
-    }
-};
+// Initialize the redesigned component browser when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('ComponentBrowser: DOM loaded, initializing redesigned browser...');
+
+    setTimeout(() => {
+        try {
+            new ComponentBrowserRedesigned();
+        } catch (error) {
+            console.error('ComponentBrowser: Failed to initialize redesigned browser:', error);
+        }
+    }, 100);
+});
+
+// Export for potential external usage
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = ComponentBrowserRedesigned;
+}

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Components - Axiom UI Framework</title>
+  <meta name="description" content="Explore the components available in the Axiom UI Framework - a minimal, semantic, and flexible CSS framework.">
+  <link rel="stylesheet" href="../css/axiom.min.css">
+  <link rel="stylesheet" href="../css/alerts.css">
+  <link rel="stylesheet" href="../css/prism.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <script src="js/scripts.js" defer></script>
+  <style>
+    :root {
+      --doc-sidebar-width: 260px;
+      --doc-header-height: 60px;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--a-color-surface-variant, #f7f8fa);
+    }
+    
+    .doc-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--doc-header-height);
+      background-color: var(--a-color-primary, #1976D2);
+      color: var(--a-color-on-primary, #fff);
+      z-index: 100;
+      box-shadow: var(--a-shadow-medium);
+    }
+    
+    .doc-navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 var(--a-padding-large);
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .doc-logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: var(--a-font-weight-bold);
+      color: var(--a-color-on-primary);
+      text-decoration: none;
+    }
+    
+    .doc-logo span {
+      font-family: var(--a-font-family-mono);
+    }
+    
+    .doc-nav-links {
+      display: flex;
+      gap: var(--a-space-medium);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .doc-nav-links a {
+      color: var(--a-color-on-primary);
+      text-decoration: none;
+      font-weight: var(--a-font-weight-medium);
+      padding: var(--a-padding-small) 0;
+      position: relative;
+    }
+    
+    .doc-nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--a-color-on-primary);
+      transition: width 0.3s ease;
+    }
+    
+    .doc-nav-links a:hover::after,
+    .doc-nav-links a.active::after {
+      width: 100%;
+    }
+    
+    .doc-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--a-color-on-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    .doc-main {
+      display: flex;
+      margin-top: var(--doc-header-height);
+      flex: 1;
+    }
+    
+    .doc-sidebar {
+      width: var(--doc-sidebar-width);
+      background-color: var(--a-color-surface);
+      border-right: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+      padding: var(--a-padding-large);
+      position: fixed;
+      top: var(--doc-header-height);
+      bottom: 0;
+      overflow-y: auto;
+    }
+    
+    .doc-sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--a-space-medium);
+    }
+    
+    .doc-sidebar-section {
+      margin-bottom: var(--a-margin-large);
+    }
+    
+    .doc-sidebar-title {
+      font-weight: var(--a-font-weight-bold);
+      color: var(--a-color-muted);
+      margin-bottom: var(--a-margin-small);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .doc-sidebar-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--a-space-small);
+    }
+    
+    .doc-sidebar-links a {
+      color: var(--a-color-on-surface);
+      text-decoration: none;
+      padding: var(--a-padding-small);
+      border-radius: var(--a-border-radius-base);
+      transition: background-color 0.2s ease;
+      display: block;
+    }
+    
+    .doc-sidebar-links a:hover,
+    .doc-sidebar-links a.active {
+      background-color: var(--a-color-surface-variant);
+      color: var(--a-color-primary);
+    }
+    
+    .doc-content {
+      flex: 1;
+      padding: var(--a-padding-xlarge);
+      margin-left: var(--doc-sidebar-width);
+    }
+    
+    .doc-section {
+      max-width: 800px;
+      margin: 0 auto var(--a-margin-xxlarge);
+    }
+    
+    .doc-component {
+      background-color: var(--a-color-surface);
+      border-radius: var(--a-border-radius-base);
+      padding: var(--a-padding-large);
+      margin-bottom: var(--a-margin-large);
+      box-shadow: var(--a-shadow-sm);
+    }
+    
+    .doc-component-header {
+      margin-bottom: var(--a-margin-medium);
+      padding-bottom: var(--a-padding-small);
+      border-bottom: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+    }
+    
+    .doc-component-title {
+      margin-top: 0;
+      margin-bottom: var(--a-margin-tiny);
+    }
+    
+    .doc-component-description {
+      color: var(--a-color-muted);
+      margin-bottom: var(--a-margin-medium);
+    }
+    
+    .doc-component-demo {
+      padding: var(--a-padding-large);
+      margin: var(--a-margin-medium) 0;
+      background-color: var(--a-color-surface-variant, #f5f5f5);
+      border-radius: var(--a-border-radius-base);
+      border: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+    }
+    
+    .doc-code-block {
+      background-color: var(--a-color-surface-variant);
+      border-radius: var(--a-border-radius-base);
+      padding: var(--a-padding-medium);
+      margin: var(--a-margin-medium) 0;
+      overflow-x: auto;
+      position: relative;
+    }
+    
+    .doc-code {
+      font-family: var(--a-font-family-mono);
+      font-size: 0.9rem;
+    }
+    
+    .doc-footer {
+      background-color: var(--a-color-surface);
+      padding: var(--a-padding-large);
+      text-align: center;
+      border-top: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+    }
+    
+    .doc-tabs {
+      display: flex;
+      gap: var(--a-space-small);
+      margin-bottom: var(--a-margin-medium);
+      border-bottom: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+      padding-bottom: var(--a-padding-small);
+    }
+    
+    .doc-tab {
+      padding: var(--a-padding-small) var(--a-padding-medium);
+      background: none;
+      border: none;
+      border-radius: var(--a-border-radius-base) var(--a-border-radius-base) 0 0;
+      cursor: pointer;
+      font-weight: var(--a-font-weight-medium);
+      color: var(--a-color-muted);
+      transition: color 0.2s ease, background-color 0.2s ease;
+    }
+    
+    .doc-tab.active {
+      color: var(--a-color-primary);
+      background-color: var(--a-color-surface-variant);
+    }
+    
+    .doc-tab:hover {
+      color: var(--a-color-primary);
+    }
+    
+    .doc-tab-content {
+      display: none;
+    }
+    
+    .doc-tab-content.active {
+      display: block;
+    }
+    
+    .doc-props-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--a-margin-medium) 0;
+    }
+    
+    .doc-props-table th,
+    .doc-props-table td {
+      padding: var(--a-padding-small);
+      text-align: left;
+      border-bottom: 1px solid var(--a-color-outline, rgba(0,0,0,0.1));
+    }
+    
+    .doc-props-table th {
+      font-weight: var(--a-font-weight-bold);
+      color: var(--a-color-muted);
+    }
+    
+    @media (max-width: 900px) {
+      .doc-nav-links {
+        display: none;
+      }
+      
+      .doc-menu-toggle {
+        display: block;
+      }
+      
+      .doc-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 90;
+      }
+      
+      .doc-sidebar.open {
+        transform: translateX(0);
+      }
+      
+      .doc-content {
+        margin-left: 0;
+      }
+      
+      .doc-overlay {
+        position: fixed;
+        top: var(--doc-header-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 80;
+        display: none;
+      }
+      
+      .doc-overlay.open {
+        display: block;
+      }
+    }
+    
+    /* Theme toggle button */
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--a-color-on-primary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: var(--a-padding-small);
+      margin-right: var(--a-margin-small);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+    
+    .theme-toggle:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Code copy button */
+    .doc-copy-button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: var(--a-color-surface);
+      color: var(--a-color-muted);
+      border: none;
+      border-radius: var(--a-border-radius-small, 4px);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+    
+    .doc-copy-button:hover {
+      opacity: 1;
+      color: var(--a-color-primary);
+    }
+  </style>
+</head>
+<body>
+  <header class="doc-header">
+    <nav class="doc-navbar">
+      <a href="index.html" class="doc-logo">
+        <span>[Ax<span style="color: #fff;">01</span>]</span>
+      </a>
+      <ul class="doc-nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#getting-started">Getting Started</a></li>
+        <li><a href="components.html" class="active">Components</a></li>
+        <li><a href="index.html#customization">Customization</a></li>
+        <li><a href="index.html#layout">Layout</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+        🌙
+      </button>
+      <button class="doc-menu-toggle" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+  
+  <div class="doc-overlay"></div>
+  
+  <main class="doc-main">
+    <aside class="doc-sidebar">
+      <nav class="doc-sidebar-nav">
+        <div class="doc-sidebar-section">
+          <h2 class="doc-sidebar-title">Components</h2>
+          <ul class="doc-sidebar-links">
+            <li><a href="#buttons">Buttons</a></li>
+            <li><a href="#cards">Cards</a></li>
+            <li><a href="#forms">Forms</a></li>
+            <li><a href="#alerts">Alerts</a></li>
+            <li><a href="#modals">Modals</a></li>
+            <li><a href="#navbar">Navbar</a></li>
+            <li><a href="#tabs">Tabs</a></li>
+            <li><a href="#accordion">Accordion</a></li>
+            <li><a href="#dropdown">Dropdown</a></li>
+            <li><a href="#progress">Progress</a></li>
+            <li><a href="#drawer">Drawer</a></li>
+            <li><a href="#hero">Hero</a></li>
+            <li><a href="#carousel">Carousel</a></li>
+            <li><a href="#sidebar">Sidebar</a></li>
+            <li><a href="#notification">Notification</a></li>
+            <li><a href="#infinite-scroll">Infinite Scroll</a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+    
+    <div class="doc-content">
+      <section class="doc-section">
+        <h1>Axiom UI Components</h1>
+        <p>Explore the components available in the Axiom UI Framework. Each component follows Axiom's philosophy of semantic HTML, minimal classes, and CSS variables for customization.</p>
+        
+        <!-- Buttons Component -->
+        <div class="doc-component" id="buttons">
+          <div class="doc-component-header">
+            <h2 class="doc-component-title">Buttons</h2>
+            <p class="doc-component-description">Buttons are used to trigger actions or navigate to different pages. Axiom provides several button variants with minimal markup.</p>
+          </div>
+          
+          <div class="doc-tabs">
+            <button class="doc-tab active" data-tab="buttons-demo">Demo</button>
+            <button class="doc-tab" data-tab="buttons-code">Code</button>
+            <button class="doc-tab" data-tab="buttons-props">Properties</button>
+          </div>
+          
+          <div class="doc-tab-content active" id="buttons-demo">
+            <div class="doc-component-demo">
+              <button class="button">Default Button</button>
+              <button class="button primary">Primary Button</button>
+              <button class="button secondary">Secondary Button</button>
+              <button class="button success">Success Button</button>
+              <button class="button danger">Danger Button</button>
+              <button class="button" disabled>Disabled Button</button>
+            </div>
+          </div>
+          
+          <div class="doc-tab-content" id="buttons-code">
+            <div class="doc-code-block">
+              <pre class="doc-code"><code class="language-html">&lt;button class="button"&gt;Default Button&lt;/button&gt;
+&lt;button class="button primary"&gt;Primary Button&lt;/button&gt;
+&lt;button class="button secondary"&gt;Secondary Button&lt;/button&gt;
+&lt;button class="button success"&gt;Success Button&lt;/button&gt;
+&lt;button class="button danger"&gt;Danger Button&lt;/button&gt;
+&lt;button class="button" disabled&gt;Disabled Button&lt;/button&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="doc-tab-content" id="buttons-props">
+            <table class="doc-props-table">
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.button</code></td>
+                  <td>Base button class</td>
+                </tr>
+                <tr>
+                  <td><code>.primary</code></td>
+                  <td>Primary action button</td>
+                </tr>
+                <tr>
+                  <td><code>.secondary</code></td>
+                  <td>Secondary action button</td>
+                </tr>
+                <tr>
+                  <td><code>.success</code></td>
+                  <td>Success action button</td>
+                </tr>
+                <tr>
+                  <td><code>.danger</code></td>
+                  <td>Dangerous action button</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Cards Component -->
+        <div class="doc-component" id="cards">
+          <div class="doc-component-header">
+            <h2 class="doc-component-title">Cards</h2>
+            <p class="doc-component-description">Cards are used to group related content and actions. Axiom uses semantic HTML elements inside a card container.</p>
+          </div>
+          
+          <div class="doc-tabs">
+            <button class="doc-tab active" data-tab="cards-demo">Demo</button>
+            <button class="doc-tab" data-tab="cards-code">Code</button>
+            <button class="doc-tab" data-tab="cards-props">Properties</button>
+          </div>
+          
+          <div class="doc-tab-content active" id="cards-demo">
+            <div class="doc-component-demo">
+              <article class="card">
+                <header>Card Title</header>
+                <section>This is a minimal card using Axiom's semantic approach. Cards use article, header, section, and footer elements.</section>
+                <footer>
+                  <button class="button small">Action</button>
+                </footer>
+              </article>
+            </div>
+          </div>
+          
+          <div class="doc-tab-content" id="cards-code">
+            <div class="doc-code-block">
+              <pre class="doc-code"><code class="language-html">&lt;article class="card"&gt;
+  &lt;header&gt;Card Title&lt;/header&gt;
+  &lt;section&gt;This is a minimal card using Axiom's semantic approach. Cards use article, header, section, and footer elements.&lt;/section&gt;
+  &lt;footer&gt;
+    &lt;button class="button small"&gt;Action&lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="doc-tab-content" id="cards-props">
+            <table class="doc-props-table">
+              <thead>
+                <tr>
+                  <th>Element/Class</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.card</code></td>
+                  <td>Base card class</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;header&gt;</code></td>
+                  <td>Card header (title area)</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;section&gt;</code></td>
+                  <td>Card content area</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;footer&gt;</code></td>
+                  <td>Card footer (action area)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Alerts Component -->
+        <div class="doc-component" id="alerts">
+          <div class="doc-component-header">
+            <h2 class="doc-component-title">Alerts</h2>
+            <p class="doc-component-description">Alerts are used to display important messages to the user. Axiom provides several alert variants for different types of messages.</p>
+          </div>
+          
+          <div class="doc-tabs">
+            <button class="doc-tab active" data-tab="alerts-demo">Demo</button>
+            <button class="doc-tab" data-tab="alerts-code">Code</button>
+            <button class="doc-tab" data-tab="alerts-props">Properties</button>
+          </div>
+          
+          <div class="doc-tab-content active" id="alerts-demo">
+            <div class="doc-component-demo">
+              <div class="alert">This is a default alert message.</div>
+              <div class="alert success">This is a success alert message.</div>
+              <div class="alert warning">This is a warning alert message.</div>
+              <div class="alert danger">This is a danger alert message.</div>
+              <div class="alert info">This is an info alert message.</div>
+            </div>
+          </div>
+          
+          <div class="doc-tab-content" id="alerts-code">
+            <div class="doc-code-block">
+              <pre class="doc-code"><code class="language-html">&lt;div class="alert"&gt;This is a default alert message.&lt;/div&gt;
+&lt;div class="alert success"&gt;This is a success alert message.&lt;/div&gt;
+&lt;div class="alert warning"&gt;This is a warning alert message.&lt;/div&gt;
+&lt;div class="alert danger"&gt;This is a danger alert message.&lt;/div&gt;
+&lt;div class="alert info"&gt;This is an info alert message.&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="doc-tab-content" id="alerts-props">
+            <table class="doc-props-table">
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.alert</code></td>
+                  <td>Base alert class</td>
+                </tr>
+                <tr>
+                  <td><code>.success</code></td>
+                  <td>Success message alert</td>
+                </tr>
+                <tr>
+                  <td><code>.warning</code></td>
+                  <td>Warning message alert</td>
+                </tr>
+                <tr>
+                  <td><code>.danger</code></td>
+                  <td>Error/danger message alert</td>
+                </tr>
+                <tr>
+                  <td><code>.info</code></td>
+                  <td>Information message alert</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- More components would be added here -->
+        
+      </section>
+    </div>
+  </main>
+  
+  <footer class="doc-footer">
+    <p>&copy; 2025 Axiom UI Framework. Minimal. Semantic. Flexible.</p>
+  </footer>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Tab functionality
+      const tabs = document.querySelectorAll('.doc-tab');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Get the parent component
+          const component = this.closest('.doc-component');
+          
+          // Get the tab content id
+          const tabId = this.getAttribute('data-tab');
+          
+          // Remove active class from all tabs in this component
+          component.querySelectorAll('.doc-tab').forEach(t => {
+            t.classList.remove('active');
+          });
+          
+          // Add active class to clicked tab
+          this.classList.add('active');
+          
+          // Hide all tab content in this component
+          component.querySelectorAll('.doc-tab-content').forEach(content => {
+            content.classList.remove('active');
+          });
+          
+          // Show the selected tab content
+          component.querySelector(`#${tabId}`).classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
