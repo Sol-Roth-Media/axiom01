@@ -213,136 +213,43 @@ const AxiomModal = {
   </main>
 
   <script>
-    // Enhanced Modal Implementation for Axiom01
-    class AxiomModal {
-      constructor() {
-        this.activeModal = null;
-        this.previousFocus = null;
-        this.focusableSelectors = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-        this.init();
-      }
-
-      init() {
-        // Initialize modal triggers
-        document.querySelectorAll('[data-modal]').forEach(trigger => {
-          trigger.addEventListener('click', (e) => {
-            const modalId = trigger.getAttribute('data-modal');
-            this.open(modalId);
-          });
-        });
-
-        // Initialize close buttons
-        document.querySelectorAll('[data-modal-close]').forEach(closeBtn => {
-          closeBtn.addEventListener('click', () => this.close());
-        });
-
-        // Global keyboard events
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && this.activeModal) {
-            this.close();
-          }
-          if (e.key === 'Tab' && this.activeModal) {
-            this.handleTabKey(e);
-          }
-        });
-
-        // Backdrop click handling
-        document.querySelectorAll('.modal').forEach(modal => {
-          modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-              this.close();
-            }
-          });
-        });
-      }
-
-      open(modalId) {
-        const modal = document.getElementById(modalId);
-        if (!modal || this.activeModal) return;
-
-        this.activeModal = modal;
-        this.previousFocus = document.activeElement;
-
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-
-        // Focus first focusable element
-        const firstFocusable = modal.querySelector(this.focusableSelectors);
-        if (firstFocusable) {
-          firstFocusable.focus();
-        }
-      }
-
-      close() {
-        if (!this.activeModal) return;
-
-        this.activeModal.classList.remove('open');
-        this.activeModal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-
-        // Return focus to trigger element
-        if (this.previousFocus) {
-          this.previousFocus.focus();
-        }
-
-        this.activeModal = null;
-        this.previousFocus = null;
-      }
-
-      handleTabKey(e) {
-        const focusableElements = this.activeModal.querySelectorAll(this.focusableSelectors);
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey) {
-          if (document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-          }
-        } else {
-          if (document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-          }
-        }
-      }
-    }
-
-    // Initialize modal system
     document.addEventListener('DOMContentLoaded', () => {
-      new AxiomModal();
-    });
+      const modalTriggers = document.querySelectorAll('[data-modal]');
+      const modalCloses = document.querySelectorAll('[data-modal-close]');
 
-    // Form handling example
-    document.getElementById('contact-form')?.addEventListener('submit', (e) => {
-      e.preventDefault();
+      modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const modal = document.getElementById(trigger.dataset.modal);
+          modal.classList.add('open');
+          document.body.classList.add('modal-open');
+        });
+      });
 
-      // Simple validation example
-      const name = document.getElementById('contact-name');
-      const email = document.getElementById('contact-email');
+      modalCloses.forEach(close => {
+        close.addEventListener('click', () => {
+          const modal = close.closest('.modal');
+          modal.classList.remove('open');
+          document.body.classList.remove('modal-open');
+        });
+      });
 
-      let isValid = true;
+      document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.classList.remove('open');
+            document.body.classList.remove('modal-open');
+          }
+        });
+      });
 
-      if (!name.value.trim()) {
-        document.getElementById('name-error').textContent = 'Name is required';
-        isValid = false;
-      } else {
-        document.getElementById('name-error').textContent = '';
-      }
-
-      if (!email.value.trim() || !email.validity.valid) {
-        document.getElementById('email-error').textContent = 'Valid email is required';
-        isValid = false;
-      } else {
-        document.getElementById('email-error').textContent = '';
-      }
-
-      if (isValid) {
-        alert('Form submitted successfully!');
-        // Close modal after successful submission
-        document.querySelector('[data-modal-close]').click();
-      }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.modal.open').forEach(modal => {
+            modal.classList.remove('open');
+            document.body.classList.remove('modal-open');
+          });
+        }
+      });
     });
   </script>
 </body>

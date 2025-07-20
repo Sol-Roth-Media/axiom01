@@ -472,7 +472,7 @@ function validateField(e) {
       parent.postMessage({
         type: 'console',
         level: 'error',
-        args: [`Error: \${msg} at line \${line}`]
+        args: ['Error: ' + msg + ' at line ' + line]
       }, '*');
     };
     

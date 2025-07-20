@@ -10,22 +10,20 @@ Generated: 7/20/2025
 ## Bundle Analysis
 
 ### css/axiom-core.css
-- **Size**: 187.02 KB (24.71 KB gzipped)
-- **Compression**: 86.8%
-- **Status**: warning ✅
+- **Size**: 83.07 KB (14.93 KB gzipped)
+- **Compression**: 82.0%
+- **Status**: good ✅
 - **Optimization Potential**: low
-- **Suggestions**: Consider splitting CSS into critical and non-critical, Remove unused CSS rules
 
 ### css/axiom.css
-- **Size**: 108.77 KB (11.01 KB gzipped)
-- **Compression**: 89.9%
-- **Status**: warning ✅
+- **Size**: 4.82 KB (1.15 KB gzipped)
+- **Compression**: 76.1%
+- **Status**: good ✅
 - **Optimization Potential**: low
-- **Suggestions**: Consider splitting CSS into critical and non-critical, Remove unused CSS rules
 
 ### js/axiom-core.js
-- **Size**: 6.46 KB (1.89 KB gzipped)
-- **Compression**: 70.8%
+- **Size**: 8.32 KB (2.24 KB gzipped)
+- **Compression**: 73.1%
 - **Status**: good ✅
 - **Optimization Potential**: low
 

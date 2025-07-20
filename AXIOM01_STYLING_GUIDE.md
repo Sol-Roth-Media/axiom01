@@ -10,17 +10,15 @@ Structure markup with semantic elements, avoiding unnecessary `<div>` wrappers. 
 
 **Standard Component Pattern:**
 ```html
-<article class="component-name">
+<article class="card">
   <header>
-    <h3>Component Title</h3>
-    <span class="badge" aria-label="Status indicator">New</span>
+    <h3>Card Title</h3>
   </header>
   <section>
-    <p>Main content goes here with proper semantic structure.</p>
+    <p>Main content goes here.</p>
   </section>
   <footer>
     <button class="primary">Primary Action</button>
-    <button class="secondary">Secondary Action</button>
   </footer>
 </article>
 ```
@@ -29,8 +27,7 @@ Structure markup with semantic elements, avoiding unnecessary `<div>` wrappers. 
 
 ### Class Naming Strategy
 - **Single class** for main component (`.card`, `.modal`, `.button`)
-- **Variant classes** combined for modifications (`.button.primary`, `.card.elevated`)
-- **Semantic variants**: `.primary`, `.secondary`, `.danger`, `.large`, `.compact`
+- **Variant classes** for modifications (`.button.primary`, `.card.elevated`)
 - **Avoid**: Long hyphenated names, utility class stacking, BEM patterns
 
 **Examples:**
@@ -46,200 +43,75 @@ Structure markup with semantic elements, avoiding unnecessary `<div>` wrappers. 
 ## 3. CSS Variable Architecture
 
 ### Required Variable Usage
-All components must use CSS variables for consistency and theming:
+All components must use CSS variables for consistency and theming.
 
-**Spacing Variables:**
-```css
-.component {
-  padding: var(--a-padding-medium);
-  margin: var(--a-margin-base);
-  gap: var(--a-space-small);
-}
-```
-
-**Color Variables:**
-```css
-.component {
-  background: var(--a-color-surface);
-  color: var(--a-color-on-surface);
-  border-color: var(--a-color-outline);
-}
-
-.component.primary {
-  background: var(--a-color-primary);
-  color: var(--a-color-on-primary);
-}
-```
-
-**Typography Variables:**
-```css
-.component header {
-  font-size: var(--a-font-size-h3);
-  font-weight: var(--a-font-weight-medium);
-}
-```
-
-## 4. Element Selector Strategy
-
-### CSS Selector Patterns
-Target semantic elements within component contexts:
-
+**Example:**
 ```css
 .card {
-  /* Base component styles */
   background: var(--a-color-surface);
-  border-radius: var(--a-border-radius-base);
-  box-shadow: var(--a-shadow-base);
-}
-
-.card header {
-  padding: var(--a-padding-medium);
-  border-bottom: var(--a-border-width-base) solid var(--a-color-outline);
-}
-
-.card section {
-  padding: var(--a-padding-medium);
-}
-
-.card footer {
-  padding: var(--a-padding-medium);
-  display: flex;
-  gap: var(--a-space-small);
-  justify-content: flex-end;
-}
-
-.card.elevated {
-  box-shadow: var(--a-shadow-large);
+  color: var(--a-color-on-surface);
+  border: 1px solid var(--a-color-outline);
+  padding: var(--a-padding-large);
+  border-radius: var(--a-border-radius-large);
 }
 ```
 
-## 5. Accessibility Implementation (WCAG 2.1 AA)
-
-### Required Accessibility Features
-
-**ARIA Attributes:**
-```html
-<div class="modal" role="dialog" aria-modal="true" 
-     aria-labelledby="modal-title" aria-hidden="true">
-  <div class="modal-content">
-    <header>
-      <h3 id="modal-title">Modal Title</h3>
-      <button aria-label="Close modal" data-modal-close>&times;</button>
-    </header>
-  </div>
-</div>
-```
-
-**Keyboard Navigation:**
-```css
-button:focus-visible {
-  outline: var(--a-border-width-focus) solid var(--a-color-focus);
-  outline-offset: var(--a-space-tiny);
-}
-```
-
-**Icon Accessibility:**
-```html
-<!-- Decorative icons -->
-<span class="icon" aria-hidden="true">★</span>
-
-<!-- Functional icons need labels -->
-<button aria-label="Delete item">
-  <span class="icon" aria-hidden="true">×</span>
-</button>
-```
-
-## 6. Component Registration System
+## 4. Component Registration System
 
 ### JavaScript Integration
-Components use the Axiom registration system:
+Interactive components use the Axiom registration system. This system allows you to easily initialize and manage your components without cluttering your HTML with inline scripts.
 
+**Registration:**
 ```javascript
-AxiomComponents.register('componentName', function() {
-  // Component initialization
-  const components = document.querySelectorAll('.component-name');
-  
-  components.forEach(component => {
-    // Setup event listeners
-    // Handle accessibility features
-    // Manage component state
-  });
+// js/components/my-component.js
+AxiomComponents.register('my-component', {
+  init: function(element) {
+    // Add event listeners and setup component logic
+    element.querySelector('button').addEventListener('click', () => {
+      alert('Component initialized!');
+    });
+  },
+  destroy: function(element) {
+    // Remove event listeners and clean up
+  }
 });
 ```
 
-## 7. Form Accessibility Standards
+**Initialization:**
+```javascript
+// js/main.js
+document.addEventListener('DOMContentLoaded', () => {
+  AxiomComponents.init();
+});
+```
 
-### Required Form Patterns
+## 5. Accessibility (WCAG 2.1 AA)
+
+### Required Accessibility Features
+- **ARIA Attributes:** Use appropriate ARIA roles, states, and properties.
+- **Keyboard Navigation:** Ensure all interactive elements are keyboard accessible.
+- **Focus Management:** Manage focus appropriately for modals, dropdowns, and other interactive components.
+
+**Example:**
 ```html
-<div class="form-group">
-  <label for="field-name">Field Label <span aria-label="required">*</span></label>
-  <input id="field-name" name="field" required 
-         aria-describedby="field-error field-help">
-  <div id="field-help" class="help-text">Helpful context for user</div>
-  <div id="field-error" class="error-message" role="alert" aria-live="polite"></div>
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <h3 id="modal-title">Modal Title</h3>
+  <button aria-label="Close modal">&times;</button>
 </div>
 ```
-
-## 8. Theme Compatibility Requirements
-
-### Multi-Theme Support
-All components must work across themes:
-- Light theme (default)
-- Dark theme  
-- High contrast themes
-- Specialty themes (forest, ocean, sunset)
-
-**Testing Requirement:**
-```css
-/* Component must work with theme switching */
-html[data-theme="dark"] .component {
-  /* Automatic through CSS variables */
-}
-```
-
-## 9. Performance Considerations
-
-### Efficient CSS Patterns
-```css
-/* ✅ Good: Minimal selectors, CSS variables */
-.component {
-  background: var(--a-color-surface);
-}
-
-.component header {
-  padding: var(--a-padding-medium);
-}
-
-/* ❌ Avoid: Deep nesting, hardcoded values */
-.component .header .title .text {
-  padding: 16px;
-}
-```
-
-## 10. Documentation Standards
-
-### Required Component Documentation
-Each component must include:
-1. **Basic usage example** with copy-paste code
-2. **Accessibility features** explanation  
-3. **CSS implementation** showing variable usage
-4. **Best practices** section
-5. **Keyboard navigation** instructions
 
 ## Implementation Checklist
 
 For each component, verify:
 - [ ] Uses semantic HTML structure
-- [ ] Single meaningful class names
-- [ ] CSS variables for all styling
-- [ ] Element selectors within components  
-- [ ] WCAG 2.1 AA accessibility compliance
-- [ ] Keyboard navigation support
-- [ ] Screen reader compatibility
-- [ ] Theme compatibility across all themes
-- [ ] Component registration with framework
-- [ ] Comprehensive documentation
+- [ ] Uses minimal, meaningful class names
+- [ ] Uses CSS variables for all styling
+- [ ] Is fully accessible (WCAG 2.1 AA)
+- [ ] Is responsive and works on all screen sizes
+- [ ] Is themeable and works with all themes
+- [ ] Is registered with the Axiom component system (if interactive)
+- [ ] Has comprehensive documentation
 
 ---
 
-**Updated:** July 19, 2025 - Reflects current Axiom01 implementation patterns and accessibility standards.
+**Updated:** July 20, 2025 - Reflects current Axiom01 implementation patterns and accessibility standards.

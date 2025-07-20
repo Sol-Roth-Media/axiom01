@@ -29,18 +29,18 @@
       <h1>Navigation Components</h1>
       <p>Explore different navigation patterns for Axiom01: breadcrumbs, pagination, menus, and quick links. All are themeable, accessible, and easy to use.</p>
       <!-- Breadcrumbs -->
-      <nav aria-label="Breadcrumb" style="margin-bottom:2rem;">
-        <ol style="display:flex;flex-wrap:wrap;gap:0.5rem;list-style:none;padding:0;background:var(--a-color-surface);border-radius:var(--a-border-radius-base);box-shadow:var(--a-shadow-sm);padding:0.75rem 1rem;">
-          <li><a href="../index.html" style="color:var(--a-color-primary);text-decoration:none;">Home</a></li>
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ol>
+          <li><a href="../index.html">Home</a></li>
           <li aria-hidden="true">/</li>
-          <li><a href="card.html" style="color:var(--a-color-primary);text-decoration:none;">Components</a></li>
+          <li><a href="card.html">Components</a></li>
           <li aria-hidden="true">/</li>
-          <li><span style="color:var(--a-color-muted);">Navigation</span></li>
+          <li><span>Navigation</span></li>
         </ol>
       </nav>
       <section style="margin-bottom:2rem;">
         <h3>How to Use: Breadcrumbs</h3>
-        <pre><code class="language-html">&lt;nav aria-label="Breadcrumb"&gt;
+        <pre><code class="language-html">&lt;nav aria-label="Breadcrumb" class="breadcrumb"&gt;
   &lt;ol&gt;
     &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
     &lt;li aria-hidden="true"&gt;/&lt;/li&gt;
@@ -52,8 +52,8 @@
 </code></pre>
       </section>
       <!-- Pagination -->
-      <nav aria-label="Pagination" style="margin-bottom:2rem;">
-        <ul style="display:flex;gap:0.5rem;list-style:none;padding:0;justify-content:center;align-items:center;background:var(--a-color-surface);border-radius:var(--a-border-radius-base);box-shadow:var(--a-shadow-sm);padding:0.75rem 1rem;">
+      <nav aria-label="Pagination" class="pagination">
+        <ul>
           <li><a href="#" class="button" aria-label="Previous Page">&laquo;</a></li>
           <li><a href="#" class="button">1</a></li>
           <li><a href="#" class="button">2</a></li>
@@ -64,7 +64,7 @@
       </nav>
       <section style="margin-bottom:2rem;">
         <h3>How to Use: Pagination</h3>
-        <pre><code class="language-html">&lt;nav aria-label="Pagination"&gt;
+        <pre><code class="language-html">&lt;nav aria-label="Pagination" class="pagination"&gt;
   &lt;ul&gt;
     &lt;li&gt;&lt;a href="#" class="button" aria-label="Previous Page"&gt;&laquo;&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a href="#" class="button"&gt;1&lt;/a&gt;&lt;/li&gt;
@@ -77,9 +77,9 @@
 </code></pre>
       </section>
       <!-- Horizontal Menu -->
-      <nav aria-label="Horizontal Menu" style="margin-bottom:2rem;">
-        <ul style="display:flex;gap:1.5rem;list-style:none;padding:0;justify-content:center;background:var(--a-color-surface);border-radius:var(--a-border-radius-base);box-shadow:var(--a-shadow-sm);padding:0.75rem 1rem;">
-          <li><a href="../index.html" style="color:var(--a-color-primary);font-weight:bold;">Home</a></li>
+      <nav aria-label="Horizontal Menu" class="menu-horizontal">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
           <li><a href="card.html">Cards</a></li>
           <li><a href="forms.html">Forms</a></li>
           <li><a href="media.html">Media</a></li>
@@ -87,9 +87,9 @@
         </ul>
       </nav>
       <!-- Vertical Menu -->
-      <nav aria-label="Vertical Menu" style="margin-bottom:2rem;">
-        <ul style="display:flex;flex-direction:column;gap:1rem;list-style:none;padding:0;background:var(--a-color-surface);border-radius:var(--a-border-radius-base);box-shadow:var(--a-shadow-sm);padding:1rem;max-width:220px;">
-          <li><a href="../index.html" style="color:var(--a-color-primary);font-weight:bold;">Home</a></li>
+      <nav aria-label="Vertical Menu" class="menu-vertical">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
           <li><a href="card.html">Cards</a></li>
           <li><a href="forms.html">Forms</a></li>
           <li><a href="media.html">Media</a></li>
@@ -97,10 +97,10 @@
         </ul>
       </nav>
       <!-- Dropdown Menu -->
-      <nav aria-label="Dropdown Menu" style="margin-bottom:2rem;">
-        <div class="dropdown" style="position:relative;display:inline-block;">
-          <button aria-haspopup="true" aria-expanded="false" style="background:var(--a-color-primary);color:var(--a-color-on-primary);border:none;padding:0.75rem 1.5rem;border-radius:var(--a-border-radius-base);font-size:1rem;cursor:pointer;">Menu</button>
-          <ul style="position:absolute;left:0;top:100%;min-width:180px;margin-top:0.5rem;background:var(--a-color-surface);border-radius:var(--a-border-radius-base);box-shadow:var(--a-shadow-medium);padding:0.5rem 0;z-index:100;display:none;" aria-label="submenu">
+      <nav aria-label="Dropdown Menu">
+        <div class="dropdown">
+          <button aria-haspopup="true" aria-expanded="false">Menu</button>
+          <ul class="dropdown-menu" aria-label="submenu">
             <li><a href="../index.html">Home</a></li>
             <li><a href="card.html">Cards</a></li>
             <li><a href="forms.html">Forms</a></li>
@@ -111,24 +111,23 @@
         <script>
           document.querySelector('.dropdown button').addEventListener('click', function() {
             var menu = this.nextElementSibling;
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-            this.setAttribute('aria-expanded', menu.style.display === 'block');
+            var isExpanded = menu.style.display === 'block';
+            menu.style.display = isExpanded ? 'none' : 'block';
+            this.setAttribute('aria-expanded', !isExpanded);
           });
         </script>
       </nav>
       <!-- Jump Menu / Quick Links -->
-      <nav aria-label="Jump Menu" style="margin-bottom:2rem;">
-        <form action="#" method="get" style="display:flex;align-items:center;gap:1rem;background:var(--a-color-surface);border-radius:var(--a-border-radius-base);box-shadow:var(--a-shadow-sm);padding:0.75rem 1rem;max-width:400px;">
-          <label for="jump-menu" style="font-weight:bold;">Jump to:</label>
-          <select id="jump-menu" name="jump-menu" aria-label="Jump Menu" onchange="if(this.value) location=this.value;" style="padding:0.5rem 1rem;border-radius:var(--a-border-radius-base);">
-            <option value="">Select a section...</option>
-            <option value="../index.html">Home</option>
-            <option value="card.html">Cards</option>
-            <option value="forms.html">Forms</option>
-            <option value="media.html">Media</option>
-            <option value="hero.html">Hero</option>
-          </select>
-        </form>
+      <nav aria-label="Jump Menu" class="jump-menu">
+        <label for="jump-menu">Jump to:</label>
+        <select id="jump-menu" name="jump-menu" aria-label="Jump Menu" onchange="if(this.value) location=this.value;">
+          <option value="">Select a section...</option>
+          <option value="../index.html">Home</option>
+          <option value="card.html">Cards</option>
+          <option value="forms.html">Forms</option>
+          <option value="media.html">Media</option>
+          <option value="hero.html">Hero</option>
+        </select>
       </nav>
       <section style="margin-bottom:2rem;">
         <h3>How to Use: Menus & Quick Links</h3>

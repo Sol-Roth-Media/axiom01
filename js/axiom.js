@@ -3,87 +3,73 @@
  * Core Axiom01 JavaScript utilities and component registration.
  */
 
+import './accordion.js';
+import './alert.js';
+import './breadcrumb.js';
+import './button.js';
+import './card.js';
+import './carousel.js';
+import './commerce.js';
+import './component-browser.js';
+import './datepicker.js';
+import './drawer.js';
+import './dropdown.js';
+import './empty-state.js';
+import './file-upload.js';
+import './forms.js';
+import './infinite-scroll.js';
+import './jump-menu.js';
+import './media.js';
+import './mobile-navbar.js';
+import './modal.js';
+import './modals.js';
+import './multi-step-form.js';
+import './navbar-advanced.js';
+import './navbar.js';
+import './notification.js';
+import './pagination.js';
+import './paywall.js';
+import './playground.js';
+import './prism.js';
+import './progress.js';
+import './scripts.js';
+import './search.js';
+import './skeleton.js';
+import './stepper.js';
+import './tab-bar.js';
+import './table.js';
+import './tabs.js';
+import './tag.js';
+import './theme-switcher.js';
+import './theme-wizard.js';
+import './timeline.js';
+import './tooltips.js';
+import './utils.js';
+
 console.log('axiom.js: Script loaded.');
 
-// Ensure AxiomComponents object exists globally
-if (typeof window.AxiomComponents === 'undefined') {
-    window.AxiomComponents = {};
-    console.log('axiom.js: window.AxiomComponents initialized.');
-}
+const AxiomComponents = {
+    components: {},
 
-// Utility function to get computed CSS variable values
-window.AxiomComponents.getCSSVariable = function(varName) {
-    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-};
+    register(name, component) {
+        console.log(`axiom.js: Registering component: ${name}`);
+        this.components[name] = component;
+    },
 
-// Utility for accessible focus management (e.g., for modals, drawers)
-window.AxiomComponents.trapFocus = function(element) {
-    const focusableEls = element.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])');
-    const firstFocusableEl = focusableEls[0];
-    const lastFocusableEl = focusableEls[focusableEls.length - 1];
-
-    if (!firstFocusableEl || !lastFocusableEl) {
-        console.warn('trapFocus: No focusable elements found in', element);
-        return;
-    }
-
-    element.addEventListener('keydown', function(e) {
-        const isTabPressed = (e.key === 'Tab' || e.keyCode === 9);
-
-        if (!isTabPressed) {
-            return;
-        }
-
-        if (e.shiftKey) { /* shift + tab */
-            if (document.activeElement === firstFocusableEl) {
-                lastFocusableEl.focus();
-                e.preventDefault();
-            }
-        } else { /* tab */
-            if (document.activeElement === lastFocusableEl) {
-                firstFocusableEl.focus();
-                e.preventDefault();
+    init() {
+        console.log('axiom.js: Initializing components...');
+        for (const name in this.components) {
+            if (this.components.hasOwnProperty(name)) {
+                console.log(`axiom.js: Initializing component: ${name}`);
+                this.components[name].init();
             }
         }
-    });
-
-    firstFocusableEl.focus();
-};
-
-// Basic utility for announcing content to screen readers
-window.AxiomComponents.announce = function(message, polite = true) {
-    let liveRegion = document.getElementById('axiom-live-region');
-    if (!liveRegion) {
-        liveRegion = document.createElement('div');
-        liveRegion.setAttribute('aria-live', polite ? 'polite' : 'assertive');
-        liveRegion.setAttribute('aria-atomic', 'true');
-        liveRegion.setAttribute('id', 'axiom-live-region');
-        liveRegion.style.position = 'absolute';
-        liveRegion.style.width = '1px';
-        liveRegion.style.height = '1px';
-        liveRegion.style.padding = '0';
-        liveRegion.style.margin = '-1px';
-        liveRegion.style.overflow = 'hidden';
-        liveRegion.style.clip = 'rect(0, 0, 0, 0)';
-        liveRegion.style.whiteSpace = 'nowrap';
-        liveRegion.style.border = '0';
-        document.body.appendChild(liveRegion);
+        console.log('axiom.js: Component initialization complete.');
     }
-    liveRegion.textContent = ''; // Clear previous message
-    setTimeout(() => { liveRegion.textContent = message; }, 100);
 };
 
-// Global DOMContentLoaded listener to initialize all registered components
+window.AxiomComponents = AxiomComponents;
+
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('axiom.js: DOMContentLoaded fired. Initializing components...');
-    for (const key in window.AxiomComponents) {
-        if (window.AxiomComponents.hasOwnProperty(key) && typeof window.AxiomComponents[key].init === 'function') {
-            // Skip core utilities and only initialize actual components
-            if (key !== 'getCSSVariable' && key !== 'trapFocus' && key !== 'announce') {
-                console.log(`axiom.js: Initializing component: ${key}`);
-                window.AxiomComponents[key].init();
-            }
-        }
-    }
-    console.log('axiom.js: Component initialization complete.');
+    AxiomComponents.init();
 });
