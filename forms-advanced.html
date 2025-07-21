@@ -33,12 +33,17 @@
         <section class="hero">
             <div class="container">
                 <h1>Advanced Forms</h1>
-                <p>Showcasing complex form layouts, validation, and multi-step processes.</p>
+                <p>A guide to building complex, user-friendly, and accessible forms with Axiom.</p>
             </div>
         </section>
 
         <section>
             <div class="container">
+                <header>
+                    <h2>Multi-Step Wizard Form</h2>
+                    <p>Break down complex forms into manageable steps to improve user experience. This example demonstrates a multi-step registration process with progress indicators and validation.</p>
+                </header>
+
                 <div class="card" data-component="multi-step-form">
                     <div class="multi-step-header">
                         <div class="step active" data-step="1">
@@ -58,13 +63,13 @@
                     <form id="multi-step-form">
                         <div class="form-step active" data-step="1">
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" required>
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" required placeholder="you@example.com">
                                 <div class="error-message"></div>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" id="password" required minlength="8">
+                                <input type="password" id="password" required minlength="8" placeholder="Minimum 8 characters">
                                 <div class="error-message"></div>
                             </div>
                         </div>
@@ -78,10 +83,11 @@
                             <div class="form-group">
                                 <label for="country">Country</label>
                                 <select id="country" required>
-                                    <option value="">Select a country</option>
+                                    <option value="">Select a country...</option>
                                     <option value="USA">United States</option>
                                     <option value="Canada">Canada</option>
                                     <option value="Mexico">Mexico</option>
+                                    <option value="United Kingdom">United Kingdom</option>
                                 </select>
                                 <div class="error-message"></div>
                             </div>
@@ -89,19 +95,55 @@
 
                         <div class="form-step" data-step="3">
                             <h3>Confirm Your Details</h3>
-                            <p>Please review your information before submitting.</p>
-                            <div id="confirmation-details"></div>
+                            <p>Please review your information before submitting. This is your last chance to make changes.</p>
+                            <div id="confirmation-details" class="confirmation-box"></div>
                         </div>
 
                         <div class="form-actions">
                             <button type="button" class="button secondary" id="prev-btn" disabled>Previous</button>
                             <button type="button" class="button primary" id="next-btn">Next</button>
-                            <button type="submit" class="button primary" id="submit-btn" style="display: none;">Submit</button>
+                            <button type="submit" class="button primary" id="submit-btn" style="display: none;">Submit Application</button>
                         </div>
                     </form>
                 </div>
             </div>
         </section>
+
+        <section>
+            <div class="container">
+                <header>
+                    <h2>How It Works: The Multi-Step Form</h2>
+                    <p>This component combines semantic HTML, targeted CSS, and event-driven JavaScript to create a seamless experience.</p>
+                </header>
+                <div class="grid">
+                    <div class="card">
+                        <h3>HTML Structure</h3>
+                        <p>The form uses a main container with `data-component="multi-step-form"`. Each step is a `div` with a `data-step` attribute, and only the `active` step is displayed.</p>
+                        <pre><code>&lt;div data-component="multi-step-form"&gt;
+  &lt;!-- Step Headers --&gt;
+  &lt;div class="multi-step-header"&gt;...&lt;/div&gt;
+  
+  &lt;form&gt;
+    &lt;!-- Form Steps --&gt;
+    &lt;div class="form-step active" data-step="1"&gt;...&lt;/div&gt;
+    &lt;div class="form-step" data-step="2"&gt;...&lt;/div&gt;
+    
+    &lt;!-- Action Buttons --&gt;
+    &lt;div class="form-actions"&gt;...&lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <div class="card">
+                        <h3>Validation and Feedback</h3>
+                        <p>We use standard HTML5 validation attributes like `required` and `minlength`. The JavaScript hooks into the browser's built-in `checkValidity()` method to test inputs before proceeding.</p>
+                        <pre><code>&lt;input type="email" id="email" required&gt;
+&lt;div class="error-message"&gt;&lt;/div&gt;</code></pre>
+                        <p>When an input is invalid, its `validationMessage` is displayed in the `.error-message` container, providing immediate and accessible feedback.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <script src="js/axiom.js" type="module"></script>
