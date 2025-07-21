@@ -150,8 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Enhanced search functionality with debouncing
     if (searchInput) {
         let searchTimeout;
-        let currentResults = [];
-
         searchInput.addEventListener('input', (e) => {
             clearTimeout(searchTimeout);
             const query = e.target.value.toLowerCase().trim();
@@ -162,88 +160,104 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             searchTimeout = setTimeout(() => {
-                currentResults = performSearch(query);
-                renderSearchResults(currentResults);
+                const results = performSearch(query);
+                renderSearchResults(results);
             }, 150);
         });
 
+        // Handle keyboard navigation
         searchInput.addEventListener('keydown', (e) => {
-            if (searchResults.classList.contains('visible')) {
-                handleKeyboardNavigation(e, currentResults);
-            }
-        });
-
-        searchInput.addEventListener('focus', () => {
-            const query = searchInput.value.toLowerCase().trim();
-            if (query && currentResults.length > 0) {
-                searchResults.classList.add('visible');
-            }
+            const results = performSearch(searchInput.value.toLowerCase().trim());
+            handleKeyboardNavigation(e, results);
         });
 
         // Hide results when clicking outside
         document.addEventListener('click', (e) => {
-            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            if (!e.target.closest('.search-bar')) {
                 hideSearchResults();
             }
         });
     }
+    aft// Component list loading - FIXED: Use only components that actually exist
+    // FIXED: Component navigation loading
+    const loadComponentNavigation = () => {
+        if (!componentList) return;
 
-    // Component list loading - FIXED: Use only components that actually exist
-    if (componentList) {
-        // These are the ONLY components that actually exist in /docs/components/
-        const components = [
             'alert', 'badge', 'breadcrumb', 'button', 'card', 'carousel',
-            'chat', 'commerce', 'dropdown', 'input', 'modal', 'table', 'tabs'
-        ];
+            { title: 'Alert', url: 'components/alert.html' },
+            { title: 'Avatar', url: 'components/avatar.md' },
+            { title: 'Badge', url: 'components/badge.html' },
+            { title: 'Breadcrumb', url: 'components/breadcrumb.html' },
+            { title: 'Button', url: 'components/button.html' },
+            { title: 'Card', url: 'components/card.html' },
+            { title: 'Carousel', url: 'components/carousel.html' },
+            { title: 'Chat', url: 'components/chat.html' },
+            { title: 'Commerce', url: 'components/commerce.html' },
+            { title: 'Dropdown', url: 'components/dropdown.html' },
+            { title: 'Input', url: 'components/input.html' },
+            { title: 'Modal', url: 'components/modal.html' },
+            { title: 'Slider', url: 'components/slider.md' },
+            { title: 'Table', url: 'components/table.html' },
+            { title: 'Tabs', url: 'components/tabs.html' },
+            { title: 'Toggle', url: 'components/toggle.md' },
+            { title: 'Tooltip', url: 'components/tooltip.md' }
 
         components.forEach(component => {
-            const li = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = `components/${component}.html`;
-            link.target = 'content-frame';
-            link.textContent = component.charAt(0).toUpperCase() + component.slice(1);
-
+        const componentHTML = components.map(component =>
+            `<li><a href="${component.url}" target="content-frame">${component.title}</a></li>`
+        ).join('');
             // Add click handler to ensure iframe navigation works
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const iframe = document.querySelector('iframe[name="content-frame"]');
-                if (iframe) {
-                    iframe.src = link.href;
-                } else {
-                    window.location.href = link.href;
-                }
-            });
-
+        componentList.innerHTML = componentHTML;
+    };
             li.appendChild(link);
-            componentList.appendChild(li);
-        });
-    }
+    // FIXED: Theme toggle functionality
+    const initializeThemeToggle = () => {
+        if (!themeToggleButton) return;
 
-    // Theme toggle functionality
-    if (themeToggleButton) {
-        themeToggleButton.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        const html = document.documentElement;
+        const themeIcon = themeToggleButton.querySelector('i');
 
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('axiom-theme', newTheme);
+        // Get current theme
+        const getCurrentTheme = () => html.getAttribute('data-theme') || 'light';
 
-            const icon = themeToggleButton.querySelector('i');
-            if (icon) {
-                icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        // Update icon based on theme
+        const updateIcon = (theme) => {
+            if (themeIcon) {
+                themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             }
+            themeToggleButton.setAttribute('aria-label',
+                theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+            );
+        };
+    // Theme toggle functionality
+        // Toggle theme
+        const toggleTheme = () => {
+            const currentTheme = getCurrentTheme();
+
+
+            html.setAttribute('data-theme', newTheme);
+
+            updateIcon(newTheme);
+
+            // Also update the iframe content if it exists
+            const iframe = document.querySelector('iframe[name="content-frame"]');
+            if (iframe && iframe.contentDocument) {
+                iframe.contentDocument.documentElement.setAttribute('data-theme', newTheme);
         });
-
+        };
         // Load saved theme
-        const savedTheme = localStorage.getItem('axiom-theme') || 'light';
+        // Initialize theme from localStorage or default to light
         document.documentElement.setAttribute('data-theme', savedTheme);
-
+        html.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
         const icon = themeToggleButton.querySelector('i');
-        if (icon) {
-            icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
-    }
-});
+        // Add click handler
+        themeToggleButton.addEventListener('click', toggleTheme);
+    };
+
+    // Initialize all functionality
+    loadComponentNavigation();
+    initializeThemeToggle();
 
 // Add CSS for search highlighting
 const style = document.createElement('style');
