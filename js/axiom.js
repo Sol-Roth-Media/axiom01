@@ -57,6 +57,33 @@ class Axiom {
         }
         console.log('Axiom: Initialization complete.');
         this.initSearchModal();
+        this.initThemeToggle();
+    }
+
+    initThemeToggle() {
+        const themeToggleButton = document.getElementById('theme-toggle');
+        if (!themeToggleButton) return;
+
+        const htmlElement = document.documentElement;
+        const moonIcon = '<i class="fas fa-moon"></i>';
+        const sunIcon = '<i class="fas fa-sun"></i>';
+
+        // Set initial state
+        if (htmlElement.getAttribute('data-theme') === 'dark') {
+            themeToggleButton.innerHTML = sunIcon;
+        } else {
+            themeToggleButton.innerHTML = moonIcon;
+        }
+
+        themeToggleButton.addEventListener('click', () => {
+            if (htmlElement.getAttribute('data-theme') === 'dark') {
+                htmlElement.setAttribute('data-theme', 'light');
+                themeToggleButton.innerHTML = moonIcon;
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                themeToggleButton.innerHTML = sunIcon;
+            }
+        });
     }
 
     initSearchModal() {

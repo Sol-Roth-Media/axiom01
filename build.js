@@ -1,123 +1,70 @@
-#!/usr/bin/env node
-/**
- * Axiom01 Enhanced Build System
- * Implements CSS minification, JS bundling, and performance optimization
- */
-
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
-const { execSync } = require('child_process');
+const esbuild = require('esbuild');
+const CleanCSS = require('clean-css');
+const terser = require('terser');
 
-console.log('🚀 Starting Axiom01 enhanced build process...');
+const DIST_DIR = 'dist';
+const CSS_DIR = path.join(DIST_DIR, 'css');
+const JS_DIR = path.join(DIST_DIR, 'js');
 
-// Create directories
-const DIST_DIR = './dist';
-const dirs = [
-  `${DIST_DIR}`,
-  `${DIST_DIR}/css`,
-  `${DIST_DIR}/js`,
-];
+async function build() {
+    try {
+        console.log('Starting Axiom build process...');
 
-dirs.forEach(dir => {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-    console.log(`📁 Created directory: ${dir}`);
-  }
-});
+        // 1. Clean and create dist directories
+        await fs.rm(DIST_DIR, { recursive: true, force: true });
+        await fs.mkdir(CSS_DIR, { recursive: true });
+        await fs.mkdir(JS_DIR, { recursive: true });
+        console.log('Cleaned and created dist directories.');
 
-// Clean previous builds
-console.log('🧹 Cleaning previous build files...');
-try {
-  execSync(`rm -rf ${DIST_DIR}/css/* ${DIST_DIR}/js/*`);
-} catch (e) {
-  // Directory might be empty, continue
-}
+        // 2. Build CSS
+        console.log('Building CSS...');
+        const cssFiles = [
+            'css/base/_reset.css',
+            'css/base/_axiom_reset.css',
+            'css/base/axiom_vars.css',
+            'css/base/colors_vars.css',
+            'css/base/axiom_config.css',
+            'css/base/colors.css',
+            'css/axiom.css'
+        ];
 
-// CSS Build Process
-console.log('📦 Building CSS files...');
+        const cssContents = await Promise.all(cssFiles.map(file => fs.readFile(file, 'utf-8')));
+        const concatenatedCss = cssContents.join('\n');
+        await fs.writeFile(path.join(CSS_DIR, 'axiom.css'), concatenatedCss);
+        console.log('Concatenated CSS files into dist/css/axiom.css.');
 
-try {
-  // Process axiom.css (full bundle)
-  execSync(`npx cleancss -o ${DIST_DIR}/css/axiom.css css/axiom.css`);
-  execSync(`npx cleancss -o ${DIST_DIR}/css/axiom.min.css css/axiom.css`);
+        const minifiedCss = new CleanCSS().minify(concatenatedCss).styles;
+        await fs.writeFile(path.join(CSS_DIR, 'axiom.min.css'), minifiedCss);
+        console.log('Minified CSS to dist/css/axiom.min.css.');
 
-  // Process core.css (core bundle)
-  execSync(`npx cleancss -o ${DIST_DIR}/css/core.css css/core.css`);
-  execSync(`npx cleancss -o ${DIST_DIR}/css/core.min.css css/core.css`);
+        // 3. Build JavaScript
+        console.log('Building JavaScript...');
+        await esbuild.build({
+            entryPoints: ['js/axiom.js'],
+            bundle: true,
+            outfile: path.join(JS_DIR, 'axiom.js'),
+            format: 'esm',
+        });
+        console.log('Bundled JavaScript files into dist/js/axiom.js.');
 
-  console.log('✅ CSS bundles created and minified');
-} catch (error) {
-  console.error('❌ CSS build failed:', error.message);
-  process.exit(1);
-}
+        const bundledJs = await fs.readFile(path.join(JS_DIR, 'axiom.js'), 'utf-8');
+        const minifiedJs = await terser.minify(bundledJs, {
+            module: true,
+            mangle: {
+                toplevel: true,
+            },
+        });
+        await fs.writeFile(path.join(JS_DIR, 'axiom.min.js'), minifiedJs.code);
+        console.log('Minified JavaScript to dist/js/axiom.min.js.');
 
-// JavaScript Build Process
-console.log('📦 Building JavaScript files...');
+        console.log('Axiom build process completed successfully!');
 
-const jsFiles = ['js/axiom.js', ...fs.readdirSync('js').filter(file => file.endsWith('.js') && file !== 'axiom.js').map(file => `js/${file}`)];
-
-const buildJS = (files, outputFile, description) => {
-  console.log(`📦 Building ${description}...`);
-  let combinedJS = '';
-
-  files.forEach(file => {
-    if (fs.existsSync(file)) {
-      const content = fs.readFileSync(file, 'utf8');
-      combinedJS += `
-/* === ${file} === */
-${content}
-`;
-    } else {
-      console.warn(`⚠️  Warning: ${file} not found, skipping...`);
+    } catch (error) {
+        console.error('Axiom build failed:', error);
+        process.exit(1);
     }
-  });
-
-  fs.writeFileSync(outputFile, combinedJS);
-  console.log(`✅ Created ${outputFile}`);
-};
-
-// Build full and core JS bundles
-buildJS(jsFiles, `${DIST_DIR}/js/axiom.js`, 'full JavaScript bundle');
-buildJS(['js/axiom.js', 'js/theme-switcher.js'], `${DIST_DIR}/js/axiom-core.js`, 'core JavaScript bundle');
-
-// Minify JavaScript
-try {
-  execSync(`npx terser ${DIST_DIR}/js/axiom.js --compress --mangle --source-map --output ${DIST_DIR}/js/axiom.min.js`);
-  execSync(`npx terser ${DIST_DIR}/js/axiom-core.js --compress --mangle --source-map --output ${DIST_DIR}/js/axiom-core.min.js`);
-  console.log('✅ JavaScript minification completed');
-} catch (error) {
-  console.error('❌ JavaScript minification failed:', error.message);
-  process.exit(1);
 }
 
-// Generate file size report
-console.log('📊 Generating build report...');
-const generateSizeReport = () => {
-  const files = [
-    `${DIST_DIR}/css/axiom.css`,
-    `${DIST_DIR}/css/axiom.min.css`,
-    `${DIST_DIR}/css/core.css`,
-    `${DIST_DIR}/css/core.min.css`,
-    `${DIST_DIR}/js/axiom.js`,
-    `${DIST_DIR}/js/axiom.min.js`,
-    `${DIST_DIR}/js/axiom-core.js`,
-    `${DIST_DIR}/js/axiom-core.min.js`,
-  ];
-
-  console.log('📊 Build Size Report:');
-  console.log('━'.repeat(50));
-
-  files.forEach(file => {
-    if (fs.existsSync(file)) {
-      const stats = fs.statSync(file);
-      const size = (stats.size / 1024).toFixed(2);
-      console.log(`${path.basename(file).padEnd(25)} ${size.padStart(8)} KB`);
-    }
-  });
-  console.log('━'.repeat(50));
-};
-
-generateSizeReport();
-
-console.log('✅ Axiom01 build completed successfully!');
-console.log('🎯 Next steps: Run `npm run lighthouse` for performance analysis');
+build();

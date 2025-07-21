@@ -1,79 +1,95 @@
-// Axiom Multi-Step Form Component JS
+// js/multi-step-form.js
 
-class MultiStepForm {
-    constructor(element) {
-        console.log('MultiStepForm: Constructor called.');
-        this.element = element;
-        this.stepper = this.element.querySelector('.stepper');
-        this.steps = this.element.querySelectorAll('.form-step');
-        this.nextButton = this.element.querySelector('[data-multi-step-form-next]');
-        this.prevButton = this.element.querySelector('[data-multi-step-form-prev]');
-        this.submitButton = this.element.querySelector('button[type="submit"]');
-        this.currentStep = 0;
+const MultiStepForm = {
+    init(element) {
+        const prevBtn = element.querySelector('#prev-btn');
+        const nextBtn = element.querySelector('#next-btn');
+        const submitBtn = element.querySelector('#submit-btn');
+        const form = element.querySelector('#multi-step-form');
+        const steps = Array.from(element.querySelectorAll('.form-step'));
+        const stepIndicators = Array.from(element.querySelectorAll('.step'));
+        let currentStep = 0;
 
-        this.init();
-    }
+        const updateButtons = () => {
+            prevBtn.disabled = currentStep === 0;
+            if (currentStep === steps.length - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'inline-block';
+            } else {
+                nextBtn.style.display = 'inline-block';
+                submitBtn.style.display = 'none';
+            }
+        };
 
-    init() {
-        console.log('MultiStepForm: init() called.');
-        this.update();
-
-        if (this.nextButton) {
-            this.nextButton.addEventListener('click', () => this.next());
-        } else {
-            console.warn('MultiStepForm: Next button not found.', this.element);
-        }
-
-        if (this.prevButton) {
-            this.prevButton.addEventListener('click', () => this.prev());
-        } else {
-            console.warn('MultiStepForm: Previous button not found.', this.element);
-        }
-    }
-
-    next() {
-        console.log('MultiStepForm: Next step.');
-        if (this.currentStep < this.steps.length - 1) {
-            this.currentStep++;
-            this.update();
-        }
-    }
-
-    prev() {
-        console.log('MultiStepForm: Previous step.');
-        if (this.currentStep > 0) {
-            this.currentStep--;
-            this.update();
-        }
-    }
-
-    update() {
-        console.log('MultiStepForm: Updating form display for step:', this.currentStep);
-        this.steps.forEach((step, index) => {
-            step.classList.toggle('active', index === this.currentStep);
-        });
-
-        if (this.stepper) {
-            this.stepper.querySelectorAll('.stepper-step').forEach((step, index) => {
-                step.classList.toggle('active', index === this.currentStep);
+        const updateStepIndicator = () => {
+            stepIndicators.forEach((indicator, index) => {
+                if (index === currentStep) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
             });
-        } else {
-            console.warn('MultiStepForm: Stepper element not found.', this.element);
-        }
+        };
 
-        this.prevButton.style.display = this.currentStep === 0 ? 'none' : 'inline-block';
-        this.nextButton.style.display = this.currentStep === this.steps.length - 1 ? 'none' : 'inline-block';
-        this.submitButton.style.display = this.currentStep === this.steps.length - 1 ? 'inline-block' : 'none';
-    }
-}
+        const showStep = (stepIndex) => {
+            steps.forEach((step, index) => {
+                step.classList.toggle('active', index === stepIndex);
+            });
+            currentStep = stepIndex;
+            updateButtons();
+            updateStepIndicator();
+        };
 
-window.AxiomComponents = window.AxiomComponents || {};
-AxiomComponents.MultiStepForm = {
-    init: function() {
-        console.log('AxiomComponents.MultiStepForm.init called.');
-        const multiStepFormElements = document.querySelectorAll('.multi-step-form');
-        multiStepFormElements.forEach(element => {
-            new MultiStepForm(element);
+        const validateStep = (stepIndex) => {
+            const inputs = steps[stepIndex].querySelectorAll('input[required], select[required]');
+            let isValid = true;
+            inputs.forEach(input => {
+                const errorMessage = input.parentElement.querySelector('.error-message');
+                if (!input.checkValidity()) {
+                    isValid = false;
+                    errorMessage.textContent = input.validationMessage;
+                } else {
+                    errorMessage.textContent = '';
+                }
+            });
+            return isValid;
+        };
+
+        nextBtn.addEventListener('click', () => {
+            if (validateStep(currentStep) && currentStep < steps.length - 1) {
+                if (currentStep === steps.length - 2) {
+                    // Populate confirmation details
+                    const email = form.querySelector('#email').value;
+                    const fullName = form.querySelector('#full-name').value;
+                    const country = form.querySelector('#country').value;
+                    const confirmationDetails = form.querySelector('#confirmation-details');
+                    confirmationDetails.innerHTML = `
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Full Name:</strong> ${fullName}</p>
+                        <p><strong>Country:</strong> ${country}</p>
+                    `;
+                }
+                showStep(currentStep + 1);
+            }
         });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 0) {
+                showStep(currentStep - 1);
+            }
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (validateStep(currentStep)) {
+                alert('Form submitted successfully!');
+                form.reset();
+                showStep(0);
+            }
+        });
+
+        showStep(0);
     }
 };
+
+export default MultiStepForm;

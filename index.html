@@ -6,6 +6,7 @@
     <title>Axiom01 - A New Beginning</title>
     <link rel="stylesheet" href="css/core.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous"/>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 </head>
 <body class="axiom-body">
 
@@ -16,7 +17,6 @@
                 <li><a href="#philosophy">Philosophy</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#components">Components</a></li>
-                <li><a href="#get-started">Get Started</a></li>
             </ul>
             <div class="actions">
                 <button class="search-toggle" aria-label="Open Search">
@@ -26,6 +26,9 @@
                     <i class="fab fa-github"></i>
                     <span>GitHub</span>
                 </a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
                 <button class="menu-toggle" aria-label="Toggle Menu">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -122,8 +125,8 @@
         <section id="color-palette">
             <div class="container">
                 <header>
-                    <h2>A Rich and Flexible Color System</h2>
-                    <p>Axiom's color system is designed for clarity, consistency, and adaptability. We provide a full spectrum of colors, from base brand colors to a complete greyscale palette and semantic colors for UI states. All colors are available as CSS variables for easy use and customization. For a deeper dive, visit the <a href="colors-advanced.html">Advanced Color Details</a> page or use the <a href="theme-customization-wizard.html">Theme Wizard</a>.</p>
+                    <h2>The Color System: Your Automatic Designer</h2>
+                    <p>Axiom's color system is designed to do the heavy lifting for you. By simply defining a primary color, Axiom uses color theory to automatically calculate a full, harmonious palette. It generates secondary, tertiary, and analogous colors, plus accessible "on-container" text colors for each. This means you can build beautiful, consistent, and accessible interfaces right out of the box without having to be a color expert. For a deeper dive, visit the <a href="colors-advanced.html">Advanced Color Details</a> page or use the <a href="theme-customization-wizard.html">Theme Wizard</a>.</p>
                 </header>
 
                 <!-- Base Colors -->
@@ -135,6 +138,25 @@
                     <div class="color-swatch-card"><div class="swatch surface"></div><div class="swatch-info"><h4>Surface</h4><p>var(--a-color-surface)</p></div></div>
                     <div class="color-swatch-card"><div class="swatch on-surface"></div><div class="swatch-info"><h4>On Surface</h4><p>var(--a-color-on-surface)</p></div></div>
                     <div class="color-swatch-card"><div class="swatch outline"></div><div class="swatch-info"><h4>Outline</h4><p>var(--a-color-outline)</p></div></div>
+                </div>
+
+                <!-- Container Colors -->
+                <h3>Container Palette</h3>
+                <p>These colors are designed for backgrounds. The "on-container" colors are guaranteed to be accessible on their corresponding container color.</p>
+                <div class="color-grid">
+                    <div class="color-swatch-card"><div class="swatch primary-container"><span class="swatch-text on-primary-container">Text</span></div><div class="swatch-info"><h4>Primary Container</h4><p>var(--a-color-primary-container)</p></div></div>
+                    <div class="color-swatch-card"><div class="swatch secondary-container"><span class="swatch-text on-secondary-container">Text</span></div><div class="swatch-info"><h4>Secondary Container</h4><p>var(--a-color-secondary-container)</p></div></div>
+                    <div class="color-swatch-card"><div class="swatch tertiary-container"><span class="swatch-text on-tertiary-container">Text</span></div><div class="swatch-info"><h4>Tertiary Container</h4><p>var(--a-color-tertiary-container)</p></div></div>
+                    <div class="color-swatch-card"><div class="swatch error-container"><span class="swatch-text on-error-container">Text</span></div><div class="swatch-info"><h4>Error Container</h4><p>var(--a-color-error-container)</p></div></div>
+                </div>
+
+                <!-- Analogous Colors -->
+                <h3>Analogous Palette</h3>
+                <div class="color-grid">
+                    <div class="color-swatch-card"><div class="swatch analogous-1"></div><div class="swatch-info"><h4>Analogous 1</h4><p>var(--a-color-analogous-1)</p></div></div>
+                    <div class="color-swatch-card"><div class="swatch analogous-2"></div><div class="swatch-info"><h4>Analogous 2</h4><p>var(--a-color-analogous-2)</p></div></div>
+                    <div class="color-swatch-card"><div class="swatch analogous-1-container"><span class="swatch-text on-analogous-1-container">Text</span></div><div class="swatch-info"><h4>Analogous 1 Container</h4><p>var(--a-color-analogous-1-container)</p></div></div>
+                    <div class="color-swatch-card"><div class="swatch analogous-2-container"><span class="swatch-text on-analogous-2-container">Text</span></div><div class="swatch-info"><h4>Analogous 2 Container</h4><p>var(--a-color-analogous-2-container)</p></div></div>
                 </div>
 
                 <!-- Semantic Colors -->
@@ -182,21 +204,31 @@
                     <p>Axiom01 comes with a rich library of components to help you build any kind of website.</p>
                 </header>
                 <div class="component-browser" data-component="component-browser">
+                    <header class="component-browser-header">
+                        <div class="component-browser-info">
+                            <h4>Component Library (<span id="component-count">40+</span> Components)</h4>
+                            <p>Explore our growing collection of components, including categories like Navigation, Forms, Media, and AI-powered tools. More are added regularly!</p>
+                        </div>
+                        <div class="component-browser-controls">
+                            <input type="text" id="component-search-input" placeholder="Search components...">
+                            <select id="component-category-filter">
+                                <option value="all">All Categories</option>
+                                <!-- Categories will be dynamically loaded here -->
+                            </select>
+                            <button id="view-fullscreen-button" class="button secondary small">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>View in New Window</span>
+                            </button>
+                        </div>
+                    </header>
                     <div class="tabs-container">
                         <div class="tabs">
-                            <button class="active" data-src="components/button.html">Button</button>
-                            <button data-src="components/card.html">Card</button>
-                            <button data-src="components/modal.html">Modal</button>
-                            <button data-src="components/navbar.html">Navbar</button>
-                            <button data-src="components/forms.html">Forms</button>
-                            <button data-src="components/ai-chat.html">AI Chat</button>
-                            <button data-src="components/ai-image-generator.html">AI Image Generator</button>
-                            <button data-src="components/settings.html">Settings</button>
+                            <!-- Component buttons will be dynamically loaded here by component-browser.js -->
                         </div>
                     </div>
                     <div class="preview-container">
                         <div class="preview">
-                            <iframe id="component-preview-iframe" src="components/button.html"></iframe>
+                            <iframe id="component-preview-iframe" src="components/accordion.html"></iframe>
                         </div>
                     </div>
                 </div>
@@ -222,6 +254,381 @@
                         <pre><code># Coming Soon: CLI installation
 npm install axiom-ui</code></pre>
                         <a href="https://github.com/Sol-Roth-Media/axiom/archive/refs/heads/main.zip" class="button primary">Download v1.0</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="typography">
+            <div class="container">
+                <header>
+                    <h2>Typography: Expressive and Readable</h2>
+                    <p>Axiom's typography system is crafted for optimal readability and visual hierarchy, ensuring your content is both beautiful and easy to consume. We provide a comprehensive set of semantic text styles, from headings to paragraphs, designed to work harmoniously across all devices.</p>
+                </header>
+                <div class="typography-example">
+                    <h1>Heading 1 <span class="subtitle">with a Subtitle</span></h1>
+                    <p class="lead">This is a lead paragraph, often used for introductory text that needs to stand out.</p>
+                    <h2>Heading 2 <span class="subtitle">with a Subtitle</span></h2>
+                    <p>This is a standard paragraph of text. Axiom uses a clean, modern font stack that is optimized for all devices, ensuring legibility and a consistent reading experience.</p>
+                    <h3>Heading 3</h3>
+                    <p>Text can be <span class="text-bold">bold</span>, <span class="text-italic">italic</span>, or <span class="text-underline">underlined</span>. You can also use <span class="text-muted">muted text</span> for less emphasis.</p>
+                    <h4>Heading 4</h4>
+                    <blockquote>"This is a blockquote. It is used to highlight a quote or a key piece of information, providing visual separation and emphasis."<br><cite>— Famous Author</cite></blockquote>
+                    <h5>Heading 5</h5>
+                    <p>Here's a list of items:</p>
+                    <ul>
+                        <li>List Item 1</li>
+                        <li>List Item 2</li>
+                        <li>List Item 3</li>
+                    </ul>
+                    <h6>Heading 6</h6>
+                    <p>And an ordered list:</p>
+                    <ol>
+                        <li>First item</li>
+                        <li>Second item</li>
+                        <li>Third item</li>
+                    </ol>
+                    <p class="small-text">This is small text, often used for disclaimers or copyright information.</p>
+                </div>
+                <p class="example-caption">For a deeper dive into font families, weights, sizes, line heights, and advanced text utilities, see the <a href="typography-advanced.html">Advanced Typography Guide</a>.</p>
+            </div>
+        </section>
+
+        <section id="accessibility">
+            <div class="container">
+                <header>
+                    <h2>Accessible by Default</h2>
+                    <p>Axiom is built with accessibility at its core. We follow the Web Content Accessibility Guidelines (WCAG) 2.1 AA to ensure that your applications can be used by everyone, regardless of their abilities.</p>
+                </header>
+                <div class="grid">
+                    <div class="card">
+                        <i class="fas fa-universal-access"></i>
+                        <h3>Semantic HTML</h3>
+                        <p>Axiom's semantic-first approach provides a strong foundation for accessibility, making your content easier to understand for screen readers and other assistive technologies.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-eye"></i>
+                        <h3>High Contrast</h3>
+                        <p>All default themes are designed with high-contrast color palettes to ensure readability for users with low vision.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-keyboard"></i>
+                        <h3>Keyboard Navigation</h3>
+                        <p>All interactive components are fully navigable using a keyboard, ensuring that users who cannot use a mouse can still access all functionality.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="badges">
+            <div class="container">
+                <header>
+                    <h2>Badges</h2>
+                    <p>Badges are a great way to highlight small pieces of information, such as counts or statuses.</p>
+                </header>
+                <div class="component-showcase">
+                    <span class="badge">Default</span>
+                    <span class="badge primary">Primary</span>
+                    <span class="badge secondary">Secondary</span>
+                    <span class="badge success">Success</span>
+                    <span class="badge warning">Warning</span>
+                    <span class="badge error">Error</span>
+                    <span class="badge pill primary">Pill</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="open-source">
+            <div class="container">
+                <header>
+                    <h2>Free and Open Source</h2>
+                    <p>Axiom01 is released under the MIT License, which means it's free for everyone, for any project. We believe in the power of open source to create better software for everyone. Whether you're building a personal blog, a corporate website, or a complex web application, you can use Axiom without any restrictions.</p>
+                </header>
+                <div class="grid">
+                    <div class="card">
+                        <i class="fas fa-file-contract"></i>
+                        <h3>MIT License</h3>
+                        <p>Use Axiom in any project, commercial or personal. The code is yours to modify and distribute.</p>
+                        <a href="LICENSE" class="button secondary small">View License</a>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-users"></i>
+                        <h3>Community Driven</h3>
+                        <p>Axiom is built by a community of developers. We welcome contributions of all kinds, from bug reports to new features.</p>
+                        <a href="docs/contributing.md" class="button secondary small">Contributing Guide</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-ready">
+            <div class="container">
+                <header>
+                    <h2>AI-Ready Components</h2>
+                    <p>Axiom is one of the first UI frameworks to include AI-powered components out of the box. Integrate powerful AI features into your applications with just a few lines of code.</p>
+                </header>
+                <div class="grid">
+                    <div class="card">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Chat</h3>
+                        <p>A complete, ready-to-use chat component for conversational AI. Just connect it to your favorite AI service.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-image"></i>
+                        <h3>AI Image Generator</h3>
+                        <p>A component that allows users to generate images from a text prompt, powered by AI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="media-icons">
+            <div class="container">
+                <header>
+                    <h2>Media & Icons: Optimized for Performance and Flexibility</h2>
+                    <p>Axiom provides a robust approach to handling media assets and icons, ensuring your visuals are performant, responsive, and visually consistent. Our philosophy emphasizes flexibility, allowing you to choose the best format for your needs while maintaining high quality.</p>
+                </header>
+                <div class="grid">
+                    <div class="card">
+                        <i class="fas fa-image"></i>
+                        <h3>Images</h3>
+                        <p>From responsive images that adapt to any screen size to lazy loading for improved performance, Axiom helps you deliver stunning visuals without compromising speed. We encourage modern formats like WebP for optimal compression.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-icons"></i>
+                        <h3>Icons & SVGs</h3>
+                        <p>Integrate scalable vector graphics (SVGs) and icon fonts seamlessly. Axiom provides guidance on using icons for accessibility and ensures they scale beautifully without loss of quality.</p>
+                    </div>
+                </div>
+                <div class="actions">
+                    <a href="media-advanced.html" class="button secondary">Advanced Media & Icons Guide</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="icons-graphics">
+            <div class="container">
+                <header>
+                    <h2>Icons and Graphics</h2>
+                    <p>Axiom supports both icon fonts and SVGs, giving you the flexibility to choose the best format for your project. We recommend using SVGs for their scalability and small file size, but we also provide full support for Font Awesome.</p>
+                </header>
+                <div class="grid">
+                    <div class="card">
+                        <i class="fas fa-font"></i>
+                        <h3>Icon Fonts</h3>
+                        <p>Use any icon font library, like Font Awesome, by including the library's CSS and using the appropriate classes.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-vector-square"></i>
+                        <h3>SVGs</h3>
+                        <p>Embed SVGs directly into your HTML for maximum control over styling and animation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="forms-and-inputs">
+            <div class="container">
+                <header>
+                    <h2>Forms, Inputs, and Editors</h2>
+                    <p>Axiom provides a solid foundation for building accessible and user-friendly forms. Our components are designed to be flexible and can be easily combined to create complex data entry experiences.</p>
+                </header>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Standard Inputs</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="text-input">Text Input</label>
+                                <input type="text" id="text-input" placeholder="Enter some text">
+                            </div>
+                            <div class="form-group">
+                                <label for="password-input">Password Input</label>
+                                <input type="password" id="password-input" placeholder="Enter a password">
+                            </div>
+                            <div class="form-group">
+                                <label for="select-input">Select</label>
+                                <select id="select-input">
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Checkboxes</label>
+                                <div class="checkbox-group">
+                                    <label><input type="checkbox" checked> Checkbox 1</label>
+                                    <label><input type="checkbox"> Checkbox 2</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Radio Buttons</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="radio-group" checked> Radio 1</label>
+                                    <label><input type="radio" name="radio-group"> Radio 2</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <h3>Contextual Menus</h3>
+                        <p>Use the dropdown component to create contextual menus that appear on click or hover.</p>
+                        <div class="dropdown" data-component="dropdown">
+                            <button class="button primary dropdown-toggle">
+                                <span>Open Menu</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Rich Text Editor</h3>
+                        <p>Axiom integrates seamlessly with third-party libraries like CKEditor to provide rich text editing capabilities.</p>
+                        <div data-component="editor"></div>
+                        <a href="forms-advanced.html" class="button secondary" style="margin-top: 1rem;">View Advanced Form Example</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+                        <a href="forms-advanced.html" class="button secondary" style="margin-top: 1rem;">View Advanced Form</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="grid-system">
+            <div class="container">
+                <header>
+                    <h2>The Grid: Simple, Powerful, and Responsive</h2>
+                    <p>Axiom's grid system is designed to be both simple and powerful, built on the flexibility of CSS Grid. It allows you to create complex, responsive layouts with minimal effort, adhering to modern responsive design patterns.</p>
+                </header>
+                <div class="grid">
+                    <div class="card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile-First</h3>
+                        <p>Axiom is mobile-first, meaning components and layouts are designed for small screens first, then enhanced for larger screens.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-ruler-combined"></i>
+                        <h3>Fluid & Responsive</h3>
+                        <p>The grid is fluid and responsive, adapting to any screen size without the need for utility classes.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Semantic</h3>
+                        <p>Create layouts with semantic HTML and minimal classes, making your code cleaner and more maintainable.</p>
+                    </div>
+                </div>
+                <div class="actions" style="margin-top: 2rem;">
+                    <a href="layout-advanced.html" class="button secondary">Advanced Layout Guide</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="responsive-patterns">
+            <div class="container">
+                <header>
+                    <h2>Responsive & Mobile Patterns</h2>
+                    <p>Axiom's components are designed to be responsive out of the box. Here are some examples of how they adapt to different screen sizes.</p>
+                </header>
+                <div class="card" data-component="view-switcher">
+                    <div class="view-switcher-header">
+                        <h3>Product Showcase</h3>
+                        <div class="view-switcher-actions">
+                            <button class="active" data-view="grid"><i class="fas fa-th-large"></i></button>
+                            <button data-view="list"><i class="fas fa-th-list"></i></button>
+                        </div>
+                    </div>
+                    <div class="view-switcher-content grid">
+                        <div class="card">
+                            <img src="https://raw.githubusercontent.com/Sol-Roth/unruled/main/public/img/unruled-social-card.png" alt="Product Image" class="responsive-image">
+                            <h4>Product 1</h4>
+                            <p>A short description of the product.</p>
+                            <button class="button primary">View Details</button>
+                        </div>
+                        <div class="card">
+                            <img src="https://raw.githubusercontent.com/Sol-Roth/solroth.com/main/public/img/solroth-social-card.png" alt="Product Image" class="responsive-image">
+                            <h4>Product 2</h4>
+                            <p>A short description of the product.</p>
+                            <button class="button primary">View Details</button>
+                        </div>
+                        <div class="card">
+                            <img src="https://raw.githubusercontent.com/Sol-Roth/unruled/main/public/img/unruled-social-card.png" alt="Product Image" class="responsive-image">
+                            <h4>Product 3</h4>
+                            <p>A short description of the product.</p>
+                            <button class="button primary">View Details</button>
+                        </div>
+                        <div class="card">
+                            <img src="https://raw.githubusercontent.com/Sol-Roth/solroth.com/main/public/img/solroth-social-card.png" alt="Product Image" class="responsive-image">
+                            <h4>Product 4</h4>
+                            <p>A short description of the product.</p>
+                            <button class="button primary">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="style-guide">
+            <div class="container">
+                <header>
+                    <h2>The Axiom Style: A Guide to Semantic Design</h2>
+                    <p>Axiom is more than a UI framework; it's a design philosophy. By following these principles, you can create interfaces that are not only beautiful and functional but also clean, maintainable, and accessible.</p>
+                </header>
+                <div class="grid">
+                    <div class="card">
+                        <i class="fas fa-sitemap"></i>
+                        <h3>Structure with Semantics</h3>
+                        <p>Use the right HTML tag for the job. <code>&lt;nav&gt;</code> for navigation, <code>&lt;main&gt;</code> for the main content, <code>&lt;article&gt;</code> for self-contained content, etc. A well-structured document is the foundation of a great user experience.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-paint-roller"></i>
+                        <h3>Style with Classes, Not Utilities</h3>
+                        <p>Axiom components are styled with a single class. Avoid the temptation to add utility classes for minor tweaks. Instead, embrace the cascade and create new components or variations when needed.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-universal-access"></i>
+                        <h3>Accessibility First</h3>
+                        <p>Design for everyone. Use proper headings, ARIA attributes, and color contrast. A semantic structure is the first step toward an accessible application.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="code-in-action">
+            <div class="container">
+                <header>
+                    <h2>Code in Action: The Axiom Advantage</h2>
+                    <p>Axiom is designed to be simple, semantic, and powerful. See how creating a complex component like a card in Axiom compares to a utility-first framework.</p>
+                </header>
+                <div class="code-comparison-grid">
+                    <div class="code-example">
+                        <h3>Axiom</h3>
+                        <p>Clean, semantic, and easy to read. The single <code>.card</code> class handles all the styling.</p>
+                        <pre><code>&lt;div class="card"&gt;
+    &lt;img src="img/axiom.jpeg" alt="Axiom Logo"&gt;
+    &lt;h3&gt;Axiom Card&lt;/h3&gt;
+    &lt;p&gt;This is a simple card component.&lt;/p&gt;
+    &lt;button class="primary"&gt;Learn More&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <div class="code-example">
+                        <h3>Utility-First Framework</h3>
+                        <p>Verbose and hard to read. The styling is mixed directly into the HTML.</p>
+                        <pre><code>&lt;div class="max-w-sm rounded overflow-hidden shadow-lg bg-white"&gt;
+    &lt;img class="w-full" src="img/axiom.jpeg" alt="Axiom Logo"&gt;
+    &lt;div class="px-6 py-4"&gt;
+        &lt;div class="font-bold text-xl mb-2"&gt;Card Title&lt;/div&gt;
+        &lt;p class="text-gray-700 text-base"&gt;This is a simple card component.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="px-6 pt-4 pb-2"&gt;
+        &lt;span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"&gt;#axiom&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
                     </div>
                 </div>
             </div>
@@ -274,31 +681,57 @@ npm install axiom-ui</code></pre>
             </div>
         </section>
 
-        <div id="ai-chat-component" data-component="ai-chat"></div>
-        <button id="ai-chat-toggle-button" class="button primary floating">AI Chat</button>
-
-        <section id="documentation">
+        <section id="example-sites">
             <div class="container">
                 <header>
-                    <h2>Documentation</h2>
-                    <p>Explore the project's documentation to learn more about the framework and how to contribute.</p>
+                    <h2>Proudly Powering</h2>
+                    <p>Axiom01 is already being used to build beautiful, semantic websites. Here are a few examples of live sites that are built with Axiom.</p>
                 </header>
                 <div class="grid">
-                    <a href="README.md" class="card link">
-                        <h3>README.md</h3>
-                        <p>The main README file for the project, containing an overview of the framework and its features.</p>
+                    <a href="https://unruled.org" target="_blank" rel="noopener" class="card link">
+                        <img src="https://raw.githubusercontent.com/Sol-Roth/unruled/main/public/img/unruled-social-card.png" alt="Screenshot of unruled.org" class="responsive-image">
+                        <h3>unruled.org</h3>
+                        <p>A project dedicated to open-source and web standards, built entirely with Axiom01.</p>
                     </a>
-                    <a href="DEVELOPER.md" class_="card link">
-                        <h3>DEVELOPER.md</h3>
-                        <p>A guide for developers who want to contribute to the Axiom UI framework.</p>
-                    </a>
-                    <a href="AXIOM01_STYLING_GUIDE.md" class="card link">
-                        <h3>AXIOM01_STYLING_GUIDE.md</h3>
-                        <p>The official styling guide for the Axiom UI framework, with detailed information on the design system and component styles.</p>
+                    <a href="https://solroth.com" target="_blank" rel="noopener" class="card link">
+                        <img src="https://raw.githubusercontent.com/Sol-Roth/solroth.com/main/public/img/solroth-social-card.png" alt="Screenshot of solroth.com" class="responsive-image">
+                        <h3>solroth.com</h3>
+                        <p>A personal portfolio and blog, showcasing the flexibility and power of the Axiom framework.</p>
                     </a>
                 </div>
             </div>
         </section>
+
+        <section id="release-info" class="release-info-section">
+            <div class="container">
+                <div class="release-info-card">
+                    <div class="release-version">
+                        <h3>Version 1.0.0</h3>
+                        <p>Released on July 20, 2025</p>
+                    </div>
+                    <div class="release-stats">
+                        <div class="stat">
+                            <h4>~12KB</h4>
+                            <p>Gzipped Core CSS</p>
+                        </div>
+                        <div class="stat">
+                            <h4>40+</h4>
+                            <p>Components</p>
+                        </div>
+                        <div class="stat">
+                            <h4>20+</h4>
+                            <p>Themes</p>
+                        </div>
+                    </div>
+                    <div class="release-actions">
+                        <a href="https://github.com/Sol-Roth-Media/axiom/releases" class="button secondary" target="_blank" rel="noopener">View Release Notes</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="ai-chat-component" data-component="ai-chat"></div>
+        <button id="ai-chat-toggle-button" class="button primary floating">AI Chat</button>
 
         <div id="search-modal" class="search-modal is-hidden" data-component="search">
             <div class="search-modal-content">
@@ -314,6 +747,7 @@ npm install axiom-ui</code></pre>
         </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <script src="js/axiom.js" type="module"></script>
 
     <footer class="main">
