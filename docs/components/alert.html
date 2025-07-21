@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom - Alert Component</title>
+    <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="stylesheet" href="../../css/prism.css">
+    <link rel="stylesheet" href="../css/docs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="component-docs">
+
+    <header class="docs-header">
+        <h1>Alert Component</h1>
+        <p>Alerts provide contextual feedback messages for typical user actions. They can be used for success messages, warnings, errors, and general information.</p>
+    </header>
+
+    <section class="docs-section">
+        <h2 class="section-title">Basic Alerts</h2>
+        <p>Basic alerts are static and non-dismissible. Use them for information that should persist on the page.</p>
+        
+        <div class="example-preview">
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle alert-icon"></i>
+                <div class="alert-content">This is a basic informational alert.</div>
+            </div>
+        </div>
+
+        <pre><code class="language-html">&lt;div class="alert alert-info"&gt;
+    &lt;i class="fas fa-info-circle alert-icon"&gt;&lt;/i&gt;
+    &lt;div class="alert-content"&gt;This is a basic informational alert.&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="docs-section">
+        <h2 class="section-title">Alert Colors</h2>
+        <p>Use contextual color classes to indicate the type of message.</p>
+
+        <div class="example-preview">
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle alert-icon"></i>
+                <div class="alert-content"><strong>Success!</strong> Your profile has been updated.</div>
+            </div>
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle alert-icon"></i>
+                <div class="alert-content"><strong>Warning:</strong> Your trial period is about to expire.</div>
+            </div>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle alert-icon"></i>
+                <div class="alert-content"><strong>Error:</strong> Could not save your changes. Please try again.</div>
+            </div>
+        </div>
+
+        <pre><code class="language-html">&lt;!-- Success --&gt;
+&lt;div class="alert alert-success"&gt;...&lt;/div&gt;
+
+&lt;!-- Warning --&gt;
+&lt;div class="alert alert-warning"&gt;...&lt;/div&gt;
+
+&lt;!-- Error --&gt;
+&lt;div class="alert alert-error"&gt;...&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="docs-section">
+        <h2 class="section-title">Dismissible Alerts</h2>
+        <p>Add the `.alert-dismissible` class and a close button to create a dismissible alert. The JavaScript for this is handled automatically by `axiom.js`.</p>
+
+        <div class="example-preview">
+            <div class="alert alert-success alert-dismissible">
+                <i class="fas fa-check-circle alert-icon"></i>
+                <div class="alert-content">You can dismiss this success alert.</div>
+                <button class="alert-close" data-alert-close>&times;</button>
+            </div>
+        </div>
+
+        <pre><code class="language-html">&lt;div class="alert alert-success alert-dismissible"&gt;
+    &lt;i class="fas fa-check-circle alert-icon"&gt;&lt;/i&gt;
+    &lt;div class="alert-content"&gt;You can dismiss this success alert.&lt;/div&gt;
+    &lt;button class="alert-close" data-alert-close&gt;&amp;times;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+    
+    <section class="docs-section">
+        <h2 class="section-title">Dynamic Alerts (Toasts)</h2>
+        <p>Use the `AxiomComponents.Alert.show()` JavaScript method to create dynamic "toast" notifications. These are useful for providing feedback on asynchronous actions.</p>
+
+        <div class="example-preview">
+            <button class="button" onclick="AxiomComponents.Alert.show('success', 'This is a success toast.')">Show Success Toast</button>
+            <button class="button" onclick="AxiomComponents.Alert.show('info', 'This is an info toast.')">Show Info Toast</button>
+            <button class="button" onclick="AxiomComponents.Alert.show('warning', 'This is a warning toast.')">Show Warning Toast</button>
+            <button class="button" onclick="AxiomComponents.Alert.show('error', 'This is an error toast.')">Show Error Toast</button>
+        </div>
+
+        <pre><code class="language-javascript">// Show a success toast
+AxiomComponents.Alert.show('success', 'This is a success toast.');
+
+// Show an error toast that auto-dismisses after 5 seconds
+AxiomComponents.Alert.show('error', 'This will disappear in 5s.', { autoDismiss: 5000 });</code></pre>
+    </section>
+
+    <section class="docs-section">
+        <h2 class="section-title">Accessibility</h2>
+        <ul>
+            <li>Alerts have a `role` of `alert` to announce them to screen readers.</li>
+            <li>Icons are used for visual cues, but are not essential for understanding the alert's meaning.</li>
+            <li>Dismissible alerts have a close button with an `aria-label` for screen readers.</li>
+        </ul>
+    </section>
+
+    <script src="../../js/prism.js"></script>
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/alert.js"></script>
+</body>
+</html>

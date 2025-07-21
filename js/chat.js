@@ -1,28 +1,40 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const chatForm = document.querySelector('.chat-form');
-    const chatInput = document.querySelector('.chat-input');
-    const chatHistory = document.querySelector('.chat-history');
+class Chat {
+    constructor(element) {
+        this.element = element;
+        this.history = this.element.querySelector('.chat-history');
+        this.form = this.element.querySelector('.chat-form');
+        this.input = this.element.querySelector('.chat-input');
 
-    if (chatForm && chatInput && chatHistory) {
-        chatForm.addEventListener('submit', function(e) {
+        this.init();
+    }
+
+    init() {
+        this.form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const message = chatInput.value.trim();
+            const message = this.input.value.trim();
             if (message) {
-                appendMessage(message, 'user');
-                chatInput.value = '';
+                this.appendMessage(message, 'user');
+                this.input.value = '';
                 // Simulate bot response
                 setTimeout(() => {
-                    appendMessage('This is a simulated bot response.', 'bot');
+                    this.appendMessage('This is a simulated bot response.', 'bot');
                 }, 1000);
             }
         });
     }
 
-    function appendMessage(message, sender) {
+    appendMessage(message, sender) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('chat-message', sender);
         messageElement.textContent = message;
-        chatHistory.appendChild(messageElement);
-        chatHistory.scrollTop = chatHistory.scrollHeight;
+        this.history.appendChild(messageElement);
+        this.history.scrollTop = this.history.scrollHeight;
     }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const chatWidgets = document.querySelectorAll('.chat-widget');
+    chatWidgets.forEach(widget => {
+        new Chat(widget);
+    });
 });

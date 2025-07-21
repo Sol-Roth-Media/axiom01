@@ -22,6 +22,7 @@ class AxiomAlert {
         this.container.appendChild(alert);
 
         if (options.autoDismiss) {
+            alert.style.setProperty('--toast-duration', `${options.autoDismiss / 1000}s`);
             setTimeout(() => this.dismissAlert(alert), options.autoDismiss);
         }
     }
