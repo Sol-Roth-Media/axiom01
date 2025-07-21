@@ -1,75 +1,116 @@
-/**
- * axiom.js
- * Core Axiom01 JavaScript utilities and component registration.
- */
+class Axiom {
+    constructor() {
+        this.components = {};
+        document.addEventListener('DOMContentLoaded', () => this.init());
+    }
 
-import './accordion.js';
-import './alert.js';
-import './breadcrumb.js';
-import './button.js';
-import './card.js';
-import './carousel.js';
-import './commerce.js';
-import './component-browser.js';
-import './datepicker.js';
-import './drawer.js';
-import './dropdown.js';
-import './empty-state.js';
-import './file-upload.js';
-import './forms.js';
-import './infinite-scroll.js';
-import './jump-menu.js';
-import './media.js';
-import './mobile-navbar.js';
-import './modal.js';
-import './modals.js';
-import './multi-step-form.js';
-import './navbar-advanced.js';
-import './navbar.js';
-import './notification.js';
-import './pagination.js';
-import './paywall.js';
-import './playground.js';
-import './prism.js';
-import './progress.js';
-import './scripts.js';
-import './search.js';
-import './skeleton.js';
-import './stepper.js';
-import './tab-bar.js';
-import './table.js';
-import './tabs.js';
-import './tag.js';
-import './theme-switcher.js';
-import './theme-wizard.js';
-import './timeline.js';
-import './tooltips.js';
-import './utils.js';
+    async loadComponent(componentName) {
+        if (this.components[componentName]) {
+            return this.components[componentName];
+        }
 
-console.log('axiom.js: Script loaded.');
+        // Updated path to be relative to the js/ directory
+        const componentPath = `./${componentName}.js`; 
+        try {
+            const module = await import(componentPath);
+            if (module.default && typeof module.default.init === 'function') {
+                this.components[componentName] = module.default;
+                return module.default;
+            } else {
+                console.error(`Axiom: Component ${componentName} does not have a default export with an init method.`);
+                return null;
+            }
+        } catch (error) {
+            console.error(`Axiom: Failed to load component ${componentName}.`, error);
+            return null;
+        }
+    }
 
-const AxiomComponents = {
-    components: {},
+    async init() {
+        console.log('Axiom: Initializing...');
+        const componentElements = document.querySelectorAll('[data-component]');
+        const loadPromises = [];
 
-    register(name, component) {
-        console.log(`axiom.js: Registering component: ${name}`);
-        this.components[name] = component;
-    },
+        componentElements.forEach(element => {
+            const componentName = element.dataset.component;
+            if (componentName) {
+                // Pass the element to the loader
+                loadPromises.push(this.loadComponent(componentName, element)); 
+            }
+        });
 
-    init() {
-        console.log('axiom.js: Initializing components...');
-        for (const name in this.components) {
-            if (this.components.hasOwnProperty(name)) {
-                console.log(`axiom.js: Initializing component: ${name}`);
-                this.components[name].init();
+        await Promise.all(loadPromises);
+
+        for (const componentName in this.components) {
+            if (this.components.hasOwnProperty(componentName)) {
+                try {
+                    // Find all elements for this component and init them
+                    const elements = document.querySelectorAll(`[data-component="${componentName}"]`);
+                    elements.forEach(element => {
+                        this.components[componentName].init(element);
+                        console.log(`Axiom: Initialized component: ${componentName} on`, element);
+                    });
+                } catch (error) {
+                    console.error(`Axiom: Error initializing component ${componentName}.`, error);
+                }
             }
         }
-        console.log('axiom.js: Component initialization complete.');
+        console.log('Axiom: Initialization complete.');
+        this.initSearchModal();
     }
-};
 
-window.AxiomComponents = AxiomComponents;
+    initSearchModal() {
+        const searchToggleButton = document.querySelector('.search-toggle');
+        const searchModal = document.getElementById('search-modal');
+        const closeSearchButton = document.querySelector('.close-search-modal');
+        const searchInput = document.getElementById('search-modal-input');
 
-document.addEventListener('DOMContentLoaded', () => {
-    AxiomComponents.init();
-});
+        if (!searchToggleButton || !searchModal || !closeSearchButton || !searchInput) {
+            return;
+        }
+
+        const openSearch = () => {
+            searchModal.classList.remove('is-hidden');
+            searchInput.focus();
+        };
+
+        const closeSearch = () => {
+            searchModal.classList.add('is-hidden');
+        };
+
+        searchToggleButton.addEventListener('click', openSearch);
+        closeSearchButton.addEventListener('click', closeSearch);
+
+        // Close modal on escape key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !searchModal.classList.contains('is-hidden')) {
+                closeSearch();
+            }
+        });
+
+        // Close modal on background click
+        searchModal.addEventListener('click', (e) => {
+            if (e.target === searchModal) {
+                closeSearch();
+            }
+        });
+    }
+
+    initCopyToClipboard() {
+        const copyButtons = document.querySelectorAll('.copy-button');
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const snippet = button.previousElementSibling.querySelector('code').innerText;
+                navigator.clipboard.writeText(snippet).then(() => {
+                    button.innerText = 'Copied!';
+                    setTimeout(() => {
+                        button.innerText = 'Copy Snippet';
+                    }, 2000);
+                });
+            });
+        });
+    }
+}
+
+window.Axiom = new Axiom();
+window.Axiom.initCopyToClipboard();

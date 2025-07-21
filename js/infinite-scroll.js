@@ -59,6 +59,6 @@ AxiomComponents.InfiniteScroll = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    AxiomComponents.InfiniteScroll.init();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     AxiomComponents.InfiniteScroll.init();
+// });

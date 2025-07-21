@@ -63,6 +63,6 @@ AxiomComponents.Datepicker = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    AxiomComponents.Datepicker.init();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     AxiomComponents.Datepicker.init();
+// });

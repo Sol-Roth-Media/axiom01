@@ -1,49 +1,24 @@
-// Axiom Jump Menu Component JS
+const JumpMenu = {
+  init: function(element) {
+    if (!element) return;
 
-class JumpMenu {
-    constructor(element) {
-        this.element = element;
-        this.links = this.element.querySelectorAll('a');
+    const button = element.querySelector('button');
+    const menu = element.querySelector('ul');
 
-        this.init();
+    if (!button || !menu) {
+      console.warn('Axiom: Jump menu button or menu not found.');
+      return;
     }
 
-    init() {
-        this.links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      menu.classList.toggle('is-open');
+    });
 
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                    this.setActive(link);
-                }
-            });
-        });
-    }
-
-    setActive(activeLink) {
-        this.links.forEach(link => {
-            link.classList.remove('active');
-        });
-        activeLink.classList.add('active');
-    }
-}
-
-if (typeof AxiomComponents === 'undefined') {
-    window.AxiomComponents = {};
-}
-
-AxiomComponents.JumpMenu = {
-    init: function() {
-        const jumpMenuElements = document.querySelectorAll('.jump-menu');
-        jumpMenuElements.forEach(element => {
-            new JumpMenu(element);
-        });
-    }
+    document.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+    });
+  }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    AxiomComponents.JumpMenu.init();
-});
+export default JumpMenu;

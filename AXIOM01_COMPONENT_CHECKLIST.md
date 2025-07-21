@@ -134,6 +134,47 @@
 
 ## Component Status Tracking
 
+- [ ] Accordion
+- [ ] Alert
+- [ ] Breadcrumb
+- [ ] Button
+- [ ] Card
+- [ ] Carousel
+- [ ] Chat
+- [ ] Commerce
+- [ ] Component Browser
+- [ ] Datepicker
+- [ ] Drawer
+- [ ] Dropdown
+- [ ] Empty State
+- [ ] File Upload
+- [ ] Footer
+- [ ] Forms
+- [ ] Hero
+- [ ] Infinite Scroll
+- [ ] Jump Menu
+- [ ] Media
+- [ ] Modal
+- [ ] Multi-Step Form
+- [ ] Navbar
+- [ ] Navigation
+- [ ] Notification
+- [ ] Pagination
+- [ ] Paywall
+- [ ] Progress
+- [ ] Search
+- [ ] Sidebar
+- [ ] Skeleton
+- [ ] Stepper
+- [ ] Tab Bar
+- [ ] Table
+- [ ] Tabs
+- [ ] Tag
+- [ ] Timeline
+- [ ] AI Chat
+- [ ] AI Image Generation
+- [ ] Settings
+
 Mark component status in TODO files:
 - 🔴 **Not Started**: Component doesn't meet basic requirements
 - 🟡 **In Progress**: Some requirements met, others pending

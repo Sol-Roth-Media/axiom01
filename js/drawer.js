@@ -85,6 +85,6 @@ AxiomComponents.Drawer = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    AxiomComponents.Drawer.init();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     AxiomComponents.Drawer.init();
+// });

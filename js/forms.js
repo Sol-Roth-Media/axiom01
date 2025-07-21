@@ -172,6 +172,6 @@ AxiomComponents.Forms = {
     }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    AxiomComponents.Forms.init();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     AxiomComponents.Forms.init();
+// });
