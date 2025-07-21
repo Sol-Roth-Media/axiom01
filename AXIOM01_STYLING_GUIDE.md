@@ -100,3 +100,187 @@ Accessibility is not optional.
 ---
 
 **Updated:** July 20, 2025 - This guide has been updated to reinforce the framework's foundational principles and explicitly forbid non-compliant patterns.
+
+**Current Framework Examples (Updated July 2025):**
+
+## Empty State Component
+```html
+<!-- ✅ CORRECT: Minimal classes, semantic structure -->
+<div class="empty-state search" role="status" aria-label="No search results">
+  <div aria-hidden="true">🔍</div>
+  <h3>No Results Found</h3>
+  <p>We couldn't find anything matching your search terms.</p>
+  <div>
+    <button class="secondary">Clear Search</button>
+    <button class="tertiary">Browse All Items</button>
+  </div>
+</div>
+```
+```css
+/* CSS targets elements by type and order */
+.empty-state {
+  text-align: center;
+  padding: var(--a-space-xl);
+}
+
+.empty-state > div:first-child {
+  font-size: 3rem;
+  margin-bottom: var(--a-space-l);
+}
+
+.empty-state h3 {
+  margin-bottom: var(--a-space-m);
+  color: var(--a-color-on-surface);
+}
+
+.empty-state p {
+  margin-bottom: var(--a-space-l);
+  color: var(--a-color-on-surface-variant);
+}
+
+.empty-state > div:last-child {
+  display: flex;
+  gap: var(--a-space-m);
+  justify-content: center;
+}
+```
+
+## Alert Component
+```html
+<!-- ✅ CORRECT: Single component class + semantic variant -->
+<div class="alert success">
+  <i class="fas fa-check-circle"></i>
+  <div>This is a success alert.</div>
+</div>
+
+<div class="alert error dismissible">
+  <i class="fas fa-exclamation-circle"></i>
+  <div>This is a dismissible error alert.</div>
+  <button data-alert-close>&times;</button>
+</div>
+```
+```css
+/* CSS targets child elements by type and order */
+.alert {
+  display: flex;
+  align-items: center;
+  padding: var(--a-space-m);
+  border-radius: var(--a-border-radius-medium);
+  gap: var(--a-space-s);
+}
+
+.alert i {
+  flex-shrink: 0;
+}
+
+.alert > div {
+  flex: 1;
+}
+
+.alert button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.alert.success {
+  background-color: var(--a-color-success-surface);
+  color: var(--a-color-success-on-surface);
+}
+```
+
+## Breadcrumb Navigation
+```html
+<!-- ✅ CORRECT: Semantic nav with minimal classes -->
+<nav class="breadcrumb icons" aria-label="Breadcrumb navigation">
+  <ol>
+    <li><a href="/"><span aria-hidden="true">🏠</span> Home</a></li>
+    <li><a href="/dashboard"><span aria-hidden="true">📊</span> Dashboard</a></li>
+    <li aria-current="page"><span aria-hidden="true">📋</span> Reports</li>
+  </ol>
+</nav>
+```
+```css
+/* CSS targets semantic structure */
+.breadcrumb ol {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb li {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb li:not(:last-child)::after {
+  content: '›';
+  margin: 0 var(--a-space-s);
+  color: var(--a-color-on-surface-variant);
+}
+
+.breadcrumb.icons span {
+  margin-right: var(--a-space-xs);
+}
+```
+
+## Modal Component
+```html
+<!-- ✅ CORRECT: Semantic structure, minimal classes -->
+<div class="modal" id="basic-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+  <div>
+    <header>
+      <h3 id="modal-title">Modal Title</h3>
+      <button aria-label="Close modal" data-modal-close>&times;</button>
+    </header>
+    <section>
+      <p>Modal content goes here.</p>
+    </section>
+    <footer>
+      <button class="secondary" data-modal-close>Cancel</button>
+      <button class="primary">Confirm</button>
+    </footer>
+  </div>
+</div>
+```
+```css
+/* CSS targets semantic elements directly */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal > div {
+  background: var(--a-color-surface);
+  border-radius: var(--a-border-radius-large);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--a-space-l);
+  border-bottom: 1px solid var(--a-color-outline);
+}
+
+.modal section {
+  padding: var(--a-space-l);
+}
+
+.modal footer {
+  padding: var(--a-space-l);
+  border-top: 1px solid var(--a-color-outline);
+  display: flex;
+  gap: var(--a-space-m);
+  justify-content: flex-end;
+}
+```

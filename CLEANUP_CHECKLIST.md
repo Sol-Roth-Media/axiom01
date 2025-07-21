@@ -1,0 +1,47 @@
+# Files to Remove Before Release
+
+## 🗑️ DEVELOPMENT/PLANNING FILES (Safe to Remove)
+- AXIOM01_COMPONENT_CHECKLIST.md (development planning)
+- AXIOM01_ENHANCEMENT_TODO.md (development planning) 
+- AXIOM01_IMPROVEMENT_ROADMAP.md (development planning)
+- AXIOM01_INDEX_REVAMP_PLAN.md (development planning)
+- AXIOM_IMPROVEMENT_PLAN.md (development planning)
+- GEMINI_SELF_VERIFICATION.md (AI verification notes)
+- RELEASE_TODO.md (replaced by AXIOM01_MASTER_TODO.md)
+- performance-report.json (development metrics)
+- performance-report.md (development metrics)
+
+## 🔧 BUILD/DEVELOPMENT FILES (Keep for Development)
+- build-js.js (build script)
+- build.js (build script)
+- purgecss.config.js (CSS optimization)
+- package.json (dependencies)
+- package-lock.json (dependencies)
+- .eslintrc.json (code quality)
+- .stylelintrc.json (CSS quality)
+
+## 📁 DIRECTORIES TO REVIEW
+- archive/ (old/legacy files - review contents)
+- .idea/ (IDE files - can remove)
+- .vscode-extension/ (IDE files - can remove)
+- node_modules/ (dependencies - exclude from release)
+- dist/ (build output - check if needed)
+
+## 🚀 DEMO/EXAMPLE FILES (Keep for Users)
+- colors-advanced.html (demo page)
+- forms-advanced.html (demo page)
+- layout-advanced.html (demo page)
+- media-advanced.html (demo page)
+- typography-advanced.html (demo page)
+- theme-customization-wizard.html (user tool)
+- interactive-playground.html (user tool)
+- css-variables-guide.html (user guide)
+
+## 📋 KEEP FOR RELEASE
+- LICENSE (required)
+- README.md (required)
+- AXIOM01_STYLING_GUIDE.md (user documentation)
+- AXIOM01_MASTER_TODO.md (current status)
+- RELEASE_AUDIT.md (release documentation)
+- VERIFICATION.md (quality checklist)
+- DEVELOPER.md (contributor guide)
