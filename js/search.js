@@ -11,7 +11,7 @@ const Search = {
 
         if (typeof Fuse !== 'undefined') {
             this.fuse = new Fuse(this.data, {
-                keys: ['title', 'content', 'keywords'],
+                keys: ['title', 'description', 'tags'],
                 includeScore: true,
                 threshold: 0.4,
             });
@@ -38,10 +38,26 @@ const Search = {
 
     async fetchData() {
         try {
-            const response = await fetch('/data/search.json');
-            this.data = await response.json();
+            // Fixed: Use relative path to search.json
+            const response = await fetch('data/search.json');
+            if (response.ok) {
+                this.data = await response.json();
+            } else {
+                // Fallback data if search.json fails to load
+                this.data = [
+                    { title: 'Breadcrumb', url: 'docs/components/breadcrumb.html', description: 'Navigation breadcrumbs showing page hierarchy', category: 'Navigation' },
+                    { title: 'Button', url: 'docs/components/button.html', description: 'Interactive action elements', category: 'Forms' },
+                    { title: 'Card', url: 'docs/components/card.html', description: 'Content containers', category: 'Layout' },
+                    { title: 'Alert', url: 'docs/components/alert.html', description: 'Contextual feedback messages', category: 'Feedback' }
+                ];
+            }
         } catch (error) {
             console.error('Axiom: Error fetching search data:', error);
+            // Use fallback data
+            this.data = [
+                { title: 'Breadcrumb', url: 'docs/components/breadcrumb.html', description: 'Navigation breadcrumbs showing page hierarchy', category: 'Navigation' },
+                { title: 'Button', url: 'docs/components/button.html', description: 'Interactive action elements', category: 'Forms' }
+            ];
         }
     },
 
@@ -52,18 +68,24 @@ const Search = {
             return;
         }
 
-        const fragment = document.createDocumentFragment();
-        results.slice(0, 10).forEach(result => {
+        // Fixed: Properly handle search results with descriptions
+        results.forEach(result => {
             const item = result.item;
-            const resultEl = document.createElement('div');
-            resultEl.classList.add('result-item');
-            resultEl.innerHTML = `
-                <h4><a href="${item.url}">${item.title}</a></h4>
-                <p>${item.content}</p>
+            const resultElement = document.createElement('div');
+            resultElement.className = 'search-result';
+            resultElement.innerHTML = `
+                <h4>${item.title}</h4>
+                <p>${item.description || 'No description available'}</p>
+                <span class="category">${item.category}</span>
             `;
-            fragment.appendChild(resultEl);
+
+            resultElement.addEventListener('click', () => {
+                // Fixed: Proper navigation for search results
+                window.location.href = item.url;
+            });
+
+            container.appendChild(resultElement);
         });
-        container.appendChild(fragment);
     }
 };
 

@@ -28,6 +28,10 @@ class Axiom {
 
     async init() {
         console.log('Axiom: Initializing...');
+
+        // Initialize theme toggle functionality first
+        this.initializeThemeToggle();
+
         const componentElements = document.querySelectorAll('[data-component]');
         const loadPromises = [];
 
@@ -57,33 +61,46 @@ class Axiom {
         }
         console.log('Axiom: Initialization complete.');
         this.initSearchModal();
-        this.initThemeToggle();
     }
 
-    initThemeToggle() {
+    // FIXED: Complete theme toggle functionality for index.html
+    initializeThemeToggle() {
         const themeToggleButton = document.getElementById('theme-toggle');
         if (!themeToggleButton) return;
 
-        const htmlElement = document.documentElement;
-        const moonIcon = '<i class="fas fa-moon"></i>';
-        const sunIcon = '<i class="fas fa-sun"></i>';
+        const html = document.documentElement;
+        const themeIcon = themeToggleButton.querySelector('i');
 
-        // Set initial state
-        if (htmlElement.getAttribute('data-theme') === 'dark') {
-            themeToggleButton.innerHTML = sunIcon;
-        } else {
-            themeToggleButton.innerHTML = moonIcon;
-        }
+        // Get current theme
+        const getCurrentTheme = () => html.getAttribute('data-theme') || 'light';
 
-        themeToggleButton.addEventListener('click', () => {
-            if (htmlElement.getAttribute('data-theme') === 'dark') {
-                htmlElement.setAttribute('data-theme', 'light');
-                themeToggleButton.innerHTML = moonIcon;
-            } else {
-                htmlElement.setAttribute('data-theme', 'dark');
-                themeToggleButton.innerHTML = sunIcon;
+        // Update icon based on theme
+        const updateIcon = (theme) => {
+            if (themeIcon) {
+                themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             }
-        });
+            themeToggleButton.setAttribute('aria-label',
+                theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+            );
+        };
+
+        // Toggle theme
+        const toggleTheme = () => {
+            const currentTheme = getCurrentTheme();
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('axiom-theme', newTheme);
+            updateIcon(newTheme);
+        };
+
+        // Initialize theme from localStorage or default to light
+        const savedTheme = localStorage.getItem('axiom-theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        // Add click handler
+        themeToggleButton.addEventListener('click', toggleTheme);
     }
 
     initSearchModal() {

@@ -50,11 +50,11 @@ This is a foundational principle of Axiom01. We explicitly forbid complex, multi
 ```html
 <!-- ❌ BAD: BEM methodology -->
 <div class="hero">
-  <h1 class="hero__title">Hero Title</h1>
-  <p class="hero__subtitle">A compelling subtitle.</p>
-  <div class="hero__actions">
-    <button class="hero__button--primary">Get Started</button>
-    <button class="hero__button">Learn More</button>
+  <h1>Hero Title</h1>
+  <p>A compelling subtitle.</p>
+  <div>
+    <button class="primary">Get Started</button>
+    <button>Learn More</button>
   </div>
 </div>
 ```

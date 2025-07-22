@@ -178,12 +178,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    aft// Component list loading - FIXED: Use only components that actually exist
-    // FIXED: Component navigation loading
+    // Component list loading - FIXED: Use only components that actually exis// FIXED: Component navigation loading - ALL 41 components
     const loadComponentNavigation = () => {
         if (!componentList) return;
 
-            'alert', 'badge', 'breadcrumb', 'button', 'card', 'carousel',
+        const components = [
+            { title: 'Accordion', url: 'components/accordion.md' },
             { title: 'Alert', url: 'components/alert.html' },
             { title: 'Avatar', url: 'components/avatar.md' },
             { title: 'Badge', url: 'components/badge.html' },
@@ -193,23 +193,44 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: 'Carousel', url: 'components/carousel.html' },
             { title: 'Chat', url: 'components/chat.html' },
             { title: 'Commerce', url: 'components/commerce.html' },
+            { title: 'Datepicker', url: 'components/datepicker.md' },
+            { title: 'Drawer', url: 'components/drawer.md' },
             { title: 'Dropdown', url: 'components/dropdown.html' },
+            { title: 'Empty State', url: 'components/empty-state.md' },
+            { title: 'File Upload', url: 'components/file-upload.md' },
+            { title: 'Footer', url: 'components/footer.md' },
+            { title: 'Forms', url: 'components/forms.md' },
+            { title: 'Hero', url: 'components/hero.md' },
+            { title: 'Infinite Scroll', url: 'components/infinite-scroll.md' },
             { title: 'Input', url: 'components/input.html' },
+            { title: 'Media', url: 'components/media.md' },
             { title: 'Modal', url: 'components/modal.html' },
+            { title: 'Multi-Step Form', url: 'components/multi-step-form.md' },
+            { title: 'Navbar', url: 'components/navbar.md' },
+            { title: 'Navigation', url: 'components/navigation.md' },
+            { title: 'Notification', url: 'components/notification.md' },
+            { title: 'Pagination', url: 'components/pagination.md' },
+            { title: 'Paywall', url: 'components/paywall.md' },
+            { title: 'Progress', url: 'components/progress.md' },
+            { title: 'Search', url: 'components/search.md' },
+            { title: 'Sidebar', url: 'components/sidebar.md' },
+            { title: 'Skeleton', url: 'components/skeleton.md' },
             { title: 'Slider', url: 'components/slider.md' },
+            { title: 'Stepper', url: 'components/stepper.md' },
+            { title: 'Tab Bar', url: 'components/tab-bar.md' },
             { title: 'Table', url: 'components/table.html' },
             { title: 'Tabs', url: 'components/tabs.html' },
+            { title: 'Tag', url: 'components/tag.md' },
+            { title: 'Timeline', url: 'components/timeline.md' },
             { title: 'Toggle', url: 'components/toggle.md' },
             { title: 'Tooltip', url: 'components/tooltip.md' }
+        ];
 
-        components.forEach(component => {
-        const componentHTML = components.map(component =>
+        componentList.innerHTML = components.map(component =>
             `<li><a href="${component.url}" target="content-frame">${component.title}</a></li>`
         ).join('');
-            // Add click handler to ensure iframe navigation works
-        componentList.innerHTML = componentHTML;
     };
-            li.appendChild(link);
+
     // FIXED: Theme toggle functionality
     const initializeThemeToggle = () => {
         if (!themeToggleButton) return;
@@ -229,28 +250,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
             );
         };
-    // Theme toggle functionality
+
         // Toggle theme
         const toggleTheme = () => {
             const currentTheme = getCurrentTheme();
-
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
             html.setAttribute('data-theme', newTheme);
-
+            localStorage.setItem('axiom-theme', newTheme);
             updateIcon(newTheme);
 
             // Also update the iframe content if it exists
             const iframe = document.querySelector('iframe[name="content-frame"]');
             if (iframe && iframe.contentDocument) {
                 iframe.contentDocument.documentElement.setAttribute('data-theme', newTheme);
-        });
+            }
         };
-        // Load saved theme
+
         // Initialize theme from localStorage or default to light
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        const savedTheme = localStorage.getItem('axiom-theme') || 'light';
         html.setAttribute('data-theme', savedTheme);
         updateIcon(savedTheme);
-        const icon = themeToggleButton.querySelector('i');
+
         // Add click handler
         themeToggleButton.addEventListener('click', toggleTheme);
     };
@@ -258,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize all functionality
     loadComponentNavigation();
     initializeThemeToggle();
+});
 
 // Add CSS for search highlighting
 const style = document.createElement('style');

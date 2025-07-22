@@ -1,77 +1,52 @@
-// Axiom Progress Component JS
+// Axiom Progress Component JS - CORRECTED
 
 class Progress {
     constructor(element) {
         this.element = element;
-        this.isDeterminate = this.element.classList.contains('progress-bar');
-        this.isThrobber = this.element.classList.contains('throbber');
-        this.liveRegion = null;
-
         this.init();
     }
 
     init() {
-        if (this.isDeterminate) {
-            this.initProgressBar();
-        }
-
-        if (this.isThrobber) {
-            this.initThrobber();
+        const initialValue = this.element.getAttribute('aria-valuenow');
+        if (initialValue) {
+            this.update(initialValue);
         }
     }
 
-    initProgressBar() {
-        this.progressBar = this.element.querySelector('.progress');
-        this.element.setAttribute('aria-valuemin', '0');
-        this.element.setAttribute('aria-valuemax', '100');
-        this.update(this.element.getAttribute('aria-valuenow') || 0);
-    }
-
-    initThrobber() {
-        this.element.setAttribute('role', 'status');
-        this.createLiveRegion();
-        this.announce('Loading...');
-    }
-
+    /**
+     * Updates the progress bar's value.
+     * @param {number} value - The new percentage value (0-100).
+     */
     update(value) {
-        if (!this.isDeterminate) return;
-
         const clampedValue = Math.max(0, Math.min(100, value));
+
+        // 1. Update ARIA attribute for accessibility
         this.element.setAttribute('aria-valuenow', clampedValue);
-        this.element.style.setProperty('--a-progress-value', clampedValue);
-        this.progressBar.style.width = `${clampedValue}%`;
 
-        this.announce(`Progress: ${clampedValue}%`);
-    }
+        // 2. Update the CSS Custom Property for styling
+        this.element.style.setProperty('--progress-percent', `${clampedValue}%`);
 
-    createLiveRegion() {
-        this.liveRegion = document.createElement('div');
-        this.liveRegion.setAttribute('aria-live', 'polite');
-        this.liveRegion.setAttribute('aria-atomic', 'true');
-        this.liveRegion.classList.add('visually-hidden');
-        document.body.appendChild(this.liveRegion);
-    }
-
-    announce(message) {
-        if (this.liveRegion) {
-            this.liveRegion.textContent = message;
+        // 3. If there's a label span, update its text content
+        const label = this.element.querySelector('span');
+        if (label) {
+            label.textContent = `${clampedValue}%`;
         }
     }
 }
 
-if (typeof AxiomComponents === 'undefined') {
-    window.AxiomComponents = {};
-}
-
-AxiomComponents.Progress = {
-    init: function() {
-        const progressElements = document.querySelectorAll('.progress-bar, .throbber');
-        progressElements.forEach(element => {
-            new Progress(element);
-        });
-    }
-};
-
+// Initialize all progress components on the page
 document.addEventListener('DOMContentLoaded', () => {
-    AxiomComponents.Progress.init();
+    const progressElements = document.querySelectorAll('.progress');
+    progressElements.forEach(element => {
+        // Store the instance on the element for external access if needed
+        element.progressInstance = new Progress(element);
+    });
+
+    // Example of how to dynamically update a progress bar after 2 seconds
+    setTimeout(() => {
+        const exampleProgress = document.querySelector('#skill-progress');
+        if (exampleProgress && exampleProgress.progressInstance) {
+            exampleProgress.progressInstance.update(95);
+        }
+    }, 2000);
 });
