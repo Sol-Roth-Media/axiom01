@@ -163,3 +163,10 @@ Axiom01 is [MIT Licensed](LICENSE).
 ---
 
 **Made with ❤️ by developers who care about accessibility and semantic web standards.**
+
+## 🆕 Release 0.2.0 (July 27, 2025)
+- Fixed all broken links in the documentation component browser
+- Restored and integrated AI Chat and AI Imagegen components
+- Added a Settings component stub to prevent 404s
+- Confirmed BEM/class stacking violations are no longer present in docs/components/
+- Version updated to 0.2.0

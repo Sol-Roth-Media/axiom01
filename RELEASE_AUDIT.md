@@ -1,3 +1,19 @@
+# AXIOM01 RELEASE 0.2.0 SUMMARY (July 27, 2025)
+
+## ✅ Improvements in This Release
+- Fixed all broken links in the documentation component browser (docs/index.html)
+- Restored and integrated AI Chat and AI Imagegen components in docs/components/
+- Added a Settings component stub to prevent 404s
+- Confirmed BEM/class stacking violations are no longer present in docs/components/
+- Version updated to 0.2.0
+
+## ⚠️ Remaining Tasks
+- Continue BEM/class cleanup in showcase/ if needed
+- Complete documentation for remaining components
+- Continue file structure and CSS compliance improvements
+
+---
+
 # AXIOM01 COMPLIANCE AUDIT - CRITICAL VIOLATIONS FOUND
 *Updated July 21, 2025 - URGENT ACTION REQUIRED*
 
