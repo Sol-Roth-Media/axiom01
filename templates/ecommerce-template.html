@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!--
+    ================================================================================
+                                                                              |
+                AXIOM01 SPA TEMPLATE: E-COMMERCE PRODUCT PAGE                   |
+                                                                              |
+   INSTRUCTIONS FOR AI/DEVELOPER:                                             |
+   1. This is a template for a single product detail page in an e-commerce site.|
+   2. The theme is "minty-fresh" for a clean, modern, and friendly look.      |
+   3. Replace all placeholder images, text, prices, and product details.      |
+   4. The layout uses a custom CSS Grid for the main product section.         |
+   5. Follow the "AXIOM PATTERN" comments for guidance on structure.          |
+                                                                              |
+    ================================================================================
+-->
+<html lang="en" data-theme="minty-fresh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page - Axiom01 Template</title>
+
+    <!-- REQUIRED: Link to the main axiom.css file. -->
+    <link rel="stylesheet" href="../css/axiom.css">
+    <!-- REQUIRED: Link to Font Awesome for icons. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- TIP: It's common to have a few page-specific styles for complex layouts. -->
+    <style>
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--a-space-xl);
+            margin-top: var(--a-space-l);
+        }
+
+        @media (min-width: 768px) {
+            .product-layout {
+                /* On larger screens, create a two-column layout. */
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .product-gallery .main-image {
+            width: 100%;
+            border-radius: var(--a-border-radius-large);
+            margin-bottom: var(--a-space-m);
+        }
+
+        .product-gallery .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--a-space-m);
+        }
+
+        .product-gallery .thumbnails img {
+            width: 100%;
+            border-radius: var(--a-border-radius-medium);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .product-gallery .thumbnails img:hover,
+        .product-gallery .thumbnails img.active {
+            border-color: var(--a-color-primary);
+        }
+
+        .product-info .price {
+            font-size: 2rem;
+            font-weight: var(--a-font-weight-bold);
+            color: var(--a-color-primary);
+            margin: var(--a-space-m) 0;
+        }
+
+        .product-info .rating {
+            color: #f59e0b; /* Use a gold color for stars */
+            margin-bottom: var(--a-space-m);
+        }
+
+        .product-info .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-s);
+            margin-top: var(--a-space-l);
+        }
+    </style>
+</head>
+<body class="axiom-body">
+
+    <!-- ====================================================================== -->
+    <!-- =======================  NAVIGATION BAR  ============================= -->
+    <!-- ====================================================================== -->
+    <header class="main">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="#" class="brand" aria-label="Shop Home">[YourShop]</a>
+            <ul class="links">
+                <li><a href="#">New Arrivals</a></li>
+                <li><a href="#">Men</a></li>
+                <li><a href="#">Women</a></li>
+                <li><a href="#">Sale</a></li>
+            </ul>
+            <div class="actions">
+                <button class="search-toggle" aria-label="Open Search"><i class="fas fa-search"></i></button>
+                <button class="secondary" aria-label="My Account"><i class="fas fa-user"></i></button>
+                <button class="primary" aria-label="Shopping Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <!-- AXIOM PATTERN: Use a badge to show item count. -->
+                    <span class="badge">3</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- ====================================================================== -->
+            <!-- =========================  BREADCRUMB  ============================= -->
+            <!-- ====================================================================== -->
+            <!-- AXIOM PATTERN: Use a <nav> with a .breadcrumb class for navigation hierarchy. -->
+            <nav aria-label="breadcrumb" style="margin-top: var(--a-space-l);">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Apparel</a></li>
+                    <li class="active" aria-current="page">Classic Tee</li>
+                </ol>
+            </nav>
+
+            <!-- ====================================================================== -->
+            <!-- ======================  PRODUCT DETAILS  =========================== -->
+            <!-- ====================================================================== -->
+            <section class="product-layout">
+                <!-- Product Image Gallery -->
+                <div class="product-gallery">
+                    <img src="https://i.pravatar.cc/600?img=12" alt="Main view of the Classic Tee" class="main-image" id="main-product-image">
+                    <div class="thumbnails">
+                        <!-- TIP: Use JavaScript to change the #main-product-image src when a thumbnail is clicked. -->
+                        <img src="https://i.pravatar.cc/600?img=12" alt="Thumbnail view 1" class="active">
+                        <img src="https://i.pravatar.cc/600?img=13" alt="Thumbnail view 2">
+                        <img src="https://i.pravatar.cc/600?img=14" alt="Thumbnail view 3">
+                        <img src="https://i.pravatar.cc/600?img=15" alt="Thumbnail view 4">
+                    </div>
+                </div>
+
+                <!-- Product Information & Actions -->
+                <div class="product-info">
+                    <h1>Classic Tee</h1>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>(125 Reviews)</span>
+                    </div>
+                    <p class="lead">A timeless, ultra-soft cotton t-shirt that's perfect for any occasion. Made with 100% organic materials.</p>
+                    <div class="price">$29.99</div>
+
+                    <form>
+                        <label for="color-select">Color:</label>
+                        <select id="color-select">
+                            <option>Midnight Black</option>
+                            <option>Heather Gray</option>
+                            <option>Ocean Blue</option>
+                        </select>
+
+                        <div class="quantity-selector">
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" id="quantity" value="1" min="1" max="10" style="max-width: 80px;">
+                        </div>
+
+                        <!-- BEST PRACTICE: The primary action should be prominent. -->
+                        <button type="submit" class="primary large" style="width: 100%; margin-top: var(--a-space-l);">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ====================================================================== -->
+            <!-- ===================  PRODUCT INFO TABS  ============================ -->
+            <!-- ====================================================================== -->
+            <section id="product-tabs" style="margin-top: var(--a-space-xxl);">
+                <!-- AXIOM PATTERN: Use the .tabs component to organize detailed information. -->
+                <div class="tabs" data-component="tabs">
+                    <div class="tab-list" role="tablist">
+                        <button class="tab-item active" role="tab" aria-selected="true" aria-controls="panel-desc">Description</button>
+                        <button class="tab-item" role="tab" aria-selected="false" aria-controls="panel-specs">Specifications</button>
+                        <button class="tab-item" role="tab" aria-selected="false" aria-controls="panel-reviews">Reviews</button>
+                    </div>
+                    <div class="tab-panel active" id="panel-desc" role="tabpanel">
+                        <h4>Product Description</h4>
+                        <p>The Axiom Classic Tee is the last t-shirt you'll ever need. Crafted from premium, long-staple organic cotton, it offers unparalleled softness and durability. The modern, tailored fit looks great on its own or layered under a jacket.</p>
+                    </div>
+                    <div class="tab-panel" id="panel-specs" role="tabpanel">
+                        <h4>Specifications</h4>
+                        <!-- AXIOM PATTERN: Use a description list <dl> for key-value pairs. -->
+                        <dl>
+                            <dt>Material</dt>
+                            <dd>100% Organic Pima Cotton</dd>
+                            <dt>Fit</dt>
+                            <dd>Modern, Tailored</dd>
+                            <dt>Care</dt>
+                            <dd>Machine wash cold, tumble dry low</dd>
+                        </dl>
+                    </div>
+                    <div class="tab-panel" id="panel-reviews" role="tabpanel">
+                        <h4>Customer Reviews</h4>
+                        <p>No reviews yet. Be the first to review this product!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ====================================================================== -->
+            <!-- =====================  RELATED PRODUCTS  =========================== -->
+            <!-- ====================================================================== -->
+            <section id="related-products" style="margin-top: var(--a-space-xxl);">
+                <header>
+                    <h2>You Might Also Like</h2>
+                </header>
+                <div class="grid">
+                    <!-- AXIOM PATTERN: Use cards for related products. -->
+                    <article class="card">
+                        <img src="https://i.pravatar.cc/400?img=20" alt="Product 1" class="card-img-top">
+                        <header>
+                            <h3>Classic Hoodie</h3>
+                            <p>$59.99</p>
+                        </header>
+                    </article>
+                    <article class="card">
+                        <img src="https://i.pravatar.cc/400?img=21" alt="Product 2" class="card-img-top">
+                        <header>
+                            <h3>Denim Jeans</h3>
+                            <p>$79.99</p>
+                        </header>
+                    </article>
+                    <article class="card">
+                        <img src="https://i.pravatar.cc/400?img=22" alt="Product 3" class="card-img-top">
+                        <header>
+                            <h3>Leather Belt</h3>
+                            <p>$39.99</p>
+                        </header>
+                    </article>
+                    <article class="card">
+                        <img src="https://i.pravatar.cc/400?img=23" alt="Product 4" class="card-img-top">
+                        <header>
+                            <h3>Canvas Sneakers</h3>
+                            <p>$49.99</p>
+                        </header>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ====================================================================== -->
+    <!-- ============================  FOOTER  ================================ -->
+    <!-- ====================================================================== -->
+    <footer class="main-footer">
+        <div class="content">
+            <div class="brand">
+                <a href="#" class="logo">[YourShop]</a>
+                <p class="tagline">Quality apparel for modern life.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Men</a></li>
+                        <li><a href="#">Women</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>&copy; 2025 YourShop. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- REQUIRED: Axiom's JavaScript for interactive components like tabs. -->
+    <script src="../js/index-page-manager.js"></script>
+</body>
+</html>
+

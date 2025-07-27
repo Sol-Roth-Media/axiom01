@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!--
+    ================================================================================
+                                                                              |
+                AXIOM01 SPA TEMPLATE: DATA PROCESSING TOOL (v2)                 |
+                                                                              |
+   INSTRUCTIONS FOR AI/DEVELOPER:                                             |
+   1. This is a template for a tool that takes input and shows output.          |
+   2. The theme is "dracula" for a modern, tech-focused dark interface.       |
+   3. The core logic involves:                                                |
+      - Taking form input.                                                    |
+      - On submit, showing the #loading-state skeleton.                       |
+      - After a delay, hiding the skeleton and showing the #results-display.  |
+   4. This template includes a responsive two-column layout for desktop.      |
+                                                                              |
+    ================================================================================
+-->
+<html lang="en" data-theme="dracula">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Processor - Axiom01 Template</title>
+
+    <!-- REQUIRED: Link to the main axiom.css file. -->
+    <link rel="stylesheet" href="../css/axiom.css">
+    <!-- REQUIRED: Link to Font Awesome for icons. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- TIP: Page-specific styles are great for unique layouts like this. -->
+    <style>
+        /* AXIOM PATTERN: A responsive grid for the main tool layout. */
+        .tool-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--a-space-xl);
+        }
+        @media (min-width: 992px) {
+            .tool-layout {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* AXIOM PATTERN: A dedicated "stat card" for displaying results. */
+        .stat-card {
+            text-align: center;
+            padding: var(--a-space-l);
+        }
+        .stat-card h3 {
+            font-size: 1rem;
+            font-weight: var(--a-font-weight-normal);
+            color: var(--a-color-on-surface-variant);
+            margin-bottom: var(--a-space-s);
+        }
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: var(--a-font-weight-bold);
+            line-height: 1.1;
+            color: var(--a-color-on-surface);
+        }
+        .stat-card .value.positive { color: var(--a-color-success); }
+        .stat-card .value.neutral { color: var(--a-color-warning); }
+        .stat-card .value.negative { color: var(--a-color-error); }
+
+        /* AXIOM PATTERN: A simple user profile dropdown in the header. */
+        .user-profile {
+            position: relative;
+        }
+    </style>
+</head>
+<body class="axiom-body">
+
+    <!-- AXIOM PATTERN: A minimal header is best for a tool-focused page. -->
+    <header class="main">
+        <nav role="navigation">
+            <a href="#" class="brand">[YourTool]</a>
+            <div class="actions">
+                <!-- TIP: Use a dropdown for user actions like settings and logout. -->
+                <div class="dropdown user-profile" data-component="dropdown">
+                    <button class="dropdown-toggle" style="background: none; border: none; display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <img class="avatar" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                        <span style="color: var(--a-color-on-surface);">Demo User</span>
+                        <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--a-color-on-surface-variant);"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+                        <li><a href="#"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
+
+        <header style="text-align: center; max-width: 60ch; margin: 0 auto 2rem auto;">
+            <h1>AI Text Analyzer</h1>
+            <p>Paste your text below to analyze its sentiment, complexity, and key topics.</p>
+        </header>
+
+        <div class="tool-layout">
+            <!-- ====================================================================== -->
+            <!-- ==========================  INPUT FORM  ============================== -->
+            <!-- ====================================================================== -->
+            <section id="input-section">
+                <article class="card">
+                    <form>
+                        <label for="text-to-analyze">Your Text</label>
+                        <textarea id="text-to-analyze" rows="10" placeholder="Enter the text you want to analyze..."></textarea>
+
+                        <!-- AXIOM PATTERN: Use toggles for configuration options. -->
+                        <div class="toggle-group" style="margin-top: var(--a-space-l);">
+                            <label class="toggle">
+                                <input type="checkbox" role="switch" checked>
+                                <span></span>
+                                <span>Advanced Analysis</span>
+                            </label>
+                            <label class="toggle">
+                                <input type="checkbox" role="switch">
+                                <span></span>
+                                <span>Include Topic Cloud</span>
+                            </label>
+                        </div>
+
+                        <footer>
+                            <!-- TIP: The primary button should trigger the main action. No .large class needed for a clean look. -->
+                            <button type="submit" class="primary">
+                                <i class="fas fa-cogs"></i> Analyze Text
+                            </button>
+                        </footer>
+                    </form>
+                </article>
+            </section>
+
+            <!-- ====================================================================== -->
+            <!-- =========================  RESULTS AREA  ============================= -->
+            <!-- ====================================================================== -->
+            <section id="results-section">
+                <!--
+                    DEVELOPER NOTE:
+                    Use JavaScript to manage these states.
+                    - Initially, show #initial-state.
+                    - On form submit, hide #initial-state and show #loading-state.
+                    - When processing is done, hide #loading-state and show #results-display.
+                -->
+
+                <!-- INITIAL STATE: Show this before any analysis. -->
+                <div id="initial-state">
+                    <article class="card" style="text-align: center; padding: var(--a-space-xxl) var(--a-space-l);">
+                        <i class="fas fa-poll" style="font-size: 3rem; color: var(--a-color-on-surface-variant); margin-bottom: 1rem;"></i>
+                        <h3>Results will appear here</h3>
+                        <p class="text-muted">Submit your text to begin the analysis.</p>
+                    </article>
+                </div>
+
+                <!-- LOADING STATE: Show this while processing. -->
+                <div id="loading-state" style="display: none;">
+                    <!-- AXIOM PATTERN: Use the skeleton component for loading placeholders. -->
+                    <article class="card skeleton" role="status" aria-label="Analysis in progress">
+                        <div class="text"></div>
+                        <div class="text short"></div>
+                        <div class="text medium"></div>
+                        <div class="text"></div>
+                    </article>
+                </div>
+
+                <!-- RESULTS DISPLAY: Show this when processing is complete. -->
+                <div id="results-display" style="display: none;">
+                    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--a-space-m);">
+                        <article class="card stat-card">
+                            <h3>Overall Sentiment</h3>
+                            <p class="value positive">Positive</p>
+                        </article>
+                        <article class="card stat-card">
+                            <h3>Readability</h3>
+                            <p class="value">College Level</p>
+                        </article>
+                    </div>
+                    <article class="card" style="margin-top: var(--a-space-m);">
+                        <header>
+                            <i class="fas fa-tags"></i>
+                            <h3>Key Topics</h3>
+                        </header>
+                        <!-- AXIOM PATTERN: Use badges for tags or keywords. -->
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--a-space-s);">
+                            <span class="badge">AI</span>
+                            <span class="badge">Technology</span>
+                            <span class="badge">Future</span>
+                            <span class="badge">Development</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- REQUIRED: Axiom's JavaScript for interactive components like dropdowns. -->
+    <script src="../js/index-page-manager.js"></script>
+</body>
+</html>

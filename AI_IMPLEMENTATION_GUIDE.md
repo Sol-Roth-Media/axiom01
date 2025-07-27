@@ -137,24 +137,16 @@
                     </header>
                     <main>
                         <form>
-                            <div>
-                                <label for="book-title">Book Title</label>
-                                <input type="text" id="book-title" placeholder="Enter your book title" required>
-                            </div>
-                            
-                            <div>
-                                <label for="voice-select">Choose Voice</label>
-                                <select id="voice-select">
-                                    <option>Sarah - Professional Female</option>
-                                    <option>David - Warm Male</option>
-                                    <option>Emma - Energetic Female</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label for="book-content">Book Content</label>
-                                <textarea id="book-content" rows="10" placeholder="Paste your text content here..." required></textarea>
-                            </div>
+                            <label for="book-title">Book Title</label>
+                            <input type="text" id="book-title" placeholder="Enter your book title" required>
+                            <label for="voice-select">Choose Voice</label>
+                            <select id="voice-select">
+                                <option>Sarah - Professional Female</option>
+                                <option>David - Warm Male</option>
+                                <option>Emma - Energetic Female</option>
+                            </select>
+                            <label for="book-content">Book Content</label>
+                            <textarea id="book-content" rows="10" placeholder="Paste your text content here..." required></textarea>
                         </form>
                     </main>
                     <footer>
@@ -437,10 +429,10 @@ Before deploying any Axiom site, verify:
                     <p>Brief feature description</p>
                 </header>
                 <main>
-                    <p>Detailed explanation of the feature or content.</p>
+                    <p>Main card content goes here. Can be multiple paragraphs.</p>
                 </main>
                 <footer>
-                    <button class="primary">Action Button</button>
+                    <button class="primary">Action</button>
                 </footer>
             </article>
             
@@ -474,23 +466,17 @@ Before deploying any Axiom site, verify:
             </header>
             <main>
                 <form>
-                    <div>
-                        <label for="input-id">Input Label</label>
-                        <input type="text" id="input-id" placeholder="Placeholder text" required>
-                    </div>
+                    <label for="input-id">Input Label</label>
+                    <input type="text" id="input-id" placeholder="Placeholder text" required>
                     
-                    <div>
-                        <label for="select-id">Select Label</label>
-                        <select id="select-id">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                        </select>
-                    </div>
+                    <label for="select-id">Select Label</label>
+                    <select id="select-id">
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                    </select>
                     
-                    <div>
-                        <label for="textarea-id">Textarea Label</label>
-                        <textarea id="textarea-id" rows="5" placeholder="Enter text..."></textarea>
-                    </div>
+                    <label for="textarea-id">Textarea Label</label>
+                    <textarea id="textarea-id" rows="5" placeholder="Enter text..."></textarea>
                 </form>
             </main>
             <footer>

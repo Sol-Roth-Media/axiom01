@@ -13,7 +13,9 @@ class IndexPageManager {
         this.initComponentBrowser();
         this.initSearchModal();
         this.initCopyToClipboard();
-        this.initSpacingDemo(); // <-- New method for the slider
+        this.initSpacingDemo();
+        this.initThemeExplorer();
+        this.initDropdowns(); // ✅ ADD THIS LINE
 
         console.log('Index Page Manager: Initialization complete');
     }
@@ -297,23 +299,109 @@ class IndexPageManager {
                         const originalText = button.textContent;
                         button.textContent = 'Copied!';
                         button.classList.add('success');
-
                         setTimeout(() => {
                             button.textContent = originalText;
                             button.classList.remove('success');
-                        }, 2000);
-
-                        console.log('Code copied to clipboard');
-                    }).catch(err => {
-                        console.error('Failed to copy code: ', err);
+                        }, 1200);
                     });
                 }
             });
         });
 
-        if (copyButtons.length > 0) {
-            console.log(`Copy to clipboard initialized for ${copyButtons.length} buttons`);
+        console.log('Copy to clipboard initialized');
+    }
+
+    // ✅ NEW: Theme Explorer logic
+    initThemeExplorer() {
+        const themeSelect = document.getElementById('theme-select');
+        const descriptionDisplay = document.getElementById('theme-description-display');
+        const html = document.documentElement;
+
+        if (!themeSelect || !descriptionDisplay) {
+            console.log('Theme explorer elements not found');
+            return;
         }
+
+        const themeDescriptions = {
+            'light': "A clean, professional, and modern theme perfect for corporate websites and applications.",
+            'dark': "A sleek, dark theme that's easy on the eyes and perfect for modern web apps.",
+            'corporate-clean': "A professional, no-nonsense theme for business applications with a crisp blue primary.",
+            'synthwave-84': "A retro-futuristic theme with neon colors, a monospace font, and a dark purple background.",
+            'nordic-calm': "A spacious, minimalist theme with cool, muted blues inspired by Scandinavian design.",
+            'vintage-paper': "A classic theme with sepia tones and a serif font for an academic or historical feel.",
+            'dracula': "The famous dark theme for developers, featuring a purple and pink palette on a dark background.",
+            'solarized-light': "The classic, low-contrast theme designed for comfortable, long-form reading.",
+            'solarized-dark': "The dark counterpart to Solarized Light, maintaining a comfortable, low-contrast feel.",
+            'luxe-black': "A premium, high-contrast dark theme with sharp gold accents and a serif font.",
+            'minty-fresh': "A light, airy theme with a clean green palette and highly rounded corners.",
+            'desert-sunset': "Warm, earthy tones of orange and brown inspired by a desert landscape at dusk.",
+            'deep-ocean': "A dark, aquatic theme with deep blues and teals, featuring very rounded elements.",
+            'gruvbox-dark': "The popular retro groove theme for developers, with a warm, muted color palette.",
+            'sakura-blossom': "A light and soft theme inspired by Japanese cherry blossoms, with pink and white tones.",
+            'matcha-green': "A soothing, earthy theme inspired by green tea, with a calm and natural feel.",
+            'monokai-pro': "Inspired by the iconic, high-contrast code editor theme with bright, vivid colors.",
+            'slate-gray': "A modern, compact, and monochromatic theme for a serious, focused user interface.",
+            'tropical-splash': "A vibrant, high-energy theme with bright, sunny colors and extremely rounded elements.",
+            'candy-pop': "A playful, sweet theme with soft pastels and bubbly, rounded corners.",
+            'rose-pine': "A soft, warm, and elegant dark theme with a cozy, romantic feel.",
+            'midnight-moss': "A dark, nature-inspired theme with deep greens and earthy tones for a grounded feel."
+        };
+
+        const updateTheme = (theme) => {
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('axiom-theme', theme);
+            themeSelect.value = theme;
+            descriptionDisplay.innerHTML = `<p>${themeDescriptions[theme] || ''}</p>`;
+
+            // Also update the main theme toggle icon in the header
+            const themeToggleButton = document.getElementById('theme-toggle');
+            const themeIcon = themeToggleButton.querySelector('i');
+            if (themeIcon) {
+                themeIcon.className = (theme === 'dark' || !theme.includes('light')) ? 'fas fa-sun' : 'fas fa-moon';
+            }
+        };
+
+        // Event listener for the dropdown
+        themeSelect.addEventListener('change', () => {
+            updateTheme(themeSelect.value);
+        });
+
+        // Set initial state on page load
+        const savedTheme = localStorage.getItem('axiom-theme') || 'light';
+        updateTheme(savedTheme);
+
+        console.log('Theme explorer initialized');
+    }
+
+    // ✅ NEW: Dropdown menu logic
+    initDropdowns() {
+        const dropdowns = document.querySelectorAll('[data-component="dropdown"]');
+
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            if (toggle) {
+                toggle.addEventListener('click', (event) => {
+                    // Close other open dropdowns first
+                    dropdowns.forEach(d => {
+                        if (d !== dropdown) {
+                            d.classList.remove('is-open');
+                        }
+                    });
+                    // Then toggle the current one
+                    event.stopPropagation();
+                    dropdown.classList.toggle('is-open');
+                });
+            }
+        });
+
+        // Add a global click listener to close dropdowns when clicking outside
+        document.addEventListener('click', () => {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('is-open');
+            });
+        });
+
+        console.log(`Dropdowns initialized for ${dropdowns.length} elements.`);
     }
 }
 

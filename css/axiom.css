@@ -24,13 +24,13 @@
   --a-font-weight-black: 900;
 
   /* Spacing & Sizing (Cascading Model) */
-  --a-space-unit: 1rem;
+  --a-space-unit: 0.875rem; /* This reduces the base from 16px to 14px */
   --a-space-xs:  calc(var(--a-space-unit) * 0.25); /* 4px */
   --a-space-s:   calc(var(--a-space-unit) * 0.5);  /* 8px */
-  --a-space-m:   calc(var(--a-space-unit) * 1);    /* 16px */
-  --a-space-l:   calc(var(--a-space-unit) * 1.5);  /* 24px */
-  --a-space-xl:  calc(var(--a-space-unit) * 2.5);  /* 40px */
-  --a-space-xxl: calc(var(--a-space-unit) * 4);    /* 64px */
+  --a-space-m:   calc(var(--a-space-unit) * 1);    /* 14px */
+  --a-space-l:   calc(var(--a-space-unit) * 1.5);  /* 21px */
+  --a-space-xl:  calc(var(--a-space-unit) * 2.5);  /* 35px */
+  --a-space-xxl: calc(var(--a-space-unit) * 4);    /* 56px */
 
   /* Borders & Shadows */
   --a-border-radius-medium: 0.3rem;
@@ -45,7 +45,7 @@
 /* --- Base & Reset --- */
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; font-family: var(--a-font-family-sans); font-size: var(--a-font-size-base); line-height: var(--a-line-height-base); color: var(--a-color-on-surface); background-color: var(--a-color-surface); overflow-x: hidden; }
-.axiom-body { padding-top: 70px; }
+.axiom-body { padding-top: 60px; } /* Match the new navbar height */
 a { color: var(--a-color-primary); text-decoration: none; transition: color 0.2s ease; }
 a:hover { text-decoration: underline; color: #0056b3; }
 
@@ -59,10 +59,9 @@ header.main {
     background-color: var(--a-color-surface);
     border-bottom: 1px solid var(--a-color-outline);
     position: fixed;
+    height: 60px; /* Downsized height */
     top: 0; left: 0; right: 0;
     z-index: 1000;
-    height: 70px;
-    padding: 0 var(--a-space-xl);
 }
 header.main nav {
     display: flex;
@@ -465,6 +464,31 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     font-size: 0.9rem;
 }
 
+/* ✅ NEW: Modern layout for text with an image */
+#typography .text-with-image {
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-m);
+}
+@media (min-width: 768px) {
+    #typography .text-with-image {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+#typography .text-with-image img {
+    flex-shrink: 0;
+    width: 150px;
+    height: auto;
+    border-radius: var(--a-border-radius-medium);
+}
+#typography .text-with-image .content {
+    flex-grow: 1;
+}
+#typography .text-with-image .content p:first-child {
+    margin-top: 0;
+}
+
 /* --- Media Advanced Page Styles --- */
 .media-example-grid {
     display: grid;
@@ -530,33 +554,36 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     color: var(--a-color-on-surface);
 }
 
-#typography h1 { font-size: 2.8rem; line-height: 1.1; }
-#typography h2 { font-size: 2.2rem; line-height: 1.2; }
-#typography h3 { font-size: 1.8rem; line-height: 1.3; }
-#typography h4 { font-size: 1.5rem; line-height: 1.4; }
-#typography h5 { font-size: 1.2rem; line-height: 1.5; }
-#typography h6 { font-size: 1rem; line-height: 1.6; }
+#typography h1 { font-size: 2.8rem; line-height: 1.2; }
+#typography h2 { font-size: 2.1rem; line-height: 1.25; }
+#typography h3 { font-size: 1.75rem; line-height: 1.3; }
+#typography h4 { font-size: 1.4rem; line-height: 1.4; }
+#typography h5 { font-size: 1.15rem; line-height: 1.5; }
+#typography h6 { font-size: 1rem; line-height: 1.6; font-weight: var(--a-font-weight-bold); }
 
 #typography p {
     font-size: var(--a-font-size-base);
     line-height: var(--a-line-height-base);
     margin-bottom: var(--a-space-m);
     color: var(--a-color-on-surface);
+    max-width: 65ch; /* Optimal line length for readability */
 }
 
 #typography .subtitle {
-    font-size: 0.7em; /* Smaller relative to parent heading */
+    font-size: 0.65em;
     color: var(--a-color-on-surface-variant);
     font-weight: var(--a-font-weight-normal);
-    display: block; /* Ensures it breaks to a new line */
+    display: block;
     margin-top: var(--a-space-xs);
+    letter-spacing: 0.5px;
 }
 
 #typography .lead {
-    font-size: 1.25rem;
-    font-weight: var(--a-font-weight-medium);
-    color: var(--a-color-primary);
+    font-size: 1.2rem;
+    font-weight: var(--a-font-weight-normal);
+    color: var(--a-color-on-surface);
     margin-bottom: var(--a-space-l);
+    max-width: 60ch;
 }
 
 #typography .text-bold { font-weight: var(--a-font-weight-bold); }
@@ -577,14 +604,15 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     margin-top: var(--a-space-s);
     font-size: 0.9rem;
     color: var(--a-color-on-surface);
+    font-style: normal;
 }
 
 #typography ul, #typography ol {
-    margin-left: var(--a-space-l);
+    padding-left: var(--a-space-l);
     margin-bottom: var(--a-space-m);
 }
 #typography ul li, #typography ol li {
-    margin-bottom: var(--a-space-xs);
+    margin-bottom: var(--a-space-s);
 }
 
 #typography .example-caption {
@@ -654,8 +682,8 @@ section.hero {
     text-align: center;
     padding: var(--a-space-xxl) var(--a-space-xl);
 }
-section.hero h1 { font-size: 3.8rem; font-weight: var(--a-font-weight-black); margin: 0 0 var(--a-space-m); line-height: 1.1; }
-section.hero p { font-size: 1.5rem; max-width: 700px; margin: 0 auto var(--a-space-l) auto; opacity: 0.9; }
+section.hero h1 { font-size: 3.2rem; font-weight: var(--a-font-weight-black); margin: 0 0 var(--a-space-m); line-height: 1.1; } /* More refined size */
+section.hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto var(--a-space-l) auto; opacity: 0.9; } /* More refined size */
 section.hero .actions { display: flex; justify-content: center; gap: var(--a-space-m); }
 section.hero .button.primary {
     background-color: var(--a-color-on-primary); /* White background */
@@ -702,7 +730,7 @@ section header {
     text-align: center;
     margin-bottom: var(--a-space-xl);
 }
-section header h2 { font-size: 2.5rem; font-weight: var(--a-font-weight-bold); margin: 0 0 var(--a-space-s); }
+section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); margin: 0 0 var(--a-space-s); } /* More refined size */
 
 /* --- Philosophy Section --- */
 #philosophy header {
@@ -1095,6 +1123,7 @@ section header h2 { font-size: 2.5rem; font-weight: var(--a-font-weight-bold); m
 .component-browser .preview iframe {
     width: 100%;
     height: 100%;
+    min-height: 400px;
     border: none;
 }
 
@@ -1921,23 +1950,26 @@ footer.main-footer.minimal nav {
 }
 
 /* --- Forms & Inputs --- */
-form > div + div {
-    margin-top: var(--a-space-m);
-}
 form label {
     display: block;
     margin-bottom: var(--a-space-xs);
     font-weight: var(--a-font-weight-bold);
 }
-form input[type="text"],
-form input[type="password"],
+form input,
 form select,
-form textarea {
-    width: 100%;
-    padding: var(--a-space-s) var(--a-space-m);
-    border: 1px solid var(--a-color-outline);
-    border-radius: var(--a-border-radius-medium);
-    font-size: var(--a-font-size-base);
+form textarea,
+form .checkbox-group,
+form .radio-group {
+    margin-top: var(--a-space-m);
+}
+form > *:first-child {
+    margin-top: 0;
+}
+form > label:first-child {
+    margin-top: 0;
+}
+form > label:first-child + * {
+    margin-top: 0;
 }
 .checkbox-group,
 .radio-group {
@@ -1946,238 +1978,766 @@ form textarea {
     gap: var(--a-space-s);
 }
 
-/* --- Stepper Component (Official) --- */
-.stepper {
+/* ✅ NEW: Comprehensive Input, Select, & Textarea Styling */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+select,
+textarea {
+    display: block;
+    width: 100%;
+    padding: var(--a-space-s) var(--a-space-m);
+    font-size: var(--a-font-size-base);
+    font-family: var(--a-font-family-sans);
+    color: var(--a-color-on-surface);
+    background-color: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--a-color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--a-color-primary) 20%, transparent);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.checkbox-group label,
+.radio-group label {
     display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    justify-content: space-between;
-    position: relative;
+    align-items: center;
+    gap: var(--a-space-s);
+    font-weight: var(--a-font-weight-normal);
 }
 
-.stepper::before {
-    content: '';
-    position: absolute;
-    top: 15px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: var(--a-color-outline);
-    z-index: -1;
+.checkbox-group input,
+.radio-group input {
+    margin-top: 0;
 }
 
-.stepper li {
+/* --- Dark Mode Enhancements --- */
+
+/* FIX: Make code blocks readable in dark mode */
+[data-theme="dark"] .code-example pre {
+    background-color: #0d0d21; /* A deep, code-editor-like dark blue */
+    color: #d1d5db; /* A light grey for text, from your greyscale palette */
+    border: 1px solid var(--a-color-outline);
+}
+
+/* Make section headers pop more in dark mode */
+[data-theme="dark"] section header h2 {
+    color: var(--a-color-primary);
+}
+
+/* Improve link hover state in dark mode */
+[data-theme="dark"] a:hover {
+    color: var(--a-color-secondary); /* Use the secondary color for a nice contrast hover */
+}
+
+/* Improve card hover effect in dark mode */
+[data-theme="dark"] .card:hover {
+    border-color: var(--a-color-primary);
+    box-shadow: 0 0 20px rgba(129, 140, 248, 0.15); /* A subtle glow effect */
+}
+
+/* Ensure hero text and buttons remain high-contrast and vibrant */
+[data-theme="dark"] section.hero {
+    color: #f8fafc; /* Force a bright white for hero text */
+}
+
+[data-theme="dark"] section.hero .button.primary {
+    background-color: #f8fafc;
+    color: #4f46e5; /* Use the light-mode primary for a high-contrast pop */
+}
+
+[data-theme="dark"] section.hero .button.secondary {
+    border-color: #f8fafc;
+    color: #f8fafc;
+}
+
+/*
+================================================================================
+                                                                              |
+                           AXIOM01 THEME PACK V1.0                            |
+                                                                              |
+================================================================================
+*/
+
+/* === THEME 1: Corporate Clean === */
+/* A professional, no-nonsense theme for business applications. */
+[data-theme="corporate-clean"] {
+    --a-font-family-sans: 'Inter', sans-serif;
+    --a-space-unit: 0.875rem; /* 14px base */
+    --a-border-radius-medium: 0.25rem;
+    --a-border-radius-large: 0.375rem;
+    --a-color-primary: #0052cc;
+    --a-color-on-primary: #ffffff;
+    --a-color-secondary: #5e6c84;
+    --a-color-surface: #ffffff;
+    --a-color-on-surface: #172b4d;
+    --a-color-surface-variant: #f4f5f7;
+    --a-color-on-surface-variant: #5e6c84;
+    --a-color-outline: #dfe1e6;
+    --a-color-success: #00875a;
+    --a-color-warning: #ffab00;
+    --a-color-error: #de350b;
+}
+
+/* === THEME 2: Synthwave '84 === */
+/* A retro-futuristic theme with neon colors and a monospace font. */
+[data-theme="synthwave-84"] {
+    --a-font-family-sans: 'JetBrains Mono', monospace;
+    --a-space-unit: 1rem;
+    --a-border-radius-medium: 0.2rem;
+    --a-border-radius-large: 0.2rem;
+    --a-shadow-medium: 0 0 15px rgba(255, 45, 195, 0.2);
+    --a-shadow-large: 0 0 30px rgba(255, 45, 195, 0.3);
+    --a-color-primary: #ff2dc3;
+    --a-color-on-primary: #ffffff;
+    --a-color-secondary: #00c5ec;
+    --a-color-surface: #2d2a54;
+    --a-color-on-surface: #ffffff;
+    --a-color-surface-variant: #232043;
+    --a-color-on-surface-variant: #a59ecb;
+    --a-color-outline: #4a467c;
+    --a-color-success: #00f9a3;
+    --a-color-warning: #fede5d;
+    --a-color-error: #ff5370;
+}
+
+/* === THEME 3: Nordic Calm === */
+/* A spacious, minimalist theme with cool, muted colors. */
+[data-theme="nordic-calm"] {
+    --a-font-family-sans: 'Lexend', sans-serif;
+    --a-space-unit: 1.125rem; /* 18px base - spacious */
+    --a-border-radius-medium: 0.5rem;
+    --a-border-radius-large: 1rem;
+    --a-color-primary: #5e81ac;
+    --a-color-on-primary: #eceff4;
+    --a-color-secondary: #81a1c1;
+    --a-color-surface: #eceff4;
+    --a-color-on-surface: #2e3440;
+    --a-color-surface-variant: #e5e9f0;
+    --a-color-on-surface-variant: #4c566a;
+    --a-color-outline: #d8dee9;
+    --a-color-success: #a3be8c;
+    --a-color-warning: #ebcb8b;
+    --a-color-error: #bf616a;
+}
+
+/* === THEME 4: Vintage Paper === */
+/* A classic theme with sepia tones and a serif font for an academic feel. */
+[data-theme="vintage-paper"] {
+    --a-font-family-sans: 'Lora', serif;
+    --a-space-unit: 1rem;
+    --a-border-radius-medium: 0.1rem;
+    --a-border-radius-large: 0.1rem;
+    --a-color-primary: #854442;
+    --a-color-on-primary: #fffbeB;
+    --a-color-secondary: #77685d;
+    --a-color-surface: #fffbeB;
+    --a-color-on-surface: #3c2f2f;
+    --a-color-surface-variant: #f4f0e6;
+    --a-color-on-surface-variant: #77685d;
+    --a-color-outline: #ded6c9;
+    --a-color-success: #4b6652;
+    --a-color-warning: #be5a38;
+    --a-color-error: #a53838;
+}
+
+/* === THEME 5: Dracula === */
+/* The famous dark theme for developers. */
+[data-theme="dracula"] {
+    --a-font-family-sans: 'Source Code Pro', monospace;
+    --a-space-unit: 0.9rem;
+    --a-border-radius-medium: 0.3rem;
+    --a-border-radius-large: 0.5rem;
+    --a-color-primary: #bd93f9;
+    --a-color-on-primary: #282a36;
+    --a-color-secondary: #8be9fd;
+    --a-color-surface: #282a36;
+    --a-color-on-surface: #f8f8f2;
+    --a-color-surface-variant: #44475a;
+    --a-color-on-surface-variant: #bd93f9;
+    --a-color-outline: #44475a;
+    --a-color-success: #50fa7b;
+    --a-color-warning: #f1fa8c;
+    --a-color-error: #ff5555;
+}
+
+/* === THEME 6: Solarized Light === */
+/* The classic, low-contrast theme for comfortable reading. */
+[data-theme="solarized-light"] {
+    --a-font-family-sans: 'Inter', sans-serif;
+    --a-space-unit: 1rem;
+    --a-border-radius-medium: 0.3rem;
+    --a-border-radius-large: 0.5rem;
+    --a-color-primary: #268bd2;
+    --a-color-on-primary: #fdf6e3;
+    --a-color-secondary: #2aa198;
+    --a-color-surface: #fdf6e3;
+    --a-color-on-surface: #586e75;
+    --a-color-surface-variant: #eee8d5;
+    --a-color-on-surface-variant: #839496;
+    --a-color-outline: #eee8d5;
+    --a-color-success: #859900;
+    --a-color-warning: #b58900;
+    --a-color-error: #dc322f;
+}
+
+/* === THEME 7: Solarized Dark === */
+/* The dark counterpart to Solarized Light. */
+[data-theme="solarized-dark"] {
+    --a-font-family-sans: 'Inter', sans-serif;
+    --a-space-unit: 1rem;
+    --a-border-radius-medium: 0.3rem;
+    --a-border-radius-large: 0.5rem;
+    --a-color-primary: #268bd2;
+    --a-color-on-primary: #002b36;
+    --a-color-secondary: #2aa198;
+    --a-color-surface: #002b36;
+    --a-color-on-surface: #839496;
+    --a-color-surface-variant: #073642;
+    --a-color-on-surface-variant: #586e75;
+    --a-color-outline: #073642;
+    --a-color-success: #859900;
+    --a-color-warning: #b58900;
+    --a-color-error: #dc322f;
+}
+
+/* === THEME 8: Luxe Black === */
+/* A premium, high-contrast dark theme with gold accents. */
+[data-theme="luxe-black"] {
+    --a-font-family-sans: 'Playfair Display', serif;
+    --a-font-weight-bold: 900;
+    --a-space-unit: 1.05rem;
+    --a-border-radius-medium: 0;
+    --a-border-radius-large: 0;
+    --a-color-primary: #d4af37;
+    --a-color-on-primary: #0a0a0a;
+    --a-color-secondary: #c0c0c0;
+    --a-color-surface: #0a0a0a;
+    --a-color-on-surface: #e0e0e0;
+    --a-color-surface-variant: #1a1a1a;
+    --a-color-on-surface-variant: #a0a0a0;
+    --a-color-outline: #333333;
+    --a-color-success: #4caf50;
+    --a-color-warning: #d4af37;
+    --a-color-error: #f44336;
+}
+
+/* === THEME 9: Minty Fresh === */
+/* A light, airy theme with a clean green palette. */
+[data-theme="minty-fresh"] {
+    --a-font-family-sans: 'Poppins', sans-serif;
+    --a-space-unit: 0.95rem;
+    --a-border-radius-medium: 0.75rem;
+    --a-border-radius-large: 1.5rem;
+    --a-color-primary: #00a97f;
+    --a-color-on-primary: #ffffff;
+    --a-color-secondary: #9dcec5;
+    --a-color-surface: #f0fdfa;
+    --a-color-on-surface: #0f172a;
+    --a-color-surface-variant: #ffffff;
+    --a-color-on-surface-variant: #64748b;
+    --a-color-outline: #e2e8f0;
+    --a-color-success: #00a97f;
+    --a-color-warning: #f59e0b;
+    --a-color-error: #ef4444;
+}
+
+/* === THEME 10: Desert Sunset === */
+/* Warm, earthy tones inspired by a desert landscape. */
+[data-theme="desert-sunset"] {
+    --a-font-family-sans: 'Roboto Slab', serif;
+    --a-space-unit: 1rem;
+    --a-border-radius-medium: 0.2rem;
+    --a-border-radius-large: 0.4rem;
+    --a-color-primary: #d95f27;
+    --a-color-on-primary: #fff8f0;
+    --a-color-secondary: #e88c4d;
+    --a-color-surface: #fff8f0;
+    --a-color-on-surface: #4d3d33;
+    --a-color-surface-variant: #fcefe4;
+    --a-color-on-surface-variant: #8c7a6b;
+    --a-color-outline: #e6dcd1;
+    --a-color-success: #5a8c4a;
+    --a-color-warning: #d95f27;
+    --a-color-error: #c74343;
+}
+
+/* === THEME 11: Deep Ocean === */
+/* A dark, aquatic theme with deep blues and teals. */
+[data-theme="deep-ocean"] {
+    --a-font-family-sans: 'Inter', sans-serif;
+    --a-space-unit: 1rem;
+    --a-border-radius-medium: 1rem;
+    --a-border-radius-large: 2rem;
+    --a-color-primary: #00bcd4;
+    --a-color-on-primary: #001f24;
+    --a-color-secondary: #0097a7;
+    --a-color-surface: #001f24;
+    --a-color-on-surface: #b2ebf2;
+    --a-color-surface-variant: #00373d;
+    --a-color-on-surface-variant: #80deea;
+    --a-color-outline: #004e55;
+    --a-color-success: #4db6ac;
+    --a-color-warning: #ffc107;
+    --a-color-error: #ff5252;
+}
+
+/* === THEME 12: Gruvbox Dark === */
+/* The popular retro groove theme for developers. */
+[data-theme="gruvbox-dark"] {
+    --a-font-family-sans: 'JetBrains Mono', monospace;
+    --a-space-unit: 1rem;
+    --a-border-radius-medium: 0.1rem;
+    --a-border-radius-large: 0.2rem;
+    --a-color-primary: #fabd2f;
+    --a-color-on-primary: #282828;
+    --a-color-secondary: #83a598;
+    --a-color-surface: #282828;
+    --a-color-on-surface: #ebdbb2;
+    --a-color-surface-variant: #3c3836;
+    --a-color-on-surface-variant: #a89984;
+    --a-color-outline: #504945;
+    --a-color-success: #b8bb26;
+    --a-color-warning: #fe8019;
+    --a-color-error: #cc241d;
+}
+
+/* === THEME 13: Sakura Blossom === */
+/* A light and soft theme inspired by cherry blossoms. */
+[data-theme="sakura-blossom"] {
+    --a-font-family-sans: 'Poppins', sans-serif;
+    --a-space-unit: 1rem;
+    --a-border-radius-medium: 0.5rem;
+    --a-border-radius-large: 1rem;
+    --a-color-primary: #ffb7c5;
+    --a-color-on-primary: #5c2c35;
+    --a-color-secondary: #d6aab1;
+    --a-color-surface: #fff0f3;
+    --a-color-on-surface: #5c2c35;
+    --a-color-surface-variant: #ffffff;
+    --a-color-on-surface-variant: #8c6b71;
+    --a-color-outline: #ffe0e5;
+    --a-color-success: #a3d6a3;
+    --a-color-warning: #ffd699;
+    --a-color-error: #ff8a8a;
+}
+
+/* === THEME 14: Matcha Green === */
+/* A soothing, earthy theme inspired by green tea. */
+[data-theme="matcha-green"] {
+    --a-font-family-sans: 'Lexend', sans-serif;
+    --a-space-unit: 0.9rem;
+    --a-border-radius-medium: 0.4rem;
+    --a-border-radius-large: 0.8rem;
+    --a-color-primary: #6b9080;
+    --a-color-on-primary: #f6fff8;
+    --a-color-secondary: #a4c3b2;
+    --a-color-surface: #f6fff8;
+    --a-color-on-surface: #333d29;
+    --a-color-surface-variant: #eaf4f4;
+    --a-color-on-surface-variant: #6b9080;
+    --a-color-outline: #cce3de;
+    --a-color-success: #6b9080;
+    --a-color-warning: #e6b800;
+    --a-color-error: #c94f4f;
+}
+
+/* === THEME 15: Monokai Pro === */
+/* Inspired by the iconic, high-contrast code editor theme. */
+[data-theme="monokai-pro"] {
+    --a-font-family-sans: 'Source Code Pro', monospace;
+    --a-space-unit: 0.95rem;
+    --a-border-radius-medium: 0.25rem;
+    --a-border-radius-large: 0.25rem;
+    --a-color-primary: #ffd866;
+    --a-color-on-primary: #2d2a2e;
+    --a-color-secondary: #ab9df2;
+    --a-color-surface: #2d2a2e;
+    --a-color-on-surface: #fcfcfa;
+    --a-color-surface-variant: #403e41;
+    --a-color-on-surface-variant: #9e9e9e;
+    --a-color-outline: #5b595c;
+    --a-color-success: #a9dc76;
+    --a-color-warning: #ffd866;
+    --a-color-error: #ff6188;
+}
+
+/* === THEME 16: Slate Gray === */
+/* A modern, monochromatic theme for a serious, focused UI. */
+[data-theme="slate-gray"] {
+    --a-font-family-sans: 'Inter', sans-serif;
+    --a-space-unit: 0.8rem; /* Compact */
+    --a-border-radius-medium: 0.2rem;
+    --a-border-radius-large: 0.2rem;
+    --a-color-primary: #4a5568;
+    --a-color-on-primary: #ffffff;
+    --a-color-secondary: #718096;
+    --a-color-surface: #f7fafc;
+    --a-color-on-surface: #1a202c;
+    --a-color-surface-variant: #edf2f7;
+    --a-color-on-surface-variant: #4a5568;
+    --a-color-outline: #e2e8f0;
+    --a-color-success: #38a169;
+    --a-color-warning: #dd6b20;
+    --a-color-error: #e53e3e;
+}
+
+/* === THEME 17: Tropical Splash === */
+/* A vibrant, high-energy theme with bright, sunny colors. */
+[data-theme="tropical-splash"] {
+    --a-font-family-sans: 'Poppins', sans-serif;
+    --a-space-unit: 1.1rem; /* Airy */
+    --a-border-radius-medium: 2rem;
+    --a-border-radius-large: 4rem;
+    --a-color-primary: #ff6b6b;
+    --a-color-on-primary: #ffffff;
+    --a-color-secondary: #48dbfb;
+    --a-color-surface: #fefeff;
+    --a-color-on-surface: #1a1a1a;
+    --a-color-surface-variant: #f0faff;
+    --a-color-on-surface-variant: #575757;
+    --a-color-outline: #e0f5ff;
+    --a-color-success: #1dd1a1;
+    --a-color-warning: #feca57;
+    --a-color-error: #ff6b6b;
+}
+
+/* === THEME 18: Candy Pop === */
+/* A playful, sweet theme with soft pastels and rounded corners. */
+[data-theme="candy-pop"] {
+    --a-font-family-sans: 'Lexend', sans-serif;
+    --a-space-unit: 1rem;
+    --a-border-radius-medium: 1rem;
+    --a-border-radius-large: 2rem;
+    --a-color-primary: #ff85a1;
+    --a-color-on-primary: #ffffff;
+    --a-color-secondary: #a2d2ff;
+    --a-color-surface: #fff5f7;
+    --a-color-on-surface: #4b2a32;
+    --a-color-surface-variant: #ffffff;
+    --a-color-on-surface-variant: #8c6b71;
+    --a-color-outline: #ffe0e5;
+    --a-color-success: #bde0fe;
+    --a-color-warning: #ffc8dd;
+    --a-color-error: #ff85a1;
+}
+
+/* === THEME 19: Rosé Pine === */
+/* A soft, warm, and elegant theme. */
+[data-theme="rose-pine"] {
+    --a-font-family-sans: 'Inter', sans-serif;
+    --a-space-unit: 0.9rem;
+    --a-border-radius-medium: 0.5rem;
+    --a-border-radius-large: 0.75rem;
+    --a-color-primary: #eb6f92;
+    --a-color-on-primary: #191724;
+    --a-color-secondary: #9ccfd8;
+    --a-color-surface: #191724;
+    --a-color-on-surface: #e0def4;
+    --a-color-surface-variant: #26233a;
+    --a-color-on-surface-variant: #6e6a86;
+    --a-color-outline: #403d52;
+    --a-color-success: #31748f;
+    --a-color-warning: #f6c177;
+    --a-color-error: #eb6f92;
+}
+
+/* === THEME 20: Midnight Moss === */
+/* A dark, nature-inspired theme with deep greens and earthy tones. */
+[data-theme="midnight-moss"] {
+    --a-font-family-sans: 'Roboto Slab', serif;
+    --a-space-unit: 1rem;
+    --a-border-radius-medium: 0.3rem;
+    --a-border-radius-large: 0.6rem;
+    --a-color-primary: #588157;
+    --a-color-on-primary: #f1faee;
+    --a-color-secondary: #a3b18a;
+    --a-color-surface: #1b263b;
+    --a-color-on-surface: #e0e1dd;
+    --a-color-surface-variant: #2a3b52;
+    --a-color-on-surface-variant: #a3b18a;
+    --a-color-outline: #415a77;
+    --a-color-success: #588157;
+    --a-color-warning: #dda15e;
+    --a-color-error: #bc4749;
+}
+
+/* --- Theme Explorer Section --- */
+#theme-explorer {
+    background-color: var(--a-color-surface-variant);
+}
+
+.theme-switcher-card {
+    background-color: var(--a-color-surface);
+    border-radius: var(--a-border-radius-large);
+    padding: var(--a-space-xl);
+    box-shadow: var(--a-shadow-large);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--a-space-l);
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .theme-switcher-card {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+.theme-controls {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    flex-basis: 0;
-    flex-grow: 1;
+    gap: var(--a-space-s);
 }
-.stepper .marker {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: var(--a-color-surface);
-    border: 2px solid var(--a-color-outline);
+
+.theme-controls label {
+    font-weight: var(--a-font-weight-bold);
     color: var(--a-color-on-surface-variant);
+}
+
+#theme-select {
+    width: 100%;
+    padding: var(--a-space-m);
+    font-size: 1.1rem;
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    cursor: pointer;
+}
+
+.theme-description {
+    padding: var(--a-space-m);
+    background-color: var(--a-color-surface-variant);
+    border-radius: var(--a-border-radius-medium);
+    border-left: 4px solid var(--a-color-primary);
+    min-height: 80px;
     display: flex;
     align-items: center;
-    justify-content: center;
+}
+
+/* --- Alert Component --- */
+.alert {
+    display: flex;
+    align-items: center;
+    gap: var(--a-space-m);
+    padding: var(--a-space-m);
+    margin-bottom: var(--a-space-m);
+    border-radius: var(--a-border-radius-medium);
+    border-left: 4px solid;
+}
+.alert i {
+    font-size: 1.2rem;
+}
+.alert.success {
+    background-color: var(--a-color-success-container, #dcfce7);
+    color: var(--a-color-on-success-container, #14532d);
+    border-color: var(--a-color-success, #22c55e);
+}
+.alert.warning {
+    background-color: var(--a-color-warning-container, #fef3c7);
+    color: var(--a-color-on-warning-container, #78350f);
+    border-color: var(--a-color-warning, #f59e0b);
+}
+.alert.error {
+    background-color: var(--a-color-error-container, #fee2e2);
+    color: var(--a-color-on-error-container, #7f1d1d);
+    border-color: var(--a-color-error, #ef4444);
+}
+.alert.info {
+    background-color: var(--a-color-info-container, #e0f2fe);
+    color: var(--a-color-on-info-container, #0c4a6e);
+    border-color: var(--a-color-info, #3b82f6);
+}
+.alert.dismissible {
+    justify-content: space-between;
+}
+.alert .close, .alert [data-alert-close] {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+.alert .close:hover, .alert [data-alert-close]:hover {
+    opacity: 1;
+}
+
+/* --- Table Component --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--a-space-l);
+}
+table th, table td {
+    padding: var(--a-space-m);
+    text-align: left;
+    border-bottom: 1px solid var(--a-color-outline);
+}
+table thead th {
     font-weight: var(--a-font-weight-bold);
-    transition: all 0.3s ease;
+    background-color: var(--a-color-surface-variant);
+    border-bottom-width: 2px;
+}
+table.striped tbody tr:nth-of-type(odd) {
+    background-color: var(--a-color-surface-variant);
+}
+table tbody tr:hover {
+    background-color: color-mix(in srgb, var(--a-color-primary) 10%, transparent);
+}
+
+/* --- Dropdown Component --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--a-space-s);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + var(--a-space-xs));
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 180px;
+    padding: var(--a-space-s) 0;
+    margin: 0;
+    list-style: none;
+    background-color: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    box-shadow: var(--a-shadow-large);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown.is-open .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown-menu li a,
+.dropdown-menu li button {
+    display: block;
+    width: 100%;
+    padding: var(--a-space-s) var(--a-space-m);
+    clear: both;
+    font-weight: var(--a-font-weight-normal);
+    color: var(--a-color-on-surface);
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.dropdown-menu li a:hover,
+.dropdown-menu li button:hover {
+    background-color: var(--a-color-surface-variant);
+    color: var(--a-color-primary);
+    text-decoration: none;
+}
+
+.dropdown-menu .divider {
+    height: 1px;
+    margin: var(--a-space-s) 0;
+    overflow: hidden;
+    background-color: var(--a-color-outline);
+}
+
+/* --- Tooltip Component --- */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip [role="tooltip"] {
+    position: absolute;
+    z-index: 1070;
+    display: block;
+    margin: 0;
+    font-family: var(--a-font-family-sans);
+    font-style: normal;
+    font-weight: var(--a-font-weight-normal);
+    line-height: 1.5;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+    white-space: normal;
+    line-break: auto;
+    font-size: 0.875rem;
+    word-wrap: break-word;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    background-color: var(--a-color-on-surface);
+    color: var(--a-color-surface);
+    padding: var(--a-space-s) var(--a-space-m);
+    border-radius: var(--a-border-radius-medium);
+}
+
+.tooltip.is-visible [role="tooltip"] {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Positioning */
+.tooltip.top [role="tooltip"] {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
     margin-bottom: var(--a-space-s);
 }
-.stepper li[data-state="completed"] .marker {
-    background-color: var(--a-color-success);
-    border-color: var(--a-color-success);
-    color: var(--a-color-on-success);
+.tooltip.right [role="tooltip"] {
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: var(--a-space-s);
 }
-.stepper li[data-state="active"] .marker {
-    background-color: var(--a-color-primary);
-    border-color: var(--a-color-primary);
-    color: var(--a-color-on-primary);
+.tooltip.bottom [role="tooltip"] {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: var(--a-space-s);
 }
-.stepper li[data-state="active"] span {
-    color: var(--a-color-primary);
-  justify-content: center;
-  background: var(--a-color-primary);
-  color: var(--a-color-on-primary);
-  font-weight: var(--a-font-weight-bold);
-  margin-right: var(--a-space-s);
-}
-
-.avatar.small { width: 2rem; height: 2rem; font-size: 0.875rem; }
-.avatar.large { width: 3.5rem; height: 3.5rem; font-size: 1.25rem; }
-.avatar.xlarge { width: 5rem; height: 5rem; font-size: 1.5rem; }
-
-.avatar-wrapper {
-  position: relative;
-  display: inline-block;
-  margin-right: var(--a-space-s);
+.tooltip.left [role="tooltip"] {
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: var(--a-space-s);
 }
 
-.avatar-wrapper .status {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-  border: 2px solid var(--a-color-surface);
-}
-
-.status.online { background: var(--a-color-success, #10b981); }
-.status.busy { background: var(--a-color-danger, #ef4444); }
-.status.away { background: var(--a-color-warning, #f59e0b); }
-.status.offline { background: var(--a-color-on-surface-variant); }
-
-.avatar-group {
-  display: flex;
-  align-items: center;
-}
-
-.avatar-group .avatar {
-  margin-right: calc(var(--a-space-s) * -1);
-  border: 2px solid var(--a-color-surface);
-}
-
-/* Toggle Switch Component */
-.toggle {
-  display: flex;
-  align-items: center;
-  gap: var(--a-space-m);
-  cursor: pointer;
-  margin: var(--a-space-s) 0;
-}
-
-.toggle input[type="checkbox"] {
-  display: none;
-}
-
-.toggle span:first-of-type {
-  width: 3rem;
-  height: 1.5rem;
-  background: var(--a-color-outline);
-  border-radius: 1rem;
-  position: relative;
-  transition: background-color 0.2s;
-}
-
-.toggle span:first-of-type::before {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: calc(1.5rem - 4px);
-  height: calc(1.5rem - 4px);
-  background: white;
-  border-radius: 50%;
-  transition: transform 0.2s;
-}
-
-.toggle input:checked + span:first-of-type {
-  background: var(--a-color-primary);
-}
-
-.toggle input:checked + span:first-of-type::before {
-  transform: translateX(1.5rem);
-}
-
-.toggle input:disabled + span:first-of-type {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.toggle.small span:first-of-type { width: 2.5rem; height: 1.25rem; }
-.toggle.large span:first-of-type { width: 3.5rem; height: 2rem; }
-
-.toggle.primary input:checked + span:first-of-type { background: var(--a-color-primary); }
-.toggle.success input:checked + span:first-of-type { background: var(--a-color-success, #10b981); }
-.toggle.warning input:checked + span:first-of-type { background: var(--a-color-warning, #f59e0b); }
-
-/* Slider Component */
-.slider {
-  width: 100%;
-  height: 0.5rem;
-  border-radius: 0.25rem;
-  background: var(--a-color-outline); /* FIXED: Use defined theme variable */
-  outline: none;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-  appearance: none;
-}
-
-.slider:hover { opacity: 1; }
-.slider:focus { opacity: 1; box-shadow: 0 0 0 2px var(--a-color-primary-alpha); }
-
-.slider::-webkit-slider-thumb {
-  appearance: none;
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 50%;
-  background: var(--a-color-primary);
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.slider::-moz-range-thumb {
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 50%;
-  background: var(--a-color-primary);
-  cursor: pointer;
-  border: none;
-}
-
-.slider.primary::-webkit-slider-thumb { background: var(--a-color-primary); }
-.slider.success::-webkit-slider-thumb { background: var(--a-color-success, #10b981); }
-.slider.warning::-webkit-slider-thumb { background: var(--a-color-warning, #f59e0b); }
-
-.slider:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* --- Timeline Component Styles */
-.timeline {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-left: 2px solid var(--a-color-outline);
-}
-.timeline-item {
-  position: relative;
-  margin-bottom: var(--a-space-xl);
-  padding-left: var(--a-space-l);
-}
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 1.2em;
-  width: 12px;
-  height: 12px;
-  background: var(--a-color-primary);
-  border-radius: 50%;
-  border: 2px solid var(--a-color-surface);
-  box-shadow: 0 0 0 2px var(--a-color-outline);
-}
-.timeline-item header {
-  margin-bottom: var(--a-space-xs);
-}
-.timeline-item h3 {
-  font-size: var(--a-font-size-h4, 1.1rem);
-  margin: 0;
-}
-.timeline-item time {
-  display: block;
-  font-size: 0.95em;
-  color: var(--a-color-secondary);
-  margin-bottom: var(--a-space-xs);
-}
-.timeline-item p {
-  margin: 0;
-  color: var(--a-color-on-surface);
-}
