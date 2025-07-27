@@ -49,6 +49,22 @@ import 'axiom01/dist/css/axiom-core.css';
 import 'axiom01/dist/js/axiom-core.js';
 ```
 
+## 📦 npm Package Contents
+
+The npm package includes:
+- dist/css/axiom.css (unminified)
+- dist/css/axiom.min.css (minified)
+- dist/js/axiom.js (unminified)
+- dist/js/axiom.min.js (minified)
+
+**Usage Example:**
+```js
+import 'axiom01/dist/css/axiom.min.css';
+import 'axiom01/dist/js/axiom.min.js';
+```
+
+You can also use the unminified files for development or debugging.
+
 ## 📖 Documentation
 
 | Resource | Description |
