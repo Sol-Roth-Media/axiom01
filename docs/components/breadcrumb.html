@@ -3,70 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axiom - Breadcrumb Component</title>
+    <title>Breadcrumb Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-    <link rel="stylesheet" href="../../css/prism.css">
-    <link rel="stylesheet" href="../css/docs.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <style>
+        body {
+            padding: var(--a-space-xl);
+            background-color: var(--a-color-surface);
+            color: var(--a-color-on-surface);
+            font-family: var(--a-font-family-sans);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-l);
+        }
+        .component-section {
+            background-color: var(--a-color-surface-variant);
+            padding: var(--a-space-xl);
+            border-radius: var(--a-border-radius-large);
+            border: 1px solid var(--a-color-outline);
+        }
+        .component-section h2 {
+            margin-top: 0;
+            color: var(--a-color-primary);
+            font-size: var(--a-font-size-h2);
+            margin-bottom: var(--a-space-l);
+        }
+        pre {
+            background-color: var(--a-color-code-bg);
+            color: var(--a-color-code-text);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-medium);
+            overflow-x: auto;
+            border: 1px solid var(--a-color-code-border);
+        }
+        code {
+            font-family: var(--a-font-family-mono);
+            font-size: var(--a-font-size-small);
+        }
+        /* Specific styles for Breadcrumb demo */
+        .breadcrumb {
+            background-color: var(--a-color-surface);
+            padding: var(--a-space-s) var(--a-space-m);
+            border-radius: var(--a-border-radius-medium);
+            border: 1px solid var(--a-color-outline);
+            margin-bottom: var(--a-space-l);
+        }
+        .breadcrumb ol {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .breadcrumb li + li::before {
+            content: "/";
+            padding: 0 var(--a-space-s);
+            color: var(--a-color-on-surface-variant);
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: var(--a-color-primary);
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb li:last-child a {
+            color: var(--a-color-on-surface);
+            pointer-events: none;
+        }
+    </style>
 </head>
-<body class="component-docs">
+<body>
+    <div class="component-section">
+        <h2>Breadcrumb Component</h2>
+        <p>Axiom01's breadcrumb component provides a clear navigation path, indicating the user's current location within a hierarchical structure. It enhances usability by allowing users to quickly navigate back to previous pages.</p>
 
-    <header class="docs-header">
-        <h1>Breadcrumb Component</h1>
-        <p>Indicate the current page's location within a navigational hierarchy that automatically adds separators via CSS.</p>
-    </header>
-
-    <section class="docs-section">
-        <h2 class="section-title">Basic Breadcrumb</h2>
-        <p>A simple breadcrumb with a separator. The separator is automatically added in CSS through the use of `::before` and `content`.</p>
-        
-        <div class="example-preview">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Library</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data</li>
-                </ol>
-            </nav>
-        </div>
-
-        <pre><code class="language-html">&lt;nav aria-label="breadcrumb"&gt;
-    &lt;ol class="breadcrumb"&gt;
-        &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
-        &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;Library&lt;/a&gt;&lt;/li&gt;
-        &lt;li class="breadcrumb-item active" aria-current="page"&gt;Data&lt;/li&gt;
+        <h3>Basic Breadcrumb</h3>
+        <nav class="breadcrumb" aria-label="breadcrumb">
+            <ol>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Category</a></li>
+                <li><a href="#">Subcategory</a></li>
+                <li><a href="#">Current Page</a></li>
+            </ol>
+        </nav>
+        <pre><code>&lt;nav class="breadcrumb" aria-label="breadcrumb"&gt;
+    &lt;ol&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Category&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Subcategory&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Current Page&lt;/a&gt;&lt;/li&gt;
     &lt;/ol&gt;
 &lt;/nav&gt;</code></pre>
-    </section>
 
-    <section class="docs-section">
-        <h2 class="section-title">Breadcrumb with Icons</h2>
-        <p>Add icons to your breadcrumbs for additional visual context.</p>
-
-        <div class="example-preview">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-book"></i> Library</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-database"></i> Data</li>
-                </ol>
-            </nav>
-        </div>
-
-        <pre><code class="language-html">&lt;nav aria-label="breadcrumb"&gt;
-    &lt;ol class="breadcrumb"&gt;
-        &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;&lt;i class="fas fa-home"&gt;&lt;/i&gt; Home&lt;/a&gt;&lt;/li&gt;
-        &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;&lt;i class="fas fa-book"&gt;&lt;/i&gt; Library&lt;/a&gt;&lt;/li&gt;
-        &lt;li class="breadcrumb-item active" aria-current="page"&gt;&lt;i class="fas fa-database"&gt;&lt;/i&gt; Data&lt;/li&gt;
+        <h3>Breadcrumb with Icons</h3>
+        <p>You can easily include Font Awesome icons within your breadcrumb items for enhanced visual cues.</p>
+        <nav class="breadcrumb" aria-label="breadcrumb">
+            <ol>
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-folder"></i> Products</a></li>
+                <li><a href="#"><i class="fas fa-tag"></i> Electronics</a></li>
+                <li><a href="#"><i class="fas fa-laptop"></i> Laptops</a></li>
+            </ol>
+        </nav>
+        <pre><code>&lt;nav class="breadcrumb" aria-label="breadcrumb"&gt;
+    &lt;ol&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;i class="fas fa-home"&gt;&lt;/i&gt; Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;i class="fas fa-folder"&gt;&lt;/i&gt; Products&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;i class="fas fa-tag"&gt;&lt;/i&gt; Electronics&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;&lt;i class="fas fa-laptop"&gt;&lt;/i&gt; Laptops&lt;/a&gt;&lt;/li&gt;
     &lt;/ol&gt;
 &lt;/nav&gt;</code></pre>
-    </section>
 
-    <section class="docs-section">
-        <h2 class="section-title">Accessibility</h2>
-        <p>Be sure to add an `aria-label` to the `<nav>` element to describe the type of navigation provided in the `<nav>` element. The `aria-current="page"` attribute is added to the last item of the set to indicate that it represents the current page.</p>
-    </section>
+        <h3>Accessibility Considerations</h3>
+        <p>The breadcrumb component uses semantic HTML (<code>&lt;nav&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;a&gt;</code>) and ARIA attributes (<code>aria-label="breadcrumb"</code>) to ensure it is fully accessible to screen reader users. The last item in the breadcrumb typically represents the current page and should not be a link.</p>
+    </div>
 
-    <script src="../../js/prism.js"></script>
+    <script src="../../js/axiom.js"></script>
 </body>
 </html>

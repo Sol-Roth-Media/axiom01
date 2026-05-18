@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Media & Icons Guide - Axiom01</title>
+    <link rel="stylesheet" href="../css/axiom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <style>
+        body {
+            padding: var(--a-space-xxl) var(--a-space-xl);
+            background-color: var(--a-color-surface);
+            color: var(--a-color-on-surface);
+            font-family: var(--a-font-family-sans);
+            line-height: var(--a-line-height-base);
+        }
+        .container {
+            max-width: var(--a-layout-max-width);
+            margin: 0 auto;
+            padding: 0 var(--a-space-xl);
+        }
+        h1 {
+            font-size: var(--a-font-size-h1);
+            color: var(--a-color-primary);
+            margin-bottom: var(--a-space-l);
+        }
+        h2 {
+            font-size: var(--a-font-size-h2);
+            color: var(--a-color-on-surface);
+            margin-top: var(--a-space-xl);
+            margin-bottom: var(--a-space-m);
+        }
+        h3 {
+            font-size: var(--a-font-size-h3);
+            color: var(--a-color-primary);
+            margin-top: var(--a-space-l);
+            margin-bottom: var(--a-space-m);
+        }
+        p {
+            margin-bottom: var(--a-space-m);
+        }
+        pre {
+            background-color: var(--a-color-code-bg);
+            color: var(--a-color-code-text);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-medium);
+            overflow-x: auto;
+            margin-bottom: var(--a-space-l);
+            border: 1px solid var(--a-color-code-border);
+        }
+        code {
+            font-family: var(--a-font-family-mono);
+            font-size: var(--a-font-size-small);
+        }
+        .media-example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--a-space-l);
+            margin-bottom: var(--a-space-xl);
+        }
+        .media-card {
+            background-color: var(--a-color-surface);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-medium);
+            text-align: center;
+            box-shadow: var(--a-shadow-medium);
+            border: 1px solid var(--a-color-outline);
+        }
+        .media-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--a-border-radius-small);
+            margin-bottom: var(--a-space-m);
+        }
+        .icon-example-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--a-space-m);
+            margin-bottom: var(--a-space-xl);
+        }
+        .icon-item {
+            background-color: var(--a-color-surface);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-medium);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            min-height: 120px;
+            box-shadow: var(--a-shadow-sm);
+            border: 1px solid var(--a-color-outline);
+        }
+        .icon-item i {
+            font-size: var(--a-font-size-xxl);
+            color: var(--a-color-primary);
+            margin-bottom: var(--a-space-s);
+        }
+        .icon-item svg {
+            width: var(--a-font-size-xxl);
+            height: var(--a-font-size-xxl);
+            fill: var(--a-color-primary);
+            margin-bottom: var(--a-space-s);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Advanced Media & Icons Guide</h1>
+        <p>This guide delves into Axiom01's best practices for integrating and optimizing media assets and icons. Learn how to ensure your visuals are performant, responsive, accessible, and seamlessly integrated with your chosen theme.</p>
+
+        <h2>Optimizing Images for Performance</h2>
+        <p>Images are often the largest contributors to page weight. Axiom01 encourages strategies to minimize their impact while maintaining visual quality.</p>
+
+        <h3>Responsive Images</h3>
+        <p>Use the <code>&lt;picture&gt;</code> element and <code>srcset</code> attribute to serve appropriately sized images for different screen resolutions and device capabilities. This prevents users from downloading unnecessarily large files.</p>
+        <pre><code>&lt;picture&gt;
+    &lt;source srcset="image-large.webp 1200w, image-medium.webp 800w" type="image/webp"&gt;
+    &lt;source srcset="image-large.jpg 1200w, image-medium.jpg 800w" type="image/jpeg"&gt;
+    &lt;img src="image-small.jpg" alt="Descriptive alt text" class="responsive-image" loading="lazy"&gt;
+&lt;/picture&gt;</code></pre>
+        <p>The <code>.responsive-image</code> class ensures your image scales correctly within its container.</p>
+
+        <h3>Lazy Loading</h3>
+        <p>Implement lazy loading for off-screen images using the <code>loading="lazy"</code> attribute. This defers loading until the image is about to enter the viewport, significantly improving initial page load times.</p>
+        <pre><code>&lt;img src="path/to/image.jpg" alt="Description" class="responsive-image" loading="lazy"&gt;</code></pre>
+
+        <h3>Modern Image Formats</h3>
+        <p>Prioritize modern image formats like WebP or AVIF over traditional JPEG or PNG. These formats offer superior compression without significant loss of quality, leading to smaller file sizes and faster downloads.</p>
+
+        <h2>Integrating Icons & SVGs</h2>
+        <p>Icons are crucial for visual communication. Axiom01 supports both SVG and icon fonts, with recommendations for each.</p>
+
+        <h3>Scalable Vector Graphics (SVGs)</h3>
+        <p>SVGs are ideal for icons and simple graphics due to their scalability, small file size, and ability to be styled with CSS. Embed them directly in your HTML for maximum control.</p>
+        <pre><code>&lt;!-- Inline SVG for full CSS control --&gt;
+&lt;svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="var(--a-color-primary)"&gt;
+    &lt;path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/&gt;
+&lt;/svg&gt;
+
+&lt;!-- Using an external SVG file --&gt;
+&lt;img src="/assets/icons/check.svg" alt="Checkmark" class="icon-svg"&gt;</code></pre>
+        <p>You can style inline SVGs using CSS variables, making them theme-aware.</p>
+
+        <h3>Icon Fonts (e.g., Font Awesome)</h3>
+        <p>For a wide range of common icons, icon font libraries like Font Awesome are a convenient choice. Ensure you load the library's CSS and use the provided classes.</p>
+        <pre><code>&lt;!-- In your HTML head --&gt;
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous"/&gt;
+
+&lt;!-- In your body --&gt;
+&lt;i class="fas fa-star"&gt;&lt;/i&gt;
+&lt;i class="fas fa-heart primary"&gt;&lt;/i&gt;
+&lt;i class="fas fa-bell secondary"&gt;&lt;/i&gt;</code></pre>
+        <p>Axiom01's styling will automatically apply appropriate sizing and color based on context, but you can override with semantic color classes if needed.</p>
+
+        <h3>Accessibility for Icons</h3>
+        <p>Always provide alternative text for images (<code>alt</code> attribute) and ensure icons used for meaning have accessible labels (e.g., <code>aria-label</code>, visually hidden text, or a descriptive parent element).</p>
+        <pre><code>&lt;button aria-label="Delete item"&gt;&lt;i class="fas fa-trash" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;
+&lt;!-- OR --&gt;
+&lt;a href="#"&gt;&lt;i class="fas fa-info-circle" aria-hidden="true"&gt;&lt;/i&gt; &lt;span&gt;More Information&lt;/span&gt;&lt;/a&gt;</code></pre>
+
+        <h2>Media Examples</h2>
+        <h3>Image Gallery Example</h3>
+        <div class="media-example-grid">
+            <div class="media-card">
+                <img src="https://via.placeholder.com/300x200/4f46e5/e0e7ff?text=Image+1" alt="Placeholder Image 1">
+                <p>A beautiful landscape.</p>
+            </div>
+            <div class="media-card">
+                <img src="https://via.placeholder.com/300x200/06b6d4/cffafe?text=Image+2" alt="Placeholder Image 2">
+                <p>Cityscape at night.</p>
+            </div>
+            <div class="media-card">
+                <img src="https://via.placeholder.com/300x200/f59e42/fff7ed?text=Image+3" alt="Placeholder Image 3">
+                <p>Abstract art.</p>
+            </div>
+        </div>
+
+        <h3>Icon Showcase</h3>
+        <div class="icon-example-grid">
+            <div class="icon-item"><i class="fas fa-home"></i><p>Home</p></div>
+            <div class="icon-item"><i class="fas fa-cog"></i><p>Settings</p></div>
+            <div class="icon-item"><i class="fas fa-envelope"></i><p>Mail</p></div>
+            <div class="icon-item"><i class="fas fa-user"></i><p>User</p></div>
+            <div class="icon-item"><i class="fas fa-cloud"></i><p>Cloud</p></div>
+            <div class="icon-item"><i class="fas fa-camera"></i><p>Camera</p></div>
+        </div>
+    </div>
+</body>
+</html>

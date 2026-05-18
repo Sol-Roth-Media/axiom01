@@ -1,34 +1,99 @@
-<!-- AXIOM01 COMPONENT: AI Chat -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <title>AI Chat Component</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-    <script src="../../js/ai-chat.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <style>
+        body {
+            padding: var(--a-space-xl);
+            background-color: var(--a-color-surface);
+            color: var(--a-color-on-surface);
+            font-family: var(--a-font-family-sans);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-l);
+        }
+        .component-section {
+            background-color: var(--a-color-surface-variant);
+            padding: var(--a-space-xl);
+            border-radius: var(--a-border-radius-large);
+            border: 1px solid var(--a-color-outline);
+        }
+        .component-section h2 {
+            margin-top: 0;
+            color: var(--a-color-primary);
+            font-size: var(--a-font-size-h2);
+            margin-bottom: var(--a-space-l);
+        }
+        pre {
+            background-color: var(--a-color-code-bg);
+            color: var(--a-color-code-text);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-medium);
+            overflow-x: auto;
+            border: 1px solid var(--a-color-code-border);
+        }
+        code {
+            font-family: var(--a-font-family-mono);
+            font-size: var(--a-font-size-small);
+        }
+        /* Specific styles for AI Chat demo */
+        .ai-chat-demo-container {
+            position: relative;
+            height: 400px; /* Fixed height for demo */
+            margin-bottom: var(--a-space-l);
+        }
+    </style>
 </head>
-<body class="axiom-body">
-    <main class="container">
-        <h1>AI Chat</h1>
-        <div id="ai-chat-root"></div>
-        <button id="ai-chat-toggle-button" class="button primary" style="margin-top:2rem;">Open AI Chat</button>
-    </main>
-    <script>
-      // Initialize the AI Chat widget on page load
-      document.addEventListener('DOMContentLoaded', function() {
-        if (window.AIChat && document.getElementById('ai-chat-root')) {
-          AIChat.init(document.getElementById('ai-chat-root'));
-        }
-        // Optional: Toggle button logic
-        var toggleBtn = document.getElementById('ai-chat-toggle-button');
-        var chatPanel = document.querySelector('.ai-chat-panel');
-        if (toggleBtn && chatPanel) {
-          toggleBtn.addEventListener('click', function() {
-            chatPanel.classList.toggle('is-hidden');
-          });
-        }
-      });
-    </script>
+<body>
+    <div class="component-section">
+        <h2>AI Chat Component</h2>
+        <p>Axiom01 provides a ready-to-use UI component for integrating conversational AI into your applications. This component is designed for seamless connection with various AI services, offering a clean and intuitive chat interface.</p>
+
+        <h3>Example AI Chat Interface</h3>
+        <div class="ai-chat-demo-container">
+            <div id="ai-chat-component" class="ai-chat-panel">
+                <header>
+                    <h3>AI Assistant</h3>
+                    <button class="close-chat" aria-label="Close chat">&times;</button>
+                </header>
+                <div class="ai-chat-messages">
+                    <div class="ai-message assistant-message">Hello! How can I assist you today?</div>
+                    <div class="ai-message user-message">What is Axiom01?</div>
+                    <div class="ai-message assistant-message">Axiom01 is a semantic-first UI framework designed for building professional, accessible, and fast web applications with minimal classes and powerful CSS variables.</div>
+                </div>
+                <div class="ai-chat-input-area">
+                    <textarea id="ai-chat-input" placeholder="Type your message..." rows="1"></textarea>
+                    <button class="button primary">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <h3>Code Example</h3>
+        <pre><code>&lt;div id="ai-chat-component" class="ai-chat-panel"&gt;
+    &lt;header&gt;
+        &lt;h3&gt;AI Assistant&lt;/h3&gt;
+        &lt;button class="close-chat" aria-label="Close chat"&gt;&amp;times;&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="ai-chat-messages"&gt;
+        &lt;div class="ai-message assistant-message"&gt;Hello! How can I assist you today?&lt;/div&gt;
+        &lt;div class="ai-message user-message"&gt;What is Axiom01?&lt;/div&gt;
+        &lt;div class="ai-message assistant-message"&gt;Axiom01 is a semantic-first UI framework...&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="ai-chat-input-area"&gt;
+        &lt;textarea id="ai-chat-input" placeholder="Type your message..." rows="1"&gt;&lt;/textarea&gt;
+        &lt;button class="button primary"&gt;Send&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Usage Guidelines</h3>
+        <p>This component provides the visual structure for an AI chat. You will need to integrate it with a backend AI service (e.g., OpenAI, Google Gemini) using JavaScript to handle message sending, receiving, and displaying responses dynamically.</p>
+        <p>The <code>.ai-chat-panel</code> class provides the base styling. Messages can be styled with <code>.user-message</code> and <code>.assistant-message</code>. The close button and input area are also pre-styled.</p>
+    </div>
+
+    <script src="../../js/axiom.js"></script>
 </body>
 </html>
-

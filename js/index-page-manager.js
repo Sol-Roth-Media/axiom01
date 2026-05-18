@@ -1,412 +1,403 @@
-// Complete functionality for index.html page
-class IndexPageManager {
-    constructor() {
-        // The init method will be called once the DOM is ready.
-    }
+// js/index-page-manager.js
 
-    init() {
-        console.log('Index Page Manager: Initializing...');
+document.addEventListener('DOMContentLoaded', () => {
 
-        // Initialize all functionality
-        this.initThemeToggle();
-        this.initMobileNavbar();
-        this.initComponentBrowser();
-        this.initSearchModal();
-        this.initCopyToClipboard();
-        this.initSpacingDemo();
-        this.initThemeExplorer();
-        this.initDropdowns(); // ✅ ADD THIS LINE
+    // Helper function to apply theme
+    const applyTheme = (themeName) => {
+        const htmlElement = document.documentElement;
+        htmlElement.setAttribute('data-theme', themeName);
+        localStorage.setItem('theme', themeName);
+    };
 
-        console.log('Index Page Manager: Initialization complete');
-    }
-
-    // ✅ NEW: Spacing slider logic is now part of the main manager
-    initSpacingDemo() {
-        const slider = document.getElementById('space-unit-slider');
-        const valueDisplay = document.getElementById('space-unit-value');
-
-        if (!slider || !valueDisplay) {
-            console.log('Spacing demo elements not found');
-            return;
-        }
-
-        // Set initial display value
-        valueDisplay.textContent = slider.value;
-
-        // Add event listener to update CSS variable and display on change
-        slider.addEventListener('input', () => {
-            const value = slider.value;
-            valueDisplay.textContent = value;
-            document.documentElement.style.setProperty('--a-space-unit', `${value}rem`);
-        });
-
-        console.log('Spacing demo initialized');
-    }
-
-    // Theme Toggle Functionality
-    initThemeToggle() {
-        const themeToggleButton = document.getElementById('theme-toggle');
-        if (!themeToggleButton) {
-            console.log('Theme toggle button not found');
-            return;
-        }
-
-        const html = document.documentElement;
-        const themeIcon = themeToggleButton.querySelector('i');
-
-        // Get current theme
-        const getCurrentTheme = () => html.getAttribute('data-theme') || 'light';
-
-        // Update icon based on theme
-        const updateIcon = (theme) => {
-            if (themeIcon) {
-                themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-            }
-            themeToggleButton.setAttribute('aria-label',
-                theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
-            );
-        };
-
-        // Toggle theme
-        const toggleTheme = () => {
-            const currentTheme = getCurrentTheme();
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('axiom-theme', newTheme);
-            updateIcon(newTheme);
-
-            console.log(`Theme changed to: ${newTheme}`);
-        };
-
-        // Initialize theme from localStorage or default to light
-        const savedTheme = localStorage.getItem('axiom-theme') || 'light';
-        html.setAttribute('data-theme', savedTheme);
-        updateIcon(savedTheme);
-
-        // Add click handler
-        themeToggleButton.addEventListener('click', toggleTheme);
-
-        console.log(`Theme toggle initialized with theme: ${savedTheme}`);
-    }
-
-    // Mobile Navbar Toggle
-    initMobileNavbar() {
-        const header = document.querySelector('header.main');
+    // 1. Mobile Navigation Toggle
+    const initMobileNav = () => {
         const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.links');
+        const mainHeader = document.querySelector('header.main');
+        const mainContent = document.querySelector('main');
 
-        if (!header || !menuToggle || !navLinks) {
-            console.log('Mobile navbar elements not found');
-            return;
-        }
-
-        menuToggle.addEventListener('click', () => {
-            header.classList.toggle('is-open');
-            const isOpen = header.classList.contains('is-open');
-
-            // Update aria attributes for accessibility
-            menuToggle.setAttribute('aria-expanded', isOpen);
-            menuToggle.setAttribute('aria-label', isOpen ? 'Close Menu' : 'Toggle Menu');
-
-            console.log(`Mobile menu ${isOpen ? 'opened' : 'closed'}`);
-        });
-
-        // Close mobile menu when clicking on links
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                header.classList.remove('is-open');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                menuToggle.setAttribute('aria-label', 'Toggle Menu');
+        if (menuToggle && mainHeader && mainContent) {
+            menuToggle.addEventListener('click', () => {
+                const isOpen = mainHeader.classList.toggle('menu-open');
+                menuToggle.setAttribute('aria-expanded', isOpen);
+                // Toggle inert on main content when menu is open
+                if (isOpen) {
+                    mainContent.setAttribute('inert', '');
+                } else {
+                    mainContent.removeAttribute('inert');
+                }
             });
+        }
+    };
+
+    // 2. Theme Toggling (Header Toggle Button)
+    const initHeaderThemeToggle = () => {
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Set initial theme from localStorage or default to 'light'
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(currentTheme);
+
+        if (currentTheme === 'dark') {
+            themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                let theme = htmlElement.getAttribute('data-theme');
+                if (theme === 'light') {
+                    applyTheme('dark');
+                    themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    applyTheme('light');
+                    themeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+                }
+                // Update theme explorer select if it exists
+                const themeSelect = document.getElementById('theme-select');
+                if (themeSelect) {
+                    themeSelect.value = htmlElement.getAttribute('data-theme');
+                    updateThemeDescription(htmlElement.getAttribute('data-theme'));
+                }
+            });
+        }
+    };
+
+    // 3. Spacing Demo
+    const initSpacingDemo = () => {
+        const spaceUnitSlider = document.getElementById('space-unit-slider');
+        const spaceUnitValueSpan = document.getElementById('space-unit-value');
+
+        if (spaceUnitSlider && spaceUnitValueSpan) {
+            // Apply initial value
+            document.documentElement.style.setProperty('--a-space-unit', `${spaceUnitSlider.value}rem`);
+            spaceUnitValueSpan.textContent = spaceUnitSlider.value;
+
+            spaceUnitSlider.addEventListener('input', (event) => {
+                const value = event.target.value;
+                document.documentElement.style.setProperty('--a-space-unit', `${value}rem`);
+                spaceUnitValueSpan.textContent = value;
+            });
+        }
+    };
+
+    // 4. Component Browser
+    const initComponentBrowser = () => {
+        const componentTabsContainer = document.querySelector('.component-browser .tabs');
+        const componentPreviewIframe = document.getElementById('component-preview-iframe');
+        const componentCountSpan = document.getElementById('component-count');
+        const componentSearchInput = document.getElementById('component-search-input');
+        const componentCategoryFilter = document.getElementById('component-category-filter');
+        const viewFullscreenButton = document.getElementById('view-fullscreen-button');
+
+        const allComponentButtons = componentTabsContainer ? Array.from(componentTabsContainer.querySelectorAll('.tab-button')) : [];
+
+        if (componentTabsContainer && componentPreviewIframe) {
+            // Initialize iframe with the active tab's src
+            const activeTab = componentTabsContainer.querySelector('.tab-button.active');
+            if (activeTab) {
+                componentPreviewIframe.src = activeTab.dataset.src;
+            }
+
+            componentTabsContainer.addEventListener('click', (event) => {
+                const targetButton = event.target.closest('.tab-button');
+                if (targetButton && !targetButton.classList.contains('active')) {
+                    // Remove active from previous
+                    const currentActive = componentTabsContainer.querySelector('.tab-button.active');
+                    if (currentActive) {
+                        currentActive.classList.remove('active');
+                        currentActive.setAttribute('aria-selected', 'false');
+                    }
+
+                    // Add active to new
+                    targetButton.classList.add('active');
+                    targetButton.setAttribute('aria-selected', 'true');
+                    componentPreviewIframe.src = targetButton.dataset.src;
+                }
+            });
+
+            // Component Search and Filter
+            const filterComponents = () => {
+                const searchTerm = componentSearchInput.value.toLowerCase();
+                const category = componentCategoryFilter.value;
+                let visibleCount = 0;
+
+                allComponentButtons.forEach(button => {
+                    const componentName = button.textContent.toLowerCase();
+                    const componentCategory = button.dataset.category || 'all'; // Assuming categories can be set via data-category
+
+                    const matchesSearch = componentName.includes(searchTerm);
+                    const matchesCategory = (category === 'all' || componentCategory === category);
+
+                    if (matchesSearch && matchesCategory) {
+                        button.style.display = '';
+                        visibleCount++;
+                    } else {
+                        button.style.display = 'none';
+                    }
+                });
+                if (componentCountSpan) {
+                    componentCountSpan.textContent = visibleCount;
+                }
+            };
+
+            if (componentSearchInput) {
+                componentSearchInput.addEventListener('input', filterComponents);
+            }
+            if (componentCategoryFilter) {
+                componentCategoryFilter.addEventListener('change', filterComponents);
+            }
+            // Initial filter to set count
+            filterComponents();
+
+            // View Fullscreen Button
+            if (viewFullscreenButton) {
+                viewFullscreenButton.addEventListener('click', () => {
+                    const activeTab = componentTabsContainer.querySelector('.tab-button.active');
+                    if (activeTab && activeTab.dataset.src) {
+                        window.open(activeTab.dataset.src, '_blank');
+                    }
+                });
+            }
+        }
+    };
+
+    // 5. Search Modal (using Fuse.js for demo purposes)
+    const initSearchModal = () => {
+        const searchToggle = document.querySelector('.search-toggle');
+        const searchModal = document.getElementById('search-modal');
+        const closeSearchModalButton = document.querySelector('.close-search-modal');
+        const searchModalInput = document.getElementById('search-modal-input');
+        const searchModalResults = document.getElementById('search-modal-results');
+
+        // Dummy data for Fuse.js search
+        const searchData = [
+            { title: "Accordion", category: "feedback", url: "docs/components/placeholder.html" },
+            { title: "AI Chat", category: "ai", url: "docs/components/placeholder.html" },
+            { title: "AI Image Generator", category: "ai", url: "docs/components/placeholder.html" },
+            { title: "Alert", category: "feedback", url: "docs/components/placeholder.html" },
+            { title: "Avatar", category: "display", url: "docs/components/placeholder.html" },
+            { title: "Badge", category: "display", url: "docs/components/placeholder.html" },
+            { title: "Breadcrumb", category: "navigation", url: "docs/components/placeholder.html" },
+            { title: "Button", category: "forms", url: "docs/components/placeholder.html" },
+            { title: "Card", category: "layout", url: "docs/components/placeholder.html" },
+            { title: "Carousel", category: "media", url: "docs/components/placeholder.html" },
+            { title: "Chat", category: "feedback", url: "docs/components/placeholder.html" },
+            { title: "Commerce", category: "ecommerce", url: "docs/components/placeholder.html" },
+            { title: "Component Browser", category: "layout", url: "docs/components/placeholder.html" },
+            { title: "Datepicker", category: "forms", url: "docs/components/placeholder.html" },
+            { title: "Drawer", category: "overlay", url: "docs/components/placeholder.html" },
+            { title: "Dropdown", category: "navigation", url: "docs/components/placeholder.html" },
+            { title: "Editor", category: "forms", url: "docs/components/placeholder.html" },
+            { title: "Empty State", category: "feedback", url: "docs/components/placeholder.html" },
+            { title: "File Upload", category: "forms", url: "docs/components/placeholder.html" },
+            { title: "Footer", category: "layout", url: "docs/components/placeholder.html" },
+            { title: "Forms", category: "forms", url: "docs/components/placeholder.html" },
+            { title: "Hero", category: "layout", url: "docs/components/placeholder.html" },
+            { title: "Infinite Scroll", category: "display", url: "docs/components/placeholder.html" },
+            { title: "Media", category: "media", url: "docs/components/placeholder.html" },
+            { title: "Modal", category: "overlay", url: "docs/components/placeholder.html" },
+            { title: "Multi-Step Form", category: "forms", url: "docs/components/placeholder.html" },
+            { title: "Navbar", category: "navigation", url: "docs/components/placeholder.html" },
+            { title: "Navigation", category: "navigation", url: "docs/components/placeholder.html" },
+            { title: "Notification", category: "feedback", url: "docs/components/placeholder.html" },
+            { title: "Pagination", category: "navigation", url: "docs/components/placeholder.html" },
+            { title: "Paywall", category: "ecommerce", url: "docs/components/placeholder.html" },
+            { title: "Progress", category: "feedback", url: "docs/components/placeholder.html" },
+            { title: "Search", category: "navigation", url: "docs/components/placeholder.html" },
+            { title: "Settings", category: "forms", url: "docs/components/placeholder.html" },
+            { title: "Sidebar", category: "layout", url: "docs/components/placeholder.html" },
+            { title: "Skeleton", category: "display", url: "docs/components/placeholder.html" },
+            { title: "Slider", category: "forms", url: "docs/components/placeholder.html" },
+            { title: "Table", category: "display", url: "docs/components/placeholder.html" },
+            { title: "Tabs", category: "navigation", url: "docs/components/placeholder.html" },
+            { title: "Timeline", category: "display", url: "docs/components/placeholder.html" },
+            { title: "Toggle", category: "forms", url: "docs/components/placeholder.html" },
+            { title: "Tooltip", category: "overlay", url: "docs/components/placeholder.html" },
+            { title: "Documentation", category: "docs", url: "docs/placeholder.html" },
+            { title: "Advanced Color Details", category: "docs", url: "docs/colors-advanced.html" },
+            { title: "Theme Customization Wizard", category: "docs", url: "docs/theme-customization-wizard.html" },
+            { title: "Advanced Typography Guide", category: "docs", url: "docs/typography-advanced.html" },
+            { title: "Advanced Layout Guide", category: "docs", url: "docs/layout-advanced.html" },
+            { title: "Advanced Media & Icons Guide", category: "docs", url: "docs/media-advanced.html" },
+            { title: "Interactive Playground", category: "docs", url: "docs/interactive-playground.html" },
+            { title: "Contributing Guide", category: "docs", url: "docs/contributing.md" },
+            { title: "Developer Guide", category: "docs", url: "DEVELOPER.md" },
+            { title: "Styling Guide", category: "docs", url: "AXIOM01_STYLING_GUIDE.md" },
+            { title: "README", category: "docs", url: "README.md" },
+            { title: "MIT License", category: "docs", url: "LICENSE" },
+        ];
+
+        const fuse = new Fuse(searchData, {
+            keys: ['title', 'category'],
+            threshold: 0.3, // Fuzziness of the search
         });
 
-        console.log('Mobile navbar initialized');
-    }
+        if (searchToggle && searchModal && closeSearchModalButton && searchModalInput && searchModalResults) {
+            searchToggle.addEventListener('click', () => {
+                searchModal.classList.remove('is-hidden');
+                searchModal.setAttribute('aria-hidden', 'false');
+                searchModalInput.focus();
+                document.body.style.overflow = 'hidden'; // Prevent scrolling body when modal is open
+            });
 
-    // Component Browser Functionality
-    initComponentBrowser() {
-        const componentBrowser = document.querySelector('.component-browser');
-        if (!componentBrowser) {
-            console.log('Component browser not found');
-            return;
+            closeSearchModalButton.addEventListener('click', () => {
+                searchModal.classList.add('is-hidden');
+                searchModal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = ''; // Restore body scrolling
+                searchModalResults.innerHTML = ''; // Clear results
+                searchModalInput.value = ''; // Clear input
+            });
+
+            searchModalInput.addEventListener('input', (event) => {
+                const query = event.target.value;
+                searchModalResults.innerHTML = ''; // Clear previous results
+
+                if (query.length > 1) {
+                    const results = fuse.search(query);
+                    if (results.length > 0) {
+                        const ul = document.createElement('ul');
+                        results.forEach(result => {
+                            const li = document.createElement('li');
+                            const a = document.createElement('a');
+                            a.href = result.item.url;
+                            a.textContent = result.item.title;
+                            li.appendChild(a);
+                            ul.appendChild(li);
+                        });
+                        searchModalResults.appendChild(ul);
+                    } else {
+                        const p = document.createElement('p');
+                        p.textContent = 'No results found.';
+                        searchModalResults.appendChild(p);
+                    }
+                }
+            });
+
+            // Close modal on escape key
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && !searchModal.classList.contains('is-hidden')) {
+                    closeSearchModalButton.click();
+                }
+            });
+
+            // Close modal when clicking outside the content
+            searchModal.addEventListener('click', (event) => {
+                if (event.target === searchModal) {
+                    closeSearchModalButton.click();
+                }
+            });
         }
+    };
 
-        const tabButtons = componentBrowser.querySelectorAll('.tab-button');
-        const iframe = document.getElementById('component-preview-iframe');
-        const searchInput = document.getElementById('component-search-input');
-        const categoryFilter = document.getElementById('component-category-filter');
-
-        if (!iframe) {
-            console.log('Component iframe not found');
-            return;
-        }
-
-        // Tab switching functionality
-        tabButtons.forEach(button => {
+    // 6. Code Snippet Copying
+    const initCodeCopying = () => {
+        const copyButtons = document.querySelectorAll('.copy-button');
+        copyButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Remove active state from all tabs
-                tabButtons.forEach(tab => {
-                    tab.classList.remove('active');
-                    tab.setAttribute('aria-selected', 'false');
-                });
-
-                // Add active state to clicked tab
-                button.classList.add('active');
-                button.setAttribute('aria-selected', 'true');
-
-                // Load component in iframe
-                const src = button.getAttribute('data-src');
-                if (src) {
-                    iframe.src = src;
-                    console.log(`Loading component: ${src}`);
+                const pre = button.closest('article').querySelector('pre code');
+                if (pre) {
+                    navigator.clipboard.writeText(pre.textContent).then(() => {
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                    });
                 }
             });
         });
+    };
 
-        // Search functionality
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase();
-                this.filterComponents(tabButtons, query, categoryFilter ? categoryFilter.value : '');
-            });
+    // Theme Explorer description update
+    const themeDescriptions = {
+        "light": "A clean, professional, and modern theme perfect for corporate websites and applications.",
+        "dark": "A sleek, low-light theme designed to reduce eye strain and provide a sophisticated look.",
+        "corporate-clean": "A refined theme with a focus on clarity and professionalism, ideal for business applications.",
+        "synthwave-84": "An energetic theme inspired by 80s aesthetics, featuring vibrant neons and dark backgrounds.",
+        "nordic-calm": "A serene theme with muted colors and natural tones, evoking a sense of peace and simplicity.",
+        "vintage-paper": "A classic, warm theme reminiscent of old books and documents, with sepia tones and textured backgrounds.",
+        "dracula": "A dark, moody theme with deep purples and contrasting accents, popular among developers.",
+        "solarized-light": "A carefully crafted light theme with a precise color palette for optimal readability and aesthetics.",
+        "solarized-dark": "A carefully crafted dark theme with a precise color palette for optimal readability and aesthetics.",
+        "luxe-black": "A luxurious dark theme with deep blacks and subtle gold accents, exuding elegance.",
+        "minty-fresh": "A bright and invigorating theme with refreshing mint greens and clean whites.",
+        "desert-sunset": "A warm theme inspired by desert landscapes, featuring oranges, reds, and earthy tones.",
+        "deep-ocean": "A calming theme with deep blues and greens, reminiscent of the ocean's depths.",
+        "gruvbox-dark": "A retro-inspired dark theme with warm colors and high contrast, optimized for coding.",
+        "sakura-blossom": "A delicate theme inspired by cherry blossoms, with soft pinks and light pastels.",
+        "matcha-green": "A natural and earthy theme featuring various shades of green, inspired by matcha tea.",
+        "monokai-pro": "A popular dark theme known for its vibrant and distinct syntax highlighting, great for developers.",
+        "slate-gray": "A sophisticated theme with cool grays and blues, offering a modern and understated look.",
+        "tropical-splash": "A lively theme with bright, contrasting colors inspired by tropical fruits and scenery.",
+        "candy-pop": "A fun and playful theme with a burst of bright, cheerful colors.",
+        "rose-pine": "A cozy, pastel-inspired dark theme with soft colors for a comfortable coding experience.",
+        "midnight-moss": "A deep, earthy theme with dark greens and browns, inspired by a moonlit forest."
+    };
+
+    const updateThemeDescription = (selectedTheme) => {
+        const themeDescriptionDisplay = document.getElementById('theme-description-display');
+        if (themeDescriptionDisplay) {
+            themeDescriptionDisplay.querySelector('p').textContent = themeDescriptions[selectedTheme] || "No description available for this theme.";
         }
+    };
 
-        // Category filter functionality
-        if (categoryFilter) {
-            categoryFilter.addEventListener('change', (e) => {
-                const category = e.target.value;
-                const query = searchInput ? searchInput.value.toLowerCase() : '';
-                this.filterComponents(tabButtons, query, category);
-            });
-        }
+    const initThemeExplorer = () => {
+        const themeSelect = document.getElementById('theme-select');
+        const htmlElement = document.documentElement;
 
-        // Fullscreen button functionality
-        const fullscreenButton = document.getElementById('view-fullscreen-button');
-        if (fullscreenButton) {
-            fullscreenButton.addEventListener('click', () => {
-                const activeTab = componentBrowser.querySelector('.tab-button.active');
-                if (activeTab) {
-                    const src = activeTab.getAttribute('data-src');
-                    if (src) {
-                        window.open(src, '_blank');
-                        console.log(`Opening component in new window: ${src}`);
+        if (themeSelect) {
+            // Set initial select value based on current theme
+            themeSelect.value = htmlElement.getAttribute('data-theme');
+            updateThemeDescription(themeSelect.value);
+
+            themeSelect.addEventListener('change', (event) => {
+                const selectedTheme = event.target.value;
+                applyTheme(selectedTheme);
+                updateThemeDescription(selectedTheme);
+                // Update header toggle button icon if it exists
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    if (selectedTheme === 'dark') {
+                        themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+                    } else {
+                        themeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
                     }
                 }
             });
         }
+    };
 
-        console.log('Component browser initialized');
-    }
+    // Smooth scrolling for anchor links
+    const initSmoothScrolling = () => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                const mainHeader = document.querySelector('header.main');
+                const menuToggle = document.querySelector('.menu-toggle');
+                const mainContent = document.querySelector('main');
 
-    // Filter components based on search and category
-    filterComponents(tabButtons, query, category) {
-        let visibleCount = 0;
-
-        tabButtons.forEach(button => {
-            const componentName = button.querySelector('span').textContent.toLowerCase();
-            const componentSrc = button.getAttribute('data-src') || '';
-
-            // Simple category mapping based on component names/paths
-            const componentCategory = this.getComponentCategory(componentName, componentSrc);
-
-            const matchesSearch = !query || componentName.includes(query);
-            const matchesCategory = !category || category === 'all' || componentCategory === category;
-
-            if (matchesSearch && matchesCategory) {
-                button.style.display = 'flex';
-                visibleCount++;
-            } else {
-                button.style.display = 'none';
-            }
-        });
-
-        // Update component count
-        const componentCount = document.getElementById('component-count');
-        if (componentCount) {
-            componentCount.textContent = visibleCount;
-        }
-
-        console.log(`Filtered components: ${visibleCount} visible`);
-    }
-
-    // Get component category based on name/path
-    getComponentCategory(name, src) {
-        // Simple category mapping
-        if (name.includes('alert') || name.includes('progress')) return 'feedback';
-        if (name.includes('button') || name.includes('form') || name.includes('slider') || name.includes('toggle')) return 'forms';
-        if (name.includes('breadcrumb') || name.includes('navbar') || name.includes('tabs')) return 'navigation';
-        if (name.includes('card') || name.includes('modal')) return 'layout';
-        if (name.includes('avatar') || name.includes('badge') || name.includes('table')) return 'display';
-        if (name.includes('carousel') || name.includes('image')) return 'media';
-        return 'display'; // default category
-    }
-
-    // Search Modal Functionality
-    initSearchModal() {
-        const searchToggleButton = document.querySelector('.search-toggle');
-        const searchModal = document.getElementById('search-modal');
-        const closeSearchButton = document.querySelector('.close-search-modal');
-        const searchInput = document.getElementById('search-modal-input');
-
-        if (!searchToggleButton || !searchModal || !closeSearchButton || !searchInput) {
-            console.log('Search modal elements not found');
-            return;
-        }
-
-        const openSearch = () => {
-            searchModal.classList.remove('is-hidden');
-            searchInput.focus();
-            console.log('Search modal opened');
-        };
-
-        const closeSearch = () => {
-            searchModal.classList.add('is-hidden');
-            console.log('Search modal closed');
-        };
-
-        searchToggleButton.addEventListener('click', openSearch);
-        closeSearchButton.addEventListener('click', closeSearch);
-
-        // Close modal on escape key press
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !searchModal.classList.contains('is-hidden')) {
-                closeSearch();
-            }
-        });
-
-        // Close modal on background click
-        searchModal.addEventListener('click', (e) => {
-            if (e.target === searchModal) {
-                closeSearch();
-            }
-        });
-
-        console.log('Search modal initialized');
-    }
-
-    // Copy to Clipboard Functionality
-    initCopyToClipboard() {
-        const copyButtons = document.querySelectorAll('.copy-button');
-
-        copyButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const codeElement = button.previousElementSibling?.querySelector('code');
-                if (codeElement) {
-                    const textToCopy = codeElement.textContent;
-
-                    navigator.clipboard.writeText(textToCopy).then(() => {
-                        const originalText = button.textContent;
-                        button.textContent = 'Copied!';
-                        button.classList.add('success');
-                        setTimeout(() => {
-                            button.textContent = originalText;
-                            button.classList.remove('success');
-                        }, 1200);
-                    });
+                if (mainHeader && mainHeader.classList.contains('menu-open')) {
+                    mainHeader.classList.remove('menu-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    mainContent.removeAttribute('inert'); // Ensure inert is removed
                 }
             });
         });
+    };
 
-        console.log('Copy to clipboard initialized');
-    }
-
-    // ✅ NEW: Theme Explorer logic
-    initThemeExplorer() {
-        const themeSelect = document.getElementById('theme-select');
-        const descriptionDisplay = document.getElementById('theme-description-display');
-        const html = document.documentElement;
-
-        if (!themeSelect || !descriptionDisplay) {
-            console.log('Theme explorer elements not found');
-            return;
-        }
-
-        const themeDescriptions = {
-            'light': "A clean, professional, and modern theme perfect for corporate websites and applications.",
-            'dark': "A sleek, dark theme that's easy on the eyes and perfect for modern web apps.",
-            'corporate-clean': "A professional, no-nonsense theme for business applications with a crisp blue primary.",
-            'synthwave-84': "A retro-futuristic theme with neon colors, a monospace font, and a dark purple background.",
-            'nordic-calm': "A spacious, minimalist theme with cool, muted blues inspired by Scandinavian design.",
-            'vintage-paper': "A classic theme with sepia tones and a serif font for an academic or historical feel.",
-            'dracula': "The famous dark theme for developers, featuring a purple and pink palette on a dark background.",
-            'solarized-light': "The classic, low-contrast theme designed for comfortable, long-form reading.",
-            'solarized-dark': "The dark counterpart to Solarized Light, maintaining a comfortable, low-contrast feel.",
-            'luxe-black': "A premium, high-contrast dark theme with sharp gold accents and a serif font.",
-            'minty-fresh': "A light, airy theme with a clean green palette and highly rounded corners.",
-            'desert-sunset': "Warm, earthy tones of orange and brown inspired by a desert landscape at dusk.",
-            'deep-ocean': "A dark, aquatic theme with deep blues and teals, featuring very rounded elements.",
-            'gruvbox-dark': "The popular retro groove theme for developers, with a warm, muted color palette.",
-            'sakura-blossom': "A light and soft theme inspired by Japanese cherry blossoms, with pink and white tones.",
-            'matcha-green': "A soothing, earthy theme inspired by green tea, with a calm and natural feel.",
-            'monokai-pro': "Inspired by the iconic, high-contrast code editor theme with bright, vivid colors.",
-            'slate-gray': "A modern, compact, and monochromatic theme for a serious, focused user interface.",
-            'tropical-splash': "A vibrant, high-energy theme with bright, sunny colors and extremely rounded elements.",
-            'candy-pop': "A playful, sweet theme with soft pastels and bubbly, rounded corners.",
-            'rose-pine': "A soft, warm, and elegant dark theme with a cozy, romantic feel.",
-            'midnight-moss': "A dark, nature-inspired theme with deep greens and earthy tones for a grounded feel."
-        };
-
-        const updateTheme = (theme) => {
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('axiom-theme', theme);
-            themeSelect.value = theme;
-            descriptionDisplay.innerHTML = `<p>${themeDescriptions[theme] || ''}</p>`;
-
-            // Also update the main theme toggle icon in the header
-            const themeToggleButton = document.getElementById('theme-toggle');
-            const themeIcon = themeToggleButton.querySelector('i');
-            if (themeIcon) {
-                themeIcon.className = (theme === 'dark' || !theme.includes('light')) ? 'fas fa-sun' : 'fas fa-moon';
-            }
-        };
-
-        // Event listener for the dropdown
-        themeSelect.addEventListener('change', () => {
-            updateTheme(themeSelect.value);
-        });
-
-        // Set initial state on page load
-        const savedTheme = localStorage.getItem('axiom-theme') || 'light';
-        updateTheme(savedTheme);
-
-        console.log('Theme explorer initialized');
-    }
-
-    // ✅ NEW: Dropdown menu logic
-    initDropdowns() {
-        const dropdowns = document.querySelectorAll('[data-component="dropdown"]');
-
-        dropdowns.forEach(dropdown => {
-            const toggle = dropdown.querySelector('.dropdown-toggle');
-            if (toggle) {
-                toggle.addEventListener('click', (event) => {
-                    // Close other open dropdowns first
-                    dropdowns.forEach(d => {
-                        if (d !== dropdown) {
-                            d.classList.remove('is-open');
-                        }
-                    });
-                    // Then toggle the current one
-                    event.stopPropagation();
-                    dropdown.classList.toggle('is-open');
-                });
-            }
-        });
-
-        // Add a global click listener to close dropdowns when clicking outside
-        document.addEventListener('click', () => {
-            dropdowns.forEach(dropdown => {
-                dropdown.classList.remove('is-open');
-            });
-        });
-
-        console.log(`Dropdowns initialized for ${dropdowns.length} elements.`);
-    }
-}
-
-// ✅ SINGLE, CLEAN INITIALIZATION
-document.addEventListener('DOMContentLoaded', () => {
-    const pageManager = new IndexPageManager();
-    pageManager.init();
+    // Initialize all functionalities
+    initMobileNav();
+    initHeaderThemeToggle();
+    initSpacingDemo();
+    initComponentBrowser();
+    initSearchModal();
+    initCodeCopying();
+    initThemeExplorer();
+    initSmoothScrolling();
 });

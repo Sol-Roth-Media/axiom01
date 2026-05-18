@@ -3,202 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axiom - Drawer Component</title>
+    <title>Drawer Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-    <link rel="stylesheet" href="../../css/prism.css">
-    <link rel="stylesheet" href="../css/docs.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <style>
+        body {
+            padding: var(--a-space-xl);
+            background-color: var(--a-color-surface);
+            color: var(--a-color-on-surface);
+            font-family: var(--a-font-family-sans);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-l);
+        }
+        .component-section {
+            background-color: var(--a-color-surface-variant);
+            padding: var(--a-space-xl);
+            border-radius: var(--a-border-radius-large);
+            border: 1px solid var(--a-color-outline);
+        }
+        .component-section h2 {
+            margin-top: 0;
+            color: var(--a-color-primary);
+            font-size: var(--a-font-size-h2);
+            margin-bottom: var(--a-space-l);
+        }
+        pre {
+            background-color: var(--a-color-code-bg);
+            color: var(--a-color-code-text);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-medium);
+            overflow-x: auto;
+            border: 1px solid var(--a-color-code-border);
+        }
+        code {
+            font-family: var(--a-font-family-mono);
+            font-size: var(--a-font-size-small);
+        }
+        /* Specific styles for Drawer demo */
+        .drawer-container {
+            position: relative;
+            height: 300px;
+            border: 1px solid var(--a-color-outline);
+            border-radius: var(--a-border-radius-medium);
+            overflow: hidden;
+            margin-bottom: var(--a-space-l);
+        }
+        .drawer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: var(--a-color-surface);
+            border-right: 1px solid var(--a-color-outline);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 10;
+            padding: var(--a-space-m);
+            box-shadow: var(--a-shadow-lg);
+        }
+        .drawer.is-open {
+            transform: translateX(0);
+        }
+        .drawer-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            z-index: 5;
+        }
+        .drawer-backdrop.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .drawer-content {
+            padding: var(--a-space-m);
+        }
+    </style>
 </head>
-<body class="component-docs">
+<body>
+    <div class="component-section">
+        <h2>Drawer Component</h2>
+        <p>Axiom01's drawer component (also known as a sidebar or off-canvas menu) provides a hidden panel that slides in from the edge of the screen. It's commonly used for navigation, settings, or supplementary content.</p>
 
-    <header class="docs-header">
-        <h1>Drawer Component</h1>
-        <p>A slide-out panel component for navigation, settings, or additional content. Provides smooth animations and proper focus management.</p>
-    </header>
-
-    <section class="docs-section">
-        <h2 class="section-title">Basic Drawer</h2>
-        <p>Left-side navigation drawer with semantic HTML structure.</p>
-
-        <div class="example-preview">
-            <button class="trigger" data-drawer="demo-drawer">
-                <i class="fas fa-bars" aria-hidden="true"></i>
-                <span>Open Menu</span>
-            </button>
-
-            <div class="drawer" id="demo-drawer" aria-hidden="true">
-                <div class="overlay" aria-hidden="true"></div>
-                <nav role="navigation" aria-label="Main menu">
-                    <header>
-                        <h2>Menu</h2>
-                        <button class="close" aria-label="Close menu">
-                            <i class="fas fa-times" aria-hidden="true"></i>
-                        </button>
-                    </header>
-                    <div>
-                        <ul>
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#services">Services</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-                </nav>
+        <h3>Example Drawer</h3>
+        <div class="drawer-container">
+            <button class="button primary" id="openDrawer">Open Drawer</button>
+            <div class="drawer" id="myDrawer">
+                <div class="drawer-header">
+                    <h3>Drawer Title</h3>
+                    <button class="button secondary small" id="closeDrawer">Close</button>
+                </div>
+                <div class="drawer-content">
+                    <p>This is the content of the drawer.</p>
+                    <ul>
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                    </ul>
+                </div>
             </div>
+            <div class="drawer-backdrop" id="drawerBackdrop"></div>
         </div>
 
-        <div class="code-example">
-            <pre><code class="language-html">&lt;div class="drawer" id="main-drawer" aria-hidden="true"&gt;
-  &lt;div class="overlay" aria-hidden="true"&gt;&lt;/div&gt;
-  &lt;nav role="navigation" aria-label="Main menu"&gt;
-    &lt;header&gt;
-      &lt;h2&gt;Menu&lt;/h2&gt;
-      &lt;button class="close" aria-label="Close menu"&gt;
-        &lt;i class="fas fa-times" aria-hidden="true"&gt;&lt;/i&gt;
-      &lt;/button&gt;
-    &lt;/header&gt;
-    &lt;div&gt;
-      &lt;ul&gt;
-        &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
-      &lt;/ul&gt;
+        <h3>Code Example</h3>
+        <pre><code>&lt;button class="button primary" id="openDrawer"&gt;Open Drawer&lt;/button&gt;
+
+&lt;div class="drawer" id="myDrawer"&gt;
+    &lt;div class="drawer-header"&gt;
+        &lt;h3&gt;Drawer Title&lt;/h3&gt;
+        &lt;button class="button secondary small" id="closeDrawer"&gt;Close&lt;/button&gt;
     &lt;/div&gt;
-  &lt;/nav&gt;
+    &lt;div class="drawer-content"&gt;
+        &lt;p&gt;This is the content of the drawer.&lt;/p&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Item 1&lt;/li&gt;
+            &lt;li&gt;Item 2&lt;/li&gt;
+            &lt;li&gt;Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
 &lt;/div&gt;
+&lt;div class="drawer-backdrop" id="drawerBackdrop"&gt;&lt;/div&gt;
 
-&lt;button class="trigger" data-drawer="main-drawer"&gt;
-  &lt;i class="fas fa-bars" aria-hidden="true"&gt;&lt;/i&gt;
-  &lt;span&gt;Open Menu&lt;/span&gt;
-&lt;/button&gt;</code></pre>
-        </div>
-    </section>
+&lt;script&gt;
+    const openDrawerBtn = document.getElementById('openDrawer');
+    const closeDrawerBtn = document.getElementById('closeDrawer');
+    const myDrawer = document.getElementById('myDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
 
-    <section class="docs-section">
-        <h2 class="section-title">Right-side Drawer</h2>
-        <p>Settings panel drawer opening from the right side.</p>
+    openDrawerBtn.addEventListener('click', () => {
+        myDrawer.classList.add('is-open');
+        drawerBackdrop.classList.add('is-open');
+    });
 
-        <div class="example-preview">
-            <button class="trigger" data-drawer="settings-drawer">
-                <i class="fas fa-cog" aria-hidden="true"></i>
-                <span>Settings</span>
-            </button>
+    closeDrawerBtn.addEventListener('click', () => {
+        myDrawer.classList.remove('is-open');
+        drawerBackdrop.classList.remove('is-open');
+    });
 
-            <div class="drawer right" id="settings-drawer" aria-hidden="true">
-                <div class="overlay" aria-hidden="true"></div>
-                <aside role="complementary" aria-label="Settings panel">
-                    <header>
-                        <h2>Settings</h2>
-                        <button class="close" aria-label="Close settings">
-                            <i class="fas fa-times" aria-hidden="true"></i>
-                        </button>
-                    </header>
-                    <div>
-                        <section>
-                            <h3>Theme</h3>
-                            <label><input type="radio" name="theme" value="light" checked> Light</label>
-                            <label><input type="radio" name="theme" value="dark"> Dark</label>
-                        </section>
-                        <section>
-                            <h3>Notifications</h3>
-                            <label><input type="checkbox" checked> Email alerts</label>
-                            <label><input type="checkbox"> Push notifications</label>
-                        </section>
-                    </div>
-                </aside>
-            </div>
-        </div>
+    drawerBackdrop.addEventListener('click', () => {
+        myDrawer.classList.remove('is-open');
+        drawerBackdrop.classList.remove('is-open');
+    });
+&lt;/script&gt;</code></pre>
 
-        <div class="code-example">
-            <pre><code class="language-html">&lt;div class="drawer right" id="settings-drawer" aria-hidden="true"&gt;
-  &lt;div class="overlay" aria-hidden="true"&gt;&lt;/div&gt;
-  &lt;aside role="complementary" aria-label="Settings panel"&gt;
-    &lt;header&gt;
-      &lt;h2&gt;Settings&lt;/h2&gt;
-      &lt;button class="close" aria-label="Close settings"&gt;
-        &lt;i class="fas fa-times" aria-hidden="true"&gt;&lt;/i&gt;
-      &lt;/button&gt;
-    &lt;/header&gt;
-    &lt;div&gt;
-      &lt;section&gt;
-        &lt;h3&gt;Theme&lt;/h3&gt;
-        &lt;label&gt;&lt;input type="radio" name="theme" value="light"&gt; Light&lt;/label&gt;
-      &lt;/section&gt;
-    &lt;/div&gt;
-  &lt;/aside&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-    </section>
+        <h3>Usage Guidelines</h3>
+        <p>The <code>.drawer</code> class defines the hidden panel. The <code>.is-open</code> class is toggled via JavaScript to show/hide the drawer. A <code>.drawer-backdrop</code> is typically used to overlay the main content when the drawer is open, providing a visual cue and preventing interaction with the background.</p>
+        <p>You will need custom JavaScript to handle the opening and closing logic, including toggling the <code>is-open</code> class on both the drawer and its backdrop.</p>
+    </div>
 
-    <section class="docs-section">
-        <h2 class="section-title">Mini Drawer</h2>
-        <p>Compact drawer variant for quick actions or tools.</p>
-
-        <div class="example-preview">
-            <button class="trigger" data-drawer="tools-drawer">
-                <i class="fas fa-tools" aria-hidden="true"></i>
-                <span>Tools</span>
-            </button>
-
-            <div class="drawer mini" id="tools-drawer" aria-hidden="true">
-                <div class="overlay" aria-hidden="true"></div>
-                <aside role="complementary" aria-label="Tools panel">
-                    <header>
-                        <h2>Quick Tools</h2>
-                        <button class="close" aria-label="Close tools">
-                            <i class="fas fa-times" aria-hidden="true"></i>
-                        </button>
-                    </header>
-                    <div>
-                        <button class="tool">
-                            <i class="fas fa-copy" aria-hidden="true"></i>
-                            Copy
-                        </button>
-                        <button class="tool">
-                            <i class="fas fa-share" aria-hidden="true"></i>
-                            Share
-                        </button>
-                        <button class="tool">
-                            <i class="fas fa-download" aria-hidden="true"></i>
-                            Download
-                        </button>
-                    </div>
-                </aside>
-            </div>
-        </div>
-
-        <div class="code-example">
-            <pre><code class="language-html">&lt;div class="drawer mini" id="tools-drawer" aria-hidden="true"&gt;
-  &lt;div class="overlay" aria-hidden="true"&gt;&lt;/div&gt;
-  &lt;aside role="complementary" aria-label="Tools panel"&gt;
-    &lt;header&gt;
-      &lt;h2&gt;Quick Tools&lt;/h2&gt;
-      &lt;button class="close" aria-label="Close tools"&gt;
-        &lt;i class="fas fa-times" aria-hidden="true"&gt;&lt;/i&gt;
-      &lt;/button&gt;
-    &lt;/header&gt;
-    &lt;div&gt;
-      &lt;button class="tool"&gt;
-        &lt;i class="fas fa-copy" aria-hidden="true"&gt;&lt;/i&gt;
-        Copy
-      &lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/aside&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-    </section>
-
-    <section class="docs-section">
-        <h2 class="section-title">Accessibility Features</h2>
-        <ul>
-            <li><strong>Focus Management:</strong> Proper focus trapping within drawer</li>
-            <li><strong>Keyboard Navigation:</strong> Escape key closes drawer</li>
-            <li><strong>Screen Reader Support:</strong> ARIA labels and states</li>
-            <li><strong>Semantic Elements:</strong> Proper use of nav, aside, header elements</li>
-            <li><strong>Overlay Interaction:</strong> Click outside to close</li>
-        </ul>
-    </section>
-
-    <script src="../js/docs.js"></script>
-    <script src="../../js/drawer.js"></script>
+    <script src="../../js/axiom.js"></script>
 </body>
 </html>

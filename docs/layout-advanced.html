@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Layout Guide - Axiom01</title>
+    <link rel="stylesheet" href="../css/axiom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <style>
+        body {
+            padding: var(--a-space-xxl) var(--a-space-xl);
+            background-color: var(--a-color-surface);
+            color: var(--a-color-on-surface);
+            font-family: var(--a-font-family-sans);
+            line-height: var(--a-line-height-base);
+        }
+        .container {
+            max-width: var(--a-layout-max-width);
+            margin: 0 auto;
+            padding: 0 var(--a-space-xl);
+        }
+        h1 {
+            font-size: var(--a-font-size-h1);
+            color: var(--a-color-primary);
+            margin-bottom: var(--a-space-l);
+        }
+        h2 {
+            font-size: var(--a-font-size-h2);
+            color: var(--a-color-on-surface);
+            margin-top: var(--a-space-xl);
+            margin-bottom: var(--a-space-m);
+        }
+        h3 {
+            font-size: var(--a-font-size-h3);
+            color: var(--a-color-primary);
+            margin-top: var(--a-space-l);
+            margin-bottom: var(--a-space-m);
+        }
+        p {
+            margin-bottom: var(--a-space-m);
+        }
+        pre {
+            background-color: var(--a-color-code-bg);
+            color: var(--a-color-code-text);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-medium);
+            overflow-x: auto;
+            margin-bottom: var(--a-space-l);
+            border: 1px solid var(--a-color-code-border);
+        }
+        code {
+            font-family: var(--a-font-family-mono);
+            font-size: var(--a-font-size-small);
+        }
+        .layout-example-grid {
+            display: grid;
+            gap: var(--a-space-m);
+            background-color: var(--a-color-surface);
+            padding: var(--a-space-l);
+            border-radius: var(--a-border-radius-medium);
+            margin-bottom: var(--a-space-xl);
+            border: 1px solid var(--a-color-outline);
+        }
+        .layout-example-grid .grid-item {
+            background-color: var(--a-color-primary-container);
+            color: var(--a-color-on-primary-container);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-small);
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid var(--a-color-primary);
+        }
+        .nested-grid-example {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--a-space-s);
+            background-color: var(--a-color-secondary-container);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-small);
+            border: 1px solid var(--a-color-secondary);
+        }
+        .nested-grid-example .grid-item {
+            background-color: var(--a-color-secondary);
+            color: var(--a-color-on-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Advanced Layout Guide</h1>
+        <p>Axiom01's layout system is built upon the robust and flexible foundation of native CSS Grid, complemented by a cascading spacing system. This guide explores how to leverage these features to create complex, responsive, and maintainable layouts with minimal effort and semantic markup.</p>
+
+        <h2>The Axiom01 Grid System</h2>
+        <p>The core of Axiom01's layout is the <code>.grid</code> class, which applies <code>display: grid</code> and a default gap based on <code>--a-space-l</code>. You can customize the grid columns directly in your CSS or by using utility classes (if you choose to extend Axiom01 with them).</p>
+
+        <h3>Basic Grid Usage</h3>
+        <p>To create a responsive grid, simply apply the <code>.grid</code> class to a container and define your column structure. Axiom01's default <code>.grid</code> is designed to be flexible.</p>
+        <pre><code>&lt;div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"&gt;
+    &lt;div class="grid-item"&gt;Item 1&lt;/div&gt;
+    &lt;div class="grid-item"&gt;Item 2&lt;/div&gt;
+    &lt;div class="grid-item"&gt;Item 3&lt;/div&gt;
+    &lt;div class="grid-item"&gt;Item 4&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <div class="layout-example-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="grid-item">Item 1</div>
+            <div class="grid-item">Item 2</div>
+            <div class="grid-item">Item 3</div>
+            <div class="grid-item">Item 4</div>
+        </div>
+
+        <h3>Defining Columns and Rows</h3>
+        <p>You can explicitly define grid columns and rows using inline styles or custom CSS. The <code>--a-grid-gutter</code> variable controls the spacing between grid items.</p>
+        <pre><code>&lt;div class="grid" style="grid-template-columns: 1fr 2fr 1fr; grid-template-rows: auto 100px;"&gt;
+    &lt;div class="grid-item"&gt;Header&lt;/div&gt;
+    &lt;div class="grid-item" style="grid-column: span 2;"&gt;Main Content&lt;/div&gt;
+    &lt;div class="grid-item"&gt;Sidebar&lt;/div&gt;
+    &lt;div class="grid-item" style="grid-column: 1 / -1;"&gt;Footer&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <div class="layout-example-grid" style="grid-template-columns: 1fr 2fr 1fr; grid-template-rows: auto 100px;">
+            <div class="grid-item">Header</div>
+            <div class="grid-item" style="grid-column: span 2;">Main Content</div>
+            <div class="grid-item">Sidebar</div>
+            <div class="grid-item" style="grid-column: 1 / -1;">Footer</div>
+        </div>
+
+        <h3>Nested Grids</h3>
+        <p>CSS Grid allows for powerful nesting, enabling you to build complex layouts by placing grids within grid items.</p>
+        <pre><code>&lt;div class="grid" style="grid-template-columns: 1fr 1fr;"&gt;
+    &lt;div class="grid-item"&gt;Parent Item 1&lt;/div&gt;
+    &lt;div class="grid-item"&gt;
+        &lt;div class="nested-grid-example"&gt;
+            &lt;div class="grid-item"&gt;Nested 1&lt;/div&gt;
+            &lt;div class="grid-item"&gt;Nested 2&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <div class="layout-example-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="grid-item">Parent Item 1</div>
+            <div class="grid-item">
+                <div class="nested-grid-example">
+                    <div class="grid-item">Nested 1</div>
+                    <div class="grid-item">Nested 2</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Responsive Layouts with Breakpoints</h2>
+        <p>Axiom01 provides a set of predefined CSS variables for breakpoints, allowing you to create responsive designs using standard media queries.</p>
+        <table class="color-variable-table">
+            <thead>
+                <tr>
+                    <th>Variable</th>
+                    <th>Value</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><code>--a-breakpoint-xs</code></td><td><code>480px</code></td><td>Extra small devices (e.g., portrait phones)</td></tr>
+                <tr><td><code>--a-breakpoint-sm</code></td><td><code>576px</code></td><td>Small devices (e.g., landscape phones)</td></tr>
+                <tr><td><code>--a-breakpoint-md</code></td><td><code>768px</code></td><td>Medium devices (e.g., tablets)</td></tr>
+                <tr><td><code>--a-breakpoint-lg</code></td><td><code>992px</code></td><td>Large devices (e.g., laptops)</td></tr>
+                <tr><td><code>--a-breakpoint-xl</code></td><td><code>1200px</code></td><td>Extra large devices (e.g., desktops)</td></tr>
+                <tr><td><code>--a-breakpoint-xxl</code></td><td><code>1400px</code></td><td>Extra extra large devices (e.g., large desktops)</td></tr>
+            </tbody>
+        </table>
+        <pre><code>/* Example: Two columns on medium screens and up */
+.my-responsive-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column by default */
+    gap: var(--a-space-m);
+}
+
+@media (min-width: var(--a-breakpoint-md)) {
+    .my-responsive-grid {
+        grid-template-columns: 1fr 1fr; /* Two columns on medium screens and up */
+    }
+}
+
+@media (min-width: var(--a-breakpoint-lg)) {
+    .my-responsive-grid {
+        grid-template-columns: 1fr 2fr 1fr; /* Three columns on large screens and up */
+    }
+}</code></pre>
+
+        <h2>The Cascading Spacing System in Layouts</h2>
+        <p>Axiom01's unique cascading spacing system ensures consistent and harmonious layouts. All padding, margin, and gap values are derived from a single <code>--a-space-unit</code> variable, which can be adjusted globally.</p>
+        <pre><code>&lt;!-- Example of using spacing variables --&gt;
+&lt;div style="padding: var(--a-padding-xl); margin-bottom: var(--a-margin-l);"&gt;
+    &lt;p&gt;This content has extra large padding and large bottom margin.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="grid" style="gap: var(--a-space-xxl);"&gt;
+    &lt;div class="grid-item"&gt;Wide Gap Item&lt;/div&gt;
+    &lt;div class="grid-item"&gt;Wide Gap Item&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <p>By consistently using these variables, you can maintain a perfect visual rhythm throughout your application, and easily adjust the overall density of your layout by changing just one CSS variable.</p>
+    </div>
+</body>
+</html>

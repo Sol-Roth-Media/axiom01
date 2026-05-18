@@ -3,201 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axiom - Infinite Scroll Component</title>
+    <title>Infinite Scroll Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-    <link rel="stylesheet" href="../../css/prism.css">
-    <link rel="stylesheet" href="../css/docs.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <style>
+        body {
+            padding: var(--a-space-xl);
+            background-color: var(--a-color-surface);
+            color: var(--a-color-on-surface);
+            font-family: var(--a-font-family-sans);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-l);
+        }
+        .component-section {
+            background-color: var(--a-color-surface-variant);
+            padding: var(--a-space-xl);
+            border-radius: var(--a-border-radius-large);
+            border: 1px solid var(--a-color-outline);
+        }
+        .component-section h2 {
+            margin-top: 0;
+            color: var(--a-color-primary);
+            font-size: var(--a-font-size-h2);
+            margin-bottom: var(--a-space-l);
+        }
+        pre {
+            background-color: var(--a-color-code-bg);
+            color: var(--a-color-code-text);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-medium);
+            overflow-x: auto;
+            border: 1px solid var(--a-color-code-border);
+        }
+        code {
+            font-family: var(--a-font-family-mono);
+            font-size: var(--a-font-size-small);
+        }
+        /* Specific styles for Infinite Scroll demo */
+        .infinite-scroll-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--a-color-outline);
+            border-radius: var(--a-border-radius-medium);
+            margin-bottom: var(--a-space-l);
+            background-color: var(--a-color-surface);
+        }
+        .infinite-scroll-item {
+            padding: var(--a-space-m);
+            border-bottom: 1px solid var(--a-color-outline);
+        }
+        .infinite-scroll-item:last-child {
+            border-bottom: none;
+        }
+        .loading-indicator {
+            text-align: center;
+            padding: var(--a-space-m);
+            color: var(--a-color-primary);
+            font-weight: var(--a-font-weight-bold);
+        }
+    </style>
 </head>
-<body class="component-docs">
+<body>
+    <div class="component-section">
+        <h2>Infinite Scroll Component</h2>
+        <p>Axiom01 provides the structural and visual foundation for implementing infinite scrolling. This pattern allows users to continuously load content as they scroll down a page, providing a seamless browsing experience without pagination.</p>
 
-    <header class="docs-header">
-        <h1>Infinite Scroll Component</h1>
-        <p>Automatically load content as users scroll, providing seamless browsing experience with accessibility support.</p>
-    </header>
-
-    <section class="docs-section">
-        <h2 class="section-title">Basic Infinite Scroll</h2>
-        <p>Auto-loading content with proper accessibility and loading states.</p>
-
-        <div class="example-preview">
-            <div class="infinite" data-component="infinite-scroll">
-                <main role="main" aria-label="Article list">
-                    <article>
-                        <h3>Getting Started with Axiom01</h3>
-                        <p>Learn the fundamentals of semantic-first UI development with our comprehensive guide.</p>
-                    </article>
-                    <article>
-                        <h3>Building Accessible Components</h3>
-                        <p>Discover best practices for creating inclusive user interfaces that work for everyone.</p>
-                    </article>
-                    <article>
-                        <h3>Design Token Management</h3>
-                        <p>Master the art of consistent design through systematic token organization.</p>
-                    </article>
-                </main>
-
-                <div class="loading" role="status" aria-live="polite" aria-hidden="true">
-                    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
-                    <span>Loading more content...</span>
-                </div>
-
-                <div class="end" role="status" aria-hidden="true">
-                    <p>You've reached the end!</p>
-                </div>
-            </div>
+        <h3>Example Infinite Scroll List</h3>
+        <div class="infinite-scroll-container" id="infinite-scroll-demo">
+            <div class="infinite-scroll-item">Item 1: Lorem ipsum dolor sit amet.</div>
+            <div class="infinite-scroll-item">Item 2: Consectetur adipiscing elit.</div>
+            <div class="infinite-scroll-item">Item 3: Sed do eiusmod tempor incididunt.</div>
+            <div class="infinite-scroll-item">Item 4: Ut labore et dolore magna aliqua.</div>
+            <div class="infinite-scroll-item">Item 5: Ut enim ad minim veniam.</div>
+            <div class="infinite-scroll-item">Item 6: Quis nostrud exercitation ullamco.</div>
+            <div class="infinite-scroll-item">Item 7: Laboris nisi ut aliquip ex ea commodo.</div>
+            <div class="infinite-scroll-item">Item 8: Duis aute irure dolor in reprehenderit.</div>
+            <div class="infinite-scroll-item">Item 9: Excepteur sint occaecat cupidatat non proident.</div>
+            <div class="infinite-scroll-item">Item 10: Sunt in culpa qui officia deserunt.</div>
+            <div class="loading-indicator" id="loading-indicator">Loading more items...</div>
         </div>
 
-        <div class="code-example">
-            <pre><code class="language-html">&lt;div class="infinite" data-component="infinite-scroll"&gt;
-  &lt;main role="main" aria-label="Article list"&gt;
-    &lt;article&gt;
-      &lt;h3&gt;Article Title 1&lt;/h3&gt;
-      &lt;p&gt;Article content...&lt;/p&gt;
-    &lt;/article&gt;
-    &lt;article&gt;
-      &lt;h3&gt;Article Title 2&lt;/h3&gt;
-      &lt;p&gt;Article content...&lt;/p&gt;
-    &lt;/article&gt;
-  &lt;/main&gt;
+        <h3>Code Example</h3>
+        <pre><code>&lt;div class="infinite-scroll-container" id="infinite-scroll-demo"&gt;
+    &lt;div class="infinite-scroll-item"&gt;Item 1&lt;/div&gt;
+    &lt;div class="infinite-scroll-item"&gt;Item 2&lt;/div&gt;
+    &lt;!-- ... more items ... --&gt;
+    &lt;div class="loading-indicator" id="loading-indicator"&gt;Loading more items...&lt;/div&gt;
+&lt;/div&gt;
 
-  &lt;div class="loading" role="status" aria-live="polite" aria-hidden="true"&gt;
-    &lt;i class="fas fa-spinner fa-spin" aria-hidden="true"&gt;&lt;/i&gt;
-    &lt;span&gt;Loading more content...&lt;/span&gt;
-  &lt;/div&gt;
+&lt;script&gt;
+    const scrollContainer = document.getElementById('infinite-scroll-demo');
+    const loadingIndicator = document.getElementById('loading-indicator');
+    let itemCount = 10;
+    let isLoading = false;
 
-  &lt;div class="end" role="status" aria-hidden="true"&gt;
-    &lt;p&gt;You've reached the end!&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-    </section>
+    const loadMoreItems = () => {
+        if (isLoading) return;
+        isLoading = true;
+        loadingIndicator.style.display = 'block';
 
-    <section class="docs-section">
-        <h2 class="section-title">Grid Layout</h2>
-        <p>Infinite scroll with grid-based card layout for image galleries or product listings.</p>
+        setTimeout(() => { // Simulate network request
+            for (let i = 0; i < 5; i++) {
+                itemCount++;
+                const newItem = document.createElement('div');
+                newItem.classList.add('infinite-scroll-item');
+                newItem.textContent = `Item ${itemCount}: New content loaded.`;
+                scrollContainer.insertBefore(newItem, loadingIndicator);
+            }
+            loadingIndicator.style.display = 'none';
+            isLoading = false;
+        }, 1000);
+    };
 
-        <div class="example-preview">
-            <div class="infinite grid">
-                <main class="grid">
-                    <article class="card">
-                        <img src="../../img/placeholder-1.jpg" alt="Sample image 1" width="200" height="150">
-                        <h4>Grid Item 1</h4>
-                        <p>Description of the first item in our grid layout.</p>
-                    </article>
-                    <article class="card">
-                        <img src="../../img/placeholder-2.jpg" alt="Sample image 2" width="200" height="150">
-                        <h4>Grid Item 2</h4>
-                        <p>Description of the second item in our grid layout.</p>
-                    </article>
-                    <article class="card">
-                        <img src="../../img/placeholder-3.jpg" alt="Sample image 3" width="200" height="150">
-                        <h4>Grid Item 3</h4>
-                        <p>Description of the third item in our grid layout.</p>
-                    </article>
-                </main>
+    scrollContainer.addEventListener('scroll', () => {
+        const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+        if (scrollTop + clientHeight >= scrollHeight - 50 && !isLoading) { // 50px from bottom
+            loadMoreItems();
+        }
+    });
 
-                <div class="loading" role="status" aria-live="polite">
-                    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
-                    <span>Loading more items...</span>
-                </div>
-            </div>
-        </div>
+    // Initial load if container is not full
+    if (scrollContainer.scrollHeight <= scrollContainer.clientHeight) {
+        loadMoreItems();
+    }
+&lt;/script&gt;</code></pre>
 
-        <div class="code-example">
-            <pre><code class="language-html">&lt;div class="infinite grid"&gt;
-  &lt;main class="grid"&gt;
-    &lt;article class="card"&gt;
-      &lt;img src="image1.jpg" alt="Sample image 1"&gt;
-      &lt;h4&gt;Grid Item 1&lt;/h4&gt;
-      &lt;p&gt;Description of the first item.&lt;/p&gt;
-    &lt;/article&gt;
-  &lt;/main&gt;
+        <h3>Usage Guidelines</h3>
+        <p>The <code>.infinite-scroll-container</code> class defines the scrollable area. Individual content blocks should use <code>.infinite-scroll-item</code>. A <code>.loading-indicator</code> can be used to provide feedback to the user while new content is being fetched.</p>
+        <p>Implementing infinite scroll requires JavaScript to detect when the user reaches the bottom of the scrollable area and then fetch and append new content. The example above provides a basic JavaScript implementation using a simulated delay.</p>
+        <p>Consider accessibility for users who might prefer traditional pagination or who may find infinite scrolling disorienting. Provide an alternative if necessary.</p>
+    </div>
 
-  &lt;div class="loading" role="status" aria-live="polite"&gt;
-    &lt;i class="fas fa-spinner fa-spin" aria-hidden="true"&gt;&lt;/i&gt;
-    &lt;span&gt;Loading more items...&lt;/span&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-    </section>
-
-    <section class="docs-section">
-        <h2 class="section-title">Load More Button</h2>
-        <p>Alternative to automatic scrolling with manual load trigger for better user control.</p>
-
-        <div class="example-preview">
-            <div class="infinite manual">
-                <main>
-                    <article>
-                        <h3>Manual Loading Example 1</h3>
-                        <p>Content that loads when the user explicitly requests more items.</p>
-                    </article>
-                    <article>
-                        <h3>Manual Loading Example 2</h3>
-                        <p>This approach gives users more control over their browsing experience.</p>
-                    </article>
-                </main>
-
-                <footer>
-                    <button class="primary" data-action="load-more">
-                        <i class="fas fa-plus" aria-hidden="true"></i>
-                        Load More Items
-                    </button>
-                </footer>
-
-                <div class="loading" role="status" aria-live="polite" hidden>
-                    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
-                    <span>Loading...</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="code-example">
-            <pre><code class="language-html">&lt;div class="infinite manual"&gt;
-  &lt;main&gt;
-    &lt;article&gt;
-      &lt;h3&gt;Manual Loading Example 1&lt;/h3&gt;
-      &lt;p&gt;Content that loads when the user explicitly requests more items.&lt;/p&gt;
-    &lt;/article&gt;
-  &lt;/main&gt;
-
-  &lt;footer&gt;
-    &lt;button class="primary" data-action="load-more"&gt;
-      &lt;i class="fas fa-plus" aria-hidden="true"&gt;&lt;/i&gt;
-      Load More Items
-    &lt;/button&gt;
-  &lt;/footer&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-    </section>
-
-    <section class="docs-section">
-        <h2 class="section-title">CSS Variables</h2>
-        <p>Customize the infinite scroll appearance using design tokens.</p>
-
-        <div class="code-example">
-            <pre><code class="language-css">.infinite {
-  --loading-color: var(--a-color-primary);
-  --content-spacing: var(--a-space-l);
-  --grid-columns: 3;
-  --grid-gap: var(--a-space-m);
-}</code></pre>
-        </div>
-    </section>
-
-    <section class="docs-section">
-        <h2 class="section-title">Accessibility Features</h2>
-        <ul>
-            <li><strong>Live Regions:</strong> Loading status announced to screen readers</li>
-            <li><strong>Semantic Structure:</strong> Proper main, article, and section elements</li>
-            <li><strong>Keyboard Navigation:</strong> Load more button is keyboard accessible</li>
-            <li><strong>Focus Management:</strong> New content receives appropriate focus</li>
-            <li><strong>Progress Indication:</strong> Clear loading states and end messages</li>
-        </ul>
-    </section>
-
-    <script src="../js/docs.js"></script>
-    <script src="../../js/infinite-scroll.js"></script>
+    <script src="../../js/axiom.js"></script>
 </body>
 </html>
