@@ -666,7 +666,6 @@ html[data-theme='dark'],
     hsl(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) - 5%)),
     hsl(var(--a-color-primary-hue), var(--a-saturation-primary), calc(var(--a-brightness-primary) + 5%)));
 
-    /* Hero section gradient for dark theme (darker but still visible content) */
     --a-gradient-hero: linear-gradient(135deg,
     hsl(var(--a-color-primary-hue), var(--a-saturation-primary), 30%),
     hsl(var(--a-color-primary-hue), var(--a-saturation-primary), 40%));
@@ -1811,6 +1810,7 @@ header.main nav {
     height: 100%;
     max-width: 1400px;
     margin: 0 auto;
+    padding: 0 var(--a-space-m); /* Added horizontal padding */
 }
 header.main .brand {
     font-family: var(--a-font-family-mono);
@@ -2014,8 +2014,9 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     padding: var(--a-space-m);
     border-radius: var(--a-border-radius-medium);
     white-space: pre-wrap;
-    word-break: break-all;
-    height: 100%;
+    overflow-x: auto; /* Ensure horizontal scrolling */
+    /* Removed: word-break: break-all; */
+    /* Removed: height: 100%; */
 }
 
 /* --- Responsive Image Utility --- */
@@ -2465,7 +2466,7 @@ section.hero .button.secondary {
 
 /* --- General Content Sections --- */
 section {
-    padding: var(--a-space-xxl) 0;
+    padding: var(--a-space-xl) 0; /* Adjusted from xxl to xl */
 }
 section header {
     text-align: center;
@@ -2998,11 +2999,11 @@ section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); m
 @media (max-width: 768px) {
     header.main ul.links { display: none; }
     header.main .menu-toggle { display: block; }
-    header.main.is-open ul.links {
+    header.main.menu-open ul.links { /* Changed from .is-open to .menu-open */
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 80px;
+        top: 60px; /* Adjusted from 80px to 60px */
         left: 0;
         right: 0;
         background: var(--a-color-surface);
@@ -3092,7 +3093,7 @@ section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); m
 }
 
 .carousel-control-next-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3csvg%3e");
 }
 
 .carousel-indicators {
@@ -3813,6 +3814,27 @@ textarea {
     color: #f8fafc;
 }
 
+/* Ensure search modal and component browser respect dark mode */
+[data-theme="dark"] .search-modal-content,
+[data-theme="dark"] .component-browser {
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+}
+
+[data-theme="dark"] .search-modal-content header,
+[data-theme="dark"] .component-browser header {
+    background-color: var(--a-color-surface-variant);
+}
+
+[data-theme="dark"] #search-modal-input,
+[data-theme="dark"] #component-search-input,
+[data-theme="dark"] #component-category-filter {
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    border-color: var(--a-color-outline);
+}
+
+
 /*
 ================================================================================
                                                                               |
@@ -4481,4 +4503,3 @@ table tbody tr:hover {
     transform: translateY(-50%);
     margin-right: var(--a-space-s);
 }
-
