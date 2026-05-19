@@ -99,7 +99,21 @@ Axiom01 aims for broad browser compatibility, focusing on modern browsers.
 *   **CSS Features:** Leverages modern CSS features like CSS Variables, Flexbox, and Grid. Fallbacks are provided where feasible, but older browsers (e.g., IE11) are not officially supported.
 *   **JavaScript:** Written in modern JavaScript (ES6+). Transpilation is recommended for broader compatibility if targeting older environments. The provided `axiom.js` and component scripts assume a modern browser environment.
 
-## 5. Vision for a Theme Generation Tool
+## 5. Content Security Policy (CSP) Considerations
+
+When using Axiom01's dynamic component loading (via `import()`), you might encounter Content Security Policy (CSP) errors related to `eval()` or `unsafe-eval`. This is because some server configurations or default CSPs might interpret dynamic `import()` statements as similar to `eval()`, which is often restricted for security reasons.
+
+To resolve this, you need to configure your server's Content Security Policy to allow `unsafe-eval` for `script-src`.
+
+**Example CSP Header (Server-side configuration):**
+
+```
+Content-Security-Policy: script-src 'self' 'unsafe-inline' 'unsafe-eval';
+```
+
+**Note:** While `unsafe-eval` is necessary for dynamic imports in some environments, it should be used with caution as it can potentially increase the attack surface if not managed carefully. Always ensure all scripts loaded are trusted.
+
+## 6. Vision for a Theme Generation Tool
 
 A key future enhancement for Axiom01 is a comprehensive, interactive theme generation tool. This tool would:
 

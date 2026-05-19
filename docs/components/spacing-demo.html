@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spacing Demo Component - Axiom01</title>
+    <title>Spacing Demo - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="stylesheet" href="../../css/doc-styles.css"> <!-- Link to new doc-specific styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,12 +14,12 @@
 <body class="axiom-body">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
-            <a href="/" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="/#philosophy">Philosophy</a></li>
-                <li><a href="/#components">Components</a></li>
-                <li><a href="/#get-started">Get Started</a></li>
-                <li><a href="/docs/placeholder.html">Documentation</a></li>
+                <li><a href="../../index.html#philosophy">Philosophy</a></li>
+                <li><a href="../../index.html#components">Components</a></li>
+                <li><a href="../../index.html#get-started">Get Started</a></li>
+                <li><a href="../placeholder.html">Documentation</a></li>
             </ul>
             <div class="actions">
                 <button class="search-toggle" aria-label="Open Search">
@@ -39,27 +39,83 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero small">
-            <div class="content">
-                <h1>Spacing Demo Component</h1>
-                <p>The Spacing Demo component visually illustrates Axiom01's cascading spacing system, allowing users to interactively adjust the base spacing unit and observe its global impact on layout.</p>
-            </div>
-        </section>
+    <div class="doc-main-content">
+        <aside class="doc-sidebar">
+            <nav aria-label="Documentation Sidebar">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="../../README.md">Overview & Quickstart</a></li>
+                    <li><a href="../../index.html#get-started">Installation</a></li>
+                    <li><a href="../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                </ul>
 
-        <section id="purpose">
-            <div class="container">
-                <h2>Purpose</h2>
+                <h3>Core Concepts</h3>
+                <ul>
+                    <li><a href="../colors-advanced.html">Color System</a></li>
+                    <li><a href="../typography-advanced.html">Typography</a></li>
+                    <li><a href="../layout-advanced.html">Layout & Grid</a></li>
+                    <li><a href="../media-advanced.html">Media & Icons</a></li>
+                </ul>
+
+                <h3>Components</h3>
+                <ul>
+                    <li><a href="../../index.html#components">Component Browser</a></li>
+                    <li><a href="../components-simple.html">Simple Components</a></li>
+                    <li><a href="../components-advanced.html">Advanced Components</a></li>
+                    <li><a href="accordion.html">Accordion</a></li>
+                    <li><a href="dropdown.html">Dropdown</a></li>
+                    <li><a href="mobile-navbar.html">Mobile Navbar</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="spacing-demo.html">Spacing Demo</a></li>
+                </ul>
+
+                <h3>Advanced Topics & Tools</h3>
+                <ul>
+                    <li><a href="../theme-customization-wizard.html">Theme Customization Wizard</a></li>
+                    <li><a href="../interactive-playground.html">Interactive Playground</a></li>
+                    <li><a href="../contributing.md">Contributing</a></li>
+                    <li><a href="../DEVELOPER.md">Developer Guide</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="doc-content">
+            <section class="hero small">
+                <div class="content">
+                    <h1 class="doc-title">Spacing Demo Component</h1>
+                    <p class="doc-description">The Spacing Demo component visually illustrates Axiom01's cascading spacing system, allowing users to interactively adjust the base spacing unit and observe its global impact on layout.</p>
+                </div>
+            </section>
+
+            <div class="doc-section">
+                <h2 class="doc-section-title">Live Example</h2>
+                <div class="doc-live-example">
+                    <div class="spacing-demo" data-component="spacing-demo">
+                        <div class="controls">
+                            <label for="space-unit-slider">--a-space-unit: <span id="space-unit-value">1</span>rem</label>
+                            <input type="range" id="space-unit-slider" min="0.5" max="2" step="0.1" value="1">
+                        </div>
+                        <div class="example-box">
+                            <div class="example-item" style="padding: var(--a-space-l);">Card (padding: --a-space-l)</div>
+                            <div class="example-item" style="padding: var(--a-space-m);">Button (padding: --a-space-m)</div>
+                            <div class="example-item" style="padding: var(--a-space-s);">Tag (padding: --a-space-s)</div>
+                        </div>
+                        <p class="example-caption">The container above uses <code>gap: var(--a-space-m)</code>. Each item's margin and padding are derived from the same unit.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-section">
+                <h2 class="doc-section-title">Purpose</h2>
                 <p>Axiom01's layout is built on a single source of truth for all spacing: the CSS variable <code>--a-space-unit</code>. This variable generates a comprehensive, consistent scale (from <code>--a-space-xs</code> to <code>--a-space-xxl</code>) used for <code>padding</code>, <code>margin</code>, and <code>gap</code> properties throughout the framework. The Spacing Demo component provides a live, interactive way to understand and demonstrate this system.</p>
             </div>
-        </section>
 
-        <section id="usage">
-            <div class="container">
-                <h2>Usage</h2>
-                <p>To use the spacing demo, simply include the HTML structure and ensure <code>axiom.js</code> is loaded. The component will automatically initialize the slider and update the displayed spacing values.</p>
+            <div class="doc-section">
+                <h2 class="doc-section-title">Usage</h2>
+                <p>To use the spacing demo, simply include the HTML structure and ensure <code>index-page-manager.js</code> is loaded. The component will automatically initialize the slider and update the displayed spacing values.</p>
                 <h3>HTML Structure</h3>
-                <pre><code>&lt;div class="spacing-demo" data-component="spacing-demo"&gt;
+                <div class="doc-code-block">
+                    <pre><code>&lt;div class="spacing-demo" data-component="spacing-demo"&gt;
     &lt;div class="controls"&gt;
         &lt;label for="space-unit-slider"&gt;--a-space-unit: &lt;span id="space-unit-value"&gt;1&lt;/span&gt;rem&lt;/label&gt;
         &lt;input type="range" id="space-unit-slider" min="0.5" max="2" step="0.1" value="1"&gt;
@@ -71,38 +127,36 @@
     &lt;/div&gt;
     &lt;p class="example-caption"&gt;The container above uses &lt;code&gt;gap: var(--a-space-m)&lt;/code&gt;. Each item's margin and padding are derived from the same unit.&lt;/p&gt;
 &lt;/div&gt;</code></pre>
+                </div>
                 <h3>JavaScript Initialization</h3>
-                <p>The <code>spacing-demo.js</code> script (loaded via <code>axiom.js</code>) handles the interactivity of the slider. It listens for changes on the <code>#space-unit-slider</code> input and dynamically updates the <code>--a-space-unit</code> CSS variable on the <code>&lt;html&gt;</code> element, causing a global recalculation of all spacing values.</p>
+                <p>The <code>initSpacingDemo</code> function in <code>index-page-manager.js</code> handles the interactivity of the slider. It listens for changes on the <code>#space-unit-slider</code> input and dynamically updates the <code>--a-space-unit</code> CSS variable on the <code>&lt;html&gt;</code> element, causing a global recalculation of all spacing values.</p>
             </div>
-        </section>
 
-        <section id="accessibility">
-            <div class="container">
-                <h2>Accessibility</h2>
+            <div class="doc-section">
+                <h2 class="doc-section-title">Accessibility</h2>
+                <p>Axiom's Spacing Demo component is built with accessibility in mind:</p>
                 <ul>
                     <li>The slider input has a descriptive <code>&lt;label&gt;</code> associated with it.</li>
                     <li>The current value of the <code>--a-space-unit</code> is displayed visually next to the label.</li>
                 </ul>
             </div>
-        </section>
 
-        <section id="customization">
-            <div class="container">
-                <h2>Customization</h2>
+            <div class="doc-section">
+                <h2 class="doc-section-title">Customization</h2>
                 <p>While the core functionality is about demonstrating the global spacing system, the visual aspects of the demo itself can be customized:</p>
                 <ul>
                     <li>The <code>.spacing-demo</code> container and its children can be styled using standard CSS.</li>
                     <li>The <code>--a-space-unit</code> variable is the primary point of customization for the framework's spacing.</li>
                 </ul>
             </div>
-        </section>
-    </main>
+        </main>
+    </div>
 
     <script src="../../js/index-page-manager.js"></script>
     <footer class="main-footer">
         <div class="content">
             <div class="brand">
-                <a href="/" class="logo">[Ax<span class="primary">01</span>]</a>
+                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
                 <p class="tagline">The Semantic Web, Reimagined.</p>
             </div>
             <div class="links">
@@ -111,9 +165,9 @@
                     <ul>
                         <li><a href="../placeholder.html">Documentation</a></li>
                         <li><a href="../../README.md">README</a></li>
-                        <li><a href="../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="/#get-started">Getting Started</a></li>
+                        <li><a href="../DEVELOPER.md">Developer Guide</a></li>
+                        <li><a href="../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../index.html#get-started">Getting Started</a></li>
                     </ul>
                 </div>
                 <div class="column">
@@ -126,8 +180,8 @@
                     <h4>More</h4>
                     <ul>
                         <li><a href="../interactive-playground.html">Playground</a></li>
-                        <li><a href="/#example-sites">Example Sites</a></li>
-                        <li><a href="/#release-info">Release Info</a></li>
+                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
                 </div>
             </div>

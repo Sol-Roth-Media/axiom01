@@ -1,0 +1,641 @@
+/* docs/doc-styles.css */
+
+.doc-main-content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px; /* Offset for fixed header */
+    min-height: calc(100vh - 60px); /* Ensure content takes full height */
+}
+
+.doc-sidebar {
+    width: 100%;
+    background-color: var(--a-color-surface-variant);
+    border-bottom: 1px solid var(--a-color-outline);
+    padding: var(--a-space-l);
+}
+
+.doc-sidebar nav h3 {
+    font-size: 1.1rem;
+    font-weight: var(--a-font-weight-bold);
+    margin-top: var(--a-space-m);
+    margin-bottom: var(--a-space-s);
+    color: var(--a-color-primary);
+}
+
+.doc-sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--a-space-l);
+}
+
+.doc-sidebar nav ul li a {
+    display: block;
+    padding: var(--a-space-s);
+    color: var(--a-color-on-surface);
+    text-decoration: none;
+    border-radius: var(--a-border-radius-small);
+    transition: background-color 0.2s ease;
+}
+
+.doc-sidebar nav ul li a:hover {
+    background-color: var(--a-color-surface);
+}
+
+.doc-content {
+    flex-grow: 1;
+    padding: var(--a-space-xl);
+    max-width: 100%; /* Ensure it doesn't overflow on small screens */
+}
+
+.doc-title {
+    font-size: 2.5rem;
+    font-weight: var(--a-font-weight-black);
+    margin-bottom: var(--a-space-m);
+    color: var(--a-color-on-surface);
+}
+
+.doc-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--a-color-on-surface-variant);
+    margin-bottom: var(--a-space-xl);
+}
+
+.doc-section {
+    margin-bottom: var(--a-space-xxl);
+}
+
+.doc-section-title {
+    font-size: 1.8rem;
+    font-weight: var(--a-font-weight-bold);
+    margin-bottom: var(--a-space-l);
+    color: var(--a-color-on-surface);
+    border-bottom: 1px solid var(--a-color-outline);
+    padding-bottom: var(--a-space-s);
+}
+
+.doc-live-example {
+    background-color: var(--a-color-surface-variant);
+    padding: var(--a-space-l);
+    border-radius: var(--a-border-radius-large);
+    margin-bottom: var(--a-space-l);
+    border: 1px dashed var(--a-color-outline);
+}
+
+.doc-code-block {
+    background-color: var(--a-color-code-bg);
+    color: var(--a-color-code-text);
+    padding: var(--a-space-l);
+    border-radius: var(--a-border-radius-medium);
+    overflow-x: auto;
+    border: 1px solid var(--a-color-code-border);
+}
+
+.doc-code-block pre {
+    margin: 0;
+}
+
+.doc-code-block code {
+    font-family: var(--a-font-family-mono);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments for doc layout */
+@media (min-width: 768px) {
+    .doc-main-content {
+        flex-direction: row;
+    }
+
+    .doc-sidebar {
+        width: 280px; /* Fixed width for sidebar on larger screens */
+        flex-shrink: 0;
+        border-right: 1px solid var(--a-color-outline);
+        border-bottom: none;
+        position: sticky;
+        top: 60px; /* Stick below the fixed header */
+        height: calc(100vh - 60px); /* Fill remaining viewport height */
+        overflow-y: auto; /* Enable scrolling for long sidebars */
+    }
+
+    .doc-content {
+        padding-left: var(--a-space-xl);
+        padding-right: var(--a-space-xl);
+    }
+}
+
+/* Styles moved from inline in placeholder.html */
+body {
+    /* Removed padding from body, will be handled by doc-main-content */
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    font-family: var(--a-font-family-sans);
+    line-height: var(--a-line-height-base);
+}
+.container {
+    max-width: var(--a-layout-max-width);
+    margin: 0 auto;
+    padding: 0 var(--a-space-xl);
+}
+h1 {
+    font-size: var(--a-font-size-h1);
+    color: var(--a-color-primary);
+    margin-bottom: var(--a-space-l);
+}
+h2 {
+    font-size: var(--a-font-size-h2);
+    color: var(--a-color-on-surface);
+    margin-top: var(--a-space-xl);
+    margin-bottom: var(--a-space-m);
+}
+p {
+    margin-bottom: var(--a-space-m);
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--a-space-l);
+    margin-top: var(--a-space-xl);
+}
+.card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+.card i {
+    font-size: var(--a-font-size-xxl);
+    margin-bottom: var(--a-space-m);
+    color: var(--a-color-secondary);
+}
+.card h3 {
+    font-size: var(--a-font-size-h3);
+    margin-bottom: var(--a-space-s);
+    color: var(--a-color-primary);
+}
+.card p {
+    font-size: var(--a-font-size-base);
+    color: var(--a-color-on-surface-variant);
+}
+
+/* Accordion Component Styles */
+details {
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    margin-bottom: var(--a-space-m);
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+}
+
+summary {
+    padding: var(--a-space-m) var(--a-space-l);
+    font-weight: var(--a-font-weight-bold);
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
+summary::-webkit-details-marker,
+summary::marker {
+    display: none;
+}
+
+summary:hover {
+    background-color: var(--a-color-surface-variant);
+}
+
+details[open] summary {
+    border-bottom: 1px solid var(--a-color-outline);
+}
+
+details > div {
+    padding: var(--a-space-m) var(--a-space-l);
+    border-top: 1px solid transparent;
+}
+
+summary::after {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border-right: 0.1em solid var(--a-color-on-surface);
+    border-bottom: 0.1em solid var(--a-color-on-surface);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease-in-out;
+    margin-left: var(--a-space-s);
+}
+
+details[open] summary::after {
+    transform: rotate(-135deg);
+}
+
+.doc-live-example {
+    padding: var(--a-space-l);
+    background-color: var(--a-color-surface-variant); /* Corrected from --a-color-background */
+    border-radius: var(--a-border-radius-medium);
+    margin-bottom: var(--a-space-l);
+}
+
+/* Dropdown Component Styles */
+[data-component="dropdown"] {
+    position: relative;
+    display: inline-block;
+    margin-right: var(--a-space-l);
+    margin-bottom: var(--a-space-l);
+}
+.dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--a-space-xs);
+}
+.dropdown-toggle::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: var(--a-space-xs);
+    vertical-align: middle;
+    border-top: var(--a-border-width-base) solid; /* Use base border width */
+    border-right: var(--a-border-width-base) solid transparent;
+    border-bottom: 0;
+    border-left: var(--a-border-width-base) solid transparent;
+    transition: transform 0.2s ease;
+}
+[data-component="dropdown"].is-open .dropdown-toggle::after {
+    transform: rotate(180deg);
+}
+/* Dropup specific chevron */
+[data-component="dropdown"].dropup .dropdown-toggle::after {
+    border-top: 0;
+    border-right: var(--a-border-width-base) solid transparent;
+    border-bottom: var(--a-border-width-base) solid; /* Use base border width */
+    border-left: var(--a-border-width-base) solid transparent;
+}
+[data-component="dropdown"].dropup.is-open .dropdown-toggle::after {
+    transform: rotate(0deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + var(--a-space-xs));
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 180px;
+    padding: var(--a-space-s) 0;
+    margin: 0;
+    list-style: none;
+    background-color: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium); /* Use medium border radius */
+    box-shadow: var(--a-shadow-medium); /* Use medium shadow */
+    opacity: 0;
+    transform: translateY(var(--a-space-s));
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+[data-component="dropdown"].is-open .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+.dropdown-menu li a {
+    display: block;
+    padding: var(--a-space-xs) var(--a-space-m);
+    clear: both;
+    font-weight: var(--a-font-weight-normal);
+    color: var(--a-color-on-surface);
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+.dropdown-menu li a:hover,
+.dropdown-menu li a:focus {
+    color: var(--a-color-on-primary);
+    background-color: var(--a-color-primary);
+}
+.dropdown-menu .divider {
+    height: 0;
+    margin: var(--a-space-xs) 0;
+    overflow: hidden;
+    border-top: 1px solid var(--a-color-outline);
+}
+
+/* Dropup variation */
+[data-component="dropdown"].dropup .dropdown-menu {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: var(--a-space-xs);
+    transform: translateY(calc(-1 * var(--a-space-s)));
+}
+[data-component="dropdown"].dropup.is-open .dropdown-menu {
+    transform: translateY(0);
+}
+
+/* Right-aligned variation */
+.dropdown-menu-right {
+    left: auto;
+    right: 0;
+}
+
+/* Mobile Navbar Component Styles */
+.mobile-navbar-demo-container {
+    position: relative;
+    height: 200px; /* Simulate a small viewport */
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    overflow: hidden;
+    background-color: var(--a-color-surface);
+    margin-bottom: var(--a-space-l);
+}
+.mobile-navbar-demo-container .main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--a-color-surface-variant);
+    color: var(--a-color-on-surface-variant);
+    box-shadow: var(--a-shadow-medium); /* Changed to medium */
+    z-index: 10;
+}
+.mobile-navbar-demo-content {
+    padding-top: 60px; /* Offset for fixed header */
+    height: 100%;
+    overflow-y: auto;
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Search Component Styles */
+[data-component="search"] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Using rgba for overlay */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: var(--a-space-xl);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+[data-component="search"].is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+[data-component="search"] > div { /* Inner content container */
+    background-color: var(--a-color-surface); /* Using surface for background */
+    border-radius: var(--a-border-radius-medium); /* Using medium border radius */
+    width: 90%;
+    max-width: 700px;
+    box-shadow: var(--a-shadow-large); /* Using large shadow */
+    display: flex;
+    flex-direction: column;
+    max-height: 80%;
+    overflow: hidden;
+}
+
+[data-component="search"] header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--a-space-m);
+    border-bottom: 1px solid var(--a-color-outline); /* Using outline for border */
+}
+
+[data-component="search"] h3 {
+    margin: 0;
+    font-size: var(--a-font-size-h3); /* Using h3 font size */
+    color: var(--a-color-on-surface); /* Using on-surface for text color */
+}
+
+[data-search-close] {
+    background: none;
+    border: none;
+    font-size: 1.5rem; /* Adjusted font size */
+    color: var(--a-color-on-surface-variant); /* Using on-surface-variant for secondary text */
+    cursor: pointer;
+    padding: var(--a-space-xs);
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+[data-search-close]:hover {
+    color: var(--a-color-primary);
+}
+
+[data-search-input] {
+    width: 100%;
+    padding: var(--a-space-s) var(--a-space-m);
+    border: 1px solid var(--a-color-outline); /* Using outline for border */
+    border-radius: var(--a-border-radius-medium); /* Using medium border radius */
+    font-size: var(--a-font-size-base); /* Using base font size */
+    color: var(--a-color-on-surface); /* Using on-surface for text color */
+    background-color: var(--a-color-surface); /* Using surface for background */
+    margin: var(--a-space-m);
+    box-sizing: border-box;
+}
+
+[data-search-input]::placeholder {
+    color: var(--a-color-on-surface-variant); /* Using on-surface-variant for placeholder */
+}
+
+[data-search-results] {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0 var(--a-space-m) var(--a-space-m);
+}
+
+[data-search-results] ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+[data-search-results] li {
+    padding: var(--a-space-s);
+    margin-bottom: var(--a-space-xs);
+    border-radius: var(--a-border-radius-small); /* Using small border radius */
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+[data-search-results] li:hover,
+[data-search-results] li.is-active {
+    background-color: color-mix(in srgb, var(--a-color-primary) 10%, transparent); /* Using color-mix for hover */
+}
+
+[data-search-results] li a {
+    text-decoration: none;
+    color: var(--a-color-on-surface); /* Using on-surface for text color */
+    display: block;
+}
+
+[data-search-results] li strong {
+    color: var(--a-color-primary);
+}
+
+[data-search-results] li small {
+    display: block;
+    color: var(--a-color-on-surface-variant); /* Using on-surface-variant for secondary text */
+    font-size: var(--a-font-size-small); /* Using small font size */
+}
+
+/* Pure CSS Search Icon for Toggle Button */
+[data-search-toggle] {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--a-space-xs);
+    color: var(--a-color-on-surface-variant); /* Using on-surface-variant for icon color */
+    font-size: 1.2rem; /* Adjusted font size */
+    position: relative;
+    width: 40px; /* Fixed width for icon */
+    height: 40px; /* Fixed height for icon */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Make it circular */
+    transition: all 0.2s ease;
+}
+
+[data-search-toggle]:hover {
+    color: var(--a-color-primary);
+    background-color: var(--a-color-surface-variant);
+}
+
+[data-search-toggle]::before {
+    content: '';
+    display: block;
+    width: 12px; /* Size of the circle */
+    height: 12px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-60%, -60%);
+}
+
+[data-search-toggle]::after {
+    content: '';
+    display: block;
+    width: 8px; /* Length of the handle */
+    height: 2px;
+    background-color: currentColor;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-10%, 20%) rotate(45deg);
+    transform-origin: top left;
+}
+
+/* Spacing Demo Component Styles */
+.spacing-demo {
+    padding: var(--a-space-m);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    background-color: var(--a-color-surface);
+}
+.spacing-demo .controls {
+    margin-bottom: var(--a-space-l);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.spacing-demo .controls label {
+    margin-bottom: var(--a-space-s);
+    font-weight: var(--a-font-weight-bold);
+}
+.spacing-demo .controls input[type="range"] {
+    width: 100%;
+    max-width: 300px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: var(--a-space-xs);
+    background: var(--a-color-outline); /* Using outline for track */
+    border-radius: var(--a-border-radius-small);
+    outline: none;
+    transition: opacity .2s;
+}
+.spacing-demo .controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--a-space-m);
+    height: var(--a-space-m);
+    border-radius: 50%;
+    background: var(--a-color-primary); /* Using primary for thumb */
+    cursor: pointer;
+    margin-top: calc((var(--a-space-xs) - var(--a-space-m)) / 2);
+}
+.spacing-demo .controls input[type="range"]::-moz-range-thumb {
+    width: var(--a-space-m);
+    height: var(--a-space-m);
+    border-radius: 50%;
+    background: var(--a-color-primary); /* Using primary for thumb */
+    cursor: pointer;
+}
+
+.spacing-demo .example-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--a-space-m);
+    border: 1px dashed var(--a-color-outline); /* Using outline for border */
+    padding: var(--a-space-m);
+    margin-bottom: var(--a-space-m);
+}
+.spacing-demo .example-item {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    border-radius: var(--a-border-radius-small); /* Using small border radius */
+    text-align: center;
+    min-width: 100px;
+    flex-grow: 1;
+}
+.spacing-demo .example-caption {
+    font-size: var(--a-font-size-small);
+    color: var(--a-color-on-surface-variant);
+}
+
+/* Editor Component Styles */
+.editor-placeholder {
+    width: 100%;
+    min-height: 200px;
+    padding: var(--a-space-m);
+    border: 1px solid var(--a-color-outline); /* Using outline for border */
+    border-radius: var(--a-border-radius-medium); /* Using medium border radius */
+    background-color: var(--a-color-surface); /* Using surface for background */
+    color: var(--a-color-on-surface); /* Using on-surface for text */
+    font-family: var(--a-font-family-sans);
+    font-size: var(--a-font-size-base);
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+/* Button Component Styles */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--a-space-m);
+    margin-bottom: var(--a-space-l);
+    align-items: center;
+}
+.component-section h2 {
+    margin-top: 0;
+    color: var(--a-color-primary);
+    font-size: var(--a-font-size-h2);
+    margin-bottom: var(--a-space-l);
+}

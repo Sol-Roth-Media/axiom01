@@ -391,6 +391,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Highlight active link in sidebar navigation
+    const initSidebarHighlighting = () => {
+        const sidebarLinks = document.querySelectorAll('.doc-sidebar nav ul li a');
+        const currentPath = window.location.pathname;
+
+        sidebarLinks.forEach(link => {
+            // Normalize href to match currentPath format (e.g., remove leading '../')
+            let linkPath = link.getAttribute('href');
+            if (linkPath.startsWith('../')) {
+                linkPath = linkPath.substring(2); // Remove '../'
+            }
+            if (linkPath.startsWith('./')) {
+                linkPath = linkPath.substring(2); // Remove './'
+            }
+
+            // Construct full absolute path for comparison
+            const absoluteLinkPath = new URL(linkPath, window.location.origin + currentPath.substring(0, currentPath.lastIndexOf('/') + 1)).pathname;
+
+            // Check if the current path (or a part of it) matches the link's path
+            // This handles cases where the link might be to a directory (e.g., /docs/)
+            // or a specific file (e.g., /docs/placeholder.html)
+            if (currentPath === absoluteLinkPath || currentPath.startsWith(absoluteLinkPath + '/') || currentPath.endsWith(linkPath)) {
+                link.closest('li').classList.add('active');
+            } else {
+                link.closest('li').classList.remove('active');
+            }
+        });
+    };
+
     // Initialize all functionalities
     initMobileNav();
     initHeaderThemeToggle();
@@ -400,4 +429,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initCodeCopying();
     initThemeExplorer();
     initSmoothScrolling();
+    initSidebarHighlighting(); // Call the new function
 });

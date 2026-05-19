@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -6,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="stylesheet" href="../../css/doc-styles.css"> <!-- Link to new doc-specific styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,12 +14,12 @@
 <body class="axiom-body">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
-            <a href="/" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="/#philosophy">Philosophy</a></li>
-                <li><a href="/#components">Components</a></li>
-                <li><a href="/#get-started">Get Started</a></li>
-                <li><a href="/docs/placeholder.html">Documentation</a></li>
+                <li><a href="../../index.html#philosophy">Philosophy</a></li>
+                <li><a href="../../index.html#components">Components</a></li>
+                <li><a href="../../index.html#get-started">Get Started</a></li>
+                <li><a href="../placeholder.html">Documentation</a></li>
             </ul>
             <div class="actions">
                 <button class="search-toggle" aria-label="Open Search">
@@ -39,27 +39,94 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero small">
-            <div class="content">
-                <h1>Search Component</h1>
-                <p>The Search component provides an accessible and interactive search overlay for your website, allowing users to quickly find documentation, components, or any other content.</p>
-            </div>
-        </section>
+    <div class="doc-main-content">
+        <aside class="doc-sidebar">
+            <nav aria-label="Documentation Sidebar">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="../../README.md">Overview & Quickstart</a></li>
+                    <li><a href="../../index.html#get-started">Installation</a></li>
+                    <li><a href="../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                </ul>
 
-        <section id="usage">
-            <div class="container">
-                <h2>Usage</h2>
-                <p>The search component is typically triggered by a button (e.g., a search icon) and appears as a modal overlay. It uses Fuse.js for fuzzy searching capabilities.</p>
-                <h3>HTML Structure</h3>
-                <p>The search modal requires a specific HTML structure. The main container should have <code>data-component="search"</code> and an ID (e.g., <code>search-modal</code>).</p>
-                <pre><code>&lt;!-- Search Toggle Button (usually in header) --&gt;
-&lt;button class="search-toggle" aria-label="Open Search"&gt;
+                <h3>Core Concepts</h3>
+                <ul>
+                    <li><a href="../colors-advanced.html">Color System</a></li>
+                    <li><a href="../typography-advanced.html">Typography</a></li>
+                    <li><a href="../layout-advanced.html">Layout & Grid</a></li>
+                    <li><a href="../media-advanced.html">Media & Icons</a></li>
+                </ul>
+
+                <h3>Components</h3>
+                <ul>
+                    <li><a href="../../index.html#components">Component Browser</a></li>
+                    <li><a href="../components-simple.html">Simple Components</a></li>
+                    <li><a href="../components-advanced.html">Advanced Components</a></li>
+                    <li><a href="accordion.html">Accordion</a></li>
+                    <li><a href="dropdown.html">Dropdown</a></li>
+                    <li><a href="mobile-navbar.html">Mobile Navbar</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="spacing-demo.html">Spacing Demo</a></li>
+                </ul>
+
+                <h3>Advanced Topics & Tools</h3>
+                <ul>
+                    <li><a href="../theme-customization-wizard.html">Theme Customization Wizard</a></li>
+                    <li><a href="../interactive-playground.html">Interactive Playground</a></li>
+                    <li><a href="../contributing.md">Contributing</a></li>
+                    <li><a href="../DEVELOPER.md">Developer Guide</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="doc-content">
+            <section class="hero small">
+                <div class="content">
+                    <h1 class="doc-title">Search Component</h1>
+                    <p class="doc-description">The Search component provides an accessible and interactive search overlay for your website, allowing users to quickly find documentation, components, or any other content. It leverages native HTML elements and minimal CSS for a lightweight and performant solution.</p>
+                </div>
+            </section>
+
+            <div class="doc-section">
+                <h2 class="doc-section-title">Live Example</h2>
+                <div class="doc-live-example">
+                    <button class="search-toggle" aria-label="Open Search" aria-controls="search-dialog" aria-expanded="false">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
+
+                    <div id="search-modal" class="search-modal is-hidden" data-component="search" aria-modal="true" role="dialog">
+                        <div class="search-modal-content">
+                            <header>
+                                <h3>Search Documentation</h3>
+                                <button class="close-search-modal" aria-label="Close Search">&times;</button>
+                            </header>
+                            <div class="search-modal-body">
+                                <input type="search" id="search-modal-input" placeholder="Search components, guides, and more...">
+                                <div id="search-modal-results" class="search-results">
+                                    <!-- Search results will be dynamically inserted here -->
+                                    <ul>
+                                        <li><a href="#"><strong>Accordion</strong> Component <small>docs/components/accordion.html</small></a></li>
+                                        <li><a href="#"><strong>Dropdown</strong> Component <small>docs/components/dropdown.html</small></a></li>
+                                        <li><a href="#">Getting Started with <strong>Axiom01</strong> <small>README.md</small></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doc-section">
+                <h2 class="doc-section-title">HTML Structure</h2>
+                <p>The search component uses a minimal HTML structure, relying on <code>data-*</code> attributes for JavaScript targeting and semantic elements for accessibility.</p>
+                <div class="doc-code-block">
+                    <pre><code>&lt;!-- Search Toggle Button (can be placed anywhere, e.g., in header) --&gt;
+&lt;button class="search-toggle" aria-label="Open Search" aria-controls="search-dialog" aria-expanded="false"&gt;
     &lt;i class="fas fa-search" aria-hidden="true"&gt;&lt;/i&gt;
 &lt;/button&gt;
 
-&lt;!-- Search Modal Structure --&gt;
-&lt;div id="search-modal" class="search-modal is-hidden" data-component="search"&gt;
+&lt;!-- Search Overlay Structure --&gt;
+&lt;div id="search-modal" class="search-modal is-hidden" data-component="search" aria-modal="true" role="dialog"&gt;
     &lt;div class="search-modal-content"&gt;
         &lt;header&gt;
             &lt;h3&gt;Search Documentation&lt;/h3&gt;
@@ -67,65 +134,69 @@
         &lt;/header&gt;
         &lt;div class="search-modal-body"&gt;
             &lt;input type="search" id="search-modal-input" placeholder="Search components, guides, and more..."&gt;
-            &lt;div id="search-modal-results" class="search-results"&gt;&lt;/div&gt;
+            &lt;div id="search-modal-results" class="search-results"&gt;
+                &lt;!-- Search results will be dynamically inserted here --&gt;
+            &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-                <h3>JavaScript Initialization</h3>
-                <p>The <code>axiom.js</code> script automatically initializes any element with <code>data-component="search"</code>. The search functionality relies on <code>js/components/search.js</code> and the Fuse.js library.</p>
-                <p>The search component expects a global <code>searchData</code> array to be available, which contains the content to be searched. This data should be an array of objects, where each object has at least a <code>title</code> and <code>content</code> property.</p>
-                <pre><code>// Example searchData structure
+                </div>
+            </div>
+
+            <div class="doc-section">
+                <h2 class="doc-section-title">JavaScript Initialization</h2>
+                <p>The <code>index-page-manager.js</code> script automatically initializes any element with <code>data-component="search"</code>. The search functionality relies on the Fuse.js library.</p>
+                <p>The search component expects a global <code>searchData</code> array to be available, which contains the content to be searched. This data should be an array of objects, where each object has at least a <code>title</code>, <code>category</code>, and <code>url</code> property.</p>
+                <div class="doc-code-block">
+                    <pre><code>// Example searchData structure (must be globally accessible before search.js initializes)
 const searchData = [
-    {
-        title: "Accordion Component",
-        content: "Documentation for the Accordion component...",
-        url: "docs/components/accordion.html"
-    },
-    {
-        title: "Getting Started",
-        content: "Instructions on how to get started with Axiom01...",
-        url: "README.md"
-    }
+    { title: "Accordion", category: "feedback", url: "docs/components/placeholder.html" },
+    { title: "AI Chat", category: "ai", url: "docs/components/placeholder.html" },
+    // ... more data
 ];
 
-// The search.js component will automatically pick this up.
-// Ensure Fuse.js is loaded before axiom.js.
+// The initSearchModal function in index-page-manager.js will automatically pick this up.
+// Ensure Fuse.js is loaded before index-page-manager.js.
 </code></pre>
+                </div>
             </div>
-        </section>
 
-        <section id="accessibility">
-            <div class="container">
-                <h2>Accessibility</h2>
+            <div class="doc-section">
+                <h2 class="doc-section-title">Accessibility</h2>
+                <p>The search component is designed with accessibility in mind:</p>
                 <ul>
-                    <li>The search toggle button and close button have <code>aria-label</code> attributes for screen reader users.</li>
-                    <li>The modal itself is hidden with <code>is-hidden</code> class and managed via JavaScript to ensure proper focus trapping when open.</li>
+                    <li>The main search overlay has <code>aria-modal="true"</code> and <code>role="dialog"</code>.</li>
+                    <li>Toggle and close buttons have descriptive <code>aria-label</code> attributes.</li>
+                    <li>The toggle button's <code>aria-controls</code> links it to the search dialog, and <code>aria-expanded</code> indicates its state.</li>
+                    <li>Focus is managed to trap within the modal when open and return to the trigger when closed.</li>
                     <li>Keyboard navigation is supported: <code>Escape</code> key closes the modal, and arrow keys can navigate search results.</li>
                 </ul>
             </div>
-        </section>
 
-        <section id="customization">
-            <div class="container">
-                <h2>Customization</h2>
-                <p>The appearance of the search modal can be customized using CSS variables:</p>
+            <div class="doc-section">
+                <h2 class="doc-section-title">Customization</h2>
+                <p>The appearance of the search modal can be customized using CSS variables defined in <code>css/axiom.css</code>:</p>
                 <ul>
-                    <li><code>--a-search-modal-bg</code>: Background color of the modal overlay.</li>
-                    <li><code>--a-search-modal-content-bg</code>: Background color of the search content area.</li>
-                    <li><code>--a-search-input-border</code>: Border color of the search input.</li>
-                    <li><code>--a-search-input-color</code>: Text color of the search input.</li>
-                    <li><code>--a-search-result-hover-bg</code>: Background color for hovered search results.</li>
+                    <li><code>--a-color-overlay-bg</code>: Background color of the modal overlay.</li>
+                    <li><code>--a-color-surface</code>: Background color of the search content area.</li>
+                    <li><code>--a-color-outline</code>: Border color for input and separators.</li>
+                    <li><code>--a-color-on-surface</code>: Text color.</li>
+                    <li><code>--a-color-on-surface-variant</code>: Secondary text color (e.g., placeholders, small text).</li>
+                    <li><code>--a-color-primary</code>: Primary accent color.</li>
+                    <li><code>--a-border-radius-medium</code>: General border radius.</li>
+                    <li><code>--a-shadow-large</code>: For the modal's shadow.</li>
+                    <li><code>--a-space-*</code>: Various spacing variables for padding and margins.</li>
                 </ul>
             </div>
-        </section>
-    </main>
+        </main>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <script src="../../js/index-page-manager.js"></script>
     <footer class="main-footer">
         <div class="content">
             <div class="brand">
-                <a href="/" class="logo">[Ax<span class="primary">01</span>]</a>
+                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
                 <p class="tagline">The Semantic Web, Reimagined.</p>
             </div>
             <div class="links">
@@ -134,9 +205,9 @@ const searchData = [
                     <ul>
                         <li><a href="../placeholder.html">Documentation</a></li>
                         <li><a href="../../README.md">README</a></li>
-                        <li><a href="../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="/#get-started">Getting Started</a></li>
+                        <li><a href="../DEVELOPER.md">Developer Guide</a></li>
+                        <li><a href="../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../index.html#get-started">Getting Started</a></li>
                     </ul>
                 </div>
                 <div class="column">
@@ -149,8 +220,8 @@ const searchData = [
                     <h4>More</h4>
                     <ul>
                         <li><a href="../interactive-playground.html">Playground</a></li>
-                        <li><a href="/#example-sites">Example Sites</a></li>
-                        <li><a href="/#release-info">Release Info</a></li>
+                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
                 </div>
             </div>

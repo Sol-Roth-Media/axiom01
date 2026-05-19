@@ -74,6 +74,20 @@
             font-weight: bold;
             border: 1px solid var(--a-color-primary);
         }
+        /* Specific styles for layout examples */
+        .basic-grid-example {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        .defined-grid-example {
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: auto 100px;
+        }
+        .defined-grid-example .main-content-item {
+            grid-column: span 2;
+        }
+        .defined-grid-example .footer-item {
+            grid-column: 1 / -1;
+        }
         .nested-grid-example {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -99,6 +113,12 @@
             align-items: center;
             flex-wrap: wrap;
         }
+        .flex-layout-example {
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--a-space-m);
+        }
         .flex-example .flex-item {
             background-color: var(--a-color-tertiary-container);
             color: var(--a-color-on-tertiary-container);
@@ -108,6 +128,16 @@
             font-weight: bold;
             border: 1px solid var(--a-color-tertiary);
             flex-basis: 150px; /* Example fixed width for flex items */
+        }
+        .spacing-example-div {
+            padding: var(--a-space-xl);
+            margin-bottom: var(--a-space-l);
+            background-color: var(--a-color-surface-variant);
+            border-radius: var(--a-border-radius-medium);
+        }
+        .spacing-grid-example {
+            gap: var(--a-space-xxl);
+            margin-top: var(--a-space-l);
         }
     </style>
 </head>
@@ -119,7 +149,7 @@
                 <li><a href="/#philosophy">Philosophy</a></li>
                 <li><a href="/#components">Components</a></li>
                 <li><a href="/#get-started">Get Started</a></li>
-                <li><a href="/docs/placeholder.html">Documentation</a></li>
+                <li><a href="/docs/components-simple.html">Documentation</a></li>
             </ul>
             <div class="actions">
                 <button class="search-toggle" aria-label="Open Search">
@@ -150,17 +180,25 @@
         <section id="grid-system">
             <div class="container">
                 <h2>The Axiom01 Grid System</h2>
-                <p>The core of Axiom01's layout is the <code>.grid</code> class, which applies <code>display: grid</code> and a default gap based on <code>--a-space-l</code>. This semantic approach encourages you to define your grid structure directly in your CSS or using inline styles for specific layouts, rather than relying on an abundance of utility classes.</p>
+                <p>The core of Axiom01's layout is the <code>.grid</code> class, which applies <code>display: grid</code> and a default gap based on <code>--a-space-l</code>. This semantic approach encourages you to define your grid structure directly in your CSS, rather than relying on an abundance of utility classes or inline styles.</p>
 
                 <h3>Basic Grid Usage</h3>
-                <p>To create a responsive grid, simply apply the <code>.grid</code> class to a container. By default, it will arrange its direct children into a flexible grid. You can then define your column structure using standard CSS Grid properties.</p>
-                <pre><code>&lt;div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"&gt;
+                <p>To create a responsive grid, simply apply the <code>.grid</code> class to a container. By default, it will arrange its direct children into a flexible grid. You can then define your column structure using standard CSS Grid properties in your stylesheet.</p>
+                <pre><code>&lt;!-- HTML --&gt;
+&lt;div class="grid basic-grid-example"&gt;
     &lt;div class="grid-item"&gt;Item 1&lt;/div&gt;
     &lt;div class="grid-item"&gt;Item 2&lt;/div&gt;
     &lt;div class="grid-item"&gt;Item 3&lt;/div&gt;
     &lt;div class="grid-item"&gt;Item 4&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                <div class="layout-example-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+&lt;/div&gt;
+
+&lt;!-- CSS (in your stylesheet) --&gt;
+&lt;style&gt;
+    .basic-grid-example {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+&lt;/style&gt;</code></pre>
+                <div class="layout-example-grid basic-grid-example">
                     <div class="grid-item">Item 1</div>
                     <div class="grid-item">Item 2</div>
                     <div class="grid-item">Item 3</div>
@@ -169,22 +207,39 @@
 
                 <h3>Defining Columns and Rows</h3>
                 <p>You have full control over grid columns and rows. Use <code>grid-template-columns</code> and <code>grid-template-rows</code> to define explicit tracks. The gap between grid items is controlled by the <code>gap</code> property, which ideally should use Axiom01's spacing variables.</p>
-                <pre><code>&lt;div class="grid" style="grid-template-columns: 1fr 2fr 1fr; grid-template-rows: auto 100px; gap: var(--a-space-m);"&gt;
+                <pre><code>&lt;!-- HTML --&gt;
+&lt;div class="grid defined-grid-example"&gt;
     &lt;div class="grid-item"&gt;Header&lt;/div&gt;
-    &lt;div class="grid-item" style="grid-column: span 2;"&gt;Main Content&lt;/div&gt;
+    &lt;div class="grid-item main-content-item"&gt;Main Content&lt;/div&gt;
     &lt;div class="grid-item"&gt;Sidebar&lt;/div&gt;
-    &lt;div class="grid-item" style="grid-column: 1 / -1;"&gt;Footer&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                <div class="layout-example-grid" style="grid-template-columns: 1fr 2fr 1fr; grid-template-rows: auto 100px;">
+    &lt;div class="grid-item footer-item"&gt;Footer&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- CSS (in your stylesheet) --&gt;
+&lt;style&gt;
+    .defined-grid-example {
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: auto 100px;
+        gap: var(--a-space-m); /* Example: using a spacing variable for gap */
+    }
+    .defined-grid-example .main-content-item {
+        grid-column: span 2;
+    }
+    .defined-grid-example .footer-item {
+        grid-column: 1 / -1;
+    }
+&lt;/style&gt;</code></pre>
+                <div class="layout-example-grid defined-grid-example">
                     <div class="grid-item">Header</div>
-                    <div class="grid-item" style="grid-column: span 2;">Main Content</div>
+                    <div class="grid-item main-content-item">Main Content</div>
                     <div class="grid-item">Sidebar</div>
-                    <div class="grid-item" style="grid-column: 1 / -1;">Footer</div>
+                    <div class="grid-item footer-item">Footer</div>
                 </div>
 
                 <h3>Nested Grids</h3>
                 <p>CSS Grid allows for powerful nesting. You can place a grid container inside another grid item, enabling you to build highly complex and flexible layouts.</p>
-                <pre><code>&lt;div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--a-space-l);"&gt;
+                <pre><code>&lt;!-- HTML --&gt;
+&lt;div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--a-space-l);"&gt;
     &lt;div class="grid-item"&gt;Parent Item 1&lt;/div&gt;
     &lt;div class="grid-item"&gt;
         &lt;!-- Nested Grid --&gt;
@@ -193,8 +248,29 @@
             &lt;div class="grid-item"&gt;Nested 2&lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                <div class="layout-example-grid" style="grid-template-columns: 1fr 1fr;">
+&lt;/div&gt;
+
+&lt;!-- CSS (in your stylesheet) --&gt;
+&lt;style&gt;
+    .nested-grid-container { /* Apply this to the parent grid */
+        grid-template-columns: 1fr 1fr;
+        gap: var(--a-space-l);
+    }
+    .nested-grid-example { /* This is the inner grid */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--a-space-s);
+        background-color: var(--a-color-secondary-container);
+        padding: var(--a-space-m);
+        border-radius: var(--a-border-radius-small);
+        border: 1px solid var(--a-color-secondary);
+    }
+    .nested-grid-example .grid-item {
+        background-color: var(--a-color-secondary);
+        color: var(--a-color-on-secondary);
+    }
+&lt;/style&gt;</code></pre>
+                <div class="layout-example-grid nested-grid-container" style="grid-template-columns: 1fr 1fr;">
                     <div class="grid-item">Parent Item 1</div>
                     <div class="grid-item">
                         <div class="nested-grid-example">
@@ -211,13 +287,24 @@
                 <h2>Flexbox for Fine-Grained Control</h2>
                 <p>While CSS Grid is ideal for overall page layout, Flexbox excels at distributing and aligning items within a single dimension (row or column). Axiom01 provides basic Flexbox capabilities through the <code>.flex</code> class, which applies <code>display: flex</code>.</p>
                 <h3>Basic Flex Usage</h3>
-                <p>Use <code>.flex</code> on a container to enable Flexbox behavior for its direct children. You can then use standard Flexbox properties (e.g., <code>justify-content</code>, <code>align-items</code>, <code>flex-wrap</code>) via inline styles or custom CSS to achieve desired alignments.</p>
-                <pre><code>&lt;div class="flex" style="justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--a-space-m);"&gt;
+                <p>Use <code>.flex</code> on a container to enable Flexbox behavior for its direct children. You can then use standard Flexbox properties (e.g., <code>justify-content</code>, <code>align-items</code>, <code>flex-wrap</code>) via custom CSS to achieve desired alignments.</p>
+                <pre><code>&lt;!-- HTML --&gt;
+&lt;div class="flex flex-layout-example"&gt;
     &lt;div class="flex-item"&gt;Item A&lt;/div&gt;
     &lt;div class="flex-item"&gt;Item B&lt;/div&gt;
     &lt;div class="flex-item"&gt;Item C&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                <div class="flex-example">
+&lt;/div&gt;
+
+&lt;!-- CSS (in your stylesheet) --&gt;
+&lt;style&gt;
+    .flex-layout-example {
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--a-space-m);
+    }
+&lt;/style&gt;</code></pre>
+                <div class="flex-example flex-layout-example">
                     <div class="flex-item">Item A</div>
                     <div class="flex-item">Item B</div>
                     <div class="flex-item">Item C</div>
@@ -283,16 +370,30 @@
                     <li><code>--a-space-xxl</code>: Extra extra large spacing</li>
                 </ul>
                 <p>These variables are calculated based on <code>--a-space-unit</code>, ensuring that all spacing scales proportionally. You should use these variables consistently for all layout-related spacing.</p>
-                <pre><code>&lt;!-- Example of using spacing variables for padding and margin --&gt;
-&lt;div style="padding: var(--a-space-xl); margin-bottom: var(--a-space-l); background-color: var(--a-color-surface-variant); border-radius: var(--a-border-radius-medium);"&gt;
+                <pre><code>&lt;!-- HTML --&gt;
+&lt;div class="spacing-example-div"&gt;
     &lt;p&gt;This content has extra large padding and large bottom margin.&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;!-- Example of using spacing variables for grid gaps --&gt;
-&lt;div class="grid" style="gap: var(--a-space-xxl); margin-top: var(--a-space-l);"&gt;
+&lt;!-- HTML --&gt;
+&lt;div class="grid spacing-grid-example"&gt;
     &lt;div class="grid-item"&gt;Wide Gap Item&lt;/div&gt;
     &lt;div class="grid-item"&gt;Wide Gap Item&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+
+&lt;!-- CSS (in your stylesheet) --&gt;
+&lt;style&gt;
+    .spacing-example-div {
+        padding: var(--a-space-xl);
+        margin-bottom: var(--a-space-l);
+        background-color: var(--a-color-surface-variant);
+        border-radius: var(--a-border-radius-medium);
+    }
+    .spacing-grid-example {
+        gap: var(--a-space-xxl);
+        margin-top: var(--a-space-l);
+    }
+&lt;/style&gt;</code></pre>
                 <p>By consistently using these variables, you maintain a perfect visual rhythm throughout your application, and can easily adjust the overall density of your layout by changing just the <code>--a-space-unit</code> CSS variable.</p>
             </div>
         </section>
@@ -309,7 +410,7 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="placeholder.html">Documentation</a></li>
+                        <li><a href="components-simple.html">Documentation</a></li>
                         <li><a href="../../README.md">README</a></li>
                         <li><a href="../../DEVELOPER.md">Developer Guide</a></li>
                         <li><a href="../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>

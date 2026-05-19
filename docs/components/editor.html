@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -6,123 +5,198 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="stylesheet" href="../../css/doc-styles.css"> <!-- Link to new doc-specific styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
-    <style>
-        body {
-            padding: var(--a-space-xl);
-            background-color: var(--a-color-surface);
-            color: var(--a-color-on-surface);
-            font-family: var(--a-font-family-sans);
-            display: flex;
-            flex-direction: column;
-            gap: var(--a-space-l);
-        }
-        .component-section {
-            background-color: var(--a-color-surface-variant);
-            padding: var(--a-space-xl);
-            border-radius: var(--a-border-radius-large);
-            border: 1px solid var(--a-color-outline);
-        }
-        .component-section h2 {
-            margin-top: 0;
-            color: var(--a-color-primary);
-            font-size: var(--a-font-size-h2);
-            margin-bottom: var(--a-space-l);
-        }
-        pre {
-            background-color: var(--a-color-code-bg);
-            color: var(--a-color-code-text);
-            padding: var(--a-space-m);
-            border-radius: var(--a-border-radius-medium);
-            overflow-x: auto;
-            border: 1px solid var(--a-color-code-border);
-        }
-        code {
-            font-family: var(--a-font-family-mono);
-            font-size: var(--a-font-size-small);
-        }
-        /* Specific styles for Editor demo */
-        .editor-container {
-            margin-bottom: var(--a-space-l);
-        }
-        .editor-placeholder {
-            width: 100%;
-            min-height: 200px;
-            padding: var(--a-space-m);
-            border: 1px solid var(--a-color-outline);
-            border-radius: var(--a-border-radius-medium);
-            background-color: var(--a-color-surface);
-            color: var(--a-color-on-surface);
-            font-family: var(--a-font-family-sans);
-            font-size: var(--a-font-size-base);
-            resize: vertical;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="component-section">
-        <h1>Editor Component</h1>
-        <p>The <strong>Editor</strong> component in Axiom01 provides foundational styling for standard HTML <code>&lt;textarea&gt;</code> elements, making them visually consistent with the rest of the framework. For advanced rich text editing capabilities (like WYSIWYG features, formatting tools, etc.), Axiom01 is designed to integrate seamlessly with third-party JavaScript rich text editor libraries.</p>
-        <p>This approach allows developers the flexibility to choose their preferred rich text editor while ensuring the base input area adheres to Axiom01's design system.</p>
+<body class="axiom-body">
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="../../index.html#philosophy">Philosophy</a></li>
+                <li><a href="../../index.html#components">Components</a></li>
+                <li><a href="../../index.html#get-started">Get Started</a></li>
+                <li><a href="../placeholder.html">Documentation</a></li>
+            </ul>
+            <div class="actions">
+                <button class="search-toggle" aria-label="Open Search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-        <h3>Live Example: Styled Textarea</h3>
-        <div class="editor-container">
-            <label for="rich-text-editor">Content Editor:</label>
-            <textarea id="rich-text-editor" class="editor-placeholder" placeholder="Start writing your rich content here..."></textarea>
-            <p class="small-text text-muted">Note: This is a styled textarea. Actual rich text editor functionality requires integration with a third-party library like CKEditor or TinyMCE.</p>
-        </div>
+    <div class="doc-main-content">
+        <aside class="doc-sidebar">
+            <nav aria-label="Documentation Sidebar">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="../../README.md">Overview & Quickstart</a></li>
+                    <li><a href="../../index.html#get-started">Installation</a></li>
+                    <li><a href="../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                </ul>
 
-        <h3>Usage Guidelines</h3>
-        <p>To use Axiom01's base editor styling:</p>
-        <ul>
-            <li>Apply the <code>.editor-placeholder</code> class to your <code>&lt;textarea&gt;</code> element.</li>
-            <li>Ensure your <code>&lt;textarea&gt;</code> has an associated <code>&lt;label&gt;</code> for accessibility.</li>
-        </ul>
-        <p>For integrating a rich text editor library:</p>
-        <ul>
-            <li>Initialize your chosen third-party library (e.g., CKEditor, TinyMCE, Quill) on the <code>&lt;textarea&gt;</code> element that has the <code>.editor-placeholder</code> class.</li>
-            <li>Most modern rich text editors offer extensive customization options, including the ability to leverage CSS custom properties (variables) for theming. This allows you to align the editor's UI with your Axiom01 theme.</li>
-            <li>Refer to the documentation of your chosen rich text editor for specific integration and theming instructions.</li>
-        </ul>
+                <h3>Core Concepts</h3>
+                <ul>
+                    <li><a href="../colors-advanced.html">Color System</a></li>
+                    <li><a href="../typography-advanced.html">Typography</a></li>
+                    <li><a href="../layout-advanced.html">Layout & Grid</a></li>
+                    <li><a href="../media-advanced.html">Media & Icons</a></li>
+                </ul>
 
-        <h3>Third-Party Integration</h3>
-        <p>Axiom01's editor styling is a wrapper for popular rich text editor libraries. Some widely used options include:</p>
-        <ul>
-            <li><a href="https://ckeditor.com/" target="_blank">CKEditor</a>: A powerful WYSIWYG editor with extensive features.</li>
-            <li><a href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>: Another popular and highly customizable rich text editor.</li>
-            <li><a href="https://quilljs.com/" target="_blank">Quill</a>: A modern, open-source WYSIWYG editor built for compatibility and extensibility.</li>
-        </ul>
-        <p>When integrating, prioritize libraries that support CSS variable-based theming to maintain visual consistency with Axiom01.</p>
+                <h3>Components</h3>
+                <ul>
+                    <li><a href="../../index.html#components">Component Browser</a></li>
+                    <li><a href="../components-simple.html">Simple Components</a></li>
+                    <li><a href="../components-advanced.html">Advanced Components</a></li>
+                    <li><a href="accordion.html">Accordion</a></li>
+                    <li><a href="dropdown.html">Dropdown</a></li>
+                    <li><a href="mobile-navbar.html">Mobile Navbar</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="spacing-demo.html">Spacing Demo</a></li>
+                    <li><a href="editor.html">Editor</a></li>
+                </ul>
 
-        <h3>Accessibility</h3>
-        <p>While Axiom01 provides a semantic base, the full accessibility of a rich text editor largely depends on the chosen third-party library and its configuration. When selecting and implementing an editor:</p>
-        <ul>
-            <li>Ensure the library itself is WCAG compliant.</li>
-            <li>Properly associate labels with the editor instance.</li>
-            <li>Verify keyboard navigation and screen reader compatibility for all editor controls and content areas.</li>
-            <li>Provide clear instructions for users on how to create accessible content within the editor.</li>
-        </ul>
+                <h3>Advanced Topics & Tools</h3>
+                <ul>
+                    <li><a href="../theme-customization-wizard.html">Theme Customization Wizard</a></li>
+                    <li><a href="../interactive-playground.html">Interactive Playground</a></li>
+                    <li><a href="../contributing.md">Contributing</a></li>
+                    <li><a href="../DEVELOPER.md">Developer Guide</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-        <h3>Customization</h3>
-        <p>The base styling of the <code>.editor-placeholder</code> can be customized using the following CSS variables:</p>
-        <ul>
-            <li><code>--a-color-surface</code>: Background color of the textarea.</li>
-            <li><code>--a-color-on-surface</code>: Text color within the textarea.</li>
-            <li><code>--a-color-outline</code>: Border color of the textarea.</li>
-            <li><code>--a-border-radius-medium</code>: Border radius.</li>
-            <li><code>--a-space-m</code>: Internal padding.</li>
-            <li><code>--a-font-family-sans</code>, <code>--a-font-size-base</code>: Font styles.</li>
-        </ul>
-        <p>For customizing the integrated rich text editor, consult its specific theming documentation.</p>
+        <main class="doc-content">
+            <section class="hero small">
+                <div class="content">
+                    <h1 class="doc-title">Editor Component</h1>
+                    <p class="doc-description">The <strong>Editor</strong> component in Axiom01 provides foundational styling for standard HTML <code>&lt;textarea&gt;</code> elements, making them visually consistent with the rest of the framework. For advanced rich text editing capabilities (like WYSIWYG features, formatting tools, etc.), Axiom01 is designed to integrate seamlessly with third-party JavaScript rich text editor libraries.</p>
+                    <p class="doc-description">This approach allows developers the flexibility to choose their preferred rich text editor while ensuring the base input area adheres to Axiom01's design system.</p>
+                </div>
+            </section>
 
-        <h3>Code Example</h3>
-        <pre><code>&lt;div class="editor-container"&gt;
-    &lt;label for="rich-text-editor"&gt;Content Editor:&lt;/label&gt;
-    &lt;textarea id="rich-text-editor" class="editor-placeholder" placeholder="Start writing your rich content here..."&gt;&lt;/textarea&gt;
-    &lt;p class="small-text text-muted"&gt;Note: This is a styled textarea. Actual rich text editor functionality requires integration with a third-party library like CKEditor or TinyMCE.&lt;/p&gt;
-&lt;/div&gt;</code></pre>
+            <div class="doc-section">
+                <h2 class="doc-section-title">Live Example: Styled Textarea</h2>
+                <div class="doc-live-example">
+                    <label for="rich-text-editor" style="display: block; margin-bottom: var(--a-space-xs);">Content Editor:</label>
+                    <textarea id="rich-text-editor" class="editor-placeholder" placeholder="Start writing your rich content here..."></textarea>
+                    <p style="font-size: var(--a-font-size-small); color: var(--a-color-on-surface-variant); margin-top: var(--a-space-s);">Note: This is a styled textarea. Actual rich text editor functionality requires integration with a third-party library like CKEditor or TinyMCE.</p>
+                </div>
+            </div>
+
+            <div class="doc-section">
+                <h2 class="doc-section-title">Usage Guidelines</h2>
+                <p>To use Axiom01's base editor styling:</p>
+                <ul>
+                    <li>Apply the <code>.editor-placeholder</code> class to your <code>&lt;textarea&gt;</code> element.</li>
+                    <li>Ensure your <code>&lt;textarea&gt;</code> has an associated <code>&lt;label&gt;</code> for accessibility.</li>
+                </ul>
+                <p>For integrating a rich text editor library:</p>
+                <ul>
+                    <li>Initialize your chosen third-party library (e.g., CKEditor, TinyMCE, Quill) on the <code>&lt;textarea&gt;</code> element that has the <code>.editor-placeholder</code> class.</li>
+                    <li>Most modern rich text editors offer extensive customization options, including the ability to leverage CSS custom properties (variables) for theming. This allows you to align the editor's UI with your Axiom01 theme.</li>
+                    <li>Refer to the documentation of your chosen rich text editor for specific integration and theming instructions.</li>
+                </ul>
+            </section>
+
+            <div class="doc-section">
+                <h2 class="doc-section-title">Third-Party Integration</h2>
+                <p>Axiom01's editor styling is a wrapper for popular rich text editor libraries. Some widely used options include:</p>
+                <ul>
+                    <li><a href="https://ckeditor.com/" target="_blank">CKEditor</a>: A powerful WYSIWYG editor with extensive features.</li>
+                    <li><a href="https://www.tiny.cloud/" target="_blank">TinyMCE</a>: Another popular and highly customizable rich text editor.</li>
+                    <li><a href="https://quilljs.com/" target="_blank">Quill</a>: A modern, open-source WYSIWYG editor built for compatibility and extensibility.</li>
+                </ul>
+                <p>When integrating, prioritize libraries that support CSS variable-based theming to maintain visual consistency with Axiom01.</p>
+            </div>
+
+            <div class="doc-section">
+                <h2 class="doc-section-title">Accessibility</h2>
+                <p>While Axiom01 provides a semantic base, the full accessibility of a rich text editor largely depends on the chosen third-party library and its configuration. When selecting and implementing an editor:</p>
+                <ul>
+                    <li>Ensure the library itself is WCAG compliant.</li>
+                    <li>Properly associate labels with the editor instance.</li>
+                    <li>Verify keyboard navigation and screen reader compatibility for all editor controls and content areas.</li>
+                    <li>Provide clear instructions for users on how to create accessible content within the editor.</li>
+                </ul>
+            </div>
+
+            <div class="doc-section">
+                <h2 class="doc-section-title">Customization</h2>
+                <p>The base styling of the <code>.editor-placeholder</code> can be customized using the following CSS variables:</p>
+                <ul>
+                    <li><code>--a-color-surface</code>: Background color of the textarea.</li>
+                    <li><code>--a-color-on-surface</code>: Text color within the textarea.</li>
+                    <li><code>--a-color-outline</code>: Border color of the textarea.</li>
+                    <li><code>--a-border-radius-medium</code>: Border radius.</li>
+                    <li><code>--a-space-m</code>: Internal padding.</li>
+                    <li><code>--a-font-family-sans</code>, <code>--a-font-size-base</code>: Font styles.</li>
+                </ul>
+                <p>For customizing the integrated rich text editor, consult its specific theming documentation.</p>
+            </div>
+
+            <div class="doc-section">
+                <h3 class="doc-section-title">Code Example</h3>
+                <div class="doc-code-block">
+                    <pre><code>&lt;label for="rich-text-editor"&gt;Content Editor:&lt;/label&gt;
+&lt;textarea id="rich-text-editor" class="editor-placeholder" placeholder="Start writing your rich content here..."&gt;&lt;/textarea&gt;
+&lt;p&gt;Note: This is a styled textarea. Actual rich text editor functionality requires integration with a third-party library.&lt;/p&gt;</code></pre>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <script src="../../js/axiom.js"></script>
+    <script src="../../js/index-page-manager.js"></script>
+    <footer class="main-footer">
+        <div class="content">
+            <div class="brand">
+                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../placeholder.html">Documentation</a></li>
+                        <li><a href="../../README.md">README</a></li>
+                        <li><a href="../DEVELOPER.md">Developer Guide</a></li>
+                        <li><a href="../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="../interactive-playground.html">Playground</a></li>
+                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../../index.html#release-info">Release Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

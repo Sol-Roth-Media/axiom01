@@ -2,6 +2,8 @@
 var Axiom = class {
   constructor() {
     this.components = {};
+    // Store references to initialized component instances for potential destruction
+    this.initializedComponents = new Map();
     document.addEventListener("DOMContentLoaded", () => this.init());
   }
 
@@ -9,19 +11,23 @@ var Axiom = class {
     if (this.components[componentName]) {
       return this.components[componentName];
     }
-    // Assuming components are in a 'components' subfolder or similar,
-    // and their filenames match the componentName.
-    // This path might need adjustment based on actual component file structure.
     const componentPath = `./components/${componentName}.js`; 
     try {
       const module = await import(componentPath);
-      if (module.default && typeof module.default.init === "function") {
-        this.components[componentName] = module.default;
-        return module.default;
-      } else {
-        console.error(`Axiom: Component ${componentName} does not have a default export with an init method.`);
-        return null;
+      if (module.default) {
+        // Check if it's a class constructor
+        if (typeof module.default === 'function' && /^\s*class\s/.test(module.default.toString())) {
+          this.components[componentName] = module.default; // Store the class constructor
+          return module.default;
+        } 
+        // Check if it's an object with an init method (old style)
+        else if (typeof module.default === 'object' && typeof module.default.init === "function") {
+          this.components[componentName] = module.default;
+          return module.default;
+        }
       }
+      console.error(`Axiom: Component ${componentName} does not have a valid default export (class or object with init method).`);
+      return null;
     } catch (error) {
       console.error(`Axiom: Failed to load component ${componentName}.`, error);
       return null;
@@ -49,9 +55,23 @@ var Axiom = class {
     // Then, initialize each component instance
     componentElements.forEach((element) => {
         const componentName = element.dataset.component;
-        if (componentName && this.components[componentName]) {
+        const ComponentDefinition = this.components[componentName];
+
+        if (componentName && ComponentDefinition) {
             try {
-                this.components[componentName].init(element);
+                let componentInstance = null;
+                // If it's a class constructor, instantiate it
+                if (typeof ComponentDefinition === 'function' && /^\s*class\s/.test(ComponentDefinition.toString())) {
+                    componentInstance = new ComponentDefinition(element);
+                } 
+                // If it's an object with an init method, call init
+                else if (typeof ComponentDefinition === 'object' && typeof ComponentDefinition.init === 'function') {
+                    componentInstance = ComponentDefinition.init(element);
+                }
+
+                if (componentInstance && typeof componentInstance.destroy === 'function') {
+                    this.initializedComponents.set(element, { name: componentName, instance: componentInstance });
+                }
                 console.log(`Axiom: Initialized component: ${componentName} on`, element);
             } catch (error) {
                 console.error(`Axiom: Error initializing component ${componentName} on element:`, element, error);
@@ -60,6 +80,41 @@ var Axiom = class {
     });
     
     console.log("Axiom: Initialization complete.");
+  }
+
+  /**
+   * Destroys a single component instance associated with a given DOM element.
+   * Components are expected to implement a `destroy()` method for cleanup.
+   * This method would typically be called when a component is removed from the DOM
+   * or when its functionality is no longer needed.
+   * @param {HTMLElement} element The DOM element the component was initialized on.
+   */
+  destroyComponent(element) {
+    if (this.initializedComponents.has(element)) {
+      const { name, instance } = this.initializedComponents.get(element);
+      if (instance && typeof instance.destroy === 'function') {
+        try {
+          instance.destroy();
+          console.log(`Axiom: Destroyed component: ${name} on`, element);
+        } catch (error) {
+          console.error(`Axiom: Error destroying component ${name} on element:`, element, error);
+        }
+      }
+      this.initializedComponents.delete(element);
+    }
+  }
+
+  /**
+   * Destroys all currently initialized component instances.
+   * This could be useful for full page reloads or SPA navigation where
+   * old components need to be cleaned up.
+   */
+  destroyAllComponents() {
+    this.initializedComponents.forEach((_value, element) => {
+      this.destroyComponent(element);
+    });
+    this.initializedComponents.clear();
+    console.log("Axiom: All components destroyed.");
   }
 };
 
