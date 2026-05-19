@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,91 +8,208 @@
     <link rel="stylesheet" href="../../css/axiom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
     <style>
+        /* Internal styling for demo purposes */
         body {
-            padding: var(--a-space-xl);
+            padding: var(--a-space-m);
             background-color: var(--a-color-surface);
             color: var(--a-color-on-surface);
-            font-family: var(--a-font-family-sans);
-            display: flex;
-            flex-direction: column;
-            gap: var(--a-space-l);
         }
-        .component-section {
-            background-color: var(--a-color-surface-variant);
-            padding: var(--a-space-xl);
-            border-radius: var(--a-border-radius-large);
+        .accordion-example {
+            max-width: 600px;
+            margin: var(--a-space-l) auto;
+        }
+        .accordion-item {
             border: 1px solid var(--a-color-outline);
+            border-radius: var(--a-border-radius-m);
+            margin-bottom: var(--a-space-s);
+            overflow: hidden;
         }
-        .component-section h2 {
-            margin-top: 0;
-            color: var(--a-color-primary);
-            font-size: var(--a-font-size-h2);
-            margin-bottom: var(--a-space-l);
-        }
-        pre {
-            background-color: var(--a-color-code-bg);
-            color: var(--a-color-code-text);
+        .accordion-header {
+            background-color: var(--a-color-surface-variant);
             padding: var(--a-space-m);
-            border-radius: var(--a-border-radius-medium);
-            overflow-x: auto;
-            border: 1px solid var(--a-color-code-border);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: var(--a-font-weight-bold);
+            color: var(--a-color-on-surface-variant);
         }
-        code {
-            font-family: var(--a-font-family-mono);
-            font-size: var(--a-font-size-small);
+        .accordion-header:hover {
+            background-color: var(--a-color-surface-variant-hover);
+        }
+        .accordion-header i {
+            transition: transform 0.3s ease;
+        }
+        .accordion-header[aria-expanded="true"] i {
+            transform: rotate(180deg);
+        }
+        .accordion-content {
+            padding: var(--a-space-m);
+            border-top: 1px solid var(--a-color-outline);
+            background-color: var(--a-color-surface);
+            color: var(--a-color-on-surface);
+            display: none; /* Controlled by JS */
+            overflow: hidden;
+            transition: max-height 0.3s ease-out; /* For smooth animation */
+        }
+        .accordion-content.is-open {
+            display: block; /* Controlled by JS */
+        }
+        .accordion-content p {
+            margin-bottom: var(--a-space-s);
+        }
+        .accordion-content p:last-child {
+            margin-bottom: 0;
+        }
+        .code-block {
+            background-color: var(--a-color-surface-variant);
+            color: var(--a-color-on-surface-variant);
+            padding: var(--a-space-s);
+            border-radius: var(--a-border-radius-s);
+            overflow-x: auto;
         }
     </style>
 </head>
 <body>
-    <div class="component-section">
-        <h2>Accordion Component</h2>
-        <p>This is a placeholder for the Accordion component documentation. Here you would find examples, usage guidelines, and code snippets for implementing accordions in your Axiom01 projects.</p>
+    <div class="container">
+        <h1>Accordion Component</h1>
+        <p class="lead">The Accordion component allows you to toggle the visibility of content sections, providing a clean and organized way to display information. It's ideal for FAQs, feature lists, or any area where space is limited and content needs to be revealed on demand.</p>
 
-        <h3>Example Accordion</h3>
-        <div class="accordion" data-component="accordion">
+        <h2>Usage</h2>
+        <p>To implement an accordion, use the following semantic HTML structure. The `data-component="accordion"` attribute on the parent container enables Axiom's JavaScript to initialize the component. Each accordion item should have a header (button) and a content area.</p>
+
+        <h3>HTML Structure</h3>
+        <pre class="code-block"><code>&lt;div class="accordion-example" data-component="accordion"&gt;
+    &lt;div class="accordion-item"&gt;
+        &lt;button class="accordion-header" aria-expanded="false" aria-controls="content-1"&gt;
+            Accordion Item #1
+            &lt;i class="fas fa-chevron-down"&gt;&lt;/i&gt;
+        &lt;/button&gt;
+        &lt;div id="content-1" class="accordion-content" role="region" aria-labelledby="header-1"&gt;
+            &lt;p&gt;This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. It's also worth noting that just about any HTML can go within the &lt;code&gt;.accordion-body&lt;/code&gt;, though the transition does limit overflow.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="accordion-item"&gt;
+        &lt;button class="accordion-header" aria-expanded="false" aria-controls="content-2"&gt;
+            Accordion Item #2
+            &lt;i class="fas fa-chevron-down"&gt;&lt;/i&gt;
+        &lt;/button&gt;
+        &lt;div id="content-2" class="accordion-content" role="region" aria-labelledby="header-2"&gt;
+            &lt;p&gt;This is the second item's accordion body. You can include various content types here, such as text, images, or other components.&lt;/p&gt;
+            &lt;ul&gt;
+                &lt;li&gt;List item one&lt;/li&gt;
+                &lt;li&gt;List item two&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="accordion-item"&gt;
+        &lt;button class="accordion-header" aria-expanded="false" aria-controls="content-3"&gt;
+            Accordion Item #3
+            &lt;i class="fas fa-chevron-down"&gt;&lt;/i&gt;
+        &lt;/button&gt;
+        &lt;div id="content-3" class="accordion-content" role="region" aria-labelledby="header-3"&gt;
+            &lt;p&gt;And here's some amazing placeholder content. This is the last item's accordion body. Nothing more, nothing less.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Live Example</h3>
+        <div class="accordion-example" data-component="accordion">
             <div class="accordion-item">
-                <button class="accordion-header">
-                    <span>Accordion Item #1</span>
+                <button class="accordion-header" aria-expanded="false" aria-controls="content-1-live">
+                    Accordion Item #1
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="accordion-content">
-                    <p>This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables.</p>
+                <div id="content-1-live" class="accordion-content" role="region" aria-labelledby="header-1-live">
+                    <p>This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.</p>
                 </div>
             </div>
             <div class="accordion-item">
-                <button class="accordion-header">
-                    <span>Accordion Item #2</span>
+                <button class="accordion-header" aria-expanded="false" aria-controls="content-2-live">
+                    Accordion Item #2
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="accordion-content">
-                    <p>This is the second item's accordion body. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div id="content-2-live" class="accordion-content" role="region" aria-labelledby="header-2-live">
+                    <p>This is the second item's accordion body. You can include various content types here, such as text, images, or other components.</p>
+                    <ul>
+                        <li>List item one</li>
+                        <li>List item two</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false" aria-controls="content-3-live">
+                    Accordion Item #3
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="content-3-live" class="accordion-content" role="region" aria-labelledby="header-3-live">
+                    <p>And here's some amazing placeholder content. This is the last item's accordion body. Nothing more, nothing less.</p>
                 </div>
             </div>
         </div>
 
-        <h3>Code Example</h3>
-        <pre><code>&lt;div class="accordion" data-component="accordion"&gt;
-    &lt;div class="accordion-item"&gt;
-        &lt;button class="accordion-header"&gt;
-            &lt;span&gt;Accordion Item #1&lt;/span&gt;
-            &lt;i class="fas fa-chevron-down"&gt;&lt;/i&gt;
-        &lt;/button&gt;
-        &lt;div class="accordion-content"&gt;
-            &lt;p&gt;This is the first item's accordion body.&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="accordion-item"&gt;
-        &lt;button class="accordion-header"&gt;
-            &lt;span&gt;Accordion Item #2&lt;/span&gt;
-            &lt;i class="fas fa-chevron-down"&gt;&lt;/i&gt;
-        &lt;/button&gt;
-        &lt;div class="accordion-content"&gt;
-            &lt;p&gt;This is the second item's accordion body.&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+        <h2>Accessibility</h2>
+        <p>Axiom's Accordion component is built with accessibility in mind:</p>
+        <ul>
+            <li><code>role="button"</code>: The header is a button, making it focusable and operable via keyboard.</li>
+            <li><code>aria-expanded</code>: Indicates whether the accordion panel is currently expanded or collapsed. Toggled by JavaScript.</li>
+            <li><code>aria-controls</code>: Links the header button to its controlled content panel.</li>
+            <li><code>role="region"</code>: Identifies the content panel as a perceivable section of content.</li>
+            <li>Keyboard Navigation:
+                <ul>
+                    <li><kbd>Space</kbd> or <kbd>Enter</kbd>: Activates the accordion header to toggle its content.</li>
+                    <li><kbd>Tab</kbd>: Moves focus between accordion headers and other interactive elements.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>Customization</h2>
+        <p>The Accordion component can be customized using Axiom's CSS variables. You can adjust colors, spacing, and border styles to match your theme.</p>
+        <pre class="code-block"><code>.accordion-item {
+    border-color: var(--a-color-outline);
+    border-radius: var(--a-border-radius-m);
+}
+.accordion-header {
+    background-color: var(--a-color-surface-variant);
+    color: var(--a-color-on-surface-variant);
+}
+.accordion-header:hover {
+    background-color: var(--a-color-surface-variant-hover);
+}
+.accordion-content {
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+}</code></pre>
+
+        <h2>JavaScript Integration</h2>
+        <p>The accordion's functionality is handled automatically by Axiom's JavaScript when the <code>data-component="accordion"</code> attribute is present on the main container. The JavaScript toggles the <code>aria-expanded</code> attribute on the header and the <code>is-open</code> class on the content, which controls its visibility and animation.</p>
+        <p>For smooth transitions, the CSS uses `max-height` and `overflow: hidden` in conjunction with the `is-open` class. When the `is-open` class is added, the `max-height` is set to a value large enough to contain the content, allowing for a smooth reveal.</p>
     </div>
 
     <script src="../../js/axiom.js"></script>
+    <script>
+        // Manual initialization for this demo if needed, otherwise axiom.js handles it
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const accordions = document.querySelectorAll('[data-component="accordion"]');
+        //     accordions.forEach(accordion => {
+        //         // Assuming axiom.js has an Accordion component that can be initialized
+        //         // For this demo, the internal styling and simple JS toggle is sufficient
+        //         accordion.querySelectorAll('.accordion-header').forEach(header => {
+        //             header.addEventListener('click', () => {
+        //                 const content = document.getElementById(header.getAttribute('aria-controls'));
+        //                 const isExpanded = header.getAttribute('aria-expanded') === 'true';
+        //                 header.setAttribute('aria-expanded', !isExpanded);
+        //                 if (isExpanded) {
+        //                     content.style.maxHeight = null;
+        //                     content.classList.remove('is-open');
+        //                 } else {
+        //                     content.classList.add('is-open');
+        //                     content.style.maxHeight = content.scrollHeight + "px";
+        //                 }
+        //             });
+        //         });
+        //     });
+        // });
+    </script>
 </body>
 </html>
