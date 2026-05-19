@@ -6,7 +6,11 @@
     <title>Interactive Playground - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
+        /* Basic styling for the documentation page itself, using Axiom's variables */
         body {
             padding: var(--a-space-xxl) var(--a-space-xl);
             background-color: var(--a-color-surface);
@@ -85,23 +89,56 @@
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Interactive Playground</h1>
-        <p>Welcome to the Axiom01 Interactive Playground! This tool allows you to write HTML and CSS directly in your browser and see the results rendered live. It's a great way to experiment with Axiom01 components, test custom styles, and quickly prototype ideas.</p>
+<body class="axiom-body">
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="/" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="/#philosophy">Philosophy</a></li>
+                <li><a href="/#components">Components</a></li>
+                <li><a href="/#get-started">Get Started</a></li>
+                <li><a href="/docs/placeholder.html">Documentation</a></li>
+            </ul>
+            <div class="actions">
+                <button class="search-toggle" aria-label="Open Search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-        <h2>How to Use</h2>
-        <ol>
-            <li>Edit the HTML and CSS in the left editor.</li>
-            <li>Click "Run Code" to update the live preview on the right.</li>
-            <li>The preview automatically includes Axiom01's core CSS.</li>
-            <li>You can also select different themes to see how your code adapts.</li>
-        </ol>
+    <main>
+        <section class="hero small">
+            <div class="content">
+                <h1>Interactive Playground</h1>
+                <p>Welcome to the Axiom01 Interactive Playground! This tool allows you to write HTML and CSS directly in your browser and see the results rendered live. It's a great way to experiment with Axiom01 components, test custom styles, and quickly prototype ideas.</p>
+            </div>
+        </section>
 
-        <div class="playground-grid">
-            <div class="code-editor">
-                <h3>HTML & CSS Editor</h3>
-                <textarea id="code-input">
+        <section id="how-to-use">
+            <div class="container">
+                <h2>How to Use</h2>
+                <ol>
+                    <li>Edit the HTML and CSS in the left editor.</li>
+                    <li>Click "Run Code" to update the live preview on the right.</li>
+                    <li>The preview automatically includes Axiom01's core CSS.</li>
+                    <li>You can also select different themes to see how your code adapts.</li>
+                </ol>
+
+                <div class="playground-grid">
+                    <div class="code-editor">
+                        <h3>HTML & CSS Editor</h3>
+                        <textarea id="code-input">
 <!-- Write your HTML here. Axiom01 CSS is already loaded. -->
 <div class="card">
     <div class="card-body">
@@ -117,41 +154,43 @@
         text-decoration: underline;
     }
 </style>
-                </textarea>
-                <div class="controls">
-                    <button class="button primary" id="run-code">Run Code</button>
-                    <select id="theme-select-playground" class="button secondary">
-                        <option value="light">Light (Default)</option>
-                        <option value="dark">Dark</option>
-                        <option value="corporate-clean">Corporate Clean</option>
-                        <option value="synthwave-84">Synthwave '84</option>
-                        <option value="nordic-calm">Nordic Calm</option>
-                        <option value="vintage-paper">Vintage Paper</option>
-                        <option value="dracula">Dracula</option>
-                        <option value="solarized-light">Solarized Light</option>
-                        <option value="solarized-dark">Solarized Dark</option>
-                        <option value="luxe-black">Luxe Black</option>
-                        <option value="minty-fresh">Minty Fresh</option>
-                        <option value="desert-sunset">Desert Sunset</option>
-                        <option value="deep-ocean">Deep Ocean</option>
-                        <option value="gruvbox-dark">Gruvbox Dark</option>
-                        <option value="sakura-blossom">Sakura Blossom</option>
-                        <option value="matcha-green">Matcha Green</option>
-                        <option value="monokai-pro">Monokai Pro</option>
-                        <option value="slate-gray">Slate Gray</option>
-                        <option value="tropical-splash">Tropical Splash</option>
-                        <option value="candy-pop">Candy Pop</option>
-                        <option value="rose-pine">Rosé Pine</option>
-                        <option value="midnight-moss">Midnight Moss</option>
-                    </select>
+                        </textarea>
+                        <div class="controls">
+                            <button class="button primary" id="run-code">Run Code</button>
+                            <select id="theme-select-playground" class="button secondary">
+                                <option value="light">Light (Default)</option>
+                                <option value="dark">Dark</option>
+                                <option value="corporate-clean">Corporate Clean</option>
+                                <option value="synthwave-84">Synthwave '84</option>
+                                <option value="nordic-calm">Nordic Calm</option>
+                                <option value="vintage-paper">Vintage Paper</option>
+                                <option value="dracula">Dracula</option>
+                                <option value="solarized-light">Solarized Light</option>
+                                <option value="solarized-dark">Solarized Dark</option>
+                                <option value="luxe-black">Luxe Black</option>
+                                <option value="minty-fresh">Minty Fresh</option>
+                                <option value="desert-sunset">Desert Sunset</option>
+                                <option value="deep-ocean">Deep Ocean</option>
+                                <option value="gruvbox-dark">Gruvbox Dark</option>
+                                <option value="sakura-blossom">Sakura Blossom</option>
+                                <option value="matcha-green">Matcha Green</option>
+                                <option value="monokai-pro">Monokai Pro</option>
+                                <option value="slate-gray">Slate Gray</option>
+                                <option value="tropical-splash">Tropical Splash</option>
+                                <option value="candy-pop">Candy Pop</option>
+                                <option value="rose-pine">Rosé Pine</option>
+                                <option value="midnight-moss">Midnight Moss</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="preview-area">
+                        <h3>Live Preview</h3>
+                        <iframe id="live-preview" sandbox="allow-scripts allow-same-origin"></iframe>
+                    </div>
                 </div>
             </div>
-            <div class="preview-area">
-                <h3>Live Preview</h3>
-                <iframe id="live-preview" sandbox="allow-scripts allow-same-origin"></iframe>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -199,5 +238,43 @@
             updatePreview();
         });
     </script>
+    <script src="../../js/index-page-manager.js"></script>
+    <footer class="main-footer">
+        <div class="content">
+            <div class="brand">
+                <a href="/" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../placeholder.html">Documentation</a></li>
+                        <li><a href="../../README.md">README</a></li>
+                        <li><a href="../../DEVELOPER.md">Developer Guide</a></li>
+                        <li><a href="../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="/#get-started">Getting Started</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="interactive-playground.html">Playground</a></li>
+                        <li><a href="/#example-sites">Example Sites</a></li>
+                        <li><a href="/#release-info">Release Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

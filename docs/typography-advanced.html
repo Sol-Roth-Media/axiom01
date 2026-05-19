@@ -6,7 +6,11 @@
     <title>Advanced Typography Guide - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
+        /* Basic styling for the documentation page itself, using Axiom's variables */
         body {
             padding: var(--a-space-xxl) var(--a-space-xl);
             background-color: var(--a-color-surface);
@@ -62,7 +66,7 @@
             background-color: var(--a-color-surface-variant);
             padding: var(--a-space-l);
             border-radius: var(--a-border-radius-large);
-            box-shadow: var(--a-shadow-medium);
+            box-shadow: var(--a-shadow-sm);
             border: 1px solid var(--a-color-outline);
         }
         .font-item p {
@@ -105,116 +109,212 @@
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Advanced Typography Guide</h1>
-        <p>Axiom01's typography system is designed for maximum readability, visual hierarchy, and flexibility. This guide explores how to effectively use and customize fonts, sizes, weights, and line heights to create stunning and accessible text layouts.</p>
+<body class="axiom-body">
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="/" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="/#philosophy">Philosophy</a></li>
+                <li><a href="/#components">Components</a></li>
+                <li><a href="/#get-started">Get Started</a></li>
+                <li><a href="/docs/placeholder.html">Documentation</a></li>
+            </ul>
+            <div class="actions">
+                <button class="search-toggle" aria-label="Open Search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-        <h2>Font Families</h2>
-        <p>Axiom01 defines core font families using CSS variables, allowing for easy global changes and theme-specific overrides.</p>
-        <pre><code>:root {
+    <main>
+        <section class="hero small">
+            <div class="content">
+                <h1>Advanced Typography Guide</h1>
+                <p>Axiom01's typography system is crafted for optimal readability, visual hierarchy, and flexibility. This guide explores how to effectively use and customize font stacks, sizes, weights, and line heights to create stunning and accessible text layouts.</p>
+            </div>
+        </section>
+
+        <section id="font-families">
+            <div class="container">
+                <h2>Font Families</h2>
+                <p>Axiom01 defines core font families using CSS variables, allowing for easy global changes and theme-specific overrides. By default, it uses a modern sans-serif stack for body text and a monospace font for code snippets.</p>
+                <pre><code>:root {
     --a-font-family-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --a-font-family-mono: "JetBrains Mono", monospace;
     --a-font-family-serif: "Lora", serif; /* Example: if you add a serif font */
 }</code></pre>
-        <p>You can override these variables in your <code>:root</code> or within a <code>[data-theme]</code> block to change the entire application's typeface.</p>
+                <p>You can override these variables in your <code>:root</code> or within a <code>[data-theme]</code> block to change the entire application's typeface. Ensure that any custom fonts you use are properly loaded (e.g., via <code>@import</code>, <code>@font-face</code>, or <code>&lt;link&gt;</code> tags).</p>
 
-        <h3>Font Showcase</h3>
-        <div class="font-showcase">
-            <div class="font-item">
-                <p class="font-name" style="font-family: var(--a-font-family-sans);">Sans-serif</p>
-                <p style="font-family: var(--a-font-family-sans);">The quick brown fox jumps over the lazy dog. 1234567890</p>
+                <h3>Font Showcase</h3>
+                <div class="font-showcase">
+                    <div class="font-item">
+                        <p class="font-name" style="font-family: var(--a-font-family-sans);">Sans-serif</p>
+                        <p style="font-family: var(--a-font-family-sans);">The quick brown fox jumps over the lazy dog. 1234567890</p>
+                    </div>
+                    <div class="font-item">
+                        <p class="font-name" style="font-family: var(--a-font-family-mono);">Monospace</p>
+                        <p style="font-family: var(--a-font-family-mono);">The quick brown fox jumps over the lazy dog. 1234567890</p>
+                    </div>
+                    <div class="font-item">
+                        <p class="font-name" style="font-family: 'Lora', serif;">Serif (Example)</p>
+                        <p style="font-family: 'Lora', serif;">The quick brown fox jumps over the lazy dog. 1234567890</p>
+                    </div>
+                </div>
             </div>
-            <div class="font-item">
-                <p class="font-name" style="font-family: var(--a-font-family-mono);">Monospace</p>
-                <p style="font-family: var(--a-font-family-mono);">The quick brown fox jumps over the lazy dog. 1234567890</p>
-            </div>
-            <div class="font-item">
-                <p class="font-name" style="font-family: 'Lora', serif;">Serif (Example)</p>
-                <p style="font-family: 'Lora', serif;">The quick brown fox jumps over the lazy dog. 1234567890</p>
-            </div>
-        </div>
+        </section>
 
-        <h2>Font Sizes: A Cascading Scale</h2>
-        <p>Axiom01 uses a modular and cascading font size system, derived from a single <code>--a-font-size-base</code> variable and a <code>--a-heading-scale</code>. This ensures consistent visual rhythm and easy global adjustments.</p>
-        <pre><code>:root {
-    --a-font-size-base: 1rem; /* Default base font size */
-    --a-heading-scale: 1.15; /* Modular scale factor */
+        <section id="font-sizes">
+            <div class="container">
+                <h2>Font Sizes: A Cascading Scale</h2>
+                <p>Axiom01 uses a modular and cascading font size system, derived from a single <code>--a-font-size-base</code> variable and a <code>--a-heading-scale</code>. This ensures consistent visual rhythm and easy global adjustments. All font sizes are defined in <code>rem</code> units, making them scalable and responsive to user preferences.</p>
+                <pre><code>:root {
+    --a-font-size-base: 1rem; /* Default base font size (16px) */
+    --a-heading-scale: 1.15; /* Modular scale factor for headings */
 
-    --a-font-size-h6: calc(var(--a-font-size-base) / var(--a-heading-scale));
-    --a-font-size-h5: var(--a-font-size-base);
-    --a-font-size-h4: calc(var(--a-font-size-base) * var(--a-heading-scale));
-    --a-font-size-h3: calc(var(--a-font-size-h4) * var(--a-heading-scale));
-    --a-font-size-h2: calc(var(--a-font-size-h3) * var(--a-heading-scale));
-    --a-font-size-h1: calc(var(--a-font-size-h2) * var(--a-heading-scale));
+    /* Heading sizes derived from base and scale */
+    --a-font-size-h6: calc(var(--a-font-size-base) / var(--a-heading-scale)); /* ~0.87rem */
+    --a-font-size-h5: var(--a-font-size-base); /* 1rem */
+    --a-font-size-h4: calc(var(--a-font-size-base) * var(--a-heading-scale)); /* ~1.15rem */
+    --a-font-size-h3: calc(var(--a-font-size-h4) * var(--a-heading-scale)); /* ~1.32rem */
+    --a-font-size-h2: calc(var(--a-font-size-h3) * var(--a-heading-scale)); /* ~1.52rem */
+    --a-font-size-h1: calc(var(--a-font-size-h2) * var(--a-heading-scale)); /* ~1.75rem */
 
-    --a-font-size-xs: calc(var(--a-font-size-base) * 0.75);
-    --a-font-size-s: calc(var(--a-font-size-base) * 0.875);
-    --a-font-size-m: var(--a-font-size-base);
-    --a-font-size-l: calc(var(--a-font-size-base) * 1.25);
-    --a-font-size-xl: calc(var(--a-font-size-base) * 1.5);
-    --a-font-size-xxl: calc(var(--a-font-size-base) * 2);
+    /* General text sizes */
+    --a-font-size-xs: calc(var(--a-font-size-base) * 0.75); /* ~0.75rem */
+    --a-font-size-s: calc(var(--a-font-size-base) * 0.875); /* ~0.875rem */
+    --a-font-size-m: var(--a-font-size-base); /* 1rem */
+    --a-font-size-l: calc(var(--a-font-size-base) * 1.25); /* ~1.25rem */
+    --a-font-size-xl: calc(var(--a-font-size-base) * 1.5); /* ~1.5rem */
+    --a-font-size-xxl: calc(var(--a-font-size-base) * 2); /* 2rem */
 }</code></pre>
+                <p>By adjusting <code>--a-font-size-base</code> or <code>--a-heading-scale</code>, you can globally scale all text sizes in your application, making it easy to adapt to different design requirements or user preferences.</p>
 
-        <h3>Text Size Examples</h3>
-        <div class="text-size-example">
-            <p class="text-xxl">Text XXL (<code>var(--a-font-size-xxl)</code>)</p>
-            <p class="text-xl">Text XL (<code>var(--a-font-size-xl)</code>)</p>
-            <p class="text-l">Text L (<code>var(--a-font-size-l)</code>)</p>
-            <p class="text-m">Text M (<code>var(--a-font-size-m)</code>)</p>
-            <p class="text-s">Text S (<code>var(--a-font-size-s)</code>)</p>
-            <p class="text-xs">Text XS (<code>var(--a-font-size-xs)</code>)</p>
-        </div>
+                <h3>Text Size Examples</h3>
+                <div class="text-size-example">
+                    <p style="font-size: var(--a-font-size-xxl);">Text XXL (<code>var(--a-font-size-xxl)</code>)</p>
+                    <p style="font-size: var(--a-font-size-xl);">Text XL (<code>var(--a-font-size-xl)</code>)</p>
+                    <p style="font-size: var(--a-font-size-l);">Text L (<code>var(--a-font-size-l)</code>)</p>
+                    <p style="font-size: var(--a-font-size-m);">Text M (<code>var(--a-font-size-m)</code>)</p>
+                    <p style="font-size: var(--a-font-size-s);">Text S (<code>var(--a-font-size-s)</code>)</p>
+                    <p style="font-size: var(--a-font-size-xs);">Text XS (<code>var(--a-font-size-xs)</code>)</p>
+                </div>
+            </div>
+        </section>
 
-        <h2>Font Weights</h2>
-        <p>Control text emphasis with predefined font weight variables.</p>
-        <pre><code>:root {
+        <section id="font-weights">
+            <div class="container">
+                <h2>Font Weights</h2>
+                <p>Control text emphasis with predefined font weight variables. These variables map to common font weights, ensuring consistency across your design.</p>
+                <pre><code>:root {
     --a-font-weight-normal: 400;
     --a-font-weight-medium: 500;
     --a-font-weight-bold: 700;
     --a-font-weight-black: 900;
 }</code></pre>
-        <p style="font-weight: var(--a-font-weight-normal);">Normal weight text (<code>--a-font-weight-normal</code>)</p>
-        <p style="font-weight: var(--a-font-weight-medium);">Medium weight text (<code>--a-font-weight-medium</code>)</p>
-        <p style="font-weight: var(--a-font-weight-bold);">Bold weight text (<code>--a-font-weight-bold</code>)</p>
-        <p style="font-weight: var(--a-font-weight-black);">Black weight text (<code>--a-font-weight-black</code>)</p>
+                <p style="font-weight: var(--a-font-weight-normal);">Normal weight text (<code>--a-font-weight-normal</code>)</p>
+                <p style="font-weight: var(--a-font-weight-medium);">Medium weight text (<code>--a-font-weight-medium</code>)</p>
+                <p style="font-weight: var(--a-font-weight-bold);">Bold weight text (<code>--a-font-weight-bold</code>)</p>
+                <p style="font-weight: var(--a-font-weight-black);">Black weight text (<code>--a-font-weight-black</code>)</p>
+            </div>
+        </section>
 
-        <h2>Line Heights</h2>
-        <p>Ensure optimal readability with consistent line height variables.</p>
-        <pre><code>:root {
+        <section id="line-heights">
+            <div class="container">
+                <h2>Line Heights</h2>
+                <p>Ensure optimal readability and visual rhythm with consistent line height variables. These are unitless values, which is generally recommended for better scalability.</p>
+                <pre><code>:root {
     --a-line-height-tight: 1.2;
     --a-line-height-normal: 1.6;
     --a-line-height-loose: 2;
 }</code></pre>
-        <div class="line-height-example">
-            <p class="line-height-tight">This paragraph has a tight line height. It is suitable for headings or short lines of text where space is limited. (<code>--a-line-height-tight</code>)</p>
-            <p class="line-height-normal">This paragraph has a normal line height. This is the default and recommended line height for most body text to ensure good readability. (<code>--a-line-height-normal</code>)</p>
-            <p class="line-height-loose">This paragraph has a loose line height. It provides more vertical space between lines, which can be useful for certain design aesthetics or for content that requires extra visual separation. (<code>--a-line-height-loose</code>)</p>
-        </div>
+                <div class="line-height-example">
+                    <p style="line-height: var(--a-line-height-tight);">This paragraph has a tight line height. It is suitable for headings or short lines of text where space is limited. (<code>--a-line-height-tight</code>)</p>
+                    <p style="line-height: var(--a-line-height-normal);">This paragraph has a normal line height. This is the default and recommended line height for most body text to ensure good readability. (<code>--a-line-height-normal</code>)</p>
+                    <p style="line-height: var(--a-line-height-loose);">This paragraph has a loose line height. It provides more vertical space between lines, which can be useful for certain design aesthetics or for content that requires extra visual separation. (<code>--a-line-height-loose</code>)</p>
+                </div>
+            </div>
+        </section>
 
-        <h2>Text Alignment</h2>
-        <p>Utility classes for common text alignment needs.</p>
-        <div class="text-alignment-example">
-            <div class="text-left">Left aligned text.</div>
-            <div class="text-center">Center aligned text.</div>
-            <div class="text-right">Right aligned text.</div>
-            <div class="text-justify">Justified text. This text will attempt to fill the entire width of its container by adjusting the spacing between words. This can create a clean edge on both sides of the text block.</div>
-        </div>
-        <pre><code>&lt;p class="text-left"&gt;Left aligned text.&lt;/p&gt;
+        <section id="text-utilities">
+            <div class="container">
+                <h2>Text Utilities</h2>
+                <p>Axiom01 provides a minimal set of utility classes for common text styling needs, promoting semantic HTML while offering quick adjustments.</p>
+
+                <h3>Text Alignment</h3>
+                <p>Apply these classes directly to any block-level element to control its text alignment.</p>
+                <div class="text-alignment-example">
+                    <div class="text-left">Left aligned text.</div>
+                    <div class="text-center">Center aligned text.</div>
+                    <div class="text-right">Right aligned text.</div>
+                    <div class="text-justify">Justified text. This text will attempt to fill the entire width of its container by adjusting the spacing between words. This can create a clean edge on both sides of the text block.</div>
+                </div>
+                <pre><code>&lt;p class="text-left"&gt;Left aligned text.&lt;/p&gt;
 &lt;p class="text-center"&gt;Center aligned text.&lt;/p&gt;
 &lt;p class="text-right"&gt;Right aligned text.&lt;/p&gt;
 &lt;p class="text-justify"&gt;Justified text.&lt;/p&gt;</code></pre>
 
-        <h2>Text Transformation</h2>
-        <p>Utility classes to transform text case.</p>
-        <div class="text-transform-example">
-            <p class="text-uppercase">This text is uppercase.</p>
-            <p class="text-lowercase">This text is lowercase.</p>
-            <p class="text-capitalize">This text is capitalized.</p>
-        </div>
-        <pre><code>&lt;p class="text-uppercase"&gt;This text is uppercase.&lt;/p&gt;
+                <h3>Text Transformation</h3>
+                <p>Use these classes to quickly change the case of text without modifying the HTML content.</p>
+                <div class="text-transform-example">
+                    <p class="text-uppercase">This text is uppercase.</p>
+                    <p class="text-lowercase">This text is lowercase.</p>
+                    <p class="text-capitalize">This text is capitalized.</p>
+                </div>
+                <pre><code>&lt;p class="text-uppercase"&gt;This text is uppercase.&lt;/p&gt;
 &lt;p class="text-lowercase"&gt;This text is lowercase.&lt;/p&gt;
 &lt;p class="text-capitalize"&gt;This text is capitalized.&lt;/p&gt;</code></pre>
-    </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/index-page-manager.js"></script>
+    <footer class="main-footer">
+        <div class="content">
+            <div class="brand">
+                <a href="/" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="placeholder.html">Documentation</a></li>
+                        <li><a href="../../README.md">README</a></li>
+                        <li><a href="../../DEVELOPER.md">Developer Guide</a></li>
+                        <li><a href="../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="/#get-started">Getting Started</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="interactive-playground.html">Playground</a></li>
+                        <li><a href="/#example-sites">Example Sites</a></li>
+                        <li><a href="/#release-info">Release Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

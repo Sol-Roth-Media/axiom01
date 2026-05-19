@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spacing Demo Component - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body class="axiom-body">
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="/" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="/#philosophy">Philosophy</a></li>
+                <li><a href="/#components">Components</a></li>
+                <li><a href="/#get-started">Get Started</a></li>
+                <li><a href="/docs/placeholder.html">Documentation</a></li>
+            </ul>
+            <div class="actions">
+                <button class="search-toggle" aria-label="Open Search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero small">
+            <div class="content">
+                <h1>Spacing Demo Component</h1>
+                <p>The Spacing Demo component visually illustrates Axiom01's cascading spacing system, allowing users to interactively adjust the base spacing unit and observe its global impact on layout.</p>
+            </div>
+        </section>
+
+        <section id="purpose">
+            <div class="container">
+                <h2>Purpose</h2>
+                <p>Axiom01's layout is built on a single source of truth for all spacing: the CSS variable <code>--a-space-unit</code>. This variable generates a comprehensive, consistent scale (from <code>--a-space-xs</code> to <code>--a-space-xxl</code>) used for <code>padding</code>, <code>margin</code>, and <code>gap</code> properties throughout the framework. The Spacing Demo component provides a live, interactive way to understand and demonstrate this system.</p>
+            </div>
+        </section>
+
+        <section id="usage">
+            <div class="container">
+                <h2>Usage</h2>
+                <p>To use the spacing demo, simply include the HTML structure and ensure <code>axiom.js</code> is loaded. The component will automatically initialize the slider and update the displayed spacing values.</p>
+                <h3>HTML Structure</h3>
+                <pre><code>&lt;div class="spacing-demo" data-component="spacing-demo"&gt;
+    &lt;div class="controls"&gt;
+        &lt;label for="space-unit-slider"&gt;--a-space-unit: &lt;span id="space-unit-value"&gt;1&lt;/span&gt;rem&lt;/label&gt;
+        &lt;input type="range" id="space-unit-slider" min="0.5" max="2" step="0.1" value="1"&gt;
+    &lt;/div&gt;
+    &lt;div class="example-box"&gt;
+        &lt;div class="example-item" style="padding: var(--a-space-l);"&gt;Card (padding: --a-space-l)&lt;/div&gt;
+        &lt;div class="example-item" style="padding: var(--a-space-m);"&gt;Button (padding: --a-space-m)&lt;/div&gt;
+        &lt;div class="example-item" style="padding: var(--a-space-s);"&gt;Tag (padding: --a-space-s)&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p class="example-caption"&gt;The container above uses &lt;code&gt;gap: var(--a-space-m)&lt;/code&gt;. Each item's margin and padding are derived from the same unit.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                <h3>JavaScript Initialization</h3>
+                <p>The <code>spacing-demo.js</code> script (loaded via <code>axiom.js</code>) handles the interactivity of the slider. It listens for changes on the <code>#space-unit-slider</code> input and dynamically updates the <code>--a-space-unit</code> CSS variable on the <code>&lt;html&gt;</code> element, causing a global recalculation of all spacing values.</p>
+            </div>
+        </section>
+
+        <section id="accessibility">
+            <div class="container">
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>The slider input has a descriptive <code>&lt;label&gt;</code> associated with it.</li>
+                    <li>The current value of the <code>--a-space-unit</code> is displayed visually next to the label.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="customization">
+            <div class="container">
+                <h2>Customization</h2>
+                <p>While the core functionality is about demonstrating the global spacing system, the visual aspects of the demo itself can be customized:</p>
+                <ul>
+                    <li>The <code>.spacing-demo</code> container and its children can be styled using standard CSS.</li>
+                    <li>The <code>--a-space-unit</code> variable is the primary point of customization for the framework's spacing.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/index-page-manager.js"></script>
+    <footer class="main-footer">
+        <div class="content">
+            <div class="brand">
+                <a href="/" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../placeholder.html">Documentation</a></li>
+                        <li><a href="../../README.md">README</a></li>
+                        <li><a href="../../DEVELOPER.md">Developer Guide</a></li>
+                        <li><a href="../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="/#get-started">Getting Started</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="../interactive-playground.html">Playground</a></li>
+                        <li><a href="/#example-sites">Example Sites</a></li>
+                        <li><a href="/#release-info">Release Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
