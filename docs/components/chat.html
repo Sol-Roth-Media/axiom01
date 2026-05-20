@@ -41,10 +41,65 @@
             font-size: var(--a-font-size-small);
         }
         /* Specific styles for Chat demo */
-        .chat-widget-demo {
+        .chat-container {
             height: 400px;
             max-width: 500px;
             margin: 0 auto var(--a-space-l);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--a-color-outline);
+            border-radius: var(--a-border-radius-medium);
+            overflow: hidden;
+            background-color: var(--a-color-surface);
+        }
+
+        .chat-container .history {
+            flex-grow: 1;
+            padding: var(--a-space-m);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-s);
+        }
+
+        .chat-container .message {
+            max-width: 80%;
+            padding: var(--a-space-s) var(--a-space-m);
+            border-radius: var(--a-border-radius-large);
+            line-height: 1.4;
+        }
+
+        .chat-container .message.bot {
+            background-color: var(--a-color-surface-variant);
+            align-self: flex-start;
+            color: var(--a-color-on-surface-variant);
+        }
+
+        .chat-container .message.user {
+            background-color: var(--a-color-primary-container);
+            align-self: flex-end;
+            color: var(--a-color-on-primary-container);
+        }
+
+        .chat-container form {
+            display: flex;
+            padding: var(--a-space-m);
+            border-top: 1px solid var(--a-color-outline);
+            gap: var(--a-space-s);
+        }
+
+        .chat-container form input[type="text"] {
+            flex-grow: 1;
+            padding: var(--a-space-s);
+            border: 1px solid var(--a-color-outline);
+            border-radius: var(--a-border-radius-medium);
+            font-size: var(--a-font-size-medium);
+            background-color: var(--a-color-surface-variant);
+            color: var(--a-color-on-surface);
+        }
+
+        .chat-container form input[type="text"]::placeholder {
+            color: var(--a-color-on-surface-variant);
         }
     </style>
 </head>
@@ -54,42 +109,38 @@
         <p>Axiom01's chat component provides a clean and functional interface for displaying conversational messages. It's designed to be easily integrated into various applications, from customer support widgets to internal communication tools.</p>
 
         <h3>Basic Chat Widget</h3>
-        <div class="chat-widget-demo">
-            <div class="chat-widget" data-component="chat">
-                <div class="chat-history">
-                    <div class="chat-message bot">Hello! How can I help you today?</div>
-                    <div class="chat-message user">I need assistance with my order.</div>
-                    <div class="chat-message bot">Certainly! Could you please provide your order number?</div>
-                    <div class="chat-message user">It's #AXM012345.</div>
-                    <div class="chat-message bot">Thank you. Please wait a moment while I retrieve the details.</div>
-                </div>
-                <form class="chat-form">
-                    <input type="text" class="chat-input" placeholder="Type your message...">
-                    <button class="button primary">Send</button>
-                </form>
+        <div class="chat-container">
+            <div class="history">
+                <div class="message bot">Hello! How can I help you today?</div>
+                <div class="message user">I need assistance with my order.</div>
+                <div class="message bot">Certainly! Could you please provide your order number?</div>
+                <div class="message user">It's #AXM012345.</div>
+                <div class="message bot">Thank you. Please wait a moment while I retrieve the details.</div>
             </div>
+            <form>
+                <input type="text" placeholder="Type your message...">
+                <button class="button primary">Send</button>
+            </form>
         </div>
 
         <h3>Code Example</h3>
-        <pre><code>&lt;div class="chat-widget" data-component="chat"&gt;
-    &lt;div class="chat-history"&gt;
-        &lt;div class="chat-message bot"&gt;Hello! How can I help you today?&lt;/div&gt;
-        &lt;div class="chat-message user"&gt;I need assistance with my order.&lt;/div&gt;
-        &lt;div class="chat-message bot"&gt;Certainly! Could you please provide your order number?&lt;/div&gt;
-        &lt;div class="chat-message user"&gt;It's #AXM012345.&lt;/div&gt;
-        &lt;div class="chat-message bot"&gt;Thank you. Please wait a moment while I retrieve the details.&lt;/div&gt;
+        <pre><code>&lt;div class="chat-container"&gt;
+    &lt;div class="history"&gt;
+        &lt;div class="message bot"&gt;Hello! How can I help you today?&lt;/div&gt;
+        &lt;div class="message user"&gt;I need assistance with my order.&lt;/div&gt;
+        &lt;div class="message bot"&gt;Certainly! Could you please provide your order number?&lt;/div&gt;
+        &lt;div class="message user"&gt;It's #AXM012345.&lt;/div&gt;
+        &lt;div class="message bot"&gt;Thank you. Please wait a moment while I retrieve the details.&lt;/div&gt;
     &lt;/div&gt;
-    &lt;form class="chat-form"&gt;
-        &lt;input type="text" class="chat-input" placeholder="Type your message..."&gt;
+    &lt;form&gt;
+        &lt;input type="text" placeholder="Type your message..."&gt;
         &lt;button class="button primary"&gt;Send&lt;/button&gt;
     &lt;/form&gt;
 &lt;/div&gt;</code></pre>
 
         <h3>Usage Guidelines</h3>
-        <p>The <code>.chat-widget</code> class defines the main container. Message history is within <code>.chat-history</code>, with individual messages using <code>.chat-message</code>. Differentiate user and bot messages with <code>.user</code> and <code>.bot</code> modifier classes respectively. The input area is structured with <code>.chat-form</code>, <code>.chat-input</code>, and a standard <code>.button</code>.</p>
-        <p>You will need JavaScript to handle sending and receiving messages, scrolling to the latest message, and dynamically adding new messages to the <code>.chat-history</code>.</p>
+        <p>The <code>.chat-container</code> class defines the main wrapper for the chat interface. The <code>.history</code> div holds all chat messages, which are styled with the <code>.message</code> class. Use the <code>.bot</code> and <code>.user</code> modifier classes to differentiate messages from the chatbot and the user, respectively. The input area is a standard <code>&lt;form&gt;</code> containing an <code>&lt;input type="text"&gt;</code> and a <code>.button</code>.</p>
+        <p>You will need JavaScript to handle sending and receiving messages, scrolling to the latest message, and dynamically adding new messages to the <code>.history</code>.</p>
     </div>
-
-    <script src="../../js/axiom.js"></script>
 </body>
 </html>

@@ -45,14 +45,33 @@
             max-width: 600px;
             margin: 0 auto var(--a-space-l);
             position: relative;
+            overflow: hidden;
+            border-radius: var(--a-border-radius-medium);
+            box-shadow: var(--a-shadow-medium);
         }
-        .carousel-item img {
+
+        .carousel {
+            position: relative;
+        }
+
+        .carousel .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .carousel .slide img {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: var(--a-border-radius-medium);
         }
-        .carousel-caption {
+
+        .carousel .caption {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -61,8 +80,76 @@
             background-color: rgba(0, 0, 0, 0.6);
             color: white;
             text-align: center;
-            border-bottom-left-radius: var(--a-border-radius-medium);
-            border-bottom-right-radius: var(--a-border-radius-medium);
+        }
+
+        .carousel .caption h5 {
+            margin-top: 0;
+            margin-bottom: var(--a-space-xs);
+            color: white;
+        }
+
+        .carousel .caption p {
+            margin-bottom: 0;
+            font-size: var(--a-font-size-small);
+        }
+
+        .carousel .controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .carousel .controls button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: var(--a-space-s) var(--a-space-m);
+            cursor: pointer;
+            font-size: var(--a-font-size-large);
+            border-radius: var(--a-border-radius-small);
+            margin: 0 var(--a-space-s);
+        }
+
+        .carousel .indicators {
+            position: absolute;
+            bottom: var(--a-space-s);
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 1;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .carousel .indicators li {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 var(--a-space-xs);
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .carousel .indicators li.active {
+            background-color: white;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
     </style>
 </head>
@@ -73,91 +160,81 @@
 
         <h3>Basic Carousel</h3>
         <div class="carousel-demo">
-            <div id="carouselExampleIndicators" class="carousel" data-component="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="https://via.placeholder.com/600x300/4f46e5/e0e7ff?text=Slide+1" alt="First slide">
-                        <div class="carousel-caption">
+            <div class="carousel" role="region" aria-label="Image carousel">
+                <div class="slides">
+                    <div class="slide" role="group" aria-label="Slide 1 of 3">
+                        <img src="https://via.placeholder.com/600x300/4f46e5/e0e7ff?text=Slide+1" alt="Description for first slide">
+                        <div class="caption">
                             <h5>First slide label</h5>
                             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="https://via.placeholder.com/600x300/06b6d4/cffafe?text=Slide+2" alt="Second slide">
-                        <div class="carousel-caption">
+                    <div class="slide" role="group" aria-label="Slide 2 of 3">
+                        <img src="https://via.placeholder.com/600x300/06b6d4/cffafe?text=Slide+2" alt="Description for second slide">
+                        <div class="caption">
                             <h5>Second slide label</h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="https://via.placeholder.com/600x300/f59e42/fff7ed?text=Slide+3" alt="Third slide">
-                        <div class="carousel-caption">
+                    <div class="slide" role="group" aria-label="Slide 3 of 3">
+                        <img src="https://via.placeholder.com/600x300/f59e42/fff7ed?text=Slide+3" alt="Description for third slide">
+                        <div class="caption">
                             <h5>Third slide label</h5>
                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                         </div>
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </a>
+                <div class="controls">
+                    <button aria-label="Previous slide">&lt;</button>
+                    <button aria-label="Next slide">&gt;</button>
+                </div>
+                <ul class="indicators">
+                    <li class="active" aria-label="Go to slide 1"></li>
+                    <li aria-label="Go to slide 2"></li>
+                    <li aria-label="Go to slide 3"></li>
+                </ul>
             </div>
         </div>
 
         <h3>Code Example</h3>
-        <pre><code>&lt;div id="carouselExampleIndicators" class="carousel" data-component="carousel"&gt;
-    &lt;ol class="carousel-indicators"&gt;
-        &lt;li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"&gt;&lt;/li&gt;
-        &lt;li data-target="#carouselExampleIndicators" data-slide-to="1"&gt;&lt;/li&gt;
-        &lt;li data-target="#carouselExampleIndicators" data-slide-to="2"&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-    &lt;div class="carousel-inner"&gt;
-        &lt;div class="carousel-item active"&gt;
-            &lt;img class="d-block w-100" src="https://via.placeholder.com/600x300/4f46e5/e0e7ff?text=Slide+1" alt="First slide"&gt;
-            &lt;div class="carousel-caption"&gt;
+        <pre><code>&lt;div class="carousel" role="region" aria-label="Image carousel"&gt;
+    &lt;div class="slides"&gt;
+        &lt;div class="slide" role="group" aria-label="Slide 1 of 3"&gt;
+            &lt;img src="path/to/image1.jpg" alt="Description for first slide"&gt;
+            &lt;div class="caption"&gt;
                 &lt;h5&gt;First slide label&lt;/h5&gt;
                 &lt;p&gt;...&lt;/p&gt;
             &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div class="carousel-item"&gt;
-            &lt;img class="d-block w-100" src="https://via.placeholder.com/600x300/06b6d4/cffafe?text=Slide+2" alt="Second slide"&gt;
-            &lt;div class="carousel-caption"&gt;
+        &lt;div class="slide" role="group" aria-label="Slide 2 of 3"&gt;
+            &lt;img src="path/to/image2.jpg" alt="Description for second slide"&gt;
+            &lt;div class="caption"&gt;
                 &lt;h5&gt;Second slide label&lt;/h5&gt;
                 &lt;p&gt;...&lt;/p&gt;
             &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div class="carousel-item"&gt;
-            &lt;img class="d-block w-100" src="https://via.placeholder.com/600x300/f59e42/fff7ed?text=Slide+3" alt="Third slide"&gt;
-            &lt;div class="carousel-caption"&gt;
+        &lt;div class="slide" role="group" aria-label="Slide 3 of 3"&gt;
+            &lt;img src="path/to/image3.jpg" alt="Description for third slide"&gt;
+            &lt;div class="caption"&gt;
                 &lt;h5&gt;Third slide label&lt;/h5&gt;
                 &lt;p&gt;...&lt;/p&gt;
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-    &lt;a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"&gt;
-        &lt;span class="carousel-control-prev-icon" aria-hidden="true"&gt;&lt;/span&gt;
-        &lt;span class="visually-hidden"&gt;Previous&lt;/span&gt;
-    &lt;/a&gt;
-    &lt;a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"&gt;
-        &lt;span class="carousel-control-next-icon" aria-hidden="true"&gt;&lt;/span&gt;
-        &lt;span class="visually-hidden"&gt;Next&lt;/span&gt;
-    &lt;/a&gt;
+    &lt;div class="controls"&gt;
+        &lt;button aria-label="Previous slide"&gt;&amp;lt;&lt;/button&gt;
+        &lt;button aria-label="Next slide"&gt;&amp;gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;ul class="indicators"&gt;
+        &lt;li class="active" aria-label="Go to slide 1"&gt;&lt;/li&gt;
+        &lt;li aria-label="Go to slide 2"&gt;&lt;/li&gt;
+        &lt;li aria-label="Go to slide 3"&gt;&lt;/li&gt;
+    &lt;/ul&gt;
 &lt;/div&gt;</code></pre>
 
         <h3>Usage Guidelines</h3>
-        <p>The carousel component requires JavaScript for its interactive functionality (sliding, controls, indicators). Ensure <code>axiom.js</code> is loaded. The <code>data-component="carousel"</code> attribute will initialize the component.</p>
-        <p>Each <code>.carousel-item</code> represents a slide. The <code>.active</code> class determines the initially visible slide. Navigation is handled by <code>.carousel-control-prev</code> and <code>.carousel-control-next</code>, while <code>.carousel-indicators</code> provide direct access to slides.</p>
+        <p>The <code>.carousel</code> class defines the main container. Inside, <code>.slides</code> holds individual <code>.slide</code> elements, each containing an <code>&lt;img&gt;</code> and an optional <code>.caption</code>. Navigation is provided by <code>.controls</code> with buttons and <code>.indicators</code> for direct slide selection.</p>
+        <p>For accessibility, ensure <code>role="region"</code> and <code>aria-label</code> are used on the main carousel container, <code>role="group"</code> and <code>aria-label</code> on each slide, and <code>aria-label</code> on control buttons and indicator list items.</p>
     </div>
-
-    <script src="../../js/axiom.js"></script>
 </body>
 </html>
