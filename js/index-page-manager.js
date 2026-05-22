@@ -9,6 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', themeName);
     };
 
+    // Helper function to update the theme toggle button icon
+    const updateThemeToggleButtonIcon = (themeName) => {
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+                if (themeName === 'dark') {
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                }
+            }
+        }
+    };
+
     // 1. Mobile Navigation Toggle
     const initMobileNav = () => {
         const menuToggle = document.querySelector('.menu-toggle');
@@ -37,26 +52,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Set initial theme from localStorage or default to 'light'
         const currentTheme = localStorage.getItem('theme') || 'light';
         applyTheme(currentTheme);
-
-        if (currentTheme === 'dark') {
-            themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-        }
+        updateThemeToggleButtonIcon(currentTheme); // Use helper for initial icon
 
         if (themeToggle) {
             themeToggle.addEventListener('click', () => {
                 let theme = htmlElement.getAttribute('data-theme');
-                if (theme === 'light') {
-                    applyTheme('dark');
-                    themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-                } else {
-                    applyTheme('light');
-                    themeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
-                }
+                const newTheme = theme === 'light' ? 'dark' : 'light';
+                applyTheme(newTheme);
+                updateThemeToggleButtonIcon(newTheme); // Use helper for click icon update
+                
                 // Update theme explorer select if it exists
                 const themeSelect = document.getElementById('theme-select');
                 if (themeSelect) {
-                    themeSelect.value = htmlElement.getAttribute('data-theme');
-                    updateThemeDescription(htmlElement.getAttribute('data-theme'));
+                    themeSelect.value = newTheme;
+                    updateThemeDescription(newTheme);
                 }
             });
         }
@@ -356,15 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const selectedTheme = event.target.value;
                 applyTheme(selectedTheme);
                 updateThemeDescription(selectedTheme);
-                // Update header toggle button icon if it exists
-                const themeToggle = document.getElementById('theme-toggle');
-                if (themeToggle) {
-                    if (selectedTheme === 'dark') {
-                        themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-                    } else {
-                        themeToggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
-                    }
-                }
+                updateThemeToggleButtonIcon(selectedTheme); // Use helper for select change icon update
             });
         }
     };
@@ -420,6 +421,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // 7. Dynamic Copyright Year
+    const initDynamicCopyrightYear = () => {
+        const currentYearSpan = document.getElementById('current-year');
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+    };
+
     // Initialize all functionalities
     initMobileNav();
     initHeaderThemeToggle();
@@ -429,5 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initCodeCopying();
     initThemeExplorer();
     initSmoothScrolling();
-    initSidebarHighlighting(); // Call the new function
+    initSidebarHighlighting();
+    initDynamicCopyrightYear(); // Call the new function
 });
