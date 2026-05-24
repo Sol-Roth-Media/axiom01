@@ -23,6 +23,7 @@
 4. **Tighten component/documentation examples**
    - Audit docs pages for malformed HTML and inconsistent examples.
    - Keep the examples focused on the framework’s real patterns rather than legacy or placeholder markup.
+   - Check every individual component page at multiple widths so hero areas, content columns, and example blocks never overlap or feel oversized on large screens.
 
 5. **CSS cleanup pass**
    - Remove selectors that exist only to support avoidable helper classes.
@@ -35,7 +36,12 @@
   - Normalized the shared docs header hooks so the search/theme/menu buttons match the page scripts again.
   - Cleaned a few content issues in the docs, including the theme wizard preview labels, the malformed `components-overview.html` wrapper, the `components-simple.html` / `components-advanced.html` card lists, and the footer markdown links.
   - Removed inline spacing/font styles from the boilerplate template and typography guide, replacing them with docs-scoped CSS rules and fallbacks.
+  - Removed inline spacing from the index spacing demo and cleaned the search modal labels/accessibility hooks.
+  - Replaced inline navigation/footer styles in `docs/form-elements.html` with semantic classes.
+  - Added a shared `component-doc` layout pass to every page in `docs/components/` so component pages stack cleanly on wide screens and use a smaller hero treatment.
+  - Started fixing the alert component page specifically by preventing the wide-screen overlap and reducing the oversized hero treatment.
 - Still pending:
   - A deeper content/style audit of the remaining docs pages for unnecessary wrapper classes, inline styles, and legacy demo scaffolding.
   - A broader CSS pass to remove selectors that only exist for temporary helpers or one-off samples.
+  - A larger cleanup of `docs/form-elements.html` and `docs/colors-advanced.html`, which still contain legacy token names and template-specific styling that deserve a dedicated pass.
 
