@@ -44,9 +44,14 @@
   - Tightened component-page spacing in `css/doc-preview.css` so hero and footer sections are more compact and no longer carry oversized vertical gaps.
   - Cleaned `docs/form-elements.html` by fixing unresolved legacy token usage, correcting broken component nav links, removing malformed commented sidebar markup, and normalizing checkbox/radio class usage in live and code examples.
   - Fixed the page-manager script path in `docs/colors-advanced.html` so the docs page resolves local JS correctly.
+  - Fixed `index.html` component showcase dropdown preview markup to avoid nested interactive elements that were breaking card layout.
+  - Fixed index-page spacing/layout regressions: added space above the grid section “Advanced Layout Guide” action row, restored typography section column rules to the actual `.layout`/`.column` structure, and aligned heading spacing with spacing tokens.
+  - Updated the “Why Choose Axiom?” comparison section to use a dedicated horizontal-scroll wrapper on narrow screens.
+  - Removed inline swatch color styles from `docs/colors-advanced.html` and moved generated-palette token rendering into scoped rules in `css/doc-styles.css`.
+  - Removed a large legacy commented sidebar/template block from `docs/colors-advanced.html` to simplify release markup.
 - Still pending:
   - A deeper content/style audit of the remaining docs pages for unnecessary wrapper classes, inline styles, and legacy demo scaffolding.
   - A broader CSS pass to remove selectors that only exist for temporary helpers or one-off samples.
   - Cleanup of legacy per-page `<style>` blocks in component pages where demo-only body/layout rules still duplicate framework/doc CSS.
-  - Remove remaining inline swatch styles in `docs/colors-advanced.html` by moving token-color rendering to docs-scoped CSS classes.
+  - Continue cleanup of docs pages that still include large legacy commented sidebar/template blocks and other pre-release scaffolding.
 
