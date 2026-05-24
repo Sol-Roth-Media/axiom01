@@ -82,6 +82,27 @@ Before tagging a release, ensure repository scripts and packaging configuration 
 
 `BUILD_PROCESS.md` documents a PostCSS pipeline (`postcss-import`, `cssnano`, `purgecss`) for producing optimized CSS. Treat it as the source of truth for CSS build setup.
 
+## Release checks and artifacts
+
+Run the local pre-release audit:
+
+```bash
+npm test
+```
+
+Build release artifacts expected by release automation:
+
+```bash
+npm run build
+```
+
+This generates:
+
+- `dist/css/axiom.min.css`
+- `dist/js/axiom.min.js`
+- `dist/README.md`
+- `dist/version.txt`
+
 ## Docs and contributor references
 
 - `DEVELOPER.md`: contributor workflows and implementation notes.
