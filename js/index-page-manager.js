@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Highlight active link in sidebar navigation
     const initSidebarHighlighting = () => {
-        const sidebarLinks = document.querySelectorAll('.doc-sidebar nav ul li a');
+        const sidebarLinks = document.querySelectorAll('.sidebar nav ul li a');
         const currentPath = window.location.pathname;
 
         sidebarLinks.forEach(link => {
