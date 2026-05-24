@@ -441,3 +441,129 @@
     padding: var(--a-space-s) var(--a-space-m); /* Default button padding */
     font-size: var(--a-font-size-base); /* Default button font size */
 }
+
+/* Styles for the color palette section */
+#color-palette h3 {
+    margin-top: var(--a-space-xl); /* Add more space above each palette heading */
+    margin-bottom: var(--a-space-m); /* Space below heading before grid */
+}
+
+#color-palette p {
+    margin-bottom: var(--a-space-l); /* Space below paragraph before grid */
+}
+
+#color-palette .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust as needed */
+    gap: var(--a-space-m);
+}
+
+#color-palette .swatch {
+    height: 120px; /* Fixed height for visual consistency */
+    border-radius: var(--a-border-radius-medium);
+    display: flex;
+    flex-direction: column; /* Arrange children vertically */
+    justify-content: space-between; /* Push first child to top, second to bottom */
+    padding: var(--a-space-s); /* Padding around the content */
+    /* Removed default color: var(--a-color-on-surface); to allow specific on-container classes to dictate text color */
+    overflow: hidden; /* Hide overflowing text */
+    box-shadow: var(--a-shadow-small);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#color-palette .swatch:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--a-shadow-medium);
+}
+
+#color-palette .swatch .info {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    color: white; /* Ensure text is visible on dark background */
+    padding: var(--a-space-xs) var(--a-space-s);
+    border-radius: var(--a-border-radius-small);
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+#color-palette .swatch .info h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: var(--a-font-weight-bold);
+}
+
+#color-palette .swatch .info p {
+    margin: 0;
+    font-size: 0.75rem;
+    word-break: break-all; /* Allow long variable names to break */
+}
+
+/* Specific color assignments */
+#color-palette .swatch.primary { background-color: var(--a-color-primary); }
+#color-palette .swatch.secondary { background-color: var(--a-color-secondary); }
+#color-palette .swatch.tertiary { background-color: var(--a-color-tertiary); }
+#color-palette .swatch.surface { background-color: var(--a-color-surface); }
+#color-palette .swatch.on-surface { background-color: var(--a-color-on-surface); }
+#color-palette .swatch.outline { background-color: var(--a-color-outline); }
+
+#color-palette .swatch.primary-container { background-color: var(--a-color-primary-container); }
+#color-palette .swatch.secondary-container { background-color: var(--a-color-secondary-container); }
+#color-palette .swatch.tertiary-container { background-color: var(--a-color-tertiary-container); }
+#color-palette .swatch.error-container { background-color: var(--a-color-error-container); }
+
+#color-palette .swatch.analogous-1 { background-color: var(--a-color-analogous-1); }
+#color-palette .swatch.analogous-2 { background-color: var(--a-color-analogous-2); }
+#color-palette .swatch.analogous-1-container { background-color: var(--a-color-analogous-1-container); }
+#color-palette .swatch.analogous-2-container { background-color: var(--a-color-analogous-2-container); }
+
+#color-palette .swatch.success { background-color: var(--a-color-success); }
+#color-palette .swatch.warning { background-color: var(--a-color-warning); }
+#color-palette .swatch.error { background-color: var(--a-color-error); }
+#color-palette .swatch.info { background-color: var(--a-color-info); }
+
+/* Gradients */
+#color-palette .swatch.gradient-primary { background: var(--a-gradient-primary); }
+#color-palette .swatch.gradient-sunset { background: var(--a-gradient-sunset); }
+#color-palette .swatch.gradient-ocean { background: var(--a-gradient-ocean); }
+#color-palette .swatch.gradient-forest { background: var(--a-gradient-forest); }
+
+/* Greyscale */
+#color-palette .greyscale-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Smaller swatches for greyscale */
+}
+
+#color-palette .swatch.gray-1 { background-color: var(--a-color-gray-1); }
+#color-palette .swatch.gray-5 { background-color: var(--a-color-gray-5); }
+#color-palette .swatch.gray-10 { background-color: var(--a-color-gray-10); }
+#color-palette .swatch.gray-15 { background-color: var(--a-color-gray-15); }
+#color-palette .swatch.gray-20 { background-color: var(--a-color-gray-20); }
+#color-palette .swatch.gray-25 { background-color: var(--a-color-gray-25); }
+#color-palette .swatch.gray-30 { background-color: var(--a-color-gray-30); }
+#color-palette .swatch.gray-36 { background-color: var(--a-color-gray-36); }
+
+#color-palette .swatch span { /* For on-container text */
+    font-size: 0.9rem;
+    font-weight: var(--a-font-weight-bold);
+    padding: var(--a-space-xs) var(--a-space-s);
+    border-radius: var(--a-border-radius-small);
+    background-color: rgba(255, 255, 255, 0.2); /* Re-added subtle background for readability */
+    align-self: flex-start; /* Align to the start within the column */
+    margin-bottom: var(--a-space-xs); /* Small separation from info block */
+    /* Removed explicit color setting here to allow on-container classes to dictate text color */
+}
+
+#color-palette .swatch.small {
+    height: 80px; /* Smaller height for greyscale swatches */
+    flex-direction: row; /* Treat as a single row to center its single child */
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Remove padding for small swatches to allow info to take full space */
+}
+
+#color-palette .swatch.small .info {
+    background: none; /* No background for info in small swatches */
+    color: inherit; /* Inherit color from swatch */
+    text-align: center;
+    padding: 0;
+    width: auto; /* Allow info to shrink-wrap content */
+}
