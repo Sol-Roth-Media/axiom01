@@ -173,10 +173,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Search Modal (using Fuse.js for demo purposes)
     const initSearchModal = () => {
         const searchToggle = document.querySelector('.search.toggle');
-        const searchModal = document.getElementById('search-modal');
-        const closeSearchModalButton = searchModal ? searchModal.querySelector('.close') : null; // Select within modal
-        const searchModalInput = document.getElementById('search-modal-input');
-        const searchModalResults = document.getElementById('search-modal-results');
+
+        const ensureSearchModal = () => {
+            let modal = document.getElementById('search-modal');
+            if (modal) return modal;
+
+            modal = document.createElement('div');
+            modal.id = 'search-modal';
+            modal.className = 'search-modal is-hidden';
+            modal.setAttribute('data-component', 'search');
+            modal.setAttribute('aria-modal', 'true');
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-hidden', 'true');
+            modal.innerHTML = `
+                <div class="content">
+                    <header>
+                        <h3>Search Documentation</h3>
+                        <button class="close" type="button" aria-label="Close Search">&times;</button>
+                    </header>
+                    <input id="search-modal-input" type="text" placeholder="Search components and docs..." aria-label="Search Documentation">
+                    <div id="search-modal-results" aria-live="polite"></div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+            return modal;
+        };
+
+        if (!searchToggle) return;
+
+        const searchModal = ensureSearchModal();
+        const closeSearchModalButton = searchModal.querySelector('.close');
+        const searchModalInput = searchModal.querySelector('#search-modal-input');
+        const searchModalResults = searchModal.querySelector('#search-modal-results');
         let lastFocusedElement = null;
 
         const resolveSearchUrl = (url) => {
@@ -190,6 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (inDocsComponents) return `../${docsRelative}`;
                 if (inDocs) return docsRelative;
             }
+
+            if (inDocsComponents) return `../../${url}`;
+            if (inDocs) return `../${url}`;
 
             return url;
         };
@@ -249,15 +281,18 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Developer Guide", category: "docs", url: "docs/markdown-template.html?file=../DEVELOPER.md" },
             { title: "Styling Guide", category: "docs", url: "docs/markdown-template.html?file=../AXIOM01_STYLING_GUIDE.md" },
             { title: "README", category: "docs", url: "docs/markdown-template.html?file=../readme.md" },
-            { title: "MIT License", category: "docs", url: "LICENSE" },
+            { title: "MIT License", category: "docs", url: "docs/markdown-template.html?file=../LICENSE" },
         ];
 
-        const fuse = new Fuse(searchData, {
-            keys: ['title', 'category'],
-            threshold: 0.3, // Fuzziness of the search
-        });
-
         if (searchToggle && searchModal && closeSearchModalButton && searchModalInput && searchModalResults) {
+            const hasFuse = typeof window.Fuse === 'function';
+            const fuse = hasFuse
+                ? new window.Fuse(searchData, {
+                    keys: ['title', 'category'],
+                    threshold: 0.3, // Fuzziness of the search
+                })
+                : null;
+
             const closeModal = () => {
                 searchModal.classList.add('is-hidden');
                 searchModal.setAttribute('aria-hidden', 'true');
@@ -291,7 +326,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 searchModalResults.innerHTML = ''; // Clear previous results
 
                 if (query.length > 1) {
-                    const results = fuse.search(query);
+                    const results = hasFuse
+                        ? fuse.search(query)
+                        : searchData
+                            .filter(item => item.title.toLowerCase().includes(query.toLowerCase()) || item.category.toLowerCase().includes(query.toLowerCase()))
+                            .map(item => ({ item }));
+
                     if (results.length > 0) {
                         const ul = document.createElement('ul');
                         results.forEach(result => {
