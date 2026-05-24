@@ -33,8 +33,9 @@
 - Completed in this pass:
   - Simplified `index.html` by removing helper link classes, fixing invalid nested `main` tags, and replacing copy-button hooks with `data-copy-snippet`.
   - Normalized the shared docs header hooks so the search/theme/menu buttons match the page scripts again.
-  - Cleaned a few content issues in the docs, including the theme wizard preview labels and the malformed `components-overview.html` wrapper.
+  - Cleaned a few content issues in the docs, including the theme wizard preview labels, the malformed `components-overview.html` wrapper, the `components-simple.html` / `components-advanced.html` card lists, and the footer markdown links.
+  - Removed inline spacing/font styles from the boilerplate template and typography guide, replacing them with docs-scoped CSS rules and fallbacks.
 - Still pending:
-  - A deeper content/style audit of the remaining docs pages for unnecessary wrapper classes and legacy demo scaffolding.
-  - A broader CSS pass to remove selectors that only exist for temporary helpers.
+  - A deeper content/style audit of the remaining docs pages for unnecessary wrapper classes, inline styles, and legacy demo scaffolding.
+  - A broader CSS pass to remove selectors that only exist for temporary helpers or one-off samples.
 
