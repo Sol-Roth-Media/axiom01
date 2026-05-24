@@ -346,276 +346,148 @@ Light mode and dark mode.
 https://dev.to/ynab/a-semantic-color-system-the-theory-hk7
 **/
 
-.swatch {
-    width: 120px;
-    height: 120px;
+#color-palette .swatch {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid var(--a-color-outline);
+    position: relative; /* For absolute positioning of .info */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: content-box; /* Ensure padding doesn't affect width/height */
+    margin-bottom: 60px; /* Space for the info block below */
+    color: var(--a-color-on-primary); /* Default text color for swatches */
 }
 
-/* --- Surface Colors --- */
-.color-surface-box {
-    background-color: var(--a-color-surface);
-    color: var(--a-color-on-surface);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
+/* Base Colors */
+#color-palette .swatch.primary { background-color: var(--a-color-primary); }
+#color-palette .swatch.secondary { background-color: var(--a-color-secondary); }
+#color-palette .swatch.tertiary { background-color: var(--a-color-tertiary); }
+#color-palette .swatch.surface { background-color: var(--a-color-surface); color: var(--a-color-on-surface); } /* Surface needs specific text color */
+#color-palette .swatch.on-surface { background-color: var(--a-color-on-surface); color: var(--a-color-surface); } /* On-surface needs specific text color */
+#color-palette .swatch.outline { background-color: var(--a-color-outline); color: var(--a-color-on-surface-variant); } /* Outline needs specific text color */
+
+/* Container Colors */
+#color-palette .swatch.primary-container { background-color: var(--a-color-primary-container); }
+#color-palette .swatch.secondary-container { background-color: var(--a-color-secondary-container); }
+#color-palette .swatch.tertiary-container { background-color: var(--a-color-tertiary-container); }
+#color-palette .swatch.error-container { background-color: var(--a-color-error-container); }
+
+/* Analogous Colors */
+#color-palette .swatch.analogous-1 { background-color: var(--a-color-analogous-1); }
+#color-palette .swatch.analogous-2 { background-color: var(--a-color-analogous-2); }
+#color-palette .swatch.analogous-1-container { background-color: var(--a-color-analogous-1-container); }
+#color-palette .swatch.analogous-2-container { background-color: var(--a-color-analogous-2-container); }
+
+/* Semantic Colors */
+#color-palette .swatch.success { background-color: var(--a-color-success); }
+#color-palette .swatch.warning { background-color: var(--a-color-warning); }
+#color-palette .swatch.error { background-color: var(--a-color-error); }
+#color-palette .swatch.info { background-color: var(--a-color-info); }
+
+/* Gradients */
+#color-palette .swatch.gradient-primary { background: var(--a-gradient-primary); }
+#color-palette .swatch.gradient-sunset { background: var(--a-gradient-sunset); }
+#color-palette .swatch.gradient-ocean { background: var(--a-gradient-ocean); }
+#color-palette .swatch.gradient-forest { background: var(--a-gradient-forest); }
+
+/* Greyscale */
+#color-palette .swatch.gray-1 { background-color: var(--a-color-gray-1); color: var(--a-color-on-surface); }
+#color-palette .swatch.gray-5 { background-color: var(--a-color-gray-5); color: var(--a-color-on-surface); }
+#color-palette .swatch.gray-10 { background-color: var(--a-color-gray-10); color: var(--a-color-on-surface); }
+#color-palette .swatch.gray-15 { background-color: var(--a-color-gray-15); color: var(--a-color-on-surface); }
+#color-palette .swatch.gray-20 { background-color: var(--a-color-gray-20); color: var(--a-color-on-surface); }
+#color-palette .swatch.gray-25 { background-color: var(--a-color-gray-25); color: var(--a-color-on-surface); }
+#color-palette .swatch.gray-30 { background-color: var(--a-color-gray-30); color: var(--a-color-on-surface); }
+#color-palette .swatch.gray-36 { background-color: var(--a-color-gray-36); color: var(--a-color-surface); }
+
+
+/* Info text within swatch */
+#color-palette .swatch .info {
+    position: absolute;
+    bottom: -50px; /* Position relative to the bottom of the swatch */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px; /* Give it a fixed width */
+    text-align: center;
+    background-color: transparent; /* Ensure info background doesn't cover swatch */
+    color: var(--a-color-on-surface); /* Ensure text color is readable */
+    margin: 0; /* Remove any default margins */
+    padding: 0; /* Remove any default paddings */
 }
 
-.color-surface-invert-box {
-    background-color: var(--a-color-surface-variant);
-    /* Updated variable name */
+#color-palette .swatch .info h4 {
+    font-size: 1.1rem;
+    margin: 0 0 var(--a-space-xs); /* Keep some margin for the h4 */
+}
+#color-palette .swatch .info p {
+    font-family: var(--a-font-family-mono);
+    font-size: 0.9rem;
     color: var(--a-color-on-surface-variant);
-    /* Updated variable name */
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
+    margin: 0;
 }
 
-/* --- Primary Colors --- */
-.color-primary-box {
-    background-color: var(--a-color-primary);
-    color: var(--a-color-on-primary);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
+/* For the "Text" span in container swatches */
+#color-palette .swatch span {
+    display: flex; /* Use flex to center text vertically and horizontally */
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Take full height of the swatch circle */
+    width: 100%; /* Take full width of the swatch circle */
+    font-weight: var(--a-font-weight-bold);
+    text-align: center;
 }
 
-.color-on-primary-box {
-    background-color: var(--a-color-on-primary);
-    color: var(--a-color-primary);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
+/* Explicitly set colors for the "Text" span */
+#color-palette .swatch.primary-container span { color: var(--a-color-on-primary-container); }
+#color-palette .swatch.secondary-container span { color: var(--a-color-on-secondary-container); }
+#color-palette .swatch.tertiary-container span { color: var(--a-color-on-tertiary-container); }
+#color-palette .swatch.error-container span { color: var(--a-color-on-error-container); }
+#color-palette .swatch.analogous-1-container span { color: var(--a-color-on-analogous-1-container); }
+#color-palette .swatch.analogous-2-container span { color: var(--a-color-on-analogous-2-container); }
+
+#color-palette .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--a-space-l);
+    row-gap: 120px; /* Increased row-gap to prevent overlap, considering swatch height + info height */
+    margin-bottom: var(--a-space-xl);
 }
 
-.color-primary-container-box {
-    background-color: var(--a-color-primary-container);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    color: var(--a-color-on-primary-container);
-    border-radius: var(--a-border-radius-small);
+#color-palette .greyscale-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    row-gap: 100px; /* Adjusted row-gap for smaller greyscale swatches */
 }
 
-.color-on-primary-container-box {
-    background-color: var(--a-color-on-primary-container);
-    color: var(--a-color-primary-container);
-    border-radius: var(--a-border-radius-small);
+#color-palette .swatch.small {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 40px; /* Adjusted margin-bottom for smaller swatches */
+}
+#color-palette .swatch.small .info {
+    bottom: -40px; /* Adjusted bottom for smaller swatch */
+    width: 100px;
+}
+#color-palette .swatch.small .info p {
+    font-size: 0.8rem;
 }
 
-/* --- Primary Mono Colors --- */
-.color-primary-mono-box {
-    background-color: var(--a-color-primary-mono);
-    color: var(--a-color-on-primary-mono);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
+#color-palette h3 {
+    font-size: 1.5rem;
+    font-weight: var(--a-font-weight-bold);
+    margin-bottom: var(--a-space-m);
+    padding-bottom: var(--a-space-s);
+    border-bottom: 1px solid var(--a-color-outline);
 }
 
-.color-on-primary-mono-box {
-    background-color: var(--a-color-on-primary-mono);
-    color: var(--a-color-primary-mono);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
 
-.color-primary-container-mono-box {
-    background-color: var(--a-color-primary-container-mono);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    color: var(--a-color-on-primary-container-mono);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-primary-container-mono-box {
-    background-color: var(--a-color-on-primary-container-mono);
-    color: var(--a-color-primary-container-mono);
-    border-radius: var(--a-border-radius-small);
-}
-
-/* --- Secondary Colors --- */
-.color-secondary-box {
-    background-color: var(--a-color-secondary);
-    color: var(--a-color-on-secondary);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-secondary-box {
-    background-color: var(--a-color-on-secondary);
-    color: var(--a-color-secondary);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-secondary-container-box {
-    background-color: var(--a-color-secondary-container);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    color: var(--a-color-on-secondary-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-secondary-container-box {
-    background-color: var(--a-color-on-secondary-container);
-    color: var(--a-color-secondary-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-/* --- Tertiary Colors --- */
-.color-tertiary-box {
-    background-color: var(--a-color-tertiary);
-    color: var(--a-color-on-tertiary);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-tertiary-box {
-    background-color: var(--a-color-on-tertiary);
-    color: var(--a-color-tertiary);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-tertiary-container-box {
-    background-color: var(--a-color-tertiary-container);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    color: var(--a-color-on-tertiary-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-tertiary-container-box {
-    background-color: var(--a-color-on-tertiary-container);
-    color: var(--a-color-tertiary-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-/* --- Negative Colors --- */
-.color-negative-box {
-    background-color: var(--a-color-negative);
-    color: var(--a-color-on-negative);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-negative-box {
-    background-color: var(--a-color-on-negative);
-    color: var(--a-color-negative);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-negative-container-box {
-    background-color: var(--a-color-negative-container);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    color: var(--a-color-on-negative-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-negative-container-box {
-    background-color: var(--a-color-on-negative-container);
-    color: var(--a-color-negative-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-/* --- Positive Colors --- */
-.color-positive-box {
-    background-color: var(--a-color-positive);
-    color: var(--a-color-on-positive);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-positive-box {
-    background-color: var(--a-color-on-positive);
-    color: var(--a-color-positive);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-positive-container-box {
-    background-color: var(--a-color-positive-container);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    color: var(--a-color-on-positive-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-positive-container-box {
-    background-color: var(--a-color-on-positive-container);
-    color: var(--a-color-positive-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-/* --- Informative Colors --- */
-.color-informative-box {
-    background-color: var(--a-color-informative);
-    color: var(--a-color-on-informative);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-informative-box {
-    background-color: var(--a-color-on-informative);
-    color: var(--a-color-informative);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-informative-container-box {
-    background-color: var(--a-color-informative-container);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    color: var(--a-color-on-informative-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-informative-container-box {
-    background-color: var(--a-color-on-informative-container);
-    color: var(--a-color-informative-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-/* --- Notice Colors --- */
-.color-notice-box {
-    background-color: var(--a-color-notice);
-    color: var(--a-color-on-notice);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-notice-box {
-    background-color: var(--a-color-on-notice);
-    color: var(--a-color-notice);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-notice-container-box {
-    background-color: var(--a-color-notice-container);
-    padding: var(--a-padding-base);
-    margin: var(--a-margin-base);
-    color: var(--a-color-on-notice-container);
-    border-radius: var(--a-border-radius-small);
-}
-
-.color-on-notice-container-box {
-    background-color: var(--a-color-on-notice-container);
-    color: var(--a-color-notice-container);
-    border-radius: var(--a-border-radius-small);
+#color-palette .actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--a-space-m);
+    margin-top: var(--a-space-xl);
 }
 
 .content-main-wrapper {
@@ -660,8 +532,8 @@ https://dev.to/ynab/a-semantic-color-system-the-theory-hk7
   --a-color-on-success-container: #155724;
   --a-color-warning-container: #fff3cd;
   --a-color-on-warning-container: #664d03;
-  --a-color-error-container: #f8d7da;
-  --a-color-on-error-container: #721c24;
+  --a-color-error-container: #721c24;
+  --a-color-on-error-container: #f8d7da;
   --a-color-info-container: #d1ecf1;
   --a-color-on-info-container: #0c5460;
 
@@ -839,7 +711,7 @@ header.main .jump-menu ul li a { display: block; padding: var(--a-space-s) var(-
 header.main .jump-menu ul li a:hover { background: var(--a-color-surface-variant); }
 header.main .actions .github { color: var(--a-color-on-surface-variant); text-decoration: none; display: flex; align-items: center; gap: var(--a-space-s); }
 header.main .actions .github:hover { color: var(--a-color-primary); }
-header.main .theme-toggle {
+header.main .theme.toggle {
     background: none;
     border: 1px solid var(--a-color-outline);
     color: var(--a-color-on-surface-variant);
@@ -854,15 +726,15 @@ header.main .theme-toggle {
     justify-content: center;
     transition: all 0.2s ease;
 }
-header.main .theme-toggle:hover {
+header.main .theme.toggle:hover {
     color: var(--a-color-primary);
     background-color: var(--a-color-surface-variant);
 }
-header.main .menu-toggle { display: none; background: none; border: none; color: var(--a-color-on-surface); font-size: 1.5rem; cursor: pointer; }
+header.main .menu.toggle { display: none; background: none; border: none; color: var(--a-color-on-surface); font-size: 1.5rem; cursor: pointer; }
 
 
 /* --- Search --- */
-.search-toggle {
+.search.toggle {
     background: none;
     border: none;
     color: var(--a-color-on-surface-variant);
@@ -872,12 +744,12 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     border-radius: 50%;
     transition: all 0.2s ease;
 }
-.search-toggle:hover {
+.search.toggle:hover {
     color: var(--a-color-primary);
     background-color: var(--a-color-surface-variant);
 }
 
-.search-modal {
+#search-modal { /* Corrected from .search.modal */
     position: fixed;
     top: 0;
     left: 0;
@@ -892,7 +764,7 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     backdrop-filter: blur(5px);
 }
 
-.search-modal-content {
+.search-modal-content { /* Corrected from .search.modal content */
     background-color: var(--a-color-surface);
     color: var(--a-color-on-surface);
     border-radius: var(--a-border-radius-large);
@@ -910,13 +782,13 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     border-bottom: 1px solid var(--a-color-outline);
 }
 
-.search-modal-content h3 {
+.search-modal-content h3 { /* Corrected from .search.modal content h3 */
     margin: 0;
     font-size: 1.2rem;
     color: var(--a-color-on-surface);
 }
 
-.search-modal-content .close-search-modal {
+.search-modal-content .close { /* Corrected from .search.modal content .close */
     background: none;
     border: none;
     font-size: 1.8rem;
@@ -925,7 +797,7 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     color: var(--a-color-on-surface-variant);
 }
 
-.search-modal-body {
+#search-modal .body { /* Corrected from .search.modal .body */
     padding: var(--a-space-l);
 }
 
@@ -963,7 +835,7 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
 }
 
 /* --- Comparison Table --- */
-.comparison-table-wrapper {
+div.comparison-table {
     overflow-x: auto;
 }
 
@@ -1012,12 +884,12 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     gap: var(--a-space-l);
 }
 
-.code-example h3 {
+.example h3 {
     font-size: 1.5rem;
     margin-top: 0;
 }
 
-.code-example pre {
+.example pre {
     background-color: var(--a-color-surface);
     padding: var(--a-space-m);
     border-radius: var(--a-border-radius-medium);
@@ -1056,7 +928,7 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
 }
 
 #grid-system .grid-explanation p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: var(--a-space-m);
 }
@@ -1113,10 +985,10 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
 }
 
 /* --- Typography Advanced Page Styles --- */
-.typography-section {
+section.typgraphy {
     padding: var(--a-space-xxl) 0; /* Ensure consistent section padding */
 }
-.typography-section h3 {
+section.typography h3 {
     margin-top: var(--a-space-l);
     margin-bottom: var(--a-space-m);
     font-size: 1.6rem; /* Slightly larger for sub-headings */
@@ -1330,10 +1202,10 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     max-width: 60ch;
 }
 
-#typography .text-bold { font-weight: var(--a-font-weight-bold); }
-#typography .text-italic { font-style: italic; }
-#typography .text-underline { text-decoration: underline; }
-#typography .text-muted { color: var(--a-color-on-surface-variant); }
+#typography strong { font-weight: var(--a-font-weight-bold); } /* Added */
+#typography em { font-style: italic; } /* Added */
+#typography u { text-decoration: underline; } /* Added */
+#typography .muted { color: var(--a-color-on-surface-variant); } /* Changed from .text-muted */
 #typography .small-text { font-size: 0.875rem; color: var(--a-color-on-surface-variant); }
 
 #typography blockquote {
@@ -1359,7 +1231,7 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     margin-bottom: var(--a-space-s);
 }
 
-#typography .example-caption {
+#typography .caption {
     font-style: italic;
     color: var(--a-color-on-surface-variant);
     text-align: center;
@@ -1432,8 +1304,8 @@ section.hero {
     text-align: center;
     padding: var(--a-space-xxl) var(--a-space-xl);
 }
-section.hero h1 { font-size: 3.2rem; font-weight: var(--a-font-weight-black); margin: 0 0 var(--a-space-m); line-height: 1.1; } /* More refined size */
-section.hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto var(--a-space-l) auto; opacity: 0.9; } /* More refined size */
+section.hero h1 { font-size: 3.2rem; font-weight: var(--a-font-weight-black); margin: 0 0 var(--a-space-m); line-height: 1.1; color: var(--a-color-on-gradient); } /* More refined size */
+section.hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto var(--a-space-l) auto; opacity: 0.9;  color: var(--a-color-on-gradient); } /* More refined size */
 section.hero .actions { display: flex; justify-content: center; gap: var(--a-space-m); }
 section.hero .button.primary {
     background-color: var(--a-color-on-gradient); /* Changed to use on-gradient */
@@ -1467,7 +1339,7 @@ section.hero .button.secondary {
     box-shadow: var(--a-shadow-medium);
     transition: padding 0.2s ease;
 }
-.spacing-demo .example-caption {
+.spacing-demo .caption {
     font-style: italic;
     color: var(--a-color-on-surface-variant);
 }
@@ -1679,121 +1551,6 @@ section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); m
     }
 }
 
-/* --- Color Palette Section --- */
-#color-palette .color-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--a-space-l);
-    margin-bottom: var(--a-space-l);
-}
-
-#color-palette .color-swatch-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-#color-palette .swatch {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: var(--a-space-m);
-    border: 1px solid var(--a-color-outline);
-}
-
-#color-palette .swatch.primary { background-color: var(--a-color-primary); }
-#color-palette .swatch.secondary { background-color: var(--a-color-secondary); }
-#color-palette .swatch.surface { background-color: var(--a-color-surface); }
-#color-palette .swatch.on-surface { background-color: var(--a-color-on-surface); }
-#color-palette .swatch.success { background-color: var(--a-color-success); }
-#color-palette .swatch.error { background-color: var(--a-color-error); }
-#color-palette .swatch.warning { background-color: var(--a-color-warning); }
-#color-palette .swatch.info { background-color: var(--a-color-info); }
-#color-palette .swatch.outline { background-color: var(--a-color-outline); }
-#color-palette .swatch.tertiary { background-color: var(--a-color-tertiary); }
-
-/* Container Colors */
-#color-palette .swatch.primary-container { background-color: var(--a-color-primary-container); }
-#color-palette .swatch.secondary-container { background-color: var(--a-color-secondary-container); }
-#color-palette .swatch.tertiary-container { background-color: var(--a-color-tertiary-container); }
-#color-palette .swatch.error-container { background-color: var(--a-color-error-container); }
-
-.on-primary-container { color: var(--a-color-on-primary-container); }
-.on-secondary-container { color: var(--a-color-on-secondary-container); }
-.on-tertiary-container { color: var(--a-color-on-tertiary-container); }
-.on-error-container { color: var(--a-color-on-error-container); }
-
-/* Analogous Colors */
-#color-palette .swatch.analogous-1 { background-color: var(--a-color-analogous-1); }
-#color-palette .swatch.analogous-2 { background-color: var(--a-color-analogous-2); }
-#color-palette .swatch.analogous-1-container { background-color: var(--a-color-analogous-1-container); }
-#color-palette .swatch.analogous-2-container { background-color: var(--a-color-analogous-2-container); }
-
-.on-analogous-1-container { color: var(--a-color-on-analogous-1-container); }
-.on-analogous-2-container { color: var(--a-color-on-analogous-2-container); }
-
-.swatch-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-weight: var(--a-font-weight-bold);
-}
-
-/* Gradients */
-#color-palette .swatch.gradient-primary { background: var(--a-gradient-primary); }
-#color-palette .swatch.gradient-sunset { background: var(--a-gradient-sunset); }
-#color-palette .swatch.gradient-ocean { background: var(--a-gradient-ocean); }
-#color-palette .swatch.gradient-forest { background: var(--a-gradient-forest); }
-
-/* Greyscale */
-#color-palette .swatch.gray-1 { background-color: var(--a-color-gray-1); }
-#color-palette .swatch.gray-5 { background-color: var(--a-color-gray-5); }
-#color-palette .swatch.gray-10 { background-color: var(--a-color-gray-10); }
-#color-palette .swatch.gray-15 { background-color: var(--a-color-gray-15); }
-#color-palette .swatch.gray-20 { background-color: var(--a-color-gray-20); }
-#color-palette .swatch.gray-25 { background-color: var(--a-color-gray-25); }
-#color-palette .swatch.gray-30 { background-color: var(--a-color-gray-30); }
-#color-palette .swatch.gray-36 { background-color: var(--a-color-gray-36); }
-
-
-#color-palette .swatch-info h3 { font-size: 1.2rem; margin: 0 0 var(--a-space-xs); }
-#color-palette .swatch-info h4 { font-size: 1.1rem; margin: 0 0 var(--a-space-xs); }
-#color-palette .swatch-info p { font-family: var(--a-font-family-mono); font-size: 0.9rem; color: var(--a-color-on-surface-variant); }
-
-#color-palette .color-grid {
-    margin-bottom: var(--a-space-xl);
-}
-
-#color-palette .greyscale-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-}
-
-#color-palette .color-swatch-card.small .swatch {
-    width: 60px;
-    height: 60px;
-}
-#color-palette .color-swatch-card.small .swatch-info p {
-    font-size: 0.8rem;
-}
-
-#color-palette h3 {
-    font-size: 1.5rem;
-    font-weight: var(--a-font-weight-bold);
-    margin-bottom: var(--a-space-m);
-    padding-bottom: var(--a-space-s);
-    border-bottom: 1px solid var(--a-color-outline);
-}
-
-
-#color-palette .actions {
-    display: flex;
-    justify-content: center;
-    gap: var(--a-space-m);
-    margin-top: var(--a-space-xl);
-}
-
 /* --- Commerce Components --- */
 .product-card {
     border: 1px solid var(--a-color-outline);
@@ -1890,6 +1647,7 @@ section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); m
 .component-browser .info h4 {
     margin: 0;
     font-size: 1.2rem;
+    color: var(--a-color-on-surface);
 }
 
 .component-browser .info p {
@@ -2006,7 +1764,7 @@ section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); m
 /* --- Mobile Navigation --- */
 @media (max-width: 768px) {
     header.main ul.links { display: none; }
-    header.main .menu-toggle { display: block; } /* Make menu toggle visible on small screens */
+    header.main .menu.toggle { display: block; } /* Make menu toggle visible on small screens */
     header.main.menu-open ul.links { /* Changed from .is-open to .menu-open */
         display: flex !important; /* Added !important */
         flex-direction: column;
@@ -2497,13 +2255,13 @@ section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); m
 }
 
 /* --- Footer --- */
-footer.main-footer {
+footer.main {
     background-color: var(--a-color-surface-variant);
     padding: var(--a-space-xxl) 0;
     border-top: 1px solid var(--a-color-outline);
 }
 
-footer.main-footer .content {
+footer.main .content {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -2513,11 +2271,11 @@ footer.main-footer .content {
     padding: 0 var(--a-space-xl);
 }
 
-footer.main-footer .brand {
+footer.main .brand {
     flex-basis: 250px;
 }
 
-footer.main-footer .logo {
+footer.main .logo {
     font-family: var(--a-font-family-mono);
     font-weight: var(--a-font-weight-bold);
     font-size: 1.75rem;
@@ -2525,38 +2283,38 @@ footer.main-footer .logo {
     color: var(--a-color-on-surface);
 }
 
-footer.main-footer .version {
+footer.main .version {
     font-size: 0.8rem;
     color: var(--a-color-on-surface-variant);
     margin-left: var(--a-space-s);
 }
 
-footer.main-footer .tagline {
+footer.main .tagline {
     color: var(--a-color-on-surface-variant);
     font-size: 0.9rem;
 }
 
-footer.main-footer .social {
+footer.main .social {
     display: flex;
     gap: var(--a-space-m);
     margin-top: var(--a-space-m);
 }
 
-footer.main-footer .social a {
+footer.main .social a {
     color: var(--a-color-on-surface-variant);
     font-size: 1.2rem;
 }
 
-footer.main-footer .links {
+footer.main .links {
     display: flex;
     gap: var(--a-space-xl);
 }
 
-footer.main-footer .column h4 {
+footer.main .column h4 {
     margin: 0 0 var(--a-space-m);
 }
 
-footer.main-footer .column ul {
+footer.main .column ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -2565,7 +2323,7 @@ footer.main-footer .column ul {
     gap: var(--a-space-s);
 }
 
-footer.main-footer .bottom {
+footer.main .bottom {
     text-align: center;
     padding-top: var(--a-space-xl);
     margin-top: var(--a-space-xl);
@@ -2575,22 +2333,22 @@ footer.main-footer .bottom {
     padding: var(--a-space-xl) var(--a-space-xl) 0;
 }
 
-footer.main-footer.simple .content {
+footer.main.simple .content {
     align-items: center;
 }
 
-footer.main-footer.minimal {
+footer.main.minimal {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--a-space-l) var(--a-space-xl);
 }
 
-footer.main-footer.minimal p {
+footer.main.minimal p {
     margin: 0;
 }
 
-footer.main-footer.minimal nav {
+footer.main.minimal nav {
     display: flex;
     gap: var(--a-space-m);
 }
@@ -2614,7 +2372,7 @@ footer.main-footer.minimal nav {
 .release-info-section {
     background-color: var(--a-color-surface-variant);
 }
-.release-info-card {
+.info {
     background: var(--a-color-surface);
     border-radius: var(--a-border-radius-large);
     box-shadow: var(--a-shadow-large);
@@ -2625,27 +2383,27 @@ footer.main-footer.minimal nav {
     flex-wrap: wrap;
     gap: var(--a-space-l);
 }
-.release-version h3 {
+.version h3 {
     margin: 0 0 var(--a-space-xs);
     font-size: 1.8rem;
     color: var(--a-color-primary);
 }
-.release-version p {
+.version p {
     margin: 0;
     color: var(--a-color-on-surface-variant);
 }
-.release-stats {
+.stats {
     display: flex;
     gap: var(--a-space-xl);
 }
-.release-stats .stat {
+.stats .stat {
     text-align: center;
 }
-.release-stats .stat h4 {
+.stats .stat h4 {
     margin: 0 0 var(--a-space-xs);
     font-size: 1.5rem;
 }
-.release-stats .stat p {
+.stats .stat p {
     margin: 0;
     font-size: 0.9rem;
     color: var(--a-color-on-surface-variant);
@@ -2707,9 +2465,7 @@ form label {
 }
 form input,
 form select,
-form textarea,
-form .checkbox-group,
-form .radio-group {
+form textarea {
     margin-top: var(--a-space-m);
 }
 form > *:first-child {
@@ -2721,8 +2477,7 @@ form > label:first-child {
 form > label:first-child + * {
     margin-top: 0;
 }
-.checkbox-group,
-.radio-group {
+form > div { /* Target the div directly */
     display: flex;
     flex-direction: column;
     gap: var(--a-space-s);
@@ -2769,23 +2524,21 @@ textarea {
     min-height: 80px;
 }
 
-.checkbox-group label,
-.radio-group label {
+form > div label { /* Target labels within the div */
     display: flex;
     align-items: center;
     gap: var(--a-space-s);
     font-weight: var(--a-font-weight-normal);
 }
 
-.checkbox-group input,
-.radio-group input {
+form > div input { /* Target inputs within the div */
     margin-top: 0;
 }
 
 /* --- Dark Mode Enhancements --- */
 
 /* FIX: Make code blocks readable in dark mode */
-[data-theme="dark"] .code-example pre {
+[data-theme="dark"] .example pre {
     background-color: #0d0d21; /* A deep, code-editor-like dark blue */
     color: #d1d5db; /* A light grey for text, from your greyscale palette */
     border: 1px solid var(--a-color-outline);
@@ -2930,7 +2683,7 @@ textarea {
     --a-color-outline: #ded6c9;
     --a-color-success: #4b6652;
     --a-color-warning: #be5a38;
-    --a-color-error: #a53838;
+    --a-color-error: #c74343;
 }
 
 /* === THEME 5: Dracula === */
@@ -3276,13 +3029,13 @@ textarea {
     }
 }
 
-.theme-controls {
+.controls {
     display: flex;
     flex-direction: column;
     gap: var(--a-space-s);
 }
 
-.theme-controls label {
+.controls label {
     font-weight: var(--a-font-weight-bold);
     color: var(--a-color-on-surface-variant);
 }
@@ -3298,7 +3051,7 @@ textarea {
     cursor: pointer;
 }
 
-.theme-description {
+.description {
     padding: var(--a-space-m);
     background-color: var(--a-color-surface-variant);
     border-radius: var(--a-border-radius-medium);
@@ -3391,7 +3144,7 @@ table tbody tr:hover {
     gap: var(--a-space-s);
 }
 
-.dropdown-menu {
+.dropdown.menu {
     position: absolute;
     top: calc(100% + var(--a-space-xs));
     left: 0;
@@ -3410,14 +3163,14 @@ table tbody tr:hover {
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.dropdown.is-open .dropdown-menu {
+.dropdown.is-open .dropdown.menu {
     display: block;
     opacity: 1;
     transform: translateY(0);
 }
 
-.dropdown-menu li a,
-.dropdown-menu li button {
+.dropdown.menu li a,
+.dropdown.menu li button {
     display: block;
     width: 100%;
     padding: var(--a-space-s) var(--a-space-m);
@@ -3432,14 +3185,14 @@ table tbody tr:hover {
     cursor: pointer;
 }
 
-.dropdown-menu li a:hover,
-.dropdown-menu li button:hover {
+.dropdown.menu li a:hover,
+.dropdown.menu li button:hover {
     background-color: var(--a-color-surface-variant);
     color: var(--a-color-primary);
     text-decoration: none;
 }
 
-.dropdown-menu .divider {
+.dropdown.menu .divider {
     height: 1px;
     margin: var(--a-space-s) 0;
     overflow: hidden;
@@ -3513,12 +3266,6 @@ table tbody tr:hover {
 }
 
 /* --- Doc Layout --- */
-.doc-main-content {
-    display: flex;
-    flex-direction: column;
-    padding-top: 60px; /* Offset for fixed header */
-}
-
 .doc-sidebar {
     width: 100%;
     background-color: var(--a-color-surface-variant);
@@ -3614,10 +3361,6 @@ table tbody tr:hover {
 
 
 @media (min-width: var(--a-breakpoint-md)) {
-    .doc-main-content {
-        flex-direction: row;
-    }
-
     .doc-sidebar {
         width: 280px; /* Fixed width for sidebar on larger screens */
         flex-shrink: 0;

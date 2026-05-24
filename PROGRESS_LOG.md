@@ -27,7 +27,7 @@ This document tracks significant changes, fixes, and decisions made during the d
 *   **Changes Implemented**:
     1.  **Mobile Navigation Toggle**: Fixed by changing CSS selector in `css/axiom.css` from `header.main.is-open` to `header.main.menu-open` to match JS.
     2.  **Button Spacing (Component Browser)**: Modified `.component-browser .tabs` in `css/axiom.css` to allow `flex-wrap: wrap` on smaller screens and adjusted `gap`.
-    3.  **Code Overflow in Cards**: Updated `.code-example pre` in `css/axiom.css` to use `overflow-x: auto` and removed conflicting `white-space` and `word-break` properties.
+    3.  **Code Overflow in Cards**: Updated `.example pre` in `css/axiom.css` to use `overflow-x: auto` and removed conflicting `white-space` and `word-break` properties.
     4.  **Code Block Styling**: Enhanced styling for `code` and `pre code` elements in `css/axiom.css` for better readability and dark theme compatibility.
     5.  **Excessive Vertical Space**: Added media query to `css/axiom.css` to reduce `section` padding on screens below 768px.
     6.  **Badges Section Improvement**: Updated `index.html` with improved introductory text and more diverse badge examples.

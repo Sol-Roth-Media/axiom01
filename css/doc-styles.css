@@ -1,13 +1,13 @@
 /* docs/doc-styles.css */
 
-.doc-main-content {
+.content {
     display: flex;
     flex-direction: column;
     padding-top: 60px; /* Offset for fixed header */
     min-height: calc(100vh - 60px); /* Ensure content takes full height */
 }
 
-.doc-sidebar {
+.sidebar {
     width: 100%;
     background-color: var(--a-color-surface-variant);
     border-bottom: 1px solid var(--a-color-outline);
@@ -15,7 +15,7 @@
     order: 2; /* Display sidebar after main content on mobile */
 }
 
-.doc-sidebar nav h3 {
+.sidebar nav h3 {
     font-size: 1.1rem;
     font-weight: var(--a-font-weight-bold);
     margin-top: var(--a-space-m);
@@ -23,13 +23,13 @@
     color: var(--a-color-primary);
 }
 
-.doc-sidebar nav ul {
+.sidebar nav ul {
     list-style: none;
     padding: 0;
     margin-bottom: var(--a-space-l);
 }
 
-.doc-sidebar nav ul li a {
+.sidebar nav ul li a {
     display: block;
     padding: var(--a-space-s);
     color: var(--a-color-on-surface);
@@ -38,36 +38,36 @@
     transition: background-color 0.2s ease;
 }
 
-.doc-sidebar nav ul li a:hover {
+.sidebar nav ul li a:hover {
     background-color: var(--a-color-surface);
 }
 
-.doc-content {
+.content {
     flex-grow: 1;
     padding: var(--a-space-xl);
     max-width: 100%; /* Ensure it doesn't overflow on small screens */
     order: 1; /* Display main content before sidebar on mobile */
 }
 
-.doc-title {
+.title {
     font-size: 2.5rem;
     font-weight: var(--a-font-weight-black);
     margin-bottom: var(--a-space-m);
     color: var(--a-color-on-surface);
 }
 
-.doc-description {
+.description {
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--a-color-on-surface-variant);
     margin-bottom: var(--a-space-xl);
 }
 
-.doc-section {
+.section {
     margin-bottom: var(--a-space-xxl);
 }
 
-.doc-section-title {
+section .title {
     font-size: 1.8rem;
     font-weight: var(--a-font-weight-bold);
     margin-bottom: var(--a-space-l);
@@ -76,7 +76,7 @@
     padding-bottom: var(--a-space-s);
 }
 
-.doc-live-example {
+.live {
     background-color: var(--a-color-surface-variant);
     padding: var(--a-space-l);
     border-radius: var(--a-border-radius-large);
@@ -84,7 +84,7 @@
     border: 1px dashed var(--a-color-outline);
 }
 
-.doc-code-block {
+.code-block {
     background-color: var(--a-color-code-bg);
     color: var(--a-color-code-text);
     padding: var(--a-space-l);
@@ -105,11 +105,11 @@
 
 /* Responsive adjustments for doc layout */
 @media (min-width: 768px) {
-    .doc-main-content {
+    .content {
         flex-direction: row;
     }
 
-    .doc-sidebar {
+    .sidebar {
         width: 280px; /* Fixed width for sidebar on larger screens */
         flex-shrink: 0;
         border-right: 1px solid var(--a-color-outline);
@@ -118,10 +118,10 @@
         top: 60px; /* Stick below the fixed header */
         height: calc(100vh - 60px); /* Fill remaining viewport height */
         overflow-y: auto; /* Enable scrolling for long sidebars */
-        order: 1; /* Display sidebar before main content on desktop */
+        order: 1; /* Display main content before sidebar on desktop */
     }
 
-    .doc-content {
+    .content {
         padding-left: var(--a-space-xl);
         padding-right: var(--a-space-xl);
         order: 2; /* Display main content after sidebar on desktop */
@@ -236,7 +236,7 @@ details[open] summary::after {
     transform: rotate(-135deg);
 }
 
-.doc-live-example {
+.live {
     padding: var(--a-space-l);
     background-color: var(--a-color-surface-variant); /* Corrected from --a-color-background */
     border-radius: var(--a-border-radius-medium);
@@ -282,7 +282,7 @@ details[open] summary::after {
     transform: rotate(0deg);
 }
 
-.dropdown-menu {
+.dropdown.menu {
     position: absolute;
     top: calc(100% + var(--a-space-xs));
     left: 0;
@@ -300,12 +300,12 @@ details[open] summary::after {
     transform: translateY(10px);
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
-[data-component="dropdown"].is-open .dropdown-menu {
+[data-component="dropdown"].is-open .dropdown.menu {
     display: block;
     opacity: 1;
     transform: translateY(0);
 }
-.dropdown-menu li a {
+.dropdown.menu li a {
     display: block;
     padding: var(--a-space-xs) var(--a-space-m);
     clear: both;
@@ -318,12 +318,12 @@ details[open] summary::after {
     border: 0;
     cursor: pointer;
 }
-.dropdown-menu li a:hover,
-.dropdown-menu li a:focus {
+.dropdown.menu li a:hover,
+.dropdown.menu li a:focus {
     color: var(--a-color-on-primary);
     background-color: var(--a-color-primary);
 }
-.dropdown-menu .divider {
+.dropdown.menu .divider {
     height: 0;
     margin: var(--a-space-xs) 0;
     overflow: hidden;
@@ -331,19 +331,19 @@ details[open] summary::after {
 }
 
 /* Dropup variation */
-[data-component="dropdown"].dropup .dropdown-menu {
+[data-component="dropdown"].dropup .dropdown.menu {
     top: auto;
     bottom: 100%;
     margin-top: 0;
     margin-bottom: var(--a-space-xs);
     transform: translateY(calc(-1 * var(--a-space-s)));
 }
-[data-component="dropdown"].dropup.is-open .dropdown-menu {
+[data-component="dropdown"].dropup.is-open .dropdown.menu {
     transform: translateY(0);
 }
 
 /* Right-aligned variation */
-.dropdown-menu-right {
+.dropdown.menu-right {
     left: auto;
     right: 0;
 }
@@ -501,7 +501,7 @@ details[open] summary::after {
 }
 
 /* Pure CSS Search Icon for Toggle Button */
-[data-search-toggle] {
+[data-search.toggle] {
     background: none;
     border: none;
     cursor: pointer;
@@ -518,12 +518,12 @@ details[open] summary::after {
     transition: all 0.2s ease;
 }
 
-[data-search-toggle]:hover {
+[data-search.toggle]:hover {
     color: var(--a-color-primary);
     background-color: var(--a-color-surface-variant);
 }
 
-[data-search-toggle]::before {
+[data-search.toggle]::before {
     content: '';
     display: block;
     width: 12px; /* Size of the circle */
@@ -536,7 +536,7 @@ details[open] summary::after {
     transform: translate(-60%, -60%);
 }
 
-[data-search-toggle]::after {
+[data-search.toggle]::after {
     content: '';
     display: block;
     width: 8px; /* Length of the handle */
@@ -603,7 +603,7 @@ details[open] summary::after {
     padding: var(--a-space-m);
     margin-bottom: var(--a-space-m);
 }
-.spacing-demo .example-item {
+.spacing-demo .item {
     background-color: var(--a-color-primary-container);
     color: var(--a-color-on-primary-container);
     border-radius: var(--a-border-radius-small); /* Using small border radius */

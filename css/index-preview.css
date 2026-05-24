@@ -19,7 +19,7 @@
     box-shadow: var(--a-shadow-large);
 }
 
-.component-visual-preview {
+.preview {
     height: 120px; /* Fixed height for visual consistency */
     background-color: var(--a-color-surface-variant);
     border-bottom: 1px solid var(--a-color-outline);
@@ -33,14 +33,14 @@
     padding: var(--a-space-m); /* Add some padding inside the preview area */
 }
 
-.component-visual-preview > * {
+.preview > * {
     /* Ensure embedded components are styled minimally for preview */
     max-width: 100%;
     max-height: 100%;
     box-sizing: border-box;
 }
 
-.component-showcase-item .card-content {
+.component-showcase-item .content {
     padding: var(--a-space-l);
     flex-grow: 1;
     display: flex;
@@ -49,26 +49,26 @@
     text-align: center;
 }
 
-.component-showcase-item .card-content i {
+.component-showcase-item .content i {
     font-size: 2rem;
     color: var(--a-color-primary);
     margin-bottom: var(--a-space-m);
 }
 
-.component-showcase-item .card-content h3 {
+.component-showcase-item .content h3 {
     margin: 0 0 var(--a-space-s);
     font-size: 1.25rem;
     color: var(--a-color-on-surface);
 }
 
-.component-showcase-item .card-content p {
+.component-showcase-item .content p {
     font-size: 0.9rem;
     color: var(--a-color-on-surface-variant);
     margin-bottom: 0;
 }
 
 /* Specific adjustments for embedded components to fit preview */
-.component-visual-preview .alert {
+.preview .alert {
     margin: 0;
     padding: 0.5rem;
     font-size: 0.8rem;
@@ -79,44 +79,44 @@
     width: 90%;
 }
 
-.component-visual-preview .button {
+.preview .button {
     margin: 0;
 }
 
-.component-visual-preview .card {
+.preview .card {
     margin: 0;
     padding: 0.5rem;
     border: none;
     box-shadow: none;
 }
 
-.component-visual-preview .card header {
+.preview .card header {
     padding: 0.25rem;
     border-bottom: none;
 }
 
-.component-visual-preview .card h3 {
+.preview .card h3 {
     font-size: 0.9rem;
     margin: 0;
 }
 
-.component-visual-preview .card main {
+.preview .card main {
     padding: 0.25rem;
 }
 
-.component-visual-preview .card p {
+.preview .card p {
     font-size: 0.7rem;
     margin-bottom: 0;
 }
 
-.component-visual-preview .dropdown {
+.preview .dropdown {
     position: static;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.component-visual-preview .dropdown-menu {
+.preview .dropdown.menu {
     position: static;
     display: block;
     opacity: 1;
@@ -127,11 +127,11 @@
     box-shadow: var(--a-shadow-medium);
 }
 
-.component-visual-preview .dropdown-menu a {
+.preview .dropdown.menu a {
     padding: 0.25rem 0.5rem;
 }
 
-.component-visual-preview .empty-state {
+.preview .empty-state {
     padding: 0.5rem;
     border: 1px dashed var(--a-color-outline);
     border-radius: var(--a-border-radius-medium);
@@ -139,17 +139,17 @@
     width: 90%;
 }
 
-.component-visual-preview .empty-state i {
+.preview .empty-state i {
     font-size: 1.2rem;
     margin-bottom: 0.25rem;
 }
 
-.component-visual-preview .empty-state h3 {
+.preview .empty-state h3 {
     font-size: 0.9rem;
     margin: 0;
 }
 
-.component-visual-preview form {
+.preview form {
     margin: 0;
     padding: 0;
     border: none;
@@ -157,19 +157,19 @@
     width: 100%;
 }
 
-.component-visual-preview form input[type="text"] {
+.preview form input[type="text"] {
     width: 100%;
     padding: 0.25rem 0.5rem;
     font-size: 0.8rem;
     margin-bottom: 0.25rem;
 }
 
-.component-visual-preview form .button {
+.preview form .button {
     width: 100%;
     margin-top: 0.25rem;
 }
 
-.component-visual-preview .chat-container {
+.preview .chat-container {
     height: 100px;
     width: 100%;
     margin: 0;
@@ -179,7 +179,7 @@
     background-color: var(--a-color-surface);
 }
 
-.component-visual-preview .chat-container .history {
+.preview .chat-container .history {
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
@@ -187,21 +187,21 @@
     font-size: 0.7rem;
 }
 
-.component-visual-preview .chat-container .message.bot {
+.preview .chat-container .message.bot {
     padding: 0.25rem 0.5rem;
     border-radius: 0.5rem;
     background-color: var(--a-color-surface-variant);
     align-self: flex-start;
 }
 
-.component-visual-preview .chat-container .message.user {
+.preview .chat-container .message.user {
     padding: 0.25rem 0.5rem;
     border-radius: 0.5rem;
     background-color: var(--a-color-primary-container);
     align-self: flex-end;
 }
 
-.component-visual-preview .image-generator-form {
+.preview .image-generator-form {
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -209,7 +209,7 @@
     width: 100%;
 }
 
-.component-visual-preview .image-generator-form textarea {
+.preview .image-generator-form textarea {
     width: 100%;
     padding: 0.25rem 0.5rem;
     font-size: 0.7rem;
@@ -217,7 +217,7 @@
     border-radius: var(--a-border-radius-medium);
 }
 
-.component-visual-preview .image-generator-form .button {
+.preview .image-generator-form .button {
     width: 100%;
 }
 
@@ -331,19 +331,35 @@
 }
 
 #typography .typography-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--a-space-l);
+    column-count: 1; /* Default to single column on small screens */
+    column-gap: var(--a-space-l);
     margin-top: var(--a-space-xl);
 }
 
+@media (min-width: 768px) {
+    #typography .typography-layout {
+        column-count: 2; /* Two columns on medium screens and up */
+    }
+}
+
+@media (min-width: 1024px) {
+    #typography .typography-layout {
+        column-count: 3; /* Three columns on large screens and up */
+    }
+}
+
 #typography .typography-column {
-    /* Styles for individual columns, can be customized */
+    /* Break inside to prevent columns from breaking in awkward places */
+    break-inside: avoid-column;
+    page-break-inside: avoid-column;
+    -webkit-column-break-inside: avoid;
+
     padding: var(--a-space-l);
     border: 1px solid var(--a-color-outline);
     border-radius: var(--a-border-radius-large);
     background-color: var(--a-color-surface);
     box-shadow: var(--a-shadow-medium);
+    margin-bottom: var(--a-space-l); /* Add margin between columns */
 }
 
 #typography .typography-column h3 {
@@ -415,11 +431,11 @@
 }
 
 /* Forms & Inputs Section Enhancements */
-.forms-dropdown-example {
+.dropdown.example {
     margin-top: var(--a-space-m); /* Add top margin for spacing */
 }
 
-.forms-dropdown-example .dropdown-toggle {
+.dropdown.example .dropdown-toggle {
     /* Adjust button size if needed, e.g., use a smaller button class or custom padding */
     /* For now, let's ensure it's not excessively large */
     padding: var(--a-space-s) var(--a-space-m); /* Default button padding */

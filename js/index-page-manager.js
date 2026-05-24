@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper function to update the theme toggle button icon
     const updateThemeToggleButtonIcon = (themeName) => {
-        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggle = document.getElementById('theme-toggle'); // Corrected ID
         if (themeToggle) {
             const icon = themeToggle.querySelector('i');
             if (icon) {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Mobile Navigation Toggle
     const initMobileNav = () => {
-        const menuToggle = document.querySelector('.menu-toggle');
+        const menuToggle = document.querySelector('.menu.toggle');
         const mainHeader = document.querySelector('header.main');
         const mainContent = document.querySelector('main');
 
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Theme Toggling (Header Toggle Button)
     const initHeaderThemeToggle = () => {
-        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggle = document.getElementById('theme-toggle'); // Corrected ID
         const htmlElement = document.documentElement;
 
         // Set initial theme from localStorage or default to 'light'
@@ -172,9 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Search Modal (using Fuse.js for demo purposes)
     const initSearchModal = () => {
-        const searchToggle = document.querySelector('.search-toggle');
+        const searchToggle = document.querySelector('.search.toggle');
         const searchModal = document.getElementById('search-modal');
-        const closeSearchModalButton = document.querySelector('.close-search-modal');
+        const closeSearchModalButton = searchModal ? searchModal.querySelector('.close') : null; // Select within modal
         const searchModalInput = document.getElementById('search-modal-input');
         const searchModalResults = document.getElementById('search-modal-results');
 
@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "minty-fresh": "A bright and invigorating theme with refreshing mint greens and clean whites.",
         "desert-sunset": "A warm theme inspired by desert landscapes, featuring oranges, reds, and earthy tones.",
         "deep-ocean": "A calming theme with deep blues and greens, reminiscent of the ocean's depths.",
-        "gruvbox-dark": "A retro-inspired dark theme with warm colors and high contrast, optimized for coding.",
+        "gruvbox-dark": "The popular retro groove theme for developers.",
         "sakura-blossom": "A delicate theme inspired by cherry blossoms, with soft pinks and light pastels.",
         "matcha-green": "A soothing, earthy theme featuring various shades of green, inspired by matcha tea.",
         "monokai-pro": "A popular dark theme known for its vibrant and distinct syntax highlighting, great for developers.",
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateThemeDescription = (selectedTheme) => {
-        const themeDescriptionDisplay = document.getElementById('theme-description-display');
+        const themeDescriptionDisplay = document.getElementById('description-display');
         if (themeDescriptionDisplay) {
             themeDescriptionDisplay.querySelector('p').textContent = themeDescriptions[selectedTheme] || "No description available for this theme.";
         }
@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 // Close mobile menu if open
                 const mainHeader = document.querySelector('header.main');
-                const menuToggle = document.querySelector('.menu-toggle');
+                const menuToggle = document.querySelector('.menu.toggle');
                 const mainContent = document.querySelector('main');
 
                 if (mainHeader && mainHeader.classList.contains('menu-open')) {

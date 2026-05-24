@@ -4,7 +4,7 @@ import Fuse from 'fuse.js';
 export default class Search {
     constructor(element) {
         this.element = element;
-        this.toggleButton = document.querySelector('[data-search-toggle]');
+        this.toggleButton = document.querySelector('[data-search.toggle]');
         this.closeButton = this.element.querySelector('[data-search-close]');
         this.searchInput = this.element.querySelector('[data-search-input]');
         this.searchResultsContainer = this.element.querySelector('[data-search-results]');

@@ -8,7 +8,7 @@ export default {
      */
     init(element) {
         const toggleButton = element.querySelector('.dropdown-toggle');
-        const dropdownMenu = element.querySelector('.dropdown-menu');
+        const dropdownMenu = element.querySelector('.dropdown.menu');
 
         if (!toggleButton || !dropdownMenu) {
             console.error('Axiom: Dropdown component: Missing toggle button or menu.', element);
@@ -18,7 +18,7 @@ export default {
         // --- Accessibility: Assign IDs if not present ---
         const uniqueId = Math.random().toString(36).substr(2, 9);
         toggleButton.id = toggleButton.id || `axiom-dropdown-toggle-${uniqueId}`;
-        dropdownMenu.id = dropdownMenu.id || `axiom-dropdown-menu-${uniqueId}`;
+        dropdownMenu.id = dropdownMenu.id || `axiom-dropdown.menu-${uniqueId}`;
 
         // --- Accessibility: Set initial ARIA attributes ---
         toggleButton.setAttribute('aria-haspopup', 'true');
