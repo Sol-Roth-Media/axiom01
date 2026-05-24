@@ -28,6 +28,14 @@ def copy_required(src: Path, dst: Path) -> None:
     shutil.copy2(src, dst)
 
 
+def copy_tree_required(src: Path, dst: Path) -> None:
+    if not src.exists() or not src.is_dir():
+        raise BuildError(f"Missing required source directory: {src}")
+    if dst.exists():
+        shutil.rmtree(dst)
+    shutil.copytree(src, dst)
+
+
 def package_version() -> str:
     package_json = ROOT / "package.json"
     if not package_json.exists():
@@ -44,6 +52,7 @@ def main() -> int:
     try:
         if DIST.exists():
             shutil.rmtree(DIST)
+        # Build npm/release artifacts.
         ensure_dir(DIST / "css")
         ensure_dir(DIST / "js")
 
@@ -57,9 +66,19 @@ def main() -> int:
         version = package_version()
         (DIST / "version.txt").write_text(f"{version}\n", encoding="utf-8")
 
+        # Build static website payload for gh-pages deployment.
+        copy_required(ROOT / "index.html", DIST / "index.html")
+        copy_required(ROOT / "index.js", DIST / "index.js")
+        copy_tree_required(ROOT / "assets", DIST / "assets")
+        copy_tree_required(ROOT / "docs", DIST / "docs")
+        copy_tree_required(ROOT / "css", DIST / "css")
+        copy_tree_required(ROOT / "js", DIST / "js")
+
         print("Built release dist artifacts:")
+        print(f"- {DIST / 'index.html'}")
         print(f"- {DIST / 'css' / 'axiom.min.css'}")
         print(f"- {DIST / 'js' / 'axiom.min.js'}")
+        print(f"- {DIST / 'docs'}")
         print(f"- {DIST / 'README.md'}")
         print(f"- {DIST / 'version.txt'}")
         return 0
