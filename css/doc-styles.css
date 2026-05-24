@@ -1,6 +1,6 @@
 /* docs/doc-styles.css */
 
-.content {
+main.content {
     display: flex;
     flex-direction: column;
     padding-top: 60px; /* Offset for fixed header */
@@ -42,7 +42,7 @@
     background-color: var(--a-color-surface);
 }
 
-.content {
+main.content {
     flex-grow: 1;
     padding: var(--a-space-xl);
     max-width: 100%; /* Ensure it doesn't overflow on small screens */
@@ -50,16 +50,16 @@
 }
 
 /* Keep component-page hero compact so above-the-fold content is visible. */
-.component-doc main content > .hero.small {
+.component-doc main.content > .hero.small {
     padding: var(--a-space-l) var(--a-space-xl) var(--a-space-m);
     text-align: left;
 }
 
-.component-doc main content > .hero.small h1 {
+.component-doc main.content > .hero.small h1 {
     margin-bottom: var(--a-space-s);
 }
 
-.component-doc main content > .hero.small p {
+.component-doc main.content > .hero.small p {
     margin-bottom: 0;
 }
 
@@ -74,7 +74,6 @@
     min-height: 0;
     order: initial;
     padding: 0 var(--a-space-xl);
-    padding-top: 0;
     align-items: flex-start;
     gap: var(--a-space-l);
 }
@@ -116,6 +115,11 @@
     color: var(--a-color-primary);
 }
 
+.docs-overview main.content > nav[aria-label="Documentation"] h3:not(:first-of-type) {
+    padding-top: var(--a-space-s);
+    border-top: 1px solid color-mix(in srgb, var(--a-color-outline) 70%, transparent);
+}
+
 .docs-overview main.content > nav[aria-label="Documentation"] h3:first-of-type {
     margin-top: 0;
 }
@@ -147,6 +151,7 @@
     display: block;
     width: 100%;
     text-align: center;
+    line-height: 1.35;
     text-decoration: none;
     color: var(--a-color-on-surface);
     padding: var(--a-space-s);
@@ -182,8 +187,22 @@
 .docs-overview footer.main .content {
     min-height: 0;
     padding: 0 var(--a-space-xl);
+    justify-content: flex-start;
     align-items: flex-start;
+    gap: var(--a-space-m);
+}
+
+.docs-overview footer.main .brand {
+    flex-basis: auto;
+}
+
+.docs-overview footer.main .links {
     gap: var(--a-space-l);
+    align-items: flex-start;
+}
+
+.docs-overview footer.main .tagline {
+    margin-top: var(--a-space-xs);
 }
 
 .docs-overview footer.main .bottom {
@@ -213,6 +232,17 @@
 
     .docs-overview footer.main .bottom {
         padding: var(--a-space-m) var(--a-space-m) 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .docs-overview main.content > nav[aria-label="Documentation"] ul li a {
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .docs-overview main.content > nav[aria-label="Documentation"] ul li a:hover,
+    .docs-overview main.content > nav[aria-label="Documentation"] ul li a:focus-visible {
+        transform: none;
     }
 }
 
@@ -284,7 +314,7 @@ section .title {
 
 /* Responsive adjustments for doc layout */
 @media (min-width: 768px) {
-    .content {
+    main.content {
         flex-direction: row;
     }
 
@@ -300,7 +330,7 @@ section .title {
         order: 1; /* Display main content before sidebar on desktop */
     }
 
-    .content {
+    main.content {
         padding-left: var(--a-space-xl);
         padding-right: var(--a-space-xl);
         order: 2; /* Display main content after sidebar on desktop */
