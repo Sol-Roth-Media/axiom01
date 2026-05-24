@@ -40,8 +40,13 @@
   - Replaced inline navigation/footer styles in `docs/form-elements.html` with semantic classes.
   - Added a shared `component-doc` layout pass to every page in `docs/components/` so component pages stack cleanly on wide screens and use a smaller hero treatment.
   - Started fixing the alert component page specifically by preventing the wide-screen overlap and reducing the oversized hero treatment.
+  - Normalized all non-empty component pages in `docs/components/` to include `class="axiom-body component-doc"` and load `css/doc-preview.css` for shared responsive behavior.
+  - Tightened component-page spacing in `css/doc-preview.css` so hero and footer sections are more compact and no longer carry oversized vertical gaps.
+  - Cleaned `docs/form-elements.html` by fixing unresolved legacy token usage, correcting broken component nav links, removing malformed commented sidebar markup, and normalizing checkbox/radio class usage in live and code examples.
+  - Fixed the page-manager script path in `docs/colors-advanced.html` so the docs page resolves local JS correctly.
 - Still pending:
   - A deeper content/style audit of the remaining docs pages for unnecessary wrapper classes, inline styles, and legacy demo scaffolding.
   - A broader CSS pass to remove selectors that only exist for temporary helpers or one-off samples.
-  - A larger cleanup of `docs/form-elements.html` and `docs/colors-advanced.html`, which still contain legacy token names and template-specific styling that deserve a dedicated pass.
+  - Cleanup of legacy per-page `<style>` blocks in component pages where demo-only body/layout rules still duplicate framework/doc CSS.
+  - Remove remaining inline swatch styles in `docs/colors-advanced.html` by moving token-color rendering to docs-scoped CSS classes.
 
