@@ -5,151 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Layout Guide - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../css/doc-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ5/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        /* Basic styling for the documentation page itself, using Axiom's variables */
-        body {
-            padding: var(--a-space-xxl) var(--a-space-xl);
-            background-color: var(--a-color-surface);
-            color: var(--a-color-on-surface);
-            font-family: var(--a-font-family-sans);
-            line-height: var(--a-line-height-base);
-        }
-        .container {
-            max-width: var(--a-layout-max-width);
-            margin: 0 auto;
-            padding: 0 var(--a-space-xl);
-        }
-        h1 {
-            font-size: var(--a-font-size-h1);
-            color: var(--a-color-primary);
-            margin-bottom: var(--a-space-l);
-        }
-        h2 {
-            font-size: var(--a-font-size-h2);
-            color: var(--a-color-on-surface);
-            margin-top: var(--a-space-xl);
-            margin-bottom: var(--a-space-m);
-        }
-        h3 {
-            font-size: var(--a-font-size-h3);
-            color: var(--a-color-primary);
-            margin-top: var(--a-space-l);
-            margin-bottom: var(--a-space-m);
-        }
-        p {
-            margin-bottom: var(--a-space-m);
-        }
-        pre {
-            background-color: var(--a-color-code-bg);
-            color: var(--a-color-code-text);
-            padding: var(--a-space-m);
-            border-radius: var(--a-border-radius-medium);
-            overflow-x: auto;
-            margin-bottom: var(--a-space-l);
-            border: 1px solid var(--a-color-code-border);
-        }
-        code {
-            font-family: var(--a-font-family-mono);
-            font-size: var(--a-font-size-small);
-        }
-        .layout-example-grid {
-            display: grid;
-            gap: var(--a-space-m);
-            background-color: var(--a-color-surface-variant);
-            padding: var(--a-space-l);
-            border-radius: var(--a-border-radius-medium);
-            margin-bottom: var(--a-space-xl);
-            border: 1px solid var(--a-color-outline);
-        }
-        .layout-example-grid .grid-item {
-            background-color: var(--a-color-primary-container);
-            color: var(--a-color-on-primary-container);
-            padding: var(--a-space-m);
-            border-radius: var(--a-border-radius-small);
-            text-align: center;
-            font-weight: bold;
-            border: 1px solid var(--a-color-primary);
-        }
-        /* Specific styles for layout examples */
-        .basic-grid-example {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        }
-        .defined-grid-example {
-            grid-template-columns: 1fr 2fr 1fr;
-            grid-template-rows: auto 100px;
-        }
-        .defined-grid-example .main-content-item {
-            grid-column: span 2;
-        }
-        .defined-grid-example .footer-item {
-            grid-column: 1 / -1;
-        }
-        .nested-grid-example {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--a-space-s);
-            background-color: var(--a-color-secondary-container);
-            padding: var(--a-space-m);
-            border-radius: var(--a-border-radius-small);
-            border: 1px solid var(--a-color-secondary);
-        }
-        .nested-grid-example .grid-item {
-            background-color: var(--a-color-secondary);
-            color: var(--a-color-on-secondary);
-        }
-        .flex-example {
-            display: flex;
-            gap: var(--a-space-m);
-            background-color: var(--a-color-surface-variant);
-            padding: var(--a-space-l);
-            border-radius: var(--a-border-radius-medium);
-            margin-bottom: var(--a-space-xl);
-            border: 1px solid var(--a-color-outline);
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .flex-layout-example {
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--a-space-m);
-        }
-        .flex-example .flex-item {
-            background-color: var(--a-color-tertiary-container);
-            color: var(--a-color-on-tertiary-container);
-            padding: var(--a-space-m);
-            border-radius: var(--a-border-radius-small);
-            text-align: center;
-            font-weight: bold;
-            border: 1px solid var(--a-color-tertiary);
-            flex-basis: 150px; /* Example fixed width for flex items */
-        }
-        .spacing-example-div {
-            padding: var(--a-space-xl);
-            margin-bottom: var(--a-space-l);
-            background-color: var(--a-color-surface-variant);
-            border-radius: var(--a-border-radius-medium);
-        }
-        .spacing-grid-example {
-            gap: var(--a-space-xxl);
-            margin-top: var(--a-space-l);
-        }
-    </style>
 </head>
 <body class="axiom-body">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
-            <a href="/" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="/#philosophy">Philosophy</a></li>
-                <li><a href="/#components">Components</a></li>
-                <li><a href="/#get-started">Get Started</a></li>
-                <li><a href="/docs/components-simple.html">Documentation</a></li>
+                <li><a href="../index.html#philosophy">Philosophy</a></li>
+                <li><a href="../index.html#components">Components</a></li>
+                <li><a href="../index.html#get-started">Get Started</a></li>
+                <li><a href="components-overview.html">Documentation</a></li>
             </ul>
             <div class="actions">
                 <button class="search-toggle" aria-label="Open Search">
@@ -169,22 +39,111 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero small">
-            <div class="content">
-                <h1>Advanced Layout Guide</h1>
-                <p>Axiom01's layout system is built upon the robust and flexible foundation of native CSS Grid, complemented by a cascading spacing system. This guide explores how to leverage these features to create complex, responsive, and maintainable layouts with minimal effort and semantic markup.</p>
-            </div>
-        </section>
+    <div class="doc-main-content">
+        <aside class="doc-sidebar">
+            <nav aria-label="Documentation Sidebar">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="../README.md">Overview & Quickstart</a></li>
+                    <li><a href="../index.html#get-started">Installation</a></li>
+                    <li><a href="../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                </ul>
 
-        <section id="grid-system">
-            <div class="container">
-                <h2>The Axiom01 Grid System</h2>
-                <p>The core of Axiom01's layout is the <code>.grid</code> class, which applies <code>display: grid</code> and a default gap based on <code>--a-space-l</code>. This semantic approach encourages you to define your grid structure directly in your CSS, rather than relying on an abundance of utility classes or inline styles.</p>
+                <h3>Core Concepts</h3>
+                <ul>
+                    <li><a href="colors-advanced.html">Color System</a></li>
+                    <li><a href="typography-advanced.html">Typography</a></li>
+                    <li><a href="layout-advanced.html">Layout & Grid</a></li>
+                    <li><a href="media-advanced.html">Media & Icons</a></li>
+                </ul>
 
-                <h3>Basic Grid Usage</h3>
-                <p>To create a responsive grid, simply apply the <code>.grid</code> class to a container. By default, it will arrange its direct children into a flexible grid. You can then define your column structure using standard CSS Grid properties in your stylesheet.</p>
-                <pre><code>&lt;!-- HTML --&gt;
+                <h3>Components</h3>
+                <ul>
+                    <li><a href="components-overview.html">Component Overview</a></li>
+                    <li><a href="interactive-component-browser.html">Interactive Component Browser</a></li>
+                    <li><h4>Feedback & Status</h4></li>
+                    <li><a href="components/alert.html">Alert</a></li>
+                    <li><a href="components/notification.html">Notification</a></li>
+                    <li><a href="components/progress.html">Progress</a></li>
+                    <li><a href="components/empty-state.html">Empty State</a></li>
+                    <li><a href="components/skeleton.html">Skeleton</a></li>
+
+                    <li><h4>Forms & Inputs</h4></li>
+                    <li><a href="components/forms.html">Forms</a></li>
+                    <li><a href="components/editor.html">Editor</a></li>
+                    <li><a href="components/datepicker.html">Datepicker</a></li>
+                    <li><a href="components/file-upload.html">File Upload</a></li>
+                    <li><a href="components/multi-step-form.html">Multi-Step Form</a></li>
+                    <li><a href="components/slider.html">Slider</a></li>
+                    <li><a href="components/toggle.html">Toggle</a></li>
+
+                    <li><h4>Navigation & Layout</h4></li>
+                    <li><a href="components/accordion.html">Accordion</a></li>
+                    <li><a href="components/breadcrumb.html">Breadcrumb</a></li>
+                    <li><a href="components/dropdown.html">Dropdown</a></li>
+                    <li><a href="components/mobile-navbar.html">Mobile Navbar</a></li>
+                    <li><a href="components/navigation.html">Navigation</a></li>
+                    <li><a href="components/pagination.html">Pagination</a></li>
+                    <li><a href="components/sidebar.html">Sidebar</a></li>
+                    <li><a href="components/tabs.html">Tabs</a></li>
+                    <li><a href="components/timeline.html">Timeline</a></li>
+
+                    <li><h4>Content Display</h4></li>
+                    <li><a href="components/avatar.html">Avatar</a></li>
+                    <li><a href="components/badge.html">Badge</a></li>
+                    <li><a href="components/button.html">Button</a></li>
+                    <li><a href="components/card.html">Card</a></li>
+                    <li><a href="components/carousel.html">Carousel</a></li>
+                    <li><a href="components/chat.html">Chat</a></li>
+                    <li><a href="components/commerce.html">Commerce</a></li>
+                    <li><a href="components/footer.html">Footer</a></li>
+                    <li><a href="components/hero.html">Hero</a></li>
+                    <li><a href="components/media.html">Media & Icons</a></li>
+                    <li><a href="components/table.html">Table</a></li>
+
+                    <li><h4>AI Integrations</h4></li>
+                    <li><a href="components/ai-chat.html">AI Chat</a></li>
+                    <li><a href="components/ai-image-generator.html">AI Image Generator</a></li>
+
+                    <li><h4>Utilities & Overlays</h4></li>
+                    <li><a href="components/drawer.html">Drawer</a></li>
+                    <li><a href="components/modal.html">Modal</a></li>
+                    <li><a href="components/tooltip.html">Tooltip</a></li>
+                    <li><a href="components/paywall.html">Paywall</a></li>
+                    <li><a href="components/settings.html">Settings</a></li>
+                    <li><a href="components/spacing-demo.html">Spacing Demo</a></li>
+                </ul>
+
+                <h3>Advanced Topics & Tools</h3>
+                <ul>
+                    <li><a href="theme-customization-wizard.html">Theme Customization Wizard</a></li>
+                    <li><a href="interactive-playground.html">Interactive Playground</a></li>
+                    <li><a href="boilerplate-template.html">Boilerplate Template</a></li>
+                    <li><a href="integrations.html">External Integrations & CMS Themes</a></li>
+                    <li><a href="design-guide-outline.md">Designing with Axiom01</a></li>
+                    <li><a href="ai-guidelines.md">AI Coding Guidelines for Axiom01</a></li>
+                    <li><a href="contributing.md">Contributing</a></li>
+                    <li><a href="DEVELOPER.md">Developer Guide</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="doc-content">
+            <section class="hero small">
+                <div class="content">
+                    <h1 class="doc-title">Advanced Layout Guide</h1>
+                    <p class="doc-description">Axiom01's layout system is built upon the robust and flexible foundation of native CSS Grid, complemented by a cascading spacing system. This guide explores how to leverage these features to create complex, responsive, and maintainable layouts with minimal effort and semantic markup.</p>
+                </div>
+            </section>
+
+            <section id="grid-system">
+                <div class="container">
+                    <h2>The Axiom01 Grid System</h2>
+                    <p>The core of Axiom01's layout is the <code>.grid</code> class, which applies <code>display: grid</code> and a default gap based on <code>--a-space-l</code>. This semantic approach encourages you to define your grid structure directly in your CSS, rather than relying on an abundance of utility classes or inline styles.</p>
+
+                    <h3>Basic Grid Usage</h3>
+                    <p>To create a responsive grid, simply apply the <code>.grid</code> class to a container. By default, it will arrange its direct children into a flexible grid. You can then define your column structure using standard CSS Grid properties in your stylesheet.</p>
+                    <pre><code>&lt;!-- HTML --&gt;
 &lt;div class="grid basic-grid-example"&gt;
     &lt;div class="grid-item"&gt;Item 1&lt;/div&gt;
     &lt;div class="grid-item"&gt;Item 2&lt;/div&gt;
@@ -198,16 +157,16 @@
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 &lt;/style&gt;</code></pre>
-                <div class="layout-example-grid basic-grid-example">
-                    <div class="grid-item">Item 1</div>
-                    <div class="grid-item">Item 2</div>
-                    <div class="grid-item">Item 3</div>
-                    <div class="grid-item">Item 4</div>
-                </div>
+                    <div class="layout-example-grid basic-grid-example">
+                        <div class="grid-item">Item 1</div>
+                        <div class="grid-item">Item 2</div>
+                        <div class="grid-item">Item 3</div>
+                        <div class="grid-item">Item 4</div>
+                    </div>
 
-                <h3>Defining Columns and Rows</h3>
-                <p>You have full control over grid columns and rows. Use <code>grid-template-columns</code> and <code>grid-template-rows</code> to define explicit tracks. The gap between grid items is controlled by the <code>gap</code> property, which ideally should use Axiom01's spacing variables.</p>
-                <pre><code>&lt;!-- HTML --&gt;
+                    <h3>Defining Columns and Rows</h3>
+                    <p>You have full control over grid columns and rows. Use <code>grid-template-columns</code> and <code>grid-template-rows</code> to define explicit tracks. The gap between grid items is controlled by the <code>gap</code> property, which ideally should use Axiom01's spacing variables.</p>
+                    <pre><code>&lt;!-- HTML --&gt;
 &lt;div class="grid defined-grid-example"&gt;
     &lt;div class="grid-item"&gt;Header&lt;/div&gt;
     &lt;div class="grid-item main-content-item"&gt;Main Content&lt;/div&gt;
@@ -229,16 +188,16 @@
         grid-column: 1 / -1;
     }
 &lt;/style&gt;</code></pre>
-                <div class="layout-example-grid defined-grid-example">
-                    <div class="grid-item">Header</div>
-                    <div class="grid-item main-content-item">Main Content</div>
-                    <div class="grid-item">Sidebar</div>
-                    <div class="grid-item footer-item">Footer</div>
-                </div>
+                    <div class="layout-example-grid defined-grid-example">
+                        <div class="grid-item">Header</div>
+                        <div class="grid-item main-content-item">Main Content</div>
+                        <div class="grid-item">Sidebar</div>
+                        <div class="grid-item footer-item">Footer</div>
+                    </div>
 
-                <h3>Nested Grids</h3>
-                <p>CSS Grid allows for powerful nesting. You can place a grid container inside another grid item, enabling you to build highly complex and flexible layouts.</p>
-                <pre><code>&lt;!-- HTML --&gt;
+                    <h3>Nested Grids</h3>
+                    <p>CSS Grid allows for powerful nesting. You can place a grid container inside another grid item, enabling you to build highly complex and flexible layouts.</p>
+                    <pre><code>&lt;!-- HTML --&gt;
 &lt;div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--a-space-l);"&gt;
     &lt;div class="grid-item"&gt;Parent Item 1&lt;/div&gt;
     &lt;div class="grid-item"&gt;
@@ -270,25 +229,25 @@
         color: var(--a-color-on-secondary);
     }
 &lt;/style&gt;</code></pre>
-                <div class="layout-example-grid nested-grid-container" style="grid-template-columns: 1fr 1fr;">
-                    <div class="grid-item">Parent Item 1</div>
-                    <div class="grid-item">
-                        <div class="nested-grid-example">
-                            <div class="grid-item">Nested 1</div>
-                            <div class="grid-item">Nested 2</div>
+                    <div class="layout-example-grid nested-grid-container" style="grid-template-columns: 1fr 1fr;">
+                        <div class="grid-item">Parent Item 1</div>
+                        <div class="grid-item">
+                            <div class="nested-grid-example">
+                                <div class="grid-item">Nested 1</div>
+                                <div class="grid-item">Nested 2</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="flexbox-utilities">
-            <div class="container">
-                <h2>Flexbox for Fine-Grained Control</h2>
-                <p>While CSS Grid is ideal for overall page layout, Flexbox excels at distributing and aligning items within a single dimension (row or column). Axiom01 provides basic Flexbox capabilities through the <code>.flex</code> class, which applies <code>display: flex</code>.</p>
-                <h3>Basic Flex Usage</h3>
-                <p>Use <code>.flex</code> on a container to enable Flexbox behavior for its direct children. You can then use standard Flexbox properties (e.g., <code>justify-content</code>, <code>align-items</code>, <code>flex-wrap</code>) via custom CSS to achieve desired alignments.</p>
-                <pre><code>&lt;!-- HTML --&gt;
+            <section id="flexbox-utilities">
+                <div class="container">
+                    <h2>Flexbox for Fine-Grained Control</h2>
+                    <p>While CSS Grid is ideal for overall page layout, Flexbox excels at distributing and aligning items within a single dimension (row or column). Axiom01 provides basic Flexbox capabilities through the <code>.flex</code> class, which applies <code>display: flex</code>.</p>
+                    <h3>Basic Flex Usage</h3>
+                    <p>Use <code>.flex</code> on a container to enable Flexbox behavior for its direct children. You can then use standard Flexbox properties (e.g., <code>justify-content</code>, <code>align-items</code>, <code>flex-wrap</code>) via custom CSS to achieve desired alignments.</p>
+                    <pre><code>&lt;!-- HTML --&gt;
 &lt;div class="flex flex-layout-example"&gt;
     &lt;div class="flex-item"&gt;Item A&lt;/div&gt;
     &lt;div class="flex-item"&gt;Item B&lt;/div&gt;
@@ -304,37 +263,37 @@
         gap: var(--a-space-m);
     }
 &lt;/style&gt;</code></pre>
-                <div class="flex-example flex-layout-example">
-                    <div class="flex-item">Item A</div>
-                    <div class="flex-item">Item B</div>
-                    <div class="flex-item">Item C</div>
+                    <div class="flex-example flex-layout-example">
+                        <div class="flex-item">Item A</div>
+                        <div class="flex-item">Item B</div>
+                        <div class="flex-item">Item C</div>
+                    </div>
+                    <p>Flexbox is particularly useful for navigation bars, form controls, and distributing content within smaller components.</p>
                 </div>
-                <p>Flexbox is particularly useful for navigation bars, form controls, and distributing content within smaller components.</p>
-            </div>
-        </section>
+            </section>
 
-        <section id="responsive-layouts">
-            <div class="container">
-                <h2>Responsive Layouts with Breakpoints</h2>
-                <p>Axiom01 embraces a mobile-first approach to responsive design. This means you design for the smallest screens first, and then progressively enhance the layout for larger viewports using media queries. The framework provides a set of predefined CSS variables for breakpoints, making your media queries consistent and easy to manage.</p>
-                <table class="color-variable-table">
-                    <thead>
-                        <tr>
-                            <th>Variable</th>
-                            <th>Value</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><code>--a-breakpoint-xs</code></td><td><code>480px</code></td><td>Extra small devices (e.g., portrait phones)</td></tr>
-                        <tr><td><code>--a-breakpoint-sm</code></td><td><code>576px</code></td><td>Small devices (e.g., landscape phones)</td></tr>
-                        <tr><td><code>--a-breakpoint-md</code></td><td><code>768px</code></td><td>Medium devices (e.g., tablets)</td></tr>
-                        <tr><td><code>--a-breakpoint-lg</code></td><td><code>992px</code></td><td>Large devices (e.g., laptops)</td></tr>
-                        <tr><td><code>--a-breakpoint-xl</code></td><td><code>1200px</code></td><td>Extra large devices (e.g., desktops)</td></tr>
-                        <tr><td><code>--a-breakpoint-xxl</code></td><td><code>1400px</code></td><td>Extra extra large devices (e.g., large desktops)</td></tr>
-                    </tbody>
-                </table>
-                <pre><code>/* Example: Two columns on medium screens and up */
+            <section id="responsive-layouts">
+                <div class="container">
+                    <h2>Responsive Layouts with Breakpoints</h2>
+                    <p>Axiom01 embraces a mobile-first approach to responsive design. This means you design for the smallest screens first, and then progressively enhance the layout for larger viewports using media queries. The framework provides a set of predefined CSS variables for breakpoints, making your media queries consistent and easy to manage.</p>
+                    <table class="color-variable-table">
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>--a-breakpoint-xs</code></td><td><code>480px</code></td><td>Extra small devices (e.g., portrait phones)</td></tr>
+                            <tr><td><code>--a-breakpoint-sm</code></td><td><code>576px</code></td><td>Small devices (e.g., landscape phones)</td></tr>
+                            <tr><td><code>--a-breakpoint-md</code></td><td><code>768px</code></td><td>Medium devices (e.g., tablets)</td></tr>
+                            <tr><td><code>--a-breakpoint-lg</code></td><td><code>992px</code></td><td>Large devices (e.g., laptops)</td></tr>
+                            <tr><td><code>--a-breakpoint-xl</code></td><td><code>1200px</code></td><td>Extra large devices (e.g., desktops)</td></tr>
+                            <tr><td><code>--a-breakpoint-xxl</code></td><td><code>1400px</code></td><td>Extra extra large devices (e.g., large desktops)</td></tr>
+                        </tbody>
+                    </table>
+                    <pre><code>/* Example: Two columns on medium screens and up */
 .my-responsive-grid {
     display: grid;
     grid-template-columns: 1fr; /* Single column by default (mobile-first) */
@@ -352,25 +311,25 @@
         grid-template-columns: 1fr 2fr 1fr; /* Three columns on large screens and up */
     }
 }</code></pre>
-                <p>By using these variables within your media queries, you ensure that your responsive designs align with the framework's consistent sizing scale.</p>
-            </div>
-        </section>
+                    <p>By using these variables within your media queries, you ensure that your responsive designs align with the framework's consistent sizing scale.</p>
+                </div>
+            </section>
 
-        <section id="cascading-spacing-layout">
-            <div class="container">
-                <h2>The Cascading Spacing System in Layouts</h2>
-                <p>Axiom01's unique cascading spacing system is fundamental to creating harmonious and consistent layouts. All padding, margin, and gap values are derived from a single <code>--a-space-unit</code> variable, which can be adjusted globally to rescale your entire layout.</p>
-                <p>The framework provides a set of predefined spacing variables:</p>
-                <ul>
-                    <li><code>--a-space-xs</code>: Extra small spacing</li>
-                    <li><code>--a-space-s</code>: Small spacing</li>
-                    <li><code>--a-space-m</code>: Medium spacing (often the default for gaps)</li>
-                    <li><code>--a-space-l</code>: Large spacing</li>
-                    <li><code>--a-space-xl</code>: Extra large spacing</li>
-                    <li><code>--a-space-xxl</code>: Extra extra large spacing</li>
-                </ul>
-                <p>These variables are calculated based on <code>--a-space-unit</code>, ensuring that all spacing scales proportionally. You should use these variables consistently for all layout-related spacing.</p>
-                <pre><code>&lt;!-- HTML --&gt;
+            <section id="cascading-spacing-layout">
+                <div class="container">
+                    <h2>The Cascading Spacing System in Layouts</h2>
+                    <p>Axiom01's unique cascading spacing system is fundamental to creating harmonious and consistent layouts. All padding, margin, and gap values are derived from a single <code>--a-space-unit</code> variable, which can be adjusted globally to rescale your entire layout.</p>
+                    <p>The framework provides a set of predefined spacing variables:</p>
+                    <ul>
+                        <li><code>--a-space-xs</code>: Extra small spacing</li>
+                        <li><code>--a-space-s</code>: Small spacing</li>
+                        <li><code>--a-space-m</code>: Medium spacing (often the default for gaps)</li>
+                        <li><code>--a-space-l</code>: Large spacing</li>
+                        <li><code>--a-space-xl</code>: Extra large spacing</li>
+                        <li><code>--a-space-xxl</code>: Extra extra large spacing</li>
+                    </ul>
+                    <p>These variables are calculated based on <code>--a-space-unit</code>, ensuring that all spacing scales proportionally. You should use these variables consistently for all layout-related spacing.</p>
+                    <pre><code>&lt;!-- HTML --&gt;
 &lt;div class="spacing-example-div"&gt;
     &lt;p&gt;This content has extra large padding and large bottom margin.&lt;/p&gt;
 &lt;/div&gt;
@@ -394,27 +353,28 @@
         margin-top: var(--a-space-l);
     }
 &lt;/style&gt;</code></pre>
-                <p>By consistently using these variables, you maintain a perfect visual rhythm throughout your application, and can easily adjust the overall density of your layout by changing just the <code>--a-space-unit</code> CSS variable.</p>
-            </div>
-        </section>
-    </main>
+                    <p>By consistently using these variables, you maintain a perfect visual rhythm throughout your application, and can easily adjust the overall density of your layout by changing just the <code>--a-space-unit</code> CSS variable.</p>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="../../js/index-page-manager.js"></script>
     <footer class="main-footer">
         <div class="content">
             <div class="brand">
-                <a href="/" class="logo">[Ax<span class="primary">01</span>]</a>
+                <a href="../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
                 <p class="tagline">The Semantic Web, Reimagined.</p>
             </div>
             <div class="links">
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="components-simple.html">Documentation</a></li>
-                        <li><a href="../../README.md">README</a></li>
-                        <li><a href="../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="/#get-started">Getting Started</a></li>
+                        <li><a href="components-overview.html">Component Overview</a></li>
+                        <li><a href="../README.md">README</a></li>
+                        <li><a href="../DEVELOPER.md">Developer Guide</a></li>
+                        <li><a href="../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../index.html#get-started">Getting Started</a></li>
                     </ul>
                 </div>
                 <div class="column">
@@ -427,8 +387,8 @@
                     <h4>More</h4>
                     <ul>
                         <li><a href="interactive-playground.html">Playground</a></li>
-                        <li><a href="/#example-sites">Example Sites</a></li>
-                        <li><a href="/#release-info">Release Info</a></li>
+                        <li><a href="../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../index.html#release-info">Release Info</a></li>
                     </ul>
                 </div>
             </div>

@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "deep-ocean": "A calming theme with deep blues and greens, reminiscent of the ocean's depths.",
         "gruvbox-dark": "A retro-inspired dark theme with warm colors and high contrast, optimized for coding.",
         "sakura-blossom": "A delicate theme inspired by cherry blossoms, with soft pinks and light pastels.",
-        "matcha-green": "A natural and earthy theme featuring various shades of green, inspired by matcha tea.",
+        "matcha-green": "A soothing, earthy theme featuring various shades of green, inspired by matcha tea.",
         "monokai-pro": "A popular dark theme known for its vibrant and distinct syntax highlighting, great for developers.",
         "slate-gray": "A sophisticated theme with cool grays and blues, offering a modern and understated look.",
         "tropical-splash": "A lively theme with bright, contrasting colors inspired by tropical fruits and scenery.",
@@ -429,6 +429,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // 8. Dropdown Functionality
+    const initDropdowns = () => {
+        document.querySelectorAll('.dropdown[data-component="dropdown"]').forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            if (toggle) {
+                toggle.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent document click from closing immediately
+                    // Close other open dropdowns
+                    document.querySelectorAll('.dropdown.is-open').forEach(openDropdown => {
+                        if (openDropdown !== dropdown) {
+                            openDropdown.classList.remove('is-open');
+                            openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                        }
+                    });
+
+                    dropdown.classList.toggle('is-open');
+                    const isOpen = dropdown.classList.contains('is-open');
+                    toggle.setAttribute('aria-expanded', isOpen);
+                });
+            }
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (event) => {
+            document.querySelectorAll('.dropdown.is-open').forEach(openDropdown => {
+                if (!openDropdown.contains(event.target)) {
+                    openDropdown.classList.remove('is-open');
+                    openDropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    };
+
     // Initialize all functionalities
     initMobileNav();
     initHeaderThemeToggle();
@@ -439,5 +472,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initThemeExplorer();
     initSmoothScrolling();
     initSidebarHighlighting();
-    initDynamicCopyrightYear(); // Call the new function
+    initDynamicCopyrightYear();
+    initDropdowns(); // Initialize dropdowns
 });

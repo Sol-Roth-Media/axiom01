@@ -12,6 +12,7 @@
     background-color: var(--a-color-surface-variant);
     border-bottom: 1px solid var(--a-color-outline);
     padding: var(--a-space-l);
+    order: 2; /* Display sidebar after main content on mobile */
 }
 
 .doc-sidebar nav h3 {
@@ -45,6 +46,7 @@
     flex-grow: 1;
     padding: var(--a-space-xl);
     max-width: 100%; /* Ensure it doesn't overflow on small screens */
+    order: 1; /* Display main content before sidebar on mobile */
 }
 
 .doc-title {
@@ -116,11 +118,13 @@
         top: 60px; /* Stick below the fixed header */
         height: calc(100vh - 60px); /* Fill remaining viewport height */
         overflow-y: auto; /* Enable scrolling for long sidebars */
+        order: 1; /* Display sidebar before main content on desktop */
     }
 
     .doc-content {
         padding-left: var(--a-space-xl);
         padding-right: var(--a-space-xl);
+        order: 2; /* Display main content after sidebar on desktop */
     }
 }
 
@@ -293,7 +297,7 @@ details[open] summary::after {
     border-radius: var(--a-border-radius-medium); /* Use medium border radius */
     box-shadow: var(--a-shadow-medium); /* Use medium shadow */
     opacity: 0;
-    transform: translateY(var(--a-space-s));
+    transform: translateY(10px);
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
 [data-component="dropdown"].is-open .dropdown-menu {
@@ -307,10 +311,12 @@ details[open] summary::after {
     clear: both;
     font-weight: var(--a-font-weight-normal);
     color: var(--a-color-on-surface);
+    text-align: inherit;
     text-decoration: none;
     white-space: nowrap;
     background-color: transparent;
     border: 0;
+    cursor: pointer;
 }
 .dropdown-menu li a:hover,
 .dropdown-menu li a:focus {

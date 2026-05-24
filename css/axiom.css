@@ -628,6 +628,7 @@ https://dev.to/ynab/a-semantic-color-system-the-theory-hk7
   /* Colors */
   --a-color-primary: #007bff;
   --a-color-on-primary: white;
+  --a-color-on-gradient: var(--a-color-on-primary); /* Changed to use on-primary */
   --a-color-secondary: #6c757d;
   --a-color-on-secondary: white;
   --a-color-tertiary: #20c997; /* Added tertiary color */
@@ -722,6 +723,7 @@ https://dev.to/ynab/a-semantic-color-system-the-theory-hk7
 [data-theme="dark"] {
     --a-color-primary: #90caf9; /* Light blue for dark mode primary */
     --a-color-on-primary: #212121;
+    --a-color-on-gradient: var(--a-color-on-primary); /* Changed to use on-primary */
     --a-color-secondary: #b0bec5; /* Light grey-blue for dark mode secondary */
     --a-color-on-secondary: #212121;
     --a-color-tertiary: #80cbc4; /* Light teal for dark mode tertiary */
@@ -1046,13 +1048,6 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     }
 }
 
-#grid-system .grid-explanation {
-    background-color: var(--a-color-surface);
-    padding: var(--a-space-l);
-    border-radius: var(--a-border-radius-large);
-    box-shadow: var(--a-shadow-medium);
-}
-
 #grid-system .grid-explanation h3 {
     font-size: 1.3rem;
     margin-top: 0;
@@ -1210,6 +1205,7 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
 .typography-section code {
     font-family: var(--a-font-family-mono);
     font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 /* ✅ NEW: Modern layout for text with an image */
@@ -1372,8 +1368,8 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
 
 /* --- Button Component --- */
 .button, button {
-    padding: var(--a-space-s) var(--a-space-m);
-    font-size: var(--a-font-size-base);
+    padding: var(--a-space-s) var(--a-space-m); /* Default (medium) padding */
+    font-size: var(--a-font-size-base); /* Default (medium) font size */
     border-radius: var(--a-border-radius-medium);
     border: 1px solid transparent;
     cursor: pointer;
@@ -1404,6 +1400,12 @@ header.main .menu-toggle { display: none; background: none; border: none; color:
     color: var(--a-color-on-secondary);
 }
 
+/* Explicitly define medium size, which is now the default */
+.button.medium, button.medium {
+    padding: var(--a-space-s) var(--a-space-m);
+    font-size: var(--a-font-size-base);
+}
+
 .button.large, button.large {
     padding: var(--a-space-m) var(--a-space-l);
     font-size: 1.25rem;
@@ -1426,7 +1428,7 @@ button:disabled, .button:disabled,
 /* --- Hero Section --- */
 section.hero {
     background: var(--a-gradient-primary);
-    color: var(--a-color-on-primary);
+    color: var(--a-color-on-gradient); /* Changed to use on-gradient */
     text-align: center;
     padding: var(--a-space-xxl) var(--a-space-xl);
 }
@@ -1434,13 +1436,13 @@ section.hero h1 { font-size: 3.2rem; font-weight: var(--a-font-weight-black); ma
 section.hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto var(--a-space-l) auto; opacity: 0.9; } /* More refined size */
 section.hero .actions { display: flex; justify-content: center; gap: var(--a-space-m); }
 section.hero .button.primary {
-    background-color: var(--a-color-on-primary); /* White background */
+    background-color: var(--a-color-on-gradient); /* Changed to use on-gradient */
     color: var(--a-color-primary); /* Primary color text */
 }
 section.hero .button.secondary {
     background-color: transparent;
-    border-color: var(--a-color-on-primary); /* White border */
-    color: var(--a-color-on-primary); /* White text */
+    border-color: var(--a-color-on-gradient); /* Changed to use on-gradient */
+    color: var(--a-color-on-gradient); /* Changed to use on-gradient */
 }
 
 /* --- Spacing Demo --- */
