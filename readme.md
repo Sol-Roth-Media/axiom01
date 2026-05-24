@@ -15,173 +15,86 @@
 - **⚡ Performance**: Lightweight core bundle (25KB gzipped)
 - **🛠 Developer Tools**: Interactive playground, VS Code extension, and build tools
 - **🌓 Dark Mode**: Automatic dark mode with system preference detection
+# Axiom01
 
-## 🚀 Quick Start
+Axiom01 is a semantic-first UI framework and documentation site focused on clean HTML, minimal class usage, and accessible interaction patterns.
 
-### CDN (Recommended for trying out)
+## Core principles
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axiom01@latest/dist/css/axiom.min.css">
-</head>
-<body>
-    <button class="primary">Hello Axiom01!</button>
-    <script src="https://cdn.jsdelivr.net/npm/axiom01@latest/dist/js/axiom.min.js"></script>
-</body>
-</html>
-```
+- Semantic HTML first, with one descriptive root class per component.
+- No BEM-style class architecture.
+- CSS variables drive spacing, color, typography, and themes.
+- Accessibility defaults: keyboard support, ARIA state hooks, and focus handling.
 
-### npm Installation
+## Current repository layout
+
+- `index.html`: Main demo and framework landing page.
+- `css/axiom.css`: Core framework styles and tokens.
+- `css/site.css`: Site-level styles for `index.html` presentation.
+- `css/doc-styles.css`: Shared docs page styling.
+- `css/doc-preview.css`: Shared styling for component doc pages.
+- `js/axiom.js`: Component loader that initializes `[data-component]` modules from `js/components/`.
+- `js/index-page-manager.js`: Page behaviors (theme toggle, search modal, component browser, etc.).
+- `docs/`: Documentation hub, advanced guides, and per-component pages.
+
+## How component loading works
+
+`js/axiom.js` scans the DOM for `[data-component]`, dynamically imports `js/components/<name>.js`, and initializes each instance.
+
+Supported component exports:
+
+- A class (constructed with the component element)
+- An object with `init(element)`
+
+If a component instance exposes `destroy()`, the loader tracks it for cleanup.
+
+## Local development
+
+There is no full automated test/build pipeline committed yet, so local verification is browser-first.
+
+1. Open `index.html` in your browser.
+2. Exercise affected docs pages under `docs/`.
+3. For component behavior changes, test keyboard and responsive behavior (mobile + desktop widths).
+
+### Optional static server
+
+If your browser blocks module imports from `file://`, run a local server from the project root:
 
 ```bash
-npm install axiom01
+python3 -m http.server 8000
 ```
 
-```javascript
-// Import full framework
-import 'axiom01/dist/css/axiom.css';
-import 'axiom01/dist/js/axiom.js';
+Then open `http://localhost:8000/index.html`.
 
-// Or import core only (smaller bundle)
-import 'axiom01/dist/css/axiom-core.css';
-import 'axiom01/dist/js/axiom-core.js';
-```
+## Release workflow (GitHub Actions)
 
-## 📦 npm Package Contents
+The repository includes `.github/workflows/release.yml`, which triggers on version tags (`v*.*.*`) and is intended to:
 
-The npm package includes:
-- dist/css/axiom.css (unminified)
-- dist/css/axiom.min.css (minified)
-- dist/js/axiom.js (unminified)
-- dist/js/axiom.min.js (minified)
+1. install dependencies,
+2. run a build,
+3. create a GitHub release,
+4. deploy built artifacts to `gh-pages`,
+5. publish to npm.
 
-**Usage Example:**
-```js
-import 'axiom01/dist/css/axiom.min.css';
-import 'axiom01/dist/js/axiom.min.js';
-```
+Before tagging a release, ensure repository scripts and packaging configuration match that workflow (for example: lockfile present, build scripts defined, publishable package settings in `package.json`, and required secrets configured).
 
-You can also use the unminified files for development or debugging.
+## Build pipeline notes
 
-## 📖 Documentation
+`BUILD_PROCESS.md` documents a PostCSS pipeline (`postcss-import`, `cssnano`, `purgecss`) for producing optimized CSS. Treat it as the source of truth for CSS build setup.
 
-| Resource | Description |
-|----------|-------------|
-| [Getting Started](docs/getting-started.md) | Installation and basic usage |
-| [Components](components/) | Complete component library with examples |
-| [Contributing](docs/contributing.md) | Contribution guidelines |
-| [Developer Guide](DEVELOPER.md) | For framework contributors |
-| [Interactive Playground](interactive-playground.html) | Live code editor and preview |
-| [Theme Wizard](theme-customization-wizard.html) | Visual theme customizer |
+## Docs and contributor references
 
-## 🎨 Components
+- `DEVELOPER.md`: contributor workflows and implementation notes.
+- `AXIOM01_STYLING_GUIDE.md`: styling philosophy and conventions.
+- `FIRST_MAJOR_RELEASE_AUDIT.md`: release hardening checklist and cleanup status.
+- `TESTING.md`: recommended testing strategy (unit/integration/visual/accessibility).
 
-Axiom01 includes **27+ production-ready components**:
+## First release readiness (current focus)
 
-### Layout & Structure
-- **Card** - Flexible content containers
-- **Modal** - Accessible dialog boxes  
-- **Drawer** - Slide-out panels and navigation
-- **Accordion** - Collapsible content sections
-
-### Forms & Inputs
-- **Button** - Primary, secondary, and specialty buttons
-- **Form** - Complete form layouts with validation
-- **File Upload** - Drag & drop file uploads with progress
-- **Search** - Advanced search with autocomplete
-
-### Navigation
-- **Navigation** - Responsive navbar with dropdowns
-- **Breadcrumb** - Hierarchical navigation trails
-- **Pagination** - Advanced pagination with jump-to-page
-- **Tabs** - Accessible tabbed content
-
-### Feedback & Status
-- **Alert** - Success, warning, and error messages
-- **Notification** - Toast notifications and alerts
-- **Progress** - Progress bars and loading indicators
-- **Skeleton** - Loading placeholders with animations
-
-### Data Display
-- **Table** - Sortable, responsive data tables
-- **Timeline** - Process steps and chronological events
-- **Tag** - Labels, badges, and removable chips
-- **Empty State** - User-friendly no-data messages
-
-[View all components →](components/)
-
-## 🎭 Themes
-
-### Built-in Themes
-- **Light** - Clean, modern light theme (default)
-- **Dark** - Elegant dark theme with proper contrast
-- **Forest** - Nature-inspired green theme
-- **Ocean** - Calm blue and teal theme
-- **Sunset** - Warm orange and amber theme
-
-### Theme Switching
-
-```html
-<!-- Manual theme switching -->
-<html data-theme="dark">
-
-<!-- Automatic system preference -->
-<html> <!-- Respects prefers-color-scheme -->
-```
-
-### Custom Themes
-
-Use our [Theme Wizard](theme-customization-wizard.html) to create custom themes visually, or modify the design tokens:
-
-```css
-:root {
-  --a-color-primary-500: #your-brand-color;
-  --a-color-surface: #your-background;
-  /* ... customize any design token */
-}
-```
-
-## ⚡ Performance
-
-| Bundle | Size (Gzipped) | Description |
-|--------|----------------|-------------|
-| **Core** | ~25KB | Essential components only |
-| **Full** | ~45KB | All components included |
-| **Individual** | ~2-5KB | Import components separately |
-
-- **Core Web Vitals**: Optimized for excellent Lighthouse scores
-- **Tree Shakable**: Use only the components you need
-- **No Dependencies**: Zero external dependencies
-- **Modern Browsers**: ES6+ with graceful degradation
-
-## 🛠 Development Tools
-
-### Interactive Playground
-Live code editor with real-time preview and component templates
-### Theme Wizard
-Visual theme customization tool with live preview and export
-### VS Code Extension
-Component snippets, CSS custom property autocomplete, and accessibility helpers
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our:
-- [Contributing Guide](docs/contributing.md) - Contribution guidelines
-- [Developer Guide](DEVELOPER.md) - Framework development setup
-- [Component Checklist](AXIOM01_COMPONENT_CHECKLIST.md) - Component standards
-
-## 📄 License
-
-Axiom01 is [MIT Licensed](LICENSE).
-
----
-
-**Made with ❤️ by developers who care about accessibility and semantic web standards.**
-
-## 🆕 Release 0.2.0 (July 27, 2025)
-- Fixed all broken links in the documentation component browser
+- Continue docs consistency cleanup (layout, spacing, and footer/header parity).
+- Remove remaining legacy scaffolding and malformed markup.
+- Tighten accessibility checks on interactive docs components.
+- Finalize release pipeline inputs so tag-based releases are reliable.
 - Restored and integrated AI Chat and AI Imagegen components
 - Added a Settings component stub to prevent 404s
 - Confirmed BEM/class stacking violations are no longer present in docs/components/

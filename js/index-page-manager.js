@@ -177,62 +177,78 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeSearchModalButton = searchModal ? searchModal.querySelector('.close') : null; // Select within modal
         const searchModalInput = document.getElementById('search-modal-input');
         const searchModalResults = document.getElementById('search-modal-results');
+        let lastFocusedElement = null;
+
+        const resolveSearchUrl = (url) => {
+            if (!url || /^(https?:|#)/.test(url)) return url;
+
+            const inDocsComponents = window.location.pathname.includes('/docs/components/');
+            const inDocs = window.location.pathname.includes('/docs/');
+
+            if (url.startsWith('docs/')) {
+                const docsRelative = url.replace(/^docs\//, '');
+                if (inDocsComponents) return `../${docsRelative}`;
+                if (inDocs) return docsRelative;
+            }
+
+            return url;
+        };
 
         // Dummy data for Fuse.js search
         const searchData = [
-            { title: "Accordion", category: "feedback", url: "docs/components/placeholder.html" },
-            { title: "AI Chat", category: "ai", url: "docs/components/placeholder.html" },
-            { title: "AI Image Generator", category: "ai", url: "docs/components/placeholder.html" },
-            { title: "Alert", category: "feedback", url: "docs/components/placeholder.html" },
-            { title: "Avatar", category: "display", url: "docs/components/placeholder.html" },
-            { title: "Badge", category: "display", url: "docs/components/placeholder.html" },
-            { title: "Breadcrumb", category: "navigation", url: "docs/components/placeholder.html" },
-            { title: "Button", category: "forms", url: "docs/components/placeholder.html" },
-            { title: "Card", category: "layout", url: "docs/components/placeholder.html" },
-            { title: "Carousel", category: "media", url: "docs/components/placeholder.html" },
-            { title: "Chat", category: "feedback", url: "docs/components/placeholder.html" },
-            { title: "Commerce", category: "ecommerce", url: "docs/components/placeholder.html" },
-            { title: "Component Browser", category: "layout", url: "docs/components/placeholder.html" },
-            { title: "Datepicker", category: "forms", url: "docs/components/placeholder.html" },
-            { title: "Drawer", category: "overlay", url: "docs/components/placeholder.html" },
-            { title: "Dropdown", category: "navigation", url: "docs/components/placeholder.html" },
-            { title: "Editor", category: "forms", url: "docs/components/placeholder.html" },
-            { title: "Empty State", category: "feedback", url: "docs/components/placeholder.html" },
-            { title: "File Upload", category: "forms", url: "docs/components/placeholder.html" },
-            { title: "Footer", category: "layout", url: "docs/components/placeholder.html" },
-            { title: "Forms", category: "forms", url: "docs/components/placeholder.html" },
-            { title: "Hero", category: "layout", url: "docs/components/placeholder.html" },
-            { title: "Infinite Scroll", category: "display", url: "docs/components/placeholder.html" },
-            { title: "Media", category: "media", url: "docs/components/placeholder.html" },
-            { title: "Modal", category: "overlay", url: "docs/components/placeholder.html" },
-            { title: "Multi-Step Form", category: "forms", url: "docs/components/placeholder.html" },
-            { title: "Navbar", category: "navigation", url: "docs/components/placeholder.html" },
-            { title: "Navigation", category: "navigation", url: "docs/components/placeholder.html" },
-            { title: "Notification", category: "feedback", url: "docs/components/placeholder.html" },
-            { title: "Pagination", category: "navigation", url: "docs/components/placeholder.html" },
-            { title: "Paywall", category: "ecommerce", url: "docs/components/placeholder.html" },
-            { title: "Progress", category: "feedback", url: "docs/components/placeholder.html" },
-            { title: "Search", category: "navigation", url: "docs/components/placeholder.html" },
-            { title: "Settings", category: "forms", url: "docs/components/placeholder.html" },
-            { title: "Sidebar", category: "layout", url: "docs/components/placeholder.html" },
-            { title: "Skeleton", category: "display", url: "docs/components/placeholder.html" },
-            { title: "Slider", category: "forms", url: "docs/components/placeholder.html" },
-            { title: "Table", category: "display", url: "docs/components/placeholder.html" },
-            { title: "Tabs", category: "navigation", url: "docs/components/placeholder.html" },
-            { title: "Timeline", category: "display", url: "docs/components/placeholder.html" },
-            { title: "Toggle", category: "forms", url: "docs/components/placeholder.html" },
-            { title: "Tooltip", category: "overlay", url: "docs/components/placeholder.html" },
-            { title: "Documentation", category: "docs", url: "docs/placeholder.html" },
+            { title: "Accordion", category: "feedback", url: "docs/components/accordion.html" },
+            { title: "AI Chat", category: "ai", url: "docs/components/ai-chat.html" },
+            { title: "AI Image Generator", category: "ai", url: "docs/components/ai-image-generator.html" },
+            { title: "Alert", category: "feedback", url: "docs/components/alert.html" },
+            { title: "Avatar", category: "display", url: "docs/components/avatar.html" },
+            { title: "Badge", category: "display", url: "docs/components/badge.html" },
+            { title: "Breadcrumb", category: "navigation", url: "docs/components/breadcrumb.html" },
+            { title: "Button", category: "forms", url: "docs/components/button.html" },
+            { title: "Card", category: "layout", url: "docs/components/card.html" },
+            { title: "Carousel", category: "media", url: "docs/components/carousel.html" },
+            { title: "Chat", category: "feedback", url: "docs/components/chat.html" },
+            { title: "Commerce", category: "ecommerce", url: "docs/components/commerce.html" },
+            { title: "Component Browser", category: "layout", url: "docs/components/component-browser.html" },
+            { title: "Datepicker", category: "forms", url: "docs/components/datepicker.html" },
+            { title: "Drawer", category: "overlay", url: "docs/components/drawer.html" },
+            { title: "Dropdown", category: "navigation", url: "docs/components/dropdown.html" },
+            { title: "Editor", category: "forms", url: "docs/components/editor.html" },
+            { title: "Empty State", category: "feedback", url: "docs/components/empty-state.html" },
+            { title: "File Upload", category: "forms", url: "docs/components/file-upload.html" },
+            { title: "Footer", category: "layout", url: "docs/components/footer.html" },
+            { title: "Forms", category: "forms", url: "docs/components/forms.html" },
+            { title: "Hero", category: "layout", url: "docs/components/hero.html" },
+            { title: "Infinite Scroll", category: "display", url: "docs/components/infinite-scroll.html" },
+            { title: "Media", category: "media", url: "docs/components/media.html" },
+            { title: "Modal", category: "overlay", url: "docs/components/modal.html" },
+            { title: "Multi-Step Form", category: "forms", url: "docs/components/multi-step-form.html" },
+            { title: "Navbar", category: "navigation", url: "docs/components/mobile-navbar.html" },
+            { title: "Navigation", category: "navigation", url: "docs/components/navigation.html" },
+            { title: "Notification", category: "feedback", url: "docs/components/notification.html" },
+            { title: "Pagination", category: "navigation", url: "docs/components/pagination.html" },
+            { title: "Paywall", category: "ecommerce", url: "docs/components/paywall.html" },
+            { title: "Progress", category: "feedback", url: "docs/components/progress.html" },
+            { title: "Search", category: "navigation", url: "docs/components/search.html" },
+            { title: "Settings", category: "forms", url: "docs/components/settings.html" },
+            { title: "Sidebar", category: "layout", url: "docs/components/sidebar.html" },
+            { title: "Skeleton", category: "display", url: "docs/components/skeleton.html" },
+            { title: "Slider", category: "forms", url: "docs/components/slider.html" },
+            { title: "Table", category: "display", url: "docs/components/table.html" },
+            { title: "Tabs", category: "navigation", url: "docs/components/tabs.html" },
+            { title: "Timeline", category: "display", url: "docs/components/timeline.html" },
+            { title: "Toggle", category: "forms", url: "docs/components/toggle.html" },
+            { title: "Tooltip", category: "overlay", url: "docs/components/tooltip.html" },
+            { title: "Documentation", category: "docs", url: "docs/components-overview.html" },
             { title: "Advanced Color Details", category: "docs", url: "docs/colors-advanced.html" },
             { title: "Theme Customization Wizard", category: "docs", url: "docs/theme-customization-wizard.html" },
             { title: "Advanced Typography Guide", category: "docs", url: "docs/typography-advanced.html" },
             { title: "Advanced Layout Guide", category: "docs", url: "docs/layout-advanced.html" },
             { title: "Advanced Media & Icons Guide", category: "docs", url: "docs/media-advanced.html" },
             { title: "Interactive Playground", category: "docs", url: "docs/interactive-playground.html" },
-            { title: "Contributing Guide", category: "docs", url: "docs/contributing.md" },
-            { title: "Developer Guide", category: "docs", url: "DEVELOPER.md" },
-            { title: "Styling Guide", category: "docs", url: "AXIOM01_STYLING_GUIDE.md" },
-            { title: "README", category: "docs", url: "README.md" },
+            { title: "Contributing Guide", category: "docs", url: "docs/markdown-template.html?file=contributing.md" },
+            { title: "Developer Guide", category: "docs", url: "docs/markdown-template.html?file=../DEVELOPER.md" },
+            { title: "Styling Guide", category: "docs", url: "docs/markdown-template.html?file=../AXIOM01_STYLING_GUIDE.md" },
+            { title: "README", category: "docs", url: "docs/markdown-template.html?file=../readme.md" },
             { title: "MIT License", category: "docs", url: "LICENSE" },
         ];
 
@@ -242,19 +258,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (searchToggle && searchModal && closeSearchModalButton && searchModalInput && searchModalResults) {
+            const closeModal = () => {
+                searchModal.classList.add('is-hidden');
+                searchModal.setAttribute('aria-hidden', 'true');
+                searchToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = ''; // Restore body scrolling
+                searchModalResults.innerHTML = ''; // Clear results
+                searchModalInput.value = ''; // Clear input
+                if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+                    lastFocusedElement.focus();
+                }
+            };
+
+            searchToggle.setAttribute('aria-controls', 'search-modal');
+            searchToggle.setAttribute('aria-expanded', 'false');
+
             searchToggle.addEventListener('click', () => {
+                lastFocusedElement = document.activeElement;
                 searchModal.classList.remove('is-hidden');
                 searchModal.setAttribute('aria-hidden', 'false');
+                searchToggle.setAttribute('aria-expanded', 'true');
                 searchModalInput.focus();
                 document.body.style.overflow = 'hidden'; // Prevent scrolling body when modal is open
             });
 
             closeSearchModalButton.addEventListener('click', () => {
-                searchModal.classList.add('is-hidden');
-                searchModal.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = ''; // Restore body scrolling
-                searchModalResults.innerHTML = ''; // Clear results
-                searchModalInput.value = ''; // Clear input
+                closeModal();
             });
 
             searchModalInput.addEventListener('input', (event) => {
@@ -268,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         results.forEach(result => {
                             const li = document.createElement('li');
                             const a = document.createElement('a');
-                            a.href = result.item.url;
+                            a.href = resolveSearchUrl(result.item.url);
                             a.textContent = result.item.title;
                             li.appendChild(a);
                             ul.appendChild(li);
@@ -285,17 +314,44 @@ document.addEventListener('DOMContentLoaded', () => {
             // Close modal on escape key
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape' && !searchModal.classList.contains('is-hidden')) {
-                    closeSearchModalButton.click();
+                    closeModal();
                 }
             });
 
             // Close modal when clicking outside the content
             searchModal.addEventListener('click', (event) => {
                 if (event.target === searchModal) {
-                    closeSearchModalButton.click();
+                    closeModal();
                 }
             });
         }
+    };
+
+    // 5b. Navigation current-page state
+    const initCurrentPageNavState = () => {
+        const normalizePath = (value) => {
+            if (!value) return '';
+            let path = value.split('#')[0].split('?')[0];
+            path = path.replace(/\/index\.html$/, '/');
+            path = path.replace(/\/$/, '');
+            return path || '/';
+        };
+
+        const currentPath = normalizePath(window.location.pathname);
+        const anchors = document.querySelectorAll('header.main .links a, footer.main .links a');
+
+        anchors.forEach((anchor) => {
+            const href = anchor.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('http')) return;
+
+            const resolvedPath = normalizePath(new URL(href, window.location.href).pathname);
+            if (resolvedPath === currentPath) {
+                anchor.setAttribute('aria-current', 'page');
+            } else if (anchor.getAttribute('aria-current') === 'page') {
+                // Preserve explicitly-authored aria-current only for actual matches.
+                anchor.removeAttribute('aria-current');
+            }
+        });
     };
 
     // 6. Code Snippet Copying
@@ -468,6 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSpacingDemo();
     initComponentBrowser();
     initSearchModal();
+    initCurrentPageNavState();
     initCodeCopying();
     initThemeExplorer();
     initSmoothScrolling();
