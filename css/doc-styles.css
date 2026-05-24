@@ -87,9 +87,11 @@
 }
 
 .docs-overview main.content > nav[aria-label="Documentation"] {
+    width: 100%;
     max-width: 56rem;
     margin: 0 auto;
     padding: var(--a-space-m);
+    box-sizing: border-box;
     background-color: var(--a-color-surface-variant);
     border: 1px solid var(--a-color-outline);
     border-radius: var(--a-border-radius-large);
@@ -101,10 +103,21 @@
     text-align: center;
 }
 
+.docs-overview main.content > nav[aria-label="Documentation"] p {
+    margin: 0 auto var(--a-space-l);
+    max-width: 42rem;
+    text-align: center;
+    color: var(--a-color-on-surface-variant);
+}
+
 .docs-overview main.content > nav[aria-label="Documentation"] h3 {
     margin: var(--a-space-l) 0 var(--a-space-xs);
     text-align: center;
     color: var(--a-color-primary);
+}
+
+.docs-overview main.content > nav[aria-label="Documentation"] h3:first-of-type {
+    margin-top: 0;
 }
 
 .docs-overview main.content > nav[aria-label="Documentation"] ul {
@@ -114,6 +127,14 @@
     max-width: 42rem;
     display: grid;
     gap: var(--a-space-xs);
+}
+
+.docs-overview main.content > nav[aria-label="Documentation"] > ul {
+    margin-bottom: var(--a-space-l);
+}
+
+.docs-overview main.content > nav[aria-label="Documentation"] > ul:last-of-type {
+    margin-bottom: 0;
 }
 
 .docs-overview main.content > nav[aria-label="Documentation"] ul li h4 {
@@ -142,6 +163,18 @@
     transform: translateY(-1px);
 }
 
+.docs-overview main.content > nav[aria-label="Documentation"] ul li a:focus-visible {
+    outline: 2px solid var(--a-color-primary);
+    outline-offset: 2px;
+}
+
+.docs-overview main.content > nav[aria-label="Documentation"] a[aria-current="page"] {
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    border-color: color-mix(in srgb, var(--a-color-primary) 50%, var(--a-color-outline));
+    font-weight: var(--a-font-weight-medium);
+}
+
 .docs-overview footer.main {
     padding: var(--a-space-l) 0 var(--a-space-m);
 }
@@ -164,8 +197,34 @@
     }
 
     .docs-overview main.content > nav[aria-label="Documentation"] {
+        max-width: none;
+        margin: 0;
         padding: var(--a-space-s);
         border-radius: var(--a-border-radius-medium);
+    }
+
+    .docs-overview main.content > nav[aria-label="Documentation"] ul {
+        max-width: none;
+    }
+
+    .docs-overview footer.main .content {
+        padding: 0 var(--a-space-m);
+    }
+
+    .docs-overview footer.main .bottom {
+        padding: var(--a-space-m) var(--a-space-m) 0;
+    }
+}
+
+@media (min-width: 960px) {
+    .docs-overview main.content > nav[aria-label="Documentation"] > ul:nth-of-type(3) {
+        max-width: none;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--a-space-s);
+    }
+
+    .docs-overview main.content > nav[aria-label="Documentation"] > ul:nth-of-type(3) li h4 {
+        grid-column: 1 / -1;
     }
 }
 
