@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. Code Snippet Copying
     const initCodeCopying = () => {
-        const copyButtons = document.querySelectorAll('.copy-button');
+        const copyButtons = document.querySelectorAll('[data-copy-snippet]');
         copyButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const pre = button.closest('article').querySelector('pre code');
