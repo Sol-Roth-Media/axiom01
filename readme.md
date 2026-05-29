@@ -119,6 +119,13 @@ This generates:
 - `docs/MAINTENANCE_WORKFLOW.md`: triage rubric, DoD checklists, and release cadence.
 - `starter-themes/axiom01-drupal11-starter-theme/`: bootstrap scaffold for dedicated Drupal 11 starter-theme repo.
 
+## dbase integration path
+
+- `dbase` can use the Axiom01 Drupal starter theme as an optional custom-theme baseline.
+- Integration scaffold source of truth in this repository: `starter-themes/axiom01-drupal11-starter-theme/`.
+- Companion repository for Drupal baseline distribution: `https://github.com/solomonrothman/dbase`.
+- Keep integration/setup documentation aligned across both repositories whenever starter-theme behavior or compatibility contracts change.
+
 ## First release readiness (current focus)
 
 - Continue docs consistency cleanup (layout, spacing, and footer/header parity).

@@ -32,3 +32,5 @@ Use this checklist whenever Axiom01 or the starter theme changes:
 - [ ] Form and search templates remain semantic/minimal and still allow additional classes via preprocess/theme functions.
 - [ ] Axiom01 CSS/JS assets load correctly in Drupal 11.
 - [ ] Asset strategy toggle (`auto` / `local` / `package`) resolves to expected files with fallback behavior.
+- [ ] dbase install path docs correctly describe where to place/enable this theme in a dbase-based Drupal project.
+- [ ] dbase docs and Axiom01 docs both reflect current integration responsibilities and compatibility boundaries.

@@ -15,6 +15,8 @@ Scope: create the standalone `axiom01-drupal11-starter-theme` GitHub repository 
 - [ ] Wire CI to run syntax and template sanity checks on pull requests.
 - [ ] Document release/version policy and compatibility update policy.
 - [ ] Validate Drupal installation path and enablement instructions in README.
+- [ ] Add/verify dbase integration notes so dbase users can select this starter theme.
+- [ ] Ensure docs updates ship in both `axiom01` and `dbase` when integration/setup flow changes.
 
 ## First commit plan
 

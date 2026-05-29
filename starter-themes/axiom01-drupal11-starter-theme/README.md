@@ -6,6 +6,14 @@ This directory is a ready-to-install Drupal 11 custom theme with bundled Axiom01
 
 Provide a production-oriented Drupal 11 starter theme that uses Axiom01 tokens, base styles, and component patterns while staying maintainable for a solo developer + AI agents.
 
+## dbase overlap and integration
+
+This starter theme is designed to be an optional theme choice for projects bootstrapped from [`dbase`](https://github.com/solomonrothman/dbase).
+
+- Axiom01 owns the starter-theme scaffold and compatibility contract.
+- dbase owns baseline Drupal project bootstrapping and should document starter-theme selection/install steps.
+- When integration behavior changes, update docs in both repositories together.
+
 ## Included
 
 - Drupal 11 theme metadata and libraries
