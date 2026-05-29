@@ -1,6 +1,18 @@
 
 # Changelog
 
+## Version 1.0.3 - 2026-05-29
+
+### Added
+- Expanded Drupal integration hardening for contrib output patterns and starter-theme coverage.
+- Added additional Drupal-focused docs and fixture references for regression and accessibility checks.
+
+### Changed
+- Updated release workflow setup so tag-triggered releases continue without requiring a lockfile-based npm cache.
+
+### Fixed
+- Resolved release pipeline failure at `actions/setup-node` caused by npm cache lockfile enforcement.
+
 ## Version 1.0.0 (Beta) - 2024-05-15
 
 ### Added
