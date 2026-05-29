@@ -7,8 +7,8 @@ export default {
      * @returns {object} An object with a destroy method for cleanup.
      */
     init(element) {
-        const toggleButton = element.querySelector('.dropdown-toggle');
-        const dropdownMenu = element.querySelector('.dropdown.menu');
+        const toggleButton = element.querySelector('[data-dropdown-toggle], .dropdown-toggle');
+        const dropdownMenu = element.querySelector('[data-dropdown-menu], .dropdown.menu');
 
         if (!toggleButton || !dropdownMenu) {
             console.error('Axiom: Dropdown component: Missing toggle button or menu.', element);
@@ -17,14 +17,19 @@ export default {
 
         // --- Accessibility: Assign IDs if not present ---
         const uniqueId = Math.random().toString(36).substr(2, 9);
+        const toggleHadId = Boolean(toggleButton.id);
+        const menuHadId = Boolean(dropdownMenu.id);
+        const menuHadRole = dropdownMenu.hasAttribute('role');
         toggleButton.id = toggleButton.id || `axiom-dropdown-toggle-${uniqueId}`;
-        dropdownMenu.id = dropdownMenu.id || `axiom-dropdown.menu-${uniqueId}`;
+        dropdownMenu.id = dropdownMenu.id || `axiom-dropdown-menu-${uniqueId}`;
 
         // --- Accessibility: Set initial ARIA attributes ---
         toggleButton.setAttribute('aria-haspopup', 'true');
         toggleButton.setAttribute('aria-expanded', 'false');
         toggleButton.setAttribute('aria-controls', dropdownMenu.id);
-        dropdownMenu.setAttribute('role', 'menu');
+        if (!menuHadRole) {
+            dropdownMenu.setAttribute('role', 'menu');
+        }
         dropdownMenu.setAttribute('aria-labelledby', toggleButton.id);
         dropdownMenu.setAttribute('aria-hidden', 'true'); // Initially hidden
 
@@ -70,12 +75,18 @@ export default {
                 document.removeEventListener('keydown', keydownHandler);
 
                 // Reset ARIA attributes
-                toggleButton.removeAttribute('id');
+                if (!toggleHadId) {
+                    toggleButton.removeAttribute('id');
+                }
                 toggleButton.removeAttribute('aria-haspopup');
                 toggleButton.removeAttribute('aria-expanded');
                 toggleButton.removeAttribute('aria-controls');
-                dropdownMenu.removeAttribute('id');
-                dropdownMenu.removeAttribute('role');
+                if (!menuHadId) {
+                    dropdownMenu.removeAttribute('id');
+                }
+                if (!menuHadRole) {
+                    dropdownMenu.removeAttribute('role');
+                }
                 dropdownMenu.removeAttribute('aria-labelledby');
                 dropdownMenu.removeAttribute('aria-hidden');
 

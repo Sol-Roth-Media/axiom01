@@ -11,6 +11,57 @@ var Axiom = class {
     if (this.components[componentName]) {
       return this.components[componentName];
     }
+
+    /**
+     * Register a component definition manually.
+     * Supports either:
+     * - class constructor
+     * - object with init(element)
+     * @param {string} componentName
+     * @param {Function|Object} componentDefinition
+     * @returns {boolean}
+     */
+    registerComponent(componentName, componentDefinition) {
+      if (!componentName || typeof componentName !== "string") {
+        console.error("Axiom: registerComponent requires a valid component name.");
+        return false;
+      }
+
+      const isClass =
+        typeof componentDefinition === "function" &&
+        /^\s*class\s/.test(componentDefinition.toString());
+      const isInitObject =
+        typeof componentDefinition === "object" &&
+        componentDefinition !== null &&
+        typeof componentDefinition.init === "function";
+
+      if (!isClass && !isInitObject) {
+        console.error(
+          `Axiom: Invalid component definition for ${componentName}. Expected class or object with init(element).`
+        );
+        return false;
+      }
+
+      this.components[componentName] = componentDefinition;
+      return true;
+    }
+
+    /**
+     * Get a registered component definition by name.
+     * @param {string} componentName
+     * @returns {Function|Object|null}
+     */
+    getComponent(componentName) {
+      return this.components[componentName] || null;
+    }
+
+    /**
+     * List all currently loaded/registered component names.
+     * @returns {string[]}
+     */
+    listComponents() {
+      return Object.keys(this.components);
+    }
     const componentPath = `./components/${componentName}.js`; 
     try {
       const module = await import(componentPath);
