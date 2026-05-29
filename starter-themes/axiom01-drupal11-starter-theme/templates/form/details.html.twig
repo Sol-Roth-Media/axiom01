@@ -1,0 +1,30 @@
+{# Axiom01 details wrapper for consistent accordion styling in Drupal forms. #}
+{% set details_classes = [
+  'ax-details',
+  'ax-accordion',
+  'js-form-wrapper',
+  'form-wrapper',
+  required ? 'form-required',
+  errors ? 'ax-details--error',
+] %}
+<details{{ attributes.addClass(details_classes) }}>
+  {% if title %}
+    <summary{{ summary_attributes }}>{{ title }}</summary>
+  {% endif %}
+  <div class="details-wrapper">
+    {% if errors %}
+      <div class="form-item--error-message" role="alert">{{ errors }}</div>
+    {% endif %}
+
+    {% if description and description_display in ['before', 'invisible'] %}
+      <div class="description">{{ description }}</div>
+    {% endif %}
+
+    {{ children }}
+    {{ value }}
+
+    {% if description and description_display == 'after' %}
+      <div class="description">{{ description }}</div>
+    {% endif %}
+  </div>
+</details>

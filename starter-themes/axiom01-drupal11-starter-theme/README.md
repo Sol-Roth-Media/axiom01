@@ -10,6 +10,7 @@ Provide a production-oriented Drupal 11 starter theme that uses Axiom01 tokens, 
 
 - Drupal 11 theme metadata and libraries
 - Core layout templates (`page`, `node`, `views`, status messages)
+- Form wrappers for `form-element`, `details`, and `fieldset` with Axiom01-friendly anatomy
 - Main/footer/utility menu templates
 - Axiom01 component partials for Twig composition
 - Compatibility and upgrade policy docs

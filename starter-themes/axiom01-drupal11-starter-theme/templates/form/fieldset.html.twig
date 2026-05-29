@@ -1,0 +1,31 @@
+{# Axiom01 fieldset wrapper for Drupal form groups. #}
+{% set fieldset_classes = [
+  'ax-fieldset',
+  'form-wrapper',
+  'js-form-wrapper',
+  required ? 'form-required',
+  errors ? 'ax-fieldset--error',
+] %}
+<fieldset{{ attributes.addClass(fieldset_classes) }}>
+  {% if legend and legend.title %}
+    <legend{{ legend.attributes.addClass('ax-fieldset__legend') }}>
+      <span{{ legend_span.attributes.addClass('ax-fieldset__legend-text') }}>{{ legend.title }}</span>
+    </legend>
+  {% endif %}
+
+  <div class="ax-fieldset__content">
+    {% if errors %}
+      <div class="form-item--error-message" role="alert">{{ errors }}</div>
+    {% endif %}
+
+    {% if description and description_display in ['before', 'invisible'] %}
+      <div class="description">{{ description }}</div>
+    {% endif %}
+
+    {{ children }}
+
+    {% if description and description_display == 'after' %}
+      <div class="description">{{ description }}</div>
+    {% endif %}
+  </div>
+</fieldset>

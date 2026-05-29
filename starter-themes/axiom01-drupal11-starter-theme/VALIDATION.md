@@ -14,10 +14,12 @@ Use this checklist whenever Axiom01 or the starter theme changes:
 - [ ] Highlighted, breadcrumb, help, and sidebar regions render when blocks are assigned.
 - [ ] Drupal core forms (login/search/node edit) render with Axiom01 spacing, labels, and action button grouping.
 - [ ] Drupal `details`/accordion form elements render with Axiom01 accordion styling and clear open/closed state affordances.
+- [ ] Drupal `fieldset` groups render with Axiom01 legend, border, and error-state treatments.
 - [ ] Front-page fallback content/message appears when no front page content exists.
 - [ ] Node template renders title/content/meta consistently.
 - [ ] Views wrapper template remains stable.
 - [ ] Contextual edit links appear on branding block and editable node/view output.
 - [ ] Status messages template uses accessible roles and semantics (`error` => alert/assertive).
+- [ ] `.form-item--error-message`, `.messages`, `.pager`, and `.tabs` inherit Axiom01 spacing/typography treatments without layout regressions.
 - [ ] Axiom01 CSS/JS assets load correctly in Drupal 11.
 - [ ] Asset strategy toggle (`auto` / `local` / `package`) resolves to expected files with fallback behavior.
