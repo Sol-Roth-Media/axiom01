@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+"""Runtime-loader syntax and API gate."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+import subprocess
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+RUNTIME_LOADER = ROOT / "js" / "axiom.js"
+
+
+@dataclass
+class Finding:
+    scope: str
+    message: str
+
+
+def check_syntax(findings: list[Finding]) -> None:
+    result = subprocess.run(
+        ["node", "--check", str(RUNTIME_LOADER)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        details = (result.stderr or result.stdout).strip() or "unknown syntax error"
+        findings.append(Finding("js/axiom.js", f"node --check failed: {details}"))
+
+
+def check_required_markers(findings: list[Finding]) -> None:
+    text = RUNTIME_LOADER.read_text(encoding="utf-8", errors="ignore")
+    required = [
+        "registerComponent(",
+        "loadComponent(",
+        "import(componentPath)",
+        "destroyComponent(",
+        "destroyAllComponents(",
+    ]
+    for marker in required:
+        if marker not in text:
+            findings.append(Finding("js/axiom.js", f"missing runtime-loader marker: {marker}"))
+
+
+def main() -> int:
+    findings: list[Finding] = []
+    check_syntax(findings)
+    check_required_markers(findings)
+
+    print("Axiom01 runtime-loader syntax gate")
+    if not findings:
+        print("- result: PASS")
+        return 0
+
+    print(f"- result: FAIL ({len(findings)} findings)")
+    for finding in findings:
+        print(f"  - {finding.scope}: {finding.message}")
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

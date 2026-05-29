@@ -31,3 +31,13 @@ web/themes/custom/axiom01_drupal11
 ```
 
 Then enable it in Appearance settings.
+
+## Axiom01 asset strategy switch
+
+Theme settings now expose an **Asset strategy** selector:
+
+- **Auto** (default): prefers `vendor/axiom01/dist/*` when present and falls back to local `dist/*`.
+- **Local dist assets**: always uses `dist/css/axiom.min.css` + `dist/js/axiom.min.js`.
+- **Package-managed copy**: targets `vendor/axiom01/dist/*` and safely falls back to local `dist/*` if vendor files are missing.
+
+When changing strategy, clear Drupal caches and re-run `VALIDATION.md` to confirm CSS/JS loading.

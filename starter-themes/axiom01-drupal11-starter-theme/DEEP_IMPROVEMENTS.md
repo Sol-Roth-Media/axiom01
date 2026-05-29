@@ -10,7 +10,7 @@ Priority is set for solo-maintainer sustainability and high leverage.
 
 ## P1
 
-- [ ] Add configurable Axiom01 asset strategy (local dist vs package-managed copy) with fail-safe docs.
+- [x] Add configurable Axiom01 asset strategy (local dist vs package-managed copy) with fail-safe docs.
 - [x] Add optional dark/light theme token overrides for Drupal admin and frontend parity.
 - [ ] Add template-level compatibility smoke fixtures for page/node/views/status outputs.
 
@@ -24,3 +24,4 @@ Priority is set for solo-maintainer sustainability and high leverage.
 
 - [x] Began P0 by hardening navigation and status message templates.
 - [x] Continued P1 with explicit light/dark token overrides in `css/theme.css`.
+- [x] Completed asset strategy switch with auto/package/local selection and fallback docs.

@@ -11,3 +11,4 @@ Use this checklist whenever Axiom01 or the starter theme changes:
 - [ ] Views wrapper template remains stable.
 - [ ] Status messages template uses accessible roles and semantics (`error` => alert/assertive).
 - [ ] Axiom01 CSS/JS assets load correctly in Drupal 11.
+- [ ] Asset strategy toggle (`auto` / `local` / `package`) resolves to expected files with fallback behavior.

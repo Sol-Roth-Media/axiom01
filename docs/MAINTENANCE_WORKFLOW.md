@@ -54,5 +54,6 @@ npm test
 
 `npm test` runs:
 1. pre-release audit,
-2. critical interaction smoke checks,
-3. accessibility smoke checks.
+2. runtime-loader syntax gate,
+3. critical interaction smoke checks,
+4. accessibility smoke checks.
