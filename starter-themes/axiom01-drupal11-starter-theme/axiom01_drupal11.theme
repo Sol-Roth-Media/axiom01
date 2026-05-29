@@ -39,7 +39,11 @@ function _axiom01_drupal11_resolve_assets_library(string $strategy): string {
  * Implements hook_preprocess_html().
  */
 function axiom01_drupal11_preprocess_html(array &$variables): void {
-  $variables['attributes'] = $variables['attributes'] ?? new Attribute();
+  $attributes = $variables['attributes'] ?? [];
+  if (!$attributes instanceof Attribute) {
+    $attributes = new Attribute(is_array($attributes) ? $attributes : []);
+  }
+  $variables['attributes'] = $attributes;
   $variables['attributes']->addClass('axiom-body');
   $strategy = (string) \Drupal::config('axiom01_drupal11.settings')->get('asset_strategy');
   $variables['#attached']['library'][] = _axiom01_drupal11_resolve_assets_library($strategy);
