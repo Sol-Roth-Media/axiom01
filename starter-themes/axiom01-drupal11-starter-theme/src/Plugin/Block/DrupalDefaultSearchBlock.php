@@ -54,16 +54,11 @@ final class DrupalDefaultSearchBlock extends BlockBase implements ContainerFacto
   public function build(): array {
     if (!$this->moduleHandler->moduleExists('search') || !class_exists(SearchBlockForm::class)) {
       return [
-        '#type' => 'container',
-        '#attributes' => ['class' => ['messages', 'messages--warning']],
-        'message' => [
-          '#markup' => $this->t('Enable Drupal core Search module to use this block.'),
-        ],
+        '#markup' => '<p>' . $this->t('Enable Drupal core Search module to use this block.') . '</p>',
       ];
     }
 
     $form = $this->formBuilder->getForm(SearchBlockForm::class);
-    $form['#attributes']['class'][] = 'ax-drupal-search-form';
     return $form;
   }
 

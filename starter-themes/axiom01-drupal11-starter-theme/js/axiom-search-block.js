@@ -14,25 +14,25 @@
     }
 
     if (!results.length) {
-      container.innerHTML = '<p class="ax-search-block__empty">' + escapeHtml(emptyMessage) + '</p>';
+      container.innerHTML = '<p>' + escapeHtml(emptyMessage) + '</p>';
       return;
     }
 
     var items = results.map(function (result) {
       var label = escapeHtml(result.label);
       var value = escapeHtml(result.value);
-      return '<li class="ax-search-block__item"><a class="ax-search-block__link" href="' + value + '">' + label + '</a></li>';
+      return '<li><a href="' + value + '">' + label + '</a></li>';
     }).join('');
 
-    container.innerHTML = '<ul class="ax-search-block__list">' + items + '</ul>';
+    container.innerHTML = '<ul>' + items + '</ul>';
   }
 
   Drupal.behaviors.axiom01SearchBlock = {
     attach: function attach(context) {
       once('axiom01-search-block', '[data-axiom-search-block]', context).forEach(function (element) {
         var blockId = element.getAttribute('data-search-block-id');
-        var input = element.querySelector('.ax-search-block__input');
-        var output = element.querySelector('[data-axiom-search-results]');
+        var input = element.querySelector('[data-search-input]');
+        var output = element.querySelector('[data-search-results]');
         if (!blockId || !input || !output) {
           return;
         }

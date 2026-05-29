@@ -41,3 +41,9 @@ Priority is set for solo-maintainer sustainability and high leverage.
 - [ ] Introduce sample content/config bundle demonstrating a complete “contact + filters + accordion help panel” page using only Axiom01-ready Drupal structures.
 - [ ] Add validation steps (or snapshots) proving themed output for key Drupal core forms: user login, search, node edit, and theme settings.
 - [ ] Add region-level layout utility classes and documentation so sidebars, prefooter, and footer blocks preserve rhythm across all spacing-scale options.
+
+## Backport candidates to core Axiom01
+
+- [ ] Add a first-party semantic search pattern that supports configurable key/value JSON sources via data attributes (no class-heavy markup required).
+- [ ] Add docs guidance for platform integration hooks (`data-icon-set`, `data-character-set`) so downstream themes/apps can align with Axiom01 tokens without hard-coding class stacks.
+- [ ] Add “semantic-first integration” examples showing how framework styles can target native CMS classes (`.messages`, `.pager`, `.tabs`, form error wrappers) without BEM-style wrapper classes.

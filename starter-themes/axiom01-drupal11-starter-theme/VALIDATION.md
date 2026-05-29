@@ -10,6 +10,7 @@ Use this checklist whenever Axiom01 or the starter theme changes:
 - [ ] Default page load uses `data-theme="light"` and does not auto-switch to dark mode.
 - [ ] `system` color mode follows browser preference.
 - [ ] Palette/font/spacing/layout settings apply expected visual variables.
+- [ ] Icon-set and character-set settings apply expected HTML data attributes for theming/integration hooks.
 - [ ] Page template regions render without layout regressions.
 - [ ] Highlighted, breadcrumb, help, and sidebar regions render when blocks are assigned.
 - [ ] Drupal core forms (login/search/node edit) render with Axiom01 spacing, labels, and action button grouping.
@@ -23,5 +24,6 @@ Use this checklist whenever Axiom01 or the starter theme changes:
 - [ ] Contextual edit links appear on branding block and editable node/view output.
 - [ ] Status messages template uses accessible roles and semantics (`error` => alert/assertive).
 - [ ] `.form-item--error-message`, `.messages`, `.pager`, and `.tabs` inherit Axiom01 spacing/typography treatments without layout regressions.
+- [ ] Form and search templates remain semantic/minimal and still allow additional classes via preprocess/theme functions.
 - [ ] Axiom01 CSS/JS assets load correctly in Drupal 11.
 - [ ] Asset strategy toggle (`auto` / `local` / `package`) resolves to expected files with fallback behavior.

@@ -107,7 +107,7 @@ final class AxiomSearchBlock extends BlockBase {
     return [
       '#type' => 'container',
       '#attributes' => [
-        'class' => ['ax-search-block'],
+        'class' => ['search'],
         'data-axiom-search-block' => 'true',
         'data-search-block-id' => $search_block_id,
       ],
@@ -129,7 +129,7 @@ final class AxiomSearchBlock extends BlockBase {
         '#title' => $this->t('Search'),
         '#title_display' => 'invisible',
         '#attributes' => [
-          'class' => ['ax-search-block__input'],
+          'data-search-input' => 'true',
           'placeholder' => (string) ($this->configuration['search_placeholder'] ?: $this->t('Search...')),
           'autocomplete' => 'off',
         ],
@@ -137,8 +137,7 @@ final class AxiomSearchBlock extends BlockBase {
       'results' => [
         '#type' => 'container',
         '#attributes' => [
-          'class' => ['ax-search-block__results'],
-          'data-axiom-search-results' => 'true',
+          'data-search-results' => 'true',
           'aria-live' => 'polite',
         ],
       ],
@@ -186,6 +185,9 @@ final class AxiomSearchBlock extends BlockBase {
    * Determine whether an array uses non-sequential keys.
    */
   private function isAssociativeArray(array $array): bool {
+    if ($array === []) {
+      return FALSE;
+    }
     return array_keys($array) !== range(0, count($array) - 1);
   }
 

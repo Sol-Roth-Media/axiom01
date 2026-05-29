@@ -71,6 +71,8 @@ function axiom01_drupal11_preprocess_html(array &$variables): void {
   $attributes->setAttribute('data-font-heading', (string) ($config->get('heading_font') ?: 'inter'));
   $attributes->setAttribute('data-spacing-scale', (string) ($config->get('spacing_scale') ?: 'comfortable'));
   $attributes->setAttribute('data-layout-width', (string) ($config->get('layout_width') ?: 'standard'));
+  $attributes->setAttribute('data-icon-set', (string) ($config->get('icon_set') ?: 'none'));
+  $attributes->setAttribute('data-character-set', (string) ($config->get('character_set') ?: 'utf-8'));
   $attributes->addClass('axiom01-theme-ready');
   $variables['attributes'] = $attributes;
 
@@ -110,31 +112,18 @@ function axiom01_drupal11_preprocess_form(array &$variables): void {
  * Implements hook_preprocess_details().
  */
 function axiom01_drupal11_preprocess_details(array &$variables): void {
-  $attributes = $variables['attributes'] ?? [];
-  if (!$attributes instanceof Attribute) {
-    $attributes = new Attribute(is_array($attributes) ? $attributes : []);
+  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
+    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
   }
-  $attributes->addClass('ax-accordion', 'ax-accordion--drupal');
-  $variables['attributes'] = $attributes;
-
-  $summary_attributes = $variables['summary_attributes'] ?? [];
-  if (!$summary_attributes instanceof Attribute) {
-    $summary_attributes = new Attribute(is_array($summary_attributes) ? $summary_attributes : []);
-  }
-  $summary_attributes->addClass('ax-accordion__summary');
-  $variables['summary_attributes'] = $summary_attributes;
 }
 
 /**
  * Implements hook_preprocess_block().
  */
 function axiom01_drupal11_preprocess_block(array &$variables): void {
-  $attributes = $variables['attributes'] ?? [];
-  if (!$attributes instanceof Attribute) {
-    $attributes = new Attribute(is_array($attributes) ? $attributes : []);
+  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
+    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
   }
-  $attributes->addClass('ax-block');
-  $variables['attributes'] = $attributes;
 }
 
 /**
@@ -233,6 +222,31 @@ function axiom01_drupal11_form_system_theme_settings_alter(array &$form, FormSta
       'narrow' => t('Narrow (960px)'),
       'standard' => t('Standard (1200px)'),
       'wide' => t('Wide (1440px)'),
+    ],
+  ];
+
+  $form['axiom01_appearance']['icon_set'] = [
+    '#type' => 'select',
+    '#title' => t('Icon set'),
+    '#description' => t('Declare expected icon strategy for theme/component rendering conventions.'),
+    '#default_value' => $config->get('icon_set') ?: 'none',
+    '#options' => [
+      'none' => t('None / text-first'),
+      'emoji' => t('Emoji'),
+      'fontawesome' => t('Font Awesome'),
+      'material' => t('Material Symbols'),
+    ],
+  ];
+
+  $form['axiom01_appearance']['character_set'] = [
+    '#type' => 'select',
+    '#title' => t('Character set'),
+    '#description' => t('Declare expected content encoding for multilingual/content pipelines.'),
+    '#default_value' => $config->get('character_set') ?: 'utf-8',
+    '#options' => [
+      'utf-8' => t('UTF-8 (recommended)'),
+      'iso-8859-1' => t('ISO-8859-1'),
+      'windows-1252' => t('Windows-1252'),
     ],
   ];
 }

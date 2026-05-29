@@ -59,6 +59,8 @@ Theme settings now include:
 - **Body font** and **Heading font** selectors
 - **Spacing scale**: compact/comfortable/relaxed
 - **Layout width**: narrow/standard/wide
+- **Icon set strategy**: none/emoji/fontawesome/material
+- **Character set declaration**: utf-8/iso-8859-1/windows-1252
 
 ## Search blocks included
 
@@ -71,6 +73,8 @@ For the Axiom01 block, JSON accepts either:
 
 - Object map (`{"Label":"/path"}`)
 - Array of objects (`[{"title":"Label","url":"/path"}]`) with configurable label/value keys.
+
+Markup for the Axiom01 search block intentionally stays semantic/minimal and uses render-array attributes/data hooks so teams can add classes via preprocess/theme functions when needed.
 
 Branding options are enabled through core theme features:
 
