@@ -7,6 +7,7 @@
 
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Menu\MenuTreeParameters;
 
 /**
  * Resolve the selected Axiom01 asset strategy to a theme library.
@@ -28,6 +29,23 @@ function _axiom01_drupal11_resolve_assets_library(string $strategy): string {
     return 'axiom01_drupal11/axiom01_assets_local';
   }
 
+  /**
+   * Build a renderable menu tree for fallback navigation output.
+   */
+  function _axiom01_drupal11_build_menu_tree(string $menu_name): array {
+    $menu_tree = \Drupal::menuTree();
+    $parameters = (new MenuTreeParameters())
+      ->setMinDepth(1)
+      ->onlyEnabledLinks();
+    $tree = $menu_tree->load($menu_name, $parameters);
+    $manipulators = [
+      ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+      ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+    ];
+    $tree = $menu_tree->transform($tree, $manipulators);
+    return $menu_tree->build($tree);
+  }
+
   if ($package_assets_exist) {
     return 'axiom01_drupal11/axiom01_assets_package';
   }
@@ -39,15 +57,22 @@ function _axiom01_drupal11_resolve_assets_library(string $strategy): string {
  * Implements hook_preprocess_html().
  */
 function axiom01_drupal11_preprocess_html(array &$variables): void {
+  $config = \Drupal::config('axiom01_drupal11.settings');
   $attributes = $variables['attributes'] ?? [];
   if (!$attributes instanceof Attribute) {
     $attributes = new Attribute(is_array($attributes) ? $attributes : []);
   }
+  $color_mode = (string) ($config->get('color_mode') ?: 'light');
+  $initial_mode = $color_mode === 'dark' ? 'dark' : 'light';
+  $attributes->setAttribute('data-theme', $initial_mode);
+  $attributes->setAttribute('data-theme-mode', $color_mode);
+  $attributes->setAttribute('data-axiom-palette', (string) ($config->get('color_palette') ?: 'default'));
+  $attributes->setAttribute('data-font-body', (string) ($config->get('body_font') ?: 'inter'));
+  $attributes->setAttribute('data-font-heading', (string) ($config->get('heading_font') ?: 'inter'));
+  $attributes->setAttribute('data-spacing-scale', (string) ($config->get('spacing_scale') ?: 'comfortable'));
+  $attributes->setAttribute('data-layout-width', (string) ($config->get('layout_width') ?: 'standard'));
+  $attributes->addClass('axiom01-theme-ready');
   $variables['attributes'] = $attributes;
-  if (!$variables['attributes']->hasAttribute('data-theme')) {
-    $variables['attributes']->setAttribute('data-theme', 'light');
-  }
-  $variables['attributes']->addClass('axiom01-theme-ready');
 
   $body_attributes = $variables['body_attributes'] ?? [];
   if (!$body_attributes instanceof Attribute) {
@@ -56,7 +81,7 @@ function axiom01_drupal11_preprocess_html(array &$variables): void {
   $variables['body_attributes'] = $body_attributes;
   $variables['body_attributes']->addClass('axiom-body');
 
-  $strategy = (string) \Drupal::config('axiom01_drupal11.settings')->get('asset_strategy');
+  $strategy = (string) $config->get('asset_strategy');
   $variables['#attached']['library'][] = _axiom01_drupal11_resolve_assets_library($strategy);
 }
 
@@ -65,6 +90,8 @@ function axiom01_drupal11_preprocess_html(array &$variables): void {
  */
 function axiom01_drupal11_preprocess_page(array &$variables): void {
   $variables['ax_theme_name'] = 'Axiom01 Drupal 11';
+  $variables['ax_primary_menu_fallback'] = !empty($variables['page']['primary_menu']) ? [] : _axiom01_drupal11_build_menu_tree('main');
+  $variables['ax_secondary_menu_fallback'] = !empty($variables['page']['secondary_menu']) ? [] : _axiom01_drupal11_build_menu_tree('account');
 }
 
 /**
@@ -87,6 +114,82 @@ function axiom01_drupal11_form_system_theme_settings_alter(array &$form, FormSta
       'auto' => t('Auto (prefer package-managed, then local fallback)'),
       'local' => t('Local dist assets'),
       'package' => t('Package-managed copy'),
+    ],
+  ];
+
+  $form['axiom01_appearance'] = [
+    '#type' => 'details',
+    '#title' => t('Axiom01 appearance'),
+    '#open' => TRUE,
+  ];
+
+  $form['axiom01_appearance']['color_mode'] = [
+    '#type' => 'select',
+    '#title' => t('Color mode'),
+    '#description' => t('Choose default color mode for frontend rendering. System follows browser preference.'),
+    '#default_value' => $config->get('color_mode') ?: 'light',
+    '#options' => [
+      'light' => t('Light'),
+      'dark' => t('Dark'),
+      'system' => t('System preference'),
+    ],
+  ];
+
+  $form['axiom01_appearance']['color_palette'] = [
+    '#type' => 'select',
+    '#title' => t('Color palette'),
+    '#default_value' => $config->get('color_palette') ?: 'default',
+    '#options' => [
+      'default' => t('Default blue'),
+      'indigo' => t('Indigo'),
+      'emerald' => t('Emerald'),
+      'sunset' => t('Sunset'),
+    ],
+  ];
+
+  $form['axiom01_appearance']['body_font'] = [
+    '#type' => 'select',
+    '#title' => t('Body font'),
+    '#default_value' => $config->get('body_font') ?: 'inter',
+    '#options' => [
+      'inter' => t('Inter / sans-serif'),
+      'system' => t('System sans-serif'),
+      'serif' => t('Serif'),
+      'mono' => t('Monospace'),
+    ],
+  ];
+
+  $form['axiom01_appearance']['heading_font'] = [
+    '#type' => 'select',
+    '#title' => t('Heading font'),
+    '#default_value' => $config->get('heading_font') ?: 'inter',
+    '#options' => [
+      'inter' => t('Inter / sans-serif'),
+      'system' => t('System sans-serif'),
+      'serif' => t('Serif'),
+      'mono' => t('Monospace'),
+    ],
+  ];
+
+  $form['axiom01_appearance']['spacing_scale'] = [
+    '#type' => 'select',
+    '#title' => t('Spacing scale'),
+    '#default_value' => $config->get('spacing_scale') ?: 'comfortable',
+    '#options' => [
+      'compact' => t('Compact'),
+      'comfortable' => t('Comfortable'),
+      'relaxed' => t('Relaxed'),
+    ],
+  ];
+
+  $form['axiom01_appearance']['layout_width'] = [
+    '#type' => 'select',
+    '#title' => t('Layout width'),
+    '#default_value' => $config->get('layout_width') ?: 'standard',
+    '#options' => [
+      'narrow' => t('Narrow (960px)'),
+      'standard' => t('Standard (1200px)'),
+      'wide' => t('Wide (1440px)'),
     ],
   ];
 }

@@ -37,14 +37,34 @@ Then enable it in Appearance settings and clear caches.
 
 - Defaults to the **light** theme to match Axiom01 `index.html`.
 - Includes bundled local Axiom01 assets so no package install is required for first run.
-- Declares and renders standard Drupal page regions (highlighted, breadcrumb, help, content, sidebars, footer).
+- Declares and renders expanded Drupal page regions for block-heavy layouts and easier placement.
+- Supports primary and secondary navigation with fallback menu rendering when region blocks are not configured yet.
 - Front page fallback and status/system messages render correctly through normal Drupal blocks.
+- Keeps contextual edit affordances available in node/views/branding templates.
 
 If expected front-page text does not appear:
 
 1. Confirm **Page content** and **Status messages** blocks are placed.
 2. Ensure they are visible for your current theme and region assignments.
 3. Clear caches (`drush cr` or admin UI).
+
+## Theme settings (Appearance → Settings → Axiom01 Drupal 11)
+
+Theme settings now include:
+
+- **Asset strategy**: `auto`, `local`, `package`
+- **Color mode**: `light`, `dark`, `system`
+- **Color palette**: `default`, `indigo`, `emerald`, `sunset`
+- **Body font** and **Heading font** selectors
+- **Spacing scale**: compact/comfortable/relaxed
+- **Layout width**: narrow/standard/wide
+
+Branding options are enabled through core theme features:
+
+- Logo upload
+- Site name toggle
+- Site slogan/description toggle
+- Favicon support
 
 ## Axiom01 asset strategy switch
 

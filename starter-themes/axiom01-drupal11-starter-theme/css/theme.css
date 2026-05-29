@@ -3,28 +3,107 @@
   --ax-surface: #ffffff;
   --ax-text: #111827;
   --ax-border: rgba(17, 24, 39, 0.12);
+  --ax-font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ax-font-heading: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ax-max-width: 1200px;
 }
 
 :root[data-theme='light'] {
+  color-scheme: light;
   --ax-surface: #ffffff;
   --ax-text: #111827;
   --ax-border: rgba(17, 24, 39, 0.12);
 }
 
 :root[data-theme='dark'] {
+  color-scheme: dark;
   --ax-surface: #0f172a;
   --ax-text: #f8fafc;
   --ax-border: rgba(248, 250, 252, 0.18);
+}
+
+:root[data-axiom-palette='default'] {
+  --a-color-primary: #2563eb;
+}
+
+:root[data-axiom-palette='indigo'] {
+  --a-color-primary: #4f46e5;
+}
+
+:root[data-axiom-palette='emerald'] {
+  --a-color-primary: #059669;
+}
+
+:root[data-axiom-palette='sunset'] {
+  --a-color-primary: #ea580c;
+}
+
+:root[data-font-body='system'] {
+  --ax-font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+:root[data-font-body='serif'] {
+  --ax-font-body: "Lora", Georgia, Cambria, "Times New Roman", serif;
+}
+
+:root[data-font-body='mono'] {
+  --ax-font-body: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+:root[data-font-heading='system'] {
+  --ax-font-heading: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+:root[data-font-heading='serif'] {
+  --ax-font-heading: "Lora", Georgia, Cambria, "Times New Roman", serif;
+}
+
+:root[data-font-heading='mono'] {
+  --ax-font-heading: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+:root[data-spacing-scale='compact'] {
+  --a-space-unit: 0.875rem;
+}
+
+:root[data-spacing-scale='comfortable'] {
+  --a-space-unit: 1rem;
+}
+
+:root[data-spacing-scale='relaxed'] {
+  --a-space-unit: 1.125rem;
+}
+
+:root[data-layout-width='narrow'] {
+  --ax-max-width: 960px;
+}
+
+:root[data-layout-width='standard'] {
+  --ax-max-width: 1200px;
+}
+
+:root[data-layout-width='wide'] {
+  --ax-max-width: 1440px;
 }
 
 body.axiom-body {
   margin: 0;
   background: var(--ax-surface);
   color: var(--ax-text);
+  font-family: var(--ax-font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ax-font-heading);
 }
 
 .ax-layout {
-  max-width: 1200px;
+  max-width: var(--ax-max-width);
   margin: 0 auto;
   padding: 0 var(--a-space-m, 1rem);
 }
@@ -35,4 +114,16 @@ body.axiom-body {
   justify-content: flex-end;
   padding: var(--a-space-xs, 0.25rem) 0;
   border-bottom: 1px solid var(--ax-border);
+}
+
+.ax-footer-grid {
+  display: grid;
+  gap: var(--a-space-m, 1rem);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 900px) {
+  .ax-footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
