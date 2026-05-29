@@ -45,5 +45,6 @@ Priority is set for solo-maintainer sustainability and high leverage.
 ## Backport candidates to core Axiom01
 
 - [ ] Add a first-party semantic search pattern that supports configurable key/value JSON sources via data attributes (no class-heavy markup required).
-- [ ] Add docs guidance for platform integration hooks (`data-icon-set`, `data-character-set`) so downstream themes/apps can align with Axiom01 tokens without hard-coding class stacks.
-- [ ] Add “semantic-first integration” examples showing how framework styles can target native CMS classes (`.messages`, `.pager`, `.tabs`, form error wrappers) without BEM-style wrapper classes.
+- [x] Add docs guidance for platform integration hooks (`data-icon-set`, `data-character-set`) so downstream themes/apps can align with Axiom01 tokens without hard-coding class stacks.
+- [x] Add “semantic-first integration” examples showing how framework styles can target native CMS classes (`.messages`, `.pager`, `.tabs`, form error wrappers) without BEM-style wrapper classes.
+- [x] Backport CMS integration styles into core Axiom01 CSS for Drupal progress/throbber, file upload widgets, and generic field widget/formatter hooks.

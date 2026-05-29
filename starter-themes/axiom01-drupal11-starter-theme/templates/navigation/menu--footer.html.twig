@@ -5,17 +5,12 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul{{ attributes.addClass('footer-links') }}>
+      <ul{{ attributes }}>
     {% else %}
-      <ul class="footer-links-submenu">
+      <ul>
     {% endif %}
     {% for item in items %}
-      {% set item_classes = [
-        item.is_expanded ? 'menu-item--expanded',
-        item.is_collapsed ? 'menu-item--collapsed',
-        item.in_active_trail ? 'menu-item--active-trail'
-      ] %}
-      <li{{ item.attributes.addClass(item_classes) }}>
+      <li{{ item.attributes }}>
         {{ link(item.title, item.url) }}
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}

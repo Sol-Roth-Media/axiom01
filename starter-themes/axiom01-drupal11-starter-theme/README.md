@@ -42,6 +42,18 @@ Then enable it in Appearance settings and clear caches.
 - Supports primary and secondary navigation with fallback menu rendering when region blocks are not configured yet.
 - Front page fallback and status/system messages render correctly through normal Drupal blocks.
 - Keeps contextual edit affordances available in node/views/branding templates.
+- Reduces custom/BEM-style template class output and relies on semantic structure + core Drupal classes where possible.
+- Uses core Axiom01 CMS integration hooks for progress indicators, tabs, pager variants, exposed filters, messages, inline errors, and file upload widgets.
+
+## CMS integration hooks backported to Axiom01 core
+
+The starter theme now consumes framework-level hooks in `css/axiom.css` / `css/axiom.min.css` for:
+
+- Drupal message, tab, pager, and exposed-form outputs.
+- Ajax/throbber and upload progress indicators.
+- Inline form error wrappers and errored field states.
+- Native file inputs, managed-file widgets, and file list presentation.
+- Generic field widget/formatter wrappers (`field--widget-*`, `field--formatter-*`) used by Drupal core and common contributed modules.
 
 If expected front-page text does not appear:
 
