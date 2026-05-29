@@ -3,6 +3,20 @@
 
 A robust testing strategy is crucial for maintaining the quality, reliability, and accessibility of the Axiom01 UI framework. This document outlines recommended approaches for testing various aspects of the framework.
 
+## Default maintenance lane (current repo standard)
+
+For day-to-day maintenance and release gating, use:
+
+```bash
+npm test
+```
+
+This command runs:
+
+1. `scripts/pre_release_audit.py`
+2. `scripts/critical_interaction_smoke.py`
+3. `scripts/accessibility_smoke.py`
+
 ## 1. Unit Testing (JavaScript Components)
 
 Unit tests focus on individual JavaScript functions, classes, or modules in isolation.

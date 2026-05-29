@@ -284,3 +284,69 @@ Accessibility is not optional.
   justify-content: flex-end;
 }
 ```
+
+## Form Group Pattern
+```html
+<!-- ✅ CORRECT: semantic fieldset with one root class -->
+<fieldset class="form-group">
+  <legend>Contact Preferences</legend>
+
+  <label for="email">Email</label>
+  <input id="email" type="email" required aria-describedby="email-help">
+  <small id="email-help">We'll only send product updates.</small>
+
+  <label for="frequency">Frequency</label>
+  <select id="frequency">
+    <option>Weekly</option>
+    <option>Monthly</option>
+  </select>
+</fieldset>
+```
+```css
+.form-group {
+  display: grid;
+  gap: var(--a-space-s);
+  padding: var(--a-space-l);
+  border: 1px solid var(--a-color-outline);
+  border-radius: var(--a-border-radius-medium);
+}
+
+.form-group legend {
+  font-weight: var(--a-font-weight-bold);
+  padding: 0 var(--a-space-xs);
+}
+
+.form-group small {
+  color: var(--a-color-on-surface-variant);
+}
+```
+
+## Tooltip Pattern
+```html
+<!-- ✅ CORRECT: one root class + semantic role + loader hook -->
+<div class="tooltip top" data-component="tooltip">
+  <button class="tooltip-trigger" aria-describedby="save-tip">
+    Save
+  </button>
+  <div id="save-tip" role="tooltip" aria-hidden="true">
+    Saves your changes immediately.
+  </div>
+</div>
+```
+```css
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip [role="tooltip"] {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.tooltip.is-visible [role="tooltip"] {
+  opacity: 1;
+  visibility: visible;
+}
+```
