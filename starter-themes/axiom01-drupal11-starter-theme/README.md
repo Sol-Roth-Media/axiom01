@@ -1,18 +1,20 @@
-# Axiom01 Drupal 11 Starter Theme Scaffold
+# Axiom01 Drupal 11 Starter Theme
 
-This directory is a bootstrap-ready scaffold for the planned `axiom01-drupal11-starter-theme` repository.
+This directory is a ready-to-install Drupal 11 custom theme with bundled Axiom01 assets and sane defaults.
 
 ## Goal
 
 Provide a production-oriented Drupal 11 starter theme that uses Axiom01 tokens, base styles, and component patterns while staying maintainable for a solo developer + AI agents.
 
-## Included scaffold
+## Included
 
 - Drupal 11 theme metadata and libraries
 - Core layout templates (`page`, `node`, `views`, status messages)
+- Form wrappers for `form-element`, `details`, and `fieldset` with Axiom01-friendly anatomy
 - Main/footer/utility menu templates
 - Axiom01 component partials for Twig composition
 - Compatibility and upgrade policy docs
+- Bundled `dist/css/axiom.min.css` and `dist/js/axiom.min.js` for out-of-the-box usage
 - Cross-repo validation checklist
 
 ## How to extract into dedicated repository
@@ -30,7 +32,68 @@ Place this theme under your Drupal installation:
 web/themes/custom/axiom01_drupal11
 ```
 
-Then enable it in Appearance settings.
+Then enable it in Appearance settings and clear caches.
+
+## Good defaults (out of the box)
+
+- Defaults to the **light** theme to match Axiom01 `index.html`.
+- Includes bundled local Axiom01 assets so no package install is required for first run.
+- Declares and renders expanded Drupal page regions for block-heavy layouts and easier placement.
+- Supports primary and secondary navigation with fallback menu rendering when region blocks are not configured yet.
+- Front page fallback and status/system messages render correctly through normal Drupal blocks.
+- Keeps contextual edit affordances available in node/views/branding templates.
+- Reduces custom/BEM-style template class output and relies on semantic structure + core Drupal classes where possible.
+- Uses core Axiom01 CMS integration hooks for progress indicators, tabs, pager variants, exposed filters, messages, inline errors, and file upload widgets.
+
+## CMS integration hooks backported to Axiom01 core
+
+The starter theme now consumes framework-level hooks in `css/axiom.css` / `css/axiom.min.css` for:
+
+- Drupal message, tab, pager, and exposed-form outputs.
+- Ajax/throbber and upload progress indicators.
+- Inline form error wrappers and errored field states.
+- Native file inputs, managed-file widgets, and file list presentation.
+- Generic field widget/formatter wrappers (`field--widget-*`, `field--formatter-*`) used by Drupal core and common contributed modules.
+
+If expected front-page text does not appear:
+
+1. Confirm **Page content** and **Status messages** blocks are placed.
+2. Ensure they are visible for your current theme and region assignments.
+3. Clear caches (`drush cr` or admin UI).
+
+## Theme settings (Appearance → Settings → Axiom01 Drupal 11)
+
+Theme settings now include:
+
+- **Asset strategy**: `auto`, `local`, `package`
+- **Color mode**: `light`, `dark`, `system`
+- **Color palette**: `default`, `indigo`, `emerald`, `sunset`
+- **Body font** and **Heading font** selectors
+- **Spacing scale**: compact/comfortable/relaxed
+- **Layout width**: narrow/standard/wide
+- **Icon set strategy**: none/emoji/fontawesome/material
+- **Character set declaration**: utf-8/iso-8859-1/windows-1252
+
+## Search blocks included
+
+The starter theme now ships two placeable blocks:
+
+- **Axiom01 Search (JSON)**: lightweight client-side search with configurable JSON results and configurable key/value mapping.
+- **Drupal Default Search**: wrapper around Drupal core Search block form.
+
+For the Axiom01 block, JSON accepts either:
+
+- Object map (`{"Label":"/path"}`)
+- Array of objects (`[{"title":"Label","url":"/path"}]`) with configurable label/value keys.
+
+Markup for the Axiom01 search block intentionally stays semantic/minimal and uses render-array attributes/data hooks so teams can add classes via preprocess/theme functions when needed.
+
+Branding options are enabled through core theme features:
+
+- Logo upload
+- Site name toggle
+- Site slogan/description toggle
+- Favicon support
 
 ## Axiom01 asset strategy switch
 
@@ -41,3 +104,9 @@ Theme settings now expose an **Asset strategy** selector:
 - **Package-managed copy**: targets `vendor/axiom01/dist/*` and safely falls back to local `dist/*` if vendor files are missing.
 
 When changing strategy, clear Drupal caches and re-run `VALIDATION.md` to confirm CSS/JS loading.
+
+### Which asset strategy should I choose?
+
+- **Auto**: best default for most teams; it gives resilient fallback behavior across local/dev/prod.
+- **Local**: best when distributing a standalone theme package that must work without Composer vendor assets.
+- **Package**: best when your deployment pipeline consistently installs and updates `vendor/axiom01` as the source of truth.

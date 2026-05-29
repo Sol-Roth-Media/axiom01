@@ -1,0 +1,22 @@
+{# Axiom01 details wrapper for consistent accordion styling in Drupal forms. #}
+<details{{ attributes }}>
+  {% if title %}
+    <summary{{ summary_attributes }}>{{ title }}</summary>
+  {% endif %}
+  <div>
+    {% if errors %}
+      <div class="form-item--error-message" role="alert">{{ errors }}</div>
+    {% endif %}
+
+    {% if description and description_display in ['before', 'invisible'] %}
+      <div class="description">{{ description }}</div>
+    {% endif %}
+
+    {{ children }}
+    {{ value }}
+
+    {% if description and description_display == 'after' %}
+      <div class="description">{{ description }}</div>
+    {% endif %}
+  </div>
+</details>

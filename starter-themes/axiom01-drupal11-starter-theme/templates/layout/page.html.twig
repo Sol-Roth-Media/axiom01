@@ -4,12 +4,23 @@
  * Default page template for Axiom01 Drupal 11 starter theme.
  */
 #}
+{% if page.top_bar %}
+  <div class="ax-layout ax-top-bar">
+    {{ page.top_bar }}
+  </div>
+{% endif %}
+
 <header class="main" data-component="mobile-navbar">
   <div class="ax-layout">
     {{ page.header }}
     <nav aria-label="Primary">
-      {{ page.primary_menu }}
+      {{ page.primary_menu|default(ax_primary_menu_fallback) }}
     </nav>
+    {% if page.secondary_menu or ax_secondary_menu_fallback %}
+      <nav aria-label="Secondary">
+        {{ page.secondary_menu|default(ax_secondary_menu_fallback) }}
+      </nav>
+    {% endif %}
   </div>
 </header>
 
@@ -19,12 +30,73 @@
   </div>
 {% endif %}
 
+{% if page.highlighted %}
+  <div class="ax-layout">
+    {{ page.highlighted }}
+  </div>
+{% endif %}
+
+{% if page.breadcrumb %}
+  <div class="ax-layout">
+    {{ page.breadcrumb }}
+  </div>
+{% endif %}
+
+{% if page.help %}
+  <div class="ax-layout">
+    {{ page.help }}
+  </div>
+{% endif %}
+
+{% if page.hero %}
+  <div class="ax-layout">
+    {{ page.hero }}
+  </div>
+{% endif %}
+
+{% if page.content_above %}
+  <div class="ax-layout">
+    {{ page.content_above }}
+  </div>
+{% endif %}
+
 <main class="ax-layout" role="main">
+  {% if page.sidebar_first %}
+    <aside role="complementary">
+      {{ page.sidebar_first }}
+    </aside>
+  {% endif %}
+
   {{ page.content }}
+
+  {% if page.sidebar_second %}
+    <aside role="complementary">
+      {{ page.sidebar_second }}
+    </aside>
+  {% endif %}
 </main>
+
+{% if page.content_below %}
+  <div class="ax-layout">
+    {{ page.content_below }}
+  </div>
+{% endif %}
+
+{% if page.prefooter %}
+  <div class="ax-layout">
+    {{ page.prefooter }}
+  </div>
+{% endif %}
 
 <footer class="main">
   <div class="ax-layout">
+    {% if page.footer_first or page.footer_second or page.footer_third %}
+      <div class="ax-footer-grid">
+        <div>{{ page.footer_first }}</div>
+        <div>{{ page.footer_second }}</div>
+        <div>{{ page.footer_third }}</div>
+      </div>
+    {% endif %}
     {% if page.footer_menu %}
       <nav aria-label="Footer">
         {{ page.footer_menu }}
@@ -33,3 +105,9 @@
     {{ page.footer }}
   </div>
 </footer>
+
+{% if page.bottom %}
+  <div class="ax-layout">
+    {{ page.bottom }}
+  </div>
+{% endif %}

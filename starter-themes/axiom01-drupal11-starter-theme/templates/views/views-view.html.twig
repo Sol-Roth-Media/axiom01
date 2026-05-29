@@ -1,9 +1,29 @@
 {# Views wrapper template. #}
-<section{{ attributes.addClass('view-wrapper') }}>
+<section{{ attributes.addClass('view') }}>
+  {{ title_prefix }}
   {% if title %}
     <h2>{{ title }}</h2>
   {% endif %}
-
-  {{ rows }}
+  {{ title_suffix }}
+  {% if header %}
+    <header>
+      {{ header }}
+    </header>
+  {% endif %}
+  {{ exposed }}
+  {{ attachment_before }}
+  {% if rows %}
+    {{ rows }}
+  {% elseif empty %}
+    {{ empty }}
+  {% endif %}
   {{ pager }}
+  {{ attachment_after }}
+  {{ more }}
+  {% if footer %}
+    <footer>
+      {{ footer }}
+    </footer>
+  {% endif %}
+  {{ feed_icons }}
 </section>

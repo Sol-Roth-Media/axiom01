@@ -1,9 +1,12 @@
 {# Form element wrapper keeping Drupal form rendering compatible with Axiom01 defaults. #}
-<div{{ attributes.addClass('form-item') }}>
+<div{{ attributes }}>
   {% if label_display != 'invisible' %}
     {{ label }}
   {% endif %}
   {{ children }}
+  {% if errors %}
+    <div class="form-item--error-message" role="alert">{{ errors }}</div>
+  {% endif %}
   {% if description.content %}
     <small>{{ description.content }}</small>
   {% endif %}
