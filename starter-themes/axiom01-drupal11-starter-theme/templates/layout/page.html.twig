@@ -7,9 +7,11 @@
 <header class="main" data-component="mobile-navbar">
   <div class="ax-layout">
     {{ page.header }}
-    <nav aria-label="Primary">
-      {{ page.primary_menu }}
-    </nav>
+    {% if page.primary_menu %}
+      <nav aria-label="Primary">
+        {{ page.primary_menu }}
+      </nav>
+    {% endif %}
   </div>
 </header>
 
@@ -19,9 +21,51 @@
   </div>
 {% endif %}
 
+{% if page.highlighted %}
+  <div class="ax-layout">
+    {{ page.highlighted }}
+  </div>
+{% endif %}
+
+{% if page.breadcrumb %}
+  <div class="ax-layout">
+    {{ page.breadcrumb }}
+  </div>
+{% endif %}
+
+{% if page.help %}
+  <div class="ax-layout">
+    {{ page.help }}
+  </div>
+{% endif %}
+
+{% if page.content_above %}
+  <div class="ax-layout">
+    {{ page.content_above }}
+  </div>
+{% endif %}
+
 <main class="ax-layout" role="main">
+  {% if page.sidebar_first %}
+    <aside role="complementary">
+      {{ page.sidebar_first }}
+    </aside>
+  {% endif %}
+
   {{ page.content }}
+
+  {% if page.sidebar_second %}
+    <aside role="complementary">
+      {{ page.sidebar_second }}
+    </aside>
+  {% endif %}
 </main>
+
+{% if page.content_below %}
+  <div class="ax-layout">
+    {{ page.content_below }}
+  </div>
+{% endif %}
 
 <footer class="main">
   <div class="ax-layout">

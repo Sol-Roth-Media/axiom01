@@ -44,7 +44,18 @@ function axiom01_drupal11_preprocess_html(array &$variables): void {
     $attributes = new Attribute(is_array($attributes) ? $attributes : []);
   }
   $variables['attributes'] = $attributes;
-  $variables['attributes']->addClass('axiom-body');
+  if (!$variables['attributes']->hasAttribute('data-theme')) {
+    $variables['attributes']->setAttribute('data-theme', 'light');
+  }
+  $variables['attributes']->addClass('axiom01-theme-ready');
+
+  $body_attributes = $variables['body_attributes'] ?? [];
+  if (!$body_attributes instanceof Attribute) {
+    $body_attributes = new Attribute(is_array($body_attributes) ? $body_attributes : []);
+  }
+  $variables['body_attributes'] = $body_attributes;
+  $variables['body_attributes']->addClass('axiom-body');
+
   $strategy = (string) \Drupal::config('axiom01_drupal11.settings')->get('asset_strategy');
   $variables['#attached']['library'][] = _axiom01_drupal11_resolve_assets_library($strategy);
 }
