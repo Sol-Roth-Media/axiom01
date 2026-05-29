@@ -15,6 +15,8 @@ Use this checklist whenever Axiom01 or the starter theme changes:
 - [ ] Drupal core forms (login/search/node edit) render with Axiom01 spacing, labels, and action button grouping.
 - [ ] Drupal `details`/accordion form elements render with Axiom01 accordion styling and clear open/closed state affordances.
 - [ ] Drupal `fieldset` groups render with Axiom01 legend, border, and error-state treatments.
+- [ ] Axiom01 Search (JSON) block filters configured key/value results and links correctly.
+- [ ] Drupal Default Search block renders core search form when Search module is enabled and shows fallback notice when disabled.
 - [ ] Front-page fallback content/message appears when no front page content exists.
 - [ ] Node template renders title/content/meta consistently.
 - [ ] Views wrapper template remains stable.

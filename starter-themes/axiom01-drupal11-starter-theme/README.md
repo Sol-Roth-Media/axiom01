@@ -60,6 +60,18 @@ Theme settings now include:
 - **Spacing scale**: compact/comfortable/relaxed
 - **Layout width**: narrow/standard/wide
 
+## Search blocks included
+
+The starter theme now ships two placeable blocks:
+
+- **Axiom01 Search (JSON)**: lightweight client-side search with configurable JSON results and configurable key/value mapping.
+- **Drupal Default Search**: wrapper around Drupal core Search block form.
+
+For the Axiom01 block, JSON accepts either:
+
+- Object map (`{"Label":"/path"}`)
+- Array of objects (`[{"title":"Label","url":"/path"}]`) with configurable label/value keys.
+
 Branding options are enabled through core theme features:
 
 - Logo upload
