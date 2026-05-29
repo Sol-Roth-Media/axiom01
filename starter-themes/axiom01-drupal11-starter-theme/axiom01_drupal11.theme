@@ -95,6 +95,49 @@ function axiom01_drupal11_preprocess_page(array &$variables): void {
 }
 
 /**
+ * Implements hook_preprocess_form().
+ */
+function axiom01_drupal11_preprocess_form(array &$variables): void {
+  $attributes = $variables['attributes'] ?? [];
+  if (!$attributes instanceof Attribute) {
+    $attributes = new Attribute(is_array($attributes) ? $attributes : []);
+  }
+  $attributes->addClass('axiom-form');
+  $variables['attributes'] = $attributes;
+}
+
+/**
+ * Implements hook_preprocess_details().
+ */
+function axiom01_drupal11_preprocess_details(array &$variables): void {
+  $attributes = $variables['attributes'] ?? [];
+  if (!$attributes instanceof Attribute) {
+    $attributes = new Attribute(is_array($attributes) ? $attributes : []);
+  }
+  $attributes->addClass('ax-accordion', 'ax-accordion--drupal');
+  $variables['attributes'] = $attributes;
+
+  $summary_attributes = $variables['summary_attributes'] ?? [];
+  if (!$summary_attributes instanceof Attribute) {
+    $summary_attributes = new Attribute(is_array($summary_attributes) ? $summary_attributes : []);
+  }
+  $summary_attributes->addClass('ax-accordion__summary');
+  $variables['summary_attributes'] = $summary_attributes;
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function axiom01_drupal11_preprocess_block(array &$variables): void {
+  $attributes = $variables['attributes'] ?? [];
+  if (!$attributes instanceof Attribute) {
+    $attributes = new Attribute(is_array($attributes) ? $attributes : []);
+  }
+  $attributes->addClass('ax-block');
+  $variables['attributes'] = $attributes;
+}
+
+/**
  * Implements hook_form_system_theme_settings_alter().
  */
 function axiom01_drupal11_form_system_theme_settings_alter(array &$form, FormStateInterface $form_state): void {
@@ -108,7 +151,7 @@ function axiom01_drupal11_form_system_theme_settings_alter(array &$form, FormSta
   $form['axiom01_assets']['asset_strategy'] = [
     '#type' => 'select',
     '#title' => t('Asset strategy'),
-    '#description' => t('Auto prefers package-managed assets when present and otherwise falls back to local dist assets.'),
+    '#description' => t('Auto prefers package-managed assets when present and otherwise falls back to local dist assets. Use auto for most sites, local when packaging a self-contained theme release, and package when your deployment pipeline always installs vendor assets from Axiom01 updates.'),
     '#default_value' => $config->get('asset_strategy') ?: 'auto',
     '#options' => [
       'auto' => t('Auto (prefer package-managed, then local fallback)'),

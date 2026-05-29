@@ -75,3 +75,9 @@ Theme settings now expose an **Asset strategy** selector:
 - **Package-managed copy**: targets `vendor/axiom01/dist/*` and safely falls back to local `dist/*` if vendor files are missing.
 
 When changing strategy, clear Drupal caches and re-run `VALIDATION.md` to confirm CSS/JS loading.
+
+### Which asset strategy should I choose?
+
+- **Auto**: best default for most teams; it gives resilient fallback behavior across local/dev/prod.
+- **Local**: best when distributing a standalone theme package that must work without Composer vendor assets.
+- **Package**: best when your deployment pipeline consistently installs and updates `vendor/axiom01` as the source of truth.

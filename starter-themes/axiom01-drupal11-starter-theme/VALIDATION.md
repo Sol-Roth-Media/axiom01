@@ -12,6 +12,8 @@ Use this checklist whenever Axiom01 or the starter theme changes:
 - [ ] Palette/font/spacing/layout settings apply expected visual variables.
 - [ ] Page template regions render without layout regressions.
 - [ ] Highlighted, breadcrumb, help, and sidebar regions render when blocks are assigned.
+- [ ] Drupal core forms (login/search/node edit) render with Axiom01 spacing, labels, and action button grouping.
+- [ ] Drupal `details`/accordion form elements render with Axiom01 accordion styling and clear open/closed state affordances.
 - [ ] Front-page fallback content/message appears when no front page content exists.
 - [ ] Node template renders title/content/meta consistently.
 - [ ] Views wrapper template remains stable.

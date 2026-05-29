@@ -1,10 +1,16 @@
 {# Form element wrapper keeping Drupal form rendering compatible with Axiom01 defaults. #}
-<div{{ attributes.addClass('form-item') }}>
+{% set axiom_form_classes = [
+  'form-item',
+  'ax-form-item',
+  errors ? 'ax-form-item--error',
+  disabled ? 'ax-form-item--disabled',
+] %}
+<div{{ attributes.addClass(axiom_form_classes) }}>
   {% if label_display != 'invisible' %}
     {{ label }}
   {% endif %}
   {{ children }}
   {% if description.content %}
-    <small>{{ description.content }}</small>
+    <small class="ax-form-item__description">{{ description.content }}</small>
   {% endif %}
 </div>

@@ -32,3 +32,12 @@ Priority is set for solo-maintainer sustainability and high leverage.
 - [x] Continued P1 with explicit light/dark token overrides in `css/theme.css`.
 - [x] Completed asset strategy switch with auto/package/local selection and fallback docs.
 - [x] Added expanded region map, menu fallback rendering, contextual-link-friendly templates, and appearance config controls.
+
+## New in-depth TODO (next wave)
+
+- [ ] Add dedicated Twig overrides for `details.html.twig` and `fieldset.html.twig` to enforce Axiom01 accordion/fieldset anatomy consistently in admin and frontend forms.
+- [ ] Add visual consistency styles for Drupal-specific classes (`.form-item--error-message`, `.messages`, `.pager`, `.tabs`) so core structures inherit Axiom01 spacing and typography defaults.
+- [ ] Add cross-browser focus/hover checks for form controls, including high-contrast mode and forced-colors accessibility scenarios.
+- [ ] Introduce sample content/config bundle demonstrating a complete “contact + filters + accordion help panel” page using only Axiom01-ready Drupal structures.
+- [ ] Add validation steps (or snapshots) proving themed output for key Drupal core forms: user login, search, node edit, and theme settings.
+- [ ] Add region-level layout utility classes and documentation so sidebars, prefooter, and footer blocks preserve rhythm across all spacing-scale options.
