@@ -29,6 +29,17 @@
    - Remove selectors that exist only to support avoidable helper classes.
    - Prefer element/context selectors for the demo site when they can stay stable.
 
+## Solo-maintainer scope freeze for major release
+
+- Core supported set and stable surface are now documented in:
+  - `/tmp/workspace/Sol-Roth-Media/axiom01/docs/MAJOR_RELEASE_SCOPE.md`
+- AI-agent maintenance workflow (triage + DoD + cadence) is now documented in:
+  - `/tmp/workspace/Sol-Roth-Media/axiom01/docs/MAINTENANCE_WORKFLOW.md`
+- Drupal 11 starter-theme bootstrap scaffold exists in:
+  - `/tmp/workspace/Sol-Roth-Media/axiom01/starter-themes/axiom01-drupal11-starter-theme/`
+
+This release should only graduate components and APIs that are feasible to sustain by one developer assisted by AI agents.
+
 ## What has been started
 - This audit has been captured here.
 - Completed in this pass:
@@ -54,4 +65,3 @@
   - A broader CSS pass to remove selectors that only exist for temporary helpers or one-off samples.
   - Cleanup of legacy per-page `<style>` blocks in component pages where demo-only body/layout rules still duplicate framework/doc CSS.
   - Continue cleanup of docs pages that still include large legacy commented sidebar/template blocks and other pre-release scaffolding.
-

@@ -10,8 +10,8 @@ Use this checklist before creating the release tag.
 
 ## 2) Automated local checks
 
-- [ ] Pre-release audit passes:
-  - `npm test`
+- [ ] Unified quality lane passes:
+  - `npm test` (pre-release audit + critical interactions + accessibility smoke checks)
 - [ ] Release artifact build passes:
   - `npm run build`
 - [ ] Packaging dry-run passes:
@@ -77,4 +77,3 @@ Use this checklist before creating the release tag.
 - [ ] Engineering sign-off
 - [ ] Docs/UI sign-off
 - [ ] Release owner sign-off
-

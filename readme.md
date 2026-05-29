@@ -90,6 +90,12 @@ Run the local pre-release audit:
 npm test
 ```
 
+`npm test` is the single maintenance quality lane and runs:
+
+1. pre-release audit,
+2. critical interaction smoke checks,
+3. accessibility smoke checks.
+
 Build release artifacts expected by release automation:
 
 ```bash
@@ -109,6 +115,9 @@ This generates:
 - `AXIOM01_STYLING_GUIDE.md`: styling philosophy and conventions.
 - `FIRST_MAJOR_RELEASE_AUDIT.md`: release hardening checklist and cleanup status.
 - `TESTING.md`: recommended testing strategy (unit/integration/visual/accessibility).
+- `docs/MAJOR_RELEASE_SCOPE.md`: major-release core supported set and stable surface.
+- `docs/MAINTENANCE_WORKFLOW.md`: triage rubric, DoD checklists, and release cadence.
+- `starter-themes/axiom01-drupal11-starter-theme/`: bootstrap scaffold for dedicated Drupal 11 starter-theme repo.
 
 ## First release readiness (current focus)
 
