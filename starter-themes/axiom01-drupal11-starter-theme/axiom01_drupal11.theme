@@ -10,6 +10,23 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
 
 /**
+ * Build a renderable menu tree for fallback navigation output.
+ */
+function _axiom01_drupal11_build_menu_tree(string $menu_name): array {
+  $menu_tree = \Drupal::menuTree();
+  $parameters = (new MenuTreeParameters())
+    ->setMinDepth(1)
+    ->onlyEnabledLinks();
+  $tree = $menu_tree->load($menu_name, $parameters);
+  $manipulators = [
+    ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+    ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+  ];
+  $tree = $menu_tree->transform($tree, $manipulators);
+  return $menu_tree->build($tree);
+}
+
+/**
  * Resolve the selected Axiom01 asset strategy to a theme library.
  */
 function _axiom01_drupal11_resolve_assets_library(string $strategy): string {
@@ -27,23 +44,6 @@ function _axiom01_drupal11_resolve_assets_library(string $strategy): string {
 
   if ($strategy === 'local') {
     return 'axiom01_drupal11/axiom01_assets_local';
-  }
-
-  /**
-   * Build a renderable menu tree for fallback navigation output.
-   */
-  function _axiom01_drupal11_build_menu_tree(string $menu_name): array {
-    $menu_tree = \Drupal::menuTree();
-    $parameters = (new MenuTreeParameters())
-      ->setMinDepth(1)
-      ->onlyEnabledLinks();
-    $tree = $menu_tree->load($menu_name, $parameters);
-    $manipulators = [
-      ['callable' => 'menu.default_tree_manipulators:checkAccess'],
-      ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
-    ];
-    $tree = $menu_tree->transform($tree, $manipulators);
-    return $menu_tree->build($tree);
   }
 
   if ($package_assets_exist) {
