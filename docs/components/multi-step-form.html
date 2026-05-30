@@ -23,17 +23,17 @@
                 <li><a href="../components-overview.html">Documentation</a></li>
             </ul>
             <div class="actions">
-                <button class="search toggle" aria-label="Open Search">
+                <button class="search-toggle" aria-label="Open Search">
                     <i class="fas fa-search" aria-hidden="true"></i>
                 </button>
                 <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
                     <i class="fab fa-github" aria-hidden="true"></i>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
+                <button class="menu-toggle" aria-label="Toggle Menu">
                     <i class="fas fa-bars" aria-hidden="true"></i>
                 </button>
             </div>
@@ -42,7 +42,7 @@
 
 
     <main class="content">
-        <section class="hero small">
+        <section class="hero-compact">
             <h1 class="doc-title">Multi-Step Form Component</h1>
             <p class="doc-description">Axiom01 provides a flexible structure and styling for creating multi-step forms, guiding users through complex data entry processes with clear progress indication and navigation.</p>
         </section>
@@ -52,13 +52,13 @@
             <div class="example">
                 <div class="multi-step-form-container">
                     <div class="progress-indicator">
-                        <div class="step active">1</div>
+                        <div class="step" data-state="active">1</div>
                         <div class="step">2</div>
                         <div class="step">3</div>
                         <div class="step">4</div>
                     </div>
                     <form class="multi-step-form">
-                        <div class="form-step active" data-step="1">
+                        <div class="form-step" data-step="1" data-state="active">
                             <h3>Step 1: Personal Information</h3>
                             <label for="firstName">First Name</label>
                             <input type="text" id="firstName" placeholder="John">
@@ -66,7 +66,7 @@
                             <label for="lastName">Last Name</label>
                             <input type="text" id="lastName" placeholder="Doe">
 
-                            <button type="button" class="button primary next-step">Next</button>
+                            <button type="button" class="button" data-tone="primary" data-action="next-step">Next</button>
                         </div>
                         <div class="form-step" data-step="2">
                             <h3>Step 2: Contact Details</h3>
@@ -77,8 +77,8 @@
                             <input type="tel" id="phone" placeholder="123-456-7890">
 
                             <div class="form-actions">
-                                <button type="button" class="button secondary prev-step">Previous</button>
-                                <button type="button" class="button primary next-step">Next</button>
+                                <button type="button" class="button" data-tone="secondary" data-action="prev-step">Previous</button>
+                                <button type="button" class="button" data-tone="primary" data-action="next-step">Next</button>
                             </div>
                         </div>
                         <div class="form-step" data-step="3">
@@ -90,8 +90,8 @@
                             <input type="text" id="city" placeholder="Anytown">
 
                             <div class="form-actions">
-                                <button type="button" class="button secondary prev-step">Previous</button>
-                                <button type="button" class="button primary next-step">Next</button>
+                                <button type="button" class="button" data-tone="secondary" data-action="prev-step">Previous</button>
+                                <button type="button" class="button" data-tone="primary" data-action="next-step">Next</button>
                             </div>
                         </div>
                         <div class="form-step" data-step="4">
@@ -103,8 +103,8 @@
                                 <p><strong>Address:</strong> <span id="review-address"></span></p>
                             </div>
                             <div class="form-actions">
-                                <button type="button" class="button secondary prev-step">Previous</button>
-                                <button type="submit" class="button primary">Submit</button>
+                                <button type="button" class="button" data-tone="secondary" data-action="prev-step">Previous</button>
+                                <button type="submit" class="button" data-tone="primary">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -118,23 +118,23 @@
             <div class="doc-code-block">
                 <pre><code>&lt;div class="multi-step-form-container"&gt;
 &lt;div class="progress-indicator"&gt;
-    &lt;div class="step active"&gt;1&lt;/div&gt;
+    &lt;div class="step" data-state="active"&gt;1&lt;/div&gt;
     &lt;div class="step"&gt;2&lt;/div&gt;
     &lt;div class="step"&gt;3&lt;/div&gt;
     &lt;div class="step"&gt;4&lt;/div&gt;
 &lt;/div&gt;
 &lt;form class="multi-step-form"&gt;
-    &lt;div class="form-step active" data-step="1"&gt;
+    &lt;div class="form-step" data-step="1" data-state="active"&gt;
         &lt;h3&gt;Step 1: Personal Information&lt;/h3&gt;
         &lt;!-- Form fields for step 1 --&gt;
-        &lt;button type="button" class="button primary next-step"&gt;Next&lt;/button&gt;
+        &lt;button type="button" class="button" data-tone="primary" data-action="next-step"&gt;Next&lt;/button&gt;
     &lt;/div&gt;
     &lt;div class="form-step" data-step="2"&gt;
         &lt;h3&gt;Step 2: Contact Details&lt;/h3&gt;
         &lt;!-- Form fields for step 2 --&gt;
         &lt;div class="form-actions"&gt;
-            &lt;button type="button" class="button secondary prev-step"&gt;Previous&lt;/button&gt;
-            &lt;button type="button" class="button primary next-step"&gt;Next&lt;/button&gt;
+            &lt;button type="button" class="button" data-tone="secondary" data-action="prev-step"&gt;Previous&lt;/button&gt;
+            &lt;button type="button" class="button" data-tone="primary" data-action="next-step"&gt;Next&lt;/button&gt;
         &lt;/div&gt;
     &lt;/div&gt;
     &lt;!-- More steps --&gt;
@@ -149,8 +149,8 @@
             <ul>
                 <li><code>.multi-step-form-container</code>: Main wrapper for the form and its indicators.</li>
                 <li><code>.progress-indicator</code>: Container for the step circles.</li>
-                <li><code>.progress-indicator .step</code>: Individual step circles. The <code>.active</code> class highlights the current step.</li>
-                <li><code>.form-step</code>: Container for each step's content. The <code>.active</code> class shows the current step.</li>
+                <li><code>.progress-indicator .step</code>: Individual step circles. The <code>data-state="active"</code> attribute highlights the current step.</li>
+                <li><code>.form-step</code>: Container for each step's content. The <code>data-state="active"</code> attribute shows the current step.</li>
                 <li><code>.form-actions</code>: A flex container for grouping navigation buttons.</li>
             </ul>
             <p>You will need to implement CSS to hide inactive <code>.form-step</code> elements and show only the active one, typically using <code>display: none;</code> and <code>display: block;</code> or similar visibility toggles.</p>
@@ -162,7 +162,7 @@
             <ul>
                 <li>Event listeners for "Next" and "Previous" buttons.</li>
                 <li>Functions to show/hide form steps.</li>
-                <li>Logic to update the <code>.active</code> class on both the progress indicator steps and the form steps.</li>
+                <li>Logic to update the <code>data-state="active"</code> attribute on both the progress indicator steps and the form steps.</li>
                 <li>(Optional) Client-side validation before allowing users to proceed to the next step.</li>
             </ul>
             <p>Axiom01 does not provide this JavaScript out-of-the-box for multi-step forms, allowing developers to integrate their preferred validation and state management libraries.</p>
@@ -192,16 +192,24 @@
 
             const showStep = (stepIndex) => {
                 formSteps.forEach((step, index) => {
-                    step.classList.toggle('active', index === stepIndex);
+                    if (index === stepIndex) {
+                        step.setAttribute('data-state', 'active');
+                    } else {
+                        step.removeAttribute('data-state');
+                    }
                 });
                 progressSteps.forEach((step, index) => {
-                    step.classList.toggle('active', index === stepIndex);
+                    if (index === stepIndex) {
+                        step.setAttribute('data-state', 'active');
+                    } else {
+                        step.removeAttribute('data-state');
+                    }
                 });
                 updateReviewDetails();
             };
 
             const updateReviewDetails = () => {
-                if (formSteps[3] && formSteps[3].classList.contains('active')) {
+                if (formSteps[3] && formSteps[3].getAttribute('data-state') === 'active') {
                     document.getElementById('review-name').textContent = `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`;
                     document.getElementById('review-email').textContent = document.getElementById('email').value;
                     document.getElementById('review-address').textContent = `${document.getElementById('address1').value}, ${document.getElementById('city').value}`;
@@ -209,12 +217,12 @@
             };
 
             formContainer.addEventListener('click', (event) => {
-                if (event.target.classList.contains('next-step')) {
+                if (event.target.closest('[data-action=\"next-step\"]')) {
                     if (currentStep < formSteps.length - 1) {
                         currentStep++;
                         showStep(currentStep);
                     }
-                } else if (event.target.classList.contains('prev-step')) {
+                } else if (event.target.closest('[data-action=\"prev-step\"]')) {
                     if (currentStep > 0) {
                         currentStep--;
                         showStep(currentStep);

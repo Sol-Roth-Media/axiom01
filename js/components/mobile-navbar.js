@@ -7,7 +7,7 @@ export default {
    * @returns {object} An object with a destroy method for cleanup.
    */
   init: function(element) {
-    const menuToggleButton = element.querySelector('.menu.toggle');
+    const menuToggleButton = element.querySelector('.menu-toggle');
     const navLinks = element.querySelector('ul.links');
 
     if (!menuToggleButton || !navLinks) {
@@ -17,7 +17,7 @@ export default {
 
     // --- Accessibility: Assign IDs if not present ---
     const uniqueId = Math.random().toString(36).substr(2, 9);
-    menuToggleButton.id = menuToggleButton.id || `axiom-menu.toggle-${uniqueId}`;
+    menuToggleButton.id = menuToggleButton.id || `axiom-menu-toggle-${uniqueId}`;
     navLinks.id = navLinks.id || `axiom-nav-links-${uniqueId}`;
 
     // --- Accessibility: Set initial ARIA attributes ---
@@ -35,7 +35,7 @@ export default {
 
     const clickHandler = (event) => {
       // Ensure we only toggle if the menu toggle button itself was clicked
-      if (event.target.closest('.menu.toggle') === menuToggleButton) {
+      if (event.target.closest('.menu-toggle') === menuToggleButton) {
         toggleMenu();
       }
     };

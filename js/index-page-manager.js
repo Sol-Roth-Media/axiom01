@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Mobile Navigation Toggle
     const initMobileNav = () => {
-        const menuToggle = document.querySelector('.menu.toggle');
+        const menuToggle = document.querySelector('.menu-toggle');
         const mainHeader = document.querySelector('header.main');
         const mainContent = document.querySelector('main');
 
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Search Modal (using Fuse.js for demo purposes)
     const initSearchModal = () => {
-        const searchToggle = document.querySelector('.search.toggle');
+        const searchToggle = document.querySelector('.search-toggle');
 
         const ensureSearchModal = () => {
             let modal = document.getElementById('search-modal');

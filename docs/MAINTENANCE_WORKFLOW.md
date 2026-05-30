@@ -22,6 +22,7 @@ Optional secondary tags:
 - [ ] Change is minimal and maintainable by one developer.
 - [ ] `npm test` passes.
 - [ ] `npm run build` passes.
+- [ ] Semantic compliance audit passes (no blocked class stacking/BEM drift in `index.html` + `docs/components/*.html`).
 - [ ] Accessibility impact evaluated (and fixed if needed).
 - [ ] Changelog/docs updated when behavior or public guidance changes.
 
@@ -57,3 +58,22 @@ npm test
 2. runtime-loader syntax gate,
 3. critical interaction smoke checks,
 4. accessibility smoke checks.
+
+### Semantic compliance release gate
+
+Before tagging any version:
+
+- [ ] Run `npm test` and confirm pre-release audit includes semantic/BEM gate pass.
+- [ ] Verify docs examples still mirror shipped selectors/attributes (semantic parity).
+- [ ] Confirm integration-only selector exceptions are limited to documented fixture surfaces.
+
+## 5) Markup/class migration note template
+
+Use this template whenever semantic cleanup changes markup/class contracts:
+
+- **Surface changed:** (page/component/selector)
+- **Old contract:** (legacy class pattern or structure)
+- **New contract:** (semantic structure + root class/data attributes)
+- **Impact:** (who must update markup)
+- **Compatibility window:** (if legacy support remains temporarily)
+- **Validation:** (`npm test`, `npm run build`, manual checks performed)

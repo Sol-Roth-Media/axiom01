@@ -93,8 +93,10 @@ npm test
 `npm test` is the single maintenance quality lane and runs:
 
 1. pre-release audit,
-2. critical interaction smoke checks,
-3. accessibility smoke checks.
+2. semantic/BEM compliance gates for `index.html` and `docs/components/*.html`,
+3. runtime-loader syntax gate,
+4. critical interaction smoke checks,
+5. accessibility smoke checks.
 
 Build release artifacts expected by release automation:
 
@@ -127,5 +129,5 @@ This generates:
 - Finalize release pipeline inputs so tag-based releases are reliable.
 - Restored and integrated AI Chat and AI Imagegen components
 - Added a Settings component stub to prevent 404s
-- Confirmed BEM/class stacking violations are no longer present in docs/components/
+- Semantic compliance is now enforced by the pre-release audit with explicit integration-selector allowlists.
 - Version updated to 0.2.0

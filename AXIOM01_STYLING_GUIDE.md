@@ -13,7 +13,7 @@ This is a foundational principle of Axiom01. We explicitly forbid complex, multi
 
 - **Component-Level Classes:** Assign a single, descriptive class to the root element of a component (e.g., `<article class="card">`, `<section class="hero">`, `<header class="main">`).
 - **Descendant Styling:** Style child elements using descendant selectors based on the semantic structure. Avoid adding classes to every child.
-- **Variant Classes:** Use single, adjective-like classes to modify a component's appearance or behavior (e.g., `<button class="primary">`, `<article class="card elevated">`).
+- **Variants:** Prefer semantic attributes for variants (`data-tone`, `data-size`, `data-placement`) instead of stacking classes on one element.
 - **Absolutely No BEM:** The Block__Element--Modifier syntax (e.g., `card__header--large`) is strictly prohibited. It is verbose, couples the CSS to a rigid DOM structure, and violates our principle of semantic purity.
 
 **Correct Implementation:**
@@ -23,7 +23,7 @@ This is a foundational principle of Axiom01. We explicitly forbid complex, multi
   <h1>Hero Title</h1>
   <p>A compelling subtitle.</p>
   <div class="actions">
-    <button class="primary">Get Started</button>
+    <button data-tone="primary">Get Started</button>
     <button>Learn More</button>
   </div>
 </section>
@@ -97,6 +97,11 @@ Accessibility is not optional.
 - **Keyboard Navigation:** Ensure all interactive elements are focusable and operable via keyboard.
 - **Focus Management:** Manage focus correctly for modals, drawers, and other dynamic UI.
 
+## 5. Core philosophy examples vs integration fixtures
+
+- **Core philosophy examples** (`index.html`, `docs/components/*.html`): semantic-first authoring only, no BEM selectors.
+- **Integration fixtures** (`docs/drupal-contrib-fixtures.html`, Drupal starter-theme surfaces): third-party hooks like `pager__*`, `form-item--*`, and `layout-builder__*` are allowed only for compatibility targeting.
+
 ---
 
 **Updated:** July 20, 2025 - This guide has been updated to reinforce the framework's foundational principles and explicitly forbid non-compliant patterns.
@@ -106,13 +111,13 @@ Accessibility is not optional.
 ## Empty State Component
 ```html
 <!-- ✅ CORRECT: Minimal classes, semantic structure -->
-<div class="empty-state search" role="status" aria-label="No search results">
+<div class="empty-state" data-context="search" role="status" aria-label="No search results">
   <div aria-hidden="true">🔍</div>
   <h3>No Results Found</h3>
   <p>We couldn't find anything matching your search terms.</p>
   <div>
-    <button class="secondary">Clear Search</button>
-    <button class="tertiary">Browse All Items</button>
+    <button data-tone="secondary">Clear Search</button>
+    <button data-tone="tertiary">Browse All Items</button>
   </div>
 </div>
 ```
@@ -148,12 +153,12 @@ Accessibility is not optional.
 ## Alert Component
 ```html
 <!-- ✅ CORRECT: Single component class + semantic variant -->
-<div class="alert success">
+<div class="alert" data-tone="success">
   <i class="fas fa-check-circle"></i>
   <div>This is a success alert.</div>
 </div>
 
-<div class="alert error dismissible">
+<div class="alert" data-tone="error" data-dismissible="true">
   <i class="fas fa-exclamation-circle"></i>
   <div>This is a dismissible error alert.</div>
   <button data-alert-close>&times;</button>
@@ -184,7 +189,7 @@ Accessibility is not optional.
   cursor: pointer;
 }
 
-.alert.success {
+.alert[data-tone="success"] {
   background-color: var(--a-color-success-surface);
   color: var(--a-color-success-on-surface);
 }
@@ -193,7 +198,7 @@ Accessibility is not optional.
 ## Breadcrumb Navigation
 ```html
 <!-- ✅ CORRECT: Semantic nav with minimal classes -->
-<nav class="breadcrumb icons" aria-label="Breadcrumb navigation">
+<nav class="breadcrumb" data-mode="icons" aria-label="Breadcrumb navigation">
   <ol>
     <li><a href="/"><span aria-hidden="true">🏠</span> Home</a></li>
     <li><a href="/dashboard"><span aria-hidden="true">📊</span> Dashboard</a></li>
@@ -221,7 +226,7 @@ Accessibility is not optional.
   color: var(--a-color-on-surface-variant);
 }
 
-.breadcrumb.icons span {
+.breadcrumb[data-mode="icons"] span {
   margin-right: var(--a-space-xs);
 }
 ```
@@ -239,8 +244,8 @@ Accessibility is not optional.
       <p>Modal content goes here.</p>
     </section>
     <footer>
-      <button class="secondary" data-modal-close>Cancel</button>
-      <button class="primary">Confirm</button>
+      <button data-tone="secondary" data-modal-close>Cancel</button>
+      <button data-tone="primary">Confirm</button>
     </footer>
   </div>
 </div>
@@ -324,8 +329,8 @@ Accessibility is not optional.
 ## Tooltip Pattern
 ```html
 <!-- ✅ CORRECT: one root class + semantic role + loader hook -->
-<div class="tooltip top" data-component="tooltip">
-  <button class="tooltip-trigger" aria-describedby="save-tip">
+<div class="tooltip" data-component="tooltip" data-placement="top">
+  <button data-tooltip-trigger aria-describedby="save-tip">
     Save
   </button>
   <div id="save-tip" role="tooltip" aria-hidden="true">
