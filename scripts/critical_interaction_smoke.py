@@ -32,9 +32,9 @@ def check_index_toggles(findings: list[Finding]) -> None:
     index = ROOT / "index.html"
     text = read(index)
     required_markers = [
-        'class="search toggle"',
+        'class="search-toggle"',
         'id="theme-toggle"',
-        'class="menu toggle"',
+        'class="menu-toggle"',
         'src="js/index-page-manager.js"',
         'data-component="mobile-navbar"',
     ]
@@ -60,7 +60,7 @@ def check_component_modules(findings: list[Finding]) -> None:
 
 def check_docs_pages_manager(findings: list[Finding]) -> None:
     docs_dir = ROOT / "docs"
-    rx_toggle = re.compile(r'class="[^"]*(?:search|theme|menu)\s+toggle[^"]*"')
+    rx_toggle = re.compile(r'class="[^"]*(?:search-toggle|theme-toggle|menu-toggle)[^"]*"')
     rx_manager = re.compile(r'src="(?:\.\./|\.\./\.\./)js/index-page-manager\.js"')
 
     for file_path in sorted(docs_dir.rglob("*.html")):
