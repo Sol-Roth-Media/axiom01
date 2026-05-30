@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper function to update the theme toggle button icon
     const updateThemeToggleButtonIcon = (themeName) => {
-        const themeToggle = document.getElementById('theme-toggle'); // Corrected ID
+        const themeToggle = document.getElementById('themetoggle'); // Corrected ID
         if (themeToggle) {
             const icon = themeToggle.querySelector('i');
             if (icon) {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Mobile Navigation Toggle
     const initMobileNav = () => {
-        const menuToggle = document.querySelector('.menu-toggle');
+        const menuToggle = document.querySelector('.menutoggle');
         const mainHeader = document.querySelector('header.main');
         const mainContent = document.querySelector('main');
 
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Theme Toggling (Header Toggle Button)
     const initHeaderThemeToggle = () => {
-        const themeToggle = document.getElementById('theme-toggle'); // Corrected ID
+        const themeToggle = document.getElementById('themetoggle'); // Corrected ID
         const htmlElement = document.documentElement;
 
         // Set initial theme from localStorage or default to 'light'

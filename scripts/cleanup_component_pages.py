@@ -32,7 +32,7 @@ HEADER_HTML = """    <header class="main" data-component="mobile-navbar">
                     <i class="fab fa-github" aria-hidden="true"></i>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                <button class="theme toggle" id="themetoggle" aria-label="Toggle dark mode">
                     <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
                 <button class="menu toggle" aria-label="Toggle Menu">

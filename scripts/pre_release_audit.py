@@ -46,6 +46,9 @@ LEGACY_STACK_PATTERNS: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r'class="[^"]*(step|form-step)\s+active[^"]*"'), "legacy stacked active-state classes"),
 )
 
+LEGACY_DASHED_MODE_CLASSES = {"hero-compact", "search-toggle"}
+DASHED_MODE_CLASS_RX = re.compile(r"^[a-z0-9]+-(?:compact|toggle)$")
+
 
 @dataclass
 class Finding:
@@ -119,6 +122,30 @@ def audit_component_compliance(files: list[Path]) -> list[Finding]:
                 continue
             findings.append(Finding(rel(file_path), f"component page uses >2 class tokens: {classes}"))
             break
+
+    return findings
+
+
+def audit_legacy_mode_classes(files: list[Path]) -> list[Finding]:
+    findings: list[Finding] = []
+
+    for file_path in files:
+        text = file_path.read_text(encoding="utf-8", errors="ignore")
+        for classes in CLASS_ATTR_RX.findall(text):
+            for token in classes.split():
+                if not DASHED_MODE_CLASS_RX.match(token):
+                    continue
+                if token in LEGACY_DASHED_MODE_CLASSES:
+                    continue
+                findings.append(
+                    Finding(
+                        rel(file_path),
+                        (
+                            f"legacy mode class '{token}' is not allowed; "
+                            f"only {sorted(LEGACY_DASHED_MODE_CLASSES)} may remain dashed"
+                        ),
+                    )
+                )
 
     return findings
 
@@ -222,6 +249,7 @@ def main() -> int:
     findings: list[Finding] = []
     findings.extend(audit_bem_gate([ROOT / "css" / "axiom.css", *docs_files, ROOT / "index.html"]))
     findings.extend(audit_legacy_class_stacking(semantic_surface_files))
+    findings.extend(audit_legacy_mode_classes(semantic_surface_files))
     findings.extend(audit_component_compliance(sorted(COMPONENT_DOCS_DIR.glob("*.html"))))
     findings.extend(audit_semantic_parity())
     findings.extend(audit_footer_consistency(docs_files))
