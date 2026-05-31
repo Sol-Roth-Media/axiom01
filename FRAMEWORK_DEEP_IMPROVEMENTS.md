@@ -6,7 +6,7 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 
 - [x] Restore valid runtime loader structure in `js/axiom.js` and keep registration APIs callable.
 - [x] Add a lightweight runtime-loader syntax gate in the quality lane.
-- [ ] Add focused smoke checks for dynamic component import failures and fallback behavior.
+- [x] Add focused smoke checks for dynamic component import failures and fallback behavior.
 
 ## P1
 
@@ -17,6 +17,7 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 ## Started in this branch
 
 - [x] Added runtime-loader syntax/API gate and wired it into `npm test`.
+- [x] Added focused runtime-loader fallback smoke checks for dynamic import failures.
 
 ## P2
 

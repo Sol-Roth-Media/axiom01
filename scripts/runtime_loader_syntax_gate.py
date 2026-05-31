@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -44,10 +45,44 @@ def check_required_markers(findings: list[Finding]) -> None:
             findings.append(Finding("js/axiom.js", f"missing runtime-loader marker: {marker}"))
 
 
+def check_import_failure_fallback(findings: list[Finding]) -> None:
+    text = RUNTIME_LOADER.read_text(encoding="utf-8", errors="ignore")
+
+    import_failure_rx = re.compile(
+        r"async\s+loadComponent\(componentName\)\s*{[\s\S]*?"
+        r"const\s+componentPath\s*=\s*`\.\/components\/\$\{componentName\}\.js`[\s\S]*?"
+        r"const\s+module\s*=\s*await\s+import\(componentPath\);[\s\S]*?"
+        r"catch\s*\(error\)\s*{[\s\S]*?"
+        r"Failed to load component\s+\$\{componentName\}[\s\S]*?"
+        r"return\s+null;\s*}",
+        re.MULTILINE,
+    )
+    if not import_failure_rx.search(text):
+        findings.append(
+            Finding(
+                "js/axiom.js",
+                "missing focused fallback path for dynamic import failure in loadComponent()",
+            )
+        )
+
+    init_guard_rx = re.compile(
+        r"await\s+Promise\.all\(loadPromises\);[\s\S]*?if\s*\(componentName\s*&&\s*ComponentDefinition\)",
+        re.MULTILINE,
+    )
+    if not init_guard_rx.search(text):
+        findings.append(
+            Finding(
+                "js/axiom.js",
+                "missing init fallback guard that skips component startup when import fails",
+            )
+        )
+
+
 def main() -> int:
     findings: list[Finding] = []
     check_syntax(findings)
     check_required_markers(findings)
+    check_import_failure_fallback(findings)
 
     print("Axiom01 runtime-loader syntax gate")
     if not findings:
