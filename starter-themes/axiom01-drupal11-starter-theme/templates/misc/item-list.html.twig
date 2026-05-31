@@ -1,0 +1,17 @@
+{# Generic item-list wrapper for semantic Drupal list output. #}
+{% if items or empty %}
+  <section{{ attributes }}>
+    {% if title %}
+      <h3>{{ title }}</h3>
+    {% endif %}
+    {% if items %}
+      <{{ list_type }}>
+        {% for item in items %}
+          <li{{ item.attributes }}>{{ item.value }}</li>
+        {% endfor %}
+      </{{ list_type }}>
+    {% else %}
+      <p>{{ empty }}</p>
+    {% endif %}
+  </section>
+{% endif %}

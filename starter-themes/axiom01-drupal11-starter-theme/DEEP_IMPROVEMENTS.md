@@ -19,6 +19,7 @@ Priority is set for solo-maintainer sustainability and high leverage.
 
 ## P2
 
+- [ ] Complete Axiom-first replacement wave in order: tabs/pager/exposed/search, then table/list admin alignment, then tooltip/modal-safe enhancements.
 - [ ] Add a Drupal-focused changelog/migration template for Axiom01 compatibility bumps.
 - [ ] Introduce CI matrix validation against supported Drupal 11 patch lines.
 - [ ] Add a starter-theme release checklist with rollback guidance.
@@ -41,6 +42,14 @@ Priority is set for solo-maintainer sustainability and high leverage.
 - [ ] Introduce sample content/config bundle demonstrating a complete “contact + filters + accordion help panel” page using only Axiom01-ready Drupal structures.
 - [ ] Add validation steps (or snapshots) proving themed output for key Drupal core forms: user login, search, node edit, and theme settings.
 - [ ] Add region-level layout utility classes and documentation so sidebars, prefooter, and footer blocks preserve rhythm across all spacing-scale options.
+
+## Backlog entry policy (required)
+
+Every new improvement entry must explicitly state:
+
+1. Which Drupal core surface is being replaced.
+2. Which Axiom component/pattern is used.
+3. How semantic/minimal markup is preserved (single root class, no BEM/class-stack expansion).
 
 ## Backport candidates to core Axiom01
 

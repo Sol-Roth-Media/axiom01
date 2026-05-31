@@ -1,0 +1,39 @@
+{# Pager wrapper mapped to semantic Axiom pagination output. #}
+{% if items %}
+  <nav{{ attributes }} role="navigation" aria-labelledby="{{ heading_id }}">
+    <h2 id="{{ heading_id }}" class="visually-hidden">{{ 'Pagination'|t }}</h2>
+    <ul>
+      {% if items.first %}
+        <li>{{ link('First'|t, items.first.href, items.first.attributes) }}</li>
+      {% endif %}
+      {% if items.previous %}
+        <li>{{ link('Previous'|t, items.previous.href, items.previous.attributes) }}</li>
+      {% endif %}
+
+      {% if ellipses.previous %}
+        <li aria-hidden="true">…</li>
+      {% endif %}
+
+      {% for key, item in items.pages %}
+        <li>
+          {% if current == key %}
+            <span aria-current="page">{{ key }}</span>
+          {% else %}
+            {{ link(key, item.href, item.attributes) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+
+      {% if ellipses.next %}
+        <li aria-hidden="true">…</li>
+      {% endif %}
+
+      {% if items.next %}
+        <li>{{ link('Next'|t, items.next.href, items.next.attributes) }}</li>
+      {% endif %}
+      {% if items.last %}
+        <li>{{ link('Last'|t, items.last.href, items.last.attributes) }}</li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

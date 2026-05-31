@@ -63,6 +63,42 @@ If expected front-page text does not appear:
 2. Ensure they are visible for your current theme and region assignments.
 3. Clear caches (`drush cr` or admin UI).
 
+## Drupal replacement policy (Axiom-first)
+
+When overriding Drupal core templates in this starter theme:
+
+1. Prefer an existing Axiom component/pattern first.
+2. Fall back to Drupal core markup hooks only when no Axiom equivalent exists.
+3. Keep markup semantic and minimal: one root class, no BEM, no class-heavy descendant wrappers.
+4. Preserve accessibility and keyboard behavior parity with Drupal core output.
+
+## Drupal core → Axiom mapping matrix
+
+| Drupal surface | Preferred Axiom pattern | Starter-theme implementation target |
+| --- | --- | --- |
+| `details` / vertical disclosure | Accordion | `templates/form/details.html.twig` + core accordion selectors |
+| Local tasks/tabs (especially narrow viewports) | Dropdown | `templates/navigation/menu-local-tasks.html.twig` with `data-component="dropdown"` |
+| Core search block UX | Search pattern | `templates/block/block--search-form-block.html.twig` and `block--axiom01-drupal-default-search-block.html.twig` |
+| Admin/content listing tables | Advanced table behavior layer | `templates/misc/table.html.twig` with `data-component="advanced-table"` |
+| Inline contextual help text | Tooltip | prioritize semantic help text and opt-in tooltip hooks where safe |
+| Confirm/cancel interaction surfaces | Modal | only where Drupal output is themable without breaking workflows |
+
+## Implementation priority
+
+1. Local tasks/tabs, pager, exposed filters, and search wrappers.
+2. Table/admin listing alignment.
+3. Tooltip/modal enhancements where Drupal markup safely supports them.
+
+## Review gate: no extra classes
+
+For Drupal starter-theme changes, reviewers should reject patches that add:
+
+- BEM-style class naming.
+- wrapper-heavy class stacks.
+- non-essential descendant classes.
+
+Exception: classes required by Drupal core/contrib compatibility may remain, but must be documented in the related change note.
+
 ## Theme settings (Appearance → Settings → Axiom01 Drupal 11)
 
 Theme settings now include:
