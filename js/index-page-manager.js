@@ -558,6 +558,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // 12. Code Comparison Tabs
+    const initCodeComparisonTabs = () => {
+        const tabs = document.querySelectorAll('.tab-button');
+        const panels = document.querySelectorAll('.comparison-panel');
+
+        if (tabs.length === 0 || panels.length === 0) return;
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.getAttribute('data-tab');
+
+                // Remove active class from all tabs and panels
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding panel
+                tab.classList.add('active');
+                const targetPanel = document.querySelector(`.comparison-panel[data-panel="${targetTab}"]`);
+                if (targetPanel) {
+                    targetPanel.classList.add('active');
+                }
+            });
+        });
+    };
+
+    // 13. Cascade Visualization
+    const initCascadeVisualization = () => {
+        const slider = document.getElementById('cascade-slider');
+        const valueDisplay = document.getElementById('cascade-value');
+        const componentBox = document.querySelector('.component-box');
+        const subcomponentBox = document.querySelector('.subcomponent-box');
+
+        if (!slider || !valueDisplay) return;
+
+        slider.addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value);
+            valueDisplay.textContent = value;
+
+            if (componentBox) {
+                componentBox.style.padding = `calc(var(--a-space-l) * ${value})`;
+            }
+            if (subcomponentBox) {
+                subcomponentBox.style.padding = `calc(var(--a-space-m) * ${value})`;
+            }
+        });
+    };
+
     // Initialize all functionalities
     initMobileNav();
     initHeaderThemeToggle();
@@ -571,4 +618,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initSidebarHighlighting();
     initDynamicCopyrightYear();
     initDropdowns(); // Initialize dropdowns
+    initCodeComparisonTabs(); // Initialize code comparison tabs
+    initCascadeVisualization(); // Initialize cascade visualization
 });
