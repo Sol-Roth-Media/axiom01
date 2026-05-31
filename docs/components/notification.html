@@ -53,9 +53,9 @@
 								 <div class="container">
 										 <h2>Live Example</h2>
 										 <div>
-												 <button class="button primary" onclick="showNotification('success')">Show Success Notification</button>
-												 <button class="button warning" onclick="showNotification('warning')">Show Warning Notification</button>
-												 <button class="button error" onclick="showNotification('error')">Show Error Notification</button>
+                                                 <button class="button primary" type="button" data-notification-type="success">Show Success Notification</button>
+                                                 <button class="button warning" type="button" data-notification-type="warning">Show Warning Notification</button>
+                                                 <button class="button error" type="button" data-notification-type="error">Show Error Notification</button>
 
 												 <div class="notification-container" id="notification-container">
 														 <!-- Notifications will be appended here -->
@@ -162,6 +162,51 @@ function showNotification(type) {
         </section>
     </main>
 
+    <script>
+        (() => {
+            const container = document.getElementById('notification-container');
+            const controls = document.querySelectorAll('[data-notification-type]');
+
+            if (!container || controls.length === 0) return;
+
+            const showNotification = (type) => {
+                const notification = document.createElement('div');
+                notification.classList.add('notification', type);
+                notification.setAttribute('role', 'status');
+                notification.setAttribute('aria-live', 'polite');
+
+                const contentByType = {
+                    success: {
+                        message: 'Operation successful!',
+                        icon: '<i class="fas fa-check-circle" aria-hidden="true"></i>'
+                    },
+                    warning: {
+                        message: 'Warning: Something needs your attention.',
+                        icon: '<i class="fas fa-exclamation-triangle" aria-hidden="true"></i>'
+                    },
+                    error: {
+                        message: 'Error: Please try again.',
+                        icon: '<i class="fas fa-times-circle" aria-hidden="true"></i>'
+                    }
+                };
+                const content = contentByType[type] || contentByType.error;
+
+                notification.innerHTML = `${content.icon}<div>${content.message}</div><button class="close-notification" type="button" aria-label="Close notification">&times;</button>`;
+                container.appendChild(notification);
+
+                const removeNotification = () => notification.remove();
+                setTimeout(removeNotification, 5000);
+                notification.querySelector('.close-notification')?.addEventListener('click', removeNotification, { once: true });
+            };
+
+            controls.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const type = button.getAttribute('data-notification-type');
+                    if (type) showNotification(type);
+                });
+            });
+        })();
+    </script>
     <script src="../../js/index-page-manager.js"></script>
     <footer class="main">
         <div class="content">

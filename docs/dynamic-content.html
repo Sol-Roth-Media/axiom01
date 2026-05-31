@@ -342,7 +342,7 @@ grid.addCard({
             li.className = 'todo-item';
             li.innerHTML = `
                 &lt;span&gt;${item.title}&lt;/span&gt;
-                &lt;button class="btn-remove" onclick="this.parentElement.remove()"&gt;Remove&lt;/button&gt;
+                &lt;button class="button small remove" type="button" data-remove-item="${item.id}"&gt;Remove&lt;/button&gt;
             `;
             return li;
         };
@@ -355,6 +355,12 @@ grid.addCard({
                 }, renderTodo);
                 input.value = '';
             }
+        });
+
+        document.querySelector('.todo-list').addEventListener('click', (event) => {
+            const removeButton = event.target.closest('[data-remove-item]');
+            if (!removeButton) return;
+            todoList.removeItem(removeButton.getAttribute('data-remove-item'));
         });
     &lt;/script&gt;
 &lt;/body&gt;

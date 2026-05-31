@@ -78,6 +78,31 @@ def audit_scaffold_comments(files: list[Path]) -> list[Finding]:
     return findings
 
 
+def audit_semantic_compliance(files: list[Path]) -> list[Finding]:
+    findings: list[Finding] = []
+    class_attr_rx = re.compile(r'class="([^"]+)"')
+
+    for file_path in files:
+        text = file_path.read_text(encoding="utf-8", errors="ignore")
+
+        # Inline handlers are easy to slip into examples and bypass component cleanup patterns.
+        if "onclick=" in text:
+            findings.append(Finding(rel(file_path), "contains inline onclick handler; use bound listeners in scripts"))
+
+        for class_value in class_attr_rx.findall(text):
+            for cls in class_value.split():
+                if cls.startswith("doc-"):
+                    findings.append(Finding(rel(file_path), f"forbidden doc-* class found: {cls}"))
+
+                if "__" in cls:
+                    findings.append(Finding(rel(file_path), f"BEM-style class found: {cls}"))
+
+                if "--" in cls:
+                    findings.append(Finding(rel(file_path), f"modifier-style class found: {cls}"))
+
+    return findings
+
+
 def extract_search_urls() -> list[str]:
     text = SEARCH_SOURCE.read_text(encoding="utf-8", errors="ignore")
     return re.findall(r'url:\s*"([^"]+)"', text)
@@ -109,6 +134,7 @@ def main() -> int:
     findings.extend(audit_footer_consistency(docs_files))
     findings.extend(audit_search_toggles(docs_files))
     findings.extend(audit_scaffold_comments(docs_files))
+    findings.extend(audit_semantic_compliance(docs_files))
     findings.extend(audit_search_urls(search_urls))
 
     print("Axiom01 pre-release audit")
