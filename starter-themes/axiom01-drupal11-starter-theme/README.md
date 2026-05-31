@@ -72,16 +72,20 @@ When overriding Drupal core templates in this starter theme:
 3. Keep markup semantic and minimal: one root class, no BEM, no class-heavy descendant wrappers.
 4. Preserve accessibility and keyboard behavior parity with Drupal core output.
 
-## Drupal core → Axiom mapping matrix
+## Drupal core → Axiom strict replacement matrix
 
-| Drupal surface | Preferred Axiom pattern | Starter-theme implementation target |
-| --- | --- | --- |
-| `details` / vertical disclosure | Accordion | `templates/form/details.html.twig` + core accordion selectors |
-| Local tasks/tabs (especially narrow viewports) | Dropdown | `templates/navigation/menu-local-tasks.html.twig` with `data-component="dropdown"` |
-| Core search block UX | Search pattern | `templates/block/block--search-form-block.html.twig` and `block--axiom01-drupal-default-search-block.html.twig` |
-| Admin/content listing tables | Advanced table behavior layer | `templates/misc/table.html.twig` with `data-component="advanced-table"` |
-| Inline contextual help text | Tooltip | prioritize semantic help text and opt-in tooltip hooks where safe |
-| Confirm/cancel interaction surfaces | Modal | only where Drupal output is themable without breaking workflows |
+| Drupal surface | Core output baseline | Axiom mapping | Semantic constraints | Fallback behavior |
+| --- | --- | --- | --- | --- |
+| Generic block wrappers | `block.html.twig` section/div wrappers | Semantic block shell (`section`/`aside`/`article`) | No descendant class stacks; heading stays semantic | If visual containerization is needed, use existing Card pattern only |
+| Search blocks | Core search form block | Search pattern | Preserve native `<form role="search">` anatomy | Falls back to core block content when Search module output changes |
+| Views table displays | `views-view-table.html.twig` + table style plugin | Advanced Table | One root hook (`data-component="advanced-table"` on wrapper) | Plain semantic table remains usable if JS is unavailable |
+| Views unformatted/list/grid displays | `views-view-unformatted/list/grid.html.twig` | Data List policy via semantic list fallback | Use semantic list structure with one root hook and no class stacking | Render `<ul>/<ol>` fallback when Data List JS is not required |
+| Progress + throbber | AJAX/progress templates (`ajax-progress`, `progress-bar`) | Axiom spinner/progress semantics | ARIA status/progress roles required | Message text remains visible even if component styling is absent |
+| Field multiple-value forms | `field-multiple-value-form.html.twig` | Semantic list/table wrapper with allowlisted attrs | Keep structural wrappers minimal and keyboard safe | Core table/button renders unchanged inside semantic shell |
+| `details` / vertical disclosure | Core details + vertical tabs | Accordion | Preserve summary/legend semantics and focus behavior | Core details output remains functional |
+| Local tasks/tabs | Core local tasks navigation | Dropdown | Semantic nav/list output only | Full tab list remains visible without JS |
+| Pager | Core pager templates | Semantic pager pattern | One root pager hook; current page state must be explicit | Core pager links remain operable |
+| Status messages | Core status-messages template | Axiom message surface | Preserve `alert` semantics for errors | Core message types render with semantic headings/text |
 
 ## Implementation priority
 

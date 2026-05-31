@@ -1,0 +1,18 @@
+{# Views grid display mapped to semantic Data List fallback. #}
+{% set view_attributes = attributes
+  .setAttribute('data-axiom-pattern', 'data-list')
+  .setAttribute('data-view-display', 'grid') %}
+<section{{ view_attributes }}>
+  {% if title %}
+    <h3>{{ title }}</h3>
+  {% endif %}
+  <ul>
+    {% for row in rows %}
+      {% for column in row %}
+        <li{{ column.attributes|default(create_attribute()) }}>
+          {{ column.content|default(column) }}
+        </li>
+      {% endfor %}
+    {% endfor %}
+  </ul>
+</section>

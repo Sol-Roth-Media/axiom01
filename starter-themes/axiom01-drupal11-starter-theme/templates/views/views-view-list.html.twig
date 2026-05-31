@@ -1,0 +1,17 @@
+{# Views list display mapped to semantic Data List fallback. #}
+{% set view_attributes = attributes
+  .setAttribute('data-axiom-pattern', 'data-list')
+  .setAttribute('data-view-display', 'list') %}
+<section{{ view_attributes }}>
+  {% if title %}
+    <h3>{{ title }}</h3>
+  {% endif %}
+  {% set list_tag = list.type|default('ul') %}
+  <{{ list_tag }}{{ list.attributes|default(create_attribute()) }}>
+    {% for row in rows %}
+      <li{{ row.attributes|default(create_attribute()) }}>
+        {{ row.content|default(row) }}
+      </li>
+    {% endfor %}
+  </{{ list_tag }}>
+</section>

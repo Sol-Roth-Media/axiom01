@@ -164,6 +164,16 @@ function axiom01_drupal11_preprocess_details(array &$variables): void {
 function axiom01_drupal11_preprocess_block(array &$variables): void {
   $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], []);
   $plugin_id = (string) ($variables['elements']['#plugin_id'] ?? '');
+  $region = (string) ($variables['elements']['#configuration']['region'] ?? '');
+  $variables['axiom_block_tag'] = 'section';
+  $variables['axiom_block_variant'] = '';
+
+  if (str_contains($region, 'sidebar') || str_contains($region, 'aside')) {
+    $variables['axiom_block_tag'] = 'aside';
+  }
+  elseif (str_contains($region, 'content') || str_starts_with($plugin_id, 'views_block:')) {
+    $variables['axiom_block_tag'] = 'article';
+  }
 
   if ($plugin_id === 'search_form_block' || $plugin_id === 'axiom01_drupal_default_search_block') {
     $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'], ['search']);
@@ -206,6 +216,66 @@ function axiom01_drupal11_preprocess_table(array &$variables): void {
  */
 function axiom01_drupal11_preprocess_item_list(array &$variables): void {
   $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['list']);
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function axiom01_drupal11_preprocess_views_view(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['view']);
+}
+
+/**
+ * Implements hook_preprocess_views_view_table().
+ */
+function axiom01_drupal11_preprocess_views_view_table(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['view']);
+}
+
+/**
+ * Implements hook_preprocess_views_view_unformatted().
+ */
+function axiom01_drupal11_preprocess_views_view_unformatted(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['view']);
+}
+
+/**
+ * Implements hook_preprocess_views_view_list().
+ */
+function axiom01_drupal11_preprocess_views_view_list(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['view']);
+}
+
+/**
+ * Implements hook_preprocess_views_view_grid().
+ */
+function axiom01_drupal11_preprocess_views_view_grid(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['view']);
+}
+
+/**
+ * Implements hook_preprocess_field_multiple_value_form().
+ */
+function axiom01_drupal11_preprocess_field_multiple_value_form(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['list']);
+}
+
+/**
+ * Implements hook_preprocess_ajax_progress().
+ */
+function axiom01_drupal11_preprocess_ajax_progress(array &$variables): void {
+  $allowed_classes = ['ajax-progress'];
+  if (!empty($variables['type']) && $variables['type'] === 'throbber') {
+    $allowed_classes[] = 'ajax-progress-throbber';
+  }
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], $allowed_classes);
+}
+
+/**
+ * Implements hook_preprocess_progress_bar().
+ */
+function axiom01_drupal11_preprocess_progress_bar(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], []);
 }
 
 /**

@@ -16,6 +16,8 @@ Use this checklist whenever Axiom01 or the starter theme changes:
 - [ ] Highlighted, breadcrumb, help, and sidebar regions render when blocks are assigned.
 - [ ] Drupal core forms (login/search/node edit) render with Axiom01 spacing, labels, and action button grouping.
 - [ ] Core search block wrapper renders with semantic section anatomy and remains fully operable.
+- [ ] Generic Drupal block wrapper selects semantic shell (`section` / `aside` / `article`) based on block context.
+- [ ] Card-style blocks only use the existing Card pattern when explicit containerization is desired.
 - [ ] Drupal `details`/accordion form elements render with Axiom01 accordion styling and clear open/closed state affordances.
 - [ ] Drupal `fieldset` groups render with Axiom01 legend, border, and error-state treatments.
 - [ ] Axiom01 Search (JSON) block filters configured key/value results and links correctly.
@@ -23,16 +25,19 @@ Use this checklist whenever Axiom01 or the starter theme changes:
 - [ ] Front-page fallback content/message appears when no front page content exists.
 - [ ] Node template renders title/content/meta consistently.
 - [ ] Views wrapper template remains stable.
+- [ ] Views style templates map table displays to Advanced Table wrapper hooks and non-table displays to semantic Data List fallbacks.
 - [ ] Contextual edit links appear on branding block and editable node/view output.
 - [ ] Status messages template uses accessible roles and semantics (`error` => alert/assertive).
 - [ ] `.form-item--error-message`, `.messages`, `.pager`, and `.tabs` inherit Axiom01 spacing/typography treatments without layout regressions.
 - [ ] Pager template renders first/previous/numbered/next/last links with semantic list output and accessible current-page state.
 - [ ] Ajax progress indicators/throbbers and fullscreen progress overlays render with Axiom01 spinner treatment.
+- [ ] Progress/throbber template overrides expose ARIA status/progress semantics and visible message text.
 - [ ] Core and Views pager variants (`pager__*`, first/last/prev/next, mini pager, ellipsis) render consistently.
 - [ ] Views exposed form filters (including dropdown/select controls) render with Axiom01 spacing and focus states.
 - [ ] Views exposed filters wrapper remains semantic and keyboard accessible.
 - [ ] File upload widgets (`input[type=file]`, `managed-file`, `form-managed-file`) and upload progress/status rows render correctly.
 - [ ] Field widgets/formatters from Drupal core and commonly used contributed modules inherit base spacing through `field--widget-*`/`field--formatter-*` wrappers.
+- [ ] Field multiple-value form lists render through semantic wrapper templates without class-stacked shells.
 - [ ] Form and search templates remain semantic/minimal and still allow additional classes via preprocess/theme functions.
 - [ ] Admin/content listing tables render with semantic `<table>` output and optional advanced-table behavior hook.
 - [ ] Generic item-list wrappers render semantic list structures without extra wrapper class stacks.

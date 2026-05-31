@@ -5,8 +5,10 @@
 
 export default {
     init(element) {
-        const table = element.querySelector('table');
+        const table = element.matches('table') ? element : element.querySelector('table');
         if (!table) return { destroy: () => {} };
+        const host = table.parentElement;
+        if (!host) return { destroy: () => {} };
 
         let allData = [];
         let filteredData = [];
@@ -48,16 +50,24 @@ export default {
         filteredData = [...allData];
 
         // Create controls
-        const controls = document.createElement('div');
+        const controls = document.createElement('section');
         controls.className = 'table-controls';
+        controls.setAttribute('data-advanced-table-controls', '');
+        controls.setAttribute('aria-label', 'Table controls');
 
         const searchBox = document.createElement('input');
         searchBox.type = 'text';
         searchBox.className = 'table-search';
         searchBox.placeholder = 'Search...';
+        searchBox.setAttribute('aria-label', 'Search table');
 
-        const filterContainer = document.createElement('div');
+        const filterContainer = document.createElement('fieldset');
         filterContainer.className = 'table-filters';
+        filterContainer.setAttribute('data-advanced-table-filters', '');
+
+        const filterLegend = document.createElement('legend');
+        filterLegend.textContent = 'Filters';
+        filterContainer.appendChild(filterLegend);
 
         headers.forEach(header => {
             const uniqueValues = [...new Set(allData.map(row => row[header.key]))];
@@ -85,7 +95,7 @@ export default {
 
         controls.appendChild(searchBox);
         controls.appendChild(filterContainer);
-        element.insertBefore(controls, table);
+        host.insertBefore(controls, table);
 
         // Search handler
         searchBox.addEventListener('input', (e) => {
@@ -189,9 +199,11 @@ export default {
         };
 
         // Pagination
-        const paginationContainer = document.createElement('div');
+        const paginationContainer = document.createElement('nav');
         paginationContainer.className = 'table-pagination';
-        element.appendChild(paginationContainer);
+        paginationContainer.setAttribute('aria-label', 'Table pagination');
+        paginationContainer.setAttribute('data-advanced-table-pagination', '');
+        host.appendChild(paginationContainer);
 
         const updatePagination = () => {
             const totalPages = Math.ceil(filteredData.length / itemsPerPage);
@@ -262,4 +274,3 @@ export default {
         };
     }
 };
-

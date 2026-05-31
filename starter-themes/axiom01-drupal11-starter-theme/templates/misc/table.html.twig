@@ -1,44 +1,45 @@
 {# Semantic table output with optional Axiom advanced-table behavior hook. #}
-{% set table_attributes = attributes.setAttribute('data-component', 'advanced-table') %}
 {% set column_count = header ? header|length : 1 %}
-<table{{ table_attributes }}>
-  {% if caption %}
-    <caption>{{ caption }}</caption>
-  {% endif %}
+<section data-component="advanced-table">
+  <table{{ attributes }}>
+    {% if caption %}
+      <caption>{{ caption }}</caption>
+    {% endif %}
 
-  {% for colgroup in colgroups %}
-    <colgroup{{ colgroup.attributes }}>
-      {% for col in colgroup.cols %}
-        <col{{ col.attributes }} />
-      {% endfor %}
-    </colgroup>
-  {% endfor %}
-
-  {% if header %}
-    <thead>
-      <tr>
-        {% for cell in header %}
-          <{{ cell.tag }}{{ cell.attributes }}>{{ cell.content }}</{{ cell.tag }}>
+    {% for colgroup in colgroups %}
+      <colgroup{{ colgroup.attributes }}>
+        {% for col in colgroup.cols %}
+          <col{{ col.attributes }} />
         {% endfor %}
-      </tr>
-    </thead>
-  {% endif %}
+      </colgroup>
+    {% endfor %}
 
-  {% if rows %}
-    <tbody>
-      {% for row in rows %}
-        <tr{{ row.attributes }}>
-          {% for cell in row.cells %}
+    {% if header %}
+      <thead>
+        <tr>
+          {% for cell in header %}
             <{{ cell.tag }}{{ cell.attributes }}>{{ cell.content }}</{{ cell.tag }}>
           {% endfor %}
         </tr>
-      {% endfor %}
-    </tbody>
-  {% elseif empty %}
-    <tbody>
-      <tr>
-        <td colspan="{{ column_count }}">{{ empty }}</td>
-      </tr>
-    </tbody>
-  {% endif %}
-</table>
+      </thead>
+    {% endif %}
+
+    {% if rows %}
+      <tbody>
+        {% for row in rows %}
+          <tr{{ row.attributes }}>
+            {% for cell in row.cells %}
+              <{{ cell.tag }}{{ cell.attributes }}>{{ cell.content }}</{{ cell.tag }}>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    {% elseif empty %}
+      <tbody>
+        <tr>
+          <td colspan="{{ column_count }}">{{ empty }}</td>
+        </tr>
+      </tbody>
+    {% endif %}
+  </table>
+</section>
