@@ -50,6 +50,8 @@ Then enable it in Appearance settings and clear caches.
 The starter theme now consumes framework-level hooks in `css/axiom.css` / `css/axiom.min.css` for:
 
 - Drupal message, tab, pager, and exposed-form outputs.
+- Drupal details/accordion wrappers (`.js-form-type-details`, `.claro-details`) and vertical tabs (`.vertical-tabs*`).
+- Switchable accordion integrations (`.field-group-accordion`, `.ui-accordion`) for contrib/admin variants.
 - Ajax/throbber and upload progress indicators.
 - Inline form error wrappers and errored field states.
 - Native file inputs, managed-file widgets, and file list presentation.
@@ -60,6 +62,46 @@ If expected front-page text does not appear:
 1. Confirm **Page content** and **Status messages** blocks are placed.
 2. Ensure they are visible for your current theme and region assignments.
 3. Clear caches (`drush cr` or admin UI).
+
+## Drupal replacement policy (Axiom-first)
+
+When overriding Drupal core templates in this starter theme:
+
+1. Prefer an existing Axiom component/pattern first.
+2. Fall back to Drupal core markup hooks only when no Axiom equivalent exists.
+3. Keep markup semantic and minimal: one root class, no BEM, no class-heavy descendant wrappers.
+4. Preserve accessibility and keyboard behavior parity with Drupal core output.
+
+## Drupal core → Axiom strict replacement matrix
+
+| Drupal surface | Core output baseline | Axiom mapping | Semantic constraints | Fallback behavior |
+| --- | --- | --- | --- | --- |
+| Generic block wrappers | `block.html.twig` section/div wrappers | Semantic block shell (`section`/`aside`/`article`) | No descendant class stacks; heading stays semantic | If visual containerization is needed, use existing Card pattern only |
+| Search blocks | Core search form block | Search pattern | Preserve native `<form role="search">` anatomy | Falls back to core block content when Search module output changes |
+| Views table displays | `views-view-table.html.twig` + table style plugin | Advanced Table | One root hook (`data-component="advanced-table"` on wrapper) | Plain semantic table remains usable if JS is unavailable |
+| Views unformatted/list/grid displays | `views-view-unformatted/list/grid.html.twig` | Data List policy via semantic list fallback | Use semantic list structure with one root hook and no class stacking | Render `<ul>/<ol>` fallback when Data List JS is not required |
+| Progress + throbber | AJAX/progress templates (`ajax-progress`, `progress-bar`) | Axiom spinner/progress semantics | ARIA status/progress roles required | Message text remains visible even if component styling is absent |
+| Field multiple-value forms | `field-multiple-value-form.html.twig` | Semantic list/table wrapper with allowlisted attrs | Keep structural wrappers minimal and keyboard safe | Core table/button renders unchanged inside semantic shell |
+| `details` / vertical disclosure | Core details + vertical tabs | Accordion | Preserve summary/legend semantics and focus behavior | Core details output remains functional |
+| Local tasks/tabs | Core local tasks navigation | Dropdown | Semantic nav/list output only | Full tab list remains visible without JS |
+| Pager | Core pager templates | Semantic pager pattern | One root pager hook; current page state must be explicit | Core pager links remain operable |
+| Status messages | Core status-messages template | Axiom message surface | Preserve `alert` semantics for errors | Core message types render with semantic headings/text |
+
+## Implementation priority
+
+1. Local tasks/tabs, pager, exposed filters, and search wrappers.
+2. Table/admin listing alignment.
+3. Tooltip/modal enhancements where Drupal markup safely supports them.
+
+## Review gate: no extra classes
+
+For Drupal starter-theme changes, reviewers should reject patches that add:
+
+- BEM-style class naming.
+- wrapper-heavy class stacks.
+- non-essential descendant classes.
+
+Exception: classes required by Drupal core/contrib compatibility may remain, but must be documented in the related change note.
 
 ## Theme settings (Appearance → Settings → Axiom01 Drupal 11)
 

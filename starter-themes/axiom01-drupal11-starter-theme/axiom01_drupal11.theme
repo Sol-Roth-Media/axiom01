@@ -10,6 +10,49 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
 
 /**
+ * Normalize classes to a minimal allowlist while preserving non-class attrs.
+ */
+function _axiom01_drupal11_normalize_attributes($source, array $allowed_classes = []): Attribute {
+  if ($source instanceof Attribute) {
+    $values = $source->toArray();
+  }
+  elseif (is_array($source)) {
+    $values = $source;
+  }
+  else {
+    $values = [];
+  }
+
+  $normalized = new Attribute();
+
+  foreach ($values as $name => $value) {
+    if ($name === 'class') {
+      continue;
+    }
+    $normalized->setAttribute($name, $value);
+  }
+
+  $classes = [];
+  if (!empty($values['class'])) {
+    $existing_classes = is_array($values['class']) ? $values['class'] : [$values['class']];
+    foreach ($existing_classes as $class_name) {
+      if (in_array($class_name, $allowed_classes, TRUE)) {
+        $classes[] = $class_name;
+      }
+    }
+  }
+  foreach ($allowed_classes as $class_name) {
+    $classes[] = $class_name;
+  }
+
+  if ($classes) {
+    $normalized->addClass(array_values(array_unique($classes)));
+  }
+
+  return $normalized;
+}
+
+/**
  * Build a renderable menu tree for fallback navigation output.
  */
 function _axiom01_drupal11_build_menu_tree(string $menu_name): array {
@@ -112,18 +155,127 @@ function axiom01_drupal11_preprocess_form(array &$variables): void {
  * Implements hook_preprocess_details().
  */
 function axiom01_drupal11_preprocess_details(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], []);
 }
 
 /**
  * Implements hook_preprocess_block().
  */
 function axiom01_drupal11_preprocess_block(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], []);
+  $plugin_id = (string) ($variables['elements']['#plugin_id'] ?? '');
+  $region = (string) ($variables['elements']['#configuration']['region'] ?? '');
+  $variables['axiom_block_tag'] = 'section';
+  $variables['axiom_block_variant'] = '';
+
+  if (str_contains($region, 'sidebar') || str_contains($region, 'aside')) {
+    $variables['axiom_block_tag'] = 'aside';
   }
+  elseif (str_contains($region, 'content') || str_starts_with($plugin_id, 'views_block:')) {
+    $variables['axiom_block_tag'] = 'article';
+  }
+
+  if ($plugin_id === 'search_form_block' || $plugin_id === 'axiom01_drupal_default_search_block') {
+    $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'], ['search']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_menu_local_tasks().
+ */
+function axiom01_drupal11_preprocess_menu_local_tasks(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['tabs']);
+}
+
+/**
+ * Implements hook_preprocess_pager().
+ */
+function axiom01_drupal11_preprocess_pager(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['pager']);
+  if (empty($variables['heading_id'])) {
+    $variables['heading_id'] = 'pagination-heading';
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_exposed_form().
+ */
+function axiom01_drupal11_preprocess_views_exposed_form(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['filters']);
+}
+
+/**
+ * Implements hook_preprocess_table().
+ */
+function axiom01_drupal11_preprocess_table(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], []);
+}
+
+/**
+ * Implements hook_preprocess_item_list().
+ */
+function axiom01_drupal11_preprocess_item_list(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['list']);
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function axiom01_drupal11_preprocess_views_view(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['view']);
+}
+
+/**
+ * Implements hook_preprocess_views_view_table().
+ */
+function axiom01_drupal11_preprocess_views_view_table(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['view']);
+}
+
+/**
+ * Implements hook_preprocess_views_view_unformatted().
+ */
+function axiom01_drupal11_preprocess_views_view_unformatted(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['view']);
+}
+
+/**
+ * Implements hook_preprocess_views_view_list().
+ */
+function axiom01_drupal11_preprocess_views_view_list(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['view']);
+}
+
+/**
+ * Implements hook_preprocess_views_view_grid().
+ */
+function axiom01_drupal11_preprocess_views_view_grid(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['view']);
+}
+
+/**
+ * Implements hook_preprocess_field_multiple_value_form().
+ */
+function axiom01_drupal11_preprocess_field_multiple_value_form(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], ['list']);
+}
+
+/**
+ * Implements hook_preprocess_ajax_progress().
+ */
+function axiom01_drupal11_preprocess_ajax_progress(array &$variables): void {
+  $allowed_classes = ['ajax-progress'];
+  if (!empty($variables['type']) && $variables['type'] === 'throbber') {
+    $allowed_classes[] = 'ajax-progress-throbber';
+  }
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], $allowed_classes);
+}
+
+/**
+ * Implements hook_preprocess_progress_bar().
+ */
+function axiom01_drupal11_preprocess_progress_bar(array &$variables): void {
+  $variables['attributes'] = _axiom01_drupal11_normalize_attributes($variables['attributes'] ?? [], []);
 }
 
 /**

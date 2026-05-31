@@ -1,0 +1,12 @@
+{# Drupal AJAX throbber/progress template with semantic Axiom spinner output. #}
+{% set progress_attributes = attributes|default(create_attribute()) %}
+{% set progress_type = type|default('throbber') %}
+<section{{ progress_attributes.setAttribute('role', 'status').setAttribute('aria-live', 'polite') }}>
+  {% if progress_type == 'bar' and message %}
+    <p>{{ message }}</p>
+  {% endif %}
+  <span class="throbber" aria-hidden="true"></span>
+  {% if message %}
+    <span>{{ message }}</span>
+  {% endif %}
+</section>

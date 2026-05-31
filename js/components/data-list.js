@@ -9,6 +9,12 @@ export default {
         const dataSource = element.getAttribute('data-source') || '[]';
         const viewMode = element.getAttribute('data-view') || 'grid'; // grid or list
         const allowExpand = element.getAttribute('data-expand') !== 'false';
+        const semanticList = element.querySelector('ul, ol');
+
+        if (semanticList && dataSource === '[]') {
+            element.setAttribute('data-list-view', viewMode);
+            return { destroy: () => {} };
+        }
 
         let items = [];
         let currentView = viewMode;
@@ -22,11 +28,13 @@ export default {
         }
 
         // Create container structure
-        const wrapper = document.createElement('div');
+        const wrapper = document.createElement('section');
         wrapper.className = 'data-list';
+        wrapper.setAttribute('data-list-shell', '');
 
-        const controls = document.createElement('div');
+        const controls = document.createElement('nav');
         controls.className = 'data-list-controls';
+        controls.setAttribute('aria-label', 'Data list view toggle');
 
         const viewToggle = document.createElement('div');
         viewToggle.className = 'view-toggle';
@@ -47,7 +55,7 @@ export default {
         viewToggle.appendChild(listBtn);
         controls.appendChild(viewToggle);
 
-        const itemsContainer = document.createElement('div');
+        const itemsContainer = document.createElement('ul');
         itemsContainer.className = `data-list-items data-list-${currentView}`;
 
         wrapper.appendChild(controls);
@@ -66,7 +74,7 @@ export default {
         };
 
         const createItemElement = (item, index) => {
-            const itemEl = document.createElement('div');
+            const itemEl = document.createElement('li');
             itemEl.className = 'data-list-item';
             itemEl.setAttribute('data-item-id', item.id || index);
 
@@ -178,4 +186,3 @@ export default {
         };
     }
 };
-

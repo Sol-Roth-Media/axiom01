@@ -1,0 +1,15 @@
+{# Drupal progress bar template mapped to Axiom progress semantics. #}
+{% set percent_value = percentage|default(0) %}
+{% set progress_attributes = attributes|default(create_attribute()) %}
+<section{{ progress_attributes.setAttribute('role', 'progressbar').setAttribute('aria-live', 'polite').setAttribute('aria-valuemin', 0).setAttribute('aria-valuemax', 100).setAttribute('aria-valuenow', percent_value) }}>
+  {% if label %}
+    <h3>{{ label }}</h3>
+  {% endif %}
+  <div class="progress" style="--progress-percent: {{ percent_value }}%;">
+    <div></div>
+  </div>
+  <p>{{ percent_value }}%</p>
+  {% if message %}
+    <p>{{ message }}</p>
+  {% endif %}
+</section>

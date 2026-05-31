@@ -1,0 +1,16 @@
+{# Views unformatted display mapped to semantic Data List fallback. #}
+{% set view_attributes = attributes
+  .setAttribute('data-axiom-pattern', 'data-list')
+  .setAttribute('data-view-display', 'unformatted') %}
+<section{{ view_attributes }}>
+  {% if title %}
+    <h3>{{ title }}</h3>
+  {% endif %}
+  <ul>
+    {% for row in rows %}
+      <li{{ row.attributes|default(create_attribute()) }}>
+        {{ row.content|default(row) }}
+      </li>
+    {% endfor %}
+  </ul>
+</section>
