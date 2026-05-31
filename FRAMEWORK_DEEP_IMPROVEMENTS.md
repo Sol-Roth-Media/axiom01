@@ -20,8 +20,10 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 - [x] Added focused runtime-loader fallback smoke checks for dynamic import failures.
 - [x] Added components-overview parity audit coverage for `js/components/*` links.
 - [x] Added runtime-loader migration note template for breaking changes.
+- [x] Added runtime component compatibility map and linked it from docs overview/search.
+- [x] Added targeted non-component docs class-budget checks to pre-release audit.
 
 ## P2
 
 - [ ] Add optional diagnostics mode to runtime loader for structured initialization telemetry.
-- [ ] Add explicit compatibility map between core-supported and experimental components.
+- [x] Add explicit compatibility map between core-supported and experimental components.

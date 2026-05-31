@@ -12,6 +12,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = ROOT / "docs"
 SEARCH_SOURCE = ROOT / "js" / "index-page-manager.js"
+COMPATIBILITY_MAP_SOURCE = DOCS_DIR / "component-compatibility-map.md"
 
 
 @dataclass
@@ -111,6 +112,39 @@ def audit_semantic_compliance(files: list[Path]) -> list[Finding]:
     return findings
 
 
+def audit_priority_docs_class_budget() -> list[Finding]:
+    findings: list[Finding] = []
+    class_attr_rx = re.compile(r'class="([^"]+)"')
+    budgets = {
+        "docs/components-overview.html": 2,
+        "docs/integrations.html": 2,
+        "docs/theme-customization-wizard.html": 2,
+        "docs/interactive-playground.html": 2,
+        "docs/dynamic-content.html": 3,
+        "docs/dynamic-content-examples.html": 3,
+    }
+
+    for relative_path, max_classes in budgets.items():
+        file_path = ROOT / relative_path
+        if not file_path.exists():
+            findings.append(Finding(relative_path, "priority docs class-budget target does not exist"))
+            continue
+
+        text = file_path.read_text(encoding="utf-8", errors="ignore")
+        for class_value in class_attr_rx.findall(text):
+            class_count = len(class_value.split())
+            if class_count > max_classes:
+                findings.append(
+                    Finding(
+                        relative_path,
+                        f"priority docs class budget exceeded: {class_count} classes (max {max_classes})",
+                    )
+                )
+                break
+
+    return findings
+
+
 def extract_search_urls() -> list[str]:
     text = SEARCH_SOURCE.read_text(encoding="utf-8", errors="ignore")
     return re.findall(r'url:\s*"([^"]+)"', text)
@@ -180,6 +214,66 @@ def audit_components_overview_parity() -> list[Finding]:
     return findings
 
 
+def audit_component_compatibility_map() -> list[Finding]:
+    findings: list[Finding] = []
+    if not COMPATIBILITY_MAP_SOURCE.exists():
+        return [Finding(rel(COMPATIBILITY_MAP_SOURCE), "compatibility map file is missing")]
+
+    text = COMPATIBILITY_MAP_SOURCE.read_text(encoding="utf-8", errors="ignore")
+    section: str | None = None
+    core_supported: set[str] = set()
+    experimental: set[str] = set()
+
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.lower() == "## core-supported modules":
+            section = "core"
+            continue
+        if stripped.lower() == "## experimental modules":
+            section = "experimental"
+            continue
+
+        match = re.match(r"-\s+`([a-z0-9-]+)`\s*$", stripped)
+        if not match or section is None:
+            continue
+
+        module_name = match.group(1)
+        if section == "core":
+            core_supported.add(module_name)
+        if section == "experimental":
+            experimental.add(module_name)
+
+    if not core_supported:
+        findings.append(Finding(rel(COMPATIBILITY_MAP_SOURCE), "core-supported module section is empty"))
+    if not experimental:
+        findings.append(Finding(rel(COMPATIBILITY_MAP_SOURCE), "experimental module section is empty"))
+
+    overlap = sorted(core_supported & experimental)
+    for name in overlap:
+        findings.append(Finding(rel(COMPATIBILITY_MAP_SOURCE), f"module appears in both compatibility tiers: {name}"))
+
+    module_exclusions = {"dynamic-content-helpers"}
+    component_modules = {
+        path.stem for path in (ROOT / "js" / "components").glob("*.js") if path.stem not in module_exclusions
+    }
+
+    mapped_modules = core_supported | experimental
+    missing = sorted(component_modules - mapped_modules)
+    for name in missing:
+        findings.append(
+            Finding(
+                rel(COMPATIBILITY_MAP_SOURCE),
+                f"component module missing from compatibility map: js/components/{name}.js",
+            )
+        )
+
+    unknown = sorted(mapped_modules - component_modules)
+    for name in unknown:
+        findings.append(Finding(rel(COMPATIBILITY_MAP_SOURCE), f"unknown compatibility-map module: {name}"))
+
+    return findings
+
+
 def audit_search_urls(urls: list[str]) -> list[Finding]:
     findings: list[Finding] = []
 
@@ -207,9 +301,11 @@ def main() -> int:
     findings.extend(audit_search_toggles(docs_files))
     findings.extend(audit_scaffold_comments(docs_files))
     findings.extend(audit_semantic_compliance(docs_files))
+    findings.extend(audit_priority_docs_class_budget())
     findings.extend(audit_search_urls(search_urls))
     findings.extend(audit_component_parity())
     findings.extend(audit_components_overview_parity())
+    findings.extend(audit_component_compatibility_map())
 
     print("Axiom01 pre-release audit")
     print(f"- docs HTML files scanned: {len(docs_files)}")

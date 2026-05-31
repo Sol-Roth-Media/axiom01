@@ -312,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Data Grid", category: "display", url: "docs/components/data-grid.html" },
             { title: "Autocomplete Stepper", category: "forms", url: "docs/components/autocomplete-stepper.html" },
             { title: "Documentation", category: "docs", url: "docs/components-overview.html" },
+            { title: "Component Compatibility Map", category: "docs", url: "docs/markdown-template.html?file=component-compatibility-map.md" },
             { title: "Component Library", category: "docs", url: "docs/COMPONENT_LIBRARY.md" },
             { title: "Advanced Color Details", category: "docs", url: "docs/colors-advanced.html" },
             { title: "Theme Customization Wizard", category: "docs", url: "docs/theme-customization-wizard.html" },
