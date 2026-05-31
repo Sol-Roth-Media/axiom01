@@ -100,12 +100,60 @@ def audit_semantic_compliance(files: list[Path]) -> list[Finding]:
                 if "--" in cls:
                     findings.append(Finding(rel(file_path), f"modifier-style class found: {cls}"))
 
+            if len(class_value.split()) > 4:
+                findings.append(
+                    Finding(
+                        rel(file_path),
+                        f"over-classed markup found: class attribute has {len(class_value.split())} classes",
+                    )
+                )
+
     return findings
 
 
 def extract_search_urls() -> list[str]:
     text = SEARCH_SOURCE.read_text(encoding="utf-8", errors="ignore")
     return re.findall(r'url:\s*"([^"]+)"', text)
+
+
+def audit_component_parity() -> list[Finding]:
+    findings: list[Finding] = []
+    docs_components = DOCS_DIR / "components"
+    component_docs = sorted(p for p in docs_components.glob("*.html"))
+    component_doc_names = {p.stem for p in component_docs}
+
+    search_urls = extract_search_urls()
+    indexed_component_names = {
+        Path(url).stem for url in search_urls if url.startswith("docs/components/")
+    }
+
+    component_modules = sorted((ROOT / "js" / "components").glob("*.js"))
+    component_module_names = {p.stem for p in component_modules}
+    module_exclusions = {"component-browser", "dynamic-content-helpers"}
+
+    missing_from_index = sorted(component_doc_names - indexed_component_names)
+    for name in missing_from_index:
+        findings.append(
+            Finding(
+                "js/index-page-manager.js",
+                f"component doc missing from searchData index: docs/components/{name}.html",
+            )
+        )
+
+    missing_doc_for_module = sorted(
+        name
+        for name in (component_module_names - component_doc_names)
+        if name not in module_exclusions
+    )
+    for name in missing_doc_for_module:
+        findings.append(
+            Finding(
+                "docs/components",
+                f"component module missing companion docs page: js/components/{name}.js",
+            )
+        )
+
+    return findings
 
 
 def audit_search_urls(urls: list[str]) -> list[Finding]:
@@ -136,6 +184,7 @@ def main() -> int:
     findings.extend(audit_scaffold_comments(docs_files))
     findings.extend(audit_semantic_compliance(docs_files))
     findings.extend(audit_search_urls(search_urls))
+    findings.extend(audit_component_parity())
 
     print("Axiom01 pre-release audit")
     print(f"- docs HTML files scanned: {len(docs_files)}")
@@ -153,4 +202,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-
