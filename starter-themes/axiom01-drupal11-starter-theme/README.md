@@ -50,6 +50,8 @@ Then enable it in Appearance settings and clear caches.
 The starter theme now consumes framework-level hooks in `css/axiom.css` / `css/axiom.min.css` for:
 
 - Drupal message, tab, pager, and exposed-form outputs.
+- Drupal details/accordion wrappers (`.js-form-type-details`, `.claro-details`) and vertical tabs (`.vertical-tabs*`).
+- Switchable accordion integrations (`.field-group-accordion`, `.ui-accordion`) for contrib/admin variants.
 - Ajax/throbber and upload progress indicators.
 - Inline form error wrappers and errored field states.
 - Native file inputs, managed-file widgets, and file list presentation.
