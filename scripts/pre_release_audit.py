@@ -159,6 +159,27 @@ def audit_component_parity() -> list[Finding]:
     return findings
 
 
+def audit_components_overview_parity() -> list[Finding]:
+    findings: list[Finding] = []
+    overview = DOCS_DIR / "components-overview.html"
+    text = overview.read_text(encoding="utf-8", errors="ignore")
+
+    overview_names = set(re.findall(r'href="components/([a-z0-9-]+)\.html"', text))
+    component_modules = {p.stem for p in (ROOT / "js" / "components").glob("*.js")}
+    exclusions = {"dynamic-content-helpers"}
+
+    missing_from_overview = sorted((component_modules - exclusions) - overview_names)
+    for name in missing_from_overview:
+        findings.append(
+            Finding(
+                rel(overview),
+                f"components overview missing module doc link: components/{name}.html",
+            )
+        )
+
+    return findings
+
+
 def audit_search_urls(urls: list[str]) -> list[Finding]:
     findings: list[Finding] = []
 
@@ -188,6 +209,7 @@ def main() -> int:
     findings.extend(audit_semantic_compliance(docs_files))
     findings.extend(audit_search_urls(search_urls))
     findings.extend(audit_component_parity())
+    findings.extend(audit_components_overview_parity())
 
     print("Axiom01 pre-release audit")
     print(f"- docs HTML files scanned: {len(docs_files)}")
