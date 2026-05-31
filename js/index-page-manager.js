@@ -273,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Sidebar", category: "layout", url: "docs/components/sidebar.html" },
             { title: "Skeleton", category: "display", url: "docs/components/skeleton.html" },
             { title: "Slider", category: "forms", url: "docs/components/slider.html" },
+            { title: "Spacing Demo", category: "overlay", url: "docs/components/spacing-demo.html" },
             { title: "Stats", category: "display", url: "docs/components/stats.html" },
             { title: "Table", category: "display", url: "docs/components/table.html" },
             { title: "Tabs", category: "navigation", url: "docs/components/tabs.html" },

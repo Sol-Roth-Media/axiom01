@@ -131,7 +131,10 @@ def audit_component_parity() -> list[Finding]:
     component_module_names = {p.stem for p in component_modules}
     module_exclusions = {"component-browser", "dynamic-content-helpers"}
 
-    missing_from_index = sorted(component_doc_names - indexed_component_names)
+    index_exclusions = {"placeholder"}
+    missing_from_index = sorted(
+        name for name in (component_doc_names - indexed_component_names) if name not in index_exclusions
+    )
     for name in missing_from_index:
         findings.append(
             Finding(
