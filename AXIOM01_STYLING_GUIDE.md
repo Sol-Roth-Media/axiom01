@@ -350,3 +350,65 @@ Accessibility is not optional.
   visibility: visible;
 }
 ```
+
+## Animation Philosophy
+
+Axiom01 treats animation as a **functional tool**, not decoration. Every animation must serve a purpose:
+
+- **State Communication**: Show that something has changed (opened/closed, loading/done)
+- **Feedback**: Respond to user interactions with tactile feedback
+- **Attention Guidance**: Subtly direct focus where needed
+- **Performance Perception**: Make wait states feel shorter
+
+### Animation Principles
+
+1. **Purposeful**: If you can remove an animation and the interface still works, don't animate it.
+2. **Accessible**: Always respect `prefers-reduced-motion` media query.
+3. **GPU-Accelerated**: Use only `transform` and `opacity` for performance.
+4. **Timely**: Keep animations between 150ms–500ms.
+5. **Professional**: Use smooth, standard easing (`cubic-bezier(0.4, 0, 0.2, 1)`).
+
+### Quick Animation Examples
+
+```css
+/* Micro-interaction: Button hover */
+.button {
+  transition: transform 150ms ease-in-out;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+/* State change: Dropdown open */
+.dropdown.menu {
+  max-height: 0;
+  opacity: 0;
+  transition: all 300ms ease-in-out;
+}
+
+.dropdown.is-open .dropdown.menu {
+  max-height: 500px;
+  opacity: 1;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .button, .dropdown.menu {
+    transition: none;
+  }
+}
+```
+
+### Animation Variable Example (Future)
+
+```css
+/* Planned: Animation timing variables */
+--a-duration-quick: 150ms;       /* Hover, micro-interactions */
+--a-duration-standard: 300ms;    /* State changes, transitions */
+--a-duration-long: 500ms;        /* Entrance animations */
+--a-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+```
+
+For detailed animation guidance, see the [Animation Guide](docs/animation-guide.md).
+
