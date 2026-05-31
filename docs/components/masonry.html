@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masonry Component — Axiom01 UI Framework</title>
+    <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="stylesheet" href="../../css/doc-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Courier+Prime:wght@400;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main">
+        <nav>
+            <a href="../../index.html" class="brand"><span class="primary">Axiom01</span></a>
+        </nav>
+    </header>
+
+    <div style="display: flex; margin-top: 60px;">
+        <main class="content" style="flex: 1; padding: 2rem;">
+            <h1 class="title">Masonry Component</h1>
+            <p class="description">
+                A responsive grid layout component with three powerful modes: masonry (CSS Grid auto-fill), file browser, and gallery.
+                Perfect for portfolios, image galleries, and file management interfaces.
+            </p>
+
+            <section class="section">
+                <h2 class="title">Overview</h2>
+                <p>
+                    The Masonry component adapts to three different use cases:
+                </p>
+                <ul>
+                    <li><strong>Masonry Mode:</strong> CSS Grid with auto-fill for flowing layouts</li>
+                    <li><strong>File Mode:</strong> Icon-based file browser with download capabilities</li>
+                    <li><strong>Gallery Mode:</strong> Image gallery with hover overlays and aspect ratio variations</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="title">Basic Masonry Layout</h2>
+                <div class="live">
+                    <div data-component="masonry"
+                         data-mode="masonry"
+                         data-columns="3">
+                    </div>
+                </div>
+
+                <h3>HTML Structure</h3>
+                <pre class="code-block"><code>&lt;div data-component="masonry"
+     data-mode="masonry"
+     data-columns="3"&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <section class="section">
+                <h2 class="title">Attributes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Values</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>data-mode</code></td>
+                            <td>"masonry" | "files" | "gallery"</td>
+                            <td>Layout mode to use</td>
+                        </tr>
+                        <tr>
+                            <td><code>data-columns</code></td>
+                            <td>1-6</td>
+                            <td>Number of columns (masonry mode only)</td>
+                        </tr>
+                        <tr>
+                            <td><code>data-gap</code></td>
+                            <td>CSS value</td>
+                            <td>Gap between items (default: var(--a-space-l))</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2 class="title">JavaScript API</h2>
+                <pre class="code-block"><code>const masonryEl = document.querySelector('[data-component="masonry"]');
+const api = window.componentInstances.get(masonryEl);
+
+// Add item
+api.addItem({ id: 1, name: "Item", image: "url" });
+
+// Set all items
+api.setItems([...]);
+
+// Get items
+const items = api.getItems();
+
+// Change columns
+api.setColumns(4);
+
+// Change mode
+api.setMode("gallery");</code></pre>
+            </section>
+
+            <section class="section">
+                <h2 class="title">Data Formats</h2>
+                <h3>Masonry Mode</h3>
+                <pre class="code-block"><code>{
+  id: "item-1",
+  title: "Project Name",
+  description: "Project description",
+  image: "url-to-image.jpg"
+}</code></pre>
+
+                <h3>File Mode</h3>
+                <pre class="code-block"><code>{
+  id: "file-1",
+  name: "document.pdf",
+  type: "pdf" /* or: image, video, audio, document, folder */,
+  size: 1024 // in bytes
+}</code></pre>
+
+                <h3>Gallery Mode</h3>
+                <pre class="code-block"><code>{
+  id: "photo-1",
+  image: "url-to-image.jpg",
+  title: "Photo Title",
+  description: "Photo description",
+  aspect: "wide" /* or: "tall", default is normal */
+}</code></pre>
+            </section>
+
+            <section class="section">
+                <h2 class="title">Events</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>file-selected</code></td>
+                            <td><code>{ item, index }</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>gallery-selected</code></td>
+                            <td><code>{ item, index }</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>item-removed</code></td>
+                            <td><code>{ item, index }</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>item-added</code></td>
+                            <td><code>{ item }</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2 class="title">Best Practices</h2>
+                <ul>
+                    <li><strong>Gallery Images:</strong> Use optimized JPG/WebP with aspect ratios</li>
+                    <li><strong>File Icons:</strong> Component auto-detects file type from the type attribute</li>
+                    <li><strong>Performance:</strong> Virtual scrolling recommended for 1000+ items</li>
+                    <li><strong>Responsive:</strong> Adjust columns based on viewport with media queries</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <footer class="main simple">
+        <div class="content">
+            <p>&copy; 2026 Axiom01. Syntax-aware, semantic-first UI framework.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/axiom.js"></script>
+</body>
+</html>
+
