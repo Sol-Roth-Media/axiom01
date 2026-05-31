@@ -1,7 +1,7 @@
 "# Axiom01 Complete Component Library
 
 ## Overview
-Axiom01 is a comprehensive, semantic-first UI framework featuring 40+ pre-built components organized into four core categories. All components follow consistent design patterns and integrate seamlessly with the framework's theming system.
+Axiom01 is a comprehensive, semantic-first UI framework featuring 70+ pre-built components organized into four core categories. All components follow consistent design patterns and integrate seamlessly with the framework's theming system.
 
 ---
 
@@ -155,7 +155,7 @@ Axiom01 is a comprehensive, semantic-first UI framework featuring 40+ pre-built 
 | **Display Elements** | 15+ | ✅ Complete |
 | **Feedback & Overlay** | 12+ | ✅ Complete |
 | **Specialized** | 8+ | ✅ Complete |
-| **Total** | **50+** | **✅ Production Ready** |
+| **Total** | **70+** | **✅ Core + Experimental** |
 
 ---
 
@@ -215,3 +215,36 @@ These components extend Axiom01's display capabilities for modern content manage
 
 *Axiom01 Framework v0.2 - Last Updated: May 31, 2026*
 
+
+
+## 7. EXPANSION COMPONENTS
+
+- **Page Loader** (`page-loader.html`) - Experimental expansion component.
+- **Back to Top** (`back-to-top.html`) - Experimental expansion component.
+- **Bottom Sheet** (`bottom-sheet.html`) - Experimental expansion component.
+- **Pie Menu** (`pie-menu.html`) - Experimental expansion component.
+- **Multi Select** (`multi-select.html`) - Experimental expansion component.
+- **Calendar Picker** (`calendar-picker.html`) - Experimental expansion component.
+- **Lightbox** (`lightbox.html`) - Experimental expansion component.
+- **2D Matrix** (`matrix-2d.html`) - Experimental expansion component.
+- **Dial** (`dial.html`) - Experimental expansion component.
+- **Wheel Picker** (`wheel-picker.html`) - Experimental expansion component.
+- **Color Picker** (`color-picker.html`) - Experimental expansion component.
+- **Popover** (`popover.html`) - Experimental expansion component.
+- **Ribbon Tab Bar** (`ribbon-tab-bar.html`) - Experimental expansion component.
+- **Segmented Button** (`segmented-button.html`) - Experimental expansion component.
+- **Snackbar Toast** (`snackbar-toast.html`) - Experimental expansion component.
+- **Split Menu** (`split-menu.html`) - Experimental expansion component.
+- **State Switch** (`state-switch.html`) - Experimental expansion component.
+- **Vertical Toggle** (`vertical-toggle.html`) - Experimental expansion component.
+- **Treeview** (`treeview.html`) - Experimental expansion component.
+- **Checkbox Tree Selector** (`checkbox-tree-selector.html`) - Experimental expansion component.
+- **Pie Chart** (`pie-chart.html`) - Experimental expansion component.
+- **Venn Diagram** (`venn-diagram.html`) - Experimental expansion component.
+- **Bar Chart** (`bar-chart.html`) - Experimental expansion component.
+- **Audio Record Monitor Upload** (`audio-record-monitor-upload.html`) - Experimental expansion component.
+- **Inbox Messaging** (`inbox-messaging.html`) - Experimental expansion component.
+- **Logging Viewer** (`logging.html`) - Experimental expansion component.
+- **Social Share Link Bar** (`social-share-link-bar.html`) - Experimental expansion component.
+- **Data Grid** (`data-grid.html`) - Experimental expansion component.
+- **Autocomplete Stepper** (`autocomplete-stepper.html`) - Experimental expansion component.
