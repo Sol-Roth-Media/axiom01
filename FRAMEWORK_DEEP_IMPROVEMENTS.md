@@ -7,12 +7,21 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 - [x] Restore valid runtime loader structure in `js/axiom.js` and keep registration APIs callable.
 - [x] Add a lightweight runtime-loader syntax gate in the quality lane.
 - [ ] Add focused smoke checks for dynamic component import failures and fallback behavior.
+- [ ] Add strict docs audit checks for inline styles and non-semantic interactive element patterns.
+- [ ] Add strict class-shape checks to block BEM, dashed multi-part classes, and nested class chains in docs examples.
+- [ ] Add a class-budget check for key docs pages so examples stay one-root-class-first with semantic descendants.
 
 ## P1
 
 - [ ] Stabilize component lifecycle docs with `init()`/`destroy()` contract examples per supported component.
 - [ ] Add a docs parity audit between `docs/components-overview.html` and `js/components/*`.
 - [ ] Define migration-note template for any runtime loader breaking change.
+- [ ] Add gesture regression smoke checks for swipe cards, pull refresh, and touch interactions.
+- [ ] Add docs examples for production data binding patterns for story view, timer, and file display components.
+- [ ] Audit all docs component examples for one descriptive root class plus adjective variants only.
+- [ ] Replace extra wrapper markup in docs examples with semantic sectioning elements where possible.
+- [ ] Normalize docs examples to rely on element order and descendant selectors instead of child utility classes.
+- [ ] Add a semantic-structure checklist to docs contribution requirements and release checklist cross-checks.
 
 ## Started in this branch
 
@@ -22,3 +31,7 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 
 - [ ] Add optional diagnostics mode to runtime loader for structured initialization telemetry.
 - [ ] Add explicit compatibility map between core-supported and experimental components.
+- [ ] Add integration adapters for native file system APIs and offline media caching in multimedia picker workflows.
+- [ ] Add an automated docs report that ranks pages by class-count density and semantic-structure quality.
+- [ ] Add staged autofix suggestions for docs examples that can remove redundant classes without behavior changes.
+- [ ] Publish an Axiom01 semantic migration playbook for converting legacy class-heavy snippets to compliant patterns.
