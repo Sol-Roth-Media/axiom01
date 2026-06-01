@@ -2,7 +2,8 @@
 {% for type, messages in message_list %}
   {% set message_role = type == 'error' ? 'alert' : 'status' %}
   {% set message_live = type == 'error' ? 'assertive' : 'polite' %}
-  <section role="{{ message_role }}" aria-live="{{ message_live }}" aria-atomic="true" class="alert {{ type|clean_class }}" data-component="alert">
+  {% set ax_type = type == 'status' ? 'success' : type|clean_class %}
+  <section role="{{ message_role }}" aria-live="{{ message_live }}" aria-atomic="true" class="alert {{ ax_type }}" data-component="alert">
     {% if status_headings[type] %}
       <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
     {% endif %}

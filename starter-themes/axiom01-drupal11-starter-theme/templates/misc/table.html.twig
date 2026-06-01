@@ -1,0 +1,64 @@
+{#
+/**
+ * @file
+ * Axiom01 table template.
+ *
+ * Renders a semantic <table> element. The framework reset and base styles
+ * handle border-collapse and spacing. No extra wrapper classes are added.
+ *
+ * Variables:
+ * - attributes: HTML attributes for the table element
+ * - caption: optional caption text
+ * - header: array of header cells ({ content, tag, attributes })
+ * - rows: array of row data ({ attributes, cells: [{ content, tag, attributes }] })
+ * - footer: optional footer rows (same structure as rows)
+ * - empty: message to display when there are no rows
+ * - no_striping: boolean — disable automatic striping
+ */
+#}
+<table{{ attributes }}>
+  {% if caption %}
+    <caption>{{ caption }}</caption>
+  {% endif %}
+
+  {% if header %}
+    <thead>
+      <tr>
+        {% for cell in header %}
+          {% set cell_tag = cell.tag|default('th') %}
+          <{{ cell_tag }}{{ cell.attributes }}>{{ cell.content }}</{{ cell_tag }}>
+        {% endfor %}
+      </tr>
+    </thead>
+  {% endif %}
+
+  <tbody>
+    {% if rows %}
+      {% for row in rows %}
+        <tr{{ row.attributes }}>
+          {% for cell in row.cells %}
+            {% set cell_tag = cell.tag|default('td') %}
+            <{{ cell_tag }}{{ cell.attributes }}>{{ cell.content }}</{{ cell_tag }}>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    {% elseif empty %}
+      <tr>
+        <td colspan="{{ header|length ?: 1 }}">{{ empty }}</td>
+      </tr>
+    {% endif %}
+  </tbody>
+
+  {% if footer %}
+    <tfoot>
+      {% for row in footer %}
+        <tr{{ row.attributes }}>
+          {% for cell in row.cells %}
+            {% set cell_tag = cell.tag|default('td') %}
+            <{{ cell_tag }}{{ cell.attributes }}>{{ cell.content }}</{{ cell_tag }}>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tfoot>
+  {% endif %}
+</table>
