@@ -37,8 +37,15 @@ Priority is set for solo-maintainer sustainability and high leverage.
 
 - [x] Add dedicated Twig overrides for `details.html.twig` and `fieldset.html.twig` to enforce Axiom01 accordion/fieldset anatomy consistently in admin and frontend forms.
 - [x] Add visual consistency styles for Drupal-specific classes (`.form-item--error-message`, `.messages`, `.pager`, `.tabs`) so core structures inherit Axiom01 spacing and typography defaults.
+- [x] Restore missing Twig overrides: `pager.html.twig`, `menu-local-tasks.html.twig`, `views-exposed-form.html.twig`, `table.html.twig`, `item-list.html.twig`, `block--search-form-block.html.twig`.
+- [x] Fix `_axiom-card.html.twig`: use `<article>` root and remove inner `.content` class.
+- [x] Fix `status-messages.html.twig`: remap `status` type to `success` variant class for framework alert color parity.
+- [x] Bridge `--ax-*` tokens to framework `--a-*` tokens in `theme.css` so framework token updates propagate automatically.
+- [x] Replace hardcoded px/rem values in `theme.css` form inputs with `--a-space-*` and `--a-font-size-*` tokens.
+- [x] Add `--ax-navbar-height` variable and Drupal admin toolbar body offset to `theme.css`.
+- [x] Document intentional naming exceptions (dashed layout utilities, BEM-like CMS selectors) in `COMPATIBILITY.md`.
 - [ ] Add cross-browser focus/hover checks for form controls, including high-contrast mode and forced-colors accessibility scenarios.
-- [ ] Introduce sample content/config bundle demonstrating a complete “contact + filters + accordion help panel” page using only Axiom01-ready Drupal structures.
+- [ ] Introduce sample content/config bundle demonstrating a complete "contact + filters + accordion help panel" page using only Axiom01-ready Drupal structures.
 - [ ] Add validation steps (or snapshots) proving themed output for key Drupal core forms: user login, search, node edit, and theme settings.
 - [ ] Add region-level layout utility classes and documentation so sidebars, prefooter, and footer blocks preserve rhythm across all spacing-scale options.
 

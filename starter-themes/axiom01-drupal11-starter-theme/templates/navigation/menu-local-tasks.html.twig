@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Axiom01 local tasks (admin tabs) template.
+ *
+ * Maps Drupal primary/secondary task tabs to .tabs structure so that
+ * axiom.css CMS integration hooks apply without extra wrapper classes.
+ *
+ * Variables:
+ * - primary: primary task link items
+ * - secondary: secondary task link items
+ */
+#}
+{% if primary %}
+  <nav{{ attributes.addClass('tabs') }} aria-label="{{ 'Primary tabs'|t }}">
+    <ul>
+      {% for item in primary %}
+        <li{{ item.attributes }}>
+          {{ item.link }}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
+
+{% if secondary %}
+  <nav aria-label="{{ 'Secondary tabs'|t }}" class="tabs">
+    <ul>
+      {% for item in secondary %}
+        <li{{ item.attributes }}>
+          {{ item.link }}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}

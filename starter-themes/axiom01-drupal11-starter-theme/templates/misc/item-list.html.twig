@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Axiom01 item list template.
+ *
+ * Renders a plain <ul> or <ol> with no extra wrapper classes.
+ * The framework reset styles list elements; callers apply context-specific
+ * styling via the parent component class.
+ *
+ * Variables:
+ * - list_type: 'ul' or 'ol'
+ * - title: optional list title
+ * - items: list items (may be rendered strings or arrays with { value, attributes })
+ * - attributes: HTML attributes for the list element
+ */
+#}
+{% if title %}
+  {{ title }}
+{% endif %}
+{% if items %}
+  <{{ list_type }}{{ attributes }}>
+    {% for item in items %}
+      <li{{ item.attributes|default({}) }}>{{ item.value }}</li>
+    {% endfor %}
+  </{{ list_type }}>
+{% endif %}

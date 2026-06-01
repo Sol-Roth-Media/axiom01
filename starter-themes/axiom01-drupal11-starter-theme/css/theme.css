@@ -1,25 +1,33 @@
+/* CMS bridge utilities: the --ax-* tokens below bridge to framework --a-* tokens so that
+   a single framework token update propagates to Drupal theme output automatically.
+   The .ax-layout, .ax-utility, and .ax-footer-grid classes are intentional Drupal-specific
+   structural wrappers. They use dashed names to avoid collisions with Layout Builder and
+   contrib module classes that commonly claim single-word names (e.g. "container", "wrapper"). */
+
 :root {
   color-scheme: light;
-  --ax-surface: #ffffff;
-  --ax-text: #111827;
-  --ax-border: rgba(17, 24, 39, 0.12);
+  --ax-navbar-height: 60px;
+  /* Bridge to framework tokens with static fallbacks for environments where axiom.css loads late. */
+  --ax-surface: var(--a-color-surface, #ffffff);
+  --ax-text: var(--a-color-on-surface, #111827);
+  --ax-border: var(--a-color-outline, rgba(17, 24, 39, 0.12));
   --ax-font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   --ax-font-heading: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --ax-max-width: 1200px;
+  --ax-max-width: var(--a-layout-max-width, 1200px);
 }
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --ax-surface: #ffffff;
-  --ax-text: #111827;
-  --ax-border: rgba(17, 24, 39, 0.12);
+  --ax-surface: var(--a-color-surface, #ffffff);
+  --ax-text: var(--a-color-on-surface, #111827);
+  --ax-border: var(--a-color-outline, rgba(17, 24, 39, 0.12));
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --ax-surface: #0f172a;
-  --ax-text: #f8fafc;
-  --ax-border: rgba(248, 250, 252, 0.18);
+  --ax-surface: var(--a-color-surface, #0f172a);
+  --ax-text: var(--a-color-on-surface, #f8fafc);
+  --ax-border: var(--a-color-outline, rgba(248, 250, 252, 0.18));
 }
 
 :root[data-axiom-palette='default'] {
@@ -76,21 +84,34 @@
 
 :root[data-layout-width='narrow'] {
   --ax-max-width: 960px;
+  --a-layout-max-width: 960px;
 }
 
 :root[data-layout-width='standard'] {
   --ax-max-width: 1200px;
+  --a-layout-max-width: 1200px;
 }
 
 :root[data-layout-width='wide'] {
   --ax-max-width: 1440px;
+  --a-layout-max-width: 1440px;
 }
 
 body.axiom-body {
   margin: 0;
+  padding-top: var(--ax-navbar-height);
   background: var(--ax-surface);
   color: var(--ax-text);
   font-family: var(--ax-font-body);
+}
+
+/* Offset for Drupal admin toolbar so navbar and toolbar don't overlap. */
+body.axiom-body.toolbar-fixed {
+  padding-top: calc(var(--ax-navbar-height) + var(--toolbar-height, 0px));
+}
+
+body.axiom-body.toolbar-tray-open.toolbar-fixed {
+  padding-top: calc(var(--ax-navbar-height) + var(--toolbar-height, 0px) + var(--toolbar-tray-height, 0px));
 }
 
 h1,
@@ -134,8 +155,8 @@ h6 {
 .axiom-form small {
   display: block;
   margin-top: var(--a-space-xs, 0.25rem);
-  color: color-mix(in srgb, var(--ax-text) 78%, white);
-  font-size: 0.875rem;
+  color: var(--a-color-on-surface-variant, color-mix(in srgb, var(--ax-text) 78%, white));
+  font-size: var(--a-font-size-small, 0.875rem);
 }
 
 .axiom-form .form-required::after {
@@ -166,9 +187,9 @@ h6 {
   border-radius: var(--a-border-radius-base, 0.5rem);
   background: var(--ax-surface);
   color: inherit;
-  min-height: 2.5rem;
+  min-height: var(--a-space-xxl, 2.5rem);
   box-sizing: border-box;
-  padding: 0.45rem 0.65rem;
+  padding: var(--a-space-xs, 0.25rem) var(--a-space-s, 0.5rem);
 }
 
 .axiom-form textarea {
@@ -276,12 +297,28 @@ h6 {
 
 [data-axiom-search-block] [data-search-results] p {
   margin: 0;
-  color: color-mix(in srgb, var(--ax-text) 78%, white);
-  font-size: 0.875rem;
+  color: var(--a-color-on-surface-variant, color-mix(in srgb, var(--ax-text) 78%, white));
+  font-size: var(--a-font-size-small, 0.875rem);
 }
 
 @media (min-width: 900px) {
   .ax-footer-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+/* Alert list: Drupal status messages render <ul><li> inside .alert.
+   These rules normalise spacing so multi-message lists look consistent
+   without adding classes to the list elements. */
+.alert ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-xs, 0.25rem);
+}
+
+.alert li {
+  margin: 0;
 }
