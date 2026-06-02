@@ -5,9 +5,9 @@
  * Theme hooks and preprocessors for axiom01_drupal11.
  */
 
-use Drupal\Core\Template\Attribute;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
+use Drupal\Core\Template\Attribute;
 
 /**
  * Build a renderable menu tree for fallback navigation output.
@@ -62,6 +62,7 @@ function axiom01_drupal11_preprocess_html(array &$variables): void {
   if (!$attributes instanceof Attribute) {
     $attributes = new Attribute(is_array($attributes) ? $attributes : []);
   }
+
   $color_mode = (string) ($config->get('color_mode') ?: 'light');
   $initial_mode = $color_mode === 'dark' ? 'dark' : 'light';
   $attributes->setAttribute('data-theme', $initial_mode);
@@ -73,15 +74,7 @@ function axiom01_drupal11_preprocess_html(array &$variables): void {
   $attributes->setAttribute('data-layout-width', (string) ($config->get('layout_width') ?: 'standard'));
   $attributes->setAttribute('data-icon-set', (string) ($config->get('icon_set') ?: 'none'));
   $attributes->setAttribute('data-character-set', (string) ($config->get('character_set') ?: 'utf-8'));
-  $attributes->addClass('axiom01-theme-ready');
   $variables['attributes'] = $attributes;
-
-  $body_attributes = $variables['body_attributes'] ?? [];
-  if (!$body_attributes instanceof Attribute) {
-    $body_attributes = new Attribute(is_array($body_attributes) ? $body_attributes : []);
-  }
-  $variables['body_attributes'] = $body_attributes;
-  $variables['body_attributes']->addClass('axiom-body');
 
   $strategy = (string) $config->get('asset_strategy');
   $variables['#attached']['library'][] = _axiom01_drupal11_resolve_assets_library($strategy);
@@ -94,68 +87,6 @@ function axiom01_drupal11_preprocess_page(array &$variables): void {
   $variables['ax_theme_name'] = 'Axiom01 Drupal 11';
   $variables['ax_primary_menu_fallback'] = !empty($variables['page']['primary_menu']) ? [] : _axiom01_drupal11_build_menu_tree('main');
   $variables['ax_secondary_menu_fallback'] = !empty($variables['page']['secondary_menu']) ? [] : _axiom01_drupal11_build_menu_tree('account');
-}
-
-/**
- * Implements hook_preprocess_form().
- */
-function axiom01_drupal11_preprocess_form(array &$variables): void {
-  $attributes = $variables['attributes'] ?? [];
-  if (!$attributes instanceof Attribute) {
-    $attributes = new Attribute(is_array($attributes) ? $attributes : []);
-  }
-  $attributes->addClass('axiom-form');
-  $variables['attributes'] = $attributes;
-}
-
-/**
- * Implements hook_preprocess_details().
- */
-function axiom01_drupal11_preprocess_details(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
-  $variables['attributes']->addClass('axiom-form-details');
-}
-
-/**
- * Implements hook_preprocess_block().
- */
-function axiom01_drupal11_preprocess_block(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
-  $variables['attributes']->addClass('axiom-block');
-}
-
-/**
- * Implements hook_preprocess_fieldset().
- */
-function axiom01_drupal11_preprocess_fieldset(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
-  $variables['attributes']->addClass('axiom-form-fieldset');
-}
-
-/**
- * Implements hook_preprocess_node().
- */
-function axiom01_drupal11_preprocess_node(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
-  $variables['attributes']->addClass('axiom-node');
-}
-
-/**
- * Implements hook_preprocess_views_view().
- */
-function axiom01_drupal11_preprocess_views_view(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
-  $variables['attributes']->addClass('axiom-view');
 }
 
 /**

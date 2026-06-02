@@ -107,7 +107,6 @@ final class AxiomSearchBlock extends BlockBase {
     return [
       '#type' => 'container',
       '#attributes' => [
-        'class' => ['search'],
         'data-axiom-search-block' => 'true',
         'data-search-block-id' => $search_block_id,
       ],

@@ -5,64 +5,62 @@
  */
 #}
 {% if page.top_bar %}
-  <div class="ax-layout ax-top-bar axiom-top-bar">
+  <section aria-label="Top bar">
     {{ page.top_bar }}
-  </div>
+  </section>
 {% endif %}
 
-<header class="main axiom-header" data-component="mobile-navbar">
-  <div class="ax-layout">
-    {{ page.header }}
-    <nav aria-label="Primary">
-      {{ page.primary_menu|default(ax_primary_menu_fallback) }}
+<header data-component="mobile-navbar">
+  {{ page.header }}
+  <nav aria-label="Primary">
+    {{ page.primary_menu|default(ax_primary_menu_fallback) }}
+  </nav>
+  {% if page.secondary_menu or ax_secondary_menu_fallback %}
+    <nav aria-label="Secondary">
+      {{ page.secondary_menu|default(ax_secondary_menu_fallback) }}
     </nav>
-    {% if page.secondary_menu or ax_secondary_menu_fallback %}
-      <nav aria-label="Secondary">
-        {{ page.secondary_menu|default(ax_secondary_menu_fallback) }}
-      </nav>
-    {% endif %}
-  </div>
+  {% endif %}
 </header>
 
 {% if page.utility %}
-  <div class="ax-layout ax-utility axiom-utility">
+  <section aria-label="Utility">
     {{ page.utility }}
-  </div>
+  </section>
 {% endif %}
 
 {% if page.highlighted %}
-  <div class="ax-layout">
+  <section aria-label="Highlighted">
     {{ page.highlighted }}
-  </div>
+  </section>
 {% endif %}
 
 {% if page.breadcrumb %}
-  <div class="ax-layout">
+  <nav aria-label="Breadcrumb">
     {{ page.breadcrumb }}
-  </div>
+  </nav>
 {% endif %}
 
 {% if page.help %}
-  <div class="ax-layout">
+  <section aria-label="Help">
     {{ page.help }}
-  </div>
+  </section>
 {% endif %}
 
 {% if page.hero %}
-  <div class="ax-layout">
+  <section aria-label="Hero">
     {{ page.hero }}
-  </div>
+  </section>
 {% endif %}
 
 {% if page.content_above %}
-  <div class="ax-layout">
+  <section aria-label="Content above">
     {{ page.content_above }}
-  </div>
+  </section>
 {% endif %}
 
-<main class="ax-layout axiom-main" role="main">
+<main role="main">
   {% if page.sidebar_first %}
-    <aside class="axiom-sidebar" role="complementary">
+    <aside aria-label="Sidebar">
       {{ page.sidebar_first }}
     </aside>
   {% endif %}
@@ -70,44 +68,42 @@
   {{ page.content }}
 
   {% if page.sidebar_second %}
-    <aside class="axiom-sidebar" role="complementary">
+    <aside aria-label="Secondary sidebar">
       {{ page.sidebar_second }}
     </aside>
   {% endif %}
 </main>
 
 {% if page.content_below %}
-  <div class="ax-layout">
+  <section aria-label="Content below">
     {{ page.content_below }}
-  </div>
+  </section>
 {% endif %}
 
 {% if page.prefooter %}
-  <div class="ax-layout">
+  <section aria-label="Prefooter">
     {{ page.prefooter }}
-  </div>
+  </section>
 {% endif %}
 
-<footer class="main axiom-footer">
-  <div class="ax-layout">
-    {% if page.footer_first or page.footer_second or page.footer_third %}
-      <div class="ax-footer-grid">
-        <div>{{ page.footer_first }}</div>
-        <div>{{ page.footer_second }}</div>
-        <div>{{ page.footer_third }}</div>
-      </div>
-    {% endif %}
-    {% if page.footer_menu %}
-      <nav aria-label="Footer">
-        {{ page.footer_menu }}
-      </nav>
-    {% endif %}
-    {{ page.footer }}
-  </div>
+<footer>
+  {% if page.footer_first or page.footer_second or page.footer_third %}
+    <section aria-label="Footer columns">
+      {{ page.footer_first }}
+      {{ page.footer_second }}
+      {{ page.footer_third }}
+    </section>
+  {% endif %}
+  {% if page.footer_menu %}
+    <nav aria-label="Footer">
+      {{ page.footer_menu }}
+    </nav>
+  {% endif %}
+  {{ page.footer }}
 </footer>
 
 {% if page.bottom %}
-  <div class="ax-layout">
+  <section aria-label="Bottom">
     {{ page.bottom }}
-  </div>
+  </section>
 {% endif %}
