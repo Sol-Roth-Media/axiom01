@@ -294,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Component Library", category: "docs", url: "docs/COMPONENT_LIBRARY.md" },
             { title: "Advanced Color Details", category: "docs", url: "docs/colors-advanced.html" },
             { title: "Theme Customization Wizard", category: "docs", url: "docs/theme-customization-wizard.html" },
+            { title: "Code Snippet Guide", category: "docs", url: "docs/code-snippets.html" },
             { title: "Advanced Typography Guide", category: "docs", url: "docs/typography-advanced.html" },
             { title: "Advanced Layout Guide", category: "docs", url: "docs/layout-advanced.html" },
             { title: "Advanced Media & Icons Guide", category: "docs", url: "docs/media-advanced.html" },

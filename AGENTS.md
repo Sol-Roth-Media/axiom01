@@ -8,7 +8,7 @@
 ## How the app is wired
 - `js/axiom.js` scans for `[data-component]`, dynamically imports `js/components/<name>.js`, and initializes each component.
 - `js/index-page-manager.js` owns page-only behavior for `index.html`: theme toggle + `localStorage`, mobile nav, spacing slider, search modal, copy-to-clipboard, and the component browser.
-- Components in `js/components/` typically export either a class with `init()`/`destroy()` or an object with `init(element)` that returns cleanup behavior.
+yy- Components in `js/components/` typically export either a class with `init()`/`destroy()` or an object with `init(element)` that returns cleanup behavior.
 
 ## Conventions to follow
 - Prefer semantic HTML with one descriptive root class per component, then style descendants; do **not** use BEM.

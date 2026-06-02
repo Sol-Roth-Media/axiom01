@@ -273,22 +273,57 @@ footer.main .bottom {
 }
 
 .code-block {
-    background-color: var(--a-color-code-bg);
-    color: var(--a-color-code-text);
-    padding: var(--a-space-l);
+    margin-bottom: var(--a-space-l);
+}
+
+/* Documentation code snippets: works for plain <pre><code>, wrapped .code-block,
+   and Prism language classes when Prism is present. */
+main pre,
+main pre.code-block,
+main .code-block pre,
+main pre[class*="language-"] {
+    margin: 0 0 var(--a-space-m);
+    background-color: var(--a-color-code-bg, #0f172a);
+    color: var(--a-color-code-text, #e2e8f0);
+    padding: var(--a-space-m);
     border-radius: var(--a-border-radius-medium);
     overflow-x: auto;
-    border: 1px solid var(--a-color-code-border);
+    border: 1px solid var(--a-color-code-border, var(--a-color-outline));
+    white-space: pre;
+    line-height: 1.5;
+    tab-size: 2;
 }
 
-.code-block pre {
-    margin: 0;
-}
-
-.code-block code {
+main pre code,
+main .code-block code,
+main code[class*="language-"] {
+    display: block;
     font-family: var(--a-font-family-mono, monospace);
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: inherit;
+}
+
+main :not(pre) > code {
+    background-color: color-mix(in srgb, var(--a-color-primary) 12%, transparent);
+    color: inherit;
+    padding: 0 0.3em;
+    border-radius: var(--a-border-radius-small);
+}
+
+main pre[class*="language-"] code[class*="language-"] {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    text-shadow: none;
+}
+
+main pre .token.tag {
+    display: inline;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .updates-feed {
