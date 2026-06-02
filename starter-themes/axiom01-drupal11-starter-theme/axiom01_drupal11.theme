@@ -5,9 +5,9 @@
  * Theme hooks and preprocessors for axiom01_drupal11.
  */
 
-use Drupal\Core\Template\Attribute;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Menu\MenuTreeParameters;
+use Drupal\Core\Template\Attribute;
 
 /**
  * Build a renderable menu tree for fallback navigation output.
@@ -27,33 +27,6 @@ function _axiom01_drupal11_build_menu_tree(string $menu_name): array {
 }
 
 /**
- * Resolve the selected Axiom01 asset strategy to a theme library.
- */
-function _axiom01_drupal11_resolve_assets_library(string $strategy): string {
-  $theme_path = \Drupal::service('extension.list.theme')->getPath('axiom01_drupal11');
-  $package_assets_exist = file_exists($theme_path . '/vendor/axiom01/dist/css/axiom.min.css')
-    && file_exists($theme_path . '/vendor/axiom01/dist/js/axiom.min.js');
-
-  if ($strategy === 'package' && $package_assets_exist) {
-    return 'axiom01_drupal11/axiom01_assets_package';
-  }
-
-  if ($strategy === 'package') {
-    return 'axiom01_drupal11/axiom01_assets_local';
-  }
-
-  if ($strategy === 'local') {
-    return 'axiom01_drupal11/axiom01_assets_local';
-  }
-
-  if ($package_assets_exist) {
-    return 'axiom01_drupal11/axiom01_assets_package';
-  }
-
-  return 'axiom01_drupal11/axiom01_assets_local';
-}
-
-/**
  * Implements hook_preprocess_html().
  */
 function axiom01_drupal11_preprocess_html(array &$variables): void {
@@ -62,6 +35,7 @@ function axiom01_drupal11_preprocess_html(array &$variables): void {
   if (!$attributes instanceof Attribute) {
     $attributes = new Attribute(is_array($attributes) ? $attributes : []);
   }
+
   $color_mode = (string) ($config->get('color_mode') ?: 'light');
   $initial_mode = $color_mode === 'dark' ? 'dark' : 'light';
   $attributes->setAttribute('data-theme', $initial_mode);
@@ -73,18 +47,9 @@ function axiom01_drupal11_preprocess_html(array &$variables): void {
   $attributes->setAttribute('data-layout-width', (string) ($config->get('layout_width') ?: 'standard'));
   $attributes->setAttribute('data-icon-set', (string) ($config->get('icon_set') ?: 'none'));
   $attributes->setAttribute('data-character-set', (string) ($config->get('character_set') ?: 'utf-8'));
-  $attributes->addClass('axiom01-theme-ready');
   $variables['attributes'] = $attributes;
 
-  $body_attributes = $variables['body_attributes'] ?? [];
-  if (!$body_attributes instanceof Attribute) {
-    $body_attributes = new Attribute(is_array($body_attributes) ? $body_attributes : []);
-  }
-  $variables['body_attributes'] = $body_attributes;
-  $variables['body_attributes']->addClass('axiom-body');
-
-  $strategy = (string) $config->get('asset_strategy');
-  $variables['#attached']['library'][] = _axiom01_drupal11_resolve_assets_library($strategy);
+  $variables['#attached']['library'][] = 'axiom01_drupal11/axiom01_assets_local';
 }
 
 /**
@@ -97,90 +62,10 @@ function axiom01_drupal11_preprocess_page(array &$variables): void {
 }
 
 /**
- * Implements hook_preprocess_form().
- */
-function axiom01_drupal11_preprocess_form(array &$variables): void {
-  $attributes = $variables['attributes'] ?? [];
-  if (!$attributes instanceof Attribute) {
-    $attributes = new Attribute(is_array($attributes) ? $attributes : []);
-  }
-  $attributes->addClass('axiom-form');
-  $variables['attributes'] = $attributes;
-}
-
-/**
- * Implements hook_preprocess_details().
- */
-function axiom01_drupal11_preprocess_details(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
-  $variables['attributes']->addClass('axiom-form-details');
-}
-
-/**
- * Implements hook_preprocess_block().
- */
-function axiom01_drupal11_preprocess_block(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
-  $variables['attributes']->addClass('axiom-block');
-}
-
-/**
- * Implements hook_preprocess_fieldset().
- */
-function axiom01_drupal11_preprocess_fieldset(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
-  $variables['attributes']->addClass('axiom-form-fieldset');
-}
-
-/**
- * Implements hook_preprocess_node().
- */
-function axiom01_drupal11_preprocess_node(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
-  $variables['attributes']->addClass('axiom-node');
-}
-
-/**
- * Implements hook_preprocess_views_view().
- */
-function axiom01_drupal11_preprocess_views_view(array &$variables): void {
-  if (!isset($variables['attributes']) || !$variables['attributes'] instanceof Attribute) {
-    $variables['attributes'] = new Attribute(is_array($variables['attributes'] ?? NULL) ? $variables['attributes'] : []);
-  }
-  $variables['attributes']->addClass('axiom-view');
-}
-
-/**
  * Implements hook_form_system_theme_settings_alter().
  */
 function axiom01_drupal11_form_system_theme_settings_alter(array &$form, FormStateInterface $form_state): void {
   $config = \Drupal::config('axiom01_drupal11.settings');
-  $form['axiom01_assets'] = [
-    '#type' => 'details',
-    '#title' => t('Axiom01 assets'),
-    '#open' => TRUE,
-  ];
-
-  $form['axiom01_assets']['asset_strategy'] = [
-    '#type' => 'select',
-    '#title' => t('Asset strategy'),
-    '#description' => t('Auto prefers package-managed assets when present and otherwise falls back to local dist assets. Use auto for most sites, local when packaging a self-contained theme release, and package when your deployment pipeline always installs vendor assets from Axiom01 updates.'),
-    '#default_value' => $config->get('asset_strategy') ?: 'auto',
-    '#options' => [
-      'auto' => t('Auto (prefer package-managed, then local fallback)'),
-      'local' => t('Local dist assets'),
-      'package' => t('Package-managed copy'),
-    ],
-  ];
-
   $form['axiom01_appearance'] = [
     '#type' => 'details',
     '#title' => t('Axiom01 appearance'),

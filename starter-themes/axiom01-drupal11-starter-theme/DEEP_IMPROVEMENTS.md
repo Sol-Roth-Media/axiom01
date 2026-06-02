@@ -37,10 +37,30 @@ Priority is set for solo-maintainer sustainability and high leverage.
 
 - [x] Add dedicated Twig overrides for `details.html.twig` and `fieldset.html.twig` to enforce Axiom01 accordion/fieldset anatomy consistently in admin and frontend forms.
 - [x] Add visual consistency styles for Drupal-specific classes (`.form-item--error-message`, `.messages`, `.pager`, `.tabs`) so core structures inherit Axiom01 spacing and typography defaults.
+- [x] Realign `status-messages.html.twig` to Drupal-native `.messages--*` variants and normalize form-error hooks to semantic alert elements (`[data-axiom-error]`) with compatibility styling.
 - [ ] Add cross-browser focus/hover checks for form controls, including high-contrast mode and forced-colors accessibility scenarios.
 - [ ] Introduce sample content/config bundle demonstrating a complete “contact + filters + accordion help panel” page using only Axiom01-ready Drupal structures.
 - [ ] Add validation steps (or snapshots) proving themed output for key Drupal core forms: user login, search, node edit, and theme settings.
 - [ ] Add region-level layout utility classes and documentation so sidebars, prefooter, and footer blocks preserve rhythm across all spacing-scale options.
+
+## Main-branch runtime enforcement checklist (latest CSS/JS only)
+
+### P0
+
+- [x] Force Drupal runtime attachment to bundled `dist/*` assets only (remove package/local/auto switching).
+- [x] Add a parity gate that fails CI when starter-theme `dist` assets drift from root minified framework assets.
+- [x] Wire parity gate into the default quality pipeline (`npm test`) and release flow.
+
+### P1
+
+- [x] Add a dedicated sync command to refresh starter-theme `dist` CSS/JS from root assets.
+- [x] Update starter-theme docs/validation contract to remove asset strategy toggles and document strict parity.
+
+### P2
+
+- [x] Add a CI job for direct pull-request annotations when parity drift is detected.
+- [x] Add a release note fragment template that records synchronized asset source commit SHA.
+- [x] Add a standalone starter-theme repository workflow that runs parity checks against latest upstream Axiom01 main snapshots.
 
 ## Backport candidates to core Axiom01
 

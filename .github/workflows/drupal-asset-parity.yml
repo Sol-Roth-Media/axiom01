@@ -1,0 +1,27 @@
+name: Drupal Asset Parity
+
+on:
+  pull_request:
+    paths:
+      - 'css/axiom.min.css'
+      - 'js/axiom.min.js'
+      - 'starter-themes/axiom01-drupal11-starter-theme/dist/**'
+      - 'scripts/sync_drupal_starter_assets.py'
+      - 'package.json'
+      - '.github/workflows/drupal-asset-parity.yml'
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Check Drupal starter-theme asset parity
+        run: python3 scripts/sync_drupal_starter_assets.py --check

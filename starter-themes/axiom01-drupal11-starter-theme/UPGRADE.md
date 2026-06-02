@@ -3,9 +3,10 @@
 ## Axiom01 upgrade process
 
 1. Update Axiom01 dependency/version reference.
-2. Run template smoke checks and menu rendering checks.
-3. Review release notes for token or component API changes.
-4. Update compatibility range in `COMPATIBILITY.md` if needed.
+2. Run `npm run sync:drupal-assets` from repository root to refresh starter-theme `dist/*` runtime files.
+3. Run template smoke checks and menu rendering checks.
+4. Review release notes for token or component API changes.
+5. Update compatibility range in `COMPATIBILITY.md` if needed.
 
 ## Drupal minor/patch upgrade process
 

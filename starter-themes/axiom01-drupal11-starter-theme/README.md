@@ -1,28 +1,91 @@
 # Axiom01 Drupal 11 Starter Theme
 
-This directory is a ready-to-install Drupal 11 custom theme with bundled Axiom01 assets and sane defaults.
+This directory is a ready-to-install Drupal 11 custom theme with bundled Axiom01 assets and semantic-first integration defaults.
 
 ## Goal
 
-Provide a production-oriented Drupal 11 starter theme that uses Axiom01 tokens, base styles, and component patterns while staying maintainable for a solo developer + AI agents.
+Provide a production-oriented Drupal 11 starter theme that uses Axiom01 tokens, accessibility hooks, and semantic markup while staying maintainable for a solo developer + AI agents.
+
+## Strict Drupal profile (canonical)
+
+For this starter theme, treat this as the canonical integration contract even when legacy framework docs still show class-heavy patterns:
+
+- Semantic-first output.
+- No BEM.
+- No new custom dashed class naming.
+- Minimal class budget: one root component class only when unavoidable.
+- Prefer element structure + `data-*` runtime hooks over wrapper classes.
+- Drupal core classes are allowed when they are native output hooks (`.messages`, `.tabs`, `.pager`, etc.).
 
 ## Included
 
 - Drupal 11 theme metadata and libraries
-- Core layout templates (`page`, `node`, `views`, status messages)
-- Form wrappers for `form-element`, `details`, and `fieldset` with Axiom01-friendly anatomy
-- Main/footer/utility menu templates
-- Axiom01 component partials for Twig composition
-- Compatibility and upgrade policy docs
-- Bundled `dist/css/axiom.min.css` and `dist/js/axiom.min.js` for out-of-the-box usage
-- Cross-repo validation checklist
+- Core templates:
+  - `templates/layout/page.html.twig`
+  - `templates/content/node.html.twig`
+  - `templates/views/views-view.html.twig`
+  - `templates/misc/status-messages.html.twig`
+  - `templates/form/form-element.html.twig`
+  - `templates/form/details.html.twig`
+  - `templates/form/fieldset.html.twig`
+  - `templates/navigation/menu--main.html.twig`
+  - `templates/navigation/menu--footer.html.twig`
+  - `templates/navigation/menu--utility.html.twig`
+  - `templates/block/block--system-branding-block.html.twig`
+- Axiom component partials (`templates/components`)
+- Bundled `dist/css/axiom.min.css` and `dist/js/axiom.min.js`
+- Release operations templates:
+  - `RELEASE_NOTE_TEMPLATE.md`
+  - `.github/workflows/upstream-main-parity.yml` (for extracted standalone starter-theme repo)
+- Compatibility and validation docs
 
-## How to extract into dedicated repository
+## Custom blocks included
 
-1. Create a new repository named `axiom01-drupal11-starter-theme`.
-2. Copy the contents of this folder into that repository root.
-3. Set default branch and CI as needed.
-4. Keep version compatibility with Axiom01 according to `COMPATIBILITY.md`.
+- **Axiom01 Search (JSON)**
+- **Drupal Default Search**
+- **Axiom CTA**
+- **Axiom Carousel**
+- **Axiom AI Chat**
+- **Axiom AI Image Generator**
+
+## New block contracts
+
+### Axiom CTA
+
+- Config: title, body, primary/secondary label+URL, variant.
+- Output: semantic `section.cta` with heading, paragraph, and links.
+
+### Axiom Carousel
+
+- Config: slide items (media, alt, heading, text, link), autoplay/timing, controls toggle.
+- Output: semantic region with keyboard navigation and ARIA state hooks.
+
+### Axiom AI Chat
+
+- Config: provider mode, endpoint route, system prompt preset, placeholder, intro text, privacy notice.
+- Output: semantic chat panel with accessible message log + form controls.
+
+### Axiom AI Image Generator
+
+- Config: endpoint route, model preset, style presets, output size preset, moderation notice.
+- Output: semantic form + status + result region.
+
+## Drupal AI Initiative integration approach
+
+Use a thin adapter layer via a companion module:
+
+- **Theme:** presentation, accessibility semantics, progressive enhancement behavior.
+- **Companion module:** Drupal AI provider wiring, validation, moderation, permissions, caching.
+- **Config entities:** reusable presets (persona, style, model, token/cost guardrails).
+
+Keep block UI provider-agnostic (`data-*` hooks) so backend providers can change without Twig/JS rewrites.
+
+## Runtime source-of-truth
+
+- Theme always loads bundled `dist/js/axiom.min.js` and `dist/css/axiom.min.css` as its runtime contract.
+- These files must stay byte-for-byte aligned with repository-root `js/axiom.min.js` and `css/axiom.min.css`.
+- Use `npm run sync:drupal-assets` from repository root whenever framework assets change.
+- If source/minified runtime behavior diverges, treat starter-theme docs + compatibility contract as canonical and revalidate before release.
 
 ## Local Drupal usage
 
@@ -34,79 +97,20 @@ web/themes/custom/axiom01_drupal11
 
 Then enable it in Appearance settings and clear caches.
 
-## Good defaults (out of the box)
-
-- Defaults to the **light** theme to match Axiom01 `index.html`.
-- Includes bundled local Axiom01 assets so no package install is required for first run.
-- Declares and renders expanded Drupal page regions for block-heavy layouts and easier placement.
-- Supports primary and secondary navigation with fallback menu rendering when region blocks are not configured yet.
-- Front page fallback and status/system messages render correctly through normal Drupal blocks.
-- Keeps contextual edit affordances available in node/views/branding templates.
-- Reduces custom/BEM-style template class output and relies on semantic structure + core Drupal classes where possible.
-- Uses core Axiom01 CMS integration hooks for progress indicators, tabs, pager variants, exposed filters, messages, inline errors, and file upload widgets.
-
-## CMS integration hooks backported to Axiom01 core
-
-The starter theme now consumes framework-level hooks in `css/axiom.css` / `css/axiom.min.css` for:
-
-- Drupal message, tab, pager, and exposed-form outputs.
-- Ajax/throbber and upload progress indicators.
-- Inline form error wrappers and errored field states.
-- Native file inputs, managed-file widgets, and file list presentation.
-- Generic field widget/formatter wrappers (`field--widget-*`, `field--formatter-*`) used by Drupal core and common contributed modules.
-
-If expected front-page text does not appear:
-
-1. Confirm **Page content** and **Status messages** blocks are placed.
-2. Ensure they are visible for your current theme and region assignments.
-3. Clear caches (`drush cr` or admin UI).
-
 ## Theme settings (Appearance → Settings → Axiom01 Drupal 11)
 
-Theme settings now include:
+- Color mode: `light`, `dark`, `system`
+- Color palette: `default`, `indigo`, `emerald`, `sunset`
+- Body font + Heading font
+- Spacing scale: compact/comfortable/relaxed
+- Layout width: narrow/standard/wide
+- Icon set strategy: none/emoji/fontawesome/material
+- Character set declaration: utf-8/iso-8859-1/windows-1252
 
-- **Asset strategy**: `auto`, `local`, `package`
-- **Color mode**: `light`, `dark`, `system`
-- **Color palette**: `default`, `indigo`, `emerald`, `sunset`
-- **Body font** and **Heading font** selectors
-- **Spacing scale**: compact/comfortable/relaxed
-- **Layout width**: narrow/standard/wide
-- **Icon set strategy**: none/emoji/fontawesome/material
-- **Character set declaration**: utf-8/iso-8859-1/windows-1252
+## Delivery sequence for AI-enabled rollout
 
-## Search blocks included
-
-The starter theme now ships two placeable blocks:
-
-- **Axiom01 Search (JSON)**: lightweight client-side search with configurable JSON results and configurable key/value mapping.
-- **Drupal Default Search**: wrapper around Drupal core Search block form.
-
-For the Axiom01 block, JSON accepts either:
-
-- Object map (`{"Label":"/path"}`)
-- Array of objects (`[{"title":"Label","url":"/path"}]`) with configurable label/value keys.
-
-Markup for the Axiom01 search block intentionally stays semantic/minimal and uses render-array attributes/data hooks so teams can add classes via preprocess/theme functions when needed.
-
-Branding options are enabled through core theme features:
-
-- Logo upload
-- Site name toggle
-- Site slogan/description toggle
-- Favicon support
-
-## Axiom01 asset strategy switch
-
-Theme settings now expose an **Asset strategy** selector:
-
-- **Auto** (default): prefers `vendor/axiom01/dist/*` when present and falls back to local `dist/*`.
-- **Local dist assets**: always uses `dist/css/axiom.min.css` + `dist/js/axiom.min.js`.
-- **Package-managed copy**: targets `vendor/axiom01/dist/*` and safely falls back to local `dist/*` if vendor files are missing.
-
-When changing strategy, clear Drupal caches and re-run `VALIDATION.md` to confirm CSS/JS loading.
-
-### Which asset strategy should I choose?
-
-- **Auto**: best default for most teams; it gives resilient fallback behavior across local/dev/prod.
-- **Local**: best when distributing a standalone theme package that must work without Composer vendor assets.
-- **Package**: best when your deployment pipeline consistently installs and updates `vendor/axiom01` as the source of truth.
+1. Land CTA + Carousel blocks first.
+2. Land AI chat block against mocked backend contract.
+3. Switch chat backend to Drupal AI plugin-backed adapter.
+4. Land AI image generator block with the same adapter contract.
+5. Add validation fixtures + a11y smoke scenarios across all four blocks.
