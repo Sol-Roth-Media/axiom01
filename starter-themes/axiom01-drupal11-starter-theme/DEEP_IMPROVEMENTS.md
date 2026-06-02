@@ -37,6 +37,7 @@ Priority is set for solo-maintainer sustainability and high leverage.
 
 - [x] Add dedicated Twig overrides for `details.html.twig` and `fieldset.html.twig` to enforce Axiom01 accordion/fieldset anatomy consistently in admin and frontend forms.
 - [x] Add visual consistency styles for Drupal-specific classes (`.form-item--error-message`, `.messages`, `.pager`, `.tabs`) so core structures inherit Axiom01 spacing and typography defaults.
+- [x] Realign `status-messages.html.twig` to Drupal-native `.messages--*` variants and normalize form-error hooks to semantic alert elements (`[data-axiom-error]`) with compatibility styling.
 - [ ] Add cross-browser focus/hover checks for form controls, including high-contrast mode and forced-colors accessibility scenarios.
 - [ ] Introduce sample content/config bundle demonstrating a complete “contact + filters + accordion help panel” page using only Axiom01-ready Drupal structures.
 - [ ] Add validation steps (or snapshots) proving themed output for key Drupal core forms: user login, search, node edit, and theme settings.
