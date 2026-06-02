@@ -6,8 +6,8 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 
 - [x] Restore valid runtime loader structure in `js/axiom.js` and keep registration APIs callable.
 - [x] Add a lightweight runtime-loader syntax gate in the quality lane.
-- [ ] Add focused smoke checks for dynamic component import failures and fallback behavior.
-- [ ] Add strict docs audit checks for inline styles and non-semantic interactive element patterns.
+- [x] Add focused smoke checks for dynamic component import failures and fallback behavior.
+- [x] Add strict docs audit checks for inline styles and non-semantic interactive element patterns.
 - [ ] Add strict class-shape checks to block BEM, dashed multi-part classes, and nested class chains in docs examples.
 - [ ] Add a class-budget check for key docs pages so examples stay one-root-class-first with semantic descendants.
 
@@ -35,3 +35,11 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 - [ ] Add an automated docs report that ranks pages by class-count density and semantic-structure quality.
 - [ ] Add staged autofix suggestions for docs examples that can remove redundant classes without behavior changes.
 - [ ] Publish an Axiom01 semantic migration playbook for converting legacy class-heavy snippets to compliant patterns.
+
+## New deep improvements (semantic-first hardening)
+
+- [ ] Add docs audit checks to flag non-semantic button-like anchors (`href="#"`) and require true button elements for actions.
+- [ ] Add a targeted docs smoke gate that enforces one-root-class examples for selected flagship component pages before broad rollout.
+- [ ] Add an audit check that flags class attributes with more than two tokens in component examples to reduce wrapper-class drift.
+- [ ] Add a migration backlog map for top 20 docs component pages with the highest semantic debt and class-density.
+- [ ] Add starter-theme Twig fixture checks that block new BEM-style (`__` / `--`) and multi-dash utility classes.
