@@ -27,33 +27,6 @@ function _axiom01_drupal11_build_menu_tree(string $menu_name): array {
 }
 
 /**
- * Resolve the selected Axiom01 asset strategy to a theme library.
- */
-function _axiom01_drupal11_resolve_assets_library(string $strategy): string {
-  $theme_path = \Drupal::service('extension.list.theme')->getPath('axiom01_drupal11');
-  $package_assets_exist = file_exists($theme_path . '/vendor/axiom01/dist/css/axiom.min.css')
-    && file_exists($theme_path . '/vendor/axiom01/dist/js/axiom.min.js');
-
-  if ($strategy === 'package' && $package_assets_exist) {
-    return 'axiom01_drupal11/axiom01_assets_package';
-  }
-
-  if ($strategy === 'package') {
-    return 'axiom01_drupal11/axiom01_assets_local';
-  }
-
-  if ($strategy === 'local') {
-    return 'axiom01_drupal11/axiom01_assets_local';
-  }
-
-  if ($package_assets_exist) {
-    return 'axiom01_drupal11/axiom01_assets_package';
-  }
-
-  return 'axiom01_drupal11/axiom01_assets_local';
-}
-
-/**
  * Implements hook_preprocess_html().
  */
 function axiom01_drupal11_preprocess_html(array &$variables): void {
@@ -76,8 +49,7 @@ function axiom01_drupal11_preprocess_html(array &$variables): void {
   $attributes->setAttribute('data-character-set', (string) ($config->get('character_set') ?: 'utf-8'));
   $variables['attributes'] = $attributes;
 
-  $strategy = (string) $config->get('asset_strategy');
-  $variables['#attached']['library'][] = _axiom01_drupal11_resolve_assets_library($strategy);
+  $variables['#attached']['library'][] = 'axiom01_drupal11/axiom01_assets_local';
 }
 
 /**
@@ -94,24 +66,6 @@ function axiom01_drupal11_preprocess_page(array &$variables): void {
  */
 function axiom01_drupal11_form_system_theme_settings_alter(array &$form, FormStateInterface $form_state): void {
   $config = \Drupal::config('axiom01_drupal11.settings');
-  $form['axiom01_assets'] = [
-    '#type' => 'details',
-    '#title' => t('Axiom01 assets'),
-    '#open' => TRUE,
-  ];
-
-  $form['axiom01_assets']['asset_strategy'] = [
-    '#type' => 'select',
-    '#title' => t('Asset strategy'),
-    '#description' => t('Auto prefers package-managed assets when present and otherwise falls back to local dist assets. Use auto for most sites, local when packaging a self-contained theme release, and package when your deployment pipeline always installs vendor assets from Axiom01 updates.'),
-    '#default_value' => $config->get('asset_strategy') ?: 'auto',
-    '#options' => [
-      'auto' => t('Auto (prefer package-managed, then local fallback)'),
-      'local' => t('Local dist assets'),
-      'package' => t('Package-managed copy'),
-    ],
-  ];
-
   $form['axiom01_appearance'] = [
     '#type' => 'details',
     '#title' => t('Axiom01 appearance'),

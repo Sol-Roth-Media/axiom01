@@ -17,5 +17,5 @@ Use this checklist whenever Axiom01 or the starter theme changes:
 - [ ] AI chat block shows intro/privacy text, message log updates, and graceful unavailable-state UX.
 - [ ] AI image block shows status transitions and result region updates with fallback messages.
 - [ ] AI block behaviors continue to work when backend endpoint is unavailable (graceful fallback).
-- [ ] Axiom01 CSS/JS assets load correctly in Drupal 11 under all asset strategies.
-- [ ] Asset strategy toggle (`auto` / `local` / `package`) resolves to expected files with fallback behavior.
+- [ ] Axiom01 CSS/JS assets load correctly in Drupal 11 from bundled `dist/*` runtime files.
+- [ ] Starter-theme `dist/css/axiom.min.css` and `dist/js/axiom.min.js` stay byte-for-byte equal to root `css/axiom.min.css` and `js/axiom.min.js`.

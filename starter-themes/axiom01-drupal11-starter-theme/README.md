@@ -79,7 +79,9 @@ Keep block UI provider-agnostic (`data-*` hooks) so backend providers can change
 
 ## Runtime source-of-truth
 
-- Theme loads `dist/js/axiom.min.js` and `dist/css/axiom.min.css` (or package-managed vendor equivalents) as its runtime contract.
+- Theme always loads bundled `dist/js/axiom.min.js` and `dist/css/axiom.min.css` as its runtime contract.
+- These files must stay byte-for-byte aligned with repository-root `js/axiom.min.js` and `css/axiom.min.css`.
+- Use `npm run sync:drupal-assets` from repository root whenever framework assets change.
 - If source/minified runtime behavior diverges, treat starter-theme docs + compatibility contract as canonical and revalidate before release.
 
 ## Local Drupal usage
@@ -94,7 +96,6 @@ Then enable it in Appearance settings and clear caches.
 
 ## Theme settings (Appearance → Settings → Axiom01 Drupal 11)
 
-- Asset strategy: `auto`, `local`, `package`
 - Color mode: `light`, `dark`, `system`
 - Color palette: `default`, `indigo`, `emerald`, `sunset`
 - Body font + Heading font

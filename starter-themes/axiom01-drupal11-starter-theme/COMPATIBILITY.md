@@ -10,7 +10,7 @@
 
 1. Starter theme integration follows the strict Drupal profile: semantic-first, no BEM, no new custom dashed classes, minimal class budget.
 2. Drupal native output classes are allowed when required for core/contrib compatibility hooks.
-3. Runtime integration contract targets packaged runtime assets (`dist/*` or vendor-managed equivalent), not raw source files.
+3. Runtime integration contract targets bundled `dist/*` assets only; those files must match repository-root Axiom01 minified assets exactly.
 4. AI-facing blocks stay provider-agnostic in Twig/JS and rely on companion module adapters for provider services.
 5. Any Axiom01 breaking change requires a corresponding starter-theme migration note.
 
