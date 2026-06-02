@@ -34,6 +34,9 @@ For this starter theme, treat this as the canonical integration contract even wh
   - `templates/block/block--system-branding-block.html.twig`
 - Axiom component partials (`templates/components`)
 - Bundled `dist/css/axiom.min.css` and `dist/js/axiom.min.js`
+- Release operations templates:
+  - `RELEASE_NOTE_TEMPLATE.md`
+  - `.github/workflows/upstream-main-parity.yml` (for extracted standalone starter-theme repo)
 - Compatibility and validation docs
 
 ## Custom blocks included

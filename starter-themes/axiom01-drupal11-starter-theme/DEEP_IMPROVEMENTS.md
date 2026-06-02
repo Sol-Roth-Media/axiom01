@@ -57,9 +57,9 @@ Priority is set for solo-maintainer sustainability and high leverage.
 
 ### P2
 
-- [ ] Add a CI job for direct pull-request annotations when parity drift is detected.
-- [ ] Add a release note fragment template that records synchronized asset source commit SHA.
-- [ ] Add a standalone starter-theme repository workflow that runs parity checks against latest upstream Axiom01 main snapshots.
+- [x] Add a CI job for direct pull-request annotations when parity drift is detected.
+- [x] Add a release note fragment template that records synchronized asset source commit SHA.
+- [x] Add a standalone starter-theme repository workflow that runs parity checks against latest upstream Axiom01 main snapshots.
 
 ## Backport candidates to core Axiom01
 

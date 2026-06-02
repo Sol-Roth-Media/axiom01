@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import argparse
+import os
 import shutil
 import sys
 
@@ -44,6 +45,9 @@ def check_assets() -> int:
         print("Drupal starter-theme asset parity check: FAIL")
         for failure in failures:
             print(f"- {failure}")
+            if os.getenv("GITHUB_ACTIONS") == "true":
+                drift_target = failure.split(" does not match ", 1)[0]
+                print(f"::error file={drift_target}::{failure}")
         print("Run: npm run sync:drupal-assets")
         return 1
 
