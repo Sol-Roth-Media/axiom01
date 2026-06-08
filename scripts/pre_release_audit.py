@@ -33,6 +33,9 @@ CLASS_BUDGETS = {
     "docs/integrations.html": {"max_multi_class_attrs": 8, "max_class_tokens": 40},
 }
 MULTI_DASH_CLASS_RX = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+){2,}")
+IGNORED_MULTI_DASH_CLASS_PREFIXES = (
+    "fa-",
+)
 
 
 @dataclass
@@ -181,7 +184,11 @@ def audit_semantic_compliance(files: list[Path]) -> list[Finding]:
                 if "--" in cls:
                     findings.append(Finding(relative_path, f"modifier-style class found: {cls}"))
 
-                if is_semantic_strict_doc and MULTI_DASH_CLASS_RX.search(cls):
+                if (
+                    is_semantic_strict_doc
+                    and MULTI_DASH_CLASS_RX.search(cls)
+                    and not cls.startswith(IGNORED_MULTI_DASH_CLASS_PREFIXES)
+                ):
                     findings.append(Finding(relative_path, f"multi-dash utility-style class found: {cls}"))
 
         if relative_path in CLASS_BUDGETS:
