@@ -57,3 +57,9 @@ npm test
 2. runtime-loader syntax gate,
 3. critical interaction smoke checks,
 4. accessibility smoke checks.
+
+## 5) Milestone batching (P0 / P1 / P2)
+
+- **P0:** release-blocking quality/security/parity regressions. Merge only with all default gates passing and no open migration-note requirement.
+- **P1:** maintainability hardening and semantic migration work. Merge in small batches with updated backlog/map tracking.
+- **P2:** deeper platform improvements and optional capabilities. Must include explicit rollout/rollback notes before promotion.

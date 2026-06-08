@@ -294,6 +294,8 @@ Every component page must meet these standards:
 - [ ] Documents any breaking changes
 - [ ] Thanks listed for community contributions
 - [ ] Link to migration guide (if applicable)
+- [ ] Runtime-loader compatibility-impacting changes use `RUNTIME_LOADER_MIGRATION_TEMPLATE.md`
+- [ ] Starter-theme compatibility-impacting changes use `starter-themes/axiom01-drupal11-starter-theme/CHANGELOG_MIGRATION_TEMPLATE.md`
 
 ### Migration Guide (if needed)
 
@@ -331,6 +333,7 @@ Every component page must meet these standards:
 - [ ] No breaking changes to Axiom01 surface
 - [ ] Starter theme documentation updated
 - [ ] Example Drupal pages render correctly
+- [ ] Starter-theme `RELEASE_CHECKLIST.md` completed and rollback guidance captured
 
 ---
 

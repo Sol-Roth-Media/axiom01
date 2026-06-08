@@ -13,9 +13,15 @@ npm test
 
 This command runs:
 
-1. `scripts/pre_release_audit.py`
-2. `scripts/critical_interaction_smoke.py`
-3. `scripts/accessibility_smoke.py`
+1. `scripts/sync_drupal_starter_assets.py --check`
+2. `scripts/pre_release_audit.py`
+3. `scripts/axiom_philosophy_audit.py --enforce`
+4. `scripts/drupal_twig_semantic_audit.py`
+5. `scripts/runtime_loader_syntax_gate.py`
+6. `scripts/runtime_loader_failure_smoke.py`
+7. `scripts/critical_interaction_smoke.py`
+8. `scripts/gesture_regression_smoke.py`
+9. `scripts/accessibility_smoke.py`
 
 ## 1. Unit Testing (JavaScript Components)
 

@@ -12,6 +12,9 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = ROOT / "docs"
+COMPONENT_DOCS_DIR = DOCS_DIR / "components"
+COMPONENTS_DIR = ROOT / "js" / "components"
+COMPONENTS_OVERVIEW = DOCS_DIR / "components-overview.html"
 SEARCH_SOURCE = ROOT / "js" / "index-page-manager.js"
 INDEX_HTML = ROOT / "index.html"
 SEMANTIC_STRICT_DOCS = {
@@ -33,9 +36,29 @@ CLASS_BUDGETS = {
     "docs/integrations.html": {"max_multi_class_attrs": 8, "max_class_tokens": 40},
 }
 MULTI_DASH_CLASS_RX = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+){2,}")
-IGNORED_MULTI_DASH_CLASS_PREFIXES = (
-    "fa-",
-)
+IGNORED_MULTI_DASH_CLASS_PREFIXES = ("fa-",)
+COMPONENT_PARITY_EXCLUDES = {"dynamic-content-helpers"}
+COMPONENT_DOC_OVERRIDES = {
+    "filedisplay": "file-display-download",
+    "multimediapicker": "multimedia-picker",
+    "pullrefresh": "pull-to-refresh",
+    "storyview": "story-view",
+    "swipecards": "swiping-card-interface",
+    "timer": "stopwatch-countdown",
+    "touch": "touch-components",
+}
+COMPONENT_CLASS_CHAIN_BASELINES = {
+    "docs/components/alert.html": 4,
+    "docs/components/badge.html": 4,
+    "docs/components/card.html": 6,
+    "docs/components/drawer.html": 2,
+    "docs/components/dropdown.html": 8,
+    "docs/components/hero.html": 4,
+    "docs/components/multi-step-form.html": 9,
+    "docs/components/navigation.html": 2,
+    "docs/components/pagination.html": 2,
+    "docs/components/tooltip.html": 6,
+}
 
 
 @dataclass
@@ -131,8 +154,11 @@ def audit_semantic_compliance(files: list[Path]) -> list[Finding]:
         parser.close()
         relative_path = rel(file_path)
         is_semantic_strict_doc = relative_path in SEMANTIC_STRICT_DOCS
+        is_component_doc = relative_path.startswith("docs/components/")
         class_tokens_total = 0
         multi_class_attrs_total = 0
+        component_class_chains_over_two = 0
+        component_first_class_chain: str | None = None
 
         # Inline handlers are easy to slip into examples and bypass component cleanup patterns.
         if "onclick=" in text:
@@ -173,6 +199,10 @@ def audit_semantic_compliance(files: list[Path]) -> list[Finding]:
                         f"class chain too deep ({len(class_tokens)} classes); keep strict docs at two class tokens max per element",
                     )
                 )
+            if is_component_doc and len(class_tokens) > 2:
+                component_class_chains_over_two += 1
+                if component_first_class_chain is None:
+                    component_first_class_chain = class_value
 
             for cls in class_tokens:
                 if cls.startswith("doc-"):
@@ -211,6 +241,20 @@ def audit_semantic_compliance(files: list[Path]) -> list[Finding]:
                     )
                 )
 
+        if is_component_doc:
+            baseline = COMPONENT_CLASS_CHAIN_BASELINES.get(relative_path, 0)
+            if component_class_chains_over_two > baseline:
+                details = (
+                    "component class-chain baseline exceeded for >2-class attributes: "
+                    f"{component_class_chains_over_two} > {baseline}"
+                )
+                if component_first_class_chain:
+                    details += (
+                        f"; autofix suggestion: reduce class chain to two tokens where possible "
+                        f"(example found: '{component_first_class_chain}')"
+                    )
+                findings.append(Finding(relative_path, details))
+
     return findings
 
 
@@ -237,6 +281,76 @@ def audit_search_urls(urls: list[str]) -> list[Finding]:
     return findings
 
 
+def extract_components_overview_slugs() -> set[str]:
+    text = COMPONENTS_OVERVIEW.read_text(encoding="utf-8", errors="ignore")
+    return set(re.findall(r'href="components/([a-z0-9-]+)\.html"', text))
+
+
+def extract_search_component_slugs(urls: list[str]) -> set[str]:
+    slugs: set[str] = set()
+    for url in urls:
+        path_part = url.split("?", 1)[0].lstrip("./")
+        if path_part.startswith("docs/components/") and path_part.endswith(".html"):
+            slugs.add(Path(path_part).stem)
+    return slugs
+
+
+def expected_component_doc_slugs() -> set[str]:
+    slugs: set[str] = set()
+    for module_path in sorted(COMPONENTS_DIR.glob("*.js")):
+        module_name = module_path.stem
+        if module_name in COMPONENT_PARITY_EXCLUDES:
+            continue
+        slugs.add(COMPONENT_DOC_OVERRIDES.get(module_name, module_name))
+    return slugs
+
+
+def audit_component_parity(search_urls: list[str]) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_slugs = expected_component_doc_slugs()
+    overview_slugs = extract_components_overview_slugs()
+    search_slugs = extract_search_component_slugs(search_urls)
+    existing_component_docs = {path.stem for path in COMPONENT_DOCS_DIR.glob("*.html")}
+
+    missing_overview = sorted(expected_slugs - overview_slugs)
+    for slug in missing_overview:
+        findings.append(
+            Finding(
+                "docs/components-overview.html",
+                f"component parity drift: missing module-backed component link in overview -> components/{slug}.html",
+            )
+        )
+
+    missing_search = sorted(expected_slugs - search_slugs)
+    for slug in missing_search:
+        findings.append(
+            Finding(
+                "js/index-page-manager.js",
+                f"component parity drift: missing module-backed searchData URL -> docs/components/{slug}.html",
+            )
+        )
+
+    stale_overview = sorted(overview_slugs - existing_component_docs)
+    for slug in stale_overview:
+        findings.append(
+            Finding(
+                "docs/components-overview.html",
+                f"components-overview links missing component page file: components/{slug}.html",
+            )
+        )
+
+    missing_docs = sorted(expected_slugs - existing_component_docs)
+    for slug in missing_docs:
+        findings.append(
+            Finding(
+                "docs/components",
+                f"module-backed component doc file is missing: docs/components/{slug}.html",
+            )
+        )
+
+    return findings
+
+
 def main() -> int:
     docs_files = collect_docs_html()
     semantic_files = collect_semantic_html()
@@ -248,6 +362,7 @@ def main() -> int:
     findings.extend(audit_scaffold_comments(docs_files))
     findings.extend(audit_semantic_compliance(semantic_files))
     findings.extend(audit_search_urls(search_urls))
+    findings.extend(audit_component_parity(search_urls))
 
     print("Axiom01 pre-release audit")
     print(f"- docs HTML files scanned: {len(docs_files)}")

@@ -13,10 +13,10 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 
 ## P1
 
-- [ ] Stabilize component lifecycle docs with `init()`/`destroy()` contract examples per supported component.
-- [ ] Add a docs parity audit between `docs/components-overview.html` and `js/components/*`.
+- [x] Stabilize component lifecycle docs with `init()`/`destroy()` contract examples per supported component.
+- [x] Add a docs parity audit between `docs/components-overview.html` and `js/components/*`.
 - [x] Define migration-note template for any runtime loader breaking change.
-- [ ] Add gesture regression smoke checks for swipe cards, pull refresh, and touch interactions.
+- [x] Add gesture regression smoke checks for swipe cards, pull refresh, and touch interactions.
 - [ ] Add docs examples for production data binding patterns for story view, timer, and file display components.
 - [ ] Audit all docs component examples for one descriptive root class plus adjective variants only.
 - [ ] Replace extra wrapper markup in docs examples with semantic sectioning elements where possible.
@@ -34,12 +34,12 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 - [ ] Add integration adapters for native file system APIs and offline media caching in multimedia picker workflows.
 - [x] Add an automated docs report that ranks pages by class-count density and semantic-structure quality.
 - [ ] Add staged autofix suggestions for docs examples that can remove redundant classes without behavior changes.
-- [ ] Publish an Axiom01 semantic migration playbook for converting legacy class-heavy snippets to compliant patterns.
+- [x] Publish an Axiom01 semantic migration playbook for converting legacy class-heavy snippets to compliant patterns.
 
 ## New deep improvements (semantic-first hardening)
 
 - [x] Add docs audit checks to flag non-semantic button-like anchors (`href="#"`) and require true button elements for actions.
 - [x] Add a targeted docs smoke gate that enforces one-root-class examples for selected flagship component pages before broad rollout.
-- [ ] Add an audit check that flags class attributes with more than two tokens in component examples to reduce wrapper-class drift.
-- [ ] Add a migration backlog map for top 20 docs component pages with the highest semantic debt and class-density.
+- [x] Add an audit check that flags class attributes with more than two tokens in component examples to reduce wrapper-class drift.
+- [x] Add a migration backlog map for top 20 docs component pages with the highest semantic debt and class-density.
 - [ ] Add starter-theme Twig fixture checks that block new BEM-style (`__` / `--`) and multi-dash utility classes.
