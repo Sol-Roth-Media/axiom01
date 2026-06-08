@@ -19,7 +19,7 @@ Priority is set for solo-maintainer sustainability and high leverage.
 
 ## P2
 
-- [ ] Add a Drupal-focused changelog/migration template for Axiom01 compatibility bumps.
+- [x] Add a Drupal-focused changelog/migration template for Axiom01 compatibility bumps.
 - [ ] Introduce CI matrix validation against supported Drupal 11 patch lines.
 - [ ] Add a starter-theme release checklist with rollback guidance.
 - [ ] Add installer profile or config split that auto-places recommended blocks into expanded regions.

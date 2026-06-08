@@ -15,7 +15,7 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 
 - [ ] Stabilize component lifecycle docs with `init()`/`destroy()` contract examples per supported component.
 - [ ] Add a docs parity audit between `docs/components-overview.html` and `js/components/*`.
-- [ ] Define migration-note template for any runtime loader breaking change.
+- [x] Define migration-note template for any runtime loader breaking change.
 - [ ] Add gesture regression smoke checks for swipe cards, pull refresh, and touch interactions.
 - [ ] Add docs examples for production data binding patterns for story view, timer, and file display components.
 - [ ] Audit all docs component examples for one descriptive root class plus adjective variants only.
