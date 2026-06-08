@@ -79,6 +79,14 @@ Every component page must meet these standards:
 - [ ] Component linked in `docs/components-advanced.html` (if appropriate)
 - [ ] Component has matching entry in index.html showcase (if applicable)
 
+### Semantic Structure Gate (Required)
+
+- [ ] Key docs pages stay within enforced class budgets (`audit:philosophy` passes)
+- [ ] Strict docs pages avoid BEM, modifier chains, multi-dash utility-style classes, and >2-class chains
+- [ ] No non-semantic action anchors (`<a href="#">`) on strict docs/index/dropdown examples
+- [ ] New docs examples follow one descriptive root class + semantic descendants
+- [ ] Starter-theme template updates add no new BEM (`__`/`--`) or multi-dash utility-style classes
+
 ### Required Component Pages (Core Set)
 
 - [x] alert.html
