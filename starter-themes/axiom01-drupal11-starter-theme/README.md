@@ -36,6 +36,8 @@ For this starter theme, treat this as the canonical integration contract even wh
 - Bundled `dist/css/axiom.min.css` and `dist/js/axiom.min.js`
 - Release operations templates:
   - `RELEASE_NOTE_TEMPLATE.md`
+  - `CHANGELOG_MIGRATION_TEMPLATE.md`
+  - `RELEASE_CHECKLIST.md`
   - `.github/workflows/upstream-main-parity.yml` (for extracted standalone starter-theme repo)
 - Compatibility and validation docs
 

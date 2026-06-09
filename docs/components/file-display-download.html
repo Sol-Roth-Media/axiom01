@@ -18,6 +18,27 @@
           <input id="file-display-input" type="file" multiple>
           <ul></ul>
         </section>
+        <section>
+          <h2>Production data binding pattern</h2>
+          <p>Bind selected file metadata into your app state from the semantic file input so validation and uploads stay consistent.</p>
+          <pre><code>const filedisplay = document.querySelector('[data-component="filedisplay"]');
+const input = filedisplay.querySelector('input[type="file"]');
+
+input.addEventListener('change', () =&gt; {
+  const files = Array.from(input.files || []).map((file) =&gt; ({
+    name: file.name,
+    size: file.size,
+    type: file.type
+  }));
+
+  fetch('/api/uploads/draft', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ files })
+  });
+});
+</code></pre>
+        </section>
       </div>
     </section>
   </main>

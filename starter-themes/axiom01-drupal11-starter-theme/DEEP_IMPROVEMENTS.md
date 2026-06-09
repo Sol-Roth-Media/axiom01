@@ -19,9 +19,9 @@ Priority is set for solo-maintainer sustainability and high leverage.
 
 ## P2
 
-- [ ] Add a Drupal-focused changelog/migration template for Axiom01 compatibility bumps.
-- [ ] Introduce CI matrix validation against supported Drupal 11 patch lines.
-- [ ] Add a starter-theme release checklist with rollback guidance.
+- [x] Add a Drupal-focused changelog/migration template for Axiom01 compatibility bumps.
+- [x] Introduce CI matrix validation against supported Drupal 11 patch lines.
+- [x] Add a starter-theme release checklist with rollback guidance.
 - [ ] Add installer profile or config split that auto-places recommended blocks into expanded regions.
 - [ ] Add visual-regression snapshots for each palette/font/spacing setting combination.
 - [ ] Add optional per-region layout controls (container width, background, spacing) in theme settings.
@@ -40,7 +40,7 @@ Priority is set for solo-maintainer sustainability and high leverage.
 - [x] Realign `status-messages.html.twig` to Drupal-native `.messages--*` variants and normalize form-error hooks to semantic alert elements (`[data-axiom-error]`) with compatibility styling.
 - [ ] Add cross-browser focus/hover checks for form controls, including high-contrast mode and forced-colors accessibility scenarios.
 - [ ] Introduce sample content/config bundle demonstrating a complete “contact + filters + accordion help panel” page using only Axiom01-ready Drupal structures.
-- [ ] Add validation steps (or snapshots) proving themed output for key Drupal core forms: user login, search, node edit, and theme settings.
+- [x] Add validation steps (or snapshots) proving themed output for key Drupal core forms: user login, search, node edit, and theme settings.
 - [ ] Add region-level layout utility classes and documentation so sidebars, prefooter, and footer blocks preserve rhythm across all spacing-scale options.
 
 ## Main-branch runtime enforcement checklist (latest CSS/JS only)

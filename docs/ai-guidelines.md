@@ -182,6 +182,11 @@ These patterns MUST NEVER appear in Axiom01 code, whether AI-generated or human-
 
 **Every component should be audited against this checklist:**
 
+**Release gate commands (must pass):**
+- `npm run audit:pre-release`
+- `npm run audit:philosophy`
+- `npm test`
+
 #### HTML Structure
 - [ ] Uses semantic elements (`<nav>`, `<article>`, `<button>`, `<section>`, etc.) appropriately
 - [ ] No unnecessary `<div>` wrappers where semantic elements apply
@@ -230,6 +235,9 @@ These patterns MUST NEVER appear in Axiom01 code, whether AI-generated or human-
 - [ ] Accessibility notes are documented
 - [ ] Usage guidelines provided
 - [ ] Component is added to `docs/components-overview.html`
+- [ ] For strict docs pages, no element uses more than two class tokens
+- [ ] No `<a href="#">` action placeholders; use semantic `<button type="button">` for actions
+- [ ] Starter-theme template updates introduce no new BEM (`__`/`--`) or multi-dash utility-style classes
 
 ---
 
