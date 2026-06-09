@@ -17,7 +17,7 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 - [x] Add a docs parity audit between `docs/components-overview.html` and `js/components/*`.
 - [x] Define migration-note template for any runtime loader breaking change.
 - [x] Add gesture regression smoke checks for swipe cards, pull refresh, and touch interactions.
-- [ ] Add docs examples for production data binding patterns for story view, timer, and file display components.
+- [x] Add docs examples for production data binding patterns for story view, timer, and file display components.
 - [ ] Audit all docs component examples for one descriptive root class plus adjective variants only.
 - [ ] Replace extra wrapper markup in docs examples with semantic sectioning elements where possible.
 - [ ] Normalize docs examples to rely on element order and descendant selectors instead of child utility classes.

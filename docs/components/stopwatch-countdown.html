@@ -31,6 +31,28 @@
           </nav>
           <p role="status" aria-live="polite"></p>
         </section>
+        <section>
+          <h2>Production data binding pattern</h2>
+          <p>Bind timer defaults from user/task records and persist edits through semantic form controls instead of utility wrappers.</p>
+          <pre><code>const timer = document.querySelector('[data-component="timer"]');
+const mode = timer.querySelector('select');
+const minutes = timer.querySelector('[name="minutes"]');
+const seconds = timer.querySelector('[name="seconds"]');
+
+const schedule = await fetch('/api/sessions/active-timer').then((res) =&gt; res.json());
+mode.value = schedule.mode;
+minutes.value = schedule.minutes;
+seconds.value = schedule.seconds;
+
+timer.addEventListener('change', () =&gt; {
+  fetch('/api/sessions/active-timer', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mode: mode.value, minutes: minutes.value, seconds: seconds.value })
+  });
+});
+</code></pre>
+        </section>
       </div>
     </section>
   </main>

@@ -37,6 +37,24 @@
           </nav>
           <p role="status" aria-live="polite"></p>
         </section>
+        <section>
+          <h2>Production data binding pattern</h2>
+          <p>Bind story frames from API payloads before component startup so the same semantic structure works for SSR and hydrated clients.</p>
+          <pre><code>const story = document.querySelector('[data-component="storyview"]');
+const payload = await fetch('/api/stories/today').then((res) =&gt; res.json());
+
+const frames = story.querySelectorAll('[data-role="frame"]');
+const bars = story.querySelectorAll('progress');
+
+frames.forEach((frame, index) =&gt; {
+  const item = payload.items[index];
+  if (!item) return;
+  frame.querySelector('h2').textContent = item.title;
+  frame.querySelector('p').textContent = item.summary;
+  bars[index].textContent = item.title;
+});
+</code></pre>
+        </section>
       </div>
     </section>
   </main>
