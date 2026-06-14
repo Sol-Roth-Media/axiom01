@@ -24,30 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 1. Mobile Navigation Toggle
-    const initMobileNav = () => {
-        const menuToggle = document.querySelector('.menu.toggle');
-        const mainHeader = document.querySelector('header.main');
-
-        if (menuToggle && mainHeader) {
-            menuToggle.addEventListener('click', (event) => {
-                event.preventDefault();
-                const isOpen = mainHeader.classList.toggle('menu-open');
-                menuToggle.setAttribute('aria-expanded', isOpen);
-            });
-            
-            // Close menu when clicking on a link
-            const links = mainHeader.querySelectorAll('ul.links a');
-            links.forEach(link => {
-                link.addEventListener('click', () => {
-                    mainHeader.classList.remove('menu-open');
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                });
-            });
-        }
-    };
-
-    // 2. Theme Toggling (Header Toggle Button)
+// 2. Theme Toggling (Header Toggle Button)
     const initHeaderThemeToggle = () => {
         const themeToggle = document.getElementById('theme-toggle'); // Corrected ID
         const htmlElement = document.documentElement;
@@ -503,14 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         behavior: 'smooth'
                     });
                 }
-                // Close mobile menu if open
-                const mainHeader = document.querySelector('header.main');
-                const menuToggle = document.querySelector('.menu.toggle');
-
-                if (mainHeader && mainHeader.classList.contains('menu-open')) {
-                    mainHeader.classList.remove('menu-open');
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                }
+                // Note: Mobile menu close is handled by mobile-navbar component
             });
         });
     };
@@ -633,8 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Initialize all functionalities
-    initMobileNav();
-    initHeaderThemeToggle();
+initHeaderThemeToggle();
     initSpacingDemo();
     initComponentBrowser();
     initSearchModal();
