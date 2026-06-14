@@ -3,7 +3,7 @@
 This is the single living backlog for framework feature and bug enhancements.
 It supersedes archived planning/session documents moved to `docs/archive/root-history/`.
 
-## P0 — In Progress
+## P0 — Completed
 
 1. Component docs standardization
    - Normalize `docs/components/*.html` to one canonical structure (hero, overview, demo, code, accessibility, support).
@@ -15,17 +15,17 @@ It supersedes archived planning/session documents moved to `docs/archive/root-hi
    - Remove placeholder navigation targets in docs pages.
    - Align component naming across overview, page titles, and file names.
 
-## P1
+## P1 — Active
 
-3. Interactive behavior parity
+3. Interactive behavior parity _(Active)_
    - Standardize keyboard behavior (`Escape`, arrows, Enter/Space) where relevant.
    - Normalize `aria-expanded`, `aria-controls`, and focus restoration patterns.
 
-4. Semantic markup correctness sweep
+4. Semantic markup correctness sweep _(Active)_
    - Remove invalid nesting and malformed semantic examples in docs.
    - Ensure examples reflect semantic-first guidance from `AXIOM01_STYLING_GUIDE.md`.
 
-5. Component contract documentation
+5. Component contract documentation _(Active)_
    - Add concise “required markup contract” section per interactive component page.
    - Align docs claims with actual behavior in `js/components/<name>.js`.
 
