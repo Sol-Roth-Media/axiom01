@@ -109,6 +109,13 @@
             <h2 class="title">JavaScript Initialization</h2>
             <p>The <code>index-page-manager.js</code> script automatically initializes any element with <code>data-component="search"</code>. The search functionality relies on the Fuse.js library.</p>
             <p>The search component expects a global <code>searchData</code> array to be available, which contains the content to be searched. This data should be an array of objects, where each object has at least a <code>title</code>, <code>category</code>, and <code>url</code> property.</p>
+            <h3>Required Markup Contract</h3>
+            <ul>
+                <li>Use <code>data-component="search"</code> on the modal/dialog root element.</li>
+                <li>Use a trigger button with <code>data-search-toggle</code> (or the legacy <code>.search.toggle</code> class pattern).</li>
+                <li>Inside the modal, include elements using <code>data-search-close</code>, <code>data-search-input</code>, and <code>data-search-results</code>.</li>
+                <li>The component manages <code>aria-expanded</code> on the trigger and <code>aria-hidden</code> on the modal state.</li>
+            </ul>
             <div class="code-block">
                 <pre><code class="language-javascript">// Example searchData structure (must be globally accessible before search.js initializes)
 const searchData = [

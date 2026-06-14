@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "AI Chat", category: "ai", url: "docs/components/ai-chat.html" },
             { title: "AI Image Generator", category: "ai", url: "docs/components/ai-image-generator.html" },
             { title: "Alert", category: "feedback", url: "docs/components/alert.html" },
+            { title: "Account Menu", category: "navigation", url: "docs/components/account-menu.html" },
             { title: "Audio Player", category: "media", url: "docs/components/audio-player.html" },
             { title: "Avatar", category: "display", url: "docs/components/avatar.html" },
             { title: "Badge", category: "display", url: "docs/components/badge.html" },
@@ -283,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Contributing Guide", category: "docs", url: "docs/markdown-template.html?file=contributing.md" },
             { title: "Developer Guide", category: "docs", url: "docs/markdown-template.html?file=../DEVELOPER.md" },
             { title: "Styling Guide", category: "docs", url: "docs/markdown-template.html?file=../AXIOM01_STYLING_GUIDE.md" },
-            { title: "README", category: "docs", url: "docs/markdown-template.html?file=../readme.md" },
+            { title: "README", category: "docs", url: "docs/markdown-template.html?file=../README.md" },
             { title: "MIT License", category: "docs", url: "docs/markdown-template.html?file=../LICENSE" },
         ];
 

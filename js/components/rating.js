@@ -14,6 +14,8 @@ export default {
         for (let i = 1; i <= starCount; i++) {
             const button = document.createElement('button');
             button.setAttribute('aria-label', `Rate ${i} star${i !== 1 ? 's' : ''}`);
+            button.setAttribute('role', 'radio');
+            button.setAttribute('aria-checked', 'false');
             button.setAttribute('data-value', i);
             button.className = 'star';
             button.textContent = '★';
@@ -37,6 +39,7 @@ export default {
                 } else {
                     star.classList.remove('active');
                 }
+                star.setAttribute('aria-checked', String(index + 1 === value));
             });
             element.setAttribute('aria-valuenow', value);
 
@@ -85,6 +88,12 @@ export default {
 
             const value = parseInt(e.target.getAttribute('data-value'), 10);
             let newValue = value;
+
+            if ((e.key === 'Enter' || e.key === ' ') && value >= 1) {
+                e.preventDefault();
+                setRating(value);
+                return;
+            }
 
             if (e.key === 'ArrowRight' && value < starCount) {
                 newValue = value + 1;

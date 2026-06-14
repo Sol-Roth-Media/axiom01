@@ -34,10 +34,9 @@ export default {
     };
 
     const clickHandler = (event) => {
-      // Ensure we only toggle if the menu toggle button itself was clicked
-      if (event.target.closest('.menu.toggle') === menuToggleButton) {
-        toggleMenu();
-      }
+      event.preventDefault();
+      event.stopPropagation();
+      toggleMenu();
     };
 
     // Attach event listener to the menu toggle button
@@ -51,6 +50,22 @@ export default {
     };
     navLinks.addEventListener('click', linkClickHandler);
 
+    const outsideClickHandler = (event) => {
+      if (!element.contains(event.target) && element.classList.contains('menu-open')) {
+        toggleMenu();
+      }
+    };
+
+    const keydownHandler = (event) => {
+      if (event.key === 'Escape' && element.classList.contains('menu-open')) {
+        toggleMenu();
+        menuToggleButton.focus();
+      }
+    };
+
+    document.addEventListener('click', outsideClickHandler);
+    document.addEventListener('keydown', keydownHandler);
+
 
     console.log('Axiom: Mobile Navbar component initialized:', element);
 
@@ -62,6 +77,8 @@ export default {
       destroy() {
         menuToggleButton.removeEventListener('click', clickHandler);
         navLinks.removeEventListener('click', linkClickHandler);
+        document.removeEventListener('click', outsideClickHandler);
+        document.removeEventListener('keydown', keydownHandler);
 
         // Reset ARIA attributes
         menuToggleButton.removeAttribute('id');
