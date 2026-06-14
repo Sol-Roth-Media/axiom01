@@ -5243,3 +5243,402 @@ table thead th.sort-desc::after {
         flex-direction: column;
     }
 }
+
+/* ==========================================
+   BACKPORT: Reading Width Variables
+   From: dbase project (session 2 improvements)
+   Purpose: Semantic typography - optimal text line length
+   ========================================== */
+
+:root {
+  /* Typography: Reading Width (ch = character units)
+     Optimal for readability: 60-75 characters per line
+     Scales automatically with font-size */
+  --ax-reading-width: 65ch;
+}
+
+/* Layout width variants for flexible content */
+:root[data-layout-width='narrow'] {
+  --ax-reading-width: 60ch;  /* Compact - ~600px at 1rem base */
+}
+
+:root[data-layout-width='standard'] {
+  --ax-reading-width: 65ch;  /* Default - ~650px at 1rem base */
+}
+
+:root[data-layout-width='wide'] {
+  --ax-reading-width: 70ch;  /* Spacious - ~700px at 1rem base */
+}
+
+:root[data-layout-width='full'] {
+  --ax-reading-width: 100%;  /* No constraint */
+}
+
+/* Apply reading width to text-heavy elements */
+.prose,
+[data-axiom-text-content],
+article > p,
+article > blockquote,
+article > ul,
+article > ol,
+.article-body,
+.post-content,
+.page-content,
+main > p {
+  max-width: var(--ax-reading-width, 65ch);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ==========================================
+   BACKPORT: Account Menu Component
+   From: dbase project (session 2 improvements)
+   Purpose: Displays logged-in user info with dropdown menu
+   ========================================== */
+
+.account-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.account-button {
+  display: flex;
+  align-items: center;
+  gap: var(--a-space-xs, 0.25rem);
+  padding: var(--a-space-xs, 0.25rem) var(--a-space-s, 0.5rem);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--a-border-radius-base);
+  color: var(--a-color-on-surface);
+  font-size: 0.95rem;
+  font-weight: var(--a-font-weight-bold);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.account-button:hover {
+  background: var(--a-color-surface-variant);
+  border-color: var(--a-color-outline);
+}
+
+.account-button[aria-expanded="true"] {
+  background: var(--a-color-surface);
+  border-color: var(--a-color-primary);
+  color: var(--a-color-primary);
+}
+
+.account-icon {
+  font-size: 1.25rem;
+}
+
+.account-toggle {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.account-button[aria-expanded="true"] .account-toggle {
+  opacity: 1;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 180px;
+  margin-top: var(--a-space-xs, 0.25rem);
+  padding: var(--a-space-s, 0.5rem) 0;
+  background: var(--a-color-surface);
+  border: 1px solid var(--a-color-outline);
+  border-radius: var(--a-border-radius-base);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  list-style: none;
+  display: none;
+  z-index: 1000;
+}
+
+.account-dropdown li {
+  margin: 0;
+  padding: 0;
+}
+
+.account-dropdown a {
+  display: block;
+  padding: var(--a-space-s, 0.5rem) var(--a-space-m, 1rem);
+  color: var(--a-color-on-surface);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.account-dropdown a:hover,
+.account-dropdown a:focus {
+  background: var(--a-color-surface-variant);
+  color: var(--a-color-primary);
+}
+
+.account-dropdown .divider {
+  height: 1px;
+  margin: var(--a-space-xs, 0.25rem) 0;
+  background: var(--a-color-outline);
+}
+
+/* Mobile: full-width dropdown */
+@media (max-width: 768px) {
+  .account-button {
+    padding: var(--a-space-xs, 0.25rem) var(--a-space-m, 1rem);
+  }
+  
+  .account-dropdown {
+    right: auto;
+    left: 0;
+    min-width: auto;
+    width: 100%;
+  }
+}
+
+/* ==========================================
+   BACKPORT: Button Styling Variants
+   From: dbase project (session 2 improvements)
+   Purpose: Comprehensive button component patterns
+   ========================================== */
+
+.button, button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--a-space-xs, 0.25rem);
+  padding: var(--a-space-s, 0.5rem) var(--a-space-m, 1rem);
+  border: none;
+  border-radius: var(--a-border-radius-base);
+  background: var(--a-color-secondary);
+  color: var(--a-color-on-secondary);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--a-font-weight-bold);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  user-select: none;
+}
+
+/* Focus state */
+.button:focus-visible, button:focus-visible {
+  outline: 2px solid var(--a-color-primary);
+  outline-offset: 2px;
+}
+
+/* Hover state */
+.button:hover,
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Primary buttons */
+.button.primary, button.primary,
+.button[data-button-type="primary"],
+button[data-button-type="primary"] {
+  background-color: var(--a-color-primary);
+  color: var(--a-color-on-primary);
+}
+
+/* Secondary buttons */
+.button.secondary, button.secondary,
+.button[data-button-type="secondary"],
+button[data-button-type="secondary"] {
+  background-color: var(--a-color-secondary);
+  color: var(--a-color-on-secondary);
+}
+
+/* Danger buttons (destructive actions) */
+.button.danger, button.danger,
+.button[data-button-type="danger"],
+button[data-button-type="danger"] {
+  background-color: var(--a-color-error);
+  color: var(--a-color-on-error);
+}
+
+.button.danger:hover, button.danger:hover {
+  background-color: color-mix(in srgb, var(--a-color-error) 85%, black);
+}
+
+/* Success buttons */
+.button.success, button.success,
+.button[data-button-type="success"],
+button[data-button-type="success"] {
+  background-color: var(--a-color-success);
+  color: var(--a-color-on-success);
+}
+
+/* Icon-only buttons */
+.button.icon-only,
+button.icon-only,
+.button[data-button-type="icon"],
+button[data-button-type="icon"] {
+  padding: var(--a-space-s, 0.5rem);
+  background: transparent;
+  color: var(--a-color-on-surface);
+}
+
+.button.icon-only:hover,
+button.icon-only:hover {
+  background: var(--a-color-surface-variant);
+}
+
+/* Button sizes */
+.button.small, button.small,
+.button[data-size="small"],
+button[data-size="small"] {
+  padding: var(--a-space-xs, 0.25rem) var(--a-space-s, 0.5rem);
+  font-size: 0.875rem;
+}
+
+.button.medium, button.medium,
+.button[data-size="medium"],
+button[data-size="medium"] {
+  padding: var(--a-space-s, 0.5rem) var(--a-space-m, 1rem);
+  font-size: var(--a-font-size-base);
+}
+
+.button.large, button.large,
+.button[data-size="large"],
+button[data-size="large"] {
+  padding: var(--a-space-m, 1rem) var(--a-space-l, 1.5rem);
+  font-size: 1.125rem;
+}
+
+/* Full-width button */
+.button.full-width,
+button.full-width,
+.button[data-button-width="full"],
+button[data-button-width="full"] {
+  width: 100%;
+}
+
+/* Disabled state */
+button:disabled, .button:disabled,
+.button[disabled], button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+button:disabled:hover, .button:disabled:hover {
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+/* Button group */
+.button-group,
+[data-button-group] {
+  display: inline-flex;
+  gap: 0;
+  border-radius: var(--a-border-radius-base);
+  overflow: hidden;
+}
+
+.button-group button,
+[data-button-group] button {
+  border-radius: 0;
+  border-right: 1px solid var(--a-color-outline);
+}
+
+.button-group button:last-child,
+[data-button-group] button:last-child {
+  border-right: none;
+}
+
+/* ==========================================
+   BACKPORT: Page Header Section Component
+   From: dbase project (session 2 improvements)
+   Purpose: Consistent page hierarchy pattern
+   ========================================== */
+
+section.page-header {
+  width: 100%;
+  padding: var(--a-space-xl, 2rem) var(--a-space-m, 1rem);
+  background: var(--a-color-surface);
+  border-bottom: 1px solid var(--a-color-outline);
+}
+
+.page-header-container {
+  width: min(100%, var(--a-layout-max-width, 1200px));
+  margin: 0 auto;
+  padding-inline: var(--a-space-m, 1rem);
+}
+
+section.page-header h1 {
+  margin: var(--a-space-m, 1rem) 0 0 0;
+  font-size: 1.75rem;
+  font-weight: var(--a-font-weight-bold);
+  color: var(--a-color-on-surface);
+}
+
+/* Breadcrumb navigation */
+nav.breadcrumb {
+  font-size: 0.875rem;
+  color: var(--a-color-on-surface-variant, #666);
+}
+
+nav.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--a-space-xs, 0.25rem);
+  align-items: center;
+}
+
+nav.breadcrumb li {
+  margin: 0;
+  padding: 0;
+}
+
+nav.breadcrumb a {
+  color: var(--a-color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+nav.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+nav.breadcrumb a::after {
+  content: " →";
+  margin: 0 var(--a-space-xs, 0.25rem);
+  color: var(--a-color-on-surface-variant, #666);
+}
+
+nav.breadcrumb li:last-child a::after {
+  content: "";
+  margin: 0;
+}
+
+nav.breadcrumb [aria-current="page"] {
+  color: var(--a-color-on-surface);
+  font-weight: var(--a-font-weight-bold);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  section.page-header {
+    padding: var(--a-space-l, 1.5rem) var(--a-space-m, 1rem);
+  }
+  
+  section.page-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  nav.breadcrumb {
+    font-size: 0.8125rem;
+  }
+  
+  nav.breadcrumb ol {
+    gap: var(--a-space-xs, 0.25rem);
+  }
+}

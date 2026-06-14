@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (themeToggle) {
             themeToggle.addEventListener('click', () => {
-                let theme = htmlElement.getAttribute('data-theme');
-                const newTheme = theme === 'light' ? 'dark' : 'light';
+                const modeInDOM = htmlElement.getAttribute("data-theme") || "light";
+                const newTheme = modeInDOM === "light" ? 'dark' : 'light';
                 applyTheme(newTheme);
                 updateThemeToggleButtonIcon(newTheme); // Use helper for click icon update
                 
