@@ -28,18 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const initMobileNav = () => {
         const menuToggle = document.querySelector('.menu.toggle');
         const mainHeader = document.querySelector('header.main');
-        const mainContent = document.querySelector('main');
 
-        if (menuToggle && mainHeader && mainContent) {
-            menuToggle.addEventListener('click', () => {
+        if (menuToggle && mainHeader) {
+            menuToggle.addEventListener('click', (event) => {
+                event.preventDefault();
                 const isOpen = mainHeader.classList.toggle('menu-open');
                 menuToggle.setAttribute('aria-expanded', isOpen);
-                // Toggle inert on main content when menu is open
-                if (isOpen) {
-                    mainContent.setAttribute('inert', '');
-                } else {
-                    mainContent.removeAttribute('inert');
-                }
+            });
+            
+            // Close menu when clicking on a link
+            const links = mainHeader.querySelectorAll('ul.links a');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    mainHeader.classList.remove('menu-open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                });
             });
         }
     };
@@ -494,18 +497,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
                 // Close mobile menu if open
                 const mainHeader = document.querySelector('header.main');
                 const menuToggle = document.querySelector('.menu.toggle');
-                const mainContent = document.querySelector('main');
 
                 if (mainHeader && mainHeader.classList.contains('menu-open')) {
                     mainHeader.classList.remove('menu-open');
                     menuToggle.setAttribute('aria-expanded', 'false');
-                    mainContent.removeAttribute('inert'); // Ensure inert is removed
                 }
             });
         });
