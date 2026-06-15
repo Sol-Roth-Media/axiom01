@@ -1380,3 +1380,145 @@ section.hero .button.secondary:focus {
 .hero-stats .stat:hover .examples {
     color: rgba(255, 255, 255, 0.85);
 }
+
+/* Fix Prism.js Syntax Highlighting - No Overlapping Backgrounds */
+.code-comparison-grid pre code,
+.comparison-example pre code {
+    background: transparent !important;
+    color: #d4d4d4 !important;
+    padding: 0 !important;
+}
+
+/* Token colors - clean and readable */
+.code-comparison-grid pre .token,
+.comparison-example pre .token {
+    background: none !important;
+}
+
+.code-comparison-grid pre .token.tag,
+.comparison-example pre .token.tag {
+    color: #569cd6 !important;  /* Blue for tags */
+}
+
+.code-comparison-grid pre .token.attr-name,
+.comparison-example pre .token.attr-name {
+    color: #9cdcfe !important;  /* Light blue for attributes */
+}
+
+.code-comparison-grid pre .token.attr-value,
+.comparison-example pre .token.attr-value,
+.code-comparison-grid pre .token.string,
+.comparison-example pre .token.string {
+    color: #ce9178 !important;  /* Orange for strings */
+}
+
+.code-comparison-grid pre .token.punctuation,
+.comparison-example pre .token.punctuation {
+    color: #d4d4d4 !important;  /* Default for punctuation */
+}
+
+.code-comparison-grid pre .token.keyword,
+.comparison-example pre .token.keyword {
+    color: #c586c0 !important;  /* Purple for keywords */
+}
+
+.code-comparison-grid pre .token.class-name,
+.comparison-example pre .token.class-name {
+    color: #4ec9b0 !important;  /* Teal for class names */
+}
+
+/* Ensure no background bleeding */
+.code-comparison-grid pre code .token::before,
+.code-comparison-grid pre code .token::after,
+.comparison-example pre code .token::before,
+.comparison-example pre code .token::after {
+    content: none !important;
+    background: none !important;
+}
+
+/* Line numbers if present */
+.code-comparison-grid pre[data-line],
+.comparison-example pre[data-line] {
+    padding: var(--a-space-m);
+}
+
+/* Make code wrap properly */
+.code-comparison-grid pre code,
+.comparison-example pre code {
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+/* Code Comparison Grid with Metrics */
+.code-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--a-space-l);
+    margin-top: var(--a-space-l);
+}
+
+.code-comparison-grid .example {
+    border-radius: var(--a-border-radius-medium);
+    overflow: hidden;
+}
+
+.code-comparison-grid .example h3 {
+    background: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    padding: var(--a-space-m);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.code-comparison-grid .example p {
+    padding: var(--a-space-m) var(--a-space-m) var(--a-space-s);
+    margin: 0;
+    color: var(--a-color-on-surface-variant);
+    font-size: 0.9rem;
+}
+
+.code-comparison-grid .metrics {
+    display: flex;
+    gap: var(--a-space-l);
+    padding: 0 var(--a-space-m) var(--a-space-m);
+    font-size: 0.85rem;
+    color: var(--a-color-on-surface-variant);
+    border-bottom: 1px solid var(--a-color-outline);
+    flex-wrap: wrap;
+}
+
+.code-comparison-grid .metric-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.code-comparison-grid .metric-value {
+    font-weight: var(--a-font-weight-bold);
+    color: var(--a-color-on-surface);
+    font-size: 1.1rem;
+}
+
+.code-comparison-grid .metric-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--a-color-on-surface-variant);
+}
+
+.code-comparison-grid pre {
+    margin: 0;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: var(--a-space-m);
+    border-radius: 0;
+    overflow-x: auto;
+    border: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .code-comparison-grid {
+        grid-template-columns: 1fr;
+    }
+}
