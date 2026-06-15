@@ -526,7 +526,7 @@ All components are fully supported in:
 - Ensure keyboard accessibility
 
 ### ❌ DON'T:
-- Use BEM-style hyphenated names (`.button--lg`, `.card--elevated`)
+- Use BEM-style hyphenated names (`.button.lg`, `.card.elevated`)
 - Use non-semantic divs for interactive elements
 - Create nested BEM-like structures
 - Use class names that couple to DOM structure

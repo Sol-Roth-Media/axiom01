@@ -45,9 +45,9 @@ Axiom01 is a semantic-first UI framework built on the principle that **beautiful
 #### Button Component
 ```html
 <button>Primary</button>
-<button class="button--lg button--success">Large Success</button>
-<button class="button--secondary">Secondary</button>
-<button class="button--outline">Outline</button>
+<button class="button lg success">Large Success</button>
+<button class="button secondary">Secondary</button>
+<button class="button outline">Outline</button>
 ```
 - 4 sizes (sm, default, lg, xl)
 - 7 semantic types (primary, secondary, success, warning, danger, ghost, outline)
@@ -56,11 +56,11 @@ Axiom01 is a semantic-first UI framework built on the principle that **beautiful
 
 #### Card Component
 ```html
-<div class="card card--elevated">
+<div class="card card elevated">
   <header><h2>Title</h2></header>
   <div>Content</div>
   <footer>
-    <button class="button--secondary">Cancel</button>
+    <button class="button secondary">Cancel</button>
     <button>Save</button>
   </footer>
 </div>
@@ -72,15 +72,15 @@ Axiom01 is a semantic-first UI framework built on the principle that **beautiful
 
 #### Badge & Alert Components
 ```html
-<span class="badge badge--success">Active</span>
-<span class="badge badge--error">Inactive</span>
+<span class="badge badge success">Active</span>
+<span class="badge error">Inactive</span>
 
-<div class="alert alert--warning">
+<div class="alert warning">
   <h3>Warning</h3>
   <p>Please review this carefully.</p>
 </div>
 
-<div class="alert alert--success alert--dismissible">
+<div class="alert success dismissible">
   <div>Success message</div>
   <button>×</button>
 </div>
@@ -152,8 +152,8 @@ Use single, descriptive classes and variant modifiers.
 ```css
 /* ✅ Good */
 .button { /* base */ }
-.button--lg { /* variant */ }
-.button--primary { /* type */ }
+.button lg { /* variant */ }
+.button primary { /* type */ }
 
 /* ❌ Avoid */
 .button__label--primary--large { /* BEM stacking */ }
@@ -231,14 +231,14 @@ axiom01/
 ### Using Buttons
 ```html
 <!-- Size variants -->
-<button class="button--sm">Small</button>
+<button class="button sm">Small</button>
 <button>Default</button>
-<button class="button--lg">Large</button>
+<button class="button lg">Large</button>
 
 <!-- Type variants -->
-<button class="button--secondary">Secondary</button>
-<button class="button--success">Success</button>
-<button class="button--danger">Danger</button>
+<button class="button secondary">Secondary</button>
+<button class="button success">Success</button>
+<button class="button danger">Danger</button>
 
 <!-- Button groups -->
 <div class="button-group">
@@ -250,7 +250,7 @@ axiom01/
 
 ### Using Cards
 ```html
-<div class="card card--elevated">
+<div class="card card elevated">
   <header>
     <h2>Card Title</h2>
   </header>
@@ -258,8 +258,8 @@ axiom01/
     <p>Card content goes here...</p>
   </div>
   <footer>
-    <button class="button--secondary">Cancel</button>
-    <button class="button--success">Save</button>
+    <button class="button secondary">Cancel</button>
+    <button class="button success">Save</button>
   </footer>
 </div>
 ```
@@ -326,7 +326,7 @@ To use new features:
 <div class="flex items-center gap-m">...</div>
 
 /* Use new components */
-<button class="button--lg button--success">Save</button>
+<button class="button lg success">Save</button>
 ```
 
 ## 🤝 Contributing
