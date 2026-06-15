@@ -3,6 +3,35 @@
 
 This guide helps developers create beautiful, maintainable components using the Axiom01 UI framework's semantic-first philosophy with modern accessibility standards.
 
+## 0. Design Token System
+
+Axiom01 provides a comprehensive CSS variable system for consistent design implementation across all projects. These design tokens establish a single source of truth for colors, spacing, typography, animations, and more.
+
+**Key Tokens:**
+- **Colors**: Primary, secondary, semantic (success, warning, error, info), surface/text, grayscale
+- **Spacing**: xs (4px), s (8px), m (14px), l (21px), xl (35px), xxl (56px)
+- **Typography**: Font families, sizes, weights, line heights
+- **Shadows**: Medium and large depth levels
+- **Borders**: Radius variants (small, base, medium, large)
+- **Breakpoints**: xs (480px), sm (576px), md (768px), lg (992px), xl (1200px), xxl (1400px)
+
+**Get Started:**
+- See [Design Token Reference](docs/tokens/VARIABLES.md) for complete token documentation
+- All tokens are optional — use them to maintain consistency
+- Dark mode support built-in via `[data-theme="dark"]` attribute
+
+**Usage Example:**
+```css
+.component {
+  padding: var(--a-space-m);
+  background: var(--a-color-primary);
+  color: var(--a-color-on-primary);
+  border-radius: var(--a-border-radius-base);
+}
+```
+
+---
+
 ## 1. Core Philosophy: Semantic Purity
 
 Axiom01 is an HTML-centric framework. Your primary focus should always be on writing clean, semantic, and accessible HTML. The CSS is designed to style this semantic structure with minimal class-based intervention. **If you find yourself adding classes to every element, you are not following the Axiom01 philosophy.**
@@ -411,4 +440,3 @@ Axiom01 treats animation as a **functional tool**, not decoration. Every animati
 ```
 
 For detailed animation guidance, see the [Animation Guide](docs/animation-guide.md).
-
