@@ -1436,6 +1436,136 @@ a.card { text-decoration: none; color: var(--a-color-on-surface); }
     border-top: 1px solid var(--a-color-outline);
 }
 
+
+/* --- Adaptive Media Cards --- */
+/* Responsive cards that prioritize media (image/video) for optimal viewing */
+/* Single class addition: .card.adaptive-media */
+
+.card.adaptive-media {
+    display: flex;
+    flex-direction: column;
+}
+
+.card.adaptive-media > header {
+    order: 1;
+    margin-bottom: var(--a-space-m);
+}
+
+.card.adaptive-media > figure {
+    order: 2;
+    margin: 0 calc(var(--a-space-l) * -1) var(--a-space-m) calc(var(--a-space-l) * -1);
+    flex-shrink: 0;
+}
+
+.card.adaptive-media > figure img,
+.card.adaptive-media > figure video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--a-border-radius-medium);
+}
+
+.card.adaptive-media > main {
+    order: 3;
+    flex: 1;
+}
+
+.card.adaptive-media > footer {
+    order: 4;
+    margin-top: var(--a-space-m);
+}
+
+/* Desktop Layout: Horizontal when enough space (card width > 500px) */
+@media (min-width: 640px) {
+    .card.adaptive-media {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: var(--a-space-l);
+    }
+
+    .card.adaptive-media > header {
+        flex: 0 0 100%;
+        order: 1;
+    }
+
+    .card.adaptive-media > figure {
+        order: 2;
+        flex: 0 0 45%;
+        margin: 0;
+        min-width: 0;
+    }
+
+    .card.adaptive-media > figure img,
+    .card.adaptive-media > figure video {
+        border-radius: var(--a-border-radius-medium);
+    }
+
+    .card.adaptive-media > main {
+        order: 3;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .card.adaptive-media > footer {
+        flex: 0 0 100%;
+        order: 4;
+    }
+}
+
+/* Tablet Layout: Adjust spacing and sizing */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .card.adaptive-media {
+        flex-direction: row;
+    }
+
+    .card.adaptive-media > figure {
+        flex: 0 0 40%;
+    }
+
+    .card.adaptive-media > main {
+        flex: 1;
+    }
+}
+
+/* Large Desktop: Media can be up to 50% width */
+@media (min-width: 1024px) {
+    .card.adaptive-media > figure {
+        flex: 0 0 50%;
+    }
+
+    .card.adaptive-media > main {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+/* Mobile: Stack vertically (under 640px) */
+@media (max-width: 639px) {
+    .card.adaptive-media {
+        flex-direction: column;
+    }
+
+    .card.adaptive-media > figure {
+        margin: 0 calc(var(--a-space-l) * -1) var(--a-space-m) calc(var(--a-space-l) * -1);
+    }
+
+    .card.adaptive-media > figure img,
+    .card.adaptive-media > figure video {
+        border-radius: 0 0 var(--a-border-radius-medium) var(--a-border-radius-medium);
+    }
+}
+
+/* Dark mode support */
+[data-theme="dark"] .card.adaptive-media {
+    background: var(--a-color-surface);
+}
+
+[data-theme="dark"] .card.adaptive-media > figure img,
+[data-theme="dark"] .card.adaptive-media > figure video {
+    opacity: 0.95;
+}
+
+
 /* --- Modals --- */
 .modal {
     position: fixed;
