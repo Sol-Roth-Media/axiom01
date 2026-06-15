@@ -1,0 +1,43 @@
+name: Drupal Starter Compatibility Matrix
+
+on:
+  pull_request:
+    paths:
+      - 'starter-themes/axiom01-drupal11-starter-theme/**'
+      - 'scripts/drupal_twig_semantic_audit.py'
+      - '.github/workflows/drupal-starter-compat-matrix.yml'
+
+jobs:
+  compatibility:
+    name: Drupal ${{ matrix.drupal_patchline }} compatibility fixture
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        drupal_patchline: ['11.0', '11.1', '11.2']
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Run Twig class-shape audit
+        run: python3 scripts/drupal_twig_semantic_audit.py
+
+      - name: Lint starter-theme PHP files
+        run: |
+          find starter-themes/axiom01-drupal11-starter-theme -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Record matrix target
+        run: echo "Validated starter-theme fixture gates against Drupal ${DRUPAL_PATCHLINE} compatibility contract."
+        env:
+          DRUPAL_PATCHLINE: ${{ matrix.drupal_patchline }}

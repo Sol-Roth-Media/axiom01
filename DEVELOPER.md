@@ -24,6 +24,26 @@ For components that manage their own resources (e.g., event listeners, timers, t
 *   Clean up any created DOM elements that are not automatically garbage-collected.
 *   Destroy instances of third-party libraries.
 
+### Runtime lifecycle contract (supported shape)
+
+`js/axiom.js` supports two component export shapes:
+
+1. **Class export** (`export default class X { ... }`)
+   - Constructor receives the component root element.
+   - The runtime stores instances that expose `destroy()`.
+2. **Factory/object export** (`export default { init(element) { ... } }`)
+   - `init(element)` should return an instance/object.
+   - Returned object should expose `destroy()` when cleanup is needed.
+
+For framework-maintained interactive modules (`js/components/*.js` excluding helper-only modules), keep this baseline contract:
+
+- [ ] `init(element)` exists (or class constructor + `init()` pattern).
+- [ ] `destroy()` exists for listener/timer/resource cleanup.
+- [ ] No inline event-handler dependency (`onclick`, etc.).
+- [ ] Docs page for the module is linked in `docs/components-overview.html`.
+
+This contract is now enforced by pre-release and smoke audits, so new component work should follow the same structure from the start.
+
 **Example Component Structure:**
 
 ```javascript

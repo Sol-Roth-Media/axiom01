@@ -6,12 +6,21 @@
   <title>Stopwatch and Countdown - Axiom01</title>
   <link rel="stylesheet" href="../../css/axiom.css">
   <link rel="stylesheet" href="../../css/doc-styles.css">
+    <link rel="stylesheet" href="../../css/doc-preview.css">
 </head>
-<body class="axiom-body">
+<body class="axiom-body component-doc">
   <main class="content">
+        <section class="hero">
+            <div class="container">
+                <h1>Stopwatch Countdown</h1>
+                <p>Stopwatch and countdown timer components.</p>
+            </div>
+        </section>
+
+
     <section>
       <div class="container">
-        <h1>Stopwatch and Countdown</h1>
+        <h2>Basic Usage</h2>
         <p>A dual timer with one control model for elapsed and remaining time.</p>
         <section class="timer" data-component="timer" aria-label="Timer component">
           <label for="timer-mode">Mode</label>
@@ -31,9 +40,80 @@
           </nav>
           <p role="status" aria-live="polite"></p>
         </section>
+
+        <section>
+          <h2>Production data binding pattern</h2>
+          <p>Bind timer defaults from user/task records and persist edits through semantic form controls instead of utility wrappers.</p>
+          <pre><code>const timer = document.querySelector('[data-component="timer"]');
+const mode = timer.querySelector('select');
+const minutes = timer.querySelector('[name="minutes"]');
+const seconds = timer.querySelector('[name="seconds"]');
+
+const schedule = await fetch('/api/sessions/active-timer').then((res) =&gt; res.json());
+mode.value = schedule.mode;
+minutes.value = schedule.minutes;
+seconds.value = schedule.seconds;
+
+timer.addEventListener('change', () =&gt; {
+  fetch('/api/sessions/active-timer', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mode: mode.value, minutes: minutes.value, seconds: seconds.value })
+  });
+});
+</code></pre>
+        </section>
+
+        <h3>Required Markup Contract</h3>
+        <ul>
+          <li>Use <code>data-component="timer"</code> on the root timer container.</li>
+          <li>Provide mode, minutes, and seconds inputs, one <code>time</code> display, and controls with <code>data-action</code> values.</li>
+          <li>Include a status region with <code>role="status"</code> for state updates.</li>
+        </ul>
       </div>
     </section>
   </main>
-  <script src="../../js/axiom.js"></script>
+
+
+    <footer class="main">
+        <div class="content">
+            <div class="brand">
+                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../components-overview.html">Component Overview</a></li>
+                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
+                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
+                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="../interactive-playground.html">Playground</a></li>
+                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../../index.html#release-info">Release Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/index-page-manager.js"></script>
 </body>
 </html>

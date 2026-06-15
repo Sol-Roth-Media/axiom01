@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Theme override for account menu.
+ *
+ * Available variables:
+ * - authenticated: Boolean indicating if user is logged in
+ * - user: User object with id, name, displayName
+ * - items: Menu items array
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="account-menu" data-component="account-menu">
+  {% if authenticated %}
+    <button class="account-button" 
+            aria-expanded="false" 
+            aria-haspopup="menu"
+            aria-label="Account menu for {{ user.displayName }}">
+      <span class="account-icon">👤</span>
+      <span class="account-name">{{ user.displayName }}</span>
+      <span class="account-toggle">⋮</span>
+    </button>
+    
+    <ul class="account-dropdown" role="menu">
+      <li><a href="/user/{{ user.id }}" role="menuitem">My Profile</a></li>
+      <li><a href="/user/{{ user.id }}/edit" role="menuitem">Settings</a></li>
+      <li class="divider"></li>
+      <li><a href="/user/logout" role="menuitem">Logout</a></li>
+    </ul>
+  {% else %}
+    <a href="/user/login" class="login-link">Log in</a>
+  {% endif %}
+</div>

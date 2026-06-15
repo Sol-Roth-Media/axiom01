@@ -17,6 +17,7 @@ export default {
     const render = () => {
       frames.forEach((frame, frameIndex) => {
         frame.hidden = frameIndex !== index;
+        frame.setAttribute('aria-hidden', String(frameIndex !== index));
       });
       bars.forEach((bar, barIndex) => {
         bar.value = barIndex < index ? 100 : barIndex === index ? 100 : 0;
@@ -53,8 +54,29 @@ export default {
 
     const keyHandler = (event) => {
       if (!element.contains(document.activeElement)) return;
-      if (event.key === 'ArrowRight') nextHandler();
-      if (event.key === 'ArrowLeft') prevHandler();
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        nextHandler();
+      }
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        prevHandler();
+      }
+      if (event.key === 'Home') {
+        event.preventDefault();
+        index = 0;
+        render();
+        startTimer();
+      }
+      if (event.key === 'End') {
+        event.preventDefault();
+        index = frames.length - 1;
+        render();
+        startTimer();
+      }
+      if (event.key === 'Escape') {
+        stopTimer();
+      }
     };
 
     next?.addEventListener('click', nextHandler);

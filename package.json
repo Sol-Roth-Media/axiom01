@@ -1,13 +1,22 @@
 {
   "name": "axiom01",
-  "version": "1.0.2",
-  "description": "Semantic-first UI framework and documentation site",
+  "version": "2.0.0",
+  "description": "Semantic-first UI framework with professional design system, animations, utilities, and components",
   "license": "MIT",
   "main": "index.js",
   "files": [
+    "css/axiom.css",
     "css/axiom.min.css",
+    "css/_variables.css",
+    "css/_animations.css",
+    "css/_utilities.css",
+    "css/_components.css",
+    "css/axiom_config.css",
+    "docs/",
     "js/axiom.min.js",
-    "readme.md",
+    "index.html",
+    "README.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "scripts": {
@@ -15,10 +24,14 @@
     "audit:drupal-assets": "python3 scripts/sync_drupal_starter_assets.py --check",
     "build": "npm run sync:drupal-assets && python3 scripts/build_release_dist.py",
     "audit:pre-release": "python3 scripts/pre_release_audit.py",
+    "audit:philosophy:report": "python3 scripts/axiom_philosophy_audit.py",
+    "audit:philosophy": "python3 scripts/axiom_philosophy_audit.py --enforce",
+    "audit:drupal-twig": "python3 scripts/drupal_twig_semantic_audit.py",
     "audit:runtime-loader": "python3 scripts/runtime_loader_syntax_gate.py",
     "audit:runtime-loader-failures": "python3 scripts/runtime_loader_failure_smoke.py",
     "audit:critical-interactions": "python3 scripts/critical_interaction_smoke.py",
+    "audit:gestures": "python3 scripts/gesture_regression_smoke.py",
     "audit:a11y-smoke": "python3 scripts/accessibility_smoke.py",
-    "test": "npm run audit:drupal-assets && npm run audit:pre-release && npm run audit:runtime-loader && npm run audit:runtime-loader-failures && npm run audit:critical-interactions && npm run audit:a11y-smoke"
+    "test": "npm run audit:drupal-assets && npm run audit:pre-release && npm run audit:philosophy && npm run audit:drupal-twig && npm run audit:runtime-loader && npm run audit:runtime-loader-failures && npm run audit:critical-interactions && npm run audit:gestures && npm run audit:a11y-smoke"
   }
 }

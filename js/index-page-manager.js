@@ -24,27 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 1. Mobile Navigation Toggle
-    const initMobileNav = () => {
-        const menuToggle = document.querySelector('.menu.toggle');
-        const mainHeader = document.querySelector('header.main');
-        const mainContent = document.querySelector('main');
-
-        if (menuToggle && mainHeader && mainContent) {
-            menuToggle.addEventListener('click', () => {
-                const isOpen = mainHeader.classList.toggle('menu-open');
-                menuToggle.setAttribute('aria-expanded', isOpen);
-                // Toggle inert on main content when menu is open
-                if (isOpen) {
-                    mainContent.setAttribute('inert', '');
-                } else {
-                    mainContent.removeAttribute('inert');
-                }
-            });
-        }
-    };
-
-    // 2. Theme Toggling (Header Toggle Button)
+// 2. Theme Toggling (Header Toggle Button)
     const initHeaderThemeToggle = () => {
         const themeToggle = document.getElementById('theme-toggle'); // Corrected ID
         const htmlElement = document.documentElement;
@@ -56,8 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (themeToggle) {
             themeToggle.addEventListener('click', () => {
-                let theme = htmlElement.getAttribute('data-theme');
-                const newTheme = theme === 'light' ? 'dark' : 'light';
+                const modeInDOM = htmlElement.getAttribute("data-theme") || "light";
+                const newTheme = modeInDOM === "light" ? 'dark' : 'light';
                 applyTheme(newTheme);
                 updateThemeToggleButtonIcon(newTheme); // Use helper for click icon update
                 
@@ -233,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "AI Chat", category: "ai", url: "docs/components/ai-chat.html" },
             { title: "AI Image Generator", category: "ai", url: "docs/components/ai-image-generator.html" },
             { title: "Alert", category: "feedback", url: "docs/components/alert.html" },
+            { title: "Account Menu", category: "navigation", url: "docs/components/account-menu.html" },
             { title: "Audio Player", category: "media", url: "docs/components/audio-player.html" },
             { title: "Avatar", category: "display", url: "docs/components/avatar.html" },
             { title: "Badge", category: "display", url: "docs/components/badge.html" },
@@ -273,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Sidebar", category: "layout", url: "docs/components/sidebar.html" },
             { title: "Skeleton", category: "display", url: "docs/components/skeleton.html" },
             { title: "Slider", category: "forms", url: "docs/components/slider.html" },
+            { title: "Spacing Demo", category: "layout", url: "docs/components/spacing-demo.html" },
             { title: "Stats", category: "display", url: "docs/components/stats.html" },
             { title: "Table", category: "display", url: "docs/components/table.html" },
             { title: "Tabs", category: "navigation", url: "docs/components/tabs.html" },
@@ -302,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Contributing Guide", category: "docs", url: "docs/markdown-template.html?file=contributing.md" },
             { title: "Developer Guide", category: "docs", url: "docs/markdown-template.html?file=../DEVELOPER.md" },
             { title: "Styling Guide", category: "docs", url: "docs/markdown-template.html?file=../AXIOM01_STYLING_GUIDE.md" },
-            { title: "README", category: "docs", url: "docs/markdown-template.html?file=../readme.md" },
+            { title: "README", category: "docs", url: "docs/markdown-template.html?file=../README.md" },
             { title: "MIT License", category: "docs", url: "docs/markdown-template.html?file=../LICENSE" },
         ];
 
@@ -493,19 +475,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                // Close mobile menu if open
-                const mainHeader = document.querySelector('header.main');
-                const menuToggle = document.querySelector('.menu.toggle');
-                const mainContent = document.querySelector('main');
-
-                if (mainHeader && mainHeader.classList.contains('menu-open')) {
-                    mainHeader.classList.remove('menu-open');
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    mainContent.removeAttribute('inert'); // Ensure inert is removed
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
+                // Note: Mobile menu close is handled by mobile-navbar component
             });
         });
     };
@@ -628,8 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Initialize all functionalities
-    initMobileNav();
-    initHeaderThemeToggle();
+initHeaderThemeToggle();
     initSpacingDemo();
     initComponentBrowser();
     initSearchModal();

@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * @file
+ * Theme hooks and preprocessors for axiom01.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Menu\MenuTreeParameters;
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Build a renderable menu tree for fallback navigation output.
+ */
+function _axiom01_build_menu_tree(string $menu_name): array {
+  $menu_tree = \Drupal::menuTree();
+  $parameters = (new MenuTreeParameters())
+    ->setMinDepth(1)
+    ->onlyEnabledLinks();
+  $tree = $menu_tree->load($menu_name, $parameters);
+  $manipulators = [
+    ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+    ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+  ];
+  $tree = $menu_tree->transform($tree, $manipulators);
+  return $menu_tree->build($tree);
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function axiom01_preprocess_html(array &$variables): void {
+  $config = \Drupal::config('axiom01.settings');
+  $attributes = $variables['attributes'] ?? [];
+  if (!$attributes instanceof Attribute) {
+    $attributes = new Attribute(is_array($attributes) ? $attributes : []);
+  }
+
+  $color_mode = (string) ($config->get('color_mode') ?: 'light');
+  $initial_mode = $color_mode === 'dark' ? 'dark' : 'light';
+  $attributes->setAttribute('data-theme', $initial_mode);
+  $attributes->setAttribute('data-theme-mode', $color_mode);
+  $attributes->setAttribute('data-axiom-palette', (string) ($config->get('color_palette') ?: 'default'));
+  $attributes->setAttribute('data-font-body', (string) ($config->get('body_font') ?: 'inter'));
+  $attributes->setAttribute('data-font-heading', (string) ($config->get('heading_font') ?: 'inter'));
+  $attributes->setAttribute('data-spacing-scale', (string) ($config->get('spacing_scale') ?: 'comfortable'));
+  $attributes->setAttribute('data-layout-width', (string) ($config->get('layout_width') ?: 'standard'));
+  $attributes->setAttribute('data-icon-set', (string) ($config->get('icon_set') ?: 'none'));
+  $attributes->setAttribute('data-character-set', (string) ($config->get('character_set') ?: 'utf-8'));
+  $variables['attributes'] = $attributes;
+
+  $variables['#attached']['library'][] = 'axiom01/axiom_assets_local';
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function axiom01_preprocess_page(array &$variables): void {
+  $variables['ax_theme_name'] = 'Axiom01';
+  $variables['ax_primary_menu_fallback'] = !empty($variables['page']['primary_menu']) ? [] : _axiom01_build_menu_tree('main');
+  $variables['ax_secondary_menu_fallback'] = !empty($variables['page']['secondary_menu']) ? [] : _axiom01_build_menu_tree('account');
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function axiom01_preprocess_block(&$variables) {
+  if (isset($variables['attributes']) && $variables['attributes'] instanceof Attribute) {
+    $variables['attributes']->setAttribute('data-component', str_replace('_', '-', $variables['plugin_id']));
+  }
+}
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+function axiom01_form_system_theme_settings_alter(array &$form, FormStateInterface $form_state): void {
+  $config = \Drupal::config('axiom01.settings');
+  $form['axiom_appearance'] = [
+    '#type' => 'details',
+    '#title' => t('Axiom01 appearance'),
+    '#open' => TRUE,
+  ];
+
+  $form['axiom_appearance']['color_mode'] = [
+    '#type' => 'select',
+    '#title' => t('Color mode'),
+    '#description' => t('Choose default color mode for frontend rendering. System follows browser preference.'),
+    '#default_value' => $config->get('color_mode') ?: 'light',
+    '#options' => [
+      'light' => t('Light'),
+      'dark' => t('Dark'),
+      'system' => t('System preference'),
+    ],
+  ];
+
+  $form['axiom_appearance']['color_palette'] = [
+    '#type' => 'select',
+    '#title' => t('Color palette'),
+    '#default_value' => $config->get('color_palette') ?: 'default',
+    '#options' => [
+      'default' => t('Default blue'),
+      'indigo' => t('Indigo'),
+      'emerald' => t('Emerald'),
+      'sunset' => t('Sunset'),
+    ],
+  ];
+
+  $form['axiom_appearance']['body_font'] = [
+    '#type' => 'select',
+    '#title' => t('Body font'),
+    '#default_value' => $config->get('body_font') ?: 'inter',
+    '#options' => [
+      'inter' => t('Inter / sans-serif'),
+      'system' => t('System sans-serif'),
+      'serif' => t('Serif'),
+      'mono' => t('Monospace'),
+    ],
+  ];
+
+  $form['axiom_appearance']['heading_font'] = [
+    '#type' => 'select',
+    '#title' => t('Heading font'),
+    '#default_value' => $config->get('heading_font') ?: 'inter',
+    '#options' => [
+      'inter' => t('Inter / sans-serif'),
+      'system' => t('System sans-serif'),
+      'serif' => t('Serif'),
+      'mono' => t('Monospace'),
+    ],
+  ];
+
+  $form['axiom_appearance']['spacing_scale'] = [
+    '#type' => 'select',
+    '#title' => t('Spacing scale'),
+    '#default_value' => $config->get('spacing_scale') ?: 'comfortable',
+    '#options' => [
+      'compact' => t('Compact'),
+      'comfortable' => t('Comfortable'),
+      'relaxed' => t('Relaxed'),
+    ],
+  ];
+
+  $form['axiom_appearance']['layout_width'] = [
+    '#type' => 'select',
+    '#title' => t('Layout width'),
+    '#default_value' => $config->get('layout_width') ?: 'standard',
+    '#options' => [
+      'narrow' => t('Narrow (960px)'),
+      'standard' => t('Standard (1200px)'),
+      'wide' => t('Wide (1440px)'),
+    ],
+  ];
+
+  $form['axiom_appearance']['icon_set'] = [
+    '#type' => 'select',
+    '#title' => t('Icon set'),
+    '#description' => t('Declare expected icon strategy for theme/component rendering conventions.'),
+    '#default_value' => $config->get('icon_set') ?: 'none',
+    '#options' => [
+      'none' => t('None / text-first'),
+      'emoji' => t('Emoji'),
+      'fontawesome' => t('Font Awesome'),
+      'material' => t('Material Symbols'),
+    ],
+  ];
+
+  $form['axiom_appearance']['character_set'] = [
+    '#type' => 'select',
+    '#title' => t('Character set'),
+    '#description' => t('Declare expected content encoding for multilingual/content pipelines.'),
+    '#default_value' => $config->get('character_set') ?: 'utf-8',
+    '#options' => [
+      'utf-8' => t('UTF-8 (recommended)'),
+      'iso-8859-1' => t('ISO-8859-1'),
+      'windows-1252' => t('Windows-1252'),
+    ],
+  ];
+}

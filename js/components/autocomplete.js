@@ -11,6 +11,11 @@ export default {
     let active = -1;
     let filtered = [...options];
 
+    const listHadId = Boolean(list.id);
+    if (!list.id) {
+      list.id = `autocomplete-list-${Math.random().toString(36).slice(2, 11)}`;
+    }
+
     const render = () => {
       list.innerHTML = '';
       filtered.forEach((option, index) => {
@@ -78,6 +83,7 @@ export default {
     input.setAttribute('autocomplete', 'off');
     input.setAttribute('role', 'combobox');
     input.setAttribute('aria-haspopup', 'listbox');
+    input.setAttribute('aria-controls', list.id);
     input.addEventListener('input', inputHandler);
     input.addEventListener('keydown', keyHandler);
     document.addEventListener('click', outsideHandler);
@@ -88,6 +94,10 @@ export default {
         input.removeEventListener('input', inputHandler);
         input.removeEventListener('keydown', keyHandler);
         document.removeEventListener('click', outsideHandler);
+        input.removeAttribute('aria-controls');
+        if (!listHadId) {
+          list.removeAttribute('id');
+        }
       }
     };
   }

@@ -33,17 +33,31 @@ export default {
         dropdownMenu.setAttribute('aria-labelledby', toggleButton.id);
         dropdownMenu.setAttribute('aria-hidden', 'true'); // Initially hidden
 
-        const toggleDropdown = (isOpen) => {
+        const getMenuItems = () =>
+            Array.from(dropdownMenu.querySelectorAll('[role="menuitem"], a, button')).filter((item) => {
+                return item.offsetParent !== null && !item.hasAttribute('disabled');
+            });
+
+        const toggleDropdown = (isOpen, options = {}) => {
+            const { restoreFocus = false, focusFirst = false } = options;
             const newState = typeof isOpen === 'boolean' ? isOpen : !element.classList.contains('is-open');
             element.classList.toggle('is-open', newState);
             toggleButton.setAttribute('aria-expanded', newState);
             dropdownMenu.setAttribute('aria-hidden', !newState);
             // No need to toggle display directly, CSS handles it based on .is-open
+
+            if (newState && focusFirst) {
+                getMenuItems()[0]?.focus();
+            }
+            if (!newState && restoreFocus) {
+                toggleButton.focus();
+            }
         };
 
         const clickHandler = (event) => {
             event.stopPropagation(); // Prevent document click from closing immediately
-            toggleDropdown();
+            const isOpen = element.classList.contains('is-open');
+            toggleDropdown(!isOpen, { focusFirst: !isOpen });
         };
 
         const documentClickHandler = (event) => {
@@ -54,10 +68,36 @@ export default {
 
         const keydownHandler = (event) => {
             if (event.key === 'Escape' && element.classList.contains('is-open')) {
-                toggleDropdown(false); // Close dropdown
-                toggleButton.focus(); // Return focus to the toggle button
+                event.preventDefault();
+                toggleDropdown(false, { restoreFocus: true });
             }
-            // TODO: Add keyboard navigation for menu items (Up/Down arrows, Home/End)
+
+            if (!element.classList.contains('is-open')) {
+                return;
+            }
+
+            const menuItems = getMenuItems();
+            if (!menuItems.length) {
+                return;
+            }
+
+            const activeIndex = menuItems.indexOf(document.activeElement);
+
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                const nextIndex = activeIndex + 1 < menuItems.length ? activeIndex + 1 : 0;
+                menuItems[nextIndex].focus();
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                const prevIndex = activeIndex - 1 >= 0 ? activeIndex - 1 : menuItems.length - 1;
+                menuItems[prevIndex].focus();
+            } else if (event.key === 'Home') {
+                event.preventDefault();
+                menuItems[0].focus();
+            } else if (event.key === 'End') {
+                event.preventDefault();
+                menuItems[menuItems.length - 1].focus();
+            }
         };
 
         toggleButton.addEventListener('click', clickHandler);
