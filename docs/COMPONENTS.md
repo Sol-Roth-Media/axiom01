@@ -2,9 +2,9 @@
 
 ## Overview
 
-Axiom01 provides a complete system of semantic components including buttons, cards, badges, tags, alerts, and more. All components follow the framework's philosophy of semantic HTML with minimal class-based intervention.
+Axiom01 provides a complete system of semantic components including buttons, cards, badges, tags, alerts, and more. All components follow the framework's philosophy of semantic HTML with minimal class-based intervention. **All variants use separate classes, never BEM-style hyphenated names.**
 
-**File Location**: `css/_components.css` (13,075 bytes, expanded in Session 3)
+**File Location**: `css/_components.css` (13,380 bytes)
 
 ## Button Component System
 
@@ -28,69 +28,81 @@ The most fundamental interactive element. Applies to `<button>`, `<input type="s
 
 ### Size Variants
 
-Three button sizes for different contexts:
+Three button sizes for different contexts (using separate classes):
 
 ```html
-<!-- Small button (sm) -->
-<button class="button--sm">Small</button>
+<!-- Small button -->
+<button class="button sm">Small</button>
 
-<!-- Default button (no class) -->
-<button>Default</button>
+<!-- Default button (no size class) -->
+<button class="button">Default</button>
 
-<!-- Large button (lg) -->
-<button class="button--lg">Large</button>
+<!-- Large button -->
+<button class="button lg">Large</button>
 
-<!-- Extra large button (xl) -->
-<button class="button--xl">Extra Large</button>
+<!-- Extra large button -->
+<button class="button xl">Extra Large</button>
+
+<!-- Combining variants -->
+<button class="button lg success">Large Success Button</button>
 ```
 
 **Size Details**:
-- `--sm`: 0.875rem font, 1.75rem height
+- `.sm`: 0.875rem font, 1.75rem height
 - Default: 1rem font, 2rem height
-- `--lg`: 1.125rem font, 3rem height
-- `--xl`: 1.25rem font, 3.5rem height
+- `.lg`: 1.125rem font, 3rem height
+- `.xl`: 1.25rem font, 3.5rem height
 
 ### Type Variants
 
-Different button types for different actions:
+Different button types for different actions (using separate classes):
 
 ```html
 <!-- Primary (default) -->
-<button>Primary Action</button>
+<button class="button primary">Primary Action</button>
 
 <!-- Secondary -->
-<button class="button--secondary">Cancel</button>
+<button class="button secondary">Cancel</button>
 
 <!-- Danger/Destructive -->
-<button class="button--danger">Delete</button>
+<button class="button danger">Delete</button>
 
 <!-- Success -->
-<button class="button--success">Confirm</button>
+<button class="button success">Confirm</button>
 
 <!-- Warning -->
-<button class="button--warning">Attention</button>
+<button class="button warning">Attention</button>
 
 <!-- Ghost (transparent with border) -->
-<button class="button--ghost">Ghost</button>
+<button class="button ghost">Ghost</button>
 
 <!-- Outline (variant of ghost) -->
-<button class="button--outline">Outline</button>
+<button class="button outline">Outline</button>
 ```
+
+**Type Details**:
+- `primary`: Blue background (default)
+- `secondary`: Gray background
+- `danger`: Red background
+- `success`: Green background
+- `warning`: Orange background
+- `ghost`: Transparent with primary border
+- `outline`: Transparent with primary border (alternative)
 
 ### Special Button States
 
 ```html
 <!-- Icon-only button -->
-<button class="button--icon" aria-label="Close">✕</button>
+<button class="button icon" aria-label="Close">✕</button>
 
 <!-- Loading state -->
-<button class="button--loading" disabled>Loading...</button>
+<button class="button loading" disabled>Loading...</button>
 
 <!-- Disabled state -->
 <button disabled>Disabled</button>
 
 <!-- Focus state (automatic on keyboard navigation) -->
-<button>Keyboard Focus Here</button>
+<button class="button primary">Keyboard Focus Here</button>
 ```
 
 ### Button Groups
@@ -99,9 +111,9 @@ Group buttons together for related actions:
 
 ```html
 <div class="button-group">
-  <button>First</button>
-  <button>Second</button>
-  <button>Third</button>
+  <button class="button primary">Save</button>
+  <button class="button secondary">Cancel</button>
+  <button class="button danger">Delete</button>
 </div>
 ```
 
@@ -130,19 +142,19 @@ Default link styling with smooth transitions.
 
 ```html
 <!-- Primary link (bold) -->
-<a href="/page" class="link--primary">Primary Link</a>
+<a href="/page" class="primary">Primary Link</a>
 
 <!-- Secondary link (muted) -->
-<a href="/page" class="link--secondary">Secondary Link</a>
+<a href="/page" class="secondary">Secondary Link</a>
 
 <!-- Muted link -->
-<a href="/page" class="link--muted">Muted Link</a>
+<a href="/page" class="muted">Muted Link</a>
 
 <!-- Underlined link -->
-<a href="/page" class="link--underline">Underlined Link</a>
+<a href="/page" class="underline">Underlined Link</a>
 
 <!-- Call-to-action link (button-like) -->
-<a href="/signup" class="link--cta">Sign Up Now</a>
+<a href="/signup" class="cta">Sign Up Now</a>
 
 <!-- External link (auto-adds arrow) -->
 <a href="https://external.com" target="_blank">External Site</a>
@@ -155,16 +167,16 @@ Default link styling with smooth transitions.
 Container for grouped content with border and optional shadow.
 
 ```html
-<div class="card">
+<article class="card">
   <header>
     <h2>Card Title</h2>
   </header>
   <div>Card content goes here</div>
   <footer>
-    <button class="button--secondary">Cancel</button>
-    <button>Save</button>
+    <button class="button secondary">Cancel</button>
+    <button class="button primary">Save</button>
   </footer>
-</div>
+</article>
 ```
 
 **Structure**:
@@ -176,25 +188,25 @@ Container for grouped content with border and optional shadow.
 
 ```html
 <!-- Elevated card (shadow) -->
-<div class="card card--elevated">...</div>
+<article class="card elevated">...</article>
 
 <!-- Outlined card (border) -->
-<div class="card card--outlined">...</div>
+<article class="card outlined">...</article>
 
 <!-- Filled card (background color) -->
-<div class="card card--filled">...</div>
+<article class="card filled">...</article>
 
 <!-- Interactive card (hover effect) -->
-<div class="card card--interactive">...</div>
+<article class="card interactive">...</article>
 
 <!-- Hover-lift card (animations on hover) -->
-<div class="card card--hover-lift">...</div>
+<article class="card hover-lift">...</article>
 ```
 
 ### Card Structure Example
 
 ```html
-<div class="card card--elevated">
+<article class="card elevated">
   <header>
     <h2>Product Details</h2>
   </header>
@@ -209,10 +221,10 @@ Container for grouped content with border and optional shadow.
   </div>
   
   <footer>
-    <button class="button--secondary">Learn More</button>
-    <button class="button--success">Add to Cart</button>
+    <button class="button secondary">Learn More</button>
+    <button class="button success lg">Add to Cart</button>
   </footer>
-</div>
+</article>
 ```
 
 ### Card Grid
@@ -221,9 +233,9 @@ Responsive grid of cards:
 
 ```html
 <div class="card-grid">
-  <div class="card">...</div>
-  <div class="card">...</div>
-  <div class="card">...</div>
+  <article class="card elevated">...</article>
+  <article class="card elevated">...</article>
+  <article class="card elevated">...</article>
 </div>
 ```
 
@@ -240,8 +252,8 @@ Small label for status or category indication.
 
 ```html
 <span class="badge">Primary</span>
-<span class="badge badge--success">Active</span>
-<span class="badge badge--error">Inactive</span>
+<span class="badge success">Active</span>
+<span class="badge error">Inactive</span>
 ```
 
 **Default Badge**:
@@ -254,35 +266,38 @@ Small label for status or category indication.
 
 ```html
 <!-- Primary (default) -->
-<span class="badge badge--primary">New</span>
+<span class="badge primary">New</span>
 
 <!-- Secondary -->
-<span class="badge badge--secondary">Beta</span>
+<span class="badge secondary">Beta</span>
 
 <!-- Success (green) -->
-<span class="badge badge--success">Active</span>
+<span class="badge success">Active</span>
 
 <!-- Warning (orange) -->
-<span class="badge badge--warning">Pending</span>
+<span class="badge warning">Pending</span>
 
 <!-- Error (red) -->
-<span class="badge badge--error">Critical</span>
+<span class="badge error">Critical</span>
 
 <!-- Info (blue) -->
-<span class="badge badge--info">Info</span>
+<span class="badge info">Info</span>
 ```
 
 ### Badge Sizes
 
 ```html
 <!-- Small badge -->
-<span class="badge badge--sm">Tiny</span>
+<span class="badge sm">Tiny</span>
 
 <!-- Default badge -->
 <span class="badge">Normal</span>
 
 <!-- Large badge -->
-<span class="badge badge--lg">Big</span>
+<span class="badge lg">Big</span>
+
+<!-- Combined variants -->
+<span class="badge success lg">Active (Large)</span>
 ```
 
 ## Tag Component System
@@ -299,7 +314,7 @@ Flexible tags with optional dismissible button.
 ### Dismissible Tag
 
 ```html
-<span class="tag tag--dismissible">
+<span class="tag dismissible">
   Selected Option
   <button aria-label="Remove">×</button>
 </span>
@@ -318,8 +333,9 @@ Flexible tags with optional dismissible button.
 Prominent notification/message container.
 
 ```html
-<div class="alert alert--info">
-  <div>This is an informational message.</div>
+<div class="alert">
+  <h3>Alert Title</h3>
+  <p>This is an alert message.</p>
 </div>
 ```
 
@@ -327,25 +343,25 @@ Prominent notification/message container.
 
 ```html
 <!-- Info alert (blue) -->
-<div class="alert alert--info">
+<div class="alert info">
   <h3>Information</h3>
   <p>This is helpful information.</p>
 </div>
 
 <!-- Success alert (green) -->
-<div class="alert alert--success">
+<div class="alert success">
   <h3>Success</h3>
   <p>Your action completed successfully.</p>
 </div>
 
 <!-- Warning alert (orange) -->
-<div class="alert alert--warning">
+<div class="alert warning">
   <h3>Warning</h3>
   <p>Please review this carefully.</p>
 </div>
 
 <!-- Error alert (red) -->
-<div class="alert alert--error">
+<div class="alert error">
   <h3>Error</h3>
   <p>Something went wrong. Please try again.</p>
 </div>
@@ -354,7 +370,7 @@ Prominent notification/message container.
 ### Dismissible Alert
 
 ```html
-<div class="alert alert--success alert--dismissible">
+<div class="alert success dismissible">
   <div>
     <h3>Success</h3>
     <p>Your changes have been saved.</p>
@@ -367,18 +383,18 @@ Prominent notification/message container.
 
 ```html
 <!-- Small alert -->
-<div class="alert alert--success alert--sm">
+<div class="alert success sm">
   Changes saved
 </div>
 
 <!-- Default alert -->
-<div class="alert alert--warning">
+<div class="alert warning">
   <h3>Warning</h3>
   <p>Please review this carefully.</p>
 </div>
 
 <!-- Large alert -->
-<div class="alert alert--error alert--lg">
+<div class="alert error lg">
   <h3>Critical Error</h3>
   <p>This is a serious issue that requires attention.</p>
 </div>
@@ -389,42 +405,42 @@ Prominent notification/message container.
 ### Card with Button Group
 
 ```html
-<div class="card">
+<article class="card">
   <header>
     <h2>Settings</h2>
   </header>
   <div class="button-group">
-    <button>Save</button>
-    <button class="button--secondary">Cancel</button>
-    <button class="button--danger">Reset</button>
+    <button class="button primary">Save</button>
+    <button class="button secondary">Cancel</button>
+    <button class="button danger">Reset</button>
   </div>
-</div>
+</article>
 ```
 
 ### Card with Alert
 
 ```html
-<div class="card">
-  <div class="alert alert--warning">
+<article class="card">
+  <div class="alert warning">
     <h3>Important</h3>
     <p>This change is permanent.</p>
   </div>
   <div>...</div>
-</div>
+</article>
 ```
 
 ### Card with Badges
 
 ```html
-<div class="card">
+<article class="card">
   <header>
     <h2>
       Article Title
-      <span class="badge badge--success">Featured</span>
+      <span class="badge success lg">Featured</span>
     </h2>
   </header>
   <div>Article content...</div>
-</div>
+</article>
 ```
 
 ## Responsive Behavior
@@ -502,15 +518,16 @@ All components are fully supported in:
 ## Usage Philosophy
 
 ### ✅ DO:
-- Use semantic HTML (`<button>`, `<a>`, `<h2>`, `<div>`)
+- Use semantic HTML (`<button>`, `<a>`, `<h2>`, `<article>`)
 - Apply single root class (`.button`, `.card`, `.alert`)
+- Use separate variant classes (`.button.lg.success`)
 - Use child element selectors in CSS
 - Combine components naturally
 - Ensure keyboard accessibility
 
 ### ❌ DON'T:
+- Use BEM-style hyphenated names (`.button--lg`, `.card--elevated`)
 - Use non-semantic divs for interactive elements
-- Stack multiple root classes
 - Create nested BEM-like structures
 - Use class names that couple to DOM structure
 - Ignore keyboard navigation requirements
@@ -527,5 +544,6 @@ All components are fully supported in:
 ---
 
 **Version**: 2.0.0  
-**Updated**: 2025  
-**Status**: Production Ready ✅
+**Updated**: January 20, 2025  
+**Status**: Production Ready ✅  
+**Key Change**: Refactored from BEM-style classes to separate variant classes for compliance with Axiom01 core philosophy.
