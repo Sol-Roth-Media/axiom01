@@ -4,7 +4,7 @@
 
 [![npm](https://img.shields.io/npm/v/axiom01.svg?color=blue)](https://www.npmjs.com/package/axiom01)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CSS Bundle](https://img.shields.io/badge/CSS-~40KB%20gzipped-brightgreen.svg)]()
+[![CSS Bundle](https://img.shields.io/badge/CSS-13.3KB%20gzipped-brightgreen.svg)]()
 [![WCAG 2.1 Level AA](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AA-blue.svg)]()
 [![JavaScript Free](https://img.shields.io/badge/JavaScript-Not%20Required-ff69b4.svg)]()
 
@@ -43,18 +43,19 @@ Most UI frameworks make you choose: **clean code OR beautiful design**. You writ
 ## ✨ What You Get
 
 ### 🎨 Professional Design System
-- **50+ Design Tokens** — Colors, spacing, typography, animations, shadows, borders, breakpoints
+- **149 Design Tokens** — Colors, spacing, typography, animations, shadows, borders, breakpoints
 - **Dark Mode Built-In** — Automatic theme detection and smooth transitions
 - **Semantic Color System** — Primary, secondary, success, warning, error, info colors (auto-calculated for harmony)
 - **Customizable via CSS Variables** — Change one variable, update the entire site
 
-### 🧩 6 Production-Ready Components
+### 🧩 67 Production-Ready Components
 - **Button** — 4 sizes, 7 types, all states (hover, focus, disabled, loading)
 - **Card** — 5 variants, semantic structure, responsive footer layout
 - **Badge** — 6 colors, 3 sizes, perfect for status indicators
 - **Alert** — 4 types, 3 sizes, dismissible option, WCAG AA compliant
 - **Tag** — With optional close button for filtering
 - **Link** — 5 semantic variants for different contexts
+- **Plus 61 More** — Accordion, Avatar, Modal, Table, Tabs, Carousel, Slider, Video Player, Audio Player, Datepicker, and much more
 
 ### 🎬 20+ Animations
 - **GPU-Accelerated** — Uses only transform/opacity for 60fps performance
@@ -77,11 +78,9 @@ Most UI frameworks make you choose: **clean code OR beautiful design**. You writ
 - Touch-optimized interactions
 
 ### 🚀 Performance
-- **~40KB CSS (gzipped)** — Tiny bundle size
-- **~8KB JavaScript (gzipped)** — Optional component loader
-- **Zero Dependencies** — Pure CSS and vanilla JavaScript
-- **No Build Required** — Works with plain HTML, npm, or any bundler
-- **GPU-Accelerated** — Animations never block the main thread
+- **13.3 KB CSS (gzipped)** — Incredibly lean bundle size with 67 components
+- **1.0 KB JavaScript (gzipped)** — Optional component loader
+- **14.3 KB Total (gzipped)** — Production-ready, zero dependencies
 
 ---
 
@@ -264,9 +263,9 @@ Automatic detection. Smooth transitions. Zero extra work.
 
 | Asset | Size (gzipped) | Notes |
 |-------|---|---|
-| **CSS** | ~40 KB | Full framework with all components |
-| **JavaScript** | ~8 KB | Optional component loader |
-| **Total** | ~48 KB | Production-ready, zero dependencies |
+| **CSS** | 13.3 KB | Full framework with all 67 components |
+| **JavaScript** | 1.0 KB | Optional component loader |
+| **Total** | 14.3 KB | Production-ready, zero dependencies |
 
 For comparison:
 - Bootstrap: ~150 KB CSS
@@ -380,7 +379,7 @@ Building with Axiom01? [Let us know!](https://github.com/Sol-Roth-Media/axiom01/
 | **Latest** | 2.0.0 |
 | **Released** | January 20, 2025 |
 | **License** | MIT |
-| **Bundle Size** | ~40KB CSS + ~8KB JS (gzipped) |
+| **Bundle Size** | 13.3 KB CSS + 1.0 KB JS (gzipped) |
 
 ---
 
@@ -395,5 +394,11 @@ Building with Axiom01? [Let us know!](https://github.com/Sol-Roth-Media/axiom01/
 ---
 
 **Made with ❤️ for developers who believe in clean code, semantic HTML, and accessible design.**
+
+---
+
+### About
+
+**Axiom01** is created by [Sol Roth](https://www.solroth.com). Licensed under MIT, open source and free to use.
 
 *Axiom01 — The semantic-first UI framework.*
