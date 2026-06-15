@@ -1,0 +1,30 @@
+name: Upstream Main Asset Parity
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'
+
+env:
+  AXIOM_UPSTREAM_REPO: Sol-Roth-Media/axiom01
+  AXIOM_UPSTREAM_REF: main
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download upstream main runtime assets
+        run: |
+          mkdir -p /tmp/upstream/css /tmp/upstream/js
+          curl -fsSL "https://raw.githubusercontent.com/${AXIOM_UPSTREAM_REPO}/${AXIOM_UPSTREAM_REF}/css/axiom.min.css" -o /tmp/upstream/css/axiom.min.css
+          curl -fsSL "https://raw.githubusercontent.com/${AXIOM_UPSTREAM_REPO}/${AXIOM_UPSTREAM_REF}/js/axiom.min.js" -o /tmp/upstream/js/axiom.min.js
+
+      - name: Compare CSS parity
+        run: diff -u /tmp/upstream/css/axiom.min.css dist/css/axiom.min.css
+
+      - name: Compare JS parity
+        run: diff -u /tmp/upstream/js/axiom.min.js dist/js/axiom.min.js

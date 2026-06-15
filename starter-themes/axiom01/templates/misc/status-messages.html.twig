@@ -1,0 +1,16 @@
+{# Accessible status messages mapped to alert semantics. #}
+{% for type, messages in message_list %}
+  {% set message_role = type == 'error' ? 'alert' : 'status' %}
+  {% set message_live = type == 'error' ? 'assertive' : 'polite' %}
+  {% set message_variant = type in ['status', 'warning', 'error'] ? 'messages--' ~ type : 'messages--status' %}
+  <section role="{{ message_role }}" aria-live="{{ message_live }}" aria-atomic="true" class="messages {{ message_variant }}" data-severity="{{ type|clean_class }}" data-component="alert">
+    {% if status_headings[type] %}
+      <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
+    {% endif %}
+    <ul class="messages__list">
+      {% for message in messages %}
+        <li class="messages__item">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endfor %}

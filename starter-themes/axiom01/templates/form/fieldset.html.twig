@@ -1,0 +1,24 @@
+{# Fieldset wrapper for Drupal form groups. #}
+<fieldset{{ attributes }}>
+  {% if legend and legend.title %}
+    <legend{{ legend.attributes }}>
+      <span{{ legend_span.attributes }}>{{ legend.title }}</span>
+    </legend>
+  {% endif %}
+
+  <div>
+    {% if errors %}
+      <p role="alert" data-axiom-error>{{ errors }}</p>
+    {% endif %}
+
+    {% if description and description_display in ['before', 'invisible'] %}
+      <div>{{ description }}</div>
+    {% endif %}
+
+    {{ children }}
+
+    {% if description and description_display == 'after' %}
+      <div>{{ description }}</div>
+    {% endif %}
+  </div>
+</fieldset>
