@@ -12,8 +12,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSET_PAIRS = (
-    (ROOT / "css" / "axiom.min.css", ROOT / "starter-themes" / "axiom01-drupal11-starter-theme" / "dist" / "css" / "axiom.min.css"),
-    (ROOT / "js" / "axiom.min.js", ROOT / "starter-themes" / "axiom01-drupal11-starter-theme" / "dist" / "js" / "axiom.min.js"),
+    (ROOT / "css" / "axiom.min.css", ROOT / "starter-themes" / "axiom01" / "dist" / "css" / "axiom.min.css"),
+    (ROOT / "js" / "axiom.min.js", ROOT / "starter-themes" / "axiom01" / "dist" / "js" / "axiom.min.js"),
 )
 
 

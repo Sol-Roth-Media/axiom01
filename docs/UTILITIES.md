@@ -2,390 +2,44 @@
 
 ## Overview
 
-Axiom01 provides 100+ optional utility classes for rapid development and prototyping.
+⚠️ **Important**: Axiom01 philosophy emphasizes **semantic HTML and component-based CSS over utilities**. 
 
-**⚠️ Important**: Axiom01 philosophy emphasizes semantic HTML and component-based CSS. Utilities are provided for convenience, but should not replace well-structured semantic markup.
+Utilities provided are for exceptional cases only (layout edge cases, responsive adjustments, accessibility helpers). Do NOT use utilities as your primary styling approach.
 
-**File Location**: `css/_utilities.css` (354 lines)
+**File Location**: `css/_utilities.css` (minimal ~100 lines)
 
-## Philosophy: Semantic First, Utilities Second
+---
+
+## Philosophy: Components First, Utilities Only When Needed
+
+### ✅ Preferred Pattern: Semantic Components
 
 ```html
-<!-- ✅ PREFERRED: Semantic HTML + CSS -->
-<div class="card elevated">
-  <h2>Title</h2>
-  <p>Content</p>
-</div>
-
-<!-- ⚠️ LESS IDEAL: Utilities everywhere -->
-<div class="flex flex-col items-center justify-center gap-m p-l border-1 rounded-lg shadow-md">
-  <h2>Title</h2>
-  <p>Content</p>
-</div>
+<!-- Use semantic components with minimal classes -->
+<article class="card elevated">
+  <header>
+    <h2>Title</h2>
+  </header>
+  <div>
+    <p>Content goes here</p>
+  </div>
+</article>
 ```
 
-Utilities are best used for:
-- Quick prototyping
-- Complex layouts (flex, grid)
-- Responsive adjustments
-- One-off adjustments
-
-## Display Utilities
-
-### Block-Level Display
+### ❌ Anti-Pattern: Utility-Heavy Layout
 
 ```html
-<div class="block">Block element</div>
-<span class="inline">Inline element</span>
-<span class="inline-block">Inline-block element</span>
-```
-
-Classes: `.block`, `.inline`, `.inline-block`, `.flex`, `.grid`, `.hidden`, `.visible`
-
-## Flexbox Utilities
-
-### Flex Direction
-
-```html
-<div class="flex flex-row">Row (default)</div>
-<div class="flex flex-col">Column</div>
-```
-
-### Alignment
-
-```html
-<!-- Justify Content (horizontal axis) -->
-<div class="flex justify-start">Left-aligned</div>
-<div class="flex justify-center">Centered</div>
-<div class="flex justify-between">Space-between</div>
-<div class="flex justify-around">Space-around</div>
-<div class="flex justify-end">Right-aligned</div>
-
-<!-- Align Items (vertical axis) -->
-<div class="flex items-start">Top-aligned</div>
-<div class="flex items-center">Centered</div>
-<div class="flex items-end">Bottom-aligned</div>
-<div class="flex items-stretch">Stretched</div>
-```
-
-### Gaps
-
-```html
-<div class="flex gap-xs">4px gap</div>
-<div class="flex gap-s">8px gap</div>
-<div class="flex gap-m">14px gap</div>
-<div class="flex gap-l">21px gap</div>
-<div class="flex gap-xl">35px gap</div>
-```
-
-## Grid Utilities
-
-### Grid Columns
-
-```html
-<div class="grid grid-1">1 column</div>
-<div class="grid grid-2">2 columns</div>
-<div class="grid grid-3">3 columns</div>
-<div class="grid grid-auto">Auto-fit columns</div>
-```
-
-### Grid Gaps
-
-```html
-<div class="grid gap-s">Small gap</div>
-<div class="grid gap-m">Medium gap</div>
-<div class="grid gap-l">Large gap</div>
-```
-
-## Spacing Utilities
-
-### Margin
-
-```html
-<!-- All sides -->
-<div class="m-xs">4px margin</div>
-<div class="m-s">8px margin</div>
-<div class="m-m">14px margin</div>
-<div class="m-l">21px margin</div>
-<div class="m-xl">35px margin</div>
-
-<!-- Individual sides -->
-<div class="mt-m">Top margin</div>
-<div class="mb-m">Bottom margin</div>
-<div class="ml-m">Left margin</div>
-<div class="mr-m">Right margin</div>
-
-<!-- Horizontal/Vertical -->
-<div class="mx-m">Horizontal margins</div>
-<div class="my-l">Vertical margins</div>
-
-<!-- Auto (centering) -->
-<div class="mx-auto">Center horizontally</div>
-```
-
-### Padding
-
-Same syntax as margin, using `p-*` instead:
-
-```html
-<div class="p-m">All sides</div>
-<div class="pt-l">Top padding</div>
-<div class="px-m">Horizontal padding</div>
-<div class="py-s">Vertical padding</div>
-```
-
-## Typography Utilities
-
-### Font Weight
-
-```html
-<div class="font-normal">Normal weight (400)</div>
-<div class="font-medium">Medium weight (500)</div>
-<div class="font-semibold">Semibold weight (600)</div>
-<div class="font-bold">Bold weight (700)</div>
-```
-
-### Text Alignment
-
-```html
-<div class="text-left">Left-aligned text</div>
-<div class="text-center">Centered text</div>
-<div class="text-right">Right-aligned text</div>
-<div class="text-justify">Justified text</div>
-```
-
-### Text Transform
-
-```html
-<div class="uppercase">UPPERCASE TEXT</div>
-<div class="lowercase">lowercase text</div>
-<div class="capitalize">Capitalize Each Word</div>
-```
-
-### Text Truncation
-
-```html
-<div class="truncate">Text truncates with ellipsis...</div>
-<div class="line-clamp-2">Text clamps to 2 lines...</div>
-```
-
-## Color Utilities
-
-### Text Colors
-
-```html
-<div class="text-primary">Primary text</div>
-<div class="text-secondary">Secondary text</div>
-<div class="text-success">Success message</div>
-<div class="text-warning">Warning message</div>
-<div class="text-error">Error message</div>
-<div class="text-muted">Muted/subtle text</div>
-```
-
-### Background Colors
-
-```html
-<div class="bg-primary">Primary background</div>
-<div class="bg-secondary">Secondary background</div>
-<div class="bg-success">Success background</div>
-<div class="bg-warning">Warning background</div>
-<div class="bg-error">Error background</div>
-<div class="bg-surface">Default background</div>
-```
-
-### Border Colors
-
-```html
-<div class="border border-primary">Bordered element</div>
-<div class="border border-secondary">Secondary border</div>
-<div class="border-1">1px border</div>
-<div class="border-2">2px border</div>
-```
-
-## Size Utilities
-
-### Width
-
-```html
-<div class="w-full">100% width</div>
-<div class="w-half">50% width</div>
-<div class="w-1/3">33% width</div>
-<div class="w-1/4">25% width</div>
-<div class="w-auto">Auto width</div>
-<div class="max-w-full">Max width 100%</div>
-<div class="max-w-reading">Reading width (65ch)</div>
-```
-
-### Height
-
-```html
-<div class="h-full">100% height</div>
-<div class="h-auto">Auto height</div>
-<div class="h-screen">100vh height</div>
-<div class="min-h-screen">Min 100vh height</div>
-```
-
-## Responsive Utilities
-
-### Visibility
-
-```html
-<!-- Hide below tablet -->
-<div class="hide-sm">Hidden on mobile</div>
-
-<!-- Show only on tablet and up -->
-<div class="show-md">Visible on tablets+</div>
-
-<!-- Hide on desktop -->
-<div class="hide-lg">Hidden on desktop</div>
-
-<!-- Screen reader only -->
-<div class="sr-only">Visible to screen readers only</div>
-```
-
-### Responsive Display
-
-```html
-<!-- Block on mobile, flex on tablet+ -->
-<div class="block md:flex">Responsive layout</div>
-
-<!-- Grid on desktop, stack on mobile -->
-<div class="grid md:block">Responsive grid</div>
-```
-
-## Position Utilities
-
-### Static/Relative/Absolute/Fixed
-
-```html
-<div class="relative">Position: relative</div>
-<div class="absolute">Position: absolute</div>
-<div class="fixed">Position: fixed</div>
-<div class="sticky">Position: sticky</div>
-```
-
-### Positioning
-
-```html
-<div class="absolute inset-0">Cover entire container</div>
-<div class="absolute top-0 left-0">Top-left corner</div>
-<div class="absolute bottom-0 right-0">Bottom-right corner</div>
-<div class="fixed bottom-xl right-xl">Floating action button</div>
-```
-
-## Border & Shadow Utilities
-
-### Border Radius
-
-```html
-<div class="rounded-none">No radius</div>
-<div class="rounded-sm">Small radius (3px)</div>
-<div class="rounded-base">Base radius (5px)</div>
-<div class="rounded-md">Medium radius (0.3rem)</div>
-<div class="rounded-lg">Large radius (0.5rem)</div>
-<div class="rounded-full">Full radius (50%)</div>
-```
-
-### Shadows
-
-```html
-<div class="shadow-none">No shadow</div>
-<div class="shadow-sm">Small shadow</div>
-<div class="shadow-md">Medium shadow</div>
-<div class="shadow-lg">Large shadow</div>
-```
-
-## Overflow Utilities
-
-```html
-<div class="overflow-auto">Auto overflow</div>
-<div class="overflow-hidden">Hidden overflow</div>
-<div class="overflow-scroll">Always scrollable</div>
-<div class="overflow-x-auto">Horizontal scroll</div>
-<div class="overflow-y-auto">Vertical scroll</div>
-```
-
-## Opacity Utilities
-
-```html
-<div class="opacity-0">Transparent (0%)</div>
-<div class="opacity-25">25% opacity</div>
-<div class="opacity-50">50% opacity</div>
-<div class="opacity-75">75% opacity</div>
-<div class="opacity-100">Opaque (100%)</div>
-```
-
-## Cursor Utilities
-
-```html
-<div class="cursor-auto">Auto cursor</div>
-<div class="cursor-pointer">Pointer cursor</div>
-<div class="cursor-not-allowed">Disabled cursor</div>
-<div class="cursor-text">Text cursor</div>
-```
-
-## Common Patterns
-
-### Centered Box
-
-```html
-<div class="flex items-center justify-center min-h-screen">
-  <div class="text-center">Content</div>
+<!-- AVOID: Too many utilities, hard to maintain -->
+<div class="flex flex-col items-center justify-center gap-m p-l border rounded-lg shadow-md">
+  <h2 class="font-bold text-lg">Title</h2>
+  <p class="text-muted">Content</p>
 </div>
 ```
 
-### Responsive Grid
-
-```html
-<div class="grid grid-1 md:grid-2 lg:grid-3 gap-m">
-  <div>Column 1</div>
-  <div>Column 2</div>
-  <div>Column 3</div>
-</div>
-```
-
-### Card with Spacing
-
-```html
-<div class="p-l border rounded-lg shadow-md">
-  <h3 class="mb-s">Title</h3>
-  <p class="text-muted">Description</p>
-</div>
-```
-
-### Stacked List
-
-```html
-<div class="flex flex-col gap-s">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-</div>
-```
-
-## When NOT to Use Utilities
-
-❌ **Anti-patterns to avoid:**
-
-```html
-<!-- Too many utilities - hard to read -->
-<div class="flex flex-col items-center justify-center gap-m p-l m-m border rounded-lg shadow-lg text-center">
-  Don't do this
-</div>
-
-<!-- Multiple spacing utilities -->
-<div class="p-m m-m pt-l mt-xl mb-s">
-  Too much spacing complexity
-</div>
-
-<!-- Replacing semantic markup -->
-<div class="font-bold text-lg">Should use <h2> instead</div>
-```
-
-✅ **Better approach:**
+### ✅ Correct Approach: Define a Component
 
 ```css
-/* Define semantic component */
+/* Instead of utilities, define semantic component */
 .card {
   display: flex;
   flex-direction: column;
@@ -393,56 +47,235 @@ Same syntax as margin, using `p-*` instead:
   justify-content: center;
   gap: var(--a-space-m);
   padding: var(--a-space-l);
-  margin: var(--a-space-m);
-  border: 1px solid var(--a-color-outline);
-  border-radius: var(--a-border-radius-lg);
-  box-shadow: var(--a-shadow-lg);
-  text-align: center;
+  border: 1px solid var(--ax-border);
+  border-radius: var(--a-border-radius-base);
+  box-shadow: var(--a-shadow-md);
 }
 ```
 
 ```html
-<div class="card">Use semantic classes</div>
+<!-- Clean semantic HTML -->
+<article class="card">
+  <h2>Title</h2>
+  <p>Content</p>
+</article>
 ```
 
-## Responsive Breakpoints
+---
 
-Utilities use the same breakpoints defined in design tokens:
+## When Utilities ARE Appropriate
 
-```css
-/* Base (mobile-first) */
-.text-center { text-align: center; }
+1. **Screen Reader Only Text** - `.sr-only` for accessibility
+2. **Responsive Visibility** - `.hide-mobile`, `.hide-desktop` for layout breakpoints  
+3. **Display Override** - `.hidden` for rare show/hide cases
+4. **Text Truncation** - `.truncate` for single-line overflow
+5. **Positioning Helpers** - `.relative`, `.absolute` for specific layout needs
+6. **Float Clearfix** - `.clearfix` for legacy float-based layouts
 
-/* Tablet and up */
-@media (min-width: 768px) {
-  .md\:text-left { text-align: left; }
-}
+---
 
-/* Desktop and up */
-@media (min-width: 992px) {
-  .lg\:text-right { text-align: right; }
-}
+## Available Utilities
+
+### Accessibility
+
+```html
+<!-- Hide from sighted users, visible to screen readers -->
+<span class="sr-only">Screen reader only text</span>
 ```
+
+### Display
+
+```html
+<!-- Override display property -->
+<div class="hidden">Hidden element</div>
+<span class="block">Block element</span>
+<span class="inline">Inline element</span>
+<span class="inline-block">Inline-block element</span>
+```
+
+### Responsive Display
+
+```html
+<!-- Show/hide at different breakpoints -->
+<div class="hide-mobile">Visible on desktop only</div>
+<div class="hide-desktop">Visible on mobile only</div>
+```
+
+### Positioning
+
+```html
+<!-- Position properties -->
+<div class="relative">position: relative</div>
+<div class="absolute">position: absolute</div>
+<div class="fixed">position: fixed</div>
+<div class="static">position: static</div>
+```
+
+### Spacing Reset
+
+```html
+<!-- Remove all margins (reset default margins) -->
+<p class="m-0">No margin</p>
+```
+
+### Text Truncation
+
+```html
+<!-- Single-line truncation with ellipsis -->
+<div class="truncate">This text will truncate with ellipsis...</div>
+```
+
+### Overflow
+
+```html
+<!-- Overflow handling -->
+<div class="overflow-auto">Auto overflow</div>
+<div class="overflow-hidden">Hidden overflow</div>
+<div class="overflow-x-auto">Horizontal scroll</div>
+<div class="overflow-y-auto">Vertical scroll</div>
+```
+
+### Visibility
+
+```html
+<!-- Visual opacity -->
+<div class="opacity-50">50% opacity</div>
+<div class="opacity-100">Full opacity</div>
+```
+
+### Pointer Events
+
+```html
+<!-- Disable/enable pointer events -->
+<div class="pointer-none">Cannot be clicked</div>
+<div class="pointer-auto">Can be clicked</div>
+```
+
+### Float Clearfix
+
+```html
+<!-- For legacy float-based layouts only -->
+<div class="clearfix">
+  <div style="float: left;">Left</div>
+  <div style="float: right;">Right</div>
+</div>
+```
+
+### Responsive Iframe
+
+```html
+<!-- Maintain video aspect ratio -->
+<div class="responsive-iframe">
+  <iframe src="https://..."></iframe>
+</div>
+```
+
+### Size Shortcuts
+
+```html
+<!-- Common width/height scenarios -->
+<div class="w-full">Width: 100%</div>
+<div class="h-auto">Height: auto</div>
+```
+
+### Box Sizing
+
+```html
+<!-- CSS box model -->
+<div class="box-border">box-sizing: border-box</div>
+```
+
+---
+
+## What These Utilities Should NOT Be
+
+❌ **Axiom01 does NOT provide:**
+
+- Padding utilities (`p-m`, `p-l`, `pt-s`, etc.) - Use components instead
+- Margin utilities (`m-m`, `mb-l`, `mx-auto`, etc.) - Use CSS in components
+- Flexbox utilities (`flex`, `items-center`, `gap-m`, etc.) - Use components
+- Grid utilities (`grid`, `grid-cols-3`, etc.) - Use components
+- Color utilities (`text-primary`, `bg-success`, etc.) - Use semantic class + CSS
+- Typography utilities (`font-bold`, `text-lg`, etc.) - Use semantic HTML (`<h1>`, `<strong>`, etc.)
+- Border utilities (`border`, `rounded-lg`, etc.) - Use components
+- Shadow utilities (`shadow-md`, `shadow-lg`, etc.) - Use components
+
+---
+
+## Why So Few Utilities?
+
+Axiom01 is built on semantic-first principles:
+
+1. **HTML should be meaningful** - Use `<nav>`, `<article>`, `<h2>`, etc., not generic `<div>`
+2. **Components handle layout** - Define `.card`, `.button`, `.alert` once, reuse everywhere
+3. **CSS variables handle consistency** - All spacing/colors defined in tokens
+4. **Maintainability** - Easier to update `.card` once than 50 utility-heavy divs
+5. **Accessibility** - Semantic HTML + components naturally accessible
+
+---
+
+## Example: Building Without Utilities
+
+### Without Components (Hard to Maintain ❌)
+
+```html
+<div class="flex flex-col gap-m p-l border rounded-lg shadow-md">
+  <div class="flex items-center justify-between gap-s mb-m">
+    <h3 class="font-bold text-lg">Card Title</h3>
+    <button class="font-semibold text-primary">Edit</button>
+  </div>
+  <p class="text-muted mb-m">Description text</p>
+  <div class="flex gap-s">
+    <button class="flex items-center gap-xs px-m py-s bg-primary text-white rounded">Save</button>
+    <button class="flex items-center gap-xs px-m py-s bg-secondary text-on-secondary rounded">Cancel</button>
+  </div>
+</div>
+```
+
+### With Components (Easy to Maintain ✅)
+
+```html
+<article class="card elevated">
+  <header>
+    <h2>Card Title</h2>
+    <button>Edit</button>
+  </header>
+  <div>
+    <p>Description text</p>
+  </div>
+  <footer>
+    <button class="button primary">Save</button>
+    <button class="button secondary">Cancel</button>
+  </footer>
+</article>
+```
+
+The component CSS handles all spacing, alignment, and styling.
+
+---
 
 ## Browser Support
 
-All utilities use standard CSS and are supported in:
+All utilities use standard CSS supported in:
 - ✅ Chrome/Edge 60+
 - ✅ Firefox 55+
 - ✅ Safari 12+
 - ✅ iOS Safari 12+
 - ✅ Android Browser 60+
 
+---
+
 ## Related Files
 
 - **Implementation**: `css/_utilities.css`
-- **Integration**: `css/axiom.css` (imports utilities)
-- **Variables**: `css/_variables.css` (token values)
+- **Components**: `css/_components.css`
+- **Design Tokens**: `css/_variables.css`
 - **Styling Guide**: `AXIOM01_STYLING_GUIDE.md`
-- **Token Reference**: `docs/tokens/VARIABLES.md`
+- **Component Reference**: `docs/COMPONENTS.md`
 
 ---
 
 **Version**: 2.0.0  
-**Updated**: 2025  
-**Status**: Production Ready ✅
+**Updated**: January 20, 2025  
+**Status**: Production Ready ✅  
+**Philosophy**: Semantic HTML + Components > Utilities

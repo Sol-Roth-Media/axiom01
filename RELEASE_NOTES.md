@@ -200,9 +200,9 @@ All new features are fully documented:
 
 ### Use Components
 ```html
-<button class="button--lg button--success">Save</button>
+<button class="button lg success">Save</button>
 
-<div class="card card--elevated">
+<article class="card elevated">
   <header><h2>Title</h2></header>
   <div>Content</div>
 </div>

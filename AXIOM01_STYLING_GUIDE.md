@@ -42,8 +42,8 @@ This is a foundational principle of Axiom01. We explicitly forbid complex, multi
 
 - **Component-Level Classes:** Assign a single, descriptive class to the root element of a component (e.g., `<article class="card">`, `<section class="hero">`, `<header class="main">`).
 - **Descendant Styling:** Style child elements using descendant selectors based on the semantic structure. Avoid adding classes to every child.
-- **Variant Classes:** Use single, adjective-like classes to modify a component's appearance or behavior (e.g., `<button class="primary">`, `<article class="card elevated">`).
-- **Absolutely No BEM:** The Block__Element--Modifier syntax (e.g., `card__header--large`) is strictly prohibited. It is verbose, couples the CSS to a rigid DOM structure, and violates our principle of semantic purity.
+- **Variant Classes:** Use single, adjective-like classes to modify a component's appearance or behavior (e.g., `<button class="primary">`, `<article class="card elevated">`). **Multiple separate classes, not hyphenated variants.**
+- **Absolutely No BEM:** The Block__Element--Modifier syntax (e.g., `card__header--large` or `button--lg`) is strictly prohibited. It is verbose, couples the CSS to a rigid DOM structure, and violates our principle of semantic purity.
 
 **Correct Implementation:**
 ```html
@@ -115,31 +115,35 @@ Accessibility is not optional.
 
 ## 5. Built-In Components (Session 3)
 
-Axiom01 now includes a comprehensive component library with production-ready styles for buttons, cards, badges, tags, and alerts.
+Axiom01 now includes a comprehensive component library with production-ready styles for buttons, cards, badges, tags, and alerts. All components use separate variant classes, never BEM-style hyphenated names.
 
 ### Button Component
 
-Semantic buttons with multiple variants:
+Semantic buttons with multiple variants (each variant is a separate class):
 
 ```html
-<!-- Size variants -->
-<button class="button--sm">Small</button>
-<button>Default</button>
-<button class="button--lg">Large</button>
-<button class="button--xl">Extra Large</button>
+<!-- Size variants - use separate classes -->
+<button class="button sm">Small</button>
+<button class="button">Default</button>
+<button class="button lg">Large</button>
+<button class="button xl">Extra Large</button>
 
-<!-- Type variants -->
-<button>Primary</button>
-<button class="button--secondary">Secondary</button>
-<button class="button--success">Success</button>
-<button class="button--warning">Warning</button>
-<button class="button--danger">Danger</button>
-<button class="button--ghost">Ghost</button>
-<button class="button--outline">Outline</button>
+<!-- Type variants - use separate classes -->
+<button class="button primary">Primary (default)</button>
+<button class="button secondary">Secondary</button>
+<button class="button success">Success</button>
+<button class="button warning">Warning</button>
+<button class="button danger">Danger</button>
+<button class="button ghost">Ghost</button>
+<button class="button outline">Outline</button>
+
+<!-- Combining variants - multiple separate classes -->
+<button class="button lg success">Large Success Button</button>
+<button class="button sm secondary">Small Secondary Button</button>
 
 <!-- Special states -->
-<button class="button--loading" disabled>Loading...</button>
-<button class="button--icon" aria-label="Close">✕</button>
+<button class="button loading" disabled>Loading...</button>
+<button class="button icon" aria-label="Close">✕</button>
 ```
 
 **Features**:
@@ -155,24 +159,24 @@ Semantic buttons with multiple variants:
 Container for grouped content:
 
 ```html
-<div class="card card--elevated">
+<article class="card elevated">
   <header>
     <h2>Card Title</h2>
   </header>
   <div>Main content section</div>
   <footer>
-    <button class="button--secondary">Cancel</button>
-    <button>Save</button>
+    <button class="button secondary">Cancel</button>
+    <button class="button primary">Save</button>
   </footer>
-</div>
+</article>
 ```
 
-**Card Variants**:
-- `.card--elevated` - Shadow-based depth
-- `.card--outlined` - Border-based style
-- `.card--filled` - Background color variant
-- `.card--hover-lift` - Lifts on hover
-- `.card--interactive` - Clickable with hover effect
+**Card Variants** (separate classes):
+- `.elevated` - Shadow-based depth
+- `.outlined` - Border-based style
+- `.filled` - Background color variant
+- `.hover-lift` - Lifts on hover
+- `.interactive` - Clickable with hover effect
 
 **Features**:
 - Semantic structure (header, content sections, footer)
@@ -185,18 +189,21 @@ Container for grouped content:
 Small labels for status and categories:
 
 ```html
-<!-- Color variants -->
-<span class="badge badge--primary">Primary</span>
-<span class="badge badge--success">Active</span>
-<span class="badge badge--warning">Pending</span>
-<span class="badge badge--error">Critical</span>
-<span class="badge badge--info">Info</span>
-<span class="badge badge--secondary">Secondary</span>
+<!-- Color variants - separate classes -->
+<span class="badge primary">Primary</span>
+<span class="badge success">Active</span>
+<span class="badge warning">Pending</span>
+<span class="badge error">Critical</span>
+<span class="badge info">Info</span>
+<span class="badge secondary">Secondary</span>
 
-<!-- Size variants -->
-<span class="badge badge--sm">Small</span>
+<!-- Size variants - separate classes -->
+<span class="badge sm">Small</span>
 <span class="badge">Default</span>
-<span class="badge badge--lg">Large</span>
+<span class="badge lg">Large</span>
+
+<!-- Combining variants -->
+<span class="badge success lg">Active (Large)</span>
 ```
 
 **Features**:
@@ -211,13 +218,13 @@ Small labels for status and categories:
 Prominent notifications and messages:
 
 ```html
-<!-- Semantic types -->
-<div class="alert alert--info">
+<!-- Semantic types - separate classes -->
+<div class="alert info">
   <h3>Information</h3>
   <p>This is an informational message.</p>
 </div>
 
-<div class="alert alert--success alert--dismissible">
+<div class="alert success dismissible">
   <div>
     <h3>Success</h3>
     <p>Your action completed successfully.</p>
@@ -225,9 +232,12 @@ Prominent notifications and messages:
   <button aria-label="Dismiss">×</button>
 </div>
 
-<!-- Size variants -->
-<div class="alert alert--warning alert--sm">Compact warning</div>
-<div class="alert alert--error alert--lg">Large error message</div>
+<!-- Size variants - separate classes -->
+<div class="alert warning sm">Compact warning</div>
+<div class="alert error lg">Large error message</div>
+
+<!-- Combining variants -->
+<div class="alert success lg">Large success alert</div>
 ```
 
 **Features**:
@@ -244,7 +254,7 @@ Flexible tags with optional removal:
 ```html
 <span class="tag">Technology</span>
 
-<span class="tag tag--dismissible">
+<span class="tag dismissible">
   Selected Item
   <button aria-label="Remove">×</button>
 </span>
@@ -267,9 +277,7 @@ For comprehensive component documentation, see:
 
 ---
 
-**Updated:** July 20, 2025 - This guide has been updated to reinforce the framework's foundational principles and explicitly forbid non-compliant patterns.
-
-**Component Examples (Updated July 2025):**
+**Updated:** January 20, 2025 - Refactored all components to use separate variant classes instead of BEM-style hyphenated names. This is a foundational principle of Axiom01.
 
 ## Empty State Component
 ```html
@@ -279,8 +287,8 @@ For comprehensive component documentation, see:
   <h3>No Results Found</h3>
   <p>We couldn't find anything matching your search terms.</p>
   <div>
-    <button class="button--secondary">Clear Search</button>
-    <button>Browse All Items</button>
+    <button class="button secondary">Clear Search</button>
+    <button class="button primary">Browse All Items</button>
   </div>
 </div>
 ```
@@ -288,12 +296,12 @@ For comprehensive component documentation, see:
 ## Alert Component (Built-In)
 ```html
 <!-- ✅ CORRECT: Semantic alert with proper structure -->
-<div class="alert alert--success">
+<div class="alert success">
   <h3>Success</h3>
   <p>Your changes have been saved successfully.</p>
 </div>
 
-<div class="alert alert--error alert--dismissible">
+<div class="alert error dismissible">
   <div>
     <h3>Error</h3>
     <p>Something went wrong. Please try again.</p>
@@ -305,7 +313,7 @@ For comprehensive component documentation, see:
 ## Card Component (Built-In)
 ```html
 <!-- ✅ CORRECT: Semantic card structure -->
-<div class="card card--elevated">
+<article class="card elevated">
   <header>
     <h2>Product Details</h2>
   </header>
@@ -313,24 +321,28 @@ For comprehensive component documentation, see:
     <p>Main product information goes here.</p>
   </div>
   <footer>
-    <button class="button--secondary">Cancel</button>
-    <button class="button--success">Add to Cart</button>
+    <button class="button secondary">Cancel</button>
+    <button class="button success">Add to Cart</button>
   </footer>
-</div>
+</article>
 ```
 
 ## Button Component (Built-In)
 ```html
-<!-- ✅ CORRECT: Using semantic buttons with variants -->
-<button>Primary Action</button>
-<button class="button--secondary">Secondary</button>
-<button class="button--success">Confirm</button>
-<button class="button--danger">Delete</button>
+<!-- ✅ CORRECT: Using semantic buttons with separate variant classes -->
+<button class="button primary">Primary Action</button>
+<button class="button secondary">Secondary</button>
+<button class="button success">Confirm</button>
+<button class="button danger">Delete</button>
+
+<!-- ✅ CORRECT: Combining multiple variants -->
+<button class="button lg success">Large Success Button</button>
+<button class="button sm secondary">Small Secondary</button>
 
 <div class="button-group">
-  <button>Save</button>
-  <button class="button--secondary">Cancel</button>
-  <button class="button--danger">Delete</button>
+  <button class="button primary">Save</button>
+  <button class="button secondary">Cancel</button>
+  <button class="button danger">Delete</button>
 </div>
 ```
 
@@ -359,8 +371,8 @@ For comprehensive component documentation, see:
       <p>Modal content goes here.</p>
     </section>
     <footer>
-      <button class="button--secondary">Cancel</button>
-      <button>Confirm</button>
+      <button class="button secondary">Cancel</button>
+      <button class="button primary">Confirm</button>
     </footer>
   </div>
 </div>
@@ -413,7 +425,7 @@ Axiom01 treats animation as a **functional tool**, not decoration. Every animati
 }
 
 /* State change: Card hover */
-.card--elevated:hover {
+.card.elevated:hover {
   box-shadow: var(--a-shadow-lg);
 }
 
