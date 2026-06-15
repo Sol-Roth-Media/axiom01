@@ -193,7 +193,7 @@ All files import in correct order to maintain CSS specificity.
 1. The update is fully backward compatible
 2. No changes needed to existing code
 3. New features are optional
-4. To use new components, simply add class names (e.g., `.button--lg`, `.card--elevated`)
+4. To use new components, simply add class names (e.g., `.button lg`, `.card elevated`)
 5. See `docs/COMPONENTS.md` for all available options
 
 **To Use Design Tokens:**
@@ -228,21 +228,21 @@ All files import in correct order to maintain CSS specificity.
 
 ```html
 <!-- Button variants -->
-<button class="button--lg button--success">Large Success Button</button>
+<button class="button lg success">Large Success Button</button>
 
 <!-- Card with components -->
-<div class="card card--elevated">
+<div class="card card elevated">
   <header><h2>Title</h2></header>
   <div>Content</div>
   <footer>
-    <button class="button--secondary">Cancel</button>
+    <button class="button secondary">Cancel</button>
     <button>Save</button>
   </footer>
 </div>
 
 <!-- Alert types -->
-<div class="alert alert--success">Success message</div>
-<div class="alert alert--error alert--dismissible">
+<div class="alert success">Success message</div>
+<div class="alert error dismissible">
   <div>Error message</div>
   <button>×</button>
 </div>

@@ -258,8 +258,8 @@ These patterns MUST NEVER appear in Axiom01 code, whether AI-generated or human-
       <p>Modal content</p>
     </div>
     <div class="modal-footer modal-footer--justified">
-      <button class="button button--secondary button--size-sm">Cancel</button>
-      <button class="button button--primary button--size-sm">Confirm</button>
+      <button class="button secondary sm">Cancel</button>
+      <button class="button primary sm">Confirm</button>
     </div>
   </div>
 </div>
