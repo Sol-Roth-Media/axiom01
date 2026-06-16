@@ -1058,10 +1058,11 @@ details[open] summary::after {
 /* Main container - responsive but controlled */
 main.docs-components-grid {
     width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
+    margin: 0;
     padding: var(--a-space-lg) var(--a-space-m);
     box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: visible;
 }
 
 /* Hero header - HIDDEN (was causing blue sidebar box) */
@@ -1137,6 +1138,8 @@ main.docs-components-grid {
 /* Grid for component cards - COMPACT (default for non-first sections) */
 .section-grid {
     width: 100%;
+    box-sizing: border-box;
+    overflow: visible;
 }
 
 /* Component cards - Compact but nice */
@@ -1378,14 +1381,10 @@ main.docs-components-grid {
 /* Desktop (901px+) */
 @media (min-width: 901px) {
     main.docs-components-grid {
-        padding: var(--a-space-lg) var(--a-space-xl);
-        max-width: 100%;
+        padding: calc(var(--a-space-lg) + 20px) var(--a-space-xl);
         margin: 0;
         box-sizing: border-box;
-    }
-
-    .docs-header {
-        display: none !important;
+        overflow-x: hidden;
     }
 
     .docs-section:not(:first-of-type) .section-grid {
@@ -1428,5 +1427,76 @@ main.docs-components-grid {
     .component-item {
         flex: 1 1 calc(25% - var(--a-space-s));
     }
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* FIX: HEADER RESPONSIVE + PREVENT OVERLAP + NO HORIZONTAL CUTOFF           */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Add padding-top to account for fixed header */
+main.docs-components-grid {
+    padding-top: calc(var(--a-space-lg) + 20px);
+}
+
+/* Hide some nav links on small/medium screens to prevent overlap */
+@media (max-width: 1200px) {
+    header.main ul.links li:nth-child(2),
+    header.main ul.links li:nth-child(3) {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    header.main ul.links {
+        display: none;
+    }
+    
+    header.main .menu.toggle {
+        display: block;
+    }
+}
+
+/* Ensure sections don't overflow */
+.docs-section {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+/* Ensure section headers don't overflow */
+.section-header {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.section-header h2 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.section-header p {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Component cards should respect container width */
+.docs-section:not(:first-of-type) .section-grid {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Component cards with proper sizing */
+.component-card {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.component-name {
+    word-break: break-word;
+    hyphens: auto;
 }
 
