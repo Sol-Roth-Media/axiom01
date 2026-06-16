@@ -438,3 +438,79 @@ Axiom01 treats animation as a **functional tool**, not decoration. Every animati
 ```
 
 See [Animation Guide](docs/ANIMATIONS.md) for complete animation system documentation.
+
+---
+
+## 6. Grid System (Updated v2.1.0)
+
+Axiom01 uses a mobile-first, semantic grid system that adapts responsively without magic sizing or horizontal overflow.
+
+### Quick Start
+
+```html
+<!-- Automatically responsive: 1/2/3/4 columns per breakpoint -->
+<div class="grid">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</div>
+
+<!-- Explicit 2-column layout -->
+<div class="grid grid-cols-2">
+  <div>Left</div>
+  <div>Right</div>
+</div>
+```
+
+### Key Features
+
+- ✅ **Mobile-first**: Starts with 1 column, scales up
+- ✅ **No overflow**: Fixed columns never exceed viewport
+- ✅ **Semantic**: Minimal classes, clear intent
+- ✅ **Responsive**: Automatic at 576px, 992px, 1200px
+- ✅ **Accessible**: WCAG 2.1 AA compliant
+
+### Why We Changed It
+
+The old `repeat(auto-fit, minmax())` pattern was unpredictable and could overflow. The new system uses explicit breakpoints:
+
+| Breakpoint | Columns | Use Case |
+|-----------|---------|----------|
+| Default | 1 | Mobile |
+| 576px+ | 2 | Tablet |
+| 992px+ | 3 | Laptop |
+| 1200px+ | 4 | Desktop |
+
+### Advanced Patterns
+
+**Sidebar + Main:**
+```html
+<div class="grid grid-sidebar">
+  <aside>Sidebar</aside>
+  <main>Main</main>
+</div>
+```
+
+**Featured item (spans 2 cols):**
+```html
+<div class="grid grid-cols-4">
+  <div class="grid-item-featured">Featured</div>
+  <!-- More items -->
+</div>
+```
+
+**Responsive reordering (no HTML change):**
+```css
+@media (max-width: 768px) {
+  aside { order: 2; }
+  main { order: 1; }
+}
+```
+
+### Resources
+
+- Complete Guide: [GRID_SYSTEM_IMPLEMENTATION.md](GRID_SYSTEM_IMPLEMENTATION.md)
+- Design Rationale: [GRID_SYSTEM_AUDIT.md](GRID_SYSTEM_AUDIT.md)
+- Live Examples: [Layout Advanced](docs/layout-advanced.html)
+
+---
