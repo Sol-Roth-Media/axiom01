@@ -5,11 +5,287 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Layout Guide - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.css">
-    <link rel="stylesheet" href="../css/doc-styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ5/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+      /* Layout Guide Styles - Axiom Semantic Principles */
+      main.layout-guide {
+        width: 100%;
+        max-width: 100%;
+        padding: 80px var(--a-space-l) var(--a-space-xxl);
+        box-sizing: border-box;
+      }
+
+      .layout-hero {
+        margin-bottom: var(--a-space-xxl);
+        padding: var(--a-space-xxl) var(--a-space-l);
+        background: linear-gradient(135deg, var(--a-color-primary) 0%, color-mix(in srgb, var(--a-color-primary) 85%, var(--a-color-secondary)) 100%);
+        color: var(--a-color-on-primary);
+        border-radius: var(--a-border-radius-large);
+        box-shadow: var(--a-shadow-large);
+        text-align: center;
+      }
+
+      .layout-hero h1 {
+        margin: 0 0 var(--a-space-m) 0;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: var(--a-font-weight-black);
+        line-height: 1.1;
+      }
+
+      .layout-hero p {
+        margin: 0;
+        font-size: clamp(1rem, 2vw, 1.1rem);
+        opacity: 0.95;
+        line-height: 1.6;
+      }
+
+      section.layout-section {
+        margin-bottom: var(--a-space-xxl);
+      }
+
+      section.layout-section h2 {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        margin: 0 0 var(--a-space-l) 0;
+        color: var(--a-color-primary);
+        font-weight: var(--a-font-weight-bold);
+      }
+
+      section.layout-section h3 {
+        font-size: var(--a-font-size-h3);
+        margin: var(--a-space-xl) 0 var(--a-space-m) 0;
+        color: var(--a-color-on-surface);
+        font-weight: var(--a-font-weight-bold);
+      }
+
+      section.layout-section p {
+        margin-bottom: var(--a-space-m);
+        line-height: 1.7;
+        color: var(--a-color-on-surface-variant);
+      }
+
+      code {
+        background: var(--a-color-surface-variant);
+        color: var(--a-color-primary);
+        padding: 0.2em 0.4em;
+        border-radius: var(--a-border-radius-small);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9em;
+      }
+
+      pre {
+        background: var(--a-color-code-bg, #0f172a);
+        color: var(--a-color-code-text, #e2e8f0);
+        padding: var(--a-space-l);
+        border-radius: var(--a-border-radius-medium);
+        overflow-x: auto;
+        margin: var(--a-space-l) 0;
+        border: 1px solid var(--a-color-outline);
+      }
+
+      pre code {
+        background: none;
+        color: inherit;
+        padding: 0;
+        border-radius: 0;
+      }
+
+      /* Grid Examples */
+      .demo-grid {
+        display: grid;
+        gap: var(--a-space-m);
+        margin: var(--a-space-l) 0;
+      }
+
+      .demo-item {
+        padding: var(--a-space-l);
+        background: var(--a-color-surface);
+        border: 2px solid var(--a-color-primary);
+        border-radius: var(--a-border-radius-medium);
+        font-weight: var(--a-font-weight-bold);
+        text-align: center;
+        color: var(--a-color-on-surface);
+      }
+
+      /* 2-Column Grid Demo */
+      .grid-2col {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* 3-Column Grid Demo */
+      .grid-3col {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      /* 4-Column Grid Demo */
+      .grid-4col {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      /* Responsive Grid Demo */
+      .grid-responsive {
+        grid-template-columns: 1fr;
+      }
+
+      @media (min-width: 576px) {
+        .grid-responsive {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 992px) {
+        .grid-responsive {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .grid-responsive {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      /* Breakpoints Table */
+      table.breakpoints {
+        width: 100%;
+        border-collapse: collapse;
+        margin: var(--a-space-l) 0;
+        border: 1px solid var(--a-color-outline);
+        border-radius: var(--a-border-radius-medium);
+        overflow: hidden;
+      }
+
+      table.breakpoints th,
+      table.breakpoints td {
+        padding: var(--a-space-m);
+        text-align: left;
+      }
+
+      table.breakpoints th {
+        background: var(--a-color-primary);
+        color: var(--a-color-on-primary);
+        font-weight: var(--a-font-weight-bold);
+      }
+
+      table.breakpoints tr:nth-child(even) {
+        background: var(--a-color-surface-variant);
+      }
+
+      table.breakpoints tr:hover {
+        background: color-mix(in srgb, var(--a-color-primary) 10%, transparent);
+      }
+
+      /* Spacing Scale Demo */
+      .spacing-scale {
+        margin: var(--a-space-l) 0;
+      }
+
+      .spacing-demo {
+        display: flex;
+        align-items: center;
+        gap: var(--a-space-m);
+        margin-bottom: var(--a-space-m);
+      }
+
+      .spacing-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: var(--a-font-weight-bold);
+        min-width: 120px;
+        color: var(--a-color-primary);
+      }
+
+      .spacing-visual {
+        height: 24px;
+        background: linear-gradient(90deg, var(--a-color-primary), var(--a-color-secondary));
+        border-radius: var(--a-border-radius-small);
+        flex: 1;
+      }
+
+      .spacing-value {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--a-color-on-surface-variant);
+        min-width: 80px;
+        text-align: right;
+      }
+
+      /* Flexbox Demo */
+      .flex-demo {
+        display: flex;
+        gap: var(--a-space-m);
+        margin: var(--a-space-l) 0;
+        flex-wrap: wrap;
+      }
+
+      .flex-item {
+        flex: 1 1 150px;
+        padding: var(--a-space-m);
+        background: var(--a-color-surface);
+        border: 2px solid var(--a-color-secondary);
+        border-radius: var(--a-border-radius-medium);
+        text-align: center;
+        font-weight: var(--a-font-weight-bold);
+        color: var(--a-color-on-surface);
+      }
+
+      /* Card Layout */
+      .layout-card {
+        background: var(--a-color-surface);
+        border: 1px solid var(--a-color-outline);
+        border-radius: var(--a-border-radius-medium);
+        padding: var(--a-space-l);
+        margin: var(--a-space-l) 0;
+        box-shadow: var(--a-shadow-small);
+      }
+
+      .layout-card header {
+        border-bottom: 1px solid var(--a-color-outline);
+        padding-bottom: var(--a-space-m);
+        margin-bottom: var(--a-space-m);
+      }
+
+      .layout-card h4 {
+        margin: 0;
+        color: var(--a-color-primary);
+      }
+
+      .layout-card section {
+        margin-top: var(--a-space-m);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        main.layout-guide {
+          padding: 80px var(--a-space-m) var(--a-space-xl);
+        }
+
+        .demo-grid {
+          gap: var(--a-space-s);
+        }
+
+        .demo-item {
+          padding: var(--a-space-m);
+        }
+
+        .spacing-demo {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .spacing-label,
+        .spacing-value {
+          min-width: auto;
+        }
+      }
+
+      /* Accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
 </head>
 <body class="axiom-body">
     <header class="main" data-component="mobile-navbar">
@@ -39,235 +315,349 @@
         </nav>
     </header>
 
-    <main class="content">
-            <section class="hero small">
-                <div class="content">
-                    <h1 class="title">Advanced Layout Guide</h1>
-                    <p class="description">Axiom01's layout system is built upon the robust and flexible foundation of native CSS Grid, complemented by a cascading spacing system. This guide explores how to leverage these features to create complex, responsive, and maintainable layouts with minimal effort and semantic markup.</p>
-                </div>
-            </section>
+    <main class="layout-guide">
+        <section class="layout-hero">
+            <h1>Advanced Layout Guide</h1>
+            <p>Master CSS Grid and Flexbox with Axiom01's semantic-first approach. Build responsive, beautiful layouts with minimal code and maximum control.</p>
+        </section>
 
-            <section id="grid-system">
-                <div class="container">
-                    <h2>The Axiom01 Grid System</h2>
-                    <p>The core of Axiom01's layout is the <code>.grid</code> class, which applies <code>display: grid</code> and a default gap based on <code>--a-space-l</code>. This semantic approach encourages you to define your grid structure directly in your CSS, rather than relying on an abundance of utility classes or inline styles.</p>
+        <!-- Grid System Section -->
+        <section class="layout-section" id="grid-system">
+            <h2><i class="fas fa-border-all"></i> The Axiom01 Grid System</h2>
+            
+            <p>Axiom01's layout foundation is pure CSS Grid: simple, semantic, and powerful. Define your grid structure directly in CSS, not in HTML with utility classes.</p>
 
-                    <h3>Basic Grid Usage</h3>
-                    <p>To create a responsive grid, simply apply the <code>.grid</code> class to a container. By default, it will arrange its direct children into a flexible grid. You can then define your column structure using standard CSS Grid properties in your stylesheet.</p>
-                    <pre><code class="language-html">&lt;!-- HTML --&gt;
-&lt;div class="grid basic-grid-example"&gt;
-    &lt;div class="grid-item"&gt;Item 1&lt;/div&gt;
-    &lt;div class="grid-item"&gt;Item 2&lt;/div&gt;
-    &lt;div class="grid-item"&gt;Item 3&lt;/div&gt;
-    &lt;div class="grid-item"&gt;Item 4&lt;/div&gt;
-&lt;/div&gt;
+            <h3>🎯 Core Principle</h3>
+            <p>Use CSS Grid with semantic class names. Avoid <code>repeat(auto-fit, minmax())</code> at high resolutions—use fixed column counts per breakpoint for predictable layouts.</p>
 
-&lt;!-- CSS (in your stylesheet) --&gt;
-&lt;style&gt;
-    .basic-grid-example {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-&lt;/style&gt;</code></pre>
-                    <div class="layout-example-grid basic-grid-example">
-                        <div class="grid-item">Item 1</div>
-                        <div class="grid-item">Item 2</div>
-                        <div class="grid-item">Item 3</div>
-                        <div class="grid-item">Item 4</div>
-                    </div>
-
-                    <h3>Defining Columns and Rows</h3>
-                    <p>You have full control over grid columns and rows. Use <code>grid-template-columns</code> and <code>grid-template-rows</code> to define explicit tracks. The gap between grid items is controlled by the <code>gap</code> property, which ideally should use Axiom01's spacing variables.</p>
-                    <pre><code class="language-html">&lt;!-- HTML --&gt;
-&lt;div class="grid defined-grid-example"&gt;
-    &lt;div class="grid-item"&gt;Header&lt;/div&gt;
-    &lt;div class="grid-item main-content-item"&gt;Main Content&lt;/div&gt;
-    &lt;div class="grid-item"&gt;Sidebar&lt;/div&gt;
-    &lt;div class="grid-item footer-item"&gt;Footer&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- CSS (in your stylesheet) --&gt;
-&lt;style&gt;
-    .defined-grid-example {
-        grid-template-columns: 1fr 2fr 1fr;
-        grid-template-rows: auto 100px;
-        gap: var(--a-space-m); /* Example: using a spacing variable for gap */
-    }
-    .defined-grid-example .main-content-item {
-        grid-column: span 2;
-    }
-    .defined-grid-example .footer-item {
-        grid-column: 1 / -1;
-    }
-&lt;/style&gt;</code></pre>
-                    <div class="layout-example-grid defined-grid-example">
-                        <div class="grid-item">Header</div>
-                        <div class="grid-item main-content-item">Main Content</div>
-                        <div class="grid-item">Sidebar</div>
-                        <div class="grid-item footer-item">Footer</div>
-                    </div>
-
-                    <h3>Nested Grids</h3>
-                    <p>CSS Grid allows for powerful nesting. You can place a grid container inside another grid item, enabling you to build highly complex and flexible layouts.</p>
-                    <pre><code class="language-html">&lt;!-- HTML --&gt;
-&lt;div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--a-space-l);"&gt;
-    &lt;div class="grid-item"&gt;Parent Item 1&lt;/div&gt;
-    &lt;div class="grid-item"&gt;
-        &lt;!-- Nested Grid --&gt;
-        &lt;div class="nested-grid-example"&gt;
-            &lt;div class="grid-item"&gt;Nested 1&lt;/div&gt;
-            &lt;div class="grid-item"&gt;Nested 2&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- CSS (in your stylesheet) --&gt;
-&lt;style&gt;
-    .nested-grid-container { /* Apply this to the parent grid */
-        grid-template-columns: 1fr 1fr;
-        gap: var(--a-space-l);
-    }
-    .nested-grid-example { /* This is the inner grid */
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--a-space-s);
-        background-color: var(--a-color-secondary-container);
-        padding: var(--a-space-m);
-        border-radius: var(--a-border-radius-small);
-        border: 1px solid var(--a-color-secondary);
-    }
-    .nested-grid-example .grid-item {
-        background-color: var(--a-color-secondary);
-        color: var(--a-color-on-secondary);
-    }
-&lt;/style&gt;</code></pre>
-                    <div class="layout-example-grid nested-grid-container">
-                        <div class="grid-item">Parent Item 1</div>
-                        <div class="grid-item">
-                            <div class="nested-grid-example">
-                                <div class="grid-item">Nested 1</div>
-                                <div class="grid-item">Nested 2</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="flexbox-utilities">
-                <div class="container">
-                    <h2>Flexbox for Fine-Grained Control</h2>
-                    <p>While CSS Grid is ideal for overall page layout, Flexbox excels at distributing and aligning items within a single dimension (row or column). Axiom01 provides basic Flexbox capabilities through the <code>.flex</code> class, which applies <code>display: flex</code>.</p>
-                    <h3>Basic Flex Usage</h3>
-                    <p>Use <code>.flex</code> on a container to enable Flexbox behavior for its direct children. You can then use standard Flexbox properties (e.g., <code>justify-content</code>, <code>align-items</code>, <code>flex-wrap</code>) via custom CSS to achieve desired alignments.</p>
-                    <pre><code class="language-html">&lt;!-- HTML --&gt;
-&lt;div class="flex flex-layout-example"&gt;
-    &lt;div class="flex-item"&gt;Item A&lt;/div&gt;
-    &lt;div class="flex-item"&gt;Item B&lt;/div&gt;
-    &lt;div class="flex-item"&gt;Item C&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- CSS (in your stylesheet) --&gt;
-&lt;style&gt;
-    .flex-layout-example {
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: var(--a-space-m);
-    }
-&lt;/style&gt;</code></pre>
-                    <div class="flex-example flex-layout-example">
-                        <div class="flex-item">Item A</div>
-                        <div class="flex-item">Item B</div>
-                        <div class="flex-item">Item C</div>
-                    </div>
-                    <p>Flexbox is particularly useful for navigation bars, form controls, and distributing content within smaller components.</p>
-                </div>
-            </section>
-
-            <section id="responsive-layouts">
-                <div class="container">
-                    <h2>Responsive Layouts with Breakpoints</h2>
-                    <p>Axiom01 embraces a mobile-first approach to responsive design. This means you design for the smallest screens first, and then progressively enhance the layout for larger viewports using media queries. The framework provides a set of predefined CSS variables for breakpoints, making your media queries consistent and easy to manage.</p>
-                    <table class="color-variable-table">
-                        <thead>
-                            <tr>
-                                <th>Variable</th>
-                                <th>Value</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><code>--a-breakpoint-xs</code></td><td><code>480px</code></td><td>Extra small devices (e.g., portrait phones)</td></tr>
-                            <tr><td><code>--a-breakpoint-sm</code></td><td><code>576px</code></td><td>Small devices (e.g., landscape phones)</td></tr>
-                            <tr><td><code>--a-breakpoint-md</code></td><td><code>768px</code></td><td>Medium devices (e.g., tablets)</td></tr>
-                            <tr><td><code>--a-breakpoint-lg</code></td><td><code>992px</code></td><td>Large devices (e.g., laptops)</td></tr>
-                            <tr><td><code>--a-breakpoint-xl</code></td><td><code>1200px</code></td><td>Extra large devices (e.g., desktops)</td></tr>
-                            <tr><td><code>--a-breakpoint-xxl</code></td><td><code>1400px</code></td><td>Extra extra large devices (e.g., large desktops)</td></tr>
-                        </tbody>
-                    </table>
-                    <pre><code class="language-css">/* Example: Two columns on medium screens and up */
-.my-responsive-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Single column by default (mobile-first) */
-    gap: var(--a-space-m);
-}
-
-@media (min-width: var(--a-breakpoint-md)) {
-    .my-responsive-grid {
-        grid-template-columns: 1fr 1fr; /* Two columns on medium screens and up */
-    }
-}
-
-@media (min-width: var(--a-breakpoint-lg)) {
-    .my-responsive-grid {
-        grid-template-columns: 1fr 2fr 1fr; /* Three columns on large screens and up */
-    }
+            <h3>Basic Grid: 1 Column (Mobile Default)</h3>
+            <p>Start mobile-first: 1 column, then scale up at breakpoints.</p>
+            <pre><code class="language-css">.demo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--a-space-m);
 }</code></pre>
-                    <p>By using these variables within your media queries, you ensure that your responsive designs align with the framework's consistent sizing scale.</p>
+            <div class="demo-grid grid-responsive">
+                <div class="demo-item">Mobile (1 col)</div>
+                <div class="demo-item">Default</div>
+                <div class="demo-item">Layout</div>
+                <div class="demo-item">Resize to see</div>
+            </div>
+
+            <h3>2-Column Grid</h3>
+            <p>Perfect for tablets and side-by-side layouts.</p>
+            <pre><code class="language-css">.grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--a-space-m);
+}</code></pre>
+            <div class="demo-grid grid-2col">
+                <div class="demo-item">Item 1</div>
+                <div class="demo-item">Item 2</div>
+                <div class="demo-item">Item 3</div>
+                <div class="demo-item">Item 4</div>
+            </div>
+
+            <h3>3-Column Grid</h3>
+            <p>For larger screens—balanced content distribution.</p>
+            <pre><code class="language-css">.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--a-space-l);
+}</code></pre>
+            <div class="demo-grid grid-3col">
+                <div class="demo-item">Content</div>
+                <div class="demo-item">Grid</div>
+                <div class="demo-item">System</div>
+                <div class="demo-item">Works</div>
+                <div class="demo-item">Perfectly</div>
+                <div class="demo-item">Every Time</div>
+            </div>
+
+            <h3>4-Column Grid</h3>
+            <p>Desktop standard—maximum content density with clarity.</p>
+            <pre><code class="language-css">.grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--a-space-l);
+}</code></pre>
+            <div class="demo-grid grid-4col">
+                <div class="demo-item">1</div>
+                <div class="demo-item">2</div>
+                <div class="demo-item">3</div>
+                <div class="demo-item">4</div>
+                <div class="demo-item">5</div>
+                <div class="demo-item">6</div>
+                <div class="demo-item">7</div>
+                <div class="demo-item">8</div>
+            </div>
+        </section>
+
+        <!-- Responsive Breakpoints -->
+        <section class="layout-section" id="breakpoints">
+            <h2><i class="fas fa-mobile"></i> Responsive Breakpoints</h2>
+            
+            <p>Axiom01 defines 6 standard breakpoints. Design mobile-first, then progressively enhance at each breakpoint.</p>
+
+            <table class="breakpoints">
+                <thead>
+                    <tr>
+                        <th>Breakpoint</th>
+                        <th>Size</th>
+                        <th>Device</th>
+                        <th>Typical Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>--a-breakpoint-xs</code></td>
+                        <td>480px</td>
+                        <td>Portrait phones</td>
+                        <td>Primary mobile</td>
+                    </tr>
+                    <tr>
+                        <td><code>--a-breakpoint-sm</code></td>
+                        <td>576px</td>
+                        <td>Landscape phones</td>
+                        <td>Large phones</td>
+                    </tr>
+                    <tr>
+                        <td><code>--a-breakpoint-md</code></td>
+                        <td>768px</td>
+                        <td>Tablets</td>
+                        <td>Mid-size screens</td>
+                    </tr>
+                    <tr>
+                        <td><code>--a-breakpoint-lg</code></td>
+                        <td>992px</td>
+                        <td>Laptops</td>
+                        <td>3-column layouts</td>
+                    </tr>
+                    <tr>
+                        <td><code>--a-breakpoint-xl</code></td>
+                        <td>1200px</td>
+                        <td>Desktops</td>
+                        <td>4-column layouts</td>
+                    </tr>
+                    <tr>
+                        <td><code>--a-breakpoint-xxl</code></td>
+                        <td>1400px</td>
+                        <td>Large desktops</td>
+                        <td>5+ column layouts</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Mobile-First Pattern</h3>
+            <pre><code class="language-css">/* Default: 1 column (mobile) */
+.my-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--a-space-m);
+}
+
+/* 2 columns at tablets and up */
+@media (min-width: 768px) {
+  .my-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 3 columns at laptops and up */
+@media (min-width: 992px) {
+  .my-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 4 columns at desktops and up */
+@media (min-width: 1200px) {
+  .my-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}</code></pre>
+        </section>
+
+        <!-- Spacing System -->
+        <section class="layout-section" id="spacing">
+            <h2><i class="fas fa-expand"></i> The Cascading Spacing System</h2>
+            
+            <p>All spacing derives from a single <code>--a-space-unit</code>. Change one variable, scale your entire layout proportionally.</p>
+
+            <h3>Spacing Scale</h3>
+            <p>Six levels of semantic spacing, each calculated from the base unit:</p>
+
+            <div class="spacing-scale">
+                <div class="spacing-demo">
+                    <div class="spacing-label"><code>--a-space-xs</code></div>
+                    <div class="spacing-visual" style="width: 4px;"></div>
+                    <div class="spacing-value">4px</div>
                 </div>
-            </section>
-
-            <section id="cascading-spacing-layout">
-                <div class="container">
-                    <h2>The Cascading Spacing System in Layouts</h2>
-                    <p>Axiom01's unique cascading spacing system is fundamental to creating harmonious and consistent layouts. All padding, margin, and gap values are derived from a single <code>--a-space-unit</code> variable, which can be adjusted globally to rescale your entire layout.</p>
-                    <p>The framework provides a set of predefined spacing variables:</p>
-                    <ul>
-                        <li><code>--a-space-xs</code>: Extra small spacing</li>
-                        <li><code>--a-space-s</code>: Small spacing</li>
-                        <li><code>--a-space-m</code>: Medium spacing (often the default for gaps)</li>
-                        <li><code>--a-space-l</code>: Large spacing</li>
-                        <li><code>--a-space-xl</code>: Extra large spacing</li>
-                        <li><code>--a-space-xxl</code>: Extra extra large spacing</li>
-                    </ul>
-                    <p>These variables are calculated based on <code>--a-space-unit</code>, ensuring that all spacing scales proportionally. You should use these variables consistently for all layout-related spacing.</p>
-                    <pre><code class="language-html">&lt;!-- HTML --&gt;
-&lt;div class="spacing-example-div"&gt;
-    &lt;p&gt;This content has extra large padding and large bottom margin.&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- HTML --&gt;
-&lt;div class="grid spacing-grid-example"&gt;
-    &lt;div class="grid-item"&gt;Wide Gap Item&lt;/div&gt;
-    &lt;div class="grid-item"&gt;Wide Gap Item&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- CSS (in your stylesheet) --&gt;
-&lt;style&gt;
-    .spacing-example-div {
-        padding: var(--a-space-xl);
-        margin-bottom: var(--a-space-l);
-        background-color: var(--a-color-surface-variant);
-        border-radius: var(--a-border-radius-medium);
-    }
-    .spacing-grid-example {
-        gap: var(--a-space-xxl);
-        margin-top: var(--a-space-l);
-    }
-&lt;/style&gt;</code></pre>
-                    <p>By consistently using these variables, you maintain a perfect visual rhythm throughout your application, and can easily adjust the overall density of your layout by changing just the <code>--a-space-unit</code> CSS variable.</p>
+                <div class="spacing-demo">
+                    <div class="spacing-label"><code>--a-space-s</code></div>
+                    <div class="spacing-visual" style="width: 8px;"></div>
+                    <div class="spacing-value">8px</div>
                 </div>
-            </section>
-        </main>
+                <div class="spacing-demo">
+                    <div class="spacing-label"><code>--a-space-m</code></div>
+                    <div class="spacing-visual" style="width: 16px;"></div>
+                    <div class="spacing-value">16px</div>
+                </div>
+                <div class="spacing-demo">
+                    <div class="spacing-label"><code>--a-space-l</code></div>
+                    <div class="spacing-visual" style="width: 24px;"></div>
+                    <div class="spacing-value">24px</div>
+                </div>
+                <div class="spacing-demo">
+                    <div class="spacing-label"><code>--a-space-xl</code></div>
+                    <div class="spacing-visual" style="width: 40px;"></div>
+                    <div class="spacing-value">40px</div>
+                </div>
+                <div class="spacing-demo">
+                    <div class="spacing-label"><code>--a-space-xxl</code></div>
+                    <div class="spacing-visual" style="width: 64px;"></div>
+                    <div class="spacing-value">64px</div>
+                </div>
+            </div>
+
+            <h3>Always Use Variables</h3>
+            <pre><code class="language-css">/* ✅ CORRECT: Using Axiom spacing */
+.card {
+  padding: var(--a-space-l);
+  margin-bottom: var(--a-space-xl);
+  gap: var(--a-space-m);
+}
+
+/* ❌ WRONG: Hardcoded pixels */
+.card {
+  padding: 24px;
+  margin-bottom: 40px;
+  gap: 16px;
+}</code></pre>
+        </section>
+
+        <!-- Flexbox -->
+        <section class="layout-section" id="flexbox">
+            <h2><i class="fas fa-directions"></i> Flexbox for 1D Layouts</h2>
+            
+            <p>Use Flexbox for single-dimension layouts (rows or columns). CSS Grid handles 2D layouts. Use both together for powerful compositions.</p>
+
+            <h3>Flex Direction: Row (Default)</h3>
+            <p>Items flow horizontally, wrapping on smaller screens.</p>
+            <pre><code class="language-css">.flex-demo {
+  display: flex;
+  gap: var(--a-space-m);
+  flex-wrap: wrap;
+}</code></pre>
+            <div class="flex-demo">
+                <div class="flex-item">Item</div>
+                <div class="flex-item">Item</div>
+                <div class="flex-item">Item</div>
+                <div class="flex-item">Item</div>
+            </div>
+
+            <h3>Navigation Example</h3>
+            <pre><code class="language-html">&lt;nav class="main-nav"&gt;
+  &lt;a href="/"&gt;Home&lt;/a&gt;
+  &lt;a href="/about"&gt;About&lt;/a&gt;
+  &lt;a href="/contact"&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+            <pre><code class="language-css">.main-nav {
+  display: flex;
+  gap: var(--a-space-l);
+  align-items: center;
+  justify-content: space-between;
+}</code></pre>
+        </section>
+
+        <!-- Layout Cards -->
+        <section class="layout-section" id="layout-cards">
+            <h2><i class="fas fa-layer-group"></i> Real-World Layout Examples</h2>
+
+            <div class="layout-card">
+                <header>
+                    <h4>Card + Grid Layout</h4>
+                </header>
+                <section>
+                    <p>Combine cards with grids for content-rich pages.</p>
+                    <pre><code class="language-html">&lt;article class="card"&gt;
+  &lt;header&gt;
+    &lt;h2&gt;Title&lt;/h2&gt;
+  &lt;/header&gt;
+  &lt;div class="card-grid"&gt;
+    &lt;!-- grid items --&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+                </section>
+            </div>
+
+            <div class="layout-card">
+                <header>
+                    <h4>Responsive Typography</h4>
+                </header>
+                <section>
+                    <p>Use CSS clamp() for fluid typography that scales with viewport.</p>
+                    <pre><code class="language-css">h1 {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+}</code></pre>
+                </section>
+            </div>
+
+            <div class="layout-card">
+                <header>
+                    <h4>Container Queries</h4>
+                </header>
+                <section>
+                    <p>Adapt layouts based on container width, not viewport width.</p>
+                    <pre><code class="language-css">@container (min-width: 600px) {
+  .component {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}</code></pre>
+                </section>
+            </div>
+        </section>
+
+        <!-- Best Practices -->
+        <section class="layout-section" id="best-practices">
+            <h2><i class="fas fa-check-circle"></i> Best Practices</h2>
+
+            <h3>✅ DO: Mobile-First Design</h3>
+            <ul>
+                <li>Start with 1 column layouts</li>
+                <li>Add columns at larger breakpoints</li>
+                <li>Test on real devices, not just browsers</li>
+            </ul>
+
+            <h3>✅ DO: Use CSS Variables</h3>
+            <ul>
+                <li>All spacing: <code>var(--a-space-*)</code></li>
+                <li>All colors: <code>var(--a-color-*)</code></li>
+                <li>All sizing: <code>var(--a-*)</code></li>
+            </ul>
+
+            <h3>✅ DO: Semantic HTML</h3>
+            <ul>
+                <li>Use proper tags: <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code></li>
+                <li>Minimal classes (one per component)</li>
+                <li>Style descendants, not everything</li>
+            </ul>
+
+            <h3>❌ DON'T: Avoid auto-fit / auto-fill</h3>
+            <ul>
+                <li>Unpredictable at high resolutions</li>
+                <li>Use fixed columns: <code>repeat(N, 1fr)</code></li>
+                <li>Control behavior with media queries</li>
+            </ul>
+
+            <h3>❌ DON'T: Stack Too Many Columns</h3>
+            <ul>
+                <li>5+ columns gets cramped and hard to read</li>
+                <li>Consider carousel or pagination for many items</li>
+                <li>Prioritize readability over density</li>
+            </ul>
+        </section>
+    </main>
 
     <script src="../js/index-page-manager.js"></script>
     <footer class="main">
@@ -280,24 +670,24 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="components-overview.html">Component Overview</a></li>
-                        <li><a href="../README.md">README</a></li>
-                        <li><a href="../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../index.html#get-started">Getting Started</a></li>
+                        <li><a href="components-overview.html">Components</a></li>
+                        <li><a href="layout-advanced.html">Layout Guide</a></li>
+                        <li><a href="markdown-template.html?file=../README.md">README</a></li>
+                        <li><a href="markdown-template.html?file=../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
                         <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">npm</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
                         <li><a href="interactive-playground.html">Playground</a></li>
-                        <li><a href="../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../index.html#philosophy">Philosophy</a></li>
                         <li><a href="../index.html#release-info">Release Info</a></li>
                     </ul>
                 </div>
