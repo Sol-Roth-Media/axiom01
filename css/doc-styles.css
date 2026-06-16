@@ -1071,97 +1071,96 @@ main.docs-components-grid {
     text-align: center;
     margin-bottom: var(--a-space-lg);
     padding: var(--a-space-xl) var(--a-space-lg);
-    background: linear-gradient(135deg, var(--a-color-primary) 0%, color-mix(in srgb, var(--a-color-primary) 85%, var(--a-color-secondary)) 100%);
-    color: var(--a-color-on-primary);
-    border-radius: var(--a-border-radius-large);
-    box-shadow: var(--a-shadow-large);
-}
 
-.docs-header h1 {
-    margin: 0 0 var(--a-space-s) 0;
-    font-size: clamp(1.75rem, 5vw, 2.5rem);
-    font-weight: var(--a-font-weight-bold);
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-}
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* REC 21: COMPONENTS OVERVIEW - FIXED COLUMN LAYOUT                         */
+/* ═══════════════════════════════════════════════════════════════════════════ */
 
-.docs-header p {
+main.docs-components-grid {
+    width: 100%;
     margin: 0;
-    font-size: clamp(1rem, 2vw, 1.1rem);
-    opacity: 0.95;
-    line-height: 1.5;
+    padding: 80px 16px 32px 16px;
+    box-sizing: border-box;
+    overflow-x: visible;
+    overflow-y: visible;
 }
 
-/* Sections - tighter spacing */
+.docs-header {
+    display: none !important;
+}
+
 .docs-section {
-    margin-bottom: var(--a-space-m);
+    margin-bottom: 24px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .docs-section:not(:last-of-type) {
-    padding-bottom: var(--a-space-m);
-    border-bottom: 1px solid color-mix(in srgb, var(--a-color-outline) 60%, transparent);
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
 }
 
-/* Section headers */
 .section-header {
-    margin-bottom: var(--a-space-m);
+    margin-bottom: 16px;
     padding-bottom: 0;
     border-bottom: none;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .section-header h2 {
     display: flex;
     align-items: center;
-    gap: var(--a-space-s);
-    margin: 0 0 var(--a-space-xs) 0;
-    font-size: clamp(1.1rem, 3vw, 1.35rem);
-    font-weight: var(--a-font-weight-bold);
+    gap: 8px;
+    margin: 0 0 4px 0;
+    font-size: 1.2rem;
+    font-weight: 700;
     color: var(--a-color-primary);
     line-height: 1.2;
-    text-align: left;
+    word-break: break-word;
 }
 
 .section-header h2 i {
-    font-size: clamp(1.1rem, 3vw, 1.35rem);
-    min-width: clamp(1.1rem, 3vw, 1.35rem);
+    font-size: 1.2rem;
+    min-width: 1.2rem;
     flex-shrink: 0;
 }
 
 .section-header p {
     margin: 0;
-    color: var(--a-color-on-surface-variant);
+    color: rgba(0,0,0,0.6);
     font-size: 0.85rem;
     line-height: 1.4;
-    text-align: left;
+    word-break: break-word;
 }
 
-/* Grid for component cards - COMPACT (default for non-first sections) */
 .section-grid {
     width: 100%;
     box-sizing: border-box;
-    overflow: visible;
+    display: grid;
+    gap: 16px;
 }
 
-/* Component cards - Compact but nice */
 .component-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--a-space-s);
-    padding: var(--a-space-m);
+    gap: 8px;
+    padding: 16px;
     background: var(--a-color-surface);
     border: 1px solid var(--a-color-outline);
-    border-radius: var(--a-border-radius-medium);
+    border-radius: 8px;
     text-decoration: none;
     color: var(--a-color-on-surface);
-    font-weight: var(--a-font-weight-bold);
+    font-weight: 700;
     text-align: center;
     cursor: pointer;
     position: relative;
     min-height: 100px;
     transition: all 0.2s ease;
-    box-shadow: var(--a-shadow-small);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    word-break: break-word;
 }
 
 .component-card:hover {
@@ -1169,11 +1168,7 @@ main.docs-components-grid {
     background: var(--a-color-surface-variant);
     color: var(--a-color-primary);
     transform: translateY(-2px);
-    box-shadow: var(--a-shadow-medium);
-}
-
-.component-card:active {
-    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .component-name {
@@ -1182,70 +1177,57 @@ main.docs-components-grid {
     word-break: break-word;
 }
 
-/* Badges */
 .component-card .badge {
     position: absolute;
-    top: var(--a-space-s);
-    right: var(--a-space-s);
+    top: 8px;
+    right: 8px;
     padding: 0.25rem 0.5rem;
     background: var(--a-color-success);
     color: var(--a-color-on-success);
-    border-radius: var(--a-border-radius-small);
+    border-radius: 4px;
     font-size: 0.6rem;
-    font-weight: var(--a-font-weight-bold);
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
 
-/* Component item cards (Release, Getting Started) - USE FLEXBOX FOR FIRST SECTION ONLY */
 .docs-section:first-of-type .section-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--a-space-m);
-    width: 100%;
-    box-sizing: border-box;
+    gap: 16px;
 }
 
-.docs-section:first-of-type .section-grid .component-item {
-    flex: 1 1 45%;
+.docs-section:first-of-type .component-item {
+    flex: 1 1 calc(50% - 8px);
     min-width: 250px;
     max-width: 100%;
-}
-
-/* All other sections use grid for component cards */
-.docs-section:not(:first-of-type) .section-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--a-space-m);
 }
 
 .component-item {
     background: var(--a-color-surface);
     border: 1px solid var(--a-color-outline);
-    border-radius: var(--a-border-radius-medium);
-    padding: var(--a-space-m);
+    border-radius: 8px;
+    padding: 16px;
     transition: all 0.2s ease;
-    box-shadow: var(--a-shadow-small);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
     display: flex;
     flex-direction: column;
 }
 
 .component-item:hover {
     border-color: var(--a-color-primary);
-    box-shadow: var(--a-shadow-medium);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transform: translateY(-2px);
 }
 
 .component-item h3 {
-    margin: 0 0 var(--a-space-s) 0;
+    margin: 0 0 16px 0;
     font-size: 1rem;
-    font-weight: var(--a-font-weight-bold);
+    font-weight: 700;
     display: flex;
     align-items: center;
-    gap: var(--a-space-s);
+    gap: 8px;
     color: var(--a-color-primary);
     line-height: 1.3;
-    flex-wrap: wrap;
 }
 
 .component-item h3 i {
@@ -1257,16 +1239,16 @@ main.docs-components-grid {
 .component-links {
     display: flex;
     flex-direction: column;
-    gap: var(--a-space-xs);
+    gap: 4px;
     flex: 1;
 }
 
 .component-links a {
-    padding: var(--a-space-xs) var(--a-space-s);
+    padding: 4px 8px;
     background: var(--a-color-surface-variant);
     color: var(--a-color-on-surface);
     text-decoration: none;
-    border-radius: var(--a-border-radius-small);
+    border-radius: 4px;
     font-size: 0.8rem;
     font-weight: 500;
     transition: all 0.2s ease;
@@ -1279,230 +1261,78 @@ main.docs-components-grid {
     border-left-color: var(--a-color-on-primary);
 }
 
-/* ─────────────────────────────────────────────────────────────────────────── */
-/* RESPONSIVE BREAKPOINTS - COMPACT APPROACH                                 */
-/* ─────────────────────────────────────────────────────────────────────────── */
+/* FIXED COLUMNS - NO AUTO-FIT */
 
-/* Mobile (360px - 600px) */
 @media (max-width: 600px) {
     main.docs-components-grid {
-        padding: var(--a-space-m) var(--a-space-s);
-    }
-
-    .docs-header {
-        display: none;
-    }
-
-    .docs-section {
-        margin-bottom: var(--a-space-s);
-    }
-
-    .docs-section:not(:last-of-type) {
-        padding-bottom: var(--a-space-s);
+        padding: 80px 12px 24px 12px;
     }
 
     .section-header h2 {
         font-size: 1.1rem;
-        gap: var(--a-space-xs);
-    }
-
-    .section-header h2 i {
-        font-size: 1.1rem;
-        min-width: 1.1rem;
-    }
-
-    .section-header p {
-        font-size: 0.8rem;
     }
 
     .docs-section:not(:first-of-type) .section-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: var(--a-space-s);
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     .component-card {
-        padding: var(--a-space-s);
+        padding: 12px;
         min-height: 90px;
-        gap: var(--a-space-xs);
     }
 
-    .component-name {
-        font-size: 0.75rem;
-    }
-
-    .component-item {
+    .docs-section:first-of-type .component-item {
         flex: 1 1 100%;
         min-width: auto;
-        padding: var(--a-space-m);
-    }
-
-    .component-item h3 {
-        font-size: 0.95rem;
-        margin-bottom: var(--a-space-xs);
-    }
-
-    .component-links a {
-        padding: var(--a-space-xs) var(--a-space-s);
-        font-size: 0.75rem;
     }
 }
 
-/* Tablet (601px - 900px) */
 @media (min-width: 601px) and (max-width: 900px) {
     main.docs-components-grid {
-        padding: var(--a-space-lg) var(--a-space-m);
-    }
-
-    .docs-header {
-        display: none;
+        padding: 80px 16px 24px 16px;
     }
 
     .docs-section:not(:first-of-type) .section-grid {
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: var(--a-space-m);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
     }
 
-    .component-card {
-        padding: var(--a-space-m);
-        min-height: 105px;
-    }
-
-    .component-item {
-        flex: 1 1 calc(50% - var(--a-space-s));
+    .docs-section:first-of-type .component-item {
+        flex: 1 1 calc(50% - 8px);
         min-width: 280px;
     }
-
-    .docs-section {
-        margin-bottom: var(--a-space-m);
-    }
-    
-    .docs-section:not(:last-of-type) {
-        padding-bottom: var(--a-space-m);
-    }
 }
 
-/* Desktop (901px+) */
-@media (min-width: 901px) {
+@media (min-width: 901px) and (max-width: 1200px) {
     main.docs-components-grid {
-        padding: calc(var(--a-space-lg) + 20px) var(--a-space-xl);
-        margin: 0;
-        box-sizing: border-box;
-        overflow-x: hidden;
+        padding: 80px 24px 32px 24px;
     }
 
     .docs-section:not(:first-of-type) .section-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: var(--a-space-lg);
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
     }
 
-    .component-card {
-        padding: var(--a-space-m);
-        min-height: 110px;
-    }
-
-    .component-item {
-        flex: 1 1 calc(25% - var(--a-space-s));
+    .docs-section:first-of-type .component-item {
+        flex: 1 1 calc(50% - 8px);
         min-width: 300px;
     }
-
-    .docs-section {
-        margin-bottom: var(--a-space-lg);
-    }
-
-    .docs-section:not(:last-of-type) {
-        padding-bottom: var(--a-space-lg);
-    }
 }
 
-/* Wide Desktop (1200px+) */
 @media (min-width: 1201px) {
     main.docs-components-grid {
-        padding: var(--a-space-lg) var(--a-space-xl);
-        max-width: 100%;
-        margin: 0;
+        padding: 80px 32px 32px 32px;
     }
 
     .docs-section:not(:first-of-type) .section-grid {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: var(--a-space-lg);
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
     }
 
-    .component-item {
-        flex: 1 1 calc(25% - var(--a-space-s));
+    .docs-section:first-of-type .component-item {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 320px;
     }
-}
-
-
-
-/* ═══════════════════════════════════════════════════════════════════════════ */
-/* FIX: HEADER RESPONSIVE + PREVENT OVERLAP + NO HORIZONTAL CUTOFF           */
-/* ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Add padding-top to account for fixed header */
-main.docs-components-grid {
-    padding-top: calc(var(--a-space-lg) + 20px);
-}
-
-/* Hide some nav links on small/medium screens to prevent overlap */
-@media (max-width: 1200px) {
-    header.main ul.links li:nth-child(2),
-    header.main ul.links li:nth-child(3) {
-        display: none;
-    }
-}
-
-@media (max-width: 900px) {
-    header.main ul.links {
-        display: none;
-    }
-    
-    header.main .menu.toggle {
-        display: block;
-    }
-}
-
-/* Ensure sections don't overflow */
-.docs-section {
-    width: 100%;
-    box-sizing: border-box;
-    overflow: visible;
-}
-
-/* Ensure section headers don't overflow */
-.section-header {
-    width: 100%;
-    box-sizing: border-box;
-    overflow: visible;
-}
-
-.section-header h2 {
-    word-break: break-word;
-    overflow-wrap: break-word;
-}
-
-.section-header p {
-    word-break: break-word;
-    overflow-wrap: break-word;
-}
-
-/* Component cards should respect container width */
-.docs-section:not(:first-of-type) .section-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--a-space-m);
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* Component cards with proper sizing */
-.component-card {
-    word-break: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-}
-
-.component-name {
-    word-break: break-word;
-    hyphens: auto;
 }
 
