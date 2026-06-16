@@ -1045,36 +1045,14 @@ details[open] summary::after {
 
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
-/* REC 21: COMPONENTS OVERVIEW PAGE - BEAUTIFUL GRID REDESIGN                 */
-/* ═══════════════════════════════════════════════════════════════════════════ */
 
-
-
-/* ═══════════════════════════════════════════════════════════════════════════ */
-/* REC 21 v3: COMPONENTS OVERVIEW - CLEAN, COMPACT, AESTHETIC REDESIGN        */
-/* Focus: tight spacing, no scrollbars, efficient layout, professional look    */
-/* ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Main container - responsive but controlled */
-/* Hero header - HIDDEN (was causing blue sidebar box) */
-.docs-header {
-    display: none !important;
-    text-align: center;
-    margin-bottom: var(--a-space-lg);
-    padding: var(--a-space-xl) var(--a-space-lg);
-
-/* ═══════════════════════════════════════════════════════════════════════════ */
-/* REC 21: COMPONENTS OVERVIEW - FIXED COLUMN LAYOUT                         */
-/* ═══════════════════════════════════════════════════════════════════════════ */
+/* Components Overview - Using Axiom01 Grid System */
 
 main.docs-components-grid {
     width: 100%;
-    max-width: 100vw;
     margin: 0;
     padding: 80px 16px 32px 16px;
     box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: visible;
 }
 
 .docs-header {
@@ -1084,9 +1062,7 @@ main.docs-components-grid {
 .docs-section {
     margin-bottom: 24px;
     width: 100%;
-    max-width: 100vw;
     box-sizing: border-box;
-    overflow-x: hidden;
 }
 
 .docs-section:not(:last-of-type) {
@@ -1098,10 +1074,6 @@ main.docs-components-grid {
     margin-bottom: 16px;
     padding-bottom: 0;
     border-bottom: none;
-    width: 100%;
-    max-width: 100vw;
-    box-sizing: border-box;
-    overflow-x: hidden;
 }
 
 .section-header h2 {
@@ -1130,11 +1102,11 @@ main.docs-components-grid {
     word-break: break-word;
 }
 
+/* USE AXIOM01 GRID CLASS */
 .section-grid {
+    display: grid;
     width: 100%;
     box-sizing: border-box;
-    display: grid;
-    gap: 16px;
 }
 
 .component-card {
@@ -1257,50 +1229,38 @@ main.docs-components-grid {
     border-left-color: var(--a-color-on-primary);
 }
 
-/* FIXED COLUMNS - NO AUTO-FIT */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* RESPONSIVE GRIDS USING AXIOM01 BREAKPOINTS                               */
+/* ═══════════════════════════════════════════════════════════════════════════ */
 
-@media (max-width: 600px) {
-    main.docs-components-grid {
-        padding: 80px 12px 24px 12px;
-    }
+/* Mobile (default - xs) */
+.docs-section:not(:first-of-type) .section-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
 
-    .section-header h2 {
-        font-size: 1.1rem;
-    }
-
+/* Small devices (480px+) */
+@media (min-width: 480px) {
     .docs-section:not(:first-of-type) .section-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 12px;
-    }
-
-    .component-card {
-        padding: 12px;
-        min-height: 90px;
-    }
-
-    .docs-section:first-of-type .component-item {
-        flex: 1 1 100%;
-        min-width: auto;
     }
 }
 
-@media (min-width: 601px) and (max-width: 900px) {
+/* Tablets (768px+) */
+@media (min-width: 768px) {
     main.docs-components-grid {
-        padding: 80px 16px 24px 16px;
+        padding: 80px 16px 32px 16px;
     }
 
     .docs-section:not(:first-of-type) .section-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
     }
-
-    .docs-section:first-of-type .component-item {
-        flex: 1 1 calc(50% - 8px);
-        min-width: 280px;
-    }
 }
 
-@media (min-width: 901px) and (max-width: 1200px) {
+/* Medium/Laptops (992px+) */
+@media (min-width: 992px) {
     main.docs-components-grid {
         padding: 80px 16px 32px 16px;
     }
@@ -1309,26 +1269,25 @@ main.docs-components-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 16px;
     }
-
-    .docs-section:first-of-type .component-item {
-        flex: 1 1 calc(50% - 8px);
-        min-width: 300px;
-    }
 }
 
-@media (min-width: 1201px) {
+/* Large Desktops (1200px+) */
+@media (min-width: 1200px) {
     main.docs-components-grid {
         padding: 80px 16px 32px 16px;
     }
 
     .docs-section:not(:first-of-type) .section-grid {
         grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
+        gap: 16px;
     }
+}
 
-    .docs-section:first-of-type .component-item {
-        flex: 1 1 calc(50% - 8px);
-        min-width: 320px;
+/* Extra Large (1400px+) */
+@media (min-width: 1400px) {
+    .docs-section:not(:first-of-type) .section-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px;
     }
 }
 
