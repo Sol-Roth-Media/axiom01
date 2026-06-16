@@ -1134,11 +1134,8 @@ main.docs-components-grid {
     text-align: left;
 }
 
-/* Grid for component cards - COMPACT */
+/* Grid for component cards - COMPACT (default for non-first sections) */
 .section-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: var(--a-space-m);
     width: 100%;
 }
 
@@ -1197,14 +1194,7 @@ main.docs-components-grid {
     letter-spacing: 0.05em;
 }
 
-/* Component item cards (Release, Getting Started) - USE FLEXBOX */
-.section-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--a-space-m);
-}
-
-/* Override for component items in first section */
+/* Component item cards (Release, Getting Started) - USE FLEXBOX FOR FIRST SECTION ONLY */
 .docs-section:first-of-type .section-grid {
     display: flex;
     flex-wrap: wrap;
@@ -1214,6 +1204,13 @@ main.docs-components-grid {
 .docs-section:first-of-type .section-grid .component-item {
     flex: 1 1 calc(50% - var(--a-space-s));
     min-width: 250px;
+}
+
+/* All other sections use grid for component cards */
+.docs-section:not(:first-of-type) .section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--a-space-m);
 }
 
 .component-item {
@@ -1312,7 +1309,7 @@ main.docs-components-grid {
         font-size: 0.8rem;
     }
 
-    .section-grid {
+    .docs-section:not(:first-of-type) .section-grid {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: var(--a-space-s);
     }
@@ -1354,7 +1351,7 @@ main.docs-components-grid {
         display: none;
     }
 
-    .section-grid {
+    .docs-section:not(:first-of-type) .section-grid {
         grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
         gap: var(--a-space-m);
     }
@@ -1381,9 +1378,9 @@ main.docs-components-grid {
 /* Desktop (901px+) */
 @media (min-width: 901px) {
     main.docs-components-grid {
-        padding: var(--a-space-lg);
-        max-width: 1500px;
-        margin: 0 auto;
+        padding: var(--a-space-lg) var(--a-space-xl);
+        max-width: 100%;
+        margin: 0;
         box-sizing: border-box;
     }
 
@@ -1397,7 +1394,7 @@ main.docs-components-grid {
         font-size: 2.25rem;
     }
 
-    .section-grid {
+    .docs-section:not(:first-of-type) .section-grid {
         grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
         gap: var(--a-space-lg);
     }
@@ -1423,7 +1420,13 @@ main.docs-components-grid {
 
 /* Wide Desktop (1200px+) */
 @media (min-width: 1201px) {
-    .section-grid {
+    main.docs-components-grid {
+        padding: var(--a-space-lg) var(--a-space-xl);
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .docs-section:not(:first-of-type) .section-grid {
         grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
         gap: var(--a-space-lg);
     }
