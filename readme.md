@@ -78,7 +78,7 @@ Most UI frameworks make you choose: **clean code OR beautiful design**. You writ
 - Touch-optimized interactions
 
 ### 🚀 Performance
-- **13.3 KB CSS (gzipped)** — Incredibly lean bundle size with 67 components
+- **13.3 KB CSS (gzipped)** — Incredibly lean bundle size with 73 components
 - **1.0 KB JavaScript (gzipped)** — Optional component loader
 - **14.3 KB Total (gzipped)** — Production-ready, zero dependencies
 
@@ -263,7 +263,7 @@ Automatic detection. Smooth transitions. Zero extra work.
 
 | Asset | Size (gzipped) | Notes |
 |-------|---|---|
-| **CSS** | 13.3 KB | Full framework with all 67 components |
+| **CSS** | 13.3 KB | Full framework with all 73 components |
 | **JavaScript** | 1.0 KB | Optional component loader |
 | **Total** | 14.3 KB | Production-ready, zero dependencies |
 
