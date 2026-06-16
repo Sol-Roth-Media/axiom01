@@ -1386,7 +1386,8 @@ section.hero .content {
 }
 
 section.hero.small {
-    padding: calc(var(--a-space-xxl) + 80px) var(--a-space-xl) var(--a-space-xxl);
+    padding: var(--a-space-xl) var(--a-space-xl) var(--a-space-xl);
+    margin-top: 80px;
 }
 
 section.hero h1 {
@@ -1396,6 +1397,14 @@ section.hero h1 {
     line-height: 1.1;
     color: var(--a-color-on-gradient);
     max-width: 100%;
+}
+
+section.hero p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--a-color-on-gradient);
+    opacity: 0.95;
 }
 
 section.hero .tagline {
@@ -1739,7 +1748,72 @@ section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); m
 
 /* --- Containers & Grids --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--a-space-xl); }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--a-space-l); }
+
+/* === AXIOM01 GRID SYSTEM - MOBILE-FIRST SEMANTIC APPROACH === */
+/* Replaces problematic repeat(auto-fit, minmax()) pattern */
+
+/* Base .grid - Mobile first: 1 column */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--a-space-m);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Semantic grid column utilities */
+.grid-cols-1 { grid-template-columns: 1fr; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-cols-5 { grid-template-columns: repeat(5, 1fr); }
+
+/* Responsive grid - tablet: 2 columns */
+@media (min-width: 576px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Responsive grid - laptop: 3 columns */
+@media (min-width: 992px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Responsive grid - desktop: 4 columns */
+@media (min-width: 1200px) {
+  .grid { grid-template-columns: repeat(4, 1fr); gap: var(--a-space-l); }
+}
+
+/* Advanced grid patterns */
+
+/* Sidebar + Main layout */
+.grid-sidebar {
+  grid-template-columns: 250px 1fr;
+  gap: var(--a-space-l);
+}
+
+@media (max-width: 768px) {
+  .grid-sidebar {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Featured grid item - spans 2 columns */
+.grid-item-featured {
+  grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .grid-item-featured {
+    grid-column: span 1;
+  }
+}
+
+/* Auto-sized grid with constrained columns - for when you need flexibility */
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: var(--a-space-l);
+}
 
 /* --- Cards --- */
 .card {
