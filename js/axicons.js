@@ -141,7 +141,7 @@ const axicons = [
     { id: 180, name: "Scissors", svgContent: '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>' },
     { id: 181, name: "Key-Round", svgContent: '<circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/>' },
     { id: 182, name: "Hash", svgContent: '<line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/>' },
-    { id: 183, name: "Infinity", svgContent: '<path d="M22 12c0-5-3.5-9-8-9S6 7 6 12s3.5 9 8 9 8-4 8-9z"/><path d="M2 12c0 5 3.5 9 8 9s8-4 8-9-3.5-9-8-9-8 4-8 9z"/>' }
+    { id: 183, name: "Infinity", svgContent: '<path d="M22 12c0-5-3.5-9-8-9S6 7 6 12s3.5 9 8 9 8-4 8-9z"/><path d="M2 12c0 5 3.5 9 8 9s8-4 8-9-3.5-9-8-9-8 4-8 9z"/>' },
     { id: 184, name: "Smile", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
     { id: 185, name: "Frown", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M8 16s1.5-2 4-2 4 2 4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
     { id: 186, name: "Meh", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
