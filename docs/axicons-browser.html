@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Axicons - Icon Library | Axiom01</title>
+	<link rel="stylesheet" href="../css/axiom.css">
+	<link rel="stylesheet" href="../css/axicons.css">
+	<style>
+		body {
+			font-family: var(--a-font-family-base);
+			background: var(--a-color-surface);
+			color: var(--a-color-on-surface);
+		}
+
+		header {
+			background: var(--a-color-primary);
+			color: var(--a-color-on-primary);
+			padding: var(--a-space-xl);
+			text-align: center;
+		}
+
+		header h1 {
+			margin: 0;
+			font-size: 2.5rem;
+		}
+
+		header p {
+			margin: var(--a-space-m) 0 0;
+			opacity: 0.9;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: var(--a-space-xl);
+		}
+
+		.search-section {
+			margin-bottom: var(--a-space-xl);
+		}
+
+		.search-box {
+			display: flex;
+			gap: var(--a-space-m);
+		}
+
+		.search-box input {
+			flex: 1;
+			padding: var(--a-space-m);
+			border: 1px solid var(--a-color-outline);
+			border-radius: var(--a-border-radius-base);
+			font-size: 1rem;
+		}
+
+		.search-box button {
+			padding: var(--a-space-m) var(--a-space-l);
+			background: var(--a-color-primary);
+			color: var(--a-color-on-primary);
+			border: none;
+			border-radius: var(--a-border-radius-base);
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		.search-box button:hover {
+			opacity: 0.9;
+		}
+
+		.icon-count {
+			text-align: center;
+			margin: var(--a-space-l) 0;
+			color: var(--a-color-on-surface-variant);
+		}
+
+		.icons-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+			gap: var(--a-space-m);
+			margin-top: var(--a-space-l);
+		}
+
+		.icon-card {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: var(--a-space-m);
+			background: var(--a-color-surface-variant);
+			border: 1px solid var(--a-color-outline);
+			border-radius: var(--a-border-radius-base);
+			cursor: pointer;
+			transition: all 200ms ease;
+			min-height: 100px;
+		}
+
+		.icon-card:hover {
+			background: var(--a-color-primary-container);
+			border-color: var(--a-color-primary);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		}
+
+		.icon-card .axicon {
+			width: 40px;
+			height: 40px;
+			margin-bottom: var(--a-space-s);
+			color: var(--a-color-primary);
+		}
+
+		.icon-card .name {
+			font-size: 0.75rem;
+			text-align: center;
+			word-break: break-word;
+			color: var(--a-color-on-surface);
+		}
+
+		.icon-card:active {
+			background: var(--a-color-secondary-container);
+		}
+
+		.category {
+			margin-top: var(--a-space-xxl);
+		}
+
+		.category h2 {
+			font-size: 1.5rem;
+			margin: 0 0 var(--a-space-m) 0;
+			padding-bottom: var(--a-space-m);
+			border-bottom: 2px solid var(--a-color-primary);
+			color: var(--a-color-primary);
+		}
+
+		.hidden {
+			display: none;
+		}
+
+		.copy-feedback {
+			position: fixed;
+			bottom: var(--a-space-l);
+			right: var(--a-space-l);
+			background: var(--a-color-success);
+			color: var(--a-color-on-success);
+			padding: var(--a-space-m) var(--a-space-l);
+			border-radius: var(--a-border-radius-base);
+			animation: slideUp 300ms ease;
+			z-index: 1000;
+		}
+
+		@keyframes slideUp {
+			from {
+				transform: translateY(100px);
+				opacity: 0;
+			}
+			to {
+				transform: translateY(0);
+				opacity: 1;
+			}
+		}
+
+		.empty-state {
+			text-align: center;
+			padding: var(--a-space-xxl);
+			color: var(--a-color-on-surface-variant);
+		}
+
+		footer {
+			text-align: center;
+			padding: var(--a-space-xl);
+			border-top: 1px solid var(--a-color-outline);
+			margin-top: var(--a-space-xxl);
+			color: var(--a-color-on-surface-variant);
+		}
+
+		a {
+			color: var(--a-color-primary);
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+	</style>
+</head>
+<body>
+
+<header>
+	<h1>Axicons</h1>
+	<p>200+ curated SVG icons designed for Axiom01</p>
+</header>
+
+<div class="container">
+	<div class="search-section">
+		<div class="search-box">
+			<input type="text" id="search-input" placeholder="Search icons by name...">
+			<button onclick="filterIcons()">Search</button>
+		</div>
+		<div class="icon-count">
+			<span id="icon-count">200</span> icons available
+		</div>
+	</div>
+
+	<div id="icons-container"></div>
+
+	<div class="empty-state hidden" id="empty-state">
+		<p>No icons found matching your search.</p>
+	</div>
+</div>
+
+<footer>
+	<p><a href="../index.html">← Back to Axiom01</a></p>
+	<p><small>Axicons are part of <a href="https://github.com/Sol-Roth-Media/axiom01">Axiom01</a> • MIT License</small></p>
+</footer>
+
+<div id="copy-feedback" class="copy-feedback hidden">Copied to clipboard!</div>
+
+<script src="../js/axicons.js"></script>
+<script>
+	const container = document.getElementById('icons-container');
+	const searchInput = document.getElementById('search-input');
+	const emptyState = document.getElementById('empty-state');
+	const copyFeedback = document.getElementById('copy-feedback');
+	const iconCount = document.getElementById('icon-count');
+
+	// Initialize - show all icons
+	function renderAllIcons() {
+		container.innerHTML = '';
+		
+		if (typeof axicons === 'undefined') {
+			container.innerHTML = '<div class="empty-state"><p>Error: Axicons library not loaded</p></div>';
+			return;
+		}
+
+		// Group icons by category
+		const categories = {
+			'Navigation': ['Menu', 'X', 'ChevronDown', 'ChevronUp', 'ChevronLeft', 'ChevronRight', 'ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Home', 'Map', 'MapPin', 'Navigation', 'Compass', 'SkipBack', 'SkipForward', 'Maximize', 'Minimize', 'Expand'],
+			'User & Account': ['User', 'Users', 'UserPlus', 'UserMinus', 'UserCheck', 'UserCircle', 'UserX', 'LogOut', 'LogIn', 'Settings', 'Bell', 'BellOff', 'Eye', 'EyeOff'],
+			'Communication': ['Mail', 'Send', 'MessageCircle', 'MessageSquare', 'Phone', 'PhoneMissed', 'Video', 'VideoOff', 'Mic', 'MicOff', 'Speaker', 'Volume', 'VolumeUp', 'VolumeDown', 'VolumeMute', 'AtSign', 'Hash'],
+			'Media': ['Image', 'Images', 'Camera', 'Play', 'Pause', 'Stop', 'Music', 'Radio', 'Headphones', 'Headset', 'Film', 'Tv', 'Layers', 'Layout', 'Repeat', 'Shuffle', 'RotateCw', 'RotateCcw', 'Zoom', 'ZoomIn', 'ZoomOut'],
+			'Files & Documents': ['File', 'FileText', 'FileCode', 'FileImage', 'FilePdf', 'FileAudio', 'Folder', 'FolderOpen', 'FolderPlus', 'FolderMinus', 'Copy', 'Download', 'Upload', 'Save'],
+			'Status & Feedback': ['CheckCircle', 'XCircle', 'AlertCircle', 'AlertTriangle', 'Info', 'HelpCircle', 'Check', 'Heart', 'Star', 'Flag', 'Bookmark'],
+			'Shapes & Objects': ['Circle', 'Square', 'Triangle', 'Hexagon', 'Box', 'Cube', 'Gift', 'Package', 'Sun', 'Moon', 'Cloud', 'Smile', 'Frown'],
+		};
+
+		// Render by category or all if searching
+		const searchTerm = searchInput.value.toLowerCase();
+		if (searchTerm) {
+			const filtered = axicons.filter(icon => icon.name.toLowerCase().includes(searchTerm));
+			renderIcons(filtered, true);
+			iconCount.textContent = filtered.length;
+		} else {
+			for (const [category, iconNames] of Object.entries(categories)) {
+				const categoryIcons = axicons.filter(icon => iconNames.includes(icon.name));
+				if (categoryIcons.length > 0) {
+					const categoryDiv = document.createElement('div');
+					categoryDiv.className = 'category';
+					categoryDiv.innerHTML = `<h2>${category} (${categoryIcons.length})</h2><div class="icons-grid"></div>`;
+					const grid = categoryDiv.querySelector('.icons-grid');
+					categoryIcons.forEach(icon => {
+						grid.appendChild(createIconCard(icon));
+					});
+					container.appendChild(categoryDiv);
+				}
+			}
+			// Show uncategorized
+			const allCategorized = Object.values(categories).flat();
+			const uncategorized = axicons.filter(icon => !allCategorized.includes(icon.name));
+			if (uncategorized.length > 0) {
+				const categoryDiv = document.createElement('div');
+				categoryDiv.className = 'category';
+				categoryDiv.innerHTML = `<h2>More (${uncategorized.length})</h2><div class="icons-grid"></div>`;
+				const grid = categoryDiv.querySelector('.icons-grid');
+				uncategorized.forEach(icon => {
+					grid.appendChild(createIconCard(icon));
+				});
+				container.appendChild(categoryDiv);
+			}
+			iconCount.textContent = axicons.length;
+		}
+	}
+
+	function renderIcons(icons, hideCategories = false) {
+		container.innerHTML = '';
+		emptyState.classList.add('hidden');
+		
+		if (icons.length === 0) {
+			emptyState.classList.remove('hidden');
+			return;
+		}
+
+		const grid = document.createElement('div');
+		grid.className = 'icons-grid';
+		icons.forEach(icon => {
+			grid.appendChild(createIconCard(icon));
+		});
+		container.appendChild(grid);
+	}
+
+	function createIconCard(icon) {
+		const card = document.createElement('div');
+		card.className = 'icon-card';
+		card.title = `${icon.name} - Click to copy`;
+		card.innerHTML = `
+			<span class="axicon render" data-name="${icon.name}"></span>
+			<span class="name">${icon.name}</span>
+		`;
+
+		// Render the icon
+		const iconEl = card.querySelector('.axicon.render');
+		const iconData = axicons.find(i => i.name === icon.name);
+		if (iconData) {
+			iconEl.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${iconData.svgContent}</svg>`;
+		}
+
+		// Copy to clipboard on click
+		card.addEventListener('click', () => {
+			const html = `<span class="axicon render" data-name="${icon.name}"></span>`;
+			navigator.clipboard.writeText(html).then(() => {
+				showCopyFeedback();
+			});
+		});
+
+		return card;
+	}
+
+	function filterIcons() {
+		renderAllIcons();
+	}
+
+	function showCopyFeedback() {
+		copyFeedback.classList.remove('hidden');
+		setTimeout(() => {
+			copyFeedback.classList.add('hidden');
+		}, 2000);
+	}
+
+	// Search on input
+	searchInput.addEventListener('keypress', (e) => {
+		if (e.key === 'Enter') {
+			filterIcons();
+		}
+	});
+
+	// Initial render
+	renderAllIcons();
+</script>
+
+</body>
+</html>

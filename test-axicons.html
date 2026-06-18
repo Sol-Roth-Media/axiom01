@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Axicons Test - Debug</title>
+	<link rel="stylesheet" href="css/axicons.css">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 40px;
+			background: #f5f5f5;
+		}
+		h1 { color: #333; }
+		.test-icon {
+			display: inline-block;
+			margin: 10px;
+			padding: 10px;
+			background: white;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+		}
+		.axicon { 
+			width: 24px; 
+			height: 24px; 
+			display: inline-block;
+			margin-right: 8px;
+		}
+		.debug-info {
+			background: #fffacd;
+			padding: 15px;
+			border-radius: 4px;
+			margin-bottom: 20px;
+			font-family: monospace;
+			font-size: 12px;
+		}
+		.success { color: green; }
+		.error { color: red; }
+	</style>
+</head>
+<body>
+
+<h1>Axicons Debug Test</h1>
+
+<div class="debug-info" id="debug-output">
+	<p id="status">Loading...</p>
+</div>
+
+<h2>Test Icons (Should Display)</h2>
+
+<div class="test-icon">
+	<span class="axicon render" data-name="Search"></span>
+	Search
+</div>
+
+<div class="test-icon">
+	<span class="axicon render" data-name="Menu"></span>
+	Menu
+</div>
+
+<div class="test-icon">
+	<span class="axicon render" data-name="Settings"></span>
+	Settings
+</div>
+
+<div class="test-icon">
+	<span class="axicon render" data-name="Heart"></span>
+	Heart
+</div>
+
+<div class="test-icon">
+	<span class="axicon render" data-name="Check"></span>
+	Check
+</div>
+
+<script src="js/axicons.js"></script>
+<script>
+	const debugOutput = document.getElementById('debug-output');
+	const statusEl = document.getElementById('status');
+	
+	// Check if axicons loaded
+	if (typeof axicons !== 'undefined') {
+		statusEl.innerHTML = `<span class="success">✓ axicons.js loaded successfully</span><br>Total icons: ${axicons.length}`;
+		
+		// Render icons
+		document.querySelectorAll('.axicon.render').forEach(el => {
+			const name = el.getAttribute('data-name');
+			const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+			
+			if (icon) {
+				el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+				statusEl.innerHTML += `<br><span class="success">✓ Rendered ${name}</span>`;
+			} else {
+				statusEl.innerHTML += `<br><span class="error">✗ Icon "${name}" not found</span>`;
+			}
+		});
+	} else {
+		statusEl.innerHTML = `<span class="error">✗ axicons.js failed to load</span>`;
+	}
+</script>
+
+</body>
+</html>
