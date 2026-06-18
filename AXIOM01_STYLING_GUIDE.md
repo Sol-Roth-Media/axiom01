@@ -441,7 +441,117 @@ See [Animation Guide](docs/ANIMATIONS.md) for complete animation system document
 
 ---
 
-## 6. Grid System (Updated v2.1.0)
+## 6. Icon System: Axicons (NEW v2.1.1)
+
+Axiom01 now includes **Axicons**, a native SVG icon system with 200+ curated icons designed specifically for the framework. Instead of external icon fonts, Axicons are injected via lightweight JavaScript and styled with CSS.
+
+### Philosophy
+
+Axicons embody Axiom01's core principles:
+- **Semantic**: Single meaningful class (`.axicon`)
+- **Minimal**: No BEM, no utility stacking  
+- **Cascading**: Icons inherit text color via `currentColor`
+- **Native**: 100% control, no CDN dependency
+- **Accessible**: Automatic `aria-hidden="true"` on SVGs
+
+### Quick Start
+
+```html
+<!-- Include in head -->
+<link rel="stylesheet" href="css/axicons.css">
+
+<!-- Include before </body> -->
+<script src="js/axicons.js"></script>
+<script>
+    document.querySelectorAll('.axicon.render').forEach(el => {
+        const name = el.getAttribute('data-name');
+        const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+        if (icon) {
+            el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+        }
+    });
+</script>
+```
+
+### Usage Patterns
+
+```html
+<!-- Simple icon (default 1em size) -->
+<span class="axicon render" data-name="Search"></span>
+
+<!-- With size variant -->
+<span class="axicon render axicon-lg" data-name="Settings"></span>
+<span class="axicon render axicon-xl" data-name="Bell"></span>
+
+<!-- With semantic color -->
+<span class="axicon render axicon-success" data-name="Check"></span>
+<span class="axicon render axicon-error" data-name="AlertTriangle"></span>
+
+<!-- With animation -->
+<span class="axicon render axicon-spin" data-name="Loader"></span>
+
+<!-- With inline color -->
+<span class="axicon render" style="color: var(--a-color-primary);" data-name="Heart"></span>
+
+<!-- In a button (semantic context) -->
+<button>
+    <span class="axicon render" data-name="Download"></span>
+    Download
+</button>
+```
+
+### Size Utilities
+
+```css
+.axicon-sm  { width: 0.875em; height: 0.875em; }
+.axicon     { width: 1em;     height: 1em; }       /* default */
+.axicon-lg  { width: 1.25em;  height: 1.25em; }
+.axicon-xl  { width: 1.5em;   height: 1.5em; }
+.axicon-2xl { width: 2em;     height: 2em; }
+```
+
+### Color Utilities
+
+```html
+<!-- Semantic color classes (auto-updated with themes) -->
+<span class="axicon render axicon-primary" data-name="Star"></span>
+<span class="axicon render axicon-secondary" data-name="Star"></span>
+<span class="axicon render axicon-success" data-name="Star"></span>
+<span class="axicon render axicon-warning" data-name="Star"></span>
+<span class="axicon render axicon-error" data-name="Star"></span>
+<span class="axicon render axicon-info" data-name="Star"></span>
+<span class="axicon render axicon-muted" data-name="Star"></span>
+```
+
+### Animation Utilities
+
+```html
+<!-- Spinning (for loading states) -->
+<span class="axicon render axicon-spin" data-name="Loader"></span>
+
+<!-- Pulsing (for attention) -->
+<span class="axicon render axicon-pulse" data-name="Bell"></span>
+```
+
+### Dark Mode
+
+Axicons automatically adapt to dark mode via `currentColor`. No CSS changes needed!
+
+### All 200+ Icons
+
+Complete icon browser: **[docs/AXICONS_REFERENCE.md](docs/AXICONS_REFERENCE.md)**
+
+### Resources
+
+- **Full Reference**: [docs/AXICONS_REFERENCE.md](docs/AXICONS_REFERENCE.md)
+- **SVG Data**: [js/axicons.js](js/axicons.js)
+- **CSS Styling**: [css/axicons.css](css/axicons.css)
+
+---
+
+## 7. Grid System (Updated v2.1.0)
+
+
 
 Axiom01 uses a mobile-first, semantic grid system that adapts responsively without magic sizing or horizontal overflow.
 

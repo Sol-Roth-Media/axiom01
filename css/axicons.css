@@ -1,0 +1,190 @@
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* AXICONS - The Axiom01 Icon System                                          */
+/* 200 curated SVG icons designed for semantic, minimal CSS                   */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/**
+ * Base .axicon definition
+ * 
+ * Principles:
+ * - width: 1em makes icons scale with font-size (semantic sizing)
+ * - stroke: currentColor makes icons inherit parent text color
+ * - flex-shrink: 0 prevents icons from shrinking in flex containers
+ * - vertical-align: -0.125em aligns icons with baseline text
+ */
+.axicon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+    vertical-align: -0.125em;
+    flex-shrink: 0;
+}
+
+/**
+ * The .render hook
+ * 
+ * Intentionally empty - this class purely acts as a JavaScript behavior trigger.
+ * It decouples rendering logic from styling, following Axiom's semantic-first philosophy.
+ * 
+ * JavaScript targets: document.querySelectorAll('.axicon.render')
+ */
+.render {
+    /* Pure behavior hook - no styles */
+}
+
+/**
+ * Optional size utilities
+ * 
+ * These cascade naturally and can be combined with .axicon:
+ * - <span class="axicon render axicon-lg" data-name="Bell"></span>
+ * 
+ * No BEM naming, no complexity - just additive modifications.
+ */
+
+.axicon-sm {
+    width: 0.875em;
+    height: 0.875em;
+}
+
+.axicon-lg {
+    width: 1.25em;
+    height: 1.25em;
+}
+
+.axicon-xl {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.axicon-2xl {
+    width: 2em;
+    height: 2em;
+}
+
+/**
+ * Animation utilities
+ * 
+ * Spin animation for loading/processing states:
+ * - <span class="axicon render axicon-spin" data-name="Loader"></span>
+ */
+
+.axicon-spin {
+    animation: axicon-spin 1s linear infinite;
+}
+
+@keyframes axicon-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pulse animation for attention states */
+.axicon-pulse {
+    animation: axicon-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes axicon-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/**
+ * Semantic color overrides
+ * 
+ * These inherit from design tokens for consistency:
+ * - <span class="axicon render axicon-success" data-name="Check"></span>
+ */
+
+.axicon-primary {
+    color: var(--a-color-primary);
+}
+
+.axicon-secondary {
+    color: var(--a-color-secondary);
+}
+
+.axicon-success {
+    color: var(--a-color-success);
+}
+
+.axicon-warning {
+    color: var(--a-color-warning);
+}
+
+.axicon-error {
+    color: var(--a-color-error);
+}
+
+.axicon-info {
+    color: var(--a-color-info);
+}
+
+.axicon-muted {
+    color: var(--a-color-on-surface-variant);
+}
+
+/**
+ * Container integration
+ * 
+ * SVG wrapper created by JavaScript render hook
+ */
+
+.axicon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/**
+ * Accessibility - aria-hidden maintained by JS injection
+ * 
+ * Icons are purely decorative and hidden from screen readers.
+ * JavaScript automatically adds aria-hidden="true" to injected SVGs.
+ */
+
+.axicon[aria-hidden="true"] {
+    /* Ensures icons don't affect focus order or accessibility tree */
+}
+
+/**
+ * Dark mode support
+ * 
+ * Icons automatically adapt to dark mode via currentColor
+ * No additional styling needed - inherits text color naturally
+ */
+
+@media (prefers-color-scheme: dark) {
+    /* Icons automatically use light text color in dark mode via currentColor */
+}
+
+/**
+ * Reduced motion support
+ * 
+ * Respect user preference for animations
+ */
+
+@media (prefers-reduced-motion: reduce) {
+    .axicon-spin,
+    .axicon-pulse {
+        animation: none;
+    }
+}
+
+/**
+ * Print styles
+ * 
+ * Ensure icons display correctly when printing
+ */
+
+@media print {
+    .axicon {
+        color: inherit;
+    }
+}
