@@ -1325,18 +1325,28 @@
 	</div>
 </main>
 
-<script src="js/axicons.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 <script src="js/axiom.js"></script>
+<script src="js/axicons.js"></script>
 <script>
-	document.querySelectorAll('.axicon.render').forEach(el => {
-		const name = el.getAttribute('data-name');
-		const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
-		if (icon) {
-			el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+	function renderAxicons() {
+		if (typeof axicons !== 'undefined') {
+			document.querySelectorAll('.axicon.render').forEach(el => {
+				const name = el.getAttribute('data-name');
+				const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+				if (icon) {
+					el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+				}
+			});
 		}
-	});
+	}
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', renderAxicons);
+	} else {
+		renderAxicons();
+	}
 </script>
+
 <script src="js/release-loader.js"></script>
 <script src="js/index-page-manager.js"></script>
 <!-- Prism.js for syntax highlighting -->
