@@ -8,13 +8,6 @@
 (function() {
     'use strict';
 
-    // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initCopyButtons);
-    } else {
-        initCopyButtons();
-    }
-
     function initCopyButtons() {
         // Find all code blocks
         const codeBlocks = document.querySelectorAll('pre code');
@@ -43,10 +36,28 @@
             wrapper.insertBefore(copyButton, preElement);
         });
 
-        // Re-render axicons if the function exists
-        if (typeof window.renderAxicons === 'function') {
-            window.renderAxicons();
-        }
+        // Re-render axicons after creating buttons
+        renderCopyButtonIcons();
+    }
+
+    function renderCopyButtonIcons() {
+        // Wait for axicons to be available
+        const attemptRender = () => {
+            if (typeof axicons !== 'undefined' && axicons.length > 0) {
+                document.querySelectorAll('.copy-code-button .axicon.render').forEach(el => {
+                    const name = el.getAttribute('data-name');
+                    const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+                    if (icon) {
+                        el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">${icon.svgContent}</svg>`;
+                    }
+                });
+            } else {
+                // Retry if axicons not loaded yet
+                setTimeout(attemptRender, 50);
+            }
+        };
+        
+        attemptRender();
     }
 
     function createCopyButton(codeBlock) {
@@ -104,9 +115,7 @@
             button.disabled = false;
 
             // Re-render axicons if needed
-            if (typeof window.renderAxicons === 'function') {
-                window.renderAxicons();
-            }
+            renderCopyButtonIcons();
         }, 2000);
     }
 
@@ -120,5 +129,13 @@
             button.innerHTML = originalHTML;
             button.classList.remove('error');
         }, 2000);
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCopyButtons);
+    } else {
+        // DOM already loaded, initialize immediately
+        setTimeout(initCopyButtons, 100);
     }
 })();
