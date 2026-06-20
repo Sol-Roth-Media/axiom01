@@ -5,58 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Component Overview - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* Components Overview - Minimal, Perfect Styles */
+        /* ===== COMPONENTS OVERVIEW - ENHANCED AESTHETIC ===== */
+
+        /* Hero Section */
+        section.hero {
+            background: linear-gradient(135deg, var(--a-color-primary) 0%, var(--a-color-primary-container) 100%);
+            color: var(--a-color-on-primary);
+            padding: var(--a-space-2xl) var(--a-space-m);
+            text-align: center;
+            margin-bottom: var(--a-space-2xl);
+            border-radius: var(--a-border-radius-large);
+            box-shadow: var(--a-shadow-medium);
+        }
+
+        section.hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin: 0 0 var(--a-space-m) 0;
+            line-height: 1.2;
+        }
+
+        section.hero p {
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* Main Container */
         main.overview {
             width: 100%;
-            padding-top: var(--a-space-xl);
-            padding-bottom: var(--a-space-xxl);
-            padding-left: var(--a-space-m);
-            padding-right: var(--a-space-m);
+            padding: var(--a-space-m);
             margin: 0;
             box-sizing: border-box;
         }
 
+        /* Category Sections */
         section.category {
-            margin-bottom: var(--a-space-xl);
+            margin-bottom: var(--a-space-2xl);
             width: 100%;
-            padding-bottom: var(--a-space-l);
-            border-bottom: 1px solid var(--a-color-outline);
+            padding: var(--a-space-xl);
+            background: var(--a-color-surface);
+            border-radius: var(--a-border-radius-large);
+            border-left: 4px solid var(--a-color-primary);
+            box-shadow: var(--a-shadow-small);
+            transition: all 300ms ease;
         }
 
-        section.category:last-of-type {
-            margin-bottom: 0;
-            border-bottom: none;
+        section.category:hover {
+            box-shadow: var(--a-shadow-medium);
+            transform: translateY(-2px);
         }
 
         section.category h2 {
             display: flex;
             align-items: center;
             gap: var(--a-space-m);
-            margin: 0 0 var(--a-space-m) 0;
-            font-size: var(--a-font-size-h2);
-            font-weight: var(--a-font-weight-bold);
+            margin: 0 0 var(--a-space-s) 0;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--a-color-primary);
             line-height: 1.2;
         }
 
-        section.category h2 i {
-            font-size: 1.5rem;
-            min-width: 1.5rem;
+        section.category h2 .axicon {
+            font-size: 1.75rem;
+            min-width: 1.75rem;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        section.category h2 .axicon svg {
+            width: 100%;
+            height: 100%;
         }
 
         section.category > p {
             margin: 0 0 var(--a-space-l) 0;
             color: var(--a-color-on-surface-variant);
-            font-size: var(--a-font-size-base);
+            font-size: 0.95rem;
             line-height: 1.6;
+            font-style: italic;
         }
 
+        /* Items Grid */
         .items {
             display: grid;
             grid-template-columns: 1fr;
@@ -65,107 +104,122 @@
         }
 
         .item {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100px;
+            min-height: 120px;
             padding: var(--a-space-m);
-            background: var(--a-color-surface);
+            background: linear-gradient(135deg, var(--a-color-surface-variant) 0%, var(--a-color-surface) 100%);
             border: 1px solid var(--a-color-outline);
             border-radius: var(--a-border-radius-medium);
             text-decoration: none;
             color: var(--a-color-on-surface);
-            font-weight: var(--a-font-weight-bold);
+            font-weight: 600;
+            font-size: 0.95rem;
             text-align: center;
             cursor: pointer;
-            transition: all 150ms ease-in-out;
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: var(--a-shadow-small);
             word-break: break-word;
             overflow-wrap: break-word;
         }
 
+        .item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top-left, rgba(var(--a-rgb-primary), 0.1) 0%, transparent 100%);
+            border-radius: var(--a-border-radius-medium);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 250ms ease;
+        }
+
         .item:hover {
             border-color: var(--a-color-primary);
-            background: var(--a-color-surface-variant);
+            background: linear-gradient(135deg, var(--a-color-primary-container) 0%, var(--a-color-surface-variant) 100%);
             color: var(--a-color-primary);
-            transform: translateY(-2px);
+            transform: translateY(-6px);
             box-shadow: var(--a-shadow-medium);
         }
 
-        .item:active {
-            transform: translateY(0);
+        .item:hover::before {
+            opacity: 1;
         }
 
+        .item:active {
+            transform: translateY(-2px);
+        }
+
+        .item:focus-visible {
+            outline: 2px solid var(--a-color-primary);
+            outline-offset: 2px;
+        }
+
+        /* Badge Styling */
         .badge {
             position: absolute;
-            top: var(--a-space-s);
-            right: var(--a-space-s);
+            top: var(--a-space-m);
+            right: var(--a-space-m);
             padding: var(--a-space-xs) var(--a-space-s);
             background: var(--a-color-success);
             color: var(--a-color-on-success);
             border-radius: var(--a-border-radius-small);
             font-size: 0.625rem;
-            font-weight: var(--a-font-weight-bold);
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: var(--a-shadow-small);
         }
 
-        /* Breakpoints */
+        /* Responsive Grid */
         @media (min-width: 480px) {
             .items {
                 grid-template-columns: repeat(2, 1fr);
+                gap: var(--a-space-m);
             }
         }
 
         @media (min-width: 576px) {
             .items {
                 grid-template-columns: repeat(2, 1fr);
-                gap: var(--a-space-m);
+                gap: var(--a-space-l);
+            }
+
+            main.overview {
+                padding: var(--a-space-l);
             }
         }
 
         @media (min-width: 768px) {
             main.overview {
-                padding-left: var(--a-space-l);
-                padding-right: var(--a-space-l);
-            }
-
-            .items {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--a-space-m);
-            }
-        }
-
-        @media (min-width: 992px) {
-            main.overview {
-                padding-left: var(--a-space-l);
-                padding-right: var(--a-space-l);
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: var(--a-space-l);
             }
 
             .items {
                 grid-template-columns: repeat(3, 1fr);
                 gap: var(--a-space-l);
             }
+
+            section.category {
+                padding: var(--a-space-l);
+            }
         }
 
-        @media (min-width: 1200px) {
-            main.overview {
-                padding-left: var(--a-space-l);
-                padding-right: var(--a-space-l);
-            }
-
+        @media (min-width: 992px) {
             .items {
                 grid-template-columns: repeat(4, 1fr);
                 gap: var(--a-space-l);
             }
         }
 
-        @media (min-width: 1400px) {
+        @media (min-width: 1200px) {
             main.overview {
-                max-width: 1920px;
-                margin: 0 auto;
-                padding-left: var(--a-space-l);
-                padding-right: var(--a-space-l);
+                max-width: 1300px;
             }
 
             .items {
@@ -174,13 +228,26 @@
             }
         }
 
+        /* Motion Preferences */
         @media (prefers-reduced-motion: reduce) {
+            section.category,
             .item {
                 transition: none;
             }
 
             .item:hover {
                 transform: none;
+            }
+
+            section.category:hover {
+                transform: none;
+            }
+        }
+
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            section.hero {
+                background: linear-gradient(135deg, var(--a-color-primary) 0%, var(--a-color-primary-container) 100%);
             }
         }
     </style>
@@ -193,14 +260,14 @@
                 <li><a href="../index.html#philosophy">Philosophy</a></li>
                 <li><a href="../index.html#components">Components</a></li>
                 <li><a href="../index.html#get-started">Get Started</a></li>
-                <li><a href="components-overview.html" aria-current="page">Documentation</a></li>
+                <li><a href="components-overview.html" aria-current="page">Docs</a></li>
             </ul>
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
                     <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="GitHub"></span>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
                 <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
@@ -214,33 +281,38 @@
     </header>
 
     <main class="overview">
+        <section class="hero">
+            <h1>Component Library</h1>
+            <p>Explore 100+ production-ready, semantic components designed for modern web applications. All components are accessible, responsive, and themeable.</p>
+        </section>
+
         <section class="category">
             <h2><span class="axicon render" data-name="Book"></span> Core Documentation</h2>
             <p>Getting started and reference guides</p>
             <div class="items">
                 <a href="markdown-template.html?file=../CHANGELOG.md" class="item">v2.1.0 Release</a>
                 <a href="markdown-template.html?file=../README.md" class="item">Getting Started</a>
-                <a href="colors-advanced.html" class="item">Core Concepts</a>
-                <a href="layout-advanced.html" class="item">Grid System</a>
+                <a href="colors-advanced.html" class="item">Colors & Themes</a>
+                <a href="layout-advanced.html" class="item">Grid & Layout</a>
             </div>
         </section>
 
         <section class="category">
-            <h2><span class="axicon render" data-name="Keyboard"></span> Forms & Inputs</h2>
+            <h2><span class="axicon render" data-name="File-Text"></span> Forms & Inputs</h2>
             <p>Form controls, inputs, and submission components</p>
             <div class="items">
                 <a href="components/forms.html" class="item">Forms</a>
                 <a href="components/editor.html" class="item">Editor</a>
                 <a href="components/datepicker.html" class="item">Datepicker</a>
                 <a href="components/file-upload.html" class="item">File Upload</a>
-                <a href="components/multi-step-form.html" class="item">Multi-Step Form</a>
+                <a href="components/multi-step-form.html" class="item">Multi-Step</a>
                 <a href="components/slider.html" class="item">Slider</a>
                 <a href="components/toggle.html" class="item">Toggle</a>
             </div>
         </section>
 
         <section class="category">
-            <h2><i class="fas fa-compass"></i> Navigation & Layout</h2>
+            <h2><span class="axicon render" data-name="Navigation"></span> Navigation & Layout</h2>
             <p>Menus, navigation, and layout components</p>
             <div class="items">
                 <a href="components/accordion.html" class="item">Accordion</a>
@@ -276,10 +348,10 @@
                 <a href="components/badge.html" class="item">Badge</a>
                 <a href="components/button.html" class="item">Button</a>
                 <a href="components/card.html" class="item">Card</a>
-                <a href="components/adaptive-media-card.html" class="item">Adaptive Media Card</a>
+                <a href="components/adaptive-media-card.html" class="item">Media Card</a>
                 <a href="components/carousel.html" class="item">Carousel</a>
                 <a href="components/queue.html" class="item">Queue</a>
-                <a href="components/segmented-control.html" class="item">Segmented Control</a>
+                <a href="components/segmented-control.html" class="item">Segmented</a>
                 <a href="components/chip-input.html" class="item">Chip Input</a>
                 <a href="components/list.html" class="item">List</a>
                 <a href="components/backlit.html" class="item">Backlit</a>
@@ -290,10 +362,10 @@
                 <a href="components/feature-grid.html" class="item">Feature Grid</a>
                 <a href="components/footer.html" class="item">Footer</a>
                 <a href="components/hero.html" class="item">Hero</a>
-                <a href="components/masonry.html" class="item">Masonry Layout</a>
-                <a href="components/media.html" class="item">Media & Icons</a>
+                <a href="components/masonry.html" class="item">Masonry</a>
+                <a href="components/media.html" class="item">Media</a>
                 <a href="components/rating.html" class="item">Rating</a>
-                <a href="components/stats.html" class="item">Stats/Metrics</a>
+                <a href="components/stats.html" class="item">Stats</a>
                 <a href="components/table.html" class="item">Table</a>
                 <a href="components/advanced-table.html" class="item">Advanced Table</a>
                 <a href="components/testimonial.html" class="item">Testimonial</a>
@@ -302,7 +374,7 @@
         </section>
 
         <section class="category">
-            <h2><span class="axicon render" data-name="Star"></span> Extended Components</h2>
+            <h2><span class="axicon render" data-name="Zap"></span> Extended Components</h2>
             <p>Advanced and specialized components</p>
             <div class="items">
                 <a href="components/account-menu.html" class="item">
@@ -329,48 +401,40 @@
         </section>
 
         <section class="category">
-            <h2><i class="fas fa-mouse"></i> Advanced Interactions</h2>
+            <h2><span class="axicon render" data-name="Zap"></span> Advanced Interactions</h2>
             <p>Interactive and gesture-based components</p>
             <div class="items">
-                <a href="components/swiping-card-interface.html" class="item">Swiping Card Interface</a>
+                <a href="components/swiping-card-interface.html" class="item">Swiping Cards</a>
                 <a href="components/pull-to-refresh.html" class="item">Pull to Refresh</a>
                 <a href="components/story-view.html" class="item">Story View</a>
-                <a href="components/multimedia-picker.html" class="item">Multimedia Picker</a>
+                <a href="components/multimedia-picker.html" class="item">Media Picker</a>
                 <a href="components/autocomplete.html" class="item">Autocomplete</a>
-                <a href="components/stopwatch-countdown.html" class="item">Stopwatch & Countdown</a>
+                <a href="components/stopwatch-countdown.html" class="item">Stopwatch</a>
                 <a href="components/shapes-paths.html" class="item">Shapes & Paths</a>
-                <a href="components/touch-components.html" class="item">Touch Components</a>
-                <a href="components/file-display-download.html" class="item">File Display & Download</a>
-                <a href="components/component-browser.html" class="item">Component Browser</a>
+                <a href="components/touch-components.html" class="item">Touch</a>
+                <a href="components/file-display-download.html" class="item">File Display</a>
+                <a href="components/component-browser.html" class="item">Browser</a>
             </div>
         </section>
 
         <section class="category">
-            <h2><span class="axicon render" data-name="Brain"></span> AI & Advanced Tools</h2>
+            <h2><span class="axicon render" data-name="Ai-Sparkles"></span> AI & Advanced Tools</h2>
             <p>AI integrations and advanced tooling</p>
             <div class="items">
                 <a href="components/ai-chat.html" class="item">AI Chat</a>
                 <a href="components/ai-image-generator.html" class="item">AI Image Generator</a>
-                <a href="boilerplate-template.html" class="item">Boilerplate Template</a>
-                <a href="integrations.html" class="item">Integrations & CMS</a>
+                <a href="boilerplate-template.html" class="item">Boilerplate</a>
+                <a href="integrations.html" class="item">Integrations</a>
                 <a href="markdown-template.html?file=design-guide-outline.md" class="item">Design Guide</a>
                 <a href="markdown-template.html?file=ai-guidelines.md" class="item">AI Guidelines</a>
-                <a href="markdown-template.html?file=COMPONENT_COMPATIBILITY_MAP.md" class="item">Compatibility Map</a>
-                <a href="markdown-template.html?file=SEMANTIC_MIGRATION_PLAYBOOK.md" class="item">Migration Playbook</a>
+                <a href="markdown-template.html?file=COMPONENT_COMPATIBILITY_MAP.md" class="item">Compatibility</a>
+                <a href="markdown-template.html?file=SEMANTIC_MIGRATION_PLAYBOOK.md" class="item">Migration</a>
                 <a href="markdown-template.html?file=contributing.md" class="item">Contributing</a>
                 <a href="markdown-template.html?file=../DEVELOPER.md" class="item">Developer Guide</a>
             </div>
         </section>
     </main>
 
-    <script src="../js/index-page-manager.js"></script>
-    <script type="module">
-      import mobileNavbar from '../js/components/mobile-navbar.js';
-      const navElement = document.querySelector('header[data-component="mobile-navbar"]');
-      if (navElement) {
-        mobileNavbar.init(navElement);
-      }
-    </script>
     <footer class="main">
         <div class="content">
             <div class="brand">
@@ -390,7 +454,7 @@
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
                         <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">npm</a></li>
                     </ul>
                 </div>
@@ -408,5 +472,34 @@
             <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <script src="../js/axicons.js"></script>
+    <script src="../js/code-copy.js"></script>
+    <script>
+        function renderAxicons() {
+            if (typeof axicons !== 'undefined') {
+                document.querySelectorAll('.axicon.render').forEach(el => {
+                    const name = el.getAttribute('data-name');
+                    const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+                    if (icon) {
+                        el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">${icon.svgContent}</svg>`;
+                    }
+                });
+            }
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+    </script>
+    <script src="../js/index-page-manager.js"></script>
+    <script type="module">
+      import mobileNavbar from '../js/components/mobile-navbar.js';
+      const navElement = document.querySelector('header[data-component="mobile-navbar"]');
+      if (navElement) {
+        mobileNavbar.init(navElement);
+      }
+    </script>
 </body>
 </html>
