@@ -2727,3 +2727,67 @@ main {
 section:first-child.hero {
     margin-top: 0 !important;
 }
+
+/* ===== PHASE 3 - FIX NAV ALIGNMENT AT MEDIUM RESOLUTIONS ===== */
+
+/* Medium resolution (768px - 1023px): Hide links, show menu icon */
+@media (max-width: 1023px) and (min-width: 768px) {
+    header.main .links {
+        display: none !important;
+    }
+    
+    header.main .actions .menu {
+        display: flex !important;
+    }
+    
+    header.main .actions {
+        gap: var(--a-space-s) !important;
+    }
+}
+
+/* Tablet (1024px - 1199px): Show both but compact */
+@media (min-width: 1024px) and (max-width: 1199px) {
+    header.main .links {
+        display: flex !important;
+        gap: var(--a-space-m) !important;
+    }
+    
+    header.main .links a {
+        font-size: 0.85rem !important;
+        padding: var(--a-space-xs) var(--a-space-s) !important;
+    }
+    
+    header.main .actions .menu {
+        display: none !important;
+    }
+}
+
+/* Desktop (1200px+): Show all normally */
+@media (min-width: 1200px) {
+    header.main .links {
+        display: flex !important;
+    }
+    
+    header.main .actions .menu {
+        display: none !important;
+    }
+}
+
+/* Ensure header positioning doesn't overlap hero */
+header.main {
+    z-index: 100 !important;
+}
+
+section.hero {
+    margin-top: 0 !important;
+    padding-top: var(--a-space-3xl) !important;
+}
+
+/* Fix icon alignment in header */
+header.main .actions .menu,
+header.main .actions button,
+header.main .actions a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
