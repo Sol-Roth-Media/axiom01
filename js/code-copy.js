@@ -8,15 +8,23 @@
 (function() {
     'use strict';
 
+    const MAX_RETRY_ATTEMPTS = 50;
+    let retryCount = 0;
+
     function initCopyButtons() {
         // Find all code blocks
         const codeBlocks = document.querySelectorAll('pre code');
+        
+        if (codeBlocks.length === 0) {
+            console.log('No code blocks found');
+            return;
+        }
         
         codeBlocks.forEach((codeBlock) => {
             const preElement = codeBlock.closest('pre');
             if (!preElement) return;
 
-            // Skip if copy button already exists (data-copy-snippet or .copy-code-button)
+            // Skip if copy button already exists
             if (preElement.querySelector('.copy-code-button') || 
                 preElement.closest('[data-copy-snippet]')) {
                 return;
@@ -36,28 +44,32 @@
             wrapper.insertBefore(copyButton, preElement);
         });
 
-        // Re-render axicons after creating buttons
-        renderCopyButtonIcons();
+        // Render icons with retry logic
+        attemptIconRender();
+    }
+
+    function attemptIconRender() {
+        if (typeof axicons !== 'undefined' && axicons.length > 0) {
+            renderCopyButtonIcons();
+            console.log('Icons rendered successfully');
+        } else if (retryCount < MAX_RETRY_ATTEMPTS) {
+            retryCount++;
+            setTimeout(attemptIconRender, 50);
+        } else {
+            console.warn('Axicons not available after retries - icons may not render');
+        }
     }
 
     function renderCopyButtonIcons() {
-        // Wait for axicons to be available
-        const attemptRender = () => {
-            if (typeof axicons !== 'undefined' && axicons.length > 0) {
-                document.querySelectorAll('.copy-code-button .axicon.render').forEach(el => {
-                    const name = el.getAttribute('data-name');
-                    const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
-                    if (icon) {
-                        el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">${icon.svgContent}</svg>`;
-                    }
-                });
-            } else {
-                // Retry if axicons not loaded yet
-                setTimeout(attemptRender, 50);
+        document.querySelectorAll('.copy-code-button .axicon.render').forEach(el => {
+            if (el.innerHTML.trim().length > 0) return; // Already rendered
+            
+            const name = el.getAttribute('data-name');
+            const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+            if (icon && icon.svgContent) {
+                el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">${icon.svgContent}</svg>`;
             }
-        };
-        
-        attemptRender();
+        });
     }
 
     function createCopyButton(codeBlock) {
@@ -65,10 +77,15 @@
         button.className = 'copy-code-button';
         button.type = 'button';
         button.setAttribute('aria-label', 'Copy code to clipboard');
-        button.title = 'Copy to clipboard (Ctrl+C when focused)';
+        button.title = 'Copy code (Ctrl+C)';
         
-        // Use Axicon (Copy icon)
-        button.innerHTML = '<span class="axicon render" data-name="Copy" aria-hidden="true"></span>';
+        // Create icon container with proper structure
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'axicon render';
+        iconSpan.setAttribute('data-name', 'Copy');
+        iconSpan.setAttribute('aria-hidden', 'true');
+        
+        button.appendChild(iconSpan);
 
         button.addEventListener('click', (e) => {
             e.preventDefault();
@@ -114,7 +131,7 @@
             button.className = originalClass;
             button.disabled = false;
 
-            // Re-render axicons if needed
+            // Re-render icons if needed
             renderCopyButtonIcons();
         }, 2000);
     }
@@ -131,11 +148,28 @@
         }, 2000);
     }
 
-    // Initialize when DOM is ready
+    // Initialize when DOM is ready, with retry for dynamic content
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initCopyButtons);
+        document.addEventListener('DOMContentLoaded', () => {
+            initCopyButtons();
+            // Re-run after content might be loaded
+            setTimeout(initCopyButtons, 500);
+        });
     } else {
-        // DOM already loaded, initialize immediately
-        setTimeout(initCopyButtons, 100);
+        initCopyButtons();
+        setTimeout(initCopyButtons, 500);
     }
+
+    // Listen for dynamic content changes (Phase 2+ template additions)
+    const observer = new MutationObserver(() => {
+        clearTimeout(observer.debounce);
+        observer.debounce = setTimeout(() => {
+            initCopyButtons();
+        }, 300);
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 })();
