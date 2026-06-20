@@ -2694,44 +2694,38 @@ body {
     overflow-x: hidden !important;
     margin: 0 !important;
     padding: 0 !important;
+
+/* ===== PHASE 3 - FIX NAV ALIGNMENT & STICKY HEADER ===== */
+
+/* Keep header sticky at all resolutions */
+header.main {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
 }
 
-/* Hero background extends to edges, content centered */
-section.hero {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    margin: 0 !important;
-    margin-bottom: var(--a-space-3xl) !important;
-    padding: var(--a-space-3xl) var(--a-space-l) !important;
-    box-sizing: border-box !important;
-    position: static !important;
+/* Fix icon alignment in header */
+header.main .actions .menu,
+header.main .actions button,
+header.main .actions a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-/* Keep content centered */
-section.hero .content {
-    max-width: 1000px !important;
-    margin: 0 auto !important;
-    width: 100% !important;
-    padding: 0 !important;
+/* Mobile (< 768px): Menu icon only */
+@media (max-width: 767px) {
+    header.main .links {
+        display: none !important;
+    }
+    
+    header.main .actions .menu {
+        display: flex !important;
+    }
 }
 
-/* Remove excessive white space at top */
-main {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-    width: 100% !important;
-}
-
-/* Ensure hero is first visible element after header */
-section:first-child.hero {
-    margin-top: 0 !important;
-}
-
-/* ===== PHASE 3 - FIX NAV ALIGNMENT AT MEDIUM RESOLUTIONS ===== */
-
-/* Medium resolution (768px - 1023px): Hide links, show menu icon */
-@media (max-width: 1023px) and (min-width: 768px) {
+/* Medium resolution (768px - 1023px): Menu icon only */
+@media (min-width: 768px) and (max-width: 1023px) {
     header.main .links {
         display: none !important;
     }
@@ -2745,7 +2739,7 @@ section:first-child.hero {
     }
 }
 
-/* Tablet (1024px - 1199px): Show both but compact */
+/* Tablet (1024px - 1199px): Compact links, hide menu */
 @media (min-width: 1024px) and (max-width: 1199px) {
     header.main .links {
         display: flex !important;
@@ -2762,7 +2756,7 @@ section:first-child.hero {
     }
 }
 
-/* Desktop (1200px+): Show all normally */
+/* Desktop (1200px+): Full nav, hide menu */
 @media (min-width: 1200px) {
     header.main .links {
         display: flex !important;
@@ -2773,21 +2767,7 @@ section:first-child.hero {
     }
 }
 
-/* Ensure header positioning doesn't overlap hero */
-header.main {
-    z-index: 100 !important;
-}
-
 section.hero {
     margin-top: 0 !important;
     padding-top: var(--a-space-3xl) !important;
-}
-
-/* Fix icon alignment in header */
-header.main .actions .menu,
-header.main .actions button,
-header.main .actions a {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
 }
