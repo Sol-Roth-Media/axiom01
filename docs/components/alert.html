@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alert Component - Axiom01</title>
-    <link rel="stylesheet" href="../../css/axiom.css">
-        <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
+    <link rel="stylesheet" href="../../css/axiom.css">    <link rel="stylesheet" href="../../css/doc-preview.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,23 +22,23 @@
             </ul>
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
                 <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
                 <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Moon"></span>
                 </button>
                 <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Menu"></span>
                 </button>
             </div>
         </nav>
     </header>
 
-    <main class="content">
+    <main>
         <section class="hero small">
             <h1 class="title">Alert Component</h1>
             <p class="description">Axiom01's alert component provides contextual feedback messages for users. They are designed to be clear, accessible, and easily themeable to match your application's aesthetic.</p>
@@ -52,19 +50,19 @@
             <h3>Basic Alerts</h3>
             <div class="alert-group">
                 <div class="alert success" role="alert">
-                    <i class="fas fa-check-circle"></i>
+                    <span class="axicon render" data-name="Check-Circle"></span>
                     <div>Success! Your operation was completed successfully.</div>
                 </div>
                 <div class="alert info" role="alert">
-                    <i class="fas fa-info-circle"></i>
+                    <span class="axicon render" data-name="Info"></span>
                     <div>Heads up! This is an informational message.</div>
                 </div>
                 <div class="alert warning" role="alert">
-                    <i class="fas fa-exclamation-triangle"></i>
+                    <span class="axicon render" data-name="Alert-Triangle"></span>
                     <div>Warning! Something might be wrong.</div>
                 </div>
                 <div class="alert error" role="alert">
-                    <i class="fas fa-times-circle"></i>
+                    <span class="axicon render" data-name="X-Circle"></span>
                     <div>Error! Please correct the issues and try again.</div>
                 </div>
             </div>
@@ -89,12 +87,12 @@
             <p>Add a dismiss button to allow users to close the alert. This requires a small JavaScript snippet to handle the dismissal.</p>
             <div class="alert-group">
                 <div class="alert info dismissible" role="alert">
-                    <i class="fas fa-info-circle"></i>
+                    <span class="axicon render" data-name="Info"></span>
                     <div>You can dismiss this alert.</div>
                     <button data-alert-close aria-label="Close alert">&times;</button>
                 </div>
                 <div class="alert success dismissible" role="alert">
-                    <i class="fas fa-check-circle"></i>
+                    <span class="axicon render" data-name="Check-Circle"></span>
                     <div>Well done! You successfully read this important alert message.</div>
                     <button data-alert-close aria-label="Close alert">&times;</button>
                 </div>
@@ -147,7 +145,26 @@
         <div class="bottom">
             <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
-    </footer>
+    </footer>    <script src="../../js/axicons.js"></script>
+	<script>
+		function renderAxicons() {
+			if (typeof axicons !== 'undefined') {
+				document.querySelectorAll('.axicon.render').forEach(el => {
+					const name = el.getAttribute('data-name');
+					const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+					if (icon) {
+						el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">${icon.svgContent}</svg>`;
+					}
+				});
+			}
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', renderAxicons);
+		} else {
+			renderAxicons();
+		}
+	</script>
+
 
     <script src="../../js/axiom.js"></script>
     <script src="../../js/index-page-manager.js"></script>

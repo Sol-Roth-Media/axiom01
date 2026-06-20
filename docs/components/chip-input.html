@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chip Input - Axiom01</title>
-    <link rel="stylesheet" href="../../css/axiom.css">
-    <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
+    <link rel="stylesheet" href="../../css/axiom.css">    <link rel="stylesheet" href="../../css/doc-preview.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
 </head>
 <body class="axiom-body component-doc">
@@ -21,23 +19,23 @@
             </ul>
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
                 <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
                 <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Moon"></span>
                 </button>
                 <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Menu"></span>
                 </button>
             </div>
         </nav>
     </header>
 
-    <main class="content">
+    <main>
         <section class="hero small">
             <h1 class="title">Chip Input</h1>
             <p class="description">Multi-value input component for tags, labels, and multi-select fields. Perfect for email recipients, content tags, and dynamic form inputs with visual feedback.</p>
@@ -85,7 +83,7 @@
             <h3>Features</h3>
             <div class="card-group">
                 <article class="card">
-                    <i class="fas fa-tags"></i>
+                    <span class="axicon render" data-name="Tag"></span>
                     <h3>Multiple Values</h3>
                     <p>Add, remove, and manage unlimited chips dynamically</p>
                 </article>
@@ -100,17 +98,17 @@
                     <p>Full keyboard support and ARIA roles</p>
                 </article>
                 <article class="card">
-                    <i class="fas fa-exclamation-circle"></i>
+                    <span class="axicon render" data-name="Alert-Circle"></span>
                     <h3>Validation</h3>
                     <p>Built-in error states and messages</p>
                 </article>
                 <article class="card">
-                    <i class="fas fa-mobile-alt"></i>
+                    <span class="axicon render" data-name="Phone-Mobile"></span>
                     <h3>Mobile Ready</h3>
                     <p>Touch-friendly with haptic feedback</p>
                 </article>
                 <article class="card">
-                    <i class="fas fa-user-check"></i>
+                    <span class="axicon render" data-name="User-Check"></span>
                     <h3>Customizable</h3>
                     <p>Works with any validation or formatting rules</p>
                 </article>
@@ -196,7 +194,26 @@
             <p>Axiom01 Framework</p>
             <p class="attribution">Created by <a href="https://www.solroth.com" target="_blank" rel="noopener">Sol Roth</a> • <a href="../../LICENSE">MIT License</a></p>
         </div>
-    </footer>
+    </footer>    <script src="../../js/axicons.js"></script>
+	<script>
+		function renderAxicons() {
+			if (typeof axicons !== 'undefined') {
+				document.querySelectorAll('.axicon.render').forEach(el => {
+					const name = el.getAttribute('data-name');
+					const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+					if (icon) {
+						el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">${icon.svgContent}</svg>`;
+					}
+				});
+			}
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', renderAxicons);
+		} else {
+			renderAxicons();
+		}
+	</script>
+
 
     <script src="../../js/axiom.js"></script>
     <script src="../../js/index-page-manager.js"></script>

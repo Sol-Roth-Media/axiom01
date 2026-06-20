@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data List Component — Axiom01 UI Framework</title>
-    <link rel="stylesheet" href="../../css/axiom.css">
-    <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
+    <link rel="stylesheet" href="../../css/axiom.css">    <link rel="stylesheet" href="../../css/doc-preview.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Courier+Prime:wght@400;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -21,53 +19,20 @@
             </ul>
             <div class="actions">
                 <button class="search toggle" aria-label="Search">
-                    <i class="fas fa-search"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
                 <button class="theme toggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon"></i>
+                    <span class="axicon render" data-name="Moon"></span>
                 </button>
                 <a href="https://github.com/solroth/axiom01" class="github">
-                    <i class="fab fa-github"></i> GitHub
+                    <span class="axicon render" data-name="Brand-Github"></span> GitHub
                 </a>
             </div>
         </nav>
     </header>
 
     <div style="display: flex; margin-top: 60px;">
-        <aside class="sidebar">
-            <nav>
-                <h3>Display Elements</h3>
-                <ul>
-                    <li><a href="./card.html">Cards</a></li>
-                    <li><a href="./accordion.html">Accordions</a></li>
-                    <li><a href="./carousel.html">Carousels</a></li>
-                    <li><a href="./badge.html">Badges</a></li>
-                    <li><a href="./data-list.html" style="color: var(--a-color-primary); font-weight: bold;">Data List</a></li>
-                    <li><a href="./table.html">Tables</a></li>
-                    <li><a href="./avatar.html">Avatars</a></li>
-                </ul>
-
-                <h3>Navigation</h3>
-                <ul>
-                    <li><a href="./breadcrumb.html">Breadcrumbs</a></li>
-                    <li><a href="./pagination.html">Pagination</a></li>
-                    <li><a href="./tabs.html">Tabs</a></li>
-                    <li><a href="./sidebar.html">Sidebar</a></li>
-                    <li><a href="./navigation.html">Navigation</a></li>
-                </ul>
-
-                <h3>Input Controls</h3>
-                <ul>
-                    <li><a href="./button.html">Buttons</a></li>
-                    <li><a href="./forms.html">Forms</a></li>
-                    <li><a href="./slider.html">Sliders</a></li>
-                    <li><a href="./toggle.html">Toggles</a></li>
-                    <li><a href="./dropdown.html">Dropdowns</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="content">
+        <main>
         <section class="hero">
             <div class="container">
                 <h1>Data List</h1>
@@ -300,7 +265,26 @@ dataList.addEventListener('view-changed', (e) => {
     </footer>
 
         </div>
-</div>
+</div>    <script src="../../js/axicons.js"></script>
+	<script>
+		function renderAxicons() {
+			if (typeof axicons !== 'undefined') {
+				document.querySelectorAll('.axicon.render').forEach(el => {
+					const name = el.getAttribute('data-name');
+					const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+					if (icon) {
+						el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">${icon.svgContent}</svg>`;
+					}
+				});
+			}
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', renderAxicons);
+		} else {
+			renderAxicons();
+		}
+	</script>
+
 
     <script src="../../js/axiom.js"></script>
     <script src="../../js/index-page-manager.js"></script>
