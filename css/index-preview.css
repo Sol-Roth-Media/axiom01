@@ -856,7 +856,7 @@
 	border-left-color: var(--a-color-error);
 }
 
-/* Development Metrics */
+/* Development Metrics - FIXED RESPONSIVE LAYOUT */
 #development-metrics {
 	padding: var(--a-space-xxl) 0;
 	background: var(--a-color-surface);
@@ -864,8 +864,38 @@
 
 .metrics-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-template-columns: repeat(4, 1fr);
 	gap: var(--a-space-l);
+}
+
+/* Large screens (1024px+) - 4 columns */
+@media (min-width: 1024px) {
+	.metrics-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+/* Medium screens (768px - 1023px) - 2 columns */
+@media (max-width: 1023px) and (min-width: 768px) {
+	.metrics-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Small screens (480px - 767px) - 2 columns with better spacing */
+@media (max-width: 767px) and (min-width: 480px) {
+	.metrics-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--a-space-m);
+	}
+}
+
+/* Extra small screens (< 480px) - 1 column */
+@media (max-width: 479px) {
+	.metrics-grid {
+		grid-template-columns: 1fr;
+		gap: var(--a-space-m);
+	}
 }
 
 .metric {
@@ -875,6 +905,10 @@
 	text-align: center;
 	color: var(--a-color-on-primary-container);
 	transition: transform 200ms ease-in-out;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 180px;
 }
 
 .metric:hover {
@@ -882,7 +916,7 @@
 }
 
 .metric-value {
-	font-size: 3rem;
+	font-size: clamp(2rem, 8vw, 3rem);
 	font-weight: var(--a-font-weight-bold);
 	color: var(--a-color-primary);
 	margin-bottom: var(--a-space-s);
@@ -892,6 +926,10 @@
 	margin-bottom: var(--a-space-s);
 	color: var(--a-color-on-primary-container);
 	margin-top: 0;
+	font-size: clamp(1rem, 3vw, 1.25rem);
+	line-height: 1.2;
+	word-break: break-word;
+	overflow-wrap: break-word;
 }
 
 .metric p {
@@ -899,6 +937,20 @@
 	color: var(--a-color-on-primary-container);
 	opacity: 0.9;
 	margin: 0;
+	line-height: 1.4;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+/* Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+	.metric {
+		transition: none;
+	}
+	
+	.metric:hover {
+		transform: none;
+	}
 }
 
 /* CSS Variables Cascade */
