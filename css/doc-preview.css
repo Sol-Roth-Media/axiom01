@@ -14,14 +14,18 @@
     padding-top: var(--a-space-m);
 }
 
+.component-doc main,
 .component-doc main.content {
     display: block;
     width: min(100%, 72rem);
     margin: 0 auto;
     min-height: 0;
     padding: 80px var(--a-space-xl) var(--a-space-xl) var(--a-space-xl);
+    box-sizing: border-box;
 }
 
+.component-doc main > section.hero,
+.component-doc main > section.hero.small,
 .component-doc main.content > .hero,
 .component-doc main.content > .hero.small {
     padding: var(--a-space-xxl) var(--a-space-xl);
@@ -86,6 +90,8 @@
     padding: var(--a-space-m) var(--a-space-xl) 0;
 }
 
+.component-doc main > .component-section,
+.component-doc main > section:not(.hero),
 .component-doc main.content > .component-section,
 .component-doc main.content > section:not(.hero) {
     width: min(100%, 72rem);
@@ -109,10 +115,12 @@
 }
 
 @media (max-width: 767px) {
+    .component-doc main,
     .component-doc main.content {
         padding: 80px var(--a-space-m) var(--a-space-l) var(--a-space-m);
     }
 
+    .component-doc main > section.hero.small,
     .component-doc main.content > .hero.small {
         padding: var(--a-space-s) 0;
     }
@@ -1071,4 +1079,262 @@ form button[type="submit"] {
     padding: var(--a-space-m);
     color: var(--a-color-primary);
     font-weight: var(--a-font-weight-bold);
+}
+/* ===== PHASE 2 TEMPLATE SECTIONS - RESPONSIVE FIX ===== */
+
+.component-doc section.anatomy-section,
+.component-doc section.when-to-use-section,
+.component-doc section.related-components-section {
+    width: min(100%, 72rem);
+    margin: var(--a-space-2xl) auto;
+    padding: var(--a-space-xl);
+    background: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-large);
+    box-sizing: border-box;
+}
+
+/* Anatomy section styling */
+.component-doc .anatomy-diagram {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--a-space-l);
+    align-items: center;
+    margin-top: var(--a-space-l);
+}
+
+.component-doc .anatomy-svg {
+    background: var(--a-color-surface-variant);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    padding: var(--a-space-l);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    overflow: hidden;
+}
+
+.component-doc .anatomy-svg svg {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+
+.component-doc .anatomy-labels {
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-m);
+}
+
+.component-doc .anatomy-label {
+    display: flex;
+    gap: var(--a-space-m);
+    align-items: flex-start;
+}
+
+.component-doc .anatomy-label .label-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--a-color-primary);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+
+.component-doc .anatomy-label h4 {
+    margin: 0 0 var(--a-space-xs) 0;
+    color: var(--a-color-primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.component-doc .anatomy-label p {
+    margin: 0;
+    color: var(--a-color-on-surface-variant);
+    font-size: 0.95rem;
+}
+
+/* When to use cards styling */
+.component-doc .when-to-use-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--a-space-l);
+    width: 100%;
+    margin-top: var(--a-space-l);
+}
+
+.component-doc .when-to-use-card {
+    padding: var(--a-space-l);
+    background: var(--a-color-surface-variant);
+    border: 2px solid;
+    border-radius: var(--a-border-radius-large);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.component-doc .when-to-use-card.do {
+    border-color: var(--a-color-success);
+    background: linear-gradient(135deg, var(--a-color-success-container) 0%, var(--a-color-surface-variant) 100%);
+}
+
+.component-doc .when-to-use-card.dont {
+    border-color: var(--a-color-error);
+    background: linear-gradient(135deg, var(--a-color-error-container) 0%, var(--a-color-surface-variant) 100%);
+}
+
+.component-doc .when-to-use-card.consider {
+    border-color: var(--a-color-warning);
+    background: linear-gradient(135deg, var(--a-color-warning-container) 0%, var(--a-color-surface-variant) 100%);
+}
+
+.component-doc .when-to-use-card h3 {
+    margin: 0 0 var(--a-space-m) 0;
+    display: flex;
+    align-items: center;
+    gap: var(--a-space-s);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.component-doc .when-to-use-card .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.component-doc .when-to-use-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.component-doc .when-to-use-card li {
+    margin-bottom: var(--a-space-s);
+    color: var(--a-color-on-surface);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.component-doc .when-to-use-card li:last-child {
+    margin-bottom: 0;
+}
+
+/* Related components grid styling */
+.component-doc .related-components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--a-space-m);
+    width: 100%;
+    margin-top: var(--a-space-l);
+}
+
+.component-doc .related-component-card {
+    padding: var(--a-space-m);
+    background: linear-gradient(135deg, var(--a-color-secondary-container) 0%, var(--a-color-surface-variant) 100%);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    text-decoration: none;
+    color: var(--a-color-on-surface);
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--a-space-s);
+}
+
+.component-doc .related-component-card:hover {
+    border-color: var(--a-color-secondary);
+    background: linear-gradient(135deg, var(--a-color-secondary) 0%, var(--a-color-secondary-container) 100%);
+    color: var(--a-color-on-secondary);
+    transform: translateY(-4px);
+    box-shadow: var(--a-shadow-medium);
+}
+
+.component-doc .related-component-card .category-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: var(--a-space-xs) var(--a-space-s);
+    background: var(--a-color-primary);
+    color: var(--a-color-on-primary);
+    border-radius: var(--a-border-radius-small);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.component-doc .related-component-card .icon {
+    font-size: 1.75rem;
+    color: var(--a-color-primary);
+}
+
+.component-doc .related-component-card h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--a-color-on-surface);
+}
+
+.component-doc .related-component-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--a-color-on-surface-variant);
+}
+
+/* Responsive adjustments for Phase 2 sections */
+@media (max-width: 768px) {
+    .component-doc section.anatomy-section,
+    .component-doc section.when-to-use-section,
+    .component-doc section.related-components-section {
+        padding: var(--a-space-m);
+        margin: var(--a-space-l) auto;
+    }
+    
+    .component-doc .anatomy-diagram {
+        grid-template-columns: 1fr;
+        gap: var(--a-space-m);
+    }
+    
+    .component-doc .anatomy-svg {
+        min-height: 250px;
+        order: 2;
+    }
+    
+    .component-doc .anatomy-labels {
+        order: 1;
+    }
+    
+    .component-doc .when-to-use-cards {
+        grid-template-columns: 1fr;
+        gap: var(--a-space-m);
+    }
+    
+    .component-doc .related-components-grid {
+        grid-template-columns: 1fr;
+        gap: var(--a-space-s);
+    }
+}
+
+@media (max-width: 480px) {
+    .component-doc section.anatomy-section,
+    .component-doc section.when-to-use-section,
+    .component-doc section.related-components-section {
+        padding: var(--a-space-s);
+        margin: var(--a-space-m) auto;
+    }
+    
+    .component-doc .anatomy-label {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .component-doc .when-to-use-card {
+        padding: var(--a-space-m);
+    }
+    
+    .component-doc .related-component-card {
+        padding: var(--a-space-s);
+    }
 }
