@@ -41,7 +41,7 @@
 
 
 					<main><div class="container">
-        <header style="padding-bottom: var(--a-space-xl); border-bottom: 1px solid var(--ax-border); margin-bottom: var(--a-space-2xl);"><h1 style="margin: 0 0 var(--a-space-m) 0;">Table Component</h1><p style="margin: 0; color: var(--a-color-text-muted); font-size: 1.1rem;">Axiom01 provides clean, semantic, and responsive styling for HTML tables, ensuring tabular data is presented clearly and accessibly. Our table component focuses on readability and maintainability without excessive class usage.</p></header>
+        <header><h1>Table Component</h1><p class="text-muted">Axiom01 provides clean, semantic, and responsive styling for HTML tables, ensuring tabular data is presented clearly and accessibly. Our table component focuses on readability and maintainability without excessive class usage.</p></header>
 
         <div class="component-section">
 
@@ -226,6 +226,24 @@
 	
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
+<script>
+function renderAxicons() {
+    if (typeof axicons !== 'undefined') {
+        document.querySelectorAll('.axicon.render').forEach(el => {
+            const name = el.getAttribute('data-name');
+            const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+            if (icon) {
+                el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+            }
+        });
+    }
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderAxicons);
+} else {
+    renderAxicons();
+}
+</script>
     <script src="../../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>

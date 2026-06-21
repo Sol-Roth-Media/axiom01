@@ -17,7 +17,7 @@
     </header>
 
     <main><div class="container">
-        <section style="padding: var(--a-space-xl) 0; border-bottom: 1px solid var(--ax-border); margin-bottom: var(--a-space-2xl);"><div class="container"><h1 style="margin: 0 0 var(--a-space-m) 0;">Audio Player</h1><p style="margin: 0; color: var(--a-color-text-muted); font-size: 1.1rem;">A customizable audio player component for media playback.</p></div></section>
+        <section style="padding: var(--a-space-xl) 0; border-bottom: 1px solid var(--ax-border); margin-bottom: var(--a-space-2xl);"><div class="container"><h1 style="margin: 0 0 var(--a-space-m) 0;">Audio Player</h1><p class="text-muted">A customizable audio player component for media playback.</p></div></section>
 
 
         <h1 class="title">Audio Player Component</h1>
@@ -181,6 +181,24 @@ console.log(api.getDuration());</code></pre>
     </footer>
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
+<script>
+function renderAxicons() {
+    if (typeof axicons !== 'undefined') {
+        document.querySelectorAll('.axicon.render').forEach(el => {
+            const name = el.getAttribute('data-name');
+            const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+            if (icon) {
+                el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+            }
+        });
+    }
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderAxicons);
+} else {
+    renderAxicons();
+}
+</script>
     <script src="../../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
