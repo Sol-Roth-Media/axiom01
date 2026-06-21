@@ -10,6 +10,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--a-space-s);
+            align-items: center;
+            margin: var(--a-space-l) 0;
+            font-size: var(--a-font-size-sm);
+        }
+        .breadcrumb ol {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--a-space-s);
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .breadcrumb li {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-s);
+        }
+        .breadcrumb a {
+            color: var(--a-color-primary);
+            text-decoration: none;
+            transition: color var(--a-transition-base) var(--a-ease-out);
+        }
+        .breadcrumb a:hover {
+            color: var(--a-color-secondary);
+            text-decoration: underline;
+        }
+        .breadcrumb [aria-current="page"] {
+            color: var(--a-color-text-muted);
+            font-weight: var(--a-font-weight-medium);
+        }
+        .breadcrumb-separator {
+            color: var(--a-color-text-muted);
+            display: flex;
+            align-items: center;
+        }
+        .breadcrumb-examples {
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-2xl);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -38,72 +85,188 @@
     <main><section><div class="container">
         <header>
             <h1>Breadcrumb</h1>
-            <p class="text-muted">Axiom01's breadcrumb component provides a clear navigation path, indicating the user's current location within a hierarc...</p>
+            <p class="text-muted">Axiom01's breadcrumb component shows the user's current location within a website hierarchy. It helps users understand where they are and navigate back to parent pages.</p>
         </header>
 
         <div class="component-section">
 
-        <section>
-            <div class="container">
-                <h2>Basic Breadcrumb</h2>
-                <nav class="breadcrumb" aria-label="Breadcrumb navigation">
-                    <ol>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Subcategory</a></li>
-                        <li aria-current="page">Current Page</li>
-                    </ol>
-                </nav>
+            <section>
+                <h2>Live Examples</h2>
+
+                <div class="breadcrumb-examples">
+                    <div>
+                        <h3>Simple Breadcrumb</h3>
+                        <nav class="breadcrumb" aria-label="Breadcrumb">
+                            <ol>
+                                <li><a href="/">Home</a></li>
+                                <li class="breadcrumb-separator">/</li>
+                                <li><a href="/products">Products</a></li>
+                                <li class="breadcrumb-separator">/</li>
+                                <li><span aria-current="page">Electronics</span></li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <div>
+                        <h3>Breadcrumb with Icons</h3>
+                        <nav class="breadcrumb" aria-label="Breadcrumb">
+                            <ol>
+                                <li>
+                                    <a href="/">
+                                        <span class="axicon render" data-name="Home"></span>
+                                        Home
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-separator">/</li>
+                                <li>
+                                    <a href="/docs">
+                                        <span class="axicon render" data-name="Book"></span>
+                                        Documentation
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-separator">/</li>
+                                <li>
+                                    <span aria-current="page">
+                                        <span class="axicon render" data-name="File"></span>
+                                        Components
+                                    </span>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <div>
+                        <h3>Long Breadcrumb Trail</h3>
+                        <nav class="breadcrumb" aria-label="Breadcrumb">
+                            <ol>
+                                <li><a href="/">Home</a></li>
+                                <li class="breadcrumb-separator">/</li>
+                                <li><a href="/shop">Shop</a></li>
+                                <li class="breadcrumb-separator">/</li>
+                                <li><a href="/shop/electronics">Electronics</a></li>
+                                <li class="breadcrumb-separator">/</li>
+                                <li><a href="/shop/electronics/phones">Phones</a></li>
+                                <li class="breadcrumb-separator">/</li>
+                                <li><a href="/shop/electronics/phones/smartphones">Smartphones</a></li>
+                                <li class="breadcrumb-separator">/</li>
+                                <li><span aria-current="page">iPhone 15</span></li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <div>
+                        <h3>With Arrow Separators</h3>
+                        <nav class="breadcrumb" aria-label="Breadcrumb">
+                            <ol>
+                                <li><a href="/">Home</a></li>
+                                <li class="breadcrumb-separator">
+                                    <span class="axicon render" data-name="Chevron-Right"></span>
+                                </li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li class="breadcrumb-separator">
+                                    <span class="axicon render" data-name="Chevron-Right"></span>
+                                </li>
+                                <li><a href="/blog/tutorials">Tutorials</a></li>
+                                <li class="breadcrumb-separator">
+                                    <span class="axicon render" data-name="Chevron-Right"></span>
+                                </li>
+                                <li><span aria-current="page">Getting Started</span></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Basic HTML Structure</h2>
+                <p>Use semantic <code>&lt;nav&gt;</code> and <code>&lt;ol&gt;</code> elements for proper accessibility:</p>
                 <div class="code-block">
-                    <pre><code class="language-html">&lt;nav class="breadcrumb" aria-label="Breadcrumb navigation"&gt;
-&lt;ol&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Category&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Subcategory&lt;/a&gt;&lt;/li&gt;
-    &lt;li aria-current="page"&gt;Current Page&lt;/li&gt;
-&lt;/ol&gt;
+                    <pre><code class="language-html">&lt;nav aria-label="Breadcrumb"&gt;
+    &lt;ol class="breadcrumb"&gt;
+        &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="breadcrumb-separator"&gt;/&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/products"&gt;Products&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="breadcrumb-separator"&gt;/&lt;/li&gt;
+        &lt;li&gt;&lt;span aria-current="page"&gt;Electronics&lt;/span&gt;&lt;/li&gt;
+    &lt;/ol&gt;
 &lt;/nav&gt;</code></pre>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <div class="component-section">
-
-        <section>
-            <div class="container">
-                <h2>Breadcrumb with Icons</h2>
-                <p>You can easily include Font Awesome icons within your breadcrumb items for enhanced visual cues.</p>
-                <nav class="breadcrumb icons" aria-label="Breadcrumb navigation">
-                    <ol>
-                        <li><a href="#"><span aria-hidden="true"><span class="axicon render" data-name="home"></span></span> Home</a></li>
-                        <li><a href="#"><span aria-hidden="true"><span class="axicon render" data-name="folder"></span></span> Products</a></li>
-                        <li><a href="#"><span aria-hidden="true"><span class="axicon render" data-name="tag"></span></span> Electronics</a></li>
-                        <li aria-current="page"><span aria-hidden="true"><span class="axicon render" data-name="laptop"></span></span> Laptops</li>
-                    </ol>
-                </nav>
+            <section>
+                <h2>With Icons</h2>
+                <p>Add icons to breadcrumb items for visual enhancement:</p>
                 <div class="code-block">
-                    <pre><code class="language-html">&lt;nav class="breadcrumb icons" aria-label="Breadcrumb navigation"&gt;
-&lt;ol&gt;
-    &lt;li&gt;&lt;a href="#"&gt;&lt;span aria-hidden="true"&gt;&lt;i class="fas fa-home"&gt;&lt;/i&gt;&lt;/span&gt; Home&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;&lt;span aria-hidden="true"&gt;&lt;i class="fas fa-folder"&gt;&lt;/i&gt;&lt;/span&gt; Products&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;&lt;span aria-hidden="true"&gt;&lt;i class="fas fa-tag"&gt;&lt;/i&gt;&lt;/span&gt; Electronics&lt;/a&gt;&lt;/li&gt;
-    &lt;li aria-current="page"&gt;&lt;span aria-hidden="true"&gt;&lt;i class="fas fa-laptop"&gt;&lt;/i&gt;&lt;/span&gt; Laptops&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/nav&gt;</code></pre>
+                    <pre><code class="language-html">&lt;li&gt;
+    &lt;a href="/docs"&gt;
+        &lt;span class="axicon render" data-name="Book"&gt;&lt;/span&gt;
+        Documentation
+    &lt;/a&gt;
+&lt;/li&gt;
+
+&lt;li class="breadcrumb-separator"&gt;
+    &lt;span class="axicon render" data-name="Chevron-Right"&gt;&lt;/span&gt;
+&lt;/li&gt;</code></pre>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <div class="component-section">
+            <section>
+                <h2>Key Attributes</h2>
+                <ul>
+                    <li><code>&lt;nav aria-label="Breadcrumb"&gt;</code> - Semantic navigation region</li>
+                    <li><code>&lt;ol&gt;</code> - Ordered list shows hierarchy properly</li>
+                    <li><code>aria-current="page"</code> - Marks the current page in the breadcrumb</li>
+                    <li><code>class="breadcrumb"</code> - Applies breadcrumb styling</li>
+                    <li><code>class="breadcrumb-separator"</code> - Styles the separator (/, >, etc.)</li>
+                </ul>
+            </section>
 
-        <section>
-            <div class="container">
-                <h2>Accessibility Considerations</h2>
-                <p>The breadcrumb component uses semantic HTML (<code>&lt;nav&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code>, <code>&lt;a&gt;</code>) and ARIA attributes (<code>aria-label="Breadcrumb navigation"</code>, <code>aria-current="page"</code>) to ensure it is fully accessible to screen reader users. The last item in the breadcrumb typically represents the current page and should not be a link.</p>
-            </div>
-        </section>
+            <section>
+                <h2>Separator Options</h2>
+                <ul>
+                    <li><strong>Slash (/)</strong> - Most common, plain text</li>
+                    <li><strong>Chevron (›)</strong> - Modern, often paired with icons</li>
+                    <li><strong>Dot (•)</strong> - Compact separator</li>
+                    <li><strong>Arrow (→)</strong> - Directional, shows forward progression</li>
+                    <li><strong>Pipe (|)</strong> - Traditional, formal appearance</li>
+                </ul>
+            </section>
 
-        <div class="component-section">
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>E-commerce</strong>: Show product category hierarchy (Home / Electronics / Phones / iPhone)</li>
+                    <li><strong>Documentation</strong>: Display doc navigation path (Docs / Getting Started / Installation)</li>
+                    <li><strong>Blog</strong>: Show category structure (Home / Blog / Tutorials / CSS)</li>
+                    <li><strong>File Systems</strong>: Display folder/file paths</li>
+                    <li><strong>Multi-step Processes</strong>: Show current step in a wizard</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Always use <code>&lt;nav aria-label="Breadcrumb"&gt;</code> for semantic markup</li>
+                    <li>Use <code>&lt;ol&gt;</code> (ordered list) to convey hierarchy</li>
+                    <li>Mark the current page with <code>aria-current="page"</code></li>
+                    <li>Ensure links are keyboard accessible</li>
+                    <li>Keep breadcrumb text short and descriptive</li>
+                    <li>Don't use breadcrumbs as the only navigation method</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Always Include Home</strong>: First breadcrumb should link to home page</li>
+                    <li><strong>Current Page Not a Link</strong>: Don't make the current page a clickable link</li>
+                    <li><strong>Truncate Long Paths</strong>: Use ellipsis or hide early breadcrumbs on mobile</li>
+                    <li><strong>Consistent Separators</strong>: Use the same separator throughout</li>
+                    <li><strong>Semantic Structure</strong>: Match breadcrumb hierarchy to actual site structure</li>
+                    <li><strong>Mobile Responsive</strong>: Consider hiding breadcrumbs or truncating on small screens</li>
+                </ul>
+            </section>
+
         </div>
 
     </div></section></main>
