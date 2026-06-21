@@ -161,15 +161,16 @@
     }
 
     // Listen for dynamic content changes (Phase 2+ template additions)
-    const observer = new MutationObserver(() => {
-        clearTimeout(observer.debounce);
-        observer.debounce = setTimeout(() => {
-            initCopyButtons();
-        }, 300);
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+    // BUT: Disable this to prevent infinite loop when button HTML updates
+    // const observer = new MutationObserver(() => {
+    //     clearTimeout(observer.debounce);
+    //     observer.debounce = setTimeout(() => {
+    //         initCopyButtons();
+    //     }, 300);
+    // });
+    //
+    // observer.observe(document.body, {
+    //     childList: true,
+    //     subtree: true
+    // });
 })();
