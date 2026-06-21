@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Typography - Axiom01</title>
+    <title>Typography - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.css">
     <link rel="stylesheet" href="../css/axicons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
-<body class="axiom-body">
-    <!-- HEADER: Standard Navigation -->
+<body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
@@ -18,224 +19,358 @@
                 <li><a href="../index.html#philosophy">Philosophy</a></li>
                 <li><a href="../index.html#components">Components</a></li>
                 <li><a href="../index.html#get-started">Get Started</a></li>
-                <li><a href="components-overview.html" aria-current="page">Docs</a></li>
+                <li><a href="components-overview.html">Component Overview</a></li>
             </ul>
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
                     <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
                     <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="axicon render" data-name="Moon"></span>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <span class="axicon render" data-name="Menu"></span>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-    <!-- MAIN CONTENT: Semantic page structure -->
-    <main>
-        <section class="container">
-            <!-- PAGE TITLE & INTRO -->
-            <header>
-                <h1>Advanced Typography</h1>
-                <p>Advanced typography and text styling</p>
-            </header>
+    <main><section><div class="container">
+        <header>
+            <h1>Typography</h1>
+            <p class="text-muted">Axiom01's typography system creates hierarchy, readability, and visual rhythm across your interface.</p>
+        </header>
 
-            <!-- CONTENT SECTIONS: Use semantic HTML with core classes only -->
-                        <section style="padding: var(--a-space-xl) 0; border-bottom: 1px solid var(--ax-border); margin-bottom: var(--a-space-2xl);"><div class="container"><h1 style="margin: 0 0 var(--a-space-m) 0;">Advanced Typography</h1><p class="text-muted">Advanced typography and text styling</p></div></section>
+        <div class="component-section">
 
             <section>
-                <div class="container">
-                    <h2>Overview</h2>
-                    <p>This page covers advanced typography and text styling.</p>
+                <h2>Typography Philosophy</h2>
+                <p>Typography is more than just choosing fonts—it's about creating a harmonious scale that guides users through your content. Axiom01 uses a mathematically scaled system with:</p>
+                <ul style="margin: var(--a-space-m) 0;">
+                    <li><strong>Perfect Vertical Rhythm</strong> - All line heights and margins align to a baseline grid</li>
+                    <li><strong>Optimal Reading Width</strong> - Lines automatically constrain to 65 characters for comfortable reading</li>
+                    <li><strong>Semantic Scaling</strong> - Heading sizes (h1-h6) scale proportionally</li>
+                    <li><strong>Font System</strong> - Three font families with sensible defaults and customization</li>
+                    <li><strong>Weight Hierarchy</strong> - Consistent font weights for emphasis and hierarchy</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Font Families</h2>
+                <p>Axiom01 includes three carefully selected font families. These can be switched dynamically using data attributes.</p>
+                
+                <h3>Default: Inter (Sans Serif)</h3>
+                <p style="font-family: Inter, system-ui; font-size: var(--a-font-size-l); line-height: var(--a-line-height-loose);">
+                    Inter is a highly legible, modern sans-serif designed specifically for screen use. It's the default for both headings and body text.
+                </p>
+                <pre><code class="language-css">--ax-font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+--ax-font-heading: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;</code></pre>
+
+                <h3 style="margin-top: var(--a-space-xl);">Serif: Lora</h3>
+                <p style="font-family: 'Lora', serif; font-size: var(--a-font-size-l); line-height: var(--a-line-height-loose);">
+                    Lora is a contemporary serif typeface optimized for screen and print. Use for editorial or formal contexts.
+                </p>
+                <pre><code class="language-css">--ax-font-body: "Lora", Georgia, serif;
+--ax-font-heading: "Lora", Georgia, serif;</code></pre>
+
+                <h3 style="margin-top: var(--a-space-xl);">Monospace: JetBrains Mono</h3>
+                <p style="font-family: 'JetBrains Mono', monospace; font-size: var(--a-font-size-l); line-height: var(--a-line-height-loose);">
+                    JetBrains Mono is a professional monospace font perfect for code, terminal text, and technical content.
+                </p>
+                <pre><code class="language-css">--a-font-family-mono: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, monospace;</code></pre>
+
+                <h3 style="margin-top: var(--a-space-xl);">Switching Fonts</h3>
+                <pre><code class="language-html">&lt;!-- Default (Inter) --&gt;
+&lt;html data-font-body="system" data-font-heading="system"&gt;
+
+&lt;!-- Serif (Lora) --&gt;
+&lt;html data-font-body="serif" data-font-heading="serif"&gt;
+
+&lt;!-- Monospace --&gt;
+&lt;html data-font-body="mono"&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Heading Scale</h2>
+                <p>All headings follow a mathematical scale (1.15x) for perfect proportions. Each heading has a corresponding CSS variable.</p>
+                
+                <div style="margin: var(--a-space-xl) 0;">
+                    <div style="margin-bottom: var(--a-space-2xl);">
+                        <h1 style="margin: 0; font-size: var(--a-font-size-h1);">Heading 1 (48px)</h1>
+                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h1) • Used for page titles</p>
+                    </div>
+
+                    <div style="margin-bottom: var(--a-space-2xl);">
+                        <h2 style="margin: 0; font-size: var(--a-font-size-h2);">Heading 2 (36px)</h2>
+                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h2) • Major section headings</p>
+                    </div>
+
+                    <div style="margin-bottom: var(--a-space-2xl);">
+                        <h3 style="margin: 0; font-size: var(--a-font-size-h3);">Heading 3 (24px)</h3>
+                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h3) • Subsection headings</p>
+                    </div>
+
+                    <div style="margin-bottom: var(--a-space-2xl);">
+                        <h4 style="margin: 0; font-size: var(--a-font-size-h4);">Heading 4 (18px)</h4>
+                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h4) • Minor headings</p>
+                    </div>
+
+                    <div style="margin-bottom: var(--a-space-2xl);">
+                        <h5 style="margin: 0; font-size: var(--a-font-size-h5);">Heading 5 (16px)</h5>
+                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h5) • Small headings</p>
+                    </div>
+
+                    <div>
+                        <h6 style="margin: 0; font-size: var(--a-font-size-h6);">Heading 6 (14px)</h6>
+                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h6) • Extra small headings</p>
+                    </div>
+                </div>
+
+                <h3>CSS Reference</h3>
+                <pre><code class="language-css">--a-font-size-h1: 3rem;     /* 48px */
+--a-font-size-h2: 2.25rem;  /* 36px */
+--a-font-size-h3: 1.5rem;   /* 24px */
+--a-font-size-h4: 1.125rem; /* 18px */
+--a-font-size-h5: 1rem;     /* 16px */
+--a-font-size-h6: 0.875rem; /* 14px */</code></pre>
+            </section>
+
+            <section>
+                <h2>Font Sizes</h2>
+                <p>Axiom01 provides a complete scale of font sizes from extra small to extra large, suitable for all contexts.</p>
+                
+                <div class="grid grid-cols-2" style="margin: var(--a-space-l) 0; gap: var(--a-space-l);">
+                    <div>
+                        <p style="font-size: var(--a-font-size-xs);">Extra Small (12px)</p>
+                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-xs</p>
+                    </div>
+                    <div>
+                        <p style="font-size: var(--a-font-size-s);">Small (14px)</p>
+                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-s</p>
+                    </div>
+                    <div>
+                        <p style="font-size: var(--a-font-size-base);">Base (16px)</p>
+                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-base</p>
+                    </div>
+                    <div>
+                        <p style="font-size: var(--a-font-size-m);">Medium (18px)</p>
+                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-m</p>
+                    </div>
+                    <div>
+                        <p style="font-size: var(--a-font-size-l);">Large (20px)</p>
+                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-l</p>
+                    </div>
+                    <div>
+                        <p style="font-size: var(--a-font-size-xl);">Extra Large (24px)</p>
+                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-xl</p>
+                    </div>
                 </div>
             </section>
 
-        </section>
+            <section>
+                <h2>Font Weights</h2>
+                <p>Five font weights provide hierarchy and emphasis without changing font size.</p>
+                
+                <div style="margin: var(--a-space-l) 0;">
+                    <p style="font-weight: var(--a-font-weight-normal); font-size: var(--a-font-size-l);">Regular (400 weight)</p>
+                    <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s); margin-bottom: var(--a-space-xl);">--a-font-weight-normal</p>
+
+                    <p style="font-weight: var(--a-font-weight-medium); font-size: var(--a-font-size-l);">Medium (500 weight)</p>
+                    <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s); margin-bottom: var(--a-space-xl);">--a-font-weight-medium</p>
+
+                    <p style="font-weight: var(--a-font-weight-semibold); font-size: var(--a-font-size-l);">Semibold (600 weight)</p>
+                    <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s); margin-bottom: var(--a-space-xl);">--a-font-weight-semibold</p>
+
+                    <p style="font-weight: var(--a-font-weight-bold); font-size: var(--a-font-size-l);">Bold (700 weight)</p>
+                    <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s); margin-bottom: var(--a-space-xl);">--a-font-weight-bold</p>
+
+                    <p style="font-weight: var(--a-font-weight-black); font-size: var(--a-font-size-l);">Black (900 weight)</p>
+                    <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-weight-black</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Line Height & Vertical Rhythm</h2>
+                <p>Line height is crucial for readability. Axiom01 uses a mathematical system where all line heights are proportional.</p>
+                
+                <div style="margin: var(--a-space-l) 0;">
+                    <div style="margin-bottom: var(--a-space-2xl);">
+                        <p style="line-height: var(--a-line-height-tight); font-size: var(--a-font-size-m);">Tight Line Height (1.2)<br>This is body text with tight line height, useful for headings or when space is limited.</p>
+                        <p class="text-muted sm">--a-line-height-tight</p>
+                    </div>
+
+                    <div style="margin-bottom: var(--a-space-2xl);">
+                        <p style="line-height: var(--a-line-height-heading); font-size: var(--a-font-size-m);">Heading Line Height (1.3)<br>This is applied to all h1-h6 elements for optimal heading appearance.</p>
+                        <p class="text-muted sm">--a-line-height-heading</p>
+                    </div>
+
+                    <div style="margin-bottom: var(--a-space-2xl);">
+                        <p style="line-height: var(--a-line-height-base); font-size: var(--a-font-size-m);">Base Line Height (1.6)<br>Default body text line height for comfortable reading across paragraphs and longer text blocks.</p>
+                        <p class="text-muted sm">--a-line-height-base</p>
+                    </div>
+
+                    <div>
+                        <p style="line-height: var(--a-line-height-loose); font-size: var(--a-font-size-m);">Loose Line Height (2.0)<br>Use for emphasized or highlighted text where extra breathing room helps readability.</p>
+                        <p class="text-muted sm">--a-line-height-loose</p>
+                    </div>
+                </div>
+
+                <h3>Why Vertical Rhythm Matters</h3>
+                <p>When line heights, spacing, and font sizes follow a mathematical scale, content feels organized and professional. Axiom01 automatically manages this through design tokens.</p>
+            </section>
+
+            <section>
+                <h2>Reading Width</h2>
+                <p>Axiom01 automatically constrains paragraph width to 65 characters for optimal readability. This prevents eye strain from lines that are too long.</p>
+                
+                <div style="max-width: var(--ax-reading-width); margin: var(--a-space-l) 0; background: var(--ax-background-secondary); padding: var(--a-space-l); border-radius: var(--a-border-radius-lg);">
+                    <p style="line-height: var(--a-line-height-base);">This paragraph is constrained to 65 characters width (--ax-reading-width). Notice how it naturally breaks lines at comfortable intervals. This width is optimal for reading without having to track your eyes across long distances, which causes fatigue.</p>
+                </div>
+
+                <h3>Reading Width Variants</h3>
+                <pre><code class="language-html">&lt;!-- Narrow: 60 characters --&gt;
+&lt;html data-layout-width="narrow"&gt;
+
+&lt;!-- Standard: 65 characters (default) --&gt;
+&lt;html data-layout-width="standard"&gt;
+
+&lt;!-- Wide: 70 characters --&gt;
+&lt;html data-layout-width="wide"&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Text Hierarchy & Emphasis</h2>
+                <p>Use semantic HTML elements combined with CSS variables to create visual hierarchy:</p>
+                
+                <div style="margin: var(--a-space-l) 0;">
+                    <p><strong>Strong/Bold:</strong> <code>&lt;strong&gt;</code> or <code>&lt;b&gt;</code> for important content</p>
+                    <p style="margin-top: var(--a-space-m);"><em>Italic/Emphasis:</em> <code>&lt;em&gt;</code> or <code>&lt;i&gt;</code> for emphasized content</p>
+                    <p style="margin-top: var(--a-space-m);"><mark>Highlighted:</mark> <code>&lt;mark&gt;</code> for highlighted or marked text</p>
+                    <p style="margin-top: var(--a-space-m);"><code>Code:</code> <code>&lt;code&gt;</code> for inline code samples</p>
+                    <p style="margin-top: var(--a-space-m); color: var(--a-color-text-muted);">Muted Text: <code class="text-muted">.text-muted</code> for secondary information</p>
+                </div>
+
+                <h3>Text Utilities</h3>
+                <pre><code class="language-html">&lt;!-- Primary text (default) --&gt;
+&lt;p class="text-primary"&gt;Primary content&lt;/p&gt;
+
+&lt;!-- Secondary text --&gt;
+&lt;p class="text-secondary"&gt;Secondary information&lt;/p&gt;
+
+&lt;!-- Muted text --&gt;
+&lt;p class="text-muted"&gt;Supplementary or disabled content&lt;/p&gt;
+
+&lt;!-- Success --&gt;
+&lt;p class="success"&gt;Success message&lt;/p&gt;
+
+&lt;!-- Error --&gt;
+&lt;p class="error"&gt;Error message&lt;/p&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>CSS Variable Reference</h2>
+                <p>Complete list of typography variables available in Axiom01:</p>
+                
+                <pre><code class="language-css">/* Font Families */
+--ax-font-body
+--ax-font-heading
+--a-font-family-mono
+
+/* Font Weights */
+--a-font-weight-normal (400)
+--a-font-weight-medium (500)
+--a-font-weight-semibold (600)
+--a-font-weight-bold (700)
+--a-font-weight-black (900)
+
+/* Font Sizes */
+--a-font-size-xs through --a-font-size-5xl
+--a-font-size-h1 through --a-font-size-h6
+
+/* Line Heights */
+--a-line-height-tight (1.2)
+--a-line-height-heading (1.3)
+--a-line-height-base (1.6)
+--a-line-height-loose (2)
+
+/* Layout */
+--ax-reading-width (65ch)
+--ax-max-width (1200px)</code></pre>
+            </section>
+
+        </div>
+
     </div></section></main>
 
-    <!-- FOOTER: New ax-footer component -->
-    <footer class="ax-footer">
-        <div class="ax-footer-content">
-            <section class="ax-footer-brand" aria-label="Brand Information">
-                <a href="../index.html" class="ax-footer-logo">[Ax<span class="primary">01</span>]</a>
-                <p class="ax-footer-tagline">The Semantic Web, Reimagined.</p>
-            </section>
-            <nav class="ax-footer-links" aria-label="Footer Navigation">
-                <section class="ax-footer-column">
-                    <h3>Documentation</h3>
+    <footer class="main">
+        <div class="content">
+            <div class="brand">
+                <a href="../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
                     <ul>
-                        <li><a href="components-overview.html">Components</a></li>
-                        <li><a href="layout-advanced.html">Layout Guide</a></li>
-                        <li><a href="colors-advanced.html">Colors & Themes</a></li>
-                        <li><a href="typography-advanced.html">Typography</a></li>
+                        <li><a href="components-overview.html">Component Overview</a></li>
+                        <li><a href="markdown-template.html?file=../README.md">README</a></li>
+                        <li><a href="markdown-template.html?file=../DEVELOPER.md">Developer Guide</a></li>
+                        <li><a href="markdown-template.html?file=../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
-                </section>
-                <section class="ax-footer-column">
-                    <h3>Community</h3>
+                </div>
+                <div class="column">
+                    <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">npm</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
-                </section>
-                <section class="ax-footer-column">
-                    <h3>Resources</h3>
+                </div>
+                <div class="column">
+                    <h4>More</h4>
                     <ul>
-                        <li><a href="interactive-playground.html">Playground</a></li>
-                        <li><a href="../index.html#philosophy">Philosophy</a></li>
+                        <li><a href="../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../index.html#release-info">Release Info</a></li>
                     </ul>
-                </section>
-            </nav>
+                </div>
+            </div>
         </div>
-        <div class="ax-footer-bottom">
-            <p class="ax-footer-copyright">&copy; 2025 Axiom01. All rights reserved.</p>
+        <div class="bottom">
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- SCRIPTS: Core only -->
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <script src="../js/axiom.js"></script>
     <script src="../js/axicons.js"></script>
-    <script src="../js/sticky-header.js"></script>
-    <script src="../js/release-loader.js"></script>
     <script>
-function renderAxicons() {
-    if (typeof axicons === 'undefined') {
-        console.warn('axicons not loaded yet, retrying...');
-        setTimeout(renderAxicons, 100);
-        return;
-    }
-    
-    document.querySelectorAll('.axicon.render').forEach(el => {
-        const name = el.getAttribute('data-name');
-        if (!name) return;
-        
-        const icon = axicons.find(i => i.name === name);
-        if (icon) {
-            el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-        } else {
-            console.warn(`Icon not found: ${name}`);
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
         }
-    });
-}
 
-// Run when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderAxicons);
-} else {
-    renderAxicons();
-}
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
 
-// Also run after a short delay to catch any lazy-loaded content
-setTimeout(renderAxicons, 500);
-</script>
-
+        setTimeout(renderAxicons, 500);
+    </script>
+    <script src="../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script>
-function renderAxicons() {
-    if (typeof axicons === 'undefined') {
-        console.warn('axicons not loaded yet, retrying...');
-        setTimeout(renderAxicons, 100);
-        return;
-    }
-    
-    document.querySelectorAll('.axicon.render').forEach(el => {
-        const name = el.getAttribute('data-name');
-        if (!name) return;
-        
-        const icon = axicons.find(i => i.name === name);
-        if (icon) {
-            el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-        } else {
-            console.warn(`Icon not found: ${name}`);
-        }
-    });
-}
-
-// Run when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderAxicons);
-} else {
-    renderAxicons();
-}
-
-// Also run after a short delay to catch any lazy-loaded content
-setTimeout(renderAxicons, 500);
-</script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-    <script>
-function renderAxicons() {
-    if (typeof axicons === 'undefined') {
-        console.warn('axicons not loaded yet, retrying...');
-        setTimeout(renderAxicons, 100);
-        return;
-    }
-    
-    document.querySelectorAll('.axicon.render').forEach(el => {
-        const name = el.getAttribute('data-name');
-        if (!name) return;
-        
-        const icon = axicons.find(i => i.name === name);
-        if (icon) {
-            el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-        } else {
-            console.warn(`Icon not found: ${name}`);
-        }
-    });
-}
-
-// Run when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderAxicons);
-} else {
-    renderAxicons();
-}
-
-// Also run after a short delay to catch any lazy-loaded content
-setTimeout(renderAxicons, 500);
-</script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-    <script>
-function renderAxicons() {
-    if (typeof axicons === 'undefined') {
-        console.warn('axicons not loaded yet, retrying...');
-        setTimeout(renderAxicons, 100);
-        return;
-    }
-    
-    document.querySelectorAll('.axicon.render').forEach(el => {
-        const name = el.getAttribute('data-name');
-        if (!name) return;
-        
-        const icon = axicons.find(i => i.name === name);
-        if (icon) {
-            el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-        } else {
-            console.warn(`Icon not found: ${name}`);
-        }
-    });
-}
-
-// Run when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderAxicons);
-} else {
-    renderAxicons();
-}
-
-// Also run after a short delay to catch any lazy-loaded content
-setTimeout(renderAxicons, 500);
-</script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>
