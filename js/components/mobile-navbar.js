@@ -63,9 +63,16 @@ export default {
       }
     };
 
+    // Close menu on resize to desktop
+    const resizeHandler = () => {
+      if (window.innerWidth > 1023 && element.classList.contains('menu-open')) {
+        toggleMenu(); // Close menu if resizing to desktop
+      }
+    };
+
     document.addEventListener('click', outsideClickHandler);
     document.addEventListener('keydown', keydownHandler);
-
+    window.addEventListener('resize', resizeHandler);
 
     console.log('Axiom: Mobile Navbar component initialized:', element);
 
@@ -79,6 +86,7 @@ export default {
         navLinks.removeEventListener('click', linkClickHandler);
         document.removeEventListener('click', outsideClickHandler);
         document.removeEventListener('keydown', keydownHandler);
+        window.removeEventListener('resize', resizeHandler);
 
         // Reset ARIA attributes
         menuToggleButton.removeAttribute('id');
