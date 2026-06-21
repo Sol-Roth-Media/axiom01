@@ -2625,24 +2625,6 @@ section.hero .button {
 
 /* ===== PHASE 3 FIXES - HEADER AND SPACING ===== */
 
-/* Hide menu button on desktop (>768px) */
-@media (min-width: 769px) {
-    header.main .actions .menu {
-        display: none !important;
-    }
-}
-
-/* Show menu button on mobile (<768px) */
-@media (max-width: 768px) {
-    header.main .links {
-        display: none !important;
-    }
-    
-    header.main .actions .menu {
-        display: flex !important;
-    }
-}
-
 /* Fix sticky header behavior */
 header.main {
     position: sticky !important;
@@ -2909,4 +2891,55 @@ main > section {
 
 main > section:first-child {
     margin-top: 0 !important;
+}
+/* Always show menu button at all resolutions */
+header.main .actions .menu {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+/* Hide nav links on smaller screens, show on larger */
+@media (max-width: 1023px) {
+    header.main .links {
+        display: none !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    header.main .links {
+        display: flex !important;
+    }
+}
+
+/* Menu dropdown always works - shown/hidden by menu-open class */
+header.main.menu-open .links {
+    display: flex !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    background: var(--a-color-surface) !important;
+    border-bottom: 1px solid var(--a-color-outline) !important;
+    padding: var(--a-space-m) 0 !important;
+    margin: 0 !important;
+    z-index: 99 !important;
+}
+
+header.main.menu-open .links li {
+    margin: 0 !important;
+}
+
+header.main.menu-open .links a {
+    display: block !important;
+    padding: var(--a-space-m) var(--a-space-l) !important;
+    border-bottom: 1px solid var(--a-color-outline-variant) !important;
+}
+
+header.main.menu-open .links a:last-child {
+    border-bottom: none !important;
 }
