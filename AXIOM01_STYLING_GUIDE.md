@@ -1,440 +1,596 @@
-# Axiom01 Styling Guide - Updated July 2025
-*Comprehensive guide reflecting current implementation patterns*
+# Axiom01 Styling Guide
 
-This guide helps developers create beautiful, maintainable components using the Axiom01 UI framework's semantic-first philosophy with modern accessibility standards.
+## Table of Contents
+1. [Design Philosophy](#design-philosophy)
+2. [Color System](#color-system)
+3. [Typography](#typography)
+4. [Spacing & Layout](#spacing--layout)
+5. [Components](#components)
+6. [Accessibility](#accessibility)
+7. [Dark Mode](#dark-mode)
+8. [Best Practices](#best-practices)
 
-## 0. Design Token System
+---
 
-Axiom01 provides a comprehensive CSS variable system for consistent design implementation across all projects. These design tokens establish a single source of truth for colors, spacing, typography, animations, and more.
+## Design Philosophy
 
-**Key Tokens:**
-- **Colors**: Primary, secondary, semantic (success, warning, error, info), surface/text, grayscale
-- **Spacing**: xs (4px), s (8px), m (14px), l (21px), xl (35px), xxl (56px)
-- **Typography**: Font families, sizes, weights, line heights
-- **Shadows**: Medium and large depth levels
-- **Borders**: Radius variants (small, base, medium, large)
-- **Breakpoints**: xs (480px), sm (576px), md (768px), lg (992px), xl (1200px), xxl (1400px)
+Axiom01 embraces the **Semantic Web** — where markup is meaningful, styles follow content, not the reverse, and every component serves a clear purpose.
 
-**Get Started:**
-- See [Design Token Reference](docs/tokens/VARIABLES.md) for complete token documentation
-- All tokens are optional — use them to maintain consistency
-- Dark mode support built-in via `[data-theme="dark"]` attribute
+### Core Principles
 
-**Usage Example:**
+- **Semantic HTML First**: Use proper semantic elements (`<button>`, `<nav>`, `<article>`, etc.)
+- **CSS Variables**: Leverage CSS custom properties for theming and consistency
+- **Accessible by Default**: WCAG 2.1 AA compliance built into every component
+- **Responsive Design**: Mobile-first, scales to any screen size
+- **Minimal Dependencies**: Pure HTML, CSS, and SVG (no external icon libraries)
+- **Dark Mode Support**: Full theme toggle support built-in
+
+---
+
+## Color System
+
+Axiom01 provides a comprehensive, semantic color palette with CSS variables for easy theming.
+
+### Primary Color Palette
+
 ```css
-.component {
-  padding: var(--a-space-m);
-  background: var(--a-color-primary);
-  color: var(--a-color-on-primary);
-  border-radius: var(--a-border-radius-base);
+/* Light Mode */
+--a-color-primary: #0066cc;           /* Primary blue */
+--a-color-primary-container: #e6f2ff; /* Light blue container */
+--a-color-on-primary: #ffffff;        /* Text on primary */
+
+/* Secondary Color */
+--a-color-secondary: #666666;         /* Neutral gray */
+--a-color-secondary-container: #f5f5f5;
+--a-color-on-secondary: #ffffff;
+
+/* Tertiary Color */
+--a-color-tertiary: #00a8a8;          /* Teal accent */
+--a-color-tertiary-container: #e0f7f7;
+--a-color-on-tertiary: #ffffff;
+
+/* Error & Status Colors */
+--a-color-error: #d32f2f;             /* Error red */
+--a-color-error-container: #ffebee;
+--a-color-warning: #f57c00;           /* Warning orange */
+--a-color-success: #388e3c;           /* Success green */
+--a-color-info: #1976d2;              /* Info blue */
+
+/* Neutral Colors */
+--a-color-background: #ffffff;        /* Main background */
+--a-color-surface: #f9f9f9;           /* Secondary surface */
+--a-color-surface-variant: #f0f0f0;   /* Tertiary surface */
+--a-color-outline: #cccccc;           /* Borders */
+--a-color-outline-variant: #e0e0e0;   /* Subtle borders */
+
+/* Text Colors */
+--a-color-text: #1a1a1a;              /* Primary text */
+--a-color-text-secondary: #666666;    /* Secondary text */
+--a-color-text-muted: #999999;        /* Muted text */
+--a-color-text-disabled: #cccccc;     /* Disabled text */
+```
+
+### Dark Mode Adjustments
+
+In dark mode, all colors are inverted automatically:
+
+```css
+[data-theme="dark"] {
+  --a-color-background: #1a1a1a;
+  --a-color-surface: #2a2a2a;
+  --a-color-text: #ffffff;
+  --a-color-text-secondary: #cccccc;
+  /* ... other dark mode colors */
 }
+```
+
+### Using Colors in Your Components
+
+```html
+<!-- Using CSS variables -->
+<div style="background: var(--a-color-primary-container); color: var(--a-color-primary);">
+  Primary themed content
+</div>
+
+<!-- Status colors -->
+<span style="color: var(--a-color-success);">✓ Success</span>
+<span style="color: var(--a-color-error);">✗ Error</span>
+<span style="color: var(--a-color-warning);">⚠ Warning</span>
 ```
 
 ---
 
-## 1. Core Philosophy: Semantic Purity
+## Typography
 
-Axiom01 is an HTML-centric framework. Your primary focus should always be on writing clean, semantic, and accessible HTML. The CSS is designed to style this semantic structure with minimal class-based intervention. **If you find yourself adding classes to every element, you are not following the Axiom01 philosophy.**
+Axiom01 uses a carefully selected font stack with multiple font families optimized for different uses.
 
-## 2. Class Naming Strategy: No BEM, No Utility Stacking
+### Font Families
 
-This is a foundational principle of Axiom01. We explicitly forbid complex, multi-part class names.
+```css
+/* Primary UI Font - Clean, modern */
+--a-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
 
-- **Component-Level Classes:** Assign a single, descriptive class to the root element of a component (e.g., `<article class="card">`, `<section class="hero">`, `<header class="main">`).
-- **Descendant Styling:** Style child elements using descendant selectors based on the semantic structure. Avoid adding classes to every child.
-- **Variant Classes:** Use single, adjective-like classes to modify a component's appearance or behavior (e.g., `<button class="primary">`, `<article class="card elevated">`). **Multiple separate classes, not hyphenated variants.**
-- **Absolutely No BEM:** The Block__Element--Modifier syntax (e.g., `card__header--large` or `button--lg`) is strictly prohibited. It is verbose, couples the CSS to a rigid DOM structure, and violates our principle of semantic purity.
+/* Serif for Editorial Content */
+--a-font-family-serif: 'Lora', Georgia, serif;
 
-**Correct Implementation:**
+/* Monospace for Code */
+--a-font-family-mono: 'JetBrains Mono', 'Courier New', monospace;
+```
+
+### Font Sizes
+
+```css
+--a-font-size-xs: 0.75rem;    /* 12px */
+--a-font-size-sm: 0.875rem;   /* 14px */
+--a-font-size-base: 1rem;     /* 16px - standard body */
+--a-font-size-lg: 1.125rem;   /* 18px */
+--a-font-size-xl: 1.25rem;    /* 20px */
+--a-font-size-2xl: 1.5rem;    /* 24px */
+--a-font-size-3xl: 1.875rem;  /* 30px */
+--a-font-size-4xl: 2.25rem;   /* 36px */
+--a-font-size-5xl: 3rem;      /* 48px */
+--a-font-size-6xl: 3.75rem;   /* 60px */
+```
+
+### Font Weights
+
+```css
+--a-font-weight-light: 300;
+--a-font-weight-normal: 400;
+--a-font-weight-medium: 500;
+--a-font-weight-semibold: 600;
+--a-font-weight-bold: 700;
+--a-font-weight-extrabold: 900;
+```
+
+### Line Heights
+
+```css
+--a-line-height-tight: 1.2;      /* Headings */
+--a-line-height-normal: 1.5;     /* Body text (default) */
+--a-line-height-relaxed: 1.75;   /* Readable paragraphs */
+--a-line-height-loose: 2;        /* Extra spacing for accessibility */
+```
+
+### Heading Scale
+
+```css
+h1 { font-size: var(--a-font-size-4xl); font-weight: var(--a-font-weight-bold); }
+h2 { font-size: var(--a-font-size-3xl); font-weight: var(--a-font-weight-bold); }
+h3 { font-size: var(--a-font-size-2xl); font-weight: var(--a-font-weight-semibold); }
+h4 { font-size: var(--a-font-size-xl); font-weight: var(--a-font-weight-semibold); }
+h5 { font-size: var(--a-font-size-lg); font-weight: var(--a-font-weight-semibold); }
+h6 { font-size: var(--a-font-size-base); font-weight: var(--a-font-weight-bold); }
+```
+
+### Using Typography
+
 ```html
-<!-- ✅ GOOD: Clean, semantic, and minimal -->
-<section class="hero">
-  <h1>Hero Title</h1>
-  <p>A compelling subtitle.</p>
-  <div class="actions">
-    <button class="primary">Get Started</button>
-    <button>Learn More</button>
+<!-- Semantic semantic elements with automatic styling -->
+<h1>Page Title</h1>
+<p>Body text uses default line height and font size.</p>
+
+<!-- Override with CSS variables -->
+<span style="font-size: var(--a-font-size-lg); font-weight: var(--a-font-weight-semibold);">
+  Custom heading
+</span>
+
+<!-- Code blocks -->
+<code style="font-family: var(--a-font-family-mono);">
+  const x = 42;
+</code>
+```
+
+---
+
+## Spacing & Layout
+
+Axiom01 uses a consistent 4px-based spacing system for predictable, harmonious layouts.
+
+### Spacing Scale
+
+```css
+--a-space-xs: 0.25rem;   /* 4px */
+--a-space-s: 0.5rem;     /* 8px */
+--a-space-m: 1rem;       /* 16px - base unit */
+--a-space-l: 1.5rem;     /* 24px */
+--a-space-xl: 2rem;      /* 32px */
+--a-space-2xl: 3rem;     /* 48px */
+--a-space-3xl: 4rem;     /* 64px */
+--a-space-4xl: 6rem;     /* 96px */
+```
+
+### Layout Containers
+
+```css
+--a-container-max-width: 1280px;      /* Max width for content */
+--a-container-padding: var(--a-space-l); /* Responsive padding */
+--a-container-gutter: var(--a-space-m);  /* Gap between columns */
+```
+
+### Border Radius
+
+```css
+--a-border-radius-sm: 0.25rem;  /* 4px - subtle */
+--a-border-radius-md: 0.5rem;   /* 8px - standard */
+--a-border-radius-lg: 0.75rem;  /* 12px - prominent */
+--a-border-radius-xl: 1rem;     /* 16px - large buttons */
+--a-border-radius-2xl: 1.5rem;  /* 24px - cards */
+--a-border-radius-full: 9999px; /* Fully rounded (pills) */
+```
+
+### Breakpoints (Responsive Design)
+
+```css
+/* Mobile First */
+@media (min-width: 640px) { /* sm */ }
+@media (min-width: 768px) { /* md */ }
+@media (min-width: 1024px) { /* lg */ }
+@media (min-width: 1280px) { /* xl */ }
+@media (min-width: 1536px) { /* 2xl */ }
+```
+
+### Grid System
+
+```html
+<!-- Flexible container -->
+<div class="container">
+  <div class="grid">
+    <div class="col">Column 1</div>
+    <div class="col">Column 2</div>
+    <div class="col">Column 3</div>
   </div>
-</section>
-```
-```css
-/* ✅ GOOD: Styling semantic descendants */
-.hero {
-  padding: var(--a-space-xl);
-  background: var(--a-color-surface-variant);
-}
-
-.hero h1 {
-  font-size: var(--a-font-size-h1);
-}
-
-.hero .actions {
-  margin-top: var(--a-space-l);
-  display: flex;
-  gap: var(--a-space-m);
-}
+</div>
 ```
 
-## 3. The Cascading Spacing & Sizing Model
+---
 
-Axiom01 uses a cascading system of CSS variables to control spacing, padding, margins, and gaps. This allows for global control over the framework's rhythm and feel from a single source.
-
-- **Base Unit:** The core of the system is `--a-space-unit` (typically `1rem`).
-- **Tiered Variables:** All spacing values are derived from this base unit (e.g., `--a-space-s`, `--a-space-m`, `--a-space-l`).
-- **Consistent Application:** Use these variables for all `padding`, `margin`, and `gap` properties. Do not use hardcoded pixel values.
-
-**Example:**
-```css
-:root {
-  --a-space-unit: 1rem;
-  --a-space-xs:  calc(var(--a-space-unit) * 0.25); /* 4px */
-  --a-space-s:   calc(var(--a-space-unit) * 0.5);  /* 8px */
-  --a-space-m:   calc(var(--a-space-unit) * 1);    /* 16px */
-  --a-space-l:   calc(var(--a-space-unit) * 1.5);  /* 24px */
-  --a-space-xl:  calc(var(--a-space-unit) * 2.5);  /* 40px */
-  --a-space-xxl: calc(var(--a-space-unit) * 4);    /* 64px */
-}
-
-.card {
-  padding: var(--a-space-l);
-  border-radius: var(--a-border-radius-medium);
-}
-
-.card header {
-  margin-bottom: var(--a-space-m);
-}
-```
-
-## 4. Accessibility (WCAG 2.1 AA)
-
-Accessibility is not optional.
-- **Semantic HTML:** Use elements like `<nav>`, `<main>`, `<article>`, and `<aside>` correctly.
-- **ARIA Attributes:** Use appropriate ARIA roles, states, and properties, especially for interactive components.
-- **Keyboard Navigation:** Ensure all interactive elements are focusable and operable via keyboard.
-- **Focus Management:** Manage focus correctly for modals, drawers, and other dynamic UI.
-
-## 5. Built-In Components (Session 3)
-
-Axiom01 now includes a comprehensive component library with production-ready styles for buttons, cards, badges, tags, and alerts. All components use separate variant classes, never BEM-style hyphenated names.
+## Components
 
 ### Button Component
 
-Semantic buttons with multiple variants (each variant is a separate class):
-
 ```html
-<!-- Size variants - use separate classes -->
-<button class="button sm">Small</button>
-<button class="button">Default</button>
-<button class="button lg">Large</button>
-<button class="button xl">Extra Large</button>
+<!-- Primary button -->
+<button class="btn btn-primary">Primary Action</button>
 
-<!-- Type variants - use separate classes -->
-<button class="button primary">Primary (default)</button>
-<button class="button secondary">Secondary</button>
-<button class="button success">Success</button>
-<button class="button warning">Warning</button>
-<button class="button danger">Danger</button>
-<button class="button ghost">Ghost</button>
-<button class="button outline">Outline</button>
+<!-- Secondary button -->
+<button class="btn btn-secondary">Secondary Action</button>
 
-<!-- Combining variants - multiple separate classes -->
-<button class="button lg success">Large Success Button</button>
-<button class="button sm secondary">Small Secondary Button</button>
+<!-- Disabled state -->
+<button class="btn btn-primary" disabled>Disabled</button>
 
-<!-- Special states -->
-<button class="button loading" disabled>Loading...</button>
-<button class="button icon" aria-label="Close">✕</button>
+<!-- With icon -->
+<button class="btn btn-primary">
+  <span class="axicon render" data-name="Check"></span>
+  Save
+</button>
 ```
-
-**Features**:
-- 4 sizes (sm, default, lg, xl)
-- 7 type variants for different actions
-- Loading and icon-only states
-- Full keyboard accessibility
-- Smooth hover and focus effects
-- Touch-target safe (minimum 2rem height)
-
-### Card Component
-
-Container for grouped content:
-
-```html
-<article class="card elevated">
-  <header>
-    <h2>Card Title</h2>
-  </header>
-  <div>Main content section</div>
-  <footer>
-    <button class="button secondary">Cancel</button>
-    <button class="button primary">Save</button>
-  </footer>
-</article>
-```
-
-**Card Variants** (separate classes):
-- `.elevated` - Shadow-based depth
-- `.outlined` - Border-based style
-- `.filled` - Background color variant
-- `.hover-lift` - Lifts on hover
-- `.interactive` - Clickable with hover effect
-
-**Features**:
-- Semantic structure (header, content sections, footer)
-- Responsive grid layout (`.card-grid`)
-- Automatic dark mode support
-- Interactive states for clickable cards
-
-### Badge Component
-
-Small labels for status and categories:
-
-```html
-<!-- Color variants - separate classes -->
-<span class="badge primary">Primary</span>
-<span class="badge success">Active</span>
-<span class="badge warning">Pending</span>
-<span class="badge error">Critical</span>
-<span class="badge info">Info</span>
-<span class="badge secondary">Secondary</span>
-
-<!-- Size variants - separate classes -->
-<span class="badge sm">Small</span>
-<span class="badge">Default</span>
-<span class="badge lg">Large</span>
-
-<!-- Combining variants -->
-<span class="badge success lg">Active (Large)</span>
-```
-
-**Features**:
-- 6 semantic color variants (primary, secondary, success, warning, error, info)
-- 3 sizes for flexibility
-- Uppercase, bold, pill-shaped design
-- Perfect for status indicators and tags
-- Full accessibility with sufficient color contrast
 
 ### Alert Component
 
-Prominent notifications and messages:
-
 ```html
-<!-- Semantic types - separate classes -->
-<div class="alert info">
-  <h3>Information</h3>
-  <p>This is an informational message.</p>
+<!-- Success alert -->
+<div class="alert alert-success">
+  <span class="axicon render" data-name="Check-Circle"></span>
+  Operation completed successfully!
 </div>
 
-<div class="alert success dismissible">
-  <div>
-    <h3>Success</h3>
-    <p>Your action completed successfully.</p>
+<!-- Error alert -->
+<div class="alert alert-error">
+  <span class="axicon render" data-name="Alert-Circle"></span>
+  An error occurred. Please try again.
+</div>
+
+<!-- Warning alert -->
+<div class="alert alert-warning">
+  <span class="axicon render" data-name="Alert-Triangle"></span>
+  Please review before proceeding.
+</div>
+```
+
+### Card Component
+
+```html
+<div class="card">
+  <div class="card-header">
+    <h3>Card Title</h3>
   </div>
-  <button aria-label="Dismiss">×</button>
+  <div class="card-body">
+    <p>Card content goes here.</p>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-secondary">Learn More</button>
+  </div>
 </div>
-
-<!-- Size variants - separate classes -->
-<div class="alert warning sm">Compact warning</div>
-<div class="alert error lg">Large error message</div>
-
-<!-- Combining variants -->
-<div class="alert success lg">Large success alert</div>
 ```
 
-**Features**:
-- 4 semantic types (info, success, warning, error)
-- 3 sizes (sm, default, lg)
-- Optional dismissible button
-- Color-coded with left border indicator
-- Structured with heading and message
-
-### Tag Component
-
-Flexible tags with optional removal:
+### Form Elements
 
 ```html
-<span class="tag">Technology</span>
+<!-- Text input -->
+<div class="form-group">
+  <label for="name">Full Name</label>
+  <input type="text" id="name" class="form-control" placeholder="Enter your name">
+</div>
 
-<span class="tag dismissible">
-  Selected Item
-  <button aria-label="Remove">×</button>
-</span>
+<!-- Select -->
+<div class="form-group">
+  <label for="category">Category</label>
+  <select id="category" class="form-control">
+    <option>Option 1</option>
+    <option>Option 2</option>
+  </select>
+</div>
+
+<!-- Checkbox -->
+<div class="form-group">
+  <input type="checkbox" id="agree" class="form-check">
+  <label for="agree">I agree to the terms</label>
+</div>
+
+<!-- Toggle Switch -->
+<div class="form-group">
+  <div class="toggle-switch">
+    <input type="checkbox" id="notifications">
+    <label for="notifications">Enable Notifications</label>
+  </div>
+</div>
 ```
-
-**Features**:
-- Pill-shaped with rounded corners
-- Optional dismissible variant
-- Smooth hover effects
-- Flexible sizing
-- Perfect for tag clouds and filters
-
-### Component Reference
-
-For comprehensive component documentation, see:
-- [Component Reference Guide](docs/COMPONENTS.md) - Complete API and examples
-- [Design Tokens](docs/tokens/VARIABLES.md) - Customization through variables
-- [Animations](docs/ANIMATIONS.md) - Animation system
-- [Utilities](docs/UTILITIES.md) - Optional utility classes
 
 ---
 
-**Updated:** January 20, 2025 - Refactored all components to use separate variant classes instead of BEM-style hyphenated names. This is a foundational principle of Axiom01.
+## Accessibility
 
-## Empty State Component
+### Semantic HTML
+
+Always use semantic elements:
+
 ```html
-<!-- ✅ CORRECT: Minimal classes, semantic structure -->
-<div class="empty-state search" role="status" aria-label="No search results">
-  <div aria-hidden="true">🔍</div>
-  <h3>No Results Found</h3>
-  <p>We couldn't find anything matching your search terms.</p>
-  <div>
-    <button class="button secondary">Clear Search</button>
-    <button class="button primary">Browse All Items</button>
-  </div>
-</div>
-```
-
-## Alert Component (Built-In)
-```html
-<!-- ✅ CORRECT: Semantic alert with proper structure -->
-<div class="alert success">
-  <h3>Success</h3>
-  <p>Your changes have been saved successfully.</p>
-</div>
-
-<div class="alert error dismissible">
-  <div>
-    <h3>Error</h3>
-    <p>Something went wrong. Please try again.</p>
-  </div>
-  <button aria-label="Dismiss">×</button>
-</div>
-```
-
-## Card Component (Built-In)
-```html
-<!-- ✅ CORRECT: Semantic card structure -->
-<article class="card elevated">
-  <header>
-    <h2>Product Details</h2>
-  </header>
-  <div>
-    <p>Main product information goes here.</p>
-  </div>
-  <footer>
-    <button class="button secondary">Cancel</button>
-    <button class="button success">Add to Cart</button>
-  </footer>
-</article>
-```
-
-## Button Component (Built-In)
-```html
-<!-- ✅ CORRECT: Using semantic buttons with separate variant classes -->
-<button class="button primary">Primary Action</button>
-<button class="button secondary">Secondary</button>
-<button class="button success">Confirm</button>
-<button class="button danger">Delete</button>
-
-<!-- ✅ CORRECT: Combining multiple variants -->
-<button class="button lg success">Large Success Button</button>
-<button class="button sm secondary">Small Secondary</button>
-
-<div class="button-group">
-  <button class="button primary">Save</button>
-  <button class="button secondary">Cancel</button>
-  <button class="button danger">Delete</button>
-</div>
-```
-
-## Breadcrumb Navigation
-```html
-<!-- ✅ CORRECT: Semantic nav with minimal classes -->
-<nav class="breadcrumb" aria-label="Breadcrumb navigation">
-  <ol>
+<!-- Good -->
+<nav aria-label="Main Navigation">
+  <ul>
     <li><a href="/">Home</a></li>
-    <li><a href="/dashboard">Dashboard</a></li>
-    <li aria-current="page">Reports</li>
-  </ol>
+    <li><a href="/about">About</a></li>
+  </ul>
 </nav>
-```
 
-## Modal Component
-```html
-<!-- ✅ CORRECT: Semantic structure, minimal classes -->
-<div class="modal" id="basic-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
-  <div>
-    <header>
-      <h3 id="modal-title">Modal Title</h3>
-      <button aria-label="Close modal">×</button>
-    </header>
-    <section>
-      <p>Modal content goes here.</p>
-    </section>
-    <footer>
-      <button class="button secondary">Cancel</button>
-      <button class="button primary">Confirm</button>
-    </footer>
+<!-- Bad (divitis) -->
+<div class="nav">
+  <div class="list">
+    <div class="item"><a href="/">Home</a></div>
   </div>
 </div>
 ```
 
-## Form Group Pattern
+### ARIA Labels
+
 ```html
-<!-- ✅ CORRECT: Semantic fieldset with one root class -->
-<fieldset class="form-group">
-  <legend>Contact Preferences</legend>
+<!-- Icon-only button needs accessible name -->
+<button aria-label="Close dialog">
+  <span class="axicon render" data-name="X"></span>
+</button>
 
-  <label for="email">Email</label>
-  <input id="email" type="email" required>
+<!-- Complex regions need labels -->
+<nav aria-label="Main Navigation"></nav>
 
-  <label for="frequency">Frequency</label>
-  <select id="frequency">
-    <option>Weekly</option>
-    <option>Monthly</option>
-  </select>
-</fieldset>
+<!-- Current page indicator -->
+<a href="/current-page" aria-current="page">Current Page</a>
 ```
 
-## Animation Philosophy
+### Color Contrast
 
-Axiom01 treats animation as a **functional tool**, not decoration. Every animation must serve a purpose:
+- Text on background: Minimum 4.5:1 contrast ratio
+- UI components: Minimum 3:1 contrast ratio
+- Large text (18pt+): Minimum 3:1 contrast ratio
 
-- **State Communication**: Show that something has changed (opened/closed, loading/done)
-- **Feedback**: Respond to user interactions with tactile feedback
-- **Attention Guidance**: Subtly direct focus where needed
-- **Performance Perception**: Make wait states feel shorter
+### Keyboard Navigation
 
-### Animation Principles
+All interactive elements should be keyboard accessible:
 
-1. **Purposeful**: If you can remove an animation and the interface still works, don't animate it.
-2. **Accessible**: Always respect `prefers-reduced-motion` media query.
-3. **GPU-Accelerated**: Use only `transform` and `opacity` for performance.
-4. **Timely**: Keep animations between 150ms–500ms.
-5. **Professional**: Use smooth, standard easing (`cubic-bezier(0.4, 0, 0.2, 1)`).
+```html
+<!-- Native buttons and links are keyboard accessible by default -->
+<button>Click Me</button>
+<a href="/">Link</a>
 
-### Quick Animation Examples
+<!-- Custom interactive elements need tabindex -->
+<div tabindex="0" role="button" onclick="doSomething()">
+  Custom Button
+</div>
+```
+
+### Focus Styles
+
+Always maintain visible focus indicators:
 
 ```css
-/* Micro-interaction: Button hover */
-.button {
-  transition: transform 150ms ease-in-out;
+*:focus {
+  outline: 2px solid var(--a-color-primary);
+  outline-offset: 2px;
+}
+```
+
+---
+
+## Dark Mode
+
+### Enabling Dark Mode
+
+```html
+<!-- Set data-theme attribute on html element -->
+<html data-theme="light">  <!-- or "dark" -->
+  <!-- content -->
+</html>
+```
+
+### JavaScript Toggle
+
+```javascript
+// Toggle between light and dark
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
 }
 
-.button:hover {
-  transform: translateY(-2px);
+// Respect user's system preference
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+```
+
+### Colors Automatically Adapt
+
+All colors defined in the CSS variable system automatically adjust for dark mode — no additional work needed if you use CSS variables!
+
+```css
+/* These automatically change in dark mode */
+background: var(--a-color-background);
+color: var(--a-color-text);
+border-color: var(--a-color-outline);
+```
+
+---
+
+## Best Practices
+
+### 1. Use CSS Variables for Consistency
+
+```css
+/* Good - Consistent with design system */
+padding: var(--a-space-m);
+margin: var(--a-space-l);
+color: var(--a-color-text);
+
+/* Avoid - Hard-coded values break consistency */
+padding: 20px;
+margin: 30px;
+color: #333;
+```
+
+### 2. Mobile-First Responsive Design
+
+```css
+/* Start with mobile styles */
+.card {
+  display: flex;
+  flex-direction: column;
 }
 
-/* State change: Card hover */
-.card.elevated:hover {
-  box-shadow: var(--a-shadow-lg);
-}
-
-/* Respect reduced-motion preference */
-@media (prefers-reduced-motion: reduce) {
-  .button, .card {
-    transition: none;
+/* Add tablet+ enhancements */
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;
   }
 }
 ```
 
-See [Animation Guide](docs/ANIMATIONS.md) for complete animation system documentation.
+### 3. Use Semantic HTML
+
+```html
+<!-- Good -->
+<main>
+  <article>
+    <h1>Article Title</h1>
+    <p>Content...</p>
+  </article>
+</main>
+
+<!-- Avoid -->
+<div class="main">
+  <div class="article">
+    <div class="heading">Article Title</div>
+    <div>Content...</div>
+  </div>
+</div>
+```
+
+### 4. Accessibility First
+
+```html
+<!-- Always provide context for interactive elements -->
+<button aria-label="Close modal">✕</button>
+
+<!-- Use proper heading hierarchy -->
+<h1>Main Title</h1>
+<h2>Section</h2>
+<h3>Subsection</h3>
+<!-- Don't skip levels: h1 → h3 is confusing -->
+
+<!-- Associate labels with form inputs -->
+<label for="email">Email Address</label>
+<input id="email" type="email">
+```
+
+### 5. Performance Optimization
+
+```css
+/* Use CSS variables (no browser repaints) */
+.button.active {
+  background: var(--a-color-primary);
+}
+
+/* Minimize specificity */
+.btn { /* Good */ }
+.container .card .btn { /* Avoid - too specific */ }
+
+/* Use transitions instead of animations when possible */
+.button {
+  transition: background-color var(--a-transition-base) var(--a-ease-out);
+}
+```
+
+### 6. Component Reusability
+
+```html
+<!-- Create flexible, reusable components -->
+<div class="card">
+  <img src="..." alt="...">
+  <h3>Card Title</h3>
+  <p>Description</p>
+  <button class="btn">Action</button>
+</div>
+
+<!-- Use CSS modifier classes for variations -->
+<div class="card card-elevated">...</div>
+<div class="card card-outlined">...</div>
+```
+
+---
+
+## Component Checklist
+
+When creating components, ensure:
+
+- [ ] Semantic HTML structure
+- [ ] Accessible (WCAG 2.1 AA)
+- [ ] Keyboard navigation support
+- [ ] Focus indicators visible
+- [ ] ARIA labels where needed
+- [ ] Works in light and dark modes
+- [ ] Responsive design (mobile to desktop)
+- [ ] Uses CSS variables for theming
+- [ ] Proper spacing using design system
+- [ ] Clear visual hierarchy
+- [ ] Performance optimized
+- [ ] Cross-browser compatible
+- [ ] Code documented
+- [ ] Live examples included
+
+---
+
+## Resources
+
+- [Axiom01 Components](components-overview.html)
+- [Color System](colors-advanced.html)
+- [Typography Guide](typography-advanced.html)
+- [Layout & Grid](layout-advanced.html)
+- [Axicons Browser](axicons.html)
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [MDN Web Docs](https://developer.mozilla.org/)
+- [Web Accessibility Guidelines](https://www.w3.org/WAI/)
+
+---
+
+**Last Updated**: 2025 | **Version**: 1.0 | **Status**: Complete
