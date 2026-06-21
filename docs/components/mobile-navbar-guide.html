@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Navbar Component - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/doc-preview.css">
+</head>
+<body class="axiom-body component-doc">
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="../../index.html#philosophy">Philosophy</a></li>
+                <li><a href="../../index.html#components">Components</a></li>
+                <li><a href="../../index.html#get-started">Get Started</a></li>
+                <li><a href="../components-overview.html" aria-current="page">Docs</a></li>
+            </ul>
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="axicon render" data-name="Moon"></span>
+                </button>
+                <button class="menu toggle" aria-label="Toggle Menu">
+                    <span class="axicon render" data-name="Menu"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <nav class="breadcrumb">
+            <a href="../components-overview.html">Components</a>
+            <span class="separator">/</span>
+            <span class="current">Mobile Navbar</span>
+        </nav>
+
+        <div class="component-section">
+            <h1>Mobile Navbar Component</h1>
+            <p>A responsive navigation component that adapts to different screen sizes. On small and medium screens, it provides a toggleable menu with fullscreen overlay. On desktop screens, navigation links are always visible.</p>
+
+            <h2>Overview</h2>
+            <p>The Mobile Navbar intelligently handles responsive navigation, providing a hamburger menu on mobile/tablet and traditional navigation links on desktop. The menu button provides visual feedback when the menu is open.</p>
+
+            <h2>Basic Usage</h2>
+            <p>Add the following HTML to your page header:</p>
+
+            <div class="code-snippet">
+<pre><code>&lt;header class="main" data-component="mobile-navbar"&gt;
+    &lt;nav role="navigation" aria-label="Main Navigation"&gt;
+        &lt;a href="/" class="brand"&gt;Brand&lt;/a&gt;
+        
+        &lt;ul class="links"&gt;
+            &lt;li&gt;&lt;a href="#section1"&gt;Section 1&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#section2"&gt;Section 2&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#section3"&gt;Section 3&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        
+        &lt;div class="actions"&gt;
+            &lt;button class="menu toggle" aria-label="Toggle Menu"&gt;
+                &lt;span class="axicon render" data-name="Menu"&gt;&lt;/span&gt;
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+            </div>
+
+            <h2>JavaScript Initialization</h2>
+            <p>Initialize the component with a module script:</p>
+
+            <div class="code-snippet">
+<pre><code>&lt;script type="module"&gt;
+    import mobileNavbar from '../../js/components/mobile-navbar.js';
+    const navElement = document.querySelector('header[data-component="mobile-navbar"]');
+    if (navElement) {
+        mobileNavbar.init(navElement);
+    }
+&lt;/script&gt;</code></pre>
+            </div>
+
+            <h2>Responsive Behavior</h2>
+            <ul>
+                <li><strong>Desktop (1024px+):</strong> Navigation links are always visible. Menu button still available.</li>
+                <li><strong>Tablet & Mobile (&lt;1024px):</strong> Navigation links hidden, menu button shows. Menu opens as fullscreen overlay.</li>
+                <li><strong>Menu Button State:</strong> Shows primary background color when menu is open (visual feedback)</li>
+            </ul>
+
+            <h2>Features</h2>
+            <ul>
+                <li><strong>Responsive:</strong> Automatically adapts to screen size</li>
+                <li><strong>Fullscreen Menu:</strong> Menu takes full viewport height on mobile/tablet</li>
+                <li><strong>Visual Feedback:</strong> Menu button changes color when menu is open</li>
+                <li><strong>Accessible:</strong> Full ARIA support for screen readers</li>
+                <li><strong>Keyboard Navigation:</strong> Press ESC to close menu, Tab to navigate</li>
+                <li><strong>Outside Click:</strong> Menu closes when clicking outside</li>
+                <li><strong>Link Click:</strong> Menu auto-closes when a link is clicked (SPA behavior)</li>
+            </ul>
+
+            <h2>Menu States</h2>
+
+            <h3>Closed State (Default)</h3>
+            <p>Menu button shows no background, links are hidden on small screens.</p>
+
+            <h3>Open State</h3>
+            <p>Menu button shows primary color background as indicator. Navigation links display as fullscreen overlay. Menu can be closed by:</p>
+            <ul>
+                <li>Clicking the menu button again</li>
+                <li>Clicking a link inside the menu</li>
+                <li>Clicking outside the menu</li>
+                <li>Pressing the ESC key</li>
+            </ul>
+
+            <h2>CSS Classes</h2>
+            <p>Key classes used in the Mobile Navbar component:</p>
+            <ul>
+                <li><code>.main</code> - Main header wrapper (sticky)</li>
+                <li><code>.menu.toggle</code> - Menu toggle button</li>
+                <li><code>.menu-open</code> - Applied to header when menu is open</li>
+                <li><code>.links</code> - Navigation links container</li>
+                <li><code>.actions</code> - Action buttons container (menu, theme, search)</li>
+            </ul>
+
+            <h2>Design Tokens Used</h2>
+            <ul>
+                <li><code>var(--a-color-surface)</code> - Menu background</li>
+                <li><code>var(--a-color-primary-container)</code> - Menu button active background</li>
+                <li><code>var(--a-color-primary)</code> - Menu button active color</li>
+                <li><code>var(--a-color-outline)</code> - Menu border</li>
+                <li><code>var(--a-shadow-large)</code> - Menu shadow</li>
+            </ul>
+
+            <h2>Accessibility Features</h2>
+            <ul>
+                <li><strong>ARIA Controls:</strong> <code>aria-controls</code> links button to menu</li>
+                <li><strong>ARIA Expanded:</strong> <code>aria-expanded</code> indicates menu state</li>
+                <li><strong>ARIA Hidden:</strong> <code>aria-hidden</code> hides closed menu from screen readers</li>
+                <li><strong>Keyboard Support:</strong> ESC key closes menu</li>
+                <li><strong>Semantic HTML:</strong> Proper nav and button elements</li>
+            </ul>
+
+            <section class="anatomy-section">
+                <h2><span class="axicon render" data-name="Layout"></span> Anatomy</h2>
+                <p>The Mobile Navbar consists of the following parts:</p>
+                <ul>
+                    <li><strong>Brand/Logo:</strong> Left-aligned branding element</li>
+                    <li><strong>Navigation Links:</strong> Main navigation items (hidden on mobile)</li>
+                    <li><strong>Actions:</strong> Search, GitHub, Theme, and Menu buttons</li>
+                    <li><strong>Menu Button:</strong> Hamburger icon (visible on mobile/tablet)</li>
+                    <li><strong>Fullscreen Menu:</strong> Overlay menu that appears on small screens</li>
+                </ul>
+            </section>
+
+            <section class="when-to-use-section">
+                <h2><span class="axicon render" data-name="Check-Circle"></span> When to Use Mobile Navbar</h2>
+                <div class="when-to-use-cards">
+                    <div class="when-to-use-card do">
+                        <h3><span class="axicon render" data-name="Check-Circle"></span> Do Use</h3>
+                        <ul>
+                            <li>For responsive site headers and navigation</li>
+                            <li>When supporting mobile, tablet, and desktop layouts</li>
+                            <li>To provide consistent navigation across devices</li>
+                            <li>When you need accessibility built-in</li>
+                            <li>For SPA or multi-page applications</li>
+                        </ul>
+                    </div>
+                    <div class="when-to-use-card dont">
+                        <h3><span class="axicon render" data-name="X-Circle"></span> Don't Use</h3>
+                        <ul>
+                            <li>Don't use if you don't need responsive design</li>
+                            <li>Avoid duplicating menu content unnecessarily</li>
+                            <li>Don't hardcode breakpoints in your app</li>
+                            <li>Avoid ignoring keyboard navigation needs</li>
+                            <li>Don't skip testing on actual devices</li>
+                        </ul>
+                    </div>
+                    <div class="when-to-use-card consider">
+                        <h3><span class="axicon render" data-name="Alert-Triangle"></span> Consider</h3>
+                        <ul>
+                            <li>Menu animation performance on slower devices</li>
+                            <li>Keyboard focus management when menu opens/closes</li>
+                            <li>Deep linking with menu state persistence</li>
+                            <li>Mobile gesture support (swipe to open/close)</li>
+                            <li>Integration with routing libraries</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <h2>Browser Support</h2>
+            <ul>
+                <li>Chrome 90+</li>
+                <li>Firefox 88+</li>
+                <li>Safari 14+</li>
+                <li>Edge 90+</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="main">
+        <div class="content">
+            <div class="brand">
+                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../components-overview.html">Component Overview</a></li>
+                        <li><a href="mobile-navbar-guide.html">Mobile Navbar Guide</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">npm Package</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/axicons.js"></script>
+	<script>
+		function renderAxicons() {
+			if (typeof axicons !== 'undefined' && axicons.length > 0) {
+				document.querySelectorAll('.axicon.render').forEach(el => {
+					const name = el.getAttribute('data-name');
+					if (name) {
+						const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+						if (icon) {
+							el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">${icon.svgContent}</svg>`;
+						}
+					}
+				});
+			}
+		}
+		// Render icons immediately and on load
+		renderAxicons();
+		window.addEventListener('load', renderAxicons);
+		document.addEventListener('DOMContentLoaded', renderAxicons);
+	</script>
+
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/sticky-header.js"></script>
+    <script src="../../js/code-copy.js"></script>
+	<script src="../../js/index-page-manager.js"></script>
+    <script type="module">
+        import mobileNavbar from '../../js/components/mobile-navbar.js';
+        const navElement = document.querySelector('header[data-component="mobile-navbar"]');
+        if (navElement) {
+            mobileNavbar.init(navElement);
+        }
+    </script>
+</body>
+</html>
