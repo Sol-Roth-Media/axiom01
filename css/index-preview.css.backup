@@ -492,7 +492,7 @@
     padding: var(--a-space-s); /* Padding around the content */
     /* Removed default color: var(--a-color-on-surface); to allow specific on-container classes to dictate text color */
     overflow: hidden; /* Hide overflowing text */
-    box-shadow: var(--a-shadow-small, var(--a-shadow-medium));
+    box-shadow: var(--a-shadow-medium, var(--a-shadow-medium));
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -689,16 +689,73 @@
 
 .comparison-example pre {
 	margin: 0;
-	background: rgba(0, 0, 0, 0.15);
+	background: #1e1e1e !important;
 	padding: var(--a-space-m);
 	border-radius: var(--a-border-radius-small);
 	overflow-x: auto;
+	border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .comparison-example code {
 	font-family: 'JetBrains Mono', monospace;
 	font-size: 0.85rem;
-	line-height: 1.5;
+	line-height: 1.6;
+	color: #d4d4d4 !important;
+	display: block;
+}
+
+.comparison-example code .token {
+	color: inherit !important;
+}
+
+.comparison-example code .token.tag {
+	color: #569cd6;
+}
+
+.comparison-example code .token.attr-name {
+	color: #9cdcfe;
+}
+
+.comparison-example code .token.attr-value {
+	color: #ce9178;
+}
+
+.comparison-example code .token.string {
+	color: #ce9178;
+}
+
+.comparison-example code .token.punctuation {
+	color: #d4d4d4;
+}
+
+/* Make comparison panels stack better */
+.comparison-panel.active {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--a-space-l);
+	max-width: 100%;
+}
+
+.comparison-example {
+	padding: var(--a-space-l);
+	border-radius: var(--a-border-radius-medium);
+	overflow: hidden;
+}
+
+.comparison-example h3 {
+	margin-top: 0;
+	margin-bottom: var(--a-space-m);
+}
+
+.comparison-example pre {
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+	.comparison-panel.active {
+		grid-template-columns: 1fr;
+	}
 }
 
 @keyframes fadeIn {
@@ -798,7 +855,7 @@
 	border-left-color: var(--a-color-error);
 }
 
-/* Development Metrics */
+/* Development Metrics - FIXED RESPONSIVE LAYOUT */
 #development-metrics {
 	padding: var(--a-space-xxl) 0;
 	background: var(--a-color-surface);
@@ -806,8 +863,38 @@
 
 .metrics-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-template-columns: repeat(4, 1fr);
 	gap: var(--a-space-l);
+}
+
+/* Large screens (1024px+) - 4 columns */
+@media (min-width: 1024px) {
+	.metrics-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+/* Medium screens (768px - 1023px) - 2 columns */
+@media (max-width: 1023px) and (min-width: 768px) {
+	.metrics-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Small screens (480px - 767px) - 2 columns with better spacing */
+@media (max-width: 767px) and (min-width: 480px) {
+	.metrics-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--a-space-m);
+	}
+}
+
+/* Extra small screens (< 480px) - 1 column */
+@media (max-width: 479px) {
+	.metrics-grid {
+		grid-template-columns: 1fr;
+		gap: var(--a-space-m);
+	}
 }
 
 .metric {
@@ -817,6 +904,10 @@
 	text-align: center;
 	color: var(--a-color-on-primary-container);
 	transition: transform 200ms ease-in-out;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 180px;
 }
 
 .metric:hover {
@@ -824,7 +915,7 @@
 }
 
 .metric-value {
-	font-size: 3rem;
+	font-size: clamp(2rem, 8vw, 3rem);
 	font-weight: var(--a-font-weight-bold);
 	color: var(--a-color-primary);
 	margin-bottom: var(--a-space-s);
@@ -834,6 +925,10 @@
 	margin-bottom: var(--a-space-s);
 	color: var(--a-color-on-primary-container);
 	margin-top: 0;
+	font-size: clamp(1rem, 3vw, 1.25rem);
+	line-height: 1.2;
+	word-break: break-word;
+	overflow-wrap: break-word;
 }
 
 .metric p {
@@ -841,6 +936,20 @@
 	color: var(--a-color-on-primary-container);
 	opacity: 0.9;
 	margin: 0;
+	line-height: 1.4;
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+
+/* Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+	.metric {
+		transition: none;
+	}
+	
+	.metric:hover {
+		transform: none;
+	}
 }
 
 /* CSS Variables Cascade */
@@ -1198,19 +1307,68 @@ section.hero .actions .button.outline {
     }
 }
 
-/* Fix outline button styling for hero section */
+/* Fix outline button styling for hero section - make it much more readable */
 section.hero .button.outline {
-    background: rgba(0, 0, 0, 0.2);
-    color: white;
-    border: 2px solid white;
-    font-weight: 600;
+    background: rgba(0, 0, 0, 0.35) !important;
+    color: white !important;
+    border: 2px solid white !important;
+    font-weight: 700;
 }
 
 section.hero .button.outline:hover {
-    background: rgba(0, 0, 0, 0.35);
-    border-color: white;
+    background: rgba(0, 0, 0, 0.5) !important;
+    border-color: white !important;
 }
 
+section.hero .button.outline:active {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Dark mode button fixes */
+[data-theme="dark"] section.hero .button.outline {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
+    border: 2px solid white !important;
+}
+
+[data-theme="dark"] section.hero .button.outline:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Ensure secondary button is also readable */
+section.hero .button.secondary {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
+    border: 2px solid white !important;
+    font-weight: 600;
+}
+
+section.hero .button.secondary:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: white !important;
+}
+
+/* Ensure all hero buttons have proper contrast */
+section.hero .button {
+    font-weight: 600;
+    transition: all 200ms ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+section.hero .button.primary {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+section.hero .button.primary:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px);
+}
+
+section.hero .button.outline:focus,
+section.hero .button.secondary:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
 /* Dark mode button fixes */
 [data-theme="dark"] section.hero .button.outline {
     background: rgba(0, 0, 0, 0.4);
@@ -1221,4 +1379,791 @@ section.hero .button.outline:hover {
 [data-theme="dark"] section.hero .button.outline:hover {
     background: rgba(0, 0, 0, 0.55);
 }
+
+
+.hero-stats .stat .examples {
+    margin-top: var(--a-space-xs);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.4;
+    display: block;
 }
+
+.hero-stats .stat:hover .examples {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.hero-stats .stat .icon {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: var(--a-space-s);
+    transition: all 200ms ease;
+}
+
+.hero-stats .stat:hover .icon {
+    color: white;
+    transform: scale(1.1);
+}
+
+.hero-stats .stat .value {
+    font-size: 2.5rem;
+    font-weight: var(--a-font-weight-bold);
+    color: white;
+    margin-bottom: var(--a-space-xs);
+}
+
+.hero-stats .stat .label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--a-space-s);
+}
+
+.hero-stats .stat .examples {
+    margin-top: var(--a-space-xs);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.3;
+    display: block;
+}
+
+.hero-stats .stat:hover .examples {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Fix Prism.js Syntax Highlighting - No Overlapping Backgrounds */
+.code-comparison-grid pre code,
+.comparison-example pre code {
+    background: transparent !important;
+    color: #d4d4d4 !important;
+    padding: 0 !important;
+}
+
+/* Token colors - clean and readable */
+.code-comparison-grid pre .token,
+.comparison-example pre .token {
+    background: none !important;
+}
+
+.code-comparison-grid pre .token.tag,
+.comparison-example pre .token.tag {
+    color: #569cd6 !important;  /* Blue for tags */
+}
+
+.code-comparison-grid pre .token.attr-name,
+.comparison-example pre .token.attr-name {
+    color: #9cdcfe !important;  /* Light blue for attributes */
+}
+
+.code-comparison-grid pre .token.attr-value,
+.comparison-example pre .token.attr-value,
+.code-comparison-grid pre .token.string,
+.comparison-example pre .token.string {
+    color: #ce9178 !important;  /* Orange for strings */
+}
+
+.code-comparison-grid pre .token.punctuation,
+.comparison-example pre .token.punctuation {
+    color: #d4d4d4 !important;  /* Default for punctuation */
+}
+
+.code-comparison-grid pre .token.keyword,
+.comparison-example pre .token.keyword {
+    color: #c586c0 !important;  /* Purple for keywords */
+}
+
+.code-comparison-grid pre .token.class-name,
+.comparison-example pre .token.class-name {
+    color: #4ec9b0 !important;  /* Teal for class names */
+}
+
+/* Ensure no background bleeding */
+.code-comparison-grid pre code .token::before,
+.code-comparison-grid pre code .token::after,
+.comparison-example pre code .token::before,
+.comparison-example pre code .token::after {
+    content: none !important;
+    background: none !important;
+}
+
+/* Line numbers if present */
+.code-comparison-grid pre[data-line],
+.comparison-example pre[data-line] {
+    padding: var(--a-space-m);
+}
+
+/* Make code wrap properly */
+.code-comparison-grid pre code,
+.comparison-example pre code {
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+/* Code Comparison Grid with Metrics */
+.code-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--a-space-l);
+    margin-top: var(--a-space-l);
+}
+
+.code-comparison-grid .example {
+    border-radius: var(--a-border-radius-medium);
+    overflow: hidden;
+}
+
+.code-comparison-grid .example h3 {
+    background: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    padding: var(--a-space-m);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.code-comparison-grid .example p {
+    padding: var(--a-space-m) var(--a-space-m) var(--a-space-s);
+    margin: 0;
+    color: var(--a-color-on-surface-variant);
+    font-size: 0.9rem;
+}
+
+.code-comparison-grid .metrics {
+    display: flex;
+    gap: var(--a-space-l);
+    padding: 0 var(--a-space-m) var(--a-space-m);
+    font-size: 0.85rem;
+    color: var(--a-color-on-surface-variant);
+    border-bottom: 1px solid var(--a-color-outline);
+    flex-wrap: wrap;
+}
+
+.code-comparison-grid .metric-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.code-comparison-grid .metric-value {
+    font-weight: var(--a-font-weight-bold);
+    color: var(--a-color-on-surface);
+    font-size: 1.1rem;
+}
+
+.code-comparison-grid .metric-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--a-color-on-surface-variant);
+}
+
+.code-comparison-grid pre {
+    margin: 0;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: var(--a-space-m);
+    border-radius: 0;
+    overflow-x: auto;
+    border: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .code-comparison-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Quick Facts Section */
+.quick-facts-section {
+    background: var(--a-color-surface);
+    padding: var(--a-space-xxl) var(--a-space-l);
+}
+
+.quick-facts-
+
+/* Container padding improvements */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--a-space-l);
+    box-sizing: border-box;
+}
+
+/* Card typography and spacing */
+article.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-large);
+    padding: var(--a-space-l);
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    gap: var(--a-space-m);
+}
+
+article.card:hover {
+    border-color: var(--a-color-primary);
+    box-shadow: var(--a-shadow-medium);
+    transform: translateY(-4px);
+}
+
+article.card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--a-color-on-surface);
+}
+
+article.card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--a-color-on-surface-variant);
+    margin: 0;
+}
+
+/* Grid improvements */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--a-space-l);
+    width: 100%;
+    margin-top: var(--a-space-xl);
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: var(--a-space-m);
+    }
+}
+
+/* Section spacing */
+section {
+    padding: var(--a-space-3xl) 0;
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: var(--a-space-2xl) 0;
+    }
+}
+
+/* Hero section improvements */
+section.hero {
+    background: linear-gradient(135deg, var(--a-color-primary) 0%, var(--a-color-secondary) 100%);
+    color: white;
+    padding: var(--a-space-3xl) 0;
+}
+
+section.hero .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--a-space-l);
+    box-sizing: border-box;
+}
+
+section.hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.2;
+    margin: 0 0 var(--a-space-m) 0;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+section.hero p {
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    line-height: 1.7;
+    margin: 0 0 var(--a-space-l) 0;
+    opacity: 0.95;
+}
+
+section.hero p.tagline {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin-bottom: var(--a-space-l);
+    opacity: 0.9;
+}
+
+/* Hero actions */
+section.hero .actions {
+    display: flex;
+    gap: var(--a-space-m);
+    flex-wrap: wrap;
+    margin-bottom: var(--a-space-2xl);
+}
+
+section.hero .button {
+    padding: var(--a-space-m) var(--a-space-xl);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 200ms ease;
+}
+
+/* Fact items - improved spacing and sizing */
+.fact-item {
+    padding: var(--a-space-l);
+    background: var(--a-color-background);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-m);
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fact-item:hover {
+    border-color: var(--a-color-primary);
+    box-shadow: var(--a-shadow-small);
+    transform: translateY(-2px);
+}
+
+.fact-item h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--a-color-on-surface);
+}
+
+.fact-item p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--a-color-on-surface-variant);
+    margin: 0;
+    flex: 1;
+}
+
+/* Quick facts section */
+.quick-facts-section {
+    background: var(--a-color-surface);
+    padding: var(--a-space-3xl) 0;
+}
+
+.quick-facts-section header {
+    margin-bottom: var(--a-space-2xl);
+}
+
+.facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--a-space-l);
+}
+
+@media (max-width: 768px) {
+    .facts-grid {
+        gap: var(--a-space-m);
+    }
+}
+
+/* Get started section */
+.get-started-section {
+    padding: var(--a-space-3xl) 0;
+    background: var(--a-color-background);
+}
+
+.get-started-section .grid {
+    gap: var(--a-space-l);
+}
+
+.get-started-card {
+    background: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-large);
+    padding: var(--a-space-xl);
+}
+
+.get-started-card header {
+    text-align: center;
+    margin-bottom: var(--a-space-l);
+}
+
+.get-started-card header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.get-started-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--a-color-on-surface-variant);
+}
+
+.code-snippet {
+    background: var(--a-color-surface-variant);
+    padding: var(--a-space-m);
+    border-radius: var(--a-border-radius-small);
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--a-color-on-surface);
+    margin: var(--a-space-m) 0;
+}
+
+/* Actions buttons */
+.actions {
+    display: flex;
+    gap: var(--a-space-m);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--a-space-2xl);
+}
+
+.actions .button {
+    padding: var(--a-space-m) var(--a-space-xl);
+    font-size: 0.95rem;
+}
+
+/* Color palette section */
+#color-palette h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: var(--a-space-2xl);
+    margin-bottom: var(--a-space-l);
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--a-space-m);
+    margin-bottom: var(--a-space-xl);
+}
+
+.swatch {
+    height: 120px;
+    border-radius: var(--a-border-radius-medium);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--a-space-s);
+    box-shadow: var(--a-shadow-small);
+    transition: all 200ms ease;
+}
+
+.swatch:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--a-shadow-medium);
+}
+
+/* Responsive improvements */
+@media (max-width: 1024px) {
+    header.main nav {
+        gap: var(--a-space-m);
+        padding: var(--a-space-s) var(--a-space-m);
+    }
+    
+    header.main .links {
+        gap: var(--a-space-m);
+    }
+    
+    header.main .links a {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 640px) {
+    header.main .links {
+        display: none;
+    }
+    
+    section header h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+    
+    section header p {
+        font-size: 0.95rem;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .container {
+        padding: 0 var(--a-space-m);
+    }
+    
+    section {
+        padding: var(--a-space-2xl) 0;
+    }
+}
+
+@media (max-width: 480px) {
+    section header h2 {
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+        margin-bottom: var(--a-space-s);
+    }
+    
+    section header p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .grid {
+        gap: var(--a-space-m);
+    }
+    
+    article.card {
+        padding: var(--a-space-m);
+    }
+}
+
+/* ===== PHASE 3 FIXES - HEADER AND SPACING ===== */
+
+/* Fix sticky header behavior */
+header.main {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+}
+
+/* Hero section top spacing - add margin above heading */
+section.hero h1 {
+    margin-top: var(--a-space-xl);
+    margin-bottom: var(--a-space-l);
+}
+
+/* Reduce excessive top padding on body/html for mobile */
+@media (max-width: 480px) {
+    html, body {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    header.main {
+        padding: var(--a-space-s) 0 !important;
+    }
+    
+    section.hero {
+        padding: var(--a-space-xl) var(--a-space-m) !important;
+    }
+}
+
+/* ===== PHASE 3 - HERO FULL-WIDTH & TOP SPACING FIX ===== */
+
+/* Remove all constraints from html and body */
+html {
+    width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+body {
+    width: 100% !important;
+    overflow-x: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+/* ===== PHASE 3 - FIX NAV ALIGNMENT & STICKY HEADER ===== */
+
+/* Keep header sticky at all resolutions */
+header.main {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+}
+
+/* Fix icon alignment in header */
+header.main .actions .menu,
+header.main .actions button,
+header.main .actions a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Mobile (< 768px): Menu icon only */
+@media (max-width: 767px) {
+    header.main .links {
+        display: none !important;
+    }
+    
+    header.main .actions .menu {
+        display: flex !important;
+    }
+}
+
+/* Medium resolution (768px - 1023px): Menu icon only */
+@media (min-width: 768px) and (max-width: 1023px) {
+    header.main .links {
+        display: none !important;
+    }
+    
+    header.main .actions .menu {
+        display: flex !important;
+    }
+    
+    header.main .actions {
+        gap: var(--a-space-s) !important;
+    }
+}
+
+/* Tablet (1024px - 1199px): Compact links, hide menu */
+@media (min-width: 1024px) and (max-width: 1199px) {
+    header.main .links {
+        display: flex !important;
+        gap: var(--a-space-m) !important;
+    }
+    
+    header.main .links a {
+        font-size: 0.85rem !important;
+        padding: var(--a-space-xs) var(--a-space-s) !important;
+    }
+    
+    header.main .actions .menu {
+        display: none !important;
+    }
+}
+
+/* Desktop (1200px+): Full nav, hide menu */
+@media (min-width: 1200px) {
+    header.main .links {
+        display: flex !important;
+    }
+    
+    header.main .actions .menu {
+        display: none !important;
+    }
+}
+
+section.hero {
+    margin-top: 0 !important;
+    padding-top: var(--a-space-3xl) !important;
+}
+
+/* ===== MOBILE MENU TOGGLE STYLING ===== */
+
+/* Show/hide nav links based on menu-open class */
+
+/* Ensure menu button is clickable and visible */
+header.main .actions .menu {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+/* At higher resolutions, keep menu hidden */
+@media (min-width: 1024px) {
+    
+
+/* ===== FINAL OVERRIDE: Ensure header is sticky not fixed ===== */
+
+/* Override all conflicting position rules - STICKY MUST WIN */
+header.main {
+    position: sticky !important;
+    top: 0 !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: 100 !important;
+}
+
+/* Ensure menu button is always interactive */
+header.main .actions .menu,
+.menu.toggle {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    touch-action: auto !important;
+}
+
+/* ===== ABSOLUTE MENU BUTTON FIX - OVERRIDE EVERYTHING ===== */
+
+/* At ANY resolution: ensure button exists and is interactive */
+header.main .actions .menu,
+header.main .menu.toggle,
+.menu.toggle {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 2.5rem !important;
+    min-height: 2.5rem !important;
+}
+
+/* Specifically at mobile */
+@media (max-width: 1023px) {
+    header.main .actions .menu,
+    header.main .menu.toggle,
+    .menu.toggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+
+
+/* ===== HERO FULL-WIDTH SOLUTION ===== */
+
+/* Hero - full width background */
+section.hero {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: var(--a-space-3xl) var(--a-space-l) !important;
+    box-sizing: border-box !important;
+}
+
+/* Content - centered with max-width */
+section.hero .content {
+    max-width: 1000px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+/* ===== PHASE 3 - FIX MAIN PADDING ===== */
+
+/* Main element - no padding, let sections handle their own spacing */
+main {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Sections add their own top margin for spacing */
+main > section {
+    margin-top: var(--a-space-3xl) !important;
+}
+
+main > section:first-child {
+    margin-top: 0 !important;
+}
+/* Always show menu button at all resolutions */
+header.main .actions .menu {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+/* Hide nav links on smaller screens, show on larger */
+@media (max-width: 1023px) {
+    header.main .links {
+        display: none !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    header.main .links {
+        display: flex !important;
+    }
+}
+
+/* Menu dropdown always works - shown/hidden by menu-open class */
+
+
+/* Hide menu button at high resolutions */
+@media (min-width: 1024px) {
+    header.main .menu.toggle {
+        display: none !important;
+    }
+}}
+}
+
