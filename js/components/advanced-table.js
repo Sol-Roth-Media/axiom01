@@ -85,7 +85,9 @@ export default {
 
         controls.appendChild(searchBox);
         controls.appendChild(filterContainer);
-        element.insertBefore(controls, table);
+
+        // FIX: Insert relative to the table's actual parent to avoid DOM hierarchy errors
+        table.parentNode.insertBefore(controls, table);
 
         // Search handler
         searchBox.addEventListener('input', (e) => {
@@ -191,7 +193,9 @@ export default {
         // Pagination
         const paginationContainer = document.createElement('div');
         paginationContainer.className = 'table-pagination';
-        element.appendChild(paginationContainer);
+
+        // FIX: Append to the table's parent node to avoid DOM errors
+        table.parentNode.appendChild(paginationContainer);
 
         const updatePagination = () => {
             const totalPages = Math.ceil(filteredData.length / itemsPerPage);
@@ -262,4 +266,3 @@ export default {
         };
     }
 };
-
