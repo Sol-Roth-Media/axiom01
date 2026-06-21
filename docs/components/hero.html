@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hero Component - Mobile Optimizations & Swipe - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-    <link rel="stylesheet" href="../../css/axicons.css">
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/doc-styles.css">
+    <link rel="stylesheet" href="../../css/doc-preview.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -20,23 +21,27 @@
             </ul>
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
+                    <i class="fas fa-search" aria-hidden="true"></i>
                 </button>
                 <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="Brand-Github"></span>
+                    <i class="fab fa-github" aria-hidden="true"></i>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
                 <button class="menu toggle" aria-label="Toggle Menu">
-                    <span class="axicon render" data-name="Menu"></span>
+                    <i class="fas fa-bars" aria-hidden="true"></i>
                 </button>
             </div>
         </nav>
     </header>
 
-    <main><section><div class="container">
-        <header><h1>Hero Component</h1><p class="text-muted">Mobile-optimized hero sections with responsive typography, button sizing, and optional touch-swipe carousel functionality for rich content presentation.</p></header>
+    <main class="content">
+        <section class="hero small">
+            <h1 class="title">Hero Component</h1>
+            <p class="description">Mobile-optimized hero sections with responsive typography, button sizing, and optional touch-swipe carousel functionality for rich content presentation.</p>
+        </section>
 
         <div class="component-section">
             <h2>Hero Component Features</h2>
@@ -44,37 +49,48 @@
 
             <h3>Standard Hero</h3>
             <div class="doc-live-example" style="height: 400px; overflow: hidden;">
-                </div>
+                <section class="hero" style="height: 100%; padding: var(--a-space-lg);">
+                    <div class="content">
+                        <h1>Build Better Interfaces</h1>
+                        <p class="tagline">Semantic HTML meets beautiful design.</p>
+                        <p>Create stunning, accessible web experiences with minimal markup.</p>
+                        <div class="actions">
+                            <a href="#" class="button primary lg">Get Started</a>
+                            <a href="#" class="button secondary lg">Learn More</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
 
             <h3>Features</h3>
             <div class="card-group">
                 <article class="card">
-                    <span class="axicon render" data-name="mobile-alt"></span>
+                    <i class="fas fa-mobile-alt"></i>
                     <h3>Mobile-First Design</h3>
                     <p>Automatically optimizes typography and spacing for screens as small as 320px</p>
                 </article>
                 <article class="card">
-                    <span class="axicon render" data-name="text-height"></span>
+                    <i class="fas fa-text-height"></i>
                     <h3>Responsive Typography</h3>
                     <p>Headings scale from 1.5rem on mobile to 3.2rem on desktop</p>
                 </article>
                 <article class="card">
-                    <span class="axicon render" data-name="button"></span>
+                    <i class="fas fa-button"></i>
                     <h3>Smart Button Sizing</h3>
                     <p>Buttons automatically reduce from lg to md on mobile to prevent stacking</p>
                 </article>
                 <article class="card">
-                    <span class="axicon render" data-name="hand-paper"></span>
+                    <i class="fas fa-hand-paper"></i>
                     <h3>Touch Swipe Support</h3>
                     <p>Optional carousel functionality for swiping between content panels</p>
                 </article>
                 <article class="card">
-                    <span class="axicon render" data-name="universal-access"></span>
+                    <i class="fas fa-universal-access"></i>
                     <h3>Accessible by Default</h3>
                     <p>Semantic HTML, focus states, and keyboard support built-in</p>
                 </article>
                 <article class="card">
-                    <span class="axicon render" data-name="swatchbook"></span>
+                    <i class="fas fa-swatchbook"></i>
                     <h3>Theme Compatible</h3>
                     <p>Works with all Axiom01 color themes and custom gradients</p>
                 </article>
@@ -282,7 +298,8 @@ Axiom.destroyComponent(element)</code></pre>
 
             <h2>Browser Support</h2>
             <p>All modern browsers. Swipe support requires touch-enabled devices (phones, tablets) or mouse simulation in dev tools.</p>
-        </div></section></main>
+        </div>
+    </main>
 
     <footer class="main">
         <div class="content">
@@ -321,43 +338,6 @@ Axiom.destroyComponent(element)</code></pre>
     </footer>
 
     <script src="../../js/axiom.js"></script>
-    <script src="../../js/axicons.js"></script>
-<script>
-function renderAxicons() {
-    if (typeof axicons === 'undefined') {
-        console.warn('axicons not loaded yet, retrying...');
-        setTimeout(renderAxicons, 100);
-        return;
-    }
-    
-    document.querySelectorAll('.axicon.render').forEach(el => {
-        const name = el.getAttribute('data-name');
-        if (!name) return;
-        
-        const icon = axicons.find(i => i.name === name);
-        if (icon) {
-            el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-        } else {
-            console.warn(`Icon not found: ${name}`);
-        }
-    });
-}
-
-// Run when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderAxicons);
-} else {
-    renderAxicons();
-}
-
-// Also run after a short delay to catch any lazy-loaded content
-setTimeout(renderAxicons, 500);
-</script>
     <script src="../../js/index-page-manager.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-
-
+</body>
 </html>
