@@ -74,8 +74,8 @@
         }
 
         section.category h2 .axicon {
-            font-size: 1.75rem;
-            min-width: 1.75rem;
+            font-size: 0.875rem;
+            min-width: 0.875rem;
             flex-shrink: 0;
             display: flex;
             align-items: center;
@@ -281,10 +281,6 @@
     </header>
 
     <main class="overview">
-        <section class="hero">
-            <h1>Component Library</h1>
-            <p>Explore 100+ production-ready, semantic components designed for modern web applications. All components are accessible, responsive, and themeable.</p>
-        </section>
 
         <section class="category">
             <h2><span class="axicon render" data-name="Book"></span> Core Documentation</h2>
@@ -487,10 +483,20 @@
                 });
             }
         }
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderAxicons);
-        } else {
+        function initRenderAxicons() {
             renderAxicons();
+            // Re-render when theme changes
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    setTimeout(renderAxicons, 100);
+                });
+            }
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initRenderAxicons);
+        } else {
+            initRenderAxicons();
         }
     </script>
     <script src="../js/index-page-manager.js"></script>
