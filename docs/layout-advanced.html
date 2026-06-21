@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Layout Guide - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.css">
-    <link rel="stylesheet" href="../css/doc-styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ5/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/axicons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body class="axiom-body">
+    <!-- HEADER: Standard Navigation -->
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
@@ -19,293 +18,101 @@
                 <li><a href="../index.html#philosophy">Philosophy</a></li>
                 <li><a href="../index.html#components">Components</a></li>
                 <li><a href="../index.html#get-started">Get Started</a></li>
-                <li><a href="components-overview.html">Documentation</a></li>
+                <li><a href="components-overview.html" aria-current="page">Docs</a></li>
             </ul>
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
                 <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Moon"></span>
                 </button>
                 <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Menu"></span>
                 </button>
             </div>
         </nav>
     </header>
 
-    <main class="content">
-            <section class="hero small">
-                <div class="content">
-                    <h1 class="title">Advanced Layout Guide</h1>
-                    <p class="description">Axiom01's layout system is built upon the robust and flexible foundation of native CSS Grid, complemented by a cascading spacing system. This guide explores how to leverage these features to create complex, responsive, and maintainable layouts with minimal effort and semantic markup.</p>
+    <!-- MAIN CONTENT: Semantic page structure -->
+    <main>
+        <section class="container">
+            <!-- PAGE TITLE & INTRO -->
+            <header>
+                <h1>Advanced Layout Guide</h1>
+                <p>Advanced layout techniques and grid systems</p>
+            </header>
+
+            <!-- CONTENT SECTIONS: Use semantic HTML with core classes only -->
+                        <section class="hero small">
+                <div class="container">
+                    <h1>Advanced Layout Guide</h1>
+                    <p>Advanced layout techniques and grid systems</p>
                 </div>
             </section>
 
-            <section id="grid-system">
+            <section>
                 <div class="container">
-                    <h2>The Axiom01 Grid System</h2>
-                    <p>The core of Axiom01's layout is the <code>.grid</code> class, which applies <code>display: grid</code> and a default gap based on <code>--a-space-l</code>. This semantic approach encourages you to define your grid structure directly in your CSS, rather than relying on an abundance of utility classes or inline styles.</p>
-
-                    <h3>Basic Grid Usage</h3>
-                    <p>To create a responsive grid, simply apply the <code>.grid</code> class to a container. By default, it will arrange its direct children into a flexible grid. You can then define your column structure using standard CSS Grid properties in your stylesheet.</p>
-                    <pre><code class="language-html">&lt;!-- HTML --&gt;
-&lt;div class="grid basic-grid-example"&gt;
-    &lt;div class="grid-item"&gt;Item 1&lt;/div&gt;
-    &lt;div class="grid-item"&gt;Item 2&lt;/div&gt;
-    &lt;div class="grid-item"&gt;Item 3&lt;/div&gt;
-    &lt;div class="grid-item"&gt;Item 4&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- CSS (in your stylesheet) --&gt;
-&lt;style&gt;
-    .basic-grid-example {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-&lt;/style&gt;</code></pre>
-                    <div class="layout-example-grid basic-grid-example">
-                        <div class="grid-item">Item 1</div>
-                        <div class="grid-item">Item 2</div>
-                        <div class="grid-item">Item 3</div>
-                        <div class="grid-item">Item 4</div>
-                    </div>
-
-                    <h3>Defining Columns and Rows</h3>
-                    <p>You have full control over grid columns and rows. Use <code>grid-template-columns</code> and <code>grid-template-rows</code> to define explicit tracks. The gap between grid items is controlled by the <code>gap</code> property, which ideally should use Axiom01's spacing variables.</p>
-                    <pre><code class="language-html">&lt;!-- HTML --&gt;
-&lt;div class="grid defined-grid-example"&gt;
-    &lt;div class="grid-item"&gt;Header&lt;/div&gt;
-    &lt;div class="grid-item main-content-item"&gt;Main Content&lt;/div&gt;
-    &lt;div class="grid-item"&gt;Sidebar&lt;/div&gt;
-    &lt;div class="grid-item footer-item"&gt;Footer&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- CSS (in your stylesheet) --&gt;
-&lt;style&gt;
-    .defined-grid-example {
-        grid-template-columns: 1fr 2fr 1fr;
-        grid-template-rows: auto 100px;
-        gap: var(--a-space-m); /* Example: using a spacing variable for gap */
-    }
-    .defined-grid-example .main-content-item {
-        grid-column: span 2;
-    }
-    .defined-grid-example .footer-item {
-        grid-column: 1 / -1;
-    }
-&lt;/style&gt;</code></pre>
-                    <div class="layout-example-grid defined-grid-example">
-                        <div class="grid-item">Header</div>
-                        <div class="grid-item main-content-item">Main Content</div>
-                        <div class="grid-item">Sidebar</div>
-                        <div class="grid-item footer-item">Footer</div>
-                    </div>
-
-                    <h3>Nested Grids</h3>
-                    <p>CSS Grid allows for powerful nesting. You can place a grid container inside another grid item, enabling you to build highly complex and flexible layouts.</p>
-                    <pre><code class="language-html">&lt;!-- HTML --&gt;
-&lt;div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--a-space-l);"&gt;
-    &lt;div class="grid-item"&gt;Parent Item 1&lt;/div&gt;
-    &lt;div class="grid-item"&gt;
-        &lt;!-- Nested Grid --&gt;
-        &lt;div class="nested-grid-example"&gt;
-            &lt;div class="grid-item"&gt;Nested 1&lt;/div&gt;
-            &lt;div class="grid-item"&gt;Nested 2&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- CSS (in your stylesheet) --&gt;
-&lt;style&gt;
-    .nested-grid-container { /* Apply this to the parent grid */
-        grid-template-columns: 1fr 1fr;
-        gap: var(--a-space-l);
-    }
-    .nested-grid-example { /* This is the inner grid */
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--a-space-s);
-        background-color: var(--a-color-secondary-container);
-        padding: var(--a-space-m);
-        border-radius: var(--a-border-radius-small);
-        border: 1px solid var(--a-color-secondary);
-    }
-    .nested-grid-example .grid-item {
-        background-color: var(--a-color-secondary);
-        color: var(--a-color-on-secondary);
-    }
-&lt;/style&gt;</code></pre>
-                    <div class="layout-example-grid nested-grid-container">
-                        <div class="grid-item">Parent Item 1</div>
-                        <div class="grid-item">
-                            <div class="nested-grid-example">
-                                <div class="grid-item">Nested 1</div>
-                                <div class="grid-item">Nested 2</div>
-                            </div>
-                        </div>
-                    </div>
+                    <h2>Overview</h2>
+                    <p>This page covers advanced layout techniques and grid systems.</p>
                 </div>
             </section>
 
-            <section id="flexbox-utilities">
-                <div class="container">
-                    <h2>Flexbox for Fine-Grained Control</h2>
-                    <p>While CSS Grid is ideal for overall page layout, Flexbox excels at distributing and aligning items within a single dimension (row or column). Axiom01 provides basic Flexbox capabilities through the <code>.flex</code> class, which applies <code>display: flex</code>.</p>
-                    <h3>Basic Flex Usage</h3>
-                    <p>Use <code>.flex</code> on a container to enable Flexbox behavior for its direct children. You can then use standard Flexbox properties (e.g., <code>justify-content</code>, <code>align-items</code>, <code>flex-wrap</code>) via custom CSS to achieve desired alignments.</p>
-                    <pre><code class="language-html">&lt;!-- HTML --&gt;
-&lt;div class="flex flex-layout-example"&gt;
-    &lt;div class="flex-item"&gt;Item A&lt;/div&gt;
-    &lt;div class="flex-item"&gt;Item B&lt;/div&gt;
-    &lt;div class="flex-item"&gt;Item C&lt;/div&gt;
-&lt;/div&gt;
+        </section>
+    </main>
 
-&lt;!-- CSS (in your stylesheet) --&gt;
-&lt;style&gt;
-    .flex-layout-example {
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: var(--a-space-m);
-    }
-&lt;/style&gt;</code></pre>
-                    <div class="flex-example flex-layout-example">
-                        <div class="flex-item">Item A</div>
-                        <div class="flex-item">Item B</div>
-                        <div class="flex-item">Item C</div>
-                    </div>
-                    <p>Flexbox is particularly useful for navigation bars, form controls, and distributing content within smaller components.</p>
-                </div>
+    <!-- FOOTER: New ax-footer component -->
+    <footer class="ax-footer">
+        <div class="ax-footer-content">
+            <section class="ax-footer-brand" aria-label="Brand Information">
+                <a href="../index.html" class="ax-footer-logo">[Ax<span class="primary">01</span>]</a>
+                <p class="ax-footer-tagline">The Semantic Web, Reimagined.</p>
             </section>
-
-            <section id="responsive-layouts">
-                <div class="container">
-                    <h2>Responsive Layouts with Breakpoints</h2>
-                    <p>Axiom01 embraces a mobile-first approach to responsive design. This means you design for the smallest screens first, and then progressively enhance the layout for larger viewports using media queries. The framework provides a set of predefined CSS variables for breakpoints, making your media queries consistent and easy to manage.</p>
-                    <table class="color-variable-table">
-                        <thead>
-                            <tr>
-                                <th>Variable</th>
-                                <th>Value</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><code>--a-breakpoint-xs</code></td><td><code>480px</code></td><td>Extra small devices (e.g., portrait phones)</td></tr>
-                            <tr><td><code>--a-breakpoint-sm</code></td><td><code>576px</code></td><td>Small devices (e.g., landscape phones)</td></tr>
-                            <tr><td><code>--a-breakpoint-md</code></td><td><code>768px</code></td><td>Medium devices (e.g., tablets)</td></tr>
-                            <tr><td><code>--a-breakpoint-lg</code></td><td><code>992px</code></td><td>Large devices (e.g., laptops)</td></tr>
-                            <tr><td><code>--a-breakpoint-xl</code></td><td><code>1200px</code></td><td>Extra large devices (e.g., desktops)</td></tr>
-                            <tr><td><code>--a-breakpoint-xxl</code></td><td><code>1400px</code></td><td>Extra extra large devices (e.g., large desktops)</td></tr>
-                        </tbody>
-                    </table>
-                    <pre><code class="language-css">/* Example: Two columns on medium screens and up */
-.my-responsive-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Single column by default (mobile-first) */
-    gap: var(--a-space-m);
-}
-
-@media (min-width: var(--a-breakpoint-md)) {
-    .my-responsive-grid {
-        grid-template-columns: 1fr 1fr; /* Two columns on medium screens and up */
-    }
-}
-
-@media (min-width: var(--a-breakpoint-lg)) {
-    .my-responsive-grid {
-        grid-template-columns: 1fr 2fr 1fr; /* Three columns on large screens and up */
-    }
-}</code></pre>
-                    <p>By using these variables within your media queries, you ensure that your responsive designs align with the framework's consistent sizing scale.</p>
-                </div>
-            </section>
-
-            <section id="cascading-spacing-layout">
-                <div class="container">
-                    <h2>The Cascading Spacing System in Layouts</h2>
-                    <p>Axiom01's unique cascading spacing system is fundamental to creating harmonious and consistent layouts. All padding, margin, and gap values are derived from a single <code>--a-space-unit</code> variable, which can be adjusted globally to rescale your entire layout.</p>
-                    <p>The framework provides a set of predefined spacing variables:</p>
+            <nav class="ax-footer-links" aria-label="Footer Navigation">
+                <section class="ax-footer-column">
+                    <h3>Documentation</h3>
                     <ul>
-                        <li><code>--a-space-xs</code>: Extra small spacing</li>
-                        <li><code>--a-space-s</code>: Small spacing</li>
-                        <li><code>--a-space-m</code>: Medium spacing (often the default for gaps)</li>
-                        <li><code>--a-space-l</code>: Large spacing</li>
-                        <li><code>--a-space-xl</code>: Extra large spacing</li>
-                        <li><code>--a-space-xxl</code>: Extra extra large spacing</li>
+                        <li><a href="components-overview.html">Components</a></li>
+                        <li><a href="layout-advanced.html">Layout Guide</a></li>
+                        <li><a href="colors-advanced.html">Colors & Themes</a></li>
+                        <li><a href="typography-advanced.html">Typography</a></li>
                     </ul>
-                    <p>These variables are calculated based on <code>--a-space-unit</code>, ensuring that all spacing scales proportionally. You should use these variables consistently for all layout-related spacing.</p>
-                    <pre><code class="language-html">&lt;!-- HTML --&gt;
-&lt;div class="spacing-example-div"&gt;
-    &lt;p&gt;This content has extra large padding and large bottom margin.&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- HTML --&gt;
-&lt;div class="grid spacing-grid-example"&gt;
-    &lt;div class="grid-item"&gt;Wide Gap Item&lt;/div&gt;
-    &lt;div class="grid-item"&gt;Wide Gap Item&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- CSS (in your stylesheet) --&gt;
-&lt;style&gt;
-    .spacing-example-div {
-        padding: var(--a-space-xl);
-        margin-bottom: var(--a-space-l);
-        background-color: var(--a-color-surface-variant);
-        border-radius: var(--a-border-radius-medium);
-    }
-    .spacing-grid-example {
-        gap: var(--a-space-xxl);
-        margin-top: var(--a-space-l);
-    }
-&lt;/style&gt;</code></pre>
-                    <p>By consistently using these variables, you maintain a perfect visual rhythm throughout your application, and can easily adjust the overall density of your layout by changing just the <code>--a-space-unit</code> CSS variable.</p>
-                </div>
-            </section>
-        </main>
-
-    <script src="../js/index-page-manager.js"></script>
-    <footer class="main">
-        <div class="content">
-            <div class="brand">
-                <a href="../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-                <p class="tagline">The Semantic Web, Reimagined.</p>
-            </div>
-            <div class="links">
-                <div class="column">
-                    <h4>Documentation</h4>
+                </section>
+                <section class="ax-footer-column">
+                    <h3>Community</h3>
                     <ul>
-                        <li><a href="components-overview.html">Component Overview</a></li>
-                        <li><a href="../README.md">README</a></li>
-                        <li><a href="../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../index.html#get-started">Getting Started</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">npm</a></li>
                     </ul>
-                </div>
-                <div class="column">
-                    <h4>Community</h4>
-                    <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>More</h4>
+                </section>
+                <section class="ax-footer-column">
+                    <h3>Resources</h3>
                     <ul>
                         <li><a href="interactive-playground.html">Playground</a></li>
-                        <li><a href="../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../index.html#philosophy">Philosophy</a></li>
                         <li><a href="../index.html#release-info">Release Info</a></li>
                     </ul>
-                </div>
-            </div>
+                </section>
+            </nav>
         </div>
-        <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+        <div class="ax-footer-bottom">
+            <p class="ax-footer-copyright">&copy; 2025 Axiom01. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- SCRIPTS: Core only -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script src="../js/axiom.js"></script>
+    <script src="../js/axicons.js"></script>
+    <script src="../js/sticky-header.js"></script>
+    <script src="../js/release-loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

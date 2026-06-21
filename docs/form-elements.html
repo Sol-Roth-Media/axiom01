@@ -1,447 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Elements - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.css">
-    <link rel="stylesheet" href="../css/doc-styles.css">
-    <style>
-        /* Page-specific layout for form-elements doc */
-        .page-nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--a-space-m);
-            padding: var(--a-space-m);
-            background-color: var(--a-color-surface-variant);
-        }
-
-        .note {
-            text-align: center;
-            padding: var(--a-space-m);
-            background-color: var(--a-color-surface-variant);
-            margin-top: var(--a-space-xl);
-        }
-
-        /* Form Elements Specific Styling */
-        /* Using structural selectors where possible, and minimal classes */
-
-        /* General form group spacing */
-        .form-group {
-            margin-bottom: var(--a-space-l); /* Use Axiom01 spacing variable */
-        }
-
-        /* Label styling */
-        label {
-            display: block;
-            margin-bottom: var(--a-space-xs); /* Use Axiom01 spacing variable */
-            font-weight: var(--a-font-weight-medium);
-            color: var(--a-color-on-surface);
-        }
-
-        /* Input, Textarea, Select base styling */
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        input[type="number"],
-        input[type="date"], /* Added date input */
-        input[type="time"], /* Added time input */
-        textarea,
-        select {
-            width: 100%;
-            padding: var(--a-space-s); /* Use Axiom01 spacing variable */
-            border: 1px solid var(--a-color-outline);
-            border-radius: var(--a-border-radius-small);
-            font-size: var(--a-font-size-base);
-            color: var(--a-color-on-surface);
-            background-color: var(--a-color-surface);
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-
-        /* Focus states */
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus,
-        input[type="number"]:focus,
-        input[type="date"]:focus,
-        input[type="time"]:focus,
-        textarea:focus,
-        select:focus {
-            border-color: var(--a-color-primary);
-            box-shadow: 0 0 0 3px color-mix(in srgb, var(--a-color-primary) 20%, transparent);
-            outline: none;
-        }
-
-        /* Disabled states */
-        input:disabled,
-        textarea:disabled,
-        select:disabled {
-            background-color: var(--a-color-surface-variant);
-            color: var(--a-color-on-surface-variant);
-            cursor: not-allowed;
-        }
-
-        /* Error state for inputs */
-        input.error,
-        textarea.error,
-        select.error {
-            border-color: var(--a-color-error);
-        }
-
-        input.error:focus,
-        textarea.error:focus,
-        select.error:focus {
-            box-shadow: 0 0 0 3px color-mix(in srgb, var(--a-color-error) 20%, transparent);
-        }
-
-        /* Checkbox and Radio styling */
-        .checkbox.group,
-        .radio.group {
-            display: flex;
-            align-items: center;
-            margin-bottom: var(--a-space-s); /* Use Axiom01 spacing variable */
-        }
-
-        .checkbox.group input[type="checkbox"],
-        .radio.group input[type="radio"] {
-            margin-right: var(--a-space-xs); /* Use Axiom01 spacing variable */
-            /* Minimal custom styling for checkboxes/radios if needed, otherwise native */
-            width: auto; /* Override 100% width */
-            padding: 0;
-        }
-
-        .checkbox.group label,
-        .radio.group label {
-            margin-bottom: 0; /* Override default label margin */
-            cursor: pointer;
-        }
-
-        /* Help and Error text */
-        .help-text {
-            font-size: var(--a-font-size-small, 0.875rem);
-            color: var(--a-color-on-surface-variant);
-            margin-top: var(--a-space-xs); /* Use Axiom01 spacing variable */
-        }
-
-        .error-text {
-            font-size: var(--a-font-size-small, 0.875rem);
-            color: var(--a-color-error);
-            margin-top: var(--a-space-xs); /* Use Axiom01 spacing variable */
-        }
-
-        /* File input specific styling */
-        input[type="file"] {
-            border: 1px solid var(--a-color-outline);
-            padding: var(--a-space-s);
-            border-radius: var(--a-border-radius-small);
-            background-color: var(--a-color-surface);
-        }
-
-        /* Range input specific styling */
-        input[type="range"] {
-            padding: 0; /* Native range inputs don't need padding */
-            background: transparent; /* Override background */
-            border: none; /* Override border */
-            box-shadow: none; /* Override box-shadow */
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: var(--a-space-m);
-            width: var(--a-space-m);
-            border-radius: 50%;
-            background: var(--a-color-primary);
-            cursor: pointer;
-            margin-top: calc((var(--a-space-xs) - var(--a-space-m)) / 2); /* Center thumb vertically */
-        }
-        input[type="range"]::-moz-range-thumb {
-            height: var(--a-space-m);
-            width: var(--a-space-m);
-            border-radius: 50%;
-            background: var(--a-color-primary);
-            cursor: pointer;
-        }
-        input[type="range"]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: var(--a-space-xs);
-            background: var(--a-color-outline);
-            border-radius: var(--a-border-radius-small);
-        }
-        input[type="range"]::-moz-range-track {
-            width: 100%;
-            height: var(--a-space-xs);
-            background: var(--a-color-outline);
-            border-radius: var(--a-border-radius-small);
-        }
-
-        /* Buttons in forms - using existing button styles */
-        .form-actions {
-            display: flex;
-            gap: var(--a-space-m);
-            margin-top: var(--a-space-xl);
-        }
-    </style>
+    <link rel="stylesheet" href="../css/axicons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
-<body class="form-elements-doc">
-    <header>
-        <nav class="page-nav">
-            <a href="../index.html">Home</a>
-            <a href="components/accordion.html">Accordion</a>
-            <a href="components/dropdown.html">Dropdown</a>
-            <a href="components/mobile-navbar.html">Mobile Navbar</a>
-            <a href="components/search.html">Search</a>
-            <a href="components/editor.html">Editor</a>
-            <a href="components/button.html">Button</a>
-            <a href="form-elements.html">Form Elements</a>
-            <a href="components/spacing-demo.html">Spacing Demo</a>
+<body class="axiom-body">
+    <!-- HEADER: Standard Navigation -->
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="../index.html#philosophy">Philosophy</a></li>
+                <li><a href="../index.html#components">Components</a></li>
+                <li><a href="../index.html#get-started">Get Started</a></li>
+                <li><a href="components-overview.html" aria-current="page">Docs</a></li>
+            </ul>
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="axicon render" data-name="Moon"></span>
+                </button>
+                <button class="menu toggle" aria-label="Toggle Menu">
+                    <span class="axicon render" data-name="Menu"></span>
+                </button>
+            </div>
         </nav>
     </header>
 
+    <!-- MAIN CONTENT: Semantic page structure -->
     <main>
-        <article class="content">
-            <h1>Form Elements</h1>
-            <p>Axiom01 provides a clean, accessible, and highly customizable base for common form elements. We leverage native HTML elements as much as possible, applying minimal styling to ensure consistency across browsers while allowing for easy customization via CSS variables.</p>
+        <section class="container">
+            <!-- PAGE TITLE & INTRO -->
+            <header>
+                <h1>Form Elements</h1>
+                <p>Complete form components and patterns</p>
+            </header>
 
-            <section class="section">
-                <h2>Text Inputs</h2>
-                <p>Standard text input fields for various types of user data.</p>
-                <div class="live">
-                    <div class="form-group">
-                        <label for="textInput">Text Input</label>
-                        <input type="text" id="textInput" placeholder="Enter text here">
-                        <p class="help-text">This is some helpful text for the input.</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="emailInput">Email Input</label>
-                        <input type="email" id="emailInput" placeholder="your@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="passwordInput">Password Input</label>
-                        <input type="password" id="passwordInput" placeholder="••••••••">
-                    </div>
-                    <div class="form-group">
-                        <label for="numberInput">Number Input</label>
-                        <input type="number" id="numberInput" value="123">
-                    </div>
-                    <div class="form-group">
-                        <label for="dateInput">Date Input</label>
-                        <input type="date" id="dateInput" value="2023-10-26">
-                    </div>
-                    <div class="form-group">
-                        <label for="timeInput">Time Input</label>
-                        <input type="time" id="timeInput" value="14:30">
-                    </div>
-                    <div class="form-group">
-                        <label for="disabledInput">Disabled Input</label>
-                        <input type="text" id="disabledInput" value="Cannot edit this" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="errorInput">Input with Error</label>
-                        <input type="text" id="errorInput" value="Invalid data" class="error" aria-invalid="true" aria-describedby="errorInputHelp">
-                        <p id="errorInputHelp" class="error-text">This field has an error.</p>
-                    </div>
-                </div>
-                <div class="code-block">
-<pre><code class="language-html">&lt;div class="form-group"&gt;
-  &lt;label for="textInput"&gt;Text Input&lt;/label&gt;
-  &lt;input type="text" id="textInput" placeholder="Enter text here"&gt;
-  &lt;p class="help-text"&gt;This is some helpful text for the input.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="form-group"&gt;
-  &lt;label for="disabledInput"&gt;Disabled Input&lt;/label&gt;
-  &lt;input type="text" id="disabledInput" value="Cannot edit this" disabled&gt;
-&lt;/div&gt;
-&lt;div class="form-group"&gt;
-  &lt;label for="errorInput"&gt;Input with Error&lt;/label&gt;
-  &lt;input type="text" id="errorInput" value="Invalid data" class="error" aria-invalid="true" aria-describedby="errorInputHelp"&gt;
-  &lt;p id="errorInputHelp" class="error-text"&gt;This field has an error.&lt;/p&gt;
-&lt;/div&gt;</code></pre>
+            <!-- CONTENT SECTIONS: Use semantic HTML with core classes only -->
+                        <section class="hero small">
+                <div class="container">
+                    <h1>Form Elements</h1>
+                    <p>Complete form components and patterns</p>
                 </div>
             </section>
 
-            <section class="section">
-                <h2>Textarea</h2>
-                <p>Multi-line text input for longer content.</p>
-                <div class="live">
-                    <div class="form-group">
-                        <label for="textareaInput">Textarea</label>
-                        <textarea id="textareaInput" rows="5" placeholder="Enter your message here..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="disabledTextarea">Disabled Textarea</label>
-                        <textarea id="disabledTextarea" rows="3" disabled>This textarea is disabled.</textarea>
-                    </div>
-                </div>
-                <div class="code-block">
-<pre><code class="language-html">&lt;div class="form-group"&gt;
-  &lt;label for="textareaInput"&gt;Textarea&lt;/label&gt;
-  &lt;textarea id="textareaInput" rows="5" placeholder="Enter your message here..."&gt;&lt;/textarea&gt;
-&lt;/div&gt;
-&lt;div class="form-group"&gt;
-  &lt;label for="disabledTextarea"&gt;Disabled Textarea&lt;/label&gt;
-  &lt;textarea id="disabledTextarea" rows="3" disabled&gt;This textarea is disabled.&lt;/textarea&gt;
-&lt;/div&gt;</code></pre>
+            <section>
+                <div class="container">
+                    <h2>Overview</h2>
+                    <p>This page covers complete form components and patterns.</p>
                 </div>
             </section>
 
-            <section class="section">
-                <h2>Select Dropdown</h2>
-                <p>Standard dropdown for selecting options.</p>
-                <div class="live">
-                    <div class="form-group">
-                        <label for="selectInput">Select Option</label>
-                        <select id="selectInput">
-                            <option value="">--Please choose an option--</option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="disabledSelect">Disabled Select</label>
-                        <select id="disabledSelect" disabled>
-                            <option value="">--Cannot select--</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="code-block">
-<pre><code class="language-html">&lt;div class="form-group"&gt;
-  &lt;label for="selectInput"&gt;Select Option&lt;/label&gt;
-  &lt;select id="selectInput"&gt;
-    &lt;option value=""&gt;--Please choose an option--&lt;/option&gt;
-    &lt;option value="option1"&gt;Option 1&lt;/option&gt;
-    &lt;option value="option2"&gt;Option 2&lt;/option&gt;
-    &lt;option value="option3"&gt;Option 3&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/div&gt;
-&lt;div class="form-group"&gt;
-  &lt;label for="disabledSelect"&gt;Disabled Select&lt;/label&gt;
-  &lt;select id="disabledSelect" disabled&gt;
-    &lt;option value=""&gt;--Cannot select--&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>Checkboxes and Radios</h2>
-                <p>Single or multiple selections.</p>
-                <div class="live">
-                    <div class="form-group">
-                        <p><strong>Checkboxes</strong></p>
-                        <div class="checkbox group">
-                            <input type="checkbox" id="checkbox1" name="checkbox-group-example">
-                            <label for="checkbox1">Checkbox 1</label>
-                        </div>
-                        <div class="checkbox group">
-                            <input type="checkbox" id="checkbox2" name="checkbox-group-example" checked>
-                            <label for="checkbox2">Checkbox 2 (Checked)</label>
-                        </div>
-                        <div class="checkbox group">
-                            <input type="checkbox" id="checkbox3" name="checkbox-group-example" disabled>
-                            <label for="checkbox3">Checkbox 3 (Disabled)</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <p><strong>Radio Buttons</strong></p>
-                        <div class="radio group">
-                            <input type="radio" id="radio1" name="radio-group-example" value="radio1">
-                            <label for="radio1">Radio 1</label>
-                        </div>
-                        <div class="radio group">
-                            <input type="radio" id="radio2" name="radio-group-example" value="radio2" checked>
-                            <label for="radio2">Radio 2 (Checked)</label>
-                        </div>
-                        <div class="radio group">
-                            <input type="radio" id="radio3" name="radio-group-example" value="radio3" disabled>
-                            <label for="radio3">Radio 3 (Disabled)</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="code-block">
-<pre><code class="language-html">&lt;div class="form-group"&gt;
-  &lt;p&gt;&lt;strong&gt;Checkboxes&lt;/strong&gt;&lt;/p&gt;
-  &lt;div class="checkbox group"&gt;
-    &lt;input type="checkbox" id="checkbox1" name="checkbox-group-example"&gt;
-    &lt;label for="checkbox1"&gt;Checkbox 1&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div class="checkbox group"&gt;
-    &lt;input type="checkbox" id="checkbox2" name="checkbox-group-example" checked&gt;
-    &lt;label for="checkbox2"&gt;Checkbox 2 (Checked)&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="form-group"&gt;
-  &lt;p&gt;&lt;strong&gt;Radio Buttons&lt;/strong&gt;&lt;/p&gt;
-  &lt;div class="radio group"&gt;
-    &lt;input type="radio" id="radio1" name="radio-group-example" value="radio1"&gt;
-    &lt;label for="radio1"&gt;Radio 1&lt;/label&gt;
-  &lt;/div&gt;
-  &lt;div class="radio group"&gt;
-    &lt;input type="radio" id="radio2" name="radio-group-example" value="radio2" checked&gt;
-    &lt;label for="radio2"&gt;Radio 2 (Checked)&lt;/label&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>File Input</h2>
-                <p>For uploading files.</p>
-                <div class="live">
-                    <div class="form-group">
-                        <label for="fileInput">Upload File</label>
-                        <input type="file" id="fileInput">
-                    </div>
-                </div>
-                <div class="code-block">
-<pre><code class="language-html">&lt;div class="form-group"&gt;
-  &lt;label for="fileInput"&gt;Upload File&lt;/label&gt;
-  &lt;input type="file" id="fileInput"&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>Range Slider</h2>
-                <p>For selecting a value from a specified range.</p>
-                <div class="live">
-                    <div class="form-group">
-                        <label for="rangeInput">Range Slider</label>
-                        <input type="range" id="rangeInput" min="0" max="100" value="50">
-                    </div>
-                </div>
-                <div class="code-block">
-<pre><code class="language-html">&lt;div class="form-group"&gt;
-  &lt;label for="rangeInput"&gt;Range Slider&lt;/label&gt;
-  &lt;input type="range" id="rangeInput" min="0" max="100" value="50"&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>Buttons in Forms</h2>
-                <p>Examples of buttons used within a form context.</p>
-                <div class="live">
-                    <div class="form-actions">
-                        <button type="submit" class="primary">Submit</button>
-                        <button type="reset">Reset</button>
-                        <button type="button">Cancel</button>
-                    </div>
-                </div>
-                <div class="code-block">
-<pre><code class="language-html">&lt;div class="form-actions"&gt;
-  &lt;button type="submit" class="primary"&gt;Submit&lt;/button&gt;
-  &lt;button type="reset"&gt;Reset&lt;/button&gt;
-  &lt;button type="button"&gt;Cancel&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-        </article>
+        </section>
     </main>
 
-    <footer>
-        <p class="note">Axiom01 form elements prioritize semantic HTML, accessibility, and theme consistency through CSS variables.</p>
+    <!-- FOOTER: New ax-footer component -->
+    <footer class="ax-footer">
+        <div class="ax-footer-content">
+            <section class="ax-footer-brand" aria-label="Brand Information">
+                <a href="../index.html" class="ax-footer-logo">[Ax<span class="primary">01</span>]</a>
+                <p class="ax-footer-tagline">The Semantic Web, Reimagined.</p>
+            </section>
+            <nav class="ax-footer-links" aria-label="Footer Navigation">
+                <section class="ax-footer-column">
+                    <h3>Documentation</h3>
+                    <ul>
+                        <li><a href="components-overview.html">Components</a></li>
+                        <li><a href="layout-advanced.html">Layout Guide</a></li>
+                        <li><a href="colors-advanced.html">Colors & Themes</a></li>
+                        <li><a href="typography-advanced.html">Typography</a></li>
+                    </ul>
+                </section>
+                <section class="ax-footer-column">
+                    <h3>Community</h3>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">npm</a></li>
+                    </ul>
+                </section>
+                <section class="ax-footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="interactive-playground.html">Playground</a></li>
+                        <li><a href="../index.html#philosophy">Philosophy</a></li>
+                        <li><a href="../index.html#release-info">Release Info</a></li>
+                    </ul>
+                </section>
+            </nav>
+        </div>
+        <div class="ax-footer-bottom">
+            <p class="ax-footer-copyright">&copy; 2025 Axiom01. All rights reserved.</p>
+        </div>
     </footer>
+
+    <!-- SCRIPTS: Core only -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script src="../js/axiom.js"></script>
+    <script src="../js/axicons.js"></script>
+    <script src="../js/sticky-header.js"></script>
+    <script src="../js/release-loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>
-

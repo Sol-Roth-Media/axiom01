@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Components by Category - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.css">
-    <link rel="stylesheet" href="../css/doc-styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/axicons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body class="axiom-body">
+    <!-- HEADER: Standard Navigation -->
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
@@ -19,179 +18,97 @@
                 <li><a href="../index.html#philosophy">Philosophy</a></li>
                 <li><a href="../index.html#components">Components</a></li>
                 <li><a href="../index.html#get-started">Get Started</a></li>
-                <li><a href="components-overview.html">Documentation</a></li>
+                <li><a href="components-overview.html" aria-current="page">Docs</a></li>
             </ul>
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
                 <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Moon"></span>
                 </button>
                 <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Menu"></span>
                 </button>
             </div>
         </nav>
     </header>
 
+    <!-- MAIN CONTENT: Semantic page structure -->
     <main>
-            <section class="hero small">
-                <div class="content">
-                    <h1 class="title" id="category-title">Components</h1>
-                    <p class="description" id="category-description">Explore Axiom01 components organized by category. Click on any component to view its detailed documentation and live examples.</p>
-                </div>
+        <section class="container">
+            <!-- PAGE TITLE & INTRO -->
+            <header>
+                <h1>Components by Category</h1>
+                <p>Browse all components organized by category</p>
+            </header>
+
+            <!-- CONTENT SECTIONS: Use semantic HTML with core classes only -->
+                        <header>
+                <h1>Components by Category</h1>
+                <p>Browse all components organized by category</p>
+            </header>
+
+            <section>
+                <h2>Overview</h2>
+                <p>This page covers browse all components organized by category.</p>
             </section>
 
-            <section id="component-list-by-category">
-                <div class="container">
-                    <div class="component-grid" id="dynamic-component-grid">
-                        <!-- Components will be dynamically loaded here -->
-                    </div>
-                </div>
+        </section>
+    </main>
+
+    <!-- FOOTER: New ax-footer component -->
+    <footer class="ax-footer">
+        <div class="ax-footer-content">
+            <section class="ax-footer-brand" aria-label="Brand Information">
+                <a href="../index.html" class="ax-footer-logo">[Ax<span class="primary">01</span>]</a>
+                <p class="ax-footer-tagline">The Semantic Web, Reimagined.</p>
             </section>
-        </main>
-
-    <script src="../js/index-page-manager.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const categoryTitle = document.getElementById('category-title');
-            const categoryDescription = document.getElementById('category-description');
-            const dynamicComponentGrid = document.getElementById('dynamic-component-grid');
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const category = urlParams.get('category');
-
-            const allComponents = [
-                // Feedback & Status
-                { name: "Alert", file: "components/alert.html", icon: "fas fa-exclamation-triangle", description: "Provide contextual feedback with accessible, theme-aware alerts.", category: "feedback" },
-                { name: "Notification", file: "components/notification.html", icon: "fas fa-bell", description: "Display short, timely messages to users.", category: "feedback" },
-                { name: "Progress", file: "components/progress.html", icon: "fas fa-spinner", description: "Visual feedback on the status of ongoing processes.", category: "feedback" },
-                { name: "Empty State", file: "components/empty-state.html", icon: "fas fa-box-open", description: "User-friendly messages for when there's no content to display.", category: "feedback" },
-                { name: "Skeleton", file: "components/skeleton.html", icon: "fas fa-bone", description: "Visual placeholders for content that is still loading.", category: "feedback" },
-
-                // Forms & Inputs
-                { name: "Forms", file: "components/forms.html", icon: "fas fa-edit", description: "Accessible and consistently styled input fields, selects, and textareas.", category: "forms" },
-                { name: "Editor", file: "components/editor.html", icon: "fas fa-pencil-alt", description: "Foundational styling for rich text editing.", category: "forms" },
-                { name: "Datepicker", file: "components/datepicker.html", icon: "fas fa-calendar-alt", description: "Styled date input fields for easy date selection.", category: "forms" },
-                { name: "File Upload", file: "components/file-upload.html", icon: "fas fa-file-upload", description: "Styled native file inputs and drag-and-drop areas.", category: "forms" },
-                { name: "Multi-Step Form", file: "components/multi-step-form.html", icon: "fas fa-list-ol", description: "Guide users through complex data entry processes.", category: "forms" },
-                { name: "Slider", file: "components/slider.html", icon: "fas fa-sliders-h", description: "Native HTML range input styling for value selection.", category: "forms" },
-                { name: "Toggle", file: "components/toggle.html", icon: "fas fa-toggle-on", description: "Visually distinct and accessible switches for binary choices.", category: "forms" },
-
-                // Navigation & Layout
-                { name: "Accordion", file: "components/accordion.html", icon: "fas fa-plus-square", description: "Toggle visibility of content sections using native HTML.", category: "navigation" },
-                { name: "Breadcrumb", file: "components/breadcrumb.html", icon: "fas fa-route", description: "Clear navigation path indicating user's location.", category: "navigation" },
-                { name: "Dropdown", file: "components/dropdown.html", icon: "fas fa-chevron-down", description: "Toggleable, contextual overlays for lists of links or actions.", category: "navigation" },
-                { name: "Mobile Navbar", file: "components/mobile-navbar.html", icon: "fas fa-bars", description: "Responsive navigation for smaller screens.", category: "navigation" },
-                { name: "Navigation", file: "components/navigation.html", icon: "fas fa-compass", description: "Suite of navigation components for clear site structure.", category: "navigation" },
-                { name: "Pagination", file: "components/pagination.html", icon: "fas fa-ellipsis-h", description: "Navigate through large sets of content.", category: "navigation" },
-                { name: "Sidebar", file: "components/sidebar.html", icon: "fas fa-columns", description: "Flexible and responsive sidebar for navigation or content.", category: "navigation" },
-                { name: "Tabs", file: "components/tabs.html", icon: "fas fa-folder", description: "Organize and display content in a compact, navigable interface.", category: "navigation" },
-                { name: "Timeline", file: "components/timeline.html", icon: "fas fa-stream", description: "Visually engaging way to display a series of events chronologically.", category: "navigation" },
-
-                // Content Display
-                { name: "Avatar", file: "components/avatar.html", icon: "fas fa-user-circle", description: "Display a user's profile picture, initials, or generic icon.", category: "display" },
-                { name: "Badge", file: "components/badge.html", icon: "fas fa-tag", description: "Highlight small pieces of information like counts or statuses.", category: "display" },
-                { name: "Button", file: "components/button.html", icon: "fas fa-hand-pointer", description: "Clear, semantic calls to action with various styles and sizes.", category: "display" },
-                { name: "Card", file: "components/card.html", icon: "fas fa-clone", description: "Flexible content containers for grouping related information.", category: "display" },
-                { name: "Carousel", file: "components/carousel.html", icon: "fas fa-images", description: "Flexible, responsive slideshow for cycling through content.", category: "display" },
-                { name: "Chat", file: "components/chat.html", icon: "fas fa-comments", description: "Clean and functional interface for displaying conversational messages.", category: "display" },
-                { name: "Commerce", file: "components/commerce.html", icon: "fas fa-shopping-cart", description: "Foundational components for building e-commerce interfaces.", category: "display" },
-                { name: "Footer", file: "components/footer.html", icon: "fas fa-shoe-prints", description: "Structured and semantic way to display site-wide content.", category: "display" },
-                { name: "Hero", file: "components/hero.html", icon: "fas fa-star", description: "Prominent, full-width section to capture attention.", category: "display" },
-                { name: "Media & Icons", file: "components/media.html", icon: "fas fa-photo-video", description: "Robust approach to handling media assets and icons.", category: "display" },
-                { name: "Table", file: "components/table.html", icon: "fas fa-table", description: "Clean, semantic, and responsive styling for tabular data.", category: "display" },
-
-                // AI Integrations
-                { name: "AI Chat", file: "components/ai-chat.html", icon: "fas fa-robot", description: "Ready-to-use UI component for integrating conversational AI.", category: "ai" },
-                { name: "AI Image Generator", file: "components/ai-image-generator.html", icon: "fas fa-image", description: "Structured UI for AI-powered image generation.", category: "ai" },
-
-                // Utilities & Overlays
-                { name: "Drawer", file: "components/drawer.html", icon: "fas fa-box", description: "Hidden panel that slides in from the edge of the screen.", category: "overlay" },
-                { name: "Modal", file: "components/modal.html", icon: "fas fa-window-maximize", description: "Flexible and accessible way to display dialogs or alerts.", category: "overlay" },
-                { name: "Tooltip", file: "components/tooltip.html", icon: "fas fa-info-circle", description: "Small, contextual popup for informative text.", category: "overlay" },
-                { name: "Paywall", file: "components/paywall.html", icon: "fas fa-lock", description: "Flexible and customizable component to restrict content access.", category: "overlay" },
-                { name: "Settings", file: "components/settings.html", icon: "fas fa-cog", description: "Flexible structure for creating settings panels or preference forms.", category: "overlay" },
-                { name: "Spacing Demo", file: "components/spacing-demo.html", icon: "fas fa-ruler-combined", description: "Visually illustrates Axiom01's cascading spacing system.", category: "overlay" },
-            ];
-
-            const categoryMap = {
-                "feedback": { title: "Feedback & Status Components", description: "Components designed to provide users with clear feedback, indicate status, or manage loading states." },
-                "forms": { title: "Forms & Input Components", description: "Components for collecting user input, from basic fields to complex multi-step forms and rich text editors." },
-                "navigation": { title: "Navigation & Layout Components", description: "Components that help users navigate your application and structure your content effectively." },
-                "display": { title: "Content Display Components", description: "Components for presenting various types of content in an organized and engaging manner." },
-                "ai": { title: "AI Integration Components", description: "Ready-to-use components for integrating artificial intelligence features into your applications." },
-                "overlay": { title: "Utilities & Overlay Components", description: "Components that provide utility functions or overlay content on top of the main interface." }
-            };
-
-            if (category && categoryMap[category]) {
-                categoryTitle.textContent = categoryMap[category].title;
-                categoryDescription.textContent = categoryMap[category].description;
-                const filteredComponents = allComponents.filter(comp => comp.category === category);
-                renderComponents(filteredComponents);
-            } else {
-                categoryTitle.textContent = "All Components";
-                categoryDescription.textContent = "Browse all Axiom01 components organized by category.";
-                renderComponents(allComponents); // Render all if no specific category or invalid category
-            }
-
-            function renderComponents(componentsToRender) {
-                dynamicComponentGrid.innerHTML = ''; // Clear existing content
-                componentsToRender.forEach(component => {
-                    const componentCard = document.createElement('a');
-                    componentCard.href = component.file;
-                    componentCard.classList.add('card', 'link');
-                    componentCard.innerHTML = `
-                        <i class="${component.icon}" aria-hidden="true"></i>
-                        <h3>${component.name}</h3>
-                        <p>${component.description}</p>
-                    `;
-                    dynamicComponentGrid.appendChild(componentCard);
-                });
-            }
-        });
-    </script>
-    <footer class="main">
-        <div class="content">
-            <div class="brand">
-                <a href="../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-                <p class="tagline">The Semantic Web, Reimagined.</p>
-            </div>
-            <div class="links">
-                <div class="column">
-                    <h4>Documentation</h4>
+            <nav class="ax-footer-links" aria-label="Footer Navigation">
+                <section class="ax-footer-column">
+                    <h3>Documentation</h3>
                     <ul>
-                        <li><a href="components-overview.html">Component Overview</a></li>
-                        <li><a href="../README.md">README</a></li>
-                        <li><a href="../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../index.html#get-started">Getting Started</a></li>
+                        <li><a href="components-overview.html">Components</a></li>
+                        <li><a href="layout-advanced.html">Layout Guide</a></li>
+                        <li><a href="colors-advanced.html">Colors & Themes</a></li>
+                        <li><a href="typography-advanced.html">Typography</a></li>
                     </ul>
-                </div>
-                <div class="column">
-                    <h4>Community</h4>
+                </section>
+                <section class="ax-footer-column">
+                    <h3>Community</h3>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">npm</a></li>
                     </ul>
-                </div>
-                <div class="column">
-                    <h4>More</h4>
+                </section>
+                <section class="ax-footer-column">
+                    <h3>Resources</h3>
                     <ul>
                         <li><a href="interactive-playground.html">Playground</a></li>
-                        <li><a href="../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../index.html#philosophy">Philosophy</a></li>
                         <li><a href="../index.html#release-info">Release Info</a></li>
                     </ul>
-                </div>
-            </div>
+                </section>
+            </nav>
         </div>
-        <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+        <div class="ax-footer-bottom">
+            <p class="ax-footer-copyright">&copy; 2025 Axiom01. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- SCRIPTS: Core only -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script src="../js/axiom.js"></script>
+    <script src="../js/axicons.js"></script>
+    <script src="../js/sticky-header.js"></script>
+    <script src="../js/release-loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>
