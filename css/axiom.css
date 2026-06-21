@@ -2853,17 +2853,19 @@ footer.main {
 }
 
 footer.main .content {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: var(--a-space-xxl);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--a-space-xl);
-    align-items: start;
+    gap: var(--a-space-xxl);
+    flex-wrap: nowrap;
 }
 
 footer.main .brand {
-    grid-column: 1;
+    flex-shrink: 0;
+    min-width: 200px;
 }
 
 footer.main .logo {
@@ -2872,44 +2874,32 @@ footer.main .logo {
     font-size: 1.75rem;
     text-decoration: none;
     color: var(--a-color-on-surface);
-}
-
-footer.main .version {
-    font-size: 0.8rem;
-    color: var(--a-color-on-surface-variant);
-    margin-left: var(--a-space-s);
+    display: block;
+    margin-bottom: var(--a-space-s);
 }
 
 footer.main .tagline {
     color: var(--a-color-on-surface-variant);
     font-size: 0.9rem;
-}
-
-footer.main .social {
-    display: flex;
-    gap: var(--a-space-m);
-    margin-top: var(--a-space-m);
-}
-
-footer.main .social a {
-    color: var(--a-color-on-surface-variant);
-    font-size: 1.2rem;
-}
-
-footer.main .column {
-    flex: 1;
-    min-width: auto;
+    margin: 0;
 }
 
 footer.main .links {
     display: flex;
-    flex-wrap: wrap;
     gap: var(--a-space-xxl);
-    grid-column: 2;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+footer.main .column {
+    flex-shrink: 0;
 }
 
 footer.main .column h4 {
-    margin: 0 0 var(--a-space-m);
+    margin: 0 0 var(--a-space-m) 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--a-color-on-surface);
 }
 
 footer.main .column ul {
@@ -2921,50 +2911,19 @@ footer.main .column ul {
     gap: var(--a-space-s);
 }
 
+footer.main .column ul li {
+    margin: 0;
+}
+
 footer.main .column ul li a {
     color: var(--a-color-primary);
     text-decoration: none;
-    transition: color 0.2s ease;
+    font-size: 0.95rem;
 }
 
 footer.main .column ul li a:hover {
     text-decoration: underline;
 }
-
-
-
-/* Desktop: Keep grid layout */
-@media (min-width: 1024px) {
-    footer.main .content {
-        display: grid !important;
-        grid-template-columns: auto 1fr !important;
-        gap: var(--a-space-xxl) !important;
-        align-items: start !important;
-    }
-    
-    footer.main .brand {
-        grid-column: 1 !important;
-    }
-    
-    footer.main .links {
-        grid-column: 2 !important;
-    }
-}
-
-@media (max-width: 1023px) {
-    footer.main .content {
-        grid-template-columns: 1fr;
-    }
-    
-    footer.main .brand {
-        grid-column: 1;
-    }
-    
-    footer.main .links {
-        grid-column: 1;
-    }
-}
-
 
 footer.main .bottom {
     text-align: center;
@@ -2972,30 +2931,29 @@ footer.main .bottom {
     margin-top: var(--a-space-xl);
     border-top: 1px solid var(--a-color-outline);
     max-width: 1200px;
-    margin: var(--a-space-xl) auto 0;
-    padding: var(--a-space-xl) var(--a-space-xl) 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--a-space-xl);
+    padding-right: var(--a-space-xl);
 }
 
-footer.main.simple .content {
-    align-items: center;
+footer.main .bottom p {
+    margin: 0 0 var(--a-space-s) 0;
+    color: var(--a-color-on-surface);
 }
 
-footer.main.minimal {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--a-space-l) var(--a-space-xl);
+@media (max-width: 1023px) {
+    footer.main .content {
+        flex-direction: column;
+        gap: var(--a-space-xl);
+    }
+    
+    footer.main .links {
+        flex-direction: column;
+        gap: var(--a-space-xl);
+        justify-content: flex-start;
+    }
 }
-
-footer.main.minimal p {
-    margin: 0;
-}
-
-footer.main.minimal nav {
-    display: flex;
-    gap: var(--a-space-m);
-}
-
 
 /* --- Example Sites Section --- */
 #example-sites .card {
