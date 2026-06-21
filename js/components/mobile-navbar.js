@@ -31,20 +31,6 @@ export default {
       const isOpen = element.classList.toggle('menu-open');
       menuToggleButton.setAttribute('aria-expanded', isOpen);
       navLinks.setAttribute('aria-hidden', !isOpen);
-      
-      // Lock/unlock body scroll when menu opens/closes
-      const body = document.body;
-      const axionBody = document.querySelector('.axiom-body');
-      
-      if (isOpen) {
-        // Menu is opening - lock scroll
-        body.classList.add('menu-scroll-locked');
-        if (axionBody) axionBody.classList.add('menu-scroll-locked');
-      } else {
-        // Menu is closing - unlock scroll
-        body.classList.remove('menu-scroll-locked');
-        if (axionBody) axionBody.classList.remove('menu-scroll-locked');
-      }
     };
 
     const clickHandler = (event) => {
@@ -111,11 +97,6 @@ export default {
 
         // Ensure menu is closed visually
         element.classList.remove('menu-open');
-        
-        // Unlock scroll
-        document.body.classList.remove('menu-scroll-locked');
-        const axionBody = document.querySelector('.axiom-body');
-        if (axionBody) axionBody.classList.remove('menu-scroll-locked');
       }
     };
   }
