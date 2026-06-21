@@ -1741,6 +1741,81 @@ a.card { text-decoration: none; color: var(--a-color-on-surface); }
     border-top: 1px solid var(--a-color-outline);
 }
 
+/* Auto-target anchor cards for interactive states */
+a.card,
+button.card {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+a.card:hover,
+button.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--a-shadow-lg);
+    border-color: var(--a-color-primary);
+}
+
+/* Auto-target figures directly inside cards for media/previews */
+.card > figure {
+    margin: calc(var(--a-space-l) * -1) calc(var(--a-space-l) * -1) var(--a-space-m);
+    padding: var(--a-space-xl);
+    border-bottom: 1px solid var(--ax-border);
+    border-radius: var(--a-border-radius-base) var(--a-border-radius-base) 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--ax-background-secondary); /* Auto-fills background */
+}
+
+/* Ensure preview components fit automatically */
+.card > figure > * {
+    max-width: 100%;
+    margin: 0; /* Clears margins for embedded preview components like alerts */
+}
+
+/* If a card starts with an axicon, style it as a feature/fact automatically */
+.card > .axicon:first-child {
+    font-size: 2.5rem;
+    color: var(--a-color-primary);
+    margin-bottom: var(--a-space-m);
+    display: block;
+}
+
+/* If a card has a footer, push it to the bottom automatically */
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card > footer {
+    margin-top: auto; /* Pushes footer to the bottom */
+    padding-top: var(--a-space-m);
+    border-top: none; /* Override default card footer border if desired */
+    background: transparent;
+}
+
+.card.ghost {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    text-align: center; /* Auto-centers text for ghost cards */
+    padding: 0;
+}
+
+.card.ghost:hover {
+    transform: translateY(-2px);
+    box-shadow: none;
+}
+
+/* Center icons in ghost cards */
+.card.ghost > .axicon:first-child {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 
 /* --- Adaptive Media Cards --- */
 /* Responsive cards that prioritize media (image/video) for optimal viewing */
