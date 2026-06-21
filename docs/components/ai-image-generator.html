@@ -235,7 +235,27 @@
         <div class="bottom">
             <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
         </div>
-    </footer>    <script src="../../js/axicons.js"></script>
+    </footer>
+    <script src="../../js/axicons.js"></script>
+	<script>
+		function renderAxicons() {
+			if (typeof axicons !== 'undefined' && axicons.length > 0) {
+				document.querySelectorAll('.axicon.render').forEach(el => {
+					const name = el.getAttribute('data-name');
+					if (name) {
+						const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+						if (icon) {
+							el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">${icon.svgContent}</svg>`;
+						}
+					}
+				});
+			}
+		}
+		// Render icons immediately and on load
+		renderAxicons();
+		window.addEventListener('load', renderAxicons);
+		document.addEventListener('DOMContentLoaded', renderAxicons);
+	</script>
 	<script>
 		function renderAxicons() {
 			if (typeof axicons !== 'undefined' && axicons.length > 0) {
