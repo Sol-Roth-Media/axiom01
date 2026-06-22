@@ -10,6 +10,84 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .sidebar-demo {
+            display: flex;
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            overflow: hidden;
+            margin: var(--a-space-l) 0;
+            height: 400px;
+            background: var(--ax-surface);
+        }
+        
+        .sidebar-demo aside {
+            width: 250px;
+            background: var(--a-color-primary-container);
+            padding: var(--a-space-l);
+            border-right: 1px solid var(--ax-border);
+            overflow-y: auto;
+        }
+        
+        .sidebar-demo aside h3 {
+            margin: 0 0 var(--a-space-m) 0;
+            font-size: var(--a-font-size-lg);
+            color: var(--a-color-primary);
+        }
+        
+        .sidebar-demo aside nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .sidebar-demo aside nav li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .sidebar-demo aside nav a {
+            display: block;
+            padding: var(--a-space-m);
+            color: var(--a-color-primary);
+            text-decoration: none;
+            border-radius: var(--a-border-radius-md);
+            transition: background-color var(--a-transition-base) var(--a-ease-out);
+        }
+        
+        .sidebar-demo aside nav a:hover {
+            background: rgba(0, 102, 204, 0.1);
+        }
+        
+        .sidebar-demo aside nav a.active {
+            background: var(--a-color-primary);
+            color: white;
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .sidebar-demo main {
+            flex: 1;
+            padding: var(--a-space-l);
+            overflow-y: auto;
+        }
+        
+        .sidebar-demo main h4 {
+            margin-top: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-demo {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .sidebar-demo aside {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--ax-border);
+            }
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -38,20 +116,186 @@
     <main><section><div class="container">
         <header>
             <h1>Sidebar</h1>
-            <p class="text-muted">Axiom01 provides a flexible and responsive sidebar component, ideal for navigation, supplementary content, or applicatio...</p>
+            <p class="text-muted">Axiom01's sidebar component is a flexible layout component for navigation, supplementary content, or application menus. It adapts responsively to different screen sizes.</p>
         </header>
 
         <div class="component-section">
 
-						 <div class="section">
-								 <h2 class="title">Live Example</h2>
-								 <div class="live">
-										 <div class="sidebar-layout">
-												 
-												 <main class="sidebar-content">
-														 <p>This is the main content area. The sidebar is on the left.</p>
-														 <p>Resize your browser to see how the sidebar adapts to different screen sizes.</p>
-														 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <section>
+                <h2>Live Examples</h2>
+
+                <h3>Basic Sidebar Layout</h3>
+                <div class="sidebar-demo">
+                    <aside role="complementary" aria-label="Sidebar Navigation">
+                        <h3>Navigation</h3>
+                        <nav>
+                            <ul>
+                                <li><a href="#" class="active"><span class="axicon render" data-name="Home"></span> Dashboard</a></li>
+                                <li><a href="#"><span class="axicon render" data-name="File"></span> Projects</a></li>
+                                <li><a href="#"><span class="axicon render" data-name="Users"></span> Team</a></li>
+                                <li><a href="#"><span class="axicon render" data-name="Settings"></span> Settings</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+                    <main>
+                        <h4>Main Content Area</h4>
+                        <p>This is the primary content area. The sidebar on the left contains navigation items.</p>
+                        <p>Resize your browser to see how the sidebar adapts to different screen sizes. On mobile, the sidebar would typically collapse or stack vertically.</p>
+                    </main>
+                </div>
+
+                <h3>Collapsible Sidebar</h3>
+                <p>On smaller screens, sidebars often collapse into icons or hide completely:</p>
+                <div class="sidebar-demo">
+                    <aside role="complementary" aria-label="Sidebar Navigation" style="width: 80px; padding: var(--a-space-m);">
+                        <nav style="display: flex; flex-direction: column; gap: var(--a-space-m);">
+                            <button title="Dashboard" style="background: var(--a-color-primary); color: white; border: none; padding: var(--a-space-m); border-radius: var(--a-border-radius-md); cursor: pointer;">
+                                <span class="axicon render" data-name="Home" style="font-size: 24px;"></span>
+                            </button>
+                            <button title="Projects" style="background: var(--a-color-surface); border: 1px solid var(--ax-border); padding: var(--a-space-m); border-radius: var(--a-border-radius-md); cursor: pointer;">
+                                <span class="axicon render" data-name="File" style="font-size: 24px;"></span>
+                            </button>
+                            <button title="Team" style="background: var(--a-color-surface); border: 1px solid var(--ax-border); padding: var(--a-space-m); border-radius: var(--a-border-radius-md); cursor: pointer;">
+                                <span class="axicon render" data-name="Users" style="font-size: 24px;"></span>
+                            </button>
+                            <button title="Settings" style="background: var(--a-color-surface); border: 1px solid var(--ax-border); padding: var(--a-space-m); border-radius: var(--a-border-radius-md); cursor: pointer;">
+                                <span class="axicon render" data-name="Settings" style="font-size: 24px;"></span>
+                            </button>
+                        </nav>
+                    </aside>
+                    <main>
+                        <h4>Collapsed Sidebar</h4>
+                        <p>This sidebar is collapsed to icon-only mode, useful for responsive designs on smaller screens.</p>
+                    </main>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="sidebar-layout"&gt;
+    &lt;aside role="complementary" aria-label="Sidebar Navigation"&gt;
+        &lt;h3&gt;Navigation&lt;/h3&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#" class="active"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Team&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Settings&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/aside&gt;
+    &lt;main&gt;
+        &lt;h4&gt;Main Content&lt;/h4&gt;
+        &lt;p&gt;Content goes here...&lt;/p&gt;
+    &lt;/main&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Flexible Layout</strong> - Use flexbox or CSS Grid for layout</li>
+                    <li><strong>Responsive Design</strong> - Adapts from fixed width to collapsible/stacked on mobile</li>
+                    <li><strong>Icon Support</strong> - Display icons with text or collapse to icon-only</li>
+                    <li><strong>Semantic HTML</strong> - Uses <code>&lt;aside&gt;</code> and <code>&lt;nav&gt;</code> for proper structure</li>
+                    <li><strong>Active States</strong> - Highlight current page/section with active class</li>
+                    <li><strong>Accessibility</strong> - Proper ARIA labels and semantic roles</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>CSS Implementation</h2>
+                <div class="code-block">
+                    <pre><code class="language-css">/* Sidebar layout */
+.sidebar-layout {
+    display: flex;
+}
+
+/* Sidebar styling */
+.sidebar-layout aside {
+    width: 250px;
+    background: var(--a-color-primary-container);
+    padding: var(--a-space-l);
+    border-right: 1px solid var(--ax-border);
+}
+
+/* Navigation links */
+.sidebar-layout nav a {
+    display: block;
+    padding: var(--a-space-m);
+    color: var(--a-color-primary);
+    text-decoration: none;
+    border-radius: var(--a-border-radius-md);
+    transition: background-color var(--a-transition-base) var(--a-ease-out);
+}
+
+.sidebar-layout nav a:hover {
+    background: rgba(0, 102, 204, 0.1);
+}
+
+.sidebar-layout nav a.active {
+    background: var(--a-color-primary);
+    color: white;
+}
+
+/* Main content */
+.sidebar-layout main {
+    flex: 1;
+    padding: var(--a-space-l);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar-layout {
+        flex-direction: column;
+    }
+    
+    .sidebar-layout aside {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--ax-border);
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Application Navigation</strong> - Main navigation for web applications and dashboards</li>
+                    <li><strong>Documentation Sites</strong> - Table of contents or navigation sidebar</li>
+                    <li><strong>Blog Sidebars</strong> - Recent posts, categories, or search</li>
+                    <li><strong>Admin Panels</strong> - Menu and settings navigation</li>
+                    <li><strong>E-commerce</strong> - Product filters and categories</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li><strong>Semantic HTML</strong> - Use <code>&lt;aside&gt;</code> with <code>role="complementary"</code></li>
+                    <li><strong>Navigation</strong> - Use <code>&lt;nav&gt;</code> element for navigation items</li>
+                    <li><strong>ARIA Labels</strong> - Add <code>aria-label</code> to identify sidebar purpose</li>
+                    <li><strong>Active State</strong> - Indicate current page with visual and text indicators</li>
+                    <li><strong>Keyboard Navigation</strong> - All links and buttons must be keyboard accessible</li>
+                    <li><strong>Mobile Considerations</strong> - Ensure sidebar doesn't block content on small screens</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Navigation</strong> - Keep sidebar navigation simple and organized</li>
+                    <li><strong>Visual Hierarchy</strong> - Group related items, use indentation for hierarchy</li>
+                    <li><strong>Responsive Collapse</strong> - Sidebar should collapse or stack on mobile</li>
+                    <li><strong>Consistent Width</strong> - Standard sidebar widths: 200-300px</li>
+                    <li><strong>Easy to Hide</strong> - On mobile, provide button to show/hide sidebar</li>
+                    <li><strong>Scrollable Content</strong> - Long sidebars should have internal scroll</li>
+                </ul>
+            </section>
+
         </div>
 
     </div></section></main>
@@ -67,9 +311,9 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
