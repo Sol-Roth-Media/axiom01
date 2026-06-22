@@ -9,6 +9,9 @@
  * Principles:
  * - width: 1em makes icons scale with font-size (semantic sizing)
  * - stroke: currentColor makes icons inherit parent text color
+ * - stroke-width: 2px for crisp pixel-grid alignment (changed from 2.5px)
+ * - stroke-linecap/stroke-linejoin: round for polished aesthetic (Feather/Lucide tier)
+ * - fill: none for outline-only style (default for Regular & Thin)
  * - flex-shrink: 0 prevents icons from shrinking in flex containers
  * - vertical-align: -0.125em aligns icons with baseline text
  */
@@ -18,6 +21,8 @@
     height: 1em;
     stroke: currentColor;
     stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
     fill: none;
     vertical-align: -0.125em;
     flex-shrink: 0;
@@ -131,15 +136,27 @@
 }
 
 /**
+ * Thin variant override
+ * 
+ * Thin icons use 1px strokes for elegance in dense layouts
+ * CSS changes stroke-width, SVG content has no redundant attributes
+ */
+.axicon.thin {
+    stroke-width: 1;
+}
+
+/**
  * Container integration
  * 
  * SVG wrapper created by JavaScript render hook
+ * Inherits stroke-width, stroke-linecap, stroke-linejoin from .axicon
  */
 
 .axicon svg {
     width: 100%;
     height: 100%;
     display: block;
+    /* SVG wrapper inherits stroke properties from parent .axicon */
 }
 
 /**
@@ -154,14 +171,28 @@
 }
 
 /**
+ * CSS Custom Properties for Inverted Variants
+ * 
+ * Inverted icons use CSS variables for theme-aware backgrounds
+ * --ax-bg-inverse: Controls the stroke/fill color in inverted icons
+ */
+
+.axicon.inverted {
+    --ax-bg-inverse: #ffffff;  /* Default: white stroke/fill on colored background */
+}
+
+/**
  * Dark mode support
  * 
  * Icons automatically adapt to dark mode via currentColor
- * No additional styling needed - inherits text color naturally
+ * Inverted variants also respect dark mode by adjusting --ax-bg-inverse
  */
 
 @media (prefers-color-scheme: dark) {
     /* Icons automatically use light text color in dark mode via currentColor */
+    
+    /* Optional: Adjust inverted background color for dark mode */
+    /* .axicon.inverted { --ax-bg-inverse: #000000; } */
 }
 
 /**

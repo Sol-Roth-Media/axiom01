@@ -35,25 +35,27 @@ const axicons = [
 
 **Key insight:** `svgContent` contains only the INNER markup (paths, lines, circles, rects), NOT the `<svg>` wrapper element.
 
-### The Three Styles
+### The Three Styles (Optimized)
 
-1. **Regular** (Bold - 2.5px strokes)
+1. **Regular** (Bold - 2px strokes)
    - Prominent, solid appearance
    - Use in: Navigation, buttons, CTAs, primary UI
-   - All strokes: `stroke-width="2.5"`
+   - CSS sets: `stroke-width="2"`
+   - SVG content: No stroke-width attribute (inherited from CSS)
 
-2. **Thin** (Ultra-thin 0.5px)
+2. **Thin** (Elegant 1px)
    - Delicate, refined outline style
    - Use in: Data tables, admin panels, dense layouts
-   - All strokes: `stroke-width="0.5"`
-   - Simplified details (some lines removed)
-   - All fills: `fill="none"` (outline-only)
+   - CSS sets: `stroke-width="1"` via `.axicon.thin` class
+   - SVG content: No stroke-width attribute (inherited from CSS)
+   - Simplified details (some lines removed for legibility)
 
-3. **Inverted** (Solid with white cutout)
-   - Solid currentColor background + white symbol
+3. **Inverted** (Solid with contrasting cutout)
+   - Solid currentColor background + contrasting symbol
    - Use in: Badges, status indicators, highlights
    - Background rect: `<rect fill="currentColor">`
-   - Symbol elements: `fill="white"` or `stroke="white"`
+   - Symbol elements: Use CSS variable `stroke="var(--ax-bg-inverse, #ffffff)"`
+   - Supports light/dark theme switching via `--ax-bg-inverse` property
 
 ---
 
@@ -272,6 +274,7 @@ class AxiconRenderer {
 
     /**
      * Create a proper SVG element with safe content
+     * Includes stroke-linecap and stroke-linejoin for polished rendering
      */
     createSVGElement(icon) {
         // Use proper SVG namespace (not HTML)
@@ -281,6 +284,10 @@ class AxiconRenderer {
         svg.setAttribute('viewBox', '0 0 24 24');
         svg.setAttribute('aria-hidden', 'true');
         svg.setAttribute('role', 'img');
+        
+        // Set stroke properties for polished aesthetic (Feather/Lucide tier)
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
         
         // Parse content safely (not innerHTML)
         const parser = new DOMParser();
