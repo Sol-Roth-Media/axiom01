@@ -10,6 +10,81 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .slider-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-xl);
+        }
+        
+        .slider-section {
+            margin-bottom: var(--a-space-xl);
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--a-space-m);
+            font-weight: var(--a-font-weight-semibold);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .slider-value {
+            color: var(--a-color-primary);
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--ax-border);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--a-color-primary);
+            cursor: pointer;
+            transition: all var(--a-transition-base);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--a-color-primary);
+            cursor: pointer;
+            border: none;
+            transition: all var(--a-transition-base);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slider-container {
+            background: var(--ax-surface);
+            padding: var(--a-space-l);
+            border-radius: var(--a-border-radius-md);
+            border: 1px solid var(--ax-border);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -22,13 +97,8 @@
                 <li><a href="../components-overview.html">Component Overview</a></li>
             </ul>
             <div class="actions">
-                <button class="search toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="Brand-Github"></span>
-                    <span>GitHub</span>
-                </a>
+                <button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub"><span class="axicon render" data-name="Brand-Github"></span><span>GitHub</span></a>
                 <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
                 <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
@@ -38,83 +108,107 @@
     <main><section><div class="container">
         <header>
             <h1>Slider</h1>
-            <p class="text-muted">Axiom01 provides styling for native HTML range input elements, allowing users to select a value from a specified range. ...</p>
+            <p class="text-muted">Axiom01's slider component provides a smooth range input for selecting values. Supports single and range sliders with keyboard navigation and accessibility.</p>
         </header>
 
         <div class="component-section">
+            <section>
+                <h2>Live Examples</h2>
+                <h3>Basic Slider</h3>
+                <div class="slider-demo">
+                    <div class="slider-section">
+                        <div class="slider-label">
+                            <span>Volume</span>
+                            <span class="slider-value" id="volumeValue">50%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" value="50" id="volumeSlider">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-section">
+                        <div class="slider-label">
+                            <span>Brightness</span>
+                            <span class="slider-value" id="brightnessValue">75%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="100" value="75" id="brightnessSlider">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-section">
+                        <div class="slider-label">
+                            <span>Price Range ($)</span>
+                            <span class="slider-value" id="priceValue">250</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="1000" value="250" id="priceSlider">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-							<div class="section">
-									<h2 class="title">Live Example</h2>
-									<div class="live">
-											<h4>Basic Range Slider</h4>
-											<div class="slider-container">
-													<label for="volume-slider">Volume:</label>
-													<input type="range" id="volume-slider" min="0" max="100" value="50">
-													<span id="volume-value">50</span>
-											</div>
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="slider-label"&gt;
+    &lt;span&gt;Volume&lt;/span&gt;
+    &lt;span class="slider-value"&gt;50%&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="slider-container"&gt;
+    &lt;input type="range" min="0" max="100" value="50"&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
 
-											<h4>Disabled Slider</h4>
-											<div class="slider-container">
-													<label for="disabled-slider">Brightness:</label>
-													<input type="range" id="disabled-slider" min="0" max="100" value="70" disabled>
-													<span>70</span>
-											</div>
-									</div>
-							</div>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Range Input</strong> - Select value from min/max</li>
+                    <li><strong>Custom Styling</strong> - Professional appearance</li>
+                    <li><strong>Smooth Interaction</strong> - Responsive drag behavior</li>
+                    <li><strong>Value Display</strong> - Show current selection</li>
+                    <li><strong>Keyboard Support</strong> - Arrow key navigation</li>
+                    <li><strong>Hover Effects</strong> - Visual feedback on interaction</li>
+                </ul>
+            </section>
 
-							<div class="section">
-									<h2 class="title">HTML Structure</h2>
-									<p>The slider component uses the native HTML <code>&lt;input type="range"&gt;</code> element.</p>
-									<div class="code-block">
-											<pre><code class="language-html">&lt;div class="slider-container"&gt;
-			&lt;label for="volume-slider"&gt;Volume:&lt;/label&gt;
-			&lt;input type="range" id="volume-slider" min="0" max="100" value="50"&gt;
-			&lt;span id="volume-value"&gt;50&lt;/span&gt;
-	&lt;/div&gt;</code></pre>
-									</div>
-							</div>
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Volume Control</strong> - Audio/video volume</li>
+                    <li><strong>Brightness</strong> - Screen brightness adjustment</li>
+                    <li><strong>Price Range</strong> - Filter by price</li>
+                    <li><strong>Playback Speed</strong> - Video speed control</li>
+                    <li><strong>Settings</strong> - Configuration sliders</li>
+                    <li><strong>Filters</strong> - Search and filter ranges</li>
+                </ul>
+            </section>
 
-							<div class="section">
-									<h2 class="title">Styling</h2>
-									<p>Axiom01 provides base styling for the <code>&lt;input type="range"&gt;</code> element to ensure it looks consistent across browsers and themes. This includes styling the track and the thumb of the slider.</p>
-									<ul>
-											<li>The <code>.slider-container</code> can be used to group the label, slider, and value display.</li>
-											<li>The <code>&lt;input type="range"&gt;</code> element itself is styled.</li>
-											<li>The <code>:disabled</code> attribute will apply appropriate visual styles.</li>
-									</ul>
-							</div>
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic <code>&lt;input type="range"&gt;</code></li>
+                    <li>Include aria-label for context</li>
+                    <li>Support keyboard arrow keys</li>
+                    <li>Display current value clearly</li>
+                    <li>Provide min/max labels</li>
+                    <li>Ensure sufficient touch target size</li>
+                </ul>
+            </section>
 
-							<div class="section">
-									<h2 class="title">JavaScript Integration</h2>
-									<p>To display the current value of the slider or to implement more complex interactions, you will need JavaScript.</p>
-									<div class="code-block">
-											<pre><code class="language-html">&lt;script&gt;
-			const volumeSlider = document.getElementById('volume-slider');
-			const volumeValue = document.getElementById('volume-value');
-
-			volumeSlider.addEventListener('input', (event) => {
-					volumeValue.textContent = event.target.value;
-			});
-	&lt;/script&gt;</code></pre>
-									</div>
-							</div>
-
-							<div class="section">
-									<h2 class="title">Accessibility</h2>
-									<p>The native <code>&lt;input type="range"&gt;</code> element is inherently accessible. Ensure you:</p>
-									<ul>
-											<li>Always associate the slider with a <code>&lt;label&gt;</code> using the <code>for</code> and <code>id</code> attributes.</li>
-											<li>Provide clear <code>min</code>, <code>max</code>, and <code>value</code> attributes.</li>
-											<li>If a visual display of the current value is not directly linked to the input, consider using <code>aria-valuetext</code> or <code>aria-labelledby</code> to provide additional context for screen readers.</li>
-									</ul>
-							</div>
-
-							<div class="section">
-									<h2 class="title">Customization</h2>
-									<p>Customize the appearance using Axiom01's CSS variables for colors (e.g., <code>--a-color-primary</code> for the thumb and filled track), spacing, and typography. You can also target the pseudo-elements (<code>::-webkit-slider-thumb</code>, <code>::-moz-range-thumb</code>, etc.) for deeper styling control.</p>
-							</div>
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Labels</strong> - Explain what is being adjusted</li>
+                    <li><strong>Show Value</strong> - Display current selection</li>
+                    <li><strong>Step Increments</strong> - Appropriate step values</li>
+                    <li><strong>Visual Feedback</strong> - Hover and active states</li>
+                    <li><strong>Touch Friendly</strong> - Large enough touch targets</li>
+                    <li><strong>Min/Max Info</strong> - Display range boundaries</li>
+                </ul>
+            </section>
         </div>
-
     </div></section></main>
 
     <footer class="main">
@@ -128,9 +222,9 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
@@ -157,29 +251,35 @@
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
     <script>
+        document.getElementById('volumeSlider').addEventListener('input', (e) => {
+            document.getElementById('volumeValue').textContent = e.target.value + '%';
+        });
+        document.getElementById('brightnessSlider').addEventListener('input', (e) => {
+            document.getElementById('brightnessValue').textContent = e.target.value + '%';
+        });
+        document.getElementById('priceSlider').addEventListener('input', (e) => {
+            document.getElementById('priceValue').textContent = '$' + e.target.value;
+        });
+
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
                 return;
             }
-            
             document.querySelectorAll('.axicon.render').forEach(el => {
                 const name = el.getAttribute('data-name');
                 if (!name) return;
-                
                 const icon = axicons.find(i => i.name === name);
                 if (icon) {
                     el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
                 }
             });
         }
-
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', renderAxicons);
         } else {
             renderAxicons();
         }
-
         setTimeout(renderAxicons, 500);
     </script>
     <script src="../../js/index-page-manager.js"></script>
