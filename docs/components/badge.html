@@ -7,66 +7,55 @@
     <link rel="stylesheet" href="../../css/axiom.css">
     <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <style>
+        .badge-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--a-space-l);
+        }
+        
         .badge {
-            display: inline-block;
-            padding: var(--a-space-xs) var(--a-space-s);
-            border-radius: var(--a-border-radius-full);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: var(--a-border-radius-md);
             font-size: var(--a-font-size-xs);
             font-weight: var(--a-font-weight-semibold);
             white-space: nowrap;
-            line-height: 1;
         }
-        .badge-default {
-            background: var(--a-color-surface-variant);
-            color: var(--a-color-text);
-            border: 1px solid var(--a-color-outline);
-        }
+        
         .badge-primary {
             background: var(--a-color-primary-container);
             color: var(--a-color-primary);
         }
-        .badge-secondary {
-            background: var(--a-color-secondary-container);
-            color: var(--a-color-secondary);
-        }
+        
         .badge-success {
-            background: rgba(56, 142, 60, 0.1);
-            color: var(--a-color-success);
+            background: rgba(76, 175, 80, 0.1);
+            color: #2e7d32;
         }
+        
         .badge-warning {
-            background: rgba(245, 124, 0, 0.1);
-            color: var(--a-color-warning);
+            background: rgba(255, 152, 0, 0.1);
+            color: #e65100;
         }
+        
         .badge-error {
             background: rgba(211, 47, 47, 0.1);
-            color: var(--a-color-error);
+            color: #b71c1c;
         }
-        .badge-info {
-            background: rgba(25, 118, 210, 0.1);
-            color: var(--a-color-info);
-        }
-        .badge-dot {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--a-space-xs);
-        }
-        .badge-dot::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: currentColor;
-        }
-        .badge-examples {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--a-space-m);
-            margin: var(--a-space-l) 0;
-            align-items: center;
+        
+        .badge-outline {
+            border: 1px solid var(--ax-border);
+            background: transparent;
+            color: var(--ax-text);
         }
     </style>
 </head>
@@ -81,13 +70,8 @@
                 <li><a href="../components-overview.html">Component Overview</a></li>
             </ul>
             <div class="actions">
-                <button class="search toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="Brand-Github"></span>
-                    <span>GitHub</span>
-                </a>
+                <button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub"><span class="axicon render" data-name="Brand-Github"></span><span>GitHub</span></a>
                 <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
                 <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
@@ -97,127 +81,71 @@
     <main><section><div class="container">
         <header>
             <h1>Badge</h1>
-            <p class="text-muted">Axiom01's badge component displays small, labeled indicator elements. Use badges to highlight status, count, or categorize content with semantic color coding.</p>
+            <p class="text-muted">Axiom01's badge component displays labels, tags, and status indicators. Perfect for categorization, counts, and visual labels.</p>
         </header>
 
         <div class="component-section">
-
             <section>
                 <h2>Live Examples</h2>
-
-                <h3>Default Badges</h3>
-                <div class="badge-examples">
-                    <span class="badge badge-default">Default</span>
-                    <span class="badge badge-primary">Primary</span>
-                    <span class="badge badge-secondary">Secondary</span>
-                </div>
-
-                <h3>Status Badges</h3>
-                <div class="badge-examples">
-                    <span class="badge badge-success">Success</span>
-                    <span class="badge badge-warning">Warning</span>
+                <div class="badge-demo">
+                    <span class="badge badge-primary">New</span>
+                    <span class="badge badge-success">Active</span>
+                    <span class="badge badge-warning">Pending</span>
                     <span class="badge badge-error">Error</span>
-                    <span class="badge badge-info">Info</span>
-                </div>
-
-                <h3>Badges with Dot</h3>
-                <div class="badge-examples">
-                    <span class="badge badge-primary badge-dot">Online</span>
-                    <span class="badge badge-warning badge-dot">Pending</span>
-                    <span class="badge badge-error badge-dot">Offline</span>
-                    <span class="badge badge-success badge-dot">Verified</span>
-                </div>
-
-                <h3>Badges in Context</h3>
-                <div style="margin: var(--a-space-l) 0;">
-                    <div style="display: flex; align-items: center; gap: var(--a-space-m); padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg);">
-                        <div>
-                            <h4 style="margin: 0 0 var(--a-space-s) 0;">Feature Request</h4>
-                            <p style="margin: 0; font-size: var(--a-font-size-sm); color: var(--a-color-text-secondary);">Add dark mode support</p>
-                        </div>
-                        <div style="margin-left: auto; display: flex; gap: var(--a-space-s);">
-                            <span class="badge badge-info">Enhancement</span>
-                            <span class="badge badge-success badge-dot">Open</span>
-                        </div>
-                    </div>
+                    <span class="badge badge-outline">Label</span>
+                    <span class="badge badge-primary">99+</span>
+                    <span class="badge badge-success">Featured</span>
                 </div>
             </section>
 
             <section>
-                <h2>Basic HTML</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;!-- Default badge --&gt;
-&lt;span class="badge badge-default"&gt;Default&lt;/span&gt;
-
-&lt;!-- Primary badge --&gt;
-&lt;span class="badge badge-primary"&gt;Primary&lt;/span&gt;
-
-&lt;!-- Status badges --&gt;
-&lt;span class="badge badge-success"&gt;Success&lt;/span&gt;
-&lt;span class="badge badge-warning"&gt;Warning&lt;/span&gt;
-&lt;span class="badge badge-error"&gt;Error&lt;/span&gt;
-&lt;span class="badge badge-info"&gt;Info&lt;/span&gt;</code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>With Indicator Dot</h2>
-                <p>Add the <code>badge-dot</code> class to display a colored dot next to the text:</p>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;span class="badge badge-success badge-dot"&gt;Online&lt;/span&gt;
-&lt;span class="badge badge-warning badge-dot"&gt;Pending&lt;/span&gt;
-&lt;span class="badge badge-error badge-dot"&gt;Offline&lt;/span&gt;</code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Color Variants</h2>
+                <h2>Features</h2>
                 <ul>
-                    <li><code>badge-default</code> - Neutral badge with border</li>
-                    <li><code>badge-primary</code> - Primary brand color</li>
-                    <li><code>badge-secondary</code> - Secondary color</li>
-                    <li><code>badge-success</code> - Green for successful/positive states</li>
-                    <li><code>badge-warning</code> - Orange for warnings/alerts</li>
-                    <li><code>badge-error</code> - Red for errors/critical states</li>
-                    <li><code>badge-info</code> - Blue for informational content</li>
+                    <li><strong>Multiple Types</strong> - Primary, success, warning, error, outline</li>
+                    <li><strong>Compact</strong> - Small, inline display</li>
+                    <li><strong>Icon Support</strong> - Optional icons before/after</li>
+                    <li><strong>Flexible Text</strong> - Numbers, words, or emojis</li>
+                    <li><strong>Color Coded</strong> - Visual type indication</li>
+                    <li><strong>Semantic</strong> - Convey meaning through appearance</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Use Cases</h2>
                 <ul>
-                    <li><strong>Status Indicators</strong>: Show online/offline, draft/published, active/inactive</li>
-                    <li><strong>Labels</strong>: Categorize items with tags (Bug, Feature, Documentation)</li>
-                    <li><strong>Counts</strong>: Display notification badges, unread messages, etc.</li>
-                    <li><strong>Achievements</strong>: Highlight badges, certifications, or special status</li>
-                    <li><strong>Metadata</strong>: Show versions, priority levels, or other attributes</li>
+                    <li><strong>Status Indicators</strong> - Active, pending, error</li>
+                    <li><strong>Tags</strong> - Category labels</li>
+                    <li><strong>Counts</strong> - Notification or item counts</li>
+                    <li><strong>Badges</strong> - Achievement or feature badges</li>
+                    <li><strong>Labels</strong> - Generic text labels</li>
+                    <li><strong>Keywords</strong> - Search or filter tags</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Accessibility</h2>
                 <ul>
-                    <li>Badges with dot indicators provide visual + textual information</li>
-                    <li>Use semantic color coding that's intuitive (green = good, red = error)</li>
-                    <li>Ensure sufficient contrast between text and background</li>
-                    <li>Never rely on color alone to convey meaning - include text</li>
-                    <li>For status indicators, consider using <code>aria-label</code> for additional context</li>
+                    <li>Use clear, descriptive text</li>
+                    <li>Color + text for meaning</li>
+                    <li>Sufficient contrast (WCAG AA)</li>
+                    <li>Don't use color alone for meaning</li>
+                    <li>Include in semantic structure</li>
+                    <li>Announce counts if important</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Best Practices</h2>
                 <ul>
-                    <li><strong>Keep Text Short</strong>: Badges work best with 1-2 words</li>
-                    <li><strong>Use Semantic Colors</strong>: Match colors to meaning (green=success, red=error)</li>
-                    <li><strong>Consistent Sizing</strong>: All badges use the same height for visual harmony</li>
-                    <li><strong>Avoid Nesting</strong>: Don't place badges inside interactive elements</li>
-                    <li><strong>Context Matters</strong>: Place badges near relevant content</li>
+                    <li><strong>Clear Label</strong> - Text should be concise</li>
+                    <li><strong>Consistent Sizing</strong> - Uniform badge dimensions</li>
+                    <li><strong>Color Semantics</strong> - Match colors to meaning</li>
+                    <li><strong>Positioned Well</strong> - Place near relevant content</li>
+                    <li><strong>Not Actionable</strong> - Badges shouldn't be buttons</li>
+                    <li><strong>Performance</strong> - Keep text minimal</li>
                 </ul>
             </section>
-
         </div>
-
     </div></section></main>
 
     <footer class="main">
@@ -231,9 +159,9 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
@@ -259,32 +187,6 @@
 
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
-    <script>
-        function renderAxicons() {
-            if (typeof axicons === 'undefined') {
-                setTimeout(renderAxicons, 100);
-                return;
-            }
-            
-            document.querySelectorAll('.axicon.render').forEach(el => {
-                const name = el.getAttribute('data-name');
-                if (!name) return;
-                
-                const icon = axicons.find(i => i.name === name);
-                if (icon) {
-                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-                }
-            });
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderAxicons);
-        } else {
-            renderAxicons();
-        }
-
-        setTimeout(renderAxicons, 500);
-    </script>
     <script src="../../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>

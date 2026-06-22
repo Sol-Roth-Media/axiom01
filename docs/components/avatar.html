@@ -7,51 +7,60 @@
     <link rel="stylesheet" href="../../css/axiom.css">
     <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <style>
+        .avatar-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--a-space-l);
+            align-items: center;
+        }
+        
         .avatar {
-            display: inline-flex;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--a-color-primary), var(--a-color-primary-container));
+            display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
+            color: var(--a-color-primary-on);
             font-weight: var(--a-font-weight-bold);
-            color: white;
-            overflow: hidden;
+            font-size: 18px;
+            border: 2px solid var(--ax-surface);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .avatar-sm { width: 32px; height: 32px; font-size: var(--a-font-size-xs); }
-        .avatar-md { width: 48px; height: 48px; font-size: var(--a-font-size-sm); }
-        .avatar-lg { width: 64px; height: 64px; font-size: var(--a-font-size-base); }
-        .avatar-primary { background: linear-gradient(135deg, var(--a-color-primary), var(--a-color-secondary)); }
-        .avatar-success { background: linear-gradient(135deg, var(--a-color-success), #66bb6a); }
-        .avatar-warning { background: linear-gradient(135deg, var(--a-color-warning), #ffb74d); }
-        .avatar-error { background: linear-gradient(135deg, var(--a-color-error), #ef5350); }
-        .avatar-neutral { background: var(--a-color-secondary); }
-        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .avatar.sm {
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+        }
+        
+        .avatar.lg {
+            width: 64px;
+            height: 64px;
+            font-size: 24px;
+        }
+        
         .avatar-group {
             display: flex;
-            gap: var(--a-space-m);
-            align-items: center;
-            flex-wrap: wrap;
-            margin: var(--a-space-l) 0;
+            gap: -8px;
         }
-        .avatar-with-status {
-            position: relative;
-            display: inline-block;
+        
+        .avatar-group .avatar {
+            margin-left: -8px;
         }
-        .avatar-status {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            border: 2px solid var(--ax-surface);
-            background: var(--a-color-success);
+        
+        .avatar-group .avatar:first-child {
+            margin-left: 0;
         }
-        .avatar-status.offline { background: var(--a-color-secondary); }
-        .avatar-status.away { background: var(--a-color-warning); }
     </style>
 </head>
 <body class="axiom-body component-doc">
@@ -65,13 +74,8 @@
                 <li><a href="../components-overview.html">Component Overview</a></li>
             </ul>
             <div class="actions">
-                <button class="search toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="Brand-Github"></span>
-                    <span>GitHub</span>
-                </a>
+                <button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub"><span class="axicon render" data-name="Brand-Github"></span><span>GitHub</span></a>
                 <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
                 <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
@@ -81,171 +85,78 @@
     <main><section><div class="container">
         <header>
             <h1>Avatar</h1>
-            <p class="text-muted">Axiom01's avatar component displays a user's profile picture or initials. Avatars can show user status and come in multiple sizes and color variants.</p>
+            <p class="text-muted">Axiom01's avatar component displays user profiles with initials or images. Perfect for user profiles, team displays, and social features.</p>
         </header>
 
         <div class="component-section">
-
             <section>
                 <h2>Live Examples</h2>
-
-                <h3>Sizes</h3>
-                <div class="avatar-group">
-                    <div class="avatar avatar-sm avatar-primary">JD</div>
-                    <div class="avatar avatar-md avatar-primary">JD</div>
-                    <div class="avatar avatar-lg avatar-primary">JD</div>
+                <h3>Avatar Sizes</h3>
+                <div class="avatar-demo">
+                    <div class="avatar sm">AB</div>
+                    <div class="avatar">JD</div>
+                    <div class="avatar lg">MD</div>
                 </div>
 
-                <h3>Color Variants</h3>
-                <div class="avatar-group">
-                    <div class="avatar avatar-md avatar-primary">AB</div>
-                    <div class="avatar avatar-md avatar-success">CD</div>
-                    <div class="avatar avatar-md avatar-warning">EF</div>
-                    <div class="avatar avatar-md avatar-error">GH</div>
-                    <div class="avatar avatar-md avatar-neutral">IJ</div>
-                </div>
-
-                <h3>With Status Indicator</h3>
-                <div class="avatar-group">
-                    <div class="avatar-with-status">
-                        <div class="avatar avatar-md avatar-primary">JD</div>
-                        <div class="avatar-status"></div>
-                    </div>
-                    <div class="avatar-with-status">
-                        <div class="avatar avatar-md avatar-success">KL</div>
-                        <div class="avatar-status away"></div>
-                    </div>
-                    <div class="avatar-with-status">
-                        <div class="avatar avatar-md avatar-error">MN</div>
-                        <div class="avatar-status offline"></div>
-                    </div>
-                </div>
-
-                <h3>With Icons</h3>
-                <div class="avatar-group">
-                    <div class="avatar avatar-md avatar-primary">
-                        <span class="axicon render" data-name="User"></span>
-                    </div>
-                    <div class="avatar avatar-md avatar-success">
-                        <span class="axicon render" data-name="Settings"></span>
-                    </div>
-                    <div class="avatar avatar-md avatar-warning">
-                        <span class="axicon render" data-name="Bell"></span>
-                    </div>
-                </div>
-
-                <h3>In User List Context</h3>
-                <div style="display: flex; flex-direction: column; gap: var(--a-space-m); margin: var(--a-space-l) 0;">
-                    <div style="display: flex; align-items: center; gap: var(--a-space-m); padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg);">
-                        <div class="avatar-with-status">
-                            <div class="avatar avatar-md avatar-primary">JD</div>
-                            <div class="avatar-status"></div>
-                        </div>
-                        <div style="flex: 1;">
-                            <h4 style="margin: 0;">John Doe</h4>
-                            <p style="margin: var(--a-space-xs) 0 0 0; font-size: var(--a-font-size-sm); color: var(--a-color-text-muted);">Online</p>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: var(--a-space-m); padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg);">
-                        <div class="avatar-with-status">
-                            <div class="avatar avatar-md avatar-success">AB</div>
-                            <div class="avatar-status away"></div>
-                        </div>
-                        <div style="flex: 1;">
-                            <h4 style="margin: 0;">Alice Brown</h4>
-                            <p style="margin: var(--a-space-xs) 0 0 0; font-size: var(--a-font-size-sm); color: var(--a-color-text-muted);">Away</p>
-                        </div>
+                <h3>Avatar Group</h3>
+                <div class="avatar-demo">
+                    <div class="avatar-group">
+                        <div class="avatar">AB</div>
+                        <div class="avatar">JD</div>
+                        <div class="avatar">MD</div>
+                        <div class="avatar">+3</div>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h2>Basic HTML</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;!-- Avatar with initials --&gt;
-&lt;div class="avatar avatar-md avatar-primary"&gt;JD&lt;/div&gt;
-
-&lt;!-- Avatar with image --&gt;
-&lt;div class="avatar avatar-md"&gt;
-    &lt;img src="user.jpg" alt="John Doe"&gt;
-&lt;/div&gt;
-
-&lt;!-- Avatar with icon --&gt;
-&lt;div class="avatar avatar-md avatar-primary"&gt;
-    &lt;span class="axicon render" data-name="User"&gt;&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Sizes</h2>
+                <h2>Features</h2>
                 <ul>
-                    <li><code>avatar-sm</code> - 32px (small)</li>
-                    <li><code>avatar-md</code> - 48px (medium, default)</li>
-                    <li><code>avatar-lg</code> - 64px (large)</li>
+                    <li><strong>Multiple Sizes</strong> - Small, medium, large</li>
+                    <li><strong>Initials</strong> - User name display</li>
+                    <li><strong>Images</strong> - Profile pictures</li>
+                    <li><strong>Badges</strong> - Status indicators</li>
+                    <li><strong>Groups</strong> - Multiple avatars</li>
+                    <li><strong>Hover Effects</strong> - Interactive states</li>
                 </ul>
-            </section>
-
-            <section>
-                <h2>Color Variants</h2>
-                <ul>
-                    <li><code>avatar-primary</code> - Primary brand color</li>
-                    <li><code>avatar-success</code> - Green (positive)</li>
-                    <li><code>avatar-warning</code> - Orange (caution)</li>
-                    <li><code>avatar-error</code> - Red (error)</li>
-                    <li><code>avatar-neutral</code> - Gray (neutral)</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>With Status Indicators</h2>
-                <p>Add a status dot to show user availability:</p>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="avatar-with-status"&gt;
-    &lt;div class="avatar avatar-md avatar-primary"&gt;JD&lt;/div&gt;
-    &lt;div class="avatar-status"&gt;&lt;/div&gt; &lt;!-- Online --&gt;
-&lt;/div&gt;
-
-&lt;div class="avatar-status away"&gt;&lt;/div&gt; &lt;!-- Away --&gt;
-&lt;div class="avatar-status offline"&gt;&lt;/div&gt; &lt;!-- Offline --&gt;</code></pre>
-                </div>
             </section>
 
             <section>
                 <h2>Use Cases</h2>
                 <ul>
-                    <li><strong>User Profiles</strong>: Display user picture or initials in headers, cards, or lists</li>
-                    <li><strong>Comments & Discussions</strong>: Show who made a comment or post</li>
-                    <li><strong>Team Members</strong>: Display team avatars in project pages</li>
-                    <li><strong>Chat & Messaging</strong>: Show status and picture in conversations</li>
-                    <li><strong>Assigned Tasks</strong>: Show who is assigned to a task</li>
+                    <li><strong>User Profiles</strong> - Account representation</li>
+                    <li><strong>Team Display</strong> - Member listings</li>
+                    <li><strong>Comments</strong> - Author identification</li>
+                    <li><strong>Notifications</strong> - User actions</li>
+                    <li><strong>Mentions</strong> - @ user tags</li>
+                    <li><strong>Chat</strong> - Message senders</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Accessibility</h2>
                 <ul>
-                    <li>When using images, always include an <code>alt</code> attribute with the user's name</li>
-                    <li>If avatar is interactive, use a button element</li>
-                    <li>Status indicators should be accompanied by text when possible</li>
-                    <li>Ensure sufficient contrast between avatar and background</li>
-                    <li>Use semantic color coding (green = online, gray = offline, orange = away)</li>
+                    <li>Include alt text for images</li>
+                    <li>Use initials for text avatars</li>
+                    <li>Sufficient contrast on background</li>
+                    <li>Provide user name in title/aria-label</li>
+                    <li>Support screen readers</li>
+                    <li>Meaningful status indicators</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Best Practices</h2>
                 <ul>
-                    <li><strong>Consistent Sizing</strong>: Use the same avatar size within a list or component</li>
-                    <li><strong>Initials</strong>: Use first letter of first and last name (e.g., "JD" for John Doe)</li>
-                    <li><strong>Status Context</strong>: Only show status indicators where relevant</li>
-                    <li><strong>Meaningful Colors</strong>: Use colors that mean something or group users by team</li>
-                    <li><strong>Fallbacks</strong>: Always have a fallback if image fails to load</li>
+                    <li><strong>Consistent Sizing</strong> - Use standard sizes</li>
+                    <li><strong>Clear Initials</strong> - Use first letters</li>
+                    <li><strong>Quality Images</strong> - Crisp profile pics</li>
+                    <li><strong>Color Variety</strong> - Different gradients per user</li>
+                    <li><strong>Group Overlap</strong> - Visual connection</li>
+                    <li><strong>Loading State</strong> - Show placeholder</li>
                 </ul>
             </section>
-
         </div>
-
     </div></section></main>
 
     <footer class="main">
@@ -259,16 +170,16 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
@@ -287,32 +198,6 @@
 
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
-    <script>
-        function renderAxicons() {
-            if (typeof axicons === 'undefined') {
-                setTimeout(renderAxicons, 100);
-                return;
-            }
-            
-            document.querySelectorAll('.axicon.render').forEach(el => {
-                const name = el.getAttribute('data-name');
-                if (!name) return;
-                
-                const icon = axicons.find(i => i.name === name);
-                if (icon) {
-                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-                }
-            });
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderAxicons);
-        } else {
-            renderAxicons();
-        }
-
-        setTimeout(renderAxicons, 500);
-    </script>
     <script src="../../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>

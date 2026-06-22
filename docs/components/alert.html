@@ -10,6 +10,71 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .alert-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-m);
+        }
+        
+        .alert {
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-md);
+            border-left: 4px solid;
+            display: flex;
+            gap: var(--a-space-m);
+        }
+        
+        .alert-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .alert-content {
+            flex: 1;
+        }
+        
+        .alert-title {
+            margin: 0 0 4px 0;
+            font-weight: var(--a-font-weight-semibold);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .alert-message {
+            margin: 0;
+            font-size: var(--a-font-size-sm);
+            line-height: 1.4;
+        }
+        
+        .alert-info {
+            border-left-color: var(--a-color-primary);
+            background: rgba(var(--a-color-primary-rgb), 0.05);
+            color: var(--a-color-primary);
+        }
+        
+        .alert-success {
+            border-left-color: #4caf50;
+            background: rgba(76, 175, 80, 0.05);
+            color: #2e7d32;
+        }
+        
+        .alert-warning {
+            border-left-color: #ff9800;
+            background: rgba(255, 152, 0, 0.05);
+            color: #e65100;
+        }
+        
+        .alert-error {
+            border-left-color: #d32f2f;
+            background: rgba(211, 47, 47, 0.05);
+            color: #b71c1c;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -22,13 +87,8 @@
                 <li><a href="../components-overview.html">Component Overview</a></li>
             </ul>
             <div class="actions">
-                <button class="search toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="Brand-Github"></span>
-                    <span>GitHub</span>
-                </a>
+                <button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub"><span class="axicon render" data-name="Brand-Github"></span><span>GitHub</span></a>
                 <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
                 <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
@@ -38,76 +98,108 @@
     <main><section><div class="container">
         <header>
             <h1>Alert</h1>
-            <p class="text-muted">Axiom01's alert component provides contextual feedback messages for users. They are designed to be clear, accessible, an...</p>
+            <p class="text-muted">Axiom01's alert component displays important messages with color-coded severity levels. Essential for system feedback and user guidance.</p>
         </header>
 
         <div class="component-section">
-            <h2>Alert Component</h2>
-            <p>Axiom01's alert component provides contextual feedback messages for users. They are designed to be clear, accessible, and easily themeable to match your application's aesthetic.</p>
+            <section>
+                <h2>Live Examples</h2>
+                <div class="alert-demo">
+                    <div class="alert alert-info">
+                        <div class="alert-icon">ℹ️</div>
+                        <div class="alert-content">
+                            <p class="alert-title">Information</p>
+                            <p class="alert-message">This is an informational alert with important details for the user.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-success">
+                        <div class="alert-icon">✓</div>
+                        <div class="alert-content">
+                            <p class="alert-title">Success</p>
+                            <p class="alert-message">Your action has been completed successfully.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <div class="alert-icon">⚠️</div>
+                        <div class="alert-content">
+                            <p class="alert-title">Warning</p>
+                            <p class="alert-message">Please be careful with this action as it may have consequences.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-error">
+                        <div class="alert-icon">✕</div>
+                        <div class="alert-content">
+                            <p class="alert-title">Error</p>
+                            <p class="alert-message">An error occurred. Please try again or contact support.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            <h3>Basic Alerts</h3>
-            <div class="alert-group">
-                <div class="alert success" role="alert">
-                    <span class="axicon render" data-name="check-circle"></span>
-                    <div>Success! Your operation was completed successfully.</div>
-                </div>
-                <div class="alert info" role="alert">
-                    <span class="axicon render" data-name="info-circle"></span>
-                    <div>Heads up! This is an informational message.</div>
-                </div>
-                <div class="alert warning" role="alert">
-                    <span class="axicon render" data-name="exclamation-triangle"></span>
-                    <div>Warning! Something might be wrong.</div>
-                </div>
-                <div class="alert error" role="alert">
-                    <span class="axicon render" data-name="times-circle"></span>
-                    <div>Error! Please correct the issues and try again.</div>
-                </div>
-            </div>
-            <pre><code class="language-html">&lt;div class="alert success" role="alert"&gt;
-&lt;i class="fas fa-check-circle"&gt;&lt;/i&gt;
-&lt;div&gt;Success! Your operation was completed successfully.&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="alert info" role="alert"&gt;
-&lt;i class="fas fa-info-circle"&gt;&lt;/i&gt;
-&lt;div&gt;Heads up! This is an informational message.&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="alert warning" role="alert"&gt;
-&lt;i class="fas fa-exclamation-triangle"&gt;&lt;/i&gt;
-&lt;div&gt;Warning! Something might be wrong.&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="alert error" role="alert"&gt;
-&lt;i class="fas fa-times-circle"&gt;&lt;/i&gt;
-&lt;div&gt;Error! Please correct the issues and try again.&lt;/div&gt;
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="alert alert-info"&gt;
+    &lt;div class="alert-icon"&gt;ℹ️&lt;/div&gt;
+    &lt;div class="alert-content"&gt;
+        &lt;p class="alert-title"&gt;Title&lt;/p&gt;
+        &lt;p class="alert-message"&gt;Message&lt;/p&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-
-            <h3>Dismissible Alerts</h3>
-            <p>Add a dismiss button to allow users to close the alert. This requires a small JavaScript snippet to handle the dismissal.</p>
-            <div class="alert-group">
-                <div class="alert info dismissible" role="alert">
-                    <span class="axicon render" data-name="info-circle"></span>
-                    <div>You can dismiss this alert.</div>
-                    <button data-alert-close aria-label="Close alert">&times;</button>
                 </div>
-                <div class="alert success dismissible" role="alert">
-                    <span class="axicon render" data-name="check-circle"></span>
-                    <div>Well done! You successfully read this important alert message.</div>
-                    <button data-alert-close aria-label="Close alert">&times;</button>
-                </div>
-            </div>
-            <pre><code class="language-html">&lt;div class="alert info dismissible" role="alert"&gt;
-&lt;i class="fas fa-info-circle"&gt;&lt;/i&gt;
-&lt;div&gt;You can dismiss this alert.&lt;/div&gt;
-&lt;button data-alert-close aria-label="Close alert"&gt;&amp;times;&lt;/button&gt;
-&lt;/div&gt;
-&lt;div class="alert success dismissible" role="alert"&gt;
-&lt;i class="fas fa-check-circle"&gt;&lt;/i&gt;
-&lt;div&gt;Well done! You successfully read this important alert message.&lt;/div&gt;
-&lt;button data-alert-close aria-label="Close alert"&gt;&amp;times;&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-        </div>
+            </section>
 
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Multiple Types</strong> - Info, Success, Warning, Error</li>
+                    <li><strong>Color Coded</strong> - Visual severity indication</li>
+                    <li><strong>Icons</strong> - Type-specific icons</li>
+                    <li><strong>Left Border</strong> - Accent line for emphasis</li>
+                    <li><strong>Flexible Content</strong> - Title and message areas</li>
+                    <li><strong>Dismissible</strong> - Optional close button</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>System Messages</strong> - Status updates</li>
+                    <li><strong>User Feedback</strong> - Action results</li>
+                    <li><strong>Warnings</strong> - Important notices</li>
+                    <li><strong>Errors</strong> - Problem indicators</li>
+                    <li><strong>Information</strong> - Contextual help</li>
+                    <li><strong>Success</strong> - Completion confirmation</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use <code>role="alert"</code> for urgent messages</li>
+                    <li>Color + icon for type indication</li>
+                    <li>Clear, readable text</li>
+                    <li>Sufficient contrast (WCAG AA)</li>
+                    <li>Avoid relying on color alone</li>
+                    <li>Announce to screen readers</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Messages</strong> - Be specific and actionable</li>
+                    <li><strong>Appropriate Type</strong> - Match severity to type</li>
+                    <li><strong>Visual Hierarchy</strong> - Use size and color strategically</li>
+                    <li><strong>Timely Display</strong> - Show when relevant</li>
+                    <li><strong>Icon Usage</strong> - Reinforce type with icons</li>
+                    <li><strong>Dismissible</strong> - Allow users to close if appropriate</li>
+                </ul>
+            </section>
+        </div>
     </div></section></main>
 
     <footer class="main">
@@ -150,41 +242,25 @@
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
     <script>
-        // Handle dismissible alerts
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('[data-alert-close]').forEach(button => {
-                button.addEventListener('click', function() {
-                    const alert = this.closest('.alert');
-                    if (alert) {
-                        alert.style.display = 'none';
-                    }
-                });
-            });
-        });
-        
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
                 return;
             }
-            
             document.querySelectorAll('.axicon.render').forEach(el => {
                 const name = el.getAttribute('data-name');
                 if (!name) return;
-                
                 const icon = axicons.find(i => i.name === name);
                 if (icon) {
                     el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
                 }
             });
         }
-
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', renderAxicons);
         } else {
             renderAxicons();
         }
-
         setTimeout(renderAxicons, 500);
     </script>
     <script src="../../js/index-page-manager.js"></script>
