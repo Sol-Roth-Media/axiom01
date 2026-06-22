@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axicons - Thin Variant Style Exploration</title>
+    <link rel="stylesheet" href="css/axicons.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 { margin-bottom: 0.5rem; font-size: 2em; }
+        .subtitle { color: #666; margin-bottom: 2rem; font-size: 1.1em; }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
+        .style-section {
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .style-section h2 {
+            font-size: 1.2em;
+            margin-bottom: 0.5rem;
+        }
+
+        .style-section .description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .icon-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-row {
+            text-align: center;
+        }
+
+        .icon-row .label {
+            font-size: 0.75em;
+            color: #999;
+            margin-top: 0.5rem;
+        }
+
+        svg {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #e0e0e0;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .pros, .cons {
+            font-size: 0.85em;
+            margin-top: 1rem;
+        }
+
+        .pros {
+            color: #22c55e;
+            border-left: 3px solid #22c55e;
+            padding-left: 0.75rem;
+        }
+
+        .cons {
+            color: #ef4444;
+            border-left: 3px solid #ef4444;
+            padding-left: 0.75rem;
+        }
+
+        .pros strong, .cons strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .pros ul, .cons ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .pros li::before, .cons li::before {
+            content: "• ";
+            margin-right: 0.25rem;
+        }
+
+        .recommendation {
+            background: #e8f4f8;
+            border: 2px solid #0066cc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-size: 1em;
+        }
+
+        .recommendation strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1em;
+            color: #0066cc;
+        }
+
+        .vs-title {
+            text-align: center;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 1.2em;
+        }
+
+        .code-example {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Monaco', monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .choice-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .choice-card {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .choice-card.recommended {
+            border-color: #0066cc;
+            background: #e8f4f8;
+        }
+
+        .choice-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1em;
+        }
+
+        .choice-card .rating {
+            font-size: 2em;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Thin Variant Style Exploration</h1>
+        <p class="subtitle">Finding the right balance between Regular (bold) and Thin (refined)</p>
+
+        <div class="recommendation">
+            <strong>Your Observation:</strong>
+            Current Thin variants (1px filled strokes) look too similar to Regular variants (2px filled strokes).
+            Both look "thick" and filled. Let's explore outlined (hollow) alternatives for visual distinction.
+        </div>
+
+        <h2 style="margin-top: 2rem; margin-bottom: 1rem;">Comparison: Three Approaches</h2>
+
+        <div class="comparison">
+            <!-- Current: Filled 1px -->
+            <div class="style-section">
+                <h2>Current: Filled 1px</h2>
+                <p class="description">Thin variants with 1px filled strokes (wrapped in &lt;g stroke-width="1"&gt;)</p>
+                
+                <div class="icon-showcase">
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        <p class="label">Regular (2px)</p>
+                    </div>
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        <p class="label">Thin (1px) - CURRENT</p>
+                    </div>
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="6" y="6" width="12" height="12" rx="1"/>
+                        </svg>
+                        <p class="label">Filled example</p>
+                    </div>
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="6" y="6" width="12" height="12" rx="1"/>
+                        </svg>
+                        <p class="label">Filled thin</p>
+                    </div>
+                </div>
+
+                <div class="pros">
+                    <strong>✓ Pros:</strong>
+                    <ul>
+                        <li>Consistent with Regular (same visual language)</li>
+                        <li>Less complex geometrically</li>
+                    </ul>
+                </div>
+
+                <div class="cons">
+                    <strong>✗ Cons:</strong>
+                    <ul>
+                        <li>Too similar to Regular (hard to distinguish)</li>
+                        <li>1px barely more refined than 2px</li>
+                        <li>Looks incomplete or cheap</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Option 1: Double outline -->
+            <div class="style-section">
+                <h2>Option 1: Double Outline</h2>
+                <p class="description">Outlined (hollow) icons with double strokes for definition</p>
+                
+                <div class="icon-showcase">
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        <p class="label">Regular (2px)</p>
+                    </div>
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        <p class="label">Outlined (0.75px)</p>
+                    </div>
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="6" y="6" width="12" height="12" rx="1"/>
+                        </svg>
+                        <p class="label">Filled example</p>
+                    </div>
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6">
+                            <rect x="6" y="6" width="12" height="12" rx="1"/>
+                        </svg>
+                        <p class="label">Outlined thin</p>
+                    </div>
+                </div>
+
+                <div class="pros">
+                    <strong>✓ Pros:</strong>
+                    <ul>
+                        <li>Much more visually distinct</li>
+                        <li>Elegant, refined appearance</li>
+                        <li>Good for dense layouts</li>
+                    </ul>
+                </div>
+
+                <div class="cons">
+                    <strong>✗ Cons:</strong>
+                    <ul>
+                        <li>0.75px strokes may be too thin (anti-aliasing issues)</li>
+                        <li>Less readable at small sizes</li>
+                        <li>May look faint on some displays</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Option 2: Reduced stroke + lighter -->
+            <div class="style-section">
+                <h2>Option 2: Reduced + Lighter</h2>
+                <p class="description">Thin filled strokes (1px) with reduced opacity for lightness</p>
+                
+                <div class="icon-showcase">
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        <p class="label">Regular (2px)</p>
+                    </div>
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        <p class="label">Thin (1px, 50% opacity)</p>
+                    </div>
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="6" y="6" width="12" height="12" rx="1"/>
+                        </svg>
+                        <p class="label">Filled example</p>
+                    </div>
+                    <div class="icon-row">
+                        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+                            <rect x="6" y="6" width="12" height="12" rx="1"/>
+                        </svg>
+                        <p class="label">Lighter thin</p>
+                    </div>
+                </div>
+
+                <div class="pros">
+                    <strong>✓ Pros:</strong>
+                    <ul>
+                        <li>Clear visual distinction via opacity</li>
+                        <li>Works on all displays</li>
+                        <li>Minimal file size impact</li>
+                    </ul>
+                </div>
+
+                <div class="cons">
+                    <strong>✗ Cons:</strong>
+                    <ul>
+                        <li>Requires CSS or SVG opacity attribute</li>
+                        <li>Faded appearance might not match intent</li>
+                        <li>Not ideal for emphasis scenarios</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="margin-top: 2rem; margin-bottom: 1rem;">Detailed Style Recommendations</h2>
+
+        <div class="choice-grid">
+            <div class="choice-card recommended">
+                <h3>🎯 RECOMMENDED: Outlined + Lighter (Option 2B)</h3>
+                <p class="rating">★★★★★</p>
+                <p><strong>Approach:</strong> Keep 1px strokes + add 60-70% opacity</p>
+                <div class="code-example">
+&lt;g stroke-width="1" opacity="0.65"&gt;
+  &lt;path d="..."/&gt;
+  &lt;circle.../&gt;
+&lt;/g&gt;
+                </div>
+                <p><strong>Why this works:</strong></p>
+                <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                    <li>✓ Immediately visually distinct</li>
+                    <li>✓ Elegant and refined appearance</li>
+                    <li>✓ Works at any size</li>
+                    <li>✓ Minimal file size (just opacity attr)</li>
+                    <li>✓ Easy to adjust (change opacity value)</li>
+                    <li>✓ Professional look (like Material Design's "outlined" style)</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 0.9em; color: #0066cc;"><strong>Implementation:</strong> Single attribute per Thin variant.</p>
+            </div>
+
+            <div class="choice-card">
+                <h3>ALTERNATIVE: Truly Outlined (0.75-1px)</h3>
+                <p class="rating">★★★★☆</p>
+                <p><strong>Approach:</strong> Use 0.75px or 1px but scaled down shapes</p>
+                <div class="code-example">
+&lt;g stroke-width="0.75" fill="none"&gt;
+  &lt;path d="..."/&gt;
+  &lt;circle.../&gt;
+&lt;/g&gt;
+                </div>
+                <p><strong>Pros & Cons:</strong></p>
+                <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                    <li>✓ Ultimate visual distinction</li>
+                    <li>✓ "Paper-thin" elegant look</li>
+                    <li>✗ May look too faint at small sizes</li>
+                    <li>✗ Anti-aliasing issues on some displays</li>
+                    <li>✗ Less readable in dense layouts</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 0.9em; color: #666;"><strong>Best for:</strong> Large icon displays (32px+)</p>
+            </div>
+        </div>
+
+        <div class="recommendation" style="margin-top: 2rem;">
+            <strong>My Recommendation:</strong>
+            Go with <strong>Option 2B (Outlined + Lighter with 65% opacity)</strong> because:
+            <ul style="margin: 1rem 0 0 1.5rem; line-height: 1.8;">
+                <li>Immediately creates visual hierarchy (dark regular, light thin)</li>
+                <li>Works perfectly at any DPI or screen size</li>
+                <li>Easy to implement (just add opacity="0.65" to Thin wrapper)</li>
+                <li>Can be adjusted later if needed (try 0.5-0.7 range)</li>
+                <li>Matches popular design systems (Material, Ant Design)</li>
+                <li>Minimal code/file size impact</li>
+            </ul>
+        </div>
+
+        <h2 style="margin-top: 2rem; margin-bottom: 1rem;">Visual Style Hierarchy</h2>
+
+        <div style="background: #f9f9f9; border: 2px solid #e0e0e0; border-radius: 8px; padding: 2rem;">
+            <h3 style="margin-bottom: 1rem;">After Implementation:</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                <div style="text-align: center;">
+                    <h4 style="margin-bottom: 0.5rem;">Regular</h4>
+                    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 120px; height: 120px; margin: 0 auto 1rem; display: block; border: 1px solid #e0e0e0; padding: 0.5rem; border-radius: 4px;">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    <p style="font-size: 0.9em; color: #666;">Bold, prominent<br/>2px strokes, 100% opacity</p>
+                </div>
+
+                <div style="text-align: center;">
+                    <h4 style="margin-bottom: 0.5rem;">Thin (Recommended)</h4>
+                    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.65" style="width: 120px; height: 120px; margin: 0 auto 1rem; display: block; border: 1px solid #e0e0e0; padding: 0.5rem; border-radius: 4px;">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    <p style="font-size: 0.9em; color: #666;">Refined, elegant<br/>1px strokes, 65% opacity</p>
+                </div>
+
+                <div style="text-align: center;">
+                    <h4 style="margin-bottom: 0.5rem;">Inverted</h4>
+                    <svg viewBox="0 0 24 24" style="width: 120px; height: 120px; margin: 0 auto 1rem; display: block; border: 1px solid #e0e0e0; border-radius: 4px;">
+                        <rect x="0" y="0" width="24" height="24" fill="currentColor" rx="2"/>
+                        <path stroke="white" d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="9 22 9 12 15 12 15 22" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p style="font-size: 0.9em; color: #666;">Solid with contrast<br/>CSS variables</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="recommendation" style="margin-top: 2rem; background: #fff3cd; border-color: #ffc107;">
+            <strong style="color: #856404;">Next Steps (If You Agree):</strong>
+            <p style="color: #856404; margin-top: 0.5rem;">
+                If you like the opacity approach, I can:
+            </p>
+            <ol style="margin-left: 1.5rem; margin-top: 0.5rem; color: #856404;">
+                <li>Update all 536 Thin variants to add opacity="0.65"</li>
+                <li>Test the visual hierarchy</li>
+                <li>Adjust opacity if needed (0.5-0.7 range)</li>
+                <li>Commit and you'll have perfectly distinct Thin variants</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
