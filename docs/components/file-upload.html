@@ -10,6 +10,127 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .upload-demo {
+            background: var(--ax-background-secondary);
+            padding: var(--a-space-l);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            max-width: 500px;
+        }
+        
+        .upload-zone {
+            border: 2px dashed var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            padding: var(--a-space-xl);
+            text-align: center;
+            cursor: pointer;
+            transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
+        }
+        
+        .upload-zone:hover {
+            background-color: var(--a-color-primary-container);
+            border-color: var(--a-color-primary);
+        }
+        
+        .upload-zone.drag-over {
+            background-color: var(--a-color-primary-container);
+            border-color: var(--a-color-primary);
+            box-shadow: 0 0 0 3px rgba(var(--a-color-primary-rgb), 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: var(--a-space-m);
+        }
+        
+        .upload-text {
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+        }
+        
+        .upload-text strong {
+            color: var(--a-color-primary);
+            cursor: pointer;
+        }
+        
+        .hidden-input {
+            display: none;
+        }
+        
+        .file-list {
+            margin-top: var(--a-space-l);
+            padding-top: var(--a-space-l);
+            border-top: 1px solid var(--ax-border);
+        }
+        
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--a-space-m);
+            background: var(--ax-surface);
+            border-radius: var(--a-border-radius-sm);
+            margin-bottom: var(--a-space-s);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-s);
+            flex: 1;
+        }
+        
+        .file-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--a-border-radius-sm);
+            background: var(--a-color-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--a-color-primary);
+            font-size: 14px;
+        }
+        
+        .file-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .file-name {
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .file-size {
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+        }
+        
+        .remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--a-color-error, #d32f2f);
+            padding: var(--a-space-s);
+            border-radius: var(--a-border-radius-sm);
+            transition: background-color var(--a-transition-base);
+        }
+        
+        .remove-btn:hover {
+            background-color: rgba(211, 47, 47, 0.1);
+        }
+        
+        .input-label {
+            font-weight: var(--a-font-weight-semibold);
+            font-size: var(--a-font-size-sm);
+            display: block;
+            margin-bottom: var(--a-space-s);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -38,98 +159,166 @@
     <main><section><div class="container">
         <header>
             <h1>File Upload</h1>
-            <p class="text-muted">Axiom01 provides styling for native file input elements and a flexible structure for creating custom drag-and-drop file ...</p>
+            <p class="text-muted">Axiom01's file upload component provides an intuitive interface for selecting and uploading files. It supports drag-and-drop, file validation, and progress indication for a user-friendly experience.</p>
         </header>
 
         <div class="component-section">
-            <h2>File Upload Component</h2>
-            <p>Axiom01 provides styling for native file input elements and a flexible structure for creating custom drag-and-drop file upload areas. This component is designed to be user-friendly and visually consistent with the framework's aesthetic.</p>
 
-            <h3>Basic File Input</h3>
-            <div class="file-upload-container">
-                <label for="basic-file-input" class="button primary">Choose File</label>
-                <input type="file" id="basic-file-input">
-                <p id="basic-file-name">No file chosen</p>
-            </div>
+            <section>
+                <h2>Live Examples</h2>
 
-            <h3>Code Example (Basic File Input)</h3>
-            <pre><code class="language-html">&lt;div class="file-upload-container"&gt;
-&lt;label for="basic-file-input" class="button primary"&gt;Choose File&lt;/label&gt;
-&lt;input type="file" id="basic-file-input"&gt;
-&lt;p id="basic-file-name"&gt;No file chosen&lt;/p&gt;
+                <h3>Drag and Drop Upload</h3>
+                <div class="upload-demo">
+                    <div class="upload-zone" id="uploadZone1" role="button" tabindex="0" aria-label="Drag files here or click to browse">
+                        <div class="upload-icon">
+                            <span class="axicon render" data-name="Upload"></span>
+                        </div>
+                        <p class="upload-text">
+                            <strong>Click to browse</strong> or drag files here
+                        </p>
+                        <p style="font-size: var(--a-font-size-xs); color: var(--a-color-text-muted); margin: var(--a-space-s) 0 0;">
+                            Supported formats: JPG, PNG, PDF (Max 10MB)
+                        </p>
+                    </div>
+                    <input type="file" id="fileInput1" class="hidden-input" multiple accept=".jpg,.jpeg,.png,.pdf">
+                    <div class="file-list" id="fileList1" style="display: none;"></div>
+                </div>
+
+                <h3>Simple File Input</h3>
+                <div class="upload-demo">
+                    <label class="input-label" for="fileInput2">Select Document</label>
+                    <div style="display: flex; gap: var(--a-space-m);">
+                        <input type="file" id="fileInput2" class="hidden-input" accept=".doc,.docx,.pdf">
+                        <button type="button" class="button primary" id="browseBtn" aria-label="Browse for files">
+                            <span class="axicon render" data-name="File"></span>
+                            Choose File
+                        </button>
+                    </div>
+                    <div class="file-list" id="fileList2" style="display: none;"></div>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;!-- Drag and drop zone --&gt;
+&lt;div class="upload-zone" role="button" tabindex="0" aria-label="Upload area"&gt;
+    &lt;div class="upload-icon"&gt;
+        &lt;span class="axicon render" data-name="Upload"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;p class="upload-text"&gt;
+        &lt;strong&gt;Click to browse&lt;/strong&gt; or drag files here
+    &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;script&gt;
-document.getElementById('basic-file-input').addEventListener('change', function() {
-    const fileName = this.files.length > 0 ? this.files[0].name : 'No file chosen';
-    document.getElementById('basic-file-name').textContent = fileName;
-});
-&lt;/script&gt;</code></pre>
+&lt;input type="file" id="fileInput" class="hidden-input" multiple&gt;
+&lt;div class="file-list" id="fileList"&gt;&lt;/div&gt;
 
-            <h3>Drag-and-Drop File Upload Area</h3>
-            <div class="file-upload-container" id="drop-area">
-                <span class="axicon render" data-name="cloud-upload-alt"></span>
-                <p>Drag & drop files here, or <label for="drop-file-input">browse</label></p>
-                <input type="file" id="drop-file-input" multiple>
-                <ul class="file-list" id="uploaded-files"></ul>
-            </div>
+&lt;!-- Simple file input --&gt;
+&lt;label for="file"&gt;Upload File&lt;/label&gt;
+&lt;input type="file" id="file" accept=".pdf,.doc"&gt;</code></pre>
+                </div>
+            </section>
 
-            <h3>Code Example (Drag-and-Drop)</h3>
-            <pre><code class="language-html">&lt;div class="file-upload-container" id="drop-area"&gt;
-&lt;i class="fas fa-cloud-upload-alt"&gt;&lt;/i&gt;
-&lt;p&gt;Drag &amp; drop files here, or &lt;label for="drop-file-input"&gt;browse&lt;/label&gt;&lt;/p&gt;
-&lt;input type="file" id="drop-file-input" multiple&gt;
-&lt;ul class="file-list" id="uploaded-files"&gt;&lt;/ul&gt;
-&lt;/div&gt;
+            <section>
+                <h2>JavaScript Implementation</h2>
+                <div class="code-block">
+                    <pre><code class="language-javascript">const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+const fileList = document.getElementById('fileList');
 
-&lt;script&gt;
-const dropArea = document.getElementById('drop-area');
-const dropFileInput = document.getElementById('drop-file-input');
-const uploadedFilesList = document.getElementById('uploaded-files');
-
-;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, preventDefaults, false);
+// Click to upload
+uploadZone.addEventListener('click', () => fileInput.click());
+uploadZone.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fileInput.click();
+    }
 });
 
-function preventDefaults (e) {
+// Drag and drop
+uploadZone.addEventListener('dragover', (e) => {
     e.preventDefault();
-    e.stopPropagation();
-}
-
-;['dragenter', 'dragover'].forEach(eventName => {
-    dropArea.addEventListener(eventName, () => dropArea.classList.add('highlight'), false);
+    uploadZone.classList.add('drag-over');
 });
 
-;['dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, () => dropArea.classList.remove('highlight'), false);
+uploadZone.addEventListener('dragleave', () => {
+    uploadZone.classList.remove('drag-over');
 });
 
-dropArea.addEventListener('drop', handleDrop, false);
-dropFileInput.addEventListener('change', () => handleFiles(dropFileInput.files));
-
-function handleDrop(e) {
-    const dt = e.dataTransfer;
-    const files = dt.files;
+uploadZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadZone.classList.remove('drag-over');
+    const files = e.dataTransfer.files;
     handleFiles(files);
-}
+});
+
+// File input change
+fileInput.addEventListener('change', (e) => {
+    handleFiles(e.target.files);
+});
 
 function handleFiles(files) {
-    for (const file of files) {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            &lt;span class="file-name"&gt;${file.name}&lt;/span&gt;
-            &lt;button class="remove-file"&gt;&amp;times;&lt;/button&gt;
-        `;
-        uploadedFilesList.appendChild(listItem);
-        listItem.querySelector('.remove-file').addEventListener('click', () => listItem.remove());
+    Array.from(files).forEach(file => {
+        const item = createFileItem(file);
+        fileList.appendChild(item);
+    });
+    
+    if (files.length > 0) {
+        fileList.style.display = 'block';
     }
-}
-&lt;/script&gt;</code></pre>
+}</code></pre>
+                </div>
+            </section>
 
-            <h3>Usage Guidelines</h3>
-            <p>For custom file upload areas, the <code>.file-upload-container</code> class provides a styled drop zone. You'll need JavaScript to handle the drag-and-drop events, process file selections, and display file names or previews. The example above provides a basic JavaScript implementation for this.</p>
-            <p>Remember to handle server-side file uploads securely and provide clear feedback to the user about upload progress and success/failure.</p>
-        </div>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Drag and Drop</strong> - Drop files directly onto the upload area</li>
+                    <li><strong>Click to Browse</strong> - Traditional file picker dialog</li>
+                    <li><strong>Multiple Files</strong> - Upload multiple files at once</li>
+                    <li><strong>File Validation</strong> - Accept specific file types</li>
+                    <li><strong>File Preview</strong> - Show uploaded files with metadata</li>
+                    <li><strong>Remove Option</strong> - Remove files before submission</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Document Upload</strong> - Resume, invoice, or document submission</li>
+                    <li><strong>Image Gallery</strong> - Photo uploads for profiles or products</li>
+                    <li><strong>File Management</strong> - Cloud storage or file sharing</li>
+                    <li><strong>Form Attachments</strong> - Additional information submission</li>
+                    <li><strong>Batch Import</strong> - CSV/Excel data import</li>
+                    <li><strong>Media Upload</strong> - Video or audio file uploads</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use <code>role="button"</code> and <code>tabindex="0"</code> on upload zones</li>
+                    <li>Include keyboard support (Enter/Space to open picker)</li>
+                    <li>Provide clear file type restrictions</li>
+                    <li>Use <code>aria-label</code> to describe upload areas</li>
+                    <li>Show file validation error messages clearly</li>
+                    <li>Allow removing files with keyboard</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>File Size Limit</strong> - Clearly display maximum file size</li>
+                    <li><strong>File Type Validation</strong> - Restrict to expected formats</li>
+                    <li><strong>Virus Scanning</strong> - Scan uploaded files server-side</li>
+                    <li><strong>Progress Indication</strong> - Show upload progress</li>
+                    <li><strong>Error Handling</strong> - Clear, actionable error messages</li>
+                    <li><strong>Drag Feedback</strong> - Visual feedback during drag-over</li>
+                </ul>
+            </section>
+
         </div>
 
     </div></section></main>
@@ -145,9 +334,9 @@ function handleFiles(files) {
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
@@ -174,6 +363,88 @@ function handleFiles(files) {
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
     <script>
+        // File upload handler 1
+        const uploadZone1 = document.getElementById('uploadZone1');
+        const fileInput1 = document.getElementById('fileInput1');
+        const fileList1 = document.getElementById('fileList1');
+
+        uploadZone1.addEventListener('click', () => fileInput1.click());
+        uploadZone1.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                fileInput1.click();
+            }
+        });
+
+        uploadZone1.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone1.classList.add('drag-over');
+        });
+
+        uploadZone1.addEventListener('dragleave', () => {
+            uploadZone1.classList.remove('drag-over');
+        });
+
+        uploadZone1.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone1.classList.remove('drag-over');
+            handleFiles1(e.dataTransfer.files);
+        });
+
+        fileInput1.addEventListener('change', (e) => handleFiles1(e.target.files));
+
+        function handleFiles1(files) {
+            fileList1.innerHTML = '';
+            Array.from(files).forEach(file => {
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                const ext = file.name.split('.').pop().toUpperCase();
+                item.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-icon">${ext}</div>
+                        <div class="file-details">
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${(file.size / 1024).toFixed(2)} KB</div>
+                        </div>
+                    </div>
+                    <button type="button" class="remove-btn" aria-label="Remove file">×</button>
+                `;
+                fileList1.appendChild(item);
+            });
+            if (files.length > 0) {
+                fileList1.style.display = 'block';
+            }
+        }
+
+        // File upload handler 2
+        const browseBtn = document.getElementById('browseBtn');
+        const fileInput2 = document.getElementById('fileInput2');
+        const fileList2 = document.getElementById('fileList2');
+
+        browseBtn.addEventListener('click', () => fileInput2.click());
+        fileInput2.addEventListener('change', (e) => {
+            fileList2.innerHTML = '';
+            Array.from(e.target.files).forEach(file => {
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                const ext = file.name.split('.').pop().toUpperCase();
+                item.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-icon">${ext}</div>
+                        <div class="file-details">
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${(file.size / 1024).toFixed(2)} KB</div>
+                        </div>
+                    </div>
+                    <button type="button" class="remove-btn" aria-label="Remove file">×</button>
+                `;
+                fileList2.appendChild(item);
+            });
+            if (e.target.files.length > 0) {
+                fileList2.style.display = 'block';
+            }
+        });
+
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
