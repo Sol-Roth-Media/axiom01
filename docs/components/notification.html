@@ -10,6 +10,166 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .notification-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+        }
+        
+        .notification {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--a-space-m);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-md);
+            margin-bottom: var(--a-space-m);
+            border-left: 4px solid var(--ax-border);
+            background: var(--ax-surface);
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .notification.success {
+            border-left-color: #4caf50;
+            background: rgba(76, 175, 80, 0.05);
+        }
+        
+        .notification.error {
+            border-left-color: #d32f2f;
+            background: rgba(211, 47, 47, 0.05);
+        }
+        
+        .notification.warning {
+            border-left-color: #ff9800;
+            background: rgba(255, 152, 0, 0.05);
+        }
+        
+        .notification.info {
+            border-left-color: var(--a-color-primary);
+            background: rgba(var(--a-color-primary-rgb), 0.05);
+        }
+        
+        .notification-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .notification.success .notification-icon {
+            color: #4caf50;
+        }
+        
+        .notification.error .notification-icon {
+            color: #d32f2f;
+        }
+        
+        .notification.warning .notification-icon {
+            color: #ff9800;
+        }
+        
+        .notification.info .notification-icon {
+            color: var(--a-color-primary);
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-title {
+            margin: 0 0 4px 0;
+            font-weight: var(--a-font-weight-semibold);
+            color: var(--ax-text);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .notification-message {
+            margin: 0;
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+            line-height: 1.4;
+        }
+        
+        .notification-close {
+            width: 24px;
+            height: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--a-color-text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all var(--a-transition-base);
+        }
+        
+        .notification-close:hover {
+            color: var(--ax-text);
+        }
+        
+        .notification-buttons {
+            margin-top: var(--a-space-m);
+            display: flex;
+            gap: var(--a-space-s);
+        }
+        
+        .notification-button {
+            padding: 6px 12px;
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-sm);
+            cursor: pointer;
+            font-size: var(--a-font-size-xs);
+            font-weight: var(--a-font-weight-semibold);
+            transition: all var(--a-transition-base);
+            color: var(--ax-text);
+        }
+        
+        .notification-button:hover {
+            border-color: var(--a-color-primary);
+            color: var(--a-color-primary);
+        }
+        
+        .trigger-buttons {
+            display: flex;
+            gap: var(--a-space-m);
+            flex-wrap: wrap;
+            margin-bottom: var(--a-space-l);
+        }
+        
+        .trigger-btn {
+            padding: 10px 20px;
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border: none;
+            border-radius: var(--a-border-radius-md);
+            cursor: pointer;
+            font-weight: var(--a-font-weight-semibold);
+            font-size: var(--a-font-size-sm);
+            transition: all var(--a-transition-base);
+        }
+        
+        .trigger-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -38,134 +198,131 @@
     <main><section><div class="container">
         <header>
             <h1>Notification</h1>
-            <p class="text-muted">Axiom01's notification component provides a non-intrusive way to display short, timely messages to users. These can be u...</p>
+            <p class="text-muted">Axiom01's notification component displays contextual alerts and messages to users. Supports multiple types (success, error, warning, info) with dismissible options and animations.</p>
         </header>
 
         <div class="component-section">
 
-						 <section>
-								 <div class="container">
-										 <h2>Live Example</h2>
-										 <div>
-                                                 <button class="button primary" type="button" data-notification-type="success">Show Success Notification</button>
-                                                 <button class="button warning" type="button" data-notification-type="warning">Show Warning Notification</button>
-                                                 <button class="button error" type="button" data-notification-type="error">Show Error Notification</button>
+            <section>
+                <h2>Live Examples</h2>
 
-												 <div class="notification-container" id="notification-container">
-														 <!-- Notifications will be appended here -->
+                <h3>Notification Types</h3>
+                <div class="notification-demo">
+                    <div class="trigger-buttons">
+                        <button class="trigger-btn" onclick="showNotification('success')">Success</button>
+                        <button class="trigger-btn" onclick="showNotification('error')">Error</button>
+                        <button class="trigger-btn" onclick="showNotification('warning')">Warning</button>
+                        <button class="trigger-btn" onclick="showNotification('info')">Info</button>
+                    </div>
+                    
+                    <div id="notificationContainer"></div>
+                    
+                    <h3 style="margin-top: var(--a-space-l); font-size: var(--a-font-size-lg);">Preset Examples</h3>
+                    
+                    <div class="notification success">
+                        <div class="notification-icon">✓</div>
+                        <div class="notification-content">
+                            <p class="notification-title">Success!</p>
+                            <p class="notification-message">Your changes have been saved successfully.</p>
+                        </div>
+                        <button class="notification-close" aria-label="Close notification">&times;</button>
+                    </div>
+                    
+                    <div class="notification error">
+                        <div class="notification-icon">✕</div>
+                        <div class="notification-content">
+                            <p class="notification-title">Error</p>
+                            <p class="notification-message">An error occurred while processing your request. Please try again.</p>
+                            <div class="notification-buttons">
+                                <button class="notification-button">Retry</button>
+                                <button class="notification-button">Dismiss</button>
+                            </div>
+                        </div>
+                        <button class="notification-close" aria-label="Close notification">&times;</button>
+                    </div>
+                    
+                    <div class="notification warning">
+                        <div class="notification-icon">!</div>
+                        <div class="notification-content">
+                            <p class="notification-title">Warning</p>
+                            <p class="notification-message">This action cannot be undone. Are you sure you want to continue?</p>
+                        </div>
+                        <button class="notification-close" aria-label="Close notification">&times;</button>
+                    </div>
+                    
+                    <div class="notification info">
+                        <div class="notification-icon">ⓘ</div>
+                        <div class="notification-content">
+                            <p class="notification-title">Information</p>
+                            <p class="notification-message">A new version is available. Update now to get the latest features.</p>
+                        </div>
+                        <button class="notification-close" aria-label="Close notification">&times;</button>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <div class="component-section">
-
-        <section>
-            <div class="container">
+            <section>
                 <h2>HTML Structure</h2>
-                <p>Notifications are typically generated dynamically via JavaScript, but their base structure is simple:</p>
                 <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="notification-container"&gt;
-&lt;div class="notification success" role="status" aria-live="polite"&gt;
-    &lt;i class="fas fa-check-circle" aria-hidden="true"&gt;&lt;/i&gt;
-    &lt;div&gt;Your changes have been saved!&lt;/div&gt;
-    &lt;button class="close-notification" aria-label="Close notification"&gt;&amp;times;&lt;/button&gt;
-&lt;/div&gt;
+                    <pre><code class="language-html">&lt;div class="notification success"&gt;
+    &lt;div class="notification-icon"&gt;✓&lt;/div&gt;
+    &lt;div class="notification-content"&gt;
+        &lt;p class="notification-title"&gt;Success!&lt;/p&gt;
+        &lt;p class="notification-message"&gt;Message text&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;button class="notification-close" aria-label="Close"&gt;×&lt;/button&gt;
 &lt;/div&gt;</code></pre>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <div class="component-section">
-
-        <section>
-            <div class="container">
-                <h2>Styling</h2>
-                <p>The <code>.notification-container</code> positions the notifications (e.g., top-right of the viewport). Individual notifications use the <code>.notification</code> class, with modifier classes like <code>.success</code>, <code>.warning</code>, <code>.error</code>, or <code>.info</code> to indicate their type.</p>
-                <p>Notifications are designed to be animated for a smooth appearance and disappearance.</p>
-            </div>
-        </section>
-
-        <div class="component-section">
-
-        <section>
-            <div class="container">
-                <h2>JavaScript Integration</h2>
-                <p>Notifications are primarily driven by JavaScript. You'll need to:</p>
+            <section>
+                <h2>Features</h2>
                 <ul>
-                    <li>Create a function to generate and append notification elements to the <code>.notification-container</code>.</li>
-                    <li>Implement logic for auto-dismissal after a set duration.</li>
-                    <li>Handle user-initiated dismissal via the close button.</li>
-                    <li>Ensure proper ARIA attributes are set for accessibility.</li>
+                    <li><strong>Multiple Types</strong> - Success, error, warning, info</li>
+                    <li><strong>Icons</strong> - Visual type identification</li>
+                    <li><strong>Dismissible</strong> - Close button to remove</li>
+                    <li><strong>Action Buttons</strong> - Call-to-action within notification</li>
+                    <li><strong>Animations</strong> - Slide-in and fade effects</li>
+                    <li><strong>Auto-dismiss</strong> - Optional timeout feature</li>
                 </ul>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;script&gt;
-function showNotification(type) {
-    const container = document.getElementById('notification-container');
-    const notification = document.createElement('div');
-    notification.classList.add('notification', type);
-    notification.setAttribute('role', 'status');
-    notification.setAttribute('aria-live', 'polite');
+            </section>
 
-    let message = '';
-    let icon = '';
-    if (type === 'success') {
-        message = 'Operation successful!';
-        icon = '&lt;i class="fas fa-check-circle" aria-hidden="true"&gt;&lt;/i&gt;';
-    } else if (type === 'warning') {
-        message = 'Warning: Something needs your attention.';
-        icon = '&lt;i class="fas fa-exclamation-triangle" aria-hidden="true"&gt;&lt;/i&gt;';
-    } else if (type === 'error') {
-        message = 'Error: Please try again.';
-        icon = '&lt;i class="fas fa-times-circle" aria-hidden="true"&gt;&lt;/i&gt;';
-    }
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Form Submission</strong> - Success or error feedback</li>
+                    <li><strong>System Status</strong> - Alert notifications</li>
+                    <li><strong>User Actions</strong> - Confirmation messages</li>
+                    <li><strong>Warnings</strong> - Important notices</li>
+                    <li><strong>Updates</strong> - Software or content updates</li>
+                    <li><strong>Help Text</strong> - Contextual information</li>
+                </ul>
+            </section>
 
-    notification.innerHTML = `
-        ${icon}
-        &lt;div&gt;${message}&lt;/div&gt;
-        &lt;button class="close-notification" aria-label="Close notification"&gt;&amp;times;&lt;/button&gt;
-    `;
-
-    container.appendChild(notification);
-
-    // Auto-dismiss after 5 seconds
-    setTimeout(() => {
-        notification.remove();
-    }, 5000);
-
-    // Dismiss on close button click
-    notification.querySelector('.close-notification').addEventListener('click', () => {
-        notification.remove();
-    });
-}
-&lt;/script&gt;</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <div class="component-section">
-
-        <section>
-            <div class="container">
+            <section>
                 <h2>Accessibility</h2>
                 <ul>
-                    <li><code>role="status"</code> and <code>aria-live="polite"</code> on the notification container ensure screen readers announce new notifications without interrupting the user.</li>
-                    <li>Close buttons have descriptive <code>aria-label</code> attributes.</li>
-                    <li>Icons are marked with <code>aria-hidden="true"</code> if purely decorative.</li>
+                    <li>Use <code>role="alert"</code> for urgent messages</li>
+                    <li>Include descriptive title and message</li>
+                    <li>Color + icon for type indication</li>
+                    <li>Include close button with aria-label</li>
+                    <li>Announce to screen readers on appearance</li>
+                    <li>Allow keyboard dismissal</li>
                 </ul>
-            </div>
-        </section>
+            </section>
 
-        <div class="component-section">
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Messages</strong> - Be specific and actionable</li>
+                    <li><strong>Appropriate Type</strong> - Match severity to type</li>
+                    <li><strong>Color + Icon</strong> - Redundant visual cues</li>
+                    <li><strong>Auto-Dismiss</strong> - Use sparingly, not for errors</li>
+                    <li><strong>Position</strong> - Typically top-right or center</li>
+                    <li><strong>Timing</strong> - Don't hide before user reads</li>
+                </ul>
+            </section>
 
-        <section>
-            <div class="container">
-                <h2>Customization</h2>
-                <p>Customize the appearance using Axiom01's CSS variables for colors, spacing, and typography. The positioning of the <code>.notification-container</code> can be adjusted with standard CSS positioning properties.</p>
-            </div>
-        </section>
-
-        <div class="component-section">
         </div>
 
     </div></section></main>
@@ -181,9 +338,9 @@ function showNotification(type) {
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
@@ -210,6 +367,48 @@ function showNotification(type) {
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
     <script>
+        function showNotification(type) {
+            const container = document.getElementById('notificationContainer');
+            const icons = {
+                success: '✓',
+                error: '✕',
+                warning: '!',
+                info: 'ⓘ'
+            };
+            const titles = {
+                success: 'Success',
+                error: 'Error',
+                warning: 'Warning',
+                info: 'Information'
+            };
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-icon">${icons[type]}</div>
+                <div class="notification-content">
+                    <p class="notification-title">${titles[type]}</p>
+                    <p class="notification-message">This is a ${type} notification message.</p>
+                </div>
+                <button class="notification-close" aria-label="Close">&times;</button>
+            `;
+            
+            const closeBtn = notification.querySelector('.notification-close');
+            closeBtn.addEventListener('click', () => {
+                notification.remove();
+            });
+            
+            container.insertBefore(notification, container.firstChild);
+            
+            setTimeout(() => notification.remove(), 5000);
+        }
+        
+        document.querySelectorAll('.notification-close').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('.notification').remove();
+            });
+        });
+
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
