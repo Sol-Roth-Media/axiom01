@@ -10,6 +10,122 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .scroll-demo-container {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            height: 500px;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-m);
+            padding: var(--a-space-l);
+        }
+        
+        .item {
+            background: var(--ax-surface);
+            padding: var(--a-space-l);
+            border-radius: var(--a-border-radius-md);
+            border: 1px solid var(--ax-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .item-number {
+            font-weight: var(--a-font-weight-bold);
+            font-size: var(--a-font-size-lg);
+            color: var(--a-color-primary);
+            min-width: 50px;
+        }
+        
+        .item-content {
+            flex: 1;
+            margin-left: var(--a-space-l);
+        }
+        
+        .item-title {
+            font-weight: var(--a-font-weight-semibold);
+            margin: 0 0 var(--a-space-s) 0;
+        }
+        
+        .item-desc {
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+            margin: 0;
+        }
+        
+        .item-badge {
+            background: var(--a-color-primary-container);
+            color: var(--a-color-primary);
+            padding: 4px 12px;
+            border-radius: var(--a-border-radius-sm);
+            font-size: var(--a-font-size-xs);
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .loading-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--a-space-xl);
+            margin-top: var(--a-space-l);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading-indicator.visible {
+            opacity: 1;
+        }
+        
+        .spinner {
+            border: 3px solid var(--a-color-primary-container);
+            border-top-color: var(--a-color-primary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .end-message {
+            text-align: center;
+            padding: var(--a-space-xl);
+            color: var(--a-color-text-muted);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .info-box {
+            background: var(--a-color-primary-container);
+            color: var(--a-color-primary);
+            padding: var(--a-space-l);
+            border-radius: var(--a-border-radius-md);
+            font-size: var(--a-font-size-sm);
+            margin: var(--a-space-l) 0;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -38,71 +154,166 @@
     <main><section><div class="container">
         <header>
             <h1>Infinite Scroll</h1>
-            <p class="text-muted">Axiom01 provides the structural and visual foundation for implementing infinite scrolling — continuously loading content...</p>
+            <p class="text-muted">Axiom01's infinite scroll component automatically loads more content as users reach the bottom of a page. Perfect for feeds, lists, and galleries that continuously load new items.</p>
         </header>
 
         <div class="component-section">
-            <h2>Infinite Scroll Component</h2>
-            <p>Axiom01 provides the structural and visual foundation for implementing infinite scrolling. This pattern allows users to continuously load content as they scroll down a page, providing a seamless browsing experience without pagination.</p>
 
-            <h3>Example Infinite Scroll List</h3>
-            <div class="infinite-scroll-container" id="infinite-scroll-demo">
-                <div class="infinite-scroll-item">Item 1: Lorem ipsum dolor sit amet.</div>
-                <div class="infinite-scroll-item">Item 2: Consectetur adipiscing elit.</div>
-                <div class="infinite-scroll-item">Item 3: Sed do eiusmod tempor incididunt.</div>
-                <div class="infinite-scroll-item">Item 4: Ut labore et dolore magna aliqua.</div>
-                <div class="infinite-scroll-item">Item 5: Ut enim ad minim veniam.</div>
-                <div class="infinite-scroll-item">Item 6: Quis nostrud exercitation ullamco.</div>
-                <div class="infinite-scroll-item">Item 7: Laboris nisi ut aliquip ex ea commodo.</div>
-                <div class="infinite-scroll-item">Item 8: Duis aute irure dolor in reprehenderit.</div>
-                <div class="infinite-scroll-item">Item 9: Excepteur sint occaecat cupidatat non proident.</div>
-                <div class="infinite-scroll-item">Item 10: Sunt in culpa qui officia deserunt.</div>
-                <div class="loading-indicator" id="loading-indicator">Loading more items...</div>
-            </div>
+            <section>
+                <h2>Live Examples</h2>
 
-            <h3>Code Example</h3>
-            <pre><code class="language-html">&lt;div class="infinite-scroll-container" id="infinite-scroll-demo"&gt;
-    &lt;div class="infinite-scroll-item"&gt;Item 1&lt;/div&gt;
-    &lt;div class="infinite-scroll-item"&gt;Item 2&lt;/div&gt;
-    &lt;!-- ... more items ... --&gt;
-    &lt;div class="loading-indicator" id="loading-indicator"&gt;Loading more items...&lt;/div&gt;
-&lt;/div&gt;
+                <div class="info-box">
+                    💡 Scroll down to see more items load automatically!
+                </div>
 
-&lt;script&gt;
-    const scrollContainer = document.getElementById('infinite-scroll-demo');
-    const loadingIndicator = document.getElementById('loading-indicator');
-    let itemCount = 10;
-    let isLoading = false;
+                <h3>Infinite Scrolling List</h3>
+                <div class="scroll-demo-container" id="scrollContainer">
+                    <div class="item-list" id="itemList">
+                        <!-- Items will be generated by JavaScript -->
+                    </div>
+                    <div class="loading-indicator" id="loadingIndicator">
+                        <div class="spinner"></div>
+                    </div>
+                    <div class="end-message" id="endMessage" style="display: none;">
+                        No more items to load
+                    </div>
+                </div>
+            </section>
 
-    const loadMoreItems = () =&gt; {
-        if (isLoading) return;
-        isLoading = true;
-        loadingIndicator.style.display = 'block';
-        setTimeout(() =&gt; {
-            for (let i = 0; i &lt; 5; i++) {
-                itemCount++;
-                const newItem = document.createElement('div');
-                newItem.classList.add('infinite-scroll-item');
-                newItem.textContent = `Item ${itemCount}: New content loaded.`;
-                scrollContainer.insertBefore(newItem, loadingIndicator);
-            }
-            loadingIndicator.style.display = 'none';
-            isLoading = false;
-        }, 1000);
-    };
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="scroll-demo-container" id="scrollContainer"&gt;
+    &lt;div class="item-list" id="itemList"&gt;
+        &lt;div class="item"&gt;
+            &lt;div class="item-number"&gt;1&lt;/div&gt;
+            &lt;div class="item-content"&gt;
+                &lt;h3 class="item-title"&gt;Item Title&lt;/h3&gt;
+                &lt;p class="item-desc"&gt;Item description&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="item-badge"&gt;Tag&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="loading-indicator" id="loadingIndicator"&gt;
+        &lt;div class="spinner"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="end-message" id="endMessage"&gt;
+        No more items to load
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
 
-    scrollContainer.addEventListener('scroll', () =&gt; {
-        const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
-        if (scrollTop + clientHeight &gt;= scrollHeight - 50 &amp;&amp; !isLoading) {
-            loadMoreItems();
+            <section>
+                <h2>JavaScript Implementation</h2>
+                <div class="code-block">
+                    <pre><code class="language-javascript">let currentPage = 1;
+let isLoading = false;
+const scrollContainer = document.getElementById('scrollContainer');
+const itemList = document.getElementById('itemList');
+const loadingIndicator = document.getElementById('loadingIndicator');
+const endMessage = document.getElementById('endMessage');
+
+function loadMoreItems() {
+    if (isLoading) return;
+    isLoading = true;
+    loadingIndicator.classList.add('visible');
+    
+    // Simulate API delay
+    setTimeout(() => {
+        const newItems = generateItems(currentPage, 10);
+        newItems.forEach(item => {
+            const itemEl = createItemElement(item);
+            itemList.appendChild(itemEl);
+        });
+        
+        currentPage++;
+        isLoading = false;
+        loadingIndicator.classList.remove('visible');
+        
+        // Stop after 5 pages
+        if (currentPage > 5) {
+            endMessage.style.display = 'block';
         }
-    });
-&lt;/script&gt;</code></pre>
+    }, 500);
+}
 
-            <h3>Usage Guidelines</h3>
-            <p>The <code>.infinite-scroll-container</code> class defines the scrollable area. Individual content blocks use <code>.infinite-scroll-item</code>. A <code>.loading-indicator</code> provides feedback while new content loads.</p>
-            <p>Consider accessibility: some users prefer pagination or find infinite scrolling disorienting. Provide an alternative if necessary.</p>
-        </div>
+function createItemElement(item) {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.innerHTML = `
+        &lt;div class="item-number"&gt;${item.id}&lt;/div&gt;
+        &lt;div class="item-content"&gt;
+            &lt;h3 class="item-title"&gt;${item.title}&lt;/h3&gt;
+            &lt;p class="item-desc"&gt;${item.description}&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="item-badge"&gt;${item.tag}&lt;/div&gt;
+    `;
+    return div;
+}
+
+scrollContainer.addEventListener('scroll', () => {
+    if (scrollContainer.scrollTop + scrollContainer.clientHeight 
+        >= scrollContainer.scrollHeight - 100) {
+        loadMoreItems();
+    }
+});
+
+// Load initial items
+loadMoreItems();</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Automatic Loading</strong> - Loads content when user reaches bottom</li>
+                    <li><strong>Loading Indicator</strong> - Shows spinner during data fetch</li>
+                    <li><strong>Smooth Animation</strong> - New items slide in smoothly</li>
+                    <li><strong>End Detection</strong> - Shows message when no more items</li>
+                    <li><strong>Debounced Loading</strong> - Prevents multiple simultaneous requests</li>
+                    <li><strong>Threshold Control</strong> - Customize when loading starts</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Social Media Feed</strong> - Twitter, Instagram, Facebook feeds</li>
+                    <li><strong>Image Gallery</strong> - Pinterest, Flickr, photo galleries</li>
+                    <li><strong>Product Listings</strong> - E-commerce product browsing</li>
+                    <li><strong>News Feed</strong> - Blog posts, articles, news streams</li>
+                    <li><strong>Search Results</strong> - Google, search engines pagination</li>
+                    <li><strong>Activity Stream</strong> - User activity logs and timelines</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic HTML for item structure</li>
+                    <li>Provide clear loading indicators for screen readers</li>
+                    <li>Use <code>aria-label</code> on the loading spinner</li>
+                    <li>Support keyboard navigation (Tab through items)</li>
+                    <li>Announce when new items are loaded (ARIA live regions)</li>
+                    <li>Provide alternative pagination option</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Loading Threshold</strong> - Start loading 100-200px before bottom</li>
+                    <li><strong>Request Debouncing</strong> - Prevent multiple simultaneous requests</li>
+                    <li><strong>Visual Feedback</strong> - Always show loading spinner</li>
+                    <li><strong>Error Handling</strong> - Show error message if load fails</li>
+                    <li><strong>End Detection</strong> - Clearly indicate when no more items</li>
+                    <li><strong>Performance</strong> - Consider virtualizing large lists</li>
+                </ul>
+            </section>
+
         </div>
 
     </div></section></main>
@@ -118,9 +329,9 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
@@ -147,6 +358,79 @@
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
     <script>
+        let currentPage = 1;
+        let isLoading = false;
+        let hasMoreItems = true;
+        const scrollContainer = document.getElementById('scrollContainer');
+        const itemList = document.getElementById('itemList');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const endMessage = document.getElementById('endMessage');
+
+        function generateItems(pageNum, count) {
+            const items = [];
+            const startNum = (pageNum - 1) * count + 1;
+            const tags = ['Feature', 'Bug', 'Enhancement', 'Documentation', 'Performance'];
+            
+            for (let i = 0; i < count; i++) {
+                items.push({
+                    id: startNum + i,
+                    title: `Item ${startNum + i}`,
+                    description: `This is the description for item ${startNum + i}. It contains some useful information.`,
+                    tag: tags[Math.floor(Math.random() * tags.length)]
+                });
+            }
+            return items;
+        }
+
+        function createItemElement(item) {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `
+                <div class="item-number">${item.id}</div>
+                <div class="item-content">
+                    <h3 class="item-title">${item.title}</h3>
+                    <p class="item-desc">${item.description}</p>
+                </div>
+                <div class="item-badge">${item.tag}</div>
+            `;
+            return div;
+        }
+
+        function loadMoreItems() {
+            if (isLoading || !hasMoreItems) return;
+            isLoading = true;
+            loadingIndicator.classList.add('visible');
+            
+            // Simulate API delay
+            setTimeout(() => {
+                const newItems = generateItems(currentPage, 10);
+                newItems.forEach(item => {
+                    const itemEl = createItemElement(item);
+                    itemList.appendChild(itemEl);
+                });
+                
+                currentPage++;
+                isLoading = false;
+                loadingIndicator.classList.remove('visible');
+                
+                // Stop after 5 pages
+                if (currentPage > 5) {
+                    hasMoreItems = false;
+                    endMessage.style.display = 'block';
+                }
+            }, 500);
+        }
+
+        scrollContainer.addEventListener('scroll', () => {
+            if (scrollContainer.scrollTop + scrollContainer.clientHeight 
+                >= scrollContainer.scrollHeight - 100) {
+                loadMoreItems();
+            }
+        });
+
+        // Load initial items
+        loadMoreItems();
+
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);

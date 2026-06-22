@@ -10,6 +10,176 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .chat-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            display: flex;
+            flex-direction: column;
+            height: 450px;
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            padding: var(--a-space-l);
+            border-bottom: 1px solid var(--ax-border);
+            background: var(--ax-surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header-title {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-m);
+        }
+        
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--a-color-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--a-color-primary);
+            font-weight: var(--a-font-weight-bold);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .chat-info h3 {
+            margin: 0;
+            font-size: var(--a-font-size-base);
+        }
+        
+        .chat-status {
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--a-space-l);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-m);
+            background: var(--ax-background-secondary);
+        }
+        
+        .message {
+            display: flex;
+            gap: var(--a-space-s);
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message.user {
+            justify-content: flex-end;
+        }
+        
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--a-color-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--a-color-primary);
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        
+        .message-bubble {
+            max-width: 70%;
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-lg);
+            word-wrap: break-word;
+        }
+        
+        .message-bubble.received {
+            background: var(--ax-surface);
+            color: var(--ax-text);
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message-bubble.sent {
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message-time {
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+            margin-top: 4px;
+        }
+        
+        .chat-input-area {
+            padding: var(--a-space-l);
+            border-top: 1px solid var(--ax-border);
+            background: var(--ax-surface);
+            display: flex;
+            gap: var(--a-space-s);
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: var(--a-space-m);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-sm);
+            background: var(--ax-background-secondary);
+            color: var(--ax-text);
+            resize: none;
+            max-height: 100px;
+        }
+        
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--a-color-primary);
+            box-shadow: 0 0 0 2px var(--a-color-primary-container);
+        }
+        
+        .send-button {
+            padding: var(--a-space-m);
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border: none;
+            border-radius: var(--a-border-radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            transition: opacity var(--a-transition-base);
+        }
+        
+        .send-button:hover {
+            opacity: 0.9;
+        }
+        
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -38,47 +208,167 @@
     <main><section><div class="container">
         <header>
             <h1>Chat</h1>
-            <p class="text-muted">Axiom01's chat component provides a clean and functional interface for displaying conversational messages. It's designed...</p>
+            <p class="text-muted">Axiom01's chat component provides a complete messaging interface including message display, input area, and support for both user and system messages. Perfect for chat applications, support tickets, and messaging features.</p>
         </header>
 
         <div class="component-section">
-								 <h2>Chat Component</h2>
-								 <p>Axiom01's chat component provides a clean and functional interface for displaying conversational messages. It's designed to be easily integrated into various applications, from customer support widgets to internal communication tools.</p>
 
-								 <h3>Basic Chat Widget</h3>
-								 <div class="chat-container">
-										 <div class="history">
-												 <div class="message bot">Hello! How can I help you today?</div>
-												 <div class="message user">I need assistance with my order.</div>
-												 <div class="message bot">Certainly! Could you please provide your order number?</div>
-												 <div class="message user">It's #AXM012345.</div>
-												 <div class="message bot">Thank you. Please wait a moment while I retrieve the details.</div>
-										 </div>
-										 <form>
-												 <input type="text" placeholder="Type your message...">
-												 <button class="button primary">Send</button>
-										 </form>
-								 </div>
+            <section>
+                <h2>Live Examples</h2>
 
-								 <h3>Code Example</h3>
-								 <pre><code class="language-html">&lt;div class="chat-container"&gt;
-		 &lt;div class="history"&gt;
-				 &lt;div class="message bot"&gt;Hello! How can I help you today?&lt;/div&gt;
-				 &lt;div class="message user"&gt;I need assistance with my order.&lt;/div&gt;
-				 &lt;div class="message bot"&gt;Certainly! Could you please provide your order number?&lt;/div&gt;
-				 &lt;div class="message user"&gt;It's #AXM012345.&lt;/div&gt;
-				 &lt;div class="message bot"&gt;Thank you. Please wait a moment while I retrieve the details.&lt;/div&gt;
-		 &lt;/div&gt;
-		 &lt;form&gt;
-				 &lt;input type="text" placeholder="Type your message..."&gt;
-				 &lt;button class="button primary"&gt;Send&lt;/button&gt;
-		 &lt;/form&gt;
- &lt;/div&gt;</code></pre>
+                <h3>Chat Interface with Messages</h3>
+                <div class="chat-demo">
+                    <div class="chat-header">
+                        <div class="chat-header-title">
+                            <div class="chat-avatar">JD</div>
+                            <div class="chat-info">
+                                <h3>John Doe</h3>
+                                <p class="chat-status">Online</p>
+                            </div>
+                        </div>
+                        <button style="background: none; border: none; cursor: pointer; padding: var(--a-space-m);">
+                            <span class="axicon render" data-name="X"></span>
+                        </button>
+                    </div>
+                    
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message">
+                            <div class="message-avatar">JD</div>
+                            <div>
+                                <div class="message-bubble received">Hi there! How can I help you today?</div>
+                                <div class="message-time">10:30 AM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="message user">
+                            <div>
+                                <div class="message-bubble sent">I need help with my account setup</div>
+                                <div class="message-time" style="text-align: right;">10:31 AM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="message">
+                            <div class="message-avatar">JD</div>
+                            <div>
+                                <div class="message-bubble received">Sure! I'd be happy to help. What specific issue are you facing?</div>
+                                <div class="message-time">10:32 AM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="message user">
+                            <div>
+                                <div class="message-bubble sent">I'm having trouble resetting my password</div>
+                                <div class="message-time" style="text-align: right;">10:33 AM</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-area">
+                        <input type="text" class="chat-input" placeholder="Type a message..." aria-label="Chat message input">
+                        <button class="send-button" aria-label="Send message">
+                            <span class="axicon render" data-name="Send"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
 
-								 <h3>Usage Guidelines</h3>
-								 <p>The <code>.chat-container</code> class defines the main wrapper for the chat interface. The <code>.history</code> div holds all chat messages, which are styled with the <code>.message</code> class. Use the <code>.bot</code> and <code>.user</code> modifier classes to differentiate messages from the chatbot and the user, respectively. The input area is a standard <code>&lt;form&gt;</code> containing an <code>&lt;input type="text"&gt;</code> and a <code>.button</code>.</p>
-								 <p>You will need JavaScript to handle sending and receiving messages, scrolling to the latest message, and dynamically adding new messages to the <code>.history</code>.</p>
-						 </div>
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="chat-demo"&gt;
+    &lt;div class="chat-header"&gt;
+        &lt;div class="chat-header-title"&gt;
+            &lt;div class="chat-avatar"&gt;JD&lt;/div&gt;
+            &lt;div class="chat-info"&gt;
+                &lt;h3&gt;John Doe&lt;/h3&gt;
+                &lt;p class="chat-status"&gt;Online&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="chat-messages"&gt;
+        &lt;div class="message"&gt;
+            &lt;div class="message-avatar"&gt;JD&lt;/div&gt;
+            &lt;div&gt;
+                &lt;div class="message-bubble received"&gt;Message text&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="message user"&gt;
+            &lt;div&gt;
+                &lt;div class="message-bubble sent"&gt;Your message&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="chat-input-area"&gt;
+        &lt;input type="text" class="chat-input" placeholder="Type a message..."&gt;
+        &lt;button class="send-button"&gt;Send&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Message Display</strong> - Received and sent messages with different styling</li>
+                    <li><strong>User Avatars</strong> - Profile pictures or initials</li>
+                    <li><strong>Message Timestamps</strong> - Time indication for each message</li>
+                    <li><strong>Auto Scroll</strong> - Messages scroll to bottom automatically</li>
+                    <li><strong>Online Status</strong> - Shows user availability</li>
+                    <li><strong>Message Input</strong> - Textarea for composing messages</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Message Types</h2>
+                <ul>
+                    <li><strong>User Messages</strong> - Messages sent by current user (right-aligned, primary color)</li>
+                    <li><strong>Received Messages</strong> - Messages from other users (left-aligned, neutral color)</li>
+                    <li><strong>System Messages</strong> - Status updates or notifications (centered, muted)</li>
+                    <li><strong>Timestamps</strong> - Time indication for each message</li>
+                    <li><strong>Read Receipts</strong> - Indicators showing message status</li>
+                    <li><strong>Typing Indicator</strong> - Show when user is typing</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Live Chat Support</strong> - Customer service and support tickets</li>
+                    <li><strong>Team Messaging</strong> - Internal communication and collaboration</li>
+                    <li><strong>Peer-to-Peer Chat</strong> - Direct messaging between users</li>
+                    <li><strong>Chatbots</strong> - AI assistant conversations</li>
+                    <li><strong>Group Chat</strong> - Multiple participants in single conversation</li>
+                    <li><strong>Notifications</strong> - In-app messaging and alerts</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic HTML for message structure</li>
+                    <li>Include <code>aria-label</code> on input fields</li>
+                    <li>Provide high contrast between message styles</li>
+                    <li>Use <code>role="region"</code> for message area for screen readers</li>
+                    <li>Support keyboard navigation (Tab, Enter to send)</li>
+                    <li>Announce new messages to screen readers (ARIA live regions)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Auto Scroll</strong> - Always scroll to latest message</li>
+                    <li><strong>Clear Input</strong> - Empty input after sending</li>
+                    <li><strong>Timestamps</strong> - Show time for context</li>
+                    <li><strong>Avatars</strong> - Consistent user identification</li>
+                    <li><strong>Read States</strong> - Indicate message delivery status</li>
+                    <li><strong>Typing Indicator</strong> - Show when other user is typing</li>
+                </ul>
+            </section>
+
         </div>
 
     </div></section></main>
@@ -94,9 +384,9 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
