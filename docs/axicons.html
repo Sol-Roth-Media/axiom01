@@ -11,12 +11,136 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <style>
+        /* Hero Section */
+        .axicons-hero {
+            background: linear-gradient(135deg, var(--a-color-primary) 0%, var(--a-color-primary-container) 100%);
+            padding: var(--a-space-xl) var(--a-space-l);
+            border-radius: var(--a-border-radius-xl);
+            color: white;
+            margin-bottom: var(--a-space-xl);
+        }
+
+        .axicons-hero h1 {
+            font-size: var(--a-font-size-2xl);
+            margin-bottom: var(--a-space-m);
+            font-weight: 900;
+        }
+
+        .axicons-hero p {
+            font-size: var(--a-font-size-lg);
+            margin-bottom: var(--a-space-m);
+            opacity: 0.95;
+        }
+
+        .badge-group {
+            display: flex;
+            gap: var(--a-space-s);
+            flex-wrap: wrap;
+            margin-bottom: var(--a-space-l);
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: var(--a-space-xs) var(--a-space-m);
+            border-radius: var(--a-border-radius-full);
+            font-size: var(--a-font-size-sm);
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--a-space-l);
+            margin: var(--a-space-xl) 0;
+        }
+
+        .info-card {
+            padding: var(--a-space-l);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            background: var(--ax-background-secondary);
+        }
+
+        .info-card h3 {
+            margin-bottom: var(--a-space-m);
+            color: var(--a-color-primary);
+        }
+
+        .info-card p {
+            margin-bottom: var(--a-space-s);
+            line-height: var(--a-line-height-loose);
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-card li {
+            padding: var(--a-space-xs) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-s);
+        }
+
+        .info-card li:before {
+            content: "✓";
+            color: var(--a-color-success);
+            font-weight: 700;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--a-space-l) 0;
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            overflow: hidden;
+        }
+
+        .comparison-table thead {
+            background: var(--ax-background-secondary);
+        }
+
+        .comparison-table th {
+            padding: var(--a-space-m);
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 1px solid var(--ax-border);
+            color: var(--a-color-primary);
+        }
+
+        .comparison-table td {
+            padding: var(--a-space-m);
+            border-bottom: 1px solid var(--ax-border);
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: var(--ax-background-secondary);
+        }
+
+        .stat-large {
+            font-size: var(--a-font-size-xl);
+            font-weight: 900;
+            color: var(--a-color-primary);
+        }
+
+        /* Icon Browser */
         .icon-browser {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: var(--a-space-m);
             margin: var(--a-space-l) 0;
         }
+
         .icon-item {
             display: flex;
             flex-direction: column;
@@ -31,11 +155,13 @@
             cursor: pointer;
             transition: all var(--a-transition-base) var(--a-ease-out);
         }
+
         .icon-item:hover {
             background: var(--a-color-primary-container);
             border-color: var(--a-color-primary);
             transform: translateY(-2px);
         }
+
         .icon-item svg {
             width: 48px;
             height: 48px;
@@ -43,6 +169,7 @@
             stroke-width: 1.5;
             fill: none;
         }
+
         .icon-name {
             font-size: var(--a-font-size-xs);
             font-weight: 600;
@@ -50,9 +177,12 @@
             word-break: break-word;
             line-height: var(--a-line-height-tight);
         }
+
+        /* Search Box */
         .search-box {
             margin: var(--a-space-l) 0;
         }
+
         .search-box input {
             width: 100%;
             padding: var(--a-space-m);
@@ -62,9 +192,137 @@
             background: var(--ax-surface);
             color: var(--ax-text);
         }
+
         .icon-count {
             color: var(--a-color-text-muted);
             margin-top: var(--a-space-m);
+            font-size: var(--a-font-size-sm);
+        }
+
+        /* Code Examples */
+        .code-section {
+            margin: var(--a-space-xl) 0;
+        }
+
+        .code-tabs {
+            display: flex;
+            gap: var(--a-space-s);
+            margin-bottom: var(--a-space-m);
+            border-bottom: 1px solid var(--ax-border);
+        }
+
+        .code-tab {
+            padding: var(--a-space-m) var(--a-space-l);
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+            transition: all var(--a-transition-base) var(--a-ease-out);
+        }
+
+        .code-tab.active {
+            color: var(--a-color-primary);
+            border-bottom-color: var(--a-color-primary);
+        }
+
+        .code-content {
+            display: none;
+        }
+
+        .code-content.active {
+            display: block;
+        }
+
+        .code-example {
+            background: var(--ax-background-secondary);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            padding: var(--a-space-l);
+            margin: var(--a-space-m) 0;
+            overflow-x: auto;
+        }
+
+        .code-example pre {
+            margin: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--a-font-size-sm);
+        }
+
+        .code-example code {
+            color: var(--ax-text);
+            line-height: var(--a-line-height-loose);
+        }
+
+        .copy-button {
+            padding: var(--a-space-s) var(--a-space-m);
+            background: var(--a-color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--a-border-radius-md);
+            cursor: pointer;
+            font-size: var(--a-font-size-sm);
+            font-weight: 600;
+            margin-top: var(--a-space-m);
+            transition: all var(--a-transition-base) var(--a-ease-out);
+        }
+
+        .copy-button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Section Spacing */
+        .doc-section {
+            margin: var(--a-space-2xl) 0;
+            padding: var(--a-space-l) 0;
+            border-top: 1px solid var(--ax-border);
+        }
+
+        .doc-section:first-of-type {
+            border-top: none;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .doc-section h2 {
+            margin-bottom: var(--a-space-l);
+            color: var(--a-color-primary);
+        }
+
+        /* License Section */
+        .license-box {
+            background: var(--ax-background-secondary);
+            border-left: 4px solid var(--a-color-primary);
+            padding: var(--a-space-l);
+            border-radius: var(--a-border-radius-md);
+            margin: var(--a-space-l) 0;
+        }
+
+        .license-box h3 {
+            margin-top: 0;
+            color: var(--a-color-primary);
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--a-space-l);
+            margin: var(--a-space-l) 0;
+        }
+
+        .feature-item {
+            padding: var(--a-space-m);
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-md);
+            border: 1px solid var(--ax-border);
+        }
+
+        .feature-item h4 {
+            color: var(--a-color-primary);
+            margin-bottom: var(--a-space-s);
         }
     </style>
 </head>
@@ -75,8 +333,7 @@
             <ul class="links">
                 <li><a href="../index.html#philosophy">Philosophy</a></li>
                 <li><a href="../index.html#components">Components</a></li>
-                <li><a href="../index.html#get-started">Get Started</a></li>
-                <li><a href="components-overview.html">Component Overview</a></li>
+                <li><a href="components-overview.html">Docs</a></li>
             </ul>
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
@@ -93,26 +350,497 @@
     </header>
 
     <main><section><div class="container">
-        <header>
-            <h1>Axicons - Complete Icon Library</h1>
-            <p class="text-muted">Browse all 204 icons available in Axiom01. Click any icon to copy its name.</p>
-        </header>
-
-        <div class="component-section">
-
-            <section>
-                <h2>Search Icons</h2>
-                <div class="search-box">
-                    <input type="text" id="icon-search" placeholder="Search icons by name... (e.g., check, arrow, user)">
-                </div>
-                <p class="icon-count"><span id="icon-count">204</span> icons found</p>
-            </section>
-
-            <section>
-                <div class="icon-browser" id="icon-browser"></div>
-            </section>
-
+        
+        <!-- Hero Section -->
+        <div class="axicons-hero">
+            <h1>Axicons: 536+ Professional Icons</h1>
+            <p>A complete, production-ready icon library covering AI, wearables, IoT, social platforms, dev tools, and everything modern applications need.</p>
+            <div class="badge-group">
+                <span class="badge">536+ Icons</span>
+                <span class="badge">AI Ready</span>
+                <span class="badge">IoT & Wearables</span>
+                <span class="badge">Open Licensed</span>
+                <span class="badge">Scalable SVG</span>
+            </div>
         </div>
+
+        <!-- Overview Section -->
+        <section class="doc-section">
+            <h2>What Are Axicons?</h2>
+            <p>Axicons is a comprehensive, semantic-first icon library designed for modern web and mobile applications. With 536 icons covering everything from AI assistants (ChatGPT, Claude, Gemini) to IoT devices, wearables, robotics, and traditional UI elements, Axicons provides the complete visual vocabulary your application needs.</p>
+            <p>Unlike bloated icon sets, Axicons is curated for relevance. Every icon serves a purpose. Nothing is unnecessary.</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>536+ Icons</h3>
+                    <p>Comprehensive coverage across 25+ categories:</p>
+                    <ul>
+                        <li>AI & LLM brands (ChatGPT, Claude, Gemini)</li>
+                        <li>Tech companies & platforms</li>
+                        <li>Social networks & chat apps</li>
+                        <li>Streaming services</li>
+                        <li>Developer tools & cloud</li>
+                        <li>Crypto & payments</li>
+                        <li>Wearables & IoT</li>
+                        <li>UI & navigation</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>Production Ready</h3>
+                    <p>Built for real applications:</p>
+                    <ul>
+                        <li>Optimized SVG format</li>
+                        <li>Consistent 24px viewBox</li>
+                        <li>Semantic naming</li>
+                        <li>Dark mode compatible</li>
+                        <li>Accessible markup</li>
+                        <li>Zero dependencies</li>
+                        <li>Framework agnostic</li>
+                        <li>MIT licensed</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>Modern Coverage</h3>
+                    <p>Covers the tools people actually use:</p>
+                    <ul>
+                        <li>All major AI assistants</li>
+                        <li>Every social platform</li>
+                        <li>All streaming services</li>
+                        <li>All payment methods</li>
+                        <li>AWS, Azure, GCP</li>
+                        <li>Docker, Kubernetes</li>
+                        <li>Smartwatch, AR glasses</li>
+                        <li>Beauty filters, avatars</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why They're Cool Section -->
+        <section class="doc-section">
+            <h2>Why Axicons Are Different</h2>
+            <p>Icon libraries vary widely. Here's what makes Axicons stand out:</p>
+            
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🤖 AI-First Design</h4>
+                    <p>Includes icons for ChatGPT, Claude, Gemini, and other modern AI services—not an afterthought, but built-in from the ground up.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🏠 IoT & Wearables</h4>
+                    <p>Smartwatch, AR glasses, smart home, sensors, robotics—coverage for the connected device ecosystem.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>💰 Complete Brand Set</h4>
+                    <p>Every major platform: GitHub, Slack, Discord, Figma, PayPal, Visa, Netflix, Spotify, Docker, Kubernetes. Design once, use everywhere.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📸 Beauty & Photo Filters</h4>
+                    <p>Brightness, contrast, saturation, blur, sharpen, grayscale, sepia, and beauty mode—perfect for photo/video editing apps.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>👥 Avatar System</h4>
+                    <p>10 avatar variants (male, female, anonymous, groups, teams, blocked)—covers user profile use cases completely.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>⚡ Performance Metrics</h4>
+                    <p>Speedometer, bandwidth, power, efficiency, optimization—visual language for dashboards and monitoring tools.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Semantic Naming</h4>
+                    <p>Every icon has a meaningful name. No guessing. Autocomplete friendly. Scales intuitively (AvatarMale, AvatarFemale, etc.).</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Dark Mode Native</h4>
+                    <p>Works perfectly in light and dark themes. Uses CSS custom properties—integrates seamlessly with Axiom01 design tokens.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="doc-section">
+            <h2>How Axicons Compare</h2>
+            <p>Axicons sits in the sweet spot: more comprehensive than minimal sets, more focused than bloated ones.</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Axicons</th>
+                        <th>Heroicons</th>
+                        <th>Feather</th>
+                        <th>Material Design</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Total Icons</strong></td>
+                        <td><span class="stat-large">536+</span></td>
+                        <td>300+</td>
+                        <td>280</td>
+                        <td>900+</td>
+                    </tr>
+                    <tr>
+                        <td>AI Brand Icons</td>
+                        <td>✓ (ChatGPT, Claude, etc.)</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                    </tr>
+                    <tr>
+                        <td>Tech Platform Brands</td>
+                        <td>✓ (GitHub, Slack, etc.)</td>
+                        <td>Limited</td>
+                        <td>Limited</td>
+                        <td>Limited</td>
+                    </tr>
+                    <tr>
+                        <td>IoT & Wearables</td>
+                        <td>✓ (Smartwatch, AR, etc.)</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                        <td>Limited</td>
+                    </tr>
+                    <tr>
+                        <td>Robotics Icons</td>
+                        <td>✓ (Robot, arm, gears)</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                        <td>Limited</td>
+                    </tr>
+                    <tr>
+                        <td>Beauty/Photo Filters</td>
+                        <td>✓ (10 filter types)</td>
+                        <td>✗</td>
+                        <td>✗</td>
+                        <td>Limited</td>
+                    </tr>
+                    <tr>
+                        <td>Avatar Variants</td>
+                        <td>✓ (10 variants)</td>
+                        <td>Limited</td>
+                        <td>✗</td>
+                        <td>Basic</td>
+                    </tr>
+                    <tr>
+                        <td>Crypto & Payments</td>
+                        <td>✓ (Full set)</td>
+                        <td>Limited</td>
+                        <td>Limited</td>
+                        <td>Basic</td>
+                    </tr>
+                    <tr>
+                        <td>Web UI Elements</td>
+                        <td>✓ (Complete)</td>
+                        <td>✓ (Complete)</td>
+                        <td>✓ (Complete)</td>
+                        <td>✓ (Extensive)</td>
+                    </tr>
+                    <tr>
+                        <td>Dark Mode Native</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>Semantic Naming</td>
+                        <td>✓ (Full)</td>
+                        <td>✓ (Full)</td>
+                        <td>✓ (Full)</td>
+                        <td>✓ (Extensive)</td>
+                    </tr>
+                    <tr>
+                        <td>Framework Agnostic</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                        <td>✓</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top: var(--a-space-l); font-style: italic; color: var(--a-color-text-muted);">
+                <strong>Bottom line:</strong> Axicons has better coverage of modern tech (AI, IoT, wearables, robotics) and brand icons than competitors, while remaining focused and production-ready. More comprehensive than Heroicons/Feather, less bloated than Material Design.
+            </p>
+        </section>
+
+        <!-- Using with Axiom Section -->
+        <section class="doc-section">
+            <h2>Using Axicons with Axiom01</h2>
+            <p>Axicons integrate seamlessly with the Axiom01 framework. They use the same design tokens, follow the same philosophy, and work beautifully out of the box.</p>
+            
+            <h3>1. Direct HTML Usage</h3>
+            <p>Use the <code>axicon</code> class with semantic naming:</p>
+            
+            <div class="code-example">
+                <pre><code class="language-html">&lt;span class="axicon render" data-name="ChatGPT"&gt;&lt;/span&gt;
+&lt;span class="axicon render" data-name="Smartwatch"&gt;&lt;/span&gt;
+&lt;span class="axicon render" data-name="Docker"&gt;&lt;/span&gt;</code></pre>
+            </div>
+
+            <h3>2. With Axiom Components</h3>
+            <p>Icons work naturally within Axiom's semantic components:</p>
+            
+            <div class="code-example">
+                <pre><code class="language-html">&lt;button&gt;
+    &lt;span class="axicon render" data-name="Settings"&gt;&lt;/span&gt;
+    Configure
+&lt;/button&gt;
+
+&lt;a href="#"&gt;
+    &lt;span class="axicon render" data-name="Github"&gt;&lt;/span&gt;
+    Fork Repository
+&lt;/a&gt;
+
+&lt;label&gt;
+    &lt;span class="axicon render" data-name="Search"&gt;&lt;/span&gt;
+    &lt;input type="search" placeholder="Find icons..."&gt;
+&lt;/label&gt;</code></pre>
+            </div>
+
+            <h3>3. Styling with Design Tokens</h3>
+            <p>Icons automatically use Axiom's color system via design tokens:</p>
+            
+            <div class="code-example">
+                <pre><code class="language-css">/* Icons inherit from current text color */
+.axicon {
+    width: var(--a-space-l);
+    height: var(--a-space-l);
+    stroke: currentColor;
+    fill: none;
+}
+
+/* Size variants using tokens */
+.axicon.small {
+    width: var(--a-space-m);
+    height: var(--a-space-m);
+}
+
+.axicon.large {
+    width: var(--a-space-xl);
+    height: var(--a-space-xl);
+}
+
+/* Color tokens */
+.primary {
+    stroke: var(--a-color-primary);
+}
+
+.success {
+    stroke: var(--a-color-success);
+}
+
+.error {
+    stroke: var(--a-color-error);
+}</code></pre>
+            </div>
+
+            <h3>4. JavaScript Integration</h3>
+            <p>Access icons programmatically in Axiom components:</p>
+            
+            <div class="code-example">
+                <pre><code class="language-javascript">// Find icon by name
+const icon = axicons.find(i => i.name === 'ChatGPT');
+
+// Render icon dynamically
+function createIcon(name, size = 'md') {
+    const icon = axicons.find(i => i.name === name);
+    if (!icon) return null;
+    
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('class', `axicon ${size}`);
+    svg.innerHTML = icon.svgContent;
+    
+    return svg;
+}
+
+// Usage
+const element = document.getElementById('icon-container');
+element.appendChild(createIcon('Smartwatch', 'large'));</code></pre>
+            </div>
+        </section>
+
+        <!-- Using Separately Section -->
+        <section class="doc-section">
+            <h2>Using Axicons Independently</h2>
+            <p>Axicons can be used standalone, outside of Axiom01. They're framework-agnostic and have zero dependencies.</p>
+            
+            <h3>1. Standalone HTML</h3>
+            <div class="code-example">
+                <pre><code class="language-html">&lt;!-- Include the axicons library --&gt;
+&lt;script src="axicons.js"&gt;&lt;/script&gt;
+
+&lt;!-- Use with any HTML --&gt;
+&lt;div id="icon-container"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+// Find and render an icon
+const icon = axicons.find(i => i.name === 'Docker');
+const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svg.setAttribute('viewBox', '0 0 24 24');
+svg.innerHTML = icon.svgContent;
+document.getElementById('icon-container').appendChild(svg);
+&lt;/script&gt;</code></pre>
+            </div>
+
+            <h3>2. React Integration</h3>
+            <div class="code-example">
+                <pre><code class="language-jsx">import { axicons } from './axicons.js';
+
+function Icon({ name, size = 24 }) {
+    const icon = axicons.find(i => i.name === name);
+    
+    return (
+        &lt;svg 
+            viewBox="0 0 24 24" 
+            width={size} 
+            height={size}
+            dangerouslySetInnerHTML={{ __html: icon.svgContent }}
+        /&gt;
+    );
+}
+
+// Usage
+export function App() {
+    return (
+        &lt;div&gt;
+            &lt;Icon name="ChatGPT" size={48} /&gt;
+            &lt;Icon name="Docker" size={32} /&gt;
+            &lt;Icon name="Smartwatch" size={24} /&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+            </div>
+
+            <h3>3. Vue Integration</h3>
+            <div class="code-example">
+                <pre><code class="language-vue">&lt;template&gt;
+    &lt;svg 
+        viewBox="0 0 24 24" 
+        :width="size" 
+        :height="size"
+        v-html="iconContent"
+    /&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import { axicons } from '@/assets/axicons.js';
+
+export default {
+    props: {
+        name: String,
+        size: {
+            type: Number,
+            default: 24
+        }
+    },
+    computed: {
+        iconContent() {
+            const icon = axicons.find(i => i.name === this.name);
+            return icon ? icon.svgContent : '';
+        }
+    }
+}
+&lt;/script&gt;
+
+&lt;!-- Usage --&gt;
+&lt;Icon name="ChatGPT" :size="48" /&gt;
+&lt;Icon name="Docker" :size="32" /&gt;</code></pre>
+            </div>
+
+            <h3>4. Custom Styling</h3>
+            <div class="code-example">
+                <pre><code class="language-css">/* Standalone icon styling */
+.my-icon {
+    width: 48px;
+    height: 48px;
+    stroke: #2563eb;
+    stroke-width: 1.5;
+    fill: none;
+}
+
+/* Hover effect */
+.my-icon:hover {
+    stroke: #1d4ed8;
+    transform: scale(1.05);
+}
+
+/* Size variants */
+.my-icon.sm { width: 20px; height: 20px; }
+.my-icon.md { width: 32px; height: 32px; }
+.my-icon.lg { width: 48px; height: 48px; }
+.my-icon.xl { width: 64px; height: 64px; }
+
+/* Color variants */
+.my-icon.primary { stroke: #2563eb; }
+.my-icon.success { stroke: #16a34a; }
+.my-icon.error { stroke: #dc2626; }
+.my-icon.warning { stroke: #ea580c; }</code></pre>
+            </div>
+        </section>
+
+        <!-- Licensing Section -->
+        <section class="doc-section">
+            <h2>Licensing & Attribution</h2>
+            
+            <div class="license-box">
+                <h3>📜 MIT License</h3>
+                <p>Axicons is released under the MIT License, which means:</p>
+                <ul>
+                    <li>✓ Free for commercial use</li>
+                    <li>✓ Free for private use</li>
+                    <li>✓ Can modify and distribute</li>
+                    <li>✓ Can use as-is or incorporate into products</li>
+                    <li>✗ No warranty provided</li>
+                    <li>✗ License must be included in distributions</li>
+                </ul>
+            </div>
+
+            <h3>Attribution (Optional but Appreciated)</h3>
+            <p>While attribution is not required by the MIT license, we'd be honored if you included it in your project:</p>
+            
+            <div class="code-example">
+                <pre><code class="language-html">&lt;!-- In your README or footer --&gt;
+Icons by &lt;a href="https://github.com/Sol-Roth/axiom01"&gt;Axicons&lt;/a&gt;
+Licensed under &lt;a href="https://opensource.org/licenses/MIT"&gt;MIT&lt;/a&gt;</code></pre>
+            </div>
+
+            <h3>Full License Text</h3>
+            <div class="code-example">
+                <pre><code class="language-text">MIT License
+
+Copyright (c) 2024 Axiom01
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.</code></pre>
+            </div>
+        </section>
+
+        <!-- Browse Icons Section -->
+        <section class="doc-section">
+            <h2>Browse All Icons</h2>
+            <p>Search and explore the complete Axicons library. Click any icon to copy its name.</p>
+
+            <div class="search-box">
+                <input type="text" id="icon-search" placeholder="Search icons by name... (e.g., check, arrow, user, ChatGPT, Docker)">
+            </div>
+            <p class="icon-count"><span id="icon-count">536</span> icons found</p>
+
+            <div class="icon-browser" id="icon-browser"></div>
+        </section>
 
     </div></section></main>
 
@@ -206,6 +934,21 @@
                 renderIcons();
             }, 500);
         }
+
+        // Tab switching for code examples (if needed in future)
+        document.querySelectorAll('.code-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabGroup = tab.parentElement;
+                const contentGroup = tab.closest('.code-section');
+                
+                tabGroup.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+                contentGroup.querySelectorAll('.code-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const index = Array.from(tabGroup.children).indexOf(tab);
+                contentGroup.querySelectorAll('.code-content')[index]?.classList.add('active');
+            });
+        });
     </script>
     <script src="../js/index-page-manager.js"></script>
 </body>
