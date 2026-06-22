@@ -10,6 +10,132 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .datepicker-demo {
+            background: var(--ax-background-secondary);
+            padding: var(--a-space-l);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            max-width: 500px;
+        }
+        
+        .date-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-s);
+        }
+        
+        .date-label {
+            font-weight: var(--a-font-weight-semibold);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .date-input {
+            padding: var(--a-space-m);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-base);
+            background: var(--ax-surface);
+            color: var(--ax-text);
+            transition: border-color var(--a-transition-base), box-shadow var(--a-transition-base);
+        }
+        
+        .date-input:focus {
+            outline: none;
+            border-color: var(--a-color-primary);
+            box-shadow: 0 0 0 3px var(--a-color-primary-container);
+        }
+        
+        .date-range-container {
+            display: flex;
+            gap: var(--a-space-m);
+            margin-top: var(--a-space-m);
+        }
+        
+        .date-range-container .date-input-group {
+            flex: 1;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-top: var(--a-space-m);
+            padding: var(--a-space-m);
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+        }
+        
+        .calendar-header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--a-space-m);
+            padding-bottom: var(--a-space-m);
+            border-bottom: 1px solid var(--ax-border);
+        }
+        
+        .calendar-header button {
+            background: none;
+            border: 1px solid var(--ax-border);
+            padding: var(--a-space-s);
+            cursor: pointer;
+            border-radius: var(--a-border-radius-sm);
+            transition: background-color var(--a-transition-base);
+        }
+        
+        .calendar-header button:hover {
+            background-color: var(--a-color-primary-container);
+        }
+        
+        .calendar-weekday {
+            font-weight: var(--a-font-weight-semibold);
+            text-align: center;
+            font-size: var(--a-font-size-xs);
+            padding: var(--a-space-s);
+            color: var(--a-color-text-muted);
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--a-border-radius-sm);
+            cursor: pointer;
+            transition: background-color var(--a-transition-base), color var(--a-transition-base);
+            border: 1px solid transparent;
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .calendar-day:hover {
+            background-color: var(--a-color-primary-container);
+        }
+        
+        .calendar-day.other-month {
+            color: var(--a-color-text-muted);
+        }
+        
+        .calendar-day.today {
+            border: 1px solid var(--a-color-primary);
+        }
+        
+        .calendar-day.selected {
+            background-color: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .date-help {
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+            margin-top: var(--a-space-xs);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -38,29 +164,169 @@
     <main><section><div class="container">
         <header>
             <h1>Datepicker</h1>
-            <p class="text-muted">Axiom01 provides basic styling for date input fields. For advanced datepicker functionality (e.g., calendar pop-ups, ran...</p>
+            <p class="text-muted">Axiom01's datepicker component provides an intuitive calendar interface for selecting dates. Supports single date selection, date ranges, and HTML5 date inputs for maximum flexibility and accessibility.</p>
         </header>
 
         <div class="component-section">
-            <h2>Datepicker Component</h2>
-            <p>Axiom01 provides basic styling for date input fields. For advanced datepicker functionality (e.g., calendar pop-ups, range selections), integration with a third-party JavaScript library is recommended.</p>
 
-            <h3>Basic Date Input</h3>
-            <div class="datepicker-container">
-                <label for="date-input">Select a Date:</label>
-                <input type="date" id="date-input">
-            </div>
+            <section>
+                <h2>Live Examples</h2>
 
-            <h3>Code Example</h3>
-            <pre><code class="language-html">&lt;div class="datepicker-container"&gt;
-&lt;label for="date-input"&gt;Select a Date:&lt;/label&gt;
-&lt;input type="date" id="date-input"&gt;
+                <h3>Single Date Selection</h3>
+                <div class="datepicker-demo">
+                    <div class="date-input-group">
+                        <label class="date-label" for="single-date">Select Date</label>
+                        <input type="date" id="single-date" class="date-input" aria-label="Select a date">
+                        <p class="date-help">Click the input to select a date from the calendar</p>
+                    </div>
+                </div>
+
+                <h3>Date Range Selection</h3>
+                <div class="datepicker-demo">
+                    <div class="date-range-container">
+                        <div class="date-input-group">
+                            <label class="date-label" for="start-date">Start Date</label>
+                            <input type="date" id="start-date" class="date-input" aria-label="Start date of range">
+                        </div>
+                        <div class="date-input-group">
+                            <label class="date-label" for="end-date">End Date</label>
+                            <input type="date" id="end-date" class="date-input" aria-label="End date of range">
+                        </div>
+                    </div>
+                    <p class="date-help" style="margin-top: var(--a-space-m);">Select a range for date filtering or reporting</p>
+                </div>
+
+                <h3>Calendar Grid Example</h3>
+                <div class="datepicker-demo">
+                    <div class="calendar-grid" role="grid" aria-label="Calendar">
+                        <div class="calendar-header" role="rowheader">
+                            <button aria-label="Previous month">&lt;</button>
+                            <strong>January 2024</strong>
+                            <button aria-label="Next month">&gt;</button>
+                        </div>
+                        
+                        <div class="calendar-weekday" role="columnheader">Sun</div>
+                        <div class="calendar-weekday" role="columnheader">Mon</div>
+                        <div class="calendar-weekday" role="columnheader">Tue</div>
+                        <div class="calendar-weekday" role="columnheader">Wed</div>
+                        <div class="calendar-weekday" role="columnheader">Thu</div>
+                        <div class="calendar-weekday" role="columnheader">Fri</div>
+                        <div class="calendar-weekday" role="columnheader">Sat</div>
+                        
+                        <div class="calendar-day other-month" role="gridcell">31</div>
+                        <div class="calendar-day" role="gridcell">1</div>
+                        <div class="calendar-day" role="gridcell">2</div>
+                        <div class="calendar-day" role="gridcell">3</div>
+                        <div class="calendar-day" role="gridcell">4</div>
+                        <div class="calendar-day" role="gridcell">5</div>
+                        <div class="calendar-day" role="gridcell">6</div>
+                        
+                        <div class="calendar-day" role="gridcell">7</div>
+                        <div class="calendar-day" role="gridcell">8</div>
+                        <div class="calendar-day" role="gridcell">9</div>
+                        <div class="calendar-day" role="gridcell">10</div>
+                        <div class="calendar-day" role="gridcell">11</div>
+                        <div class="calendar-day today" role="gridcell" tabindex="0">12</div>
+                        <div class="calendar-day selected" role="gridcell">13</div>
+                        
+                        <div class="calendar-day" role="gridcell">14</div>
+                        <div class="calendar-day" role="gridcell">15</div>
+                        <div class="calendar-day" role="gridcell">16</div>
+                        <div class="calendar-day" role="gridcell">17</div>
+                        <div class="calendar-day" role="gridcell">18</div>
+                        <div class="calendar-day" role="gridcell">19</div>
+                        <div class="calendar-day" role="gridcell">20</div>
+                        
+                        <div class="calendar-day" role="gridcell">21</div>
+                        <div class="calendar-day" role="gridcell">22</div>
+                        <div class="calendar-day" role="gridcell">23</div>
+                        <div class="calendar-day" role="gridcell">24</div>
+                        <div class="calendar-day" role="gridcell">25</div>
+                        <div class="calendar-day" role="gridcell">26</div>
+                        <div class="calendar-day" role="gridcell">27</div>
+                        
+                        <div class="calendar-day" role="gridcell">28</div>
+                        <div class="calendar-day" role="gridcell">29</div>
+                        <div class="calendar-day" role="gridcell">30</div>
+                        <div class="calendar-day" role="gridcell">31</div>
+                        <div class="calendar-day other-month" role="gridcell">1</div>
+                        <div class="calendar-day other-month" role="gridcell">2</div>
+                        <div class="calendar-day other-month" role="gridcell">3</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;!-- Simple date input --&gt;
+&lt;div class="date-input-group"&gt;
+    &lt;label class="date-label" for="date"&gt;Select Date&lt;/label&gt;
+    &lt;input type="date" id="date" class="date-input"&gt;
+&lt;/div&gt;
+
+&lt;!-- Date range --&gt;
+&lt;div class="date-range-container"&gt;
+    &lt;div class="date-input-group"&gt;
+        &lt;label class="date-label" for="start"&gt;Start Date&lt;/label&gt;
+        &lt;input type="date" id="start" class="date-input"&gt;
+    &lt;/div&gt;
+    &lt;div class="date-input-group"&gt;
+        &lt;label class="date-label" for="end"&gt;End Date&lt;/label&gt;
+        &lt;input type="date" id="end" class="date-input"&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+                </div>
+            </section>
 
-            <h3>Usage Guidelines</h3>
-            <p>The native HTML <code>&lt;input type="date"&gt;</code> element is styled by Axiom01 to match the overall theme. For a more feature-rich datepicker experience, you would typically use a JavaScript library. Axiom01's semantic approach ensures that such integrations are straightforward, as the base styling provides a consistent look and feel.</p>
-            <p>When integrating a third-party datepicker, ensure it is accessible and that its styles can be easily overridden or customized using CSS variables to maintain your Axiom01 theme.</p>
-        </div>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>HTML5 Date Input</strong> - Native browser support with fallback</li>
+                    <li><strong>Single Date Selection</strong> - Pick one date easily</li>
+                    <li><strong>Date Range</strong> - Select start and end dates</li>
+                    <li><strong>Calendar Grid</strong> - Visual calendar interface</li>
+                    <li><strong>Today Highlight</strong> - Current date is marked</li>
+                    <li><strong>Month Navigation</strong> - Navigate between months</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Booking Systems</strong> - Hotel, flight, appointment booking</li>
+                    <li><strong>Event Registration</strong> - Conference or event date selection</li>
+                    <li><strong>Date Range Filters</strong> - Analytics and reporting date ranges</li>
+                    <li><strong>Birthday Selection</strong> - User profile and account forms</li>
+                    <li><strong>Project Timelines</strong> - Project start and end dates</li>
+                    <li><strong>Leave Request</strong> - Time off and vacation requests</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use native HTML5 <code>&lt;input type="date"&gt;</code> for best compatibility</li>
+                    <li>Label all date inputs with <code>&lt;label&gt;</code> elements</li>
+                    <li>Use <code>aria-label</code> for calendar grid cells</li>
+                    <li>Support keyboard navigation in calendar</li>
+                    <li>Highlight today's date visually and semantically</li>
+                    <li>Provide text input as alternative to calendar</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Use Native Input</strong> - Let browsers handle date picking when possible</li>
+                    <li><strong>Consistent Format</strong> - Always use YYYY-MM-DD format internally</li>
+                    <li><strong>Today Button</strong> - Quick access to today's date</li>
+                    <li><strong>Range Validation</strong> - Ensure end date is after start date</li>
+                    <li><strong>Keyboard Support</strong> - Full keyboard navigation for calendar</li>
+                    <li><strong>Mobile Friendly</strong> - Native date picker on mobile devices</li>
+                </ul>
+            </section>
+
         </div>
 
     </div></section></main>
@@ -76,9 +342,9 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
