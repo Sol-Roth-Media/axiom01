@@ -994,3 +994,53 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.</code></pre>
     <script src="../js/index-page-manager.js"></script>
 </body>
 </html>
+
+    <!-- Add rendering script that handles icon initialization -->
+    <script>
+    // Ensure icons render after axicons.js loads completely
+    function renderAllAxicons() {
+        if (typeof axicons === 'undefined' || axicons.length === 0) {
+            setTimeout(renderAllAxicons, 100);
+            return;
+        }
+        
+        // Render all inline feature icons in "Why Axicons Are Different"
+        document.querySelectorAll('.axicon.render').forEach(el => {
+            if (el.tagName === 'svg') return; // Skip if already rendered
+            
+            const name = el.getAttribute('data-name');
+            const icon = axicons.find(i => i.name === name);
+            
+            if (icon && icon.svgContent) {
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('viewBox', '0 0 24 24');
+                svg.setAttribute('class', el.className);
+                svg.setAttribute('aria-hidden', 'true');
+                svg.setAttribute('stroke', 'currentColor');
+                svg.setAttribute('stroke-width', '1.5');
+                svg.setAttribute('fill', 'none');
+                svg.innerHTML = icon.svgContent;
+                
+                // Copy inline styles
+                if (el.getAttribute('style')) {
+                    svg.setAttribute('style', el.getAttribute('style'));
+                }
+                
+                el.replaceWith(svg);
+            }
+        });
+    }
+    
+    // Trigger rendering
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => setTimeout(renderAllAxicons, 200));
+    } else {
+        setTimeout(renderAllAxicons, 200);
+    }
+    
+    // Re-render on theme change
+    const observer = new MutationObserver(() => {
+        setTimeout(renderAllAxicons, 100);
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    </script>
