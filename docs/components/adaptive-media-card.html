@@ -10,6 +10,131 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .media-card-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+        }
+        
+        .media-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--a-space-l);
+            margin-bottom: var(--a-space-l);
+        }
+        
+        .media-card {
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            overflow: hidden;
+            transition: all var(--a-transition-base);
+        }
+        
+        .media-card:hover {
+            border-color: var(--a-color-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .media-card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--a-color-primary-container), var(--a-color-primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--a-color-primary-on);
+            overflow: hidden;
+        }
+        
+        .media-card-content {
+            padding: var(--a-space-l);
+        }
+        
+        .media-card-title {
+            margin: 0 0 var(--a-space-s) 0;
+            font-weight: var(--a-font-weight-bold);
+            font-size: var(--a-font-size-base);
+            color: var(--ax-text);
+        }
+        
+        .media-card-description {
+            margin: 0 0 var(--a-space-m) 0;
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+            line-height: 1.4;
+        }
+        
+        .media-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--a-space-m);
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+        }
+        
+        .media-card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            background: var(--a-color-primary-container);
+            color: var(--a-color-primary);
+            border-radius: var(--a-border-radius-sm);
+            font-size: var(--a-font-size-xs);
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .media-card-actions {
+            display: flex;
+            gap: var(--a-space-s);
+        }
+        
+        .media-card-button {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border: none;
+            border-radius: var(--a-border-radius-md);
+            cursor: pointer;
+            font-size: var(--a-font-size-sm);
+            font-weight: var(--a-font-weight-semibold);
+            transition: all var(--a-transition-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+        
+        .media-card-button:hover {
+            background: var(--a-color-primary-dark, var(--a-color-primary));
+            transform: scale(1.05);
+        }
+        
+        .media-card-button.secondary {
+            background: var(--ax-background-secondary);
+            color: var(--ax-text);
+            border: 1px solid var(--ax-border);
+        }
+        
+        .media-card-button.secondary:hover {
+            border-color: var(--a-color-primary);
+            color: var(--a-color-primary);
+        }
+        
+        @media (max-width: 768px) {
+            .media-card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -38,29 +163,175 @@
     <main><section><div class="container">
         <header>
             <h1>Adaptive Media Card</h1>
-            <p class="text-muted">Intelligent responsive cards that prioritize images, videos, and audio for optimal viewing. Perfect for product showcase...</p>
+            <p class="text-muted">Axiom01's adaptive media card component provides responsive layouts for displaying media with titles, descriptions, badges, and action buttons. Perfect for portfolios, galleries, and product showcases.</p>
         </header>
 
         <div class="component-section">
-            <h2>Adaptive Media Card Component</h2>
-            <p>Adaptive Media Cards are responsive containers that intelligently arrange images, videos, or audio alongside text content. They maintain optimal media sizing across all devices while keeping your HTML semantic and clean. This is ideal for product showcases, feature highlights, tutorials, podcasts, and media-rich content like Amazon A+ pages.</p>
 
-            <h3>Basic Example with Image</h3>
-            <div class="card-group">
-                <article class="card adaptive-media">
-                    <header>
-                        <h3>Mountain Landscape</h3>
-                    </header>
-                    <figure>
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop" alt="Mountain landscape">
-                    </figure>
-                    <main>
-                        <p>Beautiful mountain landscape showcasing the power of adaptive media cards. On desktop, the image and text display side-by-side. On mobile, they stack vertically for optimal viewing.</p>
-                        <ul>
-                            <li>High-quality media display</li>
-                            <li>Responsive layout</li>
-                            <li>Perfect for product showcases</li>
-                        </ul>
+            <section>
+                <h2>Live Examples</h2>
+
+                <h3>Media Card Grid</h3>
+                <div class="media-card-demo">
+                    <div class="media-card-grid">
+                        <div class="media-card">
+                            <div class="media-card-image">🎨</div>
+                            <div class="media-card-content">
+                                <h3 class="media-card-title">Design System</h3>
+                                <p class="media-card-description">Comprehensive design guidelines and component library</p>
+                                <div class="media-card-meta">
+                                    <span>12 components</span>
+                                    <span class="media-card-badge">
+                                        <span class="axicon render" data-name="Star"></span>
+                                        Featured
+                                    </span>
+                                </div>
+                                <div class="media-card-actions">
+                                    <button class="media-card-button">View</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="media-card">
+                            <div class="media-card-image">📱</div>
+                            <div class="media-card-content">
+                                <h3 class="media-card-title">Mobile App</h3>
+                                <p class="media-card-description">React Native application with offline support</p>
+                                <div class="media-card-meta">
+                                    <span>Latest: v2.1</span>
+                                    <span class="media-card-badge">
+                                        <span class="axicon render" data-name="Code"></span>
+                                        Open Source
+                                    </span>
+                                </div>
+                                <div class="media-card-actions">
+                                    <button class="media-card-button">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="media-card">
+                            <div class="media-card-image">🚀</div>
+                            <div class="media-card-content">
+                                <h3 class="media-card-title">API Documentation</h3>
+                                <p class="media-card-description">Complete REST API reference with examples</p>
+                                <div class="media-card-meta">
+                                    <span>42 endpoints</span>
+                                    <span class="media-card-badge">
+                                        <span class="axicon render" data-name="CheckCircle"></span>
+                                        Stable
+                                    </span>
+                                </div>
+                                <div class="media-card-actions">
+                                    <button class="media-card-button">Read Docs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Compact Card Layout</h3>
+                <div class="media-card-demo">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--a-space-m);">
+                        <div class="media-card">
+                            <div class="media-card-image">📚</div>
+                            <div class="media-card-content">
+                                <h3 class="media-card-title">Tutorial</h3>
+                                <p class="media-card-description">Learn the basics in 30 minutes</p>
+                                <div class="media-card-actions">
+                                    <button class="media-card-button secondary">
+                                        <span class="axicon render" data-name="Play"></span>
+                                        Start
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="media-card">
+                            <div class="media-card-image">🎓</div>
+                            <div class="media-card-content">
+                                <h3 class="media-card-title">Course</h3>
+                                <p class="media-card-description">Advanced techniques (8 weeks)</p>
+                                <div class="media-card-actions">
+                                    <button class="media-card-button secondary">
+                                        <span class="axicon render" data-name="LogIn"></span>
+                                        Enroll
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="media-card"&gt;
+    &lt;div class="media-card-image"&gt;🎨&lt;/div&gt;
+    &lt;div class="media-card-content"&gt;
+        &lt;h3 class="media-card-title"&gt;Title&lt;/h3&gt;
+        &lt;p class="media-card-description"&gt;Description&lt;/p&gt;
+        &lt;div class="media-card-meta"&gt;
+            &lt;span&gt;Metadata&lt;/span&gt;
+            &lt;span class="media-card-badge"&gt;Badge&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="media-card-actions"&gt;
+            &lt;button class="media-card-button"&gt;Action&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Responsive Grid</strong> - Auto-fills available space</li>
+                    <li><strong>Media Area</strong> - Image, emoji, or icon placeholder</li>
+                    <li><strong>Title & Description</strong> - Clear content hierarchy</li>
+                    <li><strong>Metadata & Badges</strong> - Key information display</li>
+                    <li><strong>Action Buttons</strong> - Primary and secondary styles</li>
+                    <li><strong>Hover Effects</strong> - Smooth transitions and elevation</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Product Showcase</strong> - Feature cards with CTA</li>
+                    <li><strong>Portfolio</strong> - Project showcase grid</li>
+                    <li><strong>Gallery</strong> - Image collection display</li>
+                    <li><strong>Course Listing</strong> - Online learning platforms</li>
+                    <li><strong>Case Studies</strong> - Success story cards</li>
+                    <li><strong>Team Members</strong> - Staff directory display</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic <code>&lt;h3&gt;</code> for card titles</li>
+                    <li>Include descriptive button labels</li>
+                    <li>Ensure color contrast on badges and text</li>
+                    <li>Support keyboard navigation for all buttons</li>
+                    <li>Use <code>role="img"</code> for emoji/icon areas</li>
+                    <li>Provide alternative text for images</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Consistent Height</strong> - Cards should align well</li>
+                    <li><strong>Clear Titles</strong> - Descriptive, scannable text</li>
+                    <li><strong>Visual Hierarchy</strong> - Important info prominent</li>
+                    <li><strong>Action Buttons</strong> - Primary action most prominent</li>
+                    <li><strong>Metadata</strong> - Show relevant info (date, count, etc.)</li>
+                    <li><strong>Responsive Design</strong> - Single column on mobile</li>
+                </ul>
+            </section>
+
         </div>
 
     </div></section></main>
@@ -76,9 +347,9 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>

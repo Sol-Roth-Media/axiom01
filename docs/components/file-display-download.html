@@ -3,13 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Display Download Component - Axiom01</title>
+    <title>File Display & Download Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
     <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .file-display-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            max-width: 650px;
+        }
+        
+        .file-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-s);
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-m);
+            padding: var(--a-space-m);
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            transition: all var(--a-transition-base);
+        }
+        
+        .file-item:hover {
+            border-color: var(--a-color-primary);
+            background: var(--a-color-primary-container);
+        }
+        
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--a-border-radius-sm);
+            background: var(--ax-background-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: var(--a-font-weight-bold);
+            color: var(--a-color-primary);
+            flex-shrink: 0;
+        }
+        
+        .file-item.pdf .file-icon {
+            background: rgba(255, 0, 0, 0.1);
+            color: #d32f2f;
+        }
+        
+        .file-item.image .file-icon {
+            background: rgba(33, 150, 243, 0.1);
+            color: #2196f3;
+        }
+        
+        .file-item.video .file-icon {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+        }
+        
+        .file-item.archive .file-icon {
+            background: rgba(255, 152, 0, 0.1);
+            color: #ff9800;
+        }
+        
+        .file-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .file-name {
+            margin: 0 0 4px 0;
+            font-weight: var(--a-font-weight-semibold);
+            font-size: var(--a-font-size-sm);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .file-meta {
+            display: flex;
+            gap: var(--a-space-m);
+            margin: 0;
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+        }
+        
+        .file-actions {
+            display: flex;
+            gap: var(--a-space-s);
+            flex-shrink: 0;
+        }
+        
+        .file-action-btn {
+            padding: 6px 12px;
+            background: none;
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-sm);
+            cursor: pointer;
+            font-size: var(--a-font-size-xs);
+            color: var(--ax-text);
+            transition: all var(--a-transition-base);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .file-action-btn:hover {
+            border-color: var(--a-color-primary);
+            color: var(--a-color-primary);
+        }
+        
+        .file-upload-area {
+            border: 2px dashed var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            padding: var(--a-space-xl);
+            text-align: center;
+            background: var(--ax-surface);
+            transition: all var(--a-transition-base);
+            cursor: pointer;
+            margin-bottom: var(--a-space-l);
+        }
+        
+        .file-upload-area:hover {
+            border-color: var(--a-color-primary);
+            background: var(--a-color-primary-container);
+        }
+        
+        .upload-icon {
+            font-size: 32px;
+            margin-bottom: var(--a-space-m);
+        }
+        
+        .upload-text {
+            margin: 0;
+            font-weight: var(--a-font-weight-semibold);
+            color: var(--ax-text);
+        }
+        
+        .upload-subtext {
+            margin: var(--a-space-s) 0 0 0;
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+        }
+        
+        .file-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--a-space-m);
+            margin-top: var(--a-space-l);
+            padding-top: var(--a-space-l);
+            border-top: 1px solid var(--ax-border);
+        }
+        
+        .stat-item {
+            padding: var(--a-space-m);
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+        }
+        
+        .stat-label {
+            margin: 0 0 4px 0;
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+            text-transform: uppercase;
+            font-weight: var(--a-font-weight-semibold);
+            letter-spacing: 0.5px;
+        }
+        
+        .stat-value {
+            margin: 0;
+            font-size: var(--a-font-size-lg);
+            font-weight: var(--a-font-weight-bold);
+            color: var(--ax-text);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -37,48 +218,200 @@
 
     <main><section><div class="container">
         <header>
-            <h1>File Display Download</h1>
-            <p class="text-muted">Display and manage file downloads.</p>
+            <h1>File Display & Download</h1>
+            <p class="text-muted">Axiom01's file display component shows file lists with type indicators, sizes, dates, and action buttons. Perfect for file browsers, uploads, and document management.</p>
         </header>
 
         <div class="component-section">
-<section>
-      <div class="container">
-        <h1>File Display and Download</h1>
-        <p>Render local file metadata with optional text previews and download actions.</p>
-        <section class="filedisplay" data-component="filedisplay" aria-label="File display and download">
-          <label for="file-display-input">Choose files to preview</label>
-          <input id="file-display-input" type="file" multiple>
-          <ul></ul>
-        </section>
 
-        <div class="component-section">
-        <section>
-          <h2>Production data binding pattern</h2>
-          <p>Bind selected file metadata into your app state from the semantic file input so validation and uploads stay consistent.</p>
-          <pre><code>const filedisplay = document.querySelector('[data-component="filedisplay"]');
-const input = filedisplay.querySelector('input[type="file"]');
+            <section>
+                <h2>Live Examples</h2>
 
-input.addEventListener('change', () =&gt; {
-  const files = Array.from(input.files || []).map((file) =&gt; ({
-    name: file.name,
-    size: file.size,
-    type: file.type
-  }));
+                <h3>File Upload Area</h3>
+                <div class="file-display-demo">
+                    <div class="file-upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <p class="upload-text">Drag files here or click to upload</p>
+                        <p class="upload-subtext">Supports PDF, images, videos, and archives</p>
+                    </div>
+                </div>
 
-  fetch('/api/uploads/draft', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ files })
-  });
-});
-</code></pre>
-        </section>
+                <h3>File List with Actions</h3>
+                <div class="file-display-demo">
+                    <ul class="file-list">
+                        <li class="file-item pdf">
+                            <div class="file-icon">📄</div>
+                            <div class="file-info">
+                                <p class="file-name">Annual_Report_2024.pdf</p>
+                                <p class="file-meta">
+                                    <span>2.4 MB</span>
+                                    <span>•</span>
+                                    <span>Jan 15, 2024</span>
+                                </p>
+                            </div>
+                            <div class="file-actions">
+                                <button class="file-action-btn" title="Preview">
+                                    <span class="axicon render" data-name="Eye"></span>
+                                    Preview
+                                </button>
+                                <button class="file-action-btn" title="Download">
+                                    <span class="axicon render" data-name="Download"></span>
+                                </button>
+                            </div>
+                        </li>
+                        
+                        <li class="file-item image">
+                            <div class="file-icon">🖼️</div>
+                            <div class="file-info">
+                                <p class="file-name">screenshot-dashboard.png</p>
+                                <p class="file-meta">
+                                    <span>1.8 MB</span>
+                                    <span>•</span>
+                                    <span>Jan 14, 2024</span>
+                                </p>
+                            </div>
+                            <div class="file-actions">
+                                <button class="file-action-btn" title="Preview">
+                                    <span class="axicon render" data-name="Eye"></span>
+                                    Preview
+                                </button>
+                                <button class="file-action-btn" title="Download">
+                                    <span class="axicon render" data-name="Download"></span>
+                                </button>
+                            </div>
+                        </li>
+                        
+                        <li class="file-item video">
+                            <div class="file-icon">🎬</div>
+                            <div class="file-info">
+                                <p class="file-name">product_demo.mp4</p>
+                                <p class="file-meta">
+                                    <span>45.2 MB</span>
+                                    <span>•</span>
+                                    <span>Jan 13, 2024</span>
+                                </p>
+                            </div>
+                            <div class="file-actions">
+                                <button class="file-action-btn" title="Preview">
+                                    <span class="axicon render" data-name="Eye"></span>
+                                    Preview
+                                </button>
+                                <button class="file-action-btn" title="Download">
+                                    <span class="axicon render" data-name="Download"></span>
+                                </button>
+                            </div>
+                        </li>
+                        
+                        <li class="file-item archive">
+                            <div class="file-icon">📦</div>
+                            <div class="file-info">
+                                <p class="file-name">backup_2024_jan.zip</p>
+                                <p class="file-meta">
+                                    <span>156.7 MB</span>
+                                    <span>•</span>
+                                    <span>Jan 12, 2024</span>
+                                </p>
+                            </div>
+                            <div class="file-actions">
+                                <button class="file-action-btn" title="Preview">
+                                    <span class="axicon render" data-name="Eye"></span>
+                                    Preview
+                                </button>
+                                <button class="file-action-btn" title="Download">
+                                    <span class="axicon render" data-name="Download"></span>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="file-stats">
+                        <div class="stat-item">
+                            <p class="stat-label">Total Files</p>
+                            <p class="stat-value">4</p>
+                        </div>
+                        <div class="stat-item">
+                            <p class="stat-label">Total Size</p>
+                            <p class="stat-value">206.1 MB</p>
+                        </div>
+                        <div class="stat-item">
+                            <p class="stat-label">Largest File</p>
+                            <p class="stat-value">156.7 MB</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        
-    </section>
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;ul class="file-list"&gt;
+    &lt;li class="file-item pdf"&gt;
+        &lt;div class="file-icon"&gt;📄&lt;/div&gt;
+        &lt;div class="file-info"&gt;
+            &lt;p class="file-name"&gt;document.pdf&lt;/p&gt;
+            &lt;p class="file-meta"&gt;
+                &lt;span&gt;2.4 MB&lt;/span&gt;
+                &lt;span&gt;•&lt;/span&gt;
+                &lt;span&gt;Jan 15, 2024&lt;/span&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="file-actions"&gt;
+            &lt;button class="file-action-btn"&gt;Preview&lt;/button&gt;
+            &lt;button class="file-action-btn"&gt;Download&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                </div>
+            </section>
 
-        <div class="component-section">
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Type Indicators</strong> - Icons and colors for file types</li>
+                    <li><strong>File Metadata</strong> - Size, date, and other info</li>
+                    <li><strong>Action Buttons</strong> - Preview, download, delete</li>
+                    <li><strong>Upload Area</strong> - Drag-and-drop file input</li>
+                    <li><strong>File Statistics</strong> - Total count, size, etc.</li>
+                    <li><strong>Hover Effects</strong> - Visual feedback on interaction</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>File Management</strong> - Browse and organize files</li>
+                    <li><strong>Document Upload</strong> - Submit forms with files</li>
+                    <li><strong>Media Library</strong> - View and manage media</li>
+                    <li><strong>Backup System</strong> - Download backups</li>
+                    <li><strong>Report Distribution</strong> - Share files with users</li>
+                    <li><strong>Storage Dashboard</strong> - View storage usage</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> for lists</li>
+                    <li>Include <code>title</code> attributes on all buttons</li>
+                    <li>Support keyboard navigation for all actions</li>
+                    <li>Provide descriptive file names and metadata</li>
+                    <li>Use color + icon for file type indication</li>
+                    <li>Announce file upload completion to screen readers</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Icons</strong> - Use distinctive icons per file type</li>
+                    <li><strong>Metadata Display</strong> - Show size, date, and status</li>
+                    <li><strong>Quick Actions</strong> - Most common actions visible</li>
+                    <li><strong>Upload Area</strong> - Make uploads prominent</li>
+                    <li><strong>File Statistics</strong> - Show aggregate information</li>
+                    <li><strong>Responsive Design</strong> - Stack actions on mobile</li>
+                </ul>
+            </section>
+
         </div>
 
     </div></section></main>
@@ -94,16 +427,16 @@ input.addEventListener('change', () =&gt; {
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
@@ -123,6 +456,22 @@ input.addEventListener('change', () =&gt; {
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
     <script>
+        const uploadArea = document.getElementById('uploadArea');
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'var(--a-color-primary)';
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '';
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '';
+        });
+
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
