@@ -10,6 +10,111 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .segmented-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            max-width: 600px;
+        }
+        
+        .segmented-control {
+            display: inline-flex;
+            background: var(--ax-background-secondary);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            padding: 4px;
+            gap: 0;
+        }
+        
+        .segment-button {
+            flex: 1;
+            min-width: 80px;
+            padding: var(--a-space-m);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-sm);
+            font-weight: var(--a-font-weight-semibold);
+            color: var(--a-color-text-muted);
+            border-radius: var(--a-border-radius-sm);
+            transition: all var(--a-transition-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--a-space-s);
+            white-space: nowrap;
+        }
+        
+        .segment-button:hover {
+            color: var(--a-color-primary);
+            background: rgba(var(--a-color-primary-rgb, 33, 150, 243), 0.05);
+        }
+        
+        .segment-button.active {
+            background: var(--ax-surface);
+            color: var(--a-color-primary);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-panels {
+            margin-top: var(--a-space-l);
+            padding: var(--a-space-l);
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            min-height: 150px;
+        }
+        
+        .content-panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .content-panel.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .panel-title {
+            margin: 0 0 var(--a-space-m) 0;
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .panel-description {
+            margin: 0;
+            color: var(--a-color-text-muted);
+            font-size: var(--a-font-size-sm);
+            line-height: 1.6;
+        }
+        
+        .segmented-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--a-space-l);
+            margin-top: var(--a-space-l);
+        }
+        
+        .variant-card {
+            padding: var(--a-space-l);
+            background: var(--ax-background-secondary);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+        }
+        
+        .variant-title {
+            font-weight: var(--a-font-weight-semibold);
+            margin: 0 0 var(--a-space-m) 0;
+            font-size: var(--a-font-size-sm);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -38,120 +143,134 @@
     <main><section><div class="container">
         <header>
             <h1>Segmented Control</h1>
-            <p class="text-muted">Accessible button group for exclusive selection. Replaces tabs in modern UI with a cleaner, more compact control for swi...</p>
+            <p class="text-muted">Axiom01's segmented control component provides a modern alternative to tab navigation and radio buttons. Users can toggle between multiple related options with a single interaction.</p>
         </header>
 
         <div class="component-section">
-            <h2>Segmented Control Component</h2>
-            <p>Segmented Controls provide a way to select one item from a set of mutually exclusive options. Use them for filters, view modes, or content tabs. Built with semantic HTML and full keyboard accessibility.</p>
 
-            <h3>Basic Example</h3>
-            <div class="doc-live-example">
-                <div class="segmented-control" role="group" aria-label="View options">
-                    <button aria-pressed="true">List</button>
-                    <button aria-pressed="false">Grid</button>
-                    <button aria-pressed="false">Map</button>
+            <section>
+                <h2>Live Examples</h2>
+
+                <h3>View Mode Selector</h3>
+                <div class="segmented-demo">
+                    <div class="segmented-control" role="tablist">
+                        <button class="segment-button active" data-panel="list" role="tab" aria-selected="true">
+                            <span class="axicon render" data-name="List"></span>
+                            List
+                        </button>
+                        <button class="segment-button" data-panel="grid" role="tab" aria-selected="false">
+                            <span class="axicon render" data-name="Grid"></span>
+                            Grid
+                        </button>
+                        <button class="segment-button" data-panel="compact" role="tab" aria-selected="false">
+                            <span class="axicon render" data-name="Compact"></span>
+                            Compact
+                        </button>
+                    </div>
+                    
+                    <div class="content-panels">
+                        <div class="content-panel active" id="list">
+                            <h3 class="panel-title">List View</h3>
+                            <p class="panel-description">Display items in a detailed list format with all information visible. Ideal for browsing and detailed inspection of each item.</p>
+                        </div>
+                        <div class="content-panel" id="grid">
+                            <h3 class="panel-title">Grid View</h3>
+                            <p class="panel-description">Display items in a grid layout for visual browsing. Perfect for galleries, products, or media collections.</p>
+                        </div>
+                        <div class="content-panel" id="compact">
+                            <h3 class="panel-title">Compact View</h3>
+                            <p class="panel-description">Display items in a condensed format with minimal information. Ideal for quick scanning of many items.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <pre><code class="language-html">&lt;div class="segmented-control" role="group" aria-label="View options"&gt;
-  &lt;button aria-pressed="true"&gt;List&lt;/button&gt;
-  &lt;button aria-pressed="false"&gt;Grid&lt;/button&gt;
-  &lt;button aria-pressed="false"&gt;Map&lt;/button&gt;
-&lt;/div&gt;</code></pre>
 
-            <h3>With Icons</h3>
-            <div class="doc-live-example">
-                <div class="segmented-control" role="group" aria-label="Sort options">
-                    <button aria-pressed="true"><span class="axicon render" data-name="arrow-down"></span> Newest</button>
-                    <button aria-pressed="false"><span class="axicon render" data-name="arrow-up"></span> Oldest</button>
-                    <button aria-pressed="false"><span class="axicon render" data-name="star"></span> Popular</button>
+                <h3>Filter Toggle</h3>
+                <div class="segmented-demo">
+                    <div class="segmented-control" role="tablist">
+                        <button class="segment-button active" role="tab" aria-selected="true">All Items</button>
+                        <button class="segment-button" role="tab" aria-selected="false">Active Only</button>
+                        <button class="segment-button" role="tab" aria-selected="false">Archived</button>
+                    </div>
                 </div>
-            </div>
-            <pre><code class="language-html">&lt;div class="segmented-control" role="group" aria-label="Sort options"&gt;
-  &lt;button aria-pressed="true"&gt;&lt;i class="fas fa-arrow-down"&gt;&lt;/i&gt; Newest&lt;/button&gt;
-  &lt;button aria-pressed="false"&gt;&lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt; Oldest&lt;/button&gt;
-  &lt;button aria-pressed="false"&gt;&lt;i class="fas fa-star"&gt;&lt;/i&gt; Popular&lt;/button&gt;
-&lt;/div&gt;</code></pre>
+            </section>
 
-            <h3>Full Width</h3>
-            <div class="doc-live-example">
-                <div class="segmented-control full-width" role="group" aria-label="Time period">
-                    <button aria-pressed="true">Today</button>
-                    <button aria-pressed="false">Week</button>
-                    <button aria-pressed="false">Month</button>
-                    <button aria-pressed="false">Year</button>
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="segmented-control" role="tablist"&gt;
+    &lt;button class="segment-button active" 
+            data-panel="list" 
+            role="tab" 
+            aria-selected="true"&gt;
+        List
+    &lt;/button&gt;
+    &lt;button class="segment-button" 
+            data-panel="grid" 
+            role="tab" 
+            aria-selected="false"&gt;
+        Grid
+    &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class="content-panels"&gt;
+    &lt;div class="content-panel active" id="list"&gt;
+        Content for list view
+    &lt;/div&gt;
+    &lt;div class="content-panel" id="grid"&gt;
+        Content for grid view
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
                 </div>
-            </div>
-            <pre><code class="language-html">&lt;div class="segmented-control full-width" role="group" aria-label="Time period"&gt;
-  &lt;button aria-pressed="true"&gt;Today&lt;/button&gt;
-  &lt;button aria-pressed="false"&gt;Week&lt;/button&gt;
-  &lt;button aria-pressed="false"&gt;Month&lt;/button&gt;
-  &lt;button aria-pressed="false"&gt;Year&lt;/button&gt;
-&lt;/div&gt;</code></pre>
+            </section>
 
-            <h3>Features</h3>
-            <div class="card-group">
-                <article class="card">
-                    <span class="axicon render" data-name="universal-access"></span>
-                    <h3>Accessible</h3>
-                    <p>Uses aria-pressed for semantic screen reader support</p>
-                </article>
-                <article class="card">
-                    <span class="axicon render" data-name="keyboard"></span>
-                    <h3>Keyboard Nav</h3>
-                    <p>Tab and arrow keys for navigation, Enter to select</p>
-                </article>
-                <article class="card">
-                    <span class="axicon render" data-name="icons"></span>
-                    <h3>Icon Support</h3>
-                    <p>Works seamlessly with Font Awesome and other icon sets</p>
-                </article>
-                <article class="card">
-                    <span class="axicon render" data-name="mobile-alt"></span>
-                    <h3>Responsive</h3>
-                    <p>Stacks on mobile, stays compact on desktop</p>
-                </article>
-                <article class="card">
-                    <span class="axicon render" data-name="swatchbook"></span>
-                    <h3>Themeable</h3>
-                    <p>Fully respects all Axiom01 design tokens</p>
-                </article>
-                <article class="card">
-                    <span class="axicon render" data-name="code"></span>
-                    <h3>Semantic HTML</h3>
-                    <p>Pure CSS, no JavaScript required</p>
-                </article>
-            </div>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Multiple Options</strong> - Support 2-5 segments</li>
+                    <li><strong>Visual Feedback</strong> - Clear active state indication</li>
+                    <li><strong>Icon Support</strong> - Include icons with labels</li>
+                    <li><strong>Content Switching</strong> - Dynamic panel display</li>
+                    <li><strong>Smooth Transitions</strong> - Fade animation on switch</li>
+                    <li><strong>Accessible</strong> - Full ARIA tab support</li>
+                </ul>
+            </section>
 
-            <h3>Use Cases</h3>
-            <ul>
-                <li>View mode toggles (list/grid/map)</li>
-                <li>Sorting and filtering options</li>
-                <li>Time period selection</li>
-                <li>Theme or display preferences</li>
-                <li>Tab-like content switching</li>
-                <li>Exclusive option selection in forms</li>
-            </ul>
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>View Modes</strong> - List/grid/compact toggles</li>
+                    <li><strong>Filters</strong> - All/active/archived selection</li>
+                    <li><strong>Time Range</strong> - Day/week/month/year views</li>
+                    <li><strong>Sorting</strong> - Different sort order options</li>
+                    <li><strong>Display Options</strong> - Detailed/summary/icon views</li>
+                    <li><strong>Form Steps</strong> - Step-by-step form navigation</li>
+                </ul>
+            </section>
 
-            <h3>JavaScript Integration</h3>
-            <p>For state management and switching content, add JavaScript to handle <code>aria-pressed</code> updates and content visibility. Example with vanilla JS:</p>
-            <pre><code class="language-javascript">document.querySelectorAll('.segmented-control button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    // Update pressed state
-    btn.parentElement.querySelectorAll('button').forEach(b => {
-      b.setAttribute('aria-pressed', 'false');
-    });
-    btn.setAttribute('aria-pressed', 'true');
-    
-    // Emit event or update content
-    const value = btn.textContent;
-    console.log('Selected:', value);
-  });
-});</code></pre>
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use <code>role="tablist"</code> on container</li>
+                    <li>Use <code>role="tab"</code> on buttons</li>
+                    <li>Update <code>aria-selected</code> when switching</li>
+                    <li>Support keyboard navigation (Arrow keys, Enter)</li>
+                    <li>Announce content changes to screen readers</li>
+                    <li>Provide visible focus indicators</li>
+                </ul>
+            </section>
 
-            <h3>Browser Support</h3>
-            <p>All modern browsers (Chrome, Firefox, Safari, Edge). No CSS preprocessor or JavaScript required for basic functionality.</p>
-        </div>
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Labels</strong> - Descriptive option names</li>
+                    <li><strong>Visual Hierarchy</strong> - Emphasize active segment</li>
+                    <li><strong>Limited Options</strong> - Keep to 2-5 choices max</li>
+                    <li><strong>Consistent Width</strong> - Equal segment sizes</li>
+                    <li><strong>Icon + Text</strong> - Use both for clarity</li>
+                    <li><strong>Smooth Transitions</strong> - Fade between panels</li>
+                </ul>
+            </section>
+
         </div>
 
     </div></section></main>
@@ -167,9 +286,9 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
@@ -196,6 +315,52 @@
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
     <script>
+        // Segmented control switching
+        document.querySelectorAll('.segment-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tablist = button.closest('.segmented-control');
+                
+                // Update button states
+                tablist.querySelectorAll('.segment-button').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                });
+                button.classList.add('active');
+                button.setAttribute('aria-selected', 'true');
+                
+                // Switch panels if data-panel exists
+                const panelId = button.dataset.panel;
+                if (panelId) {
+                    const container = tablist.closest('.segmented-demo');
+                    if (container) {
+                        const panels = container.querySelectorAll('.content-panel');
+                        panels.forEach(panel => panel.classList.remove('active'));
+                        const activePanel = container.querySelector('#' + panelId);
+                        if (activePanel) {
+                            activePanel.classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Keyboard navigation
+        document.querySelectorAll('.segment-button').forEach(button => {
+            button.addEventListener('keydown', (e) => {
+                const tablist = button.closest('.segmented-control');
+                const buttons = Array.from(tablist.querySelectorAll('.segment-button'));
+                const index = buttons.indexOf(button);
+                
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    buttons[(index - 1 + buttons.length) % buttons.length].click();
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    buttons[(index + 1) % buttons.length].click();
+                }
+            });
+        });
+
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
