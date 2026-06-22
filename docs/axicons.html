@@ -132,7 +132,9 @@
             width: 48px;
             height: 48px;
             stroke: currentColor;
-            stroke-width: 1.5;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
             fill: none;
         }
 
@@ -877,7 +879,9 @@ export default {
     width: 48px;
     height: 48px;
     stroke: #2563eb;
-    stroke-width: 1.5;
+    stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
     fill: none;
 }
 
@@ -1146,3 +1150,69 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.</code></pre>
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     </script>
+<!-- Enhanced icon rendering for Thin variants -->
+<script>
+// Override the render function to properly handle Thin variants
+document.addEventListener('DOMContentLoaded', function() {
+    function renderIconProperly(el, name) {
+        if (el.tagName === 'svg') return; // Already rendered
+        
+        const icon = axicons.find(i => i.name === name);
+        if (!icon) return;
+        
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('aria-hidden', 'true');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+        
+        // Copy any classes
+        if (el.className) {
+            svg.setAttribute('class', el.className);
+        }
+        
+        // Parse SVG content properly
+        const parser = new DOMParser();
+        const docFrag = parser.parseFromString(
+            `<svg xmlns="http://www.w3.org/2000/svg">${icon.svgContent}</svg>`,
+            'image/svg+xml'
+        );
+        
+        const sourceElements = docFrag.documentElement.children;
+        for (let child of sourceElements) {
+            svg.appendChild(document.importNode(child, true));
+        }
+        
+        // Add specific classes for styling
+        if (name.includes('Thin')) {
+            svg.classList.add('thin');
+        }
+        if (name.includes('Inverted')) {
+            svg.classList.add('inverted');
+        }
+        
+        el.replaceWith(svg);
+    }
+    
+    // Re-render all icons with proper styling
+    setTimeout(() => {
+        document.querySelectorAll('[data-name]').forEach(el => {
+            const name = el.getAttribute('data-name');
+            renderIconProperly(el, name);
+        });
+    }, 500);
+});
+</script>
+
+<style>
+/* Proper icon styling */
+svg.axicon {
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+svg.axicon.thin {
+    stroke-width: 0.5;
+}
+</style>
