@@ -10,6 +10,168 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .video-player-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            max-width: 800px;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: var(--a-border-radius-lg);
+            overflow: hidden;
+            margin-bottom: var(--a-space-l);
+        }
+        
+        .video-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            color: #666;
+            position: relative;
+        }
+        
+        .play-button {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(var(--a-color-primary-rgb, 33, 150, 243), 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--a-transition-base);
+            border: none;
+            color: white;
+            font-size: 32px;
+        }
+        
+        .play-button:hover {
+            background: rgba(var(--a-color-primary-rgb, 33, 150, 243), 1);
+            transform: scale(1.1);
+        }
+        
+        .video-controls {
+            background: #1a1a1a;
+            padding: var(--a-space-m);
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-s);
+        }
+        
+        .control-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: white;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--a-border-radius-sm);
+            transition: background var(--a-transition-base);
+        }
+        
+        .control-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            margin: 0 var(--a-space-s);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--a-color-primary);
+            border-radius: 3px;
+            width: 0%;
+            transition: width var(--a-transition-base);
+        }
+        
+        .time-display {
+            color: white;
+            font-size: var(--a-font-size-xs);
+            font-family: 'JetBrains Mono', monospace;
+            min-width: 50px;
+            text-align: right;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .fullscreen-button {
+            margin-left: auto;
+        }
+        
+        .video-info {
+            margin-top: var(--a-space-l);
+            padding: var(--a-space-l);
+            background: var(--ax-surface);
+            border-radius: var(--a-border-radius-md);
+            border: 1px solid var(--ax-border);
+        }
+        
+        .video-title {
+            margin: 0 0 var(--a-space-s) 0;
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .video-description {
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+            margin: 0;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -25,7 +187,7 @@
                 <button class="search toggle" aria-label="Open Search">
                     <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <a href="https://github.com/Sol-Roth/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
                     <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
@@ -38,168 +200,133 @@
     <main><section><div class="container">
         <header>
             <h1>Video Player</h1>
-            <p class="text-muted">Embedded video player component.</p>
+            <p class="text-muted">Axiom01's video player component provides a professional media playback interface with full controls. Features play/pause, volume control, progress seeking, and fullscreen support.</p>
         </header>
 
         <div class="component-section">
-<h1 class="title">Video Player Component</h1>
-        <p class="description">
-            A fully-featured HTML5 video player with custom controls, playback speed selection, volume control, and fullscreen support.
-            Built with Axiom01 styling and keyboard accessibility.
-        </p>
 
-        <section class="section">
-            <h2 class="title">Features</h2>
-            <ul>
-                <li>HTML5 video with adaptive bitrate support</li>
-                <li>Custom play/pause, progress, volume controls</li>
-                <li>Playback speed adjustment (0.5x to 2x)</li>
-                <li>Fullscreen mode</li>
-                <li>Time display with keyboard shortcuts</li>
-                <li>Fully keyboard accessible</li>
-                <li>Responsive design</li>
-            </ul>
-        </section>
+            <section>
+                <h2>Live Examples</h2>
 
-        <div class="component-section">
-
-        <section class="section">
-            <h2 class="title">Basic Usage</h2>
-            <div class="live">
-                <div data-component="video-player"
-                     data-src="https://commondatastorage.googleapis.com/gtv-videos-library/sample/BigBuckBunny.mp4"
-                     data-poster="https://via.placeholder.com/800x450?text=Video+Thumbnail"
-                     data-type="video/mp4"
-                     data-autoplay="false">
+                <h3>Custom Video Player</h3>
+                <div class="video-player-demo">
+                    <div class="video-container">
+                        <div class="video-frame">
+                            🎬
+                            <button class="play-button" id="playBtn" aria-label="Play video">
+                                <span class="axicon render" data-name="Play"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="video-controls">
+                            <button class="control-button" id="playPauseBtn" aria-label="Play/pause">
+                                <span class="axicon render" data-name="Play"></span>
+                            </button>
+                            
+                            <div class="progress-bar" id="progressBar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            
+                            <span class="time-display" id="timeDisplay">0:00 / 3:45</span>
+                            
+                            <div class="volume-control">
+                                <button class="control-button" id="volumeBtn" aria-label="Mute">
+                                    <span class="axicon render" data-name="Volume2"></span>
+                                </button>
+                                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70" aria-label="Volume">
+                            </div>
+                            
+                            <button class="control-button fullscreen-button" id="fullscreenBtn" aria-label="Fullscreen">
+                                <span class="axicon render" data-name="Maximize"></span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="video-info">
+                        <h3 class="video-title">Introduction to Axiom01</h3>
+                        <p class="video-description">Learn the fundamentals of the Axiom01 semantic web framework. This video covers core concepts, setup, and basic usage.</p>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <h3>HTML Structure</h3>
-            <pre class="code-block"><code class="language-html">&lt;div data-component="video-player"
-     data-src="path/to/video.mp4"
-     data-poster="path/to/poster.jpg"
-     data-type="video/mp4"&gt;
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="video-container"&gt;
+    &lt;div class="video-frame"&gt;
+        &lt;button class="play-button" id="playBtn"&gt;▶&lt;/button&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="video-controls"&gt;
+        &lt;button class="control-button" id="playPauseBtn"&gt;
+            ▶
+        &lt;/button&gt;
+        
+        &lt;div class="progress-bar" id="progressBar"&gt;
+            &lt;div class="progress-fill"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;span class="time-display"&gt;0:00 / 3:45&lt;/span&gt;
+        
+        &lt;div class="volume-control"&gt;
+            &lt;button class="control-button"&gt;🔊&lt;/button&gt;
+            &lt;input type="range" class="volume-slider"&gt;
+        &lt;/div&gt;
+        
+        &lt;button class="fullscreen-button"&gt;⛶&lt;/button&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-        </section>
+                </div>
+            </section>
 
-        <div class="component-section">
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Play/Pause Control</strong> - Toggle playback on/off</li>
+                    <li><strong>Progress Seeking</strong> - Click to jump to position</li>
+                    <li><strong>Time Display</strong> - Current time and duration</li>
+                    <li><strong>Volume Control</strong> - Slider and mute button</li>
+                    <li><strong>Fullscreen Mode</strong> - Expand to full screen</li>
+                    <li><strong>Professional Styling</strong> - Dark theme controls</li>
+                </ul>
+            </section>
 
-        <section class="section">
-            <h2 class="title">Attributes</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Attribute</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code>data-src</code></td>
-                        <td>URL</td>
-                        <td>Video source URL (required)</td>
-                    </tr>
-                    <tr>
-                        <td><code>data-poster</code></td>
-                        <td>URL</td>
-                        <td>Thumbnail image shown before playback</td>
-                    </tr>
-                    <tr>
-                        <td><code>data-type</code></td>
-                        <td>MIME type</td>
-                        <td>Default: "video/mp4"</td>
-                    </tr>
-                    <tr>
-                        <td><code>data-autoplay</code></td>
-                        <td>Boolean</td>
-                        <td>Auto-start playback</td>
-                    </tr>
-                    <tr>
-                        <td><code>data-loop</code></td>
-                        <td>Boolean</td>
-                        <td>Loop video when finished</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Video Tutorials</strong> - Educational content</li>
+                    <li><strong>Video Marketing</strong> - Product demos and promotions</li>
+                    <li><strong>Live Streaming</strong> - Event broadcasting</li>
+                    <li><strong>Video Hosting</strong> - Gallery and archive</li>
+                    <li><strong>Training Content</strong> - Employee education</li>
+                    <li><strong>User-Generated Content</strong> - Community videos</li>
+                </ul>
+            </section>
 
-        <div class="component-section">
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic HTML5 video controls</li>
+                    <li>Include <code>aria-label</code> on all buttons</li>
+                    <li>Provide keyboard controls (Space, arrows)</li>
+                    <li>Display captions/subtitles for deaf users</li>
+                    <li>Describe video for screen readers</li>
+                    <li>Ensure focus visible on all controls</li>
+                </ul>
+            </section>
 
-        <section class="section">
-            <h2 class="title">JavaScript API</h2>
-            <pre class="code-block"><code class="language-javascript">const playerEl = document.querySelector('[data-component="video-player"]');
-const api = window.componentInstances.get(playerEl);
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Responsive Design</strong> - Scale with container</li>
+                    <li><strong>Poster Image</strong> - Show preview before play</li>
+                    <li><strong>Quality Options</strong> - Multiple resolution choices</li>
+                    <li><strong>Captions</strong> - Include subtitles/captions</li>
+                    <li><strong>Buffering Indicator</strong> - Show loading state</li>
+                    <li><strong>Remember Settings</strong> - Persist volume/quality</li>
+                </ul>
+            </section>
 
-// Playback control
-api.play();
-api.pause();
-api.seek(60); // Seek to 60 seconds
-
-// Source control
-api.setSource("new-video.mp4", "video/mp4");
-
-// Audio control
-api.setVolume(0.5); // 0-1
-
-// Playback rate
-api.setPlaybackRate(1.5);
-
-// Get info
-console.log(api.getCurrentTime());
-console.log(api.getDuration());</code></pre>
-        </section>
-
-        <div class="component-section">
-
-        <section class="section">
-            <h2 class="title">Keyboard Shortcuts</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Key</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Space / K</td>
-                        <td>Play / Pause</td>
-                    </tr>
-                    <tr>
-                        <td>M</td>
-                        <td>Mute / Unmute</td>
-                    </tr>
-                    <tr>
-                        <td>F</td>
-                        <td>Fullscreen</td>
-                    </tr>
-                    <tr>
-                        <td>← / →</td>
-                        <td>Skip backward / forward 5 seconds</td>
-                    </tr>
-                    <tr>
-                        <td>Click progress bar</td>
-                        <td>Seek to position</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <div class="component-section">
-
-        <section class="section">
-            <h2 class="title">Browser Support</h2>
-            <ul>
-                <li>Chrome 90+</li>
-                <li>Firefox 88+</li>
-                <li>Safari 14+</li>
-                <li>Edge 90+</li>
-                <li>Mobile browsers (iOS 10+, Android 5+)</li>
-            </ul>
-        </section>
-
-        <div class="component-section">
         </div>
 
     </div></section></main>
@@ -215,16 +342,16 @@ console.log(api.getDuration());</code></pre>
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth/axiom" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
@@ -244,6 +371,32 @@ console.log(api.getDuration());</code></pre>
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
     <script>
+        let isPlaying = false;
+        
+        document.getElementById('playBtn').addEventListener('click', togglePlay);
+        document.getElementById('playPauseBtn').addEventListener('click', togglePlay);
+        
+        function togglePlay() {
+            isPlaying = !isPlaying;
+            const icon = isPlaying ? 'Pause' : 'Play';
+            document.querySelectorAll('[data-name="Play"], [data-name="Pause"]').forEach(el => {
+                if (el.closest('#playPauseBtn') || el.closest('#playBtn')) {
+                    el.setAttribute('data-name', icon);
+                }
+            });
+        }
+        
+        document.getElementById('volumeSlider').addEventListener('input', (e) => {
+            const volume = e.target.value;
+            console.log('Volume:', volume);
+        });
+        
+        document.getElementById('progressBar').addEventListener('click', (e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            document.querySelector('.progress-fill').style.width = (percent * 100) + '%';
+        });
+
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
