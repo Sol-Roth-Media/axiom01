@@ -10,6 +10,135 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .progress-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+        }
+        
+        .progress-section {
+            margin-bottom: var(--a-space-xl);
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--a-space-s);
+            font-size: var(--a-font-size-sm);
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--ax-background-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: var(--a-space-l);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--a-color-primary), var(--a-color-primary-container));
+            border-radius: 4px;
+            transition: width 0.3s ease-out;
+        }
+        
+        .progress-fill.success {
+            background: linear-gradient(90deg, #4caf50, #66bb6a);
+        }
+        
+        .progress-fill.warning {
+            background: linear-gradient(90deg, #ff9800, #ffb74d);
+        }
+        
+        .progress-fill.error {
+            background: linear-gradient(90deg, #d32f2f, #ef5350);
+        }
+        
+        .skeleton-loader {
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-m);
+            padding: var(--a-space-l);
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+        }
+        
+        .skeleton-item {
+            display: flex;
+            gap: var(--a-space-m);
+            align-items: center;
+        }
+        
+        .skeleton-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--ax-background-secondary);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        .skeleton-content {
+            flex: 1;
+        }
+        
+        .skeleton-line {
+            height: 12px;
+            background: var(--ax-background-secondary);
+            border-radius: 4px;
+            margin-bottom: 8px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        .skeleton-line.full {
+            width: 100%;
+        }
+        
+        .skeleton-line.short {
+            width: 60%;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .linear-progress {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-m);
+        }
+        
+        .linear-progress-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--ax-background-secondary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .linear-progress-fill {
+            height: 100%;
+            background: var(--a-color-primary);
+            border-radius: 3px;
+            animation: progress-animation 2s ease-in-out infinite;
+        }
+        
+        @keyframes progress-animation {
+            0% { width: 0%; }
+            50% { width: 100%; }
+            100% { width: 0%; }
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -37,123 +166,162 @@
 
     <main><section><div class="container">
         <header>
-            <h1>Progress</h1>
-            <p class="text-muted">Axiom01's progress components provide visual feedback on the status of ongoing processes, such as loading, uploading, or...</p>
+            <h1>Progress & Skeleton</h1>
+            <p class="text-muted">Axiom01's progress and skeleton loader components provide visual feedback for ongoing operations and loading states. Essential for improved perceived performance.</p>
         </header>
 
         <div class="component-section">
 
-							 <div class="section">
-									 <h2 class="title">Live Example: Linear Progress Bar</h2>
-									 <div class="live">
-											 <h4>Basic Progress</h4>
-											 <div class="progress" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-													 <div style="width: 25%;"></div>
-											 </div>
+            <section>
+                <h2>Live Examples</h2>
 
-											 <h4>Labeled Progress</h4>
-											 <div class="progress labeled" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-													 <div style="width: 50%;">50%</div>
-											 </div>
+                <h3>Progress Bars</h3>
+                <div class="progress-demo">
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span>File Upload</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span>Installation</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill success" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span>Processing</span>
+                            <span>42%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill warning" style="width: 42%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span>Download</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill error" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
 
-											 <h4>Colored Progress</h4>
-											 <div class="progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-													 <div class="success" style="width: 75%;"></div>
-											 </div>
-									 </div>
-							 </div>
+                <h3>Skeleton Loaders</h3>
+                <div class="progress-demo">
+                    <div class="skeleton-loader">
+                        <div class="skeleton-item">
+                            <div class="skeleton-avatar"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton-line full"></div>
+                                <div class="skeleton-line short"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton-item">
+                            <div class="skeleton-avatar"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton-line full"></div>
+                                <div class="skeleton-line short"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton-item">
+                            <div class="skeleton-avatar"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton-line full"></div>
+                                <div class="skeleton-line short"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-							 <div class="section">
-									 <h2 class="title">HTML Structure: Linear Progress</h2>
-									 <p>A linear progress bar consists of a container with the <code>.progress</code> class and an inner <code>&lt;div&gt;</code> that represents the progress.</p>
-									 <div class="code-block">
-											 <pre><code class="language-html">&lt;!-- Basic Progress --&gt;
-	 &lt;div class="progress" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"&gt;
-			 &lt;div style="width: 25%;"&gt;&lt;/div&gt;
-	 &lt;/div&gt;
+                <h3>Linear Progress (Indeterminate)</h3>
+                <div class="progress-demo">
+                    <div class="linear-progress">
+                        <div class="linear-progress-bar">
+                            <div class="linear-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-	 &lt;!-- Labeled Progress --&gt;
-	 &lt;div class="progress labeled" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"&gt;
-			 &lt;div style="width: 50%;"&gt;50%&lt;/div&gt;
-	 &lt;/div&gt;
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="progress-bar"&gt;
+    &lt;div class="progress-fill" style="width: 65%;"&gt;&lt;/div&gt;
+&lt;/div&gt;
 
-	 &lt;!-- Colored Progress (using semantic color classes) --&gt;
-	 &lt;div class="progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"&gt;
-			 &lt;div class="success" style="width: 75%;"&gt;&lt;/div&gt;
-	 &lt;/div&gt;</code></pre>
-									 </div>
-							 </div>
+&lt;div class="skeleton-loader"&gt;
+    &lt;div class="skeleton-item"&gt;
+        &lt;div class="skeleton-avatar"&gt;&lt;/div&gt;
+        &lt;div class="skeleton-content"&gt;
+            &lt;div class="skeleton-line full"&gt;&lt;/div&gt;
+            &lt;div class="skeleton-line short"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
 
-							 <div class="section">
-									 <h2 class="title">Live Example: Circular Progress Indicator</h2>
-									 <div class="live">
-											 <div class="progress circular" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="--progress-value: 60;">
-													 <svg viewBox="0 0 36 36">
-															 <path class="track" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-															 <path class="indicator" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" style="--progress-circumference: 100;" />
-													 </svg>
-													 <span>60%</span>
-											 </div>
-									 </div>
-							 </div>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Determinate Progress</strong> - Show percentage complete</li>
+                    <li><strong>Indeterminate Progress</strong> - Animate while loading</li>
+                    <li><strong>Status Colors</strong> - Success, warning, error states</li>
+                    <li><strong>Skeleton Screens</strong> - Placeholder while loading</li>
+                    <li><strong>Smooth Animations</strong> - Fluid transitions</li>
+                    <li><strong>Accessible</strong> - aria-valuenow and aria-valuemax</li>
+                </ul>
+            </section>
 
-							 <div class="section">
-									 <h2 class="title">HTML Structure: Circular Progress</h2>
-									 <p>A circular progress indicator uses an SVG to draw the circle and progress arc. The <code>--progress-value</code> CSS variable controls the fill percentage.</p>
-									 <div class="code-block">
-											 <pre><code class="language-html">&lt;div class="progress circular" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="--progress-value: 60;"&gt;
-			 &lt;svg viewBox="0 0 36 36"&gt;
-					 &lt;path class="track" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" /&gt;
-					 &lt;path class="indicator" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" style="--progress-circumference: 100;" /&gt;
-			 &lt;/svg&gt;
-			 &lt;span&gt;60%&lt;/span&gt;
-	 &lt;/div&gt;</code></pre>
-									 </div>
-							 </div>
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>File Operations</strong> - Upload, download progress</li>
+                    <li><strong>Loading States</strong> - Content being fetched</li>
+                    <li><strong>Installation</strong> - Setup progress tracking</li>
+                    <li><strong>Batch Operations</strong> - Process status display</li>
+                    <li><strong>Perceived Performance</strong> - Skeleton screens</li>
+                    <li><strong>Long Operations</strong> - Background task progress</li>
+                </ul>
+            </section>
 
-							 <div class="section">
-									 <h2 class="title">Styling</h2>
-									 <p>The <code>.progress</code> class provides the base styling for both linear and circular progress bars. For linear bars, the inner <code>&lt;div&gt;</code>'s width is set via an inline style or JavaScript. For circular bars, SVG <code>stroke-dasharray</code> and <code>stroke-dashoffset</code> properties are used, controlled by CSS variables.</p>
-									 <ul>
-											 <li><code>.progress</code>: Base container for progress bars.</li>
-											 <li><code>.progress.labeled</code>: Adds styling for a text label inside the bar.</li>
-											 <li><code>.progress.circular</code>: Styles for circular progress indicators.</li>
-											 <li>Semantic color classes (<code>.success</code>, <code>.warning</code>, <code>.error</code>) can be applied to the progress indicator for contextual feedback.</li>
-									 </ul>
-							 </div>
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use <code>role="progressbar"</code> on determinate progress</li>
+                    <li>Include <code>aria-valuenow</code> and <code>aria-valuemax</code></li>
+                    <li>Provide percentage text alongside bar</li>
+                    <li>Use color + text for status indication</li>
+                    <li>Announce completion to screen readers</li>
+                    <li>Support high contrast mode</li>
+                </ul>
+            </section>
 
-							 <div class="section">
-									 <h2 class="title">JavaScript Integration</h2>
-									 <p>To dynamically update progress, you will typically use JavaScript to change the <code>width</code> style property of the inner <code>&lt;div&gt;</code> for linear bars, or the <code>--progress-value</code> CSS variable for circular bars.</p>
-									 <div class="code-block">
-											 <pre><code class="language-html">&lt;script&gt;
-			 // Example for linear progress
-			 const linearProgress = document.querySelector('.progress div');
-			 linearProgress.style.width = '75%'; // Update dynamically
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Show Progress</strong> - Always indicate ongoing operation</li>
+                    <li><strong>Accurate Estimates</strong> - Don't fake progress completion</li>
+                    <li><strong>Skeleton Screens</strong> - Better UX than spinners</li>
+                    <li><strong>Color Meaning</strong> - Use consistent color semantics</li>
+                    <li><strong>Clear Labels</strong> - Show what's loading</li>
+                    <li><strong>Completion Feedback</strong> - Signal when done</li>
+                </ul>
+            </section>
 
-			 // Example for circular progress
-			 const circularProgress = document.querySelector('.progress.circular');
-			 circularProgress.style.setProperty('--progress-value', 85); // Update dynamically
-	 &lt;/script&gt;</code></pre>
-									 </div>
-							 </div>
-
-							 <div class="section">
-									 <h2 class="title">Accessibility</h2>
-									 <p>Progress components are designed with accessibility in mind:</p>
-									 <ul>
-											 <li><code>role="progressbar"</code>: Identifies the element as a progress bar to assistive technologies.</li>
-											 <li><code>aria-valuenow</code>: Indicates the current value of the progress bar.</li>
-											 <li><code>aria-valuemin</code>: Defines the minimum allowed value.</li>
-											 <li><code>aria-valuemax</code>: Defines the maximum allowed value.</li>
-											 <li>For circular progress, the visible percentage text provides additional context.</li>
-									 </ul>
-							 </div>
-
-							 <div class="section">
-									 <h2 class="title">Customization</h2>
-									 <p>Customize the appearance using Axiom01's CSS variables for colors, spacing, and typography. You can adjust the height of linear bars, the size of circular bars, and their colors to match your theme.</p>
-							 </div>
         </div>
 
     </div></section></main>
@@ -169,9 +337,9 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
