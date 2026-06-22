@@ -3,13 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ai Chat Component - Axiom01</title>
+    <title>AI Chat Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
     <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .ai-chat-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            overflow: hidden;
+        }
+        
+        .ai-chat-header {
+            padding: var(--a-space-l);
+            border-bottom: 1px solid var(--ax-border);
+            background: var(--ax-surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ai-chat-title {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-m);
+            margin: 0;
+        }
+        
+        .ai-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--a-color-primary), var(--a-color-primary-container));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--a-color-primary-on);
+            font-weight: var(--a-font-weight-bold);
+            font-size: 18px;
+        }
+        
+        .ai-title-text h3 {
+            margin: 0 0 4px 0;
+            font-size: var(--a-font-size-base);
+        }
+        
+        .ai-title-text p {
+            margin: 0;
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+        }
+        
+        .ai-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--a-space-l);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-m);
+            background: var(--ax-background-secondary);
+        }
+        
+        .ai-message {
+            display: flex;
+            gap: var(--a-space-s);
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .ai-message.user {
+            justify-content: flex-end;
+        }
+        
+        .ai-message-bubble {
+            max-width: 70%;
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-lg);
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+        
+        .ai-message-bubble.ai {
+            background: var(--ax-surface);
+            color: var(--ax-text);
+            border-bottom-left-radius: 4px;
+        }
+        
+        .ai-message-bubble.user {
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border-bottom-right-radius: 4px;
+        }
+        
+        .ai-typing {
+            display: flex;
+            gap: 4px;
+            padding: var(--a-space-m);
+            background: var(--ax-surface);
+            border-radius: var(--a-border-radius-lg);
+            width: fit-content;
+        }
+        
+        .ai-typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--a-color-text-muted);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        
+        .ai-typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .ai-typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-10px); opacity: 1; }
+        }
+        
+        .ai-input-area {
+            padding: var(--a-space-l);
+            border-top: 1px solid var(--ax-border);
+            background: var(--ax-surface);
+            display: flex;
+            gap: var(--a-space-s);
+        }
+        
+        .ai-input {
+            flex: 1;
+            padding: var(--a-space-m);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-sm);
+            background: var(--ax-background-secondary);
+            color: var(--ax-text);
+            resize: none;
+            max-height: 100px;
+        }
+        
+        .ai-input:focus {
+            outline: none;
+            border-color: var(--a-color-primary);
+            box-shadow: 0 0 0 2px var(--a-color-primary-container);
+        }
+        
+        .ai-send-btn {
+            padding: var(--a-space-m);
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border: none;
+            border-radius: var(--a-border-radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            transition: opacity var(--a-transition-base);
+        }
+        
+        .ai-send-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .ai-features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--a-space-m);
+            margin-top: var(--a-space-l);
+        }
+        
+        .ai-feature {
+            padding: var(--a-space-l);
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-md);
+            border: 1px solid var(--ax-border);
+        }
+        
+        .ai-feature-title {
+            font-weight: var(--a-font-weight-semibold);
+            margin: 0 0 var(--a-space-s) 0;
+            color: var(--a-color-primary);
+        }
+        
+        .ai-feature-desc {
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+            margin: 0;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -37,54 +242,186 @@
 
     <main><section><div class="container">
         <header>
-            <h1>Ai Chat</h1>
-            <p class="text-muted">Axiom01 provides a ready-to-use UI component for integrating conversational AI into your applications. This component is...</p>
+            <h1>AI Chat</h1>
+            <p class="text-muted">Axiom01's AI chat component provides a sophisticated interface for AI-powered conversations. Features real-time messaging, typing indicators, conversation history, and seamless AI integration support.</p>
         </header>
 
         <div class="component-section">
-            <h2>AI Chat Component</h2>
-            <p>Axiom01 provides a ready-to-use UI component for integrating conversational AI into your applications. This component is designed for seamless connection with various AI services, offering a clean and intuitive chat interface.</p>
 
-            <h3>Example AI Chat Interface</h3>
-            <div class="ai-chat-demo-container">
-                <div id="ai-chat-component" class="ai-chat-panel">
-                    <header>
-                        <h3>AI Assistant</h3>
-                        <button class="close-chat" aria-label="Close chat">&times;</button>
-                    </header>
-                    <div class="ai-chat-messages">
-                        <div class="ai-message assistant-message">Hello! How can I assist you today?</div>
-                        <div class="ai-message user-message">What is Axiom01?</div>
-                        <div class="ai-message assistant-message">Axiom01 is a semantic-first UI framework designed for building professional, accessible, and fast web applications with minimal classes and powerful CSS variables.</div>
+            <section>
+                <h2>Live Examples</h2>
+
+                <h3>AI Chat Interface</h3>
+                <div class="ai-chat-demo">
+                    <div class="ai-chat-header">
+                        <div class="ai-title-text">
+                            <div class="ai-title">
+                                <div class="ai-avatar">
+                                    <span class="axicon render" data-name="Sparkles"></span>
+                                </div>
+                                <div>
+                                    <h3>Assistant</h3>
+                                    <p>Always ready to help</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button style="background: none; border: none; cursor: pointer; padding: var(--a-space-m);">
+                            <span class="axicon render" data-name="X"></span>
+                        </button>
                     </div>
-                    <div class="ai-chat-input-area">
-                        <textarea id="ai-chat-input" placeholder="Type your message..." rows="1"></textarea>
-                        <button class="button primary">Send</button>
+                    
+                    <div class="ai-messages" id="aiMessages">
+                        <div class="ai-message">
+                            <div class="ai-message-bubble ai">Welcome! I'm here to help with any questions you have. What can I do for you today?</div>
+                        </div>
+                        
+                        <div class="ai-message user">
+                            <div class="ai-message-bubble user">How do I use the Axiom01 framework?</div>
+                        </div>
+                        
+                        <div class="ai-message">
+                            <div class="ai-message-bubble ai">
+                                Axiom01 is a comprehensive semantic web framework. You can:
+                                <br>• Explore the 74 pre-built components
+                                <br>• Customize using CSS variables
+                                <br>• Use semantic HTML5 throughout
+                                <br>• Access full accessibility support
+                            </div>
+                        </div>
+                        
+                        <div class="ai-message user">
+                            <div class="ai-message-bubble user">That's helpful! Can you show me an example?</div>
+                        </div>
+                        
+                        <div class="ai-message">
+                            <div class="ai-typing">
+                                <div class="ai-typing-dot"></div>
+                                <div class="ai-typing-dot"></div>
+                                <div class="ai-typing-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-input-area">
+                        <textarea class="ai-input" placeholder="Ask me anything..." aria-label="Chat message input"></textarea>
+                        <button class="ai-send-btn" aria-label="Send message">
+                            <span class="axicon render" data-name="Send"></span>
+                        </button>
                     </div>
                 </div>
-            </div>
 
-            <h3>Code Example</h3>
-            <pre><code class="language-html">&lt;div id="ai-chat-component" class="ai-chat-panel"&gt;
-&lt;header&gt;
-    &lt;h3&gt;AI Assistant&lt;/h3&gt;
-    &lt;button class="close-chat" aria-label="Close chat"&gt;&amp;times;&lt;/button&gt;
-&lt;/header&gt;
-&lt;div class="ai-chat-messages"&gt;
-    &lt;div class="ai-message assistant-message"&gt;Hello! How can I assist you today?&lt;/div&gt;
-    &lt;div class="ai-message user-message"&gt;What is Axiom01?&lt;/div&gt;
-    &lt;div class="ai-message assistant-message"&gt;Axiom01 is a semantic-first UI framework...&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="ai-chat-input-area"&gt;
-    &lt;textarea id="ai-chat-input" placeholder="Type your message..." rows="1"&gt;&lt;/textarea&gt;
-    &lt;button class="button primary"&gt;Send&lt;/button&gt;
-&lt;/div&gt;
+                <h3>AI Features Showcase</h3>
+                <div class="ai-features-grid">
+                    <div class="ai-feature">
+                        <h4 class="ai-feature-title">
+                            <span class="axicon render" data-name="Brain"></span>
+                            Natural Language Processing
+                        </h4>
+                        <p class="ai-feature-desc">Understands context and maintains conversation history for better responses.</p>
+                    </div>
+                    <div class="ai-feature">
+                        <h4 class="ai-feature-title">
+                            <span class="axicon render" data-name="Zap"></span>
+                            Real-Time Response
+                        </h4>
+                        <p class="ai-feature-desc">Instant message delivery with typing indicators for natural interaction.</p>
+                    </div>
+                    <div class="ai-feature">
+                        <h4 class="ai-feature-title">
+                            <span class="axicon render" data-name="Shield"></span>
+                            Secure Messaging
+                        </h4>
+                        <p class="ai-feature-desc">End-to-end encryption and secure communication protocols.</p>
+                    </div>
+                    <div class="ai-feature">
+                        <h4 class="ai-feature-title">
+                            <span class="axicon render" data-name="Settings"></span>
+                            Configurable AI
+                        </h4>
+                        <p class="ai-feature-desc">Customize AI personality, response style, and behavior settings.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="ai-chat-demo"&gt;
+    &lt;div class="ai-chat-header"&gt;
+        &lt;div class="ai-title"&gt;
+            &lt;div class="ai-avatar"&gt;🤖&lt;/div&gt;
+            &lt;div&gt;
+                &lt;h3&gt;Assistant&lt;/h3&gt;
+                &lt;p&gt;Status&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="ai-messages"&gt;
+        &lt;div class="ai-message"&gt;
+            &lt;div class="ai-message-bubble ai"&gt;AI message&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="ai-message user"&gt;
+            &lt;div class="ai-message-bubble user"&gt;User message&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="ai-input-area"&gt;
+        &lt;textarea class="ai-input"&gt;&lt;/textarea&gt;
+        &lt;button class="ai-send-btn"&gt;Send&lt;/button&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+                </div>
+            </section>
 
-            <h3>Usage Guidelines</h3>
-            <p>This component provides the visual structure for an AI chat. You will need to integrate it with a backend AI service (e.g., OpenAI, Google Gemini) using JavaScript to handle message sending, receiving, and displaying responses dynamically.</p>
-            <p>The <code>.ai-chat-panel</code> class provides the base styling. Messages can be styled with <code>.user-message</code> and <code>.assistant-message</code>. The close button and input area are also pre-styled.</p>
-        </div>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Real-Time Messaging</strong> - Instant message delivery and updates</li>
+                    <li><strong>Typing Indicators</strong> - Shows when AI is composing response</li>
+                    <li><strong>Conversation History</strong> - Full message history with context</li>
+                    <li><strong>AI Avatars</strong> - Distinct visual identity for AI vs user</li>
+                    <li><strong>Multi-line Input</strong> - Support for longer messages</li>
+                    <li><strong>Rich Formatting</strong> - Support for formatted responses</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Customer Support</strong> - AI-powered help desk and FAQ</li>
+                    <li><strong>Virtual Assistant</strong> - Personal AI helper for tasks</li>
+                    <li><strong>Chatbot</strong> - Conversational user interaction</li>
+                    <li><strong>Learning Assistant</strong> - Educational AI tutoring</li>
+                    <li><strong>Code Helper</strong> - Programming assistance and debugging</li>
+                    <li><strong>Creative Writing</strong> - Writing prompts and suggestions</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic HTML for message structure</li>
+                    <li>Include <code>aria-label</code> on input and send button</li>
+                    <li>Announce typing indicators to screen readers</li>
+                    <li>Support keyboard navigation (Tab, Enter to send)</li>
+                    <li>Use <code>role="region"</code> for message area</li>
+                    <li>Provide clear distinction between user and AI messages</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Identity</strong> - Always show AI vs user distinction</li>
+                    <li><strong>Typing Feedback</strong> - Use typing indicators for better UX</li>
+                    <li><strong>Error Handling</strong> - Show errors gracefully</li>
+                    <li><strong>Message Limits</strong> - Validate input length</li>
+                    <li><strong>Scrolling</strong> - Auto-scroll to latest message</li>
+                    <li><strong>Accessibility</strong> - Full keyboard and screen reader support</li>
+                </ul>
+            </section>
+
         </div>
 
     </div></section></main>
@@ -100,9 +437,9 @@
                     <h4>Documentation</h4>
                     <ul>
                         <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
