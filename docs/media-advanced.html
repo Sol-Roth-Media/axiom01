@@ -3,15 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Media & Icons Guide - Axiom01</title>
+    <title>Media & Icons - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.css">
-    <link rel="stylesheet" href="../css/doc-styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: var(--a-space-m);
+            margin: var(--a-space-l) 0;
+        }
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--a-space-s);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            background: var(--ax-background-secondary);
+            text-align: center;
+        }
+        .icon-item svg {
+            width: 32px;
+            height: 32px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+        .icon-name {
+            font-size: var(--a-font-size-xs);
+            font-weight: 500;
+            color: var(--ax-text);
+        }
+        .image-demo {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--a-color-primary) 0%, var(--a-color-primary-light) 100%);
+            border-radius: var(--a-border-radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin: var(--a-space-l) 0;
+        }
+    </style>
 </head>
-<body class="axiom-body">
+<body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
@@ -19,165 +63,385 @@
                 <li><a href="../index.html#philosophy">Philosophy</a></li>
                 <li><a href="../index.html#components">Components</a></li>
                 <li><a href="../index.html#get-started">Get Started</a></li>
-                <li><a href="components-overview.html">Documentation</a></li>
+                <li><a href="components-overview.html">Component Overview</a></li>
             </ul>
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-	<main>
-							<section class="hero small">
-									<div class="content">
-											<h1 class="title">Advanced Media & Icons Guide</h1>
-											<p class="description">This guide delves into Axiom01's best practices for integrating and optimizing media assets and icons. Learn how to ensure your visuals are performant, responsive, accessible, and seamlessly integrated with your chosen theme.</p>
-									</div>
-							</section>
+    <main><section><div class="container">
+        <header>
+            <h1>Media & Icons</h1>
+            <p class="text-muted">Axiom01 includes a comprehensive icon system and media best practices for images, videos, and other visual content.</p>
+        </header>
 
-							<section id="optimizing-images">
-									<div class="container">
-											<h2>Optimizing Images for Performance</h2>
-											<p>Images are often the largest contributors to page weight. Axiom01 encourages strategies to minimize their impact while maintaining visual quality.</p>
+        <div class="component-section">
 
-											<h3>Responsive Images</h3>
-											<p>Use the <code>&lt;picture&gt;</code> element and <code>srcset</code> attribute to serve appropriately sized images for different screen resolutions and device capabilities. This prevents users from downloading unnecessarily large files.</p>
-											<pre><code class="language-html">&lt;!-- HTML --&gt;
-	&lt;picture&gt;
-			&lt;source srcset="image-large.webp 1200w, image-medium.webp 800w" type="image/webp"&gt;
-			&lt;source srcset="image-large.jpg 1200w, image-medium.jpg 800w" type="image/jpeg"&gt;
-			&lt;img src="image-small.jpg" alt="Descriptive alt text" class="responsive-image" loading="lazy"&gt;
-	&lt;/picture&gt;</code></pre>
-											<p>The <code>.responsive-image</code> class ensures your image scales correctly within its container.</p>
+            <section>
+                <h2>Axicons - The Icon System</h2>
+                <p>Axiom01 includes <strong>204 built-in icons</strong> called Axicons. These are native SVG icons that are lightweight, scalable, and accessible. No external dependencies or font files needed.</p>
+                
+                <p><strong><a href="axicons.html" style="color: var(--a-color-primary);">→ Browse all Axicons in the icon browser</a></strong></p>
+                
+                <h3>Why Axicons?</h3>
+                <ul style="margin: var(--a-space-m) 0;">
+                    <li><strong>Native SVG</strong> - No font fallbacks or rendering issues</li>
+                    <li><strong>Lightweight</strong> - Only ~15 KB for the entire library</li>
+                    <li><strong>Scalable</strong> - Perfect at any size from 16px to 256px</li>
+                    <li><strong>Accessible</strong> - Built with aria-hidden and semantic structure</li>
+                    <li><strong>Customizable</strong> - Control color via CSS, no image replacement needed</li>
+                    <li><strong>Consistent Design</strong> - All icons follow the same visual style</li>
+                </ul>
+            </section>
 
-											<h3>Lazy Loading</h3>
-											<p>Implement lazy loading for off-screen images using the <code>loading="lazy"</code> attribute. This defers loading until the image is about to enter the viewport, significantly improving initial page load times.</p>
-											<pre><code class="language-html">&lt;!-- HTML --&gt;
-	&lt;img src="path/to/image.jpg" alt="Description" class="responsive-image" loading="lazy"&gt;</code></pre>
+            <section>
+                <h2>Using Axicons</h2>
+                <p>There are two ways to use axicons in your projects:</p>
+                
+                <h3>1. Using the Axicon Renderer (Recommended)</h3>
+                <p>Use the <code>axicon render</code> class to automatically render icons from the JavaScript library:</p>
+                <pre><code class="language-html">&lt;span class="axicon render" data-name="Check-Circle"&gt;&lt;/span&gt;
+&lt;span class="axicon render" data-name="Search"&gt;&lt;/span&gt;
+&lt;span class="axicon render" data-name="Menu"&gt;&lt;/span&gt;</code></pre>
 
-											<h3>Modern Image Formats</h3>
-											<p>Prioritize modern image formats like WebP or AVIF over traditional JPEG or PNG. These formats offer superior compression without significant loss of quality, leading to smaller file sizes and faster downloads.</p>
-									</div>
-							</section>
+                <h3>2. Inline SVG</h3>
+                <p>For cases where you need direct control, embed the SVG directly:</p>
+                <pre><code class="language-html">&lt;svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"&gt;
+  &lt;circle cx="12" cy="12" r="10"&gt;&lt;/circle&gt;
+  &lt;line x1="12" y1="16" x2="12" y2="12"&gt;&lt;/line&gt;
+  &lt;line x1="12" y1="8" x2="12.01" y2="8"&gt;&lt;/line&gt;
+&lt;/svg&gt;</code></pre>
 
-							<section id="integrating-icons">
-									<div class="container">
-											<h2>Integrating Icons & SVGs</h2>
-											<p>Icons are crucial for visual communication. Axiom01 supports both SVG and icon fonts, with recommendations for each.</p>
+                <h3>Sizing Icons</h3>
+                <pre><code class="language-html">&lt;!-- Small icon (16px) --&gt;
+&lt;span class="axicon render" data-name="Check" style="font-size: 16px;"&gt;&lt;/span&gt;
 
-											<h3>Scalable Vector Graphics (SVGs)</h3>
-											<p>SVGs are ideal for icons and simple graphics due to their scalability, small file size, and ability to be styled with CSS. Embed them directly in your HTML for maximum control.</p>
-											<pre><code class="language-html">&lt;!-- HTML --&gt;
-	&lt;!-- Inline SVG for full CSS control --&gt;
-	&lt;svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="var(--a-color-primary)"&gt;
-			&lt;path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/&gt;
-	&lt;/svg&gt;
+&lt;!-- Default (24px) --&gt;
+&lt;span class="axicon render" data-name="Check"&gt;&lt;/span&gt;
 
-	&lt;!-- Using an external SVG file --&gt;
-	&lt;img src="/assets/icons/check.svg" alt="Checkmark" class="icon-svg"&gt;</code></pre>
-											<p>You can style inline SVGs using CSS variables, making them theme-aware.</p>
+&lt;!-- Large icon (32px) --&gt;
+&lt;span class="axicon render" data-name="Check" style="font-size: 32px;"&gt;&lt;/span&gt;</code></pre>
 
-											<h3>Icon Fonts (e.g., Font Awesome)</h3>
-											<p>For a wide range of common icons, icon font libraries like Font Awesome are a convenient choice. Ensure you load the library's CSS and use the provided classes.</p>
-											<pre><code class="language-html">&lt;!-- In your HTML head --&gt;
-	&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous"/&gt;
+                <h3>Coloring Icons</h3>
+                <pre><code class="language-html">&lt;!-- Inherit text color --&gt;
+&lt;span class="axicon render" data-name="Check"&gt;&lt;/span&gt;
 
-	&lt;!-- In your body --&gt;
-	&lt;i class="fas fa-star"&gt;&lt;/i&gt;
-	&lt;i class="fas fa-heart primary"&gt;&lt;/i&gt;
-	&lt;i class="fas fa-bell secondary"&gt;&lt;/i&gt;</code></pre>
-											<p>Axiom01's styling will automatically apply appropriate sizing and color based on context, but you can override with semantic color classes if needed.</p>
+&lt;!-- With specific color --&gt;
+&lt;span class="axicon render success" data-name="Check-Circle"&gt;&lt;/span&gt;
 
-											<h3>Accessibility for Icons</h3>
-											<p>Always provide alternative text for images (<code>alt</code> attribute) and ensure icons used for meaning have accessible labels (e.g., <code>aria-label</code>, visually hidden text, or a descriptive parent element).</p>
-											<pre><code class="language-html">&lt;!-- HTML --&gt;
-	&lt;button aria-label="Delete item"&gt;&lt;i class="fas fa-trash" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;
-	&lt;!-- OR --&gt;
-	&lt;a href="#"&gt;&lt;i class="fas fa-info-circle" aria-hidden="true"&gt;&lt;/i&gt; &lt;span&gt;More Information&lt;/span&gt;&lt;/a&gt;</code></pre>
-									</div>
-							</section>
+&lt;!-- Custom color --&gt;
+&lt;span class="axicon render" data-name="Warning" style="color: var(--a-color-warning);"&gt;&lt;/span&gt;</code></pre>
+            </section>
 
-							<section id="media-examples">
-									<div class="container">
-											<h2>Media Examples</h2>
-											<h3>Image Gallery Example</h3>
-											<div class="media-example-grid">
-													<div class="media-card">
-															<img src="https://via.placeholder.com/300x200/4f46e5/e0e7ff?text=Image+1" alt="Placeholder Image 1">
-															<p>A beautiful landscape.</p>
-													</div>
-													<div class="media-card">
-															<img src="https://via.placeholder.com/300x200/06b6d4/cffafe?text=Image+2" alt="Placeholder Image 2">
-															<p>Cityscape at night.</p>
-													</div>
-													<div class="media-card">
-															<img src="https://via.placeholder.com/300x200/f59e42/fff7ed?text=Image+3" alt="Placeholder Image 3">
-															<p>Abstract art.</p>
-													</div>
-											</div>
+            <section>
+                <h2>Icon Gallery</h2>
+                <p>Browse all 200+ available icons. Click any icon to copy its name.</p>
+                
+                <div class="icon-grid">
+                    <div class="icon-item" title="Click to copy name">
+                        <span class="axicon render" data-name="Check"></span>
+                        <span class="icon-name">Check</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="X-Circle"></span>
+                        <span class="icon-name">X-Circle</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Check-Circle"></span>
+                        <span class="icon-name">Check-Circle</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Alert-Triangle"></span>
+                        <span class="icon-name">Alert-Triangle</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Alert-Circle"></span>
+                        <span class="icon-name">Alert-Circle</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Help-Circle"></span>
+                        <span class="icon-name">Help-Circle</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Info"></span>
+                        <span class="icon-name">Info</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Bell"></span>
+                        <span class="icon-name">Bell</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Search"></span>
+                        <span class="icon-name">Search</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Menu"></span>
+                        <span class="icon-name">Menu</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Settings"></span>
+                        <span class="icon-name">Settings</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="User"></span>
+                        <span class="icon-name">User</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Upload"></span>
+                        <span class="icon-name">Upload</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Download"></span>
+                        <span class="icon-name">Download</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Calendar"></span>
+                        <span class="icon-name">Calendar</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Clock"></span>
+                        <span class="icon-name">Clock</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Heart"></span>
+                        <span class="icon-name">Heart</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Star"></span>
+                        <span class="icon-name">Star</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Share-2"></span>
+                        <span class="icon-name">Share-2</span>
+                    </div>
+                    <div class="icon-item">
+                        <span class="axicon render" data-name="Trash"></span>
+                        <span class="icon-name">Trash</span>
+                    </div>
+                </div>
 
-											<h3>Icon Showcase</h3>
-											<div class="icon-example-grid">
-													<div class="icon-item"><i class="fas fa-home"></i><p>Home</p></div>
-													<div class="icon-item"><i class="fas fa-cog"></i><p>Settings</p></div>
-													<div class="icon-item"><i class="fas fa-envelope"></i><p>Mail</p></div>
-													<div class="icon-item"><i class="fas fa-user"></i><p>User</p></div>
-													<div class="icon-item"><i class="fas fa-cloud"></i><p>Cloud</p></div>
-													<div class="icon-item"><i class="fas fa-camera"></i><p>Camera</p></div>
-											</div>
-									</div>
-							</section>
-					</main>
+                <p class="text-muted" style="margin-top: var(--a-space-l);">
+                    For the complete list of all 200+ icons, check the <code>js/axicons.js</code> file or search for "axicon" in the codebase.
+                </p>
+            </section>
 
-			<script src="../js/index-page-manager.js"></script>
-			<footer class="main">
-					<div class="content">
-							<div class="brand">
-									<a href="../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-									<p class="tagline">The Semantic Web, Reimagined.</p>
-							</div>
-							<div class="links">
-									<div class="column">
-											<h4>Documentation</h4>
-											<ul>
-													<li><a href="components-overview.html">Component Overview</a></li>
-													<li><a href="../README.md">README</a></li>
-													<li><a href="../DEVELOPER.md">Developer Guide</a></li>
-													<li><a href="../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-													<li><a href="../index.html#get-started">Getting Started</a></li>
-											</ul>
-									</div>
-									<div class="column">
-											<h4>Community</h4>
-											<ul>
-													<li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
-											</ul>
-									</div>
-									<div class="column">
-											<h4>More</h4>
-											<ul>
-													<li><a href="interactive-playground.html">Playground</a></li>
-													<li><a href="../index.html#example-sites">Example Sites</a></li>
-													<li><a href="../index.html#release-info">Release Info</a></li>
-											</ul>
-									</div>
-							</div>
-					</div>
-					<div class="bottom">
-							<p>&copy; 2025 Axiom01. All Rights Reserved.</p>
-					</div>
-			</footer>
-	</body>
-	</html>
+            <section>
+                <h2>Icon Best Practices</h2>
+                <ul style="margin: var(--a-space-m) 0;">
+                    <li><strong>Always provide context</strong> - Pair icons with text labels, especially for interactive elements</li>
+                    <li><strong>Use aria-hidden="true" for decorative icons</strong> - Screen readers skip purely decorative icons</li>
+                    <li><strong>Consistent sizing</strong> - Stick to standard sizes (16px, 24px, 32px, 48px) for visual consistency</li>
+                    <li><strong>Color contrast</strong> - Ensure icons have sufficient contrast against the background (4.5:1 minimum)</li>
+                    <li><strong>Active states</strong> - Use different colors or fills to indicate active/selected states</li>
+                    <li><strong>Accessible icons</strong> - For functional icons, include proper aria-labels or title attributes</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Icons in Components</h2>
+                <p>Use icons throughout your interfaces in these common patterns:</p>
+                
+                <h3>Buttons with Icons</h3>
+                <pre><code class="language-html">&lt;button class="button primary"&gt;
+  &lt;span class="axicon render" data-name="Download"&gt;&lt;/span&gt;
+  Download File
+&lt;/button&gt;
+
+&lt;button class="button" aria-label="Delete"&gt;
+  &lt;span class="axicon render" data-name="Trash"&gt;&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+
+                <h3>Navigation with Icons</h3>
+                <pre><code class="language-html">&lt;nav&gt;
+  &lt;a href="#"&gt;
+    &lt;span class="axicon render" data-name="Home"&gt;&lt;/span&gt;
+    Home
+  &lt;/a&gt;
+  &lt;a href="#"&gt;
+    &lt;span class="axicon render" data-name="Settings"&gt;&lt;/span&gt;
+    Settings
+  &lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+
+                <h3>Status Indicators</h3>
+                <pre><code class="language-html">&lt;!-- Success --&gt;
+&lt;span class="axicon render success" data-name="Check-Circle"&gt;&lt;/span&gt;
+
+&lt;!-- Warning --&gt;
+&lt;span class="axicon render warning" data-name="Alert-Triangle"&gt;&lt;/span&gt;
+
+&lt;!-- Error --&gt;
+&lt;span class="axicon render error" data-name="X-Circle"&gt;&lt;/span&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Images & Media</h2>
+                <p>Best practices for using images, videos, and other media in your Axiom01 projects.</p>
+                
+                <h3>Responsive Images</h3>
+                <pre><code class="language-html">&lt;!-- Simple responsive image --&gt;
+&lt;img 
+  src="image.jpg" 
+  alt="Descriptive text"
+  style="width: 100%; height: auto; border-radius: var(--a-border-radius-lg);"
+&gt;
+
+&lt;!-- Picture element for art direction --&gt;
+&lt;picture&gt;
+  &lt;source media="(min-width: 900px)" srcset="image-large.jpg"&gt;
+  &lt;source media="(min-width: 600px)" srcset="image-medium.jpg"&gt;
+  &lt;img src="image-small.jpg" alt="Descriptive text"&gt;
+&lt;/picture&gt;
+
+&lt;!-- With srcset for different densities --&gt;
+&lt;img 
+  src="image.jpg"
+  srcset="image@2x.jpg 2x, image@3x.jpg 3x"
+  alt="Descriptive text"
+&gt;</code></pre>
+
+                <h3>Image in Card</h3>
+                <pre><code class="language-html">&lt;article class="card"&gt;
+  &lt;img src="thumbnail.jpg" alt="Card image" style="width: 100%; border-radius: var(--a-border-radius-lg) var(--a-border-radius-lg) 0 0;"&gt;
+  &lt;div style="padding: var(--a-space-l);"&gt;
+    &lt;h3&gt;Card Title&lt;/h3&gt;
+    &lt;p&gt;Card description...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+
+                <h3>Embedded Video</h3>
+                <pre><code class="language-html">&lt;!-- Responsive iframe --&gt;
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"&gt;
+  &lt;iframe 
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3>SVG Graphics</h3>
+                <pre><code class="language-html">&lt;!-- Inline SVG --&gt;
+&lt;svg viewBox="0 0 100 100" style="width: 100px; height: 100px;"&gt;
+  &lt;circle cx="50" cy="50" r="40" fill="var(--a-color-primary)"&gt;&lt;/circle&gt;
+&lt;/svg&gt;
+
+&lt;!-- External SVG --&gt;
+&lt;img src="graphic.svg" alt="Graphic description"&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Accessibility for Media</h2>
+                <p>Ensure all media is accessible to all users:</p>
+                
+                <ul style="margin: var(--a-space-m) 0;">
+                    <li><strong>Alt Text</strong> - Always include descriptive alt text for images</li>
+                    <li><strong>Captions</strong> - Add captions for videos (especially audio-dependent content)</li>
+                    <li><strong>Transcripts</strong> - Provide transcripts for podcasts and important videos</li>
+                    <li><strong>Icon Labels</strong> - Use aria-labels or title attributes for icon-only buttons</li>
+                    <li><strong>Color Contrast</strong> - Ensure icons and graphics have proper contrast</li>
+                    <li><strong>Keyboard Navigation</strong> - All interactive media controls must be keyboard accessible</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Performance Tips</h2>
+                <p>Optimize media for faster page load times:</p>
+                
+                <ul style="margin: var(--a-space-m) 0;">
+                    <li><strong>Image Optimization</strong> - Use modern formats (WebP) with fallbacks</li>
+                    <li><strong>Lazy Loading</strong> - Use the <code>loading="lazy"</code> attribute for below-the-fold images</li>
+                    <li><strong>SVG Optimization</strong> - Minify SVGs to reduce file size</li>
+                    <li><strong>Video Optimization</strong> - Use appropriate codecs and bitrates for streaming</li>
+                    <li><strong>Responsive Images</strong> - Serve different image sizes for different devices</li>
+                </ul>
+            </section>
+
+        </div>
+
+    </div></section></main>
+
+    <footer class="main">
+        <div class="content">
+            <div class="brand">
+                <a href="../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="components-overview.html">Component Overview</a></li>
+                        <li><a href="markdown-template.html?file=../README.md">README</a></li>
+                        <li><a href="markdown-template.html?file=../DEVELOPER.md">Developer Guide</a></li>
+                        <li><a href="markdown-template.html?file=../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="overview-quickstart.html">Overview & Quickstart</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../index.html#release-info">Release Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/axiom.js"></script>
+    <script src="../js/axicons.js"></script>
+    <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
+    <script src="../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>

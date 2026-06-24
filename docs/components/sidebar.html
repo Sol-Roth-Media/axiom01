@@ -5,172 +5,371 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidebar Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-        <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .sidebar-demo {
+            display: flex;
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            overflow: hidden;
+            margin: var(--a-space-l) 0;
+            height: 400px;
+            background: var(--ax-surface);
+        }
+        
+        .sidebar-demo aside {
+            width: 250px;
+            background: var(--a-color-primary-container);
+            padding: var(--a-space-l);
+            border-right: 1px solid var(--ax-border);
+            overflow-y: auto;
+        }
+        
+        .sidebar-demo aside h3 {
+            margin: 0 0 var(--a-space-m) 0;
+            font-size: var(--a-font-size-lg);
+            color: var(--a-color-primary);
+        }
+        
+        .sidebar-demo aside nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .sidebar-demo aside nav li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .sidebar-demo aside nav a {
+            display: block;
+            padding: var(--a-space-m);
+            color: var(--a-color-primary);
+            text-decoration: none;
+            border-radius: var(--a-border-radius-md);
+            transition: background-color var(--a-transition-base) var(--a-ease-out);
+        }
+        
+        .sidebar-demo aside nav a:hover {
+            background: rgba(0, 102, 204, 0.1);
+        }
+        
+        .sidebar-demo aside nav a.active {
+            background: var(--a-color-primary);
+            color: white;
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .sidebar-demo main {
+            flex: 1;
+            padding: var(--a-space-l);
+            overflow-y: auto;
+        }
+        
+        .sidebar-demo main h4 {
+            margin-top: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-demo {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .sidebar-demo aside {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--ax-border);
+            }
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../../index.html#components">Components</a></li>
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-
-				 <main class="content">
-        <section class="hero small">
-										 <h1 class="title">Sidebar Component</h1>
-										 <p class="description">Axiom01 provides a flexible and responsive sidebar component, ideal for navigation, supplementary content, or application dashboards. It can be easily integrated into various layout structures.</p>
-						 </section>
+    <main><section><div class="container">
+        <header>
+            <h1>Sidebar</h1>
+            <p class="text-muted">Axiom01's sidebar component is a flexible layout component for navigation, supplementary content, or application menus. It adapts responsively to different screen sizes.</p>
+        </header>
 
         <div class="component-section">
 
-						 <div class="section">
-								 <h2 class="title">Live Example</h2>
-								 <div class="live">
-										 <div class="sidebar-layout">
-												 <aside class="sidebar">
-														 <nav>
-																 <h3>Main Menu</h3>
-																 <ul>
-																		 <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-																		 <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
-																		 <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-																		 <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-																 </ul>
-																 <h3>Reports</h3>
-																 <ul>
-																		 <li><a href="#"><i class="fas fa-chart-line"></i> Sales</a></li>
-																		 <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
-																 </ul>
-														 </nav>
-												 </aside>
-												 <main class="sidebar-content">
-														 <p>This is the main content area. The sidebar is on the left.</p>
-														 <p>Resize your browser to see how the sidebar adapts to different screen sizes.</p>
-														 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</main>
-										 </div>
-								 </div>
-						 </div>
+            <section>
+                <h2>Live Examples</h2>
 
-						 <div class="section">
-								 <h2 class="title">HTML Structure</h2>
-								 <p>The sidebar component typically involves a main layout container, an <code>&lt;aside&gt;</code> for the sidebar, and a <code>&lt;main&gt;</code> element for the primary content.</p>
-								 <div class="code-block">
-										 <pre><code class="language-html">&lt;div class="sidebar-layout"&gt;
-		 &lt;aside class="sidebar"&gt;
-				 &lt;nav&gt;
-						 &lt;h3&gt;Main Menu&lt;/h3&gt;
-						 &lt;ul&gt;
-								 &lt;li&gt;&lt;a href="#"&gt;&lt;i class="fas fa-home"&gt;&lt;/i&gt; Dashboard&lt;/a&gt;&lt;/li&gt;
-								 &lt;li&gt;&lt;a href="#"&gt;&lt;i class="fas fa-user"&gt;&lt;/i&gt; Profile&lt;/a&gt;&lt;/li&gt;
-						 &lt;/ul&gt;
-				 &lt;/nav&gt;
-		 &lt;/aside&gt;
-		 &lt;main class="sidebar-content"&gt;
-				 &lt;p&gt;This is the main content area.&lt;/p&gt;
-		 &lt;/main&gt;
- &lt;/div&gt;</code></pre>
-								 </div>
-						 </div>
+                <h3>Basic Sidebar Layout</h3>
+                <div class="sidebar-demo">
+                    <aside role="complementary" aria-label="Sidebar Navigation">
+                        <h3>Navigation</h3>
+                        <nav>
+                            <ul>
+                                <li><a href="#" class="active"><span class="axicon render" data-name="Home"></span> Dashboard</a></li>
+                                <li><a href="#"><span class="axicon render" data-name="File"></span> Projects</a></li>
+                                <li><a href="#"><span class="axicon render" data-name="Users"></span> Team</a></li>
+                                <li><a href="#"><span class="axicon render" data-name="Settings"></span> Settings</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+                    <main>
+                        <h4>Main Content Area</h4>
+                        <p>This is the primary content area. The sidebar on the left contains navigation items.</p>
+                        <p>Resize your browser to see how the sidebar adapts to different screen sizes. On mobile, the sidebar would typically collapse or stack vertically.</p>
+                    </main>
+                </div>
 
-						 <div class="section">
-								 <h2 class="title">Styling</h2>
-								 <p>The <code>.sidebar-layout</code> uses CSS Grid or Flexbox to arrange the sidebar and content. The <code>.sidebar</code> itself is styled with a background, padding, and potentially a border or shadow. Navigation links within the sidebar are styled for clarity and interactivity.</p>
-								 <ul>
-										 <li><code>.sidebar-layout</code>: Container for the entire layout, managing the positioning of the sidebar and content.</li>
-										 <li><code>.sidebar</code>: Styles the sidebar panel, including its width, background, and text color.</li>
-										 <li><code>.sidebar-content</code>: Styles the main content area, ensuring it flows correctly alongside the sidebar.</li>
-										 <li>Navigation within the sidebar uses standard <code>&lt;nav&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;li&gt;</code>, and <code>&lt;a&gt;</code> elements, inheriting Axiom01's base typography and link styles.</li>
-								 </ul>
-						 </div>
+                <h3>Collapsible Sidebar</h3>
+                <p>On smaller screens, sidebars often collapse into icons or hide completely:</p>
+                <div class="sidebar-demo">
+                    <aside role="complementary" aria-label="Sidebar Navigation" style="width: 80px; padding: var(--a-space-m);">
+                        <nav style="display: flex; flex-direction: column; gap: var(--a-space-m);">
+                            <button title="Dashboard" style="background: var(--a-color-primary); color: white; border: none; padding: var(--a-space-m); border-radius: var(--a-border-radius-md); cursor: pointer;">
+                                <span class="axicon render" data-name="Home" style="font-size: 24px;"></span>
+                            </button>
+                            <button title="Projects" style="background: var(--a-color-surface); border: 1px solid var(--ax-border); padding: var(--a-space-m); border-radius: var(--a-border-radius-md); cursor: pointer;">
+                                <span class="axicon render" data-name="File" style="font-size: 24px;"></span>
+                            </button>
+                            <button title="Team" style="background: var(--a-color-surface); border: 1px solid var(--ax-border); padding: var(--a-space-m); border-radius: var(--a-border-radius-md); cursor: pointer;">
+                                <span class="axicon render" data-name="Users" style="font-size: 24px;"></span>
+                            </button>
+                            <button title="Settings" style="background: var(--a-color-surface); border: 1px solid var(--ax-border); padding: var(--a-space-m); border-radius: var(--a-border-radius-md); cursor: pointer;">
+                                <span class="axicon render" data-name="Settings" style="font-size: 24px;"></span>
+                            </button>
+                        </nav>
+                    </aside>
+                    <main>
+                        <h4>Collapsed Sidebar</h4>
+                        <p>This sidebar is collapsed to icon-only mode, useful for responsive designs on smaller screens.</p>
+                    </main>
+                </div>
+            </section>
 
-						 <div class="section">
-								 <h2 class="title">Responsive Behavior</h2>
-								 <p>For smaller screens, the sidebar typically collapses or transforms into an off-canvas menu, similar to the mobile navbar. This requires media queries to adjust the layout and potentially JavaScript to handle the toggle functionality.</p>
-						 </div>
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="sidebar-layout"&gt;
+    &lt;aside role="complementary" aria-label="Sidebar Navigation"&gt;
+        &lt;h3&gt;Navigation&lt;/h3&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#" class="active"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Team&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Settings&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/aside&gt;
+    &lt;main&gt;
+        &lt;h4&gt;Main Content&lt;/h4&gt;
+        &lt;p&gt;Content goes here...&lt;/p&gt;
+    &lt;/main&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
 
-						 <div class="section">
-								 <h2 class="title">Accessibility</h2>
-								 <p>Ensure the sidebar is accessible:</p>
-								 <ul>
-										 <li>Use a semantic <code>&lt;aside&gt;</code> element for the sidebar.</li>
-										 <li>Provide clear <code>aria-label</code> attributes for navigation elements within the sidebar.</li>
-										 <li>If the sidebar is toggleable, ensure proper keyboard navigation and ARIA attributes (e.g., <code>aria-expanded</code>, <code>aria-controls</code>) are used on the toggle button.</li>
-								 </ul>
-						 </div>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Flexible Layout</strong> - Use flexbox or CSS Grid for layout</li>
+                    <li><strong>Responsive Design</strong> - Adapts from fixed width to collapsible/stacked on mobile</li>
+                    <li><strong>Icon Support</strong> - Display icons with text or collapse to icon-only</li>
+                    <li><strong>Semantic HTML</strong> - Uses <code>&lt;aside&gt;</code> and <code>&lt;nav&gt;</code> for proper structure</li>
+                    <li><strong>Active States</strong> - Highlight current page/section with active class</li>
+                    <li><strong>Accessibility</strong> - Proper ARIA labels and semantic roles</li>
+                </ul>
+            </section>
 
-						 <div class="section">
-								 <h2 class="title">Customization</h2>
-								 <p>Customize the appearance using Axiom01's CSS variables for colors, spacing, and typography. You can adjust the width of the sidebar, its background, and the styling of its navigation items to match your application's design.</p>
-						 </div>
-</main>
+            <section>
+                <h2>CSS Implementation</h2>
+                <div class="code-block">
+                    <pre><code class="language-css">/* Sidebar layout */
+.sidebar-layout {
+    display: flex;
+}
+
+/* Sidebar styling */
+.sidebar-layout aside {
+    width: 250px;
+    background: var(--a-color-primary-container);
+    padding: var(--a-space-l);
+    border-right: 1px solid var(--ax-border);
+}
+
+/* Navigation links */
+.sidebar-layout nav a {
+    display: block;
+    padding: var(--a-space-m);
+    color: var(--a-color-primary);
+    text-decoration: none;
+    border-radius: var(--a-border-radius-md);
+    transition: background-color var(--a-transition-base) var(--a-ease-out);
+}
+
+.sidebar-layout nav a:hover {
+    background: rgba(0, 102, 204, 0.1);
+}
+
+.sidebar-layout nav a.active {
+    background: var(--a-color-primary);
+    color: white;
+}
+
+/* Main content */
+.sidebar-layout main {
+    flex: 1;
+    padding: var(--a-space-l);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar-layout {
+        flex-direction: column;
+    }
+    
+    .sidebar-layout aside {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--ax-border);
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Application Navigation</strong> - Main navigation for web applications and dashboards</li>
+                    <li><strong>Documentation Sites</strong> - Table of contents or navigation sidebar</li>
+                    <li><strong>Blog Sidebars</strong> - Recent posts, categories, or search</li>
+                    <li><strong>Admin Panels</strong> - Menu and settings navigation</li>
+                    <li><strong>E-commerce</strong> - Product filters and categories</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li><strong>Semantic HTML</strong> - Use <code>&lt;aside&gt;</code> with <code>role="complementary"</code></li>
+                    <li><strong>Navigation</strong> - Use <code>&lt;nav&gt;</code> element for navigation items</li>
+                    <li><strong>ARIA Labels</strong> - Add <code>aria-label</code> to identify sidebar purpose</li>
+                    <li><strong>Active State</strong> - Indicate current page with visual and text indicators</li>
+                    <li><strong>Keyboard Navigation</strong> - All links and buttons must be keyboard accessible</li>
+                    <li><strong>Mobile Considerations</strong> - Ensure sidebar doesn't block content on small screens</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Navigation</strong> - Keep sidebar navigation simple and organized</li>
+                    <li><strong>Visual Hierarchy</strong> - Group related items, use indentation for hierarchy</li>
+                    <li><strong>Responsive Collapse</strong> - Sidebar should collapse or stack on mobile</li>
+                    <li><strong>Consistent Width</strong> - Standard sidebar widths: 200-300px</li>
+                    <li><strong>Easy to Hide</strong> - On mobile, provide button to show/hide sidebar</li>
+                    <li><strong>Scrollable Content</strong> - Long sidebars should have internal scroll</li>
+                </ul>
+            </section>
 
         </div>
-<footer class="main">
-				 <div class="content">
-						 <div class="brand">
-								 <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-								 <p class="tagline">The Semantic Web, Reimagined.</p>
-						 </div>
-						 <div class="links">
-								 <div class="column">
-										 <h4>Documentation</h4>
-										 <ul>
-												 <li><a href="../components-overview.html">Component Overview</a></li>
-												 <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-												 <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-												 <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-												 <li><a href="../../index.html#get-started">Getting Started</a></li>
-										 </ul>
-								 </div>
-								 <div class="column">
-										 <h4>Community</h4>
-										 <ul>
-												 <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
-										 </ul>
-								 </div>
-								 <div class="column">
-										 <h4>More</h4>
-										 <ul>
-												 <li><a href="../interactive-playground.html">Playground</a></li>
-												 <li><a href="../../index.html#example-sites">Example Sites</a></li>
-												 <li><a href="../../index.html#release-info">Release Info</a></li>
-										 </ul>
-								 </div>
-						 </div>
-				 </div>
-				 <div class="bottom">
-						 <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
-				 </div>
-		 </footer>
- 
+
+    </div></section></main>
+
+    <footer class="main">
+        <div class="content">
+            <div class="brand">
+                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../../index.html#release-info">Release Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
+        </div>
+    </footer>
+
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
- </html>
+</html>

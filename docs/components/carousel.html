@@ -5,127 +5,303 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carousel Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-        <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .carousel-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+        }
+        
+        .carousel-container {
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .carousel-inner {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--a-color-primary-container), var(--ax-background-secondary));
+        }
+        
+        .carousel-item {
+            display: none;
+            width: 100%;
+            padding: 80px var(--a-space-xl);
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .carousel-item.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .carousel-icon {
+            font-size: 64px;
+            margin-bottom: var(--a-space-m);
+        }
+        
+        .carousel-title {
+            margin: 0 0 var(--a-space-m) 0;
+            font-size: var(--a-font-size-xl);
+            font-weight: var(--a-font-weight-bold);
+            color: var(--ax-text);
+        }
+        
+        .carousel-description {
+            margin: 0 0 var(--a-space-l) 0;
+            font-size: var(--a-font-size-base);
+            color: var(--a-color-text-muted);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--a-space-m);
+            padding: var(--a-space-m);
+            background: var(--ax-surface);
+            border-top: 1px solid var(--ax-border);
+        }
+        
+        .carousel-button {
+            padding: 8px 16px;
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border: none;
+            border-radius: var(--a-border-radius-md);
+            cursor: pointer;
+            font-size: var(--a-font-size-sm);
+            font-weight: var(--a-font-weight-semibold);
+            transition: all var(--a-transition-base);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .carousel-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .carousel-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--a-space-s);
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--ax-border);
+            cursor: pointer;
+            transition: all var(--a-transition-base);
+            border: none;
+            padding: 0;
+        }
+        
+        .carousel-dot.active {
+            background: var(--a-color-primary);
+            transform: scale(1.3);
+        }
+        
+        .carousel-dot:hover {
+            background: var(--a-color-primary-container);
+        }
+        
+        .carousel-counter {
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+            font-weight: var(--a-font-weight-semibold);
+            min-width: 60px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../../index.html#components">Components</a></li>
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-    <main class="content">
-        <section class="hero small">
-            <h1 class="title">Carousel Component</h1>
-            <p class="description">Axiom01's carousel component is a flexible, responsive slideshow for cycling through a series of images or content. It's designed to be accessible and easily integrated into your web projects.</p>
-        </section>
+    <main><section><div class="container">
+        <header>
+            <h1>Carousel</h1>
+            <p class="text-muted">Axiom01's carousel component displays content in a rotating slideshow format. Supports auto-play, manual navigation, and indicator dots. Perfect for featured content, testimonials, and image galleries.</p>
+        </header>
+
         <div class="component-section">
-            <h2>Carousel Component</h2>
-            <p>Axiom01's carousel component is a flexible, responsive slideshow for cycling through a series of images or content. It's designed to be accessible and easily integrated into your web projects.</p>
 
-            <h3>Basic Carousel</h3>
-            <div class="carousel-demo">
-                <div class="carousel" role="region" aria-label="Image carousel">
-                    <div class="slides">
-                        <div class="slide" role="group" aria-label="Slide 1 of 3">
-                            <img src="https://via.placeholder.com/600x300/4f46e5/e0e7ff?text=Slide+1" alt="Description for first slide">
-                            <div class="caption">
-                                <h5>First slide label</h5>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <section>
+                <h2>Live Examples</h2>
+
+                <h3>Featured Content Carousel</h3>
+                <div class="carousel-demo">
+                    <div class="carousel-container">
+                        <div class="carousel-inner" id="carouselInner">
+                            <div class="carousel-item active">
+                                <div class="carousel-icon">🚀</div>
+                                <h3 class="carousel-title">Launch Your Project</h3>
+                                <p class="carousel-description">Get started with Axiom01 in minutes. Comprehensive components ready to use.</p>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="carousel-icon">🎨</div>
+                                <h3 class="carousel-title">Beautiful Design</h3>
+                                <p class="carousel-description">Modern, accessible components with light and dark mode support.</p>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="carousel-icon">⚡</div>
+                                <h3 class="carousel-title">Lightning Fast</h3>
+                                <p class="carousel-description">Optimized performance with zero external dependencies.</p>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="carousel-icon">🔧</div>
+                                <h3 class="carousel-title">Fully Customizable</h3>
+                                <p class="carousel-description">CSS variables let you adapt components to your brand.</p>
                             </div>
                         </div>
-                        <div class="slide" role="group" aria-label="Slide 2 of 3">
-                            <img src="https://via.placeholder.com/600x300/06b6d4/cffafe?text=Slide+2" alt="Description for second slide">
-                            <div class="caption">
-                                <h5>Second slide label</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        
+                        <div class="carousel-controls">
+                            <button class="carousel-button" id="prevBtn">
+                                <span class="axicon render" data-name="ChevronLeft"></span>
+                                Previous
+                            </button>
+                            
+                            <div class="carousel-indicators" id="indicators"></div>
+                            
+                            <div class="carousel-counter">
+                                <span id="currentSlide">1</span> / <span id="totalSlides">4</span>
                             </div>
-                        </div>
-                        <div class="slide" role="group" aria-label="Slide 3 of 3">
-                            <img src="https://via.placeholder.com/600x300/f59e42/fff7ed?text=Slide+3" alt="Description for third slide">
-                            <div class="caption">
-                                <h5>Third slide label</h5>
-                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                            </div>
+                            
+                            <button class="carousel-button" id="nextBtn">
+                                Next
+                                <span class="axicon render" data-name="ChevronRight"></span>
+                            </button>
                         </div>
                     </div>
-                    <div class="controls">
-                        <button aria-label="Previous slide">&lt;</button>
-                        <button aria-label="Next slide">&gt;</button>
-                    </div>
-                    <ul class="indicators">
-                        <li class="active" aria-label="Go to slide 1"></li>
-                        <li aria-label="Go to slide 2"></li>
-                        <li aria-label="Go to slide 3"></li>
-                    </ul>
                 </div>
-            </div>
+            </section>
 
-            <h3>Code Example</h3>
-            <pre><code class="language-html">&lt;div class="carousel" role="region" aria-label="Image carousel"&gt;
-&lt;div class="slides"&gt;
-    &lt;div class="slide" role="group" aria-label="Slide 1 of 3"&gt;
-        &lt;img src="path/to/image1.jpg" alt="Description for first slide"&gt;
-        &lt;div class="caption"&gt;
-            &lt;h5&gt;First slide label&lt;/h5&gt;
-            &lt;p&gt;...&lt;/p&gt;
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="carousel-container"&gt;
+    &lt;div class="carousel-inner"&gt;
+        &lt;div class="carousel-item active"&gt;
+            &lt;div class="carousel-icon"&gt;🚀&lt;/div&gt;
+            &lt;h3 class="carousel-title"&gt;Title&lt;/h3&gt;
+            &lt;p class="carousel-description"&gt;Description&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="carousel-item"&gt;
+            &lt;!-- More items --&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class="slide" role="group" aria-label="Slide 2 of 3"&gt;
-        &lt;img src="path/to/image2.jpg" alt="Description for second slide"&gt;
-        &lt;div class="caption"&gt;
-            &lt;h5&gt;Second slide label&lt;/h5&gt;
-            &lt;p&gt;...&lt;/p&gt;
-        &lt;/div&gt;
+    
+    &lt;div class="carousel-controls"&gt;
+        &lt;button class="carousel-button" id="prevBtn"&gt;Previous&lt;/button&gt;
+        &lt;div class="carousel-indicators" id="indicators"&gt;&lt;/div&gt;
+        &lt;button class="carousel-button" id="nextBtn"&gt;Next&lt;/button&gt;
     &lt;/div&gt;
-    &lt;div class="slide" role="group" aria-label="Slide 3 of 3"&gt;
-        &lt;img src="path/to/image3.jpg" alt="Description for third slide"&gt;
-        &lt;div class="caption"&gt;
-            &lt;h5&gt;Third slide label&lt;/h5&gt;
-            &lt;p&gt;...&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="controls"&gt;
-    &lt;button aria-label="Previous slide"&gt;&amp;lt;&lt;/button&gt;
-    &lt;button aria-label="Next slide"&gt;&amp;gt;&lt;/button&gt;
-&lt;/div&gt;
-&lt;ul class="indicators"&gt;
-    &lt;li class="active" aria-label="Go to slide 1"&gt;&lt;/li&gt;
-    &lt;li aria-label="Go to slide 2"&gt;&lt;/li&gt;
-    &lt;li aria-label="Go to slide 3"&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;/div&gt;</code></pre>
+                </div>
+            </section>
 
-            <h3>Usage Guidelines</h3>
-            <p>The <code>.carousel</code> class defines the main container. Inside, <code>.slides</code> holds individual <code>.slide</code> elements, each containing an <code>&lt;img&gt;</code> and an optional <code>.caption</code>. Navigation is provided by <code>.controls</code> with buttons and <code>.indicators</code> for direct slide selection.</p>
-            <p>For accessibility, ensure <code>role="region"</code> and <code>aria-label</code> are used on the main carousel container, <code>role="group"</code> and <code>aria-label</code> on each slide, and <code>aria-label</code> on control buttons and indicator list items.</p>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Auto-Play</strong> - Optional automatic slide progression</li>
+                    <li><strong>Manual Navigation</strong> - Previous/Next buttons</li>
+                    <li><strong>Indicator Dots</strong> - Visual slide position tracking</li>
+                    <li><strong>Keyboard Navigation</strong> - Arrow keys to navigate</li>
+                    <li><strong>Fade Transitions</strong> - Smooth slide animations</li>
+                    <li><strong>Counter Display</strong> - Show current slide number</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Featured Content</strong> - Showcase hero content</li>
+                    <li><strong>Testimonials</strong> - Rotate customer quotes</li>
+                    <li><strong>Image Gallery</strong> - Display photo collections</li>
+                    <li><strong>Product Showcase</strong> - Highlight products</li>
+                    <li><strong>Onboarding</strong> - Step-through tutorial slides</li>
+                    <li><strong>News Headlines</strong> - Rotating news ticker</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Support keyboard navigation (arrow keys)</li>
+                    <li>Include proper ARIA labels on buttons</li>
+                    <li>Announce slide changes to screen readers</li>
+                    <li>Pause auto-play on keyboard interaction</li>
+                    <li>Visible focus indicators on all controls</li>
+                    <li>Provide skip option for auto-playing carousels</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Navigation</strong> - Easy prev/next buttons</li>
+                    <li><strong>Visual Indicators</strong> - Show current slide position</li>
+                    <li><strong>Auto-Play Caution</strong> - Don't use for critical content</li>
+                    <li><strong>Smooth Transitions</strong> - Not too fast or slow</li>
+                    <li><strong>Touch Support</strong> - Swipe gestures on mobile</li>
+                    <li><strong>Content Sizing</strong> - Consistent item heights</li>
+                </ul>
+            </section>
+
         </div>
-</main>
-<footer class="main">
+
+    </div></section></main>
+
+    <footer class="main">
         <div class="content">
             <div class="brand">
                 <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
@@ -135,23 +311,23 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -159,11 +335,98 @@
             </div>
         </div>
         <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        const carousel = document.getElementById('carouselInner');
+        const items = carousel.querySelectorAll('.carousel-item');
+        const totalSlides = items.length;
+        let currentSlide = 0;
+        
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideSpan = document.getElementById('currentSlide');
+        const totalSlidesSpan = document.getElementById('totalSlides');
+        const indicatorsContainer = document.getElementById('indicators');
+        
+        // Create indicator dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.addEventListener('click', () => goToSlide(i));
+            indicatorsContainer.appendChild(dot);
+        }
+        
+        function updateCarousel() {
+            items.forEach((item, index) => {
+                item.classList.toggle('active', index === currentSlide);
+            });
+            
+            const dots = indicatorsContainer.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+            
+            currentSlideSpan.textContent = currentSlide + 1;
+            totalSlidesSpan.textContent = totalSlides;
+        }
+        
+        function goToSlide(n) {
+            currentSlide = (n + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+        
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+        
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+        
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

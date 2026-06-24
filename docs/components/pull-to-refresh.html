@@ -1,47 +1,122 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pull to Refresh - Axiom01</title>
-  <link rel="stylesheet" href="../../css/axiom.css">
-  <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pull To Refresh Component - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body class="axiom-body component-doc">
-  <main class="content">
-        <section class="hero">
-            <div class="container">
-                <h1>Pull To Refresh</h1>
-                <p>Refresh content with a pull-to-refresh gesture.</p>
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
-        </section>
+        </nav>
+    </header>
 
+    <main><section><div class="container">
+        <header>
+            <h1>Pull To Refresh</h1>
+            <p class="text-muted">Refresh content with a pull-to-refresh gesture.</p>
+        </header>
 
-    <section>
-      <div class="container">
-        <h2>Basic Usage</h2>
-        <p>Drag down from the top edge to request a content refresh.</p>
-        <section class="pullrefresh" data-component="pullrefresh" aria-label="Pull to refresh demo">
-          <output aria-live="polite">Pull to refresh</output>
-          <section data-role="surface" tabindex="0" aria-label="Refresh surface">
-            <h2>Feed</h2>
-            <p>Drag down and release after the threshold to trigger refresh feedback.</p>
-            <p>The indicator uses transform-based motion for subtle animation.</p>
-            <p>Refresh events dispatch as <code>axiom:refresh</code> for app integration.</p>
-          </section>
-        </section>
+        <div class="component-section">
+            <section>
+                <h2>Live Example</h2>
+                <p>Drag down from the top edge to request a content refresh.</p>
+                <section class="pullrefresh" data-component="pullrefresh" aria-label="Pull to refresh demo" style="border: 1px solid var(--ax-border); border-radius: var(--a-border-radius-lg); overflow: hidden; margin: var(--a-space-l) 0;">
+                    <output aria-live="polite" style="display: block; padding: var(--a-space-m); background: var(--a-color-primary-container); color: var(--a-color-primary); text-align: center; font-weight: var(--a-font-weight-semibold);">Pull down to refresh</output>
+                    <section data-role="surface" tabindex="0" aria-label="Refresh surface" style="padding: var(--a-space-l); min-height: 300px; background: var(--ax-surface);">
+                        <h3>Feed Content</h3>
+                        <p>Drag down and release after the threshold to trigger refresh feedback.</p>
+                        <p>The indicator uses transform-based motion for subtle animation.</p>
+                        <p>Refresh events dispatch as <code style="background: var(--a-color-surface); padding: 2px 6px; border-radius: 4px;">axiom:refresh</code> for app integration.</p>
+                    </section>
+                </section>
+            </section>
 
-        <h3>Required Markup Contract</h3>
-        <ul>
-          <li>Use <code>data-component="pullrefresh"</code> on the root container.</li>
-          <li>Include an indicator element (for example <code>output</code>) with <code>aria-live</code>.</li>
-          <li>Provide a refresh surface marked with <code>data-role="surface"</code>.</li>
-        </ul>
-      </div>
-    </section>
-  </main>
+            <section>
+                <h2>HTML Structure</h2>
+                <p>Pull-to-refresh requires a specific markup structure:</p>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;section class="pullrefresh" data-component="pullrefresh" aria-label="Pull to refresh demo"&gt;
+    &lt;output aria-live="polite"&gt;Pull down to refresh&lt;/output&gt;
+    &lt;section data-role="surface" tabindex="0" aria-label="Refresh surface"&gt;
+        &lt;h2&gt;Feed&lt;/h2&gt;
+        &lt;p&gt;Your content here...&lt;/p&gt;
+    &lt;/section&gt;
+&lt;/section&gt;</code></pre>
+                </div>
+            </section>
 
+            <section>
+                <h2>Required Markup Contract</h2>
+                <ul>
+                    <li>Use <code>data-component="pullrefresh"</code> on the root container</li>
+                    <li>Include an indicator element (e.g., <code>&lt;output&gt;</code>) with <code>aria-live</code> for status updates</li>
+                    <li>Provide a refresh surface marked with <code>data-role="surface"</code></li>
+                    <li>Make the surface focusable with <code>tabindex="0"</code></li>
+                    <li>Refresh events dispatch as <code>axiom:refresh</code> custom event</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>JavaScript Integration</h2>
+                <p>Listen for refresh events to update your content:</p>
+                <div class="code-block">
+                    <pre><code class="language-javascript">document.addEventListener('axiom:refresh', async (event) => {
+    console.log('Refreshing content...');
+    // Fetch new data
+    // Update DOM
+    // Reset indicator
+});</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li>Mobile feeds and timelines</li>
+                    <li>Real-time notification centers</li>
+                    <li>Chat or messaging interfaces</li>
+                    <li>Data-heavy dashboards</li>
+                    <li>Social media feeds</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Uses <code>aria-live</code> to announce status updates</li>
+                    <li>Surface is keyboard accessible with <code>tabindex="0"</code></li>
+                    <li>Clear visual and textual feedback</li>
+                    <li>Works with screen readers</li>
+                </ul>
+            </section>
+        </div>
+
+    </div></section></main>
 
     <footer class="main">
         <div class="content">
@@ -53,23 +128,23 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
                         <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
                         <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
                         <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -77,11 +152,42 @@
             </div>
         </div>
         <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

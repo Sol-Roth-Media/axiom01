@@ -1,42 +1,338 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Autocomplete - Axiom01</title>
-  <link rel="stylesheet" href="../../css/axiom.css">
-  <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete Component - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .autocomplete-demo {
+            background: var(--ax-background-secondary);
+            padding: var(--a-space-l);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            max-width: 500px;
+        }
+        
+        .autocomplete-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-s);
+        }
+        
+        .autocomplete-label {
+            font-weight: var(--a-font-weight-semibold);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .autocomplete-input {
+            padding: var(--a-space-m);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-base);
+            background: var(--ax-surface);
+            color: var(--ax-text);
+            transition: border-color var(--a-transition-base), box-shadow var(--a-transition-base);
+        }
+        
+        .autocomplete-input:focus {
+            outline: none;
+            border-color: var(--a-color-primary);
+            box-shadow: 0 0 0 3px var(--a-color-primary-container);
+        }
+        
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-top: none;
+            border-radius: 0 0 var(--a-border-radius-md) var(--a-border-radius-md);
+            margin-top: -1px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .autocomplete-dropdown.open {
+            display: block;
+        }
+        
+        .autocomplete-option {
+            padding: var(--a-space-m);
+            cursor: pointer;
+            transition: background-color var(--a-transition-base);
+            border-bottom: 1px solid var(--ax-border-light);
+        }
+        
+        .autocomplete-option:last-child {
+            border-bottom: none;
+        }
+        
+        .autocomplete-option:hover,
+        .autocomplete-option.active {
+            background-color: var(--a-color-primary-container);
+        }
+        
+        .autocomplete-no-results {
+            padding: var(--a-space-m);
+            color: var(--a-color-text-muted);
+            text-align: center;
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .autocomplete-help {
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+            margin-top: var(--a-space-xs);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
-  <main class="content">
-        <section class="hero">
-            <div class="container">
-                <h1>Autocomplete</h1>
-                <p>Autocomplete input with intelligent suggestions.</p>
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
-        </section>
+        </nav>
+    </header>
 
+    <main><section><div class="container">
+        <header>
+            <h1>Autocomplete</h1>
+            <p class="text-muted">Axiom01's autocomplete component provides intelligent text input suggestions as users type. It filters options dynamically and supports keyboard navigation for accessible, efficient data entry.</p>
+        </header>
 
-    <section>
-      <div class="container">
-        <h2>Basic Usage</h2>
-        <p>Lightweight combobox behavior with keyboard navigation and ARIA states.</p>
-        <section class="autocomplete" data-component="autocomplete" data-options="Accessibility,Accordion,Autocomplete,Carousel,Countdown,Dropdown,File Display,Multimedia Picker,Pull to Refresh,Story View,Touch,Timer" aria-label="Autocomplete input">
-          <label for="autocomplete-input">Component search</label>
-          <input id="autocomplete-input" type="text" aria-controls="autocomplete-list" aria-expanded="false">
-          <ul id="autocomplete-list" role="listbox" hidden></ul>
-        </section>
-        <h3>Required Markup Contract</h3>
-        <ul>
-          <li>Use <code>data-component="autocomplete"</code> on the root element.</li>
-          <li>Include one input and one <code>role="listbox"</code> element for options.</li>
-          <li>Provide options via the <code>data-options</code> comma-separated attribute.</li>
-        </ul>
-      </div>
-    </section>
-  </main>
+        <div class="component-section">
 
+            <section>
+                <h2>Live Examples</h2>
+
+                <h3>Country Selection</h3>
+                <div class="autocomplete-demo">
+                    <div class="autocomplete-wrapper">
+                        <label class="autocomplete-label" for="country">Country</label>
+                        <input 
+                            type="text" 
+                            id="country" 
+                            class="autocomplete-input" 
+                            placeholder="Type a country name..."
+                            autocomplete="off"
+                            aria-label="Country"
+                            aria-autocomplete="list"
+                            aria-controls="country-dropdown"
+                        >
+                        <ul class="autocomplete-dropdown" id="country-dropdown" role="listbox">
+                            <li class="autocomplete-option" role="option">Afghanistan</li>
+                            <li class="autocomplete-option" role="option">Albania</li>
+                            <li class="autocomplete-option" role="option">Algeria</li>
+                            <li class="autocomplete-option" role="option">Andorra</li>
+                            <li class="autocomplete-option" role="option">Argentina</li>
+                            <li class="autocomplete-option" role="option">Australia</li>
+                            <li class="autocomplete-option" role="option">Austria</li>
+                            <li class="autocomplete-option" role="option">Azerbaijan</li>
+                            <li class="autocomplete-option" role="option">Bahamas</li>
+                            <li class="autocomplete-option" role="option">Bangladesh</li>
+                        </ul>
+                        <p class="autocomplete-help">Start typing to filter countries</p>
+                    </div>
+                </div>
+
+                <h3>Technology Stack Search</h3>
+                <div class="autocomplete-demo">
+                    <div class="autocomplete-wrapper">
+                        <label class="autocomplete-label" for="tech">Technology</label>
+                        <input 
+                            type="text" 
+                            id="tech" 
+                            class="autocomplete-input" 
+                            placeholder="Search technologies..."
+                            autocomplete="off"
+                            aria-label="Technology"
+                            aria-autocomplete="list"
+                            aria-controls="tech-dropdown"
+                        >
+                        <ul class="autocomplete-dropdown" id="tech-dropdown" role="listbox">
+                            <li class="autocomplete-option" role="option">JavaScript</li>
+                            <li class="autocomplete-option" role="option">TypeScript</li>
+                            <li class="autocomplete-option" role="option">React</li>
+                            <li class="autocomplete-option" role="option">Vue.js</li>
+                            <li class="autocomplete-option" role="option">Angular</li>
+                            <li class="autocomplete-option" role="option">Node.js</li>
+                            <li class="autocomplete-option" role="option">Python</li>
+                            <li class="autocomplete-option" role="option">Go</li>
+                            <li class="autocomplete-option" role="option">Rust</li>
+                            <li class="autocomplete-option" role="option">Docker</li>
+                        </ul>
+                        <p class="autocomplete-help">Try typing 'react' or 'node'</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="autocomplete-wrapper"&gt;
+    &lt;label class="autocomplete-label" for="search"&gt;Search&lt;/label&gt;
+    &lt;input 
+        type="text" 
+        id="search" 
+        class="autocomplete-input"
+        placeholder="Start typing..."
+        aria-autocomplete="list"
+        aria-controls="dropdown"
+    &gt;
+    &lt;ul class="autocomplete-dropdown" id="dropdown" role="listbox"&gt;
+        &lt;li class="autocomplete-option" role="option"&gt;Option 1&lt;/li&gt;
+        &lt;li class="autocomplete-option" role="option"&gt;Option 2&lt;/li&gt;
+        &lt;li class="autocomplete-option" role="option"&gt;Option 3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>JavaScript Implementation</h2>
+                <div class="code-block">
+                    <pre><code class="language-javascript">const input = document.getElementById('search');
+const dropdown = document.getElementById('dropdown');
+const options = dropdown.querySelectorAll('.autocomplete-option');
+let activeIndex = -1;
+
+input.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    const matches = Array.from(options).filter(opt => 
+        opt.textContent.toLowerCase().includes(query)
+    );
+    
+    // Hide all options first
+    options.forEach(opt => opt.style.display = 'none');
+    
+    // Show matching options
+    if (query && matches.length) {
+        matches.forEach(opt => opt.style.display = 'block');
+        dropdown.classList.add('open');
+    } else {
+        dropdown.classList.remove('open');
+    }
+    
+    activeIndex = -1;
+});
+
+// Keyboard navigation
+input.addEventListener('keydown', (e) => {
+    const visibleOptions = Array.from(options).filter(
+        opt => opt.style.display !== 'none'
+    );
+    
+    if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex = Math.min(activeIndex + 1, visibleOptions.length - 1);
+        updateActive(visibleOptions);
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex = Math.max(activeIndex - 1, -1);
+        updateActive(visibleOptions);
+    } else if (e.key === 'Enter') {
+        if (activeIndex >= 0) {
+            e.preventDefault();
+            input.value = visibleOptions[activeIndex].textContent;
+            dropdown.classList.remove('open');
+        }
+    } else if (e.key === 'Escape') {
+        dropdown.classList.remove('open');
+    }
+});
+
+function updateActive(visibleOptions) {
+    visibleOptions.forEach((opt, i) => {
+        opt.classList.toggle('active', i === activeIndex);
+    });
+}</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Real-time Filtering</strong> - Options filter as user types</li>
+                    <li><strong>Keyboard Navigation</strong> - Arrow keys, Enter, Escape support</li>
+                    <li><strong>Accessible</strong> - ARIA roles, focus management, semantic HTML</li>
+                    <li><strong>No Results Feedback</strong> - Shows message when no matches found</li>
+                    <li><strong>Click Support</strong> - Click options to select them</li>
+                    <li><strong>Flexible Styling</strong> - Works with any data source</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Country/Region Selection</strong> - Geographic filtering</li>
+                    <li><strong>User Search</strong> - Finding team members or contacts</li>
+                    <li><strong>Product Search</strong> - E-commerce product discovery</li>
+                    <li><strong>Technology Stack</strong> - Selecting technologies or skills</li>
+                    <li><strong>Tag Input</strong> - Adding tags or categories</li>
+                    <li><strong>Address Autocomplete</strong> - Street and location completion</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use <code>aria-autocomplete="list"</code> on the input</li>
+                    <li>Use <code>role="listbox"</code> on the dropdown container</li>
+                    <li>Use <code>role="option"</code> on each suggestion item</li>
+                    <li>Include <code>aria-controls</code> linking input to dropdown</li>
+                    <li>Support full keyboard navigation (arrows, Enter, Escape)</li>
+                    <li>Announce results count to screen readers</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Debounce</strong> - For large datasets, debounce the filtering</li>
+                    <li><strong>Case Insensitive</strong> - Match regardless of case</li>
+                    <li><strong>Partial Match</strong> - Match anywhere in the string, not just start</li>
+                    <li><strong>Min Characters</strong> - Wait for 2-3 characters before showing results</li>
+                    <li><strong>Clear Feedback</strong> - Show "no results" when nothing matches</li>
+                    <li><strong>Max Results</strong> - Limit displayed options (e.g., 10) for performance</li>
+                </ul>
+            </section>
+
+        </div>
+
+    </div></section></main>
 
     <footer class="main">
         <div class="content">
@@ -48,23 +344,23 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -72,11 +368,115 @@
             </div>
         </div>
         <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        // Autocomplete implementation
+        function setupAutocomplete(inputId, dropdownId) {
+            const input = document.getElementById(inputId);
+            const dropdown = document.getElementById(dropdownId);
+            const options = dropdown.querySelectorAll('.autocomplete-option');
+            let activeIndex = -1;
+            const allOptions = Array.from(options).map(opt => opt.textContent);
+
+            input.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const matches = allOptions.filter(opt => 
+                    opt.toLowerCase().includes(query)
+                );
+
+                dropdown.innerHTML = '';
+                
+                if (query && matches.length) {
+                    matches.forEach(match => {
+                        const li = document.createElement('li');
+                        li.className = 'autocomplete-option';
+                        li.role = 'option';
+                        li.textContent = match;
+                        li.addEventListener('click', () => {
+                            input.value = match;
+                            dropdown.classList.remove('open');
+                        });
+                        dropdown.appendChild(li);
+                    });
+                    dropdown.classList.add('open');
+                } else if (query) {
+                    const noResults = document.createElement('li');
+                    noResults.className = 'autocomplete-no-results';
+                    noResults.textContent = 'No results found';
+                    dropdown.appendChild(noResults);
+                    dropdown.classList.add('open');
+                } else {
+                    dropdown.classList.remove('open');
+                }
+                activeIndex = -1;
+            });
+
+            input.addEventListener('keydown', (e) => {
+                const visibleOptions = dropdown.querySelectorAll('.autocomplete-option');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    activeIndex = Math.min(activeIndex + 1, visibleOptions.length - 1);
+                    updateActive(visibleOptions);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    activeIndex = Math.max(activeIndex - 1, -1);
+                    updateActive(visibleOptions);
+                } else if (e.key === 'Enter') {
+                    if (activeIndex >= 0) {
+                        e.preventDefault();
+                        input.value = visibleOptions[activeIndex].textContent;
+                        dropdown.classList.remove('open');
+                    }
+                } else if (e.key === 'Escape') {
+                    dropdown.classList.remove('open');
+                }
+            });
+
+            function updateActive(visibleOptions) {
+                visibleOptions.forEach((opt, i) => {
+                    opt.classList.toggle('active', i === activeIndex);
+                });
+            }
+        }
+
+        setupAutocomplete('country', 'country-dropdown');
+        setupAutocomplete('tech', 'tech-dropdown');
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

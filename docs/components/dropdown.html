@@ -5,304 +5,328 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dropdown Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-        <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .dropdown-demo-container {
+            background: var(--ax-background-secondary);
+            padding: var(--a-space-l);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            max-width: 500px;
+            min-height: 250px;
+            position: relative;
+        }
+        
+        .dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .dropdown-button {
+            width: 100%;
+            padding: var(--a-space-m);
+            border: 1px solid var(--ax-border);
+            background: var(--ax-surface);
+            color: var(--ax-text);
+            border-radius: var(--a-border-radius-md);
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-base);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--a-transition-base);
+        }
+        
+        .dropdown-button:hover {
+            border-color: var(--a-color-primary);
+        }
+        
+        .dropdown-button:focus {
+            outline: none;
+            border-color: var(--a-color-primary);
+            box-shadow: 0 0 0 3px var(--a-color-primary-container);
+        }
+        
+        .dropdown-button.open {
+            border-color: var(--a-color-primary);
+            box-shadow: 0 0 0 3px var(--a-color-primary-container);
+        }
+        
+        .dropdown-arrow {
+            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dropdown-button.open .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-top: none;
+            border-radius: 0 0 var(--a-border-radius-md) var(--a-border-radius-md);
+            margin-top: -1px;
+            max-height: 300px;
+            overflow-y: auto;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .dropdown-menu.open {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: var(--a-space-m);
+            cursor: pointer;
+            transition: background-color var(--a-transition-base);
+            border-bottom: 1px solid var(--ax-border-light);
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--a-color-primary-container);
+        }
+        
+        .dropdown-item.active {
+            background-color: var(--a-color-primary-container);
+            color: var(--a-color-primary);
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .dropdown-item-icon {
+            margin-right: var(--a-space-s);
+            width: 20px;
+            display: inline-flex;
+            align-items: center;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../../index.html#components">Components</a></li>
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-    <aside class="sidebar">
-        <nav aria-label="Documentation Sidebar">
-            <h3>Getting Started</h3>
-            <ul>
-                <li><a href="../markdown-template.html?file=../../README.md">Overview & Quickstart</a></li>
-                <li><a href="../../index.html#get-started">Installation</a></li>
-                <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-            </ul>
+    <main><section><div class="container">
+        <header>
+            <h1>Dropdown</h1>
+            <p class="text-muted">Axiom01's dropdown component provides a list of options that users can select from. It's compact, keyboard-accessible, and works perfectly for menus, selectors, and navigation.</p>
+        </header>
 
-            <h3>Core Concepts</h3>
-            <ul>
-                <li><a href="../colors-advanced.html">Color System</a></li>
-                <li><a href="../typography-advanced.html">Typography</a></li>
-                <li><a href="../layout-advanced.html">Layout & Grid</a></li>
-                <li><a href="../media-advanced.html">Media & Icons</a></li>
-            </ul>
+        <div class="component-section">
 
-            <h3>Components</h3>
-            <ul>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-                <li><a href="../interactive-component-browser.html">Interactive Component Browser</a></li>
-                <li><h4>Feedback & Status</h4></li>
-                <li><a href="alert.html">Alert</a></li>
-                <li><a href="notification.html">Notification</a></li>
-                <li><a href="progress.html">Progress</a></li>
-                <li><a href="empty-state.html">Empty State</a></li>
-                <li><a href="skeleton.html">Skeleton</a></li>
-
-                <li><h4>Forms & Inputs</h4></li>
-                <li><a href="forms.html">Forms</a></li>
-                <li><a href="editor.html">Editor</a></li>
-                <li><a href="datepicker.html">Datepicker</a></li>
-                <li><a href="file-upload.html">File Upload</a></li>
-                <li><a href="multi-step-form.html">Multi-Step Form</a></li>
-                <li><a href="slider.html">Slider</a></li>
-                <li><a href="toggle.html">Toggle</a></li>
-
-                <li><h4>Navigation & Layout</h4></li>
-                <li><a href="accordion.html">Accordion</a></li>
-                <li><a href="breadcrumb.html">Breadcrumb</a></li>
-                <li><a href="dropdown.html">Dropdown</a></li>
-                <li><a href="mobile-navbar.html">Mobile Navbar</a></li>
-                <li><a href="navigation.html">Navigation</a></li>
-                <li><a href="pagination.html">Pagination</a></li>
-                <li><a href="sidebar.html">Sidebar</a></li>
-                <li><a href="tabs.html">Tabs</a></li>
-                <li><a href="timeline.html">Timeline</a></li>
-
-                <li><h4>Content Display</h4></li>
-                <li><a href="avatar.html">Avatar</a></li>
-                <li><a href="badge.html">Badge</a></li>
-                <li><a href="button.html">Button</a></li>
-                <li><a href="card.html">Card</a></li>
-                <li><a href="carousel.html">Carousel</a></li>
-                <li><a href="chat.html">Chat</a></li>
-                <li><a href="commerce.html">Commerce</a></li>
-                <li><a href="footer.html">Footer</a></li>
-                <li><a href="hero.html">Hero</a></li>
-                <li><a href="media.html">Media & Icons</a></li>
-                <li><a href="table.html">Table</a></li>
-
-                <li><h4>AI Integrations</h4></li>
-                <li><a href="ai-chat.html">AI Chat</a></li>
-                <li><a href="ai-image-generator.html">AI Image Generator</a></li>
-
-                <li><h4>Utilities & Overlays</h4></li>
-                <li><a href="drawer.html">Drawer</a></li>
-                <li><a href="modal.html">Modal</a></li>
-                <li><a href="tooltip.html">Tooltip</a></li>
-                <li><a href="paywall.html">Paywall</a></li>
-                <li><a href="settings.html">Settings</a></li>
-                <li><a href="spacing-demo.html">Spacing Demo</a></li>
-            </ul>
-
-            <h3>Advanced Topics & Tools</h3>
-            <ul>
-                <li><a href="../theme-customization-wizard.html">Theme Customization Wizard</a></li>
-                <li><a href="../interactive-playground.html">Interactive Playground</a></li>
-                <li><a href="../markdown-template.html?file=design-guide-outline.md">Designing with Axiom01</a></li>
-                <li><a href="../markdown-template.html?file=ai-guidelines.md">AI Coding Guidelines for Axiom01</a></li>
-                <li><a href="../markdown-template.html?file=contributing.md">Contributing</a></li>
-                <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-            </ul>
-        </nav>
-    </aside>
-
-    <main class="content">
-        <section class="hero">
-            <div class="container">
-                <h1>Dropdown Component</h1>
-                <p>Axiom01's <strong>Dropdown</strong> component provides a toggleable, contextual overlay for displaying lists of actions or navigation links. It's designed to be accessible, flexible, and easy to integrate into navigation menus, action buttons, or any area where you need to present a hidden menu that appears on user interaction.</p>
-            </div>
-        </section>
-
-        <section>
-            <div class="container">
+            <section>
                 <h2>Live Examples</h2>
-                <div>
-                    <h4>Basic Dropdown</h4>
-                    <div data-component="dropdown">
-                        <button class="button primary dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-                            <span>Dropdown Menu</span>
-                        </button>
-                        <ul class="dropdown menu" role="menu">
-                            <li><button type="button" role="menuitem">Action</button></li>
-                            <li><button type="button" role="menuitem">Another action</button></li>
-                            <li><button type="button" role="menuitem">Something else here</button></li>
-                            <li class="divider" role="separator"></li>
-                            <li><button type="button" role="menuitem">Separated action</button></li>
-                        </ul>
-                    </div>
 
-                    <h4>Dropup Variation</h4>
-                    <div data-component="dropdown" class="dropup">
-                        <button class="button secondary dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-                            <span>Dropup Menu</span>
+                <h3>Basic Dropdown Menu</h3>
+                <div class="dropdown-demo-container">
+                    <div class="dropdown-wrapper">
+                        <button class="dropdown-button" id="dropdownBtn1" aria-haspopup="listbox" aria-expanded="false" aria-controls="dropdownMenu1">
+                            <span>Choose an option</span>
+                            <span class="dropdown-arrow">
+                                <span class="axicon render" data-name="Chevron-Down"></span>
+                            </span>
                         </button>
-                        <ul class="dropdown menu" role="menu">
-                            <li><button type="button" role="menuitem">Action</button></li>
-                            <li><button type="button" role="menuitem">Another action</button></li>
-                            <li><button type="button" role="menuitem">Something else here</button></li>
-                            <li class="divider" role="separator"></li>
-                            <li><button type="button" role="menuitem">Separated action</button></li>
-                        </ul>
-                    </div>
-
-                    <h4>Right-Aligned Dropdown</h4>
-                    <div data-component="dropdown">
-                        <button class="button tertiary dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-                            <span>Right-Aligned</span>
-                        </button>
-                        <ul class="dropdown menu menu-right" role="menu">
-                            <li><button type="button" role="menuitem">Action</button></li>
-                            <li><button type="button" role="menuitem">Another action</button></li>
-                            <li><button type="button" role="menuitem">Something else here</button></li>
-                            <li class="divider" role="separator"></li>
-                            <li><button type="button" role="menuitem">Separated action</button></li>
+                        <ul class="dropdown-menu" id="dropdownMenu1" role="listbox">
+                            <li class="dropdown-item" role="option">Option 1</li>
+                            <li class="dropdown-item" role="option">Option 2</li>
+                            <li class="dropdown-item" role="option">Option 3</li>
+                            <li class="dropdown-item" role="option">Option 4</li>
+                            <li class="dropdown-item" role="option">Option 5</li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section>
-            <div class="container">
-                <h2>Usage Guidelines</h2>
-                <p>To implement a Dropdown component, use the following semantic HTML structure. The <code>data-component="dropdown"</code> attribute on the parent container enables Axiom's JavaScript to initialize the component. The JavaScript will automatically assign unique IDs to the toggle button and menu for accessibility purposes.</p>
+                <h3>Dropdown with Icons</h3>
+                <div class="dropdown-demo-container">
+                    <div class="dropdown-wrapper">
+                        <button class="dropdown-button" id="dropdownBtn2" aria-haspopup="listbox" aria-expanded="false" aria-controls="dropdownMenu2">
+                            <span>
+                                <span class="axicon render" data-name="Settings"></span>
+                                Settings
+                            </span>
+                            <span class="dropdown-arrow">
+                                <span class="axicon render" data-name="Chevron-Down"></span>
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu" id="dropdownMenu2" role="listbox">
+                            <li class="dropdown-item" role="option">
+                                <span class="dropdown-item-icon"><span class="axicon render" data-name="User"></span></span>
+                                Profile
+                            </li>
+                            <li class="dropdown-item" role="option">
+                                <span class="dropdown-item-icon"><span class="axicon render" data-name="Palette"></span></span>
+                                Preferences
+                            </li>
+                            <li class="dropdown-item" role="option">
+                                <span class="dropdown-item-icon"><span class="axicon render" data-name="Lock"></span></span>
+                                Security
+                            </li>
+                            <li class="dropdown-item" role="option">
+                                <span class="dropdown-item-icon"><span class="axicon render" data-name="Help-Circle"></span></span>
+                                Help
+                            </li>
+                            <li class="dropdown-item" role="option">
+                                <span class="dropdown-item-icon"><span class="axicon render" data-name="Log-Out"></span></span>
+                                Logout
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-                <h3>HTML Structure</h3>
+            <section>
+                <h2>HTML Structure</h2>
                 <div class="code-block">
-                    <pre><code class="language-html">&lt;!-- Basic Dropdown --&gt;
-&lt;div data-component="dropdown"&gt;
-&lt;button class="button primary dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="[auto-generated-id]"&gt;
-    &lt;span&gt;Dropdown Menu&lt;/span&gt;
-&lt;/button&gt;
-&lt;ul class="dropdown menu" role="menu" aria-labelledby="[auto-generated-id]" aria-hidden="true"&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Action&lt;/button&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Another action&lt;/button&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Something else here&lt;/button&gt;&lt;/li&gt;
-    &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Separated action&lt;/button&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;!-- Dropup Variation --&gt;
-&lt;div data-component="dropdown" class="dropup"&gt;
-&lt;button class="button secondary dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="[auto-generated-id]"&gt;
-    &lt;span&gt;Dropup Menu&lt;/span&gt;
-&lt;/button&gt;
-&lt;ul class="dropdown menu" role="menu" aria-labelledby="[auto-generated-id]" aria-hidden="true"&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Action&lt;/button&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Another action&lt;/button&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Something else here&lt;/button&gt;&lt;/li&gt;
-    &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Separated action&lt;/button&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;!-- Right-Aligned Dropdown --&gt;
-&lt;div data-component="dropdown"&gt;
-&lt;button class="button tertiary dropdown-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="[auto-generated-id]"&gt;
-    &lt;span&gt;Right-Aligned&lt;/span&gt;
-&lt;/button&gt;
-&lt;ul class="dropdown menu menu-right" role="menu" aria-labelledby="[auto-generated-id]" aria-hidden="true"&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Action&lt;/button&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Another action&lt;/button&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Something else here&lt;/button&gt;&lt;/li&gt;
-    &lt;li class="divider" role="separator"&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;button type="button" role="menuitem"&gt;Separated action&lt;/button&gt;&lt;/li&gt;
-&lt;/ul&gt;
+                    <pre><code class="language-html">&lt;div class="dropdown-wrapper"&gt;
+    &lt;button class="dropdown-button" 
+            id="dropdownBtn" 
+            aria-haspopup="listbox" 
+            aria-expanded="false" 
+            aria-controls="dropdownMenu"&gt;
+        &lt;span&gt;Choose Option&lt;/span&gt;
+        &lt;span class="dropdown-arrow"&gt;
+            &lt;span class="axicon render" data-name="Chevron-Down"&gt;&lt;/span&gt;
+        &lt;/span&gt;
+    &lt;/button&gt;
+    
+    &lt;ul class="dropdown-menu" id="dropdownMenu" role="listbox"&gt;
+        &lt;li class="dropdown-item" role="option"&gt;Option 1&lt;/li&gt;
+        &lt;li class="dropdown-item" role="option"&gt;Option 2&lt;/li&gt;
+    &lt;/ul&gt;
 &lt;/div&gt;</code></pre>
                 </div>
-                <p>For variations like "Dropup" or "Right-Aligned", apply the respective classes (<code>.dropup</code> on the main container, <code>.dropdown menu menu-right</code> on the menu list).</p>
-                <h3>Required Markup Contract</h3>
+            </section>
+
+            <section>
+                <h2>JavaScript Implementation</h2>
+                <div class="code-block">
+                    <pre><code class="language-javascript">function setupDropdown(btnId, menuId) {
+    const btn = document.getElementById(btnId);
+    const menu = document.getElementById(menuId);
+    const items = menu.querySelectorAll('.dropdown-item');
+    
+    btn.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.setAttribute('aria-expanded', isOpen);
+    });
+    
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            btn.textContent = item.textContent;
+            menu.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', false);
+        });
+    });
+    
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown-wrapper')) {
+            menu.classList.remove('open');
+            btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', false);
+        }
+    });
+}
+
+setupDropdown('dropdownBtn', 'dropdownMenu');</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
                 <ul>
-                    <li>Use <code>data-component="dropdown"</code> on the root container.</li>
-                    <li>Provide one toggle element matching <code>[data-dropdown-toggle]</code> or <code>.dropdown-toggle</code>.</li>
-                    <li>Provide one menu element matching <code>[data-dropdown-menu]</code> or <code>.dropdown.menu</code>.</li>
-                    <li>Use interactive menu items (for example <code>button</code> or links with <code>role="menuitem"</code>) for keyboard navigation.</li>
+                    <li><strong>Click Toggle</strong> - Open/close by clicking the button</li>
+                    <li><strong>Keyboard Navigation</strong> - Arrow keys and Enter support</li>
+                    <li><strong>Click Outside Close</strong> - Automatically closes when clicking elsewhere</li>
+                    <li><strong>Icon Support</strong> - Include icons in options</li>
+                    <li><strong>Smooth Animation</strong> - Arrow rotates when opened</li>
+                    <li><strong>Accessible</strong> - ARIA attributes and semantic structure</li>
                 </ul>
-            </div>
-        </section>
+            </section>
 
-        <section>
-            <div class="container">
-                <h2>JavaScript Integration</h2>
-                <p>The core functionality of the Dropdown (toggling visibility, handling outside clicks, and escape key dismissal) is managed by Axiom01's JavaScript. The <code>data-component="dropdown"</code> attribute triggers the loading and initialization of <code>js/components/dropdown.js</code>.</p>
-                <p>The JavaScript automatically toggles the <code>.is-open</code> class on the main <code>[data-component="dropdown"]</code> container, updates the <code>aria-expanded</code> attribute on the toggle button, and manages the <code>aria-hidden</code> attribute on the menu.</p>
-                <p>Additionally, the component now returns a <code>destroy()</code> method. This method cleans up event listeners and resets ARIA attributes, preventing memory leaks when the dropdown is dynamically removed from the DOM or when a page transition occurs in a Single Page Application (SPA).</p>
-            </div>
-        </section>
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Navigation Menus</strong> - Main site navigation or breadcrumbs</li>
+                    <li><strong>User Menus</strong> - Profile, settings, and account options</li>
+                    <li><strong>Actions Menu</strong> - Edit, delete, share, more options</li>
+                    <li><strong>Select Replacement</strong> - Custom styled alternative to &lt;select&gt;</li>
+                    <li><strong>Sorting/Filtering</strong> - Sort order or display options</li>
+                    <li><strong>Theme Selection</strong> - Dark/light mode or theme picker</li>
+                </ul>
+            </section>
 
-        <section>
-            <div class="container">
+            <section>
                 <h2>Accessibility</h2>
-                <p>Axiom01's Dropdown component is built with accessibility in mind:</p>
                 <ul>
-                    <li><strong>Semantic HTML:</strong> Uses <code>&lt;button&gt;</code> for the toggle and <code>&lt;ul&gt;</code> with <code>&lt;li&gt;</code> for menu items.</li>
-                    <li><strong>ARIA Attributes:</strong>
-                        <ul>
-                            <li><code>aria-haspopup="true"</code> on the toggle button informs assistive technologies that it controls a popup menu.</li>
-                            <li><code>aria-expanded="true|false"</code> on the toggle button indicates the current state to screen readers.</li>
-                            <li><code>aria-controls="[auto-generated-id]"</code> links the toggle button to its controlled menu.</li>
-                            <li><code>role="menu"</code> on the <code>&lt;ul&gt;</code> identifies it as a menu.</li>
-                            <li><code>aria-labelledby="[auto-generated-id]"</code> links the menu to its controlling button.</li>
-                            <li><code>aria-hidden="true|false"</code> on the menu indicates its visibility state to assistive technologies.</li>
-                            <li><code>role="menuitem"</code> on the <code>&lt;a&gt;</code> elements within the menu identifies them as selectable items.</li>
-                            <li><code>role="separator"</code> on the <code>.divider</code> element.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Keyboard Navigation:</strong>
-                        <ul>
-                            <li>Users can navigate to the dropdown toggle using the <kbd>Tab</kbd> key.</li>
-                            <li>Pressing <kbd>Space</kbd> or <kbd>Enter</kbd> on the toggle opens/closes the menu.</li>
-                            <li>The <kbd>Escape</kbd> key closes the menu and returns focus to the toggle button.</li>
-                            <li><kbd>Arrow Up</kbd>/<kbd>Arrow Down</kbd> move between menu items.</li>
-                            <li><kbd>Home</kbd>/<kbd>End</kbd> jump to first/last menu item.</li>
-                            <li>Clicking outside the dropdown also closes it.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Focus Management:</strong> Focus is managed to ensure a smooth and predictable user experience, especially when closing the dropdown.</li>
+                    <li>Use <code>role="listbox"</code> on the menu container</li>
+                    <li>Use <code>role="option"</code> on menu items</li>
+                    <li>Include <code>aria-haspopup="listbox"</code> on the button</li>
+                    <li>Update <code>aria-expanded</code> based on menu state</li>
+                    <li>Use <code>aria-controls</code> to link button to menu</li>
+                    <li>Support keyboard navigation (Arrow Up/Down, Escape)</li>
                 </ul>
-            </div>
-        </section>
+            </section>
 
-        <section>
-            <div class="container">
-                <h2>Customization</h2>
-                <p>You can customize the Dropdown's appearance by overriding the following CSS variables in your <code>site.css</code> or a custom theme file:</p>
+            <section>
+                <h2>Best Practices</h2>
                 <ul>
-                    <li><code>--a-color-surface</code>, <code>--a-color-on-surface</code>: For menu background and text colors.</li>
-                    <li><code>--a-color-primary</code>, <code>--a-color-on-primary</code>: For hover/focus states of menu items.</li>
-                    <li><code>--a-color-outline</code>: For menu borders and dividers.</li>
-                    <li><code>--a-space-xs</code>, <code>--a-space-s</code>, <code>--a-space-m</code>: For internal spacing and padding.</li>
-                    <li><code>--a-border-radius-medium</code>: For rounded corners of the menu.</li>
-                    <li><code>--a-shadow-medium</code>: For the menu's shadow.</li>
-                    <li><code>--a-font-size-base</code>: For menu item text size.</li>
+                    <li><strong>Clear Labels</strong> - Button text should indicate purpose</li>
+                    <li><strong>Keyboard First</strong> - Full keyboard support is essential</li>
+                    <li><strong>Click Outside</strong> - Automatically close when focus moves away</li>
+                    <li><strong>Consistent Styling</strong> - Match your design system</li>
+                    <li><strong>Icon + Text</strong> - Use both for better clarity</li>
+                    <li><strong>Limited Items</strong> - Keep visible items reasonable (5-10)</li>
                 </ul>
-            </div>
-        </section>
+            </section>
 
-    </main>
-<footer class="main">
+        </div>
+
+    </div></section></main>
+
+    <footer class="main">
         <div class="content">
             <div class="brand">
                 <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
@@ -312,23 +336,23 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -341,6 +365,93 @@
     </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        function setupDropdown(btnId, menuId) {
+            const btn = document.getElementById(btnId);
+            const menu = document.getElementById(menuId);
+            const items = menu.querySelectorAll('.dropdown-item');
+            let selectedText = btn.querySelector('span').textContent;
+
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = menu.classList.toggle('open');
+                btn.classList.toggle('open', isOpen);
+                btn.setAttribute('aria-expanded', isOpen);
+            });
+
+            items.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const btnSpan = btn.querySelector('span');
+                    selectedText = item.textContent.trim();
+                    btnSpan.textContent = selectedText;
+                    
+                    items.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    
+                    menu.classList.remove('open');
+                    btn.classList.remove('open');
+                    btn.setAttribute('aria-expanded', false);
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest(`#${btnId}`) && !e.target.closest(`#${menuId}`)) {
+                    menu.classList.remove('open');
+                    btn.classList.remove('open');
+                    btn.setAttribute('aria-expanded', false);
+                }
+            });
+
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    menu.classList.remove('open');
+                    btn.classList.remove('open');
+                    btn.setAttribute('aria-expanded', false);
+                } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (!menu.classList.contains('open')) {
+                        menu.classList.add('open');
+                        btn.classList.add('open');
+                        btn.setAttribute('aria-expanded', true);
+                    }
+                }
+            });
+        }
+
+        setupDropdown('dropdownBtn1', 'dropdownMenu1');
+        setupDropdown('dropdownBtn2', 'dropdownMenu2');
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

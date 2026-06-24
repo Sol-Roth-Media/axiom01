@@ -1,44 +1,418 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multimedia Picker - Axiom01</title>
-  <link rel="stylesheet" href="../../css/axiom.css">
-  <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimedia Picker Component - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .media-picker-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            max-width: 700px;
+        }
+        
+        .media-tabs {
+            display: flex;
+            gap: var(--a-space-m);
+            margin-bottom: var(--a-space-l);
+            border-bottom: 2px solid var(--ax-border);
+        }
+        
+        .media-tab {
+            padding: var(--a-space-m) 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+            position: relative;
+            transition: color var(--a-transition-base);
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-s);
+        }
+        
+        .media-tab:hover {
+            color: var(--a-color-primary);
+        }
+        
+        .media-tab.active {
+            color: var(--a-color-primary);
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .media-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--a-color-primary);
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: var(--a-space-m);
+            margin-bottom: var(--a-space-l);
+        }
+        
+        .media-item {
+            position: relative;
+            cursor: pointer;
+            border-radius: var(--a-border-radius-md);
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all var(--a-transition-base);
+        }
+        
+        .media-item:hover {
+            border-color: var(--a-color-primary);
+            transform: scale(1.05);
+        }
+        
+        .media-thumbnail {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--a-color-primary-container), var(--a-color-primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: var(--a-color-primary-on);
+            position: relative;
+        }
+        
+        .media-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--a-transition-base);
+        }
+        
+        .media-item:hover .media-overlay {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .media-play-icon {
+            color: white;
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity var(--a-transition-base);
+        }
+        
+        .media-item:hover .media-play-icon {
+            opacity: 1;
+        }
+        
+        .media-checkbox {
+            position: absolute;
+            top: var(--a-space-s);
+            right: var(--a-space-s);
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--a-color-primary);
+        }
+        
+        .media-name {
+            padding: var(--a-space-s);
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .media-selected {
+            margin-top: var(--a-space-l);
+            padding: var(--a-space-l);
+            background: var(--ax-surface);
+            border-radius: var(--a-border-radius-md);
+            border: 1px solid var(--ax-border);
+        }
+        
+        .selected-title {
+            font-weight: var(--a-font-weight-semibold);
+            margin: 0 0 var(--a-space-m) 0;
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .selected-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--a-space-s);
+        }
+        
+        .selected-badge {
+            background: var(--a-color-primary-container);
+            color: var(--a-color-primary);
+            padding: 4px 12px;
+            border-radius: var(--a-border-radius-md);
+            font-size: var(--a-font-size-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-s);
+        }
+        
+        .remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--a-color-primary);
+            padding: 0;
+            font-size: 16px;
+        }
+        
+        .media-actions {
+            display: flex;
+            gap: var(--a-space-m);
+            margin-top: var(--a-space-l);
+            justify-content: flex-end;
+        }
+        
+        .media-actions button {
+            padding: 8px 16px;
+            border-radius: var(--a-border-radius-md);
+            border: 1px solid var(--ax-border);
+            cursor: pointer;
+            font-size: var(--a-font-size-sm);
+            transition: all var(--a-transition-base);
+        }
+        
+        .media-actions .cancel {
+            background: var(--ax-surface);
+            color: var(--ax-text);
+        }
+        
+        .media-actions .confirm {
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border-color: var(--a-color-primary);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
-  <main class="content">
-        <section class="hero">
-            <div class="container">
-                <h1>Multimedia Picker</h1>
-                <p>Select multimedia content with an intuitive picker.</p>
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
-        </section>
+        </nav>
+    </header>
 
+    <main><section><div class="container">
+        <header>
+            <h1>Multimedia Picker</h1>
+            <p class="text-muted">Axiom01's multimedia picker component enables users to browse, select, and manage multiple media files. Features tabbed interface for different media types, grid display, and batch operations.</p>
+        </header>
 
-    <section>
-      <div class="container">
-        <h2>Basic Usage</h2>
-        <p>Select or drag files, then preview image, video, and audio assets.</p>
-        <section class="multimediapicker" data-component="multimediapicker" aria-label="Multimedia picker">
-          <label for="multimedia-input">Choose media files</label>
-          <input id="multimedia-input" type="file" accept="image/*,video/*,audio/*" multiple>
-          <p role="status" aria-live="polite"></p>
-          <ul data-role="list"></ul>
-        </section>
+        <div class="component-section">
 
-        <h3>Required Markup Contract</h3>
-        <ul>
-          <li>Use <code>data-component="multimediapicker"</code> on the root container.</li>
-          <li>Include one file input and one preview list with <code>data-role="list"</code>.</li>
-          <li>Include a status element with <code>role="status"</code> for upload/selection feedback.</li>
-        </ul>
-      </div>
-    </section>
-  </main>
+            <section>
+                <h2>Live Examples</h2>
 
+                <h3>Multi-Media Picker Interface</h3>
+                <div class="media-picker-demo">
+                    <div class="media-tabs">
+                        <button class="media-tab active" data-media="images">
+                            <span class="axicon render" data-name="Image"></span>
+                            Images (12)
+                        </button>
+                        <button class="media-tab" data-media="videos">
+                            <span class="axicon render" data-name="Video"></span>
+                            Videos (8)
+                        </button>
+                        <button class="media-tab" data-media="audio">
+                            <span class="axicon render" data-name="Music"></span>
+                            Audio (15)
+                        </button>
+                    </div>
+                    
+                    <div class="media-grid" id="mediaGrid">
+                        <!-- Images Tab -->
+                        <div class="media-item" data-type="images">
+                            <div class="media-thumbnail">🖼️</div>
+                            <input type="checkbox" class="media-checkbox">
+                            <div class="media-name">photo-001.jpg</div>
+                        </div>
+                        <div class="media-item" data-type="images">
+                            <div class="media-thumbnail">📷</div>
+                            <input type="checkbox" class="media-checkbox">
+                            <div class="media-name">photo-002.jpg</div>
+                        </div>
+                        <div class="media-item" data-type="images">
+                            <div class="media-thumbnail">🎨</div>
+                            <input type="checkbox" class="media-checkbox">
+                            <div class="media-name">photo-003.jpg</div>
+                        </div>
+                        <div class="media-item" data-type="images">
+                            <div class="media-thumbnail">🌄</div>
+                            <input type="checkbox" class="media-checkbox">
+                            <div class="media-name">photo-004.jpg</div>
+                        </div>
+                        <div class="media-item" data-type="images">
+                            <div class="media-thumbnail">🌅</div>
+                            <input type="checkbox" class="media-checkbox">
+                            <div class="media-name">photo-005.jpg</div>
+                        </div>
+                        <div class="media-item" data-type="images">
+                            <div class="media-thumbnail">🏞️</div>
+                            <input type="checkbox" class="media-checkbox">
+                            <div class="media-name">photo-006.jpg</div>
+                        </div>
+                        
+                        <!-- Videos Tab -->
+                        <div class="media-item" data-type="videos" style="display: none;">
+                            <div class="media-thumbnail">
+                                🎬
+                                <div class="media-overlay">
+                                    <div class="media-play-icon">▶</div>
+                                </div>
+                            </div>
+                            <input type="checkbox" class="media-checkbox">
+                            <div class="media-name">video-001.mp4</div>
+                        </div>
+                        <div class="media-item" data-type="videos" style="display: none;">
+                            <div class="media-thumbnail">
+                                🎥
+                                <div class="media-overlay">
+                                    <div class="media-play-icon">▶</div>
+                                </div>
+                            </div>
+                            <input type="checkbox" class="media-checkbox">
+                            <div class="media-name">video-002.mp4</div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-selected">
+                        <h4 class="selected-title">Selected Media (0)</h4>
+                        <ul class="selected-list" id="selectedList">
+                            <li style="color: var(--a-color-text-muted); font-size: var(--a-font-size-sm);">No items selected</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="media-actions">
+                        <button class="cancel">Cancel</button>
+                        <button class="confirm">Select</button>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="media-picker-demo"&gt;
+    &lt;div class="media-tabs"&gt;
+        &lt;button class="media-tab active" data-media="images"&gt;
+            Images (12)
+        &lt;/button&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="media-grid"&gt;
+        &lt;div class="media-item" data-type="images"&gt;
+            &lt;div class="media-thumbnail"&gt;🖼️&lt;/div&gt;
+            &lt;input type="checkbox" class="media-checkbox"&gt;
+            &lt;div class="media-name"&gt;photo-001.jpg&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="media-selected"&gt;
+        &lt;h4 class="selected-title"&gt;Selected Media (0)&lt;/h4&gt;
+        &lt;ul class="selected-list" id="selectedList"&gt;&lt;/ul&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="media-actions"&gt;
+        &lt;button class="cancel"&gt;Cancel&lt;/button&gt;
+        &lt;button class="confirm"&gt;Select&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Tabbed Interface</strong> - Organize media by type (images, videos, audio)</li>
+                    <li><strong>Grid Display</strong> - Responsive thumbnail grid layout</li>
+                    <li><strong>Multi-Select</strong> - Checkbox selection for multiple items</li>
+                    <li><strong>Preview Overlay</strong> - Hover preview for media files</li>
+                    <li><strong>Selection Display</strong> - Show selected items with count</li>
+                    <li><strong>Batch Operations</strong> - Select/confirm actions</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Gallery Management</strong> - Select photos for albums</li>
+                    <li><strong>Media Library</strong> - Browse and organize media files</li>
+                    <li><strong>Content Creation</strong> - Pick media for posts/articles</li>
+                    <li><strong>Asset Management</strong> - Manage project media files</li>
+                    <li><strong>Batch Upload</strong> - Select multiple files at once</li>
+                    <li><strong>Media Sharing</strong> - Choose files to share with others</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic button elements for tabs</li>
+                    <li>Include <code>aria-selected</code> on active tabs</li>
+                    <li>Provide <code>aria-label</code> for checkboxes</li>
+                    <li>Support keyboard navigation (Tab, Space, Arrow)</li>
+                    <li>Use visual + text indicators for selected items</li>
+                    <li>Announce selection count updates</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Organization</strong> - Logical tab grouping by media type</li>
+                    <li><strong>Visual Feedback</strong> - Show selection state clearly</li>
+                    <li><strong>Responsive Grid</strong> - Adapt layout to screen size</li>
+                    <li><strong>Thumbnail Quality</strong> - High-quality preview images</li>
+                    <li><strong>Search/Filter</strong> - Optional search within media</li>
+                    <li><strong>Batch Actions</strong> - Support multiple selections</li>
+                </ul>
+            </section>
+
+        </div>
+
+    </div></section></main>
 
     <footer class="main">
         <div class="content">
@@ -50,23 +424,23 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth/axiom" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -74,11 +448,81 @@
             </div>
         </div>
         <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.media-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const mediaType = tab.dataset.media;
+                
+                document.querySelectorAll('.media-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                document.querySelectorAll('.media-item').forEach(item => {
+                    item.style.display = item.dataset.type === mediaType ? '' : 'none';
+                });
+            });
+        });
+        
+        // Checkbox selection
+        document.querySelectorAll('.media-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                updateSelectedCount();
+            });
+        });
+        
+        function updateSelectedCount() {
+            const selected = document.querySelectorAll('.media-checkbox:checked');
+            const count = selected.length;
+            const title = document.querySelector('.selected-title');
+            const list = document.getElementById('selectedList');
+            
+            title.textContent = `Selected Media (${count})`;
+            
+            if (count === 0) {
+                list.innerHTML = '<li style="color: var(--a-color-text-muted); font-size: var(--a-font-size-sm);">No items selected</li>';
+            } else {
+                list.innerHTML = Array.from(selected).map(cb => {
+                    const name = cb.closest('.media-item').querySelector('.media-name').textContent;
+                    return `<li class="selected-badge">${name} <button class="remove-btn">×</button></li>`;
+                }).join('');
+            }
+        }
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

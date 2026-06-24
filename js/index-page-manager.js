@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const newTheme = modeInDOM === "light" ? 'dark' : 'light';
                 applyTheme(newTheme);
                 updateThemeToggleButtonIcon(newTheme); // Use helper for click icon update
-                
+
                 // Update theme explorer select if it exists
                 const themeSelect = document.getElementById('theme-select');
                 if (themeSelect) {
@@ -406,11 +406,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const pre = button.closest('article').querySelector('pre code');
                 if (pre) {
                     navigator.clipboard.writeText(pre.textContent).then(() => {
-                        const originalText = button.textContent;
-                        button.textContent = 'Copied!';
-                        setTimeout(() => {
-                            button.textContent = originalText;
-                        }, 2000);
+                        const iconSpan = button.querySelector('.axicon');
+                        if (iconSpan) {
+                            const prevIcon = iconSpan.getAttribute('data-name');
+                            iconSpan.setAttribute('data-name', 'Check');
+                            renderAxicons();
+                            setTimeout(() => {
+                                iconSpan.setAttribute('data-name', prevIcon);
+                                renderAxicons();
+                            }, 2000);
+                        }
                     }).catch(err => {
                         console.error('Failed to copy text: ', err);
                     });
@@ -556,27 +561,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // 12. Code Comparison Tabs
-    const initCodeComparisonTabs = () => {
-        const tabs = document.querySelectorAll('.tab-button');
-        const panels = document.querySelectorAll('.comparison-panel');
+    // 14. Native Tabs Component
+    const initTabs = () => {
+        document.querySelectorAll('.tabs').forEach(tabsContainer => {
+            const tabButtons = tabsContainer.querySelectorAll('[role="tab"]');
+            const tabPanels = tabsContainer.querySelectorAll('[role="tabpanel"]');
 
-        if (tabs.length === 0 || panels.length === 0) return;
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Deactivate all
+                    tabButtons.forEach(btn => btn.setAttribute('aria-selected', 'false'));
+                    tabPanels.forEach(panel => panel.hidden = true);
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetTab = tab.getAttribute('data-tab');
-
-                // Remove active class from all tabs and panels
-                tabs.forEach(t => t.classList.remove('active'));
-                panels.forEach(p => p.classList.remove('active'));
-
-                // Add active class to clicked tab and corresponding panel
-                tab.classList.add('active');
-                const targetPanel = document.querySelector(`.comparison-panel[data-panel="${targetTab}"]`);
-                if (targetPanel) {
-                    targetPanel.classList.add('active');
-                }
+                    // Activate clicked
+                    button.setAttribute('aria-selected', 'true');
+                    const controlsId = button.getAttribute('aria-controls');
+                    const targetPanel = document.getElementById(controlsId);
+                    if (targetPanel) {
+                        targetPanel.hidden = false;
+                    }
+                });
             });
         });
     };
@@ -604,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Initialize all functionalities
-initHeaderThemeToggle();
+    initHeaderThemeToggle();
     initSpacingDemo();
     initComponentBrowser();
     initSearchModal();
@@ -615,6 +619,6 @@ initHeaderThemeToggle();
     initSidebarHighlighting();
     initDynamicCopyrightYear();
     initDropdowns(); // Initialize dropdowns
-    initCodeComparisonTabs(); // Initialize code comparison tabs
+    initTabs(); // Initialize semantic tabs component
     initCascadeVisualization(); // Initialize cascade visualization
 });

@@ -1,45 +1,350 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Touch Components - Axiom01</title>
-  <link rel="stylesheet" href="../../css/axiom.css">
-  <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Touch Components - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.css">
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .touch-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            max-width: 600px;
+        }
+        
+        .touch-target {
+            background: var(--ax-surface);
+            border: 2px dashed var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            padding: var(--a-space-xl);
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--a-space-m);
+            transition: all var(--a-transition-base);
+            user-select: none;
+        }
+        
+        .touch-target.active {
+            border-color: var(--a-color-primary);
+            background: var(--a-color-primary-container);
+            border-style: solid;
+        }
+        
+        .touch-target.swiped-left {
+            background: rgba(211, 47, 47, 0.1);
+            border-color: #d32f2f;
+        }
+        
+        .touch-target.swiped-right {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: #4caf50;
+        }
+        
+        .touch-icon {
+            font-size: 48px;
+        }
+        
+        .touch-label {
+            font-size: var(--a-font-size-lg);
+            font-weight: var(--a-font-weight-bold);
+            color: var(--ax-text);
+        }
+        
+        .touch-info {
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+        }
+        
+        .gesture-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--a-space-m);
+            margin-top: var(--a-space-l);
+        }
+        
+        .gesture-item {
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            padding: var(--a-space-m);
+        }
+        
+        .gesture-icon {
+            font-size: 32px;
+            margin-bottom: var(--a-space-s);
+        }
+        
+        .gesture-name {
+            margin: 0 0 var(--a-space-s) 0;
+            font-weight: var(--a-font-weight-semibold);
+            color: var(--ax-text);
+        }
+        
+        .gesture-description {
+            margin: 0;
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+            line-height: 1.4;
+        }
+        
+        .swipe-detector {
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            padding: var(--a-space-m);
+            margin-top: var(--a-space-l);
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: pan-y;
+        }
+        
+        .swipe-message {
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+        }
+        
+        .pinch-area {
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            padding: var(--a-space-l);
+            margin-top: var(--a-space-l);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+            font-size: 24px;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        
+        .pinch-scale {
+            display: inline-block;
+            transition: transform 0.1s ease-out;
+        }
+        
+        .touch-button {
+            padding: 12px 24px;
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border: none;
+            border-radius: var(--a-border-radius-md);
+            cursor: pointer;
+            font-size: var(--a-font-size-base);
+            font-weight: var(--a-font-weight-semibold);
+            transition: all var(--a-transition-base);
+            active: 0;
+        }
+        
+        .touch-button:active {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+        
+        .touch-button:hover {
+            background: var(--a-color-primary-dark, var(--a-color-primary));
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
-  <main class="content">
-        <section class="hero">
-            <div class="container">
-                <h1>Touch Components</h1>
-                <p>Touch-optimized interactive components.</p>
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
-        </section>
+        </nav>
+    </header>
 
+    <main><section><div class="container">
+        <header>
+            <h1>Touch Components</h1>
+            <p class="text-muted">Axiom01's touch components provide mobile-optimized interactions including tap, swipe, pinch, and long-press gestures. Essential for responsive mobile and tablet experiences.</p>
+        </header>
 
-    <section>
-      <div class="container">
-        <h2>Basic Usage</h2>
-        <p>Gesture-ready interaction surface for tap, long-press, and swipe states.</p>
-        <section class="touch" data-component="touch" aria-label="Touch interaction surface">
-          <section data-role="pad" tabindex="0" aria-label="Touch pad">
-            <p>Tap, hold, or swipe in this area.</p>
-          </section>
-          <h3>Detected gestures</h3>
-          <ol></ol>
-        </section>
+        <div class="component-section">
 
-        <h3>Required Markup Contract</h3>
-        <ul>
-          <li>Use <code>data-component="touch"</code> on the root interaction container.</li>
-          <li>Include a touch target using <code>data-role="pad"</code> and make it keyboard focusable.</li>
-          <li>Include an ordered list to render gesture output events.</li>
-        </ul>
-      </div>
-    </section>
-  </main>
+            <section>
+                <h2>Live Examples</h2>
 
+                <h3>Touch Tap Detection</h3>
+                <div class="touch-demo">
+                    <div class="touch-target" id="tapTarget">
+                        <div class="touch-icon">👆</div>
+                        <div class="touch-label">Tap to activate</div>
+                        <div class="touch-info">Single or double tap</div>
+                    </div>
+                </div>
+
+                <h3>Swipe Gestures</h3>
+                <div class="touch-demo">
+                    <div class="swipe-detector" id="swipeTarget">
+                        <div class="swipe-message">👉 Swipe left or right</div>
+                    </div>
+                </div>
+
+                <h3>Pinch to Zoom</h3>
+                <div class="touch-demo">
+                    <div class="pinch-area" id="pinchArea">
+                        <div class="pinch-scale">📸</div>
+                    </div>
+                </div>
+
+                <h3>Touch Gesture Reference</h3>
+                <div class="touch-demo">
+                    <div class="gesture-list">
+                        <div class="gesture-item">
+                            <div class="gesture-icon">👆</div>
+                            <h4 class="gesture-name">Tap</h4>
+                            <p class="gesture-description">Single finger press and release. Primary interaction.</p>
+                        </div>
+                        <div class="gesture-item">
+                            <div class="gesture-icon">👆👆</div>
+                            <h4 class="gesture-name">Double Tap</h4>
+                            <p class="gesture-description">Two rapid taps. Common for zoom on photos.</p>
+                        </div>
+                        <div class="gesture-item">
+                            <div class="gesture-icon">👇</div>
+                            <h4 class="gesture-name">Long Press</h4>
+                            <p class="gesture-description">Hold finger down for 500ms+. Context menus.</p>
+                        </div>
+                        <div class="gesture-item">
+                            <div class="gesture-icon">👉</div>
+                            <h4 class="gesture-name">Swipe</h4>
+                            <p class="gesture-description">Fast directional drag. Navigation between views.</p>
+                        </div>
+                        <div class="gesture-item">
+                            <div class="gesture-icon">✌️</div>
+                            <h4 class="gesture-name">Pinch</h4>
+                            <p class="gesture-description">Two fingers moving apart/together. Zoom control.</p>
+                        </div>
+                        <div class="gesture-item">
+                            <div class="gesture-icon">🔄</div>
+                            <h4 class="gesture-name">Rotate</h4>
+                            <p class="gesture-description">Two fingers rotating. Image/map rotation.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="touch-target" id="touchElement"&gt;
+    &lt;div class="touch-icon"&gt;👆&lt;/div&gt;
+    &lt;div class="touch-label"&gt;Tap to activate&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const element = document.getElementById('touchElement');
+
+// Single tap
+element.addEventListener('touchstart', (e) => {
+    // Handle touch start
+});
+
+element.addEventListener('touchend', (e) => {
+    // Handle touch end
+});
+
+// Swipe detection
+let startX = 0;
+element.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+});
+
+element.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    if (endX &lt; startX - 50) {
+        // Swiped left
+    } else if (endX &gt; startX + 50) {
+        // Swiped right
+    }
+});
+&lt;/script&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Tap Detection</strong> - Single and double tap recognition</li>
+                    <li><strong>Swipe Gestures</strong> - Left, right, up, down swiping</li>
+                    <li><strong>Long Press</strong> - Extended touch duration detection</li>
+                    <li><strong>Pinch Zoom</strong> - Multi-touch scaling</li>
+                    <li><strong>Rotation</strong> - Two-finger rotation detection</li>
+                    <li><strong>Mobile Optimized</strong> - Touch-action CSS properties</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Mobile Navigation</strong> - Swipe between screens</li>
+                    <li><strong>Photo Galleries</strong> - Swipe and pinch to zoom</li>
+                    <li><strong>Maps</strong> - Pan, pinch, and rotate</li>
+                    <li><strong>Sliders</strong> - Swipe to change values</li>
+                    <li><strong>Context Menus</strong> - Long-press to open options</li>
+                    <li><strong>Card Swiping</strong> - Tinder-style interactions</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Provide <code>touch-action</code> CSS properties</li>
+                    <li>Support keyboard fallbacks for all gestures</li>
+                    <li>Include visual feedback on touch interactions</li>
+                    <li>Minimum 44×44px touch targets recommended</li>
+                    <li>Use semantic HTML for touch elements</li>
+                    <li>Announce gesture results to screen readers</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Touch Targets</strong> - Make buttons 44×44px minimum</li>
+                    <li><strong>Visual Feedback</strong> - Show active states clearly</li>
+                    <li><strong>Gesture Discovery</strong> - Hint users about swipes</li>
+                    <li><strong>Debounce Gestures</strong> - Prevent rapid repeated triggers</li>
+                    <li><strong>Haptic Feedback</strong> - Vibrate on important actions</li>
+                    <li><strong>Fallback Controls</strong> - Buttons for non-gesture users</li>
+                </ul>
+            </section>
+
+        </div>
+
+    </div></section></main>
 
     <footer class="main">
         <div class="content">
@@ -51,23 +356,23 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -75,11 +380,125 @@
             </div>
         </div>
         <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        // Tap detection
+        const tapTarget = document.getElementById('tapTarget');
+        let tapCount = 0;
+        let tapTimer;
+        
+        tapTarget.addEventListener('touchstart', () => {
+            tapTarget.classList.add('active');
+        });
+        
+        tapTarget.addEventListener('touchend', () => {
+            tapCount++;
+            clearTimeout(tapTimer);
+            
+            if (tapCount === 2) {
+                tapTarget.classList.add('active');
+                tapCount = 0;
+            }
+            
+            tapTimer = setTimeout(() => {
+                tapTarget.classList.remove('active');
+                tapCount = 0;
+            }, 300);
+        });
+        
+        // Swipe detection
+        const swipeTarget = document.getElementById('swipeTarget');
+        let startX = 0;
+        
+        swipeTarget.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+        
+        swipeTarget.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            swipeTarget.classList.remove('swiped-left', 'swiped-right');
+            
+            if (diff > 50) {
+                swipeTarget.classList.add('swiped-left');
+                swipeTarget.querySelector('.swipe-message').textContent = '👈 Swiped left!';
+            } else if (diff < -50) {
+                swipeTarget.classList.add('swiped-right');
+                swipeTarget.querySelector('.swipe-message').textContent = '👉 Swiped right!';
+            }
+            
+            setTimeout(() => {
+                swipeTarget.classList.remove('swiped-left', 'swiped-right');
+                swipeTarget.querySelector('.swipe-message').textContent = '👉 Swipe left or right';
+            }, 800);
+        });
+        
+        // Pinch to zoom
+        const pinchArea = document.getElementById('pinchArea');
+        const pinchScale = pinchArea.querySelector('.pinch-scale');
+        let lastDistance = 0;
+        
+        pinchArea.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const distance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                
+                if (lastDistance > 0) {
+                    const scale = distance / lastDistance;
+                    const currentScale = parseFloat(pinchScale.style.transform.match(/[\d.]+/) || 1);
+                    const newScale = Math.min(Math.max(currentScale * scale, 0.5), 3);
+                    pinchScale.style.transform = `scale(${newScale})`;
+                }
+                
+                lastDistance = distance;
+            }
+        }, false);
+        
+        pinchArea.addEventListener('touchend', () => {
+            lastDistance = 0;
+        });
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

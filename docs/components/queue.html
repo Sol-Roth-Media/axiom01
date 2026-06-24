@@ -3,141 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Queue (Drag & Drop) - Axiom01</title>
+    <title>Queue Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-    <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .queue-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            max-width: 600px;
+        }
+        
+        .queue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--a-space-l);
+        }
+        
+        .queue-title {
+            margin: 0;
+            font-size: var(--a-font-size-lg);
+            font-weight: var(--a-font-weight-bold);
+        }
+        
+        .queue-counter {
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            padding: var(--a-space-s) var(--a-space-m);
+            border-radius: var(--a-border-radius-md);
+            font-size: var(--a-font-size-sm);
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .queue-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-m);
+        }
+        
+        .queue-item {
+            background: var(--ax-surface);
+            border: 2px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            padding: var(--a-space-l);
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-m);
+            transition: all var(--a-transition-base);
+            position: relative;
+        }
+        
+        .queue-item.serving {
+            border-color: var(--a-color-primary);
+            background: var(--a-color-primary-container);
+        }
+        
+        .queue-item.waiting {
+            opacity: 0.7;
+        }
+        
+        .queue-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--a-color-primary-container);
+            color: var(--a-color-primary);
+            font-weight: var(--a-font-weight-bold);
+            font-size: var(--a-font-size-base);
+            flex-shrink: 0;
+        }
+        
+        .queue-item.serving .queue-number {
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            font-size: var(--a-font-size-lg);
+        }
+        
+        .queue-content {
+            flex: 1;
+        }
+        
+        .queue-name {
+            font-weight: var(--a-font-weight-semibold);
+            margin: 0 0 4px 0;
+        }
+        
+        .queue-info {
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+            margin: 0;
+        }
+        
+        .queue-status {
+            padding: 4px 12px;
+            border-radius: var(--a-border-radius-sm);
+            font-size: var(--a-font-size-xs);
+            font-weight: var(--a-font-weight-semibold);
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .status-waiting {
+            background: var(--a-color-warning-container, #fff3e0);
+            color: var(--a-color-warning, #f57f17);
+        }
+        
+        .status-serving {
+            background: var(--a-color-success-container, #e8f5e9);
+            color: var(--a-color-success, #2e7d32);
+        }
+        
+        .status-completed {
+            background: var(--ax-border-light);
+            color: var(--a-color-text-muted);
+        }
+        
+        .queue-progress {
+            margin-top: var(--a-space-l);
+            padding: var(--a-space-l);
+            background: var(--ax-surface);
+            border-radius: var(--a-border-radius-md);
+        }
+        
+        .progress-label {
+            font-size: var(--a-font-size-sm);
+            margin-bottom: var(--a-space-s);
+            color: var(--a-color-text-muted);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--ax-border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--a-color-primary), var(--a-color-primary-container));
+            border-radius: 4px;
+            transition: width var(--a-transition-base);
+        }
+        
+        .timeline {
+            margin-top: var(--a-space-l);
+            position: relative;
+            padding-left: var(--a-space-l);
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--ax-border);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--a-space-m);
+            padding-bottom: var(--a-space-m);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -16px;
+            top: 2px;
+            width: 12px;
+            height: 12px;
+            background: var(--ax-surface);
+            border: 2px solid var(--a-color-primary);
+            border-radius: 50%;
+        }
+        
+        .timeline-label {
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+        }
+        
+        .timeline-time {
+            font-weight: var(--a-font-weight-semibold);
+            color: var(--a-color-primary);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../../index.html#components">Components</a></li>
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
                 <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-    <main class="content">
-        <section class="hero small">
-            <h1 class="title">Queue (Drag & Drop)</h1>
-            <p class="description">Reorderable lists with native drag-and-drop support. Perfect for task management, reordering form fields, and playlist management. Fully compatible with forms and includes animation.</p>
-        </section>
+    <main><section><div class="container">
+        <header>
+            <h1>Queue</h1>
+            <p class="text-muted">Axiom01's queue component provides visual management of waiting lines and task queues. Perfect for booking systems, customer support, service desks, and any queue-based operations.</p>
+        </header>
 
         <div class="component-section">
-            <h2>Queue Component</h2>
-            <p>The Queue component provides a semantic list (<code>&lt;ol class="queue"&gt;</code> or <code>&lt;ul class="queue"&gt;</code>) that allows users to drag and reorder items. Each item can be removed, and the component automatically syncs with hidden form fields for form submission.</p>
 
-            <h3>Basic Example</h3>
-            <div class="doc-live-example">
-                <ol class="queue" data-queue>
-                    <li>Learn JavaScript</li>
-                    <li>Build a project</li>
-                    <li>Deploy to production</li>
-                </ol>
-            </div>
-            <pre><code class="language-html">&lt;ol class="queue" data-queue&gt;
-  &lt;li&gt;Learn JavaScript&lt;/li&gt;
-  &lt;li&gt;Build a project&lt;/li&gt;
-  &lt;li&gt;Deploy to production&lt;/li&gt;
-&lt;/ol&gt;</code></pre>
+            <section>
+                <h2>Live Examples</h2>
 
-            <h3>With Form Integration</h3>
-            <p>Link the queue to a form by adding <code>data-form-field</code> attribute. The component will automatically update a hidden input with the reordered values.</p>
-            <div class="doc-live-example">
-                <form>
-                    <fieldset>
-                        <legend>Reorder Your Priorities</legend>
-                        <ol class="queue" data-form-field="priorities">
-                            <li data-value="1">High Priority Task</li>
-                            <li data-value="2">Medium Priority Task</li>
-                            <li data-value="3">Low Priority Task</li>
-                        </ol>
-                        <input type="hidden" name="priorities" value="1,2,3">
-                        <button type="submit" class="button primary" style="margin-top: var(--a-space-l);">Submit Order</button>
-                    </fieldset>
-                </form>
-            </div>
-            <pre><code class="language-html">&lt;form&gt;
-  &lt;ol class="queue" data-form-field="priorities"&gt;
-    &lt;li data-value="1"&gt;High Priority Task&lt;/li&gt;
-    &lt;li data-value="2"&gt;Medium Priority Task&lt;/li&gt;
-    &lt;li data-value="3"&gt;Low Priority Task&lt;/li&gt;
-  &lt;/ol&gt;
-  &lt;input type="hidden" name="priorities" value="1,2,3"&gt;
-  &lt;button type="submit"&gt;Submit Order&lt;/button&gt;
-&lt;/form&gt;</code></pre>
+                <h3>Service Queue Display</h3>
+                <div class="queue-demo">
+                    <div class="queue-header">
+                        <h3 class="queue-title">Service Queue</h3>
+                        <div class="queue-counter">7 people waiting</div>
+                    </div>
+                    
+                    <ul class="queue-list">
+                        <li class="queue-item serving">
+                            <div class="queue-number">
+                                <span class="axicon render" data-name="Check"></span>
+                            </div>
+                            <div class="queue-content">
+                                <h4 class="queue-name">John Smith</h4>
+                                <p class="queue-info">Ticket #A-2024</p>
+                            </div>
+                            <div class="queue-status status-serving">SERVING</div>
+                        </li>
+                        
+                        <li class="queue-item waiting">
+                            <div class="queue-number">1</div>
+                            <div class="queue-content">
+                                <h4 class="queue-name">Sarah Johnson</h4>
+                                <p class="queue-info">Ticket #A-2025</p>
+                            </div>
+                            <div class="queue-status status-waiting">WAITING</div>
+                        </li>
+                        
+                        <li class="queue-item waiting">
+                            <div class="queue-number">2</div>
+                            <div class="queue-content">
+                                <h4 class="queue-name">Michael Brown</h4>
+                                <p class="queue-info">Ticket #A-2026</p>
+                            </div>
+                            <div class="queue-status status-waiting">WAITING</div>
+                        </li>
+                        
+                        <li class="queue-item waiting">
+                            <div class="queue-number">3</div>
+                            <div class="queue-content">
+                                <h4 class="queue-name">Emma Davis</h4>
+                                <p class="queue-info">Ticket #A-2027</p>
+                            </div>
+                            <div class="queue-status status-waiting">WAITING</div>
+                        </li>
+                    </ul>
+                    
+                    <div class="queue-progress">
+                        <div class="progress-label">Queue Progress</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                </div>
 
-            <h3>Features</h3>
-            <div class="card-group">
-                <article class="card">
-                    <i class="fas fa-arrows-alt"></i>
-                    <h3>Drag & Drop</h3>
-                    <p>Native HTML5 drag-and-drop API with smooth visual feedback</p>
-                </article>
-                <article class="card">
-                    <i class="fas fa-form"></i>
-                    <h3>Form Sync</h3>
-                    <p>Automatically updates hidden input fields when items are reordered</p>
-                </article>
-                <article class="card">
-                    <i class="fas fa-trash"></i>
-                    <h3>Item Removal</h3>
-                    <p>Built-in remove buttons with smooth animations</p>
-                </article>
-                <article class="card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Mobile Ready</h3>
-                    <p>Touch-friendly with haptic feedback support</p>
-                </article>
-                <article class="card">
-                    <i class="fas fa-play-circle"></i>
-                    <h3>Animated</h3>
-                    <p>Smooth transitions and staggered animations on load</p>
-                </article>
-                <article class="card">
-                    <i class="fas fa-universal-access"></i>
-                    <h3>Accessible</h3>
-                    <p>Full keyboard support and ARIA labels</p>
-                </article>
-            </div>
+                <h3>Service Timeline</h3>
+                <div class="queue-demo">
+                    <h3 style="margin-top: 0;">Service History</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-label">
+                                <span class="timeline-time">10:45 AM</span> - Customer #1 served
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">
+                                <span class="timeline-time">10:32 AM</span> - Customer #2 served
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">
+                                <span class="timeline-time">10:18 AM</span> - Customer #3 served
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">
+                                <span class="timeline-time">10:05 AM</span> - Queue started
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            <h3>Use Cases</h3>
-            <ul>
-                <li>Task management and todo lists</li>
-                <li>Playlist and queue management</li>
-                <li>Form field reordering</li>
-                <li>Priority and ranking systems</li>
-                <li>Content ordering in CMSs</li>
-                <li>Menu item reorganization</li>
-            </ul>
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="queue-demo"&gt;
+    &lt;div class="queue-header"&gt;
+        &lt;h3 class="queue-title"&gt;Queue Name&lt;/h3&gt;
+        &lt;div class="queue-counter"&gt;7 people waiting&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;ul class="queue-list"&gt;
+        &lt;li class="queue-item serving"&gt;
+            &lt;div class="queue-number"&gt;✓&lt;/div&gt;
+            &lt;div class="queue-content"&gt;
+                &lt;h4 class="queue-name"&gt;Name&lt;/h4&gt;
+                &lt;p class="queue-info"&gt;Ticket Info&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="queue-status status-serving"&gt;SERVING&lt;/div&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
 
-            <h3>JavaScript Required</h3>
-            <p>The Queue component requires <code>js/axiom.js</code> to be included. It automatically initializes all elements with <code>class="queue"</code>.</p>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Queue Display</strong> - Visual list of waiting customers</li>
+                    <li><strong>Status Indicators</strong> - Serving, waiting, completed states</li>
+                    <li><strong>Position Numbers</strong> - Clear queue position display</li>
+                    <li><strong>Progress Bar</strong> - Visual queue progress indicator</li>
+                    <li><strong>Timeline View</strong> - Service history tracking</li>
+                    <li><strong>Customer Info</strong> - Name, ticket number, and details</li>
+                </ul>
+            </section>
 
-            <h3>Browser Support</h3>
-            <p>Chrome, Firefox, Safari, Edge, and all modern browsers supporting HTML5 Drag & Drop API and ES6+.</p>
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Service Desks</strong> - Bank, DMV, post office queues</li>
+                    <li><strong>Restaurant Booking</strong> - Waiting list management</li>
+                    <li><strong>Customer Support</strong> - Help desk ticket queue</li>
+                    <li><strong>Healthcare</strong> - Patient waiting lists</li>
+                    <li><strong>Event Registration</strong> - Ticket redemption queues</li>
+                    <li><strong>Print Shop</strong> - Job queue and status tracking</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic list structure for queue items</li>
+                    <li>Clearly indicate serving vs waiting status</li>
+                    <li>Use colors + text for status (not just color)</li>
+                    <li>Include aria-label for status badges</li>
+                    <li>Support keyboard navigation through queue</li>
+                    <li>Provide text alternative for progress indicators</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Status</strong> - Make current service obvious</li>
+                    <li><strong>Position Tracking</strong> - Show customer's position in queue</li>
+                    <li><strong>Time Estimates</strong> - Display wait time if available</li>
+                    <li><strong>Real-Time Updates</strong> - Update as customers move through</li>
+                    <li><strong>Visual Hierarchy</strong> - Emphasize currently serving customer</li>
+                    <li><strong>History Tracking</strong> - Show completed services timeline</li>
+                </ul>
+            </section>
+
         </div>
-    </main>
+
+    </div></section></main>
 
     <footer class="main">
         <div class="content">
@@ -149,8 +407,12 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
@@ -162,7 +424,6 @@
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -170,12 +431,42 @@
             </div>
         </div>
         <div class="bottom">
-            <p>Axiom01 Framework</p>
-            <p class="attribution">Created by <a href="https://www.solroth.com" target="_blank" rel="noopener">Sol Roth</a> • <a href="../../LICENSE">MIT License</a></p>
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

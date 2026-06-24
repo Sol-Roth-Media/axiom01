@@ -1,228 +1,459 @@
 <!DOCTYPE html>
-<html lang="en" data-component-page="rating">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rating Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-    <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .rating-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-xl);
+        }
+        
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-l);
+            padding: var(--a-space-l);
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+        }
+        
+        .rating-content {
+            flex: 1;
+        }
+        
+        .rating-label {
+            margin: 0 0 var(--a-space-s) 0;
+            font-weight: var(--a-font-weight-semibold);
+            color: var(--ax-text);
+        }
+        
+        .rating-value {
+            margin: 0;
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+        }
+        
+        .star-rating {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .star {
+            font-size: 24px;
+            cursor: pointer;
+            transition: all var(--a-transition-base);
+            filter: grayscale(100%);
+        }
+        
+        .star:hover {
+            transform: scale(1.2);
+        }
+        
+        .star.filled {
+            filter: none;
+            color: #ffc107;
+        }
+        
+        .star.half-filled {
+            position: relative;
+            color: #ffc107;
+        }
+        
+        .rating-read-only {
+            display: flex;
+            gap: 4px;
+            font-size: 18px;
+        }
+        
+        .rating-read-only .star {
+            cursor: default;
+        }
+        
+        .rating-read-only .star:hover {
+            transform: none;
+        }
+        
+        .rating-stats {
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            padding: var(--a-space-l);
+            margin-top: var(--a-space-l);
+        }
+        
+        .stats-row {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-m);
+            margin-bottom: var(--a-space-m);
+        }
+        
+        .stats-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .stats-label {
+            width: 80px;
+            font-size: var(--a-font-size-sm);
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .stats-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--ax-background-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .stats-bar-fill {
+            height: 100%;
+            background: #ffc107;
+            border-radius: 4px;
+            transition: width 0.3s ease-out;
+        }
+        
+        .stats-count {
+            width: 50px;
+            text-align: right;
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+        }
+        
+        .average-rating {
+            text-align: center;
+            padding: var(--a-space-l);
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-md);
+        }
+        
+        .average-rating-score {
+            margin: 0;
+            font-size: 48px;
+            font-weight: var(--a-font-weight-bold);
+            color: var(--ax-text);
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: var(--a-space-s);
+        }
+        
+        .average-rating-max {
+            font-size: 24px;
+            color: var(--a-color-text-muted);
+        }
+        
+        .average-rating-stats {
+            margin: var(--a-space-m) 0 0 0;
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
-    <header class="main">
-        <nav>
-            <a href="../../index.html" class="brand"><span class="primary">axiom</span>01</a>
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../../docs/components-overview.html">Components</a></li>
-                <li><a href="../../docs/colors-advanced.html">Themes</a></li>
-                <li><a href="../../docs/layout-advanced.html">Docs</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
-                <button class="theme toggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon"></i>
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com" class="github" aria-label="GitHub">
-                    <i class="fab fa-github"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
+                    <span>GitHub</span>
                 </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-    <main class="axiom-body">
-        <section class="hero">
-            <div class="container">
-                <h1>Rating</h1>
-                <p>Star rating and feedback components for user interactions.</p>
-            </div>
-        </section>
+    <main><section><div class="container">
+        <header>
+            <h1>Rating</h1>
+            <p class="text-muted">Axiom01's rating component displays star-based ratings with interactive and read-only modes. Perfect for reviews, feedback, and product ratings.</p>
+        </header>
 
-        <section id="rating-component" class="container">
-            <h1>Rating Component</h1>
-            <p class="lead">An accessible, interactive star rating component for collecting user feedback and displaying ratings.</p>
+        <div class="component-section">
 
-            <!-- Overview Section -->
-            <section class="section">
-                <h2 class="title">Overview</h2>
-                <p>The Rating component allows users to select or view star-based ratings. It's fully keyboard accessible, supports hover previews, and can be used in read-only mode for displaying ratings.</p>
-            </section>
+            <section>
+                <h2>Live Examples</h2>
 
-            <!-- Basic Usage -->
-            <section class="section">
-                <h2 class="title">Basic Usage</h2>
                 <h3>Interactive Rating</h3>
-                <div class="live">
-                    <div class="rating" data-component="rating" data-count="5"></div>
-                </div>
-                <pre class="code-block"><code class="language-html">&lt;div class="rating" data-component="rating" data-count="5"&gt;&lt;/div&gt;</code></pre>
-
-                <h3>Read-Only Rating Display</h3>
-                <div class="live">
-                    <div class="rating" data-component="rating" data-count="5" data-readonly></div>
-                </div>
-                <pre class="code-block"><code class="language-html">&lt;div class="rating" data-component="rating" data-count="5" data-readonly&gt;&lt;/div&gt;</code></pre>
-            </section>
-
-            <!-- Features Section -->
-            <section class="section">
-                <h2 class="title">Features</h2>
-                <ul>
-                    <li><strong>Interactive Stars:</strong> Click to select a rating, hover to preview</li>
-                    <li><strong>Keyboard Navigation:</strong> Use arrow keys to navigate between stars</li>
-                    <li><strong>Read-Only Mode:</strong> Display ratings without interaction</li>
-                    <li><strong>Accessibility:</strong> Full ARIA support and semantic HTML</li>
-                    <li><strong>Customizable:</strong> Set any number of stars (1-10)</li>
-                    <li><strong>Events:</strong> Dispatches custom `rating-changed` event</li>
-                </ul>
-            </section>
-
-            <!-- Attributes Section -->
-            <section class="section">
-                <h2 class="title">Attributes</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Attribute</th>
-                            <th>Description</th>
-                            <th>Default</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>data-component="rating"</code></td>
-                            <td>Required. Enables the rating component</td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr>
-                            <td><code>data-count</code></td>
-                            <td>Number of stars to display</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td><code>data-readonly</code></td>
-                            <td>Makes the rating display-only (no interaction)</td>
-                            <td>N/A</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <!-- Examples Section -->
-            <section class="section">
-                <h2 class="title">Examples</h2>
-
-                <h3>3-Star Rating</h3>
-                <div class="live">
-                    <div class="rating" data-component="rating" data-count="3"></div>
-                </div>
-                <pre class="code-block"><code class="language-html">&lt;div class="rating" data-component="rating" data-count="3"&gt;&lt;/div&gt;</code></pre>
-
-                <h3>10-Star Rating</h3>
-                <div class="live">
-                    <div class="rating" data-component="rating" data-count="10"></div>
-                </div>
-                <pre class="code-block"><code class="language-html">&lt;div class="rating" data-component="rating" data-count="10"&gt;&lt;/div&gt;</code></pre>
-
-                <h3>Use Cases</h3>
-                <ul>
-                    <li><strong>Product Reviews:</strong> Let customers rate products</li>
-                    <li><strong>Feedback Forms:</strong> Rate service quality, satisfaction</li>
-                    <li><strong>Content Pages:</strong> Display average ratings alongside reviews</li>
-                    <li><strong>Ratings Display:</strong> Show aggregated ratings with read-only mode</li>
-                    <li><strong>Quality Metrics:</strong> Rate quality, difficulty, or other metrics</li>
-                </ul>
-            </section>
-
-            <!-- JavaScript API -->
-            <section class="section">
-                <h2 class="title">JavaScript API</h2>
-                <p>After the component is initialized, you can interact with it programmatically:</p>
-                <pre class="code-block"><code class="language-javascript">// Get the component element
-const ratingEl = document.querySelector('.rating');
-
-// Listen for rating changes
-ratingEl.addEventListener('rating-changed', (e) => {
-    console.log('Rating set to:', e.detail.rating);
-});
-
-// Set rating programmatically (if not readonly)
-// Note: Use the component's internal methods if exposed
-</code></pre>
-            </section>
-
-            <!-- Accessibility Section -->
-            <section class="section">
-                <h2 class="title">Accessibility</h2>
-                <ul>
-                    <li><strong>ARIA Roles:</strong> Uses `role="radiogroup"` for semantic meaning</li>
-                    <li><strong>Keyboard Support:</strong> Arrow keys to navigate, Enter/Space to select</li>
-                    <li><strong>Labels:</strong> Each star has descriptive `aria-label`</li>
-                    <li><strong>Focus Visible:</strong> Clear focus indicators for keyboard users</li>
-                    <li><strong>Screen Readers:</strong> Proper announcements with ARIA attributes</li>
-                </ul>
-            </section>
-
-            <!-- CSS Customization -->
-            <section class="section">
-                <h2 class="title">CSS Customization</h2>
-                <p>You can customize the appearance using CSS variables:</p>
-                <pre class="code-block"><code class="language-css">.rating {
-    --star-color: var(--a-color-outline);
-    --star-hover-color: var(--a-color-warning);
-    --star-active-color: var(--a-color-primary);
-    --star-size: 2rem;
-}</code></pre>
-                <p>Or override the CSS classes directly:</p>
-                <pre class="code-block"><code class="language-css">.rating .star {
-    font-size: 2.5rem; /* Larger stars */
-    color: var(--a-color-secondary); /* Different color */
-}</code></pre>
-            </section>
-
-            <!-- Integration Section -->
-            <section class="section">
-                <h2 class="title">Integration with Forms</h2>
-                <pre class="code-block"><code class="language-html">&lt;form&gt;
-    &lt;label for="product-rating"&gt;How would you rate this product?&lt;/label&gt;
-    &lt;div id="product-rating" class="rating" data-component="rating" data-count="5"&gt;&lt;/div&gt;
-
-    &lt;label for="review-text"&gt;Tell us more:&lt;/label&gt;
-    &lt;textarea id="review-text" name="review"&gt;&lt;/textarea&gt;
-
-    &lt;button type="submit"&gt;Submit Review&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-            </section>
-
-        </section>
-
-        <footer class="main">
-            <div class="content">
-                <div class="brand">
-                    <a href="../../index.html" class="logo"><span class="primary">axiom</span>01</a>
-                    <p class="tagline">A semantic-first UI framework</p>
-                </div>
-                <div class="links">
-                    <div class="column">
-                        <h4>Documentation</h4>
-                        <ul>
-                            <li><a href="../components-overview.html">Component Overview</a></li>
-                            <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                            <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                            <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                            <li><a href="../../index.html#get-started">Getting Started</a></li>
-                        </ul>
+                <div class="rating-demo">
+                    <div class="rating-section">
+                        <div class="rating-content">
+                            <p class="rating-label">Rate this component</p>
+                            <p class="rating-value">Click stars to rate</p>
+                        </div>
+                        <div class="star-rating" id="interactiveRating">
+                            <span class="star" data-value="1">⭐</span>
+                            <span class="star" data-value="2">⭐</span>
+                            <span class="star" data-value="3">⭐</span>
+                            <span class="star" data-value="4">⭐</span>
+                            <span class="star" data-value="5">⭐</span>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin-top: var(--a-space-l); font-size: var(--a-font-size-lg);">Average Rating</h3>
+                    <div class="average-rating">
+                        <p class="average-rating-score">
+                            4.2<span class="average-rating-max">/5</span>
+                        </p>
+                        <div class="rating-read-only">
+                            <span class="star filled">⭐</span>
+                            <span class="star filled">⭐</span>
+                            <span class="star filled">⭐</span>
+                            <span class="star filled">⭐</span>
+                            <span class="star">⭐</span>
+                        </div>
+                        <p class="average-rating-stats">Based on 1,247 reviews</p>
+                    </div>
+                    
+                    <h3 style="margin-top: var(--a-space-l); font-size: var(--a-font-size-lg);">Rating Distribution</h3>
+                    <div class="rating-stats">
+                        <div class="stats-row">
+                            <div class="stats-label">5 ⭐</div>
+                            <div class="stats-bar">
+                                <div class="stats-bar-fill" style="width: 65%;"></div>
+                            </div>
+                            <div class="stats-count">810</div>
+                        </div>
+                        <div class="stats-row">
+                            <div class="stats-label">4 ⭐</div>
+                            <div class="stats-bar">
+                                <div class="stats-bar-fill" style="width: 25%;"></div>
+                            </div>
+                            <div class="stats-count">310</div>
+                        </div>
+                        <div class="stats-row">
+                            <div class="stats-label">3 ⭐</div>
+                            <div class="stats-bar">
+                                <div class="stats-bar-fill" style="width: 7%;"></div>
+                            </div>
+                            <div class="stats-count">87</div>
+                        </div>
+                        <div class="stats-row">
+                            <div class="stats-label">2 ⭐</div>
+                            <div class="stats-bar">
+                                <div class="stats-bar-fill" style="width: 2%;"></div>
+                            </div>
+                            <div class="stats-count">25</div>
+                        </div>
+                        <div class="stats-row">
+                            <div class="stats-label">1 ⭐</div>
+                            <div class="stats-bar">
+                                <div class="stats-bar-fill" style="width: 1%;"></div>
+                            </div>
+                            <div class="stats-count">15</div>
+                        </div>
                     </div>
                 </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="star-rating"&gt;
+    &lt;span class="star" data-value="1"&gt;⭐&lt;/span&gt;
+    &lt;span class="star" data-value="2"&gt;⭐&lt;/span&gt;
+    &lt;span class="star" data-value="3"&gt;⭐&lt;/span&gt;
+    &lt;span class="star" data-value="4"&gt;⭐&lt;/span&gt;
+    &lt;span class="star" data-value="5"&gt;⭐&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Read-only rating --&gt;
+&lt;div class="rating-read-only"&gt;
+    &lt;span class="star filled"&gt;⭐&lt;/span&gt;
+    &lt;span class="star filled"&gt;⭐&lt;/span&gt;
+    &lt;span class="star"&gt;⭐&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Star Rating</strong> - 1-5 star scale</li>
+                    <li><strong>Interactive</strong> - Click to set rating</li>
+                    <li><strong>Read-Only</strong> - Display existing ratings</li>
+                    <li><strong>Hover Preview</strong> - Show rating before click</li>
+                    <li><strong>Statistics</strong> - Distribution visualization</li>
+                    <li><strong>Average Display</strong> - Overall rating summary</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Product Reviews</strong> - E-commerce ratings</li>
+                    <li><strong>User Feedback</strong> - Service quality rating</li>
+                    <li><strong>Satisfaction Survey</strong> - Experience rating</li>
+                    <li><strong>Content Rating</strong> - Article or video rating</li>
+                    <li><strong>App Rating</strong> - App store ratings</li>
+                    <li><strong>Support Quality</strong> - Service feedback</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use <code>role="radiogroup"</code> for rating group</li>
+                    <li>Include <code>aria-label</code> on each star</li>
+                    <li>Support keyboard navigation (arrow keys)</li>
+                    <li>Announce selected rating to screen readers</li>
+                    <li>Provide text alternative to star icons</li>
+                    <li>Support focus management</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Scale</strong> - Show that it's 1-5 stars</li>
+                    <li><strong>Hover State</strong> - Preview rating before click</li>
+                    <li><strong>Confirmation</strong> - Show current rating after submission</li>
+                    <li><strong>Distribution</strong> - Show rating breakdown</li>
+                    <li><strong>Count Display</strong> - Show number of ratings</li>
+                    <li><strong>Disabled State</strong> - Show when rating unavailable</li>
+                </ul>
+            </section>
+
+        </div>
+
+    </div></section></main>
+
+    <footer class="main">
+        <div class="content">
+            <div class="brand">
+                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
             </div>
-            <div class="bottom">
-                <p>&copy; 2025 Axiom01. All rights reserved.</p>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../../index.html#release-info">Release Info</a></li>
+                    </ul>
+                </div>
             </div>
-        </footer>
-    </main>
+        </div>
+        <div class="bottom">
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        const interactiveRating = document.getElementById('interactiveRating');
+        const stars = interactiveRating.querySelectorAll('.star');
+        let currentRating = 0;
+        
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                currentRating = star.getAttribute('data-value');
+                updateRating(currentRating);
+            });
+            
+            star.addEventListener('mouseover', () => {
+                const value = star.getAttribute('data-value');
+                updatePreview(value);
+            });
+        });
+        
+        interactiveRating.addEventListener('mouseout', () => {
+            updateRating(currentRating);
+        });
+        
+        function updatePreview(value) {
+            stars.forEach((s, index) => {
+                if (index < value) {
+                    s.classList.add('filled');
+                } else {
+                    s.classList.remove('filled');
+                }
+            });
+        }
+        
+        function updateRating(value) {
+            stars.forEach((s, index) => {
+                if (index < value) {
+                    s.classList.add('filled');
+                } else {
+                    s.classList.remove('filled');
+                }
+            });
+        }
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>
-

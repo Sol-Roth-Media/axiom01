@@ -5,190 +5,334 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tooltip Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-        <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .tooltip-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-xl);
+            display: flex;
+            gap: var(--a-space-xl);
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: center;
+            min-height: 300px;
+        }
+        
+        .tooltip-trigger {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border: none;
+            border-radius: var(--a-border-radius-md);
+            cursor: help;
+            font-weight: var(--a-font-weight-semibold);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: var(--ax-text);
+            color: var(--ax-surface);
+            padding: 8px 12px;
+            border-radius: var(--a-border-radius-sm);
+            font-size: var(--a-font-size-xs);
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(4px);
+            transition: all var(--a-transition-base);
+            z-index: 1000;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+        }
+        
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid var(--ax-text);
+        }
+        
+        .tooltip-trigger:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-12px);
+        }
+        
+        .tooltip-trigger:hover {
+            transform: scale(1.05);
+        }
+        
+        .tooltip.right {
+            bottom: auto;
+            left: auto;
+            right: -100%;
+            top: 50%;
+            transform: translateX(8px) translateY(-50%);
+        }
+        
+        .tooltip.right::after {
+            top: auto;
+            left: auto;
+            right: 100%;
+            transform: translateY(-50%);
+            border-left: 4px solid var(--ax-text);
+            border-right: none;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+        }
+        
+        .tooltip-trigger:has(.tooltip.right):hover .tooltip.right {
+            transform: translateX(12px) translateY(-50%);
+        }
+        
+        .tooltip.bottom {
+            bottom: auto;
+            top: 100%;
+            transform: translateX(-50%) translateY(8px);
+        }
+        
+        .tooltip.bottom::after {
+            top: auto;
+            bottom: 100%;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: none;
+            border-bottom: 4px solid var(--ax-text);
+        }
+        
+        .tooltip-trigger:has(.tooltip.bottom):hover .tooltip.bottom {
+            transform: translateX(-50%) translateY(12px);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../../index.html#components">Components</a></li>
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-
-				 <main class="content">
-        <section class="hero small">
-										 <h1 class="title">Tooltip Component</h1>
-										 <p class="description">Axiom01's tooltip component provides a small, contextual popup that displays informative text when a user hovers over or focuses on an element. It's designed to be non-intrusive and enhance user understanding without cluttering the interface.</p>
-						 </section>
+    <main><section><div class="container">
+        <header>
+            <h1>Tooltip</h1>
+            <p class="text-muted">Axiom01's tooltip component displays contextual information on hover. Supports multiple positioning options and smooth animations for enhanced user guidance.</p>
+        </header>
 
         <div class="component-section">
 
-						 <div class="section">
-								 <h2 class="title">Live Example</h2>
-								 <div class="live">
-										 <h4>Basic Tooltip (Hover over me)</h4>
-										 <div class="tooltip-demo-container">
-                                                 <div class="tooltip top" data-component="tooltip">
-												     <button class="button primary tooltip-trigger" aria-describedby="tooltip-example-1">Hover for Info</button>
-												     <div role="tooltip" id="tooltip-example-1" class="tooltip-content" aria-hidden="true">
-														 This is a helpful tooltip!
-												     </div>
-                                                 </div>
-										 </div>
+            <section>
+                <h2>Live Examples</h2>
 
-                            <h4>Tooltip Positions</h4>
-                            <div class="tooltip-demo-container">
-												 <div class="tooltip top" data-component="tooltip">
-														 <button class="button secondary tooltip-trigger" aria-describedby="tooltip-top">Top</button>
-														 <div role="tooltip" id="tooltip-top" class="tooltip-content" aria-hidden="true">
-																 Info on top!
-														 </div>
-												 </div>
-												 <div class="tooltip right" data-component="tooltip">
-														 <button class="button secondary tooltip-trigger" aria-describedby="tooltip-right">Right</button>
-														 <div role="tooltip" id="tooltip-right" class="tooltip-content" aria-hidden="true">
-																 Info on right!
-														 </div>
-												 </div>
-												 <div class="tooltip bottom" data-component="tooltip">
-														 <button class="button secondary tooltip-trigger" aria-describedby="tooltip-bottom">Bottom</button>
-														 <div role="tooltip" id="tooltip-bottom" class="tooltip-content" aria-hidden="true">
-																 Info on bottom!
-														 </div>
-												 </div>
-												 <div class="tooltip left" data-component="tooltip">
-														 <button class="button secondary tooltip-trigger" aria-describedby="tooltip-left">Left</button>
-														 <div role="tooltip" id="tooltip-left" class="tooltip-content" aria-hidden="true">
-																 Info on left!
-														 </div>
-												 </div>
-										 </div>
-								 </div>
-						 </div>
+                <h3>Tooltip Positions</h3>
+                <div class="tooltip-demo">
+                    <button class="tooltip-trigger">
+                        <span class="axicon render" data-name="Save"></span>
+                        Save
+                        <div class="tooltip">Ctrl+S to save</div>
+                    </button>
+                    
+                    <button class="tooltip-trigger">
+                        <span class="axicon render" data-name="Share2"></span>
+                        Share
+                        <div class="tooltip right">Share on social media</div>
+                    </button>
+                    
+                    <button class="tooltip-trigger">
+                        <span class="axicon render" data-name="Download"></span>
+                        Download
+                        <div class="tooltip bottom">Download to device</div>
+                    </button>
+                    
+                    <button class="tooltip-trigger">
+                        <span class="axicon render" data-name="Settings"></span>
+                        Settings
+                        <div class="tooltip">Customize preferences</div>
+                    </button>
+                </div>
+            </section>
 
-						 <div class="section">
-								 <h2 class="title">HTML Structure</h2>
-								 <p>A tooltip consists of a trigger element and the tooltip content itself, typically wrapped in a container.</p>
-								 <div class="code-block">
-										 <pre><code class="language-html">&lt;div class="tooltip top" data-component="tooltip"&gt;
-		 &lt;button class="button primary tooltip-trigger" aria-describedby="my-tooltip-id"&gt;Hover for Info&lt;/button&gt;
-		 &lt;div role="tooltip" id="my-tooltip-id" class="tooltip-content" aria-hidden="true"&gt;
-				 This is a helpful tooltip!
-		 &lt;/div&gt;
- &lt;/div&gt;</code></pre>
-								 </div>
-						 </div>
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;button class="tooltip-trigger"&gt;
+    Hover me
+    &lt;div class="tooltip"&gt;
+        This is helpful text
+    &lt;/div&gt;
+&lt;/button&gt;
 
-						 <div class="section">
-								 <h2 class="title">Styling</h2>
-								 <p>The <code>.tooltip</code> class provides the positioning context. The <code>.tooltip-content</code> is initially hidden and styled to appear as a small, informative box. Modifier classes like <code>.top</code>, <code>.right</code>, <code>.bottom</code>, and <code>.left</code> are used to control the tooltip's position relative to its trigger.</p>
-								 <ul>
-										 <li><code>.tooltip</code>: Container for the trigger and content, providing relative positioning.</li>
-										 <li><code>.tooltip-trigger</code>: The element that activates the tooltip (e.g., a button, icon, or text).</li>
-										 <li><code>.tooltip-content</code>: The actual tooltip text, initially hidden and styled with background, text color, padding, and border-radius.</li>
-										 <li>Positioning classes (<code>.top</code>, <code>.right</code>, <code>.bottom</code>, <code>.left</code>) on the <code>.tooltip</code> container adjust the absolute position of the <code>.tooltip-content</code>.</li>
-								 </ul>
-						 </div>
+&lt;!-- Positioned variants --&gt;
+&lt;button class="tooltip-trigger"&gt;
+    Right tooltip
+    &lt;div class="tooltip right"&gt;Content&lt;/div&gt;
+&lt;/button&gt;
 
-						 <div class="section">
-								 <h2 class="title">JavaScript Integration</h2>
-								 <p>Tooltips use Axiom01's built-in component loader. Add <code>data-component="tooltip"</code> on each tooltip container and include <code>js/axiom.js</code> on the page.</p>
-								 <div class="code-block">
-										 <pre><code class="language-html">&lt;div class="tooltip top" data-component="tooltip"&gt;
-  &lt;button class="tooltip-trigger" aria-describedby="tip-id"&gt;Top&lt;/button&gt;
-  &lt;div role="tooltip" id="tip-id" class="tooltip-content" aria-hidden="true"&gt;
-    Info on top
-  &lt;/div&gt;
-&lt;/div&gt;
+&lt;button class="tooltip-trigger"&gt;
+    Bottom tooltip
+    &lt;div class="tooltip bottom"&gt;Content&lt;/div&gt;
+&lt;/button&gt;</code></pre>
+                </div>
+            </section>
 
-&lt;script src="../../js/axiom.js"&gt;&lt;/script&gt;</code></pre>
-								 </div>
-						 </div>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Hover Trigger</strong> - Show on mouse over</li>
+                    <li><strong>Multiple Positions</strong> - Top, right, bottom, left</li>
+                    <li><strong>Arrow Pointer</strong> - Visual connection to trigger</li>
+                    <li><strong>Smooth Animation</strong> - Fade and slide effects</li>
+                    <li><strong>Auto Position</strong> - Avoid viewport edges</li>
+                    <li><strong>Dark Background</strong> - High contrast text</li>
+                </ul>
+            </section>
 
-						 <div class="section">
-								 <h2 class="title">Accessibility</h2>
-								 <p>Tooltips are designed with accessibility in mind:</p>
-								 <ul>
-										 <li>The trigger element has <code>aria-describedby</code> pointing to the tooltip's ID, linking the two for screen readers.</li>
-										 <li>The tooltip content has <code>role="tooltip"</code>.</li>
-										 <li>Tooltips are activated on both hover (mouse users) and focus (keyboard users).</li>
-										 <li>The content is hidden from assistive technologies when not visible.</li>
-								 </ul>
-						 </div>
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Help Text</strong> - Explain functionality</li>
+                    <li><strong>Keyboard Shortcuts</strong> - Show shortcut keys</li>
+                    <li><strong>Icon Clarification</strong> - Explain icon meaning</li>
+                    <li><strong>Abbreviations</strong> - Expand shortened text</li>
+                    <li><strong>Hints</strong> - Contextual guidance</li>
+                    <li><strong>Status Info</strong> - Additional context</li>
+                </ul>
+            </section>
 
-						 <div class="section">
-								 <h2 class="title">Customization</h2>
-								 <p>Customize the appearance using Axiom01's CSS variables for colors, spacing, and typography. You can adjust the background, text color, padding, border-radius, and shadow of the tooltip content.</p>
-						 </div>
-				 </main>
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use <code>aria-label</code> for trigger elements</li>
+                    <li>Include tooltip content in accessible tree</li>
+                    <li>Support keyboard focus with Tab key</li>
+                    <li>Announce tooltip to screen readers</li>
+                    <li>High contrast colors (WCAG AA minimum)</li>
+                    <li>Avoid moving essential content into tooltips</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Concise Text</strong> - Keep tooltips brief</li>
+                    <li><strong>Clear Language</strong> - Avoid jargon</li>
+                    <li><strong>Smart Positioning</strong> - Stay within viewport</li>
+                    <li><strong>Delay</strong> - Don't show instantly</li>
+                    <li><strong>High Contrast</strong> - Ensure readability</li>
+                    <li><strong>Icon Support</strong> - Work with icon buttons</li>
+                </ul>
+            </section>
 
         </div>
-</div>
-<footer class="main">
-				 <div class="content">
-						 <div class="brand">
-								 <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-								 <p class="tagline">The Semantic Web, Reimagined.</p>
-						 </div>
-						 <div class="links">
-								 <div class="column">
-										 <h4>Documentation</h4>
-										 <ul>
-												 <li><a href="../components-overview.html">Component Overview</a></li>
-												 <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-																															<li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-																															<li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-												 <li><a href="../../index.html#get-started">Getting Started</a></li>
-										 </ul>
-								 </div>
-								 <div class="column">
-										 <h4>Community</h4>
-										 <ul>
-												 <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
-										 </ul>
-								 </div>
-								 <div class="column">
-										 <h4>More</h4>
-										 <ul>
-												 <li><a href="../interactive-playground.html">Playground</a></li>
-												 <li><a href="../../index.html#example-sites">Example Sites</a></li>
-												 <li><a href="../../index.html#release-info">Release Info</a></li>
-										 </ul>
-								 </div>
-						 </div>
-				 </div>
-				 <div class="bottom">
-						 <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
-				 </div>
-		 </footer>
- 
+
+    </div></section></main>
+
+    <footer class="main">
+        <div class="content">
+            <div class="brand">
+                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
+                <p class="tagline">The Semantic Web, Reimagined.</p>
+            </div>
+            <div class="links">
+                <div class="column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
+                        <li><a href="../../index.html#release-info">Release Info</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
+        </div>
+    </footer>
+
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
- </html>
+</html>

@@ -5,114 +5,342 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drawer Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-        <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .drawer-demo-container {
+            display: flex;
+            gap: var(--a-space-l);
+            margin: var(--a-space-l) 0;
+            min-height: 400px;
+        }
+        
+        .drawer-demo-content {
+            flex: 1;
+            background: var(--ax-background-secondary);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            padding: var(--a-space-l);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        .drawer-overlay.open {
+            display: block;
+        }
+        
+        .drawer-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 300px;
+            background: var(--ax-surface);
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-out;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .drawer-panel.open {
+            transform: translateX(0);
+        }
+        
+        .drawer-header {
+            padding: var(--a-space-l);
+            border-bottom: 1px solid var(--ax-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .drawer-header h2 {
+            margin: 0;
+            font-size: var(--a-font-size-lg);
+        }
+        
+        .drawer-close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--a-color-text-muted);
+            transition: color var(--a-transition-base);
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .drawer-close-btn:hover {
+            color: var(--a-color-primary);
+        }
+        
+        .drawer-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--a-space-l);
+        }
+        
+        .drawer-body nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .drawer-body nav li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .drawer-body nav a {
+            display: block;
+            padding: var(--a-space-m);
+            color: var(--a-color-primary);
+            text-decoration: none;
+            border-radius: var(--a-border-radius-md);
+            transition: background-color var(--a-transition-base);
+        }
+        
+        .drawer-body nav a:hover {
+            background: var(--a-color-primary-container);
+        }
+        
+        .drawer-footer {
+            padding: var(--a-space-l);
+            border-top: 1px solid var(--ax-border);
+        }
+        
+        @media (max-width: 768px) {
+            .drawer-demo-container {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../../index.html#components">Components</a></li>
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-    <main class="content">
-        <section class="hero small">
-            <h1 class="title">Drawer Component</h1>
-            <p class="description">Axiom01's drawer component (also known as a sidebar or off-canvas menu) provides a hidden panel that slides in from the edge of the screen. It's commonly used for navigation, settings, or supplementary content.</p>
-        </section>
-        <div class="component-section">
-            <h2>Drawer Component</h2>
-            <p>Axiom01's drawer component (also known as a sidebar or off-canvas menu) provides a hidden panel that slides in from the edge of the screen. It's commonly used for navigation, settings, or supplementary content.</p>
+    <main><section><div class="container">
+        <header>
+            <h1>Drawer</h1>
+            <p class="text-muted">Axiom01's drawer component (also called an offcanvas or side panel) slides in from the edge of the screen. Perfect for navigation, supplementary content, or settings panels.</p>
+        </header>
 
-            <h3>Example Drawer</h3>
-            <div class="drawer-container">
-                <button class="button primary" id="openDrawer">Open Drawer</button>
-                <div class="drawer" id="myDrawer">
-                    <div class="drawer-header">
-                        <h3>Drawer Title</h3>
-                        <button class="button secondary small" id="closeDrawer">Close</button>
-                    </div>
-                    <div class="drawer-content">
-                        <p>This is the content of the drawer.</p>
-                        <ul>
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                        </ul>
+        <div class="component-section">
+
+            <section>
+                <h2>Live Examples</h2>
+
+                <h3>Basic Drawer from Left</h3>
+                <div class="drawer-demo-container">
+                    <div class="drawer-demo-content">
+                        <button class="button primary" id="openDrawer1">
+                            <span class="axicon render" data-name="Menu"></span>
+                            Open Drawer
+                        </button>
+                        <p style="margin-top: var(--a-space-l);">Click the button to slide in the drawer from the left.</p>
                     </div>
                 </div>
-                <div class="drawer-backdrop" id="drawerBackdrop"></div>
-            </div>
 
-            <h3>Code Example</h3>
-            <pre><code class="language-html">&lt;button class="button primary" id="openDrawer"&gt;Open Drawer&lt;/button&gt;
+                <!-- Drawer 1 -->
+                <div class="drawer-overlay" id="drawerOverlay1"></div>
+                <div class="drawer-panel" id="drawer1" role="dialog" aria-modal="true" aria-labelledby="drawer1-title">
+                    <div class="drawer-header">
+                        <h2 id="drawer1-title">Navigation</h2>
+                        <button class="drawer-close-btn" id="closeDrawer1" aria-label="Close drawer">&times;</button>
+                    </div>
+                    <div class="drawer-body">
+                        <nav>
+                            <ul>
+                                <li><a href="#"><span class="axicon render" data-name="Home" style="margin-right: 8px;"></span>Dashboard</a></li>
+                                <li><a href="#"><span class="axicon render" data-name="File" style="margin-right: 8px;"></span>Projects</a></li>
+                                <li><a href="#"><span class="axicon render" data-name="Users" style="margin-right: 8px;"></span>Team</a></li>
+                                <li><a href="#"><span class="axicon render" data-name="Settings" style="margin-right: 8px;"></span>Settings</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="drawer-footer">
+                        <p style="margin: 0; font-size: var(--a-font-size-sm); color: var(--a-color-text-muted);">Version 1.0.0</p>
+                    </div>
+                </div>
 
-&lt;div class="drawer" id="myDrawer"&gt;
-&lt;div class="drawer-header"&gt;
-    &lt;h3&gt;Drawer Title&lt;/h3&gt;
-    &lt;button class="button secondary small" id="closeDrawer"&gt;Close&lt;/button&gt;
-&lt;/div&gt;
-&lt;div class="drawer-content"&gt;
-    &lt;p&gt;This is the content of the drawer.&lt;/p&gt;
-    &lt;ul&gt;
-        &lt;li&gt;Item 1&lt;/li&gt;
-        &lt;li&gt;Item 2&lt;/li&gt;
-        &lt;li&gt;Item 3&lt;/li&gt;
-    &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="drawer-backdrop" id="drawerBackdrop"&gt;&lt;/div&gt;
+                <h3>Drawer with Scrollable Content</h3>
+                <div class="drawer-demo-container">
+                    <div class="drawer-demo-content">
+                        <button class="button secondary" id="openDrawer2">
+                            <span class="axicon render" data-name="Book"></span>
+                            Open Documentation
+                        </button>
+                    </div>
+                </div>
 
-&lt;script&gt;
-const openDrawerBtn = document.getElementById('openDrawer');
-const closeDrawerBtn = document.getElementById('closeDrawer');
-const myDrawer = document.getElementById('myDrawer');
-const drawerBackdrop = document.getElementById('drawerBackdrop');
+                <!-- Drawer 2 -->
+                <div class="drawer-overlay" id="drawerOverlay2"></div>
+                <div class="drawer-panel" id="drawer2" role="dialog" aria-modal="true" aria-labelledby="drawer2-title">
+                    <div class="drawer-header">
+                        <h2 id="drawer2-title">Documentation</h2>
+                        <button class="drawer-close-btn" id="closeDrawer2" aria-label="Close drawer">&times;</button>
+                    </div>
+                    <div class="drawer-body">
+                        <h4>Getting Started</h4>
+                        <p>Learn the basics of using Axiom01 in your projects.</p>
+                        <h4>Components</h4>
+                        <p>Explore all 74 production-ready components with live examples.</p>
+                        <h4>Styling Guide</h4>
+                        <p>Understand the design system, color palette, and typography.</p>
+                        <h4>API Reference</h4>
+                        <p>Complete documentation of all JavaScript APIs and options.</p>
+                        <h4>Examples</h4>
+                        <p>Real-world examples and patterns using Axiom01.</p>
+                        <p style="margin-top: var(--a-space-l); padding-top: var(--a-space-l); border-top: 1px solid var(--ax-border);">More sections available...</p>
+                    </div>
+                </div>
+            </section>
 
-openDrawerBtn.addEventListener('click', () => {
-    myDrawer.classList.add('is-open');
-    drawerBackdrop.classList.add('is-open');
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;!-- Overlay backdrop --&gt;
+&lt;div class="drawer-overlay" id="drawerOverlay"&gt;&lt;/div&gt;
+
+&lt;!-- Drawer panel --&gt;
+&lt;div class="drawer-panel" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title"&gt;
+    &lt;div class="drawer-header"&gt;
+        &lt;h2 id="drawer-title"&gt;Drawer Title&lt;/h2&gt;
+        &lt;button class="drawer-close-btn" aria-label="Close drawer"&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="drawer-body"&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Navigation Item&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="drawer-footer"&gt;
+        &lt;p&gt;Footer content&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>JavaScript Implementation</h2>
+                <div class="code-block">
+                    <pre><code class="language-javascript">// Open drawer
+document.getElementById('openDrawer').addEventListener('click', () => {
+    document.getElementById('drawer').classList.add('open');
+    document.getElementById('drawerOverlay').classList.add('open');
 });
 
-closeDrawerBtn.addEventListener('click', () => {
-    myDrawer.classList.remove('is-open');
-    drawerBackdrop.classList.remove('is-open');
+// Close drawer
+document.getElementById('closeDrawer').addEventListener('click', () => {
+    document.getElementById('drawer').classList.remove('open');
+    document.getElementById('drawerOverlay').classList.remove('open');
 });
 
-drawerBackdrop.addEventListener('click', () => {
-    myDrawer.classList.remove('is-open');
-    drawerBackdrop.classList.remove('is-open');
-});
-&lt;/script&gt;</code></pre>
+// Close on overlay click
+document.getElementById('drawerOverlay').addEventListener('click', () => {
+    document.getElementById('drawer').classList.remove('open');
+    document.getElementById('drawerOverlay').classList.remove('open');
+});</code></pre>
+                </div>
+            </section>
 
-            <h3>Usage Guidelines</h3>
-            <p>The <code>.drawer</code> class defines the hidden panel. The <code>.is-open</code> class is toggled via JavaScript to show/hide the drawer. A <code>.drawer-backdrop</code> is typically used to overlay the main content when the drawer is open, providing a visual cue and preventing interaction with the background.</p>
-            <p>You will need custom JavaScript to handle the opening and closing logic, including toggling the <code>is-open</code> class on both the drawer and its backdrop.</p>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Smooth Animation</strong> - CSS transforms for hardware-accelerated sliding</li>
+                    <li><strong>Overlay Backdrop</strong> - Click outside to dismiss (optional)</li>
+                    <li><strong>Flexible Content</strong> - Header, body, and footer sections</li>
+                    <li><strong>Navigation Support</strong> - Built for navigation menus with icons</li>
+                    <li><strong>Scrollable Body</strong> - Long content automatically scrolls</li>
+                    <li><strong>Accessible</strong> - ARIA roles, keyboard support, focus management</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Navigation Menu</strong> - Primary navigation on mobile devices</li>
+                    <li><strong>Settings Panel</strong> - User preferences and configuration options</li>
+                    <li><strong>Filters</strong> - Product filters for e-commerce or listings</li>
+                    <li><strong>Notifications</strong> - Notification center or inbox</li>
+                    <li><strong>Documentation</strong> - Table of contents or navigation sidebar</li>
+                    <li><strong>Chat</strong> - Chat history or conversation list</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use <code>role="dialog"</code> and <code>aria-modal="true"</code></li>
+                    <li>Include <code>aria-labelledby</code> pointing to the title</li>
+                    <li>Provide close button with clear <code>aria-label</code></li>
+                    <li>Manage focus when opening and closing</li>
+                    <li>Support Escape key to close (recommended)</li>
+                    <li>Ensure keyboard navigation through links</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Width</strong> - Keep drawer width 250-350px for optimal usability</li>
+                    <li><strong>Mobile First</strong> - Hide drawer on desktop or place inline</li>
+                    <li><strong>Content</strong> - Keep drawer content simple and focused</li>
+                    <li><strong>Animation</strong> - Use smooth 0.3s transition for better UX</li>
+                    <li><strong>Dismissal</strong> - Provide multiple close options (button, overlay click)</li>
+                    <li><strong>Z-index</strong> - Ensure drawer sits above all page content</li>
+                </ul>
+            </section>
+
         </div>
-</main>
-<footer class="main">
+
+    </div></section></main>
+
+    <footer class="main">
         <div class="content">
             <div class="brand">
                 <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
@@ -122,23 +350,23 @@ drawerBackdrop.addEventListener('click', () => {
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -146,11 +374,70 @@ drawerBackdrop.addEventListener('click', () => {
             </div>
         </div>
         <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        // Drawer 1 handlers
+        document.getElementById('openDrawer1').addEventListener('click', () => {
+            document.getElementById('drawer1').classList.add('open');
+            document.getElementById('drawerOverlay1').classList.add('open');
+        });
+        document.getElementById('closeDrawer1').addEventListener('click', () => {
+            document.getElementById('drawer1').classList.remove('open');
+            document.getElementById('drawerOverlay1').classList.remove('open');
+        });
+        document.getElementById('drawerOverlay1').addEventListener('click', () => {
+            document.getElementById('drawer1').classList.remove('open');
+            document.getElementById('drawerOverlay1').classList.remove('open');
+        });
+
+        // Drawer 2 handlers
+        document.getElementById('openDrawer2').addEventListener('click', () => {
+            document.getElementById('drawer2').classList.add('open');
+            document.getElementById('drawerOverlay2').classList.add('open');
+        });
+        document.getElementById('closeDrawer2').addEventListener('click', () => {
+            document.getElementById('drawer2').classList.remove('open');
+            document.getElementById('drawerOverlay2').classList.remove('open');
+        });
+        document.getElementById('drawerOverlay2').addEventListener('click', () => {
+            document.getElementById('drawer2').classList.remove('open');
+            document.getElementById('drawerOverlay2').classList.remove('open');
+        });
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

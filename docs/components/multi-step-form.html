@@ -5,230 +5,426 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Step Form Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-        <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .form-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            max-width: 600px;
+        }
+        
+        .form-container {
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            overflow: hidden;
+        }
+        
+        .form-progress {
+            display: flex;
+            gap: 0;
+            background: var(--ax-background-secondary);
+            padding: var(--a-space-m) var(--a-space-l);
+        }
+        
+        .progress-step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--a-space-s);
+            position: relative;
+        }
+        
+        .progress-step::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background: var(--ax-border);
+            z-index: 0;
+        }
+        
+        .progress-step:last-child::after {
+            display: none;
+        }
+        
+        .progress-step.active::after {
+            background: var(--a-color-primary);
+        }
+        
+        .progress-dot {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--ax-background-secondary);
+            border: 2px solid var(--ax-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--a-font-weight-bold);
+            color: var(--a-color-text-muted);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .progress-step.active .progress-dot {
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border-color: var(--a-color-primary);
+        }
+        
+        .progress-step.completed .progress-dot {
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border-color: var(--a-color-primary);
+        }
+        
+        .progress-label {
+            font-size: var(--a-font-size-xs);
+            font-weight: var(--a-font-weight-semibold);
+            color: var(--a-color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .progress-step.active .progress-label {
+            color: var(--a-color-primary);
+        }
+        
+        .form-content {
+            padding: var(--a-space-xl);
+            min-height: 250px;
+        }
+        
+        .form-step {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .form-step-title {
+            margin: 0 0 var(--a-space-l) 0;
+            font-size: var(--a-font-size-lg);
+            font-weight: var(--a-font-weight-bold);
+            color: var(--ax-text);
+        }
+        
+        .form-step-description {
+            margin: 0 0 var(--a-space-l) 0;
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+        }
+        
+        .form-field {
+            margin-bottom: var(--a-space-l);
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: var(--a-space-s);
+            font-weight: var(--a-font-weight-semibold);
+            font-size: var(--a-font-size-sm);
+            color: var(--ax-text);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            background: var(--ax-surface);
+            color: var(--ax-text);
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-base);
+            transition: all var(--a-transition-base);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--a-color-primary);
+            box-shadow: 0 0 0 3px var(--a-color-primary-container);
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: var(--a-space-m);
+            padding: var(--a-space-l) var(--a-space-xl);
+            background: var(--ax-background-secondary);
+            border-top: 1px solid var(--ax-border);
+            justify-content: space-between;
+        }
+        
+        .form-button {
+            padding: 10px 24px;
+            border: none;
+            border-radius: var(--a-border-radius-md);
+            cursor: pointer;
+            font-size: var(--a-font-size-sm);
+            font-weight: var(--a-font-weight-semibold);
+            transition: all var(--a-transition-base);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .form-button.primary {
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+        }
+        
+        .form-button.primary:hover {
+            transform: scale(1.05);
+        }
+        
+        .form-button.secondary {
+            background: var(--ax-surface);
+            color: var(--ax-text);
+            border: 1px solid var(--ax-border);
+        }
+        
+        .form-button.secondary:hover {
+            border-color: var(--a-color-primary);
+            color: var(--a-color-primary);
+        }
+        
+        .form-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .form-success {
+            text-align: center;
+            padding: var(--a-space-xl);
+        }
+        
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: var(--a-space-m);
+        }
+        
+        .success-message {
+            margin: 0;
+            font-size: var(--a-font-size-lg);
+            font-weight: var(--a-font-weight-bold);
+            color: var(--ax-text);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../../index.html#components">Components</a></li>
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-
-    <main class="content">
-        <section class="hero small">
-            <h1 class="title">Multi-Step Form Component</h1>
-            <p class="description">Axiom01 provides a flexible structure and styling for creating multi-step forms, guiding users through complex data entry processes with clear progress indication and navigation.</p>
-        </section>
+    <main><section><div class="container">
+        <header>
+            <h1>Multi-Step Form</h1>
+            <p class="text-muted">Axiom01's multi-step form component breaks complex forms into manageable sections with progress tracking. Features step indicators, validation, and navigation controls.</p>
+        </header>
 
         <div class="component-section">
 
-        <div class="section">
-            <h2 >Live Example</h2>
-            <div class="example">
-                <div class="multi-step-form-container">
-                    <div class="progress-indicator">
-                        <div class="step active">1</div>
-                        <div class="step">2</div>
-                        <div class="step">3</div>
-                        <div class="step">4</div>
+            <section>
+                <h2>Live Examples</h2>
+
+                <h3>Account Setup Wizard</h3>
+                <div class="form-demo">
+                    <div class="form-container">
+                        <div class="form-progress" id="formProgress">
+                            <div class="progress-step active">
+                                <div class="progress-dot">1</div>
+                                <div class="progress-label">Account</div>
+                            </div>
+                            <div class="progress-step">
+                                <div class="progress-dot">2</div>
+                                <div class="progress-label">Profile</div>
+                            </div>
+                            <div class="progress-step">
+                                <div class="progress-dot">3</div>
+                                <div class="progress-label">Review</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-content">
+                            <div class="form-step active" id="step1">
+                                <h2 class="form-step-title">Create Account</h2>
+                                <p class="form-step-description">Enter your email and password</p>
+                                <div class="form-field">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-input" placeholder="your@email.com">
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-input" placeholder="••••••••">
+                                </div>
+                            </div>
+                            
+                            <div class="form-step" id="step2">
+                                <h2 class="form-step-title">Complete Profile</h2>
+                                <p class="form-step-description">Tell us about yourself</p>
+                                <div class="form-field">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" class="form-input" placeholder="John Doe">
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label">Company</label>
+                                    <input type="text" class="form-input" placeholder="Acme Corp">
+                                </div>
+                            </div>
+                            
+                            <div class="form-step" id="step3">
+                                <h2 class="form-step-title">Review Information</h2>
+                                <p class="form-step-description">Confirm your details before submitting</p>
+                                <div class="form-field" style="padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-md);">
+                                    <p style="margin: 0; font-size: var(--a-font-size-sm); color: var(--a-color-text-muted);">
+                                        <strong>Email:</strong> your@email.com<br>
+                                        <strong>Name:</strong> John Doe<br>
+                                        <strong>Company:</strong> Acme Corp
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="form-step" id="stepSuccess">
+                                <div class="form-success">
+                                    <div class="success-icon">✅</div>
+                                    <p class="success-message">Account Created Successfully!</p>
+                                    <p style="margin: var(--a-space-m) 0 0 0; color: var(--a-color-text-muted); font-size: var(--a-font-size-sm);">Your account is ready to use</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="form-button secondary" id="prevBtn">
+                                <span class="axicon render" data-name="ChevronLeft"></span>
+                                Previous
+                            </button>
+                            <button class="form-button primary" id="nextBtn">
+                                Next
+                                <span class="axicon render" data-name="ChevronRight"></span>
+                            </button>
+                        </div>
                     </div>
-                    <form class="multi-step-form">
-                        <div class="form-step active" data-step="1">
-                            <h3>Step 1: Personal Information</h3>
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" placeholder="John">
-
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" placeholder="Doe">
-
-                            <button type="button" class="button primary next-step">Next</button>
-                        </div>
-                        <div class="form-step" data-step="2">
-                            <h3>Step 2: Contact Details</h3>
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="john.doe@example.com">
-
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" placeholder="123-456-7890">
-
-                            <div class="form-actions">
-                                <button type="button" class="button secondary prev-step">Previous</button>
-                                <button type="button" class="button primary next-step">Next</button>
-                            </div>
-                        </div>
-                        <div class="form-step" data-step="3">
-                            <h3>Step 3: Address</h3>
-                            <label for="address1">Address Line 1</label>
-                            <input type="text" id="address1" placeholder="123 Main St">
-
-                            <label for="city">City</label>
-                            <input type="text" id="city" placeholder="Anytown">
-
-                            <div class="form-actions">
-                                <button type="button" class="button secondary prev-step">Previous</button>
-                                <button type="button" class="button primary next-step">Next</button>
-                            </div>
-                        </div>
-                        <div class="form-step" data-step="4">
-                            <h3>Step 4: Confirmation</h3>
-                            <p>Please review your information before submitting.</p>
-                            <div class="review-details">
-                                <p><strong>Name:</strong> <span id="review-name"></span></p>
-                                <p><strong>Email:</strong> <span id="review-email"></span></p>
-                                <p><strong>Address:</strong> <span id="review-address"></span></p>
-                            </div>
-                            <div class="form-actions">
-                                <button type="button" class="button secondary prev-step">Previous</button>
-                                <button type="submit" class="button primary">Submit</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <div class="section">
-            <h2 class="title">HTML Structure</h2>
-            <p>The multi-step form is built around a main container, a progress indicator, and individual form steps.</p>
-            <div class="code-block">
-                <pre><code class="language-html">&lt;div class="multi-step-form-container"&gt;
-&lt;div class="progress-indicator"&gt;
-    &lt;div class="step active"&gt;1&lt;/div&gt;
-    &lt;div class="step"&gt;2&lt;/div&gt;
-    &lt;div class="step"&gt;3&lt;/div&gt;
-    &lt;div class="step"&gt;4&lt;/div&gt;
-&lt;/div&gt;
-&lt;form class="multi-step-form"&gt;
-    &lt;div class="form-step active" data-step="1"&gt;
-        &lt;h3&gt;Step 1: Personal Information&lt;/h3&gt;
-        &lt;!-- Form fields for step 1 --&gt;
-        &lt;button type="button" class="button primary next-step"&gt;Next&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;div class="form-step" data-step="2"&gt;
-        &lt;h3&gt;Step 2: Contact Details&lt;/h3&gt;
-        &lt;!-- Form fields for step 2 --&gt;
-        &lt;div class="form-actions"&gt;
-            &lt;button type="button" class="button secondary prev-step"&gt;Previous&lt;/button&gt;
-            &lt;button type="button" class="button primary next-step"&gt;Next&lt;/button&gt;
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="form-container"&gt;
+    &lt;div class="form-progress"&gt;
+        &lt;div class="progress-step active"&gt;
+            &lt;div class="progress-dot"&gt;1&lt;/div&gt;
+            &lt;div class="progress-label"&gt;Step 1&lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-    &lt;!-- More steps --&gt;
-&lt;/form&gt;
+    
+    &lt;div class="form-content"&gt;
+        &lt;div class="form-step active"&gt;
+            &lt;h2 class="form-step-title"&gt;Title&lt;/h2&gt;
+            &lt;div class="form-field"&gt;
+                &lt;label class="form-label"&gt;Label&lt;/label&gt;
+                &lt;input type="text" class="form-input"&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="form-actions"&gt;
+        &lt;button class="form-button secondary"&gt;Previous&lt;/button&gt;
+        &lt;button class="form-button primary"&gt;Next&lt;/button&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-            </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Progress Indicator</strong> - Visual step tracking</li>
+                    <li><strong>Step Navigation</strong> - Previous/Next controls</li>
+                    <li><strong>Form Validation</strong> - Validate before advancing</li>
+                    <li><strong>Field Organization</strong> - Logical grouping of inputs</li>
+                    <li><strong>Success State</strong> - Completion confirmation</li>
+                    <li><strong>State Persistence</strong> - Remember entered data</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Account Registration</strong> - Multi-step signup flow</li>
+                    <li><strong>Checkout</strong> - E-commerce purchase process</li>
+                    <li><strong>Onboarding</strong> - Setup wizard for new users</li>
+                    <li><strong>Surveys</strong> - Multi-page questionnaires</li>
+                    <li><strong>Applications</strong> - Job or grant applications</li>
+                    <li><strong>Configuration</strong> - Complex app setup</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic form elements</li>
+                    <li>Include proper labels on all inputs</li>
+                    <li>Announce current step to screen readers</li>
+                    <li>Support keyboard navigation</li>
+                    <li>Show validation error messages clearly</li>
+                    <li>Maintain focus management between steps</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Progress</strong> - Show which step user is on</li>
+                    <li><strong>Logical Grouping</strong> - Related fields on same step</li>
+                    <li><strong>Validation</strong> - Validate before advancing</li>
+                    <li><strong>Save Progress</strong> - Remember entered data</li>
+                    <li><strong>Error Messages</strong> - Clear, actionable feedback</li>
+                    <li><strong>Estimated Time</strong> - Show expected duration</li>
+                </ul>
+            </section>
+
         </div>
 
-        <div class="section">
-            <h2 class="title">Styling</h2>
-            <p>Axiom01 provides base styling for the multi-step form elements:</p>
-            <ul>
-                <li><code>.multi-step-form-container</code>: Main wrapper for the form and its indicators.</li>
-                <li><code>.progress-indicator</code>: Container for the step circles.</li>
-                <li><code>.progress-indicator .step</code>: Individual step circles. The <code>.active</code> class highlights the current step.</li>
-                <li><code>.form-step</code>: Container for each step's content. The <code>.active</code> class shows the current step.</li>
-                <li><code>.form-actions</code>: A flex container for grouping navigation buttons.</li>
-            </ul>
-            <p>You will need to implement CSS to hide inactive <code>.form-step</code> elements and show only the active one, typically using <code>display: none;</code> and <code>display: block;</code> or similar visibility toggles.</p>
-        </div>
+    </div></section></main>
 
-        <div class="section">
-            <h2 class="title">JavaScript Integration</h2>
-            <p>The interactive logic for navigating between steps, validating input, and updating the progress indicator will need to be implemented with JavaScript. This includes:</p>
-            <ul>
-                <li>Event listeners for "Next" and "Previous" buttons.</li>
-                <li>Functions to show/hide form steps.</li>
-                <li>Logic to update the <code>.active</code> class on both the progress indicator steps and the form steps.</li>
-                <li>(Optional) Client-side validation before allowing users to proceed to the next step.</li>
-            </ul>
-            <p>Axiom01 does not provide this JavaScript out-of-the-box for multi-step forms, allowing developers to integrate their preferred validation and state management libraries.</p>
-        </div>
-
-        <div class="section">
-            <h2 class="title">Accessibility</h2>
-            <p>Ensure that your JavaScript implementation correctly manages focus, ARIA attributes (e.g., <code>aria-current="step"</code> on the active progress indicator, <code>aria-hidden</code> on inactive steps), and keyboard navigation to provide an accessible experience.</p>
-        </div>
-
-        <div class="section">
-            <h2 class="title">Customization</h2>
-            <p>Customize the appearance using Axiom01's CSS variables for colors, spacing, and typography. The layout of the progress indicator and form steps can be adjusted with standard CSS properties.</p>
-        </div>
-</main>
-
-        </div>
-</div>
-
-    <script>
-        // Basic JavaScript for Multi-Step Form Demo
-        document.addEventListener('DOMContentLoaded', () => {
-            const formContainer = document.querySelector('.multi-step-form-container');
-            if (!formContainer) return;
-
-            const formSteps = formContainer.querySelectorAll('.form-step');
-            const progressSteps = formContainer.querySelectorAll('.progress-indicator .step');
-            let currentStep = 0;
-
-            const showStep = (stepIndex) => {
-                formSteps.forEach((step, index) => {
-                    step.classList.toggle('active', index === stepIndex);
-                });
-                progressSteps.forEach((step, index) => {
-                    step.classList.toggle('active', index === stepIndex);
-                });
-                updateReviewDetails();
-            };
-
-            const updateReviewDetails = () => {
-                if (formSteps[3] && formSteps[3].classList.contains('active')) {
-                    document.getElementById('review-name').textContent = `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`;
-                    document.getElementById('review-email').textContent = document.getElementById('email').value;
-                    document.getElementById('review-address').textContent = `${document.getElementById('address1').value}, ${document.getElementById('city').value}`;
-                }
-            };
-
-            formContainer.addEventListener('click', (event) => {
-                if (event.target.classList.contains('next-step')) {
-                    if (currentStep < formSteps.length - 1) {
-                        currentStep++;
-                        showStep(currentStep);
-                    }
-                } else if (event.target.classList.contains('prev-step')) {
-                    if (currentStep > 0) {
-                        currentStep--;
-                        showStep(currentStep);
-                    }
-                }
-            });
-
-            showStep(currentStep); // Initialize first step
-        });
-    </script>
     <footer class="main">
         <div class="content">
             <div class="brand">
@@ -239,23 +435,23 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -263,11 +459,100 @@
             </div>
         </div>
         <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+        
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const formProgress = document.getElementById('formProgress');
+        
+        function updateForm() {
+            // Update step visibility
+            for (let i = 1; i <= totalSteps; i++) {
+                const step = document.getElementById(`step${i}`);
+                if (step) {
+                    step.classList.toggle('active', i === currentStep);
+                }
+            }
+            document.getElementById('stepSuccess').classList.toggle('active', currentStep === totalSteps + 1);
+            
+            // Update progress indicators
+            const steps = formProgress.querySelectorAll('.progress-step');
+            steps.forEach((step, index) => {
+                const stepNum = index + 1;
+                step.classList.toggle('active', stepNum === currentStep);
+                step.classList.toggle('completed', stepNum < currentStep);
+            });
+            
+            // Update button states
+            prevBtn.disabled = currentStep === 1;
+            nextBtn.disabled = currentStep === totalSteps + 1;
+            
+            if (currentStep === totalSteps) {
+                nextBtn.textContent = 'Submit';
+            } else if (currentStep === totalSteps + 1) {
+                nextBtn.textContent = 'Start Over';
+            } else {
+                nextBtn.innerHTML = 'Next <span class="axicon render" data-name="ChevronRight"></span>';
+            }
+            
+            renderAxicons();
+        }
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateForm();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentStep <= totalSteps) {
+                currentStep++;
+                updateForm();
+            } else {
+                currentStep = 1;
+                updateForm();
+            }
+        });
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+        updateForm();
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

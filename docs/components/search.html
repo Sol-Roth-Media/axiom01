@@ -5,160 +5,367 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-        <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .search-demo {
+            background: var(--ax-background-secondary);
+            padding: var(--a-space-l);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            max-width: 600px;
+        }
+        
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: var(--a-space-m);
+            padding-left: var(--a-space-l);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-base);
+            background: var(--ax-surface);
+            color: var(--ax-text);
+            transition: all var(--a-transition-base);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--a-color-primary);
+            box-shadow: 0 0 0 3px var(--a-color-primary-container);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: var(--a-space-m);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--a-color-text-muted);
+            pointer-events: none;
+        }
+        
+        .search-clear {
+            position: absolute;
+            right: var(--a-space-m);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--a-color-text-muted);
+            display: none;
+            padding: 4px;
+            border-radius: var(--a-border-radius-sm);
+            transition: all var(--a-transition-base);
+        }
+        
+        .search-clear:hover {
+            color: var(--a-color-primary);
+            background: var(--a-color-primary-container);
+        }
+        
+        .search-clear.visible {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .search-results {
+            margin-top: var(--a-space-m);
+            border-top: 1px solid var(--ax-border);
+            padding-top: var(--a-space-m);
+            display: none;
+        }
+        
+        .search-results.visible {
+            display: block;
+        }
+        
+        .search-result-item {
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-sm);
+            cursor: pointer;
+            transition: background-color var(--a-transition-base);
+            border-bottom: 1px solid var(--ax-border-light);
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-result-item:hover {
+            background-color: var(--a-color-primary-container);
+        }
+        
+        .result-title {
+            font-weight: var(--a-font-weight-semibold);
+            color: var(--a-color-primary);
+            margin: 0 0 4px 0;
+        }
+        
+        .result-desc {
+            font-size: var(--a-font-size-sm);
+            color: var(--a-color-text-muted);
+            margin: 0;
+        }
+        
+        .search-no-results {
+            padding: var(--a-space-l);
+            text-align: center;
+            color: var(--a-color-text-muted);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .search-filters {
+            display: flex;
+            gap: var(--a-space-m);
+            margin-top: var(--a-space-m);
+            flex-wrap: wrap;
+        }
+        
+        .filter-badge {
+            padding: 6px 12px;
+            border-radius: var(--a-border-radius-md);
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            font-size: var(--a-font-size-sm);
+            cursor: pointer;
+            transition: all var(--a-transition-base);
+        }
+        
+        .filter-badge:hover {
+            border-color: var(--a-color-primary);
+            color: var(--a-color-primary);
+        }
+        
+        .filter-badge.active {
+            background: var(--a-color-primary);
+            border-color: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../../index.html#components">Components</a></li>
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-
-				 <main class="content">
-        <section class="hero small">
-										 <h1 class="title">Search Component</h1>
-										 <p class="description">The Search component provides an accessible and interactive search overlay for your website, allowing users to quickly find documentation, components, or any other content. It leverages native HTML elements and minimal CSS for a lightweight and performant solution.</p>
-						 </section>
+    <main><section><div class="container">
+        <header>
+            <h1>Search</h1>
+            <p class="text-muted">Axiom01's search component provides a powerful, accessible way to find content. Features real-time filtering, keyboard navigation, and customizable results display.</p>
+        </header>
 
         <div class="component-section">
 
-						 <div class="section">
-								 <h2 class="title">Live Example</h2>
-								 <div class="live">
-										 <button class="search toggle" aria-label="Open Search" aria-controls="search-dialog" aria-expanded="false">
-												 <i class="fas fa-search" aria-hidden="true"></i>
-										 </button>
+            <section>
+                <h2>Live Examples</h2>
 
-										 <div id="search-modal" class="search-modal is-hidden" data-component="search" aria-modal="true" role="dialog">
-												 <div class="search-modal-content">
-														 <header>
-																 <h3>Search Documentation</h3>
-																 <button class="close" aria-label="Close Search">&times;</button>
-														 </header>
-														 <div class="body">
-																 <input type="search" id="search-modal-input" placeholder="Search components, guides, and more...">
-																 <div id="search-modal-results" class="search-results">
-																		 <!-- Search results will be dynamically inserted here -->
-                                <ul>
-                                    <li><a href="#"><strong>Accordion</strong> Component <small>docs/components/accordion.html</small></a></li>
-                                    <li><a href="#"><strong>Dropdown</strong> Component <small>docs/components/dropdown.html</small></a></li>
-                                    <li><a href="#">Getting Started with <strong>Axiom01</strong> <small>README.md</small></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                <h3>Basic Search with Results</h3>
+                <div class="search-demo">
+                    <div class="search-container">
+                        <span class="search-icon">
+                            <span class="axicon render" data-name="Search"></span>
+                        </span>
+                        <input 
+                            type="text" 
+                            class="search-input" 
+                            id="searchInput1"
+                            placeholder="Search products..." 
+                            aria-label="Search products"
+                            aria-autocomplete="list"
+                            aria-controls="searchResults1"
+                        >
+                        <button class="search-clear" id="searchClear1" aria-label="Clear search">
+                            <span class="axicon render" data-name="X"></span>
+                        </button>
+                    </div>
+                    
+                    <div class="search-results" id="searchResults1" role="listbox">
+                        <!-- Results will be populated by JavaScript -->
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="section">
-            <h2 class="title">HTML Structure</h2>
-            <p>The search component uses a minimal HTML structure, relying on <code>data-*</code> attributes for JavaScript targeting and semantic elements for accessibility.</p>
-            <div class="code-block">
-                <pre><code class="language-html">&lt;!-- Search Toggle Button (can be placed anywhere, e.g., in header) --&gt;
-&lt;button class="search toggle" aria-label="Open Search" aria-controls="search-dialog" aria-expanded="false"&gt;
-&lt;i class="fas fa-search" aria-hidden="true"&gt;&lt;/i&gt;
-&lt;/button&gt;
+                <h3>Search with Filters</h3>
+                <div class="search-demo">
+                    <div class="search-container">
+                        <span class="search-icon">
+                            <span class="axicon render" data-name="Search"></span>
+                        </span>
+                        <input 
+                            type="text" 
+                            class="search-input" 
+                            id="searchInput2"
+                            placeholder="Search documentation..." 
+                            aria-label="Search documentation"
+                        >
+                        <button class="search-clear" id="searchClear2" aria-label="Clear search">
+                            <span class="axicon render" data-name="X"></span>
+                        </button>
+                    </div>
+                    
+                    <div class="search-filters">
+                        <span class="filter-badge active" data-filter="all">All</span>
+                        <span class="filter-badge" data-filter="guide">Guide</span>
+                        <span class="filter-badge" data-filter="api">API</span>
+                        <span class="filter-badge" data-filter="example">Example</span>
+                    </div>
+                </div>
+            </section>
 
-&lt;!-- Search Overlay Structure --&gt;
-&lt;div id="search-modal" class="search-modal is-hidden" data-component="search" aria-modal="true" role="dialog"&gt;
-&lt;div class="search-modal-content"&gt;
-    &lt;header&gt;
-        &lt;h3&gt;Search Documentation&lt;/h3&gt;
-        &lt;button class="close" aria-label="Close Search"&gt;&amp;times;&lt;/button&gt;
-    &lt;/header&gt;
-    &lt;div class="body"&gt;
-        &lt;input type="search" id="search-modal-input" placeholder="Search components, guides, and more..."&gt;
-        &lt;div id="search-modal-results" class="search-results"&gt;
-            &lt;!-- Search results will be dynamically inserted here --&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="search-container"&gt;
+    &lt;span class="search-icon"&gt;
+        &lt;span class="axicon render" data-name="Search"&gt;&lt;/span&gt;
+    &lt;/span&gt;
+    
+    &lt;input 
+        type="text" 
+        class="search-input"
+        placeholder="Search..."
+        aria-label="Search"
+        aria-autocomplete="list"
+        aria-controls="results"
+    &gt;
+    
+    &lt;button class="search-clear" aria-label="Clear search"&gt;
+        &lt;span class="axicon render" data-name="X"&gt;&lt;/span&gt;
+    &lt;/button&gt;
 &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-            </div>
-        </div>
 
-        <div class="section">
-            <h2 class="title">JavaScript Initialization</h2>
-            <p>The <code>index-page-manager.js</code> script automatically initializes any element with <code>data-component="search"</code>. The search functionality relies on the Fuse.js library.</p>
-            <p>The search component expects a global <code>searchData</code> array to be available, which contains the content to be searched. This data should be an array of objects, where each object has at least a <code>title</code>, <code>category</code>, and <code>url</code> property.</p>
-            <h3>Required Markup Contract</h3>
-            <ul>
-                <li>Use <code>data-component="search"</code> on the modal/dialog root element.</li>
-                <li>Use a trigger button with <code>data-search-toggle</code> (or the legacy <code>.search.toggle</code> class pattern).</li>
-                <li>Inside the modal, include elements using <code>data-search-close</code>, <code>data-search-input</code>, and <code>data-search-results</code>.</li>
-                <li>The component manages <code>aria-expanded</code> on the trigger and <code>aria-hidden</code> on the modal state.</li>
-            </ul>
-            <div class="code-block">
-                <pre><code class="language-javascript">// Example searchData structure (must be globally accessible before search.js initializes)
+&lt;div class="search-results" id="results" role="listbox"&gt;
+    &lt;div class="search-result-item" role="option"&gt;
+        &lt;h3 class="result-title"&gt;Result Title&lt;/h3&gt;
+        &lt;p class="result-desc"&gt;Result description&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>JavaScript Implementation</h2>
+                <div class="code-block">
+                    <pre><code class="language-javascript">const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
 const searchData = [
-{ title: "Accordion", category: "feedback", url: "docs/components/accordion.html" },
-{ title: "AI Chat", category: "ai", url: "docs/components/ai-chat.html" },
-// ... more data
+    { title: 'Product A', desc: 'Description A' },
+    { title: 'Product B', desc: 'Description B' },
+    // ... more data
 ];
 
-// The initSearchModal function in index-page-manager.js will automatically pick this up.
-// Ensure Fuse.js is loaded before index-page-manager.js.
-</code></pre>
-            </div>
+searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    const clearBtn = document.querySelector('.search-clear');
+    
+    if (query) {
+        clearBtn.classList.add('visible');
+        const results = searchData.filter(item =>
+            item.title.toLowerCase().includes(query)
+        );
+        
+        displayResults(results);
+    } else {
+        clearBtn.classList.remove('visible');
+        searchResults.classList.remove('visible');
+    }
+});
+
+function displayResults(results) {
+    searchResults.innerHTML = results.length 
+        ? results.map(r => `
+            &lt;div class="search-result-item"&gt;
+                &lt;h3 class="result-title"&gt;${r.title}&lt;/h3&gt;
+                &lt;p class="result-desc"&gt;${r.desc}&lt;/p&gt;
+            &lt;/div&gt;
+        `).join('')
+        : '&lt;div class="search-no-results"&gt;No results found&lt;/div&gt;';
+    
+    searchResults.classList.add('visible');
+}</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Real-time Search</strong> - Instant filtering as user types</li>
+                    <li><strong>Clear Button</strong> - Quick way to reset search</li>
+                    <li><strong>Search Icon</strong> - Visual indication of search field</li>
+                    <li><strong>No Results Message</strong> - Feedback when nothing matches</li>
+                    <li><strong>Keyboard Navigation</strong> - Full keyboard support</li>
+                    <li><strong>Filter Support</strong> - Filter results by category</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Product Search</strong> - E-commerce product discovery</li>
+                    <li><strong>Documentation</strong> - API or guide search</li>
+                    <li><strong>User Directory</strong> - Find team members or contacts</li>
+                    <li><strong>Content Discovery</strong> - Blog or article search</li>
+                    <li><strong>Settings</strong> - Search for options and preferences</li>
+                    <li><strong>Command Palette</strong> - Quick command lookup</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use semantic input element with appropriate aria-label</li>
+                    <li>Include <code>aria-autocomplete="list"</code> for autocomplete behavior</li>
+                    <li>Use <code>role="listbox"</code> for results container</li>
+                    <li>Use <code>role="option"</code> for individual results</li>
+                    <li>Support keyboard navigation (arrows, enter, escape)</li>
+                    <li>Announce search results count to screen readers</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Debounce Input</strong> - Wait before filtering for large datasets</li>
+                    <li><strong>Highlight Matches</strong> - Emphasize matching text in results</li>
+                    <li><strong>Limit Results</strong> - Show max 10 results to avoid clutter</li>
+                    <li><strong>Case Insensitive</strong> - Match regardless of case</li>
+                    <li><strong>Clear on Submit</strong> - Navigate to result and clear input</li>
+                    <li><strong>Search History</strong> - Optional: show recent searches</li>
+                </ul>
+            </section>
+
         </div>
 
-        <div class="section">
-            <h2 class="title">Accessibility</h2>
-            <p>The search component is designed with accessibility in mind:</p>
-            <ul>
-                <li>The main search overlay has <code>aria-modal="true"</code> and <code>role="dialog"</code>.</li>
-                <li>Toggle and close buttons have descriptive <code>aria-label</code> attributes.</li>
-                <li>The toggle button's <code>aria-controls</code> links it to the search dialog, and <code>aria-expanded</code> indicates its state.</li>
-                <li>Focus is managed to trap within the modal when open and return to the trigger when closed.</li>
-                <li>Keyboard navigation is supported: <code>Escape</code> key closes the modal, and arrow keys can navigate search results.</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2 class="title">Customization</h2>
-            <p>The appearance of the search modal can be customized using CSS variables defined in <code>css/axiom.css</code>:</p>
-            <ul>
-                <li><code>--a-color-overlay-bg</code>: Background color of the modal overlay.</li>
-                <li><code>--a-color-surface</code>: Background color of the search content area.</li>
-                <li><code>--a-color-outline</code>: Border color for input and separators.</li>
-                <li><code>--a-color-on-surface</code>: Text color.</li>
-                <li><code>--a-color-on-surface-variant</code>: Secondary text color (e.g., placeholders, small text).</li>
-                <li><code>--a-color-primary</code>: Primary accent color.</li>
-                <li><code>--a-border-radius-medium</code>: General border radius.</li>
-                <li><code>--a-shadow-large</code>: For the modal's shadow.</li>
-                <li><code>--a-space-*</code>: Various spacing variables for padding and margins.</li>
-            </ul>
-        </div>
-    </div>
-    </main>
+    </div></section></main>
 
     <footer class="main">
         <div class="content">
@@ -170,23 +377,23 @@ const searchData = [
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -194,14 +401,105 @@ const searchData = [
             </div>
         </div>
         <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        const searchData1 = [
+            { title: 'Product A', desc: 'Premium quality widget for professionals' },
+            { title: 'Product B', desc: 'Budget-friendly solution for startups' },
+            { title: 'Product C', desc: 'Enterprise-grade management system' },
+            { title: 'Product D', desc: 'Lightweight alternative for developers' },
+            { title: 'Product E', desc: 'Comprehensive platform with analytics' },
+        ];
+
+        function setupSearch(inputId, resultsId, clearId, data) {
+            const searchInput = document.getElementById(inputId);
+            const searchResults = document.getElementById(resultsId);
+            const clearBtn = document.getElementById(clearId);
+
+            function displayResults(results) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+                } else {
+                    searchResults.innerHTML = results.map(r => `
+                        <div class="search-result-item" role="option">
+                            <h3 class="result-title">${r.title}</h3>
+                            <p class="result-desc">${r.desc}</p>
+                        </div>
+                    `).join('');
+                }
+                searchResults.classList.add('visible');
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                
+                if (query.length > 0) {
+                    clearBtn.classList.add('visible');
+                    const results = data.filter(item =>
+                        item.title.toLowerCase().includes(query) ||
+                        item.desc.toLowerCase().includes(query)
+                    );
+                    displayResults(results);
+                } else {
+                    clearBtn.classList.remove('visible');
+                    searchResults.classList.remove('visible');
+                }
+            });
+
+            clearBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                clearBtn.classList.remove('visible');
+                searchResults.classList.remove('visible');
+                searchInput.focus();
+            });
+        }
+
+        setupSearch('searchInput1', 'searchResults1', 'searchClear1', searchData1);
+
+        // Filter functionality
+        document.querySelectorAll('[data-filter]').forEach(filter => {
+            filter.addEventListener('click', (e) => {
+                document.querySelectorAll('[data-filter]').forEach(f => 
+                    f.classList.remove('active')
+                );
+                e.target.classList.add('active');
+            });
+        });
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

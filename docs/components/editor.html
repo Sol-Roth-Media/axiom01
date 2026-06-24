@@ -5,84 +5,384 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-    <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .editor-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            overflow: hidden;
+        }
+        
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            height: 450px;
+            background: var(--ax-surface);
+        }
+        
+        .editor-toolbar {
+            display: flex;
+            gap: var(--a-space-s);
+            padding: var(--a-space-m);
+            border-bottom: 1px solid var(--ax-border);
+            background: var(--ax-background-secondary);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: var(--a-space-xs);
+            padding: 0 var(--a-space-s);
+            border-right: 1px solid var(--ax-border);
+        }
+        
+        .toolbar-group:last-child {
+            border-right: none;
+        }
+        
+        .toolbar-button {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--ax-border);
+            background: var(--ax-surface);
+            border-radius: var(--a-border-radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--a-color-primary);
+            transition: all var(--a-transition-base);
+            font-size: 14px;
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .toolbar-button:hover {
+            background: var(--a-color-primary-container);
+            border-color: var(--a-color-primary);
+        }
+        
+        .toolbar-button.active {
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border-color: var(--a-color-primary);
+        }
+        
+        .editor-content {
+            flex: 1;
+            padding: var(--a-space-l);
+            overflow-y: auto;
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-base);
+            line-height: 1.6;
+            color: var(--ax-text);
+            border: none;
+            outline: none;
+            resize: none;
+            background: var(--ax-surface);
+        }
+        
+        .editor-content:focus {
+            outline: none;
+        }
+        
+        .editor-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--a-space-m);
+            border-top: 1px solid var(--ax-border);
+            background: var(--ax-background-secondary);
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+        }
+        
+        .editor-word-count {
+            display: flex;
+            gap: var(--a-space-l);
+        }
+        
+        .editor-actions {
+            display: flex;
+            gap: var(--a-space-m);
+        }
+        
+        .editor-actions button {
+            padding: 6px 16px;
+            border-radius: var(--a-border-radius-md);
+            border: 1px solid var(--ax-border);
+            cursor: pointer;
+            font-size: var(--a-font-size-sm);
+            transition: all var(--a-transition-base);
+        }
+        
+        .editor-actions .cancel {
+            background: var(--ax-surface);
+            color: var(--ax-text);
+        }
+        
+        .editor-actions .cancel:hover {
+            background: var(--ax-background-secondary);
+        }
+        
+        .editor-actions .save {
+            background: var(--a-color-primary);
+            color: var(--a-color-primary-on);
+            border-color: var(--a-color-primary);
+        }
+        
+        .editor-actions .save:hover {
+            opacity: 0.9;
+        }
+        
+        .format-preview {
+            margin-top: var(--a-space-l);
+            padding: var(--a-space-l);
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-md);
+            border: 1px solid var(--ax-border);
+        }
+        
+        .format-preview h3 {
+            margin: 0 0 var(--a-space-m) 0;
+            font-size: var(--a-font-size-base);
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .format-preview p {
+            margin: 0 0 var(--a-space-m) 0;
+        }
+        
+        .format-preview strong {
+            font-weight: var(--a-font-weight-bold);
+            color: var(--a-color-primary);
+        }
+        
+        .format-preview em {
+            font-style: italic;
+            color: var(--a-color-primary);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../../index.html#components">Components</a></li>
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
-                <button class="search toggle" aria-label="Open Search"><i class="fas fa-search" aria-hidden="true"></i></button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub"><i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span></a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
-                <button class="menu toggle" aria-label="Toggle Menu"><i class="fas fa-bars" aria-hidden="true"></i></button>
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-    <main class="content">
-        <section class="hero small">
-            <h1 class="title">Editor Component</h1>
-            <p class="description">The <strong>Editor</strong> component provides foundational styling for a standard HTML <code>&lt;textarea&gt;</code>, keeping it visually consistent with the rest of Axiom01.</p>
-            <p class="description">For rich-text behavior (WYSIWYG tools, formatting, embeds), integrate a third-party library such as CKEditor, TinyMCE, or Quill.</p>
-        </section>
+    <main><section><div class="container">
+        <header>
+            <h1>Editor</h1>
+            <p class="text-muted">Axiom01's editor component provides a rich text editing interface with toolbar controls, formatting options, and real-time word count. Perfect for content creation, notes, and rich text input.</p>
+        </header>
 
-        <div class="section">
-            <h2 class="title">Live Example</h2>
-            <div class="live">
-                <label for="rich-text-editor">Content Editor:</label>
-                <textarea id="rich-text-editor" class="editor-placeholder" placeholder="Start writing your rich content here..."></textarea>
-                <p>Note: this is a styled textarea. Rich text features require a third-party editor integration.</p>
-            </div>
+        <div class="component-section">
+
+            <section>
+                <h2>Live Examples</h2>
+
+                <h3>Basic Rich Text Editor</h3>
+                <div class="editor-demo">
+                    <div class="editor-container" id="editor1">
+                        <div class="editor-toolbar">
+                            <div class="toolbar-group">
+                                <button class="toolbar-button" title="Bold" data-format="bold">
+                                    <strong>B</strong>
+                                </button>
+                                <button class="toolbar-button" title="Italic" data-format="italic">
+                                    <em>I</em>
+                                </button>
+                                <button class="toolbar-button" title="Underline" data-format="underline">
+                                    <u>U</u>
+                                </button>
+                            </div>
+                            <div class="toolbar-group">
+                                <button class="toolbar-button" title="List" data-format="insertUnorderedList">
+                                    <span class="axicon render" data-name="List"></span>
+                                </button>
+                                <button class="toolbar-button" title="Quote" data-format="formatBlock" data-value="blockquote">
+                                    <span class="axicon render" data-name="Quote"></span>
+                                </button>
+                            </div>
+                            <div class="toolbar-group">
+                                <button class="toolbar-button" title="Clear Formatting" data-format="removeFormat">
+                                    <span class="axicon render" data-name="X"></span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-content" id="editorContent1" contenteditable="true" role="textbox" aria-label="Rich text editor" placeholder="Start typing...">Start typing your content here. Use the toolbar buttons above to format your text.</div>
+                        
+                        <div class="editor-footer">
+                            <div class="editor-word-count">
+                                <span>Words: <strong id="wordCount1">0</strong></span>
+                                <span>Characters: <strong id="charCount1">0</strong></span>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="cancel">Cancel</button>
+                                <button class="save">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Formatted Content Preview</h3>
+                <div class="format-preview">
+                    <p>The editor supports formatting like <strong>bold text</strong>, <em>italic text</em>, and more. You can also create lists and block quotes.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="editor-container"&gt;
+    &lt;div class="editor-toolbar"&gt;
+        &lt;div class="toolbar-group"&gt;
+            &lt;button class="toolbar-button" data-format="bold"&gt;B&lt;/button&gt;
+            &lt;button class="toolbar-button" data-format="italic"&gt;I&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div 
+        class="editor-content" 
+        id="editor" 
+        contenteditable="true"
+        role="textbox"
+        aria-label="Rich text editor"
+    &gt;&lt;/div&gt;
+    
+    &lt;div class="editor-footer"&gt;
+        &lt;div class="editor-word-count"&gt;
+            &lt;span&gt;Words: &lt;strong id="wordCount"&gt;0&lt;/strong&gt;&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="editor-actions"&gt;
+            &lt;button class="cancel"&gt;Cancel&lt;/button&gt;
+            &lt;button class="save"&gt;Save&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>JavaScript Implementation</h2>
+                <div class="code-block">
+                    <pre><code class="language-javascript">function setupEditor(containerId, contentId) {
+    const toolbar = document.querySelectorAll(
+        `#${containerId} .toolbar-button`
+    );
+    const content = document.getElementById(contentId);
+    
+    // Toolbar button click handlers
+    toolbar.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const format = button.dataset.format;
+            const value = button.dataset.value;
+            
+            if (value) {
+                document.execCommand(format, false, value);
+            } else {
+                document.execCommand(format, false, null);
+            }
+            
+            content.focus();
+            button.classList.toggle('active');
+        });
+    });
+    
+    // Update word/character count
+    content.addEventListener('input', () => {
+        const text = content.innerText || '';
+        const words = text.trim().split(/\s+/).length;
+        const chars = text.length;
+        
+        document.getElementById('wordCount').innerText = words;
+        document.getElementById('charCount').innerText = chars;
+    });
+}
+
+setupEditor('editor1', 'editorContent1');</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Rich Text Formatting</strong> - Bold, italic, underline, strikethrough</li>
+                    <li><strong>List Support</strong> - Ordered and unordered lists</li>
+                    <li><strong>Block Elements</strong> - Headings, paragraphs, blockquotes</li>
+                    <li><strong>Toolbar Controls</strong> - One-click formatting buttons</li>
+                    <li><strong>Word/Character Count</strong> - Real-time statistics</li>
+                    <li><strong>Clear Formatting</strong> - Remove all formatting from selected text</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Blog Publishing</strong> - Create and format blog posts</li>
+                    <li><strong>Note Taking</strong> - Rich notes with formatting</li>
+                    <li><strong>Email Composition</strong> - Formatted email bodies</li>
+                    <li><strong>Document Editing</strong> - Collaborative document creation</li>
+                    <li><strong>Content Management</strong> - CMS article editing</li>
+                    <li><strong>Comment Systems</strong> - Formatted user comments</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use <code>role="textbox"</code> on editable area</li>
+                    <li>Include <code>aria-label</code> for content area</li>
+                    <li>Provide keyboard shortcuts for all formatting</li>
+                    <li>Show active state for applied formatting</li>
+                    <li>Support Tab key for toolbar navigation</li>
+                    <li>Announce character/word count updates</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Save Drafts</strong> - Auto-save content periodically</li>
+                    <li><strong>Undo/Redo</strong> - Provide undo/redo functionality</li>
+                    <li><strong>Placeholder Text</strong> - Guide users with helpful hints</li>
+                    <li><strong>Keyboard Shortcuts</strong> - Ctrl+B for bold, Ctrl+I for italic</li>
+                    <li><strong>Spell Check</strong> - Built-in browser spell checking</li>
+                    <li><strong>Character Limit</strong> - Show limits if needed</li>
+                </ul>
+            </section>
+
         </div>
 
-        <div class="section">
-            <h2 class="title">Usage Guidelines</h2>
-            <ul>
-                <li>Apply <code>.editor-placeholder</code> to the <code>&lt;textarea&gt;</code>.</li>
-                <li>Always provide an associated <code>&lt;label&gt;</code> for accessibility.</li>
-                <li>Initialize your chosen rich-text library on that textarea when needed.</li>
-            </ul>
-        </div>
+    </div></section></main>
 
-        <div class="section">
-            <h2 class="title">Recommended Integrations</h2>
-            <ul>
-                <li><a href="https://ckeditor.com/" target="_blank" rel="noopener">CKEditor</a></li>
-                <li><a href="https://www.tiny.cloud/" target="_blank" rel="noopener">TinyMCE</a></li>
-                <li><a href="https://quilljs.com/" target="_blank" rel="noopener">Quill</a></li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2 class="title">Code Example</h2>
-            <div class="code-block">
-<pre><code class="language-html">&lt;label for="rich-text-editor"&gt;Content Editor:&lt;/label&gt;
-&lt;textarea id="rich-text-editor" class="editor-placeholder" placeholder="Start writing your rich content here..."&gt;&lt;/textarea&gt;
-&lt;p&gt;Rich text features require a third-party editor integration.&lt;/p&gt;</code></pre>
-            </div>
-        </div>
-        <div class="section">
-            <h2 class="title">Required Markup Contract</h2>
-            <ul>
-                <li>Use a semantic <code>&lt;textarea&gt;</code> as the editable field.</li>
-                <li>Attach <code>.editor-placeholder</code> for baseline Axiom styling.</li>
-                <li>Always pair the textarea with an explicit <code>&lt;label&gt;</code>.</li>
-            </ul>
-        </div>
-    </main>
-<footer class="main">
+    <footer class="main">
         <div class="content">
             <div class="brand">
                 <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
@@ -92,23 +392,23 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="../../index.html#get-started">Getting Started</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -116,11 +416,82 @@
             </div>
         </div>
         <div class="bottom">
-            <p>&copy; 2025 Axiom01. All Rights Reserved.</p>
+            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        function setupEditor(containerId, contentId) {
+            const container = document.getElementById(containerId);
+            const toolbar = container.querySelectorAll('.toolbar-button');
+            const content = document.getElementById(contentId);
+            const wordCountEl = container.querySelector('#wordCount1');
+            const charCountEl = container.querySelector('#charCount1');
+
+            toolbar.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const format = button.dataset.format;
+                    const value = button.dataset.value;
+                    
+                    if (value) {
+                        document.execCommand(format, false, value);
+                    } else {
+                        document.execCommand(format, false, null);
+                    }
+                    
+                    content.focus();
+                    button.classList.toggle('active');
+                    updateCount();
+                });
+            });
+
+            function updateCount() {
+                const text = content.innerText || '';
+                const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+                const chars = text.length;
+                
+                wordCountEl.innerText = words;
+                charCountEl.innerText = chars;
+            }
+
+            content.addEventListener('input', updateCount);
+            content.addEventListener('keyup', updateCount);
+        }
+
+        setupEditor('editor1', 'editorContent1');
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

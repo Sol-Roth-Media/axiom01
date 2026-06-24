@@ -5,165 +5,369 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Menu Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.css">
-    <link rel="stylesheet" href="../../css/doc-styles.css">
-    <link rel="stylesheet" href="../../css/doc-preview.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../../css/axicons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .account-menu-demo {
+            background: var(--ax-background-secondary);
+            border-radius: var(--a-border-radius-lg);
+            border: 1px solid var(--ax-border);
+            margin: var(--a-space-l) 0;
+            padding: var(--a-space-l);
+            max-width: 500px;
+            position: relative;
+            min-height: 400px;
+        }
+        
+        .account-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--a-space-s);
+            padding: var(--a-space-s);
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-md);
+            cursor: pointer;
+            transition: all var(--a-transition-base);
+        }
+        
+        .account-trigger:hover {
+            border-color: var(--a-color-primary);
+        }
+        
+        .account-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--a-color-primary), var(--a-color-primary-container));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--a-color-primary-on);
+            font-weight: var(--a-font-weight-bold);
+            font-size: 14px;
+        }
+        
+        .account-menu {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 280px;
+            background: var(--ax-surface);
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            z-index: 1000;
+            animation: slideDown 0.2s ease-out;
+        }
+        
+        .account-menu.open {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .account-header {
+            padding: var(--a-space-l);
+            border-bottom: 1px solid var(--ax-border);
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-m);
+        }
+        
+        .account-header-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--a-color-primary), var(--a-color-primary-container));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--a-color-primary-on);
+            font-weight: var(--a-font-weight-bold);
+            font-size: 20px;
+        }
+        
+        .account-info h3 {
+            margin: 0 0 4px 0;
+            font-size: var(--a-font-size-sm);
+            font-weight: var(--a-font-weight-semibold);
+        }
+        
+        .account-info p {
+            margin: 0;
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-text-muted);
+        }
+        
+        .account-menu-list {
+            list-style: none;
+            margin: 0;
+            padding: var(--a-space-m) 0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .account-menu-item {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .account-menu-link {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-m);
+            padding: var(--a-space-m) var(--a-space-l);
+            color: var(--ax-text);
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: var(--a-font-family-base);
+            font-size: var(--a-font-size-sm);
+            transition: all var(--a-transition-base);
+            width: 100%;
+            text-align: left;
+        }
+        
+        .account-menu-link:hover {
+            background: var(--a-color-primary-container);
+            color: var(--a-color-primary);
+        }
+        
+        .menu-icon {
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: inherit;
+        }
+        
+        .divider {
+            height: 1px;
+            background: var(--ax-border);
+            margin: var(--a-space-s) 0;
+        }
+        
+        .danger-zone {
+            padding: var(--a-space-s) 0;
+        }
+        
+        .danger-link {
+            color: var(--a-color-error, #d32f2f);
+        }
+        
+        .danger-link:hover {
+            background: rgba(211, 47, 47, 0.1);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
             <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
             <ul class="links">
-                <li><a href="../../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../../index.html#components">Components</a></li>
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Component Overview</a></li>
-            </ul>
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+
             <div class="actions">
                 <button class="search toggle" aria-label="Open Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <i class="fab fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i>
-                </button>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
 
-    <main class="content">
-        <section class="hero small">
-            <h1 class="title">Account Menu Component</h1>
-            <p class="description">A dropdown menu component for user authentication and profile access. Displays logged-in user information with links to profile, settings, and logout. <span class="badge success">Session 2 Backport</span></p>
-        </section>
+    <main><section><div class="container">
+        <header>
+            <h1>Account Menu</h1>
+            <p class="text-muted">Axiom01's account menu component provides a dropdown interface for user account access, settings, and profile management. Perfect for top navigation or header areas.</p>
+        </header>
 
         <div class="component-section">
-            <h2>Overview</h2>
-            <p>The Account Menu component provides a consistent, accessible way to display user authentication status and provide quick access to user-related actions. It automatically shows different content for authenticated and anonymous users.</p>
 
-            <h2>Features</h2>
-            <ul>
-                <li>✅ Shows logged-in username with profile icon</li>
-                <li>✅ Dropdown menu for profile, settings, logout</li>
-                <li>✅ Shows "Log in" link for anonymous users</li>
-                <li>✅ Fully keyboard accessible (arrow keys, Escape)</li>
-                <li>✅ Click-outside to close</li>
-                <li>✅ Smooth animations and hover effects</li>
-                <li>✅ Mobile responsive (full-width on small screens)</li>
-                <li>✅ Dark mode compatible</li>
-                <li>✅ WCAG 2.1 AA compliant</li>
-            </ul>
+            <section>
+                <h2>Live Examples</h2>
 
-            <h2>Basic Usage</h2>
-            <div class="component-preview">
-                <div class="account-menu" data-component="account-menu">
-                    <button class="account-button" aria-expanded="false" aria-haspopup="menu">
-                        <span class="account-icon">👤</span>
-                        <span class="account-name">User Account</span>
-                        <span class="account-toggle">⋮</span>
+                <h3>Account Dropdown Menu</h3>
+                <div class="account-menu-demo">
+                    <button class="account-trigger" id="accountTrigger">
+                        <div class="account-avatar">JD</div>
+                        <span>John Doe</span>
+                        <span class="axicon render" data-name="ChevronDown"></span>
                     </button>
-                    <ul class="account-dropdown" role="menu">
-                        <li><a href="#" role="menuitem">My Profile</a></li>
-                        <li><a href="#" role="menuitem">Settings</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#" role="menuitem">Logout</a></li>
-                    </ul>
+                    
+                    <div class="account-menu" id="accountMenu" role="menu">
+                        <div class="account-header">
+                            <div class="account-header-avatar">JD</div>
+                            <div class="account-info">
+                                <h3>John Doe</h3>
+                                <p>john@example.com</p>
+                            </div>
+                        </div>
+                        
+                        <ul class="account-menu-list">
+                            <li class="account-menu-item">
+                                <button class="account-menu-link" role="menuitem">
+                                    <span class="menu-icon">
+                                        <span class="axicon render" data-name="User"></span>
+                                    </span>
+                                    My Profile
+                                </button>
+                            </li>
+                            <li class="account-menu-item">
+                                <button class="account-menu-link" role="menuitem">
+                                    <span class="menu-icon">
+                                        <span class="axicon render" data-name="Briefcase"></span>
+                                    </span>
+                                    My Projects
+                                </button>
+                            </li>
+                            <li class="account-menu-item">
+                                <button class="account-menu-link" role="menuitem">
+                                    <span class="menu-icon">
+                                        <span class="axicon render" data-name="Clock"></span>
+                                    </span>
+                                    Activity Log
+                                </button>
+                            </li>
+                        </ul>
+                        
+                        <div class="divider"></div>
+                        
+                        <ul class="account-menu-list">
+                            <li class="account-menu-item">
+                                <button class="account-menu-link" role="menuitem">
+                                    <span class="menu-icon">
+                                        <span class="axicon render" data-name="Settings"></span>
+                                    </span>
+                                    Settings
+                                </button>
+                            </li>
+                            <li class="account-menu-item">
+                                <button class="account-menu-link" role="menuitem">
+                                    <span class="menu-icon">
+                                        <span class="axicon render" data-name="HelpCircle"></span>
+                                    </span>
+                                    Help & Support
+                                </button>
+                            </li>
+                        </ul>
+                        
+                        <div class="divider"></div>
+                        
+                        <div class="danger-zone">
+                            <button class="account-menu-link danger-link" role="menuitem">
+                                <span class="menu-icon">
+                                    <span class="axicon render" data-name="LogOut"></span>
+                                </span>
+                                Sign Out
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <h3>HTML Structure</h3>
-            <pre><code class="language-html">&lt;div class="account-menu" data-component="account-menu"&gt;
-  &lt;button class="account-button" 
-          aria-expanded="false" 
-          aria-haspopup="menu"&gt;
-    &lt;span class="account-icon"&gt;👤&lt;/span&gt;
-    &lt;span class="account-name"&gt;John Doe&lt;/span&gt;
-    &lt;span class="account-toggle"&gt;⋮&lt;/span&gt;
-  &lt;/button&gt;
-  
-  &lt;ul class="account-dropdown" role="menu"&gt;
-    &lt;li&gt;&lt;a href="/profile" role="menuitem"&gt;My Profile&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="/settings" role="menuitem"&gt;Settings&lt;/a&gt;&lt;/li&gt;
-    &lt;li class="divider"&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="/logout" role="menuitem"&gt;Logout&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;button class="account-trigger" id="accountTrigger"&gt;
+    &lt;div class="account-avatar"&gt;JD&lt;/div&gt;
+    &lt;span&gt;John Doe&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;div class="account-menu" id="accountMenu" role="menu"&gt;
+    &lt;div class="account-header"&gt;
+        &lt;div class="account-header-avatar"&gt;JD&lt;/div&gt;
+        &lt;div class="account-info"&gt;
+            &lt;h3&gt;John Doe&lt;/h3&gt;
+            &lt;p&gt;john@example.com&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;ul class="account-menu-list"&gt;
+        &lt;li class="account-menu-item"&gt;
+            &lt;button class="account-menu-link" role="menuitem"&gt;
+                My Profile
+            &lt;/button&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
 &lt;/div&gt;</code></pre>
-
-            <h3>Anonymous Users</h3>
-            <div class="component-preview">
-                <div class="account-menu">
-                    <a href="#" class="login-link">Log in</a>
                 </div>
-            </div>
-            <pre><code class="language-html">&lt;div class="account-menu"&gt;
-  &lt;a href="/login" class="login-link"&gt;Log in&lt;/a&gt;
-&lt;/div&gt;</code></pre>
+            </section>
 
-            <h2>JavaScript</h2>
-            <p>The component is initialized automatically when the page loads. The JavaScript is located at <code>js/components/account-menu.js</code>.</p>
+            <section>
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>User Avatar</strong> - Visual identification with initials</li>
+                    <li><strong>Account Header</strong> - Shows user info and avatar</li>
+                    <li><strong>Menu Items</strong> - Organized action items with icons</li>
+                    <li><strong>Dividers</strong> - Separate menu sections</li>
+                    <li><strong>Danger Zone</strong> - Destructive actions (sign out)</li>
+                    <li><strong>Smooth Animation</strong> - Slide-down menu appearance</li>
+                </ul>
+            </section>
 
-            <h3>Keyboard Shortcuts</h3>
-            <ul>
-                <li><kbd>Enter</kbd> or <kbd>Space</kbd> - Toggle dropdown</li>
-                <li><kbd>Arrow Up</kbd> - Navigate to previous menu item</li>
-                <li><kbd>Arrow Down</kbd> - Navigate to next menu item</li>
-                <li><kbd>Home</kbd> - Jump to first menu item</li>
-                <li><kbd>End</kbd> - Jump to last menu item</li>
-                <li><kbd>Escape</kbd> - Close dropdown</li>
-                <li><kbd>Click Outside</kbd> - Close dropdown</li>
-            </ul>
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Header Navigation</strong> - Top-right user menu</li>
+                    <li><strong>Profile Access</strong> - Quick access to user profile</li>
+                    <li><strong>Settings</strong> - Application preferences</li>
+                    <li><strong>Account Management</strong> - Billing, security, notifications</li>
+                    <li><strong>Help & Support</strong> - Documentation and support links</li>
+                    <li><strong>Authentication</strong> - Sign out and session management</li>
+                </ul>
+            </section>
 
-            <h3>Required Markup Contract</h3>
-            <ul>
-                <li>Use <code>data-component="account-menu"</code> on the root container.</li>
-                <li>Include one <code>.account-button</code> toggle button and one <code>.account-dropdown</code> menu.</li>
-                <li>Menu links should use <code>role="menuitem"</code> for keyboard navigation.</li>
-                <li>The component manages <code>aria-expanded</code>, <code>aria-controls</code>, and <code>aria-hidden</code> automatically.</li>
-            </ul>
+            <section>
+                <h2>Accessibility</h2>
+                <ul>
+                    <li>Use <code>role="menu"</code> on the dropdown container</li>
+                    <li>Use <code>role="menuitem"</code> on menu items</li>
+                    <li>Support keyboard navigation (arrow keys, Enter)</li>
+                    <li>Close menu on Escape key</li>
+                    <li>Manage focus when opening/closing</li>
+                    <li>Include aria-labels for icon-only buttons</li>
+                </ul>
+            </section>
 
-            <h2>CSS Variables</h2>
-            <p>The component uses Axiom's color and spacing variables for theming:</p>
-            <pre><code class="language-css">/* Color variables */
---a-color-surface       /* Background color */
---a-color-on-surface    /* Text color */
---a-color-primary       /* Highlight color on hover */
---a-color-outline       /* Border color */
---a-color-surface-variant /* Hover background */
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Clear Organization</strong> - Group related items logically</li>
+                    <li><strong>User Info Display</strong> - Show current user at top</li>
+                    <li><strong>Icon + Text</strong> - Use both for clarity</li>
+                    <li><strong>Dividers</strong> - Separate primary and secondary actions</li>
+                    <li><strong>Danger Zone</strong> - Separate destructive actions at bottom</li>
+                    <li><strong>Click Outside</strong> - Close menu when clicking elsewhere</li>
+                </ul>
+            </section>
 
-/* Spacing variables */
---a-space-xs            /* 0.25rem - toggle icon */
---a-space-s             /* 0.5rem - padding on items */
---a-space-m             /* 1rem - padding on button */</code></pre>
-
-            <h2>Accessibility</h2>
-            <ul>
-                <li>Semantic HTML with proper roles (<code>menu</code>, <code>menuitem</code>)</li>
-                <li>ARIA attributes: <code>aria-expanded</code>, <code>aria-haspopup</code>, <code>aria-controls</code>, <code>aria-hidden</code>, <code>aria-label</code></li>
-                <li>Keyboard navigation support (arrows, Home/End, Escape, Enter)</li>
-                <li>Focus management within dropdown</li>
-                <li>High contrast in both light and dark modes</li>
-                <li>Screen reader friendly</li>
-            </ul>
-
-            <h2>Browser Support</h2>
-            <ul>
-                <li>Chrome/Edge (latest)</li>
-                <li>Firefox (latest)</li>
-                <li>Safari (latest)</li>
-                <li>Mobile browsers (iOS Safari, Chrome Mobile)</li>
-            </ul>
         </div>
 
-    </main>
+    </div></section></main>
 
     <footer class="main">
         <div class="content">
@@ -175,22 +379,23 @@
                 <div class="column">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../markdown-template.html?file=../../README.md">README</a></li>
-                        <li><a href="../markdown-template.html?file=../../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="../markdown-template.html?file=../../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+                        <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../animations.html">Animations</a></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../styling-guide.html">Styling Guide</a></li>
+                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>Community</h4>
                     <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
                     </ul>
                 </div>
                 <div class="column">
                     <h4>More</h4>
                     <ul>
-                        <li><a href="../interactive-playground.html">Playground</a></li>
                         <li><a href="../../index.html#example-sites">Example Sites</a></li>
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
@@ -201,7 +406,61 @@
             <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
+
     <script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons.js"></script>
+    <script>
+        // Account menu toggle
+        const trigger = document.getElementById('accountTrigger');
+        const menu = document.getElementById('accountMenu');
+        
+        trigger.addEventListener('click', () => {
+            menu.classList.toggle('open');
+        });
+        
+        // Close on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                menu.classList.remove('open');
+            }
+        });
+        
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.account-trigger') && !e.target.closest('.account-menu')) {
+                menu.classList.remove('open');
+            }
+        });
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
     <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>
