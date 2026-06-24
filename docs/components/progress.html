@@ -11,343 +11,432 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <style>
-        .progress-demo {
-            background: var(--ax-background-secondary);
-            border-radius: var(--a-border-radius-lg);
-            border: 1px solid var(--ax-border);
-            margin: var(--a-space-l) 0;
-            padding: var(--a-space-l);
-        }
-        
-        .progress-section {
-            margin-bottom: var(--a-space-xl);
-        }
-        
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: var(--a-space-s);
-            font-size: var(--a-font-size-sm);
-            font-weight: var(--a-font-weight-semibold);
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--ax-background-secondary);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: var(--a-space-l);
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--a-color-primary), var(--a-color-primary-container));
-            border-radius: 4px;
-            transition: width 0.3s ease-out;
-        }
-        
-        .progress-fill.success {
-            background: linear-gradient(90deg, #4caf50, #66bb6a);
-        }
-        
-        .progress-fill.warning {
-            background: linear-gradient(90deg, #ff9800, #ffb74d);
-        }
-        
-        .progress-fill.error {
-            background: linear-gradient(90deg, #d32f2f, #ef5350);
-        }
-        
-        .skeleton-loader {
-            display: flex;
-            flex-direction: column;
-            gap: var(--a-space-m);
-            padding: var(--a-space-l);
-            background: var(--ax-surface);
-            border: 1px solid var(--ax-border);
-            border-radius: var(--a-border-radius-md);
-        }
-        
-        .skeleton-item {
-            display: flex;
-            gap: var(--a-space-m);
-            align-items: center;
-        }
-        
-        .skeleton-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--ax-background-secondary);
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-        
-        .skeleton-content {
-            flex: 1;
-        }
-        
-        .skeleton-line {
-            height: 12px;
-            background: var(--ax-background-secondary);
-            border-radius: 4px;
-            margin-bottom: 8px;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-        
-        .skeleton-line.full {
-            width: 100%;
-        }
-        
-        .skeleton-line.short {
-            width: 60%;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
-        
-        .linear-progress {
-            display: flex;
-            align-items: center;
-            gap: var(--a-space-m);
-        }
-        
-        .linear-progress-bar {
-            flex: 1;
-            height: 6px;
-            background: var(--ax-background-secondary);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        
-        .linear-progress-fill {
-            height: 100%;
-            background: var(--a-color-primary);
-            border-radius: 3px;
-            animation: progress-animation 2s ease-in-out infinite;
-        }
-        
-        @keyframes progress-animation {
-            0% { width: 0%; }
-            50% { width: 100%; }
-            100% { width: 0%; }
-        }
-    </style>
 </head>
 <body class="axiom-body component-doc">
-    <header class="main" data-component="mobile-navbar">
-        <nav role="navigation" aria-label="Main Navigation">
-            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-            <ul class="links">
-			<li><a href="../../index.html#get-started">Get Started</a></li>
-			<li><a href="../components-overview.html">Docs</a></li>
-			<li><a href="../../index.html#axicons">Axicons</a></li>
-		</ul>
+    	<!-- HEADER NAVIGATION -->
+	<header class="main" data-component="mobile-navbar">
+		<nav role="navigation" aria-label="Main Navigation">
+			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+			<ul class="links">
+				<li><a href="../../index.html#get-started">Get Started</a></li>
+				<li><a href="../components-overview.html">Docs</a></li>
+				<li><a href="../../index.html#axicons">Axicons</a></li>
+			</ul>
 
-            <div class="actions">
-                <button class="btn toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom01" class="btn btn-secondary" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="GitHub"></span>
-                    <span>GitHub</span>
-                </a>
-                <button class="btn toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-                <button class="btn toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+			<div class="actions">
+				<button class="search toggle" aria-label="Open Search">
+					<span class="axicon render" data-name="Search"></span>
+				</button>
+				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+					<span class="axicon render" data-name="GitHub"></span>
+					<span>GitHub</span>
+				</a>
+				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+					<span class="axicon render" data-name="Moon"></span>
+				</button>
+				<button class="menu toggle" aria-label="Toggle Menu">
+					<span class="axicon render" data-name="Menu"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Progress</h1>
+                <p class="tagline">Native HTML5 progress element with AXIOM01 styling</p>
             </div>
-        </nav>
-    </header>
+        </section>
 
-    <main><section><div class="container">
-        <header>
-            <h1>Progress & Skeleton</h1>
-            <p class="text-muted">Axiom01's progress and skeleton loader components provide visual feedback for ongoing operations and loading states. Essential for improved perceived performance.</p>
-        </header>
+        <section>
+            <div class="container">
+                <section>
+                    <header>
+                        <h2>Live Examples</h2>
+                    </header>
 
-        <div class="component-section">
+                    <div class="grid">
+                        <article class="card">
+                            <header>
+                                <h3>50% Complete</h3>
+                            </header>
+                            <main>
+                                <progress value="50" max="100" style="width: 100%;"></progress>
+                                <p style="font-size: var(--a-font-size-sm); color: var(--a-color-text-muted); margin-top: var(--a-space-s);">50/100</p>
+                            </main>
+                        </article>
 
-            <section>
-                <h2>Live Examples</h2>
+                        <article class="card">
+                            <header>
+                                <h3>75% Complete</h3>
+                            </header>
+                            <main>
+                                <progress value="75" max="100" style="width: 100%;"></progress>
+                                <p style="font-size: var(--a-font-size-sm); color: var(--a-color-text-muted); margin-top: var(--a-space-s);">75/100</p>
+                            </main>
+                        </article>
 
-                <h3>Progress Bars</h3>
-                <div class="progress-demo">
-                    <div class="progress-section">
-                        <div class="progress-label">
-                            <span>File Upload</span>
-                            <span>65%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 65%;"></div>
-                    
-                    <div class="progress-section">
-                        <div class="progress-label">
-                            <span>Installation</span>
-                            <span>100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill success" style="width: 100%;"></div>
-                    
-                    <div class="progress-section">
-                        <div class="progress-label">
-                            <span>Processing</span>
-                            <span>42%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill warning" style="width: 42%;"></div>
-                    
-                    <div class="progress-section">
-                        <div class="progress-label">
-                            <span>Download</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill error" style="width: 85%;"></div>
-                </div>
+                        <article class="card">
+                            <header>
+                                <h3>Complete (100%)</h3>
+                            </header>
+                            <main>
+                                <progress value="100" max="100" style="width: 100%;"></progress>
+                                <p style="font-size: var(--a-font-size-sm); color: var(--a-color-text-muted); margin-top: var(--a-space-s);">100/100</p>
+                            </main>
+                        </article>
 
-                <h3>Skeleton Loaders</h3>
-                <div class="progress-demo">
-                    <div class="skeleton-loader">
-                        <div class="skeleton-item">
-                            <div class="skeleton-avatar"></div>
-                            <div class="skeleton-content">
-                                <div class="skeleton-line full"></div>
-                                <div class="skeleton-line short"></div>
-                        <div class="skeleton-item">
-                            <div class="skeleton-avatar"></div>
-                            <div class="skeleton-content">
-                                <div class="skeleton-line full"></div>
-                                <div class="skeleton-line short"></div>
-                        <div class="skeleton-item">
-                            <div class="skeleton-avatar"></div>
-                            <div class="skeleton-content">
-                                <div class="skeleton-line full"></div>
-                                <div class="skeleton-line short"></div>
+                        <article class="card">
+                            <header>
+                                <h3>Indeterminate (No Max)</h3>
+                            </header>
+                            <main>
+                                <progress style="width: 100%;"></progress>
+                                <p style="font-size: var(--a-font-size-sm); color: var(--a-color-text-muted); margin-top: var(--a-space-s);">Loading...</p>
+                            </main>
+                        </article>
+
+                        <article class="card">
+                            <header>
+                                <h3>Upload Progress</h3>
+                            </header>
+                            <main>
+                                <label for="upload-progress" style="display: block; margin-bottom: var(--a-space-s); font-weight: var(--a-font-weight-semibold);">Uploading: <span id="upload-percent">0</span>%</label>
+                                <progress id="upload-progress" value="0" max="100" style="width: 100%;"></progress>
+                            </main>
+                        </article>
+
+                        <article class="card">
+                            <header>
+                                <h3>File Download</h3>
+                            </header>
+                            <main>
+                                <label for="download-progress" style="display: block; margin-bottom: var(--a-space-s); font-weight: var(--a-font-weight-semibold);">Downloaded: <span id="download-percent">45</span>%</label>
+                                <progress id="download-progress" value="45" max="100" style="width: 100%;"></progress>
+                            </main>
+                        </article>
                     </div>
-                </div>
+                </section>
 
-                <h3>Linear Progress (Indeterminate)</h3>
-                <div class="progress-demo">
-                    <div class="linear-progress">
-                        <div class="linear-progress-bar">
-                            <div class="linear-progress-fill"></div>
-                </div>
-            </section>
+                <section>
+                    <header>
+                        <h2>Browser APIs</h2>
+                    </header>
 
-            <section>
-                <h2>HTML Structure</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="progress-bar"&gt;
-    &lt;div class="progress-fill" style="width: 65%;"&gt;&lt;/div&gt;
-&lt;/div&gt;
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Native &lt;progress&gt; Element</h3>
+                            <p>Built-in to all modern browsers for displaying task progress.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Semantic Meaning</h3>
+                            <p>Tells assistive technologies exactly what it represents.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Determinate/Indeterminate</h3>
+                            <p>Show specific progress or indeterminate loading state.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Screen Reader Support</h3>
+                            <p>Announces percentage and task status automatically.</p>
+                        </article>
+                        <article class="card">
+                            <h3>JavaScript API</h3>
+                            <p>Simple value/max properties for programmatic control.</p>
+                        </article>
+                        <article class="card">
+                            <h3>CSS Styleable</h3>
+                            <p>Style with CSS ::before and ::after pseudo-elements.</p>
+                        </article>
+                    </div>
+                </section>
 
-&lt;div class="skeleton-loader"&gt;
-    &lt;div class="skeleton-item"&gt;
-        &lt;div class="skeleton-avatar"&gt;&lt;/div&gt;
-        &lt;div class="skeleton-content"&gt;
-            &lt;div class="skeleton-line full"&gt;&lt;/div&gt;
-            &lt;div class="skeleton-line short"&gt;&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
+                <section>
+                    <header>
+                        <h2>HTML Structure</h2>
+                    </header>
 
-            <section>
-                <h2>Features</h2>
-                <ul>
-                    <li><strong>Determinate Progress</strong> - Show percentage complete</li>
-                    <li><strong>Indeterminate Progress</strong> - Animate while loading</li>
-                    <li><strong>Status Colors</strong> - Success, warning, error states</li>
-                    <li><strong>Skeleton Screens</strong> - Placeholder while loading</li>
-                    <li><strong>Smooth Animations</strong> - Fluid transitions</li>
-                    <li><strong>Accessible</strong> - aria-valuenow and aria-valuemax</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Basic Progress Bar</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;progress value="50" max="100"&gt;&lt;/progress&gt;</code></pre>
+                        </main>
+                    </article>
 
-            <section>
-                <h2>Use Cases</h2>
-                <ul>
-                    <li><strong>File Operations</strong> - Upload, download progress</li>
-                    <li><strong>Loading States</strong> - Content being fetched</li>
-                    <li><strong>Installation</strong> - Setup progress tracking</li>
-                    <li><strong>Batch Operations</strong> - Process status display</li>
-                    <li><strong>Perceived Performance</strong> - Skeleton screens</li>
-                    <li><strong>Long Operations</strong> - Background task progress</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Indeterminate Progress</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;!-- No value attribute = indeterminate (loading) state --&gt;
+&lt;progress&gt;&lt;/progress&gt;</code></pre>
+                        </main>
+                    </article>
 
-            <section>
-                <h2>Accessibility</h2>
-                <ul>
-                    <li>Use <code>role="progressbar"</code> on determinate progress</li>
-                    <li>Include <code>aria-valuenow</code> and <code>aria-valuemax</code></li>
-                    <li>Provide percentage text alongside bar</li>
-                    <li>Use color + text for status indication</li>
-                    <li>Announce completion to screen readers</li>
-                    <li>Support high contrast mode</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>With Label and Percentage</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;label for="task-progress"&gt;
+  Upload: &lt;span id="percent"&gt;45&lt;/span&gt;%
+&lt;/label&gt;
+&lt;progress id="task-progress" value="45" max="100"&gt;&lt;/progress&gt;</code></pre>
+                        </main>
+                    </article>
 
-            <section>
-                <h2>Best Practices</h2>
-                <ul>
-                    <li><strong>Show Progress</strong> - Always indicate ongoing operation</li>
-                    <li><strong>Accurate Estimates</strong> - Don't fake progress completion</li>
-                    <li><strong>Skeleton Screens</strong> - Better UX than spinners</li>
-                    <li><strong>Color Meaning</strong> - Use consistent color semantics</li>
-                    <li><strong>Clear Labels</strong> - Show what's loading</li>
-                    <li><strong>Completion Feedback</strong> - Signal when done</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Multiple Progress Bars</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;h3&gt;Task Progress&lt;/h3&gt;
+&lt;p&gt;Task 1: &lt;progress value="90" max="100"&gt;&lt;/progress&gt;&lt;/p&gt;
+&lt;p&gt;Task 2: &lt;progress value="60" max="100"&gt;&lt;/progress&gt;&lt;/p&gt;
+&lt;p&gt;Task 3: &lt;progress value="30" max="100"&gt;&lt;/progress&gt;&lt;/p&gt;</code></pre>
+                        </main>
+                    </article>
+                </section>
 
-        </div>
+                <section>
+                    <header>
+                        <h2>JavaScript API</h2>
+                    </header>
 
-    </div></section></main>
+                    <article class="card">
+                        <header>
+                            <h3>Setting Progress Value</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-javascript">const progress = document.querySelector('progress');
 
-    <footer class="main">
-        <div class="content">
-            <div class="brand">
-                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-                <p class="tagline">The Semantic Web, Reimagined.</p>
+// Get current progress
+console.log(progress.value); // 50
+console.log(progress.max);   // 100
+
+// Set progress value
+progress.value = 75;
+
+// Calculate percentage
+const percentage = (progress.value / progress.max) * 100;
+console.log(percentage); // 75</code></pre>
+                        </main>
+                    </article>
+
+                    <article class="card">
+                        <header>
+                            <h3>Simulating Upload</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-javascript">const progress = document.querySelector('progress');
+const percentDisplay = document.querySelector('#percent');
+
+// Simulate upload progress
+let current = 0;
+const interval = setInterval(() => {
+  current += Math.random() * 30;
+  if (current >= 100) {
+    current = 100;
+    clearInterval(interval);
+  }
+  progress.value = current;
+  percentDisplay.textContent = Math.floor(current);
+}, 500);</code></pre>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Features</h2>
+                    </header>
+
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Determinate Progress</h3>
+                            <p>Show specific percentage with value/max attributes.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Indeterminate Progress</h3>
+                            <p>Show activity without known progress (loading state).</p>
+                        </article>
+                        <article class="card">
+                            <h3>Semantic HTML</h3>
+                            <p>Built-in meaning for assistive technologies.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Easy JavaScript Control</h3>
+                            <p>Simple value property for dynamic updates.</p>
+                        </article>
+                        <article class="card">
+                            <h3>CSS Customizable</h3>
+                            <p>Style bar color, background, and appearance.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Responsive</h3>
+                            <p>Scales to container width automatically.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Use Cases</h2>
+                    </header>
+
+                    <div class="grid">
+                        <article class="card">
+                            <h3>File Upload</h3>
+                            <p>Show upload progress to user.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Download Progress</h3>
+                            <p>Display file download completion status.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Task Completion</h3>
+                            <p>Multi-step form or wizard progress.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Loading States</h3>
+                            <p>Indeterminate progress during data fetch.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Batch Processing</h3>
+                            <p>Show progress of bulk operations.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Skill/Experience Bars</h3>
+                            <p>User profile skill levels and rankings.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Accessibility</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Best Practices</h3>
+                        </header>
+                        <main>
+                            <ul>
+                                <li>Always label progress bars with &lt;label&gt;</li>
+                                <li>Screen readers announce percentage automatically</li>
+                                <li>Use determinate progress when known, indeterminate for unknown</li>
+                                <li>Provide text percentage alongside visual bar</li>
+                                <li>Test with screen readers (NVDA, JAWS, VoiceOver)</li>
+                                <li>Don't rely solely on color to convey status</li>
+                                <li>Use aria-live for dynamic updates</li>
+                            </ul>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>AXIOM01 Philosophy</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Why Use Native &lt;progress&gt;</h3>
+                        </header>
+                        <main>
+                            <p>The native progress element embodies AXIOM01 principles:</p>
+                            <ul>
+                                <li><strong>Semantic:</strong> &lt;progress&gt; tells the browser exactly what it represents</li>
+                                <li><strong>Accessible:</strong> Screen readers announce progress percentage automatically</li>
+                                <li><strong>Minimal Code:</strong> No custom JavaScript for basic progress</li>
+                                <li><strong>Browser Native:</strong> Optimized by browser vendor</li>
+                                <li><strong>Responsive:</strong> Scales to container automatically</li>
+                                <li><strong>Performant:</strong> Zero layout thrashing</li>
+                            </ul>
+                            <p>Custom progress bars often require complex CSS and JavaScript, breaking accessibility in the process. Use &lt;progress&gt; first.</p>
+                        </main>
+                    </article>
+                </section>
             </div>
-            <div class="links">
-                <div class="column">
-                    <h4>Documentation</h4>
-                    <ul>
-                        <li><a href="../components-overview.html">Docs</a></li>
-                <li><a href="../animations.html">Animations</a></li>
-                        <li><a href="../../README.md" target="_blank">README</a> <span class="demo-metadata-label">(Markdown)</span></li>
-                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span class="demo-metadata-label">(Markdown)</span></li>
-                        <li><a href="../styling-guide.html">Styling Guide</a></li>
-                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>Community</h4>
-                    <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>More</h4>
-                    <ul>
-                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
-                        <li><a href="../../index.html#release-info">Release Info</a></li>
-                    </ul>
-                </div>
-        <div class="bottom">
-            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
-        </div>
-    </footer>
+        </section>
+    </main>
 
-            <script>
+    	<!-- FOOTER -->
+	<footer class="footer">
+		<div class="container">
+			<!-- Main Content Grid -->
+			<div class="footer-content">
+				<!-- Brand Section -->
+				<div class="footer-brand">
+					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+				</div>
+
+				<!-- Product Links -->
+				<div class="footer-column">
+					<h4>Product</h4>
+					<ul>
+						<li><a href="../../docs/components-overview.html">All Components</a></li>
+						<li><a href="../../docs/axicons.html">Icons</a></li>
+						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
+						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+					</ul>
+				</div>
+
+				<!-- Resources Links -->
+				<div class="footer-column">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="../../README.md" target="_blank">README</a></li>
+						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+					</ul>
+				</div>
+
+				<!-- Community Links -->
+				<div class="footer-column">
+					<h4>Community</h4>
+					<ul>
+						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Bottom Section -->
+			<div class="footer-bottom">
+				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+				<ul class="footer-social">
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+						<span class="axicon render" data-name="GitHub"></span>
+					</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+						<span class="axicon render" data-name="Brand-NPM"></span>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+
+    <script>
+        // Simulate upload progress
+        const uploadProgress = document.getElementById('upload-progress');
+        const uploadPercent = document.getElementById('upload-percent');
+        let uploadValue = 0;
+        const uploadInterval = setInterval(() => {
+            uploadValue += Math.random() * 20;
+            if (uploadValue >= 100) {
+                uploadValue = 100;
+                clearInterval(uploadInterval);
+            }
+            uploadProgress.value = uploadValue;
+            uploadPercent.textContent = Math.floor(uploadValue);
+        }, 800);
+
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
@@ -378,13 +467,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="../../js/axicons-loader.js"></script>
-<script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
-<script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
+    <script src="../../js/axiom.js"></script>
 </body>
 </html>

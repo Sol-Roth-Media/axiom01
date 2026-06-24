@@ -281,19 +281,53 @@
   margin-bottom: var(--a-space-xl);
 }
 
-.hero .actions .button.primary {
+.hero .actions button,
+.hero .actions a[role="button"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--a-space-s);
+  padding: var(--a-space-m) var(--a-space-l);
+  border-radius: var(--a-border-radius-base);
+  font-weight: var(--a-font-weight-bold);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: none;
+}
+
+.hero .actions button.primary,
+.hero .actions a[role="button"].primary {
   background: white;
+  color: var(--a-color-primary, #2563eb);
+  border-color: white;
+}
+
+.hero .actions button.primary:hover,
+.hero .actions a[role="button"].primary:hover {
+  background: rgba(255, 255, 255, 0.9);
   color: var(--a-color-primary, #2563eb);
 }
 
-.hero .actions .button.outline {
+.hero .actions button.outline,
+.hero .actions a[role="button"].outline {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.6);
   color: white;
+  transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
 }
 
-.hero .actions .button.outline:hover {
+.hero .actions button.outline:hover,
+.hero .actions a[role="button"].outline:hover {
   background: rgba(255, 255, 255, 0.2);
+  border-color: white;
+}
+
+.hero .actions button:not(.primary):not(.outline),
+.hero .actions a[role="button"]:not(.primary):not(.outline) {
+  background: white;
+  color: var(--a-color-primary, #2563eb);
   border-color: white;
 }
 
@@ -304,6 +338,33 @@
 
 .hero .grid {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* ========================================
+   GRID: TIGHT VARIANT
+   4-column layout on desktop, responsive smaller
+   ======================================== */
+.grid.tight {
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--a-space-l);
+}
+
+@media (max-width: 1200px) {
+  .grid.tight {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid.tight {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid.tight {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ========================================
@@ -620,6 +681,9 @@ header.main .actions {
   display: flex;
   align-items: center;
   gap: var(--a-space-m);
+  flex-shrink: 0;
+  overflow-x: auto;
+  max-width: fit-content;
 }
 
 /* Ensure action buttons look like icons */
@@ -630,12 +694,17 @@ header.main .actions a.github {
   color: var(--a-color-on-surface);
   font-size: 1.25rem;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: var(--a-space-xs);
   border-radius: var(--a-border-radius-sm);
   transition: background-color var(--a-transition-base), color var(--a-transition-base);
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 header.main .actions a.github span:not(.axicon) {
@@ -892,6 +961,20 @@ DOCS: COLOR PALETTE
    Automatically enforces rhythm without utility classes
    ======================================== */
 
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--a-border-radius-base);
+  background-color: var(--a-color-surface);
+  border: 1px solid var(--a-color-outline);
+  padding: var(--a-space-l);
+  transition: box-shadow var(--a-transition-base), transform var(--a-transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--a-shadow-md);
+}
+
 .card > .axicon:first-child {
   font-size: 2.25rem;
   color: var(--a-color-primary);
@@ -933,10 +1016,80 @@ DOCS: COLOR PALETTE
   align-items: center;
 }
 
+.card.ghost {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+}
+
 .card.ghost > .axicon:first-child {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: var(--a-space-m);
+}
+
+.card.ghost:hover {
+  box-shadow: none;
+}
+
+/* ========================================
+   STAT CARD VARIANT (for hero stats grid)
+   ======================================== */
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--a-space-xl);
+  border-radius: var(--a-border-radius-base);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  min-height: 200px;
+  transition: all var(--a-transition-base) ease;
+}
+
+.stat:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.stat .axicon {
+  font-size: 2.5rem;
+  margin-bottom: var(--a-space-m);
+  color: white;
+  opacity: 0.9;
+  transition: opacity var(--a-transition-base);
+}
+
+.stat:hover .axicon {
+  opacity: 1;
+}
+
+.stat .value {
+  font-size: 2.5rem;
+  font-weight: var(--a-font-weight-bold);
+  margin: var(--a-space-s) 0;
+  color: white;
+}
+
+.stat .label {
+  font-size: 0.95rem;
+  font-weight: var(--a-font-weight-semibold);
+  margin: var(--a-space-s) 0;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.stat p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: var(--a-space-m) 0 0 0;
+  line-height: 1.5;
 }
 /* ========================================
    FOOTER COMPONENT
@@ -1356,4 +1509,354 @@ footer.footer.wide .container {
 .footer-link-list a:hover {
   color: var(--a-color-primary);
   text-decoration: underline;
+}
+
+/* ========================================
+   SKELETON SHIMMER ANIMATION
+   ======================================== */
+@keyframes shimmer {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.skeleton {
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+/* ========================================
+   SELECT COMPONENT (Native Form Control)
+   Browser API: <select>, <option>, <optgroup>
+   Zero custom JavaScript, full keyboard support
+   ======================================== */
+select {
+  display: block;
+  width: 100%;
+  padding: var(--a-space-m);
+  border-radius: var(--a-border-radius-base);
+  border: 1px solid var(--a-color-surface-variant);
+  background-color: white;
+  color: var(--a-color-text-primary);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  transition: border-color var(--a-transition-base), box-shadow var(--a-transition-base);
+}
+
+select:hover {
+  border-color: var(--a-color-outline);
+}
+
+select:focus {
+  border-color: var(--a-color-primary);
+  box-shadow: 0 0 0 3px var(--a-color-primary-container);
+  outline: none;
+}
+
+select:disabled {
+  background-color: var(--a-color-surface-variant);
+  color: var(--a-color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+select[multiple] {
+  min-height: 120px;
+}
+
+select option {
+  padding: var(--a-space-s);
+  color: var(--a-color-text-primary);
+  background-color: white;
+}
+
+select option:checked {
+  background: var(--a-color-primary-container);
+  color: var(--a-color-primary);
+  font-weight: var(--a-font-weight-semibold);
+}
+
+select optgroup {
+  font-weight: var(--a-font-weight-bold);
+  color: var(--a-color-text-primary);
+}
+
+/* ========================================
+   RANGE INPUT COMPONENT (Native Form Control)
+   Browser API: <input type="range">
+   No custom JavaScript, full keyboard support
+   ======================================== */
+input[type="range"] {
+  width: 100%;
+  height: 6px;
+  border-radius: var(--a-border-radius-pill);
+  background: var(--a-color-surface-variant);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  transition: box-shadow var(--a-transition-base);
+}
+
+input[type="range"]:hover {
+  box-shadow: 0 0 0 3px var(--a-color-primary-container);
+}
+
+input[type="range"]:focus {
+  box-shadow: 0 0 0 3px var(--a-color-primary-container);
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--a-color-primary);
+  cursor: pointer;
+  transition: all var(--a-transition-base);
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: var(--a-color-surface-variant);
+  height: 6px;
+  border-radius: var(--a-border-radius-pill);
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--a-color-primary);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all var(--a-transition-base);
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+input[type="range"]::-moz-range-track {
+  background: transparent;
+  border: none;
+}
+
+input[type="range"]::-moz-range-progress {
+  background: var(--a-color-primary);
+  height: 6px;
+  border-radius: var(--a-border-radius-pill);
+}
+
+/* Disabled state */
+input[type="range"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+input[type="range"]:disabled::-webkit-slider-thumb,
+input[type="range"]:disabled::-moz-range-thumb {
+  background: var(--a-color-surface-variant);
+  cursor: not-allowed;
+}
+
+/* ========================================
+   PROGRESS COMPONENT (Native Form Control)
+   Browser API: <progress>
+   Zero custom JavaScript needed
+   ======================================== */
+progress {
+  display: block;
+  width: 100%;
+  height: 8px;
+  border: none;
+  border-radius: var(--a-border-radius-pill);
+  background-color: var(--a-color-surface-variant);
+  overflow: hidden;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+progress::-webkit-progress-bar {
+  background-color: var(--a-color-surface-variant);
+  border-radius: var(--a-border-radius-pill);
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--a-color-primary);
+  border-radius: var(--a-border-radius-pill);
+  transition: width var(--a-transition-base);
+}
+
+/* Firefox */
+progress::-moz-progress-bar {
+  background-color: var(--a-color-primary);
+  border-radius: var(--a-border-radius-pill);
+  transition: width var(--a-transition-base);
+}
+
+/* Indeterminate state (loading animation) */
+progress:indeterminate::-webkit-progress-value {
+  background: linear-gradient(
+    90deg,
+    var(--a-color-primary),
+    var(--a-color-primary-light),
+    var(--a-color-primary)
+  );
+  background-size: 200% 100%;
+  animation: progress-loading 1.5s infinite;
+}
+
+progress:indeterminate::-moz-progress-bar {
+  background: linear-gradient(
+    90deg,
+    var(--a-color-primary),
+    var(--a-color-primary-light),
+    var(--a-color-primary)
+  );
+  background-size: 200% 100%;
+  animation: progress-loading 1.5s infinite;
+}
+
+@keyframes progress-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ========================================
+   METER COMPONENT (Native Form Control)
+   Browser API: <meter>
+   Represents scalar measurements (ratings, temperatures, disk usage)
+   ======================================== */
+meter {
+  display: block;
+  width: 100%;
+  height: 8px;
+  border: none;
+  border-radius: var(--a-border-radius-pill);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+meter::-webkit-meter-bar {
+  background-color: var(--a-color-surface-variant);
+  border-radius: var(--a-border-radius-pill);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Optimal value (green) */
+meter::-webkit-meter-optimum-value {
+  background: linear-gradient(90deg, var(--a-color-success-light), var(--a-color-success));
+  border-radius: var(--a-border-radius-pill);
+}
+
+/* Sub-optimal value (yellow) */
+meter::-webkit-meter-suboptimum-value {
+  background: linear-gradient(90deg, var(--a-color-warning-light), var(--a-color-warning));
+  border-radius: var(--a-border-radius-pill);
+}
+
+/* Poor value (red) */
+meter::-webkit-meter-even-less-good-value {
+  background: linear-gradient(90deg, var(--a-color-error-light), var(--a-color-error));
+  border-radius: var(--a-border-radius-pill);
+}
+
+/* Firefox */
+meter::-moz-meter-bar {
+  background-color: var(--a-color-surface-variant);
+  border-radius: var(--a-border-radius-pill);
+}
+
+/* Firefox meter segments */
+meter {
+  background: var(--a-color-surface-variant);
+  border-radius: var(--a-border-radius-pill);
+}
+
+/* Disabled state */
+meter:disabled {
+  opacity: 0.6;
+}
+
+/* ========================================
+   CARD VARIANTS: PREVIEW, FILLED
+   ======================================== */
+.card.preview {
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--a-transition-base);
+  display: flex;
+  flex-direction: column;
+}
+
+.card.preview:hover {
+  box-shadow: var(--a-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.card.preview .preview {
+  padding: var(--a-space-l);
+  background-color: var(--a-color-surface-variant);
+  border-radius: var(--a-border-radius-sm);
+  margin-bottom: var(--a-space-l);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  flex-shrink: 0;
+}
+
+.card.preview .content {
+  flex: 1;
+}
+
+.card.preview .content h3 {
+  margin-top: 0;
+}
+
+.card.filled {
+  background-color: var(--a-color-primary-container);
+  border-color: var(--a-color-primary);
+  color: var(--a-color-on-primary-container);
+}
+
+.card.filled h3,
+.card.filled h4 {
+  color: var(--a-color-on-primary-container);
+}
+
+.card.filled p {
+  color: var(--a-color-on-primary-container);
+  opacity: 0.95;
+}
+
+.card.filled:hover {
+  box-shadow: var(--a-shadow-lg);
+  background-color: var(--a-color-primary-light);
 }

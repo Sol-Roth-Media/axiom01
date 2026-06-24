@@ -1754,16 +1754,20 @@ section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); m
 }
 
 /* --- Containers & Grids --- */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 var(--a-space-xl); }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--a-space-l); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 var(--a-space-l); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--a-space-l); }
 
 /* --- Cards --- */
 .card {
     position: relative;
     display: flex;
     flex-direction: column;
-    min-width: 0;
+    min-width: 0;                 /* Prevent flex overflow */
+    max-width: 100%;              /* Prevent overflow */
+    overflow: hidden;             /* Hide overflow */
     word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
     background: var(--a-color-surface);
     background-clip: border-box;
     border: 1px solid var(--a-color-outline);
@@ -1771,6 +1775,13 @@ section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); m
     box-shadow: var(--a-shadow-medium);
     padding: var(--a-space-l);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Ensure all card children don't overflow */
+.card > * {
+  min-width: 0;           /* Flex children don't overflow */
+  max-width: 100%;        /* Hard limit */
+  overflow: hidden;       /* Hide any overflow */
 }
 .card:hover { transform: translateY(-5px); box-shadow: var(--a-shadow-large); }
 a.card { text-decoration: none; color: var(--a-color-on-surface); }
@@ -1799,6 +1810,7 @@ a.card { text-decoration: none; color: var(--a-color-on-surface); }
 }
 .card-footer {
     padding: var(--a-space-m) var(--a-space-l);
+    margin-top: auto;  /* Push footer to bottom */
     background-color: var(--a-color-surface-variant);
     border-top: 1px solid var(--a-color-outline);
 }
@@ -6253,6 +6265,19 @@ section {
 /* Ensure containers respect minimum width */
 .container {
     min-width: 360px;
+}
+
+/* Responsive container padding */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--a-space-m);  /* Mobile: tighter padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--a-space-s);  /* Very small screens: minimal padding */
+  }
 }
 
 /* Ensure header respects minimum width */

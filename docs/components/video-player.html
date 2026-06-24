@@ -11,390 +11,468 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <style>
-        .video-player-demo {
-            background: var(--ax-background-secondary);
-            border-radius: var(--a-border-radius-lg);
-            border: 1px solid var(--ax-border);
-            margin: var(--a-space-l) 0;
-            padding: var(--a-space-l);
-            max-width: 800px;
-        }
-        
-        .video-container {
-            position: relative;
-            width: 100%;
-            background: #000;
-            border-radius: var(--a-border-radius-lg);
-            overflow: hidden;
-            margin-bottom: var(--a-space-l);
-        }
-        
-        .video-frame {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: linear-gradient(135deg, #1a1a1a, #333);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 64px;
-            color: #666;
-            position: relative;
-        }
-        
-        .play-button {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: rgba(var(--a-color-primary-rgb, 33, 150, 243), 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all var(--a-transition-base);
-            border: none;
-            color: white;
-            font-size: 32px;
-        }
-        
-        .play-button:hover {
-            background: rgba(var(--a-color-primary-rgb, 33, 150, 243), 1);
-            transform: scale(1.1);
-        }
-        
-        .video-controls {
-            background: #1a1a1a;
-            padding: var(--a-space-m);
-            display: flex;
-            align-items: center;
-            gap: var(--a-space-s);
-        }
-        
-        .control-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: white;
-            padding: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--a-border-radius-sm);
-            transition: background var(--a-transition-base);
-        }
-        
-        .control-button:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .progress-bar {
-            flex: 1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-            cursor: pointer;
-            position: relative;
-            margin: 0 var(--a-space-s);
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--a-color-primary);
-            border-radius: 3px;
-            width: 0%;
-            transition: width var(--a-transition-base);
-        }
-        
-        .time-display {
-            color: white;
-            font-size: var(--a-font-size-xs);
-            font-family: 'JetBrains Mono', monospace;
-            min-width: 50px;
-            text-align: right;
-        }
-        
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .volume-slider {
-            width: 80px;
-            height: 4px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 2px;
-            outline: none;
-            cursor: pointer;
-        }
-        
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        
-        .volume-slider::-moz-range-thumb {
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .fullscreen-button {
-            margin-left: auto;
-        }
-        
-        .video-info {
-            margin-top: var(--a-space-l);
-            padding: var(--a-space-l);
-            background: var(--ax-surface);
-            border-radius: var(--a-border-radius-md);
-            border: 1px solid var(--ax-border);
-        }
-        
-        .video-title {
-            margin: 0 0 var(--a-space-s) 0;
-            font-weight: var(--a-font-weight-semibold);
-        }
-        
-        .video-description {
-            font-size: var(--a-font-size-sm);
-            color: var(--a-color-text-muted);
-            margin: 0;
-        }
-    </style>
 </head>
 <body class="axiom-body component-doc">
-    <header class="main" data-component="mobile-navbar">
-        <nav role="navigation" aria-label="Main Navigation">
-            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-            <ul class="links">
-			<li><a href="../../index.html#get-started">Get Started</a></li>
-			<li><a href="../components-overview.html">Docs</a></li>
-			<li><a href="../../index.html#axicons">Axicons</a></li>
-		</ul>
+    	<!-- HEADER NAVIGATION -->
+	<header class="main" data-component="mobile-navbar">
+		<nav role="navigation" aria-label="Main Navigation">
+			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+			<ul class="links">
+				<li><a href="../../index.html#get-started">Get Started</a></li>
+				<li><a href="../components-overview.html">Docs</a></li>
+				<li><a href="../../index.html#axicons">Axicons</a></li>
+			</ul>
 
-            <div class="actions">
-                <button class="btn toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom01" class="btn btn-secondary" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="GitHub"></span>
-                    <span>GitHub</span>
-                </a>
-                <button class="btn toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-                <button class="btn toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+			<div class="actions">
+				<button class="search toggle" aria-label="Open Search">
+					<span class="axicon render" data-name="Search"></span>
+				</button>
+				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+					<span class="axicon render" data-name="GitHub"></span>
+					<span>GitHub</span>
+				</a>
+				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+					<span class="axicon render" data-name="Moon"></span>
+				</button>
+				<button class="menu toggle" aria-label="Toggle Menu">
+					<span class="axicon render" data-name="Menu"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Video Player</h1>
+                <p class="tagline">Native HTML5 &lt;video&gt; element with built-in controls</p>
             </div>
-        </nav>
-    </header>
+        </section>
 
-    <main><section><div class="container">
-        <header>
-            <h1>Video Player</h1>
-            <p class="text-muted">Axiom01's video player component provides a professional media playback interface with full controls. Features play/pause, volume control, progress seeking, and fullscreen support.</p>
-        </header>
+        <section>
+            <div class="container">
+                <section>
+                    <header>
+                        <h2>Live Examples</h2>
+                    </header>
 
-        <div class="component-section">
+                    <div class="grid">
+                        <article class="card">
+                            <header>
+                                <h3>Basic Video with Controls</h3>
+                            </header>
+                            <main style="padding: 0;">
+                                <video controls style="width: 100%; border-radius: var(--a-border-radius-base); display: block; background: #000;">
+                                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </main>
+                        </article>
 
-            <section>
-                <h2>Live Examples</h2>
+                        <article class="card">
+                            <header>
+                                <h3>Video with Poster</h3>
+                            </header>
+                            <main style="padding: 0;">
+                                <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 180'%3E%3Crect fill='%23333' width='320' height='180'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='%23fff'%3EVideo Thumbnail%3C/text%3E%3C/svg%3E" style="width: 100%; border-radius: var(--a-border-radius-base); display: block;">
+                                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </main>
+                        </article>
 
-                <h3>Custom Video Player</h3>
-                <div class="video-player-demo">
-                    <div class="video-container">
-                        <div class="video-frame">
-                            🎬
-                            <button class="play-button" id="playBtn" aria-label="Play video">
-                                <span class="axicon render" data-name="Play"></span>
-                            </button>
-                        </div>
-                        
-                        <div class="video-controls">
-                            <button class="control-button" id="playPauseBtn" aria-label="Play/pause">
-                                <span class="axicon render" data-name="Play"></span>
-                            </button>
-                            
-                            <div class="progress-bar" id="progressBar">
-                                <div class="progress-fill"></div>
-                            </div>
-                            
-                            <span class="time-display" id="timeDisplay">0:00 / 3:45</span>
-                            
-                            <div class="volume-control">
-                                <button class="control-button" id="volumeBtn" aria-label="Mute">
-                                    <span class="axicon render" data-name="Volume2"></span>
-                                </button>
-                                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70" aria-label="Volume">
-                            </div>
-                            
-                            <button class="control-button fullscreen-button" id="fullscreenBtn" aria-label="Fullscreen">
-                                <span class="axicon render" data-name="Maximize"></span>
-                            </button>
-                        </div>
+                        <article class="card">
+                            <header>
+                                <h3>Multiple Video Formats</h3>
+                            </header>
+                            <main style="padding: 0;">
+                                <video controls style="width: 100%; border-radius: var(--a-border-radius-base); display: block; background: #000;">
+                                    <source src="video.mp4" type="video/mp4">
+                                    <source src="video.webm" type="video/webm">
+                                    <source src="video.ogv" type="video/ogg">
+                                    Your browser does not support HTML5 video.
+                                </video>
+                            </main>
+                        </article>
+
+                        <article class="card">
+                            <header>
+                                <h3>Video with Captions</h3>
+                            </header>
+                            <main style="padding: 0;">
+                                <video controls style="width: 100%; border-radius: var(--a-border-radius-base); display: block; background: #000;">
+                                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                    <track kind="subtitles" src="captions.vtt" srclang="en" label="English">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </main>
+                        </article>
                     </div>
-                    
-                    <div class="video-info">
-                        <h3 class="video-title">Introduction to Axiom01</h3>
-                        <p class="video-description">Learn the fundamentals of the Axiom01 semantic web framework. This video covers core concepts, setup, and basic usage.</p>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Browser APIs</h2>
+                    </header>
+
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Native &lt;video&gt; Element</h3>
+                            <p>Built-in to all modern browsers with native player controls.</p>
+                        </article>
+                        <article class="card">
+                            <h3>No Custom JavaScript Required</h3>
+                            <p>Full playback functionality works automatically with browser UI.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Keyboard Support</h3>
+                            <p>Space (play/pause), arrow keys, and other controls work natively.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Multiple Format Support</h3>
+                            <p>Specify fallback formats with &lt;source&gt; elements.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Captions &amp; Subtitles</h3>
+                            <p>Use &lt;track&gt; element for WebVTT subtitle files.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Fully Accessible</h3>
+                            <p>Screen readers announce controls, keyboard navigable.</p>
+                        </article>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section>
-                <h2>HTML Structure</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="video-container"&gt;
-    &lt;div class="video-frame"&gt;
-        &lt;button class="play-button" id="playBtn"&gt;▶&lt;/button&gt;
-    &lt;/div&gt;
-    
-    &lt;div class="video-controls"&gt;
-        &lt;button class="control-button" id="playPauseBtn"&gt;
-            ▶
-        &lt;/button&gt;
-        
-        &lt;div class="progress-bar" id="progressBar"&gt;
-            &lt;div class="progress-fill"&gt;&lt;/div&gt;
-        &lt;/div&gt;
-        
-        &lt;span class="time-display"&gt;0:00 / 3:45&lt;/span&gt;
-        
-        &lt;div class="volume-control"&gt;
-            &lt;button class="control-button"&gt;🔊&lt;/button&gt;
-            &lt;input type="range" class="volume-slider"&gt;
-        &lt;/div&gt;
-        
-        &lt;button class="fullscreen-button"&gt;⛶&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
+                <section>
+                    <header>
+                        <h2>HTML Structure</h2>
+                    </header>
 
-            <section>
-                <h2>Features</h2>
-                <ul>
-                    <li><strong>Play/Pause Control</strong> - Toggle playback on/off</li>
-                    <li><strong>Progress Seeking</strong> - Click to jump to position</li>
-                    <li><strong>Time Display</strong> - Current time and duration</li>
-                    <li><strong>Volume Control</strong> - Slider and mute button</li>
-                    <li><strong>Fullscreen Mode</strong> - Expand to full screen</li>
-                    <li><strong>Professional Styling</strong> - Dark theme controls</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Basic Video with Controls</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;video controls width="320" height="180"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  Your browser does not support the video tag.
+&lt;/video&gt;</code></pre>
+                        </main>
+                    </article>
 
-            <section>
-                <h2>Use Cases</h2>
-                <ul>
-                    <li><strong>Video Tutorials</strong> - Educational content</li>
-                    <li><strong>Video Marketing</strong> - Product demos and promotions</li>
-                    <li><strong>Live Streaming</strong> - Event broadcasting</li>
-                    <li><strong>Video Hosting</strong> - Gallery and archive</li>
-                    <li><strong>Training Content</strong> - Employee education</li>
-                    <li><strong>User-Generated Content</strong> - Community videos</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Video with Poster Image</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;video controls poster="poster.jpg" width="640" height="360"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;source src="video.webm" type="video/webm"&gt;
+  Your browser does not support the video tag.
+&lt;/video&gt;</code></pre>
+                        </main>
+                    </article>
 
-            <section>
-                <h2>Accessibility</h2>
-                <ul>
-                    <li>Use semantic HTML5 video controls</li>
-                    <li>Include <code>aria-label</code> on all buttons</li>
-                    <li>Provide keyboard controls (Space, arrows)</li>
-                    <li>Display captions/subtitles for deaf users</li>
-                    <li>Describe video for screen readers</li>
-                    <li>Ensure focus visible on all controls</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Video with Captions</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;video controls width="640" height="360"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;track kind="subtitles" src="en.vtt" srclang="en" label="English"&gt;
+  &lt;track kind="captions" src="en-cc.vtt" srclang="en" label="English (Captions)"&gt;
+  Your browser does not support the video tag.
+&lt;/video&gt;</code></pre>
+                        </main>
+                    </article>
 
-            <section>
-                <h2>Best Practices</h2>
-                <ul>
-                    <li><strong>Responsive Design</strong> - Scale with container</li>
-                    <li><strong>Poster Image</strong> - Show preview before play</li>
-                    <li><strong>Quality Options</strong> - Multiple resolution choices</li>
-                    <li><strong>Captions</strong> - Include subtitles/captions</li>
-                    <li><strong>Buffering Indicator</strong> - Show loading state</li>
-                    <li><strong>Remember Settings</strong> - Persist volume/quality</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Video Attributes</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;video 
+  controls            &lt;!-- Show player controls --&gt;
+  autoplay            &lt;!-- Start playing automatically --&gt;
+  loop                &lt;!-- Loop when finished --&gt;
+  muted               &lt;!-- Mute by default --&gt;
+  poster="img.jpg"    &lt;!-- Thumbnail image --&gt;
+  width="640" 
+  height="360"
+  preload="metadata"  &lt;!-- none, metadata, auto --&gt;
+&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+                        </main>
+                    </article>
+                </section>
 
-        </div>
+                <section>
+                    <header>
+                        <h2>JavaScript API</h2>
+                    </header>
 
-    </div></section></main>
+                    <article class="card">
+                        <header>
+                            <h3>Basic Controls</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-javascript">const video = document.querySelector('video');
 
-    <footer class="main">
-        <div class="content">
-            <div class="brand">
-                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-                <p class="tagline">The Semantic Web, Reimagined.</p>
+// Play/pause
+video.play();
+video.pause();
+
+// Get current time and duration
+console.log(video.currentTime);  // seconds
+console.log(video.duration);     // seconds
+
+// Set playback position
+video.currentTime = 30;
+
+// Volume control (0 to 1)
+video.volume = 0.5;
+video.muted = true;
+
+// Playback rate
+video.playbackRate = 1.5; // 1.5x speed</code></pre>
+                        </main>
+                    </article>
+
+                    <article class="card">
+                        <header>
+                            <h3>Event Handling</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-javascript">const video = document.querySelector('video');
+
+// Listen for events
+video.addEventListener('play', () => console.log('Playing'));
+video.addEventListener('pause', () => console.log('Paused'));
+video.addEventListener('ended', () => console.log('Finished'));
+video.addEventListener('timeupdate', () => {
+  const percent = (video.currentTime / video.duration) * 100;
+  console.log('Progress:', percent + '%');
+});
+
+video.addEventListener('loadedmetadata', () => {
+  console.log('Duration:', video.duration);
+});
+
+video.addEventListener('error', (e) => {
+  console.log('Error:', e.target.error.code);
+});</code></pre>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Video Format Support</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Format Compatibility</h3>
+                        </header>
+                        <main>
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left; padding: var(--a-space-s); border-bottom: 2px solid var(--a-color-outline);">Format</th>
+                                        <th style="text-align: left; padding: var(--a-space-s); border-bottom: 2px solid var(--a-color-outline);">MIME Type</th>
+                                        <th style="text-align: left; padding: var(--a-space-s); border-bottom: 2px solid var(--a-color-outline);">Browser Support</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">MP4</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">video/mp4</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">Chrome, Safari, Edge, Firefox</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">WebM</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">video/webm</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">Chrome, Firefox, Opera</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">Ogg</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">video/ogg</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">Firefox, Chrome, Opera</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Features</h2>
+                    </header>
+
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Built-in Controls</h3>
+                            <p>Play/pause, progress bar, volume, fullscreen all included.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Responsive</h3>
+                            <p>Videos scale to container size automatically.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Captions Support</h3>
+                            <p>Add subtitles with WebVTT track files.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Multiple Formats</h3>
+                            <p>Fallback to different formats for browser compatibility.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Autoplay Control</h3>
+                            <p>Control autoplay with attributes and JavaScript.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Custom Styling</h3>
+                            <p>Style native player with CSS variables and pseudo-elements.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Use Cases</h2>
+                    </header>
+
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Tutorials</h3>
+                            <p>Step-by-step instructional videos.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Marketing</h3>
+                            <p>Product demos and promotional videos.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Documentation</h3>
+                            <p>Feature walkthroughs and API demos.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Testimonials</h3>
+                            <p>Customer success stories in video format.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Accessibility</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Best Practices</h3>
+                        </header>
+                        <main>
+                            <ul>
+                                <li>Always provide captions for deaf/hard of hearing users</li>
+                                <li>Include audio descriptions for blind users</li>
+                                <li>Use WebVTT format for subtitles</li>
+                                <li>Test keyboard navigation (space, arrows, escape)</li>
+                                <li>Provide fallback text for unsupported browsers</li>
+                                <li>Use semantic markup around video</li>
+                                <li>Test with screen readers</li>
+                            </ul>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>AXIOM01 Philosophy</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Why Use Native &lt;video&gt;</h3>
+                        </header>
+                        <main>
+                            <p>The native &lt;video&gt; element embodies AXIOM01 principles:</p>
+                            <ul>
+                                <li><strong>Semantic:</strong> &lt;video&gt; tells the browser exactly what it is</li>
+                                <li><strong>Accessible:</strong> Built-in controls work with keyboard and screen readers</li>
+                                <li><strong>Minimal Code:</strong> No custom JavaScript needed for basic playback</li>
+                                <li><strong>Progressive Enhancement:</strong> Works without JavaScript, enhanced with it</li>
+                                <li><strong>Browser Native:</strong> Uses OS-level video codecs and controls</li>
+                                <li><strong>Responsive:</strong> Scales with container automatically</li>
+                            </ul>
+                            <p>Custom video players require hundreds of lines of code and often break accessibility. Use &lt;video&gt; first.</p>
+                        </main>
+                    </article>
+                </section>
             </div>
-            <div class="links">
-                <div class="column">
-                    <h4>Documentation</h4>
-                    <ul>
-                        <li><a href="../components-overview.html">Docs</a></li>
-                <li><a href="../animations.html">Animations</a></li>
-                        <li><a href="../../README.md" target="_blank">README</a> <span class="demo-metadata-label">(Markdown)</span></li>
-                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span class="demo-metadata-label">(Markdown)</span></li>
-                        <li><a href="../styling-guide.html">Styling Guide</a></li>
-                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>Community</h4>
-                    <ul>
-                        <li><a href="https://github.com/Sol-Roth/axiom" target="_blank" rel="noopener">GitHub</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>More</h4>
-                    <ul>
-                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
-                        <li><a href="../../index.html#release-info">Release Info</a></li>
-                    </ul>
-                </div>
-        <div class="bottom">
-            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
-        </div>
-    </footer>
+        </section>
+    </main>
 
-            <script>
-        let isPlaying = false;
-        
-        document.getElementById('playBtn').addEventListener('click', togglePlay);
-        document.getElementById('playPauseBtn').addEventListener('click', togglePlay);
-        
-        function togglePlay() {
-            isPlaying = !isPlaying;
-            const icon = isPlaying ? 'Pause' : 'Play';
-            document.querySelectorAll('[data-name="Play"], [data-name="Pause"]').forEach(el => {
-                if (el.closest('#playPauseBtn') || el.closest('#playBtn')) {
-                    el.setAttribute('data-name', icon);
-                }
-            });
-        }
-        
-        document.getElementById('volumeSlider').addEventListener('input', (e) => {
-            const volume = e.target.value;
-            console.log('Volume:', volume);
-        });
-        
-        document.getElementById('progressBar').addEventListener('click', (e) => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const percent = (e.clientX - rect.left) / rect.width;
-            document.querySelector('.progress-fill').style.width = (percent * 100) + '%';
-        });
+    	<!-- FOOTER -->
+	<footer class="footer">
+		<div class="container">
+			<!-- Main Content Grid -->
+			<div class="footer-content">
+				<!-- Brand Section -->
+				<div class="footer-brand">
+					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+				</div>
 
+				<!-- Product Links -->
+				<div class="footer-column">
+					<h4>Product</h4>
+					<ul>
+						<li><a href="../../docs/components-overview.html">All Components</a></li>
+						<li><a href="../../docs/axicons.html">Icons</a></li>
+						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
+						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+					</ul>
+				</div>
+
+				<!-- Resources Links -->
+				<div class="footer-column">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="../../README.md" target="_blank">README</a></li>
+						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+					</ul>
+				</div>
+
+				<!-- Community Links -->
+				<div class="footer-column">
+					<h4>Community</h4>
+					<ul>
+						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Bottom Section -->
+			<div class="footer-bottom">
+				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+				<ul class="footer-social">
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+						<span class="axicon render" data-name="GitHub"></span>
+					</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+						<span class="axicon render" data-name="Brand-NPM"></span>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+
+    <script>
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
@@ -425,13 +503,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="../../js/axicons-loader.js"></script>
-<script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
-<script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
+    <script src="../../js/axiom.js"></script>
 </body>
 </html>

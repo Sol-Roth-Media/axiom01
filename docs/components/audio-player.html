@@ -11,459 +11,479 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <style>
-        .audio-player-demo {
-            background: var(--ax-background-secondary);
-            border-radius: var(--a-border-radius-lg);
-            border: 1px solid var(--ax-border);
-            margin: var(--a-space-l) 0;
-            padding: var(--a-space-l);
-            max-width: 600px;
-        }
-        
-        .audio-player {
-            background: linear-gradient(135deg, var(--a-color-primary-container), var(--ax-surface));
-            border-radius: var(--a-border-radius-lg);
-            padding: var(--a-space-l);
-            display: flex;
-            gap: var(--a-space-l);
-            align-items: center;
-        }
-        
-        .audio-cover {
-            width: 80px;
-            height: 80px;
-            border-radius: var(--a-border-radius-md);
-            background: linear-gradient(135deg, var(--a-color-primary), var(--a-color-primary-container));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            color: var(--a-color-primary-on);
-            flex-shrink: 0;
-        }
-        
-        .audio-info {
-            flex: 1;
-        }
-        
-        .audio-title {
-            margin: 0 0 4px 0;
-            font-weight: var(--a-font-weight-semibold);
-            font-size: var(--a-font-size-base);
-        }
-        
-        .audio-artist {
-            margin: 0;
-            font-size: var(--a-font-size-sm);
-            color: var(--a-color-text-muted);
-        }
-        
-        .audio-controls {
-            display: flex;
-            gap: var(--a-space-s);
-            align-items: center;
-        }
-        
-        .play-button {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--a-color-primary);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--a-color-primary-on);
-            transition: all var(--a-transition-base);
-            flex-shrink: 0;
-        }
-        
-        .play-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(var(--a-color-primary-rgb, 33, 150, 243), 0.3);
-        }
-        
-        .audio-progress {
-            display: flex;
-            align-items: center;
-            gap: var(--a-space-s);
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .time-current {
-            font-size: var(--a-font-size-xs);
-            color: var(--a-color-text-muted);
-            min-width: 35px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .progress-track {
-            flex: 1;
-            height: 4px;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 2px;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .progress-track:hover {
-            height: 6px;
-            top: -1px;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: var(--a-color-primary);
-            border-radius: 2px;
-            width: 35%;
-            transition: width var(--a-transition-base);
-        }
-        
-        .time-duration {
-            font-size: var(--a-font-size-xs);
-            color: var(--a-color-text-muted);
-            min-width: 35px;
-            text-align: right;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .volume-control {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        
-        .volume-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: rgba(var(--a-color-primary-rgb, 33, 150, 243), 0.2);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--a-color-primary);
-            transition: all var(--a-transition-base);
-            flex-shrink: 0;
-        }
-        
-        .volume-icon:hover {
-            background: rgba(var(--a-color-primary-rgb, 33, 150, 243), 0.3);
-        }
-        
-        .volume-slider {
-            width: 80px;
-            height: 4px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 2px;
-            outline: none;
-            cursor: pointer;
-        }
-        
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 12px;
-            height: 12px;
-            background: var(--a-color-primary);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        
-        .volume-slider::-moz-range-thumb {
-            width: 12px;
-            height: 12px;
-            background: var(--a-color-primary);
-            border-radius: 50%;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .playlist {
-            margin-top: var(--a-space-l);
-            border-top: 1px solid var(--ax-border);
-            padding-top: var(--a-space-l);
-        }
-        
-        .playlist-title {
-            font-weight: var(--a-font-weight-semibold);
-            margin: 0 0 var(--a-space-m) 0;
-            font-size: var(--a-font-size-sm);
-        }
-        
-        .playlist-items {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: var(--a-space-s);
-        }
-        
-        .playlist-item {
-            padding: var(--a-space-m);
-            background: var(--ax-surface);
-            border-radius: var(--a-border-radius-sm);
-            cursor: pointer;
-            transition: all var(--a-transition-base);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: var(--a-font-size-sm);
-        }
-        
-        .playlist-item:hover {
-            background: var(--a-color-primary-container);
-        }
-        
-        .playlist-item.playing {
-            background: var(--a-color-primary);
-            color: var(--a-color-primary-on);
-        }
-        
-        .track-number {
-            opacity: 0.7;
-        }
-    </style>
 </head>
 <body class="axiom-body component-doc">
-    <header class="main" data-component="mobile-navbar">
-        <nav role="navigation" aria-label="Main Navigation">
-            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-            <ul class="links">
-			<li><a href="../../index.html#get-started">Get Started</a></li>
-			<li><a href="../components-overview.html">Docs</a></li>
-			<li><a href="../../index.html#axicons">Axicons</a></li>
-		</ul>
+    	<!-- HEADER NAVIGATION -->
+	<header class="main" data-component="mobile-navbar">
+		<nav role="navigation" aria-label="Main Navigation">
+			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+			<ul class="links">
+				<li><a href="../../index.html#get-started">Get Started</a></li>
+				<li><a href="../components-overview.html">Docs</a></li>
+				<li><a href="../../index.html#axicons">Axicons</a></li>
+			</ul>
 
-            <div class="actions">
-                <button class="btn toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom01" class="btn btn-secondary" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="GitHub"></span>
-                    <span>GitHub</span>
-                </a>
-                <button class="btn toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-                <button class="btn toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+			<div class="actions">
+				<button class="search toggle" aria-label="Open Search">
+					<span class="axicon render" data-name="Search"></span>
+				</button>
+				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+					<span class="axicon render" data-name="GitHub"></span>
+					<span>GitHub</span>
+				</a>
+				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+					<span class="axicon render" data-name="Moon"></span>
+				</button>
+				<button class="menu toggle" aria-label="Toggle Menu">
+					<span class="axicon render" data-name="Menu"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Audio Player</h1>
+                <p class="tagline">Native HTML5 &lt;audio&gt; element with built-in controls</p>
             </div>
-        </nav>
-    </header>
+        </section>
 
-    <main><section><div class="container">
-        <header>
-            <h1>Audio Player</h1>
-            <p class="text-muted">Axiom01's audio player component provides a sleek, modern interface for music playback. Features play/pause, progress seeking, volume control, and playlist management.</p>
-        </header>
+        <section>
+            <div class="container">
+                <section>
+                    <header>
+                        <h2>Live Examples</h2>
+                    </header>
 
-        <div class="component-section">
+                    <div class="grid">
+                        <article class="card">
+                            <header>
+                                <h3>Basic Audio Player</h3>
+                            </header>
+                            <main>
+                                <audio controls style="width: 100;">
+                                    <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </main>
+                        </article>
 
-            <section>
-                <h2>Live Examples</h2>
+                        <article class="card">
+                            <header>
+                                <h3>Autoplay Audio</h3>
+                            </header>
+                            <main>
+                                <audio controls autoplay>
+                                    <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </main>
+                        </article>
 
-                <h3>Music Player Interface</h3>
-                <div class="audio-player-demo">
-                    <div class="audio-player">
-                        <div class="audio-cover">🎵</div>
-                        
-                        <div style="flex: 1; min-width: 0;">
-                            <div class="audio-info">
-                                <h3 class="audio-title">Introduction to Web Design</h3>
-                                <p class="audio-artist">Axiom01 Podcast</p>
-                            </div>
-                            
-                            <div class="audio-progress" >
-                                <span class="time-current">2:15</span>
-                                <div class="progress-track">
-                                    <div class="progress-bar"></div>
-                                </div>
-                                <span class="time-duration">8:42</span>
-                            </div>
-                        </div>
-                        
-                        <div class="audio-controls">
-                            <button class="play-button" aria-label="Play/Pause">
-                                <span class="axicon render" data-name="Play"></span>
-                            </button>
-                            
-                            <div class="volume-control">
-                                <button class="volume-icon" aria-label="Mute">
-                                    <span class="axicon render" data-name="Volume2"></span>
-                                </button>
-                                <input type="range" class="volume-slider" min="0" max="100" value="70" aria-label="Volume">
-                            </div>
-                    
-                    <div class="playlist">
-                        <h4 class="playlist-title">Playlist</h4>
-                        <ul class="playlist-items">
-                            <li class="playlist-item playing">
-                                <span><span class="track-number">1.</span> Introduction to Web Design</span>
-                                <span>8:42</span>
-                            </li>
-                            <li class="playlist-item">
-                                <span><span class="track-number">2.</span> Modern CSS Techniques</span>
-                                <span>7:15</span>
-                            </li>
-                            <li class="playlist-item">
-                                <span><span class="track-number">3.</span> JavaScript Best Practices</span>
-                                <span>9:28</span>
-                            </li>
-                            <li class="playlist-item">
-                                <span><span class="track-number">4.</span> Semantic HTML5</span>
-                                <span>6:50</span>
-                            </li>
-                        </ul>
+                        <article class="card">
+                            <header>
+                                <h3>Looping Audio</h3>
+                            </header>
+                            <main>
+                                <audio controls loop>
+                                    <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </main>
+                        </article>
+
+                        <article class="card">
+                            <header>
+                                <h3>Multiple Audio Formats</h3>
+                            </header>
+                            <main>
+                                <audio controls>
+                                    <source src="audio.mp3" type="audio/mpeg">
+                                    <source src="audio.ogg" type="audio/ogg">
+                                    <source src="audio.wav" type="audio/wav">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </main>
+                        </article>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section>
-                <h2>HTML Structure</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="audio-player"&gt;
-    &lt;div class="audio-cover"&gt;🎵&lt;/div&gt;
-    
-    &lt;div&gt;
-        &lt;div class="audio-info"&gt;
-            &lt;h3 class="audio-title"&gt;Track Title&lt;/h3&gt;
-            &lt;p class="audio-artist"&gt;Artist Name&lt;/p&gt;
-        &lt;/div&gt;
-        
-        &lt;div class="audio-progress"&gt;
-            &lt;span class="time-current"&gt;2:15&lt;/span&gt;
-            &lt;div class="progress-track"&gt;
-                &lt;div class="progress-bar"&gt;&lt;/div&gt;
-            &lt;/div&gt;
-            &lt;span class="time-duration"&gt;8:42&lt;/span&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    
-    &lt;div class="audio-controls"&gt;
-        &lt;button class="play-button"&gt;▶&lt;/button&gt;
-        &lt;div class="volume-control"&gt;
-            &lt;button class="volume-icon"&gt;🔊&lt;/button&gt;
-            &lt;input type="range" class="volume-slider"&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
+                <section>
+                    <header>
+                        <h2>Browser APIs</h2>
+                    </header>
 
-            <section>
-                <h2>Features</h2>
-                <ul>
-                    <li><strong>Play/Pause Control</strong> - Toggle audio playback</li>
-                    <li><strong>Progress Seeking</strong> - Click to skip to position</li>
-                    <li><strong>Time Display</strong> - Current and total duration</li>
-                    <li><strong>Volume Control</strong> - Slider and mute button</li>
-                    <li><strong>Album Art</strong> - Visual cover display</li>
-                    <li><strong>Playlist Management</strong> - Queue and track selection</li>
-                </ul>
-            </section>
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Native &lt;audio&gt; Element</h3>
+                            <p>Built-in to all modern browsers with native player controls.</p>
+                        </article>
+                        <article class="card">
+                            <h3>No Custom JavaScript Required</h3>
+                            <p>Full playback functionality works automatically with browser UI.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Keyboard Support</h3>
+                            <p>Space (play/pause), arrow keys work natively for seeking.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Multiple Format Support</h3>
+                            <p>Specify fallback formats with &lt;source&gt; elements.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Preload Control</h3>
+                            <p>Optimize loading with preload="none", "metadata", or "auto".</p>
+                        </article>
+                        <article class="card">
+                            <h3>Fully Accessible</h3>
+                            <p>Screen readers announce controls, keyboard navigable.</p>
+                        </article>
+                    </div>
+                </section>
 
-            <section>
-                <h2>Use Cases</h2>
-                <ul>
-                    <li><strong>Music Streaming</strong> - Personal music library</li>
-                    <li><strong>Podcasts</strong> - Episode playback and management</li>
-                    <li><strong>Audio Books</strong> - Book narration playback</li>
-                    <li><strong>Background Music</strong> - Website ambient audio</li>
-                    <li><strong>Audio Lessons</strong> - Educational content</li>
-                    <li><strong>Voice Messages</strong> - Recorded message playback</li>
-                </ul>
-            </section>
+                <section>
+                    <header>
+                        <h2>HTML Structure</h2>
+                    </header>
 
-            <section>
-                <h2>Accessibility</h2>
-                <ul>
-                    <li>Use semantic HTML5 audio controls</li>
-                    <li>Include <code>aria-label</code> on all buttons</li>
-                    <li>Provide keyboard controls (Space for play/pause)</li>
-                    <li>Display captions/transcript for deaf users</li>
-                    <li>Describe audio content clearly</li>
-                    <li>Ensure focus indicators visible</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Basic Audio with Controls</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  Your browser does not support the audio element.
+&lt;/audio&gt;</code></pre>
+                        </main>
+                    </article>
 
-            <section>
-                <h2>Best Practices</h2>
-                <ul>
-                    <li><strong>Album Art</strong> - Display track artwork prominently</li>
-                    <li><strong>Metadata Display</strong> - Show artist, title, duration</li>
-                    <li><strong>Playlist UI</strong> - Easy navigation between tracks</li>
-                    <li><strong>Keyboard Shortcuts</strong> - Familiar player controls</li>
-                    <li><strong>Responsive Design</strong> - Works on all devices</li>
-                    <li><strong>Memory Usage</strong> - Efficient buffering and playback</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Audio with Multiple Formats</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  &lt;source src="audio.ogg" type="audio/ogg"&gt;
+  &lt;source src="audio.wav" type="audio/wav"&gt;
+  Your browser does not support the audio element.
+&lt;/audio&gt;</code></pre>
+                        </main>
+                    </article>
 
-        </div>
+                    <article class="card">
+                        <header>
+                            <h3>Audio Attributes</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;audio 
+  controls            &lt;!-- Show player controls --&gt;
+  autoplay            &lt;!-- Start playing automatically --&gt;
+  loop                &lt;!-- Loop when finished --&gt;
+  muted               &lt;!-- Mute by default --&gt;
+  preload="metadata"  &lt;!-- none, metadata, auto --&gt;
+&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;</code></pre>
+                        </main>
+                    </article>
 
-    </div></section></main>
+                    <article class="card">
+                        <header>
+                            <h3>Audio with Fallback Content</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  &lt;p&gt;
+    Your browser doesn't support HTML5 audio. 
+    &lt;a href="audio.mp3"&gt;Download the file&lt;/a&gt; instead.
+  &lt;/p&gt;
+&lt;/audio&gt;</code></pre>
+                        </main>
+                    </article>
+                </section>
 
-    <footer class="main">
-        <div class="content">
-            <div class="brand">
-                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-                <p class="tagline">The Semantic Web, Reimagined.</p>
+                <section>
+                    <header>
+                        <h2>JavaScript API</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Basic Controls</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-javascript">const audio = document.querySelector('audio');
+
+// Play/pause
+audio.play();
+audio.pause();
+
+// Get current time and duration
+console.log(audio.currentTime);  // seconds
+console.log(audio.duration);     // seconds
+
+// Set playback position
+audio.currentTime = 30;
+
+// Volume control (0 to 1)
+audio.volume = 0.5;
+audio.muted = true;
+
+// Playback rate
+audio.playbackRate = 1.5; // 1.5x speed</code></pre>
+                        </main>
+                    </article>
+
+                    <article class="card">
+                        <header>
+                            <h3>Event Handling</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-javascript">const audio = document.querySelector('audio');
+
+// Listen for events
+audio.addEventListener('play', () => console.log('Playing'));
+audio.addEventListener('pause', () => console.log('Paused'));
+audio.addEventListener('ended', () => console.log('Finished'));
+audio.addEventListener('timeupdate', () => {
+  const percent = (audio.currentTime / audio.duration) * 100;
+  console.log('Progress:', percent + '%');
+});
+
+audio.addEventListener('loadedmetadata', () => {
+  console.log('Duration:', audio.duration);
+});
+
+audio.addEventListener('error', (e) => {
+  console.log('Error:', e.target.error.code);
+});</code></pre>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Audio Format Support</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Format Compatibility</h3>
+                        </header>
+                        <main>
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left; padding: var(--a-space-s); border-bottom: 2px solid var(--a-color-outline);">Format</th>
+                                        <th style="text-align: left; padding: var(--a-space-s); border-bottom: 2px solid var(--a-color-outline);">MIME Type</th>
+                                        <th style="text-align: left; padding: var(--a-space-s); border-bottom: 2px solid var(--a-color-outline);">Browser Support</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">MP3</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">audio/mpeg</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">All modern browsers</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">WAV</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">audio/wav</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">Chrome, Firefox, Safari, Edge</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">Ogg Vorbis</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">audio/ogg</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">Chrome, Firefox, Opera</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: var(--a-space-s);">FLAC</td>
+                                        <td style="padding: var(--a-space-s);">audio/flac</td>
+                                        <td style="padding: var(--a-space-s);">Chrome, Firefox, Edge</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Features</h2>
+                    </header>
+
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Built-in Controls</h3>
+                            <p>Play/pause, progress bar, volume controls included.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Compact UI</h3>
+                            <p>Minimal player interface, responsive design.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Multiple Formats</h3>
+                            <p>Fallback to different formats for compatibility.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Playback Rate Control</h3>
+                            <p>Speed up or slow down playback (1x, 1.25x, 1.5x, 2x).</p>
+                        </article>
+                        <article class="card">
+                            <h3>Looping</h3>
+                            <p>Automatically repeat on completion.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Time Management</h3>
+                            <p>Seek to any point, show current time and duration.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Use Cases</h2>
+                    </header>
+
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Podcasts</h3>
+                            <p>Host and play podcast episodes.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Music</h3>
+                            <p>Stream or serve music tracks.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Audio Books</h3>
+                            <p>Chapter-based audio content.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Sound Effects</h3>
+                            <p>Interactive audio for games or apps.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Voice Notes</h3>
+                            <p>User-generated audio recordings.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Language Learning</h3>
+                            <p>Pronunciation guides and lessons.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Accessibility</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Best Practices</h3>
+                        </header>
+                        <main>
+                            <ul>
+                                <li>Always use the &lt;audio&gt; element semantically</li>
+                                <li>Provide transcripts for spoken content</li>
+                                <li>Use controls attribute for player UI</li>
+                                <li>Test keyboard navigation (space, arrows)</li>
+                                <li>Provide fallback content for unsupported browsers</li>
+                                <li>Label audio content clearly before the player</li>
+                                <li>Consider autoplay policies (may require muted)</li>
+                            </ul>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>AXIOM01 Philosophy</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Why Use Native &lt;audio&gt;</h3>
+                        </header>
+                        <main>
+                            <p>The native &lt;audio&gt; element embodies AXIOM01 principles:</p>
+                            <ul>
+                                <li><strong>Semantic:</strong> &lt;audio&gt; tells the browser exactly what it is</li>
+                                <li><strong>Accessible:</strong> Built-in controls work with keyboard and screen readers</li>
+                                <li><strong>Minimal Code:</strong> No custom JavaScript needed for basic playback</li>
+                                <li><strong>Progressive Enhancement:</strong> Works without JavaScript</li>
+                                <li><strong>Browser Native:</strong> Uses OS-level audio codecs</li>
+                                <li><strong>Performance:</strong> Lightweight and efficient</li>
+                            </ul>
+                            <p>Custom audio players require hundreds of lines of code and often break accessibility. Use &lt;audio&gt; first.</p>
+                        </main>
+                    </article>
+                </section>
             </div>
-            <div class="links">
-                <div class="column">
-                    <h4>Documentation</h4>
-                    <ul>
-                        <li><a href="../components-overview.html">Docs</a></li>
-                <li><a href="../animations.html">Animations</a></li>
-                        <li><a href="../../README.md" target="_blank">README</a> <span class="demo-metadata-label">(Markdown)</span></li>
-                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span class="demo-metadata-label">(Markdown)</span></li>
-                        <li><a href="../styling-guide.html">Styling Guide</a></li>
-                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>Community</h4>
-                    <ul>
-                        <li><a href="https://github.com/Sol-Roth/axiom" target="_blank" rel="noopener">GitHub</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>More</h4>
-                    <ul>
-                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
-                        <li><a href="../../index.html#release-info">Release Info</a></li>
-                    </ul>
-                </div>
-        <div class="bottom">
-            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
-        </div>
-    </footer>
+        </section>
+    </main>
 
-            <script>
-        // Playlist item selection
-        document.querySelectorAll('.playlist-item').forEach((item, index) => {
-            item.addEventListener('click', () => {
-                document.querySelectorAll('.playlist-item').forEach(i => i.classList.remove('playing'));
-                item.classList.add('playing');
-            });
-        });
-        
-        // Volume slider
-        document.querySelector('.volume-slider').addEventListener('input', (e) => {
-            console.log('Volume:', e.target.value);
-        });
-        
-        // Progress tracking
-        document.querySelector('.progress-track').addEventListener('click', (e) => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const percent = (e.clientX - rect.left) / rect.width;
-            document.querySelector('.progress-bar').style.width = (percent * 100) + '%';
-        });
+    	<!-- FOOTER -->
+	<footer class="footer">
+		<div class="container">
+			<!-- Main Content Grid -->
+			<div class="footer-content">
+				<!-- Brand Section -->
+				<div class="footer-brand">
+					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+				</div>
 
+				<!-- Product Links -->
+				<div class="footer-column">
+					<h4>Product</h4>
+					<ul>
+						<li><a href="../../docs/components-overview.html">All Components</a></li>
+						<li><a href="../../docs/axicons.html">Icons</a></li>
+						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
+						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+					</ul>
+				</div>
+
+				<!-- Resources Links -->
+				<div class="footer-column">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="../../README.md" target="_blank">README</a></li>
+						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+					</ul>
+				</div>
+
+				<!-- Community Links -->
+				<div class="footer-column">
+					<h4>Community</h4>
+					<ul>
+						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Bottom Section -->
+			<div class="footer-bottom">
+				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+				<ul class="footer-social">
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+						<span class="axicon render" data-name="GitHub"></span>
+					</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+						<span class="axicon render" data-name="Brand-NPM"></span>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+
+    <script>
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
@@ -494,13 +514,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="../../js/axicons-loader.js"></script>
-<script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
-<script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
+    <script src="../../js/axiom.js"></script>
 </body>
 </html>

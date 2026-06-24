@@ -11,420 +11,483 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <style>
-        .rating-demo {
-            background: var(--ax-background-secondary);
-            border-radius: var(--a-border-radius-lg);
-            border: 1px solid var(--ax-border);
-            margin: var(--a-space-l) 0;
-            padding: var(--a-space-xl);
-            display: flex;
-            flex-direction: column;
-            gap: var(--a-space-xl);
-        }
-        
-        .rating-section {
-            display: flex;
-            align-items: center;
-            gap: var(--a-space-l);
-            padding: var(--a-space-l);
-            background: var(--ax-surface);
-            border: 1px solid var(--ax-border);
-            border-radius: var(--a-border-radius-md);
-        }
-        
-        .rating-content {
-            flex: 1;
-        }
-        
-        .rating-label {
-            margin: 0 0 var(--a-space-s) 0;
-            font-weight: var(--a-font-weight-semibold);
-            color: var(--ax-text);
-        }
-        
-        .rating-value {
-            margin: 0;
-            font-size: var(--a-font-size-sm);
-            color: var(--a-color-text-muted);
-        }
-        
-        .star-rating {
-            display: flex;
-            gap: 4px;
-        }
-        
-        .star {
-            font-size: 24px;
-            cursor: pointer;
-            transition: all var(--a-transition-base);
-            filter: grayscale(100%);
-        }
-        
-        .star:hover {
-            transform: scale(1.2);
-        }
-        
-        .star.filled {
-            filter: none;
-            color: #ffc107;
-        }
-        
-        .star.half-filled {
-            position: relative;
-            color: #ffc107;
-        }
-        
-        .rating-read-only {
-            display: flex;
-            gap: 4px;
-            font-size: 18px;
-        }
-        
-        .rating-read-only .star {
-            cursor: default;
-        }
-        
-        .rating-read-only .star:hover {
-            transform: none;
-        }
-        
-        .rating-stats {
-            background: var(--ax-surface);
-            border: 1px solid var(--ax-border);
-            border-radius: var(--a-border-radius-md);
-            padding: var(--a-space-l);
-            margin-top: var(--a-space-l);
-        }
-        
-        .stats-row {
-            display: flex;
-            align-items: center;
-            gap: var(--a-space-m);
-            margin-bottom: var(--a-space-m);
-        }
-        
-        .stats-row:last-child {
-            margin-bottom: 0;
-        }
-        
-        .stats-label {
-            width: 80px;
-            font-size: var(--a-font-size-sm);
-            font-weight: var(--a-font-weight-semibold);
-        }
-        
-        .stats-bar {
-            flex: 1;
-            height: 8px;
-            background: var(--ax-background-secondary);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        
-        .stats-bar-fill {
-            height: 100%;
-            background: #ffc107;
-            border-radius: 4px;
-            transition: width 0.3s ease-out;
-        }
-        
-        .stats-count {
-            width: 50px;
-            text-align: right;
-            font-size: var(--a-font-size-sm);
-            color: var(--a-color-text-muted);
-        }
-        
-        .average-rating {
-            text-align: center;
-            padding: var(--a-space-l);
-            background: var(--ax-background-secondary);
-            border-radius: var(--a-border-radius-md);
-        }
-        
-        .average-rating-score {
-            margin: 0;
-            font-size: 48px;
-            font-weight: var(--a-font-weight-bold);
-            color: var(--ax-text);
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: var(--a-space-s);
-        }
-        
-        .average-rating-max {
-            font-size: 24px;
-            color: var(--a-color-text-muted);
-        }
-        
-        .average-rating-stats {
-            margin: var(--a-space-m) 0 0 0;
-            font-size: var(--a-font-size-sm);
-            color: var(--a-color-text-muted);
-        }
-        
-        .demo-metadata-label {
-            font-size: 0.75rem;
-            color: var(--a-color-text-muted);
-        }
-    </style>
 </head>
 <body class="axiom-body component-doc">
-    <header class="main" data-component="mobile-navbar">
-        <nav role="navigation" aria-label="Main Navigation">
-            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-            <ul class="links">
-			<li><a href="../../index.html#get-started">Get Started</a></li>
-			<li><a href="../components-overview.html">Docs</a></li>
-			<li><a href="../../index.html#axicons">Axicons</a></li>
-		</ul>
+    	<!-- HEADER NAVIGATION -->
+	<header class="main" data-component="mobile-navbar">
+		<nav role="navigation" aria-label="Main Navigation">
+			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+			<ul class="links">
+				<li><a href="../../index.html#get-started">Get Started</a></li>
+				<li><a href="../components-overview.html">Docs</a></li>
+				<li><a href="../../index.html#axicons">Axicons</a></li>
+			</ul>
 
-            <div class="actions">
-                <button class="btn toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom01" class="btn btn-secondary" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="GitHub"></span>
-                    <span>GitHub</span>
-                </a>
-                <button class="btn toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-                <button class="btn toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+			<div class="actions">
+				<button class="search toggle" aria-label="Open Search">
+					<span class="axicon render" data-name="Search"></span>
+				</button>
+				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+					<span class="axicon render" data-name="GitHub"></span>
+					<span>GitHub</span>
+				</a>
+				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+					<span class="axicon render" data-name="Moon"></span>
+				</button>
+				<button class="menu toggle" aria-label="Toggle Menu">
+					<span class="axicon render" data-name="Menu"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Rating / Meter</h1>
+                <p class="tagline">Native HTML5 meter element for scalar measurements</p>
             </div>
-        </nav>
-    </header>
+        </section>
 
-    <main><section><div class="container">
-        <header>
-            <h1>Rating</h1>
-            <p class="text-muted">Axiom01's rating component displays star-based ratings with interactive and read-only modes. Perfect for reviews, feedback, and product ratings.</p>
-        </header>
+        <section>
+            <div class="container">
+                <section>
+                    <header>
+                        <h2>Live Examples</h2>
+                    </header>
 
-        <div class="component-section">
+                    <div class="grid">
+                        <article class="card">
+                            <header>
+                                <h3>Star Rating (4/5)</h3>
+                            </header>
+                            <main>
+                                <label for="rating-4" style="display: block; margin-bottom: var(--a-space-m); font-weight: var(--a-font-weight-semibold);">Product Rating</label>
+                                <meter id="rating-4" min="0" max="5" value="4" low="2" high="4" optimum="5" style="width: 100%;"></meter>
+                                <p style="font-size: var(--a-font-size-sm); color: var(--a-color-text-muted); margin-top: var(--a-space-s);">4 out of 5 stars</p>
+                            </main>
+                        </article>
 
-            <section>
-                <h2>Live Examples</h2>
+                        <article class="card">
+                            <header>
+                                <h3>Disk Usage (70%)</h3>
+                            </header>
+                            <main>
+                                <label for="disk-usage" style="display: block; margin-bottom: var(--a-space-m); font-weight: var(--a-font-weight-semibold);">Storage Used</label>
+                                <meter id="disk-usage" min="0" max="100" value="70" low="50" high="80" optimum="20" style="width: 100%;"></meter>
+                                <p style="font-size: var(--a-font-size-sm); color: var(--a-color-text-muted); margin-top: var(--a-space-s);">70% full</p>
+                            </main>
+                        </article>
 
-                <h3>Interactive Rating</h3>
-                <div class="rating-demo">
-                    <div class="rating-section">
-                        <div class="rating-content">
-                            <p class="rating-label">Rate this component</p>
-                            <p class="rating-value">Click stars to rate</p>
-                        </div>
-                        <div class="star-rating" id="interactiveRating">
-                            <span class="star" data-value="1">⭐</span>
-                            <span class="star" data-value="2">⭐</span>
-                            <span class="star" data-value="3">⭐</span>
-                            <span class="star" data-value="4">⭐</span>
-                            <span class="star" data-value="5">⭐</span>
-                        </div>
+                        <article class="card">
+                            <header>
+                                <h3>Temperature (72°F)</h3>
+                            </header>
+                            <main>
+                                <label for="temperature" style="display: block; margin-bottom: var(--a-space-m); font-weight: var(--a-font-weight-semibold);">Room Temperature</label>
+                                <meter id="temperature" min="50" max="95" value="72" low="60" high="85" optimum="72" style="width: 100%;"></meter>
+                                <p style="font-size: var(--a-font-size-sm); color: var(--a-color-text-muted); margin-top: var(--a-space-s);">Comfortable range</p>
+                            </main>
+                        </article>
+
+                        <article class="card">
+                            <header>
+                                <h3>Quality Score (8/10)</h3>
+                            </header>
+                            <main>
+                                <label for="quality" style="display: block; margin-bottom: var(--a-space-m); font-weight: var(--a-font-weight-semibold);">Code Quality</label>
+                                <meter id="quality" min="0" max="10" value="8" low="3" high="7" optimum="10" style="width: 100%;"></meter>
+                                <p style="font-size: var(--a-font-size-sm); color: var(--a-color-text-muted); margin-top: var(--a-space-s);">8 out of 10</p>
+                            </main>
+                        </article>
+
+                        <article class="card">
+                            <header>
+                                <h3>Battery Level (45%)</h3>
+                            </header>
+                            <main>
+                                <label for="battery" style="display: block; margin-bottom: var(--a-space-m); font-weight: var(--a-font-weight-semibold);">Battery Status</label>
+                                <meter id="battery" min="0" max="100" value="45" low="20" high="80" optimum="100" style="width: 100%;"></meter>
+                                <p style="font-size: var(--a-font-size-sm); color: var(--a-color-text-muted); margin-top: var(--a-space-s);">Low battery</p>
+                            </main>
+                        </article>
+
+                        <article class="card">
+                            <header>
+                                <h3>Skill Level (Expert)</h3>
+                            </header>
+                            <main>
+                                <label for="skill" style="display: block; margin-bottom: var(--a-space-m); font-weight: var(--a-font-weight-semibold);">JavaScript Proficiency</label>
+                                <meter id="skill" min="0" max="5" value="5" low="2" high="4" optimum="5" style="width: 100%;"></meter>
+                                <p style="font-size: var(--a-font-size-sm); color: var(--a-color-text-muted); margin-top: var(--a-space-s);">Expert level</p>
+                            </main>
+                        </article>
                     </div>
-                    
-                    <h3 >Average Rating</h3>
-                    <div class="average-rating">
-                        <p class="average-rating-score">
-                            4.2<span class="average-rating-max">/5</span>
-                        </p>
-                        <div class="rating-read-only">
-                            <span class="star filled">⭐</span>
-                            <span class="star filled">⭐</span>
-                            <span class="star filled">⭐</span>
-                            <span class="star filled">⭐</span>
-                            <span class="star">⭐</span>
-                        </div>
-                        <p class="average-rating-stats">Based on 1,247 reviews</p>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Browser APIs</h2>
+                    </header>
+
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Native &lt;meter&gt; Element</h3>
+                            <p>Represents scalar measurements like ratings, disk usage, temperatures.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Semantic Measurement</h3>
+                            <p>Tells assistive tech this is a measurement, not progress.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Color-Coded Ranges</h3>
+                            <p>Low, medium, and high ranges automatically color-coded.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Value Constraints</h3>
+                            <p>Min/max define the range, value is current measurement.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Screen Reader Support</h3>
+                            <p>Announces value and measurement type automatically.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Easy JavaScript Control</h3>
+                            <p>Simple value property for dynamic updates.</p>
+                        </article>
                     </div>
-                    
-                    <h3 >Rating Distribution</h3>
-                    <div class="rating-stats">
-                        <div class="stats-row">
-                            <div class="stats-label">5 ⭐</div>
-                            <div class="stats-bar">
-                                <div class="stats-bar-fill" style="width: 65%;"></div>
-                            </div>
-                            <div class="stats-count">810</div>
-                        </div>
-                        <div class="stats-row">
-                            <div class="stats-label">4 ⭐</div>
-                            <div class="stats-bar">
-                                <div class="stats-bar-fill" style="width: 25%;"></div>
-                            </div>
-                            <div class="stats-count">310</div>
-                        </div>
-                        <div class="stats-row">
-                            <div class="stats-label">3 ⭐</div>
-                            <div class="stats-bar">
-                                <div class="stats-bar-fill" style="width: 7%;"></div>
-                            </div>
-                            <div class="stats-count">87</div>
-                        </div>
-                        <div class="stats-row">
-                            <div class="stats-label">2 ⭐</div>
-                            <div class="stats-bar">
-                                <div class="stats-bar-fill" style="width: 2%;"></div>
-                            </div>
-                            <div class="stats-count">25</div>
-                        </div>
-                        <div class="stats-row">
-                            <div class="stats-label">1 ⭐</div>
-                            <div class="stats-bar">
-                                <div class="stats-bar-fill" style="width: 1%;"></div>
-                            </div>
-                            <div class="stats-count">15</div>
-                </div>
-            </section>
+                </section>
 
-            <section>
-                <h2>HTML Structure</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="star-rating"&gt;
-    &lt;span class="star" data-value="1"&gt;⭐&lt;/span&gt;
-    &lt;span class="star" data-value="2"&gt;⭐&lt;/span&gt;
-    &lt;span class="star" data-value="3"&gt;⭐&lt;/span&gt;
-    &lt;span class="star" data-value="4"&gt;⭐&lt;/span&gt;
-    &lt;span class="star" data-value="5"&gt;⭐&lt;/span&gt;
-&lt;/div&gt;
+                <section>
+                    <header>
+                        <h2>HTML Structure</h2>
+                    </header>
 
-&lt;!-- Read-only rating --&gt;
-&lt;div class="rating-read-only"&gt;
-    &lt;span class="star filled"&gt;⭐&lt;/span&gt;
-    &lt;span class="star filled"&gt;⭐&lt;/span&gt;
-    &lt;span class="star"&gt;⭐&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Basic Meter (5-Star Rating)</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;meter min="0" max="5" value="4" 
+       low="2" high="4" optimum="5"&gt;&lt;/meter&gt;</code></pre>
+                        </main>
+                    </article>
 
-            <section>
-                <h2>Features</h2>
-                <ul>
-                    <li><strong>Star Rating</strong> - 1-5 star scale</li>
-                    <li><strong>Interactive</strong> - Click to set rating</li>
-                    <li><strong>Read-Only</strong> - Display existing ratings</li>
-                    <li><strong>Hover Preview</strong> - Show rating before click</li>
-                    <li><strong>Statistics</strong> - Distribution visualization</li>
-                    <li><strong>Average Display</strong> - Overall rating summary</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Disk Usage Meter</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;label for="disk"&gt;Storage&lt;/label&gt;
+&lt;meter id="disk" min="0" max="100" value="70"
+       low="50" high="80" optimum="20"&gt;&lt;/meter&gt;</code></pre>
+                        </main>
+                    </article>
 
-            <section>
-                <h2>Use Cases</h2>
-                <ul>
-                    <li><strong>Product Reviews</strong> - E-commerce ratings</li>
-                    <li><strong>User Feedback</strong> - Service quality rating</li>
-                    <li><strong>Satisfaction Survey</strong> - Experience rating</li>
-                    <li><strong>Content Rating</strong> - Article or video rating</li>
-                    <li><strong>App Rating</strong> - App store ratings</li>
-                    <li><strong>Support Quality</strong> - Service feedback</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Temperature Meter</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;label for="temp"&gt;Room Temperature&lt;/label&gt;
+&lt;meter id="temp" min="50" max="95" value="72"
+       low="60" high="85" optimum="72"&gt;&lt;/meter&gt;</code></pre>
+                        </main>
+                    </article>
 
-            <section>
-                <h2>Accessibility</h2>
-                <ul>
-                    <li>Use <code>role="radiogroup"</code> for rating group</li>
-                    <li>Include <code>aria-label</code> on each star</li>
-                    <li>Support keyboard navigation (arrow keys)</li>
-                    <li>Announce selected rating to screen readers</li>
-                    <li>Provide text alternative to star icons</li>
-                    <li>Support focus management</li>
-                </ul>
-            </section>
+                    <article class="card">
+                        <header>
+                            <h3>Attributes Explained</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-html">&lt;meter
+  value="4"      &lt;!-- Current measurement --&gt;
+  min="0"        &lt;!-- Minimum value --&gt;
+  max="5"        &lt;!-- Maximum value --&gt;
+  low="2"        &lt;!-- Below this = low range --&gt;
+  high="4"       &lt;!-- Above this = high range --&gt;
+  optimum="5"    &lt;!-- Ideal value --&gt;
+&gt;&lt;/meter&gt;</code></pre>
+                        </main>
+                    </article>
+                </section>
 
-            <section>
-                <h2>Best Practices</h2>
-                <ul>
-                    <li><strong>Clear Scale</strong> - Show that it's 1-5 stars</li>
-                    <li><strong>Hover State</strong> - Preview rating before click</li>
-                    <li><strong>Confirmation</strong> - Show current rating after submission</li>
-                    <li><strong>Distribution</strong> - Show rating breakdown</li>
-                    <li><strong>Count Display</strong> - Show number of ratings</li>
-                    <li><strong>Disabled State</strong> - Show when rating unavailable</li>
-                </ul>
-            </section>
+                <section>
+                    <header>
+                        <h2>JavaScript API</h2>
+                    </header>
 
-        </div>
+                    <article class="card">
+                        <header>
+                            <h3>Getting and Setting Values</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-javascript">const meter = document.querySelector('meter');
 
-    </div></section></main>
+// Get current value
+console.log(meter.value); // 4
 
-    <footer class="main">
-        <div class="content">
-            <div class="brand">
-                <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-                <p class="tagline">The Semantic Web, Reimagined.</p>
+// Set new value
+meter.value = 3;
+
+// Access range properties
+console.log(meter.min);     // 0
+console.log(meter.max);     // 5
+console.log(meter.low);     // 2
+console.log(meter.high);    // 4
+console.log(meter.optimum); // 5</code></pre>
+                        </main>
+                    </article>
+
+                    <article class="card">
+                        <header>
+                            <h3>Dynamic Rating Update</h3>
+                        </header>
+                        <main>
+                            <pre><code class="language-javascript">const ratingMeter = document.querySelector('meter');
+const ratingButtons = document.querySelectorAll('[data-rating]');
+
+ratingButtons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const newRating = e.target.dataset.rating;
+    ratingMeter.value = newRating;
+    console.log('Rating set to:', newRating);
+  });
+});</code></pre>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Color Ranges</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>How Meter Determines Color</h3>
+                        </header>
+                        <main>
+                            <p>The browser automatically colors the meter based on where the value falls:</p>
+                            <ul>
+                                <li><strong>Red (Low):</strong> value &lt; low, or value &gt; high and optimum &lt; low</li>
+                                <li><strong>Yellow (Medium):</strong> Between low and high</li>
+                                <li><strong>Green (Optimal):</strong> Close to optimum value</li>
+                            </ul>
+                            <p style="margin-top: var(--a-space-m); font-size: var(--a-font-size-sm); color: var(--a-color-text-muted);">The exact color-coding varies by browser, but the semantic meaning is consistent.</p>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Features</h2>
+                    </header>
+
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Scalar Measurement</h3>
+                            <p>Represents any scalar measurement value.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Range Constraints</h3>
+                            <p>Define min, max, low, high, optimum boundaries.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Automatic Coloring</h3>
+                            <p>Browser colors based on value position.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Semantic Meaning</h3>
+                            <p>Tells assistive tech it's a measurement, not progress.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Easy Updates</h3>
+                            <p>Simple value property for real-time changes.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Responsive</h3>
+                            <p>Scales to container width automatically.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Use Cases</h2>
+                    </header>
+
+                    <div class="grid">
+                        <article class="card">
+                            <h3>Star Ratings</h3>
+                            <p>Product or service ratings (1-5 stars).</p>
+                        </article>
+                        <article class="card">
+                            <h3>Disk/Storage Usage</h3>
+                            <p>Show how full storage is.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Temperature</h3>
+                            <p>Room or system temperature display.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Battery Level</h3>
+                            <p>Device battery or power status.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Skill Levels</h3>
+                            <p>User profile skill ratings.</p>
+                        </article>
+                        <article class="card">
+                            <h3>Quality Scores</h3>
+                            <p>Code quality, content quality metrics.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Meter vs Progress</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>When to Use Each</h3>
+                        </header>
+                        <main>
+                            <table style="width: 100%; border-collapse: collapse; margin-top: var(--a-space-m);">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left; padding: var(--a-space-s); border-bottom: 2px solid var(--a-color-outline);">Element</th>
+                                        <th style="text-align: left; padding: var(--a-space-s); border-bottom: 2px solid var(--a-color-outline);">Purpose</th>
+                                        <th style="text-align: left; padding: var(--a-space-s); border-bottom: 2px solid var(--a-color-outline);">Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);"><code>&lt;progress&gt;</code></td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">Task completion %</td>
+                                        <td style="padding: var(--a-space-s); border-bottom: 1px solid var(--a-color-outline);">File upload, download</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: var(--a-space-s);"><code>&lt;meter&gt;</code></td>
+                                        <td style="padding: var(--a-space-s);">Scalar measurement</td>
+                                        <td style="padding: var(--a-space-s);">Rating, disk usage, temperature</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>Accessibility</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Best Practices</h3>
+                        </header>
+                        <main>
+                            <ul>
+                                <li>Always pair with &lt;label&gt; for context</li>
+                                <li>Screen readers announce value and range</li>
+                                <li>Use semantic attributes (low, high, optimum)</li>
+                                <li>Provide text alternative value nearby</li>
+                                <li>Choose min/max/low/high logically</li>
+                                <li>Test with screen readers</li>
+                                <li>Don't use for progress tracking (use &lt;progress&gt;)</li>
+                            </ul>
+                        </main>
+                    </article>
+                </section>
+
+                <section>
+                    <header>
+                        <h2>AXIOM01 Philosophy</h2>
+                    </header>
+
+                    <article class="card">
+                        <header>
+                            <h3>Why Use Native &lt;meter&gt;</h3>
+                        </header>
+                        <main>
+                            <p>The native meter element embodies AXIOM01 principles:</p>
+                            <ul>
+                                <li><strong>Semantic:</strong> &lt;meter&gt; clearly indicates scalar measurement (not progress)</li>
+                                <li><strong>Accessible:</strong> Screen readers understand measurement context</li>
+                                <li><strong>Minimal Code:</strong> No custom JavaScript for basic meters</li>
+                                <li><strong>Browser Native:</strong> Uses OS-level rendering</li>
+                                <li><strong>Automatic Coloring:</strong> Browser intelligently colors ranges</li>
+                                <li><strong>Easy to Use:</strong> Simple attributes for complex semantics</li>
+                            </ul>
+                            <p>Custom rating components often misuse progress bars or build from scratch. Use &lt;meter&gt; for its intended purpose—scalar measurements.</p>
+                        </main>
+                    </article>
+                </section>
             </div>
-            <div class="links">
-                <div class="column">
-                    <h4>Documentation</h4>
-                    <ul>
-                        <li><a href="../components-overview.html">Docs</a></li>
-                <li><a href="../animations.html">Animations</a></li>
-                        <li><a href="../../README.md" target="_blank">README</a> <span class="demo-metadata-label">(Markdown)</span></li>
-                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span class="demo-metadata-label">(Markdown)</span></li>
-                        <li><a href="../styling-guide.html">Styling Guide</a></li>
-                        <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>Community</h4>
-                    <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" class="btn btn-secondary" target="_blank" rel="noopener">GitHub</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>More</h4>
-                    <ul>
-                        <li><a href="../../index.html#example-sites">Example Sites</a></li>
-                        <li><a href="../../index.html#release-info">Release Info</a></li>
-                    </ul>
-                </div>
-        <div class="bottom">
-            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
-        </div>
-    </footer>
+        </section>
+    </main>
 
-            <script>
-        const interactiveRating = document.getElementById('interactiveRating');
-        const stars = interactiveRating.querySelectorAll('.star');
-        let currentRating = 0;
-        
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
-                currentRating = star.getAttribute('data-value');
-                updateRating(currentRating);
-            });
-            
-            star.addEventListener('mouseover', () => {
-                const value = star.getAttribute('data-value');
-                updatePreview(value);
-            });
-        });
-        
-        interactiveRating.addEventListener('mouseout', () => {
-            updateRating(currentRating);
-        });
-        
-        function updatePreview(value) {
-            stars.forEach((s, index) => {
-                if (index < value) {
-                    s.classList.add('filled');
-                } else {
-                    s.classList.remove('filled');
-                }
-            });
-        }
-        
-        function updateRating(value) {
-            stars.forEach((s, index) => {
-                if (index < value) {
-                    s.classList.add('filled');
-                } else {
-                    s.classList.remove('filled');
-                }
-            });
-        }
+    	<!-- FOOTER -->
+	<footer class="footer">
+		<div class="container">
+			<!-- Main Content Grid -->
+			<div class="footer-content">
+				<!-- Brand Section -->
+				<div class="footer-brand">
+					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+				</div>
 
+				<!-- Product Links -->
+				<div class="footer-column">
+					<h4>Product</h4>
+					<ul>
+						<li><a href="../../docs/components-overview.html">All Components</a></li>
+						<li><a href="../../docs/axicons.html">Icons</a></li>
+						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
+						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+					</ul>
+				</div>
+
+				<!-- Resources Links -->
+				<div class="footer-column">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="../../README.md" target="_blank">README</a></li>
+						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+					</ul>
+				</div>
+
+				<!-- Community Links -->
+				<div class="footer-column">
+					<h4>Community</h4>
+					<ul>
+						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Bottom Section -->
+			<div class="footer-bottom">
+				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+				<ul class="footer-social">
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+						<span class="axicon render" data-name="GitHub"></span>
+					</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+						<span class="axicon render" data-name="Brand-NPM"></span>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+
+    <script>
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
@@ -455,13 +518,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="../../js/axicons-loader.js"></script>
-<script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
-<script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
+    <script src="../../js/axiom.js"></script>
 </body>
 </html>
