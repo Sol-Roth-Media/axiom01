@@ -191,8 +191,8 @@ Axiom01 includes **Axicons** — a modular SVG icon system with over **3,969 ico
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axiom.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axicons.css">
+  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.1/css/axiom.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.1/css/axicons.css">
 </head>
 <body>
   <!-- Use icons with data-name attribute -->
@@ -207,17 +207,17 @@ Axiom01 includes **Axicons** — a modular SVG icon system with over **3,969 ico
   </a>
 
   <!-- Load icon library -->
-  <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-loader.js"></script>
+  <script src="https://unpkg.com/axiom01@2.2.1/js/axicons-loader.js"></script>
   
   <!-- Load base icons (450 icons, 89KB) -->
-  <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-base.js"></script>
+  <script src="https://unpkg.com/axiom01@2.2.1/js/axicons-base.js"></script>
   
   <!-- Optional: Load other variants as needed -->
-  <!-- <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-thin-variants.js"></script> -->
-  <!-- <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-color-variants.js"></script> -->
+  <!-- <script src="https://unpkg.com/axiom01@2.2.1/js/axicons-thin-variants.js"></script> -->
+  <!-- <script src="https://unpkg.com/axiom01@2.2.1/js/axicons-color-variants.js"></script> -->
   
   <!-- Render icons automatically -->
-  <script src="https://unpkg.com/axiom01@2.2.0/js/render-icons.js"></script>
+  <script src="https://unpkg.com/axiom01@2.2.1/js/render-icons.js"></script>
 </body>
 </html>
 ```
@@ -279,18 +279,18 @@ Icons inherit color from their parent and can be styled with CSS:
 
 ```html
 <!-- Start with base (89KB) - covers 450 icons -->
-<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-base.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.1/js/axicons-base.js"></script>
 
 <!-- Add thin if needed (+170KB) - 760 total icons -->
-<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-thin-variants.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.1/js/axicons-thin-variants.js"></script>
 
 <!-- Or load all variants at once (440KB total) -->
-<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-loader.js"></script>
-<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-base.js"></script>
-<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-thin-variants.js"></script>
-<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-inverted-variants.js"></script>
-<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-color-variants.js"></script>
-<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-premium-variants.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.1/js/axicons-loader.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.1/js/axicons-base.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.1/js/axicons-thin-variants.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.1/js/axicons-inverted-variants.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.1/js/axicons-color-variants.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.1/js/axicons-premium-variants.js"></script>
 ```
 
 ### Dynamic Icon Rendering
@@ -311,7 +311,7 @@ if (typeof window.renderAxicons === 'function') {
 
 ### Browse All Icons
 
-**Live Icon Browser:** [axiom01.com/icons](https://axiom01.com/icons)
+**Live Icon Browser:** [axiom01.com/docs/axicons.html](https://axiom01.com/docs/axicons.html)
 - Search by name
 - Filter by variant
 - Click to copy icon names
@@ -386,8 +386,8 @@ Every aspect of Axiom01 is customizable through CSS variables:
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axiom.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axicons.css">
+  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.1/css/axiom.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.1/css/axicons.css">
 </head>
 <body>
   <header class="navbar">
@@ -420,9 +420,9 @@ Every aspect of Axiom01 is customizable through CSS variables:
   </main>
 
   <!-- Load icons -->
-  <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-loader.js"></script>
-  <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-base.js"></script>
-  <script src="https://unpkg.com/axiom01@2.2.0/js/render-icons.js"></script>
+  <script src="https://unpkg.com/axiom01@2.2.1/js/axicons-loader.js"></script>
+  <script src="https://unpkg.com/axiom01@2.2.1/js/axicons-base.js"></script>
+  <script src="https://unpkg.com/axiom01@2.2.1/js/render-icons.js"></script>
 </body>
 </html>
 ```
@@ -534,11 +534,10 @@ Automatic theme detection with zero configuration:
 | Resource | Purpose |
 |----------|---------|
 | 🌐 **[Live Demo](https://axiom01.com)** | See all components in action |
-| 📖 **[Documentation](https://axiom01.com/docs)** | Component reference and guides |
+| 📖 **[Documentation](https://axiom01.com/docs/overview-quickstart.html)** | Getting started guide |
 | 🧩 **[Components](https://axiom01.com/docs/components-overview.html)** | Explore all 73 components |
-| 🎬 **[Animations](https://axiom01.com/docs)** | Animation showcase |
 | 🎨 **[Design Tokens](https://axiom01.com/docs)** | CSS variables reference |
-| 🎯 **[Axicons](https://axiom01.com/icons)** | Browse all 3,969 icons |
+| 🎯 **[Axicons](https://axiom01.com/docs/axicons.html)** | Browse all 3,969 icons |
 | 💾 **[GitHub](https://github.com/Sol-Roth-Media/axiom01)** | Source code and issues |
 
 ---
@@ -619,7 +618,7 @@ See [LICENSE](LICENSE) for full details.
 npm install axiom01
 
 # Or use the CDN
-# <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axiom.min.css">
+# <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.1/css/axiom.min.css">
 
 # Start building with semantic HTML
 <button class="primary lg">Get Started</button>
