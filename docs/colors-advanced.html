@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <style>
+        /* Mobile-first responsive styling */
         .color-swatch {
             width: 100%;
             height: 120px;
@@ -23,289 +24,513 @@
             padding: var(--a-space-m);
             font-size: var(--a-font-size-xs);
             font-weight: 500;
-            color: var(--ax-text);
-            word-break: break-word;
         }
+
         .color-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: 1fr;
+            gap: var(--a-space-m);
+            margin: var(--a-space-l) 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        @media (min-width: 480px) {
+            .color-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .color-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .color-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-s);
+        }
+
+        .color-label {
+            font-size: var(--a-font-size-s);
+            font-weight: var(--a-font-weight-semibold);
+            margin-top: var(--a-space-m);
+            color: var(--a-color-text);
+        }
+
+        .color-value {
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-on-surface-variant);
+            font-family: var(--a-font-family-mono);
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--a-space-l);
+            margin: var(--a-space-l) 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .status-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .status-section {
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            padding: var(--a-space-l);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-m);
+        }
+
+        .status-section h4 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-s);
+        }
+
+        .status-colors {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--a-space-m);
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--a-space-m);
+            margin: var(--a-space-l) 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        @media (min-width: 480px) {
+            .palette-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .palette-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .palette-card {
+            border: 1px solid var(--ax-border);
+            border-radius: var(--a-border-radius-lg);
+            overflow: hidden;
+        }
+
+        .palette-card-color {
+            width: 100%;
+            height: 100px;
+        }
+
+        .palette-card-label {
+            padding: var(--a-space-m);
+        }
+
+        .surface-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--a-space-m);
+            margin: var(--a-space-l) 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .surface-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .gradient-showcase {
+            display: grid;
+            grid-template-columns: 1fr;
             gap: var(--a-space-m);
             margin: var(--a-space-l) 0;
         }
-        .color-item {
-            text-align: center;
+
+        @media (min-width: 768px) {
+            .gradient-showcase {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-        .color-label {
-            font-size: var(--a-font-size-s);
-            font-weight: 600;
+
+        .gradient-card {
+            height: 150px;
+            border-radius: var(--a-border-radius-lg);
+            display: flex;
+            align-items: flex-end;
+            padding: var(--a-space-m);
+            box-shadow: var(--a-shadow-sm);
+            border: 1px solid var(--ax-border);
+        }
+
+        .gradient-card p {
+            margin: 0;
+            font-weight: var(--a-font-weight-semibold);
+            color: white;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Code examples */
+        pre {
+            overflow-x: auto;
+            max-width: 100%;
+            display: block;
+        }
+
+        pre code {
+            display: block;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        /* Container - ensure proper padding on mobile */
+        .container {
+            padding: 0 var(--a-space-m);
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 var(--a-space-l);
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Hero section */
+        .hero h1 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Section spacing */
+        .component-section {
+            margin-bottom: var(--a-space-xl);
+        }
+
+        .component-section h2 {
+            margin-top: 0;
+            margin-bottom: var(--a-space-m);
+        }
+
+        .component-section h3 {
             margin-top: var(--a-space-m);
-            color: var(--ax-text);
+            margin-bottom: var(--a-space-s);
         }
-        .color-value {
+
+        /* Lists */
+        ul {
+            list-style-type: disc;
+            padding-left: var(--a-space-2xl);
+            margin: var(--a-space-m) 0;
+        }
+
+        ol {
+            list-style-type: decimal;
+            padding-left: var(--a-space-2xl);
+            margin: var(--a-space-m) 0;
+        }
+
+        li {
+            margin-bottom: var(--a-space-m);
+            line-height: var(--a-line-height-relaxed);
+        }
+
+        /* Footer lists have no bullets */
+        footer ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        footer li {
+            margin-bottom: var(--a-space-s);
+        }
+
+        /* Badge style */
+        .badge {
+            display: inline-block;
+            padding: var(--a-space-xs) var(--a-space-s);
+            border-radius: var(--a-border-radius-md);
             font-size: var(--a-font-size-xs);
-            color: var(--a-color-text-muted);
-            font-family: var(--a-font-family-mono);
+            font-weight: var(--a-font-weight-semibold);
+        }
+
+        .badge.success {
+            background: var(--a-color-success);
+            color: var(--a-color-on-success);
+        }
+
+        .badge.warning {
+            background: var(--a-color-warning);
+            color: var(--a-color-text);
+        }
+
+        .badge.error {
+            background: var(--a-color-error);
+            color: var(--a-color-on-error);
+        }
+
+        .badge.info {
+            background: var(--a-color-info);
+            color: var(--a-color-on-info);
         }
     </style>
 </head>
-<body class="axiom-body component-doc">
-    <header class="main" data-component="mobile-navbar">
-        <nav role="navigation" aria-label="Main Navigation">
-            <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-            <ul class="links">
-                <li><a href="../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../index.html#components">Components</a></li>
-                <li><a href="../index.html#get-started">Get Started</a></li>
-                <li><a href="components-overview.html">Component Overview</a></li>
-            </ul>
-            <div class="actions">
-                <button class="search toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="Brand-Github"></span>
-                    <span>GitHub</span>
-                </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
-            </div>
-        </nav>
-    </header>
+<body class="axiom-body">
 
-    <main><section><div class="container">
-        <header>
+<header class="main" data-component="mobile-navbar">
+    <nav role="navigation" aria-label="Main Navigation">
+        <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+        <ul class="links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="styling-guide.html">Styling Guide</a></li>
+            <li><a href="axicons.html">Icons</a></li>
+        </ul>
+        <div class="actions">
+            <button class="btn toggle search" aria-label="Open Search">
+                <span class="axicon render" data-name="Search"></span>
+            </button>
+            <a href="https://github.com/Sol-Roth-Media/axiom01" class="btn btn-secondary" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <span class="axicon render" data-name="GitHub"></span>
+                <span>GitHub</span>
+            </a>
+            <button class="btn toggle theme" id="theme-toggle" aria-label="Toggle dark mode">
+                <span class="axicon render" data-name="Moon"></span>
+            </button>
+            <button class="btn toggle menu" aria-label="Toggle Menu">
+                <span class="axicon render" data-name="Menu"></span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container">
             <h1>Color System</h1>
-            <p class="text-muted">Axiom01's color system is mathematically designed to ensure harmony, accessibility, and flexibility across your entire interface.</p>
-        </header>
+            <p class="tagline">Mathematically designed color system with accessibility and harmony built-in</p>
+        </div>
+    </section>
 
-        <div class="component-section">
+    <section class="component-section">
+        <div class="container">
+            <h2>Color Philosophy</h2>
+            <p>Axiom01's color system is mathematically designed to ensure harmony, accessibility, and flexibility across your entire interface. Every color works with every other color, ensuring your interfaces are always harmonious and accessible.</p>
+            
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Semantic Colors</strong> — Primary, Secondary, Success, Warning, Error, and Info colors that communicate intent</li>
+                <li><strong>Automatic Derivations</strong> — Light variants, containers, and text colors computed from base colors</li>
+                <li><strong>Light & Dark Modes</strong> — Colors adapt automatically with proper contrast ratios</li>
+                <li><strong>Accessible Contrast</strong> — WCAG 2.1 AA compliance built-in</li>
+                <li><strong>Multiple Palettes</strong> — Switch between default, indigo, emerald, and sunset palettes</li>
+            </ul>
+        </div>
+    </section>
 
-            <section>
-                <h2>Color Philosophy</h2>
-                <p>Axiom01 uses a sophisticated color system based on semantic colors and mathematical relationships. Every color in the system works with every other color, ensuring that your interfaces are always harmonious and accessible.</p>
-                <p>The color system supports:</p>
-                <ul style="margin: var(--a-space-m) 0;">
-                    <li><strong>Semantic Colors</strong> - Primary, Secondary, Success, Warning, Error, and Info colors that communicate intent</li>
-                    <li><strong>Automatic Derivations</strong> - Light variants, containers, and text colors are computed from base colors</li>
-                    <li><strong>Light & Dark Modes</strong> - Colors adapt automatically with proper contrast ratios</li>
-                    <li><strong>Accessible Contrast</strong> - WCAG 2.1 AA compliance built-in</li>
-                    <li><strong>Multiple Palettes</strong> - Switch between default, indigo, emerald, and sunset palettes</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Primary Color</h2>
-                <p>The primary color is the most important color in your design system. It's used for interactive elements, links, and key actions. Axiom01 provides multiple primary color options.</p>
-                
-                <div style="margin: var(--a-space-xl) 0;">
-                    <h3 style="margin-bottom: var(--a-space-l);">Primary Color Palettes</h3>
-                    <div class="grid grid-cols-3">
-                        <div class="card" style="text-align: center;">
-                            <div class="color-swatch" style="background: #2563eb; color: white;">Default Blue</div>
-                            <p class="color-label">#2563eb</p>
-                            <p class="color-value">--a-color-primary</p>
-                        </div>
-                        <div class="card" style="text-align: center;">
-                            <div class="color-swatch" style="background: #4f46e5; color: white;">Indigo</div>
-                            <p class="color-label">#4f46e5</p>
-                            <p class="color-value">data-axiom-palette="indigo"</p>
-                        </div>
-                        <div class="card" style="text-align: center;">
-                            <div class="color-swatch" style="background: #059669; color: white;">Emerald</div>
-                            <p class="color-label">#059669</p>
-                            <p class="color-value">data-axiom-palette="emerald"</p>
-                        </div>
-                        <div class="card" style="text-align: center;">
-                            <div class="color-swatch" style="background: #ea580c; color: white;">Sunset</div>
-                            <p class="color-label">#ea580c</p>
-                            <p class="color-value">data-axiom-palette="sunset"</p>
-                        </div>
+    <section class="component-section">
+        <div class="container">
+            <h2>Primary Color Palettes</h2>
+            <p>The primary color is the most important color in your design system. It's used for interactive elements, links, and key actions. Choose from four professionally designed palettes:</p>
+            
+            <div class="palette-grid">
+                <article class="palette-card">
+                    <div class="palette-card-color" style="background: #2563eb;"></div>
+                    <div class="palette-card-label">
+                        <p class="color-label">Default Blue</p>
+                        <p class="color-value">#2563eb</p>
                     </div>
-                </div>
+                </article>
 
-                <h3>Primary Color Variations</h3>
-                <p>For each primary color, Axiom01 automatically creates these variations:</p>
-                <div style="margin: var(--a-space-l) 0;">
-                    <pre><code class="language-css">--a-color-primary: #2563eb;              /* Base primary color */
+                <article class="palette-card">
+                    <div class="palette-card-color" style="background: #4f46e5;"></div>
+                    <div class="palette-card-label">
+                        <p class="color-label">Indigo</p>
+                        <p class="color-value">#4f46e5</p>
+                    </div>
+                </article>
+
+                <article class="palette-card">
+                    <div class="palette-card-color" style="background: #059669;"></div>
+                    <div class="palette-card-label">
+                        <p class="color-label">Emerald</p>
+                        <p class="color-value">#059669</p>
+                    </div>
+                </article>
+
+                <article class="palette-card">
+                    <div class="palette-card-color" style="background: #ea580c;"></div>
+                    <div class="palette-card-label">
+                        <p class="color-label">Sunset</p>
+                        <p class="color-value">#ea580c</p>
+                    </div>
+                </article>
+            </div>
+
+            <h3>Primary Color Variations</h3>
+            <p>For each primary color, Axiom01 automatically creates these CSS variables:</p>
+            <pre><code class="language-css">--a-color-primary: #2563eb;              /* Base primary color */
 --a-color-on-primary: #ffffff;           /* Text color ON primary */
 --a-color-primary-light: lighter shade;  /* Light variant for backgrounds */
 --a-color-primary-dark: darker shade;    /* Dark variant for emphasis */
 --a-color-primary-container: very light; /* Container background */
 --a-color-on-primary-container: dark;    /* Text ON container */</code></pre>
-                </div>
 
-                <h3>Usage Example</h3>
-                <pre><code class="language-html">&lt;button class="primary"&gt;Click Me&lt;/button&gt;
-&lt;a href="#" class="button primary"&gt;Link&lt;/a&gt;
-&lt;div style="background: var(--a-color-primary);"&gt;&lt;/div&gt;</code></pre>
-            </section>
+            <div style="text-align: center; margin-top: var(--a-space-2xl);">
+                <a href="../index.html#theme-explorer" class="button primary lg">Explore Live Themes</a>
+            </div>
+        </div>
+    </section>
 
-            <section>
-                <h2>Semantic Status Colors</h2>
-                <p>Semantic colors communicate meaning and status to users. These colors are optimized for accessibility and work well with light and dark modes.</p>
-                
-                <div style="margin: var(--a-space-xl) 0;">
-                    <h3 style="margin-bottom: var(--a-space-l);">Status Color Set</h3>
-                    
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <h4 style="margin-bottom: var(--a-space-m);">Success <span class="badge success">Positive action</span></h4>
-                        <div class="grid grid-cols-2">
-                            <div class="card" style="text-align: center;">
-                                <div class="color-swatch" style="background: #16a34a; color: white;">Success</div>
-                                <p class="color-label">#16a34a</p>
-                                <p class="color-value">--a-color-success</p>
-                            </div>
-                            <div class="card" style="text-align: center;">
-                                <div class="color-swatch" style="background: #dcfce7; color: #111827;">Success Light</div>
-                                <p class="color-label">Light variant</p>
-                                <p class="color-value">--a-color-success-light</p>
-                            </div>
-                        </div>
+    <section class="component-section">
+        <div class="container">
+            <h2>Semantic Status Colors</h2>
+            <p>Semantic colors communicate meaning and status to users. These colors are optimized for accessibility and work well in light and dark modes.</p>
+            
+            <div class="status-grid">
+                <section class="status-section">
+                    <h4>
+                        <span style="width: 24px; height: 24px; background: var(--a-color-success); border-radius: var(--a-border-radius-md); display: inline-block;"></span>
+                        Success <span class="badge success">Positive Action</span>
+                    </h4>
+                    <div class="status-colors">
+                        <article class="color-item">
+                            <div class="color-swatch" style="background: var(--a-color-success); color: var(--a-color-on-success);"></div>
+                            <p class="color-label">Base</p>
+                            <p class="color-value">--a-color-success</p>
+                        </article>
+                        <article class="color-item">
+                            <div class="color-swatch" style="background: var(--a-color-success-container); color: var(--a-color-text);"></div>
+                            <p class="color-label">Container</p>
+                            <p class="color-value">--a-color-success-container</p>
+                        </article>
                     </div>
+                </section>
 
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <h4 style="margin-bottom: var(--a-space-m);">Warning <span class="badge warning">Caution</span></h4>
-                        <div class="grid grid-cols-2">
-                            <div class="card" style="text-align: center;">
-                                <div class="color-swatch" style="background: #ea580c; color: white;">Warning</div>
-                                <p class="color-label">#ea580c</p>
-                                <p class="color-value">--a-color-warning</p>
-                            </div>
-                            <div class="card" style="text-align: center;">
-                                <div class="color-swatch" style="background: #ffedd5; color: #111827;">Warning Light</div>
-                                <p class="color-label">Light variant</p>
-                                <p class="color-value">--a-color-warning-light</p>
-                            </div>
-                        </div>
+                <section class="status-section">
+                    <h4>
+                        <span style="width: 24px; height: 24px; background: var(--a-color-warning); border-radius: var(--a-border-radius-md); display: inline-block;"></span>
+                        Warning <span class="badge warning">Caution</span>
+                    </h4>
+                    <div class="status-colors">
+                        <article class="color-item">
+                            <div class="color-swatch" style="background: var(--a-color-warning); color: var(--a-color-text);"></div>
+                            <p class="color-label">Base</p>
+                            <p class="color-value">--a-color-warning</p>
+                        </article>
+                        <article class="color-item">
+                            <div class="color-swatch" style="background: var(--a-color-warning-container); color: var(--a-color-text);"></div>
+                            <p class="color-label">Container</p>
+                            <p class="color-value">--a-color-warning-container</p>
+                        </article>
                     </div>
+                </section>
 
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <h4 style="margin-bottom: var(--a-space-m);">Error <span class="badge error">Negative</span></h4>
-                        <div class="grid grid-cols-2">
-                            <div class="card" style="text-align: center;">
-                                <div class="color-swatch" style="background: #dc2626; color: white;">Error</div>
-                                <p class="color-label">#dc2626</p>
-                                <p class="color-value">--a-color-error</p>
-                            </div>
-                            <div class="card" style="text-align: center;">
-                                <div class="color-swatch" style="background: #fee2e2; color: #111827;">Error Light</div>
-                                <p class="color-label">Light variant</p>
-                                <p class="color-value">--a-color-error-light</p>
-                            </div>
-                        </div>
+                <section class="status-section">
+                    <h4>
+                        <span style="width: 24px; height: 24px; background: var(--a-color-error); border-radius: var(--a-border-radius-md); display: inline-block;"></span>
+                        Error <span class="badge error">Negative</span>
+                    </h4>
+                    <div class="status-colors">
+                        <article class="color-item">
+                            <div class="color-swatch" style="background: var(--a-color-error); color: var(--a-color-on-error);"></div>
+                            <p class="color-label">Base</p>
+                            <p class="color-value">--a-color-error</p>
+                        </article>
+                        <article class="color-item">
+                            <div class="color-swatch" style="background: var(--a-color-error-container); color: var(--a-color-text);"></div>
+                            <p class="color-label">Container</p>
+                            <p class="color-value">--a-color-error-container</p>
+                        </article>
                     </div>
+                </section>
 
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <h4 style="margin-bottom: var(--a-space-m);">Info <span class="badge info">Information</span></h4>
-                        <div class="grid grid-cols-2">
-                            <div class="card" style="text-align: center;">
-                                <div class="color-swatch" style="background: #0284c7; color: white;">Info</div>
-                                <p class="color-label">#0284c7</p>
-                                <p class="color-value">--a-color-info</p>
-                            </div>
-                            <div class="card" style="text-align: center;">
-                                <div class="color-swatch" style="background: #e0f2fe; color: #111827;">Info Light</div>
-                                <p class="color-label">Light variant</p>
-                                <p class="color-value">--a-color-info-light</p>
-                            </div>
-                        </div>
+                <section class="status-section">
+                    <h4>
+                        <span style="width: 24px; height: 24px; background: var(--a-color-info); border-radius: var(--a-border-radius-md); display: inline-block;"></span>
+                        Info <span class="badge info">Information</span>
+                    </h4>
+                    <div class="status-colors">
+                        <article class="color-item">
+                            <div class="color-swatch" style="background: var(--a-color-info); color: var(--a-color-on-info);"></div>
+                            <p class="color-label">Base</p>
+                            <p class="color-value">--a-color-info</p>
+                        </article>
+                        <article class="color-item">
+                            <div class="color-swatch" style="background: var(--a-color-info-container); color: var(--a-color-text);"></div>
+                            <p class="color-label">Container</p>
+                            <p class="color-value">--a-color-info-container</p>
+                        </article>
                     </div>
-                </div>
+                </section>
+            </div>
 
-                <h3>Using Status Colors</h3>
-                <pre><code class="language-html">&lt;!-- Success --&gt;
+            <h3>Using Status Colors</h3>
+            <pre><code class="language-html">&lt;!-- Success Alert --&gt;
 &lt;div class="alert success"&gt;Operation completed!&lt;/div&gt;
 &lt;button class="success"&gt;Approve&lt;/button&gt;
 
-&lt;!-- Warning --&gt;
+&lt;!-- Warning Alert --&gt;
 &lt;div class="alert warning"&gt;Please review before proceeding&lt;/div&gt;
 
-&lt;!-- Error --&gt;
+&lt;!-- Error Alert --&gt;
 &lt;div class="alert error"&gt;Something went wrong&lt;/div&gt;
 
-&lt;!-- Info --&gt;
-&lt;div class="alert info"&gt;FYI: This is helpful information&lt;/div&gt;</code></pre>
-            </section>
+&lt;!-- Info Alert --&gt;
+&lt;div class="alert info"&gt;This is helpful information&lt;/div&gt;</code></pre>
+        </div>
+    </section>
 
-            <section>
-                <h2>Surface & Text Colors</h2>
-                <p>Surface and text colors define the foundation of your interface. They adapt automatically for light and dark modes while maintaining accessibility standards.</p>
-                
-                <h3>Light Mode</h3>
-                <div class="grid grid-cols-2" style="margin: var(--a-space-l) 0;">
-                    <div class="card" style="text-align: center;">
-                        <div class="color-swatch" style="background: #ffffff; border: 2px solid var(--ax-border);">Surface</div>
-                        <p class="color-label">#ffffff</p>
-                        <p class="color-value">--ax-surface</p>
-                    </div>
-                    <div class="card" style="text-align: center;">
-                        <div class="color-swatch" style="background: #111827; color: white;">Text</div>
-                        <p class="color-label">#111827</p>
-                        <p class="color-value">--ax-text</p>
-                    </div>
-                </div>
+    <section class="component-section">
+        <div class="container">
+            <h2>Surface & Text Colors</h2>
+            <p>Surface and text colors define the foundation of your interface. They adapt automatically for light and dark modes while maintaining accessibility standards.</p>
+            
+            <h3>Light Mode</h3>
+            <div class="surface-grid">
+                <article class="color-item">
+                    <div class="color-swatch" style="background: var(--a-color-surface); border: 2px solid var(--ax-border); color: var(--a-color-text);"></div>
+                    <p class="color-label">Surface</p>
+                    <p class="color-value">--a-color-surface</p>
+                </article>
+                <article class="color-item">
+                    <div class="color-swatch" style="background: var(--a-color-text); color: var(--a-color-surface);"></div>
+                    <p class="color-label">Text (Primary)</p>
+                    <p class="color-value">--a-color-text</p>
+                </article>
+            </div>
 
-                <h3>Dark Mode</h3>
-                <div class="grid grid-cols-2" style="margin: var(--a-space-l) 0;">
-                    <div class="card" style="text-align: center;">
-                        <div class="color-swatch" style="background: #0f172a; color: white;">Surface</div>
-                        <p class="color-label">#0f172a</p>
-                        <p class="color-value">--ax-surface (dark)</p>
-                    </div>
-                    <div class="card" style="text-align: center;">
-                        <div class="color-swatch" style="background: #f8fafc; border: 2px solid var(--ax-border);">Text</div>
-                        <p class="color-label">#f8fafc</p>
-                        <p class="color-value">--ax-text (dark)</p>
-                    </div>
-                </div>
+            <h3>Text Hierarchy</h3>
+            <pre><code class="language-css">--a-color-text: Main body text (100% contrast)
+--a-color-on-surface-variant: Secondary content (70% opacity)
+--a-color-outline: Borders and dividers (50% opacity)
+--a-color-on-surface: Tertiary text</code></pre>
+        </div>
+    </section>
 
-                <h3>Text Hierarchy</h3>
-                <pre><code class="language-css">--a-color-text-primary: Main body text (100% contrast)
---a-color-text-secondary: Secondary content (70% opacity)
---a-color-text-muted: Supplementary info (50% opacity)
---a-color-text-disabled: Disabled state (40% opacity)</code></pre>
-            </section>
-
-            <section>
-                <h2>Gradients</h2>
-                <p>Axiom01 includes predefined gradients for visual interest and emphasis. These gradients are built from the color system and work harmoniously together.</p>
-                
-                <div style="margin: var(--a-space-l) 0;">
-                    <div class="grid grid-cols-2" style="gap: var(--a-space-l);">
-                        <div class="card">
-                            <div style="width: 100%; height: 100px; background: linear-gradient(135deg, var(--a-color-primary) 0%, #06b6d4 100%); border-radius: var(--a-border-radius-lg); margin-bottom: var(--a-space-m);"></div>
-                            <p class="color-label">Primary Gradient</p>
-                            <pre><code class="language-css">--a-gradient-primary</code></pre>
-                        </div>
-                        <div class="card">
-                            <div style="width: 100%; height: 100px; background: linear-gradient(135deg, #f97316 0%, #facc15 100%); border-radius: var(--a-border-radius-lg); margin-bottom: var(--a-space-m);"></div>
-                            <p class="color-label">Sunset Gradient</p>
-                            <pre><code class="language-css">--a-gradient-sunset</code></pre>
-                        </div>
-                        <div class="card">
-                            <div style="width: 100%; height: 100px; background: linear-gradient(135deg, #0ea5e9 0%, #2dd4bf 100%); border-radius: var(--a-border-radius-lg); margin-bottom: var(--a-space-m);"></div>
-                            <p class="color-label">Ocean Gradient</p>
-                            <pre><code class="language-css">--a-gradient-ocean</code></pre>
-                        </div>
-                        <div class="card">
-                            <div style="width: 100%; height: 100px; background: linear-gradient(135deg, #10b981 0%, #84cc16 100%); border-radius: var(--a-border-radius-lg); margin-bottom: var(--a-space-m);"></div>
-                            <p class="color-label">Forest Gradient</p>
-                            <pre><code class="language-css">--a-gradient-forest</code></pre>
-                        </div>
-                    </div>
-                </div>
-
-                <h3>Using Gradients</h3>
-                <pre><code class="language-html">&lt;div style="background: var(--a-gradient-primary);"&gt;
-  &lt;h2&gt;Featured Section&lt;/h2&gt;
-&lt;/div&gt;</code></pre>
-            </section>
-
-            <section>
-                <h2>Switching Color Palettes</h2>
-                <p>Change the primary color palette dynamically by setting the <code>data-axiom-palette</code> attribute on the root element.</p>
-                
-                <pre><code class="language-html">&lt;!-- Default Blue --&gt;
+    <section class="component-section">
+        <div class="container">
+            <h2>Switching Color Palettes</h2>
+            <p>Change the primary color palette dynamically by setting the <code>data-axiom-palette</code> attribute on the root element.</p>
+            
+            <pre><code class="language-html">&lt;!-- Default Blue --&gt;
 &lt;html data-axiom-palette="default"&gt;
 
 &lt;!-- Indigo --&gt;
@@ -317,141 +542,120 @@
 &lt;!-- Sunset --&gt;
 &lt;html data-axiom-palette="sunset"&gt;</code></pre>
 
-                <h3>JavaScript Palette Switching</h3>
-                <pre><code class="language-javascript">// Change palette at runtime
+            <h3>JavaScript Palette Switching</h3>
+            <pre><code class="language-javascript">// Change palette at runtime
 document.documentElement.setAttribute('data-axiom-palette', 'emerald');
 
 // Or toggle dark mode
 document.documentElement.setAttribute('data-theme', 'dark');</code></pre>
-            </section>
+        </div>
+    </section>
 
-            <section>
-                <h2>Accessibility & Contrast</h2>
-                <p>All colors in Axiom01 are chosen to meet WCAG 2.1 AA accessibility standards. This ensures:</p>
-                <ul style="margin: var(--a-space-m) 0;">
-                    <li><strong>Minimum 4.5:1 contrast ratio</strong> for normal text</li>
-                    <li><strong>Minimum 3:1 contrast ratio</strong> for large text</li>
-                    <li><strong>Automatic dark mode adaptation</strong> maintains contrast</li>
-                    <li><strong>Color-blind friendly</strong> semantic meanings (not just color-based)</li>
-                </ul>
-                
-                <p style="margin-top: var(--a-space-l);">Always pair colors with meaningful text or icons to communicate intent, not just color alone.</p>
-            </section>
+    <section class="component-section">
+        <div class="container">
+            <h2>Accessibility & Contrast</h2>
+            <p>All colors in Axiom01 meet WCAG 2.1 AA accessibility standards:</p>
+            <ul>
+                <li><strong>Minimum 4.5:1 contrast ratio</strong> for normal text</li>
+                <li><strong>Minimum 3:1 contrast ratio</strong> for large text and UI components</li>
+                <li><strong>Automatic dark mode adaptation</strong> maintains contrast in both themes</li>
+                <li><strong>Color-blind friendly</strong> semantic meanings, not color alone</li>
+            </ul>
+            
+            <p><strong>Best Practice:</strong> Always pair colors with meaningful text or icons to communicate intent, not just color alone.</p>
+        </div>
+    </section>
 
-            <section>
-                <h2>CSS Variable Reference</h2>
-                <p>Complete list of color variables available in Axiom01:</p>
-                
-                <pre><code class="language-css">/* Primary Colors */
+    <section class="component-section">
+        <div class="container">
+            <h2>CSS Variable Reference</h2>
+            <p>Complete list of color variables available in Axiom01:</p>
+            
+            <pre><code class="language-css">/* Primary Colors */
 --a-color-primary
 --a-color-on-primary
---a-color-primary-light
---a-color-primary-dark
 --a-color-primary-container
 --a-color-on-primary-container
 
 /* Secondary Colors */
 --a-color-secondary
 --a-color-on-secondary
---a-color-secondary-light
 --a-color-secondary-container
 
 /* Status Colors */
---a-color-success / --a-color-success-light / --a-color-success-container
---a-color-warning / --a-color-warning-light / --a-color-warning-container
---a-color-error / --a-color-error-light / --a-color-error-container
---a-color-info / --a-color-info-light / --a-color-info-container
+--a-color-success
+--a-color-on-success
+--a-color-success-container
+
+--a-color-warning
+--a-color-warning-container
+
+--a-color-error
+--a-color-on-error
+--a-color-error-container
+
+--a-color-info
+--a-color-on-info
+--a-color-info-container
 
 /* Surface & Text */
---ax-surface
---ax-text
---ax-border
---ax-background-secondary
---a-color-text-primary
---a-color-text-secondary
---a-color-text-muted
---a-color-text-disabled
-
-/* Gradients */
---a-gradient-primary
---a-gradient-sunset
---a-gradient-ocean
---a-gradient-forest</code></pre>
-            </section>
-
+--a-color-surface
+--a-color-surface-variant
+--a-color-text
+--a-color-on-surface-variant
+--a-color-outline
+--a-color-on-surface</code></pre>
         </div>
+    </section>
 
-    </div></section></main>
+</main>
 
-    <footer class="main">
-        <div class="content">
-            <div class="brand">
-                <a href="../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-                <p class="tagline">The Semantic Web, Reimagined.</p>
+<footer class="main">
+    <div class="container">
+        <div class="grid grid-cols-4">
+            <div class="brand-section">
+                <a href="../index.html" class="brand">[Ax<span class="primary">01</span>]</a>
+                <p class="muted sm">The Semantic Web, Reimagined.</p>
             </div>
-            <div class="links">
-                <div class="column">
-                    <h4>Documentation</h4>
-                    <ul>
-                        <li><a href="components-overview.html">Component Overview</a></li>
-                        <li><a href="markdown-template.html?file=../README.md">README</a></li>
-                        <li><a href="markdown-template.html?file=../DEVELOPER.md">Developer Guide</a></li>
-                        <li><a href="markdown-template.html?file=../AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
-                        <li><a href="overview-quickstart.html">Overview & Quickstart</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>Community</h4>
-                    <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom" target="_blank" rel="noopener">GitHub</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>More</h4>
-                    <ul>
-                        <li><a href="../index.html#example-sites">Example Sites</a></li>
-                        <li><a href="../index.html#release-info">Release Info</a></li>
-                    </ul>
-                </div>
+
+            <div class="footer-column">
+                <h3>Documentation</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li><a href="components-overview.html">Component Overview</a></li>
+                    <li><a href="axicons.html">Icon Browser</a></li>
+                    <li><a href="styling-guide.html">Styling Guide</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Community</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Creator</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li><a href="https://www.solroth.com" target="_blank" rel="noopener">Sol Roth</a></li>
+                </ul>
             </div>
         </div>
-        <div class="bottom">
-            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
-        </div>
-    </footer>
+    </div>
+</footer>
 
-    <script src="../js/axiom.js"></script>
-    <script src="../js/axicons.js"></script>
-    <script>
-        function renderAxicons() {
-            if (typeof axicons === 'undefined') {
-                setTimeout(renderAxicons, 100);
-                return;
-            }
-            
-            document.querySelectorAll('.axicon.render').forEach(el => {
-                const name = el.getAttribute('data-name');
-                if (!name) return;
-                
-                const icon = axicons.find(i => i.name === name);
-                if (icon) {
-                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-                }
-            });
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderAxicons);
-        } else {
-            renderAxicons();
-        }
-
-        setTimeout(renderAxicons, 500);
-    </script>
-    <script src="../js/index-page-manager.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="../js/axiom.js"></script>
+<script src="../js/axicons-loader.js"></script>
+<script src="../js/axicons-base.js"></script>
+<script src="../js/axicons-thin-variants.js"></script>
+<script src="../js/axicons-inverted-variants.js"></script>
+<script src="../js/axicons-color-variants.js"></script>
+<script src="../js/axicons-premium-variants.js"></script>
+<script src="../js/render-icons.js"></script>
+<script src="../js/sticky-header.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 </body>
 </html>

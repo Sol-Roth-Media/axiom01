@@ -6,6 +6,7 @@
     <title>File Upload Component - Axiom01</title>
     <link rel="stylesheet" href="../../css/axiom.min.css">
     <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="stylesheet" href="../../css/docs.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -143,15 +144,15 @@
 		</ul>
 
             <div class="actions">
-                <button class="search toggle" aria-label="Open Search">
+                <button class="btn toggle" aria-label="Open Search">
                     <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="btn btn-secondary" target="_blank" rel="noopener" aria-label="View on GitHub">
                     <span class="axicon render" data-name="GitHub"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+                <button class="btn toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="btn toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
@@ -169,32 +170,32 @@
 
                 <h3>Drag and Drop Upload</h3>
                 <div class="upload-demo">
-                    <div class="upload-zone" id="uploadZone1" role="button" tabindex="0" aria-label="Drag files here or click to browse">
+                    <button class="upload-zone" id="uploadZone1"  tabindex="0" aria-label="Drag files here or click to browse">
                         <div class="upload-icon">
                             <span class="axicon render" data-name="Upload"></span>
                         </div>
                         <p class="upload-text">
                             <strong>Click to browse</strong> or drag files here
                         </p>
-                        <p style="font-size: var(--a-font-size-xs); color: var(--a-color-text-muted); margin: var(--a-space-s) 0 0;">
+                        <p >
                             Supported formats: JPG, PNG, PDF (Max 10MB)
                         </p>
                     </div>
                     <input type="file" id="fileInput1" class="hidden-input" multiple accept=".jpg,.jpeg,.png,.pdf">
-                    <div class="file-list" id="fileList1" style="display: none;"></div>
+                    <div class="file-list demo-hidden" id="fileList1"></div>
                 </div>
 
                 <h3>Simple File Input</h3>
                 <div class="upload-demo">
                     <label class="input-label" for="fileInput2">Select Document</label>
-                    <div style="display: flex; gap: var(--a-space-m);">
+                    <div class="flex-row">
                         <input type="file" id="fileInput2" class="hidden-input" accept=".doc,.docx,.pdf">
                         <button type="button" class="button primary" id="browseBtn" aria-label="Browse for files">
                             <span class="axicon render" data-name="File"></span>
                             Choose File
                         </button>
                     </div>
-                    <div class="file-list" id="fileList2" style="display: none;"></div>
+                    <div class="file-list demo-hidden" id="fileList2"></div>
                 </div>
             </section>
 
@@ -335,8 +336,8 @@ function handleFiles(files) {
                     <ul>
                         <li><a href="../components-overview.html">Docs</a></li>
                 <li><a href="../animations.html">Animations</a></li>
-                        <li><a href="../../README.md" target="_blank">README</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
-                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span style="font-size: 0.75rem; color: var(--a-color-text-muted);">(Markdown)</span></li>
+                        <li><a href="../../README.md" target="_blank">README</a> <span class="demo-metadata-label">(Markdown)</span></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a> <span class="demo-metadata-label">(Markdown)</span></li>
                         <li><a href="../styling-guide.html">Styling Guide</a></li>
                         <li><a href="../overview-quickstart.html">Overview & Quickstart</a></li>
                     </ul>
@@ -354,16 +355,12 @@ function handleFiles(files) {
                         <li><a href="../../index.html#release-info">Release Info</a></li>
                     </ul>
                 </div>
-            </div>
-        </div>
         <div class="bottom">
             <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <script src="../../js/axiom.js"></script>
-    <script src="../../js/axicons.js"></script>
-    <script>
+            <script>
         // File upload handler 1
         const uploadZone1 = document.getElementById('uploadZone1');
         const fileInput1 = document.getElementById('fileInput1');
@@ -406,8 +403,6 @@ function handleFiles(files) {
                         <div class="file-details">
                             <div class="file-name">${file.name}</div>
                             <div class="file-size">${(file.size / 1024).toFixed(2)} KB</div>
-                        </div>
-                    </div>
                     <button type="button" class="remove-btn" aria-label="Remove file">×</button>
                 `;
                 fileList1.appendChild(item);
@@ -435,8 +430,6 @@ function handleFiles(files) {
                         <div class="file-details">
                             <div class="file-name">${file.name}</div>
                             <div class="file-size">${(file.size / 1024).toFixed(2)} KB</div>
-                        </div>
-                    </div>
                     <button type="button" class="remove-btn" aria-label="Remove file">×</button>
                 `;
                 fileList2.appendChild(item);
@@ -476,5 +469,13 @@ function handleFiles(files) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="../../js/axicons-loader.js"></script>
+<script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-thin-variants.js"></script>
+<script src="../../js/axicons-inverted-variants.js"></script>
+<script src="../../js/axicons-color-variants.js"></script>
+<script src="../../js/axicons-premium-variants.js"></script>
+<script src="../../js/render-icons.js"></script>
+<script src="../../js/axiom.js"></script>
 </body>
 </html>

@@ -6,10 +6,111 @@
     <title>Typography - Axiom01</title>
     <link rel="stylesheet" href="../css/axiom.min.css">
     <link rel="stylesheet" href="../css/axicons.css">
+    <link rel="stylesheet" href="../css/docs.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        /* Typography demo sections */
+        .font-demo {
+            font-size: var(--a-font-size-l);
+            line-height: var(--a-line-height-loose);
+            margin: var(--a-space-m) 0;
+        }
+
+        .font-demo.sans { font-family: var(--a-font-family-sans); }
+        .font-demo.serif { font-family: var(--a-font-family-serif); }
+        .font-demo.mono { font-family: var(--a-font-family-mono); }
+
+        /* Heading showcase */
+        .heading-showcase {
+            margin: var(--a-space-m) 0;
+        }
+
+        .heading-showcase h1,
+        .heading-showcase h2,
+        .heading-showcase h3,
+        .heading-showcase h4,
+        .heading-showcase h5,
+        .heading-showcase h6 {
+            margin: 0;
+        }
+
+        .heading-label {
+            color: var(--a-color-text-muted);
+            font-size: var(--a-font-size-sm);
+            margin-top: var(--a-space-xs);
+        }
+
+        /* Font size showcase */
+        .font-size-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--a-space-l);
+            margin: var(--a-space-l) 0;
+        }
+
+        .font-size-demo p:first-child {
+            margin: 0;
+        }
+
+        .font-size-label {
+            color: var(--a-color-text-muted);
+            font-size: var(--a-font-size-s);
+            margin: var(--a-space-s) 0 0 0;
+        }
+
+        /* Font weight showcase */
+        .weight-demo {
+            margin: var(--a-space-l) 0;
+        }
+
+        .weight-item {
+            margin-bottom: var(--a-space-l);
+        }
+
+        .weight-item p:first-child {
+            margin: 0;
+            font-size: var(--a-font-size-l);
+        }
+
+        .weight-item .weight-label {
+            color: var(--a-color-text-muted);
+            font-size: var(--a-font-size-s);
+            margin-top: var(--a-space-xs);
+        }
+
+        /* Line height showcase */
+        .line-height-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--a-space-l);
+            margin: var(--a-space-l) 0;
+        }
+
+        .line-height-item {
+            border: 1px solid var(--ax-border);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-lg);
+        }
+
+        .line-height-item p {
+            margin: 0 0 var(--a-space-s) 0;
+            font-size: var(--a-font-size-m);
+        }
+
+        .line-height-item .line-height-label {
+            color: var(--a-color-text-muted);
+            font-size: var(--a-font-size-sm);
+        }
+
+        /* Reading width demo */
+        .reading-width-demo {
+            line-height: var(--a-line-height-base);
+            max-width: 65ch;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <header class="main" data-component="mobile-navbar">
@@ -22,15 +123,15 @@
                 <li><a href="components-overview.html">Component Overview</a></li>
             </ul>
             <div class="actions">
-                <button class="search toggle" aria-label="Open Search">
+                <button class="btn toggle" aria-label="Open Search">
                     <span class="axicon render" data-name="Search"></span>
                 </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <a href="https://github.com/Sol-Roth-Media/axiom" class="btn btn-secondary" target="_blank" rel="noopener" aria-label="View on GitHub">
                     <span class="axicon render" data-name="Brand-Github"></span>
                     <span>GitHub</span>
                 </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+                <button class="btn toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="btn toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
             </div>
         </nav>
     </header>
@@ -46,7 +147,7 @@
             <section>
                 <h2>Typography Philosophy</h2>
                 <p>Typography is more than just choosing fonts—it's about creating a harmonious scale that guides users through your content. Axiom01 uses a mathematically scaled system with:</p>
-                <ul style="margin: var(--a-space-m) 0;">
+                <ul>
                     <li><strong>Perfect Vertical Rhythm</strong> - All line heights and margins align to a baseline grid</li>
                     <li><strong>Optimal Reading Width</strong> - Lines automatically constrain to 65 characters for comfortable reading</li>
                     <li><strong>Semantic Scaling</strong> - Heading sizes (h1-h6) scale proportionally</li>
@@ -60,26 +161,26 @@
                 <p>Axiom01 includes three carefully selected font families. These can be switched dynamically using data attributes.</p>
                 
                 <h3>Default: Inter (Sans Serif)</h3>
-                <p style="font-family: Inter, system-ui; font-size: var(--a-font-size-l); line-height: var(--a-line-height-loose);">
+                <p class="font-demo sans">
                     Inter is a highly legible, modern sans-serif designed specifically for screen use. It's the default for both headings and body text.
                 </p>
                 <pre><code class="language-css">--ax-font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
 --ax-font-heading: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;</code></pre>
 
-                <h3 style="margin-top: var(--a-space-xl);">Serif: Lora</h3>
-                <p style="font-family: 'Lora', serif; font-size: var(--a-font-size-l); line-height: var(--a-line-height-loose);">
+                <h3>Serif: Lora</h3>
+                <p class="font-demo serif">
                     Lora is a contemporary serif typeface optimized for screen and print. Use for editorial or formal contexts.
                 </p>
                 <pre><code class="language-css">--ax-font-body: "Lora", Georgia, serif;
 --ax-font-heading: "Lora", Georgia, serif;</code></pre>
 
-                <h3 style="margin-top: var(--a-space-xl);">Monospace: JetBrains Mono</h3>
-                <p style="font-family: 'JetBrains Mono', monospace; font-size: var(--a-font-size-l); line-height: var(--a-line-height-loose);">
+                <h3>Monospace: JetBrains Mono</h3>
+                <p class="font-demo mono">
                     JetBrains Mono is a professional monospace font perfect for code, terminal text, and technical content.
                 </p>
                 <pre><code class="language-css">--a-font-family-mono: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, monospace;</code></pre>
 
-                <h3 style="margin-top: var(--a-space-xl);">Switching Fonts</h3>
+                <h3 >Switching Fonts</h3>
                 <pre><code class="language-html">&lt;!-- Default (Inter) --&gt;
 &lt;html data-font-body="system" data-font-heading="system"&gt;
 
@@ -94,35 +195,35 @@
                 <h2>Heading Scale</h2>
                 <p>All headings follow a mathematical scale (1.15x) for perfect proportions. Each heading has a corresponding CSS variable.</p>
                 
-                <div style="margin: var(--a-space-xl) 0;">
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <h1 style="margin: 0; font-size: var(--a-font-size-h1);">Heading 1 (48px)</h1>
-                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h1) • Used for page titles</p>
+                <div class="component-section">
+                    <div class="heading-showcase">
+                        <h1>Heading 1 (48px)</h1>
+                        <p class="heading-label">var(--a-font-size-h1) • Used for page titles</p>
                     </div>
 
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <h2 style="margin: 0; font-size: var(--a-font-size-h2);">Heading 2 (36px)</h2>
-                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h2) • Major section headings</p>
+                    <div class="heading-showcase">
+                        <h2>Heading 2 (36px)</h2>
+                        <p class="heading-label">var(--a-font-size-h2) • Major section headings</p>
                     </div>
 
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <h3 style="margin: 0; font-size: var(--a-font-size-h3);">Heading 3 (24px)</h3>
-                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h3) • Subsection headings</p>
+                    <div class="heading-showcase">
+                        <h3>Heading 3 (24px)</h3>
+                        <p class="heading-label">var(--a-font-size-h3) • Subsection headings</p>
                     </div>
 
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <h4 style="margin: 0; font-size: var(--a-font-size-h4);">Heading 4 (18px)</h4>
-                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h4) • Minor headings</p>
+                    <div class="heading-showcase">
+                        <h4>Heading 4 (18px)</h4>
+                        <p class="heading-label">var(--a-font-size-h4) • Minor headings</p>
                     </div>
 
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <h5 style="margin: 0; font-size: var(--a-font-size-h5);">Heading 5 (16px)</h5>
-                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h5) • Small headings</p>
+                    <div class="heading-showcase">
+                        <h5>Heading 5 (16px)</h5>
+                        <p class="heading-label">var(--a-font-size-h5) • Small headings</p>
                     </div>
 
-                    <div>
-                        <h6 style="margin: 0; font-size: var(--a-font-size-h6);">Heading 6 (14px)</h6>
-                        <p class="text-muted sm" style="margin: var(--a-space-s) 0;">var(--a-font-size-h6) • Extra small headings</p>
+                    <div class="heading-showcase">
+                        <h6>Heading 6 (14px)</h6>
+                        <p class="heading-label">var(--a-font-size-h6) • Extra small headings</p>
                     </div>
                 </div>
 
@@ -139,30 +240,30 @@
                 <h2>Font Sizes</h2>
                 <p>Axiom01 provides a complete scale of font sizes from extra small to extra large, suitable for all contexts.</p>
                 
-                <div class="grid grid-cols-2" style="margin: var(--a-space-l) 0; gap: var(--a-space-l);">
+                <div class="font-size-demo">
                     <div>
                         <p style="font-size: var(--a-font-size-xs);">Extra Small (12px)</p>
-                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-xs</p>
+                        <p class="font-size-label">--a-font-size-xs</p>
                     </div>
                     <div>
                         <p style="font-size: var(--a-font-size-s);">Small (14px)</p>
-                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-s</p>
+                        <p class="font-size-label">--a-font-size-s</p>
                     </div>
                     <div>
                         <p style="font-size: var(--a-font-size-base);">Base (16px)</p>
-                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-base</p>
+                        <p class="font-size-label">--a-font-size-base</p>
                     </div>
                     <div>
                         <p style="font-size: var(--a-font-size-m);">Medium (18px)</p>
-                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-m</p>
+                        <p class="font-size-label">--a-font-size-m</p>
                     </div>
                     <div>
                         <p style="font-size: var(--a-font-size-l);">Large (20px)</p>
-                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-l</p>
+                        <p class="font-size-label">--a-font-size-l</p>
                     </div>
                     <div>
                         <p style="font-size: var(--a-font-size-xl);">Extra Large (24px)</p>
-                        <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-size-xl</p>
+                        <p class="font-size-label">--a-font-size-xl</p>
                     </div>
                 </div>
             </section>
@@ -171,21 +272,31 @@
                 <h2>Font Weights</h2>
                 <p>Five font weights provide hierarchy and emphasis without changing font size.</p>
                 
-                <div style="margin: var(--a-space-l) 0;">
-                    <p style="font-weight: var(--a-font-weight-normal); font-size: var(--a-font-size-l);">Regular (400 weight)</p>
-                    <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s); margin-bottom: var(--a-space-xl);">--a-font-weight-normal</p>
+                <div class="weight-demo">
+                    <div class="weight-item">
+                        <p style="font-weight: var(--a-font-weight-normal);">Regular (400 weight)</p>
+                        <p class="weight-label">--a-font-weight-normal</p>
+                    </div>
 
-                    <p style="font-weight: var(--a-font-weight-medium); font-size: var(--a-font-size-l);">Medium (500 weight)</p>
-                    <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s); margin-bottom: var(--a-space-xl);">--a-font-weight-medium</p>
+                    <div class="weight-item">
+                        <p style="font-weight: var(--a-font-weight-medium);">Medium (500 weight)</p>
+                        <p class="weight-label">--a-font-weight-medium</p>
+                    </div>
 
-                    <p style="font-weight: var(--a-font-weight-semibold); font-size: var(--a-font-size-l);">Semibold (600 weight)</p>
-                    <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s); margin-bottom: var(--a-space-xl);">--a-font-weight-semibold</p>
+                    <div class="weight-item">
+                        <p style="font-weight: var(--a-font-weight-semibold);">Semibold (600 weight)</p>
+                        <p class="weight-label">--a-font-weight-semibold</p>
+                    </div>
 
-                    <p style="font-weight: var(--a-font-weight-bold); font-size: var(--a-font-size-l);">Bold (700 weight)</p>
-                    <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s); margin-bottom: var(--a-space-xl);">--a-font-weight-bold</p>
+                    <div class="weight-item">
+                        <p style="font-weight: var(--a-font-weight-bold);">Bold (700 weight)</p>
+                        <p class="weight-label">--a-font-weight-bold</p>
+                    </div>
 
-                    <p style="font-weight: var(--a-font-weight-black); font-size: var(--a-font-size-l);">Black (900 weight)</p>
-                    <p style="color: var(--a-color-text-muted); font-size: var(--a-font-size-s);">--a-font-weight-black</p>
+                    <div class="weight-item">
+                        <p style="font-weight: var(--a-font-weight-black);">Black (900 weight)</p>
+                        <p class="weight-label">--a-font-weight-black</p>
+                    </div>
                 </div>
             </section>
 
@@ -193,25 +304,25 @@
                 <h2>Line Height & Vertical Rhythm</h2>
                 <p>Line height is crucial for readability. Axiom01 uses a mathematical system where all line heights are proportional.</p>
                 
-                <div style="margin: var(--a-space-l) 0;">
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <p style="line-height: var(--a-line-height-tight); font-size: var(--a-font-size-m);">Tight Line Height (1.2)<br>This is body text with tight line height, useful for headings or when space is limited.</p>
-                        <p class="text-muted sm">--a-line-height-tight</p>
+                <div class="line-height-demo">
+                    <div class="line-height-item">
+                        <p style="line-height: var(--a-line-height-tight);">Tight Line Height (1.2)<br>This is body text with tight line height, useful for headings or when space is limited.</p>
+                        <p class="line-height-label">--a-line-height-tight</p>
                     </div>
 
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <p style="line-height: var(--a-line-height-heading); font-size: var(--a-font-size-m);">Heading Line Height (1.3)<br>This is applied to all h1-h6 elements for optimal heading appearance.</p>
-                        <p class="text-muted sm">--a-line-height-heading</p>
+                    <div class="line-height-item">
+                        <p style="line-height: var(--a-line-height-heading);">Heading Line Height (1.3)<br>This is applied to all h1-h6 elements for optimal heading appearance.</p>
+                        <p class="line-height-label">--a-line-height-heading</p>
                     </div>
 
-                    <div style="margin-bottom: var(--a-space-2xl);">
-                        <p style="line-height: var(--a-line-height-base); font-size: var(--a-font-size-m);">Base Line Height (1.6)<br>Default body text line height for comfortable reading across paragraphs and longer text blocks.</p>
-                        <p class="text-muted sm">--a-line-height-base</p>
+                    <div class="line-height-item">
+                        <p style="line-height: var(--a-line-height-base);">Base Line Height (1.6)<br>Default body text line height for comfortable reading across paragraphs and longer text blocks.</p>
+                        <p class="line-height-label">--a-line-height-base</p>
                     </div>
 
-                    <div>
-                        <p style="line-height: var(--a-line-height-loose); font-size: var(--a-font-size-m);">Loose Line Height (2.0)<br>Use for emphasized or highlighted text where extra breathing room helps readability.</p>
-                        <p class="text-muted sm">--a-line-height-loose</p>
+                    <div class="line-height-item">
+                        <p style="line-height: var(--a-line-height-loose);">Loose Line Height (2.0)<br>Use for emphasized or highlighted text where extra breathing room helps readability.</p>
+                        <p class="line-height-label">--a-line-height-loose</p>
                     </div>
                 </div>
 
@@ -223,8 +334,8 @@
                 <h2>Reading Width</h2>
                 <p>Axiom01 automatically constrains paragraph width to 65 characters for optimal readability. This prevents eye strain from lines that are too long.</p>
                 
-                <div style="max-width: var(--ax-reading-width); margin: var(--a-space-l) 0; background: var(--ax-background-secondary); padding: var(--a-space-l); border-radius: var(--a-border-radius-lg);">
-                    <p style="line-height: var(--a-line-height-base);">This paragraph is constrained to 65 characters width (--ax-reading-width). Notice how it naturally breaks lines at comfortable intervals. This width is optimal for reading without having to track your eyes across long distances, which causes fatigue.</p>
+                <div class="component-section">
+                    <p class="reading-width-demo">This paragraph is constrained to 65 characters width (--ax-reading-width). Notice how it naturally breaks lines at comfortable intervals. This width is optimal for reading without having to track your eyes across long distances, which causes fatigue.</p>
                 </div>
 
                 <h3>Reading Width Variants</h3>
@@ -242,12 +353,12 @@
                 <h2>Text Hierarchy & Emphasis</h2>
                 <p>Use semantic HTML elements combined with CSS variables to create visual hierarchy:</p>
                 
-                <div style="margin: var(--a-space-l) 0;">
+                <div class="component-section">
                     <p><strong>Strong/Bold:</strong> <code>&lt;strong&gt;</code> or <code>&lt;b&gt;</code> for important content</p>
-                    <p style="margin-top: var(--a-space-m);"><em>Italic/Emphasis:</em> <code>&lt;em&gt;</code> or <code>&lt;i&gt;</code> for emphasized content</p>
-                    <p style="margin-top: var(--a-space-m);"><mark>Highlighted:</mark> <code>&lt;mark&gt;</code> for highlighted or marked text</p>
-                    <p style="margin-top: var(--a-space-m);"><code>Code:</code> <code>&lt;code&gt;</code> for inline code samples</p>
-                    <p style="margin-top: var(--a-space-m); color: var(--a-color-text-muted);">Muted Text: <code class="text-muted">.text-muted</code> for secondary information</p>
+                    <p ><em>Italic/Emphasis:</em> <code>&lt;em&gt;</code> or <code>&lt;i&gt;</code> for emphasized content</p>
+                    <p ><mark>Highlighted:</mark> <code>&lt;mark&gt;</code> for highlighted or marked text</p>
+                    <p ><code>Code:</code> <code>&lt;code&gt;</code> for inline code samples</p>
+                    <p >Muted Text: <code class="text-muted">.text-muted</code> for secondary information</p>
                 </div>
 
                 <h3>Text Utilities</h3>
@@ -332,15 +443,12 @@
                         <li><a href="../index.html#release-info">Release Info</a></li>
                     </ul>
                 </div>
-            </div>
-        </div>
         <div class="bottom">
             <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="../js/axiom.js"></script>
-    <script src="../js/axicons.js"></script>
     <script>
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
@@ -372,5 +480,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="../js/axiom.js"></script>
+<script src="../js/axicons-loader.js"></script>
+<script src="../js/axicons-base.js"></script>
+<script src="../js/axicons-thin-variants.js"></script>
+<script src="../js/axicons-inverted-variants.js"></script>
+<script src="../js/axicons-color-variants.js"></script>
+<script src="../js/axicons-premium-variants.js"></script>
+<script src="../js/render-icons.js"></script>
 </body>
 </html>

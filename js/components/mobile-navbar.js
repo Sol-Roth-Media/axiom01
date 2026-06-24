@@ -7,7 +7,7 @@ export default {
    * @returns {object} An object with a destroy method for cleanup.
    */
   init: function(element) {
-    const menuToggleButton = element.querySelector('.menu.toggle');
+    const menuToggleButton = element.querySelector('button.toggle[aria-label*="Menu"]');
     const navLinks = element.querySelector('ul.links');
 
     if (!menuToggleButton || !navLinks) {

@@ -21,6 +21,260 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 	<!-- Prism.js for syntax highlighting -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+	<style>
+		/* FOOTER COMPONENT STYLES */
+		footer.footer {
+			background: var(--ax-surface);
+			color: var(--ax-text);
+			border-top: 2px solid var(--ax-border);
+			padding: var(--a-space-3xl) var(--a-space-l);
+			margin-top: var(--a-space-4xl);
+			transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
+		}
+
+		footer.footer .container {
+			max-width: var(--ax-max-width);
+			margin: 0 auto;
+		}
+
+		footer.footer .footer-content {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: var(--a-space-2xl);
+			margin-bottom: var(--a-space-2xl);
+			padding-bottom: var(--a-space-2xl);
+			border-bottom: 1px solid var(--ax-border);
+			transition: gap var(--a-transition-base);
+		}
+
+		footer.footer .footer-brand {
+			display: flex;
+			flex-direction: column;
+			gap: var(--a-space-m);
+		}
+
+		footer.footer .footer-brand-logo {
+			font-family: var(--a-font-family-mono);
+			font-size: var(--a-font-size-l);
+			font-weight: var(--a-font-weight-bold);
+			color: var(--a-color-on-surface);
+			text-decoration: none;
+			transition: all var(--a-transition-base);
+			display: inline-block;
+			max-width: fit-content;
+			position: relative;
+		}
+
+		footer.footer .footer-brand-logo::before {
+			content: '';
+			position: absolute;
+			inset: -4px -8px;
+			background: var(--a-color-primary);
+			border-radius: var(--a-border-radius-sm);
+			opacity: 0;
+			z-index: -1;
+			transition: opacity var(--a-transition-base);
+		}
+
+		footer.footer .footer-brand-logo:hover {
+			color: var(--a-color-primary);
+		}
+
+		footer.footer .footer-brand-logo:hover::before {
+			opacity: 0.1;
+		}
+
+		footer.footer .footer-brand-logo .primary {
+			color: var(--a-color-primary);
+		}
+
+		footer.footer .footer-tagline {
+			font-size: var(--a-font-size-s);
+			color: var(--a-color-text-muted);
+			margin: 0;
+			line-height: var(--a-line-height-base);
+		}
+
+		footer.footer .footer-column {
+			display: flex;
+			flex-direction: column;
+			gap: var(--a-space-m);
+		}
+
+		footer.footer .footer-column h4 {
+			font-size: var(--a-font-size-base);
+			font-weight: var(--a-font-weight-semibold);
+			color: var(--a-color-on-surface);
+			margin: 0;
+			padding: 0;
+			line-height: var(--a-line-height-heading);
+			letter-spacing: -0.01em;
+		}
+
+		footer.footer .footer-column ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			gap: var(--a-space-s);
+		}
+
+		footer.footer .footer-column li {
+			margin: 0;
+			padding: 0;
+		}
+
+		footer.footer .footer-column a {
+			color: var(--a-color-text-secondary);
+			text-decoration: none;
+			font-size: var(--a-font-size-s);
+			font-weight: var(--a-font-weight-normal);
+			transition: color var(--a-transition-base), text-decoration var(--a-transition-base);
+			line-height: var(--a-line-height-base);
+			position: relative;
+		}
+
+		footer.footer .footer-column a::after {
+			content: '';
+			position: absolute;
+			bottom: -2px;
+			left: 0;
+			width: 0;
+			height: 2px;
+			background: var(--a-color-primary);
+			transition: width var(--a-transition-base);
+		}
+
+		footer.footer .footer-column a:hover {
+			color: var(--a-color-primary);
+		}
+
+		footer.footer .footer-column a:hover::after {
+			width: 100%;
+		}
+
+		footer.footer .footer-bottom {
+			display: flex;
+			flex-direction: column;
+			gap: var(--a-space-l);
+			align-items: flex-start;
+		}
+
+		@media (min-width: 640px) {
+			footer.footer .footer-bottom {
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+			}
+		}
+
+		footer.footer .footer-copyright {
+			font-size: var(--a-font-size-xs);
+			color: var(--a-color-text-muted);
+			margin: 0;
+			line-height: var(--a-line-height-base);
+			flex: 1;
+		}
+
+		footer.footer .footer-copyright a {
+			color: var(--a-color-text-secondary);
+			text-decoration: none;
+			transition: color var(--a-transition-base);
+		}
+
+		footer.footer .footer-copyright a:hover {
+			color: var(--a-color-primary);
+			text-decoration: underline;
+		}
+
+		footer.footer .footer-social {
+			display: flex;
+			gap: var(--a-space-m);
+			align-items: center;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		footer.footer .footer-social li {
+			margin: 0;
+			padding: 0;
+		}
+
+		footer.footer .footer-social a {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 36px;
+			height: 36px;
+			border-radius: var(--a-border-radius-md);
+			background-color: var(--a-color-primary-container);
+			color: var(--a-color-primary);
+			text-decoration: none;
+			transition: background-color var(--a-transition-base), color var(--a-transition-base), transform var(--a-transition-base);
+			font-size: var(--a-font-size-base);
+		}
+
+		footer.footer .footer-social a:hover {
+			background-color: var(--a-color-primary);
+			color: var(--a-color-on-primary);
+			transform: translateY(-2px);
+		}
+
+		footer.footer .footer-scroll-top {
+			display: inline-flex !important;
+			align-items: center;
+			justify-content: center;
+			width: 36px;
+			height: 36px;
+			border-radius: var(--a-border-radius-md);
+			background-color: var(--a-color-success-container);
+			color: var(--a-color-success);
+			border: none;
+			cursor: pointer;
+			transition: all var(--a-transition-base);
+			font-size: var(--a-font-size-base);
+			padding: 0;
+		}
+
+		footer.footer .footer-scroll-top:hover {
+			background-color: var(--a-color-success);
+			color: var(--a-color-on-success);
+			transform: translateY(-2px);
+		}
+
+		footer.footer .footer-scroll-top:active {
+			transform: translateY(0);
+		}
+
+		@media (max-width: 640px) {
+			footer.footer {
+				padding: var(--a-space-2xl) var(--a-space-m);
+				margin-top: var(--a-space-3xl);
+			}
+
+			footer.footer .footer-content {
+				grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+				gap: var(--a-space-xl);
+				margin-bottom: var(--a-space-xl);
+				padding-bottom: var(--a-space-xl);
+			}
+
+			footer.footer .footer-column h4 {
+				font-size: var(--a-font-size-s);
+			}
+
+			footer.footer .footer-column a {
+				font-size: var(--a-font-size-xs);
+			}
+
+			footer.footer .footer-bottom {
+				gap: var(--a-space-m);
+			}
+		}
+	</style>
+
 </head>
 <body class="axiom-body">
 
@@ -294,7 +548,6 @@
 				</article>
 
 				<article class="card">
-				<article class="card">
 					<header><h3 style="margin-top: 0;">All Icon Variants</h3></header>
 					<p style="font-size: 0.95rem; color: var(--a-color-text-muted); margin-bottom: var(--a-space-l);">Every icon is available in 5 responsive variants. Click any icon to copy its name.</p>
 					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--a-space-l); padding: var(--a-space-m) 0;">
@@ -302,31 +555,31 @@
 							<span class="axicon render" data-name="Check" style="font-size: 2.5rem; flex-shrink: 0; color: var(--a-color-primary);"></span>
 							<div style="width: 100%;">
 								<p style="font-weight: bold; margin-top: 0; font-size: 0.95rem;">Base (450)</p>
-								<p style="font-size: 0.85rem; margin: 0; color: var(--a-color-text-muted);">Clean outline style</p>
+								<p style="font-size: 0.85rem; margin: 0; color: var(--a-color-text-muted);">Clean outline style, perfect for primary actions and status indicators</p>
 								<code style="font-size: 0.75rem; color: var(--a-color-primary); display: block; margin-top: var(--a-space-s);">Check</code>
 							</div>
 						</div>
 						<div style="display: flex; flex-direction: column; align-items: flex-start; gap: var(--a-space-m); padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg); border: 1px solid var(--ax-border);">
-							<span class="axicon render" data-name="CheckThin" style="font-size: 2.5rem; flex-shrink: 0; color: var(--a-color-primary);"></span>
+							<span class="axicon render" data-name="Minimize" style="font-size: 2.5rem; flex-shrink: 0; color: var(--a-color-primary);"></span>
 							<div style="width: 100%;">
 								<p style="font-weight: bold; margin-top: 0; font-size: 0.95rem;">Thin (760)</p>
-								<p style="font-size: 0.85rem; margin: 0; color: var(--a-color-text-muted);">Ultra-thin 0.5px</p>
-								<code style="font-size: 0.75rem; color: var(--a-color-primary); display: block; margin-top: var(--a-space-s);">CheckThin</code>
+								<p style="font-size: 0.85rem; margin: 0; color: var(--a-color-text-muted);">Ultra-thin 0.5px strokes for elegant, minimal interfaces</p>
+								<code style="font-size: 0.75rem; color: var(--a-color-primary); display: block; margin-top: var(--a-space-s);">Minimize</code>
 							</div>
 						</div>
 						<div style="display: flex; flex-direction: column; align-items: flex-start; gap: var(--a-space-m); padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg); border: 1px solid var(--ax-border);">
-							<span class="axicon render" data-name="CheckInverted" style="font-size: 2.5rem; flex-shrink: 0; color: var(--a-color-primary);"></span>
+							<span class="axicon render" data-name="Zap" style="font-size: 2.5rem; flex-shrink: 0; color: var(--a-color-primary); -webkit-mask-image: radial-gradient(circle, transparent 40%, black 60%); mask-image: radial-gradient(circle, transparent 40%, black 60%);"></span>
 							<div style="width: 100%;">
 								<p style="font-weight: bold; margin-top: 0; font-size: 0.95rem;">Inverted (758)</p>
-								<p style="font-size: 0.85rem; margin: 0; color: var(--a-color-text-muted);">Solid + cutout</p>
-								<code style="font-size: 0.75rem; color: var(--a-color-primary); display: block; margin-top: var(--a-space-s);">CheckInverted</code>
+								<p style="font-size: 0.85rem; margin: 0; color: var(--a-color-text-muted);">Solid with transparent cutouts, high visual impact</p>
+								<code style="font-size: 0.75rem; color: var(--a-color-primary); display: block; margin-top: var(--a-space-s);">Zap</code>
 							</div>
 						</div>
 						<div style="display: flex; flex-direction: column; align-items: flex-start; gap: var(--a-space-m); padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg); border: 1px solid var(--ax-border);">
 							<span class="axicon render" data-name="Check-Color" style="font-size: 2.5rem; flex-shrink: 0; color: var(--a-color-primary);"></span>
 							<div style="width: 100%;">
 								<p style="font-weight: bold; margin-top: 0; font-size: 0.95rem;">Color (1,351)</p>
-								<p style="font-size: 0.85rem; margin: 0; color: var(--a-color-text-muted);">Gradients & fills</p>
+								<p style="font-size: 0.85rem; margin: 0; color: var(--a-color-text-muted);">Gradients & multi-color fills for vibrant, playful designs</p>
 								<code style="font-size: 0.75rem; color: var(--a-color-primary); display: block; margin-top: var(--a-space-s);">Check-Color</code>
 							</div>
 						</div>
@@ -334,7 +587,7 @@
 							<span class="axicon render" data-name="Check-Premium" style="font-size: 2.5rem; flex-shrink: 0; color: var(--a-color-primary);"></span>
 							<div style="width: 100%;">
 								<p style="font-weight: bold; margin-top: 0; font-size: 0.95rem;">Premium (650)</p>
-								<p style="font-size: 0.85rem; margin: 0; color: var(--a-color-text-muted);">Advanced effects</p>
+								<p style="font-size: 0.85rem; margin: 0; color: var(--a-color-text-muted);">Advanced effects like shadows, glows, and 3D transformations</p>
 								<code style="font-size: 0.75rem; color: var(--a-color-primary); display: block; margin-top: var(--a-space-s);">Check-Premium</code>
 							</div>
 						</div>
@@ -390,7 +643,7 @@
 			</article>
 
 			<div style="text-align: center; margin-top: var(--a-space-2xl);">
-				<a href="docs/AXICONS_VARIANTS_GUIDE.md" class="button primary lg" style="margin-right: var(--a-space-m);">Variants Guide</a>
+				<a href="docs/AXICONS_VARIANTS_GUIDE.md" class="button primary lg" style="margin-right: var(--a-space-m);"><span class="axicon render" data-name="File-Text" style="margin-right: 0.5rem;"></span>Variants Guide (Markdown)</a>
 				<a href="docs/axicons.html" class="button secondary lg">Browse Icons</a>
 			</div>
 		</div>
@@ -662,11 +915,95 @@
 					</footer>
 				</article>
 			</div>
+			
+			<div style="text-align: center; margin-top: var(--a-space-2xl);">
+				<a href="docs/colors-advanced.html" class="button primary lg">Explore Colors & Tokens</a>
+			</div>
 		</div>
 	</section>
 
-	<!-- CASCADE VISUALIZATION -->
-	<section id="cascade-visualization">
+	<!-- THEME SWITCHER -->
+	<section id="theme-explorer">
+		<div class="container">
+			<header>
+				<h2>Live Theme Explorer</h2>
+				<p>Choose from 22 carefully crafted themes, each with unique color palettes and personalities. See the changes instantly.</p>
+			</header>
+
+			<div class="grid grid-cols-2">
+				<!-- Theme Selector -->
+				<article class="card">
+					<header><h3 style="margin-top: 0;">Select a Theme</h3></header>
+					<div>
+						<label for="theme-select" style="display: block; font-weight: 600; margin-bottom: var(--a-space-m); font-size: 0.95rem;">Available Themes:</label>
+						<select id="theme-select" style="width: 100%; padding: var(--a-space-m); border: 1px solid var(--ax-border); border-radius: var(--a-border-radius-base); font-size: 1rem; background: var(--ax-surface); color: var(--ax-text); cursor: pointer;">
+							<option value="light">Light</option>
+							<option value="dark">Dark</option>
+							<option value="corporate-clean">Corporate Clean</option>
+							<option value="synthwave-84">Synthwave 84</option>
+							<option value="nordic-calm">Nordic Calm</option>
+							<option value="vintage-paper">Vintage Paper</option>
+							<option value="dracula">Dracula</option>
+							<option value="solarized-light">Solarized Light</option>
+							<option value="solarized-dark">Solarized Dark</option>
+							<option value="luxe-black">Luxe Black</option>
+							<option value="minty-fresh">Minty Fresh</option>
+							<option value="desert-sunset">Desert Sunset</option>
+							<option value="deep-ocean">Deep Ocean</option>
+							<option value="gruvbox-dark">Gruvbox Dark</option>
+							<option value="sakura-blossom">Sakura Blossom</option>
+							<option value="matcha-green">Matcha Green</option>
+							<option value="monokai-pro">Monokai Pro</option>
+							<option value="slate-gray">Slate Gray</option>
+							<option value="tropical-splash">Tropical Splash</option>
+							<option value="candy-pop">Candy Pop</option>
+							<option value="rose-pine">Rose Pine</option>
+							<option value="midnight-moss">Midnight Moss</option>
+						</select>
+						<p style="font-size: 0.9rem; color: var(--a-color-text-muted); margin-top: var(--a-space-m); margin-bottom: 0;">Your selection is saved and will persist on your next visit.</p>
+					</div>
+				</article>
+
+				<!-- Theme Description -->
+				<article class="card" id="description-display">
+					<header><h3 style="margin-top: 0;">Theme Description</h3></header>
+					<div>
+						<p style="margin: 0; line-height: 1.6; font-size: 0.95rem;">Select a theme to see its description and instantly preview the color scheme across the entire page.</p>
+					</div>
+				</article>
+			</div>
+
+			<!-- Color Palette Preview -->
+			<article class="card" style="margin-top: var(--a-space-2xl);">
+				<header><h3 style="margin-top: 0;">Live Preview</h3></header>
+				<div>
+					<p style="margin: 0 0 var(--a-space-l) 0; font-size: 0.95rem;">The current theme is applied in real-time to this page. Change the theme above to see all colors, buttons, cards, and components adapt instantly.</p>
+					
+					<div class="grid grid-cols-3" style="gap: var(--a-space-l); margin-top: var(--a-space-l);">
+						<!-- Sample Button -->
+						<div style="text-align: center;">
+							<button class="button primary" style="margin-bottom: var(--a-space-m); pointer-events: none;">Primary Button</button>
+							<p style="font-size: 0.85rem; color: var(--a-color-text-muted); margin: 0;">Primary Action</p>
+						</div>
+
+						<!-- Sample Badge -->
+						<div style="text-align: center;">
+							<span class="badge success" style="margin-bottom: var(--a-space-m); display: inline-block;">Success Badge</span>
+							<p style="font-size: 0.85rem; color: var(--a-color-text-muted); margin: 0;">Status Indicator</p>
+						</div>
+
+						<!-- Sample Card -->
+						<div style="text-align: center;">
+							<div class="card" style="margin-bottom: var(--a-space-m); max-width: 150px; margin-left: auto; margin-right: auto;">
+								<p style="margin: var(--a-space-m) 0; font-size: 0.85rem;">Sample Card</p>
+							</div>
+							<p style="font-size: 0.85rem; color: var(--a-color-text-muted); margin: 0;">Component Example</p>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
 		<div class="container">
 			<header>
 				<h2>The Cascade: One Variable, Infinite Impact</h2>
@@ -792,39 +1129,99 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 
-<footer class="main">
+<footer class="footer">
 	<div class="container">
-		<div class="grid grid-cols-4">
-			<div class="brand-section">
-				<a href="/" class="brand">[Ax<span class="primary">01</span>]</a>
-				<p class="muted sm">The Semantic Web, Reimagined.</p>
+		<!-- Main Content Grid -->
+		<div class="footer-content">
+			<!-- Brand Section -->
+			<div class="footer-brand">
+				<a href="/" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+				<p style="font-size: var(--a-font-size-xs); color: var(--a-color-text-muted); margin: var(--a-space-m) 0 0 0; line-height: var(--a-line-height-base);">v2.0.0 · 73 Components · 149 Tokens · 13.3 KB</p>
 			</div>
 
+			<!-- Product Links -->
 			<div class="footer-column">
-				<h3>Documentation</h3>
+				<h4>Product</h4>
 				<ul>
-					<li><a href="docs/components-overview.html">Component Overview</a></li>
-					<li><a href="docs/axicons.html">Icon Browser</a></li>
-					<li><a href="AXIOM01_STYLING_GUIDE.md">Styling Guide</a></li>
+					<li><a href="docs/components-overview.html">All Components</a></li>
+					<li><a href="docs/axicons.html">3,941+ Icons</a></li>
+					<li><a href="docs/colors-advanced.html">Colors & Tokens</a></li>
+					<li><a href="docs/overview-quickstart.html">Get Started</a></li>
 				</ul>
 			</div>
 
+			<!-- Resources Links -->
 			<div class="footer-column">
-				<h3>Community</h3>
+				<h4>Resources</h4>
 				<ul>
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+					<li><a href="docs/AXIOM01_STYLING_GUIDE.md" target="_blank">Styling Guide</a></li>
+					<li><a href="DEVELOPER.md" target="_blank">Developer Guide</a></li>
+					<li><a href="README.md" target="_blank">README</a></li>
+					<li><a href="LICENSE" target="_blank">MIT License</a></li>
 				</ul>
 			</div>
 
+			<!-- Community Links -->
 			<div class="footer-column">
-				<h3>Creator</h3>
+				<h4>Community</h4>
 				<ul>
-					<li><a href="https://www.solroth.com" target="_blank" rel="noopener">Sol Roth</a></li>
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01/issues" target="_blank" rel="noopener">Report Issues</a></li>
+					<li><a href="https://www.solroth.com" target="_blank" rel="noopener">Creator: Sol Roth</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
 				</ul>
+			</div>
+		</div>
+
+		<!-- Bottom Section with Copyright & Social -->
+		<div class="footer-bottom">
+			<div style="flex: 1;">
+				<p class="footer-copyright">
+					&copy; 2024 <strong>Sol Roth Media</strong>. Released under <strong>MIT License</strong>.
+					<br>
+					<span style="font-size: var(--a-font-size-xs); opacity: 0.8;">Built with Axiom01 · <a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" style="color: inherit;">Open Source</a></span>
+				</p>
+			</div>
+			<div style="display: flex; gap: var(--a-space-m); align-items: center;">
+				<ul class="footer-social">
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub Repository">
+						<span class="axicon render" data-name="GitHub"></span>
+					</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM Package">
+						<span class="axicon render" data-name="Brand-NPM"></span>
+					</a></li>
+				</ul>
+				<button id="scroll-to-top" class="footer-scroll-top" aria-label="Scroll to top" style="display: none; margin-left: var(--a-space-s);">
+					<span class="axicon render" data-name="Arrow-Up"></span>
+				</button>
 			</div>
 		</div>
 	</div>
 </footer>
+
+<script>
+	// Scroll to Top Button Functionality
+	const scrollTopBtn = document.getElementById('scroll-to-top');
+	
+	if (scrollTopBtn) {
+		// Show/hide button based on scroll position
+		window.addEventListener('scroll', () => {
+			if (window.pageYOffset > 300) {
+				scrollTopBtn.style.display = 'inline-flex';
+			} else {
+				scrollTopBtn.style.display = 'none';
+			}
+		});
+		
+		// Scroll to top when clicked
+		scrollTopBtn.addEventListener('click', () => {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		});
+	}
+</script>
 </body>
 </html>

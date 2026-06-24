@@ -455,4 +455,5 @@ window.axicons = [
     { id: 2298, name: "YouTube", category: "brands", svgContent: '<rect x="2" y="3" width="20" height="18" rx="2"/><polygon points="9 9 9 15 15 12 9 9"/>' },
     { id: 2304, name: "Zap", category: "ui", svgContent: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>' },
     { id: 2307, name: "Zap3", category: "ui", svgContent: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/><path d="M12 8l0 6M15 11l-6 0"/>' },
+    { id: 2310, name: "Brand-NPM", category: "brands", svgContent: '<rect x="2" y="2" width="20" height="20" fill="currentColor"/><path d="M4 4h16v16H4V4zm2 2v12h3V8h3v10h2V6H6v4zm8-2v10h3V8h-6v4zm6 4h3v6h-3v-6z" fill="white"/>' },
 ];

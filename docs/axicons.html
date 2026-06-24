@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
+        /* Tab styling */
         .variant-tabs {
             display: flex;
             gap: var(--a-space-m);
@@ -25,15 +26,15 @@
             border: none;
             cursor: pointer;
             font-weight: 600;
-            color: var(--a-color-text-muted);
+            color: var(--a-color-on-surface-variant);
             border-bottom: 3px solid transparent;
             transition: all var(--a-transition-base);
             font-size: var(--a-font-size-base);
         }
 
         .variant-tab:hover {
-            color: var(--ax-text);
-            background: var(--ax-background-secondary);
+            color: var(--a-color-text);
+            background: var(--a-color-surface-variant);
         }
 
         .variant-tab.active {
@@ -41,6 +42,12 @@
             border-bottom-color: var(--a-color-primary);
         }
 
+        .variant-tab-count {
+            font-size: 0.9rem;
+            color: var(--a-color-on-surface-variant);
+        }
+
+        /* Search box */
         .search-box {
             margin: var(--a-space-l) 0;
         }
@@ -51,10 +58,15 @@
             border: 1px solid var(--ax-border);
             border-radius: var(--a-border-radius-lg);
             font-size: var(--a-font-size-base);
-            background: var(--ax-surface);
-            color: var(--ax-text);
+            background: var(--a-color-surface);
+            color: var(--a-color-text);
         }
 
+        .search-box input::placeholder {
+            color: var(--a-color-on-surface-variant);
+        }
+
+        /* Icon grid browser */
         .icon-browser {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -62,6 +74,13 @@
             margin: var(--a-space-l) 0;
         }
 
+        @media (max-width: 480px) {
+            .icon-browser {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+        }
+
+        /* Icon item card */
         .icon-item {
             display: flex;
             flex-direction: column;
@@ -71,10 +90,10 @@
             padding: var(--a-space-m);
             border-radius: var(--a-border-radius-lg);
             border: 1px solid var(--ax-border);
-            background: var(--ax-background-secondary);
+            background: var(--a-color-surface-variant);
             text-align: center;
             cursor: pointer;
-            transition: all var(--a-transition-base) var(--a-ease-out);
+            transition: all var(--a-transition-base);
             min-height: 120px;
         }
 
@@ -82,9 +101,10 @@
             background: var(--a-color-primary-container);
             border-color: var(--a-color-primary);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--a-shadow-md);
         }
 
+        /* Icon display */
         .icon-display {
             width: 48px;
             height: 48px;
@@ -108,24 +128,32 @@
             fill: currentColor;
         }
 
+        /* Icon name label */
         .icon-name {
             font-size: var(--a-font-size-xs);
             font-weight: 600;
-            color: var(--ax-text);
+            color: var(--a-color-text);
             word-break: break-word;
             line-height: var(--a-line-height-tight);
             max-width: 90px;
         }
 
+        /* Icon count display */
         .icon-count {
-            color: var(--a-color-text-muted);
+            color: var(--a-color-on-surface-variant);
             margin-top: var(--a-space-m);
             font-size: var(--a-font-size-sm);
             font-weight: 500;
         }
 
+        .count-number {
+            font-weight: 700;
+            color: var(--a-color-primary);
+        }
+
+        /* Variant info box */
         .variant-info {
-            background: var(--ax-background-secondary);
+            background: var(--a-color-surface-variant);
             padding: var(--a-space-m) var(--a-space-l);
             border-radius: var(--a-border-radius-lg);
             margin: var(--a-space-l) 0;
@@ -137,11 +165,13 @@
             font-size: var(--a-font-size-sm);
         }
 
+        /* Tabs container scroll */
         .tabs-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
 
+        /* Documentation section */
         .doc-section {
             margin: var(--a-space-2xl) 0;
             padding: var(--a-space-l) 0;
@@ -159,6 +189,7 @@
             color: var(--a-color-primary);
         }
 
+        /* Main layout */
         main {
             padding: var(--a-space-2xl) 0;
         }
@@ -166,83 +197,186 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--a-space-xl);
+            padding: 0 var(--a-space-m);
         }
 
-        header h1 {
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 var(--a-space-l);
+            }
+        }
+
+        /* Hero section */
+        .hero h1 {
             font-size: 2.5rem;
             margin: var(--a-space-l) 0 var(--a-space-m) 0;
         }
 
-        header .tagline {
+        .tagline {
             font-size: 1.1rem;
-            color: var(--a-color-text-muted);
+            color: var(--a-color-on-surface-variant);
             margin-bottom: 0;
+        }
+
+        /* Code examples */
+        pre {
+            overflow-x: auto;
+            max-width: 100%;
+            display: block;
+        }
+
+        pre code {
+            display: block;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        /* Naming guide grid */
+        .naming-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--a-space-m);
+            margin: var(--a-space-l) 0;
+        }
+
+        @media (min-width: 480px) {
+            .naming-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .naming-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .naming-item {
+            border: 1px solid var(--ax-border);
+            padding: var(--a-space-m);
+            border-radius: var(--a-border-radius-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-s);
+        }
+
+        .naming-item p {
+            margin: 0;
+        }
+
+        .naming-title {
+            font-weight: 700;
+            color: var(--a-color-primary);
+            margin: 0;
+        }
+
+        .naming-code {
+            font-family: var(--a-font-family-mono);
+            font-size: 0.9rem;
+        }
+
+        .naming-desc {
+            color: var(--a-color-on-surface-variant);
+            font-size: var(--a-font-size-sm);
+        }
+
+        /* Lists */
+        ul {
+            list-style-type: disc;
+        }
+
+        li {
+            margin-bottom: var(--a-space-s);
+            line-height: var(--a-line-height-relaxed);
+        }
+
+        /* Column layout */
+        .columns-2 {
+            columns: 2;
+            column-gap: var(--a-space-2xl);
+            line-height: var(--a-line-height-relaxed);
+        }
+
+        /* Loading message */
+        .loading-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: var(--a-space-2xl);
+            color: var(--a-color-on-surface-variant);
         }
     </style>
 </head>
-<body class="axiom-body component-doc">
-    <header class="main" data-component="mobile-navbar">
-        <nav role="navigation" aria-label="Main Navigation">
-            <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-            <ul class="links">
-                <li><a href="../index.html#philosophy">Philosophy</a></li>
-                <li><a href="../index.html#components">Components</a></li>
-                <li><a href="components-overview.html">Docs</a></li>
-            </ul>
-            <div class="actions">
-                <button class="search toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="Brand-GitHub"></span>
-                    <span>GitHub</span>
-                </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
-            </div>
-        </nav>
-    </header>
+<body class="axiom-body">
 
-    <main><section><div class="container">
-        <!-- Getting Started Section -->
-        <section class="doc-section">
+<header class="main" data-component="mobile-navbar">
+    <nav role="navigation" aria-label="Main Navigation">
+        <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+        <ul class="links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="components-overview.html">Components</a></li>
+            <li><a href="overview-quickstart.html">Get Started</a></li>
+        </ul>
+        <div class="actions">
+            <button class="btn toggle search" aria-label="Open Search">
+                <span class="axicon render" data-name="Search"></span>
+            </button>
+            <a href="https://github.com/Sol-Roth-Media/axiom01" class="btn btn-secondary" target="_blank" rel="noopener" aria-label="View on GitHub">
+                <span class="axicon render" data-name="GitHub"></span>
+                <span>GitHub</span>
+            </a>
+            <button class="btn toggle theme" id="theme-toggle" aria-label="Toggle dark mode">
+                <span class="axicon render" data-name="Moon"></span>
+            </button>
+            <button class="btn toggle menu" aria-label="Toggle Menu">
+                <span class="axicon render" data-name="Menu"></span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <h1>Axicons: 3,969 SVG Icons</h1>
+            <p class="tagline">Browse all icons across 5 variants: Base (450), Thin (760), Inverted (758), Color (1,351), Premium (650). Click any icon to copy its name.</p>
+        </div>
+    </section>
+
+    <section class="doc-section">
+        <div class="container">
             <h2>Getting Started with Axicons</h2>
-            
-            <div style="background: var(--ax-background-secondary); padding: var(--a-space-l); border-radius: var(--a-border-radius-lg); margin: var(--a-space-l) 0; border-left: 4px solid var(--a-color-primary);">
-                <h3 style="margin-top: 0; color: var(--a-color-primary);">Quick Start</h3>
-                <p>Axicons is a modular icon system with 3,969 SVG icons across 5 variants. Load only what you need.</p>
-            </div>
 
-            <h3>1. Installation</h3>
-            <p>Include the Axicons JavaScript file in your HTML:</p>
-            <pre style="background: var(--a-color-surface); padding: var(--a-space-l); border-radius: var(--a-border-radius-lg); overflow-x: auto;"><code class="language-html">&lt;!-- Load base icons (89KB, 450 icons) --&gt;
+            <article class="component-section">
+                <h3>Quick Start</h3>
+                <p>Axicons is a modular icon system with 3,969 SVG icons across 5 variants. Load only what you need.</p>
+
+                <h4>1. Installation</h4>
+                <p>Include the Axicons JavaScript file in your HTML:</p>
+                <pre><code class="language-html">&lt;!-- Load base icons (89KB, 450 icons) --&gt;
 &lt;script src="path/to/axicons-base.js"&gt;&lt;/script&gt;
 
 &lt;!-- Optional: Add other variants --&gt;
 &lt;script src="path/to/axicons-thin-variants.js"&gt;&lt;/script&gt;
 &lt;script src="path/to/axicons-color-variants.js"&gt;&lt;/script&gt;</code></pre>
 
-            <h3>2. HTML Markup</h3>
-            <p>Use the <code>axicon render</code> class with the <code>data-name</code> attribute:</p>
-            <pre style="background: var(--a-color-surface); padding: var(--a-space-l); border-radius: var(--a-border-radius-lg); overflow-x: auto;"><code class="language-html">&lt;!-- Simple icon --&gt;
+                <h4>2. HTML Markup</h4>
+                <p>Use the <code>axicon render</code> class with the <code>data-name</code> attribute:</p>
+                <pre><code class="language-html">&lt;!-- Simple icon --&gt;
 &lt;span class="axicon render" data-name="Check"&gt;&lt;/span&gt;
 
 &lt;!-- With styling --&gt;
 &lt;button&gt;
-    &lt;span class="axicon render" data-name="Menu" style="font-size: 1.5rem;"&gt;&lt;/span&gt;
+    &lt;span class="axicon render" data-name="Menu"&gt;&lt;/span&gt;
 &lt;/button&gt;
 
 &lt;!-- Different variants --&gt;
 &lt;span class="axicon render" data-name="Check"&gt;&lt;/span&gt;           &lt;!-- Base --&gt;
 &lt;span class="axicon render" data-name="CheckThin"&gt;&lt;/span&gt;       &lt;!-- Thin --&gt;
-&lt;span class="axicon render" data-name="CheckInverted"&gt;&lt;/span&gt;   &lt;!-- Inverted --&gt;
-&lt;span class="axicon render" data-name="Check-Color"&gt;&lt;/span&gt;     &lt;!-- Color --&gt;
-&lt;span class="axicon render" data-name="Check-Premium"&gt;&lt;/span&gt;   &lt;!-- Premium --&gt;</code></pre>
+&lt;span class="axicon render" data-name="CheckInverted"&gt;&lt;/span&gt;   &lt;!-- Inverted --&gt;</code></pre>
 
-            <h3>3. Styling Icons</h3>
-            <p>Icons inherit <code>color</code> from parent element. Use CSS to style:</p>
-            <pre style="background: var(--a-color-surface); padding: var(--a-space-l); border-radius: var(--a-border-radius-lg); overflow-x: auto;"><code class="language-css">/* Size */
+                <h4>3. Styling Icons</h4>
+                <p>Icons inherit <code>color</code> from parent element. Use CSS to style:</p>
+                <pre><code class="language-css">/* Size */
 .icon-large {
     font-size: 2rem;
 }
@@ -256,130 +390,76 @@
 button .axicon {
     margin-right: 0.5rem;
     vertical-align: middle;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .axicon {
-        font-size: 1.25rem;
-    }
 }</code></pre>
 
-            <h3>4. JavaScript Rendering</h3>
-            <p>Icons are automatically rendered when the page loads. If you add icons dynamically, call:</p>
-            <pre style="background: var(--a-color-surface); padding: var(--a-space-l); border-radius: var(--a-border-radius-lg); overflow-x: auto;"><code class="language-javascript">// Manually render icons after dynamic content
+                <h4>4. JavaScript Rendering</h4>
+                <p>Icons are automatically rendered when the page loads. If you add icons dynamically:</p>
+                <pre><code class="language-javascript">// Manually render icons after dynamic content
 if (typeof window.renderAxicons === 'function') {
     window.renderAxicons();
 }</code></pre>
 
-            <h3>5. Icon Naming Convention</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--a-space-m); margin: var(--a-space-l) 0;">
-                <div style="padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg);">
-                    <p style="font-weight: bold; margin-top: 0; color: var(--a-color-primary);">Base Icons</p>
-                    <code style="font-size: 0.9rem;">Check</code><br>
-                    <p style="font-size: 0.85rem; color: var(--a-color-text-muted); margin: var(--a-space-s) 0 0 0;">450 standard outline icons</p>
+                <h4>5. Icon Naming Convention</h4>
+                <div class="naming-grid">
+                    <div class="naming-item">
+                        <p class="naming-title">Base Icons</p>
+                        <p class="naming-code">Check</p>
+                        <p class="naming-desc">450 standard outline icons</p>
+                    </div>
+                    <div class="naming-item">
+                        <p class="naming-title">Thin Variants</p>
+                        <p class="naming-code">CheckThin</p>
+                        <p class="naming-desc">760 ultra-thin 0.5px icons</p>
+                    </div>
+                    <div class="naming-item">
+                        <p class="naming-title">Inverted Variants</p>
+                        <p class="naming-code">CheckInverted</p>
+                        <p class="naming-desc">758 solid fill with cutout</p>
+                    </div>
+                    <div class="naming-item">
+                        <p class="naming-title">Color Variants</p>
+                        <p class="naming-code">Check-Color</p>
+                        <p class="naming-desc">1,351 icons with gradients</p>
+                    </div>
+                    <div class="naming-item">
+                        <p class="naming-title">Premium Variants</p>
+                        <p class="naming-code">Check-Premium</p>
+                        <p class="naming-desc">650 advanced effect icons</p>
+                    </div>
                 </div>
-                <div style="padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg);">
-                    <p style="font-weight: bold; margin-top: 0; color: var(--a-color-primary);">Thin Variants</p>
-                    <code style="font-size: 0.9rem;">CheckThin</code><br>
-                    <p style="font-size: 0.85rem; color: var(--a-color-text-muted); margin: var(--a-space-s) 0 0 0;">760 ultra-thin 0.5px icons</p>
-                </div>
-                <div style="padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg);">
-                    <p style="font-weight: bold; margin-top: 0; color: var(--a-color-primary);">Inverted Variants</p>
-                    <code style="font-size: 0.9rem;">CheckInverted</code><br>
-                    <p style="font-size: 0.85rem; color: var(--a-color-text-muted); margin: var(--a-space-s) 0 0 0;">758 solid fill with cutout</p>
-                </div>
-                <div style="padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg);">
-                    <p style="font-weight: bold; margin-top: 0; color: var(--a-color-primary);">Color Variants</p>
-                    <code style="font-size: 0.9rem;">Check-Color</code><br>
-                    <p style="font-size: 0.85rem; color: var(--a-color-text-muted); margin: var(--a-space-s) 0 0 0;">1,351 icons with gradients</p>
-                </div>
-                <div style="padding: var(--a-space-m); background: var(--ax-background-secondary); border-radius: var(--a-border-radius-lg);">
-                    <p style="font-weight: bold; margin-top: 0; color: var(--a-color-primary);">Premium Variants</p>
-                    <code style="font-size: 0.9rem;">Check-Premium</code><br>
-                    <p style="font-size: 0.85rem; color: var(--a-color-text-muted); margin: var(--a-space-s) 0 0 0;">650 advanced effect icons</p>
-                </div>
-            </div>
 
-            <h3>6. Performance Best Practices</h3>
-            <ul style="line-height: 1.8;">
-                <li><strong>Start Minimal:</strong> Load only <code>axicons-base.js</code> (89KB) initially</li>
-                <li><strong>Mix Variants:</strong> Add other variants only if needed (+170-440KB each)</li>
-                <li><strong>Lazy Load:</strong> Use <code>AxiconsLoader</code> to load variants on-demand</li>
-                <li><strong>Cache Busting:</strong> Icon bundles are versioned and can be cached indefinitely</li>
-                <li><strong>CSS Inheritance:</strong> Icons use <code>currentColor</code> by default for easy theming</li>
-            </ul>
+                <h4>6. Performance Best Practices</h4>
+                <ul>
+                    <li><strong>Start Minimal:</strong> Load only <code>axicons-base.js</code> (89KB) initially</li>
+                    <li><strong>Mix Variants:</strong> Add other variants only if needed (+170-440KB each)</li>
+                    <li><strong>Lazy Load:</strong> Use <code>AxiconsLoader</code> to load variants on-demand</li>
+                    <li><strong>Cache Busting:</strong> Icon bundles are versioned and can be cached indefinitely</li>
+                    <li><strong>CSS Inheritance:</strong> Icons use <code>currentColor</code> by default for easy theming</li>
+                </ul>
+            </article>
+        </div>
+    </section>
 
-            <h3>7. Advanced: Custom Icon Rendering</h3>
-            <p>For special use cases, access icons programmatically:</p>
-            <pre style="background: var(--a-color-surface); padding: var(--a-space-l); border-radius: var(--a-border-radius-lg); overflow-x: auto;"><code class="language-javascript">// Find icon by name
-const icon = window.axicons.find(i => i.name === 'Check');
-
-// Use SVG content directly
-if (icon) {
-    element.innerHTML = `&lt;svg viewBox="0 0 24 24"&gt;${icon.svgContent}&lt;/svg&gt;`;
-}
-
-// Create icon element programmatically
-function createIcon(name, size = '1.5rem') {
-    const icon = window.axicons.find(i => i.name === name);
-    if (!icon) return null;
-    
-    const span = document.createElement('span');
-    span.className = 'axicon render';
-    span.setAttribute('data-name', name);
-    span.style.fontSize = size;
-    
-    // Render manually
-    const viewBoxMatch = icon.svgContent.match(/viewBox="([^"]+)"/);
-    const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
-    const cleanContent = icon.svgContent.replace(/\s*viewBox="[^"]*"/, '');
-    span.innerHTML = `&lt;svg viewBox="${viewBox}" aria-hidden="true"&gt;${cleanContent}&lt;/svg&gt;`;
-    
-    return span;
-}</code></pre>
-
-            <h3>8. Icon Categories</h3>
-            <p>Icons are organized by category. Browse below to find icons for your use case:</p>
-            <ul style="columns: 2; line-height: 1.8; gap: var(--a-space-2xl);">
-                <li>UI/UX (alerts, arrows, checkmarks, close)</li>
-                <li>Media (play, pause, volume, camera)</li>
-                <li>Navigation (menu, home, search, settings)</li>
-                <li>Social & Brands (GitHub, Twitter, LinkedIn)</li>
-                <li>Communication (mail, chat, phone, bell)</li>
-                <li>Business (graph, chart, briefcase, money)</li>
-                <li>Editing (pencil, trash, copy, download)</li>
-                <li>And many more...</li>
-            </ul>
-        </section>
-
-        
-        <!-- Hero Section -->
-        <header style="margin-bottom: var(--a-space-2xl);">
-            <h1>Axicons: 3,969 SVG Icons</h1>
-            <p class="tagline">Browse all icons across 5 variants: Base (450), Thin (760), Inverted (758), Color (1,351), Premium (650). Click any icon to copy its name.</p>
-        </header>
-
-        <!-- Variant Tabs -->
-        <section class="doc-section">
+    <section class="doc-section">
+        <div class="container">
             <h2>Browse by Variant</h2>
-            
+
             <div class="tabs-container">
                 <div class="variant-tabs">
                     <button class="variant-tab active" data-variant="base">
-                        Base <span style="font-size: 0.9rem; color: var(--a-color-text-muted);">(450)</span>
+                        Base <span class="variant-tab-count">(450)</span>
                     </button>
                     <button class="variant-tab" data-variant="thin">
-                        Thin <span style="font-size: 0.9rem; color: var(--a-color-text-muted);">(760)</span>
+                        Thin <span class="variant-tab-count">(760)</span>
                     </button>
                     <button class="variant-tab" data-variant="inverted">
-                        Inverted <span style="font-size: 0.9rem; color: var(--a-color-text-muted);">(758)</span>
+                        Inverted <span class="variant-tab-count">(758)</span>
                     </button>
                     <button class="variant-tab" data-variant="color">
-                        Color <span style="font-size: 0.9rem; color: var(--a-color-text-muted);">(1,351)</span>
+                        Color <span class="variant-tab-count">(1,351)</span>
                     </button>
                     <button class="variant-tab" data-variant="premium">
-                        Premium <span style="font-size: 0.9rem; color: var(--a-color-text-muted);">(650)</span>
+                        Premium <span class="variant-tab-count">(650)</span>
                     </button>
                 </div>
             </div>
@@ -391,164 +471,171 @@ function createIcon(name, size = '1.5rem') {
             <div class="search-box">
                 <input type="text" id="icon-search" placeholder="Search icons by name... (e.g., check, arrow, user, github)">
             </div>
-            <p class="icon-count"><span id="icon-count">450</span> icons found</p>
+            <p class="icon-count"><span class="count-number" id="icon-count">450</span> icons found</p>
 
             <div class="icon-browser" id="icon-browser"></div>
-        </section>
+        </div>
+    </section>
 
-    </div></section></main>
+</main>
 
-    <footer class="main">
-        <div class="content">
-            <div class="brand">
-                <a href="../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
-                <p class="tagline">The Semantic Web, Reimagined.</p>
+<footer class="main">
+    <div class="container">
+        <div class="grid grid-cols-4">
+            <div class="brand-section">
+                <a href="../index.html" class="brand">[Ax<span class="primary">01</span>]</a>
+                <p class="muted sm">The Semantic Web, Reimagined.</p>
             </div>
-            <div class="links">
-                <div class="column">
-                    <h4>Documentation</h4>
-                    <ul>
-                        <li><a href="components-overview.html">Component Overview</a></li>
-                        <li><a href="AXICONS_VARIANTS_GUIDE.md">Variants Guide</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h4>Community</h4>
-                    <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-                    </ul>
-                </div>
+
+            <div class="footer-column">
+                <h3>Documentation</h3>
+                <ul>
+                    <li><a href="components-overview.html">Component Overview</a></li>
+                    <li><a href="styling-guide.html">Styling Guide</a></li>
+                    <li><a href="colors-advanced.html">Colors</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Creator</h3>
+                <ul>
+                    <li><a href="https://www.solroth.com" target="_blank" rel="noopener">Sol Roth</a></li>
+                </ul>
             </div>
         </div>
-        <div class="bottom">
-            <p>&copy; <span id="current-year"></span> Axiom01. All Rights Reserved.</p>
-        </div>
-    </footer>
+    </div>
+</footer>
 
-    <script src="../js/axiom.js"></script>
-    <script src="../js/axicons-loader.js"></script>
-    <script src="../js/axicons-base.js"></script>
-    <script src="../js/axicons-thin-variants.js"></script>
-    <script src="../js/axicons-inverted-variants.js"></script>
-    <script src="../js/axicons-color-variants.js"></script>
-    <script src="../js/axicons-premium-variants.js"></script>
-    <script src="../js/render-icons.js"></script>
-    <script>
-        const variantTabs = document.querySelectorAll('.variant-tab');
-        const iconBrowser = document.getElementById('icon-browser');
-        const searchInput = document.getElementById('icon-search');
-        const iconCount = document.getElementById('icon-count');
-        const variantInfo = document.getElementById('variant-info');
-        const variantDescriptions = {
-            base: '<strong>Base Icons:</strong> Standard outline style, 450 icons optimized for general UI',
-            thin: '<strong>Thin Variants:</strong> Ultra-thin 0.5px strokes, 760 elegant icons for refined layouts',
-            inverted: '<strong>Inverted Variants:</strong> Modern solid fill with cutouts, 758 high-contrast icons for badges and status',
-            color: '<strong>Color Variants:</strong> Vibrant gradients and colors, 1,351 icons for rich visual designs',
-            premium: '<strong>Premium Variants:</strong> Exclusive effects and advanced styling, 650 polished icons'
-        };
+<script src="../js/axiom.js"></script>
+<script src="../js/axicons-loader.js"></script>
+<script src="../js/axicons-base.js"></script>
+<script src="../js/axicons-thin-variants.js"></script>
+<script src="../js/axicons-inverted-variants.js"></script>
+<script src="../js/axicons-color-variants.js"></script>
+<script src="../js/axicons-premium-variants.js"></script>
+<script src="../js/render-icons.js"></script>
+<script src="../js/sticky-header.js"></script>
+<script>
+    const variantTabs = document.querySelectorAll('.variant-tab');
+    const iconBrowser = document.getElementById('icon-browser');
+    const searchInput = document.getElementById('icon-search');
+    const iconCount = document.getElementById('icon-count');
+    const variantInfo = document.getElementById('variant-info');
+    const variantDescriptions = {
+        base: '<strong>Base Icons:</strong> Standard outline style, 450 icons optimized for general UI',
+        thin: '<strong>Thin Variants:</strong> Ultra-thin 0.5px strokes, 760 elegant icons for refined layouts',
+        inverted: '<strong>Inverted Variants:</strong> Modern solid fill with cutouts, 758 high-contrast icons for badges and status',
+        color: '<strong>Color Variants:</strong> Vibrant gradients and colors, 1,351 icons for rich visual designs',
+        premium: '<strong>Premium Variants:</strong> Exclusive effects and advanced styling, 650 polished icons'
+    };
 
-        let currentVariant = 'base';
-        let allIcons = [];
+    let currentVariant = 'base';
+    let allIcons = [];
 
-        function renderIcons(filter = '') {
-            iconBrowser.innerHTML = '';
-            let count = 0;
-            const filterLower = filter.toLowerCase();
+    function renderIcons(filter = '') {
+        iconBrowser.innerHTML = '';
+        let count = 0;
+        const filterLower = filter.toLowerCase();
 
-            if (!allIcons || allIcons.length === 0) {
-                iconBrowser.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: var(--a-space-2xl);">Loading icons...</p>';
-                return;
+        if (!allIcons || allIcons.length === 0) {
+            iconBrowser.innerHTML = '<p class="loading-message">Loading icons...</p>';
+            return;
+        }
+
+        allIcons.forEach(icon => {
+            let includeIcon = false;
+            
+            if (currentVariant === 'base') {
+                includeIcon = !icon.name.includes('Thin') && !icon.name.includes('Inverted') && !icon.name.includes('Color') && !icon.name.includes('Premium');
+            } else if (currentVariant === 'thin') {
+                includeIcon = icon.name.includes('Thin');
+            } else if (currentVariant === 'inverted') {
+                includeIcon = icon.name.includes('Inverted');
+            } else if (currentVariant === 'color') {
+                includeIcon = icon.name.includes('Color') || icon.name.includes('-Color');
+            } else if (currentVariant === 'premium') {
+                includeIcon = icon.name.includes('Premium');
             }
 
-            allIcons.forEach(icon => {
-                // Filter based on current variant
-                let includeIcon = false;
+            if (includeIcon && (filterLower === '' || icon.name.toLowerCase().includes(filterLower))) {
+                const item = document.createElement('div');
+                item.className = 'icon-item';
+                item.title = `Click to copy: ${icon.name}`;
                 
-                if (currentVariant === 'base') {
-                    includeIcon = !icon.name.includes('Thin') && !icon.name.includes('Inverted') && !icon.name.includes('Color') && !icon.name.includes('Premium');
-                } else if (currentVariant === 'thin') {
-                    includeIcon = icon.name.includes('Thin');
-                } else if (currentVariant === 'inverted') {
-                    includeIcon = icon.name.includes('Inverted');
-                } else if (currentVariant === 'color') {
-                    includeIcon = icon.name.includes('Color') || icon.name.includes('-Color');
-                } else if (currentVariant === 'premium') {
-                    includeIcon = icon.name.includes('Premium');
+                let iconHTML = '';
+                if (icon.svgContent) {
+                    const viewBoxMatch = icon.svgContent.match(/viewBox="([^"]+)"/);
+                    const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
+                    const cleanSvgContent = icon.svgContent.replace(/\s+viewBox="[^"]*"/, '');
+                    iconHTML = `<div class="icon-display ${currentVariant === 'color' || currentVariant === 'premium' ? 'color' : ''}"><svg viewBox="${viewBox}" aria-hidden="true">${cleanSvgContent}</svg></div>`;
+                } else {
+                    iconHTML = '<div class="icon-display" style="color: var(--a-color-on-surface-variant);">No SVG</div>';
                 }
+                
+                item.innerHTML = `
+                    ${iconHTML}
+                    <span class="icon-name">${icon.name}</span>
+                `;
 
-                if (includeIcon && (filterLower === '' || icon.name.toLowerCase().includes(filterLower))) {
-                    const item = document.createElement('div');
-                    item.className = 'icon-item';
-                    item.title = `Click to copy: ${icon.name}`;
+                item.addEventListener('click', () => {
+                    navigator.clipboard.writeText(icon.name);
                     
-                    let iconHTML = '';
-                    if (icon.svgContent) {
-                        const viewBoxMatch = icon.svgContent.match(/viewBox="([^"]+)"/);
-                        const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
-                        const cleanSvgContent = icon.svgContent.replace(/\s+viewBox="[^"]*"/, '');
-                        iconHTML = `<div class="icon-display ${currentVariant === 'color' || currentVariant === 'premium' ? 'color' : ''}"><svg viewBox="${viewBox}" aria-hidden="true">${cleanSvgContent}</svg></div>`;
-                    } else {
-                        iconHTML = '<div class="icon-display" style="color: var(--a-color-text-muted);">No SVG</div>';
-                    }
-                    
-                    item.innerHTML = `
-                        ${iconHTML}
-                        <span class="icon-name">${icon.name}</span>
-                    `;
+                    const originalText = item.querySelector('.icon-name').textContent;
+                    item.querySelector('.icon-name').textContent = 'Copied!';
+                    setTimeout(() => {
+                        item.querySelector('.icon-name').textContent = originalText;
+                    }, 1500);
+                });
 
-                    item.addEventListener('click', () => {
-                        navigator.clipboard.writeText(icon.name);
-                        
-                        const originalText = item.querySelector('.icon-name').textContent;
-                        item.querySelector('.icon-name').textContent = 'Copied!';
-                        setTimeout(() => {
-                            item.querySelector('.icon-name').textContent = originalText;
-                        }, 1500);
-                    });
-
-                    iconBrowser.appendChild(item);
-                    count++;
-                }
-            });
-
-            iconCount.textContent = count;
-        }
-
-        // Load all icons
-        async function loadAllIcons() {
-            if (typeof window.axicons !== 'undefined' && Array.isArray(window.axicons)) {
-                allIcons = window.axicons;
-                renderIcons();
-            } else {
-                // Fallback: load manually
-                await window.AxiconsLoader.loadAll();
-                allIcons = window.axicons || [];
-                renderIcons();
+                iconBrowser.appendChild(item);
+                count++;
             }
+        });
+
+        iconCount.textContent = count;
+    }
+
+    // Load all icons
+    async function loadAllIcons() {
+        if (typeof window.axicons !== 'undefined' && Array.isArray(window.axicons)) {
+            allIcons = window.axicons;
+            renderIcons();
+        } else {
+            await window.AxiconsLoader.loadAll();
+            allIcons = window.axicons || [];
+            renderIcons();
         }
+    }
 
-        // Variant tab switching
-        variantTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                variantTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                currentVariant = tab.dataset.variant;
-                variantInfo.innerHTML = variantDescriptions[currentVariant];
-                searchInput.value = '';
-                renderIcons();
-            });
+    // Variant tab switching
+    variantTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            variantTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentVariant = tab.dataset.variant;
+            variantInfo.innerHTML = variantDescriptions[currentVariant];
+            searchInput.value = '';
+            renderIcons();
         });
+    });
 
-        // Search functionality
-        searchInput.addEventListener('input', (e) => {
-            renderIcons(e.target.value);
-        });
+    // Search functionality
+    searchInput.addEventListener('input', (e) => {
+        renderIcons(e.target.value);
+    });
 
-        // Initialize
-        loadAllIcons().catch(() => {
-            console.error('Failed to load icons');
-        });
-    </script>
-    <script src="../js/index-page-manager.js"></script>
+    // Initialize
+    loadAllIcons().catch(() => {
+        console.error('Failed to load icons');
+    });
+</script>
 </body>
 </html>
