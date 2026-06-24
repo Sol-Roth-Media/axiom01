@@ -1,4 +1,4 @@
-# Axiom01 v2.1.2 — The Semantic-First UI Framework
+# Axiom01 v2.2.0 — The Semantic-First UI Framework
 
 > **Write Less Code. Build Better Interfaces.** Semantic HTML meets beautiful design. No utility chaos. No BEM complexity.
 
@@ -187,7 +187,7 @@ Axiom01 includes **2,900+ professionally designed icons** ready to use:
 
 ```html
 <!-- Include the icon font -->
-<link rel="stylesheet" href="https://unpkg.com/axiom01@2.1.2/css/axicons.css">
+<link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axicons.css">
 
 <!-- Use icons anywhere -->
 <i class="axicon-home"></i> Home
@@ -286,8 +286,8 @@ Every aspect of Axiom01 is customizable through CSS variables:
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.1.2/css/axiom.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.1.2/css/axicons.css">
+  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axiom.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axicons.css">
 </head>
 <body>
   <header class="navbar">
@@ -492,14 +492,14 @@ See [LICENSE](LICENSE) for full details.
 
 ---
 
-## 🎉 What's New in v2.1.2
+## 🎉 What's New in v2.2.0
 
-✅ Fixed GitHub Pages CSS 404 errors
-✅ Unified CSS build process
-✅ Updated NPM documentation
-✅ Enhanced component examples
+✅ Completely revamped NPM README with component showcase
+✅ Prominently featured 2,900+ Axicons with examples
+✅ Better visual presentation and organization
+✅ Component examples for all major features
+✅ Performance comparison and feature tables
 ✅ Improved accessibility documentation
-✅ Better showcase of Axicons
 
 ---
 
@@ -510,7 +510,7 @@ See [LICENSE](LICENSE) for full details.
 npm install axiom01
 
 # Or use the CDN
-# <link rel="stylesheet" href="https://unpkg.com/axiom01@2.1.2/css/axiom.min.css">
+# <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axiom.min.css">
 
 # Start building with semantic HTML
 <button class="primary lg">Get Started</button>
