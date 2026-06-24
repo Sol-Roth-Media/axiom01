@@ -1,4 +1,4 @@
-# Axiom01 v2.2.1 — The Semantic-First UI Framework
+# Axiom01 v2.2.2 — The Semantic-First UI Framework
 
 > **Write Less Code. Build Better Interfaces.** Semantic HTML meets beautiful design. No utility chaos. No BEM complexity.
 
@@ -601,13 +601,12 @@ See [LICENSE](LICENSE) for full details.
 
 ---
 
-## 🎉 What's New in v2.2.1
+## 🎉 What's New in v2.2.2
 
-✅ Fixed Axicons documentation - correct SVG icon implementation
-✅ Accurate modular loading examples for icon variants
-✅ Correct data-name attribute usage
-✅ Performance best practices for icons
-✅ Updated component count accuracy
+✅ Corrected all documentation links (Axicons to /docs/axicons.html)
+✅ Updated all CDN versions to 2.2.2
+✅ Comprehensive link audit completed
+✅ All resources verified and accurate
 
 ---
 
