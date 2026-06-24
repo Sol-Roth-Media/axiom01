@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axicons Test</title>
+    <style>
+        body { font-family: Arial; margin: 20px; background: #f5f5f5; }
+        .test-section { background: white; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .icon { display: inline-block; width: 48px; height: 48px; margin: 10px; padding: 4px; border: 1px solid #ccc; border-radius: 4px; }
+        svg { width: 100%; height: 100%; stroke: #333; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+</head>
+<body>
+    <h1>Axicons Loading Test</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Check Global Variable</h2>
+        <button onclick="testGlobal()">Test Global axicons</button>
+        <div id="test1-output"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Render Sample Icons</h2>
+        <div id="icons-container"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Page Icons (from HTML)</h2>
+        <p>Moon icon: <span class="axicon render" data-name="Moon"></span></p>
+        <p>Menu icon: <span class="axicon render" data-name="Menu"></span></p>
+        <p>Search icon: <span class="axicon render" data-name="Search"></span></p>
+    </div>
+
+    <!-- Load axicons -->
+    <script src="js/axicons.js"></script>
+
+    <!-- Test script -->
+    <script>
+        function testGlobal() {
+            const output = document.getElementById('test1-output');
+            console.log('window.axicons type:', typeof window.axicons);
+            console.log('window.axicons length:', Array.isArray(window.axicons) ? window.axicons.length : 'not array');
+            
+            if (typeof window.axicons === 'undefined') {
+                output.innerHTML = '<p style="color: red;">ERROR: window.axicons is undefined</p>';
+            } else if (!Array.isArray(window.axicons)) {
+                output.innerHTML = '<p style="color: red;">ERROR: window.axicons is not an array</p>';
+            } else {
+                const moonIcon = window.axicons.find(i => i.name === 'Moon');
+                const menuIcon = window.axicons.find(i => i.name === 'Menu');
+                output.innerHTML = `
+                    <p style="color: green;">✓ window.axicons loaded successfully!</p>
+                    <p>Total icons: ${window.axicons.length}</p>
+                    <p>Moon icon found: ${moonIcon ? '✓ Yes' : '✗ No'}</p>
+                    <p>Menu icon found: ${menuIcon ? '✓ Yes' : '✗ No'}</p>
+                `;
+            }
+        }
+
+        function renderIcon(name) {
+            if (!window.axicons) return null;
+            const icon = window.axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+            if (!icon) return null;
+            
+            const span = document.createElement('span');
+            span.className = 'icon';
+            span.innerHTML = `<svg viewBox="0 0 24 24">${icon.svgContent}</svg>`;
+            return span;
+        }
+
+        function renderAxicons() {
+            if (typeof window.axicons === 'undefined' || !Array.isArray(window.axicons)) {
+                setTimeout(renderAxicons, 50);
+                return;
+            }
+
+            // Test 1
+            testGlobal();
+
+            // Test 2: Render sample icons
+            const container = document.getElementById('icons-container');
+            const names = ['Moon', 'Menu', 'Search', 'Settings', 'Bell', 'Activity'];
+            names.forEach(name => {
+                const svg = renderIcon(name);
+                if (svg) {
+                    const label = document.createElement('div');
+                    label.style.textAlign = 'center';
+                    label.appendChild(svg);
+                    label.innerHTML += `<p>${name}</p>`;
+                    container.appendChild(label);
+                }
+            });
+
+            // Test 3: Render page icons
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                if (el.tagName === 'svg') return; // Already rendered
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = window.axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        // Run after DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            setTimeout(renderAxicons, 100);
+        }
+    </script>
+</body>
+</html>
