@@ -91,7 +91,7 @@
                     <span class="axicon render" data-name="Search"></span>
                 </button>
                 <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="Brand-Github"></span>
+                    <span class="axicon render" data-name="GitHub"></span>
                     <span>GitHub</span>
                 </a>
                 <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
@@ -111,7 +111,7 @@
                 <h2>Live Examples</h2>
                 <div class="alert-demo">
                     <div class="alert alert-info">
-                        <div class="alert-icon">ℹ️</div>
+                        <div class="alert-icon"><span class="axicon render" data-name="Info"></span></div>
                         <div class="alert-content">
                             <p class="alert-title">Information</p>
                             <p class="alert-message">This is an informational alert with important details for the user.</p>
@@ -119,7 +119,7 @@
                     </div>
                     
                     <div class="alert alert-success">
-                        <div class="alert-icon">✓</div>
+                        <div class="alert-icon"><span class="axicon render" data-name="Check-Circle"></span></div>
                         <div class="alert-content">
                             <p class="alert-title">Success</p>
                             <p class="alert-message">Your action has been completed successfully.</p>
@@ -127,7 +127,7 @@
                     </div>
                     
                     <div class="alert alert-warning">
-                        <div class="alert-icon">⚠️</div>
+                        <div class="alert-icon"><span class="axicon render" data-name="Alert-Triangle"></span></div>
                         <div class="alert-content">
                             <p class="alert-title">Warning</p>
                             <p class="alert-message">Please be careful with this action as it may have consequences.</p>
@@ -135,7 +135,7 @@
                     </div>
                     
                     <div class="alert alert-error">
-                        <div class="alert-icon">✕</div>
+                        <div class="alert-icon"><span class="axicon render" data-name="X"></span></div>
                         <div class="alert-content">
                             <p class="alert-title">Error</p>
                             <p class="alert-message">An error occurred. Please try again or contact support.</p>
@@ -148,7 +148,7 @@
                 <h2>HTML Structure</h2>
                 <div class="code-block">
                     <pre><code class="language-html">&lt;div class="alert alert-info"&gt;
-    &lt;div class="alert-icon"&gt;ℹ️&lt;/div&gt;
+    &lt;div class="alert-icon"&gt;&lt;span class="axicon render" data-name="Info"&gt;&lt;/span&gt;&lt;/div&gt;
     &lt;div class="alert-content"&gt;
         &lt;p class="alert-title"&gt;Title&lt;/p&gt;
         &lt;p class="alert-message"&gt;Message&lt;/p&gt;
@@ -247,18 +247,23 @@
 
     <script src="../../js/axiom.js"></script>
     <script src="../../js/axicons.js"></script>
+    <script src="../../js/render-icons.js"></script>
     <script>
         function renderAxicons() {
-            if (typeof axicons === 'undefined') {
-                setTimeout(renderAxicons, 100);
+            if (typeof window.axicons === 'undefined' || !Array.isArray(window.axicons)) {
+                setTimeout(renderAxicons, 50);
                 return;
             }
             document.querySelectorAll('.axicon.render').forEach(el => {
+                if (el.querySelector('svg')) return; // Already rendered
                 const name = el.getAttribute('data-name');
                 if (!name) return;
-                const icon = axicons.find(i => i.name === name);
-                if (icon) {
-                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                const icon = window.axicons.find(i => i && i.name && i.name.toLowerCase() === name.toLowerCase());
+                if (icon && icon.svgContent) {
+                    const viewBoxMatch = icon.svgContent.match(/viewBox="([^"]+)"/);
+                    const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
+                    const cleanSvgContent = icon.svgContent.replace(/\s*viewBox="[^"]*"/, '');
+                    el.innerHTML = `<svg viewBox="${viewBox}" aria-hidden="true">${cleanSvgContent}</svg>`;
                 }
             });
         }
