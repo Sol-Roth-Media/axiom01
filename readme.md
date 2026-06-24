@@ -31,18 +31,18 @@ Most CSS frameworks force you to choose between **clean code** and **beautiful d
 **That's the Axiom01 philosophy:**
 - ✅ **One semantic class per element** — No utility stacking
 - ✅ **CSS Variables for everything** — Change one variable, update your entire site
-- ✅ **67 production-ready components** — Everything you need, nothing you don't
+- ✅ **73 production-ready components** — Everything you need, nothing you don't
+- ✅ **3,969+ Axicons SVG icons** — 5 design variants, modular loading
 - ✅ **Dark mode built-in** — Automatic theme detection
 - ✅ **WCAG 2.1 AA compliant** — Accessible by default
-- ✅ **13.3 KB CSS (gzipped)** — All components included
-- ✅ **2,900+ Axicons** — Beautiful icon set included
+- ✅ **14.3 KB CSS (gzipped)** — All components included
 - ✅ **Zero dependencies** — Pure CSS + optional vanilla JS
 
 ---
 
 ## 🎨 What You Get
 
-### 67 Production-Ready Components
+### 73 Production-Ready Components
 
 **Buttons & Actions**
 ```html
@@ -114,7 +114,7 @@ Most CSS frameworks force you to choose between **clean code** and **beautiful d
 <span class="badge warning">Warning</span>
 ```
 
-**Tables**
+**Tables & Data**
 ```html
 <table>
   <thead>
@@ -151,7 +151,7 @@ Most CSS frameworks force you to choose between **clean code** and **beautiful d
 </div>
 ```
 
-**And 55+ More** — Hero sections, pagination, badges, spinners, tooltips, and much more!
+**And 65+ More** — Hero sections, pagination, spinners, tooltips, breadcrumbs, forms, and much more!
 
 ---
 
@@ -181,41 +181,141 @@ Smooth, performant animations that respect accessibility preferences:
 
 ---
 
-## 🎨 2,900+ Axicons — Beautiful Icon Set
+## 🎨 Axicons: 3,969+ SVG Icons with 5 Design Variants
 
-Axiom01 includes **2,900+ professionally designed icons** ready to use:
+Axiom01 includes **Axicons** — a modular SVG icon system with over **3,969 icons** across **5 design variants**. Load only what you need.
+
+### Quick Start with Axicons
 
 ```html
-<!-- Include the icon font -->
-<link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axicons.css">
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axiom.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/axiom01@2.2.0/css/axicons.css">
+</head>
+<body>
+  <!-- Use icons with data-name attribute -->
+  <button>
+    <span class="axicon render" data-name="Menu"></span>
+    Menu
+  </button>
 
-<!-- Use icons anywhere -->
-<i class="axicon-home"></i> Home
-<i class="axicon-search"></i> Search
-<i class="axicon-user"></i> Profile
-<i class="axicon-settings"></i> Settings
-<i class="axicon-bell"></i> Notifications
-<i class="axicon-heart"></i> Favorite
-<i class="axicon-star"></i> Rating
-<i class="axicon-check"></i> Success
-<i class="axicon-x"></i> Close
-<i class="axicon-menu"></i> Menu
-<i class="axicon-arrow-right"></i> Next
-<i class="axicon-download"></i> Download
+  <a href="https://github.com">
+    <span class="axicon render" data-name="Brand-GitHub"></span>
+    GitHub
+  </a>
 
-<!-- Size variants -->
-<i class="axicon-heart sm"></i> Small
-<i class="axicon-heart"></i> Medium
-<i class="axicon-heart lg"></i> Large
-<i class="axicon-heart xl"></i> Extra Large
-
-<!-- Color variants -->
-<i class="axicon-star" style="color: var(--a-color-primary)"></i>
-<i class="axicon-star" style="color: var(--a-color-success)"></i>
-<i class="axicon-star" style="color: var(--a-color-error)"></i>
+  <!-- Load icon library -->
+  <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-loader.js"></script>
+  
+  <!-- Load base icons (450 icons, 89KB) -->
+  <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-base.js"></script>
+  
+  <!-- Optional: Load other variants as needed -->
+  <!-- <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-thin-variants.js"></script> -->
+  <!-- <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-color-variants.js"></script> -->
+  
+  <!-- Render icons automatically -->
+  <script src="https://unpkg.com/axiom01@2.2.0/js/render-icons.js"></script>
+</body>
+</html>
 ```
 
-**Browse all icons** at [axiom01.com/icons](https://axiom01.com/icons)
+### Icon Variants
+
+Axicons comes in **5 design variants**:
+
+| Variant | Icons | Style | Best For |
+|---------|-------|-------|----------|
+| **Base** | 450 | Standard outline | General UI, default choice |
+| **Thin** | 760 | Ultra-thin 0.5px strokes | Refined, elegant designs |
+| **Inverted** | 758 | Solid fill with cutouts | Badges, high-contrast status |
+| **Color** | 1,351 | Vibrant gradients | Rich visual designs |
+| **Premium** | 650 | Advanced effects | Polished, special effects |
+
+### Using Different Variants
+
+```html
+<!-- Base icons -->
+<span class="axicon render" data-name="Check"></span>
+
+<!-- Thin variant -->
+<span class="axicon render" data-name="CheckThin"></span>
+
+<!-- Inverted variant -->
+<span class="axicon render" data-name="CheckInverted"></span>
+
+<!-- Color variant -->
+<span class="axicon render" data-name="Check-Color"></span>
+
+<!-- Premium variant -->
+<span class="axicon render" data-name="Check-Premium"></span>
+```
+
+### Styling Icons
+
+Icons inherit color from their parent and can be styled with CSS:
+
+```html
+<!-- Size via font-size -->
+<span class="axicon render" data-name="Heart" style="font-size: 2rem;"></span>
+
+<!-- Color via CSS -->
+<style>
+  .icon-primary {
+    color: var(--a-color-primary);
+  }
+  
+  .icon-success {
+    color: var(--a-color-success);
+  }
+</style>
+
+<span class="axicon render" data-name="CheckCircle" style="color: var(--a-color-success);"></span>
+```
+
+### Performance: Load Only What You Need
+
+```html
+<!-- Start with base (89KB) - covers 450 icons -->
+<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-base.js"></script>
+
+<!-- Add thin if needed (+170KB) - 760 total icons -->
+<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-thin-variants.js"></script>
+
+<!-- Or load all variants at once (440KB total) -->
+<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-loader.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-base.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-thin-variants.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-inverted-variants.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-color-variants.js"></script>
+<script src="https://unpkg.com/axiom01@2.2.0/js/axicons-premium-variants.js"></script>
+```
+
+### Dynamic Icon Rendering
+
+If you add icons dynamically, call the render function:
+
+```javascript
+// Add icon HTML dynamically
+const button = document.createElement('button');
+button.innerHTML = '<span class="axicon render" data-name="Download"></span> Download';
+document.body.appendChild(button);
+
+// Render the new icon
+if (typeof window.renderAxicons === 'function') {
+  window.renderAxicons();
+}
+```
+
+### Browse All Icons
+
+**Live Icon Browser:** [axiom01.com/icons](https://axiom01.com/icons)
+- Search by name
+- Filter by variant
+- Click to copy icon names
+- See all 3,969 icons
 
 ---
 
@@ -303,21 +403,26 @@ Every aspect of Axiom01 is customizable through CSS variables:
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; padding: 2rem;">
       <article class="card elevated">
-        <header><h3><i class="axicon-lightning"></i> Fast</h3></header>
-        <p>13.3 KB CSS includes all 67 components</p>
+        <header><h3><span class="axicon render" data-name="Bolt"></span> Fast</h3></header>
+        <p>14.3 KB CSS includes all 73 components</p>
       </article>
 
       <article class="card elevated">
-        <header><h3><i class="axicon-accessible"></i> Accessible</h3></header>
+        <header><h3><span class="axicon render" data-name="Shield"></span> Accessible</h3></header>
         <p>WCAG 2.1 AA compliant by default</p>
       </article>
 
       <article class="card elevated">
-        <header><h3><i class="axicon-code"></i> Semantic</h3></header>
+        <header><h3><span class="axicon render" data-name="Code"></span> Semantic</h3></header>
         <p>One class per element, clean HTML</p>
       </article>
     </div>
   </main>
+
+  <!-- Load icons -->
+  <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-loader.js"></script>
+  <script src="https://unpkg.com/axiom01@2.2.0/js/axicons-base.js"></script>
+  <script src="https://unpkg.com/axiom01@2.2.0/js/render-icons.js"></script>
 </body>
 </html>
 ```
@@ -331,14 +436,19 @@ npm install axiom01
 ```css
 /* In your CSS file */
 @import 'axiom01/css/axiom.min.css';
-@import 'axiom01/css/axicons.css';
 ```
 
 ```html
 <!-- Use components in HTML -->
-<button class="primary">Click Me</button>
+<button class="primary lg">Click Me</button>
 <article class="card">Content</article>
-<i class="axicon-home"></i> Home
+```
+
+### Option 3: Yarn or pnpm
+
+```bash
+yarn add axiom01
+pnpm add axiom01
 ```
 
 ---
@@ -415,7 +525,7 @@ Automatic theme detection with zero configuration:
 | Tailwind | 40-80 KB | 5 KB | 45-85 KB |
 | Foundation | 120 KB | 80 KB | 200 KB |
 
-**Axiom01 includes 67 components, dark mode, 2,900 icons, animations, and WCAG AA compliance — all in 14.3 KB.**
+**Axiom01 includes 73 components, 3,969 Axicons (modular), dark mode, animations, and WCAG AA compliance — all in 14.3 KB base CSS.**
 
 ---
 
@@ -425,10 +535,10 @@ Automatic theme detection with zero configuration:
 |----------|---------|
 | 🌐 **[Live Demo](https://axiom01.com)** | See all components in action |
 | 📖 **[Documentation](https://axiom01.com/docs)** | Component reference and guides |
-| 🎨 **[Components](https://axiom01.com/components)** | Explore all 67 components |
-| 🎬 **[Animations](https://axiom01.com/animations)** | Animation showcase |
-| 🎨 **[Design Tokens](https://axiom01.com/tokens)** | CSS variables reference |
-| 🎯 **[Icons](https://axiom01.com/icons)** | All 2,900 Axicons |
+| 🧩 **[Components](https://axiom01.com/docs/components-overview.html)** | Explore all 73 components |
+| 🎬 **[Animations](https://axiom01.com/docs)** | Animation showcase |
+| 🎨 **[Design Tokens](https://axiom01.com/docs)** | CSS variables reference |
+| 🎯 **[Axicons](https://axiom01.com/icons)** | Browse all 3,969 icons |
 | 💾 **[GitHub](https://github.com/Sol-Roth-Media/axiom01)** | Source code and issues |
 
 ---
@@ -446,8 +556,8 @@ Automatic theme detection with zero configuration:
 
 ## 📋 Core Features
 
-- ✅ **67 Components** — Everything for production
-- ✅ **2,900 Axicons** — Beautiful icon set included
+- ✅ **73 Components** — Everything for production
+- ✅ **3,969 Axicons** — 5 design variants, modular loading
 - ✅ **149 Design Tokens** — Complete design system
 - ✅ **20+ Animations** — GPU-accelerated
 - ✅ **Dark Mode** — Built-in theme switching
@@ -494,12 +604,12 @@ See [LICENSE](LICENSE) for full details.
 
 ## 🎉 What's New in v2.2.0
 
-✅ Completely revamped NPM README with component showcase
-✅ Prominently featured 2,900+ Axicons with examples
-✅ Better visual presentation and organization
-✅ Component examples for all major features
-✅ Performance comparison and feature tables
-✅ Improved accessibility documentation
+✅ Completely revamped NPM README
+✅ Accurate Axicons documentation (SVG icons + modular loading)
+✅ Correct implementation examples
+✅ Better visual presentation
+✅ Updated component count (73 total)
+✅ Accurate icon count (3,969 across 5 variants)
 
 ---
 
