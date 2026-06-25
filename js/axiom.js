@@ -18,6 +18,15 @@
      */
     dismiss: function (element) {
       if (!element) return;
+      
+      // Emit dismiss event before removal
+      const dismissEvent = new CustomEvent('axiom:alert:dismiss', {
+        detail: { element },
+        bubbles: true,
+        cancelable: true
+      });
+      element.dispatchEvent(dismissEvent);
+      
       element.style.transition = 'opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
       element.style.opacity = '0';
       element.style.transform = 'scale(0.95)';
@@ -49,8 +58,8 @@
         }
       });
 
-      // Dispatch a custom event for form validation or wizard logic
-      const event = new CustomEvent('axiomStepChange', {
+      // Dispatch custom event for form validation or wizard logic
+      const event = new CustomEvent('axiom:step:change', {
         detail: { activeIndex: targetIndex, activeStep: steps[targetIndex] },
         bubbles: true
       });
@@ -104,6 +113,49 @@
           }
         });
       });
+    },
+
+    /**
+     * Simple state management for component state.
+     */
+    state: {
+      get: function(key) {
+        try {
+          const value = sessionStorage.getItem(`axiom:${key}`);
+          return value ? JSON.parse(value) : null;
+        } catch (e) {
+          return null;
+        }
+      },
+      set: function(key, value) {
+        try {
+          sessionStorage.setItem(`axiom:${key}`, JSON.stringify(value));
+        } catch (e) {
+          console.warn('Axiom state storage failed:', e);
+        }
+      },
+      clear: function(key) {
+        try {
+          sessionStorage.removeItem(`axiom:${key}`);
+        } catch (e) {
+          console.warn('Axiom state clear failed:', e);
+        }
+      }
+    },
+
+    /**
+     * Debounce utility for performance-sensitive handlers.
+     */
+    debounce: function(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
     }
   };
 
