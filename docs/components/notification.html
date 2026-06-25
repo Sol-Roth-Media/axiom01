@@ -13,7 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body class="axiom-body component-doc">
-    	<!-- HEADER NAVIGATION -->
+    <!-- HEADER NAVIGATION -->
 	<header class="main" data-component="mobile-navbar">
 		<nav role="navigation" aria-label="Main Navigation">
 			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
@@ -44,136 +44,113 @@
     <main><section><div class="container">
         <header>
             <h1>Notification</h1>
-            <p class="text-muted">Axiom01's notification component displays contextual alerts and messages to users. Supports multiple types (success, error, warning, info) with dismissible options and animations.</p>
+            <p class="text-muted">Alert users to important information with semantic notifications. Supports multiple types: success, error, warning, and info.</p>
         </header>
 
         <div class="component-section">
-
             <section>
                 <h2>Live Examples</h2>
 
-                <h3>Notification Types</h3>
-                <div class="notification-demo">
-                    <div class="trigger-buttons">
-                        <button class="trigger-btn" onclick="showNotification('success')">Success</button>
-                        <button class="trigger-btn" onclick="showNotification('error')">Error</button>
-                        <button class="trigger-btn" onclick="showNotification('warning')">Warning</button>
-                        <button class="trigger-btn" onclick="showNotification('info')">Info</button>
+                <h3>Success Notification</h3>
+                <div class="notification success" role="alert">
+                    <span class="axicon render" data-name="CheckCircle"></span>
+                    <div>
+                        <strong>Success!</strong> Your changes have been saved.
                     </div>
-                    
-                    <div id="notificationContainer"></div>
-                    
-                    <h3 >Preset Examples</h3>
-                    
-                    <div class="notification success">
-                        <div class="notification-icon"><span class="axicon render" data-name="Check-Circle"></span></div>
-                        <div class="notification-content">
-                            <p class="notification-title">Success!</p>
-                            <p class="notification-message">Your changes have been saved successfully.</p>
-                        </div>
-                        <button class="notification-close" aria-label="Close notification">&times;</button>
+                    <button class="notification-close" aria-label="Close notification">&times;</button>
+                </div>
+
+                <h3>Error Notification</h3>
+                <div class="notification error" role="alert">
+                    <span class="axicon render" data-name="AlertCircle"></span>
+                    <div>
+                        <strong>Error!</strong> Something went wrong. Please try again.
                     </div>
-                    
-                    <div class="notification error">
-                        <div class="notification-icon"><span class="axicon render" data-name="X"></span></div>
-                        <div class="notification-content">
-                            <p class="notification-title">Error</p>
-                            <p class="notification-message">An error occurred while processing your request. Please try again.</p>
-                            <div class="notification-buttons">
-                                <button class="notification-button">Retry</button>
-                                <button class="notification-button">Dismiss</button>
-                            </div>
-                        </div>
-                        <button class="notification-close" aria-label="Close notification">&times;</button>
+                    <button class="notification-close" aria-label="Close notification">&times;</button>
+                </div>
+
+                <h3>Warning Notification</h3>
+                <div class="notification warning" role="alert">
+                    <span class="axicon render" data-name="AlertTriangle"></span>
+                    <div>
+                        <strong>Warning!</strong> This action cannot be undone.
                     </div>
-                    
-                    <div class="notification warning">
-                        <div class="notification-icon">!</div>
-                        <div class="notification-content">
-                            <p class="notification-title">Warning</p>
-                            <p class="notification-message">This action cannot be undone. Are you sure you want to continue?</p>
-                        </div>
-                        <button class="notification-close" aria-label="Close notification">&times;</button>
+                    <button class="notification-close" aria-label="Close notification">&times;</button>
+                </div>
+
+                <h3>Info Notification</h3>
+                <div class="notification info" role="alert">
+                    <span class="axicon render" data-name="Info"></span>
+                    <div>
+                        <strong>Note:</strong> New features are now available.
                     </div>
-                    
-                    <div class="notification info">
-                        <div class="notification-icon">ⓘ</div>
-                        <div class="notification-content">
-                            <p class="notification-title">Information</p>
-                            <p class="notification-message">A new version is available. Update now to get the latest features.</p>
-                        </div>
-                        <button class="notification-close" aria-label="Close notification">&times;</button>
-                    </div>
+                    <button class="notification-close" aria-label="Close notification">&times;</button>
                 </div>
             </section>
 
             <section>
-                <h2>HTML Structure</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="notification success"&gt;
-    &lt;div class="notification-icon"&gt;&lt;span class="axicon render" data-name="Check-Circle"&gt;&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="notification-content"&gt;
-        &lt;p class="notification-title"&gt;Success!&lt;/p&gt;
-        &lt;p class="notification-message"&gt;Message text&lt;/p&gt;
+                <h2>Markup</h2>
+                <p>Notifications use semantic HTML with ARIA roles and utility classes for styling:</p>
+                <pre><code class="language-html">&lt;div class="notification success" role="alert"&gt;
+    &lt;span class="axicon render" data-name="CheckCircle"&gt;&lt;/span&gt;
+    &lt;div&gt;
+        &lt;strong&gt;Success!&lt;/strong&gt; Your action completed.
     &lt;/div&gt;
-    &lt;button class="notification-close" aria-label="Close"&gt;×&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-                </div>
+    &lt;button class="notification-close" aria-label="Close"&gt;&amp;times;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Types: success, error, warning, info --&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Types</h2>
+                <ul>
+                    <li><strong>success</strong> - Green, for positive feedback</li>
+                    <li><strong>error</strong> - Red, for errors or failures</li>
+                    <li><strong>warning</strong> - Orange, for warnings or caution</li>
+                    <li><strong>info</strong> - Blue, for informational messages</li>
+                </ul>
             </section>
 
             <section>
                 <h2>Features</h2>
                 <ul>
-                    <li><strong>Multiple Types</strong> - Success, error, warning, info</li>
-                    <li><strong>Icons</strong> - Visual type identification</li>
-                    <li><strong>Dismissible</strong> - Close button to remove</li>
-                    <li><strong>Action Buttons</strong> - Call-to-action within notification</li>
-                    <li><strong>Animations</strong> - Slide-in and fade effects</li>
-                    <li><strong>Auto-dismiss</strong> - Optional timeout feature</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Use Cases</h2>
-                <ul>
-                    <li><strong>Form Submission</strong> - Success or error feedback</li>
-                    <li><strong>System Status</strong> - Alert notifications</li>
-                    <li><strong>User Actions</strong> - Confirmation messages</li>
-                    <li><strong>Warnings</strong> - Important notices</li>
-                    <li><strong>Updates</strong> - Software or content updates</li>
-                    <li><strong>Help Text</strong> - Contextual information</li>
+                    <li><strong>Semantic HTML</strong> - Uses <code>&lt;div&gt;</code> with <code>role="alert"</code></li>
+                    <li><strong>Icon Support</strong> - Include icons for visual clarity</li>
+                    <li><strong>Close Button</strong> - Allow users to dismiss</li>
+                    <li><strong>Type Variants</strong> - Four semantic notification types</li>
+                    <li><strong>Token-Based Colors</strong> - Uses design tokens for styling</li>
+                    <li><strong>Accessibility</strong> - ARIA roles for screen readers</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Accessibility</h2>
                 <ul>
-                    <li>Use <code>role="alert"</code> for urgent messages</li>
-                    <li>Include descriptive title and message</li>
-                    <li>Color + icon for type indication</li>
-                    <li>Include close button with aria-label</li>
-                    <li>Announce to screen readers on appearance</li>
-                    <li>Allow keyboard dismissal</li>
+                    <li><code>role="alert"</code> - Announces notification to screen readers</li>
+                    <li><code>aria-label</code> - Labels close button for context</li>
+                    <li><strong>Color + Icon</strong> - Never rely on color alone</li>
+                    <li><strong>Focus Management</strong> - Close button is keyboard accessible</li>
+                    <li><strong>Clear Text</strong> - Use descriptive messages</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Best Practices</h2>
                 <ul>
-                    <li><strong>Clear Messages</strong> - Be specific and actionable</li>
-                    <li><strong>Appropriate Type</strong> - Match severity to type</li>
-                    <li><strong>Color + Icon</strong> - Redundant visual cues</li>
-                    <li><strong>Auto-Dismiss</strong> - Use sparingly, not for errors</li>
-                    <li><strong>Position</strong> - Typically top-right or center</li>
-                    <li><strong>Timing</strong> - Don't hide before user reads</li>
+                    <li>Keep messages concise and actionable</li>
+                    <li>Use appropriate type for the message content</li>
+                    <li>Include icons to reinforce the message type</li>
+                    <li>Allow users to dismiss notifications</li>
+                    <li>Position consistently on the page</li>
+                    <li>Use color with icon/text, not color alone</li>
                 </ul>
             </section>
-
         </div>
 
     </div></section></main>
 
-    	<!-- FOOTER -->
+    <!-- FOOTER -->
 	<footer class="footer">
 		<div class="container">
 			<!-- Main Content Grid -->
@@ -184,14 +161,13 @@
 					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
 				</div>
 
-				<!-- Product Links -->
+				<!-- Documentation Links -->
 				<div class="footer-column">
-					<h4>Product</h4>
+					<h4>Documentation</h4>
 					<ul>
-						<li><a href="../../docs/components-overview.html">All Components</a></li>
-						<li><a href="../../docs/axicons.html">Icons</a></li>
-						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
-						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+						<li><a href="../components-overview.html">Component Overview</a></li>
+						<li><a href="../overview-quickstart.html">Get Started</a></li>
+						<li><a href="../colors-advanced.html">Colors & Tokens</a></li>
 					</ul>
 				</div>
 
@@ -201,7 +177,7 @@
 					<ul>
 						<li><a href="../../README.md" target="_blank">README</a></li>
 						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+						<li><a href="../../LICENSE" target="_blank">License</a></li>
 					</ul>
 				</div>
 
@@ -209,8 +185,8 @@
 				<div class="footer-column">
 					<h4>Community</h4>
 					<ul>
-						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
-						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
 					</ul>
 				</div>
 			</div>
@@ -230,87 +206,51 @@
 		</div>
 	</footer>
 
-            <script src="../../js/render-icons.js"></script>
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/index-page-manager.js"></script>
     <script>
-        function showNotification(type) {
-            const container = document.getElementById('notificationContainer');
-            const icons = {
-                success: '✓',
-                error: '✕',
-                warning: '!',
-                info: 'ⓘ'
-            };
-            const titles = {
-                success: 'Success',
-                error: 'Error',
-                warning: 'Warning',
-                info: 'Information'
-            };
-            
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <div class="notification-icon">${icons[type]}</div>
-                <div class="notification-content">
-                    <p class="notification-title">${titles[type]}</p>
-                    <p class="notification-message">This is a ${type} notification message.</p>
-                </div>
-                <button class="notification-close" aria-label="Close">&times;</button>
-            `;
-            
-            const closeBtn = notification.querySelector('.notification-close');
-            closeBtn.addEventListener('click', () => {
-                notification.remove();
-            });
-            
-            container.insertBefore(notification, container.firstChild);
-            
-            setTimeout(() => notification.remove(), 5000);
-        }
-        
-        document.querySelectorAll('.notification-close').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.closest('.notification').remove();
-            });
-        });
-
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
                 return;
             }
-            
             document.querySelectorAll('.axicon.render').forEach(el => {
                 const name = el.getAttribute('data-name');
                 if (!name) return;
-                
                 const icon = axicons.find(i => i.name === name);
                 if (icon) {
                     el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
                 }
             });
         }
-
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', renderAxicons);
         } else {
             renderAxicons();
         }
-
         setTimeout(renderAxicons, 500);
     </script>
-    <script src="../../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="../../js/axicons-loader.js"></script>
-<script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
-<script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
+
+    <!-- Notification Close Handler -->
+    <script>
+        document.querySelectorAll('.notification-close').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.style.opacity = '0';
+                this.parentElement.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => this.parentElement.remove(), 300);
+            });
+        });
+    </script>
 </body>
 </html>

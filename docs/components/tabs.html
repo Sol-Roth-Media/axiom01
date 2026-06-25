@@ -13,7 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body class="axiom-body component-doc">
-    	<!-- HEADER NAVIGATION -->
+    <!-- HEADER NAVIGATION -->
 	<header class="main" data-component="mobile-navbar">
 		<nav role="navigation" aria-label="Main Navigation">
 			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
@@ -44,133 +44,88 @@
     <main><section><div class="container">
         <header>
             <h1>Tabs</h1>
-            <p class="text-muted">Axiom01's tabs component organizes related content into separate panels. Supports keyboard navigation and multiple styling variants for flexible content organization.</p>
+            <p class="text-muted">Organize related content into separate panels with semantic HTML and ARIA roles. Supports keyboard navigation and maintains focus management.</p>
         </header>
 
         <div class="component-section">
-
             <section>
-                <h2>Live Examples</h2>
-
-                <h3>Documentation Tabs</h3>
-                <div class="tabs-demo">
-                    <div class="tabs-container">
-                        <div class="tabs-nav" role="tablist">
-                            <button class="tab-button active" role="tab" aria-selected="true" aria-controls="panel1">
-                                <span class="axicon render" data-name="FileText"></span>
-                                Overview
-                            </button>
-                            <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel2">
-                                <span class="axicon render" data-name="Code"></span>
-                                Code
-                            </button>
-                            <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel3">
-                                <span class="axicon render" data-name="Settings"></span>
-                                Configuration
-                            </button>
-                            <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel4">
-                                <span class="axicon render" data-name="HelpCircle"></span>
-                                FAQ
-                            </button>
-                        </div>
-                        
-                        <div id="panel1" class="tab-content active" role="tabpanel">
-                            <h2 class="tab-panel-title">Component Overview</h2>
-                            <p class="tab-panel-text">The tabs component provides an organized way to display related content. Each tab contains a panel with relevant information. Users can switch between tabs to view different content without leaving the page.</p>
-                        </div>
-                        
-                        <div id="panel2" class="tab-content" role="tabpanel">
-                            <h2 class="tab-panel-title">Code Example</h2>
-                            <p class="tab-panel-text">Implementation is straightforward with semantic HTML and accessible ARIA attributes. The component supports keyboard navigation with arrow keys and full screen reader support for accessibility.</p>
-                        </div>
-                        
-                        <div id="panel3" class="tab-content" role="tabpanel">
-                            <h2 class="tab-panel-title">Configuration</h2>
-                            <p class="tab-panel-text">Customize tabs with CSS variables for colors, spacing, and transitions. Support for vertical tabs, icon-only tabs, and disabled states. Flexible enough for any use case.</p>
-                        </div>
-                        
-                        <div id="panel4" class="tab-content" role="tabpanel">
-                            <h2 class="tab-panel-title">Frequently Asked Questions</h2>
-                            <p class="tab-panel-text">Q: Can I have nested tabs? A: Yes, but use with caution for usability. Q: Mobile responsive? A: Fully responsive with horizontal scrolling on small screens.</p>
-                        </div>
+                <h2>Live Example</h2>
+                <div class="tabs" role="tablist" aria-label="Documentation sections">
+                    <button role="tab" aria-selected="true" aria-controls="panel1" tabindex="0">Overview</button>
+                    <button role="tab" aria-selected="false" aria-controls="panel2" tabindex="-1">Examples</button>
+                    <button role="tab" aria-selected="false" aria-controls="panel3" tabindex="-1">Usage</button>
+                </div>
+                
+                <div id="panel1" role="tabpanel" aria-labelledby="tab1" aria-selected="true">
+                    <p>The tabs component provides an organized way to display related content. Each tab button controls the visibility of a corresponding panel.</p>
+                </div>
+                <div id="panel2" role="tabpanel" aria-labelledby="tab2" hidden>
+                    <p>You can include any content inside each tab panel - text, forms, images, or other components.</p>
+                </div>
+                <div id="panel3" role="tabpanel" aria-labelledby="tab3" hidden>
+                    <p>Tabs are ideal for documentation, settings pages, product details, and any grouped content sections.</p>
+                </div>
             </section>
 
             <section>
-                <h2>HTML Structure</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="tabs-container"&gt;
-    &lt;div class="tabs-nav" role="tablist"&gt;
-        &lt;button class="tab-button active" role="tab" aria-controls="panel1"&gt;
-            Tab 1
-        &lt;/button&gt;
-        &lt;button class="tab-button" role="tab" aria-controls="panel2"&gt;
-            Tab 2
-        &lt;/button&gt;
-    &lt;/div&gt;
-    
-    &lt;div id="panel1" class="tab-content active" role="tabpanel"&gt;
-        &lt;p&gt;Content for tab 1&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div id="panel2" class="tab-content" role="tabpanel"&gt;
-        &lt;p&gt;Content for tab 2&lt;/p&gt;
-    &lt;/div&gt;
+                <h2>Markup</h2>
+                <p>Tabs use semantic HTML with ARIA attributes for accessibility:</p>
+                <pre><code class="language-html">&lt;div class="tabs" role="tablist"&gt;
+    &lt;button role="tab" aria-selected="true" aria-controls="panel1"&gt;
+        Tab 1
+    &lt;/button&gt;
+    &lt;button role="tab" aria-selected="false" aria-controls="panel2"&gt;
+        Tab 2
+    &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div id="panel1" role="tabpanel"&gt;
+    &lt;p&gt;Content for tab 1&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id="panel2" role="tabpanel" hidden&gt;
+    &lt;p&gt;Content for tab 2&lt;/p&gt;
 &lt;/div&gt;</code></pre>
-                </div>
             </section>
 
             <section>
                 <h2>Features</h2>
                 <ul>
-                    <li><strong>Tab Navigation</strong> - Click or keyboard to switch tabs</li>
-                    <li><strong>Content Panels</strong> - Organized content areas per tab</li>
-                    <li><strong>Active State</strong> - Clear indication of current tab</li>
-                    <li><strong>Icon Support</strong> - Optional icons on tabs</li>
-                    <li><strong>Keyboard Navigation</strong> - Arrow keys and Enter support</li>
-                    <li><strong>ARIA Support</strong> - Full accessibility for screen readers</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Use Cases</h2>
-                <ul>
-                    <li><strong>Documentation</strong> - Multiple sections of content</li>
-                    <li><strong>Settings Pages</strong> - Grouped configuration options</li>
-                    <li><strong>Product Details</strong> - Description, reviews, specs tabs</li>
-                    <li><strong>Dashboard</strong> - Different data views or filters</li>
-                    <li><strong>Form Steps</strong> - Multi-section form submission</li>
-                    <li><strong>Navigation</strong> - Alternative to dropdown menus</li>
+                    <li><strong>Semantic HTML</strong> - Uses native <code>&lt;button&gt;</code> elements</li>
+                    <li><strong>ARIA Attributes</strong> - Full accessibility support</li>
+                    <li><strong>Keyboard Navigation</strong> - Tab and arrow key support</li>
+                    <li><strong>Focus Management</strong> - Proper focus states</li>
+                    <li><strong>Token-Based Styling</strong> - Customizable with CSS variables</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Accessibility</h2>
                 <ul>
-                    <li>Use <code>role="tablist"</code> on tab container</li>
-                    <li>Use <code>role="tab"</code> on tab buttons</li>
-                    <li>Use <code>role="tabpanel"</code> on content areas</li>
-                    <li>Include <code>aria-controls</code> linking tabs to panels</li>
-                    <li>Support keyboard: Tab, Arrow keys, Home, End</li>
-                    <li>Maintain focus management</li>
+                    <li><code>role="tablist"</code> - Container for tab buttons</li>
+                    <li><code>role="tab"</code> - Individual tab buttons</li>
+                    <li><code>role="tabpanel"</code> - Content panels</li>
+                    <li><code>aria-selected</code> - Indicates active tab</li>
+                    <li><code>aria-controls</code> - Links tab to panel</li>
+                    <li><code>hidden</code> - Hides inactive panels</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Best Practices</h2>
                 <ul>
-                    <li><strong>Clear Labels</strong> - Tab titles should be clear</li>
-                    <li><strong>Logical Ordering</strong> - Order tabs by importance</li>
-                    <li><strong>Icon + Text</strong> - Use both for clarity</li>
-                    <li><strong>Content Organization</strong> - Related content per tab</li>
-                    <li><strong>Keyboard Support</strong> - Full arrow key navigation</li>
-                    <li><strong>Mobile Responsive</strong> - Scroll if needed on small screens</li>
+                    <li>Use clear, concise tab labels</li>
+                    <li>Order tabs by importance or logic</li>
+                    <li>Include keyboard navigation support</li>
+                    <li>Keep content organization simple</li>
+                    <li>Maintain consistent styling across tabs</li>
+                    <li>Ensure focus indicators are visible</li>
                 </ul>
             </section>
-
         </div>
 
     </div></section></main>
 
-    	<!-- FOOTER -->
+    <!-- FOOTER -->
 	<footer class="footer">
 		<div class="container">
 			<!-- Main Content Grid -->
@@ -181,14 +136,13 @@
 					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
 				</div>
 
-				<!-- Product Links -->
+				<!-- Documentation Links -->
 				<div class="footer-column">
-					<h4>Product</h4>
+					<h4>Documentation</h4>
 					<ul>
-						<li><a href="../../docs/components-overview.html">All Components</a></li>
-						<li><a href="../../docs/axicons.html">Icons</a></li>
-						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
-						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+						<li><a href="../components-overview.html">Component Overview</a></li>
+						<li><a href="../overview-quickstart.html">Get Started</a></li>
+						<li><a href="../colors-advanced.html">Colors & Tokens</a></li>
 					</ul>
 				</div>
 
@@ -198,7 +152,7 @@
 					<ul>
 						<li><a href="../../README.md" target="_blank">README</a></li>
 						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+						<li><a href="../../LICENSE" target="_blank">License</a></li>
 					</ul>
 				</div>
 
@@ -206,8 +160,8 @@
 				<div class="footer-column">
 					<h4>Community</h4>
 					<ul>
-						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
-						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
 					</ul>
 				</div>
 			</div>
@@ -227,81 +181,75 @@
 		</div>
 	</footer>
 
-            <script>
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabButtons.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                // Remove active from all
-                tabButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    btn.setAttribute('aria-selected', 'false');
-                });
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // Add active to clicked
-                button.classList.add('active');
-                button.setAttribute('aria-selected', 'true');
-                const panelId = button.getAttribute('aria-controls');
-                document.getElementById(panelId).classList.add('active');
-            });
-            
-            // Keyboard navigation
-            button.addEventListener('keydown', (e) => {
-                let nextIndex = index;
-                if (e.key === 'ArrowRight') nextIndex = (index + 1) % tabButtons.length;
-                if (e.key === 'ArrowLeft') nextIndex = (index - 1 + tabButtons.length) % tabButtons.length;
-                if (e.key === 'Home') nextIndex = 0;
-                if (e.key === 'End') nextIndex = tabButtons.length - 1;
-                
-                if (nextIndex !== index) {
-                    e.preventDefault();
-                    tabButtons[nextIndex].click();
-                    tabButtons[nextIndex].focus();
-                }
-            });
-        });
-
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/index-page-manager.js"></script>
+    <script>
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
                 return;
             }
-            
             document.querySelectorAll('.axicon.render').forEach(el => {
                 const name = el.getAttribute('data-name');
                 if (!name) return;
-                
                 const icon = axicons.find(i => i.name === name);
                 if (icon) {
                     el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
                 }
             });
         }
-
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', renderAxicons);
         } else {
             renderAxicons();
         }
-
         setTimeout(renderAxicons, 500);
     </script>
-    <script src="../../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="../../js/axicons-loader.js"></script>
-<script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
-<script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
+
+    <!-- Tab Management -->
+    <script>
+        document.querySelectorAll('[role="tablist"]').forEach(tablist => {
+            const tabs = tablist.querySelectorAll('[role="tab"]');
+            const panels = tablist.parentElement.querySelectorAll('[role="tabpanel"]');
+
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', () => selectTab(index));
+                tab.addEventListener('keydown', (e) => {
+                    let nextIndex = index;
+                    if (e.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+                    else if (e.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+                    else if (e.key === 'Home') nextIndex = 0;
+                    else if (e.key === 'End') nextIndex = tabs.length - 1;
+                    else return;
+
+                    e.preventDefault();
+                    selectTab(nextIndex);
+                });
+            });
+
+            function selectTab(index) {
+                tabs.forEach((tab, i) => {
+                    tab.setAttribute('aria-selected', i === index);
+                    tab.tabIndex = i === index ? 0 : -1;
+                });
+                panels.forEach((panel, i) => {
+                    panel.hidden = i !== index;
+                    panel.setAttribute('aria-selected', i === index);
+                });
+                tabs[index].focus();
+            }
+        });
+    </script>
 </body>
 </html>
