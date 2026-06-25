@@ -1,198 +1,284 @@
-// js/axiom.js
-var Axiom = class {
-  constructor() {
-    this.components = {};
-    // Store references to initialized component instances for potential destruction
-    this.initializedComponents = new Map();
-    document.addEventListener("DOMContentLoaded", () => this.init());
-  }
+/**
+ * @file
+ * Core Axiom01 Front-End Framework Client Runtime & API.
+ * Provides zero-dependency, classless, high-performance interactions.
+ * * Leverages document-level event delegation to remain fully compatible with 
+ * client-rendered sites, single-page applications, and dynamic HTML injection.
+ */
 
-  /**
-   * Register a component definition manually.
-   * Supports either:
-   * - class constructor
-   * - object with init(element)
-   * @param {string} componentName
-   * @param {Function|Object} componentDefinition
-   * @returns {boolean}
-   */
-  registerComponent(componentName, componentDefinition) {
-    if (!componentName || typeof componentName !== "string") {
-      console.error("Axiom: registerComponent requires a valid component name.");
-      return false;
+(function () {
+  'use strict';
+
+  // ==========================================================================
+  // 1. Flash of Unstyled Content (FOUC) Mitigation
+  // ==========================================================================
+  try {
+    const cachedMode = localStorage.getItem('axiom-theme-mode') || 'system';
+    if (cachedMode === 'dark' || (cachedMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
     }
-
-    const isClass =
-      typeof componentDefinition === "function" &&
-      /^\s*class\s/.test(componentDefinition.toString());
-    const isInitObject =
-      typeof componentDefinition === "object" &&
-      componentDefinition !== null &&
-      typeof componentDefinition.init === "function";
-
-    if (!isClass && !isInitObject) {
-      console.error(
-        `Axiom: Invalid component definition for ${componentName}. Expected class or object with init(element).`
-      );
-      return false;
-    }
-
-    this.components[componentName] = componentDefinition;
-    return true;
+  } catch (e) {
+    console.warn('Local storage theme caching is unavailable.');
   }
 
-  /**
-   * Get a registered component definition by name.
-   * @param {string} componentName
-   * @returns {Function|Object|null}
-   */
-  getComponent(componentName) {
-    return this.components[componentName] || null;
-  }
+  // ==========================================================================
+  // 2. Global Axiom Programmatic Component API Namespace
+  // ==========================================================================
+  window.Axiom = {
+    /**
+     * Dismisses an alert callout with a professional scale-and-fade animation.
+     * @param {HTMLElement} element - The alert container to dismiss.
+     */
+    dismiss: function (element) {
+      if (!element) return;
+      element.style.transition = 'opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+      element.style.opacity = '0';
+      element.style.transform = 'scale(0.95)';
+      element.addEventListener('transitionend', function () {
+        element.remove();
+      }, { once: true });
+    },
 
-  /**
-   * List all currently loaded/registered component names.
-   * @returns {string[]}
-   */
-  listComponents() {
-    return Object.keys(this.components);
-  }
+    /**
+     * Programmatically sets the active index of a linear steps wizard.
+     * @param {HTMLElement} stepsContainer - The parent .steps container.
+     * @param {number} targetIndex - The index (0-based) to set active.
+     */
+    setActiveStep: function (stepsContainer, targetIndex) {
+      const steps = stepsContainer.querySelectorAll('span');
+      if (targetIndex < 0 || targetIndex >= steps.length) return;
 
-  async loadComponent(componentName) {
-    if (this.components[componentName]) {
-      return this.components[componentName];
-    }
-
-    const componentPath = `./components/${componentName}.js`;
-    try {
-      const module = await import(componentPath);
-      if (module.default) {
-        // Check if it's a class constructor.
-        if (
-          typeof module.default === "function" &&
-          /^\s*class\s/.test(module.default.toString())
-        ) {
-          this.components[componentName] = module.default;
-          return module.default;
+      steps.forEach((step, idx) => {
+        if (idx === targetIndex) {
+          step.setAttribute('data-active', 'true');
+          step.removeAttribute('data-completed');
+        } else if (idx < targetIndex) {
+          step.removeAttribute('data-active');
+          step.setAttribute('data-completed', 'true');
+        } else {
+          step.removeAttribute('data-active');
+          step.removeAttribute('data-completed');
         }
-        // Check if it's an object with an init method (old style).
-        if (
-          typeof module.default === "object" &&
-          typeof module.default.init === "function"
-        ) {
-          this.components[componentName] = module.default;
-          return module.default;
-        }
-      }
-      console.error(
-        `Axiom: Component ${componentName} does not have a valid default export (class or object with init method).`
-      );
-      return null;
-    } catch (error) {
-      console.error(`Axiom: Failed to load component ${componentName}.`, error);
-      return null;
+      });
+
+      // Dispatch event for programmatic workflow integration (e.g. form progression triggers)
+      const event = new CustomEvent('axiomStepChange', {
+        detail: { activeIndex: targetIndex, activeStep: steps[targetIndex] },
+        bubbles: true
+      });
+      stepsContainer.dispatchEvent(event);
+    },
+
+    /**
+     * Initializes a progressive keyboard accessibility tree inside hierarchical grids.
+     * @param {HTMLElement} hierarchyContainer - The root .hierarchy element.
+     */
+    initHierarchyAccessibility: function (hierarchyContainer) {
+      const items = hierarchyContainer.querySelectorAll('a, summary, .hierarchy-item');
+      
+      items.forEach((item, index) => {
+        item.setAttribute('tabindex', '0');
+        
+        item.addEventListener('keydown', function (e) {
+          let target = null;
+          
+          switch (e.key) {
+            case 'ArrowDown':
+              e.preventDefault();
+              target = items[index + 1] || items[0];
+              break;
+            case 'ArrowUp':
+              e.preventDefault();
+              target = items[index - 1] || items[items.length - 1];
+              break;
+            case 'ArrowRight':
+              if (item.tagName === 'SUMMARY') {
+                const details = item.parentNode;
+                if (details && !details.open) {
+                  e.preventDefault();
+                  details.open = true;
+                }
+              }
+              break;
+            case 'ArrowLeft':
+              if (item.tagName === 'SUMMARY') {
+                const details = item.parentNode;
+                if (details && details.open) {
+                  e.preventDefault();
+                  details.open = false;
+                }
+              }
+              break;
+          }
+          
+          if (target) {
+            target.focus();
+          }
+        });
+      });
     }
-  }
+  };
 
-  async init() {
-    console.log("Axiom: Initializing...");
+  // ==========================================================================
+  // 3. Document-Level Event Delegation & Event Handlers
+  // ==========================================================================
+  document.addEventListener('DOMContentLoaded', function () {
 
-    const componentElements = document.querySelectorAll("[data-component]");
-    const loadPromises = [];
-
-    // First, load all unique components.
-    const uniqueComponents = new Set();
-    componentElements.forEach((element) => {
-      const componentName = element.dataset.component;
-      if (componentName && !uniqueComponents.has(componentName)) {
-        uniqueComponents.add(componentName);
-        loadPromises.push(this.loadComponent(componentName));
+    // 3.1. Alert Dismissals (.alert)
+    document.addEventListener('click', function (e) {
+      const closeBtn = e.target.closest('.alert .close, .alert [data-dismiss="alert"]');
+      if (closeBtn) {
+        e.preventDefault();
+        const alert = closeBtn.closest('.alert');
+        window.Axiom.dismiss(alert);
       }
     });
 
-    await Promise.all(loadPromises);
-
-    // Then, initialize each component instance.
-    componentElements.forEach((element) => {
-      const componentName = element.dataset.component;
-      const ComponentDefinition = this.components[componentName];
-
-      if (componentName && ComponentDefinition) {
-        try {
-          let componentInstance = null;
-          // If it's a class constructor, instantiate it.
-          if (
-            typeof ComponentDefinition === "function" &&
-            /^\s*class\s/.test(ComponentDefinition.toString())
-          ) {
-            componentInstance = new ComponentDefinition(element);
-          }
-          // If it's an object with an init method, call init.
-          else if (
-            typeof ComponentDefinition === "object" &&
-            typeof ComponentDefinition.init === "function"
-          ) {
-            componentInstance = ComponentDefinition.init(element);
-          }
-
-          if (componentInstance && typeof componentInstance.destroy === "function") {
-            this.initializedComponents.set(element, {
-              name: componentName,
-              instance: componentInstance,
-            });
-          }
-          console.log(`Axiom: Initialized component: ${componentName} on`, element);
-        } catch (error) {
-          console.error(
-            `Axiom: Error initializing component ${componentName} on element:`,
-            element,
-            error
-          );
+    // 3.2. Steps Wizard Progression Timeline (.steps)
+    document.addEventListener('click', function (e) {
+      const stepNode = e.target.closest('.steps span');
+      if (stepNode) {
+        const parent = stepNode.closest('.steps');
+        if (parent) {
+          const steps = Array.from(parent.querySelectorAll('span'));
+          const index = steps.indexOf(stepNode);
+          window.Axiom.setActiveStep(parent, index);
         }
       }
     });
 
-    console.log("Axiom: Initialization complete.");
-  }
+    // 3.3. Interactive Tab Panel Switches (.tabs)
+    document.addEventListener('click', function (e) {
+      const tabLink = e.target.closest('.tabs nav a');
+      if (tabLink) {
+        e.preventDefault();
+        const parent = tabLink.closest('.tabs');
+        if (!parent) return;
 
-  /**
-   * Destroys a single component instance associated with a given DOM element.
-   * Components are expected to implement a `destroy()` method for cleanup.
-   * This method would typically be called when a component is removed from the DOM
-   * or when its functionality is no longer needed.
-   * @param {HTMLElement} element The DOM element the component was initialized on.
-   */
-  destroyComponent(element) {
-    if (this.initializedComponents.has(element)) {
-      const { name, instance } = this.initializedComponents.get(element);
-      if (instance && typeof instance.destroy === "function") {
-        try {
-          instance.destroy();
-          console.log(`Axiom: Destroyed component: ${name} on`, element);
-        } catch (error) {
-          console.error(
-            `Axiom: Error destroying component ${name} on element:`,
-            element,
-            error
-          );
+        parent.querySelectorAll('nav a').forEach(a => a.removeAttribute('data-active'));
+        parent.querySelectorAll('section').forEach(s => s.style.display = 'none');
+
+        tabLink.setAttribute('data-active', 'true');
+        const targetId = tabLink.getAttribute('href').replace('#', '');
+        const targetSection = parent.querySelector(targetId.startsWith('#') ? targetId : '#' + targetId);
+        if (targetSection) {
+          targetSection.style.display = 'block';
         }
       }
-      this.initializedComponents.delete(element);
-    }
-  }
-
-  /**
-   * Destroys all currently initialized component instances.
-   * This could be useful for full page reloads or SPA navigation where
-   * old components need to be cleaned up.
-   */
-  destroyAllComponents() {
-    this.initializedComponents.forEach((_value, element) => {
-      this.destroyComponent(element);
     });
-    this.initializedComponents.clear();
-    console.log("Axiom: All components destroyed.");
-  }
-};
 
-window.Axiom = new Axiom();
+    // 3.4. Input Focus Tracking Attribute Flags (data-focused)
+    document.addEventListener('focusin', function (e) {
+      const fieldWrapper = e.target.closest('.field, .pager li');
+      if (fieldWrapper) {
+        fieldWrapper.setAttribute('data-focused', 'true');
+      }
+    });
+
+    document.addEventListener('focusout', function (e) {
+      const fieldWrapper = e.target.closest('.field, .pager li');
+      if (fieldWrapper) {
+        fieldWrapper.removeAttribute('data-focused');
+      }
+    });
+
+    // 3.5. HTML5 details Accordion Chevrons and Icons
+    document.addEventListener('toggle', function (e) {
+      const detailsParent = e.target.closest('details.bordered');
+      if (detailsParent) {
+        const icon = detailsParent.querySelector('summary .axicon');
+        if (icon) {
+          icon.className = detailsParent.open ? 'axicon chevron-down' : 'axicon chevron-right';
+        }
+      }
+    }, true);
+
+    // 3.6. Dynamic Range Sliders Output Value Syncer
+    document.addEventListener('input', function (e) {
+      const rangeInput = e.target.closest('.slider input[type="range"]');
+      if (rangeInput) {
+        const output = rangeInput.parentNode.querySelector('output');
+        if (output) {
+          output.textContent = rangeInput.value;
+        }
+      }
+    });
+
+    // 3.7. Active Input real-time validation error clearings
+    document.addEventListener('input', function (e) {
+      const input = e.target.closest('.field input, .field textarea, .field select');
+      if (input) {
+        const parentField = input.closest('.field');
+        if (parentField && parentField.getAttribute('data-invalid') === 'true') {
+          if (input.checkValidity()) {
+            parentField.removeAttribute('data-invalid');
+            const errorMessage = parentField.querySelector('.error-message');
+            if (errorMessage) errorMessage.remove();
+          }
+        }
+      }
+    });
+
+    // 3.8. Hierarchical tree folder visual states (folder -> folder-open)
+    document.addEventListener('toggle', function (e) {
+      const detailsParent = e.target.closest('.hierarchy details');
+      if (detailsParent) {
+        const icon = detailsParent.querySelector('summary .axicon');
+        if (icon) {
+          icon.className = detailsParent.open ? 'axicon folder-open' : 'axicon folder';
+        }
+      }
+    }, true);
+
+    // 3.9. Adaptive Palette Color Toggle Switch with Local Memory
+    document.addEventListener('click', function (e) {
+      const switcher = e.target.closest('.theme-switch');
+      if (switcher) {
+        e.preventDefault();
+        const currentMode = document.documentElement.getAttribute('data-theme') || 'light';
+        const newMode = currentMode === 'light' ? 'dark' : 'light';
+
+        document.documentElement.setAttribute('data-theme', newMode);
+        switcher.setAttribute('aria-checked', newMode === 'dark');
+        localStorage.setItem('axiom-theme-mode', newMode);
+      }
+    });
+
+    // 3.10. Global Defocus handler for Popovers, Dropbuttons, and Modals
+    window.addEventListener('click', function () {
+      document.querySelectorAll('.popover[aria-expanded="true"]').forEach(function (popover) {
+        popover.setAttribute('aria-expanded', 'false');
+      });
+      document.querySelectorAll('details.dropbutton-details[open]').forEach(function (dropbutton) {
+        dropbutton.removeAttribute('open');
+      });
+    });
+
+    // Escape Key Observer to close active dialog overlays and detail popups
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('details[open]').forEach(function (details) {
+          details.removeAttribute('open');
+        });
+        document.querySelectorAll('dialog[open]').forEach(function (dialog) {
+          dialog.removeAttribute('open');
+          if (typeof dialog.close === 'function') {
+            dialog.close();
+          }
+        });
+      }
+    });
+
+    // ==========================================================================
+    // 4. Standalone Feature Initializations
+    // ==========================================================================
+    // Automatically bind keyboard focus accessibility to static tree components
+    document.querySelectorAll('.hierarchy').forEach(function (hierarchyContainer) {
+      window.Axiom.initHierarchyAccessibility(hierarchyContainer);
+    });
+
+  });
+
+})();
