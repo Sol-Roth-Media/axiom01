@@ -1856,3 +1856,300 @@ meter:disabled {
   box-shadow: var(--a-shadow-lg);
   background-color: var(--a-color-primary-light);
 }
+
+/* ========================================
+   STEPS COMPONENT (Multi-Step Wizards)
+   ======================================== */
+.steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--a-space-l);
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.steps > * {
+  display: flex;
+  align-items: center;
+  gap: var(--a-space-s);
+  opacity: 0.5;
+  font-weight: var(--a-font-weight-medium);
+  cursor: pointer;
+  transition: opacity var(--a-transition-base), color var(--a-transition-base);
+  flex: 1;
+  min-width: 120px;
+}
+
+.steps > *:hover {
+  opacity: 0.8;
+}
+
+.steps > [data-active="true"] {
+  opacity: 1;
+}
+
+.steps > [data-completed="true"] {
+  opacity: 0.75;
+  color: var(--a-color-success);
+}
+
+.steps > * i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--a-space-xl);
+  height: var(--a-space-xl);
+  border-radius: var(--a-border-radius-full);
+  border: 2px solid currentColor;
+  font-style: normal;
+  font-size: var(--a-font-size-s);
+  font-weight: var(--a-font-weight-bold);
+  transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
+  flex-shrink: 0;
+}
+
+.steps > [data-active="true"] i {
+  background-color: var(--a-color-primary);
+  border-color: var(--a-color-primary);
+  color: white;
+}
+
+/* ========================================
+   HIERARCHY COMPONENT (Hierarchical Tree Lists)
+   ======================================== */
+.hierarchy,
+.hierarchy ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 var(--a-space-l);
+  position: relative;
+}
+
+.hierarchy::before {
+  content: "";
+  position: absolute;
+  left: var(--a-space-s);
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--a-color-outline);
+}
+
+.hierarchy li {
+  position: relative;
+  padding: var(--a-space-m) 0 var(--a-space-m) var(--a-space-m);
+}
+
+.hierarchy li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--a-space-m));
+  top: calc(var(--a-space-xl) + var(--a-space-xs));
+  width: var(--a-space-m);
+  height: 1px;
+  background-color: var(--a-color-outline);
+}
+
+.hierarchy li:last-child::after {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--a-space-m));
+  top: calc(var(--a-space-xl) + var(--a-space-xs));
+  bottom: 0;
+  width: 2px;
+  background-color: var(--a-color-surface);
+}
+
+.hierarchy details summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--a-space-s);
+  font-weight: var(--a-font-weight-medium);
+  transition: color var(--a-transition-base);
+}
+
+.hierarchy details summary::-webkit-details-marker {
+  display: none;
+}
+
+.hierarchy details summary::before {
+  content: "▶";
+  display: inline-flex;
+  transition: transform var(--a-transition-base);
+  width: 1rem;
+}
+
+.hierarchy details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.hierarchy details summary:hover {
+  color: var(--a-color-primary);
+}
+
+/* ========================================
+   POPOVER COMPONENT (Details Overlays)
+   ======================================== */
+details.popover {
+  position: relative;
+  display: inline-block;
+}
+
+details.popover summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--a-space-xs);
+  padding: var(--a-space-s) var(--a-space-l);
+  border: 1px solid var(--a-color-outline);
+  border-radius: var(--a-border-radius-base);
+  background-color: var(--a-color-surface);
+  color: var(--a-color-on-surface);
+  font-weight: var(--a-font-weight-medium);
+  transition: border-color var(--a-transition-base), background-color var(--a-transition-base);
+}
+
+details.popover summary::-webkit-details-marker {
+  display: none;
+}
+
+details.popover summary:hover {
+  border-color: var(--a-color-primary);
+  background-color: var(--a-color-surface-variant);
+}
+
+details.popover nav {
+  position: absolute;
+  top: calc(100% + var(--a-space-xs));
+  right: 0;
+  min-width: 160px;
+  background: var(--a-color-surface);
+  border: 1px solid var(--a-color-outline);
+  border-radius: var(--a-border-radius-base);
+  box-shadow: var(--a-shadow-md);
+  z-index: var(--z-dropdown, 100);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+details.popover nav a,
+details.popover nav button {
+  padding: var(--a-space-m) var(--a-space-l);
+  text-decoration: none;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--a-color-on-surface);
+  font-size: var(--a-font-size-base);
+  transition: background-color var(--a-transition-base), color var(--a-transition-base);
+}
+
+details.popover nav a:hover,
+details.popover nav button:hover {
+  background: var(--a-color-surface-variant);
+  color: var(--a-color-primary);
+}
+
+/* ========================================
+   FIELD COMPONENT (Form Validation)
+   ======================================== */
+.field {
+  margin-bottom: var(--a-space-m);
+}
+
+.field label,
+.field strong {
+  font-weight: var(--a-font-weight-medium);
+  color: var(--a-color-on-surface);
+}
+
+.field[data-invalid="true"] label,
+.field[data-invalid="true"] strong {
+  color: var(--a-color-error);
+}
+
+.field[data-invalid="true"] input,
+.field[data-invalid="true"] select,
+.field[data-invalid="true"] textarea {
+  border-color: var(--a-color-error) !important;
+  background-color: var(--a-color-error-light);
+  outline: none;
+}
+
+.field[data-invalid="true"] .error-message {
+  font-size: var(--a-font-size-s);
+  font-weight: var(--a-font-weight-medium);
+  color: var(--a-color-error);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--a-space-xs);
+  margin-top: var(--a-space-xs);
+}
+
+.field[data-focused="true"] {
+  outline: var(--focus-outline-width) solid var(--a-color-primary);
+  outline-offset: var(--focus-outline-offset);
+  border-radius: var(--a-border-radius-sm);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: var(--a-space-m);
+  border: 1px solid var(--a-color-outline);
+  border-radius: var(--a-border-radius-base);
+  background-color: var(--a-color-surface);
+  color: var(--a-color-on-surface);
+  font-family: inherit;
+  font-size: inherit;
+  transition: border-color var(--a-transition-base), box-shadow var(--a-transition-base);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--a-color-primary);
+  box-shadow: 0 0 0 3px var(--a-color-primary-container);
+  outline: none;
+}
+
+/* RESPONSIVE TABS FIX - Mobile Support */
+@media (max-width: 768px) {
+  .tabs > menu[role="tablist"],
+  .tab-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--a-space-xs);
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .tabs > menu[role="tablist"] a,
+  .tab-list a {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabs > menu[role="tablist"],
+  .tab-list {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .tabs > menu[role="tablist"] a,
+  .tab-list a {
+    padding: var(--a-space-s) var(--a-space-m);
+    font-size: var(--a-font-size-s);
+  }
+}

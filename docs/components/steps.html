@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Steps Component - AXIOM01</title>
+	<link rel="stylesheet" href="../../css/axiom.min.css">
+	<link rel="stylesheet" href="../../css/axicons.css">
+</head>
+<body>
+
+<header class="main">
+	<nav role="navigation" aria-label="Main Navigation">
+		<a href="index.html" class="brand">AXIOM<span class="primary">01</span></a>
+		<ul class="links">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="components-overview.html">Components</a></li>
+		</ul>
+		<div class="actions">
+			<button class="search" aria-label="Search" title="Search"><span class="axicon render" data-name="Search"></span></button>
+			<button class="theme" aria-label="Toggle theme" title="Toggle theme"><span class="axicon render" data-name="Moon"></span></button>
+			<button class="menu toggle" aria-label="Toggle menu" title="Toggle menu"><span class="axicon render" data-name="Menu"></span></button>
+		</div>
+	</nav>
+</header>
+
+<main>
+	<article class="container">
+		<header>
+			<h1>Steps Component</h1>
+			<p>Multi-step wizards for user workflows, form progressions, and sequential processes. Visual indicator of progress through a series of steps.</p>
+		</header>
+
+		<section>
+			<h2>Basic Steps</h2>
+			<div class="steps">
+				<span data-active="true">
+					<i>1</i>
+					<span>Step One</span>
+				</span>
+				<span>
+					<i>2</i>
+					<span>Step Two</span>
+				</span>
+				<span>
+					<i>3</i>
+					<span>Step Three</span>
+				</span>
+				<span>
+					<i>4</i>
+					<span>Complete</span>
+				</span>
+			</div>
+		</section>
+
+		<section>
+			<h2>Steps with Completed State</h2>
+			<div class="steps">
+				<span data-completed="true">
+					<i>✓</i>
+					<span>Step One</span>
+				</span>
+				<span data-completed="true">
+					<i>✓</i>
+					<span>Step Two</span>
+				</span>
+				<span data-active="true">
+					<i>3</i>
+					<span>Step Three</span>
+				</span>
+				<span>
+					<i>4</i>
+					<span>Complete</span>
+				</span>
+			</div>
+		</section>
+
+		<section>
+			<h2>Interactive Steps</h2>
+			<p>Click any step to change the active state:</p>
+			<div class="steps" id="interactive-steps">
+				<span data-active="true">
+					<i>1</i>
+					<span>Personal Info</span>
+				</span>
+				<span>
+					<i>2</i>
+					<span>Address</span>
+				</span>
+				<span>
+					<i>3</i>
+					<span>Payment</span>
+				</span>
+				<span>
+					<i>4</i>
+					<span>Confirm</span>
+				</span>
+			</div>
+			<p style="margin-top: var(--a-space-l); font-size: var(--a-font-size-s); color: var(--a-color-text-muted);">Current step: <strong>1</strong> (Personal Info)</p>
+		</section>
+
+		<section>
+			<h2>CSS Structure</h2>
+			<p>The steps component uses semantic HTML with AXIOM01 design tokens:</p>
+			<pre><code>&lt;div class="steps"&gt;
+  &lt;span data-active="true"&gt;
+    &lt;i&gt;1&lt;/i&gt;
+    &lt;span&gt;Step One&lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span&gt;
+    &lt;i&gt;2&lt;/i&gt;
+    &lt;span&gt;Step Two&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+		</section>
+
+		<section>
+			<h2>JavaScript API</h2>
+			<p>Use the <code>window.Axiom.setActiveStep()</code> method to control steps programmatically:</p>
+			<pre><code>// Set step 2 as active
+const stepsContainer = document.querySelector('.steps');
+window.Axiom.setActiveStep(stepsContainer, 1); // 0-based index
+
+// Listen for step changes
+stepsContainer.addEventListener('axiomStepChange', (e) => {
+  console.log('Active step:', e.detail.activeIndex);
+});</code></pre>
+		</section>
+
+		<section>
+			<h2>Data Attributes</h2>
+			<ul>
+				<li><code>data-active="true"</code> - Marks the currently active step</li>
+				<li><code>data-completed="true"</code> - Marks a completed step (displays checkmark or completed state)</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Design Tokens Used</h2>
+			<ul>
+				<li><code>--a-space-l</code> - Gap between steps</li>
+				<li><code>--a-space-s</code> - Gap between icon and label</li>
+				<li><code>--a-space-xl</code> - Step circle size</li>
+				<li><code>--a-font-weight-medium</code> - Step label weight</li>
+				<li><code>--a-color-primary</code> - Active step color</li>
+				<li><code>--a-color-success</code> - Completed step color</li>
+				<li><code>--a-transition-base</code> - Smooth state transitions</li>
+			</ul>
+		</section>
+
+	</article>
+</main>
+
+<footer class="footer">
+	<div class="container">
+		<div class="footer-content">
+			<div class="footer-brand">
+				<a href="index.html" class="footer-brand-logo">AXIOM<span class="primary">01</span></a>
+				<p class="footer-tagline">Semantic-first UI framework for modern web applications.</p>
+			</div>
+			<div class="footer-column">
+				<h4>Components</h4>
+				<ul>
+					<li><a href="components-overview.html">All Components</a></li>
+					<li><a href="components/steps.html">Steps</a></li>
+					<li><a href="components/hierarchy.html">Hierarchy</a></li>
+					<li><a href="components/popover.html">Popover</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Documentation</h4>
+				<ul>
+					<li><a href="styling-guide.html">Styling Guide</a></li>
+					<li><a href="layout-advanced.html">Layout</a></li>
+					<li><a href="accessibility.html">Accessibility</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Resources</h4>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="index.html#icons">Icons</a></li>
+					<li><a href="index.html#tokens">Design Tokens</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p class="footer-copyright">&copy; 2024 AXIOM01. All rights reserved.</p>
+			<ul class="footer-social">
+				<li><a href="index.html" aria-label="GitHub">→</a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+
+<script src="../../js/axiom.min.js"></script>
+<script src="../../js/axicons-loader.js"></script>
+<script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-thin-variants.js"></script>
+<script src="../../js/axicons-inverted-variants.js"></script>
+<script src="../../js/axicons-color-variants.js"></script>
+<script src="../../js/axicons-premium-variants.js"></script>
+<script src="../../js/render-icons.js"></script>
+<script>
+  function renderAxicons() {
+    if (typeof axicons === 'undefined') {
+      setTimeout(renderAxicons, 100);
+      return;
+    }
+    document.querySelectorAll('.axicon.render').forEach(el => {
+      const name = el.getAttribute('data-name');
+      if (!name) return;
+      const icon = axicons.find(i => i.name === name);
+      if (icon) {
+        el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderAxicons);
+  } else {
+    renderAxicons();
+  }
+  setTimeout(renderAxicons, 500);
+</script>
+<script>
+  // Update step label when step changes
+  const stepsContainer = document.querySelector('#interactive-steps');
+  const stepLabels = ['Personal Info', 'Address', 'Payment', 'Confirm'];
+  
+  stepsContainer.addEventListener('axiomStepChange', (e) => {
+    const currentStep = document.querySelector('p strong');
+    if (currentStep) {
+      currentStep.textContent = (e.detail.activeIndex + 1) + ' (' + stepLabels[e.detail.activeIndex] + ')';
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -11,14 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper function to update the theme toggle button icon
     const updateThemeToggleButtonIcon = (themeName) => {
-        const themeToggle = document.getElementById('theme-toggle'); // Corrected ID
+        const themeToggle = document.getElementById('theme-toggle');
         if (themeToggle) {
-            const icon = themeToggle.querySelector('i');
+            const icon = themeToggle.querySelector('.axicon');
             if (icon) {
                 if (themeName === 'dark') {
-                    icon.classList.replace('fa-moon', 'fa-sun');
+                    icon.setAttribute('data-name', 'Sun');
                 } else {
-                    icon.classList.replace('fa-sun', 'fa-moon');
+                    icon.setAttribute('data-name', 'Moon');
+                }
+                // Re-render the icon
+                if (typeof renderAxicons === 'function') {
+                    setTimeout(renderAxicons, 0);
                 }
             }
         }
@@ -26,20 +30,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 2. Theme Toggling (Header Toggle Button)
     const initHeaderThemeToggle = () => {
-        const themeToggle = document.getElementById('theme-toggle'); // Corrected ID
+        const themeToggle = document.getElementById('theme-toggle');
         const htmlElement = document.documentElement;
 
-        // Set initial theme from localStorage or default to 'light'
-        const currentTheme = localStorage.getItem('theme') || 'light';
+        // Check system preference if no saved theme
+        let currentTheme = localStorage.getItem('theme');
+        if (!currentTheme) {
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            currentTheme = prefersDark ? 'dark' : 'light';
+        }
+        
         applyTheme(currentTheme);
-        updateThemeToggleButtonIcon(currentTheme); // Use helper for initial icon
+        updateThemeToggleButtonIcon(currentTheme);
 
         if (themeToggle) {
             themeToggle.addEventListener('click', () => {
                 const modeInDOM = htmlElement.getAttribute("data-theme") || "light";
                 const newTheme = modeInDOM === "light" ? 'dark' : 'light';
                 applyTheme(newTheme);
-                updateThemeToggleButtonIcon(newTheme); // Use helper for click icon update
+                updateThemeToggleButtonIcon(newTheme);
 
                 // Update theme explorer select if it exists
                 const themeSelect = document.getElementById('theme-select');
