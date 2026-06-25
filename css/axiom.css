@@ -1319,7 +1319,16 @@ h6 {
     color: var(--ax-text);
 }
 
-/* --- Button Component --- */
+/* Remove actions top spacing - handled by sibling cascade */
+.actions { display: flex; justify-content: center; gap: var(--a-space-m); flex-wrap: wrap; }
+
+/* Philosophy section styling */
+section > div[style*="max-width: 900px"] { max-width: 900px; text-align: center; }
+section:has(> div > article.card:first-child) { background: linear-gradient(135deg, var(--a-color-primary-container) 0%, var(--a-color-secondary-container) 100%); }
+section:has(> div > article.card:first-child) article.card main { padding: var(--a-space-2xl); }
+
+/* Hero actions - handled by sibling cascade for margin */
+section.hero .actions { margin: var(--a-space-l) 0 0 0; }
 .button, button {
     padding: var(--a-space-s) var(--a-space-m); /* Default (medium) padding */
     font-size: var(--a-font-size-base); /* Default (medium) font size */
@@ -6421,6 +6430,60 @@ p:last-child {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== FLUID TYPOGRAPHY SCALES (clamp-based) ===== */
+h1 { font-size: clamp(2rem, 5.5vw, 3.5rem); line-height: 1.15; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.6rem, 4.5vw, 2.5rem); line-height: 1.2; }
+h3 { font-size: clamp(1.3rem, 3.5vw, 1.85rem); line-height: 1.25; }
+
+/* ===== ADJACENT SIBLING CASCADE ===== */
+main > * + *, section > * + *, article > * + *, .stack > * + * { margin-top: var(--a-space-l, 1.85rem); }
+h1 + p, h2 + p, h3 + p, header + p, header + .group, header + .grid, header + .swatch { margin-top: var(--a-space-m, 1rem); }
+
+/* ===== CLASSLESS SWATCH COMPONENT ===== */
+.swatch { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: var(--a-space-l); width: 100%; }
+.swatch figure { margin: 0; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; border: 1px solid var(--a-color-outline); }
+.swatch figure div { aspect-ratio: 4 / 3; width: 100%; }
+.swatch figcaption { padding: 0.5rem; font-size: 0.85rem; font-weight: 600; text-align: center; }
+.swatch figure .primary { background-color: var(--a-color-primary); }
+.swatch figure .base { background-color: var(--a-color-surface); }
+.swatch figure .dark { background-color: var(--a-color-on-surface); }
+.swatch figure .success { background-color: var(--a-color-success); }
+.swatch figure .error { background-color: var(--a-color-error); }
+
+/* ===== PROGRESS & SKELETON ===== */
+progress { width: 100%; height: 1rem; border: 1px solid var(--a-color-outline); border-radius: var(--a-border-radius-medium); background-color: var(--a-color-surface-variant); }
+progress::-webkit-progress-value { background-color: var(--a-color-primary); }
+progress::-moz-progress-bar { background-color: var(--a-color-primary); }
+.skeleton { background: linear-gradient(90deg, var(--a-color-surface-variant) 25%, var(--a-color-surface) 50%, var(--a-color-surface-variant) 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; border-radius: var(--a-border-radius-medium); }
+@keyframes skeleton-loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ===== TOGGLE SWITCHES ===== */
+label.toggle-switch { display: flex; align-items: center; gap: var(--a-space-m); cursor: pointer; user-select: none; }
+label.toggle-switch input[type="checkbox"] { appearance: none; width: 48px; height: 28px; background-color: var(--a-color-outline); border: none; border-radius: 999px; cursor: pointer; position: relative; transition: background-color 0.3s; }
+label.toggle-switch input[type="checkbox"]::before { content: ''; position: absolute; width: 24px; height: 24px; background-color: white; border-radius: 50%; top: 2px; left: 2px; transition: left 0.3s; }
+label.toggle-switch input[type="checkbox"]:checked { background-color: var(--a-color-primary); }
+label.toggle-switch input[type="checkbox"]:checked::before { left: 22px; }
+
+/* ===== SEGMENTED CONTROL ===== */
+.segmented-control { display: flex; border: 1px solid var(--a-color-outline); border-radius: var(--a-border-radius-medium); overflow: hidden; background-color: var(--a-color-surface-variant); }
+.segmented-control input[type="radio"] { display: none; }
+.segmented-control label { flex: 1; padding: var(--a-space-s) var(--a-space-m); text-align: center; cursor: pointer; background-color: var(--a-color-surface-variant); color: var(--a-color-on-surface-variant); font-weight: var(--a-font-weight-bold); transition: all 0.2s; border-right: 1px solid var(--a-color-outline); }
+.segmented-control label:last-child { border-right: none; }
+.segmented-control input[type="radio"]:checked + label { background-color: var(--a-color-primary); color: var(--a-color-on-primary); }
+
+/* ===== TIMELINE ===== */
+ol.timeline { list-style: none; padding: 0; margin: var(--a-space-l) 0; position: relative; padding-left: 30px; }
+ol.timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--a-color-outline); }
+ol.timeline li { margin-bottom: var(--a-space-l); position: relative; }
+ol.timeline li::before { content: ''; position: absolute; left: -19px; top: 0.25rem; width: 12px; height: 12px; background: var(--a-color-primary); border-radius: 50%; border: 3px solid var(--a-color-surface); }
+ol.timeline li strong { display: block; font-weight: var(--a-font-weight-bold); margin-bottom: var(--a-space-xs); }
+ol.timeline li p { margin: 0; line-height: 1.6; }
+
+/* ===== DATA-TOOLTIP ===== */
+[data-tooltip] { position: relative; }
+[data-tooltip]::before { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-0.5rem); padding: 0.5rem 0.75rem; font-size: 0.875rem; background-color: var(--a-color-on-surface); color: var(--a-color-surface); border-radius: var(--a-border-radius-medium); opacity: 0; visibility: hidden; transition: opacity 0.15s, transform 0.15s; pointer-events: none; white-space: nowrap; z-index: 1070; }
+[data-tooltip]:hover::before { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-0.75rem); }
 
 /* ===== FADE ANIMATIONS ===== */
 @keyframes fadeIn {
