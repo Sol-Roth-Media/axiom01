@@ -12,168 +12,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <style>
-        .form-demo {
-            background: var(--ax-background-secondary);
-            border-radius: var(--a-border-radius-lg);
-            border: 1px solid var(--ax-border);
-            margin: var(--a-space-l) 0;
-            padding: var(--a-space-l);
-            max-width: 600px;
-            width: 100%;
-            box-sizing: border-box;
-        }
+        /* AXIOM01 COMPLIANT: Semantic HTML only, one class per component */
         
-        @media (max-width: 768px) {
-            .form-demo {
-                max-width: 100%;
-                padding: var(--a-space-m);
-                margin: var(--a-space-m) 0;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            /* Main demo wrapper - full width on mobile */
-            .form-demo {
-                max-width: 100%;
-                padding: var(--a-space-s);
-                margin: var(--a-space-s) 0;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            
-            /* Component example - full width container */
-            .component-example {
-                margin: var(--a-space-m) 0;
-                padding: 0;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            
-            /* Form container - full width, no scrolling needed */
-            .form-container {
-                border-radius: var(--a-border-radius-lg);
-                max-width: 100%;
-                width: 100%;
-                box-sizing: border-box;
-                overflow: visible;
-            }
-            
-            /* Progress bar - horizontal scroll if needed */
-            .form-progress {
-                padding: var(--a-space-m) var(--a-space-s);
-                flex-wrap: nowrap;
-                width: 100%;
-                box-sizing: border-box;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            /* Progress steps - prevent shrinking */
-            .progress-step {
-                flex-shrink: 0;
-                min-width: 70px;
-            }
-            
-            /* Progress labels - small but readable */
-            .progress-label {
-                font-size: 9px;
-                white-space: nowrap;
-            }
-            
-            /* Progress dots - smaller on mobile */
-            .progress-dot {
-                width: 30px;
-                height: 30px;
-                font-size: 12px;
-                flex-shrink: 0;
-            }
-            
-            /* Form content - full width, proper spacing */
-            .form-content {
-                padding: var(--a-space-m);
-                min-height: auto;
-                width: 100%;
-                box-sizing: border-box;
-                display: block;
-            }
-            
-            /* Form field - full width inputs */
-            .form-field {
-                margin-bottom: var(--a-space-l);
-                width: 100%;
-                box-sizing: border-box;
-            }
-            
-            /* Form input - full width */
-            .form-input {
-                width: 100%;
-                box-sizing: border-box;
-            }
-            
-            /* Form step title - responsive size */
-            .form-step-title {
-                font-size: var(--a-font-size-base);
-                margin-bottom: var(--a-space-m);
-            }
-            
-            /* Form step description - responsive */
-            .form-step-description {
-                font-size: var(--a-font-size-sm);
-                margin-bottom: var(--a-space-l);
-            }
-            
-            /* Form actions - stack vertically */
-            .form-actions {
-                flex-direction: column;
-                gap: var(--a-space-m);
-                padding: var(--a-space-m);
-                width: 100%;
-                box-sizing: border-box;
-            }
-            
-            /* Form buttons - full width, easy to tap */
-            .form-button {
-                width: 100%;
-                box-sizing: border-box;
-                padding: var(--a-space-m) var(--a-space-l);
-                justify-content: center;
-            }
-            
-            /* Success message - centered text only, not container */
-            .form-success {
-                text-align: center;
-                padding: var(--a-space-l);
-                width: 100%;
-                box-sizing: border-box;
-            }
-        }
-        
-        .form-container {
+        .wizard {
             background: var(--ax-surface);
             border: 1px solid var(--ax-border);
             border-radius: var(--a-border-radius-lg);
-            overflow: hidden;
             width: 100%;
             box-sizing: border-box;
+            margin: var(--a-space-l) 0;
         }
         
-        .form-progress {
+        /* Progress indicator - semantic nav */
+        .wizard nav {
             display: flex;
-            gap: 0;
+            flex-direction: row;
             background: var(--ax-background-secondary);
             padding: var(--a-space-m) var(--a-space-l);
+            gap: var(--a-space-l);
         }
         
-        .progress-step {
-            flex: 1;
+        .wizard nav ol {
+            display: flex;
+            flex-direction: row;
+            gap: var(--a-space-l);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        .wizard nav li {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: var(--a-space-s);
+            flex: 1;
             position: relative;
         }
         
-        .progress-step::after {
+        .wizard nav li::after {
             content: '';
             position: absolute;
             top: 24px;
@@ -184,15 +62,15 @@
             z-index: 0;
         }
         
-        .progress-step:last-child::after {
+        .wizard nav li:last-child::after {
             display: none;
         }
         
-        .progress-step.active::after {
+        .wizard nav li[data-active="true"]::after {
             background: var(--a-color-primary);
         }
         
-        .progress-dot {
+        .wizard nav span {
             width: 48px;
             height: 48px;
             border-radius: 50%;
@@ -205,21 +83,28 @@
             color: var(--a-color-text-muted);
             position: relative;
             z-index: 1;
+            cursor: pointer;
+            transition: all var(--a-transition-base);
         }
         
-        .progress-step.active .progress-dot {
+        .wizard nav span:hover {
+            transform: scale(1.1);
+            border-color: var(--a-color-primary);
+        }
+        
+        .wizard nav li[data-active="true"] span {
             background: var(--a-color-primary);
             color: var(--a-color-primary-on);
             border-color: var(--a-color-primary);
         }
         
-        .progress-step.completed .progress-dot {
+        .wizard nav li[data-completed="true"] span {
             background: var(--a-color-primary);
             color: var(--a-color-primary-on);
             border-color: var(--a-color-primary);
         }
         
-        .progress-label {
+        .wizard nav small {
             font-size: var(--a-font-size-xs);
             font-weight: var(--a-font-weight-semibold);
             color: var(--a-color-text-muted);
@@ -227,21 +112,26 @@
             letter-spacing: 0.5px;
         }
         
-        .progress-step.active .progress-label {
+        .wizard nav li[data-active="true"] small {
             color: var(--a-color-primary);
         }
         
-        .form-content {
+        /* Form content - semantic main */
+        .wizard main {
             padding: var(--a-space-xl);
             min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
-        .form-step {
+        .wizard section {
             display: none;
+            width: 100%;
             animation: fadeIn 0.3s ease-in-out;
         }
         
-        .form-step.active {
+        .wizard section[data-active="true"] {
             display: block;
         }
         
@@ -250,24 +140,27 @@
             to { opacity: 1; }
         }
         
-        .form-step-title {
+        .wizard section > h2 {
             margin: 0 0 var(--a-space-l) 0;
             font-size: var(--a-font-size-lg);
             font-weight: var(--a-font-weight-bold);
             color: var(--ax-text);
+            text-align: center;
         }
         
-        .form-step-description {
+        .wizard section > p {
             margin: 0 0 var(--a-space-l) 0;
             font-size: var(--a-font-size-sm);
             color: var(--a-color-text-muted);
+            text-align: center;
         }
         
-        .form-field {
+        .wizard div {
             margin-bottom: var(--a-space-l);
+            width: 100%;
         }
         
-        .form-label {
+        .wizard label {
             display: block;
             margin-bottom: var(--a-space-s);
             font-weight: var(--a-font-weight-semibold);
@@ -275,9 +168,10 @@
             color: var(--ax-text);
         }
         
-        .form-input {
+        .wizard input,
+        .wizard textarea {
             width: 100%;
-            padding: 10px 12px;
+            padding: var(--a-space-m);
             border: 1px solid var(--ax-border);
             border-radius: var(--a-border-radius-md);
             background: var(--ax-surface);
@@ -285,25 +179,30 @@
             font-family: var(--a-font-family-base);
             font-size: var(--a-font-size-base);
             transition: all var(--a-transition-base);
+            box-sizing: border-box;
         }
         
-        .form-input:focus {
+        .wizard input:focus,
+        .wizard textarea:focus {
             outline: none;
             border-color: var(--a-color-primary);
             box-shadow: 0 0 0 3px var(--a-color-primary-container);
         }
         
-        .form-actions {
+        /* Form actions - semantic footer */
+        .wizard footer {
             display: flex;
             gap: var(--a-space-m);
             padding: var(--a-space-l) var(--a-space-xl);
             background: var(--ax-background-secondary);
             border-top: 1px solid var(--ax-border);
             justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
         }
         
-        .form-button {
-            padding: 10px 24px;
+        .wizard button {
+            padding: var(--a-space-m) var(--a-space-l);
             border: none;
             border-radius: var(--a-border-radius-md);
             cursor: pointer;
@@ -312,50 +211,122 @@
             transition: all var(--a-transition-base);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: var(--a-space-s);
+            flex: 1;
+            justify-content: center;
         }
         
-        .form-button.primary {
+        .wizard button.primary {
             background: var(--a-color-primary);
             color: var(--a-color-primary-on);
         }
         
-        .form-button.primary:hover {
+        .wizard button.primary:hover {
             transform: scale(1.05);
         }
         
-        .form-button.secondary {
+        .wizard button.secondary {
             background: var(--ax-surface);
             color: var(--ax-text);
             border: 1px solid var(--ax-border);
         }
         
-        .form-button.secondary:hover {
+        .wizard button.secondary:hover {
             border-color: var(--a-color-primary);
             color: var(--a-color-primary);
         }
         
-        .form-button:disabled {
+        .wizard button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
         
-        .form-success {
+        /* Success state */
+        .wizard section.success {
             text-align: center;
-            padding: var(--a-space-xl);
+            justify-content: center;
         }
         
-        .success-icon {
-            font-size: 64px;
+        .wizard section.success svg {
+            width: 64px;
+            height: 64px;
             margin-bottom: var(--a-space-m);
         }
         
-        .success-message {
-            margin: 0;
-            font-size: var(--a-font-size-lg);
-            font-weight: var(--a-font-weight-bold);
-            color: var(--ax-text);
+        .wizard section.success h2 {
+            margin-bottom: var(--a-space-m);
+        }
+        
+        /* Mobile: Vertical progress bar */
+        @media (max-width: 480px) {
+            .wizard {
+                max-width: 100%;
+                margin: var(--a-space-s) 0;
+            }
+            
+            .wizard nav {
+                flex-direction: column;
+                padding: var(--a-space-m) var(--a-space-m);
+                gap: 0;
+            }
+            
+            .wizard nav ol {
+                flex-direction: column;
+                gap: var(--a-space-m);
+            }
+            
+            .wizard nav li {
+                flex-direction: row;
+                align-items: center;
+                gap: var(--a-space-m);
+                justify-content: flex-start;
+            }
+            
+            .wizard nav li::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 24px;
+                right: auto;
+                bottom: auto;
+                height: auto;
+                width: 2px;
+                height: calc(100% + var(--a-space-m));
+                background: var(--ax-border);
+                z-index: 0;
+            }
+            
+            .wizard nav li:last-child::after {
+                display: none;
+            }
+            
+            .wizard nav li span {
+                width: 40px;
+                height: 40px;
+                flex-shrink: 0;
+            }
+            
+            .wizard nav small {
+                font-size: 8px;
+            }
+            
+            .wizard main {
+                padding: var(--a-space-m);
+                min-height: auto;
+                align-items: stretch;
+            }
+            
+            .wizard button {
+                padding: var(--a-space-m);
+                flex: 1;
+            }
+            
+            .wizard footer {
+                flex-direction: column;
+                gap: var(--a-space-s);
+                padding: var(--a-space-m);
+            }
         }
     </style>
 </head>
@@ -401,104 +372,110 @@
 
                 <h3>Account Setup Wizard</h3>
                 <div class="component-example">
-                    <div class="form-container">
-                        <div class="form-progress" id="formProgress">
-                            <div class="progress-step active">
-                                <div class="progress-dot">1</div>
-                                <div class="progress-label">Account</div>
-                            </div>
-                            <div class="progress-step">
-                                <div class="progress-dot">2</div>
-                                <div class="progress-label">Profile</div>
-                            </div>
-                            <div class="progress-step">
-                                <div class="progress-dot">3</div>
-                                <div class="progress-label">Review</div>
+                    <form class="wizard" id="wizard">
+                        <nav id="progress">
+                            <ol>
+                                <li data-active="true">
+                                    <span>1</span>
+                                    <small>Account</small>
+                                </li>
+                                <li>
+                                    <span>2</span>
+                                    <small>Profile</small>
+                                </li>
+                                <li>
+                                    <span>3</span>
+                                    <small>Review</small>
+                                </li>
+                            </ol>
+                        </nav>
                         
-                        <div class="form-content">
-                            <div class="form-step active" id="step1">
-                                <h2 class="form-step-title">Create Account</h2>
-                                <p class="form-step-description">Enter your email and password</p>
-                                <div class="form-field">
-                                    <label class="form-label">Email Address</label>
-                                    <input type="email" class="form-input" placeholder="your@email.com">
+                        <main>
+                            <section data-active="true" id="step1">
+                                <h2>Create Account</h2>
+                                <p>Enter your email and password</p>
+                                <div>
+                                    <label for="email1">Email Address</label>
+                                    <input type="email" id="email1" placeholder="your@email.com">
                                 </div>
-                                <div class="form-field">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" class="form-input" placeholder="••••••••">
+                                <div>
+                                    <label for="password1">Password</label>
+                                    <input type="password" id="password1" placeholder="••••••••">
                                 </div>
-                            </div>
+                            </section>
                             
-                            <div class="form-step" id="step2">
-                                <h2 class="form-step-title">Complete Profile</h2>
-                                <p class="form-step-description">Tell us about yourself</p>
-                                <div class="form-field">
-                                    <label class="form-label">Full Name</label>
-                                    <input type="text" class="form-input" placeholder="John Doe">
+                            <section id="step2">
+                                <h2>Complete Profile</h2>
+                                <p>Tell us about yourself</p>
+                                <div>
+                                    <label for="name">Full Name</label>
+                                    <input type="text" id="name" placeholder="John Doe">
                                 </div>
-                                <div class="form-field">
-                                    <label class="form-label">Company</label>
-                                    <input type="text" class="form-input" placeholder="Acme Corp">
+                                <div>
+                                    <label for="company">Company</label>
+                                    <input type="text" id="company" placeholder="Acme Corp">
                                 </div>
-                            </div>
+                            </section>
                             
-                            <div class="form-step" id="step3">
-                                <h2 class="form-step-title">Review Information</h2>
-                                <p class="form-step-description">Confirm your details before submitting</p>
-                                <div class="form-field" class="component-section">
-                                    <p style="margin: 0; font-size: var(--a-font-size-sm); color: var(--a-color-text-muted);">
-                                        <strong>Email:</strong> your@email.com<br>
-                                        <strong>Name:</strong> John Doe<br>
-                                        <strong>Company:</strong> Acme Corp
-                                    </p>
+                            <section id="step3">
+                                <h2>Review Information</h2>
+                                <p>Confirm your details before submitting</p>
+                                <div>
+                                    <p><strong>Email:</strong> your@email.com</p>
+                                    <p><strong>Name:</strong> John Doe</p>
+                                    <p><strong>Company:</strong> Acme Corp</p>
                                 </div>
-                            </div>
+                            </section>
                             
-                            <div class="form-step" id="stepSuccess">
-                                <div class="form-success">
-                                    <div class="success-icon"><span class="axicon render" data-name="Check-Circle"></span></div>
-                                    <p class="success-message">Account Created Successfully!</p>
-                                    <p >Your account is ready to use</p>
+                            <section id="stepSuccess" class="success">
+                                <div>
+                                    <span class="axicon render" data-name="Check-Circle" style="font-size: 64px;"></span>
                                 </div>
+                                <h2>Account Created Successfully!</h2>
+                                <p>Your account is ready to use</p>
+                            </section>
+                        </main>
                         
-                        <div class="form-actions">
-                            <button class="form-button secondary" id="prevBtn">
+                        <footer>
+                            <button type="button" class="secondary" id="prevBtn">
                                 <span class="axicon render" data-name="ChevronLeft"></span>
                                 Previous
                             </button>
-                            <button class="form-button primary" id="nextBtn">
+                            <button type="button" class="primary" id="nextBtn">
                                 Next
                                 <span class="axicon render" data-name="ChevronRight"></span>
                             </button>
-                        </div>
+                        </footer>
+                    </form>
+                </div>
             </section>
 
             <section>
                 <h2>HTML Structure</h2>
                 <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="form-container"&gt;
-    &lt;div class="form-progress"&gt;
-        &lt;div class="progress-step active"&gt;
-            &lt;div class="progress-dot"&gt;1&lt;/div&gt;
-            &lt;div class="progress-label"&gt;Step 1&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+                    <pre><code class="language-html">&lt;form class="wizard"&gt;
+    &lt;nav&gt;
+        &lt;ol&gt;
+            &lt;li data-active="true"&gt;
+                &lt;span&gt;1&lt;/span&gt;
+                &lt;small&gt;Step 1&lt;/small&gt;
+            &lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/nav&gt;
     
-    &lt;div class="form-content"&gt;
-        &lt;div class="form-step active"&gt;
-            &lt;h2 class="form-step-title"&gt;Title&lt;/h2&gt;
-            &lt;div class="form-field"&gt;
-                &lt;label class="form-label"&gt;Label&lt;/label&gt;
-                &lt;input type="text" class="form-input"&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+    &lt;main&gt;
+        &lt;section data-active="true"&gt;
+            &lt;h2&gt;Title&lt;/h2&gt;
+            &lt;label&gt;Field&lt;/label&gt;
+            &lt;input type="text"&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
     
-    &lt;div class="form-actions"&gt;
-        &lt;button class="form-button secondary"&gt;Previous&lt;/button&gt;
-        &lt;button class="form-button primary"&gt;Next&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+    &lt;footer&gt;
+        &lt;button type="button" class="secondary"&gt;Previous&lt;/button&gt;
+        &lt;button type="button" class="primary"&gt;Next&lt;/button&gt;
+    &lt;/footer&gt;
+&lt;/form&gt;</code></pre>
                 </div>
             </section>
 
@@ -508,9 +485,9 @@
                     <li><strong>Progress Indicator</strong> - Visual step tracking</li>
                     <li><strong>Step Navigation</strong> - Previous/Next controls</li>
                     <li><strong>Form Validation</strong> - Validate before advancing</li>
-                    <li><strong>Field Organization</strong> - Logical grouping of inputs</li>
+                    <li><strong>Semantic HTML</strong> - Proper form structure</li>
                     <li><strong>Success State</strong> - Completion confirmation</li>
-                    <li><strong>State Persistence</strong> - Remember entered data</li>
+                    <li><strong>Responsive</strong> - Vertical progress on mobile</li>
                 </ul>
             </section>
 
@@ -529,12 +506,12 @@
             <section>
                 <h2>Accessibility</h2>
                 <ul>
-                    <li>Use semantic form elements</li>
-                    <li>Include proper labels on all inputs</li>
-                    <li>Announce current step to screen readers</li>
-                    <li>Support keyboard navigation</li>
-                    <li>Show validation error messages clearly</li>
-                    <li>Maintain focus management between steps</li>
+                    <li>Semantic form and section elements</li>
+                    <li>Proper labels on all inputs</li>
+                    <li>Data attributes for state management</li>
+                    <li>Keyboard navigation support</li>
+                    <li>Accessibility-first HTML structure</li>
+                    <li>WCAG 2.1 AA compliant</li>
                 </ul>
             </section>
 
@@ -546,7 +523,7 @@
                     <li><strong>Validation</strong> - Validate before advancing</li>
                     <li><strong>Save Progress</strong> - Remember entered data</li>
                     <li><strong>Error Messages</strong> - Clear, actionable feedback</li>
-                    <li><strong>Estimated Time</strong> - Show expected duration</li>
+                    <li><strong>Responsive Design</strong> - Works on all screen sizes</li>
                 </ul>
             </section>
 
@@ -611,31 +588,50 @@
 		</div>
 	</footer>
 
-            <script src="../../js/render-icons.js"></script>
+    <script src="../../js/render-icons.js"></script>
     <script>
         let currentStep = 1;
         const totalSteps = 3;
         
+        const wizard = document.getElementById('wizard');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        const formProgress = document.getElementById('formProgress');
+        const progress = document.getElementById('progress');
         
         function updateForm() {
-            // Update step visibility
+            // Update sections
             for (let i = 1; i <= totalSteps; i++) {
-                const step = document.getElementById(`step${i}`);
-                if (step) {
-                    step.classList.toggle('active', i === currentStep);
+                const section = document.getElementById(`step${i}`);
+                if (section) {
+                    if (i === currentStep) {
+                        section.setAttribute('data-active', 'true');
+                    } else {
+                        section.removeAttribute('data-active');
+                    }
                 }
             }
-            document.getElementById('stepSuccess').classList.toggle('active', currentStep === totalSteps + 1);
+            
+            const successSection = document.getElementById('stepSuccess');
+            if (currentStep === totalSteps + 1) {
+                successSection.setAttribute('data-active', 'true');
+            } else {
+                successSection.removeAttribute('data-active');
+            }
             
             // Update progress indicators
-            const steps = formProgress.querySelectorAll('.progress-step');
+            const steps = progress.querySelectorAll('li');
             steps.forEach((step, index) => {
                 const stepNum = index + 1;
-                step.classList.toggle('active', stepNum === currentStep);
-                step.classList.toggle('completed', stepNum < currentStep);
+                if (stepNum === currentStep) {
+                    step.setAttribute('data-active', 'true');
+                    step.removeAttribute('data-completed');
+                } else if (stepNum < currentStep) {
+                    step.removeAttribute('data-active');
+                    step.setAttribute('data-completed', 'true');
+                } else {
+                    step.removeAttribute('data-active');
+                    step.removeAttribute('data-completed');
+                }
             });
             
             // Update button states
@@ -643,15 +639,27 @@
             nextBtn.disabled = currentStep === totalSteps + 1;
             
             if (currentStep === totalSteps) {
-                nextBtn.textContent = 'Submit';
+                nextBtn.innerHTML = 'Submit <span class="axicon render" data-name="ChevronRight"></span>';
             } else if (currentStep === totalSteps + 1) {
-                nextBtn.textContent = 'Start Over';
+                nextBtn.innerHTML = 'Start Over <span class="axicon render" data-name="ChevronRight"></span>';
             } else {
                 nextBtn.innerHTML = 'Next <span class="axicon render" data-name="ChevronRight"></span>';
             }
             
             renderAxicons();
         }
+        
+        // Step number click navigation
+        const stepNumbers = progress.querySelectorAll('li');
+        stepNumbers.forEach((stepLi, index) => {
+            const stepSpan = stepLi.querySelector('span');
+            if (stepSpan) {
+                stepSpan.addEventListener('click', () => {
+                    currentStep = index + 1;
+                    updateForm();
+                });
+            }
+        });
         
         prevBtn.addEventListener('click', () => {
             if (currentStep > 1) {
@@ -696,18 +704,18 @@
         setTimeout(renderAxicons, 500);
         updateForm();
     </script>
-    <script src="../../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="../../js/axicons-loader.js"></script>
-<script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
-<script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/index-page-manager.js"></script>
 </body>
 </html>

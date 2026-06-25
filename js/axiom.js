@@ -453,17 +453,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('DOMContentLoaded', function() {
     initTheme();
 
-    // Theme toggle buttons (only on pages where index-page-manager isn't loaded)
-    const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname.endsWith('/');
-    if (!isIndexPage) {
-      const themeButtons = document.querySelectorAll('button.theme');
-      themeButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          toggleTheme();
-        });
-      });
-    }
+    // Theme toggle button listeners are handled by index-page-manager.js on all pages
   });
 
   // Expose to global for testing
