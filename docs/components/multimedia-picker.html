@@ -11,6 +11,65 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .media-thumbnail {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--a-color-background-secondary);
+            border: 1px solid var(--a-color-border);
+            border-radius: var(--a-border-radius-base);
+            font-size: 2.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .media-item:hover .media-thumbnail {
+            background: var(--a-color-primary-container);
+            border-color: var(--a-color-primary);
+            transform: translateY(-2px);
+        }
+
+        .media-item input[type="checkbox"]:checked ~ .media-info {
+            background: var(--a-color-primary-container);
+        }
+
+        .media-item input[type="checkbox"] {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .media-item {
+            position: relative;
+            padding: var(--a-space-m);
+            background: var(--a-color-background);
+            border: 1px solid var(--a-color-border);
+            border-radius: var(--a-border-radius-base);
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-s);
+        }
+
+        .media-info {
+            padding-top: var(--a-space-m);
+            border-top: 1px solid var(--a-color-border);
+            background: transparent;
+            border-radius: 0 0 var(--a-border-radius-base) var(--a-border-radius-base);
+            transition: all 0.2s ease;
+        }
+
+        .media-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--a-color-text);
+            word-break: break-word;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <!-- HEADER NAVIGATION -->
@@ -44,132 +103,189 @@
     <main><section><div class="container">
         <header>
             <h1>Multimedia Picker</h1>
-            <p class="text-muted">Semantic multimedia picker component for browsing and selecting media files. Uses tabbed interface for organization and multi-select with selection display in a cohesive container.</p>
+            <p class="text-muted">Semantic multimedia picker component with media previews, organized by type. Includes visual thumbnails for images, audio, and video files.</p>
         </header>
 
         <div class="component-section">
 
             <section>
-                <h2>Basic Multimedia Picker</h2>
+                <h2>Multimedia Picker with Previews</h2>
 
-                <article style="border: 1px solid var(--a-color-border); border-radius: var(--a-border-radius-base); padding: var(--a-space-l); background: var(--a-color-background);">
+                <div style="border: 2px solid var(--a-color-border); border-radius: var(--a-border-radius-base); padding: var(--a-space-l); background: var(--a-color-background); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                     <div role="region" aria-label="Media picker interface">
-                        <div role="tablist" aria-label="Media types">
+                        <!-- Tab Group -->
+                        <div role="tablist" aria-label="Media types" style="margin-bottom: var(--a-space-l);">
                             <button role="tab" aria-selected="true" aria-controls="images-panel" id="images-tab" class="button" data-variant="primary">
                                 <span class="axicon render" data-name="Image"></span>
-                                Images
+                                Images (6)
                             </button>
                             <button role="tab" aria-selected="false" aria-controls="videos-panel" id="videos-tab" class="button" data-variant="secondary">
                                 <span class="axicon render" data-name="Video"></span>
-                                Videos
+                                Videos (2)
                             </button>
                             <button role="tab" aria-selected="false" aria-controls="audio-panel" id="audio-tab" class="button" data-variant="secondary">
                                 <span class="axicon render" data-name="Music"></span>
-                                Audio
+                                Audio (2)
                             </button>
                         </div>
 
+                        <!-- Images Tab -->
                         <div id="images-panel" role="tabpanel" aria-labelledby="images-tab">
-                            <fieldset>
-                                <legend>Select Images</legend>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: var(--a-space-m);">
-                                    <label style="display: flex; flex-direction: column; align-items: center; gap: var(--a-space-s); cursor: pointer;">
-                                        <input type="checkbox" class="media-item" data-name="photo-001.jpg" style="cursor: pointer;">
-                                        <span style="font-size: 0.9rem; text-align: center;">photo-001.jpg</span>
+                            <fieldset style="border: none; padding: 0; margin: 0;">
+                                <legend style="font-weight: 600; margin-bottom: var(--a-space-m); font-size: 1.1rem;">Select Images</legend>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--a-space-m);">
+                                    <label class="media-item">
+                                        <div class="media-thumbnail">
+                                            <span class="axicon render" data-name="Image"></span>
+                                        </div>
+                                        <input type="checkbox" class="media-checkbox" data-name="photo-001.jpg" data-type="image">
+                                        <div class="media-info">
+                                            <div class="media-name">photo-001.jpg</div>
+                                        </div>
                                     </label>
-                                    <label style="display: flex; flex-direction: column; align-items: center; gap: var(--a-space-s); cursor: pointer;">
-                                        <input type="checkbox" class="media-item" data-name="photo-002.jpg" style="cursor: pointer;">
-                                        <span style="font-size: 0.9rem; text-align: center;">photo-002.jpg</span>
+                                    <label class="media-item">
+                                        <div class="media-thumbnail">
+                                            <span class="axicon render" data-name="Image"></span>
+                                        </div>
+                                        <input type="checkbox" class="media-checkbox" data-name="photo-002.jpg" data-type="image">
+                                        <div class="media-info">
+                                            <div class="media-name">photo-002.jpg</div>
+                                        </div>
                                     </label>
-                                    <label style="display: flex; flex-direction: column; align-items: center; gap: var(--a-space-s); cursor: pointer;">
-                                        <input type="checkbox" class="media-item" data-name="photo-003.jpg" style="cursor: pointer;">
-                                        <span style="font-size: 0.9rem; text-align: center;">photo-003.jpg</span>
+                                    <label class="media-item">
+                                        <div class="media-thumbnail">
+                                            <span class="axicon render" data-name="Image"></span>
+                                        </div>
+                                        <input type="checkbox" class="media-checkbox" data-name="photo-003.jpg" data-type="image">
+                                        <div class="media-info">
+                                            <div class="media-name">photo-003.jpg</div>
+                                        </div>
                                     </label>
-                                    <label style="display: flex; flex-direction: column; align-items: center; gap: var(--a-space-s); cursor: pointer;">
-                                        <input type="checkbox" class="media-item" data-name="photo-004.jpg" style="cursor: pointer;">
-                                        <span style="font-size: 0.9rem; text-align: center;">photo-004.jpg</span>
+                                    <label class="media-item">
+                                        <div class="media-thumbnail">
+                                            <span class="axicon render" data-name="Image"></span>
+                                        </div>
+                                        <input type="checkbox" class="media-checkbox" data-name="photo-004.jpg" data-type="image">
+                                        <div class="media-info">
+                                            <div class="media-name">photo-004.jpg</div>
+                                        </div>
                                     </label>
-                                    <label style="display: flex; flex-direction: column; align-items: center; gap: var(--a-space-s); cursor: pointer;">
-                                        <input type="checkbox" class="media-item" data-name="photo-005.jpg" style="cursor: pointer;">
-                                        <span style="font-size: 0.9rem; text-align: center;">photo-005.jpg</span>
+                                    <label class="media-item">
+                                        <div class="media-thumbnail">
+                                            <span class="axicon render" data-name="Image"></span>
+                                        </div>
+                                        <input type="checkbox" class="media-checkbox" data-name="photo-005.jpg" data-type="image">
+                                        <div class="media-info">
+                                            <div class="media-name">photo-005.jpg</div>
+                                        </div>
                                     </label>
-                                    <label style="display: flex; flex-direction: column; align-items: center; gap: var(--a-space-s); cursor: pointer;">
-                                        <input type="checkbox" class="media-item" data-name="photo-006.jpg" style="cursor: pointer;">
-                                        <span style="font-size: 0.9rem; text-align: center;">photo-006.jpg</span>
+                                    <label class="media-item">
+                                        <div class="media-thumbnail">
+                                            <span class="axicon render" data-name="Image"></span>
+                                        </div>
+                                        <input type="checkbox" class="media-checkbox" data-name="photo-006.jpg" data-type="image">
+                                        <div class="media-info">
+                                            <div class="media-name">photo-006.jpg</div>
+                                        </div>
                                     </label>
                                 </div>
                             </fieldset>
                         </div>
 
+                        <!-- Videos Tab -->
                         <div id="videos-panel" role="tabpanel" aria-labelledby="videos-tab" hidden>
-                            <fieldset>
-                                <legend>Select Videos</legend>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: var(--a-space-m);">
-                                    <label style="display: flex; flex-direction: column; align-items: center; gap: var(--a-space-s); cursor: pointer;">
-                                        <input type="checkbox" class="media-item" data-name="video-001.mp4" style="cursor: pointer;">
-                                        <span style="font-size: 0.9rem; text-align: center;">video-001.mp4</span>
+                            <fieldset style="border: none; padding: 0; margin: 0;">
+                                <legend style="font-weight: 600; margin-bottom: var(--a-space-m); font-size: 1.1rem;">Select Videos</legend>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--a-space-m);">
+                                    <label class="media-item">
+                                        <div class="media-thumbnail">
+                                            <span class="axicon render" data-name="Video"></span>
+                                        </div>
+                                        <input type="checkbox" class="media-checkbox" data-name="video-001.mp4" data-type="video">
+                                        <div class="media-info">
+                                            <div class="media-name">video-001.mp4</div>
+                                        </div>
                                     </label>
-                                    <label style="display: flex; flex-direction: column; align-items: center; gap: var(--a-space-s); cursor: pointer;">
-                                        <input type="checkbox" class="media-item" data-name="video-002.mp4" style="cursor: pointer;">
-                                        <span style="font-size: 0.9rem; text-align: center;">video-002.mp4</span>
+                                    <label class="media-item">
+                                        <div class="media-thumbnail">
+                                            <span class="axicon render" data-name="Video"></span>
+                                        </div>
+                                        <input type="checkbox" class="media-checkbox" data-name="video-002.mp4" data-type="video">
+                                        <div class="media-info">
+                                            <div class="media-name">video-002.mp4</div>
+                                        </div>
                                     </label>
                                 </div>
                             </fieldset>
                         </div>
 
+                        <!-- Audio Tab -->
                         <div id="audio-panel" role="tabpanel" aria-labelledby="audio-tab" hidden>
-                            <fieldset>
-                                <legend>Select Audio</legend>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: var(--a-space-m);">
-                                    <label style="display: flex; flex-direction: column; align-items: center; gap: var(--a-space-s); cursor: pointer;">
-                                        <input type="checkbox" class="media-item" data-name="audio-001.mp3" style="cursor: pointer;">
-                                        <span style="font-size: 0.9rem; text-align: center;">audio-001.mp3</span>
+                            <fieldset style="border: none; padding: 0; margin: 0;">
+                                <legend style="font-weight: 600; margin-bottom: var(--a-space-m); font-size: 1.1rem;">Select Audio</legend>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--a-space-m);">
+                                    <label class="media-item">
+                                        <div class="media-thumbnail">
+                                            <span class="axicon render" data-name="Music"></span>
+                                        </div>
+                                        <input type="checkbox" class="media-checkbox" data-name="audio-001.mp3" data-type="audio">
+                                        <div class="media-info">
+                                            <div class="media-name">audio-001.mp3</div>
+                                        </div>
                                     </label>
-                                    <label style="display: flex; flex-direction: column; align-items: center; gap: var(--a-space-s); cursor: pointer;">
-                                        <input type="checkbox" class="media-item" data-name="audio-002.mp3" style="cursor: pointer;">
-                                        <span style="font-size: 0.9rem; text-align: center;">audio-002.mp3</span>
+                                    <label class="media-item">
+                                        <div class="media-thumbnail">
+                                            <span class="axicon render" data-name="Music"></span>
+                                        </div>
+                                        <input type="checkbox" class="media-checkbox" data-name="audio-002.mp3" data-type="audio">
+                                        <div class="media-info">
+                                            <div class="media-name">audio-002.mp3</div>
+                                        </div>
                                     </label>
                                 </div>
                             </fieldset>
                         </div>
 
+                        <!-- Selection Display -->
                         <div style="margin-top: var(--a-space-l); padding-top: var(--a-space-l); border-top: 1px solid var(--a-color-border);">
-                            <h3>Selected Media</h3>
+                            <h3 style="margin: 0 0 var(--a-space-m) 0; font-weight: 600;">Selected Media</h3>
                             <ul id="selected-list" style="list-style: none; padding: 0; margin: 0;">
                                 <li style="color: var(--a-color-text-muted); padding: var(--a-space-s) 0;">No items selected</li>
                             </ul>
                         </div>
 
+                        <!-- Action Buttons -->
                         <div style="margin-top: var(--a-space-l); display: flex; gap: var(--a-space-m); justify-content: flex-end; padding-top: var(--a-space-l); border-top: 1px solid var(--a-color-border);">
                             <button class="button" data-variant="secondary">Cancel</button>
                             <button class="button" data-variant="primary">Select</button>
                         </div>
                     </div>
-                </article>
+                </div>
 
                 <div class="code-block">
-                    <pre><code class="language-html">&lt;article style="border: 1px solid var(--a-color-border); border-radius: var(--a-border-radius-base); padding: var(--a-space-l);"&gt;
+                    <pre><code class="language-html">&lt;div style="border: 2px solid var(--a-color-border); border-radius: var(--a-border-radius-base); padding: var(--a-space-l); box-shadow: 0 4px 6px rgba(0,0,0,0.05);"&gt;
     &lt;div role="region" aria-label="Media picker interface"&gt;
-        &lt;!-- Tab group with border and padding --&gt;
+        &lt;!-- Tab group with media counts --&gt;
         &lt;div role="tablist" aria-label="Media types"&gt;
             &lt;button role="tab" aria-selected="true" aria-controls="images-panel" id="images-tab" class="button" data-variant="primary"&gt;
                 &lt;span class="axicon render" data-name="Image"&gt;&lt;/span&gt;
-                Images
-            &lt;/button&gt;
-            &lt;button role="tab" aria-selected="false" aria-controls="videos-panel" id="videos-tab" class="button" data-variant="secondary"&gt;
-                &lt;span class="axicon render" data-name="Video"&gt;&lt;/span&gt;
-                Videos
+                Images (6)
             &lt;/button&gt;
         &lt;/div&gt;
 
-        &lt;!-- Tab panels --&gt;
+        &lt;!-- Tab panels with media items --&gt;
         &lt;div id="images-panel" role="tabpanel" aria-labelledby="images-tab"&gt;
             &lt;fieldset&gt;
                 &lt;legend&gt;Select Images&lt;/legend&gt;
-                &lt;div style="display: grid; gap: var(--a-space-m);"&gt;
-                    &lt;label&gt;
-                        &lt;input type="checkbox" data-name="photo-001.jpg"&gt;
-                        &lt;span&gt;photo-001.jpg&lt;/span&gt;
+                &lt;div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--a-space-m);"&gt;
+                    &lt;label class="media-item"&gt;
+                        &lt;div class="media-thumbnail"&gt;
+                            &lt;span class="axicon render" data-name="Image"&gt;&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;input type="checkbox" class="media-checkbox" data-name="photo-001.jpg"&gt;
+                        &lt;div class="media-info"&gt;
+                            &lt;div class="media-name"&gt;photo-001.jpg&lt;/div&gt;
+                        &lt;/div&gt;
                     &lt;/label&gt;
                 &lt;/div&gt;
             &lt;/fieldset&gt;
@@ -181,54 +297,60 @@
             &lt;ul id="selected-list"&gt;&lt;/ul&gt;
         &lt;/div&gt;
 
-        &lt;!-- Actions --&gt;
+        &lt;!-- Action buttons --&gt;
         &lt;div style="display: flex; gap: var(--a-space-m); justify-content: flex-end;"&gt;
             &lt;button class="button" data-variant="secondary"&gt;Cancel&lt;/button&gt;
             &lt;button class="button" data-variant="primary"&gt;Select&lt;/button&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-&lt;/article&gt;</code></pre>
+&lt;/div&gt;</code></pre>
                 </div>
             </section>
 
             <section>
-                <h2>Structure & Styling</h2>
+                <h2>Media Preview System</h2>
                 <ul>
-                    <li><strong>Container</strong> - `<article>` with border, border-radius, padding (cohesive card-like component)</li>
-                    <li><strong>Tab Group</strong> - `[role="tablist"]` with flex layout, border, and background (grouped pill-style tabs)</li>
-                    <li><strong>Tab Buttons</strong> - `.button` with `data-variant` for primary/secondary states</li>
-                    <li><strong>Tab Panels</strong> - `[role="tabpanel"]` with semantic structure</li>
-                    <li><strong>Fieldsets</strong> - `<fieldset>` and `<legend>` for form organization</li>
-                    <li><strong>Selection Area</strong> - Bordered section showing selected items</li>
-                    <li><strong>Action Buttons</strong> - Right-aligned with flex layout</li>
+                    <li><strong>Media Thumbnails</strong> - Each media type has icon representation (Image, Video, Music)</li>
+                    <li><strong>Visual Container</strong> - Bordered box with shadow and padding for containment</li>
+                    <li><strong>Hover States</strong> - Thumbnail highlights on hover with transform</li>
+                    <li><strong>Selected State</strong> - Checkbox with visual feedback via background color</li>
+                    <li><strong>File Names</strong> - Displayed below each thumbnail in info section</li>
+                    <li><strong>Responsive Grid</strong> - auto-fill with minmax(120px, 1fr)</li>
                 </ul>
             </section>
 
             <section>
-                <h2>Tab Group Styling</h2>
-                <p>The `[role="tablist"]` container provides the grouped pill-style appearance:</p>
-                <pre><code class="language-css">[role="tablist"] {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--a-space-s);
-    padding: var(--a-space-m);
-    border: 1px solid var(--a-color-border);
-    border-radius: var(--a-border-radius-base);
-    background: var(--a-color-background-secondary);
-    margin-bottom: var(--a-space-l);
-}</code></pre>
+                <h2>Icon Mapping by Media Type</h2>
+                <ul>
+                    <li><strong>Images</strong> - `<span class="axicon render" data-name="Image"></span>` (frame/photo icon)</li>
+                    <li><strong>Videos</strong> - `<span class="axicon render" data-name="Video"></span>` (video camera icon)</li>
+                    <li><strong>Audio</strong> - `<span class="axicon render" data-name="Music"></span>` (music note icon)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Visual Structure</h2>
+                <ul>
+                    <li><strong>Outer Container</strong> - `border: 2px solid var(--a-color-border)` with box-shadow</li>
+                    <li><strong>Media Item Card</strong> - Individual media with thumbnail, checkbox, and info</li>
+                    <li><strong>Thumbnail Area</strong> - Icon centered in square with aspect-ratio: 1</li>
+                    <li><strong>Hover Effect</strong> - Primary container background + border color change + translateY</li>
+                    <li><strong>Selected Effect</strong> - Info section background changes to primary-container</li>
+                    <li><strong>Spacing</strong> - All using design tokens (var(--a-space-m), var(--a-space-l))</li>
+                </ul>
             </section>
 
             <section>
                 <h2>Key Features</h2>
                 <ul>
-                    <li><strong>Cohesive Container</strong> - Component wrapped in bordered article element</li>
-                    <li><strong>Tab Group</strong> - Pills grouped together with border and background</li>
-                    <li><strong>Tab States</strong> - Active/inactive with visual distinction</li>
-                    <li><strong>Fieldset Organization</strong> - Proper form grouping with legend</li>
-                    <li><strong>Selection Display</strong> - Shows selected items in separated section</li>
-                    <li><strong>Action Buttons</strong> - Right-aligned Cancel/Select pair</li>
-                    <li><strong>Semantic HTML</strong> - All ARIA roles and attributes</li>
+                    <li><strong>Semantic HTML</strong> - role="tab", role="tabpanel", fieldset, legend, checkbox</li>
+                    <li><strong>Visual Containment</strong> - Bordered container with shadow removes "floating" feel</li>
+                    <li><strong>Media Previews</strong> - Axicon thumbnails for each media type</li>
+                    <li><strong>Type Organization</strong> - Separate tabs for Images, Videos, Audio</li>
+                    <li><strong>Selection Tracking</strong> - Shows selected media below with update on checkbox change</li>
+                    <li><strong>Responsive Grid</strong> - Automatically adapts to screen width</li>
+                    <li><strong>Proper ARIA</strong> - aria-selected, aria-controls, aria-labelledby</li>
+                    <li><strong>Keyboard Support</strong> - Arrow keys, Tab, Enter, Space</li>
                 </ul>
             </section>
 
@@ -240,34 +362,21 @@
                     <li><strong>Content Creation</strong> - Pick media for posts/articles</li>
                     <li><strong>Gallery Management</strong> - Organize and select photos</li>
                     <li><strong>Asset Library</strong> - Browse project media files</li>
+                    <li><strong>Playlist Builder</strong> - Select audio tracks</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Accessibility</h2>
                 <ul>
-                    <li>Use proper `role="tablist"`, `role="tab"`, `role="tabpanel"` attributes</li>
-                    <li>Include `aria-selected` on tabs to indicate active state</li>
-                    <li>Use `aria-controls` to link tabs to panels</li>
-                    <li>Use `aria-labelledby` for screen reader descriptions</li>
-                    <li>Support keyboard navigation (Tab, Arrow keys, Enter)</li>
-                    <li>Use `<fieldset>` and `<legend>` for form grouping</li>
-                    <li>Link labels to inputs with `for` attributes</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Best Practices</h2>
-                <ul>
-                    <li>Wrap entire component in bordered container for cohesion</li>
-                    <li>Group tabs together with border and background color</li>
-                    <li>Use semantic button elements with data-variant</li>
-                    <li>Always include legends for fieldsets</li>
-                    <li>Right-align action buttons (Cancel, Select, Save)</li>
-                    <li>Show selected items in separated section with visual distinction</li>
-                    <li>Use design tokens for all spacing, colors, borders</li>
-                    <li>Test keyboard navigation (Tab, Arrow keys)</li>
-                    <li>Verify screen reader announcements</li>
+                    <li>Semantic role="tab", role="tabpanel" for tab interface</li>
+                    <li>aria-selected for active tab state</li>
+                    <li>aria-controls linking tabs to panels</li>
+                    <li>aria-labelledby for proper descriptions</li>
+                    <li>Fieldset and legend for form grouping</li>
+                    <li>Checkbox inputs with associated labels</li>
+                    <li>Keyboard navigation (Tab, Arrow keys, Enter, Space)</li>
+                    <li>Screen reader support for all interactions</li>
                 </ul>
             </section>
 
@@ -365,12 +474,12 @@
         });
 
         // Media item selection
-        document.querySelectorAll('.media-item').forEach(checkbox => {
+        document.querySelectorAll('.media-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', updateSelectedList);
         });
 
         function updateSelectedList() {
-            const selected = document.querySelectorAll('.media-item:checked');
+            const selected = document.querySelectorAll('.media-checkbox:checked');
             const list = document.getElementById('selected-list');
             
             if (selected.length === 0) {
@@ -378,9 +487,10 @@
             } else {
                 list.innerHTML = Array.from(selected).map(checkbox => {
                     const name = checkbox.getAttribute('data-name');
-                    return `<li style="padding: var(--a-space-s) 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--a-color-border);">
-                        <span>${name}</span>
-                        <button style="background: none; border: none; color: var(--a-color-error); cursor: pointer; padding: var(--a-space-s); font-size: 1.2rem;">×</button>
+                    const type = checkbox.getAttribute('data-type');
+                    return `<li style="padding: var(--a-space-s) var(--a-space-m); background: var(--a-color-background-secondary); border-radius: var(--a-border-radius-sm); margin-bottom: var(--a-space-s); display: flex; justify-content: space-between; align-items: center;">
+                        <span><strong>${type}</strong>: ${name}</span>
+                        <button style="background: none; border: none; color: var(--a-color-error); cursor: pointer; padding: var(--a-space-s); font-size: 1.2rem; display: flex; align-items: center; justify-content: center;">×</button>
                     </li>`;
                 }).join('');
             }

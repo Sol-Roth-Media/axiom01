@@ -11,165 +11,319 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .steps-progress {
+            display: flex;
+            gap: var(--a-space-m);
+            margin-bottom: var(--a-space-l);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--a-space-s);
+            cursor: pointer;
+            opacity: 0.5;
+            transition: all 0.2s ease;
+        }
+
+        .step-item[data-active="true"] {
+            opacity: 1;
+        }
+
+        .step-item[data-completed="true"] {
+            opacity: 1;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--a-color-border);
+            border-radius: 50%;
+            font-weight: 600;
+            background: var(--a-color-background);
+            transition: all 0.2s ease;
+        }
+
+        .step-item[data-active="true"] .step-number {
+            border-color: var(--a-color-primary);
+            background: var(--a-color-primary);
+            color: var(--a-color-on-primary);
+        }
+
+        .step-item[data-completed="true"] .step-number {
+            background: var(--a-color-success);
+            border-color: var(--a-color-success);
+            color: var(--a-color-on-success);
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .form-sections {
+            border: 1px solid var(--a-color-border);
+            border-radius: var(--a-border-radius-base);
+            padding: var(--a-space-l);
+            margin-bottom: var(--a-space-l);
+            background: var(--a-color-background);
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section[data-active="true"] {
+            display: block;
+        }
+
+        .form-section h2 {
+            margin: 0 0 var(--a-space-s) 0;
+        }
+
+        .form-section > p {
+            margin: 0 0 var(--a-space-l) 0;
+            color: var(--a-color-text-muted);
+        }
+
+        .form-section .field {
+            margin-bottom: var(--a-space-m);
+        }
+
+        .success-message {
+            text-align: center;
+            padding: var(--a-space-l);
+        }
+
+        .success-message svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: var(--a-space-m);
+            color: var(--a-color-success);
+        }
+
+        .form-controls {
+            display: flex;
+            gap: var(--a-space-m);
+            justify-content: space-between;
+            padding-top: var(--a-space-l);
+            border-top: 1px solid var(--a-color-border);
+            margin-top: var(--a-space-l);
+        }
+
+        .form-controls button {
+            display: flex;
+            align-items: center;
+            gap: var(--a-space-s);
+        }
+
+        .form-controls button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
-    	<!-- HEADER NAVIGATION -->
-	<header class="main" data-component="mobile-navbar">
-		<nav role="navigation" aria-label="Main Navigation">
-			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-			<ul class="links">
-				<li><a href="../../index.html#get-started">Get Started</a></li>
-				<li><a href="../components-overview.html">Docs</a></li>
-				<li><a href="../../index.html#axicons">Axicons</a></li>
-			</ul>
+    <!-- HEADER NAVIGATION -->
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="../../index.html#get-started">Get Started</a></li>
+                <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../../index.html#axicons">Axicons</a></li>
+            </ul>
 
-			<div class="actions">
-				<button class="search toggle" aria-label="Open Search">
-					<span class="axicon render" data-name="Search"></span>
-				</button>
-				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-					<span class="axicon render" data-name="GitHub"></span>
-					<span>GitHub</span>
-				</a>
-				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-					<span class="axicon render" data-name="Moon"></span>
-				</button>
-				<button class="menu toggle" aria-label="Toggle Menu">
-					<span class="axicon render" data-name="Menu"></span>
-				</button>
-			</div>
-		</nav>
-	</header>
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="GitHub"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="axicon render" data-name="Moon"></span>
+                </button>
+                <button class="menu toggle" aria-label="Toggle Menu">
+                    <span class="axicon render" data-name="Menu"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
     <main><section><div class="container">
         <header>
             <h1>Multi-Step Form</h1>
-            <p class="text-muted">Axiom01's multi-step form component breaks complex forms into manageable sections with progress tracking. Features step indicators, validation, and navigation controls.</p>
+            <p class="text-muted">Semantic multi-step form component for breaking complex forms into manageable sections. Features progress tracking, step navigation, and validation.</p>
         </header>
 
         <div class="component-section">
 
             <section>
-                <h2>Live Examples</h2>
+                <h2>Account Setup Wizard</h2>
 
-                <h3>Account Setup Wizard</h3>
-                <div class="component-example">
-                    <form class="wizard" id="wizard">
-                        <nav id="progress">
-                            <ol>
-                                <li data-active="true">
-                                    <span>1</span>
-                                    <small>Account</small>
-                                </li>
-                                <li>
-                                    <span>2</span>
-                                    <small>Profile</small>
-                                </li>
-                                <li>
-                                    <span>3</span>
-                                    <small>Review</small>
-                                </li>
-                            </ol>
-                        </nav>
-                        
-                        <main>
-                            <section data-active="true" id="step1">
-                                <h2>Create Account</h2>
-                                <p>Enter your email and password</p>
-                                <div>
-                                    <label for="email1">Email Address</label>
-                                    <input type="email" id="email1" placeholder="your@email.com">
-                                </div>
-                                <div>
-                                    <label for="password1">Password</label>
-                                    <input type="password" id="password1" placeholder="••••••••">
-                                </div>
-                            </section>
+                <form id="multiStepForm">
+                    <!-- Progress Indicator -->
+                    <ol class="steps-progress" role="tablist" aria-label="Form steps">
+                        <li class="step-item" data-active="true" data-step="1" role="tab" aria-selected="true">
+                            <div class="step-number">1</div>
+                            <span class="step-label">Account</span>
+                        </li>
+                        <li class="step-item" data-step="2" role="tab" aria-selected="false">
+                            <div class="step-number">2</div>
+                            <span class="step-label">Profile</span>
+                        </li>
+                        <li class="step-item" data-step="3" role="tab" aria-selected="false">
+                            <div class="step-number">3</div>
+                            <span class="step-label">Review</span>
+                        </li>
+                    </ol>
+
+                    <!-- Form Sections -->
+                    <div class="form-sections" role="region" aria-label="Form content">
+                        <!-- Step 1: Account -->
+                        <section class="form-section" data-active="true" id="step1" aria-labelledby="step1-title">
+                            <h2 id="step1-title">Create Account</h2>
+                            <p>Enter your email and password to get started</p>
                             
-                            <section id="step2">
-                                <h2>Complete Profile</h2>
-                                <p>Tell us about yourself</p>
-                                <div>
-                                    <label for="name">Full Name</label>
-                                    <input type="text" id="name" placeholder="John Doe">
-                                </div>
-                                <div>
-                                    <label for="company">Company</label>
-                                    <input type="text" id="company" placeholder="Acme Corp">
-                                </div>
-                            </section>
+                            <div class="field">
+                                <label for="email1">Email Address</label>
+                                <input type="email" id="email1" placeholder="your@email.com" required>
+                            </div>
                             
-                            <section id="step3">
-                                <h2>Review Information</h2>
-                                <p>Confirm your details before submitting</p>
-                                <div>
-                                    <p><strong>Email:</strong> your@email.com</p>
-                                    <p><strong>Name:</strong> John Doe</p>
-                                    <p><strong>Company:</strong> Acme Corp</p>
-                                </div>
-                            </section>
+                            <div class="field">
+                                <label for="password1">Password</label>
+                                <input type="password" id="password1" placeholder="••••••••" required>
+                            </div>
+                        </section>
+
+                        <!-- Step 2: Profile -->
+                        <section class="form-section" id="step2" aria-labelledby="step2-title">
+                            <h2 id="step2-title">Complete Profile</h2>
+                            <p>Tell us about yourself to personalize your experience</p>
                             
-                            <section id="stepSuccess" class="success">
-                                <div>
-                                    <span class="axicon render" data-name="Check-Circle" style="font-size: 64px;"></span>
-                                </div>
-                                <h2>Account Created Successfully!</h2>
-                                <p>Your account is ready to use</p>
-                            </section>
-                        </main>
-                        
-                        <footer>
-                            <button type="button" class="secondary" id="prevBtn">
-                                <span class="axicon render" data-name="ChevronLeft"></span>
-                                Previous
-                            </button>
-                            <button type="button" class="primary" id="nextBtn">
-                                Next
-                                <span class="axicon render" data-name="ChevronRight"></span>
-                            </button>
-                        </footer>
-                    </form>
-                </div>
+                            <div class="field">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" placeholder="John Doe" required>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" placeholder="Acme Corp">
+                            </div>
+                        </section>
+
+                        <!-- Step 3: Review -->
+                        <section class="form-section" id="step3" aria-labelledby="step3-title">
+                            <h2 id="step3-title">Review Information</h2>
+                            <p>Confirm your details before submitting</p>
+                            
+                            <div style="padding: var(--a-space-m); background: var(--a-color-background-secondary); border-radius: var(--a-border-radius-base);">
+                                <p style="margin: 0 0 var(--a-space-s) 0;"><strong>Email:</strong> <span id="review-email">your@email.com</span></p>
+                                <p style="margin: 0 0 var(--a-space-s) 0;"><strong>Name:</strong> <span id="review-name">John Doe</span></p>
+                                <p style="margin: 0;"><strong>Company:</strong> <span id="review-company">Acme Corp</span></p>
+                            </div>
+                        </section>
+
+                        <!-- Success -->
+                        <section class="form-section success-message" id="stepSuccess" aria-labelledby="success-title">
+                            <div style="margin-bottom: var(--a-space-m);">
+                                <span class="axicon render" data-name="CheckCircle"></span>
+                            </div>
+                            <h2 id="success-title">Account Created Successfully!</h2>
+                            <p>Your account is ready to use. You can now log in and start exploring.</p>
+                        </section>
+                    </div>
+
+                    <!-- Navigation Controls -->
+                    <div class="form-controls">
+                        <button type="button" class="button" data-variant="secondary" id="prevBtn" aria-label="Go to previous step">
+                            <span class="axicon render" data-name="ChevronLeft"></span>
+                            Previous
+                        </button>
+                        <button type="button" class="button" data-variant="primary" id="nextBtn" aria-label="Go to next step or submit">
+                            Next
+                            <span class="axicon render" data-name="ChevronRight"></span>
+                        </button>
+                    </div>
+                </form>
             </section>
 
             <section>
                 <h2>HTML Structure</h2>
                 <div class="code-block">
-                    <pre><code class="language-html">&lt;form class="wizard"&gt;
-    &lt;nav&gt;
-        &lt;ol&gt;
-            &lt;li data-active="true"&gt;
-                &lt;span&gt;1&lt;/span&gt;
-                &lt;small&gt;Step 1&lt;/small&gt;
-            &lt;/li&gt;
-        &lt;/ol&gt;
-    &lt;/nav&gt;
-    
-    &lt;main&gt;
-        &lt;section data-active="true"&gt;
-            &lt;h2&gt;Title&lt;/h2&gt;
-            &lt;label&gt;Field&lt;/label&gt;
-            &lt;input type="text"&gt;
+                    <pre><code class="language-html">&lt;form&gt;
+    &lt;!-- Progress Indicator --&gt;
+    &lt;ol class="steps-progress" role="tablist"&gt;
+        &lt;li class="step-item" data-active="true" data-step="1" role="tab"&gt;
+            &lt;div class="step-number"&gt;1&lt;/div&gt;
+            &lt;span class="step-label"&gt;Step 1&lt;/span&gt;
+        &lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;!-- Form Sections --&gt;
+    &lt;div class="form-sections" role="region"&gt;
+        &lt;section class="form-section" data-active="true" id="step1"&gt;
+            &lt;h2&gt;Step 1 Title&lt;/h2&gt;
+            &lt;div class="field"&gt;
+                &lt;label for="input1"&gt;Field Label&lt;/label&gt;
+                &lt;input type="text" id="input1"&gt;
+            &lt;/div&gt;
         &lt;/section&gt;
-    &lt;/main&gt;
-    
-    &lt;footer&gt;
-        &lt;button type="button" class="secondary"&gt;Previous&lt;/button&gt;
-        &lt;button type="button" class="primary"&gt;Next&lt;/button&gt;
-    &lt;/footer&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Navigation --&gt;
+    &lt;div class="form-controls"&gt;
+        &lt;button type="button" class="button" data-variant="secondary" id="prevBtn"&gt;
+            Previous
+        &lt;/button&gt;
+        &lt;button type="button" class="button" data-variant="primary" id="nextBtn"&gt;
+            Next
+        &lt;/button&gt;
+    &lt;/div&gt;
 &lt;/form&gt;</code></pre>
                 </div>
             </section>
 
             <section>
-                <h2>Features</h2>
+                <h2>Key Features</h2>
                 <ul>
-                    <li><strong>Progress Indicator</strong> - Visual step tracking</li>
-                    <li><strong>Step Navigation</strong> - Previous/Next controls</li>
-                    <li><strong>Form Validation</strong> - Validate before advancing</li>
-                    <li><strong>Semantic HTML</strong> - Proper form structure</li>
-                    <li><strong>Success State</strong> - Completion confirmation</li>
-                    <li><strong>Responsive</strong> - Vertical progress on mobile</li>
+                    <li><strong>Progress Indicator</strong> - Visual step tracking with completed state</li>
+                    <li><strong>Step Navigation</strong> - Previous/Next buttons for movement</li>
+                    <li><strong>Data Attributes</strong> - `data-active` for visibility, `data-completed` for state</li>
+                    <li><strong>Semantic HTML</strong> - Proper form structure with ARIA roles</li>
+                    <li><strong>Success State</strong> - Completion confirmation message</li>
+                    <li><strong>Accessible</strong> - Full keyboard and screen reader support</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Data Attributes</h2>
+                <ul>
+                    <li><strong>`data-active="true"`</strong> - Marks currently displayed step</li>
+                    <li><strong>`data-completed="true"`</strong> - Marks completed step in progress</li>
+                    <li><strong>`data-step="1|2|3"`</strong> - Step identifier for navigation</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>ARIA Attributes</h2>
+                <ul>
+                    <li><strong>`role="tablist"`</strong> - Progress indicator is tab list</li>
+                    <li><strong>`role="tab"`</strong> - Individual step items</li>
+                    <li><strong>`aria-selected="true|false"`</strong> - Current tab indicator</li>
+                    <li><strong>`role="region"`</strong> - Form sections container</li>
+                    <li><strong>`aria-labelledby`</strong> - Links sections to titles</li>
                 </ul>
             </section>
 
@@ -186,26 +340,16 @@
             </section>
 
             <section>
-                <h2>Accessibility</h2>
-                <ul>
-                    <li>Semantic form and section elements</li>
-                    <li>Proper labels on all inputs</li>
-                    <li>Data attributes for state management</li>
-                    <li>Keyboard navigation support</li>
-                    <li>Accessibility-first HTML structure</li>
-                    <li>WCAG 2.1 AA compliant</li>
-                </ul>
-            </section>
-
-            <section>
                 <h2>Best Practices</h2>
                 <ul>
-                    <li><strong>Clear Progress</strong> - Show which step user is on</li>
-                    <li><strong>Logical Grouping</strong> - Related fields on same step</li>
-                    <li><strong>Validation</strong> - Validate before advancing</li>
-                    <li><strong>Save Progress</strong> - Remember entered data</li>
-                    <li><strong>Error Messages</strong> - Clear, actionable feedback</li>
-                    <li><strong>Responsive Design</strong> - Works on all screen sizes</li>
+                    <li>Show clear progress indicator at all times</li>
+                    <li>Group related fields on the same step</li>
+                    <li>Display step titles and descriptions</li>
+                    <li>Validate before advancing to next step</li>
+                    <li>Allow going back to previous steps</li>
+                    <li>Show summary/review before final submission</li>
+                    <li>Display success confirmation after submission</li>
+                    <li>Support keyboard navigation throughout</li>
                 </ul>
             </section>
 
@@ -213,116 +357,117 @@
 
     </div></section></main>
 
-    	<!-- FOOTER -->
-	<footer class="footer">
-		<div class="container">
-			<!-- Main Content Grid -->
-			<div class="footer-content">
-				<!-- Brand Section -->
-				<div class="footer-brand">
-					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
-				</div>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Main Content Grid -->
+            <div class="footer-content">
+                <!-- Brand Section -->
+                <div class="footer-brand">
+                    <a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+                    <p class="footer-tagline">The Semantic Web, Reimagined.</p>
+                </div>
 
-				<!-- Product Links -->
-				<div class="footer-column">
-					<h4>Product</h4>
-					<ul>
-						<li><a href="../../docs/components-overview.html">All Components</a></li>
-						<li><a href="../../docs/axicons.html">Icons</a></li>
-						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
-						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
-					</ul>
-				</div>
+                <!-- Documentation Links -->
+                <div class="footer-column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../components-overview.html">Component Overview</a></li>
+                        <li><a href="../overview-quickstart.html">Get Started</a></li>
+                        <li><a href="../colors-advanced.html">Colors & Tokens</a></li>
+                    </ul>
+                </div>
 
-				<!-- Resources Links -->
-				<div class="footer-column">
-					<h4>Resources</h4>
-					<ul>
-						<li><a href="../../README.md" target="_blank">README</a></li>
-						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
-					</ul>
-				</div>
+                <!-- Resources Links -->
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../../README.md" target="_blank">README</a></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+                        <li><a href="../../LICENSE" target="_blank">License</a></li>
+                    </ul>
+                </div>
 
-				<!-- Community Links -->
-				<div class="footer-column">
-					<h4>Community</h4>
-					<ul>
-						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
-						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
-					</ul>
-				</div>
-			</div>
+                <!-- Community Links -->
+                <div class="footer-column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+                    </ul>
+                </div>
+            </div>
 
-			<!-- Bottom Section -->
-			<div class="footer-bottom">
-				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
-				<ul class="footer-social">
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
-						<span class="axicon render" data-name="GitHub"></span>
-					</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
-						<span class="axicon render" data-name="Brand-NPM"></span>
-					</a></li>
-				</ul>
-			</div>
-		</div>
-	</footer>
+            <!-- Bottom Section -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+                <ul class="footer-social">
+                    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+                        <span class="axicon render" data-name="GitHub"></span>
+                    </a></li>
+                    <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+                        <span class="axicon render" data-name="Brand-NPM"></span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
-    <script src="../../js/render-icons.js"></script>
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/index-page-manager.js"></script>
     <script>
         let currentStep = 1;
         const totalSteps = 3;
         
-        const wizard = document.getElementById('wizard');
+        const form = document.getElementById('multiStepForm');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        const progress = document.getElementById('progress');
+        const stepItems = document.querySelectorAll('.step-item');
         
         function updateForm() {
-            // Update sections
-            for (let i = 1; i <= totalSteps; i++) {
-                const section = document.getElementById(`step${i}`);
-                if (section) {
-                    if (i === currentStep) {
-                        section.setAttribute('data-active', 'true');
-                    } else {
-                        section.removeAttribute('data-active');
-                    }
-                }
-            }
+            // Hide all sections
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.removeAttribute('data-active');
+            });
             
-            const successSection = document.getElementById('stepSuccess');
-            if (currentStep === totalSteps + 1) {
-                successSection.setAttribute('data-active', 'true');
+            // Show current step
+            if (currentStep <= totalSteps) {
+                const currentSection = document.getElementById(`step${currentStep}`);
+                if (currentSection) {
+                    currentSection.setAttribute('data-active', 'true');
+                }
             } else {
-                successSection.removeAttribute('data-active');
+                document.getElementById('stepSuccess').setAttribute('data-active', 'true');
             }
             
             // Update progress indicators
-            const steps = progress.querySelectorAll('li');
-            steps.forEach((step, index) => {
-                const stepNum = index + 1;
-                if (stepNum === currentStep) {
-                    step.setAttribute('data-active', 'true');
-                    step.removeAttribute('data-completed');
-                } else if (stepNum < currentStep) {
-                    step.removeAttribute('data-active');
-                    step.setAttribute('data-completed', 'true');
+            stepItems.forEach(item => {
+                const step = parseInt(item.getAttribute('data-step'));
+                const tab = item;
+                
+                if (step === currentStep) {
+                    tab.setAttribute('data-active', 'true');
+                    tab.setAttribute('aria-selected', 'true');
+                    tab.removeAttribute('data-completed');
+                } else if (step < currentStep) {
+                    tab.removeAttribute('data-active');
+                    tab.setAttribute('aria-selected', 'false');
+                    tab.setAttribute('data-completed', 'true');
                 } else {
-                    step.removeAttribute('data-active');
-                    step.removeAttribute('data-completed');
+                    tab.removeAttribute('data-active');
+                    tab.setAttribute('aria-selected', 'false');
+                    tab.removeAttribute('data-completed');
                 }
             });
             
             // Update button states
             prevBtn.disabled = currentStep === 1;
-            nextBtn.disabled = currentStep === totalSteps + 1;
+            nextBtn.disabled = currentStep > totalSteps;
             
+            // Update next button text
             if (currentStep === totalSteps) {
                 nextBtn.innerHTML = 'Submit <span class="axicon render" data-name="ChevronRight"></span>';
-            } else if (currentStep === totalSteps + 1) {
+            } else if (currentStep > totalSteps) {
                 nextBtn.innerHTML = 'Start Over <span class="axicon render" data-name="ChevronRight"></span>';
             } else {
                 nextBtn.innerHTML = 'Next <span class="axicon render" data-name="ChevronRight"></span>';
@@ -332,15 +477,14 @@
         }
         
         // Step number click navigation
-        const stepNumbers = progress.querySelectorAll('li');
-        stepNumbers.forEach((stepLi, index) => {
-            const stepSpan = stepLi.querySelector('span');
-            if (stepSpan) {
-                stepSpan.addEventListener('click', () => {
-                    currentStep = index + 1;
+        stepItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const step = parseInt(item.getAttribute('data-step'));
+                if (step <= currentStep + 1) { // Can only go to current or previous steps
+                    currentStep = step;
                     updateForm();
-                });
-            }
+                }
+            });
         });
         
         prevBtn.addEventListener('click', () => {
@@ -351,7 +495,7 @@
         });
         
         nextBtn.addEventListener('click', () => {
-            if (currentStep <= totalSteps) {
+            if (currentStep < totalSteps + 1) {
                 currentStep++;
                 updateForm();
             } else {
@@ -365,25 +509,22 @@
                 setTimeout(renderAxicons, 100);
                 return;
             }
-            
             document.querySelectorAll('.axicon.render').forEach(el => {
                 const name = el.getAttribute('data-name');
                 if (!name) return;
-                
                 const icon = axicons.find(i => i.name === name);
                 if (icon) {
                     el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
                 }
             });
         }
-
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', renderAxicons);
         } else {
             renderAxicons();
         }
-
         setTimeout(renderAxicons, 500);
+        
         updateForm();
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
@@ -397,7 +538,5 @@
     <script src="../../js/axicons-color-variants.js"></script>
     <script src="../../js/axicons-premium-variants.js"></script>
     <script src="../../js/render-icons.js"></script>
-    <script src="../../js/axiom.js"></script>
-    <script src="../../js/index-page-manager.js"></script>
 </body>
 </html>

@@ -11,146 +11,248 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--a-space-s);
+            padding: var(--a-space-m);
+            border: 1px solid var(--a-color-border);
+            border-radius: var(--a-border-radius-base);
+            background: var(--a-color-background);
+            min-height: 44px;
+            align-items: center;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--a-space-s);
+            padding: var(--a-space-s) var(--a-space-m);
+            background: var(--a-color-primary-container);
+            color: var(--a-color-on-primary-container);
+            border-radius: var(--a-border-radius-base);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .chip-remove {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .chip-remove:hover {
+            opacity: 1;
+        }
+
+        .chips-container input {
+            flex: 1;
+            min-width: 120px;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            padding: var(--a-space-xs);
+        }
+
+        .suggestions-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--a-space-s);
+            padding: var(--a-space-m);
+            background: var(--a-color-background-secondary);
+            border-radius: var(--a-border-radius-base);
+            list-style: none;
+            margin: var(--a-space-m) 0 0 0;
+        }
+
+        .suggestion-item {
+            padding: var(--a-space-s) var(--a-space-m);
+            background: var(--a-color-background);
+            border: 1px solid var(--a-color-border);
+            border-radius: var(--a-border-radius-base);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .suggestion-item:hover {
+            background: var(--a-color-primary-container);
+            border-color: var(--a-color-primary);
+            color: var(--a-color-on-primary-container);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
-    	<!-- HEADER NAVIGATION -->
-	<header class="main" data-component="mobile-navbar">
-		<nav role="navigation" aria-label="Main Navigation">
-			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-			<ul class="links">
-				<li><a href="../../index.html#get-started">Get Started</a></li>
-				<li><a href="../components-overview.html">Docs</a></li>
-				<li><a href="../../index.html#axicons">Axicons</a></li>
-			</ul>
+    <!-- HEADER NAVIGATION -->
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="../../index.html#get-started">Get Started</a></li>
+                <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../../index.html#axicons">Axicons</a></li>
+            </ul>
 
-			<div class="actions">
-				<button class="search toggle" aria-label="Open Search">
-					<span class="axicon render" data-name="Search"></span>
-				</button>
-				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-					<span class="axicon render" data-name="GitHub"></span>
-					<span>GitHub</span>
-				</a>
-				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-					<span class="axicon render" data-name="Moon"></span>
-				</button>
-				<button class="menu toggle" aria-label="Toggle Menu">
-					<span class="axicon render" data-name="Menu"></span>
-				</button>
-			</div>
-		</nav>
-	</header>
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="GitHub"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="axicon render" data-name="Moon"></span>
+                </button>
+                <button class="menu toggle" aria-label="Toggle Menu">
+                    <span class="axicon render" data-name="Menu"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
     <main><section><div class="container">
         <header>
             <h1>Chip Input</h1>
-            <p class="text-muted">Axiom01's chip input component enables users to enter and manage multiple values (tags, keywords, recipients). Features auto-complete suggestions, removal, and visual feedback.</p>
+            <p class="text-muted">Semantic chip input component for managing multiple values like tags, keywords, or email recipients. Supports removal, suggestions, and keyboard interaction.</p>
         </header>
 
         <div class="component-section">
 
             <section>
-                <h2>Live Examples</h2>
+                <h2>Tag Input with Suggestions</h2>
 
-                <h3>Tag Input with Suggestions</h3>
-                <div class="chip-input-demo">
-                    <label class="form-check-label">Enter tags:</label>
+                <div>
+                    <label for="tag-input">Enter tags:</label>
                     
-                    <div class="chip-input-wrapper" id="chipWrapper">
-                        <div class="chip">
+                    <div class="chips-container" id="tagsContainer" role="region" aria-label="Tag input with chips">
+                        <span class="chip">
                             React
                             <button class="chip-remove" aria-label="Remove React">&times;</button>
-                        </div>
-                        <div class="chip">
+                        </span>
+                        <span class="chip">
                             TypeScript
                             <button class="chip-remove" aria-label="Remove TypeScript">&times;</button>
-                        </div>
-                        <input type="text" class="chip-input" id="tagInput" placeholder="Add more tags...">
+                        </span>
+                        <input type="text" id="tag-input" placeholder="Add more tags..." aria-label="Add new tag">
                     </div>
                     
-                    <div class="chip-suggestions" id="suggestions">
-                        <div >Suggestions:</div>
-                        <ul class="suggestion-list" id="suggestionList">
-                            <li class="suggestion-chip">JavaScript</li>
-                            <li class="suggestion-chip">CSS</li>
-                            <li class="suggestion-chip">Web Development</li>
-                            <li class="suggestion-chip">Frontend</li>
-                            <li class="suggestion-chip">UI Design</li>
+                    <div style="margin-top: var(--a-space-m);">
+                        <p style="margin-bottom: var(--a-space-s); color: var(--a-color-text-muted);">Suggestions:</p>
+                        <ul class="suggestions-list" id="tagSuggestions">
+                            <li class="suggestion-item">JavaScript</li>
+                            <li class="suggestion-item">CSS</li>
+                            <li class="suggestion-item">Web Development</li>
+                            <li class="suggestion-item">Frontend</li>
+                            <li class="suggestion-item">UI Design</li>
                         </ul>
                     </div>
                     
-                    <div class="chip-info">
-                        <span class="chip-count">2 tags</span> selected
-                    </div>
+                    <p id="tags-info" style="margin-top: var(--a-space-m); color: var(--a-color-text-muted); font-size: 0.9rem;">2 tags selected</p>
                 </div>
 
-                <h3>Email Recipients</h3>
-                <div class="chip-input-demo">
-                    <label class="form-check-label">Recipients:</label>
-                    
-                    <div class="chip-input-wrapper">
-                        <div class="chip">
-                            alice@example.com
-                            <button class="chip-remove" aria-label="Remove alice@example.com">&times;</button>
-                        </div>
-                        <div class="chip">
-                            bob@example.com
-                            <button class="chip-remove" aria-label="Remove bob@example.com">&times;</button>
-                        </div>
-                        <div class="chip">
-                            carol@example.com
-                            <button class="chip-remove" aria-label="Remove carol@example.com">&times;</button>
-                        </div>
-                        <input type="email" class="chip-input" placeholder="Add email...">
-                    </div>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="chips-container" role="region" aria-label="Tag input"&gt;
+    &lt;!-- Existing chip --&gt;
+    &lt;span class="chip"&gt;
+        React
+        &lt;button class="chip-remove" aria-label="Remove React"&gt;&amp;times;&lt;/button&gt;
+    &lt;/span&gt;
+
+    &lt;!-- Input field --&gt;
+    &lt;input type="text" placeholder="Add more tags..." aria-label="Add new tag"&gt;
+&lt;/div&gt;
+
+&lt;!-- Suggestions --&gt;
+&lt;ul class="suggestions-list"&gt;
+    &lt;li class="suggestion-item"&gt;JavaScript&lt;/li&gt;
+    &lt;li class="suggestion-item"&gt;CSS&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
                 </div>
             </section>
 
             <section>
-                <h2>HTML Structure</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="chip-input-wrapper"&gt;
-    &lt;!-- Existing chips --&gt;
-    &lt;div class="chip"&gt;
-        Tag Name
-        &lt;button class="chip-remove" aria-label="Remove"&gt;&amp;times;&lt;/button&gt;
-    &lt;/div&gt;
-    
-    &lt;!-- Input field --&gt;
-    &lt;input type="text" class="chip-input" 
-           placeholder="Add more..."&gt;
-&lt;/div&gt;
+                <h2>Email Recipients</h2>
 
-&lt;!-- Suggestions (optional) --&gt;
-&lt;div class="chip-suggestions"&gt;
-    &lt;ul class="suggestion-list"&gt;
-        &lt;li class="suggestion-chip"&gt;Suggestion 1&lt;/li&gt;
-        &lt;li class="suggestion-chip"&gt;Suggestion 2&lt;/li&gt;
-    &lt;/ul&gt;
+                <div>
+                    <label for="email-input">Recipients:</label>
+                    
+                    <div class="chips-container" id="emailContainer" role="region" aria-label="Email recipients">
+                        <span class="chip">
+                            alice@example.com
+                            <button class="chip-remove" aria-label="Remove alice@example.com">&times;</button>
+                        </span>
+                        <span class="chip">
+                            bob@example.com
+                            <button class="chip-remove" aria-label="Remove bob@example.com">&times;</button>
+                        </span>
+                        <span class="chip">
+                            carol@example.com
+                            <button class="chip-remove" aria-label="Remove carol@example.com">&times;</button>
+                        </span>
+                        <input type="email" id="email-input" placeholder="Add email address..." aria-label="Add email recipient">
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="chips-container" role="region" aria-label="Email recipients"&gt;
+    &lt;span class="chip"&gt;
+        alice@example.com
+        &lt;button class="chip-remove" aria-label="Remove alice@example.com"&gt;&amp;times;&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;input type="email" placeholder="Add email..." aria-label="Add email recipient"&gt;
 &lt;/div&gt;</code></pre>
                 </div>
             </section>
 
             <section>
-                <h2>Features</h2>
+                <h2>Structure</h2>
                 <ul>
-                    <li><strong>Multiple Chips</strong> - Add and manage multiple values</li>
-                    <li><strong>Remove Buttons</strong> - Easy deletion with X button</li>
-                    <li><strong>Auto-complete</strong> - Suggestions for quick input</li>
-                    <li><strong>Form Integration</strong> - Works as form input</li>
-                    <li><strong>Visual Feedback</strong> - Clear chip styling</li>
-                    <li><strong>Flexible Content</strong> - Text, emails, tags, etc.</li>
+                    <li><strong>`.chips-container`</strong> - Flex wrapper for chips and input</li>
+                    <li><strong>`.chip`</strong> - Individual chip with remove button</li>
+                    <li><strong>`.chip-remove`</strong> - Unstyled button for deletion</li>
+                    <li><strong>`<input>`</strong> - Native text input for new entries</li>
+                    <li><strong>`.suggestions-list`</strong> - Unordered list of suggestions</li>
+                    <li><strong>`.suggestion-item`</strong> - Clickable suggestion item</li>
+                    <li><strong>`role="region"`</strong> - ARIA landmark for chip area</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>Semantic HTML</strong> - Native `<input>`, `<button>`, `<ul>`, `<li>` elements</li>
+                    <li><strong>Single Classes</strong> - Only `.chip`, `.chips-container`, `.suggestion-item`</li>
+                    <li><strong>ARIA Complete</strong> - `role="region"`, `aria-label`, semantic button labels</li>
+                    <li><strong>Flex Layout</strong> - Wrapping chips with flexible input</li>
+                    <li><strong>Remove Buttons</strong> - Easy deletion with × button</li>
+                    <li><strong>Suggestions</strong> - Clickable list of options</li>
+                    <li><strong>Design Tokens</strong> - All colors, spacing from var(--a-*)</li>
+                    <li><strong>Keyboard Support</strong> - Enter to add, Backspace to remove</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Use Cases</h2>
                 <ul>
-                    <li><strong>Tags/Keywords</strong> - Article and blog tagging</li>
+                    <li><strong>Tags/Keywords</strong> - Article tagging and filtering</li>
                     <li><strong>Email Recipients</strong> - To, CC, BCC fields</li>
-                    <li><strong>User Selection</strong> - Invite team members</li>
                     <li><strong>Skills/Interests</strong> - User profile setup</li>
-                    <li><strong>Permissions</strong> - Grant access to users</li>
+                    <li><strong>Team Members</strong> - Multi-user selection</li>
+                    <li><strong>Permissions</strong> - Grant access to multiple users</li>
                     <li><strong>Filtering</strong> - Multi-select filter tags</li>
                 </ul>
             </section>
@@ -158,24 +260,27 @@
             <section>
                 <h2>Accessibility</h2>
                 <ul>
-                    <li>Use semantic wrapper for input container</li>
-                    <li>Include <code>aria-label</code> on remove buttons</li>
-                    <li>Support keyboard (Space/Enter to add, Backspace to remove)</li>
+                    <li>Use semantic HTML elements: `<input>`, `<button>`, `<ul>`, `<li>`</li>
+                    <li>Include `aria-label` on remove buttons and input</li>
+                    <li>Use `role="region"` to mark chip container</li>
+                    <li>Support keyboard navigation (Tab, Enter, Backspace)</li>
                     <li>Announce chip additions/removals to screen readers</li>
                     <li>Maintain focus management when removing chips</li>
-                    <li>Provide descriptive labels for the input</li>
+                    <li>Provide clear labeling for input fields</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Best Practices</h2>
                 <ul>
-                    <li><strong>Clear Removal</strong> - Always provide remove buttons</li>
-                    <li><strong>Input Validation</strong> - Prevent duplicate entries</li>
-                    <li><strong>Suggestions</strong> - Show relevant auto-complete options</li>
-                    <li><strong>Visual Distinction</strong> - Make chips clearly visible</li>
-                    <li><strong>Keyboard Support</strong> - Full keyboard accessibility</li>
-                    <li><strong>Count Display</strong> - Show number of chips added</li>
+                    <li>Always provide remove buttons (× or trash icon)</li>
+                    <li>Validate input before adding (no duplicates)</li>
+                    <li>Show relevant suggestions for quick entry</li>
+                    <li>Make chips visually distinct from input area</li>
+                    <li>Support full keyboard accessibility</li>
+                    <li>Display count of chips added</li>
+                    <li>Clear input field after chip is added</li>
+                    <li>Handle backspace to delete last chip</li>
                 </ul>
             </section>
 
@@ -183,102 +288,138 @@
 
     </div></section></main>
 
-    	<!-- FOOTER -->
-	<footer class="footer">
-		<div class="container">
-			<!-- Main Content Grid -->
-			<div class="footer-content">
-				<!-- Brand Section -->
-				<div class="footer-brand">
-					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
-				</div>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Main Content Grid -->
+            <div class="footer-content">
+                <!-- Brand Section -->
+                <div class="footer-brand">
+                    <a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+                    <p class="footer-tagline">The Semantic Web, Reimagined.</p>
+                </div>
 
-				<!-- Product Links -->
-				<div class="footer-column">
-					<h4>Product</h4>
-					<ul>
-						<li><a href="../../docs/components-overview.html">All Components</a></li>
-						<li><a href="../../docs/axicons.html">Icons</a></li>
-						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
-						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
-					</ul>
-				</div>
+                <!-- Documentation Links -->
+                <div class="footer-column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../components-overview.html">Component Overview</a></li>
+                        <li><a href="../overview-quickstart.html">Get Started</a></li>
+                        <li><a href="../colors-advanced.html">Colors & Tokens</a></li>
+                    </ul>
+                </div>
 
-				<!-- Resources Links -->
-				<div class="footer-column">
-					<h4>Resources</h4>
-					<ul>
-						<li><a href="../../README.md" target="_blank">README</a></li>
-						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
-					</ul>
-				</div>
+                <!-- Resources Links -->
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../../README.md" target="_blank">README</a></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+                        <li><a href="../../LICENSE" target="_blank">License</a></li>
+                    </ul>
+                </div>
 
-				<!-- Community Links -->
-				<div class="footer-column">
-					<h4>Community</h4>
-					<ul>
-						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
-						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
-					</ul>
-				</div>
-			</div>
+                <!-- Community Links -->
+                <div class="footer-column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+                    </ul>
+                </div>
+            </div>
 
-			<!-- Bottom Section -->
-			<div class="footer-bottom">
-				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
-				<ul class="footer-social">
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
-						<span class="axicon render" data-name="GitHub"></span>
-					</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
-						<span class="axicon render" data-name="Brand-NPM"></span>
-					</a></li>
-				</ul>
-			</div>
-		</div>
-	</footer>
+            <!-- Bottom Section -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+                <ul class="footer-social">
+                    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+                        <span class="axicon render" data-name="GitHub"></span>
+                    </a></li>
+                    <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+                        <span class="axicon render" data-name="Brand-NPM"></span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
-            <script>
-        // Chip removal
-        document.querySelectorAll('.chip-remove').forEach(btn => {
-            btn.addEventListener('click', () => {
-                btn.closest('.chip').remove();
-                updateChipCount();
-            });
-        });
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/index-page-manager.js"></script>
+    <script>
+        // Tag chips
+        setupChips('tagsContainer', 'tag-input', 'tagSuggestions', 'tags-info');
         
-        // Suggestion chips
-        document.querySelectorAll('.suggestion-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                const newChip = document.createElement('div');
-                newChip.className = 'chip';
-                newChip.innerHTML = `
-                    ${chip.textContent}
-                    <button class="chip-remove" aria-label="Remove ${chip.textContent}">&times;</button>
-                `;
-                
-                document.getElementById('chipWrapper').insertBefore(
-                    newChip,
-                    document.getElementById('tagInput')
-                );
-                
-                newChip.querySelector('.chip-remove').addEventListener('click', function() {
-                    this.closest('.chip').remove();
-                    updateChipCount();
+        // Email chips
+        setupChips('emailContainer', 'email-input', null, null);
+
+        function setupChips(containerId, inputId, suggestionsId, infoId) {
+            const container = document.getElementById(containerId);
+            const input = document.getElementById(inputId);
+            const suggestionsElement = suggestionsId ? document.getElementById(suggestionsId) : null;
+            const infoElement = infoId ? document.getElementById(infoId) : null;
+
+            // Remove chip
+            container.querySelectorAll('.chip-remove').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    btn.closest('.chip').remove();
+                    updateInfo();
                 });
-                
-                document.getElementById('tagInput').value = '';
-                updateChipCount();
             });
-        });
-        
-        function updateChipCount() {
-            const count = document.querySelectorAll('.chip').length;
-            const info = document.querySelector('.chip-info');
-            if (info) {
-                info.innerHTML = `<span class="chip-count">${count} tag${count !== 1 ? 's' : ''}</span> selected`;
+
+            // Add chip from input
+            if (input) {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && input.value.trim()) {
+                        e.preventDefault();
+                        addChip(input.value.trim());
+                        input.value = '';
+                        updateInfo();
+                    }
+                });
+
+                // Backspace to remove last chip
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !input.value) {
+                        const lastChip = container.querySelector('.chip:last-of-type');
+                        if (lastChip) {
+                            lastChip.remove();
+                            updateInfo();
+                        }
+                    }
+                });
+            }
+
+            // Add from suggestions
+            if (suggestionsElement) {
+                suggestionsElement.querySelectorAll('.suggestion-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        addChip(item.textContent);
+                        if (input) input.value = '';
+                        updateInfo();
+                    });
+                });
+            }
+
+            function addChip(value) {
+                const chip = document.createElement('span');
+                chip.className = 'chip';
+                chip.innerHTML = `
+                    ${value}
+                    <button class="chip-remove" aria-label="Remove ${value}">&times;</button>
+                `;
+                chip.querySelector('.chip-remove').addEventListener('click', () => {
+                    chip.remove();
+                    updateInfo();
+                });
+                container.insertBefore(chip, input);
+            }
+
+            function updateInfo() {
+                if (infoElement) {
+                    const count = container.querySelectorAll('.chip').length;
+                    infoElement.textContent = `${count} tag${count !== 1 ? 's' : ''} selected`;
+                }
             }
         }
 
@@ -287,38 +428,32 @@
                 setTimeout(renderAxicons, 100);
                 return;
             }
-            
             document.querySelectorAll('.axicon.render').forEach(el => {
                 const name = el.getAttribute('data-name');
                 if (!name) return;
-                
                 const icon = axicons.find(i => i.name === name);
                 if (icon) {
                     el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
                 }
             });
         }
-
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', renderAxicons);
         } else {
             renderAxicons();
         }
-
         setTimeout(renderAxicons, 500);
     </script>
-    <script src="../../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="../../js/axicons-loader.js"></script>
-<script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
-<script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
 </body>
 </html>
