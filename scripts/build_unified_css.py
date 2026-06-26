@@ -39,7 +39,6 @@ def build_unified_css():
         "_variables.css",
         "_animations.css", 
         "_utilities.css",
-        "_components.css",
         "axiom_config.css",
     ]
     
