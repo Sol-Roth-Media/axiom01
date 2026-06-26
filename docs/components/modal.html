@@ -13,7 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body class="axiom-body component-doc">
-    	<!-- HEADER NAVIGATION -->
+    <!-- HEADER NAVIGATION -->
 	<header class="main" data-component="mobile-navbar">
 		<nav role="navigation" aria-label="Main Navigation">
 			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
@@ -44,196 +44,164 @@
     <main><section><div class="container">
         <header>
             <h1>Modal</h1>
-            <p class="text-muted">Axiom01's modal component displays important content in a focused overlay. Modals are designed to draw user attention and block interaction with the rest of the page until the modal is dismissed.</p>
+            <p class="text-muted">Semantic modal dialog component for focused user interactions. Single `.modal` class with proper ARIA roles and keyboard management.</p>
         </header>
 
         <div class="component-section">
 
             <section>
-                <h2>Live Examples</h2>
+                <h2>Live Example</h2>
+                <button class="button" data-variant="primary" onclick="document.getElementById('demo-modal').style.display='flex'">
+                    Open Modal
+                </button>
 
-                <h3>Basic Modal</h3>
-                <div class="modal-trigger-buttons">
-                    <button class="primary" onclick="document.getElementById('modal-basic').classList.add('open')">
-                        <span class="axicon render" data-name="Box"></span>
-                        Open Basic Modal
-                    </button>
+                <div class="modal" id="demo-modal" aria-modal="true" role="dialog" aria-labelledby="modal-title" style="display:none;">
+                    <div>
+                        <header>
+                            <h2 id="modal-title">Modal Title</h2>
+                            <button aria-label="Close modal" onclick="document.getElementById('demo-modal').style.display='none'">&times;</button>
+                        </header>
+                        <p>Modal content goes here. This is a semantic modal using single `.modal` class.</p>
+                        <footer>
+                            <button class="button" data-variant="secondary" onclick="document.getElementById('demo-modal').style.display='none'">Cancel</button>
+                            <button class="button" data-variant="primary" onclick="document.getElementById('demo-modal').style.display='none'">Confirm</button>
+                        </footer>
+                    </div>
                 </div>
 
-                <!-- Basic Modal -->
-                <div class="modal-overlay" id="modal-basic" onclick="this.classList.remove('open')">
-                    <div class="modal-content" onclick="event.stopPropagation()">
-                        <div class="modal-header">
-                            <h2>Basic Modal</h2>
-                            <button class="modal-close" onclick="document.getElementById('modal-basic').classList.remove('open')" aria-label="Close modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <p>This is a simple modal dialog. It overlays the page content and requires user interaction to close.</p>
-                            <p>Click outside the modal or the close button to dismiss it.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="secondary" onclick="document.getElementById('modal-basic').classList.remove('open')">Close</button>
-                            <button class="primary">Confirm</button>
-                        </div>
-
-                <h3>Modal with Form</h3>
-                <div class="modal-trigger-buttons">
-                    <button class="primary" onclick="document.getElementById('modal-form').classList.add('open')">
-                        <span class="axicon render" data-name="Edit"></span>
-                        Open Form Modal
-                    </button>
-                </div>
-
-                <!-- Form Modal -->
-                <div class="modal-overlay" id="modal-form" onclick="this.classList.remove('open')">
-                    <div class="modal-content" onclick="event.stopPropagation()">
-                        <div class="modal-header">
-                            <h2>Add New Item</h2>
-                            <button class="modal-close" onclick="document.getElementById('modal-form').classList.remove('open')" aria-label="Close modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form">
-                                <div>
-                                    <label for="item-name" >Item Name</label>
-                                    <input type="text" id="item-name" placeholder="Enter item name" class="component-example">
-                                </div>
-                                <div>
-                                    <label for="item-desc" >Description</label>
-                                    <textarea id="item-desc" placeholder="Enter description" rows="4" class="component-example"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="secondary" onclick="document.getElementById('modal-form').classList.remove('open')">Cancel</button>
-                            <button class="primary" onclick="document.getElementById('modal-form').classList.remove('open')">Add Item</button>
-                        </div>
-
-                <h3>Confirmation Modal</h3>
-                <div class="modal-trigger-buttons">
-                    <button onclick="document.getElementById('modal-confirm').classList.add('open')">
-                        <span class="axicon render" data-name="AlertCircle"></span>
-                        Open Confirmation
-                    </button>
-                </div>
-
-                <!-- Confirmation Modal -->
-                <div class="modal-overlay" id="modal-confirm" onclick="this.classList.remove('open')">
-                    <div class="modal-content" onclick="event.stopPropagation()">
-                        <div class="modal-header">
-                            <h2>Confirm Action</h2>
-                            <button class="modal-close" onclick="document.getElementById('modal-confirm').classList.remove('open')" aria-label="Close modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="flex-row">
-                                <span class="axicon render demo-icon-warning" data-name="AlertCircle"></span>
-                                <div>
-                                    <p><strong>Are you sure?</strong></p>
-                                    <p>This action cannot be undone. Please confirm you want to proceed.</p>
-                                </div>
-                        <div class="modal-footer">
-                            <button class="secondary" onclick="document.getElementById('modal-confirm').classList.remove('open')">Cancel</button>
-                            <button class="demo-button-delete" onclick="document.getElementById('modal-confirm').classList.remove('open')">Delete</button>
-                        </div>
-            </section>
-
-            <section>
-                <h2>HTML Structure</h2>
-                <p>Modals use a semantic overlay pattern with proper accessibility attributes:</p>
                 <div class="code-block">
-                    <pre><code class="language-html">&lt;!-- Modal Overlay --&gt;
-&lt;div class="modal-overlay" id="modal-example" role="dialog" aria-modal="true" aria-labelledby="modal-title"&gt;
-    &lt;div class="modal-content"&gt;
-        &lt;!-- Header --&gt;
-        &lt;div class="modal-header"&gt;
+                    <pre><code class="language-html">&lt;div class="modal" aria-modal="true" role="dialog" aria-labelledby="modal-title"&gt;
+    &lt;div&gt;
+        &lt;header&gt;
             &lt;h2 id="modal-title"&gt;Modal Title&lt;/h2&gt;
-            &lt;button class="modal-close" aria-label="Close modal"&gt;&amp;times;&lt;/button&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Body --&gt;
-        &lt;div class="modal-body"&gt;
-            &lt;p&gt;Modal content goes here.&lt;/p&gt;
-        &lt;/div&gt;
-
-        &lt;!-- Footer --&gt;
-        &lt;div class="modal-footer"&gt;
-            &lt;button class="secondary"&gt;Cancel&lt;/button&gt;
-            &lt;button class="primary"&gt;Confirm&lt;/button&gt;
-        &lt;/div&gt;
+            &lt;button aria-label="Close modal"&gt;&times;&lt;/button&gt;
+        &lt;/header&gt;
+        &lt;p&gt;Modal content here.&lt;/p&gt;
+        &lt;footer&gt;
+            &lt;button class="button" data-variant="secondary"&gt;Cancel&lt;/button&gt;
+            &lt;button class="button" data-variant="primary"&gt;Confirm&lt;/button&gt;
+        &lt;/footer&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
                 </div>
             </section>
 
             <section>
-                <h2>Features</h2>
+                <h2>Markup Structure</h2>
+                <p>Modal uses semantic HTML with single `.modal` class:</p>
+                <pre><code class="language-html">&lt;div class="modal" aria-modal="true" role="dialog" aria-labelledby="modal-title"&gt;
+    &lt;!-- Centered container div --&gt;
+    &lt;div&gt;
+        &lt;!-- Header section --&gt;
+        &lt;header&gt;
+            &lt;h2 id="modal-title"&gt;Title&lt;/h2&gt;
+            &lt;button aria-label="Close modal"&gt;&times;&lt;/button&gt;
+        &lt;/header&gt;
+
+        &lt;!-- Main content --&gt;
+        &lt;p&gt;Modal body content...&lt;/p&gt;
+
+        &lt;!-- Footer with actions --&gt;
+        &lt;footer&gt;
+            &lt;button class="button" data-variant="secondary"&gt;Cancel&lt;/button&gt;
+            &lt;button class="button" data-variant="primary"&gt;Confirm&lt;/button&gt;
+        &lt;/footer&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <section>
+                <h2>Key Features</h2>
                 <ul>
-                    <li><strong>Overlay Pattern</strong> - Darkened background prevents interaction with page content</li>
-                    <li><strong>Focus Management</strong> - Modal receives focus while open</li>
-                    <li><strong>Dismissal Options</strong> - Close button, cancel button, or click outside</li>
-                    <li><strong>Smooth Animation</strong> - Slide up animation on open</li>
-                    <li><strong>Responsive Design</strong> - Adapts to small screens</li>
-                    <li><strong>Multiple Variants</strong> - Basic, form, confirmation styles</li>
+                    <li><strong>Semantic Structure</strong> - Uses `<header>`, `<footer>` for organization</li>
+                    <li><strong>Single Class</strong> - Only `.modal` class on container</li>
+                    <li><strong>ARIA Attributes</strong> - Full accessibility: `role="dialog"`, `aria-modal="true"`, `aria-labelledby`</li>
+                    <li><strong>Focus Management</strong> - Modal receives and traps focus</li>
+                    <li><strong>Dismissal Options</strong> - Close button, cancel button, or escape key</li>
+                    <li><strong>Responsive Design</strong> - Adapts to all screen sizes</li>
+                    <li><strong>No BEM Classes</strong> - No `.modal-header`, `.modal-body`, `.modal-footer`</li>
                 </ul>
             </section>
 
             <section>
                 <h2>JavaScript Implementation</h2>
-                <p>Control modal visibility with JavaScript:</p>
-                <div class="code-block">
-                    <pre><code class="language-javascript">// Open modal
+                <p>Control modal visibility with simple JavaScript:</p>
+                <pre><code class="language-javascript">// Open modal
 const openModal = (modalId) => {
-    document.getElementById(modalId).classList.add('open');
+    const modal = document.getElementById(modalId);
+    modal.style.display = 'flex';
+    // Set focus to modal or first focusable element
+    modal.focus();
 };
 
 // Close modal
 const closeModal = (modalId) => {
-    document.getElementById(modalId).classList.remove('open');
+    document.getElementById(modalId).style.display = 'none';
 };
 
+// Close on escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const modal = document.querySelector('.modal[style*="flex"]');
+        if (modal) closeModal(modal.id);
+    }
+});
+
 // Close on outside click
-const modal = document.getElementById('modal-example');
+const modal = document.getElementById('modal-id');
 modal.addEventListener('click', (e) => {
     if (e.target === modal) {
-        closeModal('modal-example');
+        closeModal('modal-id');
     }
 });</code></pre>
-                </div>
             </section>
 
             <section>
-                <h2>Use Cases</h2>
+                <h2>Semantic Structure Details</h2>
                 <ul>
-                    <li><strong>Confirmations</strong> - "Are you sure?" dialogs before destructive actions</li>
-                    <li><strong>Forms</strong> - Create, edit, or upload forms in dedicated modal</li>
-                    <li><strong>Alerts</strong> - Important notifications requiring user acknowledgment</li>
-                    <li><strong>Information</strong> - Detailed information without leaving page</li>
-                    <li><strong>Authentication</strong> - Login or signup flows</li>
-                    <li><strong>Onboarding</strong> - Guided tours or help overlays</li>
+                    <li>**`.modal`** - Main container with single class</li>
+                    <li>**Centered `<div>`** - Child div for centering content</li>
+                    <li>**`<header>`** - Title and close button (semantic)</li>
+                    <li>**Content** - Any semantic elements (paragraphs, forms, etc.)</li>
+                    <li>**`<footer>`** - Action buttons (semantic)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>ARIA Attributes</h2>
+                <ul>
+                    <li>`role="dialog"` - Identifies as dialog/modal</li>
+                    <li>`aria-modal="true"` - Indicates modal behavior</li>
+                    <li>`aria-labelledby="modal-title"` - Links to modal title</li>
+                    <li>`aria-label` on close button - Describes purpose</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Accessibility</h2>
                 <ul>
-                    <li><strong>Semantic Role</strong> - Use <code>role="dialog"</code> and <code>aria-modal="true"</code></li>
-                    <li><strong>Labeling</strong> - Include <code>aria-labelledby</code> pointing to title</li>
-                    <li><strong>Keyboard Navigation</strong> - Escape key closes modal, Tab stays within modal</li>
-                    <li><strong>Focus Management</strong> - Focus moves to modal when opened, returns when closed</li>
-                    <li><strong>Screen Reader Support</strong> - Proper heading hierarchy and button labels</li>
-                    <li><strong>Contrast</strong> - Overlay has sufficient contrast with background</li>
+                    <li>Use semantic `<header>` and `<footer>` elements</li>
+                    <li>Include proper ARIA roles and attributes</li>
+                    <li>Trap focus within modal (don't allow tab outside)</li>
+                    <li>Support escape key to close</li>
+                    <li>Restore focus to triggering element after close</li>
+                    <li>Use descriptive button labels</li>
+                    <li>Ensure sufficient color contrast</li>
+                    <li>Test with keyboard and screen readers</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Best Practices</h2>
                 <ul>
-                    <li><strong>Clear Purpose</strong> - Modal should have one clear purpose</li>
-                    <li><strong>Minimal Content</strong> - Keep modal focused and avoid scrolling if possible</li>
-                    <li><strong>Clear Actions</strong> - Primary and secondary buttons should be obvious</li>
-                    <li><strong>Easy Dismissal</strong> - Always provide a close button and allow outside click</li>
-                    <li><strong>No Nested Modals</strong> - Avoid modal within modal</li>
-                    <li><strong>Mobile Friendly</strong> - Ensure modal is readable on small screens</li>
-                    <li><strong>Prevent Action</strong> - Modal should block interaction with page content</li>
+                    <li>Use modals for critical user actions only</li>
+                    <li>Keep modal content focused and relevant</li>
+                    <li>Include clear action buttons (Primary + Secondary)</li>
+                    <li>Always provide a close button</li>
+                    <li>Use semantic HTML structure</li>
+                    <li>Implement keyboard support (Escape, Tab trap)</li>
+                    <li>Use single `.modal` class with semantic elements</li>
+                    <li>Test focus management thoroughly</li>
                 </ul>
             </section>
 
@@ -241,7 +209,7 @@ modal.addEventListener('click', (e) => {
 
     </div></section></main>
 
-    	<!-- FOOTER -->
+    <!-- FOOTER -->
 	<footer class="footer">
 		<div class="container">
 			<!-- Main Content Grid -->
@@ -252,14 +220,13 @@ modal.addEventListener('click', (e) => {
 					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
 				</div>
 
-				<!-- Product Links -->
+				<!-- Documentation Links -->
 				<div class="footer-column">
-					<h4>Product</h4>
+					<h4>Documentation</h4>
 					<ul>
-						<li><a href="../../docs/components-overview.html">All Components</a></li>
-						<li><a href="../../docs/axicons.html">Icons</a></li>
-						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
-						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+						<li><a href="../components-overview.html">Component Overview</a></li>
+						<li><a href="../overview-quickstart.html">Get Started</a></li>
+						<li><a href="../colors-advanced.html">Colors & Tokens</a></li>
 					</ul>
 				</div>
 
@@ -269,7 +236,7 @@ modal.addEventListener('click', (e) => {
 					<ul>
 						<li><a href="../../README.md" target="_blank">README</a></li>
 						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+						<li><a href="../../LICENSE" target="_blank">License</a></li>
 					</ul>
 				</div>
 
@@ -277,8 +244,8 @@ modal.addEventListener('click', (e) => {
 				<div class="footer-column">
 					<h4>Community</h4>
 					<ul>
-						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
-						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
 					</ul>
 				</div>
 			</div>
@@ -298,44 +265,40 @@ modal.addEventListener('click', (e) => {
 		</div>
 	</footer>
 
-            <script>
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/index-page-manager.js"></script>
+    <script>
         function renderAxicons() {
             if (typeof axicons === 'undefined') {
                 setTimeout(renderAxicons, 100);
                 return;
             }
-            
             document.querySelectorAll('.axicon.render').forEach(el => {
                 const name = el.getAttribute('data-name');
                 if (!name) return;
-                
                 const icon = axicons.find(i => i.name === name);
                 if (icon) {
                     el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
                 }
             });
         }
-
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', renderAxicons);
         } else {
             renderAxicons();
         }
-
         setTimeout(renderAxicons, 500);
     </script>
-    <script src="../../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-<script src="../../js/axicons-loader.js"></script>
-<script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
-<script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
 </body>
 </html>
