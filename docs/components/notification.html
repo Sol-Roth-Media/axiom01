@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+            <section>
+                <h2>Notification Types</h2>
+                <ul>
+                    <li><strong>`data-variant="success"`</strong> - Green, for positive feedback and confirmations</li>
+                    <li><strong>`data-variant="error"`</strong> - Red, for errors or failures</li>
+                    <li><strong>`data-variant="warning"`</strong> - Orange, for warnings or caution</li>
+                    <li><strong>`data-variant="info"`</strong> - Blue, for informational messages</li>
+                </ul>
+            </section><!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +19,65 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        [role="alert"] {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--a-space-m);
+            padding: var(--a-space-m) var(--a-space-l);
+            border-radius: var(--a-border-radius-base);
+            border-left: 4px solid var(--a-color-primary);
+            background: var(--a-color-background-secondary);
+            margin-bottom: var(--a-space-m);
+        }
+
+        [role="alert"] svg {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            margin-top: 2px;
+        }
+
+        [role="alert"] > div {
+            flex: 1;
+        }
+
+        [role="alert"] strong {
+            display: block;
+            margin-bottom: var(--a-space-xs);
+        }
+
+        [role="alert"] button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1.5rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        [role="alert"][data-variant="success"] {
+            border-left-color: var(--a-color-success);
+            color: var(--a-color-success);
+        }
+
+        [role="alert"][data-variant="error"] {
+            border-left-color: var(--a-color-error);
+            color: var(--a-color-error);
+        }
+
+        [role="alert"][data-variant="warning"] {
+            border-left-color: var(--a-color-warning);
+            color: var(--a-color-warning);
+        }
+
+        [role="alert"][data-variant="info"] {
+            border-left-color: var(--a-color-primary);
+            color: var(--a-color-primary);
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     <!-- HEADER NAVIGATION -->
@@ -52,63 +119,68 @@
                 <h2>Live Examples</h2>
 
                 <h3>Success Notification</h3>
-                <div class="notification success" role="alert">
+                <div role="alert" data-variant="success">
                     <span class="axicon render" data-name="CheckCircle"></span>
                     <div>
                         <strong>Success!</strong> Your changes have been saved.
                     </div>
-                    <button class="notification-close" aria-label="Close notification">&times;</button>
+                    <button aria-label="Close notification">&times;</button>
                 </div>
 
                 <h3>Error Notification</h3>
-                <div class="notification error" role="alert">
+                <div role="alert" data-variant="error">
                     <span class="axicon render" data-name="AlertCircle"></span>
                     <div>
                         <strong>Error!</strong> Something went wrong. Please try again.
                     </div>
-                    <button class="notification-close" aria-label="Close notification">&times;</button>
+                    <button aria-label="Close notification">&times;</button>
                 </div>
 
                 <h3>Warning Notification</h3>
-                <div class="notification warning" role="alert">
+                <div role="alert" data-variant="warning">
                     <span class="axicon render" data-name="AlertTriangle"></span>
                     <div>
                         <strong>Warning!</strong> This action cannot be undone.
                     </div>
-                    <button class="notification-close" aria-label="Close notification">&times;</button>
+                    <button aria-label="Close notification">&times;</button>
                 </div>
 
                 <h3>Info Notification</h3>
-                <div class="notification info" role="alert">
+                <div role="alert" data-variant="info">
                     <span class="axicon render" data-name="Info"></span>
                     <div>
                         <strong>Note:</strong> New features are now available.
                     </div>
-                    <button class="notification-close" aria-label="Close notification">&times;</button>
+                    <button aria-label="Close notification">&times;</button>
                 </div>
             </section>
 
             <section>
                 <h2>Markup</h2>
-                <p>Notifications use semantic HTML with ARIA roles and utility classes for styling:</p>
-                <pre><code class="language-html">&lt;div class="notification success" role="alert"&gt;
+                <p>Notifications use semantic HTML with data-variant for type styling:</p>
+                <pre><code class="language-html">&lt;div role="alert" data-variant="success"&gt;
     &lt;span class="axicon render" data-name="CheckCircle"&gt;&lt;/span&gt;
     &lt;div&gt;
         &lt;strong&gt;Success!&lt;/strong&gt; Your action completed.
     &lt;/div&gt;
-    &lt;button class="notification-close" aria-label="Close"&gt;&amp;times;&lt;/button&gt;
+    &lt;button aria-label="Close notification"&gt;&amp;times;&lt;/button&gt;
 &lt;/div&gt;
 
-&lt;!-- Types: success, error, warning, info --&gt;</code></pre>
+&lt;!-- Variants: success, error, warning, info --&gt;</code></pre>
             </section>
 
             <section>
-                <h2>Types</h2>
+                <h2>Data Attributes</h2>
                 <ul>
-                    <li><strong>success</strong> - Green, for positive feedback</li>
-                    <li><strong>error</strong> - Red, for errors or failures</li>
-                    <li><strong>warning</strong> - Orange, for warnings or caution</li>
-                    <li><strong>info</strong> - Blue, for informational messages</li>
+                    <li><strong>`data-variant="success|error|warning|info"`</strong> - Notification type (colors and icons)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>ARIA Attributes</h2>
+                <ul>
+                    <li><strong>`role="alert"`</strong> - Announces notification to screen readers immediately</li>
+                    <li><strong>`aria-label`</strong> - Describes close button purpose</li>
                 </ul>
             </section>
 
@@ -127,11 +199,11 @@
             <section>
                 <h2>Accessibility</h2>
                 <ul>
-                    <li><code>role="alert"</code> - Announces notification to screen readers</li>
-                    <li><code>aria-label</code> - Labels close button for context</li>
-                    <li><strong>Color + Icon</strong> - Never rely on color alone</li>
-                    <li><strong>Focus Management</strong> - Close button is keyboard accessible</li>
-                    <li><strong>Clear Text</strong> - Use descriptive messages</li>
+                    <li><strong>`role="alert"`</strong> - Announces notification to screen readers immediately on load</li>
+                    <li><strong>`aria-label`</strong> - Labels close button for keyboard users</li>
+                    <li><strong>Color + Icon</strong> - Never rely on color alone to convey type</li>
+                    <li><strong>Focus Management</strong> - Close button is always keyboard accessible</li>
+                    <li><strong>Clear Text</strong> - Use descriptive, actionable messages</li>
                 </ul>
             </section>
 
@@ -244,7 +316,7 @@
 
     <!-- Notification Close Handler -->
     <script>
-        document.querySelectorAll('.notification-close').forEach(btn => {
+        document.querySelectorAll('[role="alert"] button').forEach(btn => {
             btn.addEventListener('click', function() {
                 this.parentElement.style.opacity = '0';
                 this.parentElement.style.transition = 'opacity 0.3s ease';

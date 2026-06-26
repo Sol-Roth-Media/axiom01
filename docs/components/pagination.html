@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+            <section>
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>Semantic `<nav>` Element</strong> - Proper HTML5 structure for navigation</li>
+                    <li><strong>Data Attributes</strong> - `data-current="true"` marks active page</li>
+                    <li><strong>Flexbox Layout</strong> - Responsive horizontal arrangement</li>
+                    <li><strong>Icon Support</strong> - Include icons with previous/next buttons</li>
+                    <li><strong>Hover States</strong> - Visual feedback on interaction</li>
+                    <li><strong>Keyboard Accessible</strong> - All links fully keyboard navigable</li>
+                </ul>
+            </section><!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +21,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        nav[aria-label*="pagination"] ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--a-space-m);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav[aria-label*="pagination"] a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--a-space-s);
+            min-width: 40px;
+            padding: var(--a-space-s) var(--a-space-m);
+            border: 1px solid var(--a-color-border);
+            border-radius: var(--a-border-radius-s);
+            background: var(--a-color-background);
+            color: var(--a-color-text);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        nav[aria-label*="pagination"] a:hover {
+            background: var(--a-color-background-secondary);
+            border-color: var(--a-color-primary);
+            color: var(--a-color-primary);
+        }
+
+        nav[aria-label*="pagination"] a[data-current="true"] {
+            background: var(--a-color-primary);
+            color: var(--a-color-on-primary);
+            border-color: var(--a-color-primary);
+            cursor: default;
+            pointer-events: none;
+        }
+
+        nav[aria-label*="pagination"] a:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body class="axiom-body component-doc">
     	<!-- HEADER NAVIGATION -->
@@ -53,11 +108,11 @@
                 <h2>Live Examples</h2>
 
                 <h3>Basic Pagination</h3>
-                <nav aria-label="Page navigation example" >
-                    <ul class="pagination">
+                <nav aria-label="Page navigation example">
+                    <ul>
                         <li><a href="#">Previous</a></li>
                         <li><a href="#">1</a></li>
-                        <li><a href="#" class="active">2</a></li>
+                        <li><a href="#" data-current="true">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
                         <li><a href="#">Next</a></li>
@@ -65,21 +120,21 @@
                 </nav>
 
                 <h3>With Icons</h3>
-                <nav aria-label="Page navigation with icons" >
-                    <ul class="pagination">
+                <nav aria-label="Page navigation with icons">
+                    <ul>
                         <li><a href="#"><span class="axicon render" data-name="ChevronLeft"></span> Previous</a></li>
                         <li><a href="#">1</a></li>
-                        <li><a href="#" class="active">2</a></li>
+                        <li><a href="#" data-current="true">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">Next <span class="axicon render" data-name="ChevronRight"></span></a></li>
                     </ul>
                 </nav>
 
                 <h3>Simple Pagination</h3>
-                <nav aria-label="Simple pagination" >
-                    <ul class="pagination">
+                <nav aria-label="Simple pagination">
+                    <ul>
                         <li><a href="#">Back</a></li>
-                        <li><a href="#" class="active">Page 5 of 12</a></li>
+                        <li><a href="#" data-current="true">Page 5 of 12</a></li>
                         <li><a href="#">Next</a></li>
                     </ul>
                 </nav>
@@ -87,13 +142,13 @@
 
             <section>
                 <h2>HTML Structure</h2>
-                <p>Pagination uses semantic <code>&lt;nav&gt;</code> with an unordered list and anchor links:</p>
+                <p>Pagination uses semantic `<nav>` with an unordered list and data-current attribute:</p>
                 <div class="code-block">
                     <pre><code class="language-html">&lt;nav aria-label="Page navigation"&gt;
-    &lt;ul class="pagination"&gt;
+    &lt;ul&gt;
         &lt;li&gt;&lt;a href="#"&gt;Previous&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#" class="active"&gt;2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#" data-current="true"&gt;2&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href="#"&gt;3&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href="#"&gt;Next&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
@@ -102,44 +157,18 @@
             </section>
 
             <section>
-                <h2>Styling</h2>
-                <p>The <code>.pagination</code> class applies flexbox layout to arrange items horizontally:</p>
-                <div class="code-block">
-                    <pre><code class="language-css">.pagination {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--a-space-m);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+                <h2>Data Attributes</h2>
+                <ul>
+                    <li><strong>`data-current="true"`</strong> - Marks current page link</li>
+                </ul>
+            </section>
 
-.pagination a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 40px;
-    padding: var(--a-space-s) var(--a-space-m);
-    border: 1px solid var(--ax-border);
-    border-radius: var(--a-border-radius-md);
-    background: var(--ax-background-secondary);
-    color: var(--a-color-text);
-    text-decoration: none;
-    transition: all var(--a-transition-base) var(--a-ease-out);
-}
-
-.pagination a:hover {
-    background: var(--a-color-primary-container);
-    border-color: var(--a-color-primary);
-    color: var(--a-color-primary);
-}
-
-.pagination a.active {
-    background: var(--a-color-primary);
-    color: white;
-    border-color: var(--a-color-primary);
-}</code></pre>
-                </div>
+            <section>
+                <h2>ARIA Attributes</h2>
+                <ul>
+                    <li><strong>`<nav>` element</strong> - Semantic navigation region</li>
+                    <li><strong>`aria-label`</strong> - Describes pagination purpose (e.g., "Page navigation")</li>
+                </ul>
             </section>
 
             <section>
