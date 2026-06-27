@@ -540,3 +540,121 @@ window.Axiom = {
   showComponentDetails: HubNav.showComponentDetails,
   loadChapter: HubNav.loadChapter,
 };
+
+// ============================================================================
+// POPULATE COMPONENT LIBRARY ON PAGE LOAD
+// ============================================================================
+
+const ComponentLibrary = (() => {
+  const init = async () => {
+    await populateComponentCards();
+    await populateCategories();
+  };
+
+  const populateComponentCards = async () => {
+    const stage = document.getElementById('component-stage');
+    if (!stage) return;
+
+    try {
+      const allComponents = await ContentLoader.loadAllComponents();
+      const gridContainer = stage.querySelector('.grid') || stage;
+      
+      // Clear existing static cards (keep first 6 as template, remove old ones)
+      const existingCards = gridContainer.querySelectorAll('article[data-category]');
+      if (existingCards.length > 0) {
+        existingCards.forEach(card => card.remove());
+      }
+
+      // Add all components dynamically
+      allComponents.forEach(component => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.setAttribute('data-category', component.category);
+        card.innerHTML = `
+          <h3>${component.name}</h3>
+          <p>${component.description}</p>
+          <footer>
+            <button class="primary" data-component="${component.id}">View</button>
+          </footer>
+        `;
+        gridContainer.appendChild(card);
+
+        // Add click handler to View button
+        const viewBtn = card.querySelector('button[data-component]');
+        if (viewBtn) {
+          viewBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await HubNav.showComponentDetails(component.id);
+          });
+        }
+      });
+
+      // Trigger initial filter to show first category
+      HubNav.filterByCategory('buttons');
+
+    } catch (error) {
+      console.error('Error populating component cards:', error);
+    }
+  };
+
+  const populateCategories = async () => {
+    const categoryNav = document.querySelector('aside nav');
+    if (!categoryNav) return;
+
+    const categoryList = categoryNav.querySelector('ul');
+    if (!categoryList) return;
+
+    // Clear existing categories
+    const existingLinks = categoryList.querySelectorAll('a[data-category]');
+    existingLinks.forEach(link => link.parentElement.remove());
+
+    // Add all categories
+    const categories = [
+      { id: 'buttons', label: 'Buttons' },
+      { id: 'cards', label: 'Cards' },
+      { id: 'forms', label: 'Forms' },
+      { id: 'alerts', label: 'Alerts' },
+      { id: 'layouts', label: 'Layouts' },
+      { id: 'misc', label: 'Misc' },
+      { id: 'typography', label: 'Typography' },
+      { id: 'navigation', label: 'Navigation' },
+      { id: 'data', label: 'Data & Lists' },
+      { id: 'interactive', label: 'Interactive' }
+    ];
+
+    categories.forEach(cat => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#';
+      a.setAttribute('data-category', cat.id);
+      a.textContent = cat.label;
+      
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        HubNav.filterByCategory(cat.id);
+        HubNav.updateCategoryActive(a);
+      });
+
+      li.appendChild(a);
+      categoryList.appendChild(li);
+    });
+  };
+
+  return {
+    init,
+  };
+})();
+
+// Initialize component library when docs view is shown
+const originalNavigate = Navigation.navigate;
+Navigation.navigate = function(viewName) {
+  originalNavigate.call(this, viewName);
+  
+  if (viewName === 'docs') {
+    // Delay slightly to ensure DOM is ready
+    setTimeout(() => {
+      ComponentLibrary.init();
+    }, 100);
+  }
+};
+
