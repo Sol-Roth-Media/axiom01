@@ -908,3 +908,323 @@
 /* ============================================================================
    END AXIOM01 v3 - The Semantic Rebellion: The Mathematics of Design
    ============================================================================ */
+
+/* ============================================================================
+   SPA-SPECIFIC LAYOUT STYLES (Framework-level, not page-specific)
+   ============================================================================ */
+
+/* Root container */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+/* Header / Navigation */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--a-surface-raised);
+  border-bottom: 1px solid var(--a-border);
+  padding: var(--a-space-md);
+}
+
+header > nav {
+  max-width: var(--a-width-max);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--a-space-lg);
+}
+
+header a {
+  font-size: var(--a-text-xl);
+  font-weight: var(--a-font-weight-bold);
+  color: var(--a-primary);
+  text-decoration: none;
+}
+
+header a > strong {
+  color: var(--a-primary);
+}
+
+header > nav > ul {
+  list-style: none;
+  display: flex;
+  gap: var(--a-space-md);
+  padding: 0;
+  margin: 0;
+}
+
+header button {
+  border: none;
+  background: transparent;
+  padding: var(--a-space-sm) var(--a-space-md);
+  cursor: pointer;
+  font-weight: var(--a-font-weight-medium);
+  color: var(--a-text-main);
+  transition: color var(--a-transition-base) var(--a-easing);
+}
+
+header button:hover {
+  color: var(--a-primary);
+}
+
+header button[aria-current="page"] {
+  color: var(--a-primary);
+  border-bottom: 2px solid var(--a-primary);
+}
+
+header > nav > div {
+  display: flex;
+  gap: var(--a-space-sm);
+  align-items: center;
+}
+
+header > nav > div > button {
+  border: none;
+  background: transparent;
+  padding: var(--a-space-sm);
+  cursor: pointer;
+  font-size: var(--a-text-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--a-radius-md);
+  transition: background var(--a-transition-base) var(--a-easing);
+}
+
+header > nav > div > button:hover {
+  background: var(--a-surface-overlay);
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, var(--a-primary) 0%, color-mix(in oklch, var(--a-primary) 80%, black) 100%);
+  color: var(--a-on-primary);
+  padding: var(--a-space-3xl) var(--a-space-md);
+  text-align: center;
+}
+
+.hero > h1 {
+  font-size: var(--a-text-3xl);
+  margin-bottom: var(--a-space-xs);
+  color: inherit;
+}
+
+.hero > p:first-of-type {
+  font-size: var(--a-text-lg);
+  margin-bottom: var(--a-space-md);
+  color: inherit;
+  max-width: none;
+}
+
+.hero > p:nth-of-type(2) {
+  font-size: var(--a-text-lg);
+  color: inherit;
+  opacity: 0.95;
+  max-width: var(--a-width-prose);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--a-space-lg);
+}
+
+.hero > div:first-of-type {
+  display: flex;
+  gap: var(--a-space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--a-space-3xl);
+}
+
+.hero > div:last-of-type {
+  max-width: 900px;
+  margin: var(--a-space-3xl) auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--a-gap-grid);
+}
+
+/* Hub Layout (3-column for docs/book) */
+.hub > .container {
+  display: grid;
+  grid-template-columns: 250px 1fr 300px;
+  gap: var(--a-space-lg);
+  padding: var(--a-space-lg) var(--a-space-md);
+  min-height: calc(100vh - 200px);
+}
+
+.hub > .container > aside:first-of-type {
+  border-right: 1px solid var(--a-border);
+  padding-right: var(--a-space-lg);
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+.hub > .container > main {
+  padding: var(--a-space-lg) 0;
+}
+
+.hub > .container > aside:last-of-type {
+  border-left: 1px solid var(--a-border);
+  padding-left: var(--a-space-lg);
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+/* Search input in sidebars */
+aside > input[type="text"] {
+  width: 100%;
+  margin-bottom: var(--a-space-md);
+}
+
+/* Sidebar navigation lists */
+aside > nav > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+aside > nav > ul > li {
+  margin: var(--a-space-sm) 0;
+}
+
+aside > nav a {
+  display: block;
+  padding: var(--a-space-xs) 0;
+  font-size: var(--a-text-sm);
+  color: var(--a-text-secondary);
+  text-decoration: none;
+  transition: color var(--a-transition-base) var(--a-easing);
+}
+
+aside > nav a:hover {
+  color: var(--a-primary);
+}
+
+/* TOC lists */
+#component-toc > ul,
+#book-toc > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#component-toc > ul > li,
+#book-toc > ul > li {
+  margin: var(--a-space-sm) 0;
+}
+
+#component-toc a,
+#book-toc a {
+  font-size: var(--a-text-sm);
+  color: var(--a-text-secondary);
+  text-decoration: none;
+}
+
+/* Footer */
+footer {
+  background: var(--a-surface-overlay);
+  border-top: 1px solid var(--a-border);
+  padding: var(--a-space-lg) var(--a-space-md);
+  text-align: center;
+  color: var(--a-text-muted);
+  font-size: var(--a-text-sm);
+  margin-top: auto;
+}
+
+/* Hidden sections */
+.hidden {
+  display: none !important;
+}
+
+/* View animations */
+section[id^="view-"]:not(.hidden) {
+  animation: fadeIn 0.2s var(--a-easing);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+  header > nav {
+    flex-wrap: wrap;
+  }
+
+  header > nav > ul {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .hub > .container {
+    grid-template-columns: 1fr;
+  }
+
+  .hub > .container > aside:first-of-type {
+    border: none;
+    padding: 0;
+    margin-bottom: var(--a-space-lg);
+    max-height: none;
+    display: flex;
+    gap: var(--a-space-md);
+    flex-wrap: wrap;
+  }
+
+  .hub > .container > aside:last-of-type {
+    border: none;
+    padding: 0;
+    margin-top: var(--a-space-lg);
+    max-height: none;
+  }
+
+  .hero > div:last-of-type {
+    grid-template-columns: 1fr;
+  }
+
+  .hero > h1 {
+    font-size: var(--a-text-2xl);
+  }
+
+  .hero > div:first-of-type {
+    flex-direction: column;
+  }
+
+  .hero > div:first-of-type > button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  header > nav {
+    gap: var(--a-space-md);
+  }
+
+  header > nav > ul {
+    gap: var(--a-space-sm);
+  }
+
+  header button {
+    padding: var(--a-space-xs) var(--a-space-sm);
+    font-size: var(--a-text-sm);
+  }
+
+  aside > nav > ul > li {
+    margin: var(--a-space-xs) 0;
+  }
+
+  .hero > p:nth-of-type(2) {
+    font-size: var(--a-text-base);
+  }
+}
+
