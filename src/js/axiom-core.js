@@ -1,14 +1,6 @@
 /**
  * AXIOM01 v3 - Core Framework JavaScript
  * The Semantic Rebellion: The Mathematics of Design
- * 
- * Minimal, focused on:
- * - Route management for the unified SPA
- * - Configuration and theme switching
- * - Hub navigation for Docs and Book
- * - Component preview and chapter loading
- * - Mobile menu management
- * - ContentLoader integration for JSON-driven content
  */
 
 // ============================================================================
@@ -25,7 +17,6 @@ const Navigation = (() => {
   };
 
   const init = () => {
-    // Set up click handlers for navigation buttons
     document.querySelectorAll('[data-nav]').forEach((el) => {
       el.addEventListener('click', (e) => {
         e.preventDefault();
@@ -34,7 +25,6 @@ const Navigation = (() => {
       });
     });
 
-    // Handle browser back button
     window.addEventListener('popstate', (e) => {
       if (e.state && e.state.view) {
         switchView(e.state.view);
@@ -46,29 +36,23 @@ const Navigation = (() => {
     if (views[viewName]) {
       currentView = viewName;
       switchView(viewName);
-      
-      // Update browser history
       window.history.pushState({ view: viewName }, '', `#${viewName}`);
     }
   };
 
   const switchView = (viewName) => {
-    // Hide all views
     Object.values(views).forEach((viewId) => {
       const el = document.getElementById(viewId);
       if (el) el.classList.add('hidden');
     });
 
-    // Show selected view
     const viewEl = document.getElementById(views[viewName]);
     if (viewEl) viewEl.classList.remove('hidden');
 
-    // Update active nav state
     document.querySelectorAll('[data-nav]').forEach((el) => {
       el.setAttribute('aria-current', el.getAttribute('data-nav') === viewName ? 'page' : 'false');
     });
 
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -87,11 +71,9 @@ const Config = (() => {
   const storagePrefix = 'axiom01-v3-';
 
   const init = () => {
-    // Load persisted theme setting
     const savedTheme = localStorage.getItem(`${storagePrefix}theme`);
     if (savedTheme) setTheme(savedTheme);
 
-    // Set up theme toggle button
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
       themeToggle.addEventListener('click', () => {
@@ -100,38 +82,11 @@ const Config = (() => {
         setTheme(next);
       });
     }
-
-    // Mobile theme toggle
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-    if (mobileThemeToggle) {
-      mobileThemeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme') || 'light';
-        const next = current === 'dark' ? 'light' : 'dark';
-        setTheme(next);
-        updateMobileThemeButton(next);
-      });
-    }
   };
 
   const setTheme = (theme) => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem(`${storagePrefix}theme`, theme);
-    updateThemeButton(theme);
-  };
-
-  const updateThemeButton = (theme) => {
-    const btn = document.getElementById('theme-toggle');
-    if (btn) {
-      btn.setAttribute('aria-label', `Toggle ${theme === 'dark' ? 'light' : 'dark'} mode`);
-      btn.setAttribute('title', `Current: ${theme} mode`);
-    }
-  };
-
-  const updateMobileThemeButton = (theme) => {
-    const btn = document.getElementById('mobile-theme-toggle');
-    if (btn) {
-      btn.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-    }
   };
 
   return {
@@ -151,7 +106,6 @@ const MobileMenu = (() => {
     
     if (!menuToggle || !mobileMenu) return;
 
-    // Toggle menu open/close
     menuToggle.addEventListener('click', () => {
       const isHidden = mobileMenu.classList.contains('hidden');
       if (isHidden) {
@@ -163,7 +117,6 @@ const MobileMenu = (() => {
       }
     });
 
-    // Close menu when nav button clicked
     document.querySelectorAll('#mobile-menu button[data-nav]').forEach(btn => {
       btn.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
@@ -171,7 +124,6 @@ const MobileMenu = (() => {
       });
     });
 
-    // Close menu when pressing Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
         mobileMenu.classList.add('hidden');
@@ -179,7 +131,6 @@ const MobileMenu = (() => {
       }
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
         if (!mobileMenu.classList.contains('hidden')) {
@@ -213,12 +164,12 @@ const ComponentSearch = (() => {
   };
 
   const filterComponents = () => {
-    const items = document.querySelectorAll('[data-category]');
+    const items = document.querySelectorAll('#component-grid article[data-category]');
 
     items.forEach((item) => {
       const h3 = item.querySelector('h3');
       const p = item.querySelector('p');
-      const text = (h3?.textContent + ' ' + p?.textContent).toLowerCase();
+      const text = ((h3?.textContent || '') + ' ' + (p?.textContent || '')).toLowerCase();
 
       const matches = !searchQuery || text.includes(searchQuery);
       item.style.display = matches ? '' : 'none';
@@ -232,7 +183,7 @@ const ComponentSearch = (() => {
 })();
 
 // ============================================================================
-// CONTENT LOADER - JSON file loading with caching
+// CONTENT LOADER
 // ============================================================================
 
 const ContentLoader = (() => {
@@ -291,21 +242,12 @@ const ContentLoader = (() => {
     return chapters.find(ch => ch.id === chapterId) || null;
   };
 
-  const clearCache = (path) => {
-    if (path) {
-      delete cache[path];
-    } else {
-      Object.keys(cache).forEach(key => delete cache[key]);
-    }
-  };
-
   return {
     loadJSON,
     loadComponents,
     loadAllComponents,
     loadChapters,
     loadChapter,
-    clearCache,
   };
 })();
 
@@ -318,38 +260,34 @@ const HubNav = (() => {
   let currentCategory = 'buttons';
 
   const init = () => {
-    // Category navigation in Docs Hub
-    document.querySelectorAll('aside [data-category]').forEach((link) => {
-      link.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
+      if (e.target.getAttribute('data-category') && e.target.closest('[data-category]')) {
         e.preventDefault();
-        const category = link.getAttribute('data-category');
+        const category = e.target.getAttribute('data-category');
         currentCategory = category;
         filterByCategory(category);
-        updateCategoryActive(link);
-      });
+        updateCategoryActive(e.target);
+      }
     });
 
-    // Component view buttons
-    document.querySelectorAll('[data-component]').forEach((btn) => {
-      btn.addEventListener('click', async (e) => {
+    document.addEventListener('click', (e) => {
+      if (e.target.getAttribute('data-component')) {
         e.preventDefault();
-        const componentId = btn.getAttribute('data-component');
-        await showComponentDetails(componentId);
-      });
+        const componentId = e.target.getAttribute('data-component');
+        showComponentDetails(componentId);
+      }
     });
 
-    // Chapter navigation in Book Reader
-    document.querySelectorAll('[data-chapter]').forEach((link) => {
-      link.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
+      if (e.target.getAttribute('data-chapter')) {
         e.preventDefault();
-        const chapter = link.getAttribute('data-chapter');
+        const chapter = e.target.getAttribute('data-chapter');
         currentChapter = chapter;
         loadChapter(chapter);
-        updateChapterActive(link);
-      });
+        updateChapterActive(e.target);
+      }
     });
 
-    // Chapter navigation buttons
     const prevBtn = document.getElementById('prev-chapter');
     const nextBtn = document.getElementById('next-chapter');
     if (prevBtn) prevBtn.addEventListener('click', () => goToChapter('prev'));
@@ -360,11 +298,9 @@ const HubNav = (() => {
     const preview = document.getElementById('component-preview');
     if (!preview) return;
 
-    // Show loading state
     preview.innerHTML = '<p style="opacity: 0.6;">Loading component...</p>';
 
     try {
-      // Find component in all categories
       const allComponents = await ContentLoader.loadAllComponents();
       const component = allComponents.find(c => c.id === componentId);
 
@@ -373,23 +309,34 @@ const HubNav = (() => {
         return;
       }
 
-      // Display component details with copy buttons
-      const htmlEl = document.createElement('code');
-      htmlEl.textContent = component.html;
-      const cssEl = document.createElement('code');
-      cssEl.textContent = component.css;
-      
+      let livePreviewHTML = '';
+      try {
+        livePreviewHTML = `<div class="live-preview">${component.html}</div>`;
+      } catch (e) {
+        livePreviewHTML = '';
+      }
+
+      let styleTag = document.getElementById('component-preview-styles');
+      if (!styleTag) {
+        styleTag = document.createElement('style');
+        styleTag.id = 'component-preview-styles';
+        document.head.appendChild(styleTag);
+      }
+      styleTag.textContent = `${component.css}`;
+
       preview.innerHTML = `
         <article>
           <h3>${component.name}</h3>
           <p><small>${component.description}</small></p>
+
+          ${livePreviewHTML}
 
           <div style="margin-top: var(--a-space-lg); border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--a-space-sm);">
               <h4 style="font-size: var(--a-text-sm); margin: 0;">HTML</h4>
               <button data-copy-html style="padding: 4px 8px; font-size: 12px; background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius-sm); cursor: pointer;">Copy</button>
             </div>
-            <code id="component-html" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md);">${escapeHtml(component.html)}</code>
+            <code id="component-html" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md); font-family: 'Menlo', 'Monaco', 'Courier New', monospace;">${escapeHtml(component.html)}</code>
           </div>
 
           <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
@@ -397,7 +344,7 @@ const HubNav = (() => {
               <h4 style="font-size: var(--a-text-sm); margin: 0;">CSS</h4>
               <button data-copy-css style="padding: 4px 8px; font-size: 12px; background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius-sm); cursor: pointer;">Copy</button>
             </div>
-            <code id="component-css" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md);">${escapeHtml(component.css)}</code>
+            <code id="component-css" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md); font-family: 'Menlo', 'Monaco', 'Courier New', monospace;">${escapeHtml(component.css)}</code>
           </div>
 
           <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
@@ -411,6 +358,46 @@ const HubNav = (() => {
           </div>
         </article>
       `;
+
+      const htmlBtn = preview.querySelector('[data-copy-html]');
+      const cssBtn = preview.querySelector('[data-copy-css]');
+      
+      if (htmlBtn) {
+        htmlBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const codeEl = document.getElementById('component-html');
+          if (codeEl) {
+            const text = codeEl.textContent || '';
+            navigator.clipboard.writeText(text);
+            const orig = htmlBtn.textContent;
+            htmlBtn.textContent = '✓ Copied!';
+            htmlBtn.disabled = true;
+            setTimeout(() => {
+              htmlBtn.textContent = orig;
+              htmlBtn.disabled = false;
+            }, 2000);
+          }
+        });
+      }
+      
+      if (cssBtn) {
+        cssBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const codeEl = document.getElementById('component-css');
+          if (codeEl) {
+            const text = codeEl.textContent || '';
+            navigator.clipboard.writeText(text);
+            const orig = cssBtn.textContent;
+            cssBtn.textContent = '✓ Copied!';
+            cssBtn.disabled = true;
+            setTimeout(() => {
+              cssBtn.textContent = orig;
+              cssBtn.disabled = false;
+            }, 2000);
+          }
+        });
+      }
+
     } catch (error) {
       console.error('Error loading component:', error);
       preview.innerHTML = '<p style="color: var(--a-text-muted);">Error loading component details.</p>';
@@ -429,7 +416,7 @@ const HubNav = (() => {
   };
 
   const filterByCategory = (category) => {
-    const items = document.querySelectorAll('#component-stage [data-category]');
+    const items = document.querySelectorAll('#component-grid article[data-category]');
     items.forEach((item) => {
       const itemCategory = item.getAttribute('data-category');
       if (category === 'all') {
@@ -493,70 +480,7 @@ const HubNav = (() => {
 })();
 
 // ============================================================================
-// CODE SNIPPET COPY
-// ============================================================================
-
-const CodeSnippet = (() => {
-  const init = () => {
-    document.addEventListener('click', (e) => {
-      if (e.target.hasAttribute('data-copy-code')) {
-        const codeBlock = e.target.closest('[data-code-block]');
-        if (codeBlock) {
-          const code = codeBlock.querySelector('code')?.textContent || '';
-          copyToClipboard(code);
-          showCopyFeedback(e.target);
-        }
-      }
-    });
-  };
-
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text);
-  };
-
-  const showCopyFeedback = (button) => {
-    const original = button.textContent;
-    button.textContent = '✓ Copied!';
-    button.disabled = true;
-
-    setTimeout(() => {
-      button.textContent = original;
-      button.disabled = false;
-    }, 2000);
-  };
-
-  return {
-    init,
-  };
-})();
-
-// ============================================================================
-// INITIALIZATION - SINGLE ENTRY POINT
-// ============================================================================
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize all systems in correct order
-  Navigation.init();
-  Config.init();
-  MobileMenu.init();
-  HubNav.init();
-  ComponentSearch.init();
-  CodeSnippet.init();
-
-  console.log('AXIOM01 v3 Framework loaded - The Semantic Rebellion: The Mathematics of Design');
-});
-
-// Expose global API for manual navigation if needed
-window.Axiom = {
-  navigate: Navigation.navigate,
-  setTheme: Config.setTheme,
-  filterByCategory: HubNav.filterByCategory,
-  showComponentDetails: HubNav.showComponentDetails,
-  loadChapter: HubNav.loadChapter,
-};
-
-// ============================================================================
-// POPULATE COMPONENT LIBRARY ON PAGE LOAD
+// COMPONENT LIBRARY INITIALIZATION
 // ============================================================================
 
 const ComponentLibrary = (() => {
@@ -566,20 +490,12 @@ const ComponentLibrary = (() => {
   };
 
   const populateComponentCards = async () => {
-    const stage = document.getElementById('component-stage');
-    if (!stage) return;
+    const gridContainer = document.getElementById('component-grid');
+    if (!gridContainer) return;
 
     try {
       const allComponents = await ContentLoader.loadAllComponents();
-      const gridContainer = stage.querySelector('.grid') || stage;
-      
-      // Clear existing static cards (keep first 6 as template, remove old ones)
-      const existingCards = gridContainer.querySelectorAll('article[data-category]');
-      if (existingCards.length > 0) {
-        existingCards.forEach(card => card.remove());
-      }
 
-      // Add all components dynamically
       allComponents.forEach(component => {
         const card = document.createElement('article');
         card.className = 'card';
@@ -592,18 +508,8 @@ const ComponentLibrary = (() => {
           </footer>
         `;
         gridContainer.appendChild(card);
-
-        // Add click handler to View button
-        const viewBtn = card.querySelector('button[data-component]');
-        if (viewBtn) {
-          viewBtn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            await HubNav.showComponentDetails(component.id);
-          });
-        }
       });
 
-      // Trigger initial filter to show first category
       HubNav.filterByCategory('buttons');
 
     } catch (error) {
@@ -612,17 +518,9 @@ const ComponentLibrary = (() => {
   };
 
   const populateCategories = async () => {
-    const categoryNav = document.querySelector('aside nav');
-    if (!categoryNav) return;
-
-    const categoryList = categoryNav.querySelector('ul');
+    const categoryList = document.getElementById('categories-list');
     if (!categoryList) return;
 
-    // Clear existing categories
-    const existingLinks = categoryList.querySelectorAll('a[data-category]');
-    existingLinks.forEach(link => link.parentElement.remove());
-
-    // Add all categories
     const categories = [
       { id: 'buttons', label: 'Buttons' },
       { id: 'cards', label: 'Cards' },
@@ -659,197 +557,39 @@ const ComponentLibrary = (() => {
   };
 })();
 
-// Initialize component library when docs view is shown
+// ============================================================================
+// INITIALIZE WHEN DOCS VIEW IS SHOWN
+// ============================================================================
+
 const originalNavigate = Navigation.navigate;
 Navigation.navigate = function(viewName) {
   originalNavigate.call(this, viewName);
   
   if (viewName === 'docs') {
-    // Delay slightly to ensure DOM is ready
     setTimeout(() => {
       ComponentLibrary.init();
     }, 100);
   }
 };
 
-
 // ============================================================================
-// ADD COPY BUTTONS TO COMPONENT PREVIEW
-// ============================================================================
-
-const originalShowComponentDetails = HubNav.showComponentDetails;
-
-HubNav.showComponentDetails = async function(componentId) {
-  // Call original function
-  const result = await originalShowComponentDetails.call(this, componentId);
-  
-  // Then enhance with copy buttons - attach listeners
-  setTimeout(() => {
-    const htmlBtn = document.querySelector('[data-copy-html]');
-    const cssBtn = document.querySelector('[data-copy-css]');
-    
-    if (htmlBtn && !htmlBtn._copyInitialized) {
-      htmlBtn._copyInitialized = true;
-      htmlBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const codeEl = document.getElementById('component-html');
-        if (codeEl) {
-          const text = codeEl.textContent || '';
-          navigator.clipboard.writeText(text);
-          const orig = htmlBtn.textContent;
-          htmlBtn.textContent = '✓ Copied!';
-          htmlBtn.disabled = true;
-          setTimeout(() => {
-            htmlBtn.textContent = orig;
-            htmlBtn.disabled = false;
-            htmlBtn._copyInitialized = false;
-          }, 2000);
-        }
-      });
-    }
-    
-    if (cssBtn && !cssBtn._copyInitialized) {
-      cssBtn._copyInitialized = true;
-      cssBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const codeEl = document.getElementById('component-css');
-        if (codeEl) {
-          const text = codeEl.textContent || '';
-          navigator.clipboard.writeText(text);
-          const orig = cssBtn.textContent;
-          cssBtn.textContent = '✓ Copied!';
-          cssBtn.disabled = true;
-          setTimeout(() => {
-            cssBtn.textContent = orig;
-            cssBtn.disabled = false;
-            cssBtn._copyInitialized = false;
-          }, 2000);
-        }
-      });
-    }
-  }, 100);
-  
-  return result;
-};
-
-// ============================================================================
-// ADD LIVE PREVIEW TO COMPONENT DETAILS
+// MAIN INITIALIZATION
 // ============================================================================
 
-const originalShowComponentDetailsFunc = HubNav.showComponentDetails;
+document.addEventListener('DOMContentLoaded', () => {
+  Navigation.init();
+  Config.init();
+  MobileMenu.init();
+  HubNav.init();
+  ComponentSearch.init();
 
-HubNav.showComponentDetails = async function(componentId) {
-  const preview = document.getElementById('component-preview');
-  if (!preview) return;
+  console.log('AXIOM01 v3 - The Semantic Rebellion: The Mathematics of Design');
+});
 
-  // Show loading state
-  preview.innerHTML = '<p style="opacity: 0.6;">Loading component...</p>';
-
-  try {
-    // Find component in all categories
-    const allComponents = await ContentLoader.loadAllComponents();
-    const component = allComponents.find(c => c.id === componentId);
-
-    if (!component) {
-      preview.innerHTML = '<p style="color: var(--a-text-muted);">Component not found.</p>';
-      return;
-    }
-
-    // Create live preview container and render HTML
-    let livePreviewHTML = '';
-    try {
-      livePreviewHTML = `<div class="live-preview">${component.html}</div>`;
-    } catch (e) {
-      livePreviewHTML = '';
-    }
-
-    // Inject styles for the preview
-    let styleTag = document.getElementById('component-preview-styles');
-    if (!styleTag) {
-      styleTag = document.createElement('style');
-      styleTag.id = 'component-preview-styles';
-      document.head.appendChild(styleTag);
-    }
-    styleTag.textContent = `${component.css}`;
-
-    // Display component details with live preview
-    preview.innerHTML = `
-      <article>
-        <h3>${component.name}</h3>
-        <p><small>${component.description}</small></p>
-
-        ${livePreviewHTML}
-
-        <div style="margin-top: var(--a-space-lg); border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--a-space-sm);">
-            <h4 style="font-size: var(--a-text-sm); margin: 0;">HTML</h4>
-            <button data-copy-html style="padding: 4px 8px; font-size: 12px; background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius-sm); cursor: pointer;">Copy</button>
-          </div>
-          <code id="component-html" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md); font-family: 'Menlo', 'Monaco', 'Courier New', monospace;">${escapeHtml(component.html)}</code>
-        </div>
-
-        <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--a-space-sm);">
-            <h4 style="font-size: var(--a-text-sm); margin: 0;">CSS</h4>
-            <button data-copy-css style="padding: 4px 8px; font-size: 12px; background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius-sm); cursor: pointer;">Copy</button>
-          </div>
-          <code id="component-css" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md); font-family: 'Menlo', 'Monaco', 'Courier New', monospace;">${escapeHtml(component.css)}</code>
-        </div>
-
-        <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
-          <h4 style="font-size: var(--a-text-sm); margin-top: 0; margin-bottom: var(--a-space-xs);">Usage</h4>
-          <p style="font-size: var(--a-text-xs); margin: 0 0 var(--a-space-md) 0; color: var(--a-text-secondary);">${component.usage}</p>
-        </div>
-
-        <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
-          <h4 style="font-size: var(--a-text-sm); margin-top: 0; margin-bottom: var(--a-space-xs);">Accessibility</h4>
-          <p style="font-size: var(--a-text-xs); margin: 0; color: var(--a-text-secondary);">${component.accessibility}</p>
-        </div>
-      </article>
-    `;
-
-    // Add copy handlers
-    const htmlBtn = preview.querySelector('[data-copy-html]');
-    const cssBtn = preview.querySelector('[data-copy-css]');
-    
-    if (htmlBtn) {
-      htmlBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const codeEl = document.getElementById('component-html');
-        if (codeEl) {
-          const text = codeEl.textContent || '';
-          navigator.clipboard.writeText(text);
-          const orig = htmlBtn.textContent;
-          htmlBtn.textContent = '✓ Copied!';
-          htmlBtn.disabled = true;
-          setTimeout(() => {
-            htmlBtn.textContent = orig;
-            htmlBtn.disabled = false;
-          }, 2000);
-        }
-      });
-    }
-    
-    if (cssBtn) {
-      cssBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const codeEl = document.getElementById('component-css');
-        if (codeEl) {
-          const text = codeEl.textContent || '';
-          navigator.clipboard.writeText(text);
-          const orig = cssBtn.textContent;
-          cssBtn.textContent = '✓ Copied!';
-          cssBtn.disabled = true;
-          setTimeout(() => {
-            cssBtn.textContent = orig;
-            cssBtn.disabled = false;
-          }, 2000);
-        }
-      });
-    }
-
-  } catch (error) {
-    console.error('Error loading component:', error);
-    preview.innerHTML = '<p style="color: var(--a-text-muted);">Error loading component details.</p>';
-  }
+window.Axiom = {
+  navigate: Navigation.navigate,
+  setTheme: Config.setTheme,
+  filterByCategory: HubNav.filterByCategory,
+  showComponentDetails: HubNav.showComponentDetails,
+  loadChapter: HubNav.loadChapter,
 };
