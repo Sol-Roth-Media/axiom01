@@ -11,6 +11,7 @@ const Navigation = (() => {
   let currentView = 'hero';
 
   const init = () => {
+    // Attach listeners to ALL data-nav buttons (header + mobile menu)
     document.querySelectorAll('[data-nav]').forEach((button) => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
@@ -34,16 +35,17 @@ const Navigation = (() => {
 
     currentView = viewName;
 
-    // Update nav buttons
+    // Update nav buttons (all of them)
     document.querySelectorAll('[data-nav]').forEach((el) => {
       el.setAttribute('aria-current', el.getAttribute('data-nav') === viewName ? 'page' : 'false');
     });
 
     // Close mobile menu
     const mobileMenu = document.getElementById('mobile-menu');
-    if (mobileMenu) {
+    const menuToggle = document.getElementById('menu-toggle');
+    if (mobileMenu && menuToggle) {
       mobileMenu.classList.add('hidden');
-      document.getElementById('menu-toggle').setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-expanded', 'false');
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -327,8 +329,14 @@ const BookLibrary = (() => {
     const chapter = allChapters[index];
     const stage = document.getElementById('book-stage');
     const metaDesc = document.getElementById('chapter-meta-desc');
+    
+    // Desktop buttons
     const prevBtn = document.getElementById('prev-chapter');
     const nextBtn = document.getElementById('next-chapter');
+    
+    // Mobile buttons
+    const prevBtnMobile = document.getElementById('prev-chapter-mobile');
+    const nextBtnMobile = document.getElementById('next-chapter-mobile');
 
     if (stage) {
       stage.innerHTML = `
@@ -350,17 +358,38 @@ const BookLibrary = (() => {
       }
     });
 
-    // Update prev/next buttons
+    // Update desktop prev/next buttons
     if (prevBtn) {
       prevBtn.disabled = index === 0;
       prevBtn.onclick = null;
-      prevBtn.addEventListener('click', () => showChapter(index - 1));
+      if (index > 0) {
+        prevBtn.addEventListener('click', () => showChapter(index - 1));
+      }
     }
 
     if (nextBtn) {
       nextBtn.disabled = index === allChapters.length - 1;
       nextBtn.onclick = null;
-      nextBtn.addEventListener('click', () => showChapter(index + 1));
+      if (index < allChapters.length - 1) {
+        nextBtn.addEventListener('click', () => showChapter(index + 1));
+      }
+    }
+
+    // Update mobile prev/next buttons
+    if (prevBtnMobile) {
+      prevBtnMobile.disabled = index === 0;
+      prevBtnMobile.onclick = null;
+      if (index > 0) {
+        prevBtnMobile.addEventListener('click', () => showChapter(index - 1));
+      }
+    }
+
+    if (nextBtnMobile) {
+      nextBtnMobile.disabled = index === allChapters.length - 1;
+      nextBtnMobile.onclick = null;
+      if (index < allChapters.length - 1) {
+        nextBtnMobile.addEventListener('click', () => showChapter(index + 1));
+      }
     }
   };
 
