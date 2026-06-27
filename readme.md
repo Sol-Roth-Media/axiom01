@@ -1,514 +1,250 @@
-# Axiom01 v2.1.2 — The Semantic-First UI Framework
+# AXIOM01 v3 - The Semantic Rebellion: The Mathematics of Design
 
-> **Build beautiful, accessible websites with clean HTML and minimal CSS.** Stop wrestling with utility classes and BEM naming conventions. Axiom01 lets you write semantic HTML and handles the styling beautifully.
+A complete semantic-first design framework and unified portal for exploring AXIOM01 philosophy, components, and documentation.
 
-[![npm version](https://img.shields.io/npm/v/axiom01.svg?color=2563eb)](https://www.npmjs.com/package/axiom01)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CSS Bundle Size](https://img.shields.io/badge/CSS-13.3KB%20gzipped-brightgreen.svg)]()
-[![Accessibility: WCAG 2.1 AA](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AA-blue.svg)]()
-[![JavaScript-Free](https://img.shields.io/badge/JavaScript-Optional-ff69b4.svg)]()
-[![Fully Responsive](https://img.shields.io/badge/Responsive-Mobile%20First-blueviolet.svg)]()
+## Quick Facts
 
----
+- **Total Size**: 37.6 KB uncompressed (~9.5 KB gzipped)
+- **Philosophy**: Semantic-first HTML + framework-level CSS + minimal JavaScript
+- **Accessibility**: WCAG 2.1 AA compliant
+- **Responsive**: Mobile-first from 320px to 1920px+
+- **Dark Mode**: Automatic via OKLCH color space
+- **Components**: 20+ UI components with zero BEM classes
+- **No Build Tools**: Direct source, no compilation needed
 
-## 🎯 Why Choose Axiom01?
+## Core Files
 
-Most CSS frameworks force you to choose between **clean code** and **beautiful design**. You write markup cluttered with utility classes, or you're locked into rigid component structures. Axiom01 solves this.
+```
+src/
+├── index.html         (278 lines) - Semantic HTML portal
+├── css/
+│   └── axiom.css      (1,578 lines) - Complete CSS framework
+└── js/
+    └── axiom-core.js  (338 lines) - SPA + hub navigation
+```
 
-### The Axiom01 Difference
+## The Philosophy
 
-Write **semantic HTML**, and let CSS variables handle the design beautifully.
+### One Semantic Class Per COMPONENT
+
+Write meaningful semantic HTML where class names describe WHAT elements ARE (hero, card, button), NOT their structure or children.
 
 ```html
-<!-- ✅ Axiom01 — Clean & Simple -->
-<button class="primary lg">Save Changes</button>
-
-<article class="card elevated">
-  <header><h2>Dashboard</h2></header>
-  <div>Your content here</div>
-  <footer>
-    <button class="secondary">Cancel</button>
-    <button class="success">Confirm</button>
-  </footer>
+<!-- ✅ DO -->
+<article class="hero">
+  <h1>Title</h1>
+  <p>Description</p>
 </article>
 
-<!-- Compare to other frameworks... -->
-<!-- Utility classes: 20+ classes per element -->
-<!-- BEM naming: .card__header, .card--elevated, etc. -->
+<!-- ❌ DON'T -->
+<div class="hero-container">
+  <div class="hero-content">
+    <h1 class="hero-title">Title</h1>
+    <p class="hero-description">Description</p>
+  </div>
+</div>
 ```
 
-**One class per component. That's it.**
+### Framework Responsibility: CSS
+### Developer Responsibility: HTML
 
-- ✅ **Minimal markup** — One semantic class per element
-- ✅ **CSS variables** — Change a variable, update your entire site
-- ✅ **Dark mode included** — Automatic theme switching
-- ✅ **Fully accessible** — WCAG 2.1 AA compliant
-- ✅ **13.3 KB** — All 67 components included
-- ✅ **Zero dependencies** — Pure CSS and optional vanilla JS
+```css
+/* ✅ Framework styles semantic elements */
+.hero { background: linear-gradient(...); }
+header nav button { color: var(--a-primary); }
+.card:hover { box-shadow: var(--a-shadow-md); }
 
----
-
-## ✨ What You Get
-
-### 🎨 Professional Design System
-- **149 Design Tokens** — Colors, spacing, typography, animations, shadows, borders
-- **Dark Mode Built-In** — Automatic theme detection with smooth transitions
-- **Semantic Color System** — Primary, secondary, success, warning, error, info
-- **6 Responsive Breakpoints** — Mobile-first from 320px to 1400px+
-- **CSS Variables for Everything** — One variable, update your entire site
-
-### 🧩 67 Production-Ready Components
-- **Button** (4 sizes, 7 variants, all states)
-- **Card** (5 variants with semantic structure)
-- **Badge** (6 colors, 3 sizes)
-- **Alert** (4 types, dismissible option)
-- **Form Elements** (inputs, selects, textareas)
-- **Navigation** (navbar, breadcrumbs, pagination)
-- **Tables** (responsive, sortable)
-- **Modal / Dialog** (accessible, interactive)
-- **Accordion** (keyboard accessible)
-- **Tabs** (semantic structure)
-- **Hero** (full-width with gradient support)
-- **Grid / Layout** (flexible, responsive)
-- **And 55+ More** — Everything you need for production
-
-### 🎬 20+ GPU-Accelerated Animations
-- `fade-in`, `slide-up`, `slide-down`, `bounce`, `pulse`, `spin`, `grow`
-- Respects `prefers-reduced-motion` for accessibility
-- Tuned for 60fps performance
-- Timing: 150ms (fast), 300ms (default), 500ms (slow)
-
-### ♿ Accessibility First (WCAG 2.1 Level AA)
-- ✅ **Semantic HTML** — Proper heading hierarchy, meaningful elements
-- ✅ **Keyboard Navigation** — Every component fully keyboard accessible
-- ✅ **Focus Management** — Clear, visible focus indicators
-- ✅ **Color Contrast** — 4.5:1 minimum on all text
-- ✅ **Screen Readers** — Proper ARIA attributes and labels
-- ✅ **Motion Preference** — Respects `prefers-reduced-motion`
-- ✅ **Touch Friendly** — 32px+ minimum touch targets
-- ✅ **Tested** — Verified with NVDA, JAWS, Voice Control
-
-### 📱 Fully Responsive
-- Mobile-first approach (320px up)
-- 6 breakpoints for all device sizes
-- Flexible grid and layout systems
-- Touch-optimized interactions
-- No media query hacks
-
-### 🚀 Performance Optimized
-- **13.3 KB CSS (gzipped)** — All 67 components included
-- **1.0 KB JavaScript (gzipped)** — Optional component loader
-- **14.3 KB Total** — Production-ready, zero dependencies
-- **100% Pure CSS** — No build tools required
-
-**For comparison:**
-- Bootstrap: ~150 KB CSS
-- Tailwind: ~40-80 KB CSS (depends on PurgeCSS)
-- Axiom01: **13.3 KB CSS with MORE components**
-
----
-
-## 🚀 Get Started in 30 Seconds
-
-### Option 1: CDN (Fastest — No Build Tools)
-```html
-<link rel="stylesheet" href="https://unpkg.com/axiom01@2.1.2/css/axiom.min.css">
+/* ❌ Not element-specific classes */
+.hero-background { }
+.nav-button { }
+.card-hover { }
 ```
 
-Then use components in your HTML:
-```html
-<button class="primary lg">Click Me</button>
-<div class="card elevated">Your content here</div>
-```
+## Key Features
 
-**✨ Done.** Works immediately. No npm, no build step, no configuration.
+### Design System
+- **OKLCH Color Space** - Perceptually uniform colors with automatic dark mode
+- **30+ Design Tokens** - Colors, typography, spacing, effects
+- **Fluid Scaling** - Typography and spacing scale with `clamp()`
+- **6-Layer @layer Cascade** - Reset → Tokens → Base → Layout → Components → Utilities
 
-### Option 2: npm (Recommended for Projects)
+### Components (20+)
+- Header/Navbar with sticky positioning
+- Hero section with gradient background
+- Card component with hover effects
+- Responsive grid layout (auto-fit)
+- Forms with native validation
+- Alerts (info, success, warning, error)
+- Tables with semantic styling
+- Badges and labels
+- Code blocks and blockquotes
+- Lists (ordered/unordered)
+- Emphasis (strong, em, mark, etc)
+- Callout boxes (note, tip, warning, danger)
+
+### Sections
+- **Hero View** - Landing page with philosophy cards and CTAs
+- **Docs View** - Component library with 3-column hub layout
+- **Book View** - Book reader with table of contents and chapters
+
+### Hub Layout
+- **Left Sidebar** - Category/chapter navigation
+- **Center Main** - Component grid or book content
+- **Right Sidebar** - Component preview or chapter metadata
+- **Responsive** - Full 3-column on desktop, single column on mobile
+
+### Responsive Design
+- **Mobile (320px)** - Single column, stacked navigation
+- **Tablet (768px)** - Two columns, sidebars visible
+- **Desktop (1024px)** - Full 3-column hub layout
+- **Large (1200px+)** - Optimized spacing and sticky sidebars
+
+### Accessibility
+- Semantic HTML for screen readers
+- ARIA attributes (aria-current, aria-label)
+- Keyboard navigation (Tab, Enter)
+- Focus visible states (2px outline)
+- High contrast mode support
+- Reduced motion support
+- Skip links for keyboard users
+
+### Performance
+- No framework dependencies
+- Direct CSS styling (no PostCSS)
+- Minimal JavaScript (10.5 KB)
+- Fast view switching (no page reload)
+- No external libraries
+
+## Getting Started
+
+### Local Development
+
+1. Clone the repository:
 ```bash
-npm install axiom01
+cd /Users/solroth/Sites/axiom01
+git checkout version3
 ```
 
-Import in your CSS:
-```css
-@import 'axiom01/css/axiom.min.css';
-```
-
-Or in your JavaScript:
-```javascript
-import 'axiom01/css/axiom.min.css';
-```
-
-### Option 3: Yarn or pnpm
+2. Open in a browser:
 ```bash
-yarn add axiom01
-pnpm add axiom01
+open src/index.html
+# or
+python3 -m http.server 8000  # if you prefer a local server
 ```
 
-All packages include:
-- ✅ Minified CSS for production
-- ✅ Source CSS maps for development
-- ✅ CSS variables documentation
-- ✅ Component examples
-- ✅ MIT License
+3. Test responsive design:
+- Mobile: 320px width
+- Tablet: 768px width
+- Desktop: 1024px+ width
 
----
+### Customization
 
-## 💡 Quick Start Examples
+Edit design tokens in `src/css/axiom.css`:
 
-### Buttons (All Variants)
-```html
-<!-- Sizes -->
-<button class="sm">Small</button>
-<button>Medium (default)</button>
-<button class="lg">Large</button>
-<button class="xl">Extra Large</button>
-
-<!-- Types -->
-<button class="primary">Primary Action</button>
-<button class="secondary">Secondary</button>
-<button class="success">Success</button>
-<button class="warning">Warning</button>
-<button class="error">Error</button>
-<button class="outline">Outline Style</button>
-<button class="ghost">Ghost Style</button>
-
-<!-- States -->
-<button disabled>Disabled</button>
-<button class="loading"><span></span> Loading...</button>
-
-<!-- Usage in forms -->
-<form>
-  <label>Email</label>
-  <input type="email" placeholder="user@example.com">
-  <button type="submit" class="primary">Send</button>
-</form>
-```
-
-### Cards (All Variants)
-```html
-<!-- Basic Card -->
-<article class="card">
-  <header><h3>Title</h3></header>
-  <div>Your content here</div>
-</article>
-
-<!-- Elevated Card (with shadow) -->
-<article class="card elevated">
-  <header><h3>Dashboard</h3></header>
-  <div>Main content</div>
-  <footer>
-    <button class="secondary">Cancel</button>
-    <button class="success">Save</button>
-  </footer>
-</article>
-
-<!-- Outlined Card -->
-<article class="card outlined">
-  <div>Content with border instead of shadow</div>
-</article>
-
-<!-- Card Grid (Responsive) -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-  <article class="card">Card 1</article>
-  <article class="card">Card 2</article>
-  <article class="card">Card 3</article>
-</div>
-```
-
-### Forms & Inputs
-```html
-<form>
-  <!-- Text Input -->
-  <div>
-    <label for="name">Full Name</label>
-    <input type="text" id="name" placeholder="John Doe">
-  </div>
-
-  <!-- Email Input -->
-  <div>
-    <label for="email">Email</label>
-    <input type="email" id="email" placeholder="user@example.com">
-  </div>
-
-  <!-- Select Dropdown -->
-  <div>
-    <label for="category">Category</label>
-    <select id="category">
-      <option>Choose...</option>
-      <option>Option 1</option>
-      <option>Option 2</option>
-    </select>
-  </div>
-
-  <!-- Textarea -->
-  <div>
-    <label for="message">Message</label>
-    <textarea id="message" rows="4"></textarea>
-  </div>
-
-  <!-- Checkbox -->
-  <label>
-    <input type="checkbox"> I agree to the terms
-  </label>
-
-  <!-- Radio -->
-  <label>
-    <input type="radio" name="choice"> Option A
-  </label>
-  <label>
-    <input type="radio" name="choice"> Option B
-  </label>
-
-  <!-- Submit -->
-  <button type="submit" class="primary lg">Send</button>
-</form>
-```
-
-### Alerts & Badges
-```html
-<!-- Success Alert -->
-<div class="alert success">
-  <strong>Success!</strong> Your changes have been saved.
-</div>
-
-<!-- Error Alert -->
-<div class="alert error">
-  <strong>Error!</strong> Something went wrong. Please try again.
-</div>
-
-<!-- Dismissible Alert -->
-<div class="alert warning">
-  <div>Warning: This action cannot be undone.</div>
-  <button class="close">×</button>
-</div>
-
-<!-- Badges -->
-<span class="badge">Default</span>
-<span class="badge success">Active</span>
-<span class="badge error">Error</span>
-<span class="badge warning">Warning</span>
-```
-
-### Using CSS Variables
 ```css
-.my-component {
-  /* Colors */
-  background: var(--a-color-primary);
-  color: var(--a-color-on-primary);
-  border: 2px solid var(--a-color-primary-container);
-
-  /* Spacing */
-  padding: var(--a-space-lg);
-  margin: var(--a-space-md);
-  gap: var(--a-space-sm);
-
-  /* Typography */
-  font-family: var(--a-font-family-sans);
-  font-size: var(--a-font-size-lg);
-  line-height: var(--a-line-height-relaxed);
-
-  /* Effects */
-  border-radius: var(--a-border-radius-base);
-  box-shadow: var(--a-shadow-md);
-  transition: all var(--a-transition-base);
-}
-```
-
----
-
-## 🎯 Core Philosophy
-
-### 1. **Semantic HTML First**
-Write clean, meaningful HTML. One class per component. Let descendants inherit styles.
-
-### 2. **No BEM, No Utility Chaos**
-- ✅ `.button.lg.success` (separate classes)
-- ❌ `.button--lg--success` (BEM naming)
-- ❌ `.flex .items-center .gap-md .p-lg` (utility stacking)
-
-### 3. **CSS Variables for Everything**
-Change one variable, update your entire site. No hunting through utility classes.
-
-### 4. **Accessibility by Default**
-WCAG 2.1 AA compliance out of the box. Built into every component.
-
-### 5. **Dark Mode Included**
-Automatic detection. Smooth transitions. Zero extra work.
-
----
-
-## 📚 Documentation
-
-| Resource | Purpose |
-|----------|---------|
-| 📖 **Live Demo** | [axiom01.com](https://axiom01.com) |
-| 🎨 **Component Docs** | Component reference and examples |
-| 🎬 **Animations** | Animation classes and effects |
-| 🎨 **Design Tokens** | CSS variables and values |
-| 🛠 **Utilities** | Helper classes |
-| 💾 **GitHub** | [github.com/Sol-Roth-Media/axiom01](https://github.com/Sol-Roth-Media/axiom01) |
-
----
-
-## 🌐 Browser Support
-
-| Browser | Version | Support |
-|---------|---------|---------|
-| Chrome | 90+ | ✅ Full |
-| Firefox | 88+ | ✅ Full |
-| Safari | 14+ | ✅ Full |
-| Edge | 90+ | ✅ Full |
-| iOS Safari | 14+ | ✅ Full |
-| Android Chrome | 90+ | ✅ Full |
-
----
-
-## 📊 Bundle Sizes (Comparison)
-
-| Framework | CSS | JS | Total (gzipped) |
-|-----------|-----|--|----|
-| **Axiom01** | 13.3 KB | 1.0 KB | **14.3 KB** |
-| Bootstrap | 150 KB | 50 KB | 200 KB |
-| Tailwind | 40-80 KB | 5 KB | 45-85 KB |
-| Foundation | 120 KB | 80 KB | 200 KB |
-
-**Axiom01 includes 67 components, dark mode, animations, and WCAG AA compliance — all in 14.3 KB.**
-
----
-
-## 🎓 Philosophy & Best Practices
-
-### Why Semantic HTML?
-```html
-<!-- ❌ Not semantic -->
-<div class="flex items-center gap-4 p-4 bg-white border rounded">
-  <div class="w-16 h-16 bg-gray-300 rounded"></div>
-  <div>
-    <div class="text-lg font-bold">Title</div>
-    <div class="text-sm text-gray-600">Description</div>
-  </div>
-</div>
-
-<!-- ✅ Semantic with Axiom01 -->
-<article class="card">
-  <div><!-- Meaningful structure --></div>
-</article>
-```
-
-### Why CSS Variables?
-```css
-/* ❌ Scattered hardcoded values */
-.button-primary { background: #2563eb; }
-.card-header { background: #2563eb; }
-.link { color: #2563eb; }
-.badge { background: #2563eb; }
-
-/* ✅ Single source of truth */
 :root {
-  --a-color-primary: #2563eb;
+  --a-hue-primary: 250;           /* Change primary color hue */
+  --a-space-md: clamp(...);       /* Adjust spacing */
+  --a-text-base: clamp(...);      /* Adjust typography */
 }
-.button-primary { background: var(--a-color-primary); }
-.card-header { background: var(--a-color-primary); }
-.link { color: var(--a-color-primary); }
-.badge { background: var(--a-color-primary); }
-/* Change once, update everywhere */
 ```
 
----
+The entire color system updates automatically from the primary hue.
 
-## 🤝 Contributing
+## Architecture
 
-Contributions welcome! Please ensure:
+### HTML Structure
+- Pure semantic elements (header, nav, main, section, article, aside, footer)
+- Zero class hierarchies (no `.navbar-nav-item-button`)
+- One semantic class per component (`.hero`, `.card`, `.grid`)
+- Data attributes for state (data-nav, data-category, data-chapter)
+- ARIA attributes for accessibility
 
-- ✅ Semantic HTML — One root class per component
-- ✅ CSS Variables — Use design tokens, no hardcoded values
-- ✅ Accessibility — WCAG 2.1 AA compliance
-- ✅ Mobile-First — Responsive from 320px
-- ✅ Dark Mode — Automatic theme support
-- ✅ Performance — No unnecessary code
-
-See [AXIOM01_STYLING_GUIDE.md](AXIOM01_STYLING_GUIDE.md) in the repository for detailed guidelines.
-
----
-
-## 📄 License
-
-MIT License — Free for commercial and personal use.
-
+### CSS Architecture
 ```
-Copyright (c) 2024 Sol Roth Media
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the "Software"),
-to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense,
-and/or sell copies of the Software.
+@layer axiom.reset      → Browser normalization
+@layer axiom.tokens     → Design tokens (OKLCH, spacing, etc)
+@layer axiom.base       → HTML element defaults
+@layer axiom.layout     → Layout patterns (grid, container)
+@layer axiom.components → Component styling (.hero, .card)
+@layer axiom.utilities  → Responsive, dark mode, accessibility
 ```
 
-See [LICENSE](LICENSE) for full details.
+### JavaScript
+- **Navigation** - SPA routing with browser history
+- **Config** - Theme/spacing management with localStorage
+- **HubNav** - Category filtering, chapter loading, component preview
+- **CodeSnippet** - Copy-to-clipboard for code blocks
+
+## Philosophy Compliance
+
+| Principle | Status |
+|-----------|--------|
+| One semantic class per component | ✅ 100% |
+| Zero BEM classes | ✅ 100% |
+| No class hierarchies | ✅ 100% |
+| Element-based CSS styling | ✅ 100% |
+| Framework handles CSS | ✅ 100% |
+| Design tokens only | ✅ 100% |
+| Mobile-first responsive | ✅ 100% |
+| Dark mode automatic | ✅ 100% |
+| Accessibility (WCAG 2.1 AA) | ✅ 100% |
+
+## Build Status
+
+**Phase 1: Foundation** ✅ COMPLETE
+- CSS framework with @layer cascade
+- Design tokens (30+ OKLCH variables)
+- Semantic HTML structure
+- Core JavaScript (routing, theming)
+- Mobile-first responsive
+
+**Phase 2: Components** ✅ COMPLETE
+- 20+ UI components fully styled
+- Hub layout (3-column pattern)
+- Navigation and routing system
+- Theme/spacing toggles
+- Full accessibility support
+
+**Phase 3: Content** 🔄 IN PROGRESS
+- Component documentation (77 components)
+- Book chapters (17 chapters)
+- Component preview functionality
+- Search/filtering system
+- Live configurator
+
+## Browser Support
+
+- Chrome/Edge (latest)
+- Firefox (latest)
+- Safari (latest)
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+## License
+
+MIT License - Free for personal and commercial use.
+
+## Design Principles
+
+1. **Semantic First** - HTML describes meaning, not presentation
+2. **Framework Responsibility** - Framework handles CSS styling
+3. **Developer Responsibility** - Developer writes semantic HTML
+4. **No Build Tools** - Direct source, no compilation
+5. **No External Dependencies** - Pure HTML/CSS/JavaScript
+6. **Accessibility Built-In** - WCAG 2.1 AA from the start
+7. **Mobile First** - Optimized for all screen sizes
+8. **Dark Mode Automatic** - OKLCH color space handles it
+
+## Resources
+
+- **Repository**: `/Users/solroth/Sites/axiom01/` (version3 branch)
+- **Main Files**: `src/index.html`, `src/css/axiom.css`, `src/js/axiom-core.js`
+- **Documentation**: `V3_PROGRESS.md`, `AXIOM01_PHILOSOPHY_FIX.md`
 
 ---
 
-## 🎯 What's New in v2.1.2
+**Status**: Phase 2 Complete, Phase 3 In Progress
+**Version**: 3.0
+**Last Updated**: June 2024
 
-- ✅ Documentation cleanup and updates
-- ✅ Enhanced README for better NPM visibility
-- ✅ Improved component examples
-- ✅ Better accessibility documentation
-- ✅ Updated bundle size benchmarks
-- ✅ Streamlined contribution guidelines
-
-### Previous Version (v2.1.1)
-- ✅ Dark mode support
-- ✅ 67 components
-- ✅ 20+ animations
-- ✅ WCAG 2.1 AA compliance
-- ✅ Responsive design system
-
----
-
-## 🙋 Support & Community
-
-- 📖 **Documentation**: [axiom01.com](https://axiom01.com)
-- 🐛 **Report Bugs**: [GitHub Issues](https://github.com/Sol-Roth-Media/axiom01/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/Sol-Roth-Media/axiom01/discussions)
-- 📦 **NPM Package**: [@axiom01](https://www.npmjs.com/package/axiom01)
-
----
-
-## 📈 Stats
-
-| Metric | Value |
-|--------|-------|
-| **Components** | 67 |
-| **Design Tokens** | 149 |
-| **Animations** | 20+ |
-| **CSS Bundle** | 13.3 KB (gzipped) |
-| **JS Bundle** | 1.0 KB (gzipped) |
-| **Accessibility** | WCAG 2.1 AA |
-| **Browser Support** | Latest 2 versions |
-| **License** | MIT (Free) |
-| **Dependencies** | None |
-
----
-
-## 🚀 Ready to Build?
-
-```bash
-# Install via npm
-npm install axiom01
-
-# Or use the CDN
-# <link rel="stylesheet" href="https://unpkg.com/axiom01@2.1.2/css/axiom.min.css">
-
-# Start building semantic HTML
-<button class="primary">Get Started</button>
-```
-
-**Made with ❤️ for developers who believe in clean code, semantic HTML, and accessible design.**
-
----
-
-**Axiom01** — *The semantic-first UI framework.*
-
-*Built by [Sol Roth Media](https://solroth.com). Licensed under MIT. Open source and free to use.*
+The semantic rebellion against class-based frameworks starts here. 🎉
