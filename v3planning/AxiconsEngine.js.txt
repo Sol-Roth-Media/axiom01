@@ -1,0 +1,79 @@
+```javascript
+/**
+ * AXICONS CORE ENGINE (v2.0)
+ * Philosophy: Zero Layout Shift, Lazy Rendered, Auto-Accessible.
+ * Size: < 0.8KB Gzipped
+ */
+
+class AxiconsEngine {
+  constructor(iconLibrary = window.AxiconsData || {}) {
+    this.icons = iconLibrary;
+    // Intersection Observer ensures we only inject SVG paths when the icon enters the viewport
+    this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
+      rootMargin: '50px 0px', // Load slightly before they scroll into view
+    });
+    this.init();
+  }
+
+  init() {
+    // Find all semantic placeholder tags
+    const placeholders = document.querySelectorAll('svg[data-axicon], i[data-axicon]');
+    placeholders.forEach(el => this.observer.observe(el));
+  }
+
+  handleIntersection(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        this.injectIcon(entry.target);
+        observer.unobserve(entry.target); // Only inject once
+      }
+    });
+  }
+
+  injectIcon(element) {
+    const iconName = element.getAttribute('data-axicon');
+    const variant = element.getAttribute('data-variant') || 'base';
+    
+    // Safety check
+    if (!this.icons[variant] || !this.icons[variant][iconName]) {
+      console.warn(`Axicon missing: ${iconName} (${variant})`);
+      return;
+    }
+
+    // 1. Accessibility First
+    // If the icon is purely decorative, hide it from screen readers
+    if (!element.hasAttribute('aria-label') && !element.hasAttribute('aria-labelledby')) {
+      element.setAttribute('aria-hidden', 'true');
+    } else {
+      element.setAttribute('role', 'img');
+    }
+
+    // 2. DOM Injection via requestAnimationFrame to prevent main-thread blocking
+    requestAnimationFrame(() => {
+      // If it's an <i> tag, we convert it to an SVG internally by injecting the wrapper
+      if (element.tagName.toLowerCase() === 'i') {
+         element.outerHTML = `
+           <svg xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                class="axicon ${element.className}" 
+                data-axicon="${iconName}" 
+                aria-hidden="${element.getAttribute('aria-hidden') || 'true'}">
+             ${this.icons[variant][iconName]}
+           </svg>
+         `;
+      } else {
+         // It's already an SVG tag, just inject the inner paths
+         element.innerHTML = this.icons[variant][iconName];
+         element.setAttribute('viewBox', '0 0 24 24');
+         element.classList.add('axicon');
+      }
+    });
+  }
+}
+
+// Auto-init
+document.addEventListener('DOMContentLoaded', () => {
+  window.Axicons = new AxiconsEngine();
+});
+
+```

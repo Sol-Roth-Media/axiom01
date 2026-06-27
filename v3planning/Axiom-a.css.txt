@@ -1,0 +1,164 @@
+```css
+/* ==========================================================================
+   AXIOM01 - BATCH A: FOUNDATION (Typography, Grid, Forms, Cards)
+   Philosophy: Elements dictate their own layout; HTML states trigger CSS.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. TYPOGRAPHY & RHYTHM --- */
+  /* Scaling is handled by the root fluid variables (clamp). No breakpoint classes needed. */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--a-text-main);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-block-end: var(--a-space-sm);
+  }
+  
+  h1 { font-size: var(--a-text-xl); letter-spacing: -0.02em; }
+  h2 { font-size: var(--a-text-lg); letter-spacing: -0.01em; }
+  h3 { font-size: var(--a-text-base); }
+  
+  blockquote {
+    border-inline-start: 4px solid var(--a-primary);
+    padding-inline-start: var(--a-space-md);
+    margin-block: var(--a-space-md);
+    font-style: italic;
+    color: var(--a-text-muted);
+  }
+
+  /* --- 2. THE AXIOM FLUID GRID --- */
+  /* Zero media queries. The grid calculates its own columns based on available space. */
+  .grid {
+    display: grid;
+    gap: var(--a-space-md);
+    /* Auto-fits items. If an item shrinks below 300px, it drops to the next line. */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  }
+
+  /* --- 3. ZERO-CLASS FORMS --- */
+  /* We use semantic structure + :has() to handle complex UI states natively */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-md);
+  }
+
+  /* Group inputs logically */
+  .form fieldset {
+    border: 1px solid var(--a-border);
+    border-radius: var(--a-radius);
+    padding: var(--a-space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-sm);
+  }
+
+  .form legend {
+    padding: 0 var(--a-space-xs);
+    font-weight: 600;
+    font-size: var(--a-text-sm);
+  }
+
+  /* Standard Input Styling */
+  .form input, 
+  .form select, 
+  .form textarea {
+    width: 100%;
+    padding: var(--a-space-sm) var(--a-space-md);
+    background: var(--a-surface-raised);
+    border: 1px solid var(--a-border);
+    border-radius: var(--a-radius);
+    color: var(--a-text-main);
+    transition: all var(--a-transition);
+  }
+
+  /* Accessible Focus */
+  .form input:focus-visible, 
+  .form textarea:focus-visible {
+    outline: none;
+    border-color: var(--a-primary);
+    box-shadow: 0 0 0 3px var(--a-primary-subtle);
+  }
+
+  /* State Management via :has() - No JS or utility classes needed */
+  /* 1. Highlight the entire form if any input is actively focused */
+  .form:has(:focus-visible) {
+    border-left: 2px solid var(--a-primary);
+    padding-left: calc(var(--a-space-md) - 2px);
+  }
+
+  /* 2. Error state: Highlights fieldset if an invalid input exists (after user types) */
+  .form fieldset:has(:invalid:not(:placeholder-shown)) {
+    border-color: var(--a-error);
+  }
+  
+  .form:has(:invalid:not(:placeholder-shown)) button[type="submit"] {
+    /* Visually demote the submit button if the form is invalid */
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* --- 4. CONTAINER-AWARE CARDS --- */
+  .card {
+    container-type: inline-size;
+    container-name: card;
+    display: flex;
+    flex-direction: column;
+    background: var(--a-surface-raised);
+    border: 1px solid var(--a-border);
+    border-radius: var(--a-radius);
+    overflow: hidden; /* For image bounding */
+    transition: transform var(--a-transition), box-shadow var(--a-transition);
+  }
+
+  /* Semantic Content Spacing */
+  .card > header, 
+  .card > main, 
+  .card > footer {
+    padding: var(--a-space-md);
+  }
+
+  /* If there's an image at the top, remove header's top padding */
+  .card:has(> img:first-child) > header {
+    padding-top: var(--a-space-sm);
+  }
+
+  .card > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-bottom: 1px solid var(--a-border);
+  }
+
+  .card > footer {
+    margin-top: auto; /* Pushes footer to bottom */
+    border-top: 1px solid var(--a-border);
+    background: var(--a-surface-base);
+  }
+
+  /* Container Query Magic: 
+     If the *container* is wide enough (e.g. placed in a full-width grid slot), 
+     shift to a horizontal layout instantly. */
+  @container card (min-width: 480px) {
+    .card:has(> img) {
+      flex-direction: row;
+    }
+    
+    .card > img {
+      width: 40%;
+      border-bottom: none;
+      border-right: 1px solid var(--a-border);
+    }
+    
+    /* Group header, main, footer into a flex-column alongside the image */
+    .card:has(> img) > header, 
+    .card:has(> img) > main, 
+    .card:has(> img) > footer {
+      flex: 1;
+      width: 60%;
+    }
+  }
+}
+
+```

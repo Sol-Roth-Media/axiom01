@@ -1,0 +1,97 @@
+```css
+/* ==========================================================================
+   AXIOM01 - BATCH J: MODERN LAYOUTS (Carousels & Masonry)
+   Philosophy: Zero-JS layout engines using the modern CSS spec.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. ZERO-JS CAROUSEL (SCROLL-SNAP) --- */
+  /* Axiom replaces 130KB slider libraries with 15 lines of CSS */
+  .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: var(--a-space-md);
+    padding-bottom: var(--a-space-md); /* Space for scrollbar/shadows */
+    
+    /* Hide scrollbars for a cleaner UI, rely on touch/trackpad */
+    scrollbar-width: none; /* Firefox */
+    container-type: inline-size;
+  }
+
+  .carousel::-webkit-scrollbar { 
+    display: none; /* Safari and Chrome */
+  }
+
+  /* Carousel Items */
+  .carousel > * {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    flex: 0 0 auto;
+    
+    /* Default to 100% width on small containers */
+    width: 100%;
+    
+    /* Transition for aesthetic snapping */
+    transition: transform var(--a-transition), opacity var(--a-transition);
+  }
+
+  /* Container-Aware Carousel Sizing */
+  @container (min-width: 500px) {
+    /* Show 2 items at a time */
+    .carousel > * { 
+      width: calc(50% - (var(--a-space-md) / 2)); 
+      scroll-snap-align: start;
+    }
+  }
+
+  @container (min-width: 900px) {
+    /* Show 3 items at a time */
+    .carousel > * { 
+      width: calc(33.333% - (var(--a-space-md) * 2 / 3)); 
+    }
+  }
+
+
+  /* --- 2. NATIVE MASONRY --- */
+  /* Replaces complex absolute positioning math with CSS columns */
+  .masonry {
+    /* Base configuration */
+    column-count: 1;
+    column-gap: var(--a-space-md);
+    container-type: inline-size;
+  }
+
+  /* Container-Aware Columns */
+  @container (min-width: 600px) {
+    .masonry { column-count: 2; }
+  }
+
+  @container (min-width: 900px) {
+    .masonry { column-count: 3; }
+  }
+
+  @container (min-width: 1200px) {
+    .masonry { column-count: 4; }
+  }
+
+  /* Masonry Items */
+  .masonry > * {
+    /* Crucial: Prevents elements from breaking across columns */
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    
+    /* Space between vertical items */
+    margin-bottom: var(--a-space-md);
+    display: block; 
+    
+    /* Force transform to establish a local stacking context */
+    transform: translateZ(0); 
+  }
+}
+
+```

@@ -1,0 +1,41 @@
+# Timelines (Steppers)
+Visual progression steps built on native ordered lists.
+## The Semantic Reality
+If you inspect a timeline or "stepper" component in a utility-first framework, you will find an absolute nightmare of HTML. Empty div elements used purely to draw lines, absolute positioning classes spread everywhere, and zero semantic meaning to a screen reader.
+A timeline is simply a numbered list of events. Axiom01 asks: *Why not use <ol>?*
+### Axiom01 Approach
+```html
+<!-- HTML: Semantic | Classes: 1 -->
+<ol class="timeline">
+  <li class="completed">
+    <h4>Account Created</h4>
+    <p class="text-muted">October 24th, 2026</p>
+  </li>
+  <li class="completed">
+    <h4>Payment Verified</h4>
+    <p class="text-muted">October 25th, 2026</p>
+  </li>
+  <li>
+    <h4>Shipping Order</h4>
+    <p class="text-muted">Pending warehouse scan.</p>
+  </li>
+</ol>
+
+```
+## How it works (CSS Counters)
+Axiom01 leverages CSS counter-reset and counter-increment to automatically calculate and inject the step numbers natively via the ::before pseudo-element.
+The connecting line is mathematically calculated using the ::after pseudo-element, perfectly bridging the gap between list items, regardless of how much content is inside them.
+ * **No math in JavaScript.**
+ * **No empty layout divs.**
+ * **100% accessible natively.** Screen readers simply read it as a list of 3 items.
+## Auto-Complete via :has()
+If your timeline contains form elements (like checkboxes for a task list), Axiom01 can automatically mark the step as "completed" using the :has() selector, with no JS intervention:
+```html
+<ol class="timeline">
+  <!-- When the user checks this box, the line and circle turn primary colored -->
+  <li>
+    <label><input type="checkbox" checked> Finalize Design</label>
+  </li>
+</ol>
+
+```

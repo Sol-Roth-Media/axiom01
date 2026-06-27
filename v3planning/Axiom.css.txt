@@ -1,0 +1,200 @@
+```css
+@charset "UTF-8";
+
+/* ==========================================================================
+   AXIOM01 CORE ENGINE (v2.5)
+   Philosophy: Semantic HTML, Mathematical Symmetry, Zero Utility Chaos
+   ========================================================================== */
+
+/* 1. CASCADE LAYERS 
+   Ensures framework styles are strictly ordered and user overrides always win 
+   without needing !important. */
+@layer axiom.reset, axiom.tokens, axiom.base, axiom.layout, axiom.components, axiom.utilities;
+
+@layer axiom.tokens {
+  :root {
+    /* --- COLOR SYSTEM (OKLCH) --- 
+       Base hues control the entire spectrum. color-mix() generates states. */
+    --a-hue-primary: 250; /* Indigo */
+    --a-hue-success: 140; /* Green */
+    --a-hue-error: 25;    /* Red */
+    --a-hue-surface: 220; /* Slate/Cool */
+
+    /* Primary Colors */
+    --a-primary: oklch(60% 0.15 var(--a-hue-primary));
+    --a-primary-hover: color-mix(in oklch, var(--a-primary) 85%, black);
+    --a-primary-subtle: color-mix(in oklch, var(--a-primary) 15%, transparent);
+    
+    /* Semantic Colors */
+    --a-success: oklch(65% 0.15 var(--a-hue-success));
+    --a-error: oklch(60% 0.18 var(--a-hue-error));
+    
+    /* Surfaces & Text */
+    --a-surface-base: oklch(99% 0.01 var(--a-hue-surface));
+    --a-surface-raised: oklch(100% 0 var(--a-hue-surface));
+    --a-text-main: oklch(25% 0.02 var(--a-hue-surface));
+    --a-text-muted: oklch(45% 0.01 var(--a-hue-surface));
+    --a-border: oklch(90% 0.02 var(--a-hue-surface));
+
+    /* --- MATHEMATICAL FLUID SCALING --- 
+       Spacing & Typography scale proportionally across viewports without media queries. */
+    --a-ratio: 1.414; /* Augmented Fourth */
+    
+    /* Typography Rhythm */
+    --a-text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --a-text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+    --a-text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --a-text-lg: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --a-text-xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+    
+    /* Spacing Units */
+    --a-space-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
+    --a-space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+    --a-space-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+    --a-space-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+    --a-space-xl: clamp(2rem, 1.6rem + 2vw, 3rem);
+
+    /* --- INTERACTIONS --- */
+    --a-radius: calc(var(--a-space-md) * 0.5);
+    --a-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Dark Theme Auto-Mapping (No classes needed if OS is dark, plus attribute override) */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --a-surface-base: oklch(15% 0.01 var(--a-hue-surface));
+      --a-surface-raised: oklch(20% 0.01 var(--a-hue-surface));
+      --a-text-main: oklch(95% 0.01 var(--a-hue-surface));
+      --a-text-muted: oklch(75% 0.01 var(--a-hue-surface));
+      --a-border: oklch(25% 0.02 var(--a-hue-surface));
+      /* Primary slightly brightened for dark mode contrast */
+      --a-primary: oklch(65% 0.15 var(--a-hue-primary)); 
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --a-surface-base: oklch(15% 0.01 var(--a-hue-surface));
+    --a-surface-raised: oklch(20% 0.01 var(--a-hue-surface));
+    --a-text-main: oklch(95% 0.01 var(--a-hue-surface));
+    --a-text-muted: oklch(75% 0.01 var(--a-hue-surface));
+    --a-border: oklch(25% 0.02 var(--a-hue-surface));
+    --a-primary: oklch(65% 0.15 var(--a-hue-primary)); 
+  }
+}
+
+@layer axiom.reset {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--a-surface-base);
+    color: var(--a-text-main);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: var(--a-text-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Axiom Core Rule: Constrain line lengths mathematically for perfect readability */
+  p { max-width: 65ch; margin-block-end: var(--a-space-md); }
+  /* Accessible Focus */
+  :focus-visible {
+    outline: 2px solid var(--a-primary);
+    outline-offset: 2px;
+  }
+}
+
+@layer axiom.components {
+  /* --- BUTTONS --- */
+  /* Axiom core rule: Tag-agnostic, single semantic class */
+  button, .button, .primary, .secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--a-space-sm);
+    padding: var(--a-space-sm) var(--a-space-md);
+    font-size: var(--a-text-sm);
+    font-weight: 500;
+    border-radius: var(--a-radius);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--a-transition);
+  }
+
+  .primary {
+    background: var(--a-primary);
+    color: oklch(100% 0 0); /* Pure white text on primary */
+  }
+  .primary:hover { background: var(--a-primary-hover); }
+
+  /* :HAS() Magic - Demote adjacent secondary buttons visually if next to a primary */
+  .button-group:has(.primary) .secondary {
+    background: transparent;
+    border-color: var(--a-border);
+    color: var(--a-text-main);
+  }
+
+  /* --- FORMS --- */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-md);
+    max-width: 100%;
+  }
+
+  .form label {
+    font-size: var(--a-text-sm);
+    font-weight: 600;
+  }
+
+  .form input, .form textarea {
+    padding: var(--a-space-sm) var(--a-space-md);
+    background: var(--a-surface-raised);
+    border: 1px solid var(--a-border);
+    border-radius: var(--a-radius);
+    color: inherit;
+    font-family: inherit;
+    transition: border-color var(--a-transition);
+  }
+
+  /* :HAS() Magic - Zero-class form validation states */
+  .form:has(input:invalid:not(:placeholder-shown)) {
+    border-left: 4px solid var(--a-error);
+    padding-left: var(--a-space-sm);
+  }
+  
+  /* --- CARDS (CONTAINER QUERIES) --- */
+  .card {
+    /* The element defines its own layout boundaries, ignoring the viewport */
+    container-type: inline-size;
+    background: var(--a-surface-raised);
+    border: 1px solid var(--a-border);
+    border-radius: var(--a-radius);
+    padding: var(--a-space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-md);
+  }
+
+  /* If a card is placed in a grid and shrinks, or is on a small mobile device, it remains vertical.
+     If the CARD ITSELF grows past 400px, it shifts to horizontal. Zero media queries used. */
+  @container (min-width: 400px) {
+    .card:has(> img:first-child) {
+      flex-direction: row;
+      align-items: center;
+    }
+    .card:has(> img:first-child) img {
+      width: 40%; /* Image takes up proportional space */
+      border-radius: calc(var(--a-radius) - 2px);
+    }
+  }
+
+  /* :HAS() Magic - Automatically remove bottom padding if a footer exists */
+  .card:has(> footer) { padding-bottom: 0; }
+  .card footer {
+    margin-top: auto;
+    padding: var(--a-space-md);
+    margin: 0 calc(var(--a-space-md) * -1); /* Break out of parent padding */
+    border-top: 1px solid var(--a-border);
+    background: var(--a-surface-base);
+  }
+}
+
+```

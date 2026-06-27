@@ -1,0 +1,47 @@
+# Dropdowns
+Accessible context menus driven by semantic attributes.
+## The Semantic Reality
+Utility-first frameworks require massive boilerplate for dropdowns, often relying on external Headless UI libraries just to toggle visibility, manage focus, and apply .block or .hidden classes.
+Axiom01 ties visual state directly to accessibility attributes.
+### Axiom01 Approach
+```html
+<div class="dropdown">
+  <!-- The aria-expanded attribute is the single source of truth -->
+  <button class="secondary" aria-expanded="false" aria-controls="user-menu">
+    Options <span>▼</span>
+  </button>
+  
+  <div class="dropdown-menu" id="user-menu">
+    <a href="#profile">Profile</a>
+    <a href="#settings">Settings</a>
+    <button>Sign Out</button>
+  </div>
+</div>
+
+```
+## The aria-expanded Trigger
+Axiom01 dropdowns do not use .is-open classes. Our ultra-light <1KB global JavaScript controller simply listens for clicks on [aria-expanded] elements and toggles them between "true" and "false".
+The CSS handles the rest:
+```css
+/* How Axiom01 works under the hood */
+.dropdown:has([aria-expanded="true"]) .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+```
+By linking the visual state directly to the aria state, we guarantee that the UI is always perfectly in sync with screen readers, while entirely eliminating CSS state classes.
+## Customizing The Axiom Way
+To change the dropdown menu's visual prominence, adjust the base tokens inline.
+### Example: Floating Action Dropdown
+```html
+<div class="dropdown" style="--a-surface-raised: var(--a-primary); --a-text-main: #fff;">
+  <button aria-expanded="false" class="primary">Actions</button>
+  <div class="dropdown-menu">
+    <!-- Menu is now primary-colored instead of surface-colored -->
+    <a href="#new">New Document</a>
+  </div>
+</div>
+
+```

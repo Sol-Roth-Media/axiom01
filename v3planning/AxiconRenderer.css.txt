@@ -1,0 +1,58 @@
+```css
+/* ==========================================================================
+   AXIOM01 - AXICONS RENDERER
+   Philosophy: Reserve space instantly to prevent layout shift.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. SPACE RESERVATION (ZERO LAYOUT SHIFT) --- */
+  /* Target the semantic attribute BEFORE JS runs */
+  svg[data-axicon], 
+  i[data-axicon],
+  .axicon {
+    display: inline-block;
+    vertical-align: middle;
+    /* Scale automatically with the surrounding text size */
+    width: 1em;
+    height: 1em;
+    aspect-ratio: 1 / 1;
+    
+    /* Inherit the text color of the parent container */
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    
+    /* Prevent shrinking in flex containers */
+    flex-shrink: 0;
+  }
+
+  /* --- 2. MULTI-COLOR VARIANTS (OKLCH INTEGRATION) --- */
+  /* Axiom's Color and Premium variants use CSS variables INSIDE the SVG paths */
+  
+  /* Example: A path in the SVG dictionary looks like this:
+     <path fill="var(--ax-fill, currentColor)" stroke="var(--ax-stroke, transparent)" ... /> 
+  */
+
+  [data-variant="color"] {
+    /* Primary tone maps to the Axiom OKLCH primary variable */
+    --ax-fill: var(--a-primary-subtle);
+    --ax-stroke: var(--a-primary);
+  }
+
+  [data-variant="inverted"] {
+    fill: currentColor;
+    stroke: none;
+  }
+
+  /* Contextual overrides - If an icon is placed inside a primary button, adapt! */
+  .button.primary [data-axicon],
+  .badge.primary [data-axicon] {
+    --ax-fill: oklch(100% 0 0 / 0.2); /* Semi-transparent white inside buttons */
+    --ax-stroke: oklch(100% 0 0); /* Solid white lines */
+  }
+}
+
+```

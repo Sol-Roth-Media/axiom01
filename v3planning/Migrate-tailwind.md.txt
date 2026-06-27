@@ -1,0 +1,50 @@
+# Migrating to Axiom01: The Escape Route
+If you are coming from utility-first frameworks like Tailwind, you have been trained to think in *visual properties*. You look at a button and think: "bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600".
+Axiom01 requires a mental shift. You must stop describing what the UI *looks like*, and start declaring what the UI *is*.
+## The Mental Shift
+| The Utility Mindset (How it looks) | The Axiom Mindset (What it is) |
+|---|---|
+| "I need a white box with rounded corners, shadow, flexbox, padding, and a border bottom." | "I need a <article class="card">." |
+| "I need an input with a red border because the state hasError is true in my React component." | "I need a <form> and a required <input>. The CSS will react when the input is invalid." |
+| "I need a grid with 1 column on mobile, 2 on tablet, and 4 on desktop." | "I need a <div class="grid">. The items will autofit the available space." |
+## Translation Guide
+Here is how you translate common utility patterns into Axiom01's semantic architecture.
+### 1. The Standard Button
+**Utility (12 classes):** <button class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-colors">
+**Axiom (1 class):**
+<button class="primary">
+### 2. The Complex Card
+**Utility (18 classes):**
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row p-6 gap-4">
+**Axiom (1 class, 0 media queries):**
+<article class="card">
+*(Axiom automatically handles dark mode, and uses @container to switch to flex-row when it has enough space).*
+### 3. State Management (Form Error)
+**Utility (JS heavy):**
+```jsx
+// Requires React/Vue to manage state and append classes
+<div class={`border p-2 ${isInvalid ? 'border-red-500' : 'border-gray-300'}`}>
+  <input type="text" onChange={validate} />
+</div>
+
+```
+**Axiom (Zero JS, Zero Classes):**
+```html
+<form class="form">
+  <fieldset>
+    <!-- CSS :has() automatically highlights this fieldset if the input fails HTML validation -->
+    <input type="text" required pattern="[A-Z]+">
+  </fieldset>
+</form>
+
+```
+## "But how do I change just ONE thing?"
+The biggest fear of leaving utility classes is losing the ability to tweak a specific element. Axiom01 solves this using **Inline CSS Variables**, adhering to our rule of keeping HTML semantic.
+If you have 10 standard cards, but you need *one* card to have a red border and a darker background, **do not write a new CSS class**. Do this:
+```html
+<article class="card" style="--a-border: var(--a-error); --a-surface-raised: var(--a-surface-base);">
+  <!-- Content -->
+</article>
+
+```
+You are still using the semantic .card architecture. You are still utilizing the framework's math and layout rules. You are simply feeding the engine different tokens for this specific node. This is how you write robust, scalable CSS that respects your markup.

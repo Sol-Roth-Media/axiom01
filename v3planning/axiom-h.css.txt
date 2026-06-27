@@ -1,0 +1,158 @@
+```css
+/* ==========================================================================
+   AXIOM01 - BATCH H: ADVANCED LAYOUTS & MODERN APIS
+   Philosophy: Leverage HTML counters; utilize the native Popover API.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. SEMANTIC TIMELINES (STEPPERS) --- */
+  /* Replaces div-soup with a native Ordered List (<ol>) */
+  ol.timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* Initialize CSS Counter */
+    counter-reset: axiom-step; 
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-md);
+  }
+
+  ol.timeline > li {
+    position: relative;
+    padding-left: calc(var(--a-space-xl) + var(--a-space-xs));
+    /* The counter automatically numbers the steps */
+    counter-increment: axiom-step; 
+  }
+
+  /* The Numbered Circle */
+  ol.timeline > li::before {
+    content: counter(axiom-step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--a-space-xl);
+    height: var(--a-space-xl);
+    border-radius: 50%;
+    background: var(--a-surface-raised);
+    border: 2px solid var(--a-border);
+    color: var(--a-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--a-text-sm);
+    font-weight: 700;
+    z-index: 2;
+    transition: all var(--a-transition);
+  }
+
+  /* The Connecting Line */
+  ol.timeline > li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: calc(var(--a-space-xl) / 2 - 1px); /* Center precisely under the circle */
+    top: var(--a-space-xl);
+    bottom: calc(var(--a-space-md) * -1); /* Connect to the next item */
+    width: 2px;
+    background: var(--a-border);
+    z-index: 1;
+  }
+
+  /* Completed State via :has() or direct class */
+  ol.timeline > li.completed::before,
+  ol.timeline > li:has([checked])::before {
+    background: var(--a-primary);
+    border-color: var(--a-primary);
+    color: oklch(100% 0 0);
+  }
+
+  ol.timeline > li.completed::after,
+  ol.timeline > li:has([checked])::after {
+    background: var(--a-primary);
+  }
+
+
+  /* --- 2. NATIVE POPOVERS --- */
+  /* Axiom natively styles the modern HTML [popover] API */
+  [popover] {
+    /* Reset browser defaults */
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    overflow: visible;
+    
+    /* Center it loosely, popover API handles top-layer injection */
+    margin: auto;
+  }
+
+  /* When the popover is rendered as a Card */
+  [popover].card {
+    /* Override card display specifically for popovers to enable entrance animations */
+    display: flex; /* Restores card flex layout stripped by popover */
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    /* Animation base */
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity var(--a-transition), transform var(--a-transition), display var(--a-transition) allow-discrete;
+  }
+
+  /* Popover Open State */
+  [popover]:popover-open {
+    opacity: 1;
+    transform: scale(1);
+    
+    @starting-style {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  /* Popover Backdrop */
+  [popover]::backdrop {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity var(--a-transition) allow-discrete;
+  }
+
+  [popover]:popover-open::backdrop {
+    opacity: 1;
+    @starting-style { opacity: 0; }
+  }
+
+
+  /* --- 3. BEAUTIFUL FILE UPLOADS --- */
+  input[type="file"].file {
+    font-family: inherit;
+    color: var(--a-text-main);
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+
+  /* Target the native file selector button */
+  input[type="file"].file::file-selector-button {
+    /* Share styling with the .button.secondary class implicitly */
+    margin-right: var(--a-space-md);
+    padding: var(--a-space-sm) var(--a-space-md);
+    background: var(--a-surface-raised);
+    border: 1px solid var(--a-border);
+    border-radius: var(--a-radius);
+    color: var(--a-text-main);
+    font-weight: 500;
+    font-size: var(--a-text-sm);
+    cursor: pointer;
+    transition: all var(--a-transition);
+  }
+
+  input[type="file"].file::file-selector-button:hover {
+    background: var(--a-primary-subtle);
+    border-color: var(--a-primary);
+    color: var(--a-primary);
+  }
+}
+
+```

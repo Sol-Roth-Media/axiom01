@@ -1,0 +1,180 @@
+```css
+/* ==========================================================================
+   AXIOM01 - BATCH I: HIERARCHY & CONTEXT (Breadcrumbs, Trees, Input Groups)
+   Philosophy: Semantic relationships dictate visual grouping.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. SEMANTIC BREADCRUMBS --- */
+  /* Replaces massive unordered lists of utility classes with native semantics */
+  nav[aria-label="breadcrumb"] ol,
+  nav[aria-label="Breadcrumb"] ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: var(--a-text-sm);
+  }
+
+  nav[aria-label^="breadcrumb" i] li {
+    display: flex;
+    align-items: center;
+  }
+
+  nav[aria-label^="breadcrumb" i] a {
+    color: var(--a-text-muted);
+    text-decoration: none;
+    transition: color var(--a-transition);
+  }
+
+  nav[aria-label^="breadcrumb" i] a:hover {
+    color: var(--a-primary);
+    text-decoration: underline;
+  }
+
+  /* Automatically generate separators natively */
+  nav[aria-label^="breadcrumb" i] li:not(:last-child)::after {
+    content: "/";
+    margin: 0 var(--a-space-sm);
+    color: var(--a-border);
+    font-weight: 300;
+  }
+
+  /* Automatically highlight the current page */
+  nav[aria-label^="breadcrumb" i] li:last-child {
+    color: var(--a-text-main);
+    font-weight: 500;
+  }
+
+  nav[aria-label^="breadcrumb" i] a[aria-current="page"] {
+    color: var(--a-text-main);
+    font-weight: 500;
+    pointer-events: none;
+    text-decoration: none;
+  }
+
+
+  /* --- 2. SEMANTIC INPUT GROUPS --- */
+  /* Wrapping inputs and spans inside a label creates an automatic group */
+  label.input-group {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    /* Create a cohesive border system */
+    border-radius: var(--a-radius);
+    border: 1px solid var(--a-border);
+    background: var(--a-surface-raised);
+    overflow: hidden;
+    transition: border-color var(--a-transition), box-shadow var(--a-transition);
+  }
+
+  /* Strip borders and backgrounds from the internal input */
+  label.input-group input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: var(--a-space-sm) var(--a-space-md);
+    min-width: 0; /* Prevents flex blowout */
+  }
+
+  label.input-group input:focus-visible {
+    outline: none;
+    box-shadow: none; /* Focus is handled by the wrapper */
+  }
+
+  /* Affixes (Prefixes and Suffixes) */
+  label.input-group > span {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--a-space-md);
+    background: var(--a-surface-base);
+    color: var(--a-text-muted);
+    font-size: var(--a-text-sm);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* Internal borders for affixes */
+  label.input-group > span:first-child { border-right: 1px solid var(--a-border); }
+  label.input-group > span:last-child { border-left: 1px solid var(--a-border); }
+
+  /* Focus Proxy via :has() - Passes the focus ring to the parent label! */
+  label.input-group:has(input:focus-visible) {
+    border-color: var(--a-primary);
+    box-shadow: 0 0 0 3px var(--a-primary-subtle);
+  }
+
+  /* Error State Proxy */
+  label.input-group:has(input:invalid:not(:placeholder-shown)) {
+    border-color: var(--a-error);
+  }
+
+
+  /* --- 3. TREE VIEWS (NESTED LISTS) --- */
+  /* Used for file explorers, deep navigation hierarchies */
+  ul.tree, 
+  ul.tree ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul.tree {
+    font-size: var(--a-text-sm);
+  }
+
+  /* Indentation math via padding, not margin, to maximize hover hit areas */
+  ul.tree ul {
+    padding-left: var(--a-space-lg);
+    border-left: 1px solid var(--a-border);
+    margin-left: calc(var(--a-space-md) / 2);
+  }
+
+  ul.tree li {
+    margin: 2px 0;
+  }
+
+  ul.tree a,
+  ul.tree details > summary {
+    display: flex;
+    align-items: center;
+    padding: calc(var(--a-space-xs) * 0.5) var(--a-space-sm);
+    color: var(--a-text-muted);
+    text-decoration: none;
+    border-radius: calc(var(--a-radius) * 0.5);
+    transition: all var(--a-transition);
+    cursor: pointer;
+  }
+
+  ul.tree a:hover,
+  ul.tree details > summary:hover {
+    background: var(--a-surface-raised);
+    color: var(--a-text-main);
+  }
+
+  ul.tree details > summary {
+    font-weight: 500;
+    color: var(--a-text-main);
+    list-style: none;
+  }
+  
+  ul.tree details > summary::-webkit-details-marker { display: none; }
+
+  /* Tree node folder indicator */
+  ul.tree details > summary::before {
+    content: "▸";
+    display: inline-block;
+    width: 1.2em;
+    font-size: 0.9em;
+    transition: transform var(--a-transition);
+  }
+
+  ul.tree details[open] > summary::before {
+    transform: rotate(90deg);
+  }
+}
+
+```

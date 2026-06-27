@@ -1,0 +1,47 @@
+# Cards
+Flexible, container-aware content wrappers. In Axiom01, cards are not defined by the screen size, but by the space they are given.
+## The Semantic Reality
+Most frameworks require you to define a card's layout, its shadow, its border, its padding, and its media query breakpoints across 15+ utility classes.
+Axiom01 asks one question: *Is it an article?*
+### Axiom01 Approach
+```html
+<!-- HTML: 9 lines | Classes: 1 -->
+<article class="card">
+  <img src="mountain.jpg" alt="Mountain landscape">
+  <header>
+    <h3>Expedition Overview</h3>
+  </header>
+  <main>
+    <p>Details about the upcoming climb.</p>
+  </main>
+  <footer>
+    <button class="primary">Book Now</button>
+  </footer>
+</article>
+
+```
+## Container-Aware Layout (Zero Breakpoints)
+Axiom01 Cards use **CSS Container Queries** (@container). This means you don't need to write md:flex-row.
+The .card element intelligently queries its own width. If you place a card in a narrow sidebar, it renders vertically with the image on top. If you place that *exact same HTML* into a wide main content area, it automatically snaps into a horizontal layout with the image on the left.
+*No media queries. No layout classes. Just math.*
+## Zero-Class Edge Handling
+Through the power of the :has() relational selector, Axiom01 understands your DOM structure and adjusts spacing automatically.
+ * **Has an Image?** The card automatically removes the border-radius from the bottom of the image and adjusts the padding of the <header> below it.
+ * **Has a Footer?** The card automatically sets the footer's background to a distinct surface color, adds a subtle border, and pushes it to the bottom of the flex container (margin-top: auto).
+## Customizing The Axiom Way
+Axiom01 components are fully entangled. But what if you need *one specific card* to stand out, like a pricing tier or a warning, without writing a new class or breaking the system?
+Use inline CSS variables to override the tokens for that specific node. The mathematical scaling (color-mix) will handle the rest.
+### Example: A Success/Highlight Card
+By simply overriding --a-border and --a-surface-raised inline, the entire component adapts while maintaining perfect semantic symmetry.
+```html
+<article class="card" style="--a-border: var(--a-success); --a-surface-raised: oklch(95% 0.05 140);">
+  <header>
+    <h3>Upgraded Successfully</h3>
+  </header>
+  <main>
+    <p>Your account has been provisioned.</p>
+  </main>
+</article>
+
+```
+**Next Step:** Learn how to place Cards into the Axiom Fluid Grid to create responsive dashboards without touching a single media query.

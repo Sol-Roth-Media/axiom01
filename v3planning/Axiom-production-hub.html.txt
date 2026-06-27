@@ -1,0 +1,697 @@
+```html
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-spacing="spacious">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axiom01 — Reclaiming the Semantic Web</title>
+  
+  <style>
+    /* ==========================================================================
+       AXIOM01 CORE ENGINE & DESIGN TOKENS
+       ========================================================================== */
+    @layer axiom.tokens, axiom.base, axiom.prose, axiom.components, axiom.utilities;
+
+    @layer axiom.tokens {
+      :root {
+        /* Base Hue Calculations (OKLCH Coordinate Space) */
+        --a-hue-primary: 250; /* Calm Indigo */
+        --a-hue-surface: 220; /* Technical Slate */
+        
+        /* Auto-Generated Complementary Accent Hue (180deg Rotation) */
+        --a-hue-accent: calc(var(--a-hue-primary) + 180);
+
+        /* Absolute Color Encodings */
+        --a-primary: oklch(60% 0.16 var(--a-hue-primary));
+        --a-primary-hover: color-mix(in oklch, var(--a-primary) 85%, black);
+        --a-primary-subtle: color-mix(in oklch, var(--a-primary) 10%, transparent);
+
+        --a-accent: oklch(65% 0.2 var(--a-hue-accent));
+        --a-accent-hover: color-mix(in oklch, var(--a-accent) 85%, black);
+        --a-accent-subtle: color-mix(in oklch, var(--a-accent) 10%, transparent);
+
+        --a-success: oklch(65% 0.18 140);
+        --a-error: oklch(60% 0.18 25);
+
+        /* Typography Base Scaling */
+        --a-text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+        --a-ratio: 1.414; /* Augmented Fourth Scale */
+        
+        --a-text-lg: calc(var(--a-text-base) * var(--a-ratio));
+        --a-text-xl: calc(var(--a-text-lg) * var(--a-ratio));
+        --a-text-xxl: calc(var(--a-text-xl) * var(--a-ratio));
+
+        /* Dynamic Spacing Constants (Spacious Default vs. Compact Layout overrides) */
+        --a-space-unit: clamp(1.125rem, 0.9rem + 1vw, 1.5rem);
+        --a-space-xs: calc(var(--a-space-unit) * 0.25);
+        --a-space-sm: calc(var(--a-space-unit) * 0.5);
+        --a-space-md: var(--a-space-unit);
+        --a-space-lg: calc(var(--a-space-unit) * 1.5);
+        --a-space-xl: calc(var(--a-space-unit) * 2.5);
+
+        --a-radius: 8px;
+        --a-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Light Theme Surface Mappings */
+      :root[data-theme="light"] {
+        --a-surface-base: oklch(99% 0.005 var(--a-hue-surface));
+        --a-surface-raised: oklch(100% 0 0);
+        --a-border: oklch(90% 0.01 var(--a-hue-surface));
+        --a-text-main: oklch(25% 0.02 var(--a-hue-surface));
+        --a-text-muted: oklch(50% 0.01 var(--a-hue-surface));
+      }
+
+      /* Dark Theme Surface Mappings */
+      :root[data-theme="dark"] {
+        --a-surface-base: oklch(15% 0.015 var(--a-hue-surface));
+        --a-surface-raised: oklch(18% 0.02 var(--a-hue-surface));
+        --a-border: oklch(28% 0.02 var(--a-hue-surface));
+        --a-text-main: oklch(92% 0.01 var(--a-hue-surface));
+        --a-text-muted: oklch(65% 0.01 var(--a-hue-surface));
+      }
+
+      /* Compact Spacing Multiplier Overrides */
+      :root[data-spacing="compact"] {
+        --a-space-unit: clamp(0.75rem, 0.6rem + 0.5vw, 0.95rem);
+        --a-radius: 4px;
+      }
+    }
+
+    @layer axiom.base {
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--a-surface-base);
+        color: var(--a-text-main);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.5;
+        transition: background-color var(--a-transition), color var(--a-transition);
+        overflow-x: hidden;
+      }
+
+      a {
+        color: var(--a-primary);
+        text-decoration: none;
+        transition: color var(--a-transition);
+      }
+      a:hover {
+        color: var(--a-primary-hover);
+      }
+
+      h1, h2, h3, h4 {
+        color: var(--a-text-main);
+        font-weight: 700;
+        line-height: 1.15;
+        text-wrap: balance;
+        letter-spacing: -0.02em;
+      }
+
+      /* Native Dialog Baseline */
+      dialog {
+        border: 1px solid var(--a-border);
+        border-radius: var(--a-radius);
+        background: var(--a-surface-raised);
+        color: var(--a-text-main);
+        padding: var(--a-space-lg);
+        max-width: 500px;
+        width: 90%;
+        margin: auto;
+        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.15);
+      }
+      dialog::backdrop {
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
+      }
+    }
+
+    @layer axiom.prose {
+      /* Editorial Printing Layout Engine */
+      .prose {
+        max-width: 65ch;
+        margin-inline: auto;
+        hanging-punctuation: first last;
+      }
+
+      .prose h1 { font-size: var(--a-text-xxl); margin-bottom: var(--a-space-md); }
+      .prose h2 { font-size: var(--a-text-xl); margin-top: var(--a-space-lg); margin-bottom: var(--a-space-sm); }
+      .prose h3 { font-size: var(--a-text-lg); margin-top: var(--a-space-md); margin-bottom: var(--a-space-xs); }
+      
+      .prose p {
+        font-size: var(--a-text-base);
+        line-height: 1.75;
+        margin-bottom: var(--a-space-md);
+        text-wrap: pretty;
+        orphans: 2;
+        widows: 2;
+        font-variant-numeric: oldstyle-nums proportional-nums;
+      }
+
+      .prose p.lead {
+        font-size: var(--a-text-lg);
+        font-weight: 300;
+        color: var(--a-text-muted);
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+      }
+
+      .prose p.drop-cap::first-letter {
+        float: left;
+        font-size: 3.8em;
+        line-height: 0.8;
+        padding-right: var(--a-space-xs);
+        padding-top: 0.1em;
+        font-weight: 700;
+        color: var(--a-primary);
+      }
+    }
+
+    @layer axiom.components {
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin-inline: auto;
+        padding-inline: var(--a-space-md);
+      }
+
+      /* Unified Buttons */
+      .button, button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--a-space-xs);
+        padding: var(--a-space-sm) var(--a-space-md);
+        font-size: var(--a-text-base);
+        font-weight: 600;
+        border-radius: var(--a-radius);
+        border: 1px solid var(--a-border);
+        background: var(--a-surface-raised);
+        color: var(--a-text-main);
+        cursor: pointer;
+        transition: all var(--a-transition);
+      }
+      .button:hover, button:hover {
+        background: var(--a-surface-base);
+        border-color: var(--a-text-muted);
+      }
+
+      .button.primary, button.primary {
+        background: var(--a-primary);
+        color: oklch(100% 0 0);
+        border-color: transparent;
+      }
+      .button.primary:hover, button.primary:hover {
+        background: var(--a-primary-hover);
+      }
+
+      .button.accent, button.accent {
+        background: var(--a-accent);
+        color: oklch(100% 0 0);
+        border-color: transparent;
+      }
+      .button.accent:hover, button.accent:hover {
+        background: var(--a-accent-hover);
+      }
+
+      /* Metric Cards */
+      .card {
+        background: var(--a-surface-raised);
+        border: 1px solid var(--a-border);
+        border-radius: var(--a-radius);
+        padding: var(--a-space-md);
+        display: flex;
+        flex-direction: column;
+        gap: var(--a-space-xs);
+        transition: border-color var(--a-transition), transform var(--a-transition);
+      }
+      .card:hover {
+        border-color: var(--a-primary);
+      }
+
+      /* Responsive Tables */
+      .table-wrapper {
+        overflow-x: auto;
+        border: 1px solid var(--a-border);
+        border-radius: var(--a-radius);
+      }
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        font-variant-numeric: lining-nums tabular-nums;
+        text-align: left;
+      }
+      .table th, .table td {
+        padding: var(--a-space-sm) var(--a-space-md);
+        border-bottom: 1px solid var(--a-border);
+      }
+      .table th {
+        background: var(--a-surface-base);
+        font-weight: 600;
+        color: var(--a-text-muted);
+        font-size: calc(var(--a-text-base) * 0.85);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      /* Avatars */
+      .avatar {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        background: var(--a-primary-subtle);
+        color: var(--a-primary);
+        font-weight: 700;
+        font-size: calc(var(--a-text-base) * 0.8);
+        overflow: hidden;
+      }
+      .avatar::after {
+        content: attr(data-initials);
+      }
+
+      /* System Badges */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: calc(var(--a-space-xs) * 0.5) var(--a-space-sm);
+        border-radius: 20px;
+        font-size: calc(var(--a-text-base) * 0.75);
+        font-weight: 600;
+        background: var(--a-border);
+        color: var(--a-text-muted);
+      }
+      .badge.accent {
+        background: var(--a-accent-subtle);
+        color: var(--a-accent);
+      }
+
+      /* Interactive Sidebar Shell */
+      .hub-layout {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        min-height: calc(100vh - 80px);
+        border-top: 1px solid var(--a-border);
+      }
+      .hub-sidebar {
+        background: var(--a-surface-raised);
+        border-right: 1px solid var(--a-border);
+        padding: var(--a-space-md);
+        overflow-y: auto;
+        height: calc(100vh - 80px);
+        position: sticky;
+        top: 80px;
+      }
+      .hub-content {
+        padding: var(--a-space-xl) var(--a-space-md);
+        overflow-y: auto;
+      }
+
+      /* Vertical Tree Lists */
+      .tree-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--a-space-xs);
+      }
+      .tree-list button {
+        width: 100%;
+        text-align: left;
+        justify-content: flex-start;
+        border: none;
+        background: transparent;
+        font-weight: 500;
+        padding: var(--a-space-xs) var(--a-space-sm);
+      }
+      .tree-list button.active {
+        background: var(--a-primary-subtle);
+        color: var(--a-primary);
+        font-weight: 700;
+      }
+
+      /* Hidden routing panels */
+      .route-view {
+        display: none;
+      }
+      .route-view.active {
+        display: block;
+      }
+    }
+
+    @layer axiom.utilities {
+      .text-center { text-align: center; }
+      .text-muted { color: var(--a-text-muted); }
+      .w-full { width: 100%; }
+      
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: var(--a-space-md);
+      }
+
+      /* OS Accessibility Preference Hooks */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
+      @media (prefers-contrast: more) {
+        :root {
+          --a-text-main: oklch(0% 0 0);
+          --a-text-muted: oklch(25% 0 0);
+          --a-border: oklch(35% 0 0);
+        }
+      }
+
+      /* Adaptive Mobile Sidebar Pivot */
+      @media (max-width: 768px) {
+        .hub-layout {
+          grid-template-columns: 1fr;
+        }
+        .hub-sidebar {
+          display: none; /* Hide standard sidebar on mobile, fallback to flat navigator */
+        }
+      }
+
+      /* Native Print Layout Optimization */
+      @media print {
+        header, footer, .hub-sidebar, .configurator {
+          display: none !important;
+        }
+        .hub-layout {
+          display: block;
+        }
+        .prose {
+          max-width: 100% !important;
+        }
+      }
+    }
+
+    /* System Icons Space Reservation CSS */
+    svg[data-axicon], i[data-axicon] {
+      display: inline-block;
+      vertical-align: middle;
+      width: 1.1em;
+      height: 1.1em;
+      aspect-ratio: 1 / 1;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER & BRAND BAR -->
+  <header style="background: var(--a-surface-raised); border-bottom: 1px solid var(--a-border); height: 80px; sticky: top; z-index: 50;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+      <a href="#" onclick="Navigation.view('hero')" style="display: flex; align-items: center; gap: var(--a-space-sm); font-weight: 800; font-size: var(--a-text-lg); letter-spacing: -0.03em;">
+        <span class="avatar" data-initials="AX" style="width: 38px; height: 38px; font-size: 1rem; border-radius: 8px;"></span>
+        Axiom01
+      </a>
+      
+      <!-- NAV TRIGGERS -->
+      <nav style="display: flex; align-items: center; gap: var(--a-space-md);">
+        <button onclick="Navigation.view('docs')" class="button">Docs</button>
+        <button onclick="Navigation.view('book')" class="button primary">The Book</button>
+        
+        <!-- Live Customizer UI -->
+        <div class="configurator" style="display: flex; align-items: center; border-left: 1px solid var(--a-border); padding-left: var(--a-space-md); gap: var(--a-space-sm);">
+          <button onclick="Config.toggleTheme()" aria-label="Toggle Theme" style="padding: var(--a-space-xs);">
+            <svg data-axicon="Sun"></svg>
+          </button>
+          <button onclick="Config.toggleSpacing()" aria-label="Toggle Density" style="padding: var(--a-space-xs);">
+            <svg data-axicon="Layers"></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- VIEW 1: HERO HOMEPAGE -->
+  <main id="view-hero" class="route-view active">
+    <!-- HERO SECTION -->
+    <section style="padding: var(--a-space-xl) 0; text-align: center; background: radial-gradient(circle at top, var(--a-primary-subtle) 0%, transparent 70%);">
+      <div class="container" style="max-width: 800px; display: flex; flex-direction: column; gap: var(--a-space-md); align-items: center;">
+        <span class="badge accent">Axiom01 Platform Launch</span>
+        <h1 style="font-size: clamp(2.5rem, 4vw, 4.5rem); line-height: 1.05; letter-spacing: -0.04em;">Reclaim the Semantic Web.</h1>
+        <p class="text-muted" style="font-size: var(--a-text-lg); font-weight: 300; line-height: 1.5; text-wrap: balance;">
+          A premium, high-performance web development system designed to completely eliminate utility-class clutter and JavaScript layout engines. Built exclusively on raw browser standards.
+        </p>
+        <div style="display: flex; gap: var(--a-space-sm); margin-top: var(--a-space-sm);">
+          <button onclick="Navigation.view('book')" class="button primary accent"><svg data-axicon="BookOpen"></svg> Read "The Semantic Reality"</button>
+          <button onclick="Navigation.view('docs')" class="button"><svg data-axicon="Terminal"></svg> Explore Framework Docs</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY PHILOSOPHICAL POSTULATES -->
+    <section style="padding: var(--a-space-lg) 0; border-top: 1px solid var(--a-border);">
+      <div class="container">
+        <h2 class="text-center" style="margin-bottom: var(--a-space-xl); font-size: var(--a-text-xl);">The Pillars of Axiom Design</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="avatar" data-initials="01" style="width: 40px; height: 40px; margin-bottom: var(--a-space-xs);"></div>
+            <h3>Pure Structural Symmetries</h3>
+            <p class="text-muted">All layout components have mathematically locked relative spacing derived from golden ratio constants. No manual pixel-pushing.</p>
+          </div>
+          <div class="card">
+            <div class="avatar" data-initials="02" style="width: 40px; height: 40px; margin-bottom: var(--a-space-xs);"></div>
+            <h3>Perceptual OKLCH Hues</h3>
+            <p class="text-muted">Banish the contrast calculations of yesterday. OKLCH guarantees access-compliant light/dark modes natively across all hue spectrums.</p>
+          </div>
+          <div class="card">
+            <div class="avatar" data-initials="03" style="width: 40px; height: 40px; margin-bottom: var(--a-space-xs);"></div>
+            <h3>Hypermedia-over-the-wire</h3>
+            <p class="text-muted">Our custom, sub-1KB Web Components swap clean server-rendered HTML fragments directly into targets, rendering SPAs obsolete.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- VIEW 2: WORKSPACE & DOCS INTERACTIVE SHELL -->
+  <main id="view-docs" class="route-view">
+    <div class="hub-layout">
+      <!-- SIDEBAR INDEX -->
+      <aside class="hub-sidebar">
+        <nav>
+          <ul class="tree-list">
+            <li><button class="active" onclick="Content.load('docs-intro', this)">Introduction</button></li>
+            <li><button onclick="Content.load('docs-tokens', this)">OKLCH Design Tokens</button></li>
+            <li><button onclick="Content.load('docs-containers', this)">Container Queries</button></li>
+            <li><button onclick="Content.load('docs-a11y', this)">Accessible Forms & :has()</button></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- CONTENT STAGE -->
+      <article class="hub-content container">
+        <div id="docs-stage" class="prose">
+          <!-- Dynamic Content Loads Here -->
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- VIEW 3: THE BOOK READER (THE SEMANTIC REALITY) -->
+  <main id="view-book" class="route-view">
+    <div class="hub-layout">
+      <!-- SIDEBAR TOC -->
+      <aside class="hub-sidebar">
+        <h3 style="font-size: var(--a-text-base); margin-bottom: var(--a-space-sm); text-transform: uppercase; letter-spacing: 0.05em;" class="text-muted">Table of Contents</h3>
+        <nav>
+          <ul class="tree-list" id="toc-list">
+            <!-- Dynamically populated via Script -->
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- BOOK CHAPTER PORT -->
+      <article class="hub-content container">
+        <div id="book-stage" class="prose">
+          <!-- Live Chapter Content -->
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- GLOBAL FOOTER -->
+  <footer style="background: var(--a-surface-raised); border-top: 1px solid var(--a-border); padding: var(--a-space-lg) 0;">
+    <div class="container text-center">
+      <p class="text-muted">Axiom01 is designed and authored by Sol Roth. Released under the MIT Open Source License.</p>
+    </div>
+  </footer>
+
+  <!-- ICON PIPELINE AND RENDERING SYSTEM -->
+  <script>
+    // Embedded SVG Icon Database for zero-CLS delivery
+    const AXICONS = {
+      Sun: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>',
+      Layers: '<svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polygon points="2 17 12 22 22 17"></polygon><polygon points="2 12 12 17 22 12"></polygon></svg>',
+      BookOpen: '<svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>',
+      Terminal: '<svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>',
+      ArrowLeft: '<svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>'
+    };
+
+    // Frame-level Routing and View Controller
+    const Navigation = {
+      view: (id) => {
+        document.querySelectorAll('.route-view').forEach(el => el.classList.remove('active'));
+        const activeView = document.getElementById(`view-${id}`);
+        if (activeView) activeView.classList.add('active');
+        
+        // Handle trigger initial states
+        if (id === 'docs') Content.initDocs();
+        if (id === 'book') Content.initBook();
+        window.scrollTo(0, 0);
+      }
+    };
+
+    // Configurator management
+    const Config = {
+      toggleTheme: () => {
+        const root = document.documentElement;
+        const current = root.getAttribute('data-theme');
+        root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+      },
+      toggleSpacing: () => {
+        const root = document.documentElement;
+        const current = root.getAttribute('data-spacing');
+        root.setAttribute('data-spacing', current === 'compact' ? 'spacious' : 'compact');
+      }
+    };
+
+    // Virtual DB containing our drafted resources
+    const DB = {
+      docs: {
+        'docs-intro': `
+          <h1>Framework Introduction</h1>
+          <p class="lead">Reclaim the native browser engine. Eliminate worthless build complexities.</p>
+          <p>Axiom01 is a pure semantic layout engine designed to free developers from the endless cognitive overhead of utility-class programming. Instead of writing thirty classes on a single container, you author pure semantic landmarks and allow our unified OKLCH and Container Query token engines to calculate layout geometries natively.</p>
+          <hr style="border:0; border-top:1px solid var(--a-border); margin: var(--a-space-lg) 0;">
+          <h2>Key Advantages</h2>
+          <ul>
+            <li><strong>Zero Class Duplication:</strong> Specify component rules once; reuse infinite times natively.</li>
+            <li><strong>Perceptual Color Layouts:</strong> Dark/light compliance calculated perfectly at the GPU layer.</li>
+            <li><strong>Optimized Delivery:</strong> Static assets that render in microseconds without hydration loops.</li>
+          </ul>
+        `,
+        'docs-tokens': `
+          <h1>OKLCH Design Tokens</h1>
+          <p class="lead">Perceptual luminance consistency natively integrated directly into the browser.</p>
+          <p>Traditional RGB and HSL colors are mathematically disconnected from human vision. Our OKLCH core engine calculates color parameters in a cylindrical matrix that corresponds directly with how the human eye registers brightness.</p>
+          <pre style="background: var(--a-surface-base); padding: var(--a-space-md); border-radius: var(--a-radius); font-size: 0.9rem; overflow-x: auto; border: 1px solid var(--a-border);">
+:root {
+  --a-hue-primary: 250;
+  --a-primary: oklch(60% 0.16 var(--a-hue-primary));
+}</pre>
+        `,
+        'docs-containers': `
+          <h1>Container Queries</h1>
+          <p class="lead">A component should respond directly to the space it occupies, completely blind to the screen size.</p>
+          <p>Axiom01 abandons page-level viewport media queries for component structural rules. Using standard container-type queries, our widgets scale seamlessly from sidebar grids to master columns.</p>
+        `,
+        'docs-a11y': `
+          <h1>Accessible Forms & :has()</h1>
+          <p class="lead">Reclaiming form states back into CSS using native selectors.</p>
+          <p>Axiom01 utilizes the browser's native selectors to manage focused, invalid, and highlighted states. Form inputs styled inside our standard systems trap error feedback without loading complex JS libraries.</p>
+        `
+      },
+      book: {
+        chapters: [
+          {
+            id: 'ch-1',
+            title: '1. The Hoarding Problem',
+            content: `
+              <p class="lead">We have a hoarding problem on the web.</p>
+              <p class="drop-cap">If you open the source code of almost any modern web application built today, you will not find a document. You will find a sprawling, dense, and ultimately unreadable matrix of visual instructions. You will see elements buried under ten, twenty, or sometimes forty inline classes, each shouting a tiny, isolated command at the browser.</p>
+              <p>This is not markup; it is a confession. It is the visual equivalent of a room packed to the ceiling with old newspapers, broken furniture, and boxes of unsorted wires. We have hoarded our styling instructions directly inside our structure because we became terrified of the very feature that makes the web elegant: <strong>the cascade</strong>.</p>
+              <p>To understand how we arrived at this utility-first absurdity, we must trace the genealogy of our avoidance. We must understand how an industry of brilliant engineers spent twenty years trying to escape the browser, only to end up writing inline styles masquerading as class names.</p>
+            `
+          },
+          {
+            id: 'ch-2',
+            title: '2. HTML is a Document, Not a Canvas',
+            content: `
+              <p class="lead">In 1993, Tim Berners-Lee and the pioneers of the IETF designed HTML with a specific paradigm in mind: it was to be a structured hypermedia document.</p>
+              <p class="drop-cap">It was never designed to be an empty canvas.</p>
+              <p>Yet, if you look at the modern single-page application (SPA), we have demoted HTML to exactly that: a low-level, blank graphics buffer. We write index files that contain a single, empty tag, and we use massive JavaScript runtimes to programmatically draw our UI onto this empty coordinate space.</p>
+              <p>This philosophical error has extracted a massive tax on our applications. In our rush to build custom interactive components, we have bypassed the native elements of the browser, replaced them with generic nesting containers, and written thousands of lines of fragile JavaScript to recreate basic, standard browser behaviors.</p>
+            `
+          },
+          {
+            id: 'ch-3',
+            title: '3. Symmetry and Relational Spacing',
+            content: `
+              <p class="lead">An exceptional layout is not accidental; it is the manifestation of silent geometry.</p>
+              <p class="drop-cap">If you ask an untrained developer to build a layout, they will construct it like a bricklayer without a level. They will look at a button and say, "Let's add a 10px margin on the right." This is the arbitrary value trap, a process of guess-and-check styling that leaves an application cluttered with fragmented, hardcoded measurements.</p>
+              <p>Axiom01 operates on a fundamentally different spatial thesis: <strong>All elements should exhibit mathematical symmetry and even relative spacing unless you have a specific, calculated, and functional reason to break it.</strong> We automate this spacing by anchoring all paddings, gaps, and margins to a relative, fluid root token scale.</p>
+            `
+          }
+        ]
+      }
+    };
+
+    // State Controller for interactive document staging
+    const Content = {
+      initDocs: () => {
+        const firstBtn = document.querySelector('#view-docs .tree-list button');
+        if (firstBtn) firstBtn.click();
+      },
+      load: (id, btn) => {
+        document.querySelectorAll('#view-docs .tree-list button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('docs-stage').innerHTML = DB.docs[id] || '<p>Content missing.</p>';
+        Content.renderLocalIcons('docs-stage');
+      },
+      initBook: () => {
+        const toc = document.getElementById('toc-list');
+        toc.innerHTML = DB.book.chapters.map((ch, i) => `
+          <li><button class="${i === 0 ? 'active' : ''}" onclick="Content.loadChapter('${ch.id}', this)">${ch.title}</button></li>
+        `).join('');
+        Content.loadChapter(DB.book.chapters[0].id, toc.querySelector('button'));
+      },
+      loadChapter: (id, btn) => {
+        document.querySelectorAll('#toc-list button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const chapter = DB.book.chapters.find(c => c.id === id);
+        
+        document.getElementById('book-stage').innerHTML = `
+          <h1>${chapter.title}</h1>
+          ${chapter.content}
+        `;
+        Content.renderLocalIcons('book-stage');
+        window.scrollTo(0,0);
+      },
+      renderLocalIcons: (containerId) => {
+        document.querySelectorAll(`#${containerId} [data-axicon]`).forEach(el => {
+          const name = el.getAttribute('data-axicon');
+          if (AXICONS[name]) el.innerHTML = AXICONS[name];
+        });
+      }
+    };
+
+    // Self-starting initialization functions
+    window.addEventListener('DOMContentLoaded', () => {
+      // Global render of all icons present on load
+      document.querySelectorAll('[data-axicon]').forEach(el => {
+        const name = el.getAttribute('data-axicon');
+        if (AXICONS[name]) el.innerHTML = AXICONS[name];
+      });
+    });
+  </script>
+</body>
+</html>
+
+```

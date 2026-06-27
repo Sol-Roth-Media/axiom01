@@ -1,0 +1,131 @@
+```css
+/* ==========================================================================
+   AXIOM01 - BATCH C: FEEDBACK & OVERLAYS (Alerts, Badges, Modals)
+   Philosophy: Use native browser APIs; derive colors mathematically.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. BADGES --- */
+  /* Axiom core rule: Badges use color-mix to automatically generate subtle backgrounds */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: calc(var(--a-space-xs) * 0.5) var(--a-space-sm);
+    font-size: var(--a-text-xs);
+    font-weight: 600;
+    border-radius: calc(var(--a-radius) * 2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    
+    /* Default to surface colors */
+    background: var(--a-surface-raised);
+    color: var(--a-text-main);
+    border: 1px solid var(--a-border);
+  }
+
+  /* Semantic Badge Variations */
+  .badge.primary {
+    background: var(--a-primary-subtle);
+    color: var(--a-primary);
+    border-color: transparent;
+  }
+  
+  .badge.success {
+    background: color-mix(in oklch, var(--a-success) 15%, transparent);
+    color: var(--a-success);
+    border-color: transparent;
+  }
+
+  .badge.error {
+    background: color-mix(in oklch, var(--a-error) 15%, transparent);
+    color: var(--a-error);
+    border-color: transparent;
+  }
+
+  /* --- 2. ALERTS --- */
+  .alert {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--a-space-md);
+    padding: var(--a-space-md);
+    border-radius: var(--a-radius);
+    background: var(--a-surface-raised);
+    border-left: 4px solid var(--a-primary);
+  }
+
+  /* Structural Typography inside Alerts */
+  .alert h4 { margin-bottom: var(--a-space-xs); font-size: var(--a-text-sm); }
+  .alert p { margin-bottom: 0; font-size: var(--a-text-sm); color: var(--a-text-muted); }
+
+  /* Variations (Relying on semantic override via single class or variable override) */
+  .alert.success { border-left-color: var(--a-success); }
+  .alert.error { border-left-color: var(--a-error); }
+
+  /* --- 3. NATIVE MODALS (DIALOG) --- */
+  /* Axiom entirely abandons div-based modals in favor of the native <dialog> element. */
+  .modal {
+    padding: 0; /* Padding handled by internal structural elements */
+    border: none;
+    border-radius: var(--a-radius);
+    background: var(--a-surface-base);
+    color: var(--a-text-main);
+    width: min(90vw, 600px);
+    max-width: 100%;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    
+    /* Initial state for entrance animation */
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+    transition: opacity var(--a-transition), transform var(--a-transition), display var(--a-transition) allow-discrete;
+  }
+
+  /* Open State (Native browser attribute) */
+  .modal[open] {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    
+    /* This rule ensures the exit animation works with the dialog API */
+    @starting-style {
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+  }
+
+  /* The Backdrop */
+  .modal::backdrop {
+    background: color-mix(in oklch, var(--a-text-main) 40%, transparent);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity var(--a-transition), display var(--a-transition) allow-discrete;
+  }
+  
+  .modal[open]::backdrop {
+    opacity: 1;
+    @starting-style { opacity: 0; }
+  }
+
+  /* Modal Internal Structure (Reusing card semantics) */
+  .modal > header, 
+  .modal > main, 
+  .modal > footer {
+    padding: var(--a-space-md);
+  }
+  
+  .modal > header {
+    border-bottom: 1px solid var(--a-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal > footer {
+    border-top: 1px solid var(--a-border);
+    background: var(--a-surface-raised);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--a-space-sm);
+  }
+}
+
+```

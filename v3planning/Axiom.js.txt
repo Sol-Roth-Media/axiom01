@@ -1,0 +1,73 @@
+```javascript
+/**
+ * AXIOM01 CORE JS (v2.5)
+ * Philosophy: Minimal dependency. CSS handles state; JS handles logic and global initialization.
+ * Payload target: < 1.0 KB Gzipped.
+ */
+
+class Axiom {
+  constructor() {
+    this.themeKey = 'axiom-theme';
+    this.init();
+  }
+
+  init() {
+    this.initTheme();
+    this.observeInteractiveElements();
+  }
+
+  /**
+   * THEME MANAGEMENT
+   * Connects perfectly with our CSS OKLCH system and media queries.
+   */
+  initTheme() {
+    const savedTheme = localStorage.getItem(this.themeKey);
+    // If a theme is saved, apply it. Otherwise, let CSS prefers-color-scheme handle it.
+    if (savedTheme) {
+      this.setTheme(savedTheme, false);
+    }
+
+    // Attach listeners to any designated theme toggle buttons semantic attribute
+    document.querySelectorAll('[data-axiom-action="toggle-theme"]').forEach(btn => {
+      btn.addEventListener('click', () => this.toggleTheme());
+    });
+  }
+
+  toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 
+                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = current === 'dark' ? 'light' : 'dark';
+    this.setTheme(next);
+  }
+
+  setTheme(themeName, save = true) {
+    document.documentElement.setAttribute('data-theme', themeName);
+    if (save) localStorage.setItem(this.themeKey, themeName);
+  }
+
+  /**
+   * SEMANTIC COMPONENT ENHANCEMENT
+   * Axiom uses :has() and adjacent sibling selectors in CSS, but accessible
+   * overlays (modals, dropdowns) require aria state toggling for screen readers.
+   */
+  observeInteractiveElements() {
+    document.addEventListener('click', (e) => {
+      // Accessible Dropdowns/Disclosures
+      const disclosureBtn = e.target.closest('[aria-expanded]');
+      if (disclosureBtn) {
+        const isExpanded = disclosureBtn.getAttribute('aria-expanded') === 'true';
+        disclosureBtn.setAttribute('aria-expanded', !isExpanded);
+        
+        // Target is handled purely by CSS using: 
+        // [aria-expanded="true"] + .dropdown-menu { display: block; }
+      }
+    });
+  }
+}
+
+// Auto-initialize when DOM is ready, keeping implementation zero-config for the dev
+document.addEventListener('DOMContentLoaded', () => {
+  window.Axiom = new Axiom();
+});
+
+```

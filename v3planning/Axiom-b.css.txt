@@ -1,0 +1,174 @@
+```css
+/* ==========================================================================
+   AXIOM01 - BATCH B: INTERACTIVE & NAVIGATION (Buttons, Dropdowns, Tabs)
+   Philosophy: State is defined by semantic attributes, not CSS classes.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. BUTTON GROUPS --- */
+  /* Combines multiple semantic buttons into a cohesive unit */
+  .button-group {
+    display: inline-flex;
+    align-items: stretch;
+  }
+
+  /* Automatically handle borders and radius based on DOM position */
+  .button-group button,
+  .button-group .button {
+    border-radius: 0;
+    /* Prevent double borders */
+    margin-left: -1px; 
+  }
+
+  /* Keep radius on the outer edges */
+  .button-group > :first-child {
+    border-top-left-radius: var(--a-radius);
+    border-bottom-left-radius: var(--a-radius);
+    margin-left: 0;
+  }
+
+  .button-group > :last-child {
+    border-top-right-radius: var(--a-radius);
+    border-bottom-right-radius: var(--a-radius);
+  }
+
+  /* Visual Hierarchy via :has() */
+  /* If a group has a primary action, demote all secondary actions to outlines */
+  .button-group:has(.primary) .secondary {
+    background: transparent;
+    border-color: var(--a-border);
+    color: var(--a-text-main);
+  }
+  .button-group:has(.primary) .secondary:hover {
+    background: var(--a-surface-raised);
+  }
+
+  /* --- 2. ACCESSIBLE DROPDOWNS (ZERO-CLASS STATE) --- */
+  /* We do not use `.is-open` or `.show`. We style purely based on aria-expanded. */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + var(--a-space-xs));
+    left: 0;
+    min-width: 200px;
+    background: var(--a-surface-raised);
+    border: 1px solid var(--a-border);
+    border-radius: var(--a-radius);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    padding: var(--a-space-xs) 0;
+    z-index: 50;
+    
+    /* Default hidden state */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--a-transition);
+  }
+
+  /* State Trigger: 
+     If the button inside the dropdown has aria-expanded="true", 
+     the adjacent sibling menu becomes visible. 
+     (The JS controller only toggles the aria attribute, nothing else).
+  */
+  .dropdown:has([aria-expanded="true"]) .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Dropdown Items */
+  .dropdown-menu a,
+  .dropdown-menu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--a-space-sm) var(--a-space-md);
+    color: var(--a-text-main);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    font-size: var(--a-text-sm);
+  }
+
+  .dropdown-menu a:hover,
+  .dropdown-menu button:hover {
+    background: var(--a-surface-base);
+    color: var(--a-primary);
+  }
+
+  /* --- 3. PURE CSS TABS (ZERO JS) --- */
+  /* Axiom uses the semantic radio-input hack, elevated by modern CSS */
+  .tabs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tab-list {
+    display: flex;
+    border-bottom: 1px solid var(--a-border);
+    gap: var(--a-space-md);
+  }
+
+  /* Hide the actual radio inputs accessibly */
+  .tabs input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .tabs label {
+    padding: var(--a-space-sm) 0;
+    color: var(--a-text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px; /* Overlap the container border */
+    transition: all var(--a-transition);
+    font-weight: 500;
+  }
+
+  .tabs label:hover {
+    color: var(--a-text-main);
+  }
+
+  .tab-panels {
+    padding: var(--a-space-md) 0;
+  }
+
+  .tab-panel {
+    display: none; /* Hidden by default */
+  }
+
+  /* State Trigger via :has():
+     If the tabs container has a checked input with value "X", 
+     show the panel with id "panel-X".
+     
+     This is true zero-JS state management based purely on semantic HTML state.
+  */
+  .tabs:has(input[value="tab1"]:checked) #panel-tab1,
+  .tabs:has(input[value="tab2"]:checked) #panel-tab2,
+  .tabs:has(input[value="tab3"]:checked) #panel-tab3 {
+    display: block;
+    animation: fadeIn var(--a-transition);
+  }
+
+  /* Style the active label based on the checked radio */
+  .tabs:has(input[value="tab1"]:checked) label[for="tab1"],
+  .tabs:has(input[value="tab2"]:checked) label[for="tab2"],
+  .tabs:has(input[value="tab3"]:checked) label[for="tab3"] {
+    color: var(--a-primary);
+    border-bottom-color: var(--a-primary);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+```

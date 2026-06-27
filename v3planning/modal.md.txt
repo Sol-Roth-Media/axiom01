@@ -1,0 +1,42 @@
+# Modals (Dialog)
+Accessible, animated overlays built on native browser APIs.
+## The Semantic Reality
+Building a modal in a utility-first framework is a nightmare of z-index stacking contexts, hidden backdrops, focus-trapping JavaScript libraries, and esc key event listeners.
+Axiom01 asks: *Why ignore the browser?*
+### Axiom01 Approach
+```html
+<!-- HTML: 10 lines | Classes: 1 -->
+<dialog class="modal" id="settingsModal">
+  <header>
+    <h3>Account Settings</h3>
+    <button class="secondary" onclick="settingsModal.close()">Close</button>
+  </header>
+  <main>
+    <p>Adjust your preferences here.</p>
+  </main>
+  <footer>
+    <button class="primary">Save Changes</button>
+  </footer>
+</dialog>
+
+<!-- Open it with native JS -->
+<button class="primary" onclick="settingsModal.showModal()">Open Settings</button>
+
+```
+## Native <dialog> Power
+By enforcing the use of the <dialog> element, Axiom01 gives you incredible features for free:
+ 1. **Top Layer Rendering:** The modal breaks out of all z-index contexts and always renders on top.
+ 2. **Native Focus Trapping:** The browser automatically keeps keyboard focus inside the modal.
+ 3. **Keyboard Accessibility:** The Esc key closes the modal automatically—zero JS required.
+ 4. **Native Backdrops:** We style the ::backdrop pseudo-element natively, complete with blur effects and animations.
+## Smooth Entrance & Exit Animations
+Axiom01 utilizes the cutting-edge @starting-style CSS feature and allow-discrete transitions. This means your modals smoothly fade and scale in, and smoothly fade out when closed, without requiring JavaScript to artificially delay the element's removal from the DOM.
+## Customizing The Axiom Way
+Need a modal to command extreme attention (like a destructive delete action)? Override the modal's border or backdrop color inline.
+```html
+<dialog class="modal" style="border: 2px solid var(--a-error);">
+  <header><h3>Delete Project?</h3></header>
+  <!-- ... -->
+</dialog>
+
+```

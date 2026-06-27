@@ -1,0 +1,77 @@
+```javascript
+#!/usr/bin/env node
+
+/**
+ * AXIOM01 CLI - ICON EXTRACTOR
+ * Scans directories for `data-axicon="IconName"` and compiles a micro-dictionary
+ * for production, eliminating dead icon code.
+ */
+
+const fs = require('fs');
+const path = require('path');
+// In a real environment, this imports the master JSON containing all 3,941 paths
+const masterDictionary = require('./dictionary/axicons-master.json'); 
+
+const SCAN_DIRS = ['./src', './public', './pages'];
+const OUTPUT_FILE = './public/axicons-compiled.js';
+const REGEX = /data-axicon=["']([^"']+)["']/g;
+
+let usedIcons = new Set();
+
+function scanDirectory(dir) {
+  if (!fs.existsSync(dir)) return;
+  
+  const files = fs.readdirSync(dir);
+  files.forEach(file => {
+    const fullPath = path.join(dir, file);
+    const stat = fs.statSync(fullPath);
+    
+    if (stat.isDirectory()) {
+      scanDirectory(fullPath);
+    } else if (/\.(html|jsx|tsx|js|vue|svelte)$/.test(fullPath)) {
+      const content = fs.readFileSync(fullPath, 'utf-8');
+      let match;
+      while ((match = REGEX.exec(content)) !== null) {
+        usedIcons.add(match[1]);
+      }
+    }
+  });
+}
+
+function compileDictionary() {
+  console.log(`🔍 Scanning for Axicons...`);
+  SCAN_DIRS.forEach(scanDirectory);
+  
+  if (usedIcons.size === 0) {
+    console.log(`⚠️ No Axicons found in markup.`);
+    return;
+  }
+
+  const compiled = { base: {}, thin: {}, color: {} }; // Add other variants as needed
+  let missing = [];
+
+  usedIcons.forEach(iconName => {
+    if (masterDictionary.base[iconName]) {
+      compiled.base[iconName] = masterDictionary.base[iconName];
+      // Optional: Pull other variants if variant logic is added to regex
+    } else {
+      missing.push(iconName);
+    }
+  });
+
+  const outputCode = `
+/* Axiom01 Compiled Icon Dictionary */
+/* Auto-generated. Do not edit directly. */
+window.AxiconsData = ${JSON.stringify(compiled)};
+  `.trim();
+
+  fs.writeFileSync(OUTPUT_FILE, outputCode);
+  
+  console.log(`✅ Success! Extracted ${usedIcons.size} icons.`);
+  console.log(`📉 Bundle saved to ${OUTPUT_FILE}`);
+  if (missing.length > 0) console.warn(`⚠️ Could not find icons: ${missing.join(', ')}`);
+}
+
+compileDictionary();
+
+```

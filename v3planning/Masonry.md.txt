@@ -1,0 +1,21 @@
+# Masonry Grids
+Pinterest-style staggered grids built with pure CSS multi-column layouts.
+## The Semantic Reality
+Utility frameworks only provide standard CSS Grid, which forces items into strict rows. To build a true Masonry layout (where items of varying heights pack tightly together vertically), developers resort to heavy JavaScript libraries that calculate absolute pixels and reposition every DOM node.
+Axiom01 asks: *Why are we doing math that the browser already knows how to do?*
+### Axiom01 Approach
+```html
+<!-- HTML: Semantic | Classes: 1 | JS: 0 -->
+<section class="masonry">
+  <img class="card" src="tall-image.jpg" alt="Gallery">
+  <img class="card" src="short-image.jpg" alt="Gallery">
+  <img class="card" src="medium-image.jpg" alt="Gallery">
+  <!-- Items automatically flow down and to the right -->
+</section>
+
+```
+## The CSS Columns API
+Axiom01 resurrects the highly performant CSS Columns API (column-count). By applying break-inside: avoid to the child elements, Axiom forces the browser's text-layout engine to treat your UI components like unbreakable blocks of text flowing through newspaper columns.
+ * **Incredibly Fast:** No JavaScript layout thrashing on window resize.
+ * **Intelligent Reflow:** Managed automatically by Axiom01's internal @container queries. The layout smoothly drops from 4 columns down to 1 column based on the width of the parent container, not the viewport.
+This is the power of a framework that deeply understands CSS.
