@@ -100,6 +100,17 @@ const Config = (() => {
         setTheme(next);
       });
     }
+
+    // Mobile theme toggle
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    if (mobileThemeToggle) {
+      mobileThemeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = current === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+        updateMobileThemeButton(next);
+      });
+    }
   };
 
   const setTheme = (theme) => {
@@ -113,6 +124,13 @@ const Config = (() => {
     if (btn) {
       btn.setAttribute('aria-label', `Toggle ${theme === 'dark' ? 'light' : 'dark'} mode`);
       btn.setAttribute('title', `Current: ${theme} mode`);
+    }
+  };
+
+  const updateMobileThemeButton = (theme) => {
+    const btn = document.getElementById('mobile-theme-toggle');
+    if (btn) {
+      btn.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
     }
   };
 
@@ -130,7 +148,6 @@ const MobileMenu = (() => {
   const init = () => {
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
     
     if (!menuToggle || !mobileMenu) return;
 
@@ -154,16 +171,6 @@ const MobileMenu = (() => {
       });
     });
 
-    // Mobile theme toggle
-    if (mobileThemeToggle) {
-      mobileThemeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme') || 'light';
-        const next = current === 'dark' ? 'light' : 'dark';
-        Config.setTheme(next);
-        updateMobileThemeButton(next);
-      });
-    }
-
     // Close menu when pressing Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
@@ -183,257 +190,10 @@ const MobileMenu = (() => {
     });
   };
 
-  const updateMobileThemeButton = (theme) => {
-    const btn = document.getElementById('mobile-theme-toggle');
-    if (btn) {
-      btn.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-    }
-  };
-
   return {
     init,
   };
 })();
-
-// ============================================================================
-// HUB NAVIGATION - Docs and Book Reader
-// ============================================================================
-
-const HubNav = (() => {
-  let currentChapter = 'intro';
-  let currentCategory = 'buttons';
-
-  const init = () => {
-    // Category navigation in Docs Hub
-    document.querySelectorAll('aside [data-category]').forEach((link) => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const category = link.getAttribute('data-category');
-        currentCategory = category;
-        filterByCategory(category);
-        updateCategoryActive(link);
-      });
-    });
-
-    // Chapter navigation in Book Reader
-    document.querySelectorAll('[data-chapter]').forEach((link) => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const chapter = link.getAttribute('data-chapter');
-        currentChapter = chapter;
-        loadChapter(chapter);
-        updateChapterActive(link);
-      });
-    });
-
-    // Component viewing - integrated with ContentLoader
-    document.querySelectorAll('[data-component]').forEach((btn) => {
-      btn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        const componentName = btn.getAttribute('data-component');
-        await showComponentPreview(componentName);
-      });
-    });
-
-    // Chapter navigation buttons
-    const prevBtn = document.getElementById('prev-chapter');
-    const nextBtn = document.getElementById('next-chapter');
-    if (prevBtn) prevBtn.addEventListener('click', () => goToChapter('prev'));
-    if (nextBtn) nextBtn.addEventListener('click', () => goToChapter('next'));
-  };
-
-  const filterByCategory = (category) => {
-    const items = document.querySelectorAll('#component-stage [data-category]');
-    items.forEach((item) => {
-      const itemCategory = item.getAttribute('data-category');
-      if (category === 'all') {
-        item.style.display = '';
-      } else {
-        item.style.display = itemCategory === category || itemCategory === 'all' ? '' : 'none';
-      }
-    });
-  };
-
-  const updateCategoryActive = (link) => {
-    document.querySelectorAll('aside [data-category]').forEach((l) => l.classList.remove('active'));
-    link.classList.add('active');
-  };
-
-  const showComponentPreview = async (componentName) => {
-    const preview = document.getElementById('component-preview');
-    const previewContent = document.getElementById('preview-content');
-    
-    if (!preview || !previewContent) return;
-
-    // Show loading state
-    preview.style.opacity = '0.6';
-    
-    try {
-      // Load component data from JSON
-      let component = null;
-      
-      // Try to find in current category first
-      const components = await ContentLoader.loadComponents(currentCategory);
-      component = components.find(c => c.id === `${componentName}-primary` || c.name.toLowerCase().includes(componentName));
-      
-      if (!component && currentCategory !== 'buttons') {
-        // Fallback: search in buttons category
-        const buttonComponents = await ContentLoader.loadComponents('buttons');
-        component = buttonComponents.find(c => c.id === `${componentName}-primary` || c.name.toLowerCase().includes(componentName));
-      }
-
-      if (component) {
-        // Update preview with actual component data
-        document.getElementById('preview-name').textContent = component.name;
-        document.getElementById('preview-description').textContent = component.description;
-        document.getElementById('preview-html').textContent = component.html;
-        document.getElementById('preview-css').textContent = component.css;
-        document.getElementById('preview-usage').textContent = component.usage;
-        document.getElementById('preview-accessibility').textContent = component.accessibility;
-        
-        // Show preview content
-        previewContent.style.display = 'block';
-      } else {
-        // Fallback if component not found
-        const displayName = componentName.charAt(0).toUpperCase() + componentName.slice(1);
-        document.getElementById('preview-name').textContent = displayName;
-        document.getElementById('preview-description').textContent = 'Loading component details...';
-        previewContent.style.display = 'block';
-      }
-    } catch (error) {
-      console.error('Error loading component:', error);
-      document.getElementById('preview-name').textContent = 'Error';
-      document.getElementById('preview-description').textContent = 'Failed to load component details.';
-      previewContent.style.display = 'block';
-    } finally {
-      preview.style.opacity = '1';
-    }
-  };
-
-  const loadChapter = async (chapterId) => {
-    const stage = document.getElementById('book-stage');
-    const bookMeta = document.getElementById('book-meta');
-    
-    if (!stage) return;
-
-    // Show loading state
-    stage.style.opacity = '0.6';
-    
-    try {
-      // Load chapter from ContentLoader
-      const chapter = await ContentLoader.loadChapter(chapterId);
-      
-      if (chapter) {
-        // Update book stage with chapter content
-        stage.innerHTML = chapter.content;
-        
-        // Update chapter metadata
-        if (bookMeta) {
-          const metaDescription = bookMeta.querySelector('p');
-          if (metaDescription && chapter.title) {
-            metaDescription.textContent = `${chapter.title} - Chapter ${chapter.number}`;
-          }
-        }
-      } else {
-        // Fallback content
-        stage.innerHTML = `<article><h2>Chapter Not Found</h2><p>This chapter could not be loaded.</p></article>`;
-      }
-    } catch (error) {
-      console.error('Error loading chapter:', error);
-      stage.innerHTML = `<article><h2>Error</h2><p>Failed to load chapter content.</p></article>`;
-    } finally {
-      stage.style.opacity = '1';
-    }
-  };
-
-  const updateChapterActive = (link) => {
-    document.querySelectorAll('[data-chapter]').forEach((l) => l.classList.remove('active'));
-    link.classList.add('active');
-  };
-
-  const goToChapter = (direction) => {
-    const chapters = Array.from(document.querySelectorAll('[data-chapter]'));
-    const currentIndex = chapters.findIndex(ch => ch.getAttribute('data-chapter') === currentChapter);
-    const newIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
-
-    if (chapters[newIndex]) {
-      chapters[newIndex].click();
-      chapters[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  };
-
-  return {
-    init,
-    filterByCategory,
-    showComponentPreview,
-    loadChapter,
-  };
-})();
-
-// ============================================================================
-// CODE SNIPPET COPY
-// ============================================================================
-
-const CodeSnippet = (() => {
-  const init = () => {
-    document.addEventListener('click', (e) => {
-      if (e.target.hasAttribute('data-copy-code')) {
-        const codeBlock = e.target.closest('[data-code-block]');
-        if (codeBlock) {
-          const code = codeBlock.querySelector('code')?.textContent || '';
-          copyToClipboard(code);
-          showCopyFeedback(e.target);
-        }
-      }
-    });
-  };
-
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text).then(() => {
-      // Success feedback handled in showCopyFeedback
-    });
-  };
-
-  const showCopyFeedback = (button) => {
-    const original = button.textContent;
-    button.textContent = '✓ Copied!';
-    button.disabled = true;
-
-    setTimeout(() => {
-      button.textContent = original;
-      button.disabled = false;
-    }, 2000);
-  };
-
-  return {
-    init,
-  };
-})();
-
-// ============================================================================
-// INITIALIZATION
-// ============================================================================
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize all systems
-  Navigation.init();
-  Config.init();
-  MobileMenu.init();
-  HubNav.init();
-  CodeSnippet.init();
-
-  // Log that framework is loaded
-  console.log('AXIOM01 v3 Framework loaded - The Semantic Rebellion: The Mathematics of Design');
-});
-
-// Expose global API for manual navigation if needed
-window.Axiom = {
-  navigate: Navigation.navigate,
-  setTheme: Config.setTheme,
-  filterByCategory: HubNav.filterByCategory,
-  showComponentPreview: HubNav.showComponentPreview,
-  loadChapter: HubNav.loadChapter,
-};
 
 // ============================================================================
 // COMPONENT SEARCH & FILTER
@@ -454,7 +214,6 @@ const ComponentSearch = (() => {
 
   const filterComponents = () => {
     const items = document.querySelectorAll('[data-category]');
-    let visibleCount = 0;
 
     items.forEach((item) => {
       const h3 = item.querySelector('h3');
@@ -463,21 +222,12 @@ const ComponentSearch = (() => {
 
       const matches = !searchQuery || text.includes(searchQuery);
       item.style.display = matches ? '' : 'none';
-      if (matches) visibleCount++;
     });
-  };
-
-  const reset = () => {
-    searchQuery = '';
-    const searchInput = document.getElementById('component-search');
-    if (searchInput) searchInput.value = '';
-    filterComponents();
   };
 
   return {
     init,
     filterComponents,
-    reset,
   };
 })();
 
@@ -557,20 +307,20 @@ const ContentLoader = (() => {
 })();
 
 // ============================================================================
-// HUB NAV - ENHANCED WITH CONTENTLOADER INTEGRATION
+// HUB NAV - COMPONENT & CHAPTER NAVIGATION
 // ============================================================================
 
-// Override previous HubNav with enhanced version
-const HubNavEnhanced = (() => {
+const HubNav = (() => {
   let currentChapter = 'intro';
-  let currentComponent = null;
+  let currentCategory = 'buttons';
 
   const init = () => {
     // Category navigation in Docs Hub
-    document.querySelectorAll('[data-category]').forEach((link) => {
+    document.querySelectorAll('aside [data-category]').forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const category = link.getAttribute('data-category');
+        currentCategory = category;
         filterByCategory(category);
         updateCategoryActive(link);
       });
@@ -616,7 +366,7 @@ const HubNavEnhanced = (() => {
       const component = allComponents.find(c => c.id === componentId);
 
       if (!component) {
-        preview.innerHTML = '<p style="color: var(--a-error);">Component not found.</p>';
+        preview.innerHTML = '<p style="color: var(--a-text-muted);">Component not found.</p>';
         return;
       }
 
@@ -647,11 +397,9 @@ const HubNavEnhanced = (() => {
           </div>
         </article>
       `;
-
-      currentComponent = component;
     } catch (error) {
       console.error('Error loading component:', error);
-      preview.innerHTML = '<p style="color: var(--a-error);">Error loading component details.</p>';
+      preview.innerHTML = '<p style="color: var(--a-text-muted);">Error loading component details.</p>';
     }
   };
 
@@ -667,22 +415,20 @@ const HubNavEnhanced = (() => {
   };
 
   const filterByCategory = (category) => {
-    const items = document.querySelectorAll('[data-category]');
+    const items = document.querySelectorAll('#component-stage [data-category]');
     items.forEach((item) => {
       const itemCategory = item.getAttribute('data-category');
       if (category === 'all') {
         item.style.display = '';
       } else {
-        item.style.display = itemCategory === category || itemCategory === 'all' ? '' : 'none';
+        item.style.display = itemCategory === category ? '' : 'none';
       }
     });
   };
 
   const updateCategoryActive = (link) => {
-    document.querySelectorAll('[data-category]').forEach((l) => {
-      if (l.tagName === 'A') l.classList.remove('active');
-    });
-    if (link.tagName === 'A') link.classList.add('active');
+    document.querySelectorAll('aside [data-category]').forEach((l) => l.classList.remove('active'));
+    link.classList.add('active');
   };
 
   const loadChapter = async (chapterId) => {
@@ -704,7 +450,7 @@ const HubNavEnhanced = (() => {
       }
     } catch (error) {
       console.error('Error loading chapter:', error);
-      stage.innerHTML = '<p style="color: var(--a-error);">Error loading chapter.</p>';
+      stage.innerHTML = '<p style="color: var(--a-text-muted);">Error loading chapter.</p>';
     }
   };
 
@@ -732,28 +478,65 @@ const HubNavEnhanced = (() => {
   };
 })();
 
-// Replace HubNav with HubNavEnhanced
-window.HubNav = HubNavEnhanced;
+// ============================================================================
+// CODE SNIPPET COPY
+// ============================================================================
 
-// Update initialization to use enhanced version
-const originalInit = document.addEventListener;
-document.removeEventListener('DOMContentLoaded', () => {
+const CodeSnippet = (() => {
+  const init = () => {
+    document.addEventListener('click', (e) => {
+      if (e.target.hasAttribute('data-copy-code')) {
+        const codeBlock = e.target.closest('[data-code-block]');
+        if (codeBlock) {
+          const code = codeBlock.querySelector('code')?.textContent || '';
+          copyToClipboard(code);
+          showCopyFeedback(e.target);
+        }
+      }
+    });
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+  };
+
+  const showCopyFeedback = (button) => {
+    const original = button.textContent;
+    button.textContent = '✓ Copied!';
+    button.disabled = true;
+
+    setTimeout(() => {
+      button.textContent = original;
+      button.disabled = false;
+    }, 2000);
+  };
+
+  return {
+    init,
+  };
+})();
+
+// ============================================================================
+// INITIALIZATION - SINGLE ENTRY POINT
+// ============================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize all systems in correct order
   Navigation.init();
   Config.init();
   MobileMenu.init();
   HubNav.init();
   ComponentSearch.init();
   CodeSnippet.init();
+
+  console.log('AXIOM01 v3 Framework loaded - The Semantic Rebellion: The Mathematics of Design');
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  Navigation.init();
-  Config.init();
-  MobileMenu.init();
-  HubNavEnhanced.init();
-  ComponentSearch.init();
-  CodeSnippet.init();
-
-  console.log('AXIOM01 v3 Framework loaded with ContentLoader integration');
-});
-
+// Expose global API for manual navigation if needed
+window.Axiom = {
+  navigate: Navigation.navigate,
+  setTheme: Config.setTheme,
+  filterByCategory: HubNav.filterByCategory,
+  showComponentDetails: HubNav.showComponentDetails,
+  loadChapter: HubNav.loadChapter,
+};
