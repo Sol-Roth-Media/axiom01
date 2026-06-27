@@ -5,7 +5,8 @@
  * Minimal, focused on:
  * - Route management for the unified SPA
  * - Configuration and theme switching
- * - Content database for embedded resources
+ * - Hub navigation for Docs and Book
+ * - Component preview and chapter loading
  */
 
 // ============================================================================
@@ -148,102 +149,126 @@ const Config = (() => {
 })();
 
 // ============================================================================
-// SEARCH & FILTER (for Docs Hub)
+// HUB NAVIGATION - Docs and Book Reader
 // ============================================================================
 
-const Search = (() => {
-  const init = () => {
-    const searchInput = document.getElementById('search-input');
-    if (!searchInput) return;
+const HubNav = (() => {
+  let currentChapter = 'intro';
 
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      filterComponents(query);
+  const init = () => {
+    // Category navigation in Docs Hub
+    document.querySelectorAll('[data-category]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const category = link.getAttribute('data-category');
+        filterByCategory(category);
+        updateCategoryActive(link);
+      });
+    });
+
+    // Chapter navigation in Book Reader
+    document.querySelectorAll('[data-chapter]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const chapter = link.getAttribute('data-chapter');
+        currentChapter = chapter;
+        loadChapter(chapter);
+        updateChapterActive(link);
+      });
+    });
+
+    // Component viewing
+    document.querySelectorAll('[data-component]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const component = btn.getAttribute('data-component');
+        showComponentPreview(component);
+      });
+    });
+
+    // Chapter navigation buttons
+    const prevBtn = document.getElementById('prev-chapter');
+    const nextBtn = document.getElementById('next-chapter');
+    if (prevBtn) prevBtn.addEventListener('click', () => goToChapter('prev'));
+    if (nextBtn) nextBtn.addEventListener('click', () => goToChapter('next'));
+  };
+
+  const filterByCategory = (category) => {
+    const items = document.querySelectorAll('[data-category]');
+    items.forEach((item) => {
+      const itemCategory = item.getAttribute('data-category');
+      if (category === 'all') {
+        item.style.display = '';
+      } else {
+        item.style.display = itemCategory === category || itemCategory === 'all' ? '' : 'none';
+      }
     });
   };
 
-  const filterComponents = (query) => {
-    const items = document.querySelectorAll('[data-component-name]');
-    items.forEach((item) => {
-      const name = item.getAttribute('data-component-name').toLowerCase();
-      const description = item.getAttribute('data-component-description')?.toLowerCase() || '';
-      const matches = name.includes(query) || description.includes(query);
-      item.style.display = matches ? 'block' : 'none';
-    });
+  const updateCategoryActive = (link) => {
+    document.querySelectorAll('[data-category]').forEach((l) => l.classList.remove('active'));
+    link.classList.add('active');
+  };
+
+  const showComponentPreview = (componentName) => {
+    const preview = document.getElementById('component-preview');
+    if (!preview) return;
+    
+    const displayName = componentName.charAt(0).toUpperCase() + componentName.slice(1);
+    preview.innerHTML = `
+      <h3>${displayName}</h3>
+      <p>Code examples and live preview for the <strong>${displayName}</strong> component.</p>
+    `;
+  };
+
+  const loadChapter = (chapterId) => {
+    const stage = document.getElementById('book-stage');
+    if (!stage) return;
+
+    // Map chapter IDs to content
+    const chapters = {
+      'intro': {
+        title: 'Introduction',
+        content: 'Welcome to AXIOM01 v3: The Semantic Rebellion - The Mathematics of Design. This is the introduction chapter.'
+      },
+      'chapter-1': {
+        title: '1. Semantic First',
+        content: 'Learn why semantic HTML is the foundation of modern web design.'
+      },
+      'chapter-2': {
+        title: '2. The Philosophy',
+        content: 'Explore the core principles that drive AXIOM01 v3.'
+      },
+      'conclusion': {
+        title: 'Conclusion',
+        content: 'The future of semantic web design starts here.'
+      }
+    };
+
+    const chapter = chapters[chapterId] || { title: 'Chapter', content: 'Chapter content here.' };
+    stage.innerHTML = `<article><h2>${chapter.title}</h2><p>${chapter.content}</p></article>`;
+  };
+
+  const updateChapterActive = (link) => {
+    document.querySelectorAll('[data-chapter]').forEach((l) => l.classList.remove('active'));
+    link.classList.add('active');
+  };
+
+  const goToChapter = (direction) => {
+    const chapters = Array.from(document.querySelectorAll('[data-chapter]'));
+    const currentIndex = chapters.findIndex(ch => ch.getAttribute('data-chapter') === currentChapter);
+    const newIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
+
+    if (chapters[newIndex]) {
+      chapters[newIndex].click();
+      chapters[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   };
 
   return {
     init,
-  };
-})();
-
-// ============================================================================
-// CONTENT LOADER
-// ============================================================================
-
-const Content = (() => {
-  const loadComponentPreview = (componentName) => {
-    const stage = document.getElementById('component-stage');
-    if (!stage) return;
-
-    // This would load component data
-    // For now, just show a loading state
-    stage.innerHTML = `<p>Loading ${componentName}...</p>`;
-
-    // In a real implementation, fetch from DB_COMPONENTS
-    if (window.DB_COMPONENTS && window.DB_COMPONENTS[componentName]) {
-      stage.innerHTML = window.DB_COMPONENTS[componentName];
-    }
-  };
-
-  const loadBookChapter = (chapterId) => {
-    const stage = document.getElementById('book-stage');
-    if (!stage) return;
-
-    if (window.DB_BOOK && window.DB_BOOK[chapterId]) {
-      stage.innerHTML = window.DB_BOOK[chapterId];
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const updateTableOfContents = () => {
-    const stage = document.getElementById('book-stage');
-    if (!stage) return;
-
-    const headings = stage.querySelectorAll('h1, h2, h3');
-    const toc = document.getElementById('book-toc');
-    if (!toc) return;
-
-    const list = document.createElement('ul');
-    headings.forEach((heading, index) => {
-      const id = heading.id || `heading-${index}`;
-      heading.id = id;
-
-      const level = parseInt(heading.tagName[1]);
-      const li = document.createElement('li');
-      li.style.marginLeft = `${(level - 1) * 1.5}em`;
-
-      const link = document.createElement('a');
-      link.href = `#${id}`;
-      link.textContent = heading.textContent;
-      link.style.cursor = 'pointer';
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        heading.scrollIntoView({ behavior: 'smooth' });
-      });
-
-      li.appendChild(link);
-      list.appendChild(li);
-    });
-
-    toc.innerHTML = '';
-    toc.appendChild(list);
-  };
-
-  return {
-    loadComponentPreview,
-    loadBookChapter,
-    updateTableOfContents,
+    filterByCategory,
+    showComponentPreview,
+    loadChapter,
   };
 })();
 
@@ -295,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize all systems
   Navigation.init();
   Config.init();
-  Search.init();
+  HubNav.init();
   CodeSnippet.init();
 
   // Log that framework is loaded
@@ -307,6 +332,7 @@ window.Axiom = {
   navigate: Navigation.navigate,
   setTheme: Config.setTheme,
   setSpacing: Config.setSpacing,
-  loadComponent: Content.loadComponentPreview,
-  loadChapter: Content.loadBookChapter,
+  filterByCategory: HubNav.filterByCategory,
+  showComponentPreview: HubNav.showComponentPreview,
+  loadChapter: HubNav.loadChapter,
 };

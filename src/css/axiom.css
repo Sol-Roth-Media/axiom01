@@ -1106,3 +1106,285 @@ hr {
   border-width: 0;
 }
 
+
+/* ============================================================================
+   HUB COMPONENT - Docs and Book reader layouts
+   ============================================================================ */
+
+.hub {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.hub > header {
+  padding-top: var(--a-space-2xl);
+  padding-bottom: var(--a-space-lg);
+  border-bottom: 1px solid var(--a-border);
+}
+
+.hub > header h1 {
+  margin: 0 0 var(--a-space-xs) 0;
+}
+
+.hub > header p {
+  margin: 0;
+  color: var(--a-text-secondary);
+}
+
+/* ============================================================================
+   HUB LAYOUT - Three-column: sidebar | main | sidebar
+   ============================================================================ */
+
+.hub-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr 280px;
+  gap: var(--a-space-lg);
+  margin: var(--a-space-lg) 0;
+  min-height: 60vh;
+}
+
+.hub-layout > aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-md);
+  padding: var(--a-space-md);
+  background: var(--a-surface-overlay);
+  border-radius: var(--a-radius-md);
+  height: fit-content;
+  position: sticky;
+  top: calc(var(--a-space-lg) + 80px);
+}
+
+.hub-layout > aside h3 {
+  margin: 0 0 var(--a-space-md) 0;
+  font-size: var(--a-text-base);
+}
+
+.hub-layout > aside nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-sm);
+}
+
+.hub-layout > aside nav li {
+  margin: 0;
+}
+
+.hub-layout > aside nav a {
+  display: block;
+  padding: var(--a-space-sm) var(--a-space-md);
+  color: var(--a-text-main);
+  text-decoration: none;
+  border-radius: var(--a-radius-sm);
+  transition: all var(--a-transition-base) var(--a-easing);
+  font-size: var(--a-text-sm);
+}
+
+.hub-layout > aside nav a:hover {
+  background: var(--a-surface-raised);
+  color: var(--a-primary);
+}
+
+.hub-layout > aside nav a[data-category],
+.hub-layout > aside nav a[data-chapter] {
+  border-left: 3px solid transparent;
+  padding-left: calc(var(--a-space-md) - 3px);
+}
+
+.hub-layout > aside nav a[data-category]:hover,
+.hub-layout > aside nav a[data-chapter]:hover {
+  border-left-color: var(--a-primary);
+}
+
+.hub-layout > aside nav a.active {
+  background: var(--a-primary);
+  color: var(--a-on-primary);
+  border-left-color: var(--a-primary);
+}
+
+/* Main content area */
+.hub-layout > main {
+  min-height: 50vh;
+}
+
+/* Right sidebar content areas */
+#component-preview {
+  padding: var(--a-space-md);
+  background: var(--a-surface-overlay);
+  border-radius: var(--a-radius-md);
+  height: fit-content;
+  position: sticky;
+  top: calc(var(--a-space-lg) + 80px);
+}
+
+#component-preview h3 {
+  margin: 0 0 var(--a-space-md) 0;
+  font-size: var(--a-text-base);
+}
+
+#component-preview p {
+  margin: 0 0 var(--a-space-md) 0;
+  font-size: var(--a-text-sm);
+  color: var(--a-text-secondary);
+}
+
+#book-meta {
+  padding: var(--a-space-md);
+  background: var(--a-surface-overlay);
+  border-radius: var(--a-radius-md);
+  height: fit-content;
+  position: sticky;
+  top: calc(var(--a-space-lg) + 80px);
+}
+
+#book-meta h3 {
+  margin: 0 0 var(--a-space-md) 0;
+  font-size: var(--a-text-base);
+}
+
+#book-meta p {
+  margin: 0 0 var(--a-space-md) 0;
+  font-size: var(--a-text-sm);
+  color: var(--a-text-secondary);
+}
+
+#book-meta nav {
+  display: flex;
+  gap: var(--a-space-sm);
+  flex-direction: column;
+}
+
+#book-meta button {
+  font-size: var(--a-text-sm);
+  padding: var(--a-space-sm);
+}
+
+/* Book content article styling */
+#book-stage article {
+  max-width: var(--a-width-prose);
+}
+
+#book-stage h2 {
+  margin-top: var(--a-space-2xl);
+  margin-bottom: var(--a-space-md);
+  padding-bottom: var(--a-space-md);
+  border-bottom: 1px solid var(--a-border);
+}
+
+#book-stage h3 {
+  margin-top: var(--a-space-lg);
+  margin-bottom: var(--a-space-md);
+}
+
+#book-stage ol {
+  margin-bottom: var(--a-space-md);
+  padding-left: var(--a-space-lg);
+}
+
+#book-stage li {
+  margin-bottom: var(--a-space-sm);
+  line-height: var(--a-line-height-normal);
+}
+
+/* ============================================================================
+   HUB LAYOUT - RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 1200px) {
+  .hub-layout {
+    grid-template-columns: 200px 1fr 240px;
+    gap: var(--a-space-md);
+  }
+
+  .hub-layout > aside {
+    padding: var(--a-space-sm);
+  }
+
+  .hub-layout > aside h3 {
+    font-size: var(--a-text-sm);
+  }
+
+  .hub-layout > aside nav a {
+    padding: var(--a-space-xs) var(--a-space-sm);
+    font-size: var(--a-text-xs);
+  }
+}
+
+@media (max-width: 960px) {
+  .hub-layout {
+    grid-template-columns: 1fr;
+    gap: var(--a-space-md);
+  }
+
+  .hub-layout > aside {
+    position: static;
+    background: transparent;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--a-space-md);
+  }
+
+  .hub-layout > aside nav {
+    background: var(--a-surface-overlay);
+    padding: var(--a-space-md);
+    border-radius: var(--a-radius-md);
+  }
+
+  .hub-layout > aside h3 {
+    display: none;
+  }
+
+  .hub-layout > aside nav ul {
+    gap: var(--a-space-xs);
+  }
+
+  .hub-layout > aside nav a {
+    padding: var(--a-space-xs) var(--a-space-sm);
+    font-size: var(--a-text-xs);
+  }
+
+  #component-preview,
+  #book-meta {
+    position: static;
+    background: var(--a-surface-overlay);
+    padding: var(--a-space-md);
+    border-radius: var(--a-radius-md);
+  }
+
+  .hub-layout > main {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .hub > header {
+    padding: var(--a-space-lg) var(--a-space-md);
+  }
+
+  .hub > .container {
+    padding: var(--a-space-md);
+  }
+
+  .hub-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hub-layout > aside {
+    display: none;
+  }
+
+  #component-preview,
+  #book-meta {
+    display: none;
+  }
+
+  #book-stage article {
+    max-width: 100%;
+  }
+}
+
