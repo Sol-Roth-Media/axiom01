@@ -122,7 +122,7 @@ const MobileMenu = (() => {
 
 const ComponentLibrary = (() => {
   let allComponents = [];
-  let categoryMap = {};
+  let categories = [];
 
   const init = async () => {
     try {
@@ -132,15 +132,7 @@ const ComponentLibrary = (() => {
       
       const data = await response.json();
       allComponents = data.components || [];
-
-      // Build category map
-      categoryMap = {};
-      allComponents.forEach((comp) => {
-        if (!categoryMap[comp.category]) {
-          categoryMap[comp.category] = [];
-        }
-        categoryMap[comp.category].push(comp);
-      });
+      categories = data.categories || [];
 
       // Populate UI
       populateCategories();
@@ -157,13 +149,15 @@ const ComponentLibrary = (() => {
 
     nav.innerHTML = '';
 
-    Object.keys(categoryMap).forEach((categoryName) => {
-      const components = categoryMap[categoryName];
-      const categoryId = `category-${categoryName.toLowerCase().replace(/\s+/g, '-')}`;
+    categories.forEach((category) => {
+      const categoryComponents = allComponents.filter(c => c.category === category.name);
+      if (categoryComponents.length === 0) return; // Skip empty categories
+
+      const categoryId = `category-${category.id}`;
 
       const section = document.createElement('section');
       section.className = 'component-category';
-      section.setAttribute('data-category', categoryName);
+      section.setAttribute('data-category', category.id);
 
       const header = document.createElement('header');
       const button = document.createElement('button');
@@ -172,8 +166,8 @@ const ComponentLibrary = (() => {
       button.setAttribute('aria-controls', categoryId);
 
       button.innerHTML = `
-        <span class="category-title">${categoryName}</span>
-        <span class="category-count">${components.length} component${components.length !== 1 ? 's' : ''}</span>
+        <span class="category-title">${category.name}</span>
+        <span class="category-count">${categoryComponents.length} component${categoryComponents.length !== 1 ? 's' : ''}</span>
         <span class="category-chevron" aria-hidden="true">▼</span>
       `;
 
@@ -191,7 +185,7 @@ const ComponentLibrary = (() => {
       categoryContent.className = 'category-items';
       categoryContent.hidden = false;
 
-      components.forEach((comp) => {
+      categoryComponents.forEach((comp) => {
         const link = document.createElement('a');
         link.href = '#';
         link.textContent = comp.name;
@@ -269,8 +263,6 @@ const ComponentLibrary = (() => {
   };
 
   const showComponentPreview = (component) => {
-    // This would be implemented when individual component pages are loaded
-    // For now, just mark that a component was clicked
     console.log('View component:', component.name);
   };
 
@@ -358,16 +350,16 @@ const BookLibrary = (() => {
       }
     });
 
-    // Update prev/next buttons (remove old listeners, add new ones)
+    // Update prev/next buttons
     if (prevBtn) {
       prevBtn.disabled = index === 0;
-      prevBtn.onclick = null; // Clear old listener
+      prevBtn.onclick = null;
       prevBtn.addEventListener('click', () => showChapter(index - 1));
     }
 
     if (nextBtn) {
       nextBtn.disabled = index === allChapters.length - 1;
-      nextBtn.onclick = null; // Clear old listener
+      nextBtn.onclick = null;
       nextBtn.addEventListener('click', () => showChapter(index + 1));
     }
   };
