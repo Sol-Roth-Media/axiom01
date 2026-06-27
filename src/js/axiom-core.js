@@ -265,6 +265,7 @@ const ContentLoader = (() => {
 const HubNav = (() => {
   let currentChapter = 'intro';
   let currentCategory = 'buttons';
+  let currentComponentId = null;
 
   const init = () => {
     // Category click handler
@@ -284,6 +285,7 @@ const HubNav = (() => {
       if (e.target.getAttribute('data-component')) {
         e.preventDefault();
         const componentId = e.target.getAttribute('data-component');
+        currentComponentId = componentId;
         showComponentDetails(componentId);
       }
     });
@@ -310,6 +312,8 @@ const HubNav = (() => {
     const preview = document.getElementById('component-preview');
     if (!preview) return;
 
+    // Show preview panel and add active class
+    preview.classList.add('active');
     preview.innerHTML = '<p style="opacity: 0.6;">Loading component...</p>';
 
     try {
@@ -411,6 +415,11 @@ const HubNav = (() => {
         });
       }
 
+      // Scroll preview into view on mobile
+      if (window.innerWidth < 1200) {
+        preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
     } catch (error) {
       console.error('Error loading component:', error);
       preview.innerHTML = '<p style="color: var(--a-text-muted);">Error loading component details.</p>';
@@ -438,10 +447,15 @@ const HubNav = (() => {
         item.style.display = itemCategory === category ? '' : 'none';
       }
     });
+    // Close preview when filtering
+    const preview = document.getElementById('component-preview');
+    if (preview) preview.classList.remove('active');
   };
 
   const updateCategoryActive = (link) => {
-    document.querySelectorAll('aside [data-category]').forEach((l) => l.classList.remove('active'));
+    document.querySelectorAll('[data-category]').forEach((l) => {
+      if (l.tagName === 'A') l.classList.remove('active');
+    });
     link.classList.add('active');
   };
 

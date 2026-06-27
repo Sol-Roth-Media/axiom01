@@ -3149,3 +3149,557 @@ footer p {
     gap: var(--a-space-sm);
   }
 }
+
+/* ============================================================================
+   COMPONENT BROWSER UX REDESIGN - Better Usability & Mobile Experience
+   ============================================================================ */
+
+/* Remove unnecessary stickiness and reduce header size */
+.hub > header {
+  position: relative;
+  padding: var(--a-space-lg) var(--a-space-md);
+  border-bottom: 1px solid var(--a-border);
+}
+
+.hub > header h1 {
+  font-size: var(--a-text-xl);
+  margin: 0 0 var(--a-space-xs) 0;
+}
+
+.hub > header p {
+  font-size: var(--a-text-sm);
+  margin: 0 0 var(--a-space-md) 0;
+  color: var(--a-text-secondary);
+}
+
+/* Redesigned hub layout - better mobile UX */
+.hub-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--a-space-md);
+  margin: var(--a-space-md) 0;
+  min-height: auto;
+}
+
+/* Categories sidebar - minimal, only on desktop */
+.hub-layout > aside:first-of-type {
+  display: none;
+  position: static;
+  background: transparent;
+  padding: 0;
+  height: auto;
+  top: auto;
+}
+
+/* Component grid - take full width */
+.hub-layout > main {
+  order: -1;
+  grid-column: 1;
+  min-height: auto;
+}
+
+/* Preview sidebar - hidden on mobile, inline on desktop */
+.hub-layout > aside:last-of-type {
+  display: none;
+  position: static;
+  background: transparent;
+  padding: 0;
+  height: auto;
+  top: auto;
+  max-height: none;
+  overflow: visible;
+  grid-column: 1;
+}
+
+/* Component grid - mobile single column, responsive */
+#component-grid {
+  display: grid;
+  gap: var(--a-space-md);
+  grid-template-columns: 1fr;
+  margin: 0;
+}
+
+/* Mobile component card - compact, show preview by default */
+.card {
+  padding: var(--a-space-md);
+  gap: var(--a-space-sm);
+  cursor: pointer;
+  transition: all var(--a-transition-base) var(--a-easing);
+  position: relative;
+}
+
+.card:hover {
+  border-color: var(--a-primary);
+  box-shadow: 0 4px 12px color-mix(in oklch, var(--a-primary) 15%, transparent);
+}
+
+.card h3 {
+  font-size: var(--a-text-lg);
+  margin: 0;
+}
+
+.card p {
+  font-size: var(--a-text-sm);
+  margin: 0;
+  color: var(--a-text-secondary);
+}
+
+.card footer {
+  margin-top: var(--a-space-sm);
+}
+
+.card footer button {
+  font-size: var(--a-text-sm);
+  padding: var(--a-space-xs) var(--a-space-sm);
+  width: auto;
+}
+
+/* Search box - prominent and full width on mobile */
+.hub > header form {
+  margin: var(--a-space-md) 0 0 0;
+}
+
+.hub > header input[type="text"] {
+  width: 100%;
+  padding: var(--a-space-md);
+  font-size: var(--a-text-base);
+}
+
+/* Categories - show as horizontal tabs/buttons on mobile */
+#category-sidebar {
+  display: none;
+}
+
+#categories-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--a-space-sm);
+  list-style: none;
+  padding: 0;
+  margin: var(--a-space-md) 0 0 0;
+}
+
+#categories-list li {
+  margin: 0;
+}
+
+#categories-list a {
+  display: inline-block;
+  padding: var(--a-space-xs) var(--a-space-sm);
+  background: var(--a-surface-overlay);
+  border: 1px solid var(--a-border);
+  border-radius: var(--a-radius-sm);
+  color: var(--a-text-main);
+  text-decoration: none;
+  font-size: var(--a-text-sm);
+  transition: all var(--a-transition-base) var(--a-easing);
+}
+
+#categories-list a:hover {
+  background: var(--a-surface-raised);
+  border-color: var(--a-primary);
+  color: var(--a-primary);
+}
+
+#categories-list a.active {
+  background: var(--a-primary);
+  color: var(--a-on-primary);
+  border-color: var(--a-primary);
+}
+
+/* Component preview panel - inline on mobile, expands below component */
+#component-preview {
+  display: none;
+  position: static;
+  background: transparent;
+  padding: 0;
+  height: auto;
+  top: auto;
+  max-height: none;
+  overflow: visible;
+  margin: var(--a-space-lg) 0 0 0;
+  border-top: 1px solid var(--a-border);
+  padding-top: var(--a-space-lg);
+}
+
+#component-preview.active {
+  display: block;
+}
+
+#component-preview h3 {
+  font-size: var(--a-text-lg);
+  margin: 0 0 var(--a-space-sm) 0;
+}
+
+#component-preview p {
+  font-size: var(--a-text-sm);
+  margin: 0 0 var(--a-space-md) 0;
+}
+
+#component-preview code {
+  font-size: var(--a-text-xs);
+  padding: var(--a-space-sm);
+  margin: var(--a-space-md) 0;
+}
+
+/* ============================================================================
+   DESKTOP: 3-COLUMN LAYOUT (min-width: 1200px)
+   ============================================================================ */
+
+@media (min-width: 1200px) {
+  .hub-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr 300px;
+    gap: var(--a-space-lg);
+    margin: var(--a-space-lg) 0;
+    min-height: 60vh;
+  }
+
+  /* Show left sidebar */
+  .hub-layout > aside:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-md);
+    padding: var(--a-space-md);
+    background: var(--a-surface-overlay);
+    border-radius: var(--a-radius-md);
+    height: fit-content;
+    position: sticky;
+    top: calc(80px + var(--a-space-md));
+  }
+
+  .hub-layout > aside:first-of-type h3 {
+    margin: 0 0 var(--a-space-md) 0;
+    font-size: var(--a-text-base);
+  }
+
+  #category-sidebar nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-sm);
+  }
+
+  #category-sidebar nav a {
+    display: block;
+    padding: var(--a-space-sm) var(--a-space-md);
+    color: var(--a-text-main);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    border-radius: var(--a-radius-sm);
+    font-size: var(--a-text-sm);
+    transition: all var(--a-transition-base) var(--a-easing);
+  }
+
+  #category-sidebar nav a:hover {
+    background: var(--a-surface-raised);
+    color: var(--a-primary);
+    border-left-color: var(--a-primary);
+  }
+
+  #category-sidebar nav a.active {
+    background: color-mix(in oklch, var(--a-primary) 20%, transparent);
+    color: var(--a-primary);
+    border-left-color: var(--a-primary);
+    font-weight: var(--a-font-weight-medium);
+  }
+
+  /* Component grid - show as 2 columns on desktop */
+  #component-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Show right sidebar */
+  .hub-layout > aside:last-of-type {
+    display: flex;
+    flex-direction: column;
+    padding: var(--a-space-md);
+    background: var(--a-surface-overlay);
+    border-radius: var(--a-radius-md);
+    height: fit-content;
+    position: sticky;
+    top: calc(80px + var(--a-space-md));
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+
+  /* Hide categories buttons on desktop */
+  #categories-list {
+    display: none;
+  }
+
+  /* Component preview - always visible on desktop */
+  #component-preview {
+    display: block !important;
+    position: static;
+    background: transparent;
+    padding: 0;
+    height: auto;
+    top: auto;
+    max-height: none;
+    overflow: visible;
+    margin: 0;
+    border: none;
+    padding-top: 0;
+  }
+
+  #component-preview:not(.active) {
+    display: block !important;
+  }
+
+  /* Hide top header on desktop */
+  .hub > header {
+    padding: var(--a-space-lg) var(--a-space-md);
+  }
+
+  .hub > header form {
+    display: none;
+  }
+}
+
+/* ============================================================================
+   TABLET: 2-COLUMN LAYOUT (min-width: 768px and max-width: 1199px)
+   ============================================================================ */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .hub-layout {
+    grid-template-columns: 1fr;
+    gap: var(--a-space-md);
+  }
+
+  /* Show categories as tabs */
+  #category-sidebar {
+    display: block;
+    background: transparent;
+    padding: 0;
+    margin: 0 0 var(--a-space-md) 0;
+  }
+
+  #categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--a-space-sm);
+  }
+
+  /* Component grid - 2 columns */
+  #component-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Hide sidebar */
+  .hub-layout > aside:first-of-type {
+    display: none;
+  }
+
+  /* Show preview inline */
+  .hub-layout > aside:last-of-type {
+    display: block;
+    position: static;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  #component-preview {
+    display: none;
+  }
+
+  #component-preview.active {
+    display: block;
+    background: var(--a-surface-overlay);
+    padding: var(--a-space-md);
+    border-radius: var(--a-radius-md);
+    margin: var(--a-space-lg) 0 0 0;
+    border-top: 1px solid var(--a-border);
+    padding-top: var(--a-space-lg);
+  }
+}
+
+/* ============================================================================
+   MOBILE: FULL-WIDTH LAYOUT (max-width: 767px)
+   ============================================================================ */
+
+@media (max-width: 767px) {
+  .hub > header {
+    padding: var(--a-space-md) var(--a-space-sm);
+  }
+
+  .hub > header h1 {
+    font-size: var(--a-text-lg);
+    margin-bottom: var(--a-space-xs);
+  }
+
+  .hub > header p {
+    display: none;
+  }
+
+  .hub-layout {
+    grid-template-columns: 1fr;
+    gap: var(--a-space-md);
+    margin: var(--a-space-md) 0;
+  }
+
+  /* Hide left sidebar - show as category tabs */
+  .hub-layout > aside:first-of-type {
+    display: none;
+  }
+
+  #category-sidebar {
+    display: block;
+    background: transparent;
+    padding: 0;
+    margin: var(--a-space-sm) 0;
+  }
+
+  #categories-list {
+    display: flex;
+    gap: var(--a-space-xs);
+    overflow-x: auto;
+    padding-bottom: var(--a-space-sm);
+  }
+
+  #categories-list li {
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  #categories-list a {
+    padding: var(--a-space-xs) var(--a-space-sm);
+    font-size: var(--a-text-xs);
+    white-space: nowrap;
+  }
+
+  /* Component grid - single column */
+  #component-grid {
+    grid-template-columns: 1fr;
+    gap: var(--a-space-sm);
+  }
+
+  /* Component cards - more compact */
+  .card {
+    padding: var(--a-space-md);
+    gap: var(--a-space-xs);
+  }
+
+  .card h3 {
+    font-size: var(--a-text-base);
+  }
+
+  .card p {
+    font-size: var(--a-text-xs);
+  }
+
+  .card footer {
+    gap: var(--a-space-xs);
+  }
+
+  .card footer button {
+    padding: var(--a-space-xs) var(--a-space-sm);
+    font-size: var(--a-text-xs);
+  }
+
+  /* Hide right sidebar - show as inline preview */
+  .hub-layout > aside:last-of-type {
+    display: block;
+    position: static;
+    background: transparent;
+    padding: 0;
+    height: auto;
+    top: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  #component-preview {
+    display: none;
+    position: static;
+    background: transparent;
+    padding: 0;
+    height: auto;
+    top: auto;
+    max-height: none;
+    overflow: visible;
+    margin: 0;
+    border: none;
+  }
+
+  #component-preview.active {
+    display: block;
+    background: var(--a-surface-overlay);
+    padding: var(--a-space-md);
+    border-radius: var(--a-radius-md);
+    margin: var(--a-space-md) 0 0 0;
+    border-top: 1px solid var(--a-border);
+    padding-top: var(--a-space-md);
+  }
+
+  #component-preview h3 {
+    font-size: var(--a-text-base);
+  }
+
+  #component-preview p {
+    font-size: var(--a-text-xs);
+  }
+
+  #component-preview h4 {
+    font-size: var(--a-text-sm);
+    margin: var(--a-space-md) 0 var(--a-space-xs) 0;
+  }
+
+  #component-preview code {
+    font-size: var(--a-text-xs);
+    padding: var(--a-space-sm);
+  }
+}
+
+/* ============================================================================
+   SMALL MOBILE: Extra compact (max-width: 480px)
+   ============================================================================ */
+
+@media (max-width: 480px) {
+  .hub > header {
+    padding: var(--a-space-md) var(--a-space-sm);
+  }
+
+  .hub > header h1 {
+    font-size: var(--a-text-lg);
+  }
+
+  #categories-list {
+    gap: var(--a-space-xs);
+  }
+
+  #categories-list a {
+    padding: var(--a-space-xs) var(--a-space-sm);
+    font-size: var(--a-text-xs);
+  }
+
+  .card {
+    padding: var(--a-space-sm);
+  }
+
+  .card h3 {
+    font-size: var(--a-text-sm);
+  }
+
+  .card p {
+    font-size: var(--a-text-xs);
+  }
+
+  #component-preview {
+    padding: var(--a-space-sm);
+  }
+
+  #component-preview h3 {
+    font-size: var(--a-text-sm);
+  }
+
+  #component-preview p {
+    font-size: var(--a-text-xs);
+  }
+
+  #component-preview code {
+    font-size: var(--a-text-xs);
+    padding: var(--a-space-xs);
+  }
+}
+
