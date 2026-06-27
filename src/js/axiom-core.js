@@ -617,3 +617,125 @@ HubNav.loadChapter = (chapterId) => {
   }
 };
 
+
+// ============================================================================
+// CONFIGURATOR - Live token adjustment (future feature)
+// ============================================================================
+
+const Configurator = (() => {
+  let isOpen = false;
+
+  const init = () => {
+    // This module is prepared for future implementation
+    // It will allow users to:
+    // - Adjust primary hue (0-360)
+    // - Adjust spacing multiplier (0.8-1.5)
+    // - Save configurations to localStorage
+    // - Live-update all colors and spacing
+    
+    console.log('Configurator ready for expansion');
+  };
+
+  const toggle = () => {
+    isOpen = !isOpen;
+    const configurator = document.getElementById('configurator');
+    if (configurator) {
+      configurator.classList.toggle('open', isOpen);
+    }
+  };
+
+  const setHue = (hue) => {
+    document.documentElement.style.setProperty('--a-hue-primary', hue);
+    localStorage.setItem('axiom01-v3-hue', hue);
+  };
+
+  const setSpacingMultiplier = (multiplier) => {
+    // Would adjust spacing scale
+    localStorage.setItem('axiom01-v3-spacing-mult', multiplier);
+  };
+
+  const reset = () => {
+    setHue(250); // Default hue
+    setSpacingMultiplier(1); // Default multiplier
+  };
+
+  return {
+    init,
+    toggle,
+    setHue,
+    setSpacingMultiplier,
+    reset,
+  };
+})();
+
+
+// ============================================================================
+// UPDATE INITIALIZATION WITH CONFIGURATOR
+// ============================================================================
+
+// Add to DOMContentLoaded after other modules (update existing line)
+// Configurator.init();
+
+// Add to global Axiom API (update existing)
+window.Axiom.configurator = {
+  toggle: Configurator.toggle,
+  setHue: Configurator.setHue,
+  reset: Configurator.reset,
+};
+
+
+// ============================================================================
+// SEARCH & FILTER FOR COMPONENTS
+// ============================================================================
+
+const ComponentSearch = (() => {
+  let searchQuery = '';
+
+  const init = () => {
+    const searchInput = document.getElementById('component-search');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase();
+      filterComponents();
+    });
+  };
+
+  const filterComponents = () => {
+    const items = document.querySelectorAll('[data-component]');
+    let visibleCount = 0;
+
+    items.forEach((item) => {
+      const card = item.closest('[data-category]');
+      if (!card) return;
+
+      const h3 = card.querySelector('h3');
+      const p = card.querySelector('p');
+      const text = (h3?.textContent + ' ' + p?.textContent).toLowerCase();
+
+      const matches = !searchQuery || text.includes(searchQuery);
+      card.style.display = matches ? '' : 'none';
+      if (matches) visibleCount++;
+    });
+
+    // Update count display
+    const countEl = document.getElementById('component-count');
+    if (countEl) {
+      countEl.textContent = `${visibleCount} components found`;
+    }
+  };
+
+  const reset = () => {
+    searchQuery = '';
+    const searchInput = document.getElementById('component-search');
+    if (searchInput) searchInput.value = '';
+    filterComponents();
+  };
+
+  return {
+    init,
+    filterComponents,
+    reset,
+  };
+})();
+
