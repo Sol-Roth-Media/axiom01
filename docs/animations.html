@@ -16,333 +16,7 @@
 	
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 	
-	<style>
-		/* Section background styles */
-		#accessibility {
-			background: var(--a-color-info-container);
-		}
-
-		.animation-checklist {
-			background: var(--a-color-success-container);
-		}
-
-		/* Margin resets */
-		.demo-section-header h2,
-		#accessibility h2,
-		.animation-checklist h2 {
-			margin-top: 0;
-		}
-
-		.demo-button-interactive {
-			transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
-		}
-
-		.demo-button-interactive:hover {
-			transform: translateY(-2px);
-		}
-
-		.demo-button-interactive:active {
-			transform: translateY(0);
-		}
-
-		.animation-demo {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			min-height: 200px;
-			background: var(--a-color-surface);
-			border: 1px solid var(--a-color-outline);
-			border-radius: var(--a-border-radius-large);
-			padding: var(--a-space-xl);
-			margin-bottom: var(--a-space-l);
-		}
-
-		.animation-box {
-			width: 80px;
-			height: 80px;
-			background: linear-gradient(135deg, var(--a-color-primary), var(--a-color-secondary));
-			border-radius: var(--a-border-radius-base);
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: white;
-			font-weight: bold;
-			font-size: 2rem;
-			box-shadow: var(--a-shadow-medium);
-		}
-
-		.animation-controls {
-			display: flex;
-			gap: var(--a-space-m);
-			margin-bottom: var(--a-space-l);
-			flex-wrap: wrap;
-		}
-
-		.animation-controls button {
-			margin: 0;
-		}
-
-		.animation-info {
-			background: var(--a-color-info-container);
-			border-left: 4px solid var(--a-color-info);
-			padding: var(--a-space-m) var(--a-space-l);
-			border-radius: var(--a-border-radius-base);
-			margin-bottom: var(--a-space-l);
-		}
-
-		.animation-info p {
-			margin: 0;
-			font-size: 0.95rem;
-			line-height: 1.5;
-		}
-
-		.animation-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: var(--a-space-xl);
-			margin-bottom: var(--a-space-2xl);
-		}
-
-		.animation-card {
-			background: var(--a-color-surface);
-			border: 1px solid var(--a-color-outline);
-			border-radius: var(--a-border-radius-large);
-			padding: var(--a-space-l);
-			overflow: hidden;
-		}
-
-		.animation-card h3 {
-			margin: 0 0 var(--a-space-s) 0;
-			font-size: 1.1rem;
-		}
-
-		.animation-card-preview {
-			height: 150px;
-			background: var(--a-color-info-container);
-			border-radius: var(--a-border-radius-base);
-			margin-bottom: var(--a-space-m);
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			overflow: hidden;
-		}
-
-		.animation-card-preview .animation-box {
-			margin: 0;
-			width: 60px;
-			height: 60px;
-			font-size: 1.5rem;
-		}
-
-		.animation-card p {
-			margin: 0;
-			font-size: 0.9rem;
-			color: var(--a-color-text-muted);
-			line-height: 1.5;
-		}
-
-		.badge-animation {
-			display: inline-block;
-			background: var(--a-color-primary);
-			color: white;
-			padding: 4px 8px;
-			border-radius: 4px;
-			font-size: 0.75rem;
-			font-weight: bold;
-			margin-top: var(--a-space-s);
-		}
-
-		/* Live animation examples */
-		.demo-reveal-fade { animation: fadeIn 1s ease-out; }
-		.demo-fade-out { animation: fadeOut 1s ease-in; }
-		.demo-reveal-fade-up { animation: fadeInUp 1s ease-out; }
-		.demo-reveal-fade-down { animation: fadeInDown 1s ease-out; }
-		.demo-reveal-fade-left { animation: fadeInLeft 1s ease-out; }
-		.demo-reveal-fade-right { animation: fadeInRight 1s ease-out; }
-		.demo-reveal-slide-up { animation: slideUp 1s ease-out; }
-		.demo-slide-down { animation: slideDown 1s ease-out; }
-		.demo-slide-left { animation: slideLeft 1s ease-out; }
-		.demo-slide-right { animation: slideRight 1s ease-out; }
-		.demo-reveal-scale { animation: scaleIn 1s ease-out; }
-		.demo-reveal-scale-out { animation: scaleOut 1s ease-in; }
-		.demo-status-spin { animation: spin 2s linear infinite; }
-		.demo-status-pulse { animation: pulse 2s ease-in-out infinite; }
-		.demo-status-bounce { animation: bounce 1s ease-in-out infinite; }
-		.demo-status-bounce-in { animation: bounceIn 1s ease-out; }
-		.demo-reveal-flip-in { animation: flipIn 1s ease-out; }
-		.demo-status-heartbeat { animation: heartbeat 1.3s ease-in-out infinite; }
-
-		.animation-subtitle {
-			color: var(--a-color-text-muted);
-			font-size: 0.9rem;
-			margin-top: var(--a-space-s);
-		}
-
-		.animation-gallery {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-			gap: var(--a-space-m);
-			margin-bottom: var(--a-space-2xl);
-		}
-
-		.animation-gallery-item {
-			aspect-ratio: 1;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			background: var(--a-color-info-container);
-			border: 1px solid var(--a-color-outline);
-			border-radius: var(--a-border-radius-base);
-			cursor: pointer;
-			transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
-		}
-
-		.animation-gallery-item:hover {
-			transform: translateY(-4px);
-			box-shadow: var(--a-shadow-medium);
-		}
-
-		.animation-gallery-item.active {
-			background: var(--a-color-primary-container);
-			border-color: var(--a-color-primary);
-		}
-
-		@keyframes fadeIn {
-			from { opacity: 0; }
-			to { opacity: 1; }
-		}
-		@keyframes fadeOut {
-			from { opacity: 1; }
-			to { opacity: 0; }
-		}
-		@keyframes fadeInUp {
-			from {
-				opacity: 0;
-				transform: translateY(0.5rem);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-		@keyframes fadeInDown {
-			from {
-				opacity: 0;
-				transform: translateY(-0.5rem);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-		@keyframes fadeInLeft {
-			from {
-				opacity: 0;
-				transform: translateX(-0.5rem);
-			}
-			to {
-				opacity: 1;
-				transform: translateX(0);
-			}
-		}
-		@keyframes fadeInRight {
-			from {
-				opacity: 0;
-				transform: translateX(0.5rem);
-			}
-			to {
-				opacity: 1;
-				transform: translateX(0);
-			}
-		}
-		@keyframes slideUp {
-			from { transform: translateY(1rem); }
-			to { transform: translateY(0); }
-		}
-		@keyframes slideDown {
-			from { transform: translateY(-1rem); }
-			to { transform: translateY(0); }
-		}
-		@keyframes slideLeft {
-			from { transform: translateX(1rem); }
-			to { transform: translateX(0); }
-		}
-		@keyframes slideRight {
-			from { transform: translateX(-1rem); }
-			to { transform: translateX(0); }
-		}
-		@keyframes scaleIn {
-			from {
-				opacity: 0;
-				transform: scale(0.95);
-			}
-			to {
-				opacity: 1;
-				transform: scale(1);
-			}
-		}
-		@keyframes scaleOut {
-			from {
-				opacity: 1;
-				transform: scale(1);
-			}
-			to {
-				opacity: 0;
-				transform: scale(0.95);
-			}
-		}
-		@keyframes spin {
-			from { transform: rotate(0deg); }
-			to { transform: rotate(360deg); }
-		}
-		@keyframes pulse {
-			0%, 100% { opacity: 1; }
-			50% { opacity: 0.5; }
-		}
-		@keyframes bounce {
-			0%, 100% { transform: translateY(0); }
-			50% { transform: translateY(-0.5rem); }
-		}
-		@keyframes bounceIn {
-			0% {
-				opacity: 0;
-				transform: scale(0.3);
-			}
-			50% {
-				opacity: 1;
-				transform: scale(1.05);
-			}
-			70% {
-				transform: scale(0.9);
-			}
-			100% {
-				transform: scale(1);
-			}
-		}
-		@keyframes flipIn {
-			from {
-				opacity: 0;
-				transform: perspective(400px) rotateY(-180deg);
-			}
-			to {
-				opacity: 1;
-				transform: perspective(400px) rotateY(0);
-			}
-		}
-		@keyframes heartbeat {
-			0%, 100% { transform: scale(1); }
-			10%, 30% { transform: scale(0.9); }
-			20%, 50%, 80% { transform: scale(1.1); }
-			40% { transform: scale(1.05); }
-			60%, 70% { transform: scale(1.05); }
-		}
-
-		@media (prefers-reduced-motion: reduce) {
-			[class^="demo-"] {
-				animation: none !important;
-			}
-		}
-	</style>
+	
 </head>
 <body class="axiom-body">
 
@@ -414,8 +88,8 @@
 				<header>
 					<h3>The Pattern</h3>
 				</header>
-				<div class="component-grid">
-					<div>
+				<div class="grid">
+					<article class="card">
 						<p><strong>Default (one class):</strong></p>
 						<pre><code class="language-html">&lt;!-- Card animates with fadeInUp --&gt;
 &lt;article class="card animate"&gt;
@@ -432,19 +106,19 @@
   Modal content
 &lt;/div&gt;</code></pre>
 					</article>
-					<div>
-						<p><strong>Override (add animation class):</strong></p>
+					<article class="card">
+<p><strong>Override (add animation class):</strong></p>
 						<pre><code class="language-html">&lt;!-- Card with custom animation --&gt;
-&lt;article class="card  animation-demo reveal-fade"&gt;
+&lt;article class="card animation-demo reveal-fade"&gt;
   Content
 &lt;/article&gt;
 
 &lt;!-- Staggered sequence --&gt;
-&lt;article class="card  animation-demo delay-1"&gt;&lt;/article&gt;
-&lt;article class="card  animation-demo delay-2"&gt;&lt;/article&gt;
-&lt;article class="card  animation-demo delay-3"&gt;&lt;/article&gt;</code></pre>
-					</div>
-				</div>
+&lt;article class="card animation-demo delay-1"&gt;&lt;/article&gt;
+&lt;article class="card animation-demo delay-2"&gt;&lt;/article&gt;
+&lt;article class="card animation-demo delay-3"&gt;&lt;/article&gt;</code></pre>
+					</article>
+</article>
 			</article>
 
 			<div class="grid grid-cols-2" >
@@ -567,8 +241,8 @@
 				<header>
 					<h3>CSS Usage</h3>
 				</header>
-				<div>
-					<pre><code class="language-css">.reveal-fade {
+				<article class="card">
+<pre><code class="language-css">.reveal-fade {
   animation: fadeIn 300ms ease-out;
 }
 
@@ -591,7 +265,7 @@
     transform: translateY(0);
   }
 }</code></pre>
-				</div>
+</article>
 			</article>
 		</div>
 	</section>
@@ -627,8 +301,8 @@
 				<header>
 					<h3>CSS Usage</h3>
 				</header>
-				<div>
-					<pre><code class="language-css">.reveal-slide-up {
+				<article class="card">
+<pre><code class="language-css">.reveal-slide-up {
   animation: slideUp 300ms ease-out;
 }
 
@@ -640,7 +314,7 @@
     transform: translateY(0);
   }
 }</code></pre>
-				</div>
+</article>
 			</article>
 		</div>
 	</section>
@@ -670,8 +344,8 @@
 				<header>
 					<h3>CSS Usage</h3>
 				</header>
-				<div>
-					<pre><code class="language-css">.reveal-scale {
+				<article class="card">
+<pre><code class="language-css">.reveal-scale {
   animation: scaleIn 300ms ease-out;
 }
 
@@ -685,7 +359,7 @@
     transform: scale(1);
   }
 }</code></pre>
-				</div>
+</article>
 			</article>
 		</div>
 	</section>
@@ -718,8 +392,8 @@
 				<header>
 					<h3>CSS Usage</h3>
 				</header>
-				<div>
-					<pre><code class="language-css">.status-spin {
+				<article class="card">
+<pre><code class="language-css">.status-spin {
   animation: spin 1s linear infinite;
 }
 
@@ -736,7 +410,7 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
 }</code></pre>
-				</div>
+</article>
 			</article>
 		</div>
 	</section>
@@ -769,8 +443,8 @@
 				<header>
 					<h3>CSS Usage</h3>
 				</header>
-				<div>
-					<pre><code class="language-css">.status-bounce-in {
+				<article class="card">
+<pre><code class="language-css">.status-bounce-in {
   animation: bounceIn 500ms ease-out;
 }
 
@@ -787,7 +461,7 @@
     transform: scale(1);
   }
 }</code></pre>
-				</div>
+</article>
 			</article>
 		</div>
 	</section>
@@ -805,7 +479,8 @@
 					<header>
 						<h3>Recommended Durations</h3>
 					</header>
-					<div>
+					<article class="card">
+
 						<table class="striped">
 							<tbody>
 								<tr>
@@ -830,14 +505,16 @@
 								</tr>
 							</tbody>
 						</table>
-					</div>
+					
+</article>
 				</article>
 
 				<article class="card">
 					<header>
 						<h3>Common Easing Functions</h3>
 					</header>
-					<div>
+					<article class="card">
+
 						<table class="striped">
 							<tbody>
 								<tr>
@@ -858,7 +535,8 @@
 								</tr>
 							</tbody>
 						</table>
-					</div>
+					
+</article>
 				</article>
 			</div>
 		</div>
@@ -876,8 +554,8 @@
 				<header>
 					<h3>CSS Pattern</h3>
 				</header>
-				<div>
-					<pre><code class="language-css">/* Default: With animation */
+				<article class="card">
+<pre><code class="language-css">/* Default: With animation */
 .element {
   animation: fadeIn 300ms ease-out;
 }
@@ -889,7 +567,7 @@
     opacity: 1;  /* Ensure element is visible */
   }
 }</code></pre>
-				</div>
+</article>
 			</article>
 
 			<div class="grid grid-cols-2" >
@@ -1000,18 +678,18 @@ if (!prefersReduced) {
 						<header>
 							<h3>Live Example</h3>
 						</header>
-						<div>
-							<button class="primary lg demo-button-interactive">Hover Me</button>
+						<article class="card">
+<button class="primary lg">Hover Me</button>
 							<p class="muted sm" >Lifts on hover, clicks with press</p>
-						</div>
+</article>
 					</article>
 
 					<article class="card filled">
 						<header>
 							<h3>Code</h3>
 						</header>
-						<div>
-							<pre><code class="language-css">.button {
+						<article class="card">
+<pre><code class="language-css">.button {
   transition: 
     transform 150ms ease-in-out,
     box-shadow 150ms ease-in-out;
@@ -1025,7 +703,7 @@ if (!prefersReduced) {
 .button:active {
   transform: translateY(0);
 }</code></pre>
-						</div>
+</article>
 					</article>
 				</article>
 
@@ -1034,17 +712,18 @@ if (!prefersReduced) {
 						<header>
 							<h3>Live Example</h3>
 						</header>
-						<div>
-							<button class="primary" onclick="alert('Modal would appear with smooth scale-in animation')">Open Modal</button>
+						<article class="card">
+<button class="primary" onclick="alert('Modal would appear with smooth scale-in animation')">Open Modal</button>
 							<p class="muted sm" >Click to see modal entrance animation</p>
-						</div>
+</article>
 					</article>
 
 					<article class="card filled">
 						<header>
 							<h3>Code</h3>
 						</header>
-						<div>
+						<article class="card">
+
 							<pre><code class="language-css">.modal {
   opacity: 0;
   transform: scale(0.95);
@@ -1057,7 +736,8 @@ if (!prefersReduced) {
   opacity: 1;
   transform: scale(1);
 }</code></pre>
-						</div>
+						
+</article>
 					</article>
 				</article>
 
@@ -1066,18 +746,21 @@ if (!prefersReduced) {
 						<header>
 							<h3>Live Example</h3>
 						</header>
-						<div>
+						<article class="card">
+
 							<label>Email</label>
 							<input type="email" placeholder="Enter email" >
 							<p class="muted sm">Type to see validation feedback</p>
-						</div>
+						
+</article>
 					</article>
 
 					<article class="card filled">
 						<header>
 							<h3>Code</h3>
 						</header>
-						<div>
+						<article class="card">
+
 							<pre><code class="language-css">@keyframes shake {
   0%, 100% { transform: translateX(0); }
   10%, 30% { transform: translateX(-4px); }
@@ -1087,13 +770,14 @@ if (!prefersReduced) {
 .input.error {
   animation: shake 300ms ease-in-out;
 }</code></pre>
-						</div>
+						
+</article>
 					</article>
 				</div>
 	</section>
 
 	<!-- ANIMATION CHECKLIST -->
-	<section class="animation-checklist">
+	<section class="card">
 		<div class="container">
 			<header>
 				<h2>Animation Quality Checklist</h2>

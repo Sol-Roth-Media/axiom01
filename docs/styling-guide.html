@@ -7,352 +7,7 @@
     <link rel="stylesheet" href="../css/axiom.min.css">
     <link rel="stylesheet" href="../css/axicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-    <style>
-        /* Mobile-first responsive styling */
-        .comparison-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            overflow-x: auto;
-            display: block;
-            margin: var(--a-space-m) 0;
-        }
-
-        .comparison-table thead {
-            display: none;
-        }
-
-        .comparison-table tbody {
-            display: block;
-        }
-
-        .comparison-table tr {
-            display: block;
-            margin-bottom: var(--a-space-m);
-            border: 1px solid var(--ax-border);
-            border-radius: var(--a-border-radius-lg);
-            padding: var(--a-space-m);
-        }
-
-        .comparison-table td {
-            display: block;
-            padding: var(--a-space-s) 0;
-            text-align: left;
-            border: none;
-        }
-
-        .comparison-table td:before {
-            content: attr(data-label);
-            font-weight: var(--a-font-weight-bold);
-            display: block;
-            margin-bottom: var(--a-space-xs);
-            color: var(--a-color-primary);
-            font-size: var(--a-font-size-sm);
-        }
-
-        /* Tablet and up - show normal table */
-        @media (min-width: 768px) {
-            .comparison-table {
-                display: table;
-            }
-
-            .comparison-table thead {
-                display: table-header-group;
-            }
-
-            .comparison-table tbody {
-                display: table-row-group;
-            }
-
-            .comparison-table tr {
-                display: table-row;
-                margin-bottom: 0;
-                border: none;
-                padding: 0;
-            }
-
-            .comparison-table td {
-                display: table-cell;
-                padding: var(--a-space-m);
-                border-bottom: 1px solid var(--ax-border);
-            }
-
-            .comparison-table td:before {
-                display: none;
-            }
-
-            .comparison-table tr:last-child td {
-                border-bottom: none;
-            }
-
-            .comparison-table th {
-                background: var(--a-color-surface);
-                font-weight: var(--a-font-weight-semibold);
-                padding: var(--a-space-m);
-                border-bottom: 2px solid var(--ax-border);
-            }
-        }
-
-        /* Spacing token cards - responsive grid */
-        .token-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--a-space-m);
-            margin: var(--a-space-l) 0;
-        }
-
-        @media (min-width: 480px) {
-            .token-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 768px) {
-            .token-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        /* Typography token cards enhanced */
-        .token-card {
-            display: flex;
-            flex-direction: column;
-            gap: var(--a-space-s);
-        }
-
-        .token-card p:first-child {
-            margin: 0;
-            font-weight: var(--a-font-weight-semibold);
-        }
-
-        .token-card p:nth-child(2) {
-            margin: 0;
-            font-family: var(--a-font-family-mono);
-            font-size: var(--a-font-size-xs);
-        }
-
-        .token-card p:nth-child(3) {
-            margin: 0;
-            font-size: var(--a-font-size-xs);
-            color: var(--a-color-on-surface-variant);
-        }
-
-        /* Code examples - prevent overflow */
-        pre {
-            overflow-x: auto;
-            max-width: 100%;
-        }
-
-        pre code {
-            display: block;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-        }
-
-        /* Button group with all variants */
-        .button-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--a-space-m);
-            margin: var(--a-space-m) 0;
-            align-items: center;
-            overflow-x: auto;
-            padding-bottom: var(--a-space-s);
-        }
-
-        @media (max-width: 480px) {
-            .button-group {
-                gap: var(--a-space-s);
-            }
-
-            .button-group button {
-                flex-shrink: 0;
-                min-width: 100px;
-            }
-        }
-
-        /* Resource grid - responsive */
-        .component-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--a-space-l);
-            margin: var(--a-space-l) 0;
-        }
-
-        @media (min-width: 480px) {
-            .component-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 768px) {
-            .component-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .component-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        /* Alert examples - responsive */
-        .alert-example {
-            word-wrap: break-word;
-        }
-
-        /* Lists - better mobile spacing */
-        ul, ol {
-            padding-left: var(--a-space-l);
-        }
-
-        li {
-            margin-bottom: var(--a-space-s);
-            line-height: var(--a-line-height-relaxed);
-        }
-
-        /* Container - ensure proper padding on mobile */
-        .container {
-            padding: 0 var(--a-space-m);
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                padding: 0 var(--a-space-l);
-            }
-        }
-
-        /* Hero section - responsive */
-        .hero h1 {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-        /* Article component-example - responsive */
-        .component-example {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            max-width: 65ch;
-        }
-
-        /* Section spacing - reduce excessive gaps */
-        
-
-        .component-section h2 {
-            margin-top: 0;
-            margin-bottom: var(--a-space-m);
-        }
-
-        .component-section h3 {
-            margin-top: var(--a-space-m);
-            margin-bottom: var(--a-space-s);
-        }
-
-        /* Reduce spacing between What is Axiom and Design Tokens */
-        section.component-section + section
-
-        /* Lists default bullets */
-        ul {
-            list-style-type: disc;
-        }
-
-        ol {
-            list-style-type: decimal;
-        }
-
-        /* Typography tokens display - show font samples */
-        .typography-sample {
-            display: inline-block;
-            padding: var(--a-space-s) var(--a-space-m);
-            background: var(--a-color-surface-variant);
-            border-radius: var(--a-border-radius-md);
-            font-size: var(--a-font-size-sm);
-        }
-
-        .typography-sample.serif {
-            font-family: var(--a-font-family-serif);
-        }
-
-        .typography-sample.sans {
-            font-family: var(--a-font-family-sans);
-        }
-
-        .typography-sample.mono {
-            font-family: var(--a-font-family-mono);
-        }
-
-        .typography-sample.weight-regular {
-            font-weight: var(--a-font-weight-regular);
-        }
-
-        .typography-sample.weight-medium {
-            font-weight: var(--a-font-weight-medium);
-        }
-
-        .typography-sample.weight-bold {
-            font-weight: var(--a-font-weight-bold);
-        }
-
-        /* Outline button style */
-        .button.outline {
-            background: transparent;
-            color: var(--a-color-primary);
-            border: 2px solid var(--a-color-primary);
-        }
-
-        .button.outline:hover {
-            background: var(--a-color-primary);
-            color: var(--a-color-on-primary);
-        }
-
-        /* Color token cards with color swatches */
-        .color-token-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--a-space-m);
-            margin: var(--a-space-l) 0;
-        }
-
-        @media (min-width: 480px) {
-            .color-token-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 768px) {
-            .color-token-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .color-token-card {
-            display: flex;
-            flex-direction: column;
-            gap: var(--a-space-s);
-        }
-
-        .color-swatch-demo {
-            width: 100%;
-            height: 80px;
-            border-radius: var(--a-border-radius-lg);
-            border: 1px solid var(--ax-border);
-            box-shadow: var(--a-shadow-sm);
-        }
-
-        .color-token-label {
-            font-weight: var(--a-font-weight-semibold);
-            font-size: var(--a-font-size-sm);
-            padding: var(--a-space-xs) var(--a-space-s);
-            border-radius: var(--a-border-radius-md);
-            font-family: var(--a-font-family-mono);
-        }
-
-        .color-token-usage {
-            font-size: var(--a-font-size-xs);
-            color: var(--a-color-on-surface-variant);
-        }
-    </style>
+    
 </head>
 <body class="axiom-body">
 
@@ -412,7 +67,7 @@
             <h2>Design Tokens</h2>
             <p>Axiom01 provides 149 design tokens across colors, spacing, typography, and shadows. All tokens use CSS variables for consistency and easy theming.</p>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>Color Tokens</h3>
                 <p>Replace hardcoded colors with semantic CSS variables that automatically work in light and dark modes:</p>
                 
@@ -494,11 +149,11 @@
 }</code></pre>
             </article>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>Spacing Tokens</h3>
                 <p>Axiom01 uses a modular spacing scale based on <code>--a-space-unit</code> (default 1rem). All spacing uses predictable intervals:</p>
                 
-                <div class="token-grid">
+                <div class="grid">
                     <div class="token-card">
                         <p><strong>xs</strong></p>
                         <p><code>--a-space-xs</code></p>
@@ -535,11 +190,11 @@
 }</code></pre>
             </article>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>Typography Tokens</h3>
                 <p>Typography is handled through semantic HTML and automatic styling. Use heading tags (<code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>) instead of custom styles.</p>
                 
-                <div class="token-grid">
+                <div class="grid">
                     <div class="token-card">
                         <p>Serif</p>
                         <p>--a-font-family-serif</p>
@@ -578,7 +233,7 @@
             <h2>Core Components</h2>
             <p>Axiom01 provides semantic components designed for common UI patterns. Use these instead of creating custom classes.</p>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>Buttons</h3>
                 <p>Use the <code>.button</code> class with semantic variations:</p>
                 
@@ -596,7 +251,7 @@
 &lt;button class="outline"&gt;Outline&lt;/button&gt;</code></pre>
             </article>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>Cards</h3>
                 <p>Use the <code>.card</code> class to group related content:</p>
                 
@@ -635,7 +290,7 @@
 &lt;/article&gt;</code></pre>
             </article>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>Alerts</h3>
                 <p>Use semantic alert classes for notifications:</p>
                 
@@ -659,7 +314,7 @@
         <div class="container">
             <h2>Best Practices</h2>
             
-            <article class="component-example">
+            <article class="card">
                 <h3>✓ DO: Use Semantic HTML</h3>
                 <pre><code class="language-html">&lt;nav role="navigation"&gt;
   &lt;ul&gt;
@@ -677,7 +332,7 @@
 &lt;/main&gt;</code></pre>
             </article>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>✗ DON'T: Use Custom Classes</h3>
                 <pre><code class="language-html">&lt;div class="navbar"&gt;
   &lt;div class="navbar-item"&gt;
@@ -686,7 +341,7 @@
 &lt;/div&gt;</code></pre>
             </article>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>✓ DO: Use CSS Variables</h3>
                 <pre><code class="language-css">.my-component {
   color: var(--a-color-text);
@@ -698,7 +353,7 @@
 /* Automatically works in dark mode */</code></pre>
             </article>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>✗ DON'T: Hardcode Values</h3>
                 <pre><code class="language-css">.my-component {
   color: #333;
@@ -717,7 +372,7 @@
             <h2>Dark Mode</h2>
             <p>Dark mode is automatically handled by Axiom01. Simply use CSS variables and dark mode will work out of the box.</p>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>How Dark Mode Works</h3>
                 <p>Add <code>data-theme="dark"</code> to your <code>&lt;html&gt;</code> tag:</p>
                 
@@ -743,7 +398,7 @@
             <h2>Accessibility</h2>
             <p>Axiom01 is built with accessibility in mind. Follow these practices to ensure your interfaces remain accessible:</p>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>Semantic HTML for A11y</h3>
                 <ul>
                     <li>Use <code>&lt;nav&gt;</code> for navigation</li>
@@ -756,7 +411,7 @@
                 </ul>
             </article>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>Form Accessibility</h3>
                 <pre><code class="language-html">&lt;form&gt;
   &lt;fieldset&gt;
@@ -775,7 +430,7 @@
 &lt;/form&gt;</code></pre>
             </article>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>Color Contrast</h3>
                 <p>Axiom01 ensures WCAG 2.1 AA color contrast standards:</p>
                 <ul>
@@ -793,7 +448,7 @@
             <h2>Customization</h2>
             <p>Customize Axiom01 by overriding CSS variables. No need to modify the framework itself.</p>
 
-            <article class="component-example">
+            <article class="card">
                 <h3>Custom Color Scheme</h3>
                 <pre><code class="language-css">/* In your CSS */
 :root {

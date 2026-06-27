@@ -9,302 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        /* Tab styling */
-        .variant-tabs {
-            display: flex;
-            gap: var(--a-space-m);
-            margin: var(--a-space-xl) 0;
-            flex-wrap: wrap;
-            border-bottom: 2px solid var(--ax-border);
-            padding-bottom: var(--a-space-m);
-        }
-
-        .variant-tab {
-            padding: var(--a-space-m) var(--a-space-l);
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--a-color-on-surface-variant);
-            border-bottom: 3px solid transparent;
-            transition: all var(--a-transition-base);
-            font-size: var(--a-font-size-base);
-        }
-
-        .variant-tab:hover {
-            color: var(--a-color-text);
-            background: var(--a-color-surface-variant);
-        }
-
-        .variant-tab.active {
-            color: var(--a-color-primary);
-            border-bottom-color: var(--a-color-primary);
-        }
-
-        .variant-tab-count {
-            font-size: 0.9rem;
-            color: var(--a-color-on-surface-variant);
-        }
-
-        /* Search box */
-        .search-box {
-            margin: var(--a-space-l) 0;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: var(--a-space-m);
-            border: 1px solid var(--ax-border);
-            border-radius: var(--a-border-radius-lg);
-            font-size: var(--a-font-size-base);
-            background: var(--a-color-surface);
-            color: var(--a-color-text);
-        }
-
-        .search-box input::placeholder {
-            color: var(--a-color-on-surface-variant);
-        }
-
-        /* Icon grid browser */
-        .icon-browser {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: var(--a-space-m);
-            margin: var(--a-space-l) 0;
-        }
-
-        @media (max-width: 480px) {
-            .icon-browser {
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            }
-        }
-
-        /* Icon item card */
-        .icon-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: var(--a-space-s);
-            padding: var(--a-space-m);
-            border-radius: var(--a-border-radius-lg);
-            border: 1px solid var(--ax-border);
-            background: var(--a-color-surface-variant);
-            text-align: center;
-            cursor: pointer;
-            transition: all var(--a-transition-base);
-            min-height: 120px;
-        }
-
-        .icon-item:hover {
-            background: var(--a-color-primary-container);
-            border-color: var(--a-color-primary);
-            transform: translateY(-2px);
-            box-shadow: var(--a-shadow-md);
-        }
-
-        /* Icon display */
-        .icon-display {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .icon-display svg {
-            width: 100%;
-            height: 100%;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        .icon-display.color svg {
-            fill: currentColor;
-        }
-
-        /* Icon name label */
-        .icon-name {
-            font-size: var(--a-font-size-xs);
-            font-weight: 600;
-            color: var(--a-color-text);
-            word-break: break-word;
-            line-height: var(--a-line-height-tight);
-            max-width: 90px;
-        }
-
-        /* Icon count display */
-        .icon-count {
-            color: var(--a-color-on-surface-variant);
-            margin-top: var(--a-space-m);
-            font-size: var(--a-font-size-sm);
-            font-weight: 500;
-        }
-
-        .count-number {
-            font-weight: 700;
-            color: var(--a-color-primary);
-        }
-
-        /* Variant info box */
-        .variant-info {
-            background: var(--a-color-surface-variant);
-            padding: var(--a-space-m) var(--a-space-l);
-            border-radius: var(--a-border-radius-lg);
-            margin: var(--a-space-l) 0;
-            border-left: 4px solid var(--a-color-primary);
-        }
-
-        .variant-info p {
-            margin: 0;
-            font-size: var(--a-font-size-sm);
-        }
-
-        /* Tabs container scroll */
-        .tabs-container {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* Documentation section */
-        .doc-section {
-            margin: var(--a-space-2xl) 0;
-            padding: var(--a-space-l) 0;
-            border-top: 1px solid var(--ax-border);
-        }
-
-        .doc-section:first-of-type {
-            border-top: none;
-            margin-top: 0;
-            padding-top: 0;
-        }
-
-        .doc-section h2 {
-            margin-bottom: var(--a-space-l);
-            color: var(--a-color-primary);
-        }
-
-        /* Main layout */
-        main {
-            padding: var(--a-space-2xl) 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--a-space-m);
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                padding: 0 var(--a-space-l);
-            }
-        }
-
-        /* Hero section */
-        .hero h1 {
-            font-size: 2.5rem;
-            margin: var(--a-space-l) 0 var(--a-space-m) 0;
-        }
-
-        .tagline {
-            font-size: 1.1rem;
-            color: var(--a-color-on-surface-variant);
-            margin-bottom: 0;
-        }
-
-        /* Code examples */
-        pre {
-            overflow-x: auto;
-            max-width: 100%;
-            display: block;
-        }
-
-        pre code {
-            display: block;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-        }
-
-        /* Naming guide grid */
-        .naming-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--a-space-m);
-            margin: var(--a-space-l) 0;
-        }
-
-        @media (min-width: 480px) {
-            .naming-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 768px) {
-            .naming-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-
-        .naming-item {
-            border: 1px solid var(--ax-border);
-            padding: var(--a-space-m);
-            border-radius: var(--a-border-radius-lg);
-            display: flex;
-            flex-direction: column;
-            gap: var(--a-space-s);
-        }
-
-        .naming-item p {
-            margin: 0;
-        }
-
-        .naming-title {
-            font-weight: 700;
-            color: var(--a-color-primary);
-            margin: 0;
-        }
-
-        .naming-code {
-            font-family: var(--a-font-family-mono);
-            font-size: 0.9rem;
-        }
-
-        .naming-desc {
-            color: var(--a-color-on-surface-variant);
-            font-size: var(--a-font-size-sm);
-        }
-
-        /* Lists */
-        ul {
-            list-style-type: disc;
-        }
-
-        li {
-            margin-bottom: var(--a-space-s);
-            line-height: var(--a-line-height-relaxed);
-        }
-
-        /* Column layout */
-        .columns-2 {
-            columns: 2;
-            column-gap: var(--a-space-2xl);
-            line-height: var(--a-line-height-relaxed);
-        }
-
-        /* Loading message */
-        .loading-message {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: var(--a-space-2xl);
-            color: var(--a-color-on-surface-variant);
-        }
-    </style>
+    
 </head>
 <body class="axiom-body">
 
@@ -446,21 +151,21 @@ if (typeof window.renderAxicons === 'function') {
             <h2>Browse by Variant</h2>
 
             <div class="tabs-container">
-                <div class="variant-tabs">
-                    <button class="variant-tab active" data-variant="base">
-                        Base <span class="variant-tab-count">(450)</span>
+                <div >
+                    <button class="active" data-variant="base">
+                        Base <span >(450)</span>
                     </button>
-                    <button class="variant-tab" data-variant="thin">
-                        Thin <span class="variant-tab-count">(760)</span>
+                    <button  data-variant="thin">
+                        Thin <span >(760)</span>
                     </button>
-                    <button class="variant-tab" data-variant="inverted">
-                        Inverted <span class="variant-tab-count">(758)</span>
+                    <button  data-variant="inverted">
+                        Inverted <span >(758)</span>
                     </button>
-                    <button class="variant-tab" data-variant="color">
-                        Color <span class="variant-tab-count">(1,351)</span>
+                    <button  data-variant="color">
+                        Color <span >(1,351)</span>
                     </button>
-                    <button class="variant-tab" data-variant="premium">
-                        Premium <span class="variant-tab-count">(650)</span>
+                    <button  data-variant="premium">
+                        Premium <span >(650)</span>
                     </button>
                 </div>
             </div>
@@ -605,7 +310,7 @@ if (typeof window.renderAxicons === 'function') {
                 
                 item.innerHTML = `
                     ${iconHTML}
-                    <span class="icon-name">${icon.name}</span>
+                    <span >${icon.name}</span>
                 `;
 
                 item.addEventListener('click', () => {
