@@ -169,7 +169,7 @@ const ComponentLibrary = (() => {
 
       button.innerHTML = `
         <span class="category-title">${category.name}</span>
-        <span class="category-count">${categoryComponents.length} component${categoryComponents.length !== 1 ? 's' : ''}</span>
+        <span class="category-count">${categoryComponents.length}</span>
         <span class="category-chevron" aria-hidden="true">▼</span>
       `;
 
@@ -196,7 +196,7 @@ const ComponentLibrary = (() => {
 
         link.addEventListener('click', (e) => {
           e.preventDefault();
-          showComponentPreview(comp);
+          showComponentDetail(comp);
         });
 
         categoryContent.appendChild(link);
@@ -257,15 +257,42 @@ const ComponentLibrary = (() => {
 
       // Update results count
       if (query) {
-        searchResults.textContent = `Found ${visibleCount} component${visibleCount !== 1 ? 's' : ''}`;
+        searchResults.textContent = `Found ${visibleCount}`;
       } else {
         searchResults.textContent = '';
       }
     });
   };
 
-  const showComponentPreview = (component) => {
-    console.log('View component:', component.name);
+  const showComponentDetail = (component) => {
+    // Hide library view, show detail view
+    document.getElementById('view-docs').classList.add('hidden');
+    document.getElementById('view-component-detail').classList.remove('hidden');
+
+    // Populate detail
+    const title = document.getElementById('component-detail-title');
+    const description = document.getElementById('component-detail-desc');
+    const usage = document.getElementById('component-detail-usage');
+    const accessibility = document.getElementById('component-detail-a11y');
+    const htmlCode = document.getElementById('component-detail-html');
+    const cssCode = document.getElementById('component-detail-css');
+    const backBtn = document.getElementById('component-detail-back');
+
+    if (title) title.textContent = component.name;
+    if (description) description.textContent = component.description || '';
+    if (usage) usage.textContent = component.usage || 'No usage info available.';
+    if (accessibility) accessibility.textContent = component.accessibility || 'Follows WCAG standards.';
+    if (htmlCode) htmlCode.textContent = component.html || '';
+    if (cssCode) cssCode.textContent = component.css || '';
+
+    if (backBtn) {
+      backBtn.onclick = () => {
+        document.getElementById('view-component-detail').classList.add('hidden');
+        document.getElementById('view-docs').classList.remove('hidden');
+      };
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return {
