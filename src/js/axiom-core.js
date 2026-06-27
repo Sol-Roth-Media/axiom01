@@ -1,65 +1,58 @@
 /**
- * AXIOM01 v3 - Core Framework
- * The Semantic Rebellion: The Mathematics of Design
+ * AXIOM01 v3 - Core Framework JavaScript
+ * Pure semantic HTML + minimal JS. No frameworks. No dependencies.
  */
 
 // ============================================================================
-// NAVIGATION & ROUTING
+// NAVIGATION MODULE
 // ============================================================================
 
 const Navigation = (() => {
   let currentView = 'hero';
 
-  const views = {
-    hero: 'view-hero',
-    docs: 'view-docs',
-    book: 'view-book',
-  };
-
   const init = () => {
-    document.querySelectorAll('[data-nav]').forEach((el) => {
-      el.addEventListener('click', (e) => {
+    document.querySelectorAll('[data-nav]').forEach((button) => {
+      button.addEventListener('click', (e) => {
         e.preventDefault();
-        const target = el.getAttribute('data-nav');
-        navigate(target);
+        const viewName = button.getAttribute('data-nav');
+        navigate(viewName);
       });
-    });
-
-    window.addEventListener('popstate', (e) => {
-      if (e.state && e.state.view) {
-        switchView(e.state.view);
-      }
     });
   };
 
   const navigate = (viewName) => {
-    if (views[viewName]) {
-      currentView = viewName;
-      switchView(viewName);
-      window.history.pushState({ view: viewName }, '', `#${viewName}`);
-    }
-  };
-
-  const switchView = (viewName) => {
-    Object.values(views).forEach((viewId) => {
-      const el = document.getElementById(viewId);
-      if (el) el.classList.add('hidden');
+    // Hide all views
+    document.querySelectorAll('main > section').forEach((section) => {
+      section.classList.add('hidden');
     });
 
-    const viewEl = document.getElementById(views[viewName]);
-    if (viewEl) viewEl.classList.remove('hidden');
+    // Show selected view
+    const view = document.getElementById(`view-${viewName}`);
+    if (view) {
+      view.classList.remove('hidden');
+    }
 
+    currentView = viewName;
+
+    // Update nav buttons
     document.querySelectorAll('[data-nav]').forEach((el) => {
       el.setAttribute('aria-current', el.getAttribute('data-nav') === viewName ? 'page' : 'false');
     });
 
+    // Close mobile menu
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) {
+      mobileMenu.classList.add('hidden');
+      document.getElementById('menu-toggle').setAttribute('aria-expanded', 'false');
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Trigger component library initialization if docs view
+    // Initialize view-specific code
     if (viewName === 'docs') {
-      setTimeout(() => {
-        ComponentLibrary.init();
-      }, 50);
+      setTimeout(() => ComponentLibrary.init(), 50);
+    } else if (viewName === 'book') {
+      setTimeout(() => BookLibrary.init(), 50);
     }
   };
 
@@ -103,547 +96,278 @@ const Config = (() => {
 })();
 
 // ============================================================================
-// MOBILE MENU MANAGEMENT
+// MOBILE MENU
 // ============================================================================
 
 const MobileMenu = (() => {
   const init = () => {
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    if (!menuToggle || !mobileMenu) return;
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
 
-    menuToggle.addEventListener('click', () => {
-      const isHidden = mobileMenu.classList.contains('hidden');
-      if (isHidden) {
-        mobileMenu.classList.remove('hidden');
-        menuToggle.setAttribute('aria-expanded', 'true');
-      } else {
-        mobileMenu.classList.add('hidden');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    document.querySelectorAll('#mobile-menu button[data-nav]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        menuToggle.setAttribute('aria-expanded', 'false');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', !isOpen);
+        menu.classList.toggle('hidden');
       });
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-        mobileMenu.classList.add('hidden');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-        if (!mobileMenu.classList.contains('hidden')) {
-          mobileMenu.classList.add('hidden');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
-      }
-    });
+    }
   };
 
-  return {
-    init,
-  };
+  return { init };
 })();
 
 // ============================================================================
-// COMPONENT SEARCH & FILTER
-// ============================================================================
-
-const ComponentSearch = (() => {
-  let searchQuery = '';
-
-  const init = () => {
-    const searchInput = document.getElementById('component-search');
-    if (!searchInput) return;
-
-    searchInput.addEventListener('input', (e) => {
-      searchQuery = e.target.value.toLowerCase();
-      filterComponents();
-    });
-  };
-
-  const filterComponents = () => {
-    const items = document.querySelectorAll('#component-grid article[data-category]');
-
-    items.forEach((item) => {
-      const h3 = item.querySelector('h3');
-      const p = item.querySelector('p');
-      const text = ((h3?.textContent || '') + ' ' + (p?.textContent || '')).toLowerCase();
-
-      const matches = !searchQuery || text.includes(searchQuery);
-      item.style.display = matches ? '' : 'none';
-    });
-  };
-
-  return {
-    init,
-    filterComponents,
-  };
-})();
-
-// ============================================================================
-// CONTENT LOADER
-// ============================================================================
-
-const ContentLoader = (() => {
-  const cache = {};
-  const baseUrl = './content';
-
-  const loadJSON = async (path) => {
-    if (cache[path]) {
-      return cache[path];
-    }
-
-    try {
-      const url = `${baseUrl}/${path}`;
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        throw new Error(`Failed to load ${path}: ${response.status}`);
-      }
-
-      const data = await response.json();
-      cache[path] = data;
-      return data;
-    } catch (error) {
-      console.error(`ContentLoader error loading ${path}:`, error);
-      return null;
-    }
-  };
-
-  const loadComponents = async (category) => {
-    const data = await loadJSON(`components/${category}.json`);
-    return data ? data.components : [];
-  };
-
-  const loadAllComponents = async () => {
-    const categories = [
-      'buttons', 'cards', 'forms', 'alerts', 'layouts', 'misc',
-      'typography', 'navigation', 'data', 'interactive'
-    ];
-    const allComponents = [];
-
-    for (const category of categories) {
-      const components = await loadComponents(category);
-      allComponents.push(...components);
-    }
-
-    return allComponents;
-  };
-
-  const loadChapters = async () => {
-    const data = await loadJSON('chapters/all-chapters.json');
-    return data ? data.chapters : [];
-  };
-
-  const loadChapter = async (chapterId) => {
-    const chapters = await loadChapters();
-    return chapters.find(ch => ch.id === chapterId) || null;
-  };
-
-  return {
-    loadJSON,
-    loadComponents,
-    loadAllComponents,
-    loadChapters,
-    loadChapter,
-  };
-})();
-
-// ============================================================================
-// HUB NAV - COMPONENT & CHAPTER NAVIGATION
-// ============================================================================
-
-const HubNav = (() => {
-  let currentChapter = 'intro';
-  let currentCategory = 'buttons';
-  let currentComponentId = null;
-
-  const init = () => {
-    // Category click handler
-    document.addEventListener('click', (e) => {
-      const categoryLink = e.target.closest('[data-category]');
-      if (categoryLink && categoryLink.tagName === 'A') {
-        e.preventDefault();
-        const category = categoryLink.getAttribute('data-category');
-        currentCategory = category;
-        filterByCategory(category);
-        updateCategoryActive(categoryLink);
-      }
-    });
-
-    // Component View button handler
-    document.addEventListener('click', (e) => {
-      if (e.target.getAttribute('data-component')) {
-        e.preventDefault();
-        const componentId = e.target.getAttribute('data-component');
-        currentComponentId = componentId;
-        showComponentDetails(componentId);
-      }
-    });
-
-    // Chapter link handler
-    document.addEventListener('click', (e) => {
-      const chapterLink = e.target.closest('[data-chapter]');
-      if (chapterLink && chapterLink.tagName === 'A') {
-        e.preventDefault();
-        const chapter = chapterLink.getAttribute('data-chapter');
-        currentChapter = chapter;
-        loadChapter(chapter);
-        updateChapterActive(chapterLink);
-      }
-    });
-
-    const prevBtn = document.getElementById('prev-chapter');
-    const nextBtn = document.getElementById('next-chapter');
-    if (prevBtn) prevBtn.addEventListener('click', () => goToChapter('prev'));
-    if (nextBtn) nextBtn.addEventListener('click', () => goToChapter('next'));
-  };
-
-  const showComponentDetails = async (componentId) => {
-    const preview = document.getElementById('component-preview');
-    if (!preview) return;
-
-    // Show preview panel and add active class
-    preview.classList.add('active');
-    preview.innerHTML = '<p style="opacity: 0.6;">Loading component...</p>';
-
-    try {
-      const allComponents = await ContentLoader.loadAllComponents();
-      const component = allComponents.find(c => c.id === componentId);
-
-      if (!component) {
-        preview.innerHTML = '<p style="color: var(--a-text-muted);">Component not found.</p>';
-        return;
-      }
-
-      let livePreviewHTML = '';
-      try {
-        livePreviewHTML = `<div class="live-preview">${component.html}</div>`;
-      } catch (e) {
-        livePreviewHTML = '';
-      }
-
-      let styleTag = document.getElementById('component-preview-styles');
-      if (!styleTag) {
-        styleTag = document.createElement('style');
-        styleTag.id = 'component-preview-styles';
-        document.head.appendChild(styleTag);
-      }
-      styleTag.textContent = `${component.css}`;
-
-      preview.innerHTML = `
-        <article>
-          <h3>${component.name}</h3>
-          <p><small>${component.description}</small></p>
-
-          ${livePreviewHTML}
-
-          <div style="margin-top: var(--a-space-lg); border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--a-space-sm);">
-              <h4 style="font-size: var(--a-text-sm); margin: 0;">HTML</h4>
-              <button data-copy-html style="padding: 4px 8px; font-size: 12px; background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius-sm); cursor: pointer;">Copy</button>
-            </div>
-            <code id="component-html" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md); font-family: 'Menlo', 'Monaco', 'Courier New', monospace;">${escapeHtml(component.html)}</code>
-          </div>
-
-          <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--a-space-sm);">
-              <h4 style="font-size: var(--a-text-sm); margin: 0;">CSS</h4>
-              <button data-copy-css style="padding: 4px 8px; font-size: 12px; background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius-sm); cursor: pointer;">Copy</button>
-            </div>
-            <code id="component-css" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md); font-family: 'Menlo', 'Monaco', 'Courier New', monospace;">${escapeHtml(component.css)}</code>
-          </div>
-
-          <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
-            <h4 style="font-size: var(--a-text-sm); margin-top: 0; margin-bottom: var(--a-space-xs);">Usage</h4>
-            <p style="font-size: var(--a-text-xs); margin: 0 0 var(--a-space-md) 0; color: var(--a-text-secondary);">${component.usage}</p>
-          </div>
-
-          <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
-            <h4 style="font-size: var(--a-text-sm); margin-top: 0; margin-bottom: var(--a-space-xs);">Accessibility</h4>
-            <p style="font-size: var(--a-text-xs); margin: 0; color: var(--a-text-secondary);">${component.accessibility}</p>
-          </div>
-        </article>
-      `;
-
-      // Add copy handlers
-      const htmlBtn = preview.querySelector('[data-copy-html]');
-      const cssBtn = preview.querySelector('[data-copy-css]');
-      
-      if (htmlBtn) {
-        htmlBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const codeEl = document.getElementById('component-html');
-          if (codeEl) {
-            const text = codeEl.textContent || '';
-            navigator.clipboard.writeText(text);
-            const orig = htmlBtn.textContent;
-            htmlBtn.textContent = '✓ Copied!';
-            htmlBtn.disabled = true;
-            setTimeout(() => {
-              htmlBtn.textContent = orig;
-              htmlBtn.disabled = false;
-            }, 2000);
-          }
-        });
-      }
-      
-      if (cssBtn) {
-        cssBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const codeEl = document.getElementById('component-css');
-          if (codeEl) {
-            const text = codeEl.textContent || '';
-            navigator.clipboard.writeText(text);
-            const orig = cssBtn.textContent;
-            cssBtn.textContent = '✓ Copied!';
-            cssBtn.disabled = true;
-            setTimeout(() => {
-              cssBtn.textContent = orig;
-              cssBtn.disabled = false;
-            }, 2000);
-          }
-        });
-      }
-
-      // Scroll preview into view on mobile
-      if (window.innerWidth < 1200) {
-        preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-    } catch (error) {
-      console.error('Error loading component:', error);
-      preview.innerHTML = '<p style="color: var(--a-text-muted);">Error loading component details.</p>';
-    }
-  };
-
-  const escapeHtml = (text) => {
-    const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    };
-    return text.replace(/[&<>"']/g, m => map[m]);
-  };
-
-  const filterByCategory = (category) => {
-    const items = document.querySelectorAll('#component-grid article[data-category]');
-    items.forEach((item) => {
-      const itemCategory = item.getAttribute('data-category');
-      if (category === 'all') {
-        item.style.display = '';
-      } else {
-        item.style.display = itemCategory === category ? '' : 'none';
-      }
-    });
-    // Close preview when filtering
-    const preview = document.getElementById('component-preview');
-    if (preview) preview.classList.remove('active');
-  };
-
-  const updateCategoryActive = (link) => {
-    document.querySelectorAll('[data-category]').forEach((l) => {
-      if (l.tagName === 'A') l.classList.remove('active');
-    });
-    link.classList.add('active');
-  };
-
-  const loadChapter = async (chapterId) => {
-    const stage = document.getElementById('book-stage');
-    const metaDesc = document.getElementById('chapter-meta-desc');
-    if (!stage) return;
-
-    try {
-      const chapter = await ContentLoader.loadChapter(chapterId);
-      
-      if (!chapter) {
-        stage.innerHTML = '<p>Chapter not found.</p>';
-        return;
-      }
-
-      stage.innerHTML = chapter.content;
-      if (metaDesc) {
-        metaDesc.textContent = `${chapter.title} - Chapter ${chapter.number}`;
-      }
-    } catch (error) {
-      console.error('Error loading chapter:', error);
-      stage.innerHTML = '<p style="color: var(--a-text-muted);">Error loading chapter.</p>';
-    }
-  };
-
-  const updateChapterActive = (link) => {
-    document.querySelectorAll('[data-chapter]').forEach((l) => l.classList.remove('active'));
-    link.classList.add('active');
-  };
-
-  const goToChapter = (direction) => {
-    const chapters = Array.from(document.querySelectorAll('[data-chapter]'));
-    const currentIndex = chapters.findIndex(ch => ch.getAttribute('data-chapter') === currentChapter);
-    const newIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
-
-    if (chapters[newIndex]) {
-      chapters[newIndex].click();
-      chapters[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  };
-
-  return {
-    init,
-    filterByCategory,
-    showComponentDetails,
-    loadChapter,
-  };
-})();
-
-// ============================================================================
-// COMPONENT LIBRARY INITIALIZATION
+// COMPONENT LIBRARY MODULE
 // ============================================================================
 
 const ComponentLibrary = (() => {
-  let isInitialized = false;
+  let allComponents = [];
+  let categoryMap = {};
 
   const init = async () => {
-    if (isInitialized) return;
-    isInitialized = true;
-
-    await populateComponentCards();
-    await populateCategories();
-  };
-
-  const populateComponentCards = async () => {
-    const gridContainer = document.getElementById('component-grid');
-    if (!gridContainer) return;
-
-    // Clear existing cards
-    gridContainer.innerHTML = '';
-
     try {
-      const allComponents = await ContentLoader.loadAllComponents();
+      // Load components data
+      const response = await fetch('./content/components/index.json');
+      if (!response.ok) throw new Error('Failed to load components');
       
-      if (!allComponents || allComponents.length === 0) {
-        gridContainer.innerHTML = '<p>No components found.</p>';
-        return;
-      }
+      const data = await response.json();
+      allComponents = data.components || [];
 
-      allComponents.forEach(component => {
-        const card = document.createElement('article');
-        card.className = 'card';
-        card.setAttribute('data-category', component.category);
-        card.innerHTML = `
-          <h3>${component.name}</h3>
-          <p>${component.description}</p>
-          <footer>
-            <button class="primary" data-component="${component.id}">View</button>
-          </footer>
-        `;
-        gridContainer.appendChild(card);
+      // Build category map
+      categoryMap = {};
+      allComponents.forEach((comp) => {
+        if (!categoryMap[comp.category]) {
+          categoryMap[comp.category] = [];
+        }
+        categoryMap[comp.category].push(comp);
       });
 
-      HubNav.filterByCategory('buttons');
+      // Populate UI
+      populateCategories();
+      populateSearch();
 
     } catch (error) {
-      console.error('Error populating component cards:', error);
-      gridContainer.innerHTML = '<p>Error loading components.</p>';
+      console.error('Error initializing component library:', error);
     }
   };
 
-  const populateCategories = async () => {
-    const categoryList = document.getElementById('categories-list');
-    if (!categoryList) return;
+  const populateCategories = () => {
+    const nav = document.getElementById('components-nav');
+    if (!nav) return;
 
-    // Clear existing categories
-    categoryList.innerHTML = '';
+    nav.innerHTML = '';
 
-    const categories = [
-      { id: 'buttons', label: 'Buttons' },
-      { id: 'cards', label: 'Cards' },
-      { id: 'forms', label: 'Forms' },
-      { id: 'alerts', label: 'Alerts' },
-      { id: 'layouts', label: 'Layouts' },
-      { id: 'misc', label: 'Misc' },
-      { id: 'typography', label: 'Typography' },
-      { id: 'navigation', label: 'Navigation' },
-      { id: 'data', label: 'Data & Lists' },
-      { id: 'interactive', label: 'Interactive' }
-    ];
+    Object.keys(categoryMap).forEach((categoryName) => {
+      const components = categoryMap[categoryName];
+      const categoryId = `category-${categoryName.toLowerCase().replace(/\s+/g, '-')}`;
 
-    categories.forEach(cat => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = '#';
-      a.setAttribute('data-category', cat.id);
-      a.textContent = cat.label;
-      
-      if (cat.id === 'buttons') {
-        a.classList.add('active');
-      }
+      const section = document.createElement('section');
+      section.className = 'component-category';
+      section.setAttribute('data-category', categoryName);
 
-      li.appendChild(a);
-      categoryList.appendChild(li);
+      const header = document.createElement('header');
+      const button = document.createElement('button');
+      button.className = 'category-toggle';
+      button.setAttribute('aria-expanded', 'true');
+      button.setAttribute('aria-controls', categoryId);
+
+      button.innerHTML = `
+        <span class="category-title">${categoryName}</span>
+        <span class="category-count">${components.length} component${components.length !== 1 ? 's' : ''}</span>
+        <span class="category-chevron" aria-hidden="true">▼</span>
+      `;
+
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', !expanded);
+        categoryContent.hidden = expanded;
+      });
+
+      header.appendChild(button);
+      section.appendChild(header);
+
+      const categoryContent = document.createElement('nav');
+      categoryContent.id = categoryId;
+      categoryContent.className = 'category-items';
+      categoryContent.hidden = false;
+
+      components.forEach((comp) => {
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = comp.name;
+        link.setAttribute('aria-label', `${comp.name} - ${comp.description || 'Component'}`);
+        link.setAttribute('data-component', comp.id);
+
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          showComponentPreview(comp);
+        });
+
+        categoryContent.appendChild(link);
+      });
+
+      section.appendChild(categoryContent);
+      nav.appendChild(section);
     });
   };
 
+  const populateSearch = () => {
+    const searchInput = document.getElementById('component-search');
+    const searchResults = document.getElementById('search-results');
+    const categoryToggles = document.querySelectorAll('.category-toggle');
+    const allComponentLinks = document.querySelectorAll('[data-component]');
+
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', function() {
+      const query = this.value.toLowerCase().trim();
+      let visibleCount = 0;
+      const visibleCategories = new Set();
+
+      // Filter component links
+      allComponentLinks.forEach((link) => {
+        const text = link.textContent.toLowerCase();
+        const matches = text.includes(query) || query === '';
+
+        if (matches && query !== '') {
+          link.style.display = '';
+          visibleCount++;
+          const category = link.closest('.component-category');
+          if (category) visibleCategories.add(category);
+        } else if (query === '') {
+          link.style.display = '';
+        } else {
+          link.style.display = 'none';
+        }
+      });
+
+      // Update categories
+      categoryToggles.forEach((toggle) => {
+        const controlsId = toggle.getAttribute('aria-controls');
+        const content = document.getElementById(controlsId);
+        const category = toggle.closest('.component-category');
+
+        if (query === '') {
+          toggle.setAttribute('aria-expanded', 'true');
+          if (content) content.hidden = false;
+        } else if (visibleCategories.has(category)) {
+          toggle.setAttribute('aria-expanded', 'true');
+          if (content) content.hidden = false;
+        } else {
+          toggle.setAttribute('aria-expanded', 'false');
+          if (content) content.hidden = true;
+        }
+      });
+
+      // Update results count
+      if (query) {
+        searchResults.textContent = `Found ${visibleCount} component${visibleCount !== 1 ? 's' : ''}`;
+      } else {
+        searchResults.textContent = '';
+      }
+    });
+  };
+
+  const showComponentPreview = (component) => {
+    // This would be implemented when individual component pages are loaded
+    // For now, just mark that a component was clicked
+    console.log('View component:', component.name);
+  };
+
   return {
     init,
   };
 })();
 
 // ============================================================================
-// BOOK INITIALIZATION
+// BOOK LIBRARY MODULE
 // ============================================================================
 
 const BookLibrary = (() => {
-  let isInitialized = false;
+  let allChapters = [];
+  let currentChapterIndex = 0;
 
   const init = async () => {
-    if (isInitialized) return;
-    isInitialized = true;
-
-    await populateChapters();
-  };
-
-  const populateChapters = async () => {
-    const chaptersList = document.getElementById('chapters-list');
-    if (!chaptersList) return;
-
-    chaptersList.innerHTML = '';
-
     try {
-      const chapters = await ContentLoader.loadChapters();
+      // Load chapters data
+      const response = await fetch('./content/chapters/all-chapters.json');
+      if (!response.ok) throw new Error('Failed to load chapters');
       
-      if (!chapters || chapters.length === 0) {
-        chaptersList.innerHTML = '<li><p>No chapters found.</p></li>';
-        return;
-      }
+      const data = await response.json();
+      allChapters = data.chapters || [];
 
-      chapters.forEach(chapter => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = '#';
-        a.setAttribute('data-chapter', chapter.id);
-        a.textContent = chapter.id === 'intro' ? 'Introduction' : chapter.title;
-        
-        if (chapter.id === 'intro') {
-          a.classList.add('active');
-        }
-
-        li.appendChild(a);
-        chaptersList.appendChild(li);
-      });
+      // Populate UI
+      populateChapters();
+      showChapter(0);
 
     } catch (error) {
-      console.error('Error populating chapters:', error);
+      console.error('Error initializing book library:', error);
+    }
+  };
+
+  const populateChapters = () => {
+    const list = document.getElementById('chapters-list');
+    if (!list) return;
+
+    list.innerHTML = '';
+
+    allChapters.forEach((chapter, index) => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#';
+      a.textContent = chapter.title;
+      a.setAttribute('data-chapter', index);
+
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        showChapter(index);
+      });
+
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+  };
+
+  const showChapter = (index) => {
+    if (index < 0 || index >= allChapters.length) return;
+
+    currentChapterIndex = index;
+    const chapter = allChapters[index];
+    const stage = document.getElementById('book-stage');
+    const metaDesc = document.getElementById('chapter-meta-desc');
+    const prevBtn = document.getElementById('prev-chapter');
+    const nextBtn = document.getElementById('next-chapter');
+
+    if (stage) {
+      stage.innerHTML = `
+        <article>
+          <h2>${chapter.title}</h2>
+          ${chapter.content ? `<p>${chapter.content}</p>` : ''}
+        </article>
+      `;
+    }
+
+    if (metaDesc) {
+      metaDesc.textContent = chapter.title;
+    }
+
+    // Update chapter links
+    document.querySelectorAll('#chapters-list a').forEach((link) => {
+      link.classList.remove('active');
+      if (parseInt(link.getAttribute('data-chapter')) === index) {
+        link.classList.add('active');
+      }
+    });
+
+    // Update prev/next buttons
+    if (prevBtn) {
+      prevBtn.disabled = index === 0;
+      prevBtn.addEventListener('click', () => showChapter(index - 1));
+    }
+
+    if (nextBtn) {
+      nextBtn.disabled = index === allChapters.length - 1;
+      nextBtn.addEventListener('click', () => showChapter(index + 1));
     }
   };
 
@@ -651,21 +375,6 @@ const BookLibrary = (() => {
     init,
   };
 })();
-
-// ============================================================================
-// OVERRIDE NAVIGATION TO TRIGGER LIBRARY INITS
-// ============================================================================
-
-const OriginalNavigate = Navigation.navigate;
-Navigation.navigate = function(viewName) {
-  OriginalNavigate.call(this, viewName);
-  
-  if (viewName === 'docs') {
-    setTimeout(() => ComponentLibrary.init(), 50);
-  } else if (viewName === 'book') {
-    setTimeout(() => BookLibrary.init(), 50);
-  }
-};
 
 // ============================================================================
 // MAIN INITIALIZATION
@@ -675,8 +384,6 @@ document.addEventListener('DOMContentLoaded', () => {
   Navigation.init();
   Config.init();
   MobileMenu.init();
-  HubNav.init();
-  ComponentSearch.init();
 
   console.log('AXIOM01 v3 - The Semantic Rebellion initialized');
 });
