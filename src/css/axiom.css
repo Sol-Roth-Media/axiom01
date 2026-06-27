@@ -662,3 +662,447 @@ li {
   line-height: var(--a-line-height-normal);
 }
 
+
+/* ============================================================================
+   DARK MODE HANDLING
+   ============================================================================ */
+
+/* Explicit dark mode via data-theme="dark" */
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* System preference when no explicit theme set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+  }
+}
+
+/* ============================================================================
+   SPACING VARIANTS
+   ============================================================================ */
+
+/* Compact spacing (data-spacing="compact") */
+[data-spacing="compact"] {
+  --a-space-md: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+  --a-space-lg: clamp(0.75rem, 0.6rem + 0.75vw, 1.125rem);
+  --a-space-xl: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+  --a-space-2xl: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  --a-space-3xl: clamp(2rem, 1.6rem + 2vw, 3rem);
+}
+
+/* ============================================================================
+   MOBILE RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  header nav {
+    gap: var(--a-space-md);
+  }
+
+  header nav ul {
+    gap: var(--a-space-sm);
+  }
+
+  .hero {
+    padding: var(--a-space-2xl) var(--a-space-md);
+  }
+
+  .hero h1 {
+    font-size: var(--a-text-2xl);
+  }
+
+  .hero > div {
+    gap: var(--a-space-sm);
+  }
+
+  .hero button {
+    padding: var(--a-space-sm) var(--a-space-md);
+    font-size: var(--a-text-sm);
+  }
+
+  .grid {
+    gap: var(--a-gap-grid);
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding-left: var(--a-space-sm);
+    padding-right: var(--a-space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: var(--a-space-sm);
+  }
+
+  header nav {
+    gap: var(--a-space-sm);
+    flex-wrap: wrap;
+  }
+
+  header nav a {
+    order: 1;
+    flex-basis: 100%;
+  }
+
+  header nav ul {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  header nav > div {
+    order: 2;
+  }
+
+  h1 { font-size: var(--a-text-2xl); }
+  h2 { font-size: var(--a-text-xl); }
+  h3 { font-size: var(--a-text-lg); }
+
+  .card {
+    padding: var(--a-space-sm);
+  }
+}
+
+/* ============================================================================
+   FOCUS & KEYBOARD NAVIGATION
+   ============================================================================ */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--a-primary);
+  outline-offset: 2px;
+  border-radius: var(--a-radius-sm);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--a-primary);
+  outline-offset: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--a-primary);
+  outline-offset: 2px;
+  border-radius: var(--a-radius-sm);
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+  header, footer, [data-nav] {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .card {
+    page-break-inside: avoid;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+}
+
+/* ============================================================================
+   HIGH CONTRAST MODE
+   ============================================================================ */
+
+@media (prefers-contrast: more) {
+  :root {
+    --a-primary: oklch(50% 0.2 var(--a-hue-primary));
+  }
+
+  button {
+    border-width: 2px;
+  }
+
+  .card {
+    border-width: 2px;
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* ============================================================================
+   FORM COMPONENTS
+   ============================================================================ */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-md);
+}
+
+input,
+textarea,
+select {
+  padding: var(--a-space-sm) var(--a-space-md);
+  background: var(--a-surface-raised);
+  color: var(--a-text-main);
+  border: 1px solid var(--a-border);
+  border-radius: var(--a-radius-md);
+  font-size: var(--a-text-base);
+  font-family: inherit;
+  transition: all var(--a-transition-base) var(--a-easing);
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--a-border-strong);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  border-color: var(--a-primary);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--a-primary) 20%, transparent);
+}
+
+input:invalid:not(:placeholder-shown),
+textarea:invalid:not(:placeholder-shown),
+select:invalid:not(:placeholder-shown) {
+  border-color: oklch(60% 0.15 25);
+}
+
+input:valid:not(:placeholder-shown),
+textarea:valid:not(:placeholder-shown),
+select:valid:not(:placeholder-shown) {
+  border-color: oklch(60% 0.15 140);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-xs);
+  font-weight: var(--a-font-weight-medium);
+}
+
+/* ============================================================================
+   ALERT COMPONENTS
+   ============================================================================ */
+
+.alert {
+  padding: var(--a-space-md);
+  border-radius: var(--a-radius-md);
+  border-left: 4px solid;
+  display: flex;
+  gap: var(--a-space-md);
+}
+
+.alert-info {
+  background: color-mix(in oklch, oklch(60% 0.15 250) 15%, transparent);
+  border-color: oklch(60% 0.15 250);
+  color: var(--a-text-main);
+}
+
+.alert-success {
+  background: color-mix(in oklch, oklch(60% 0.15 140) 15%, transparent);
+  border-color: oklch(60% 0.15 140);
+  color: var(--a-text-main);
+}
+
+.alert-warning {
+  background: color-mix(in oklch, oklch(60% 0.15 45) 15%, transparent);
+  border-color: oklch(60% 0.15 45);
+  color: var(--a-text-main);
+}
+
+.alert-error {
+  background: color-mix(in oklch, oklch(60% 0.15 25) 15%, transparent);
+  border-color: oklch(60% 0.15 25);
+  color: var(--a-text-main);
+}
+
+.alert p {
+  margin: 0;
+}
+
+/* ============================================================================
+   TABLE COMPONENT
+   ============================================================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--a-surface-raised);
+  border: 1px solid var(--a-border);
+  border-radius: var(--a-radius-md);
+  overflow: hidden;
+}
+
+th {
+  background: var(--a-surface-overlay);
+  padding: var(--a-space-md);
+  text-align: left;
+  font-weight: var(--a-font-weight-semibold);
+  border-bottom: 2px solid var(--a-border-strong);
+}
+
+td {
+  padding: var(--a-space-md);
+  border-bottom: 1px solid var(--a-border);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: var(--a-surface-overlay);
+}
+
+/* ============================================================================
+   BADGE COMPONENT
+   ============================================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--a-space-xs) var(--a-space-sm);
+  background: var(--a-surface-overlay);
+  border: 1px solid var(--a-border);
+  border-radius: var(--a-radius-md);
+  font-size: var(--a-text-xs);
+  font-weight: var(--a-font-weight-semibold);
+  white-space: nowrap;
+}
+
+.badge-primary {
+  background: var(--a-primary);
+  color: var(--a-on-primary);
+  border-color: var(--a-primary);
+}
+
+/* ============================================================================
+   CODE & BLOCKQUOTE
+   ============================================================================ */
+
+code {
+  background: var(--a-surface-overlay);
+  color: var(--a-text-main);
+  padding: 0.2em 0.4em;
+  border-radius: var(--a-radius-sm);
+  font-family: var(--a-font-family-mono);
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--a-surface-sunken);
+  color: var(--a-text-main);
+  padding: var(--a-space-md);
+  border-radius: var(--a-radius-md);
+  overflow-x: auto;
+  border: 1px solid var(--a-border);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+blockquote {
+  margin: var(--a-space-md) 0;
+  padding-left: var(--a-space-md);
+  border-left: 4px solid var(--a-primary);
+  color: var(--a-text-secondary);
+  font-style: italic;
+}
+
+/* ============================================================================
+   LINK & TEXT DECORATION
+   ============================================================================ */
+
+a {
+  color: var(--a-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color var(--a-transition-base) var(--a-easing);
+}
+
+a:hover {
+  color: var(--a-primary-hover);
+}
+
+a:visited {
+  color: color-mix(in oklch, var(--a-primary) 70%, gray);
+}
+
+/* ============================================================================
+   SEPARATOR / DIVIDER
+   ============================================================================ */
+
+hr {
+  margin: var(--a-space-lg) 0;
+  border: none;
+  border-top: 1px solid var(--a-border);
+  background: none;
+}
+
+/* ============================================================================
+   UTILITY: TRUNCATE TEXT
+   ============================================================================ */
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ============================================================================
+   SCREEN READER ONLY
+   ============================================================================ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
