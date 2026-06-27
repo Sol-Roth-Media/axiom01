@@ -341,8 +341,7 @@ const BookLibrary = (() => {
     if (stage) {
       stage.innerHTML = `
         <article>
-          <h2>${chapter.title}</h2>
-          ${chapter.content ? `<p>${chapter.content}</p>` : ''}
+          ${chapter.content ? chapter.content : ''}
         </article>
       `;
     }
@@ -359,14 +358,16 @@ const BookLibrary = (() => {
       }
     });
 
-    // Update prev/next buttons
+    // Update prev/next buttons (remove old listeners, add new ones)
     if (prevBtn) {
       prevBtn.disabled = index === 0;
+      prevBtn.onclick = null; // Clear old listener
       prevBtn.addEventListener('click', () => showChapter(index - 1));
     }
 
     if (nextBtn) {
       nextBtn.disabled = index === allChapters.length - 1;
+      nextBtn.onclick = null; // Clear old listener
       nextBtn.addEventListener('click', () => showChapter(index + 1));
     }
   };
