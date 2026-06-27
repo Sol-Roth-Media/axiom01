@@ -1,18 +1,21 @@
+@layer axiom.reset, axiom.tokens, axiom.base, axiom.layout, axiom.components, axiom.utilities;
+
 /* Design Token System - Comprehensive CSS Variables */
-@import url("./_variables.css");
+@import url("./_variables.css") layer(axiom.tokens);
 
 /* Animation System - 20+ keyframes and animation utilities */
-@import url("./_animations.css");
+@import url("./_animations.css") layer(axiom.utilities);
 
 /* Utility Classes - 100+ optional helper classes */
-@import url("./_utilities.css");
+@import url("./_utilities.css") layer(axiom.utilities);
 
 /* Component Variants - Button, Card, Badge, Alert systems */
-@import url("./_component-docs.css");
+@import url("./_component-docs.css") layer(axiom.components);
 
 /* Framework Configuration */
-@import url("axiom_config.css");
+@import url("axiom_config.css") layer(axiom.tokens);
 
+@layer axiom.base {
 /* _reset.css */
 /* Minimal CSS reset */
 
@@ -508,184 +511,6 @@ https://dev.to/ynab/a-semantic-color-system-the-theory-hk7
 }
 /* === Axiom CSS Framework === */
 
-/* --- Core Variables --- */
-:root {
-  /* Colors */
-  --a-color-primary: #007bff;
-  --a-color-on-primary: white;
-  --a-color-on-gradient: var(--a-color-on-primary); /* Changed to use on-primary */
-  --a-color-secondary: #6c757d;
-  --a-color-on-secondary: white;
-  --a-color-tertiary: #20c997; /* Added tertiary color */
-  --a-color-on-tertiary: white; /* Added on tertiary color */
-  --a-color-surface: #ffffff;
-  --a-color-on-surface: #212529;
-  --a-color-surface-variant: #f8f9fa;
-  --a-color-on-surface-variant: #495057;
-  --a-color-outline: #dee2e6;
-
-  /* Semantic Colors */
-  --a-color-success: #28a745;
-  --a-color-on-success: white;
-  --a-color-warning: #ffc107;
-  --a-color-on-warning: #212529;
-  --a-color-error: #dc3545;
-  --a-color-on-error: white;
-  --a-color-info: #17a2b8;
-  --a-color-on-info: white;
-
-  /* Container Colors */
-  --a-color-primary-container: #e0f2ff;
-  --a-color-on-primary-container: #00274d;
-  --a-color-secondary-container: #e2e6ea;
-  --a-color-on-secondary-container: #2c3033;
-  --a-color-tertiary-container: #d1f7ed;
-  --a-color-on-tertiary-container: #004d33;
-  --a-color-success-container: #d4edda;
-  --a-color-on-success-container: #155724;
-  --a-color-warning-container: #fff3cd;
-  --a-color-on-warning-container: #664d03;
-  --a-color-error-container: #721c24;
-  --a-color-on-error-container: #f8d7da;
-  --a-color-info-container: #d1ecf1;
-  --a-color-on-info-container: #0c5460;
-
-  /* Analogous Colors (example, adjust as needed) */
-  --a-color-analogous-1: #00c0ff;
-  --a-color-on-analogous-1: white;
-  --a-color-analogous-2: #004dff;
-  --a-color-on-analogous-2: white;
-  --a-color-analogous-1-container: #e0f7ff;
-  --a-color-on-analogous-1-container: #003c4d;
-  --a-color-analogous-2-container: #e0eaff;
-  --a-color-on-analogous-2-container: #001a4d;
-
-  /* Greyscale Palette */
-  --a-color-gray-1: #f8f9fa;
-  --a-color-gray-5: #e9ecef;
-  --a-color-gray-10: #dee2e6;
-  --a-color-gray-15: #ced4da;
-  --a-color-gray-20: #adb5bd;
-  --a-color-gray-25: #6c757d;
-  --a-color-gray-30: #495057;
-  --a-color-gray-36: #343a40;
-
-
-  --a-gradient-primary: linear-gradient(135deg, #007bff, #0056b3);
-  --a-gradient-sunset: linear-gradient(135deg, #ff7e5f, #feb47b);
-  --a-gradient-ocean: linear-gradient(135deg, #4facfe, #00f2fe);
-  --a-gradient-forest: linear-gradient(135deg, #a8e063, #56ab2f);
-
-  /* Typography */
-  --a-font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --a-font-family-mono: monospace;
-  --a-font-size-base: 1rem;
-  --a-line-height-base: 1.7;
-  --a-font-weight-normal: 400;
-  --a-font-weight-bold: 700;
-  --a-font-weight-black: 900;
-
-  /* Spacing & Sizing (Cascading Model) */
-  --a-space-unit: 0.875rem; /* This reduces the base from 16px to 14px */
-  --a-space-xs:  calc(var(--a-space-unit) * 0.25); /* 4px */
-  --a-space-s:   calc(var(--a-space-unit) * 0.5);  /* 8px */
-  --a-space-m:   calc(var(--a-space-unit) * 1);    /* 14px */
-  --a-space-l:   calc(var(--a-space-unit) * 1.5);  /* 21px */
-  --a-space-xl:  calc(var(--a-space-unit) * 2.5);  /* 35px */
-  --a-space-xxl: calc(var(--a-space-unit) * 4);    /* 56px */
-
-  /* Borders & Shadows */
-  --a-border-radius-medium: 0.3rem;
-  --a-border-radius-large: 0.5rem;
-  --a-shadow-medium: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.07);
-  --a-shadow-large: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
-
-  /* Breakpoints */
-  --a-breakpoint-md: 768px;
-}
-
-/* --- Dark Theme Variables --- */
-[data-theme="dark"] {
-    --a-color-primary: #90caf9; /* Light blue for dark mode primary */
-    --a-color-on-primary: #212121;
-    --a-color-on-gradient: var(--a-color-on-primary); /* Changed to use on-primary */
-    --a-color-secondary: #b0bec5; /* Light grey-blue for dark mode secondary */
-    --a-color-on-secondary: #212121;
-    --a-color-tertiary: #80cbc4; /* Light teal for dark mode tertiary */
-    --a-color-on-tertiary: #212121;
-    --a-color-surface: #212121; /* Dark surface */
-    --a-color-on-surface: #e0e0e0; /* Light text on dark surface */
-    --a-color-surface-variant: #303030; /* Slightly lighter dark surface */
-    --a-color-on-surface-variant: #bdbdbd; /* Slightly darker text on dark surface */
-    --a-color-outline: #424242; /* Darker outline */
-
-    /* Semantic Colors (Dark Mode) */
-    --a-color-success: #a5d6a7;
-    --a-color-on-success: #212121;
-    --a-color-warning: #ffeb3b;
-    --a-color-on-warning: #212121;
-    --a-color-error: #ef9a9a;
-    --a-color-on-error: #212121;
-    --a-color-info: #90caf9;
-    --a-color-on-info: #212121;
-
-    /* Container Colors (Dark Mode) */
-    --a-color-primary-container: #1a2e4a;
-    --a-color-on-primary-container: #e0f2ff;
-    --a-color-secondary-container: #37474f;
-    --a-color-on-secondary-container: #e2e6ea;
-    --a-color-tertiary-container: #004d33;
-    --a-color-on-tertiary-container: #d1f7ed;
-    --a-color-success-container: #1b5e20;
-    --a-color-on-success-container: #d4edda;
-    --a-color-warning-container: #5c4d03;
-    --a-color-on-warning-container: #fff3cd;
-    --a-color-error-container: #721c24;
-    --a-color-on-error-container: #f8d7da;
-    --a-color-info-container: #0c5460;
-    --a-color-on-info-container: #d1ecf1;
-
-    /* Analogous Colors (Dark Mode) */
-    --a-color-analogous-1: #81d4fa;
-    --a-color-on-analogous-1: #212121;
-    --a-color-analogous-2: #64b5f6;
-    --a-color-on-analogous-2: #212121;
-    --a-color-analogous-1-container: #003c4d;
-    --a-color-on-analogous-1-container: #e0f7ff;
-    --a-color-analogous-2-container: #001a4d;
-    --a-color-on-analogous-2-container: #e0eaff;
-
-    /* Greyscale Palette (Dark Mode) */
-    --a-color-gray-1: #343a40;
-    --a-color-gray-5: #495057;
-    --a-color-gray-10: #6c757d;
-    --a-color-gray-15: #adb5bd;
-    --a-color-gray-20: #ced4da;
-    --a-color-gray-25: #dee2e6;
-    --a-color-gray-30: #e9ecef;
-    --a-color-gray-36: #f8f9fa;
-
-    --a-gradient-primary: linear-gradient(135deg, #64b5f6, #42a5f5);
-    --a-gradient-sunset: linear-gradient(135deg, #ffab91, #ffcc80);
-    --a-gradient-ocean: linear-gradient(135deg, #81d4fa, #4fc3f7);
-    --a-gradient-forest: linear-gradient(135deg, #c5e1a5, #aed581);
-
-    --a-shadow-medium: 0 0.25rem 0.75rem rgba(255, 255, 255, 0.07);
-    --a-shadow-large: 0 0.5rem 1.5rem rgba(255, 255, 255, 0.1);
-
-[data-theme="dark"] a {
-  color: #e3f2fd;
-}
-
-[data-theme="dark"] a:visited {
-  color: #c5cae9;
-}
-
-[data-theme="dark"] a:hover {
-  color: #ffffff;
-}
-}
-
 /* --- Base & Reset --- */
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; font-family: var(--a-font-family-sans); font-size: var(--a-font-size-base); line-height: var(--a-line-height-base); color: var(--a-color-on-surface); background-color: var(--a-color-surface); overflow-x: hidden; }
@@ -734,44 +559,31 @@ header.main .jump-menu ul { position: absolute; top: 100%; right: 0; background:
 header.main .jump-menu ul.is-open { display: block; }
 header.main .jump-menu ul li a { display: block; padding: var(--a-space-s) var(--a-space-m); text-decoration: none; color: var(--a-color-on-surface); }
 header.main .jump-menu ul li a:hover { background: var(--a-color-surface-variant); }
-header.main .actions .github { color: var(--a-color-on-surface-variant); text-decoration: none; display: flex; align-items: center; gap: var(--a-space-s); }
-header.main .actions .github:hover { color: var(--a-color-primary); }
-header.main .theme.toggle {
-    background: none;
-    border: 1px solid var(--a-color-outline);
-    color: var(--a-color-on-surface-variant);
-    font-size: 1rem;
-    cursor: pointer;
-    padding: var(--a-space-s);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+header.main .actions > * {
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    color: var(--a-color-on-surface-variant) !important;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: var(--a-space-xs);
+    padding: var(--a-space-xs) var(--a-space-s);
+    border-radius: var(--a-border-radius-base);
     transition: all 0.2s ease;
-}
-header.main .theme.toggle:hover {
-    color: var(--a-color-primary);
-    background-color: var(--a-color-surface-variant);
-}
-header.main .menu.toggle { display: none; background: none; border: none; color: var(--a-color-on-surface); font-size: 1.5rem; cursor: pointer; }
-
-
-/* --- Search --- */
-.search.toggle {
-    background: none;
-    border: none;
-    color: var(--a-color-on-surface-variant);
-    font-size: 1.2rem;
     cursor: pointer;
-    padding: var(--a-space-s);
-    border-radius: 50%;
-    transition: all 0.2s ease;
+    font-size: 1rem;
+    height: 40px;
+    text-decoration: none;
 }
-.search.toggle:hover {
-    color: var(--a-color-primary);
-    background-color: var(--a-color-surface-variant);
+header.main .actions > *:hover {
+    color: var(--a-color-on-surface) !important;
+    border-color: var(--a-color-outline) !important;
+    background-color: var(--a-color-surface-variant) !important;
+}
+header.main .menu.toggle { 
+    display: none; 
+    border: none; 
+    background-color: transparent; 
 }
 
 #search-modal { /* Corrected from .search.modal */
@@ -2394,7 +2206,7 @@ button.card:hover {
 }
 
 /* --- Mobile Navigation --- */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     header.main ul.links { display: none; }
     header.main .menu.toggle { display: block; } /* Make menu toggle visible on small screens */
     header.main.menu-open ul.links { /* Changed from .is-open to .menu-open */
@@ -3267,9 +3079,6 @@ form > div input { /* Target inputs within the div */
 }
 
 /* Make section headers pop more in dark mode */
-[data-theme="dark"] section header h2 {
-    color: var(--a-color-primary);
-}
 
 /* Improve link hover state in dark mode */
 [data-theme="dark"] a:hover {
@@ -4557,30 +4366,35 @@ input[type='file'],
 }
 
 
-/* Hero section stat cards - semi-transparent dark overlay on gradient backgrounds */
+/* Hero section stat cards - use surface tokens for automatic light/dark mode */
 section.hero .stat {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
+    background: var(--a-color-surface-variant);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-large);
+    color: var(--a-color-on-surface);
+    padding: var(--a-space-l);
     transition: all 200ms ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 section.hero .stat:hover {
-    background: rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
+    background: var(--a-color-surface);
+    transform: translateY(-4px);
+    box-shadow: var(--a-shadow-large);
 }
 
 section.hero .stat .value {
-    color: #ffffff;
-    font-size: 2rem;
+    color: var(--a-color-primary);
+    font-size: 2.5rem;
     font-weight: var(--a-font-weight-bold);
     margin-bottom: var(--a-space-xs);
 }
 
 section.hero .stat .label {
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--a-color-on-surface);
     font-size: var(--a-font-size-base);
     font-weight: var(--a-font-weight-bold);
     margin: 0 0 var(--a-space-s);
@@ -4589,14 +4403,21 @@ section.hero .stat .label {
 }
 
 section.hero .stat-meta {
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--a-color-on-surface-variant);
     font-size: 0.7rem;
     margin: var(--a-space-xs) 0 0 0;
 }
 
 section.hero .stat p {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--a-color-on-surface-variant);
     margin: var(--a-space-xs) 0 0 0;
+    font-size: 0.9rem;
+}
+
+section.hero .stat .axicon {
+    font-size: 2.5rem; /* Larger icon size */
+    margin-bottom: var(--a-space-s);
+    color: var(--a-color-secondary);
 }
 /* Call-to-Action Component */
 .cta {
@@ -7121,11 +6942,7 @@ tbody.animate {
 
 /* ── Navigation & Datepicker Spacing Fixes ─────────────────────────────────── */
 
-/* Dark mode hero styling */
-[data-theme="dark"] section.hero {
-    background: linear-gradient(135deg, var(--a-color-primary-dark, #0d47a1) 0%, var(--a-color-primary-darker, #0a3a7a) 100%);
-    color: var(--a-color-on-primary);
-}
+
 
 /* Hero top margin for spacing from menu */
 section.hero {
@@ -8227,14 +8044,14 @@ stat span {
    Minimal styling for documentation demos
    ======================================== */
 
-/* Tabs Demo */
-.tabs {
+/* Tabs Demo (Material Style) */
+.tabs-material {
 	display: flex;
 	border-bottom: 1px solid var(--a-color-outline);
 	margin-bottom: var(--a-space-m);
 }
 
-.tabs button {
+.tabs-material button {
 	padding: var(--a-space-m);
 	background: transparent;
 	border: none;
@@ -8245,17 +8062,17 @@ stat span {
 	transition: all var(--a-transition-base);
 }
 
-.tabs button:hover {
+.tabs-material button:hover {
 	color: var(--a-color-on-surface);
 	background: var(--a-color-surface-variant);
 }
 
-.tabs button[aria-selected="true"] {
+.tabs-material button[aria-selected="true"] {
 	color: var(--a-color-primary);
 	border-bottom-color: var(--a-color-primary);
 }
 
-.tabs button:focus-visible {
+.tabs-material button:focus-visible {
 	outline: 2px solid var(--a-color-primary);
 	outline-offset: -2px;
 }
@@ -9263,6 +9080,7 @@ dialog.drawer main {
 }
 
 
+@layer axiom.components {
 /* === COMPONENT STYLES FROM _components.css === */
 /* css/_components.css */
 
@@ -9523,10 +9341,11 @@ dialog.drawer main {
   max-width: var(--ax-max-width, 1200px);
   margin: 0 auto;
   padding: 0 var(--a-space-l);
+  text-align: center;
 }
 
 .hero h1 {
-  color: white;
+  color: var(--a-color-text-primary);
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: var(--a-font-weight-bold);
   margin-bottom: var(--a-space-m);
@@ -9534,21 +9353,21 @@ dialog.drawer main {
 }
 
 .hero p {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--a-color-text-muted);
   max-width: var(--ax-reading-width, 65ch);
   margin: 0 auto var(--a-space-l);
 }
 
-.hero .actions {
+section.hero .actions {
   display: flex;
   gap: var(--a-space-m);
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: var(--a-space-xl);
+  margin-top: var(--a-space-xl) !important;
+  margin-bottom: var(--a-space-xl) !important;
 }
 
-.hero .actions button,
-.hero .actions a[role="button"] {
+section.hero .actions .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -9563,47 +9382,48 @@ dialog.drawer main {
   text-decoration: none;
 }
 
-.hero .actions button.primary,
-.hero .actions a[role="button"].primary {
+section.hero .actions .button.primary {
   background: white;
   color: var(--a-color-primary, #2563eb);
   border-color: white;
 }
 
-.hero .actions button.primary:hover,
-.hero .actions a[role="button"].primary:hover {
+section.hero .actions .button.primary:hover {
   background: rgba(255, 255, 255, 0.9);
   color: var(--a-color-primary, #2563eb);
 }
 
-.hero .actions button.outline,
-.hero .actions a[role="button"].outline {
+section.hero .actions .button.outline {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.6);
   color: white;
   transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
 }
 
-.hero .actions button.outline:hover,
-.hero .actions a[role="button"].outline:hover {
+section.hero .actions .button.outline:hover {
   background: rgba(255, 255, 255, 0.2);
   border-color: white;
 }
 
-.hero .actions button:not(.primary):not(.outline),
-.hero .actions a[role="button"]:not(.primary):not(.outline) {
-  background: white;
-  color: var(--a-color-primary, #2563eb);
+section.hero .actions .button.secondary {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: white;
+  transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
+}
+
+section.hero .actions .button.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
   border-color: white;
 }
 
-.hero .actions + p {
+section.hero .actions + p {
   margin-top: var(--a-space-xl);
   margin-bottom: var(--a-space-2xl);
 }
 
 .hero .grid {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
 
 /* ========================================
@@ -10227,31 +10047,6 @@ DOCS: COLOR PALETTE
   margin: var(--a-space-m) 0 0 0;
   line-height: 1.5;
 }
-/* ========================================
-   FOOTER COMPONENT
-   Semantic, responsive footer with:
-   - Cascading design tokens for spacing, typography, colors
-   - Dark/light mode support with CSS variables
-   - Mobile-first responsive grid
-   - Flexible sections for various use cases
-   - Accessibility built-in
-   ======================================== */
-footer.footer {
-  background-color: var(--ax-surface);
-  color: var(--a-color-on-surface);
-  border-top: 1px solid var(--ax-border);
-  padding: var(--a-space-3xl) var(--a-space-l);
-  margin-top: var(--a-space-4xl);
-  transition: background-color var(--a-transition-base),
-              border-color var(--a-transition-base),
-              color var(--a-transition-base);
-}
-
-footer.footer .container {
-  max-width: var(--ax-max-width);
-  margin: 0 auto;
-}
-
 /* ========================================
    FOOTER CONTENT - Main Grid Layout
    Auto-fits columns based on content width
@@ -13388,4 +13183,175 @@ td code {
   .grid:has(> .card pre) {
     grid-template-columns: 1fr;
   }
+}
+
+
+/* ========================================
+   FOOTER COMPONENT
+   ======================================== */
+footer {
+  background: var(--ax-surface);
+  color: var(--ax-text);
+  border-top: 2px solid var(--ax-border);
+  padding: var(--a-space-3xl) var(--a-space-l);
+  margin-top: var(--a-space-4xl);
+  transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
+}
+
+footer > .container {
+  max-width: var(--ax-max-width);
+  margin: 0 auto;
+}
+
+footer section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--a-space-2xl);
+  margin-bottom: var(--a-space-2xl);
+  padding-bottom: var(--a-space-2xl);
+  border-bottom: 1px solid var(--ax-border);
+  transition: gap var(--a-transition-base);
+}
+
+footer .brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-m);
+}
+
+footer .brand > a {
+  font-family: var(--a-font-family-mono);
+  font-size: var(--a-font-size-l);
+  font-weight: var(--a-font-weight-bold);
+  color: var(--a-color-on-surface);
+  text-decoration: none;
+  transition: all var(--a-transition-base);
+  display: inline-block;
+  max-width: fit-content;
+  position: relative;
+}
+
+footer .brand > a::before {
+  content: '';
+  position: absolute;
+  inset: -4px -8px;
+  background: var(--a-color-primary);
+  border-radius: var(--a-border-radius-sm);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--a-transition-base);
+}
+
+footer .brand > a:hover {
+  color: var(--a-color-primary);
+}
+
+footer .brand > a:hover::before {
+  opacity: 0.1;
+}
+
+footer .brand > a .primary {
+  color: var(--a-color-primary);
+}
+
+footer .brand > p {
+  font-size: var(--a-font-size-s);
+  color: var(--a-color-text-muted);
+  margin: 0;
+  line-height: var(--a-line-height-base);
+}
+
+footer nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-m);
+}
+
+footer nav h4 {
+  font-size: var(--a-font-size-s);
+  font-weight: var(--a-font-weight-bold);
+  color: var(--a-color-on-surface);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+footer nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-s);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer nav a {
+  color: var(--a-color-text-secondary);
+  text-decoration: none;
+  font-size: var(--a-font-size-base);
+  transition: color var(--a-transition-base);
+}
+
+footer nav a:hover {
+  color: var(--a-color-primary);
+}
+
+footer > .container > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-m);
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  footer > .container > div:last-child {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+footer p.copyright {
+  font-size: var(--a-font-size-s);
+  color: var(--a-color-text-muted);
+  margin: 0;
+}
+
+footer ul.legal {
+  display: flex;
+  gap: var(--a-space-m);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer ul.legal a {
+  color: var(--a-color-text-muted);
+  text-decoration: none;
+  font-size: var(--a-font-size-s);
+  transition: color var(--a-transition-base);
+}
+
+footer ul.legal a:hover {
+  color: var(--a-color-on-surface);
+}
+
+footer .scroll-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--a-space-xl);
+  height: var(--a-space-xl);
+  border-radius: var(--a-border-radius-full);
+  background: var(--a-color-surface-variant);
+  color: var(--a-color-on-surface);
+  border: none;
+  cursor: pointer;
+  transition: all var(--a-transition-base);
+}
+
+footer .scroll-top:hover {
+  background: var(--a-color-primary);
+  color: var(--a-color-on-primary);
 }

@@ -17,7 +17,6 @@ def minify_css(css_content: str) -> str:
     css_content = re.sub(r'\s*;\s*', ';', css_content)
     css_content = re.sub(r'\s*,\s*', ',', css_content)
     css_content = re.sub(r'\s*>\s*', '>', css_content)
-    css_content = re.sub(r'\s*\+\s*', '+', css_content)
     css_content = re.sub(r'\s*~\s*', '~', css_content)
     
     # Remove multiple spaces between selectors/properties
@@ -51,8 +50,8 @@ def build_unified_css():
     print(f"Reading source CSS from: {source_file}")
     source_content = source_file.read_text(encoding='utf-8')
     
-    # Remove all @import statements from source
-    unified_css = re.sub(r'@import\s+url\([^)]+\);?\s*', '', source_content)
+    # Remove all @import statements from source, including those with layer()
+    unified_css = re.sub(r'@import\s+url\([^)]+\)(?:\s+layer\([^)]+\))?;?\s*', '', source_content)
     
     # Read and append all partial files
     for partial_file in files_to_inline:
@@ -62,7 +61,15 @@ def build_unified_css():
             partial_content = partial_path.read_text(encoding='utf-8')
             # Remove comments from partial
             partial_content = re.sub(r'/\*.*?\*/', '', partial_content, flags=re.DOTALL)
-            unified_css += "\n" + partial_content
+            
+            if partial_file in ['_variables.css', 'axiom_config.css']:
+                layer = 'axiom.tokens'
+            elif partial_file in ['_animations.css', '_utilities.css']:
+                layer = 'axiom.utilities'
+            else:
+                layer = 'axiom.components'
+                
+            unified_css += f"\n@layer {layer} {{\n{partial_content}\n}}\n"
         else:
             print(f"  Warning: Partial file not found: {partial_file}")
     
