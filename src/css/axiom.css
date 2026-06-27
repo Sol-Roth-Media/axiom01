@@ -1,28 +1,23 @@
 @charset "UTF-8";
 
 /* =============================================================================
-   AXIOM01 v3 - THE SEMANTIC REBELLION: The Mathematics of Design
+   AXIOM01 v3 - The Semantic Rebellion: The Mathematics of Design
+   
+   CORE PRINCIPLE: One semantic class per COMPONENT. Framework styles 
+   semantic HTML elements. Developer writes semantic structure.
+   
    =============================================================================
    
-   Philosophy:
-   - Write meaningful HTML where class names describe WHAT elements ARE
-   - Not what they LOOK LIKE
-   - One semantic class provides display, spacing, interactions, and state
-   - All styling flows from design tokens
-   - Framework handles CSS; developer handles HTML structure
-   
-   Architecture:
-   - @layer cascade ensures framework styles are ordered, user overrides always win
-   - OKLCH color space provides perceptually uniform colors, automatic dark mode
-   - Container queries replace viewport media queries for component-aware layout
-   - :has() selector eliminates need for JS state management in forms
-   - Fluid typography/spacing uses clamp() for mobile-first scaling
+   LAYERS:
+   @layer axiom.reset      - Browser normalization
+   @layer axiom.tokens     - Design tokens (OKLCH, spacing, typography)
+   @layer axiom.base       - HTML element defaults
+   @layer axiom.layout     - Layout patterns (grid, flex, container)
+   @layer axiom.components - Semantic components (.hero, .card, .grid, etc)
+   @layer axiom.utilities  - Responsive, dark mode, accessibility
    
    ============================================================================= */
 
-/* --- CASCADE LAYERS ---
-   Framework styles are strictly ordered. User CSS (outside @layer) always wins.
-   No !important needed. The platform handles it. */
 @layer axiom.reset, axiom.tokens, axiom.base, axiom.layout, axiom.components, axiom.utilities;
 
 /* ============================================================================
@@ -30,61 +25,36 @@
    ============================================================================ */
 @layer axiom.tokens {
   :root {
-    /* --- COLOR SYSTEM (OKLCH) ---
-       OKLCH = Perceptually uniform color space
-       - O = Oklab (perceptual lightness)
-       - K = Chroma (color intensity)
-       - L = Hue (0-360 degrees)
-       
-       Benefits:
-       - Same lightness value = same visual brightness across all hues
-       - Automatic WCAG AAA contrast (7:1+) with proper lightness ratios
-       - Perfect dark mode: just swap lightness values
-       - color-mix() generates states mathematically */
+    /* Hue anchors */
+    --a-hue-primary: 250;
+    --a-hue-accent: calc(var(--a-hue-primary) + 180);
+    --a-hue-success: 140;
+    --a-hue-warning: 45;
+    --a-hue-error: 25;
+    --a-hue-surface: 220;
     
-    /* Primary hues - only developer-configurable values */
-    --a-hue-primary: 250;    /* Indigo - can be adjusted per brand */
-    --a-hue-accent: calc(var(--a-hue-primary) + 180); /* Complementary */
-    --a-hue-success: 140;    /* Green */
-    --a-hue-warning: 45;     /* Amber */
-    --a-hue-error: 25;       /* Red */
-    --a-hue-surface: 220;    /* Cool slate base */
-    
-    /* Primary color with derived states */
+    /* Primary color */
     --a-primary: oklch(60% 0.15 var(--a-hue-primary));
     --a-primary-hover: color-mix(in oklch, var(--a-primary) 85%, black);
-    --a-primary-active: color-mix(in oklch, var(--a-primary) 70%, black);
-    --a-primary-subtle: color-mix(in oklch, var(--a-primary) 15%, transparent);
-    --a-on-primary: oklch(100% 0 0); /* Pure white on dark primary */
+    --a-on-primary: oklch(100% 0 0);
     
-    /* Accent colors (semantic) */
-    --a-success: oklch(65% 0.15 var(--a-hue-success));
-    --a-warning: oklch(70% 0.15 var(--a-hue-warning));
-    --a-error: oklch(60% 0.18 var(--a-hue-error));
-    
-    /* Surface hierarchy */
+    /* Surfaces */
     --a-surface-base: oklch(99% 0.01 var(--a-hue-surface));
     --a-surface-raised: oklch(100% 0 var(--a-hue-surface));
     --a-surface-overlay: oklch(98% 0.01 var(--a-hue-surface));
     --a-surface-sunken: oklch(96% 0.01 var(--a-hue-surface));
     
-    /* Text hierarchy */
+    /* Text */
     --a-text-main: oklch(25% 0.02 var(--a-hue-surface));
     --a-text-secondary: oklch(40% 0.01 var(--a-hue-surface));
     --a-text-muted: oklch(55% 0.01 var(--a-hue-surface));
     --a-text-inverted: oklch(95% 0.01 var(--a-hue-surface));
     
-    /* Borders and dividers */
+    /* Borders */
     --a-border: oklch(90% 0.02 var(--a-hue-surface));
     --a-border-strong: oklch(85% 0.03 var(--a-hue-surface));
     
-    /* --- TYPOGRAPHY SCALE ---
-       Uses modular scale (augmented fourth: 1.414)
-       clamp() provides fluid scaling without media queries
-       Readable on 320px phone to 1920px desktop */
-    
-    --a-ratio: 1.414; /* Augmented Fourth musical interval */
-    
+    /* Typography */
     --a-text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
     --a-text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
     --a-text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
@@ -93,7 +63,6 @@
     --a-text-2xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.66rem);
     --a-text-3xl: clamp(2.5rem, 2rem + 2.5vw, 3.76rem);
     
-    --a-font-weight-light: 300;
     --a-font-weight-regular: 400;
     --a-font-weight-medium: 500;
     --a-font-weight-semibold: 600;
@@ -105,10 +74,7 @@
     --a-line-height-normal: 1.6;
     --a-line-height-relaxed: 1.875;
     
-    /* --- SPACING SCALE ---
-       Fluid scaling for responsive padding/margin
-       clamp(mobile, calculated, desktop) */
-    
+    /* Spacing */
     --a-space-unit: 1rem;
     --a-space-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
     --a-space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
@@ -118,38 +84,29 @@
     --a-space-2xl: clamp(3rem, 2.4rem + 3vw, 4.5rem);
     --a-space-3xl: clamp(4rem, 3.2rem + 4vw, 6rem);
     
-    /* --- LAYOUT ---
-       Container widths, grid gaps, etc. */
+    /* Layout */
+    --a-width-prose: 65ch;
+    --a-width-max: 1440px;
+    --a-gap-grid: var(--a-space-md);
     
-    --a-width-prose: 65ch; /* Optimal reading line length */
-    --a-width-max: 1440px; /* Max content width */
-    --a-gap-grid: var(--a-space-md); /* Grid/flex gaps */
-    
-    /* --- INTERACTIONS ---
-       Border radius, transitions, shadows, etc. */
-    
+    /* Radius */
     --a-radius-sm: 0.25rem;
     --a-radius-md: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
     --a-radius-lg: clamp(0.75rem, 0.6rem + 0.75vw, 1.125rem);
     
+    /* Transitions */
     --a-transition-fast: 0.1s;
     --a-transition-base: 0.2s;
     --a-transition-slow: 0.3s;
-    --a-easing: cubic-bezier(0.4, 0, 0.2, 1); /* Material motion easing */
+    --a-easing: cubic-bezier(0.4, 0, 0.2, 1);
     
+    /* Shadows */
     --a-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     --a-shadow-md: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
     --a-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
-    
-    /* --- BREAKPOINTS (for reference) ---
-       Mobile-first approach: styles default to mobile, then enhanced for larger */
-    --a-bp-tablet: 768px;
-    --a-bp-desktop: 1024px;
-    --a-bp-wide: 1440px;
   }
   
-  /* --- DARK MODE ---
-     Automatic via prefers-color-scheme OR via [data-theme="dark"] attribute */
+  /* Dark mode */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --a-surface-base: oklch(15% 0.01 var(--a-hue-surface));
@@ -165,14 +122,11 @@
       --a-border: oklch(30% 0.02 var(--a-hue-surface));
       --a-border-strong: oklch(40% 0.03 var(--a-hue-surface));
       
-      /* Primary colors adjusted for dark mode contrast */
       --a-primary: oklch(65% 0.15 var(--a-hue-primary));
       --a-primary-hover: color-mix(in oklch, var(--a-primary) 85%, white);
-      --a-on-primary: oklch(20% 0.01 var(--a-hue-primary)); /* Dark text on light primary */
     }
   }
   
-  /* Force dark mode when data-theme="dark" */
   :root[data-theme="dark"] {
     --a-surface-base: oklch(15% 0.01 var(--a-hue-surface));
     --a-surface-raised: oklch(20% 0.01 var(--a-hue-surface));
@@ -189,39 +143,24 @@
     
     --a-primary: oklch(65% 0.15 var(--a-hue-primary));
     --a-primary-hover: color-mix(in oklch, var(--a-primary) 85%, white);
-    --a-on-primary: oklch(20% 0.01 var(--a-hue-primary));
-  }
-  
-  /* Compact spacing mode (optional) */
-  :root[data-spacing="compact"] {
-    --a-space-xs: calc(var(--a-space-xs) * 0.75);
-    --a-space-sm: calc(var(--a-space-sm) * 0.75);
-    --a-space-md: calc(var(--a-space-md) * 0.75);
-    --a-space-lg: calc(var(--a-space-lg) * 0.75);
-    --a-space-xl: calc(var(--a-space-xl) * 0.75);
-    --a-space-2xl: calc(var(--a-space-2xl) * 0.75);
-    --a-space-3xl: calc(var(--a-space-3xl) * 0.75);
   }
 }
 
 /* ============================================================================
-   @LAYER AXIOM.RESET - Normalize and Reset
+   @LAYER AXIOM.RESET - Browser Normalization
    ============================================================================ */
 @layer axiom.reset {
-  /* Box model reset */
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
   
-  /* HTML defaults */
   html {
     height: 100%;
     scroll-behavior: smooth;
   }
   
-  /* Body defaults */
   body {
     height: 100%;
     background: var(--a-surface-base);
@@ -232,23 +171,23 @@
     line-height: var(--a-line-height-normal);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
   }
   
-  /* Root container */
   #root {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
   }
   
-  /* Focus states - always visible */
+  main {
+    flex: 1;
+  }
+  
   :focus-visible {
     outline: 2px solid var(--a-primary);
     outline-offset: 2px;
   }
   
-  /* Headings */
   h1, h2, h3, h4, h5, h6 {
     margin-block-end: var(--a-space-md);
     font-weight: var(--a-font-weight-semibold);
@@ -261,28 +200,40 @@
   h4 { font-size: var(--a-text-lg); }
   h5, h6 { font-size: var(--a-text-base); }
   
-  /* Paragraphs and text */
   p {
     max-width: var(--a-width-prose);
     margin-block-end: var(--a-space-md);
   }
-  
-  small { font-size: var(--a-text-xs); }
-  strong { font-weight: var(--a-font-weight-bold); }
-  em { font-style: italic; }
-  
-  /* Lists */
-  ul, ol {
-    margin-block-end: var(--a-space-md);
-    margin-left: var(--a-space-lg);
+}
+
+/* ============================================================================
+   @LAYER AXIOM.BASE - HTML Element Defaults
+   ============================================================================ */
+@layer axiom.base {
+  button {
+    padding: var(--a-space-sm) var(--a-space-md);
+    background: var(--a-surface-raised);
+    color: var(--a-text-main);
+    border: 1px solid var(--a-border);
+    border-radius: var(--a-radius-md);
+    font-size: var(--a-text-sm);
+    font-weight: var(--a-font-weight-medium);
+    cursor: pointer;
+    transition: all var(--a-transition-base) var(--a-easing);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   
-  li {
-    margin-block-end: var(--a-space-sm);
-    line-height: var(--a-line-height-normal);
+  button:hover {
+    background: var(--a-surface-overlay);
+    border-color: var(--a-border-strong);
   }
   
-  /* Links */
+  button:active {
+    transform: scale(0.98);
+  }
+  
   a {
     color: var(--a-primary);
     text-decoration: underline;
@@ -293,181 +244,12 @@
   a:hover {
     color: var(--a-primary-hover);
   }
-  
-  a:active {
-    color: var(--a-primary-active);
-  }
-  
-  /* Code blocks */
-  pre {
-    background: var(--a-surface-overlay);
-    border: 1px solid var(--a-border);
-    border-radius: var(--a-radius-md);
-    padding: var(--a-space-md);
-    overflow-x: auto;
-    font-family: var(--a-font-family-mono);
-    font-size: var(--a-text-sm);
-    line-height: var(--a-line-height-normal);
-    margin-block-end: var(--a-space-md);
-  }
-  
-  code {
-    font-family: var(--a-font-family-mono);
-    font-size: var(--a-text-sm);
-  }
-  
-  /* Inline code */
-  p code, li code, span code {
-    background: var(--a-surface-sunken);
-    color: var(--a-text-main);
-    padding: 2px 6px;
-    border-radius: var(--a-radius-sm);
-    display: inline;
-  }
-  
-  pre code {
-    background: transparent;
-    color: inherit;
-    padding: 0;
-    border: none;
-  }
-  
-  /* Horizontal rule */
-  hr {
-    border: none;
-    border-top: 1px solid var(--a-border);
-    margin: var(--a-space-lg) 0;
-  }
-  
-  /* Images */
-  img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--a-radius-md);
-  }
-  
-  /* Tables */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin-block-end: var(--a-space-md);
-  }
-  
-  th, td {
-    padding: var(--a-space-sm) var(--a-space-md);
-    text-align: left;
-    border-bottom: 1px solid var(--a-border);
-  }
-  
-  th {
-    background: var(--a-surface-overlay);
-    font-weight: var(--a-font-weight-semibold);
-  }
-  
-  tr:hover {
-    background: var(--a-surface-sunken);
-  }
-  
-  /* Blockquotes */
-  blockquote {
-    border-left: 4px solid var(--a-primary);
-    padding-left: var(--a-space-md);
-    margin-block-end: var(--a-space-md);
-    font-style: italic;
-    color: var(--a-text-secondary);
-  }
-}
-
-/* ============================================================================
-   @LAYER AXIOM.BASE - HTML Element Styling
-   ============================================================================ */
-@layer axiom.base {
-  /* Buttons and interactive elements */
-  button, [role="button"] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--a-space-sm);
-    padding: var(--a-space-sm) var(--a-space-md);
-    font-size: var(--a-text-sm);
-    font-weight: var(--a-font-weight-medium);
-    border-radius: var(--a-radius-md);
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: all var(--a-transition-base) var(--a-easing);
-    white-space: nowrap;
-    user-select: none;
-    
-    /* Button default styling */
-    background: var(--a-surface-raised);
-    color: var(--a-text-main);
-    border-color: var(--a-border);
-  }
-  
-  button:hover, [role="button"]:hover {
-    background: var(--a-surface-overlay);
-    border-color: var(--a-border-strong);
-  }
-  
-  button:active, [role="button"]:active {
-    transform: scale(0.98);
-  }
-  
-  button:disabled, [role="button"][aria-disabled="true"] {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-  
-  /* Form elements */
-  input, textarea, select {
-    padding: var(--a-space-sm) var(--a-space-md);
-    background: var(--a-surface-raised);
-    color: var(--a-text-main);
-    border: 1px solid var(--a-border);
-    border-radius: var(--a-radius-md);
-    font-family: inherit;
-    font-size: var(--a-text-base);
-    line-height: var(--a-line-height-normal);
-    transition: border-color var(--a-transition-base) var(--a-easing);
-  }
-  
-  input:focus, textarea:focus, select:focus {
-    border-color: var(--a-primary);
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--a-primary) 20%, transparent);
-  }
-  
-  input::placeholder, textarea::placeholder {
-    color: var(--a-text-muted);
-  }
-  
-  /* Validation states */
-  input:invalid:not(:placeholder-shown),
-  textarea:invalid:not(:placeholder-shown) {
-    border-color: var(--a-error);
-  }
-  
-  input:valid:not(:placeholder-shown),
-  textarea:valid:not(:placeholder-shown) {
-    border-color: var(--a-success);
-  }
-  
-  /* Labels */
-  label {
-    display: block;
-    margin-block-end: var(--a-space-xs);
-    font-size: var(--a-text-sm);
-    font-weight: var(--a-font-weight-medium);
-  }
 }
 
 /* ============================================================================
    @LAYER AXIOM.LAYOUT - Layout Patterns
    ============================================================================ */
 @layer axiom.layout {
-  /* Container */
   .container {
     max-width: var(--a-width-max);
     margin-left: auto;
@@ -476,142 +258,44 @@
     padding-right: var(--a-space-md);
   }
   
-  /* Grid */
   .grid {
     display: grid;
     gap: var(--a-gap-grid);
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
-  
-  .grid.tight {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  }
-  
-  .grid.columns-2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .grid.columns-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .grid.columns-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  
-  /* Flex */
-  .flex {
-    display: flex;
-  }
-  
-  .flex-col {
-    flex-direction: column;
-  }
-  
-  .flex-wrap {
-    flex-wrap: wrap;
-  }
-  
-  .gap-xs { gap: var(--a-space-xs); }
-  .gap-sm { gap: var(--a-space-sm); }
-  .gap-md { gap: var(--a-space-md); }
-  .gap-lg { gap: var(--a-space-lg); }
-  
-  /* Stack - vertical flex with consistent gap */
-  .stack {
-    display: flex;
-    flex-direction: column;
-    gap: var(--a-space-md);
-  }
-  
-  .stack.tight { gap: var(--a-space-sm); }
-  .stack.loose { gap: var(--a-space-lg); }
-  
-  /* Hero section */
+}
+
+/* ============================================================================
+   @LAYER AXIOM.COMPONENTS - Semantic Components (One class per component)
+   ============================================================================ */
+@layer axiom.components {
+  /* HERO COMPONENT */
   .hero {
-    background: linear-gradient(135deg, var(--a-primary) 0%, var(--a-primary-active) 100%);
+    background: linear-gradient(135deg, var(--a-primary) 0%, color-mix(in oklch, var(--a-primary) 80%, black) 100%);
     color: var(--a-on-primary);
     padding: var(--a-space-3xl) var(--a-space-md);
     text-align: center;
-    border-radius: var(--a-radius-lg);
   }
   
   .hero h1 {
     color: inherit;
-    margin-block-end: var(--a-space-md);
+    margin-bottom: var(--a-space-xs);
   }
   
   .hero p {
+    color: inherit;
     max-width: var(--a-width-prose);
     margin-left: auto;
     margin-right: auto;
-    margin-block-end: var(--a-space-lg);
-    color: inherit;
-  }
-}
-
-/* ============================================================================
-   @LAYER AXIOM.COMPONENTS - Semantic Components (Batch A)
-   ============================================================================ */
-@layer axiom.components {
-  /* --- BUTTONS (BATCH A) --- */
-  .primary {
-    background: var(--a-primary);
-    color: var(--a-on-primary);
-    border-color: var(--a-primary);
   }
   
-  .primary:hover {
-    background: var(--a-primary-hover);
-    border-color: var(--a-primary-hover);
+  .hero p:last-of-type {
+    opacity: 0.95;
+    margin-bottom: var(--a-space-lg);
   }
   
-  .secondary {
-    background: transparent;
-    border-color: var(--a-border-strong);
-    color: var(--a-text-main);
-  }
-  
-  .secondary:hover {
-    background: var(--a-surface-overlay);
-    border-color: var(--a-primary);
-    color: var(--a-primary);
-  }
-  
-  .outline {
-    background: transparent;
-    border-color: var(--a-primary);
-    color: var(--a-primary);
-  }
-  
-  .outline:hover {
-    background: color-mix(in oklch, var(--a-primary) 15%, transparent);
-  }
-  
-  .ghost {
-    background: transparent;
-    border: none;
-    color: var(--a-text-main);
-  }
-  
-  .ghost:hover {
-    background: var(--a-surface-overlay);
-  }
-  
-  /* Button sizes */
-  button.sm, [role="button"].sm {
-    padding: var(--a-space-xs) var(--a-space-sm);
-    font-size: var(--a-text-xs);
-  }
-  
-  button.lg, [role="button"].lg {
-    padding: var(--a-space-md) var(--a-space-lg);
-    font-size: var(--a-text-lg);
-  }
-  
-  /* --- CARDS (BATCH B) --- */
+  /* CARD COMPONENT */
   .card {
-    container-type: inline-size;
     background: var(--a-surface-raised);
     border: 1px solid var(--a-border);
     border-radius: var(--a-radius-md);
@@ -627,304 +311,33 @@
     box-shadow: var(--a-shadow-md);
   }
   
-  /* Card with image - responsive layout via container query */
-  @container (min-width: 400px) {
-    .card:has(> img:first-child) {
-      flex-direction: row;
-      align-items: stretch;
-      overflow: hidden;
-    }
-    
-    .card:has(> img:first-child) > img:first-child {
-      width: 40%;
-      height: auto;
-      border-radius: 0;
-      object-fit: cover;
-      margin: calc(var(--a-space-md) * -1);
-      margin-right: 0;
-    }
+  /* BUTTON VARIANTS */
+  .primary {
+    background: var(--a-primary);
+    color: var(--a-on-primary);
+    border-color: var(--a-primary);
   }
   
-  /* Card footer - auto-positioned to bottom */
-  .card:has(> footer) {
-    padding-bottom: 0;
+  .primary:hover {
+    background: var(--a-primary-hover);
+    border-color: var(--a-primary-hover);
   }
   
-  .card footer {
-    margin-top: auto;
-    padding: var(--a-space-md);
-    margin: 0 calc(var(--a-space-md) * -1) calc(var(--a-space-md) * -1) calc(var(--a-space-md) * -1);
-    border-top: 1px solid var(--a-border);
-    background: var(--a-surface-base);
-    display: flex;
-    gap: var(--a-space-sm);
-    justify-content: flex-end;
+  .outline {
+    background: transparent;
+    border-color: var(--a-primary);
+    color: var(--a-primary);
   }
   
-  /* --- FORMS (BATCH C) --- */
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--a-space-md);
-    max-width: 100%;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--a-space-xs);
-  }
-  
-  .form-group label {
-    font-weight: var(--a-font-weight-medium);
-    color: var(--a-text-main);
-  }
-  
-  .form-group small {
-    color: var(--a-text-muted);
-    font-size: var(--a-text-xs);
-  }
-  
-  /* Zero-class form validation with :has() */
-  .form:has(input:invalid:not(:placeholder-shown)) {
-    border-left: 4px solid var(--a-error);
-    padding-left: var(--a-space-sm);
-  }
-  
-  .form button[type="submit"]:has(~ input:invalid:not(:placeholder-shown)) {
-    opacity: 0.5;
-    pointer-events: none;
-    cursor: not-allowed;
-  }
-  
-  /* --- ALERTS (BATCH D) --- */
-  .alert {
-    padding: var(--a-space-md);
-    border: 1px solid var(--a-border);
-    border-radius: var(--a-radius-md);
-    background: var(--a-surface-raised);
-    display: flex;
-    gap: var(--a-space-md);
-    align-items: flex-start;
-  }
-  
-  .alert.success {
-    border-color: var(--a-success);
-    background: color-mix(in oklch, var(--a-success) 15%, transparent);
-    color: oklch(40% 0.15 var(--a-hue-success));
-  }
-  
-  .alert.error {
-    border-color: var(--a-error);
-    background: color-mix(in oklch, var(--a-error) 15%, transparent);
-    color: oklch(40% 0.18 var(--a-hue-error));
-  }
-  
-  .alert.warning {
-    border-color: var(--a-warning);
-    background: color-mix(in oklch, var(--a-warning) 15%, transparent);
-    color: oklch(45% 0.15 var(--a-hue-warning));
+  .outline:hover {
+    background: color-mix(in oklch, var(--a-primary) 15%, transparent);
   }
 }
 
 /* ============================================================================
-   @LAYER AXIOM.UTILITIES - Responsive, Dark Mode, Accessibility
-   ============================================================================ */
-@layer axiom.utilities {
-  /* Responsive text alignment */
-  .text-center { text-align: center; }
-  .text-left { text-align: left; }
-  .text-right { text-align: right; }
-  
-  /* Responsive grid mobile override */
-  @media (max-width: 768px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .grid.tight {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .grid.columns-2,
-    .grid.columns-3,
-    .grid.columns-4 {
-      grid-template-columns: 1fr;
-    }
-    
-    /* Hero stat cards: 2 columns on mobile */
-    .hero .grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Code comparison: 1 column on mobile */
-    .code-comparison-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    /* Component preview cards: 1 column on mobile */
-    #components .grid {
-      grid-template-columns: 1fr;
-    }
-    
-    /* Large code-containing cards: 1 column on mobile */
-    .grid:has(> .card pre) {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  /* Tablet breakpoint */
-  @media (min-width: 768px) {
-    .grid.tight {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-  }
-  
-  /* Desktop breakpoint */
-  @media (min-width: 1024px) {
-    .grid {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-    
-    .grid.tight {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
-  }
-  
-  /* Accessibility: Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-  
-  /* Print styles */
-  @media print {
-    body {
-      background: white;
-      color: black;
-    }
-    
-    a {
-      text-decoration: underline;
-    }
-    
-    button {
-      display: none;
-    }
-  }
-  
-  /* Display utilities */
-  .hidden { display: none !important; }
-  .visible { display: block !important; }
-  .inline { display: inline !important; }
-  .block { display: block !important; }
-  .inline-block { display: inline-block !important; }
-  .inline-flex { display: inline-flex !important; }
-  
-  /* Margin utilities (spacing scale) */
-  .m-0 { margin: 0 !important; }
-  .m-xs { margin: var(--a-space-xs) !important; }
-  .m-sm { margin: var(--a-space-sm) !important; }
-  .m-md { margin: var(--a-space-md) !important; }
-  .m-lg { margin: var(--a-space-lg) !important; }
-  
-  .mx-auto { margin-left: auto !important; margin-right: auto !important; }
-  .my-auto { margin-top: auto !important; margin-bottom: auto !important; }
-  
-  /* Padding utilities */
-  .p-0 { padding: 0 !important; }
-  .p-xs { padding: var(--a-space-xs) !important; }
-  .p-sm { padding: var(--a-space-sm) !important; }
-  .p-md { padding: var(--a-space-md) !important; }
-  .p-lg { padding: var(--a-space-lg) !important; }
-  
-  /* Width utilities */
-  .w-full { width: 100% !important; }
-  .w-1\/2 { width: 50% !important; }
-  .w-1\/3 { width: 33.333% !important; }
-  .w-2\/3 { width: 66.666% !important; }
-  
-  /* Text utilities */
-  .font-bold { font-weight: var(--a-font-weight-bold) !important; }
-  .font-semibold { font-weight: var(--a-font-weight-semibold) !important; }
-  .font-normal { font-weight: var(--a-font-weight-regular) !important; }
-  
-  .text-xs { font-size: var(--a-text-xs) !important; }
-  .text-sm { font-size: var(--a-text-sm) !important; }
-  .text-base { font-size: var(--a-text-base) !important; }
-  .text-lg { font-size: var(--a-text-lg) !important; }
-  .text-xl { font-size: var(--a-text-xl) !important; }
-  
-  .text-primary { color: var(--a-primary) !important; }
-  .text-success { color: var(--a-success) !important; }
-  .text-error { color: var(--a-error) !important; }
-  .text-muted { color: var(--a-text-muted) !important; }
-  
-  /* Flex utilities */
-  .items-center { align-items: center !important; }
-  .items-start { align-items: flex-start !important; }
-  .items-end { align-items: flex-end !important; }
-  
-  .justify-center { justify-content: center !important; }
-  .justify-between { justify-content: space-between !important; }
-  .justify-start { justify-content: flex-start !important; }
-  .justify-end { justify-content: flex-end !important; }
-  
-  /* Opacity utilities */
-  .opacity-50 { opacity: 0.5 !important; }
-  .opacity-75 { opacity: 0.75 !important; }
-  
-  /* Border utilities */
-  .border { border: 1px solid var(--a-border) !important; }
-  .border-t { border-top: 1px solid var(--a-border) !important; }
-  .border-b { border-bottom: 1px solid var(--a-border) !important; }
-  .border-l { border-left: 1px solid var(--a-border) !important; }
-  .border-r { border-right: 1px solid var(--a-border) !important; }
-  
-  /* Rounded corners */
-  .rounded { border-radius: var(--a-radius-md) !important; }
-  .rounded-sm { border-radius: var(--a-radius-sm) !important; }
-  .rounded-lg { border-radius: var(--a-radius-lg) !important; }
-  .rounded-full { border-radius: 9999px !important; }
-  
-  /* Shadows */
-  .shadow-sm { box-shadow: var(--a-shadow-sm) !important; }
-  .shadow-md { box-shadow: var(--a-shadow-md) !important; }
-  .shadow-lg { box-shadow: var(--a-shadow-lg) !important; }
-  
-  /* Overflow */
-  .overflow-hidden { overflow: hidden !important; }
-  .overflow-auto { overflow: auto !important; }
-  
-  /* Cursor */
-  .cursor-pointer { cursor: pointer !important; }
-  .cursor-default { cursor: default !important; }
-  .cursor-not-allowed { cursor: not-allowed !important; }
-}
-
-/* ============================================================================
-   END AXIOM01 v3 - The Semantic Rebellion: The Mathematics of Design
+   HEADER / NAVBAR STYLING - Framework-Level Element Styling
    ============================================================================ */
 
-/* ============================================================================
-   SPA-SPECIFIC LAYOUT STYLES (Framework-level, not page-specific)
-   ============================================================================ */
-
-/* Root container */
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-main {
-  flex: 1;
-}
-
-/* Header / Navigation */
 header {
   position: sticky;
   top: 0;
@@ -934,7 +347,7 @@ header {
   padding: var(--a-space-md);
 }
 
-header > nav {
+header nav {
   max-width: var(--a-width-max);
   margin: 0 auto;
   display: flex;
@@ -943,194 +356,80 @@ header > nav {
   gap: var(--a-space-lg);
 }
 
-header a {
-  font-size: var(--a-text-xl);
+header nav a {
+  font-size: var(--a-text-lg);
   font-weight: var(--a-font-weight-bold);
   color: var(--a-primary);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--a-space-xs);
 }
 
-header a > strong {
+header nav a strong {
   color: var(--a-primary);
 }
 
-header > nav > ul {
+header nav ul {
   list-style: none;
   display: flex;
-  gap: var(--a-space-md);
+  gap: var(--a-space-lg);
   padding: 0;
   margin: 0;
 }
 
-header button {
+header nav li {
+  display: flex;
+}
+
+header nav button {
   border: none;
   background: transparent;
   padding: var(--a-space-sm) var(--a-space-md);
-  cursor: pointer;
-  font-weight: var(--a-font-weight-medium);
   color: var(--a-text-main);
+  font-weight: var(--a-font-weight-medium);
+  cursor: pointer;
   transition: color var(--a-transition-base) var(--a-easing);
 }
 
-header button:hover {
+header nav button:hover {
   color: var(--a-primary);
+  background: transparent;
+  border-color: transparent;
 }
 
-header button[aria-current="page"] {
+header nav button[aria-current="page"] {
   color: var(--a-primary);
   border-bottom: 2px solid var(--a-primary);
 }
 
-header > nav > div {
+header nav > div {
   display: flex;
   gap: var(--a-space-sm);
-  align-items: center;
 }
 
-header > nav > div > button {
+header nav > div button {
   border: none;
   background: transparent;
   padding: var(--a-space-sm);
-  cursor: pointer;
   font-size: var(--a-text-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 44px;
   height: 44px;
   border-radius: var(--a-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background var(--a-transition-base) var(--a-easing);
 }
 
-header > nav > div > button:hover {
+header nav > div button:hover {
   background: var(--a-surface-overlay);
 }
 
-/* Hero Section */
-.hero {
-  background: linear-gradient(135deg, var(--a-primary) 0%, color-mix(in oklch, var(--a-primary) 80%, black) 100%);
-  color: var(--a-on-primary);
-  padding: var(--a-space-3xl) var(--a-space-md);
-  text-align: center;
-}
+/* ============================================================================
+   FOOTER STYLING
+   ============================================================================ */
 
-.hero > h1 {
-  font-size: var(--a-text-3xl);
-  margin-bottom: var(--a-space-xs);
-  color: inherit;
-}
-
-.hero > p:first-of-type {
-  font-size: var(--a-text-lg);
-  margin-bottom: var(--a-space-md);
-  color: inherit;
-  max-width: none;
-}
-
-.hero > p:nth-of-type(2) {
-  font-size: var(--a-text-lg);
-  color: inherit;
-  opacity: 0.95;
-  max-width: var(--a-width-prose);
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: var(--a-space-lg);
-}
-
-.hero > div:first-of-type {
-  display: flex;
-  gap: var(--a-space-md);
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: var(--a-space-3xl);
-}
-
-.hero > div:last-of-type {
-  max-width: 900px;
-  margin: var(--a-space-3xl) auto 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--a-gap-grid);
-}
-
-/* Hub Layout (3-column for docs/book) */
-.hub > .container {
-  display: grid;
-  grid-template-columns: 250px 1fr 300px;
-  gap: var(--a-space-lg);
-  padding: var(--a-space-lg) var(--a-space-md);
-  min-height: calc(100vh - 200px);
-}
-
-.hub > .container > aside:first-of-type {
-  border-right: 1px solid var(--a-border);
-  padding-right: var(--a-space-lg);
-  max-height: calc(100vh - 200px);
-  overflow-y: auto;
-}
-
-.hub > .container > main {
-  padding: var(--a-space-lg) 0;
-}
-
-.hub > .container > aside:last-of-type {
-  border-left: 1px solid var(--a-border);
-  padding-left: var(--a-space-lg);
-  max-height: calc(100vh - 200px);
-  overflow-y: auto;
-}
-
-/* Search input in sidebars */
-aside > input[type="text"] {
-  width: 100%;
-  margin-bottom: var(--a-space-md);
-}
-
-/* Sidebar navigation lists */
-aside > nav > ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-aside > nav > ul > li {
-  margin: var(--a-space-sm) 0;
-}
-
-aside > nav a {
-  display: block;
-  padding: var(--a-space-xs) 0;
-  font-size: var(--a-text-sm);
-  color: var(--a-text-secondary);
-  text-decoration: none;
-  transition: color var(--a-transition-base) var(--a-easing);
-}
-
-aside > nav a:hover {
-  color: var(--a-primary);
-}
-
-/* TOC lists */
-#component-toc > ul,
-#book-toc > ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#component-toc > ul > li,
-#book-toc > ul > li {
-  margin: var(--a-space-sm) 0;
-}
-
-#component-toc a,
-#book-toc a {
-  font-size: var(--a-text-sm);
-  color: var(--a-text-secondary);
-  text-decoration: none;
-}
-
-/* Footer */
 footer {
   background: var(--a-surface-overlay);
   border-top: 1px solid var(--a-border);
@@ -1141,90 +440,46 @@ footer {
   margin-top: auto;
 }
 
-/* Hidden sections */
-.hidden {
-  display: none !important;
+footer p {
+  margin: 0;
 }
 
-/* View animations */
-section[id^="view-"]:not(.hidden) {
-  animation: fadeIn 0.2s var(--a-easing);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Mobile responsiveness */
-@media (max-width: 1024px) {
-  header > nav {
-    flex-wrap: wrap;
+/* ============================================================================
+   @LAYER AXIOM.UTILITIES - Responsive, Accessibility, State
+   ============================================================================ */
+@layer axiom.utilities {
+  .hidden {
+    display: none !important;
   }
-
-  header > nav > ul {
-    width: 100%;
-    flex-wrap: wrap;
+  
+  section[id^="view-"]:not(.hidden) {
+    animation: fadeIn 0.2s var(--a-easing);
   }
-
-  .hub > .container {
-    grid-template-columns: 1fr;
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
-
-  .hub > .container > aside:first-of-type {
-    border: none;
-    padding: 0;
-    margin-bottom: var(--a-space-lg);
-    max-height: none;
-    display: flex;
-    gap: var(--a-space-md);
-    flex-wrap: wrap;
-  }
-
-  .hub > .container > aside:last-of-type {
-    border: none;
-    padding: 0;
-    margin-top: var(--a-space-lg);
-    max-height: none;
-  }
-
-  .hero > div:last-of-type {
-    grid-template-columns: 1fr;
-  }
-
-  .hero > h1 {
-    font-size: var(--a-text-2xl);
-  }
-
-  .hero > div:first-of-type {
-    flex-direction: column;
-  }
-
-  .hero > div:first-of-type > button {
-    width: 100%;
+  
+  @media (max-width: 768px) {
+    header nav {
+      gap: var(--a-space-md);
+      flex-wrap: wrap;
+    }
+    
+    header nav ul {
+      gap: var(--a-space-sm);
+      flex-wrap: wrap;
+      order: 3;
+      flex-basis: 100%;
+    }
+    
+    header nav > div {
+      order: 2;
+    }
+    
+    header nav a {
+      order: 1;
+    }
   }
 }
-
-@media (max-width: 768px) {
-  header > nav {
-    gap: var(--a-space-md);
-  }
-
-  header > nav > ul {
-    gap: var(--a-space-sm);
-  }
-
-  header button {
-    padding: var(--a-space-xs) var(--a-space-sm);
-    font-size: var(--a-text-sm);
-  }
-
-  aside > nav > ul > li {
-    margin: var(--a-space-xs) 0;
-  }
-
-  .hero > p:nth-of-type(2) {
-    font-size: var(--a-text-base);
-  }
-}
-
