@@ -373,20 +373,31 @@ const HubNav = (() => {
         return;
       }
 
-      // Display component details
+      // Display component details with copy buttons
+      const htmlEl = document.createElement('code');
+      htmlEl.textContent = component.html;
+      const cssEl = document.createElement('code');
+      cssEl.textContent = component.css;
+      
       preview.innerHTML = `
         <article>
           <h3>${component.name}</h3>
           <p><small>${component.description}</small></p>
 
           <div style="margin-top: var(--a-space-lg); border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
-            <h4 style="font-size: var(--a-text-sm); margin-top: 0;">HTML</h4>
-            <code style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md);">${escapeHtml(component.html)}</code>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--a-space-sm);">
+              <h4 style="font-size: var(--a-text-sm); margin: 0;">HTML</h4>
+              <button data-copy-html style="padding: 4px 8px; font-size: 12px; background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius-sm); cursor: pointer;">Copy</button>
+            </div>
+            <code id="component-html" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md);">${escapeHtml(component.html)}</code>
           </div>
 
           <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
-            <h4 style="font-size: var(--a-text-sm); margin-top: 0;">CSS</h4>
-            <code style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md);">${escapeHtml(component.css)}</code>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--a-space-sm);">
+              <h4 style="font-size: var(--a-text-sm); margin: 0;">CSS</h4>
+              <button data-copy-css style="padding: 4px 8px; font-size: 12px; background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius-sm); cursor: pointer;">Copy</button>
+            </div>
+            <code id="component-css" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md);">${escapeHtml(component.css)}</code>
           </div>
 
           <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
@@ -661,3 +672,62 @@ Navigation.navigate = function(viewName) {
   }
 };
 
+
+// ============================================================================
+// ADD COPY BUTTONS TO COMPONENT PREVIEW
+// ============================================================================
+
+const originalShowComponentDetails = HubNav.showComponentDetails;
+
+HubNav.showComponentDetails = async function(componentId) {
+  // Call original function
+  const result = await originalShowComponentDetails.call(this, componentId);
+  
+  // Then enhance with copy buttons - attach listeners
+  setTimeout(() => {
+    const htmlBtn = document.querySelector('[data-copy-html]');
+    const cssBtn = document.querySelector('[data-copy-css]');
+    
+    if (htmlBtn && !htmlBtn._copyInitialized) {
+      htmlBtn._copyInitialized = true;
+      htmlBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const codeEl = document.getElementById('component-html');
+        if (codeEl) {
+          const text = codeEl.textContent || '';
+          navigator.clipboard.writeText(text);
+          const orig = htmlBtn.textContent;
+          htmlBtn.textContent = '✓ Copied!';
+          htmlBtn.disabled = true;
+          setTimeout(() => {
+            htmlBtn.textContent = orig;
+            htmlBtn.disabled = false;
+            htmlBtn._copyInitialized = false;
+          }, 2000);
+        }
+      });
+    }
+    
+    if (cssBtn && !cssBtn._copyInitialized) {
+      cssBtn._copyInitialized = true;
+      cssBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const codeEl = document.getElementById('component-css');
+        if (codeEl) {
+          const text = codeEl.textContent || '';
+          navigator.clipboard.writeText(text);
+          const orig = cssBtn.textContent;
+          cssBtn.textContent = '✓ Copied!';
+          cssBtn.disabled = true;
+          setTimeout(() => {
+            cssBtn.textContent = orig;
+            cssBtn.disabled = false;
+            cssBtn._copyInitialized = false;
+          }, 2000);
+        }
+      });
+    }
+  }, 100);
+  
+  return result;
+};
