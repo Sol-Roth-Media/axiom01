@@ -731,3 +731,125 @@ HubNav.showComponentDetails = async function(componentId) {
   
   return result;
 };
+
+// ============================================================================
+// ADD LIVE PREVIEW TO COMPONENT DETAILS
+// ============================================================================
+
+const originalShowComponentDetailsFunc = HubNav.showComponentDetails;
+
+HubNav.showComponentDetails = async function(componentId) {
+  const preview = document.getElementById('component-preview');
+  if (!preview) return;
+
+  // Show loading state
+  preview.innerHTML = '<p style="opacity: 0.6;">Loading component...</p>';
+
+  try {
+    // Find component in all categories
+    const allComponents = await ContentLoader.loadAllComponents();
+    const component = allComponents.find(c => c.id === componentId);
+
+    if (!component) {
+      preview.innerHTML = '<p style="color: var(--a-text-muted);">Component not found.</p>';
+      return;
+    }
+
+    // Create live preview container and render HTML
+    let livePreviewHTML = '';
+    try {
+      livePreviewHTML = `<div class="live-preview">${component.html}</div>`;
+    } catch (e) {
+      livePreviewHTML = '';
+    }
+
+    // Inject styles for the preview
+    let styleTag = document.getElementById('component-preview-styles');
+    if (!styleTag) {
+      styleTag = document.createElement('style');
+      styleTag.id = 'component-preview-styles';
+      document.head.appendChild(styleTag);
+    }
+    styleTag.textContent = `${component.css}`;
+
+    // Display component details with live preview
+    preview.innerHTML = `
+      <article>
+        <h3>${component.name}</h3>
+        <p><small>${component.description}</small></p>
+
+        ${livePreviewHTML}
+
+        <div style="margin-top: var(--a-space-lg); border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--a-space-sm);">
+            <h4 style="font-size: var(--a-text-sm); margin: 0;">HTML</h4>
+            <button data-copy-html style="padding: 4px 8px; font-size: 12px; background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius-sm); cursor: pointer;">Copy</button>
+          </div>
+          <code id="component-html" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md); font-family: 'Menlo', 'Monaco', 'Courier New', monospace;">${escapeHtml(component.html)}</code>
+        </div>
+
+        <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--a-space-sm);">
+            <h4 style="font-size: var(--a-text-sm); margin: 0;">CSS</h4>
+            <button data-copy-css style="padding: 4px 8px; font-size: 12px; background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius-sm); cursor: pointer;">Copy</button>
+          </div>
+          <code id="component-css" style="display: block; background: var(--a-surface-base); padding: var(--a-space-sm); border-radius: var(--a-radius-md); font-size: var(--a-text-xs); overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; margin-bottom: var(--a-space-md); font-family: 'Menlo', 'Monaco', 'Courier New', monospace;">${escapeHtml(component.css)}</code>
+        </div>
+
+        <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
+          <h4 style="font-size: var(--a-text-sm); margin-top: 0; margin-bottom: var(--a-space-xs);">Usage</h4>
+          <p style="font-size: var(--a-text-xs); margin: 0 0 var(--a-space-md) 0; color: var(--a-text-secondary);">${component.usage}</p>
+        </div>
+
+        <div style="border-top: 1px solid var(--a-border); padding-top: var(--a-space-md);">
+          <h4 style="font-size: var(--a-text-sm); margin-top: 0; margin-bottom: var(--a-space-xs);">Accessibility</h4>
+          <p style="font-size: var(--a-text-xs); margin: 0; color: var(--a-text-secondary);">${component.accessibility}</p>
+        </div>
+      </article>
+    `;
+
+    // Add copy handlers
+    const htmlBtn = preview.querySelector('[data-copy-html]');
+    const cssBtn = preview.querySelector('[data-copy-css]');
+    
+    if (htmlBtn) {
+      htmlBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const codeEl = document.getElementById('component-html');
+        if (codeEl) {
+          const text = codeEl.textContent || '';
+          navigator.clipboard.writeText(text);
+          const orig = htmlBtn.textContent;
+          htmlBtn.textContent = '✓ Copied!';
+          htmlBtn.disabled = true;
+          setTimeout(() => {
+            htmlBtn.textContent = orig;
+            htmlBtn.disabled = false;
+          }, 2000);
+        }
+      });
+    }
+    
+    if (cssBtn) {
+      cssBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const codeEl = document.getElementById('component-css');
+        if (codeEl) {
+          const text = codeEl.textContent || '';
+          navigator.clipboard.writeText(text);
+          const orig = cssBtn.textContent;
+          cssBtn.textContent = '✓ Copied!';
+          cssBtn.disabled = true;
+          setTimeout(() => {
+            cssBtn.textContent = orig;
+            cssBtn.disabled = false;
+          }, 2000);
+        }
+      });
+    }
+
+  } catch (error) {
+    console.error('Error loading component:', error);
+    preview.innerHTML = '<p style="color: var(--a-text-muted);">Error loading component details.</p>';
+  }
+};
