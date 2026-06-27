@@ -14,9 +14,7 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body class="axiom-body component-doc">
-
 <a href="#main-content" class="skip-link">Skip to main content</a>
-
 <header class="main" data-component="mobile-navbar">
 	<nav role="navigation" aria-label="Main Navigation">
 		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
@@ -33,18 +31,14 @@
 		</div>
 	</nav>
 </header>
-
 <main id="main-content">
-
 	<section>
 		<div class="container">
-
 			<header>
 				<h1>Editor</h1>
 				<p>Axiom01's editor component provides a rich text editing interface with toolbar controls, formatting options, and real-time word count. Perfect for content creation, notes, and rich text input.</p>
 			</header>
-
-			<section>
+<section>
 				<h2>Live Examples</h2>
 
 				<h3>Basic Rich Text Editor</h3>
@@ -93,163 +87,9 @@
 				<h3>Formatted Content Preview</h3>
 				<div class="format-preview">
 				<p>The editor supports formatting like <strong>bold text</strong>, <em>italic text</em>, and more. You can also create lists and block quotes.</p>
-				</div>
-			</section>
-
-			<section>
-				<h2>HTML Structure</h2>
-				<pre><code class="language-html">&lt;div class="editor-container"&gt;
-				&lt;div class="editor-toolbar"&gt;
-				&lt;div class="toolbar-group"&gt;
-				&lt;button class="toolbar-button" data-format="bold"&gt;B&lt;/button&gt;
-				&lt;button class="toolbar-button" data-format="italic"&gt;I&lt;/button&gt;
-				&lt;/div&gt;
-				&lt;/div&gt;
-
-				&lt;div class="editor-content"
-				id="editor"
-				contenteditable="true"
-				role="textbox"
-				aria-label="Rich text editor"
-				&gt;&lt;/div&gt;
-
-				&lt;div class="editor-footer"&gt;
-				&lt;div class="editor-word-count"&gt;
-				&lt;span&gt;Words: &lt;strong id="wordCount"&gt;0&lt;/strong&gt;&lt;/span&gt;
-				&lt;/div&gt;
-				&lt;div class="editor-actions"&gt;
-				&lt;button class="cancel"&gt;Cancel&lt;/button&gt;
-				&lt;button class="save"&gt;Save&lt;/button&gt;
-				&lt;/div&gt;
-				&lt;/div&gt;
-				&lt;/div&gt;</code></pre>
-			</section>
-
-			<section>
-				<h2>JavaScript Implementation</h2>
-				<pre><code class="language-javascript">function setupEditor(containerId, contentId) {
-				const toolbar = document.querySelectorAll(
-				`#${containerId} .toolbar-button`
-				);
-				const content = document.getElementById(contentId);
-
-				// Toolbar button click handlers
-				toolbar.forEach(button => {
-				button.addEventListener('click', (e) => {
-				e.preventDefault();
-				const format = button.dataset.format;
-				const value = button.dataset.value;
-
-				if (value) {
-				document.execCommand(format, false, value);
-				} else {
-				document.execCommand(format, false, null);
-				}
-
-				content.focus();
-				button.classList.toggle('active');
-				});
-				});
-
-				// Update word/character count
-				content.addEventListener('input', () => {
-				const text = content.innerText || '';
-				const words = text.trim().split(/\s+/).length;
-				const chars = text.length;
-
-				document.getElementById('wordCount').innerText = words;
-				document.getElementById('charCount').innerText = chars;
-				});
-				}
-
-				setupEditor('editor1', 'editorContent1');</code></pre>
-			</section>
-
-			<section>
-				<h2>Features</h2>
-				<ul>
-				<li><strong>Rich Text Formatting</strong> - Bold, italic, underline, strikethrough</li>
-				<li><strong>List Support</strong> - Ordered and unordered lists</li>
-				<li><strong>Block Elements</strong> - Headings, paragraphs, blockquotes</li>
-				<li><strong>Toolbar Controls</strong> - One-click formatting buttons</li>
-				<li><strong>Word/Character Count</strong> - Real-time statistics</li>
-				<li><strong>Clear Formatting</strong> - Remove all formatting from selected text</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Use Cases</h2>
-				<ul>
-				<li><strong>Blog Publishing</strong> - Create and format blog posts</li>
-				<li><strong>Note Taking</strong> - Rich notes with formatting</li>
-				<li><strong>Email Composition</strong> - Formatted email bodies</li>
-				<li><strong>Document Editing</strong> - Collaborative document creation</li>
-				<li><strong>Content Management</strong> - CMS article editing</li>
-				<li><strong>Comment Systems</strong> - Formatted user comments</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Accessibility</h2>
-				<ul>
-				<li>Use <code>role="textbox"</code> on editable area</li>
-				<li>Include <code>aria-label</code> for content area</li>
-				<li>Provide keyboard shortcuts for all formatting</li>
-				<li>Show active state for applied formatting</li>
-				<li>Support Tab key for toolbar navigation</li>
-				<li>Announce character/word count updates</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Responsive Behavior</h2>
-				<p>This component automatically adapts to different screen sizes:</p>
-
-				<h3>Mobile (< 768px)</h3>
-				<p>On mobile devices:</p>
-				<ul>
-				<li>Optimized for small screens</li>
-				<li>Touch-friendly spacing maintained (44px minimum)</li>
-				<li>Text wraps naturally without overflow</li>
-				<li>Content density optimized for readability</li>
-				</ul>
-
-				<h3>Desktop (1024px+)</h3>
-				<p>On desktop displays:</p>
-				<ul>
-				<li>Enhanced visual features</li>
-				<li>Hover states and transitions</li>
-				<li>Full keyboard navigation support</li>
-				<li>Optimal spacing and sizing</li>
-				</ul>
-
-				<h3>Framework Integration</h3>
-				<p>Responsive behavior is automatic:</p>
-				<ul>
-				<li>Framework handles media queries</li>
-				<li>No custom CSS required</li>
-				<li>Mobile-first approach applied</li>
-				<li>Accessibility maintained at all sizes</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Best Practices</h2>
-				<ul>
-				<li><strong>Save Drafts</strong> - Auto-save content periodically</li>
-				<li><strong>Undo/Redo</strong> - Provide undo/redo functionality</li>
-				<li><strong>Placeholder Text</strong> - Guide users with helpful hints</li>
-				<li><strong>Keyboard Shortcuts</strong> - Ctrl+B for bold, Ctrl+I for italic</li>
-				<li><strong>Spell Check</strong> - Built-in browser spell checking</li>
-				<li><strong>Character Limit</strong> - Show limits if needed</li>
-				</ul>
-			</section>
-
 		</div>
 	</section>
-
 </main>
-
 <footer class="footer">
 	<div class="container">
 		<div class="footer-content">
@@ -290,7 +130,6 @@
 		</div>
 	</div>
 </footer>
-
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
 <script>
