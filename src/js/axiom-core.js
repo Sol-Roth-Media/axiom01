@@ -429,3 +429,79 @@ const ComponentSearch = (() => {
   };
 })();
 
+
+// ============================================================================
+// CONTENT LOADER - JSON file loading with caching
+// ============================================================================
+
+const ContentLoader = (() => {
+  const cache = {};
+  const baseUrl = './content';
+
+  const loadJSON = async (path) => {
+    if (cache[path]) {
+      return cache[path];
+    }
+
+    try {
+      const url = `${baseUrl}/${path}`;
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error(`Failed to load ${path}: ${response.status}`);
+      }
+
+      const data = await response.json();
+      cache[path] = data;
+      return data;
+    } catch (error) {
+      console.error(`ContentLoader error loading ${path}:`, error);
+      return null;
+    }
+  };
+
+  const loadComponents = async (category) => {
+    const data = await loadJSON(`components/${category}.json`);
+    return data ? data.components : [];
+  };
+
+  const loadAllComponents = async () => {
+    const categories = ['buttons', 'cards', 'forms', 'alerts', 'layouts', 'misc'];
+    const allComponents = [];
+
+    for (const category of categories) {
+      const components = await loadComponents(category);
+      allComponents.push(...components);
+    }
+
+    return allComponents;
+  };
+
+  const loadChapters = async () => {
+    const data = await loadJSON('chapters/all-chapters.json');
+    return data ? data.chapters : [];
+  };
+
+  const loadChapter = async (chapterId) => {
+    const chapters = await loadChapters();
+    return chapters.find(ch => ch.id === chapterId) || null;
+  };
+
+  const clearCache = (path) => {
+    if (path) {
+      delete cache[path];
+    } else {
+      Object.keys(cache).forEach(key => delete cache[key]);
+    }
+  };
+
+  return {
+    loadJSON,
+    loadComponents,
+    loadAllComponents,
+    loadChapters,
+    loadChapter,
+    clearCache,
+  };
+})();
+

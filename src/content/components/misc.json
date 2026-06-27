@@ -1,0 +1,87 @@
+{
+  "category": "misc",
+  "categoryLabel": "Misc & Advanced",
+  "components": [
+    {
+      "id": "badge",
+      "name": "Badge",
+      "description": "Small label for status or category.",
+      "html": "<span class=\"badge\">New</span>",
+      "css": "span.badge {\n  display: inline-block;\n  padding: var(--a-space-xs) var(--a-space-sm);\n  background: var(--a-primary);\n  color: var(--a-surface-base);\n  border-radius: var(--a-radius-sm);\n  font-size: var(--a-text-xs);\n  font-weight: var(--a-font-weight-semibold);\n}",
+      "usage": "Use for status labels, tags, or indicators.",
+      "accessibility": "Use in combination with text for clarity."
+    },
+    {
+      "id": "breadcrumb",
+      "name": "Breadcrumb Navigation",
+      "description": "Navigation showing hierarchy.",
+      "html": "<nav aria-label=\"Breadcrumb\">\n  <ol class=\"breadcrumb\">\n    <li><a href=\"#\">Home</a></li>\n    <li><a href=\"#\">Category</a></li>\n    <li><span aria-current=\"page\">Page</span></li>\n  </ol>\n</nav>",
+      "css": ".breadcrumb {\n  display: flex;\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  gap: var(--a-space-sm);\n}\n\n.breadcrumb li::before {\n  content: '/';\n  color: var(--a-text-muted);\n}\n\n.breadcrumb li:first-child::before {\n  display: none;\n}\n\n.breadcrumb a {\n  color: var(--a-primary);\n  text-decoration: none;\n}\n\n.breadcrumb a:hover {\n  text-decoration: underline;\n}\n\n.breadcrumb span[aria-current=\"page\"] {\n  color: var(--a-text-main);\n  font-weight: var(--a-font-weight-medium);\n}",
+      "usage": "Show page hierarchy. Always make current page non-clickable.",
+      "accessibility": "Use aria-current=\"page\" for current location."
+    },
+    {
+      "id": "pagination",
+      "name": "Pagination",
+      "description": "Navigation between pages.",
+      "html": "<nav aria-label=\"Pagination\">\n  <ul class=\"pagination\">\n    <li><button aria-label=\"Previous page\">← Prev</button></li>\n    <li><a aria-current=\"page\" href=\"#\">1</a></li>\n    <li><a href=\"#\">2</a></li>\n    <li><a href=\"#\">3</a></li>\n    <li><button aria-label=\"Next page\">Next →</button></li>\n  </ul>\n</nav>",
+      "css": ".pagination {\n  display: flex;\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  gap: var(--a-space-xs);\n}\n\n.pagination a,\n.pagination button {\n  padding: var(--a-space-sm) var(--a-space-md);\n  border: 1px solid var(--a-border);\n  border-radius: var(--a-radius-md);\n  text-decoration: none;\n  cursor: pointer;\n  transition: all var(--a-transition-base);\n}\n\n.pagination a:hover,\n.pagination button:hover {\n  border-color: var(--a-primary);\n  color: var(--a-primary);\n}\n\n.pagination a[aria-current=\"page\"] {\n  background: var(--a-primary);\n  color: var(--a-surface-base);\n  border-color: var(--a-primary);\n  cursor: default;\n}",
+      "usage": "Use for listing items across multiple pages.",
+      "accessibility": "aria-current marks active page. aria-label on buttons."
+    },
+    {
+      "id": "tabs",
+      "name": "Tab Navigation",
+      "description": "Tabbed content switching.",
+      "html": "<div role=\"tablist\">\n  <button role=\"tab\" aria-selected=\"true\" aria-controls=\"panel-1\">Tab 1</button>\n  <button role=\"tab\" aria-selected=\"false\" aria-controls=\"panel-2\">Tab 2</button>\n</div>\n<section id=\"panel-1\" role=\"tabpanel\">Content 1</section>\n<section id=\"panel-2\" role=\"tabpanel\" hidden>Content 2</section>",
+      "css": "button[role=\"tab\"] {\n  padding: var(--a-space-md) var(--a-space-lg);\n  background: var(--a-surface-overlay);\n  border: 1px solid var(--a-border);\n  border-bottom: none;\n  cursor: pointer;\n  transition: all var(--a-transition-base);\n}\n\nbutton[role=\"tab\"][aria-selected=\"true\"] {\n  background: var(--a-surface-base);\n  border-bottom: 3px solid var(--a-primary);\n}\n\nsection[role=\"tabpanel\"] {\n  padding: var(--a-space-lg);\n  border: 1px solid var(--a-border);\n  border-top: none;\n}",
+      "usage": "Organize content into multiple views.",
+      "accessibility": "ARIA roles for keyboard navigation and screen readers."
+    },
+    {
+      "id": "tooltip",
+      "name": "Tooltip",
+      "description": "Hover tooltip with information.",
+      "html": "<button data-tooltip=\"Click to save\">Save</button>",
+      "css": "button[data-tooltip]::after {\n  content: attr(data-tooltip);\n  position: absolute;\n  bottom: 100%;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: var(--a-space-xs) var(--a-space-sm);\n  background: var(--a-text-main);\n  color: var(--a-surface-base);\n  border-radius: var(--a-radius-sm);\n  font-size: var(--a-text-xs);\n  white-space: nowrap;\n  opacity: 0;\n  pointer-events: none;\n  transition: opacity var(--a-transition-base);\n}\n\nbutton[data-tooltip]:hover::after {\n  opacity: 1;\n}",
+      "usage": "Provide additional context on hover.",
+      "accessibility": "Use title attribute as fallback for keyboard users."
+    },
+    {
+      "id": "spinner",
+      "name": "Loading Spinner",
+      "description": "Animated loading indicator.",
+      "html": "<div class=\"spinner\" role=\"status\" aria-label=\"Loading\"></div>",
+      "css": ".spinner {\n  width: 40px;\n  height: 40px;\n  border: 4px solid var(--a-surface-overlay);\n  border-top-color: var(--a-primary);\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n\n@keyframes spin {\n  to { transform: rotate(360deg); }\n}",
+      "usage": "Show during async operations.",
+      "accessibility": "role=\"status\" and aria-label for screen readers."
+    },
+    {
+      "id": "progress-bar",
+      "name": "Progress Bar",
+      "description": "Linear progress indicator.",
+      "html": "<progress value=\"65\" max=\"100\" aria-label=\"Upload progress\"></progress>",
+      "css": "progress {\n  width: 100%;\n  height: 8px;\n  border-radius: var(--a-radius-sm);\n  border: none;\n  background: var(--a-surface-overlay);\n  overflow: hidden;\n}\n\nprogress::-webkit-progress-bar {\n  background: var(--a-surface-overlay);\n}\n\nprogress::-webkit-progress-value {\n  background: var(--a-primary);\n  border-radius: var(--a-radius-sm);\n}\n\nprogress::-moz-progress-bar {\n  background: var(--a-primary);\n  border-radius: var(--a-radius-sm);\n}",
+      "usage": "Show operation progress. Use native <progress> element.",
+      "accessibility": "Semantic element with aria-label for context."
+    },
+    {
+      "id": "menu-dropdown",
+      "name": "Dropdown Menu",
+      "description": "Clickable dropdown navigation.",
+      "html": "<div class=\"dropdown\">\n  <button>Menu</button>\n  <nav hidden>\n    <a href=\"#\">Option 1</a>\n    <a href=\"#\">Option 2</a>\n  </nav>\n</div>",
+      "css": ".dropdown {\n  position: relative;\n}\n\n.dropdown nav {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  background: var(--a-surface-base);\n  border: 1px solid var(--a-border);\n  border-radius: var(--a-radius-md);\n  flex-direction: column;\n  gap: 0;\n}\n\n.dropdown nav a {\n  display: block;\n  padding: var(--a-space-md) var(--a-space-lg);\n  text-decoration: none;\n  color: var(--a-text-main);\n  transition: all var(--a-transition-base);\n}\n\n.dropdown nav a:hover {\n  background: var(--a-surface-overlay);\n  color: var(--a-primary);\n}",
+      "usage": "Hide/show menu on button click.",
+      "accessibility": "Requires JavaScript for keyboard navigation."
+    },
+    {
+      "id": "modal",
+      "name": "Modal Dialog",
+      "description": "Overlay dialog component.",
+      "html": "<dialog class=\"modal\" open>\n  <h2>Dialog Title</h2>\n  <p>Content</p>\n  <button>Close</button>\n</dialog>",
+      "css": ".modal {\n  border: none;\n  border-radius: var(--a-radius-lg);\n  padding: var(--a-space-2xl);\n  max-width: 500px;\n  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);\n}\n\n.modal::backdrop {\n  background: rgba(0, 0, 0, 0.5);\n}",
+      "usage": "Use semantic <dialog> element.",
+      "accessibility": "Native dialog element with proper focus management."
+    }
+  ]
+}
