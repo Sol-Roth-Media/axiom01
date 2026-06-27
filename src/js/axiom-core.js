@@ -267,7 +267,10 @@ const ContentLoader = (() => {
   };
 
   const loadAllComponents = async () => {
-    const categories = ['buttons', 'cards', 'forms', 'alerts', 'layouts', 'misc'];
+    const categories = [
+      'buttons', 'cards', 'forms', 'alerts', 'layouts', 'misc',
+      'typography', 'navigation', 'data', 'interactive'
+    ];
     const allComponents = [];
 
     for (const category of categories) {
