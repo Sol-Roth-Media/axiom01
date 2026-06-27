@@ -1,5 +1,5 @@
 /**
- * AXIOM01 v3 - Core Framework JavaScript
+ * AXIOM01 v3 - Core Framework
  * The Semantic Rebellion: The Mathematics of Design
  */
 
@@ -54,6 +54,13 @@ const Navigation = (() => {
     });
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Trigger component library initialization if docs view
+    if (viewName === 'docs') {
+      setTimeout(() => {
+        ComponentLibrary.init();
+      }, 50);
+    }
   };
 
   return {
@@ -260,16 +267,19 @@ const HubNav = (() => {
   let currentCategory = 'buttons';
 
   const init = () => {
+    // Category click handler
     document.addEventListener('click', (e) => {
-      if (e.target.getAttribute('data-category') && e.target.closest('[data-category]')) {
+      const categoryLink = e.target.closest('[data-category]');
+      if (categoryLink && categoryLink.tagName === 'A') {
         e.preventDefault();
-        const category = e.target.getAttribute('data-category');
+        const category = categoryLink.getAttribute('data-category');
         currentCategory = category;
         filterByCategory(category);
-        updateCategoryActive(e.target);
+        updateCategoryActive(categoryLink);
       }
     });
 
+    // Component View button handler
     document.addEventListener('click', (e) => {
       if (e.target.getAttribute('data-component')) {
         e.preventDefault();
@@ -278,13 +288,15 @@ const HubNav = (() => {
       }
     });
 
+    // Chapter link handler
     document.addEventListener('click', (e) => {
-      if (e.target.getAttribute('data-chapter')) {
+      const chapterLink = e.target.closest('[data-chapter]');
+      if (chapterLink && chapterLink.tagName === 'A') {
         e.preventDefault();
-        const chapter = e.target.getAttribute('data-chapter');
+        const chapter = chapterLink.getAttribute('data-chapter');
         currentChapter = chapter;
         loadChapter(chapter);
-        updateChapterActive(e.target);
+        updateChapterActive(chapterLink);
       }
     });
 
@@ -359,6 +371,7 @@ const HubNav = (() => {
         </article>
       `;
 
+      // Add copy handlers
       const htmlBtn = preview.querySelector('[data-copy-html]');
       const cssBtn = preview.querySelector('[data-copy-css]');
       
@@ -484,7 +497,12 @@ const HubNav = (() => {
 // ============================================================================
 
 const ComponentLibrary = (() => {
+  let isInitialized = false;
+
   const init = async () => {
+    if (isInitialized) return;
+    isInitialized = true;
+
     await populateComponentCards();
     await populateCategories();
   };
@@ -493,8 +511,16 @@ const ComponentLibrary = (() => {
     const gridContainer = document.getElementById('component-grid');
     if (!gridContainer) return;
 
+    // Clear existing cards
+    gridContainer.innerHTML = '';
+
     try {
       const allComponents = await ContentLoader.loadAllComponents();
+      
+      if (!allComponents || allComponents.length === 0) {
+        gridContainer.innerHTML = '<p>No components found.</p>';
+        return;
+      }
 
       allComponents.forEach(component => {
         const card = document.createElement('article');
@@ -514,12 +540,16 @@ const ComponentLibrary = (() => {
 
     } catch (error) {
       console.error('Error populating component cards:', error);
+      gridContainer.innerHTML = '<p>Error loading components.</p>';
     }
   };
 
   const populateCategories = async () => {
     const categoryList = document.getElementById('categories-list');
     if (!categoryList) return;
+
+    // Clear existing categories
+    categoryList.innerHTML = '';
 
     const categories = [
       { id: 'buttons', label: 'Buttons' },
@@ -541,11 +571,9 @@ const ComponentLibrary = (() => {
       a.setAttribute('data-category', cat.id);
       a.textContent = cat.label;
       
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        HubNav.filterByCategory(cat.id);
-        HubNav.updateCategoryActive(a);
-      });
+      if (cat.id === 'buttons') {
+        a.classList.add('active');
+      }
 
       li.appendChild(a);
       categoryList.appendChild(li);
@@ -558,17 +586,70 @@ const ComponentLibrary = (() => {
 })();
 
 // ============================================================================
-// INITIALIZE WHEN DOCS VIEW IS SHOWN
+// BOOK INITIALIZATION
 // ============================================================================
 
-const originalNavigate = Navigation.navigate;
+const BookLibrary = (() => {
+  let isInitialized = false;
+
+  const init = async () => {
+    if (isInitialized) return;
+    isInitialized = true;
+
+    await populateChapters();
+  };
+
+  const populateChapters = async () => {
+    const chaptersList = document.getElementById('chapters-list');
+    if (!chaptersList) return;
+
+    chaptersList.innerHTML = '';
+
+    try {
+      const chapters = await ContentLoader.loadChapters();
+      
+      if (!chapters || chapters.length === 0) {
+        chaptersList.innerHTML = '<li><p>No chapters found.</p></li>';
+        return;
+      }
+
+      chapters.forEach(chapter => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#';
+        a.setAttribute('data-chapter', chapter.id);
+        a.textContent = chapter.id === 'intro' ? 'Introduction' : chapter.title;
+        
+        if (chapter.id === 'intro') {
+          a.classList.add('active');
+        }
+
+        li.appendChild(a);
+        chaptersList.appendChild(li);
+      });
+
+    } catch (error) {
+      console.error('Error populating chapters:', error);
+    }
+  };
+
+  return {
+    init,
+  };
+})();
+
+// ============================================================================
+// OVERRIDE NAVIGATION TO TRIGGER LIBRARY INITS
+// ============================================================================
+
+const OriginalNavigate = Navigation.navigate;
 Navigation.navigate = function(viewName) {
-  originalNavigate.call(this, viewName);
+  OriginalNavigate.call(this, viewName);
   
   if (viewName === 'docs') {
-    setTimeout(() => {
-      ComponentLibrary.init();
-    }, 100);
+    setTimeout(() => ComponentLibrary.init(), 50);
+  } else if (viewName === 'book') {
+    setTimeout(() => BookLibrary.init(), 50);
   }
 };
 
@@ -583,13 +664,10 @@ document.addEventListener('DOMContentLoaded', () => {
   HubNav.init();
   ComponentSearch.init();
 
-  console.log('AXIOM01 v3 - The Semantic Rebellion: The Mathematics of Design');
+  console.log('AXIOM01 v3 - The Semantic Rebellion initialized');
 });
 
 window.Axiom = {
   navigate: Navigation.navigate,
   setTheme: Config.setTheme,
-  filterByCategory: HubNav.filterByCategory,
-  showComponentDetails: HubNav.showComponentDetails,
-  loadChapter: HubNav.loadChapter,
 };
