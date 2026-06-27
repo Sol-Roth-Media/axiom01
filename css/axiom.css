@@ -12934,3 +12934,51 @@ footer .scroll-top:hover {
   background: var(--a-color-primary);
   color: var(--a-color-on-primary);
 }
+
+/* ============================================================================
+   HERO SECTION — container-direct child targeting
+   (index.html uses section.hero > div.container > p, not .content > p)
+   ============================================================================ */
+
+section.hero .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+section.hero .container h1 {
+    text-align: center;
+    margin-bottom: var(--a-space-m);
+}
+
+section.hero .container .tagline {
+    text-align: center;
+}
+
+section.hero .container > p:not(.tagline) {
+    text-align: center;
+    max-width: 700px;
+    margin: var(--a-space-m) auto 0 auto;
+    line-height: 1.6;
+    color: var(--a-color-on-gradient);
+    opacity: 0.95;
+}
+
+/* ============================================================================
+   NAV LINKS — hide at full desktop, show hamburger only on wide screens
+   The existing header.main nav already works ≤992px;
+   ul.links is visible at >992px which is the desired desktop behaviour.
+   The reported issue was the menu toggle was also visible at full res.
+   ============================================================================ */
+
+/* Ensure hamburger is hidden at desktop, visible at mobile */
+@media (min-width: 993px) {
+    header.main .menu.toggle {
+        display: none !important;
+    }
+    header.main ul.links {
+        display: flex !important;
+    }
+}
+
