@@ -739,3 +739,80 @@ const ComponentSearch = (() => {
   };
 })();
 
+
+// ============================================================================
+// MOBILE MENU MANAGEMENT
+// ============================================================================
+
+const MobileMenu = (() => {
+  const init = () => {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    
+    if (!menuToggle || !mobileMenu) return;
+
+    // Toggle menu open/close
+    menuToggle.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      if (isHidden) {
+        mobileMenu.classList.remove('hidden');
+        menuToggle.setAttribute('aria-expanded', 'true');
+      } else {
+        mobileMenu.classList.add('hidden');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close menu when nav button clicked
+    document.querySelectorAll('#mobile-menu button[data-nav]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Mobile theme toggle
+    if (mobileThemeToggle) {
+      mobileThemeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = current === 'dark' ? 'light' : 'dark';
+        Config.setTheme(next);
+        updateMobileThemeButton(next);
+      });
+    }
+
+    // Close menu when pressing Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
+  };
+
+  const updateMobileThemeButton = (theme) => {
+    const btn = document.getElementById('mobile-theme-toggle');
+    if (btn) {
+      btn.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+    }
+  };
+
+  return {
+    init,
+  };
+})();
+
+// Add to DOMContentLoaded initialization
+// MobileMenu.init();
+
