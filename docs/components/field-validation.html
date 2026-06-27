@@ -1,500 +1,376 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Field Validation Component - Axiom01</title>
-    <link rel="stylesheet" href="../../css/axiom.min.css">
-    <link rel="stylesheet" href="../../css/axicons.css">
-    <link rel="stylesheet" href="../../css/docs.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Field Validation - Axiom01</title>
+	<script>(function(){const t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();</script>
+	<link rel="stylesheet" href="../../css/axiom.min.css">
+	<link rel="stylesheet" href="../../css/axicons.css">
+	<link rel="stylesheet" href="../../css/docs.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body class="axiom-body component-doc">
-    <!-- HEADER NAVIGATION -->
-    <header class="main" data-component="mobile-navbar">
-        <nav role="navigation" aria-label="Main Navigation">
-            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-            <ul class="links">
-                <li><a href="../../index.html#get-started">Get Started</a></li>
-                <li><a href="../components-overview.html">Docs</a></li>
-                <li><a href="../../index.html#axicons">Axicons</a></li>
-            </ul>
 
-            <div class="actions">
-                <button class="search toggle" aria-label="Open Search">
-                    <span class="axicon render" data-name="Search"></span>
-                </button>
-                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-                    <span class="axicon render" data-name="GitHub"></span>
-                    <span>GitHub</span>
-                </a>
-                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="axicon render" data-name="Moon"></span>
-                </button>
-                <button class="menu toggle" aria-label="Toggle Menu">
-                    <span class="axicon render" data-name="Menu"></span>
-                </button>
-            </div>
-        </nav>
-    </header>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <main><section><div class="container">
-        <header>
-            <h1>Field Validation</h1>
-            <p class="text-muted">Semantic form field wrapper with validation states using data attributes for error display, focus states, and validation feedback.</p>
-        </header>
+<header class="main" data-component="mobile-navbar">
+	<nav role="navigation" aria-label="Main Navigation">
+		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
+		<ul class="links">
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html" aria-current="page">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+		<div class="actions">
+			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+		</div>
+	</nav>
+</header>
 
-        <div class="component-section">
+<main id="main-content">
 
-            <section>
-                <h2>Basic Field</h2>
-                <div class="field">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" placeholder="Enter your full name">
-                </div>
+	<section>
+		<div class="container">
 
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="field"&gt;
-    &lt;label for="name"&gt;Full Name&lt;/label&gt;
-    &lt;input type="text" id="name" placeholder="Enter your full name"&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
+			<header>
+				<h1>Field Validation</h1>
+				<p>Semantic form field wrapper with validation states using data attributes for error display, focus states, and validation feedback.</p>
+			</header>
 
-            <section>
-                <h2>Field with Different Input Types</h2>
+			<section>
+				<h2>Basic Field</h2>
+				<div class="field">
+				<label for="name">Full Name</label>
+				<input type="text" id="name" placeholder="Enter your full name">
+				</div>
 
-                <h3>Email Input</h3>
-                <div class="field">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="user@example.com">
-                </div>
+				<pre><code class="language-html">&lt;div class="field"&gt;
+				&lt;label for="name"&gt;Full Name&lt;/label&gt;
+				&lt;input type="text" id="name" placeholder="Enter your full name"&gt;
+				&lt;/div&gt;</code></pre>
+			</section>
 
-                <h3>Password Input</h3>
-                <div class="field">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="••••••••">
-                </div>
+			<section>
+				<h2>Field with Different Input Types</h2>
 
-                <h3>Textarea</h3>
-                <div class="field">
-                    <label for="message">Message</label>
-                    <textarea id="message" placeholder="Enter your message..." rows="4"></textarea>
-                </div>
+				<h3>Email Input</h3>
+				<div class="field">
+				<label for="email">Email Address</label>
+				<input type="email" id="email" placeholder="user@example.com">
+				</div>
 
-                <h3>Select Dropdown</h3>
-                <div class="field">
-                    <label for="country">Country</label>
-                    <select id="country">
-                        <option value="">Select a country</option>
-                        <option value="us">United States</option>
-                        <option value="ca">Canada</option>
-                        <option value="uk">United Kingdom</option>
-                        <option value="au">Australia</option>
-                    </select>
-                </div>
+				<h3>Password Input</h3>
+				<div class="field">
+				<label for="password">Password</label>
+				<input type="password" id="password" placeholder="••••••••">
+				</div>
 
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;!-- Email field --&gt;
-&lt;div class="field"&gt;
-    &lt;label for="email"&gt;Email Address&lt;/label&gt;
-    &lt;input type="email" id="email" placeholder="user@example.com"&gt;
-&lt;/div&gt;
+				<h3>Textarea</h3>
+				<div class="field">
+				<label for="message">Message</label>
+				<textarea id="message" placeholder="Enter your message..." rows="4"></textarea>
+				</div>
 
-&lt;!-- Textarea field --&gt;
-&lt;div class="field"&gt;
-    &lt;label for="message"&gt;Message&lt;/label&gt;
-    &lt;textarea id="message" rows="4"&gt;&lt;/textarea&gt;
-&lt;/div&gt;
+				<h3>Select Dropdown</h3>
+				<div class="field">
+				<label for="country">Country</label>
+				<select id="country">
+				<option value="">Select a country</option>
+				<option value="us">United States</option>
+				<option value="ca">Canada</option>
+				<option value="uk">United Kingdom</option>
+				<option value="au">Australia</option>
+				</select>
+				</div>
 
-&lt;!-- Select field --&gt;
-&lt;div class="field"&gt;
-    &lt;label for="country"&gt;Country&lt;/label&gt;
-    &lt;select id="country"&gt;
-        &lt;option value=""&gt;Select...&lt;/option&gt;
-        &lt;option value="us"&gt;United States&lt;/option&gt;
-    &lt;/select&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
+				<pre><code class="language-html">&lt;!-- Email field --&gt;
+				&lt;div class="field"&gt;
+				&lt;label for="email"&gt;Email Address&lt;/label&gt;
+				&lt;input type="email" id="email" placeholder="user@example.com"&gt;
+				&lt;/div&gt;
 
-            <section>
-                <h2>Invalid Field with Error State</h2>
-                <div class="field" data-invalid="true">
-                    <label for="invalid-email">Email Address</label>
-                    <input type="email" id="invalid-email" value="not-an-email" placeholder="user@example.com" aria-invalid="true" aria-describedby="email-error">
-                    <div id="email-error" role="alert" style="color: var(--a-color-error); font-size: 0.875rem; margin-top: var(--a-space-s); display: flex; align-items: center; gap: var(--a-space-s);">
-                        <span class="axicon render" data-name="AlertCircle" style="flex-shrink: 0;"></span>
-                        <span>Please enter a valid email address</span>
-                    </div>
-                </div>
+				&lt;!-- Textarea field --&gt;
+				&lt;div class="field"&gt;
+				&lt;label for="message"&gt;Message&lt;/label&gt;
+				&lt;textarea id="message" rows="4"&gt;&lt;/textarea&gt;
+				&lt;/div&gt;
 
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;!-- Invalid field state --&gt;
-&lt;div class="field" data-invalid="true"&gt;
-    &lt;label for="invalid-email"&gt;Email Address&lt;/label&gt;
-    &lt;input type="email" id="invalid-email" value="not-an-email" aria-invalid="true" aria-describedby="email-error"&gt;
-    &lt;div id="email-error" role="alert" style="color: var(--a-color-error); font-size: 0.875rem; margin-top: var(--a-space-s); display: flex; align-items: center; gap: var(--a-space-s);"&gt;
-        &lt;span class="axicon render" data-name="AlertCircle"&gt;&lt;/span&gt;
-        &lt;span&gt;Please enter a valid email address&lt;/span&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
+				&lt;!-- Select field --&gt;
+				&lt;div class="field"&gt;
+				&lt;label for="country"&gt;Country&lt;/label&gt;
+				&lt;select id="country"&gt;
+				&lt;option value=""&gt;Select...&lt;/option&gt;
+				&lt;option value="us"&gt;United States&lt;/option&gt;
+				&lt;/select&gt;
+				&lt;/div&gt;</code></pre>
+			</section>
 
-            <section>
-                <h2>Valid Field with Success State</h2>
-                <div class="field" data-valid="true">
-                    <label for="valid-email">Email Address</label>
-                    <input type="email" id="valid-email" value="user@example.com" placeholder="user@example.com" aria-describedby="email-success">
-                    <div id="email-success" style="color: var(--a-color-success); font-size: 0.875rem; margin-top: var(--a-space-s); display: flex; align-items: center; gap: var(--a-space-s);">
-                        <span class="axicon render" data-name="Check" style="flex-shrink: 0;"></span>
-                        <span>Email is valid</span>
-                    </div>
-                </div>
+			<section>
+				<h2>Invalid Field with Error State</h2>
+				<div class="field" data-invalid="true">
+				<label for="invalid-email">Email Address</label>
+				<input type="email" id="invalid-email" value="not-an-email" placeholder="user@example.com" aria-invalid="true" aria-describedby="email-error">
+				<div id="email-error" role="alert" style="color: var(--a-color-error); font-size: 0.875rem; margin-top: var(--a-space-s); display: flex; align-items: center; gap: var(--a-space-s);">
+				<span class="axicon render" data-name="AlertCircle"></span>
+				<span>Please enter a valid email address</span>
+				</div>
+				</div>
 
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;!-- Valid field state --&gt;
-&lt;div class="field" data-valid="true"&gt;
-    &lt;label for="valid-email"&gt;Email Address&lt;/label&gt;
-    &lt;input type="email" id="valid-email" value="user@example.com" aria-describedby="email-success"&gt;
-    &lt;div id="email-success" style="color: var(--a-color-success); font-size: 0.875rem; margin-top: var(--a-space-s); display: flex; align-items: center; gap: var(--a-space-s);"&gt;
-        &lt;span class="axicon render" data-name="Check"&gt;&lt;/span&gt;
-        &lt;span&gt;Email is valid&lt;/span&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
+				<pre><code class="language-html">&lt;!-- Invalid field state --&gt;
+				&lt;div class="field" data-invalid="true"&gt;
+				&lt;label for="invalid-email"&gt;Email Address&lt;/label&gt;
+				&lt;input type="email" id="invalid-email" value="not-an-email" aria-invalid="true" aria-describedby="email-error"&gt;
+				&lt;div id="email-error" role="alert" style="color: var(--a-color-error); font-size: 0.875rem; margin-top: var(--a-space-s); display: flex; align-items: center; gap: var(--a-space-s);"&gt;
+				&lt;span class="axicon render" data-name="AlertCircle"&gt;&lt;/span&gt;
+				&lt;span&gt;Please enter a valid email address&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;/div&gt;</code></pre>
+			</section>
 
-            <section>
-                <h2>Interactive Validation Demo</h2>
-                <form style="display: flex; flex-direction: column; gap: var(--a-space-l);">
-                    <div class="field">
-                        <label for="demo-email">Email (validate on blur)</label>
-                        <input type="email" id="demo-email" placeholder="user@example.com" aria-describedby="demo-email-feedback">
-                        <div id="demo-email-feedback" style="font-size: 0.875rem; margin-top: var(--a-space-s);"></div>
-                    </div>
-                    <div class="field">
-                        <label for="demo-password">Password (min 8 characters)</label>
-                        <input type="password" id="demo-password" placeholder="••••••••" aria-describedby="demo-password-feedback">
-                        <div id="demo-password-feedback" style="font-size: 0.875rem; margin-top: var(--a-space-s);"></div>
-                    </div>
-                    <button type="submit" class="button primary">Submit</button>
-                </form>
-            </section>
+			<section>
+				<h2>Valid Field with Success State</h2>
+				<div class="field" data-valid="true">
+				<label for="valid-email">Email Address</label>
+				<input type="email" id="valid-email" value="user@example.com" placeholder="user@example.com" aria-describedby="email-success">
+				<div id="email-success" style="color: var(--a-color-success); font-size: 0.875rem; margin-top: var(--a-space-s); display: flex; align-items: center; gap: var(--a-space-s);">
+				<span class="axicon render" data-name="Check"></span>
+				<span>Email is valid</span>
+				</div>
+				</div>
 
-            <section>
-                <h2>Field Structure</h2>
-                <ul>
-                    <li><strong>`.field` wrapper</strong> - Container for label + input</li>
-                    <li><strong>`<label>` element</strong> - Associated with `for` attribute</li>
-                    <li><strong>Input elements</strong> - `<input>`, `<textarea>`, `<select>`</li>
-                    <li><strong>`data-invalid="true"`</strong> - Marks field as invalid</li>
-                    <li><strong>`data-valid="true"`</strong> - Marks field as valid (optional)</li>
-                    <li><strong>Error message</strong> - Semantic `<div role="alert">` with icon + text</li>
-                    <li><strong>`aria-invalid="true"`</strong> - Screen reader indicator</li>
-                    <li><strong>`aria-describedby`</strong> - Links input to error/success message</li>
-                </ul>
-            </section>
+				<pre><code class="language-html">&lt;!-- Valid field state --&gt;
+				&lt;div class="field" data-valid="true"&gt;
+				&lt;label for="valid-email"&gt;Email Address&lt;/label&gt;
+				&lt;input type="email" id="valid-email" value="user@example.com" aria-describedby="email-success"&gt;
+				&lt;div id="email-success" style="color: var(--a-color-success); font-size: 0.875rem; margin-top: var(--a-space-s); display: flex; align-items: center; gap: var(--a-space-s);"&gt;
+				&lt;span class="axicon render" data-name="Check"&gt;&lt;/span&gt;
+				&lt;span&gt;Email is valid&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;/div&gt;</code></pre>
+			</section>
 
-            <section>
-                <h2>Data Attributes</h2>
-                <ul>
-                    <li><strong>`data-invalid="true"`</strong> - Field has validation error</li>
-                    <li><strong>`data-valid="true"`</strong> - Field passed validation (optional)</li>
-                    <li><strong>`data-focused="true"`</strong> - (Auto-applied on focus) Field has focus</li>
-                </ul>
-            </section>
+			<section>
+				<h2>Interactive Validation Demo</h2>
+				<form style="display: flex; flex-direction: column; gap: var(--a-space-l);">
+				<div class="field">
+				<label for="demo-email">Email (validate on blur)</label>
+				<input type="email" id="demo-email" placeholder="user@example.com" aria-describedby="demo-email-feedback">
 
-            <section>
-                <h2>ARIA Attributes</h2>
-                <ul>
-                    <li><strong>`aria-invalid="true"`</strong> - Indicates invalid input</li>
-                    <li><strong>`aria-describedby="id"`</strong> - Links to error/success message</li>
-                    <li><strong>`role="alert"`</strong> - Error messages announce immediately</li>
-                    <li><strong>`aria-label` or `aria-labelledby`</strong> - Alternative labeling if needed</li>
-                </ul>
-            </section>
+				</div>
+				<div class="field">
+				<label for="demo-password">Password (min 8 characters)</label>
+				<input type="password" id="demo-password" placeholder="••••••••" aria-describedby="demo-password-feedback">
 
-            <section>
-                <h2>Validation Example (JavaScript)</h2>
-                <div class="code-block">
-                    <pre><code class="language-javascript">// Email validation
-const emailInput = document.querySelector('#demo-email');
-const emailFeedback = document.querySelector('#demo-email-feedback');
-const emailField = emailInput.closest('.field');
+				</div>
+				<button type="submit" class="button primary">Submit</button>
+				</form>
+			</section>
 
-emailInput.addEventListener('blur', function () {
-    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value);
-    
-    if (!isValid && this.value) {
-        emailField.setAttribute('data-invalid', 'true');
-        emailInput.setAttribute('aria-invalid', 'true');
-        emailFeedback.innerHTML = `
-            &lt;div role="alert" style="color: var(--a-color-error); display: flex; align-items: center; gap: var(--a-space-s);"&gt;
-                &lt;span class="axicon render" data-name="AlertCircle"&gt;&lt;/span&gt;
-                &lt;span&gt;Please enter a valid email address&lt;/span&gt;
-            &lt;/div&gt;
-        `;
-    } else {
-        emailField.removeAttribute('data-invalid');
-        emailField.setAttribute('data-valid', 'true');
-        emailInput.setAttribute('aria-invalid', 'false');
-        emailFeedback.innerHTML = `
-            &lt;div style="color: var(--a-color-success); display: flex; align-items: center; gap: var(--a-space-s);"&gt;
-                &lt;span class="axicon render" data-name="Check"&gt;&lt;/span&gt;
-                &lt;span&gt;Email is valid&lt;/span&gt;
-            &lt;/div&gt;
-        `;
-        renderAxicons();
-    }
-});</code></pre>
-                </div>
-            </section>
+			<section>
+				<h2>Field Structure</h2>
+				<ul>
+				<li><strong>`.field` wrapper</strong> - Container for label + input</li>
+				<li><strong>`<label>` element</strong> - Associated with `for` attribute</li>
+				<li><strong>Input elements</strong> - `<input>`, `<textarea>`, `<select>`</li>
+				<li><strong>`data-invalid="true"`</strong> - Marks field as invalid</li>
+				<li><strong>`data-valid="true"`</strong> - Marks field as valid (optional)</li>
+				<li><strong>Error message</strong> - Semantic `<div role="alert">` with icon + text</li>
+				<li><strong>`aria-invalid="true"`</strong> - Screen reader indicator</li>
+				<li><strong>`aria-describedby`</strong> - Links input to error/success message</li>
+				</ul>
+			</section>
 
-            <section>
-                <h2>Key Features</h2>
-                <ul>
-                    <li><strong>Semantic HTML</strong> - Native form elements with proper labels</li>
-                    <li><strong>Single Class</strong> - Only `.field` wrapper class</li>
-                    <li><strong>Data Attributes</strong> - `data-invalid`, `data-valid` for state</li>
-                    <li><strong>ARIA Complete</strong> - `aria-invalid`, `aria-describedby`, `role="alert"`</li>
-                    <li><strong>Error Display</strong> - Icons + text with proper colors</li>
-                    <li><strong>Success Feedback</strong> - Optional validation success indication</li>
-                    <li><strong>Design Tokens</strong> - All colors and spacing from var(--a-*)</li>
-                </ul>
-            </section>
+			<section>
+				<h2>Data Attributes</h2>
+				<ul>
+				<li><strong>`data-invalid="true"`</strong> - Field has validation error</li>
+				<li><strong>`data-valid="true"`</strong> - Field passed validation (optional)</li>
+				<li><strong>`data-focused="true"`</strong> - (Auto-applied on focus) Field has focus</li>
+				</ul>
+			</section>
 
-            <section class="section">
-                <h2 class="title">Responsive Behavior</h2>
-                <p>This component automatically adapts to different screen sizes:</p>
-                
-                <h3>Mobile (< 768px)</h3>
-                <p>On mobile devices:</p>
-                <ul>
-                    <li>Optimized for small screens</li>
-                    <li>Touch-friendly spacing maintained (44px minimum)</li>
-                    <li>Text wraps naturally without overflow</li>
-                    <li>Content density optimized for readability</li>
-                </ul>
+			<section>
+				<h2>ARIA Attributes</h2>
+				<ul>
+				<li><strong>`aria-invalid="true"`</strong> - Indicates invalid input</li>
+				<li><strong>`aria-describedby="id"`</strong> - Links to error/success message</li>
+				<li><strong>`role="alert"`</strong> - Error messages announce immediately</li>
+				<li><strong>`aria-label` or `aria-labelledby`</strong> - Alternative labeling if needed</li>
+				</ul>
+			</section>
 
-                <h3>Desktop (1024px+)</h3>
-                <p>On desktop displays:</p>
-                <ul>
-                    <li>Enhanced visual features</li>
-                    <li>Hover states and transitions</li>
-                    <li>Full keyboard navigation support</li>
-                    <li>Optimal spacing and sizing</li>
-                </ul>
+			<section>
+				<h2>Validation Example (JavaScript)</h2>
+				<pre><code class="language-javascript">// Email validation
+				const emailInput = document.querySelector('#demo-email');
+				const emailFeedback = document.querySelector('#demo-email-feedback');
+				const emailField = emailInput.closest('.field');
 
-                <h3>Framework Integration</h3>
-                <p>Responsive behavior is automatic:</p>
-                <ul>
-                    <li>Framework handles media queries</li>
-                    <li>No custom CSS required</li>
-                    <li>Mobile-first approach applied</li>
-                    <li>Accessibility maintained at all sizes</li>
-                </ul>
-            </section>
+				emailInput.addEventListener('blur', function () {
+				const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value);
 
-            <section>
-                <h2>Best Practices</h2>
-                <ul>
-                    <li>Always use `<label for="id">` paired with input id</li>
-                    <li>Validate on blur, not on every keystroke</li>
-                    <li>Show errors with icon + text for clarity</li>
-                    <li>Use `aria-invalid="true"` for screen readers</li>
-                    <li>Link errors to inputs with `aria-describedby`</li>
-                    <li>Use `role="alert"` for error messages</li>
-                    <li>Provide success feedback when field is valid</li>
-                    <li>Keep error messages clear and actionable</li>
-                </ul>
-            </section>
+				if (!isValid && this.value) {
+				emailField.setAttribute('data-invalid', 'true');
+				emailInput.setAttribute('aria-invalid', 'true');
+				emailFeedback.innerHTML = `
+				&lt;div role="alert" style="color: var(--a-color-error); display: flex; align-items: center; gap: var(--a-space-s);"&gt;
+				&lt;span class="axicon render" data-name="AlertCircle"&gt;&lt;/span&gt;
+				&lt;span&gt;Please enter a valid email address&lt;/span&gt;
+				&lt;/div&gt;
+				`;
+				} else {
+				emailField.removeAttribute('data-invalid');
+				emailField.setAttribute('data-valid', 'true');
+				emailInput.setAttribute('aria-invalid', 'false');
+				emailFeedback.innerHTML = `
+				&lt;div style="color: var(--a-color-success); display: flex; align-items: center; gap: var(--a-space-s);"&gt;
+				&lt;span class="axicon render" data-name="Check"&gt;&lt;/span&gt;
+				&lt;span&gt;Email is valid&lt;/span&gt;
+				&lt;/div&gt;
+				`;
+				renderAxicons();
+				}
+				});</code></pre>
+			</section>
 
-            <section>
-                <h2>Use Cases</h2>
-                <ul>
-                    <li><strong>Contact Forms</strong> - Validate name, email, message</li>
-                    <li><strong>Sign Up Forms</strong> - Email, password, confirmation</li>
-                    <li><strong>Login Forms</strong> - Email/username, password</li>
-                    <li><strong>Profile Forms</strong> - Personal information validation</li>
-                    <li><strong>Search Filters</strong> - Input validation for queries</li>
-                </ul>
-            </section>
+			<section>
+				<h2>Key Features</h2>
+				<ul>
+				<li><strong>Semantic HTML</strong> - Native form elements with proper labels</li>
+				<li><strong>Single Class</strong> - Only `.field` wrapper class</li>
+				<li><strong>Data Attributes</strong> - `data-invalid`, `data-valid` for state</li>
+				<li><strong>ARIA Complete</strong> - `aria-invalid`, `aria-describedby`, `role="alert"`</li>
+				<li><strong>Error Display</strong> - Icons + text with proper colors</li>
+				<li><strong>Success Feedback</strong> - Optional validation success indication</li>
+				<li><strong>Design Tokens</strong> - All colors and spacing from var(--a-*)</li>
+				</ul>
+			</section>
 
-        </div>
+			<section>
+				<h2>Responsive Behavior</h2>
+				<p>This component automatically adapts to different screen sizes:</p>
 
-    </div></section></main>
+				<h3>Mobile (< 768px)</h3>
+				<p>On mobile devices:</p>
+				<ul>
+				<li>Optimized for small screens</li>
+				<li>Touch-friendly spacing maintained (44px minimum)</li>
+				<li>Text wraps naturally without overflow</li>
+				<li>Content density optimized for readability</li>
+				</ul>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            <!-- Main Content Grid -->
-            <div class="footer-content">
-                <!-- Brand Section -->
-                <div class="footer-brand">
-                    <a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-                    <p class="footer-tagline">The Semantic Web, Reimagined.</p>
-                </div>
+				<h3>Desktop (1024px+)</h3>
+				<p>On desktop displays:</p>
+				<ul>
+				<li>Enhanced visual features</li>
+				<li>Hover states and transitions</li>
+				<li>Full keyboard navigation support</li>
+				<li>Optimal spacing and sizing</li>
+				</ul>
 
-                <!-- Documentation Links -->
-                <div class="footer-column">
-                    <h4>Documentation</h4>
-                    <ul>
-                        <li><a href="../components-overview.html">Component Overview</a></li>
-                        <li><a href="../overview-quickstart.html">Get Started</a></li>
-                        <li><a href="../colors-advanced.html">Colors & Tokens</a></li>
-                    </ul>
-                </div>
+				<h3>Framework Integration</h3>
+				<p>Responsive behavior is automatic:</p>
+				<ul>
+				<li>Framework handles media queries</li>
+				<li>No custom CSS required</li>
+				<li>Mobile-first approach applied</li>
+				<li>Accessibility maintained at all sizes</li>
+				</ul>
+			</section>
 
-                <!-- Resources Links -->
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="../../README.md" target="_blank">README</a></li>
-                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-                        <li><a href="../../LICENSE" target="_blank">License</a></li>
-                    </ul>
-                </div>
+			<section>
+				<h2>Best Practices</h2>
+				<ul>
+				<li>Always use `<label for="id">` paired with input id</li>
+				<li>Validate on blur, not on every keystroke</li>
+				<li>Show errors with icon + text for clarity</li>
+				<li>Use `aria-invalid="true"` for screen readers</li>
+				<li>Link errors to inputs with `aria-describedby`</li>
+				<li>Use `role="alert"` for error messages</li>
+				<li>Provide success feedback when field is valid</li>
+				<li>Keep error messages clear and actionable</li>
+				</ul>
+			</section>
 
-                <!-- Community Links -->
-                <div class="footer-column">
-                    <h4>Community</h4>
-                    <ul>
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
-                    </ul>
-                </div>
-            </div>
+			<section>
+				<h2>Use Cases</h2>
+				<ul>
+				<li><strong>Contact Forms</strong> - Validate name, email, message</li>
+				<li><strong>Sign Up Forms</strong> - Email, password, confirmation</li>
+				<li><strong>Login Forms</strong> - Email/username, password</li>
+				<li><strong>Profile Forms</strong> - Personal information validation</li>
+				<li><strong>Search Filters</strong> - Input validation for queries</li>
+				</ul>
+			</section>
 
-            <!-- Bottom Section -->
-            <div class="footer-bottom">
-                <p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
-                <ul class="footer-social">
-                    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
-                        <span class="axicon render" data-name="GitHub"></span>
-                    </a></li>
-                    <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
-                        <span class="axicon render" data-name="Brand-NPM"></span>
-                    </a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+		</div>
+	</section>
 
-    <script src="../../js/axiom.js"></script>
-    <script src="../../js/index-page-manager.js"></script>
-    <script>
-        // Email validation demo
-        const emailInput = document.querySelector('#demo-email');
-        const emailFeedback = document.querySelector('#demo-email-feedback');
-        const emailField = emailInput?.closest('.field');
+</main>
 
-        if (emailInput) {
-            emailInput.addEventListener('blur', function () {
-                const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value);
-                
-                if (!isValid && this.value) {
-                    emailField.setAttribute('data-invalid', 'true');
-                    emailInput.setAttribute('aria-invalid', 'true');
-                    emailFeedback.innerHTML = `
-                        <div role="alert" style="color: var(--a-color-error); display: flex; align-items: center; gap: var(--a-space-s);">
-                            <span class="axicon render" data-name="AlertCircle"></span>
-                            <span>Please enter a valid email address</span>
-                        </div>
-                    `;
-                    renderAxicons();
-                } else if (this.value) {
-                    emailField.removeAttribute('data-invalid');
-                    emailField.setAttribute('data-valid', 'true');
-                    emailInput.setAttribute('aria-invalid', 'false');
-                    emailFeedback.innerHTML = `
-                        <div style="color: var(--a-color-success); display: flex; align-items: center; gap: var(--a-space-s);">
-                            <span class="axicon render" data-name="Check"></span>
-                            <span>Email is valid</span>
-                        </div>
-                    `;
-                    renderAxicons();
-                } else {
-                    emailField.removeAttribute('data-invalid');
-                    emailField.removeAttribute('data-valid');
-                    emailFeedback.innerHTML = '';
-                }
-            });
-        }
+<footer class="footer">
+	<div class="container">
+		<div class="footer-content">
+			<div class="footer-brand">
+				<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+			</div>
+			<div class="footer-column">
+				<h4>Documentation</h4>
+				<ul>
+					<li><a href="../components-overview.html">All Components</a></li>
+					<li><a href="../overview-quickstart.html">Get Started</a></li>
+					<li><a href="../colors-advanced.html">Colors &amp; Tokens</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Resources</h4>
+				<ul>
+					<li><a href="../../README.md" target="_blank">README</a></li>
+					<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+					<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Community</h4>
+				<ul>
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
+			<ul class="footer-social">
+				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
+				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
 
-        // Password validation demo
-        const passwordInput = document.querySelector('#demo-password');
-        const passwordFeedback = document.querySelector('#demo-password-feedback');
-        const passwordField = passwordInput?.closest('.field');
-
-        if (passwordInput) {
-            passwordInput.addEventListener('blur', function () {
-                const isValid = this.value.length >= 8;
-                
-                if (!isValid && this.value) {
-                    passwordField.setAttribute('data-invalid', 'true');
-                    passwordInput.setAttribute('aria-invalid', 'true');
-                    passwordFeedback.innerHTML = `
-                        <div role="alert" style="color: var(--a-color-error); display: flex; align-items: center; gap: var(--a-space-s);">
-                            <span class="axicon render" data-name="AlertCircle"></span>
-                            <span>Password must be at least 8 characters</span>
-                        </div>
-                    `;
-                    renderAxicons();
-                } else if (this.value) {
-                    passwordField.removeAttribute('data-invalid');
-                    passwordField.setAttribute('data-valid', 'true');
-                    passwordInput.setAttribute('aria-invalid', 'false');
-                    passwordFeedback.innerHTML = `
-                        <div style="color: var(--a-color-success); display: flex; align-items: center; gap: var(--a-space-s);">
-                            <span class="axicon render" data-name="Check"></span>
-                            <span>Password is strong</span>
-                        </div>
-                    `;
-                    renderAxicons();
-                } else {
-                    passwordField.removeAttribute('data-invalid');
-                    passwordField.removeAttribute('data-valid');
-                    passwordFeedback.innerHTML = '';
-                }
-            });
-        }
-
-        function renderAxicons() {
-            if (typeof axicons === 'undefined') {
-                setTimeout(renderAxicons, 100);
-                return;
-            }
-            document.querySelectorAll('.axicon.render').forEach(el => {
-                const name = el.getAttribute('data-name');
-                if (!name) return;
-                const icon = axicons.find(i => i.name === name);
-                if (icon) {
-                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-                }
-            });
-        }
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderAxicons);
-        } else {
-            renderAxicons();
-        }
-        setTimeout(renderAxicons, 500);
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script src="../../js/axicons-loader.js"></script>
-    <script src="../../js/axicons-base.js"></script>
-    <script src="../../js/axicons-thin-variants.js"></script>
-    <script src="../../js/axicons-inverted-variants.js"></script>
-    <script src="../../js/axicons-color-variants.js"></script>
-    <script src="../../js/axicons-premium-variants.js"></script>
-    <script src="../../js/render-icons.js"></script>
+<script src="../../js/axiom.js"></script>
+<script src="../../js/index-page-manager.js"></script>
+<script>
+function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="../../js/axicons-loader.js"></script>
+<script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-thin-variants.js"></script>
+<script src="../../js/axicons-inverted-variants.js"></script>
+<script src="../../js/axicons-color-variants.js"></script>
+<script src="../../js/axicons-premium-variants.js"></script>
+<script src="../../js/render-icons.js"></script>
 </body>
 </html>

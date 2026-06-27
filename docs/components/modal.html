@@ -1,337 +1,295 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modal Component - Axiom01</title>
-    <link rel="stylesheet" href="../../css/axiom.min.css">
-    <link rel="stylesheet" href="../../css/axicons.css">
-    <link rel="stylesheet" href="../../css/docs.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Modal - Axiom01</title>
+	<script>(function(){const t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();</script>
+	<link rel="stylesheet" href="../../css/axiom.min.css">
+	<link rel="stylesheet" href="../../css/axicons.css">
+	<link rel="stylesheet" href="../../css/docs.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body class="axiom-body component-doc">
-    <!-- HEADER NAVIGATION -->
-	<header class="main" data-component="mobile-navbar">
-		<nav role="navigation" aria-label="Main Navigation">
-			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-			<ul class="links">
-				<li><a href="../../index.html#get-started">Get Started</a></li>
-				<li><a href="../components-overview.html">Docs</a></li>
-				<li><a href="../../index.html#axicons">Axicons</a></li>
-			</ul>
 
-			<div class="actions">
-				<button class="search toggle" aria-label="Open Search">
-					<span class="axicon render" data-name="Search"></span>
-				</button>
-				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-					<span class="axicon render" data-name="GitHub"></span>
-					<span>GitHub</span>
-				</a>
-				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-					<span class="axicon render" data-name="Moon"></span>
-				</button>
-				<button class="menu toggle" aria-label="Toggle Menu">
-					<span class="axicon render" data-name="Menu"></span>
-				</button>
-			</div>
-		</nav>
-	</header>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <main><section><div class="container">
-        <header>
-            <h1>Modal</h1>
-            <p class="text-muted">Semantic modal dialog component for focused user interactions. Single `.modal` class with proper ARIA roles and keyboard management.</p>
-        </header>
+<header class="main" data-component="mobile-navbar">
+	<nav role="navigation" aria-label="Main Navigation">
+		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
+		<ul class="links">
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html" aria-current="page">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+		<div class="actions">
+			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+		</div>
+	</nav>
+</header>
 
-        <div class="component-section">
+<main id="main-content">
 
-            <section>
-                <h2>Live Example</h2>
-                <button class="button primary" onclick="document.getElementById('demo-modal').style.display='flex'">
-                    Open Modal
-                </button>
-
-                <div class="modal" id="demo-modal" aria-modal="true" role="dialog" aria-labelledby="modal-title" style="display:none;">
-                    <div>
-                        <header>
-                            <h2 id="modal-title">Modal Title</h2>
-                            <button aria-label="Close modal" onclick="document.getElementById('demo-modal').style.display='none'">&times;</button>
-                        </header>
-                        <p>Modal content goes here. This is a semantic modal using single `.modal` class.</p>
-                        <footer>
-                            <button class="button secondary" onclick="document.getElementById('demo-modal').style.display='none'">Cancel</button>
-                            <button class="button primary" onclick="document.getElementById('demo-modal').style.display='none'">Confirm</button>
-                        </footer>
-                    </div>
-                </div>
-
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="modal" aria-modal="true" role="dialog" aria-labelledby="modal-title"&gt;
-    &lt;div&gt;
-        &lt;header&gt;
-            &lt;h2 id="modal-title"&gt;Modal Title&lt;/h2&gt;
-            &lt;button aria-label="Close modal"&gt;&times;&lt;/button&gt;
-        &lt;/header&gt;
-        &lt;p&gt;Modal content here.&lt;/p&gt;
-        &lt;footer&gt;
-            &lt;button class="button secondary"&gt;Cancel&lt;/button&gt;
-            &lt;button class="button primary"&gt;Confirm&lt;/button&gt;
-        &lt;/footer&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Markup Structure</h2>
-                <p>Modal uses semantic HTML with single `.modal` class:</p>
-                <pre><code class="language-html">&lt;div class="modal" aria-modal="true" role="dialog" aria-labelledby="modal-title"&gt;
-    &lt;!-- Centered container div --&gt;
-    &lt;div&gt;
-        &lt;!-- Header section --&gt;
-        &lt;header&gt;
-            &lt;h2 id="modal-title"&gt;Title&lt;/h2&gt;
-            &lt;button aria-label="Close modal"&gt;&times;&lt;/button&gt;
-        &lt;/header&gt;
-
-        &lt;!-- Main content --&gt;
-        &lt;p&gt;Modal body content...&lt;/p&gt;
-
-        &lt;!-- Footer with actions --&gt;
-        &lt;footer&gt;
-            &lt;button class="button secondary"&gt;Cancel&lt;/button&gt;
-            &lt;button class="button primary"&gt;Confirm&lt;/button&gt;
-        &lt;/footer&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-            </section>
-
-            <section>
-                <h2>Key Features</h2>
-                <ul>
-                    <li><strong>Semantic Structure</strong> - Uses `<header>`, `<footer>` for organization</li>
-                    <li><strong>Single Class</strong> - Only `.modal` class on container</li>
-                    <li><strong>ARIA Attributes</strong> - Full accessibility: `role="dialog"`, `aria-modal="true"`, `aria-labelledby`</li>
-                    <li><strong>Focus Management</strong> - Modal receives and traps focus</li>
-                    <li><strong>Dismissal Options</strong> - Close button, cancel button, or escape key</li>
-                    <li><strong>Responsive Design</strong> - Adapts to all screen sizes</li>
-                    <li><strong>No BEM Classes</strong> - No `.modal-header`, `.modal-body`, `.modal-footer`</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>JavaScript Implementation</h2>
-                <p>Control modal visibility with simple JavaScript:</p>
-                <pre><code class="language-javascript">// Open modal
-const openModal = (modalId) => {
-    const modal = document.getElementById(modalId);
-    modal.style.display = 'flex';
-    // Set focus to modal or first focusable element
-    modal.focus();
-};
-
-// Close modal
-const closeModal = (modalId) => {
-    document.getElementById(modalId).style.display = 'none';
-};
-
-// Close on escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const modal = document.querySelector('.modal[style*="flex"]');
-        if (modal) closeModal(modal.id);
-    }
-});
-
-// Close on outside click
-const modal = document.getElementById('modal-id');
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        closeModal('modal-id');
-    }
-});</code></pre>
-            </section>
-
-            <section>
-                <h2>Semantic Structure Details</h2>
-                <ul>
-                    <li>**`.modal`** - Main container with single class</li>
-                    <li>**Centered `<div>`** - Child div for centering content</li>
-                    <li>**`<header>`** - Title and close button (semantic)</li>
-                    <li>**Content** - Any semantic elements (paragraphs, forms, etc.)</li>
-                    <li>**`<footer>`** - Action buttons (semantic)</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>ARIA Attributes</h2>
-                <ul>
-                    <li>`role="dialog"` - Identifies as dialog/modal</li>
-                    <li>`aria-modal="true"` - Indicates modal behavior</li>
-                    <li>`aria-labelledby="modal-title"` - Links to modal title</li>
-                    <li>`aria-label` on close button - Describes purpose</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Accessibility</h2>
-                <ul>
-                    <li>Use semantic `<header>` and `<footer>` elements</li>
-                    <li>Include proper ARIA roles and attributes</li>
-                    <li>Trap focus within modal (don't allow tab outside)</li>
-                    <li>Support escape key to close</li>
-                    <li>Restore focus to triggering element after close</li>
-                    <li>Use descriptive button labels</li>
-                    <li>Ensure sufficient color contrast</li>
-                    <li>Test with keyboard and screen readers</li>
-                </ul>
-            </section>
-
-            <section class="section">
-                <h2 class="title">Responsive Behavior</h2>
-                <p>Modal dialogs adapt to all screen sizes:</p>
-                
-                <h3>Mobile (< 768px)</h3>
-                <p>On mobile, modals occupy most of the screen:</p>
-                <ul>
-                    <li>Modal width: 90vw (90% viewport width)</li>
-                    <li>Max-height: 90vh (fits within viewport)</li>
-                    <li>Close button clearly visible</li>
-                    <li>Content scrolls if needed</li>
-                    <li>Touch-friendly close targets (44px+)</li>
-                </ul>
-
-                <h3>Desktop (1024px+)</h3>
-                <p>Desktop modals use optimal sizing:</p>
-                <ul>
-                    <li>Fixed width (typically 500px-800px)</li>
-                    <li>Centered on screen</li>
-                    <li>Semi-transparent backdrop</li>
-                    <li>Keyboard navigation (ESC to close)</li>
-                </ul>
-
-                <h3>Framework Integration</h3>
-                <p>Modals use semantic HTML with responsive CSS:</p>
-                <ul>
-                    <li>Framework handles viewport constraints</li>
-                    <li>Backdrop layer automatic</li>
-                    <li>Focus trap and keyboard handling built-in</li>
-                    <li>Responsive sizing based on media queries</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Best Practices</h2>
-                <ul>
-                    <li>Use modals for critical user actions only</li>
-                    <li>Keep modal content focused and relevant</li>
-                    <li>Include clear action buttons (Primary + Secondary)</li>
-                    <li>Always provide a close button</li>
-                    <li>Use semantic HTML structure</li>
-                    <li>Implement keyboard support (Escape, Tab trap)</li>
-                    <li>Use single `.modal` class with semantic elements</li>
-                    <li>Test focus management thoroughly</li>
-                </ul>
-            </section>
-
-        </div>
-
-    </div></section></main>
-
-    <!-- FOOTER -->
-	<footer class="footer">
+	<section>
 		<div class="container">
-			<!-- Main Content Grid -->
-			<div class="footer-content">
-				<!-- Brand Section -->
-				<div class="footer-brand">
-					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+
+			<header>
+				<h1>Modal</h1>
+				<p>Semantic modal dialog component for focused user interactions. Single `.modal` class with proper ARIA roles and keyboard management.</p>
+			</header>
+
+			<section>
+				<h2>Live Example</h2>
+				<button class="button primary" onclick="document.getElementById('demo-modal').style.display='flex'">
+				Open Modal
+				</button>
+
+				<div class="modal" id="demo-modal" aria-modal="true" role="dialog" aria-labelledby="modal-title">
+				<header>
+				<h2 id="modal-title">Modal Title</h2>
+				<button aria-label="Close modal" onclick="document.getElementById('demo-modal').style.display='none'">&times;</button>
+				</header>
+				<p>Modal content goes here. This is a semantic modal using single `.modal` class.</p>
+				<footer>
+				<button class="button secondary" onclick="document.getElementById('demo-modal').style.display='none'">Cancel</button>
+				<button class="button primary" onclick="document.getElementById('demo-modal').style.display='none'">Confirm</button>
+				</footer>
 				</div>
 
-				<!-- Documentation Links -->
-				<div class="footer-column">
-					<h4>Documentation</h4>
-					<ul>
-						<li><a href="../components-overview.html">Component Overview</a></li>
-						<li><a href="../overview-quickstart.html">Get Started</a></li>
-						<li><a href="../colors-advanced.html">Colors & Tokens</a></li>
-					</ul>
-				</div>
+				<pre><code class="language-html">&lt;div class="modal" aria-modal="true" role="dialog" aria-labelledby="modal-title"&gt;
+				&lt;div&gt;
+				&lt;header&gt;
+				&lt;h2 id="modal-title"&gt;Modal Title&lt;/h2&gt;
+				&lt;button aria-label="Close modal"&gt;&times;&lt;/button&gt;
+				&lt;/header&gt;
+				&lt;p&gt;Modal content here.&lt;/p&gt;
+				&lt;footer&gt;
+				&lt;button class="button secondary"&gt;Cancel&lt;/button&gt;
+				&lt;button class="button primary"&gt;Confirm&lt;/button&gt;
+				&lt;/footer&gt;
+				&lt;/div&gt;
+				&lt;/div&gt;</code></pre>
+			</section>
 
-				<!-- Resources Links -->
-				<div class="footer-column">
-					<h4>Resources</h4>
-					<ul>
-						<li><a href="../../README.md" target="_blank">README</a></li>
-						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-						<li><a href="../../LICENSE" target="_blank">License</a></li>
-					</ul>
-				</div>
+			<section>
+				<h2>Markup Structure</h2>
+				<p>Modal uses semantic HTML with single `.modal` class:</p>
+				<pre><code class="language-html">&lt;div class="modal" aria-modal="true" role="dialog" aria-labelledby="modal-title"&gt;
+				&lt;!-- Centered container div --&gt;
+				&lt;div&gt;
+				&lt;!-- Header section --&gt;
+				&lt;header&gt;
+				&lt;h2 id="modal-title"&gt;Title&lt;/h2&gt;
+				&lt;button aria-label="Close modal"&gt;&times;&lt;/button&gt;
+				&lt;/header&gt;
 
-				<!-- Community Links -->
-				<div class="footer-column">
-					<h4>Community</h4>
-					<ul>
-						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
-					</ul>
-				</div>
+				&lt;!-- Main content --&gt;
+				&lt;p&gt;Modal body content...&lt;/p&gt;
+
+				&lt;!-- Footer with actions --&gt;
+				&lt;footer&gt;
+				&lt;button class="button secondary"&gt;Cancel&lt;/button&gt;
+				&lt;button class="button primary"&gt;Confirm&lt;/button&gt;
+				&lt;/footer&gt;
+				&lt;/div&gt;
+				&lt;/div&gt;</code></pre>
+			</section>
+
+			<section>
+				<h2>Key Features</h2>
+				<ul>
+				<li><strong>Semantic Structure</strong> - Uses `<header>`, `<footer>` for organization</li>
+				<li><strong>Single Class</strong> - Only `.modal` class on container</li>
+				<li><strong>ARIA Attributes</strong> - Full accessibility: `role="dialog"`, `aria-modal="true"`, `aria-labelledby`</li>
+				<li><strong>Focus Management</strong> - Modal receives and traps focus</li>
+				<li><strong>Dismissal Options</strong> - Close button, cancel button, or escape key</li>
+				<li><strong>Responsive Design</strong> - Adapts to all screen sizes</li>
+				<li><strong>No BEM Classes</strong> - No `.modal-header`, `.modal-body`, `.modal-footer`</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>JavaScript Implementation</h2>
+				<p>Control modal visibility with simple JavaScript:</p>
+				<pre><code class="language-javascript">// Open modal
+				const openModal = (modalId) => {
+				const modal = document.getElementById(modalId);
+				modal.style.display = 'flex';
+				// Set focus to modal or first focusable element
+				modal.focus();
+				};
+
+				// Close modal
+				const closeModal = (modalId) => {
+				document.getElementById(modalId).style.display = 'none';
+				};
+
+				// Close on escape key
+				document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') {
+				const modal = document.querySelector('.modal[style*="flex"]');
+				if (modal) closeModal(modal.id);
+				}
+				});
+
+				// Close on outside click
+				const modal = document.getElementById('modal-id');
+				modal.addEventListener('click', (e) => {
+				if (e.target === modal) {
+				closeModal('modal-id');
+				}
+				});</code></pre>
+			</section>
+
+			<section>
+				<h2>Semantic Structure Details</h2>
+				<ul>
+				<li>**`.modal`** - Main container with single class</li>
+				<li>**Centered `<div>`** - Child div for centering content</li>
+				<li>**`<header>`** - Title and close button (semantic)</li>
+				<li>**Content** - Any semantic elements (paragraphs, forms, etc.)</li>
+				<li>**`<footer>`** - Action buttons (semantic)</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>ARIA Attributes</h2>
+				<ul>
+				<li>`role="dialog"` - Identifies as dialog/modal</li>
+				<li>`aria-modal="true"` - Indicates modal behavior</li>
+				<li>`aria-labelledby="modal-title"` - Links to modal title</li>
+				<li>`aria-label` on close button - Describes purpose</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+				<li>Use semantic `<header>` and `<footer>` elements</li>
+				<li>Include proper ARIA roles and attributes</li>
+				<li>Trap focus within modal (don't allow tab outside)</li>
+				<li>Support escape key to close</li>
+				<li>Restore focus to triggering element after close</li>
+				<li>Use descriptive button labels</li>
+				<li>Ensure sufficient color contrast</li>
+				<li>Test with keyboard and screen readers</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Responsive Behavior</h2>
+				<p>Modal dialogs adapt to all screen sizes:</p>
+
+				<h3>Mobile (< 768px)</h3>
+				<p>On mobile, modals occupy most of the screen:</p>
+				<ul>
+				<li>Modal width: 90vw (90% viewport width)</li>
+				<li>Max-height: 90vh (fits within viewport)</li>
+				<li>Close button clearly visible</li>
+				<li>Content scrolls if needed</li>
+				<li>Touch-friendly close targets (44px+)</li>
+				</ul>
+
+				<h3>Desktop (1024px+)</h3>
+				<p>Desktop modals use optimal sizing:</p>
+				<ul>
+				<li>Fixed width (typically 500px-800px)</li>
+				<li>Centered on screen</li>
+				<li>Semi-transparent backdrop</li>
+				<li>Keyboard navigation (ESC to close)</li>
+				</ul>
+
+				<h3>Framework Integration</h3>
+				<p>Modals use semantic HTML with responsive CSS:</p>
+				<ul>
+				<li>Framework handles viewport constraints</li>
+				<li>Backdrop layer automatic</li>
+				<li>Focus trap and keyboard handling built-in</li>
+				<li>Responsive sizing based on media queries</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Best Practices</h2>
+				<ul>
+				<li>Use modals for critical user actions only</li>
+				<li>Keep modal content focused and relevant</li>
+				<li>Include clear action buttons (Primary + Secondary)</li>
+				<li>Always provide a close button</li>
+				<li>Use semantic HTML structure</li>
+				<li>Implement keyboard support (Escape, Tab trap)</li>
+				<li>Use single `.modal` class with semantic elements</li>
+				<li>Test focus management thoroughly</li>
+				</ul>
+			</section>
+
+		</div>
+	</section>
+
+</main>
+
+<footer class="footer">
+	<div class="container">
+		<div class="footer-content">
+			<div class="footer-brand">
+				<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
 			</div>
-
-			<!-- Bottom Section -->
-			<div class="footer-bottom">
-				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
-				<ul class="footer-social">
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
-						<span class="axicon render" data-name="GitHub"></span>
-					</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
-						<span class="axicon render" data-name="Brand-NPM"></span>
-					</a></li>
+			<div class="footer-column">
+				<h4>Documentation</h4>
+				<ul>
+					<li><a href="../components-overview.html">All Components</a></li>
+					<li><a href="../overview-quickstart.html">Get Started</a></li>
+					<li><a href="../colors-advanced.html">Colors &amp; Tokens</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Resources</h4>
+				<ul>
+					<li><a href="../../README.md" target="_blank">README</a></li>
+					<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+					<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Community</h4>
+				<ul>
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
 				</ul>
 			</div>
 		</div>
-	</footer>
+		<div class="footer-bottom">
+			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
+			<ul class="footer-social">
+				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
+				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
 
-    <script src="../../js/axiom.js"></script>
-    <script src="../../js/index-page-manager.js"></script>
-    <script>
-        function renderAxicons() {
-            if (typeof axicons === 'undefined') {
-                setTimeout(renderAxicons, 100);
-                return;
-            }
-            document.querySelectorAll('.axicon.render').forEach(el => {
-                const name = el.getAttribute('data-name');
-                if (!name) return;
-                const icon = axicons.find(i => i.name === name);
-                if (icon) {
-                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-                }
-            });
-        }
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderAxicons);
-        } else {
-            renderAxicons();
-        }
-        setTimeout(renderAxicons, 500);
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script src="../../js/axicons-loader.js"></script>
-    <script src="../../js/axicons-base.js"></script>
-    <script src="../../js/axicons-thin-variants.js"></script>
-    <script src="../../js/axicons-inverted-variants.js"></script>
-    <script src="../../js/axicons-color-variants.js"></script>
-    <script src="../../js/axicons-premium-variants.js"></script>
-    <script src="../../js/render-icons.js"></script>
+<script src="../../js/axiom.js"></script>
+<script src="../../js/index-page-manager.js"></script>
+<script>
+function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="../../js/axicons-loader.js"></script>
+<script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-thin-variants.js"></script>
+<script src="../../js/axicons-inverted-variants.js"></script>
+<script src="../../js/axicons-color-variants.js"></script>
+<script src="../../js/axicons-premium-variants.js"></script>
+<script src="../../js/render-icons.js"></script>
 </body>
 </html>

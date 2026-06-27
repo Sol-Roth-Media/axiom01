@@ -251,16 +251,16 @@ Axiom01 uses a consistent 4px-based spacing system for predictable, harmonious l
 
 ```html
 <!-- Primary button -->
-<button class="btn btn-primary">Primary Action</button>
+<button class="primary">Primary Action</button>
 
 <!-- Secondary button -->
-<button class="btn btn-secondary">Secondary Action</button>
+<button class="secondary">Secondary Action</button>
 
 <!-- Disabled state -->
-<button class="btn btn-primary" disabled>Disabled</button>
+<button class="primary" disabled>Disabled</button>
 
 <!-- With icon -->
-<button class="btn btn-primary">
+<button class="primary">
   <span class="axicon render" data-name="Check"></span>
   Save
 </button>
@@ -270,19 +270,19 @@ Axiom01 uses a consistent 4px-based spacing system for predictable, harmonious l
 
 ```html
 <!-- Success alert -->
-<div class="alert alert-success">
+<div class="alert success">
   <span class="axicon render" data-name="Check-Circle"></span>
   Operation completed successfully!
 </div>
 
 <!-- Error alert -->
-<div class="alert alert-error">
+<div class="alert error">
   <span class="axicon render" data-name="Alert-Circle"></span>
   An error occurred. Please try again.
 </div>
 
 <!-- Warning alert -->
-<div class="alert alert-warning">
+<div class="alert warning">
   <span class="axicon render" data-name="Alert-Triangle"></span>
   Please review before proceeding.
 </div>
@@ -299,7 +299,7 @@ Axiom01 uses a consistent 4px-based spacing system for predictable, harmonious l
     <p>Card content goes here.</p>
   </div>
   <div class="card-footer">
-    <button class="btn btn-secondary">Learn More</button>
+    <button class="secondary">Learn More</button>
   </div>
 </div>
 ```
@@ -307,34 +307,30 @@ Axiom01 uses a consistent 4px-based spacing system for predictable, harmonious l
 ### Form Elements
 
 ```html
-<!-- Text input -->
-<div class="form-group">
-  <label for="name">Full Name</label>
-  <input type="text" id="name" class="form-control" placeholder="Enter your name">
-</div>
+<!-- Text input - no extra classes needed -->
+<label for="name">Full Name
+  <input type="text" id="name" placeholder="Enter your name">
+</label>
 
-<!-- Select -->
-<div class="form-group">
-  <label for="category">Category</label>
-  <select id="category" class="form-control">
+<!-- Select - semantic and unstyled -->
+<label for="category">Category
+  <select id="category">
     <option>Option 1</option>
     <option>Option 2</option>
   </select>
-</div>
+</label>
 
 <!-- Checkbox -->
-<div class="form-group">
-  <input type="checkbox" id="agree" class="form-check">
-  <label for="agree">I agree to the terms</label>
-</div>
+<label>
+  <input type="checkbox" id="agree">
+  I agree to the terms
+</label>
 
-<!-- Toggle Switch -->
-<div class="form-group">
-  <div class="toggle-switch">
-    <input type="checkbox" id="notifications">
-    <label for="notifications">Enable Notifications</label>
-  </div>
-</div>
+<!-- Toggle Switch - one class on label -->
+<label class="toggle-switch">
+  <input type="checkbox" id="notifications">
+  Enable Notifications
+</label>
 ```
 
 ---

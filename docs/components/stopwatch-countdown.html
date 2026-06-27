@@ -1,376 +1,226 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stopwatch & Countdown Component - Axiom01</title>
-    <link rel="stylesheet" href="../../css/axiom.min.css">
-    <link rel="stylesheet" href="../../css/axicons.css">
-    <link rel="stylesheet" href="../../css/docs.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stopwatch & Countdown - Axiom01</title>
+	<script>(function(){const t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();</script>
+	<link rel="stylesheet" href="../../css/axiom.min.css">
+	<link rel="stylesheet" href="../../css/axicons.css">
+	<link rel="stylesheet" href="../../css/docs.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body class="axiom-body component-doc">
-    	<!-- HEADER NAVIGATION -->
-	<header class="main" data-component="mobile-navbar">
-		<nav role="navigation" aria-label="Main Navigation">
-			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-			<ul class="links">
-				<li><a href="../../index.html#get-started">Get Started</a></li>
-				<li><a href="../components-overview.html">Docs</a></li>
-				<li><a href="../../index.html#axicons">Axicons</a></li>
-			</ul>
 
-			<div class="actions">
-				<button class="search toggle" aria-label="Open Search">
-					<span class="axicon render" data-name="Search"></span>
-				</button>
-				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-					<span class="axicon render" data-name="GitHub"></span>
-					<span>GitHub</span>
-				</a>
-				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-					<span class="axicon render" data-name="Moon"></span>
-				</button>
-				<button class="menu toggle" aria-label="Toggle Menu">
-					<span class="axicon render" data-name="Menu"></span>
-				</button>
-			</div>
-		</nav>
-	</header>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <main><section><div class="container">
-        <header>
-            <h1>Stopwatch & Countdown</h1>
-            <p class="text-muted">Axiom01's stopwatch and countdown components provide precise timing functionality with start/pause/reset controls. Perfect for workouts, productivity apps, and time-based events.</p>
-        </header>
+<header class="main" data-component="mobile-navbar">
+	<nav role="navigation" aria-label="Main Navigation">
+		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
+		<ul class="links">
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html" aria-current="page">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+		<div class="actions">
+			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+		</div>
+	</nav>
+</header>
 
-        <div class="component-section">
+<main id="main-content">
 
-            <section>
-                <h2>Live Examples</h2>
-
-                <h3>Stopwatch (Elapsed Time)</h3>
-                <div class="timer-demo">
-                    <div class="timer-display">
-                        <p class="timer-value" id="stopwatchValue">00:00.00</p>
-                        <p class="timer-label">Stopwatch</p>
-                    </div>
-                    <div class="timer-controls">
-                        <button class="timer-button" id="stopwatchStart">
-                            <span class="axicon render" data-name="Play"></span>
-                            Start
-                        </button>
-                        <button class="timer-button secondary" id="stopwatchPause">
-                            <span class="axicon render" data-name="Pause"></span>
-                            Pause
-                        </button>
-                        <button class="timer-button reset" id="stopwatchReset">
-                            <span class="axicon render" data-name="RotateCcw"></span>
-                            Reset
-                        </button>
-                    </div>
-                </div>
-
-                <h3>Countdown Timer</h3>
-                <div class="timer-demo">
-                    <div class="timer-input">
-                        <div class="time-input-group">
-                            <label class="time-input-label">Minutes</label>
-                            <input type="number" class="time-input-field" id="countdownMin" value="5" min="0" max="59">
-                        </div>
-                        <div class="time-input-group">
-                            <label class="time-input-label">Seconds</label>
-                            <input type="number" class="time-input-field" id="countdownSec" value="0" min="0" max="59">
-                        </div>
-                    </div>
-                    
-                    <div class="timer-display">
-                        <p class="timer-value" id="countdownValue">05:00</p>
-                        <p class="timer-label">Countdown</p>
-                    </div>
-                    
-                    <div class="timer-controls">
-                        <button class="timer-button" id="countdownStart">
-                            <span class="axicon render" data-name="Play"></span>
-                            Start
-                        </button>
-                        <button class="timer-button secondary" id="countdownPause">
-                            <span class="axicon render" data-name="Pause"></span>
-                            Pause
-                        </button>
-                        <button class="timer-button reset" id="countdownReset">
-                            <span class="axicon render" data-name="RotateCcw"></span>
-                            Reset
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2>HTML Structure</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="timer-display"&gt;
-    &lt;p class="timer-value" id="timerValue"&gt;00:00.00&lt;/p&gt;
-    &lt;p class="timer-label"&gt;Timer&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;div class="timer-controls"&gt;
-    &lt;button class="timer-button" id="startBtn"&gt;Start&lt;/button&gt;
-    &lt;button class="timer-button secondary" id="pauseBtn"&gt;Pause&lt;/button&gt;
-    &lt;button class="timer-button reset" id="resetBtn"&gt;Reset&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Features</h2>
-                <ul>
-                    <li><strong>Stopwatch Mode</strong> - Track elapsed time with milliseconds</li>
-                    <li><strong>Countdown Mode</strong> - Timer down from specified time</li>
-                    <li><strong>Start/Pause</strong> - Pause and resume functionality</li>
-                    <li><strong>Reset Function</strong> - Clear timer and restart</li>
-                    <li><strong>Input Controls</strong> - Set custom countdown times</li>
-                    <li><strong>Precision Timing</strong> - Millisecond accuracy</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Use Cases</h2>
-                <ul>
-                    <li><strong>Fitness App</strong> - Workout interval timers</li>
-                    <li><strong>Productivity</strong> - Pomodoro timer for focus sessions</li>
-                    <li><strong>Cooking App</strong> - Recipe preparation timer</li>
-                    <li><strong>Quiz App</strong> - Test time limit countdown</li>
-                    <li><strong>Event Timer</strong> - Countdown to event start</li>
-                    <li><strong>Game Timer</strong> - Turn time tracking</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Accessibility</h2>
-                <ul>
-                    <li>Use monospace font for clear time display</li>
-                    <li>Provide audio notification when timer completes</li>
-                    <li>Support keyboard controls (Space to play/pause)</li>
-                    <li>Announce time changes to screen readers</li>
-                    <li>Use <code>aria-live</code> for time updates</li>
-                    <li>Include descriptive button labels</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Best Practices</h2>
-                <ul>
-                    <li><strong>Clear Display</strong> - Large, readable monospace font</li>
-                    <li><strong>Simple Controls</strong> - Play, pause, reset buttons</li>
-                    <li><strong>Precision</strong> - Millisecond accuracy for accuracy</li>
-                    <li><strong>User Input</strong> - Allow custom countdown times</li>
-                    <li><strong>Notifications</strong> - Alert when timer complete</li>
-                    <li><strong>Persistence</strong> - Save timer state on page reload</li>
-                </ul>
-            </section>
-
-        </div>
-
-    </div></section></main>
-
-    	<!-- FOOTER -->
-	<footer class="footer">
+	<section>
 		<div class="container">
-			<!-- Main Content Grid -->
-			<div class="footer-content">
-				<!-- Brand Section -->
-				<div class="footer-brand">
-					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+
+			<header>
+				<h1>Stopwatch & Countdown</h1>
+				<p>Axiom01's stopwatch and countdown components provide precise timing functionality with start/pause/reset controls. Perfect for workouts, productivity apps, and time-based events.</p>
+			</header>
+
+			<section>
+				<h2>Live Examples</h2>
+
+				<h3>Stopwatch (Elapsed Time)</h3>
+				<div class="timer-demo">
+				<div class="timer-display">
+				<p class="timer-value" id="stopwatchValue">00:00.00</p>
+				<p class="timer-label">Stopwatch</p>
+				</div>
+				<div class="timer-controls">
+				<button class="timer-button" id="stopwatchStart">
+				<span class="axicon render" data-name="Play"></span>
+				Start
+				</button>
+				<button class="timer-button secondary" id="stopwatchPause">
+				<span class="axicon render" data-name="Pause"></span>
+				Pause
+				</button>
+				<button class="timer-button reset" id="stopwatchReset">
+				<span class="axicon render" data-name="RotateCcw"></span>
+				Reset
+				</button>
+				</div>
 				</div>
 
-				<!-- Product Links -->
-				<div class="footer-column">
-					<h4>Product</h4>
-					<ul>
-						<li><a href="../../docs/components-overview.html">All Components</a></li>
-						<li><a href="../../docs/axicons.html">Icons</a></li>
-						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
-						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
-					</ul>
+				<h3>Countdown Timer</h3>
+				<div class="timer-demo">
+				<div class="timer-input">
+				<div class="time-input-group">
+				<label class="time-input-label">Minutes</label>
+				<input type="number" class="time-input-field" id="countdownMin" value="5" min="0" max="59">
+				</div>
+				<div class="time-input-group">
+				<label class="time-input-label">Seconds</label>
+				<input type="number" class="time-input-field" id="countdownSec" value="0" min="0" max="59">
+				</div>
 				</div>
 
-				<!-- Resources Links -->
-				<div class="footer-column">
-					<h4>Resources</h4>
-					<ul>
-						<li><a href="../../README.md" target="_blank">README</a></li>
-						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
-					</ul>
+				<div class="timer-display">
+				<p class="timer-value" id="countdownValue">05:00</p>
+				<p class="timer-label">Countdown</p>
 				</div>
 
-				<!-- Community Links -->
-				<div class="footer-column">
-					<h4>Community</h4>
-					<ul>
-						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
-						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
-					</ul>
+				<div class="timer-controls">
+				<button class="timer-button" id="countdownStart">
+				<span class="axicon render" data-name="Play"></span>
+				Start
+				</button>
+				<button class="timer-button secondary" id="countdownPause">
+				<span class="axicon render" data-name="Pause"></span>
+				Pause
+				</button>
+				<button class="timer-button reset" id="countdownReset">
+				<span class="axicon render" data-name="RotateCcw"></span>
+				Reset
+				</button>
+				
 				</div>
+			</section>
+
+			<section>
+				<h2>HTML Structure</h2>
+				<pre><code class="language-html">&lt;div class="timer-display"&gt;
+				&lt;p class="timer-value" id="timerValue"&gt;00:00.00&lt;/p&gt;
+				&lt;p class="timer-label"&gt;Timer&lt;/p&gt;
+				&lt;/div&gt;
+
+				&lt;div class="timer-controls"&gt;
+				&lt;button class="timer-button" id="startBtn"&gt;Start&lt;/button&gt;
+				&lt;button class="timer-button secondary" id="pauseBtn"&gt;Pause&lt;/button&gt;
+				&lt;button class="timer-button reset" id="resetBtn"&gt;Reset&lt;/button&gt;
+				&lt;/div&gt;</code></pre>
+			</section>
+
+			<section>
+				<h2>Features</h2>
+				<ul>
+				<li><strong>Stopwatch Mode</strong> - Track elapsed time with milliseconds</li>
+				<li><strong>Countdown Mode</strong> - Timer down from specified time</li>
+				<li><strong>Start/Pause</strong> - Pause and resume functionality</li>
+				<li><strong>Reset Function</strong> - Clear timer and restart</li>
+				<li><strong>Input Controls</strong> - Set custom countdown times</li>
+				<li><strong>Precision Timing</strong> - Millisecond accuracy</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Use Cases</h2>
+				<ul>
+				<li><strong>Fitness App</strong> - Workout interval timers</li>
+				<li><strong>Productivity</strong> - Pomodoro timer for focus sessions</li>
+				<li><strong>Cooking App</strong> - Recipe preparation timer</li>
+				<li><strong>Quiz App</strong> - Test time limit countdown</li>
+				<li><strong>Event Timer</strong> - Countdown to event start</li>
+				<li><strong>Game Timer</strong> - Turn time tracking</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+				<li>Use monospace font for clear time display</li>
+				<li>Provide audio notification when timer completes</li>
+				<li>Support keyboard controls (Space to play/pause)</li>
+				<li>Announce time changes to screen readers</li>
+				<li>Use <code>aria-live</code> for time updates</li>
+				<li>Include descriptive button labels</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Best Practices</h2>
+				<ul>
+				<li><strong>Clear Display</strong> - Large, readable monospace font</li>
+				<li><strong>Simple Controls</strong> - Play, pause, reset buttons</li>
+				<li><strong>Precision</strong> - Millisecond accuracy for accuracy</li>
+				<li><strong>User Input</strong> - Allow custom countdown times</li>
+				<li><strong>Notifications</strong> - Alert when timer complete</li>
+				<li><strong>Persistence</strong> - Save timer state on page reload</li>
+				</ul>
+			</section>
+
+		</div>
+	</section>
+
+</main>
+
+<footer class="footer">
+	<div class="container">
+		<div class="footer-content">
+			<div class="footer-brand">
+				<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
 			</div>
-
-			<!-- Bottom Section -->
-			<div class="footer-bottom">
-				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
-				<ul class="footer-social">
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
-						<span class="axicon render" data-name="GitHub"></span>
-					</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
-						<span class="axicon render" data-name="Brand-NPM"></span>
-					</a></li>
+			<div class="footer-column">
+				<h4>Documentation</h4>
+				<ul>
+					<li><a href="../components-overview.html">All Components</a></li>
+					<li><a href="../overview-quickstart.html">Get Started</a></li>
+					<li><a href="../colors-advanced.html">Colors &amp; Tokens</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Resources</h4>
+				<ul>
+					<li><a href="../../README.md" target="_blank">README</a></li>
+					<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+					<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Community</h4>
+				<ul>
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
 				</ul>
 			</div>
 		</div>
-	</footer>
+		<div class="footer-bottom">
+			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
+			<ul class="footer-social">
+				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
+				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
 
-            <script>
-        // Stopwatch
-        let stopwatchRunning = false;
-        let stopwatchTime = 0;
-        let stopwatchInterval;
-        
-        const stopwatchStart = document.getElementById('stopwatchStart');
-        const stopwatchPause = document.getElementById('stopwatchPause');
-        const stopwatchReset = document.getElementById('stopwatchReset');
-        const stopwatchValue = document.getElementById('stopwatchValue');
-        
-        function formatStopwatch(ms) {
-            const totalSeconds = Math.floor(ms / 1000);
-            const minutes = Math.floor(totalSeconds / 60);
-            const seconds = totalSeconds % 60;
-            const centiseconds = Math.floor((ms % 1000) / 10);
-            
-            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(centiseconds).padStart(2, '0')}`;
-        }
-        
-        stopwatchStart.addEventListener('click', () => {
-            if (!stopwatchRunning) {
-                stopwatchRunning = true;
-                const startTime = Date.now() - stopwatchTime;
-                stopwatchInterval = setInterval(() => {
-                    stopwatchTime = Date.now() - startTime;
-                    stopwatchValue.textContent = formatStopwatch(stopwatchTime);
-                }, 10);
-            }
-        });
-        
-        stopwatchPause.addEventListener('click', () => {
-            stopwatchRunning = false;
-            clearInterval(stopwatchInterval);
-        });
-        
-        stopwatchReset.addEventListener('click', () => {
-            stopwatchRunning = false;
-            clearInterval(stopwatchInterval);
-            stopwatchTime = 0;
-            stopwatchValue.textContent = '00:00.00';
-        });
-        
-        // Countdown
-        let countdownRunning = false;
-        let countdownTime = 0;
-        let countdownInterval;
-        
-        const countdownStart = document.getElementById('countdownStart');
-        const countdownPause = document.getElementById('countdownPause');
-        const countdownReset = document.getElementById('countdownReset');
-        const countdownValue = document.getElementById('countdownValue');
-        const countdownMin = document.getElementById('countdownMin');
-        const countdownSec = document.getElementById('countdownSec');
-        
-        function formatCountdown(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-        }
-        
-        function updateCountdownDisplay() {
-            countdownValue.textContent = formatCountdown(countdownTime);
-        }
-        
-        countdownMin.addEventListener('change', () => {
-            if (!countdownRunning) {
-                countdownTime = (parseInt(countdownMin.value) || 0) * 60 + (parseInt(countdownSec.value) || 0);
-                updateCountdownDisplay();
-            }
-        });
-        
-        countdownSec.addEventListener('change', () => {
-            if (!countdownRunning) {
-                countdownTime = (parseInt(countdownMin.value) || 0) * 60 + (parseInt(countdownSec.value) || 0);
-                updateCountdownDisplay();
-            }
-        });
-        
-        countdownStart.addEventListener('click', () => {
-            if (!countdownRunning && countdownTime > 0) {
-                countdownRunning = true;
-                countdownInterval = setInterval(() => {
-                    countdownTime--;
-                    updateCountdownDisplay();
-                    
-                    if (countdownTime <= 0) {
-                        countdownRunning = false;
-                        clearInterval(countdownInterval);
-                        alert('Countdown complete!');
-                    }
-                }, 1000);
-            }
-        });
-        
-        countdownPause.addEventListener('click', () => {
-            countdownRunning = false;
-            clearInterval(countdownInterval);
-        });
-        
-        countdownReset.addEventListener('click', () => {
-            countdownRunning = false;
-            clearInterval(countdownInterval);
-            countdownTime = (parseInt(countdownMin.value) || 0) * 60 + (parseInt(countdownSec.value) || 0);
-            updateCountdownDisplay();
-        });
-
-        function renderAxicons() {
-            if (typeof axicons === 'undefined') {
-                setTimeout(renderAxicons, 100);
-                return;
-            }
-            
-            document.querySelectorAll('.axicon.render').forEach(el => {
-                const name = el.getAttribute('data-name');
-                if (!name) return;
-                
-                const icon = axicons.find(i => i.name === name);
-                if (icon) {
-                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-                }
-            });
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderAxicons);
-        } else {
-            renderAxicons();
-        }
-
-        setTimeout(renderAxicons, 500);
-    </script>
-    <script src="../../js/index-page-manager.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="../../js/axiom.js"></script>
+<script src="../../js/index-page-manager.js"></script>
+<script>
+function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
 <script src="../../js/axicons-thin-variants.js"></script>
@@ -378,6 +228,5 @@
 <script src="../../js/axicons-color-variants.js"></script>
 <script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
 </body>
 </html>

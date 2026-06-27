@@ -1,348 +1,298 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chat Component - Axiom01</title>
-    <link rel="stylesheet" href="../../css/axiom.min.css">
-    <link rel="stylesheet" href="../../css/axicons.css">
-    <link rel="stylesheet" href="../../css/docs.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AI Chat - Axiom01</title>
+	<script>(function(){const t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();</script>
+	<link rel="stylesheet" href="../../css/axiom.min.css">
+	<link rel="stylesheet" href="../../css/axicons.css">
+	<link rel="stylesheet" href="../../css/docs.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body class="axiom-body component-doc">
-    	<!-- HEADER NAVIGATION -->
-	<header class="main" data-component="mobile-navbar">
-		<nav role="navigation" aria-label="Main Navigation">
-			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
-			<ul class="links">
-				<li><a href="../../index.html#get-started">Get Started</a></li>
-				<li><a href="../components-overview.html">Docs</a></li>
-				<li><a href="../../index.html#axicons">Axicons</a></li>
-			</ul>
 
-			<div class="actions">
-				<button class="search toggle" aria-label="Open Search">
-					<span class="axicon render" data-name="Search"></span>
-				</button>
-				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
-					<span class="axicon render" data-name="GitHub"></span>
-					<span>GitHub</span>
-				</a>
-				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
-					<span class="axicon render" data-name="Moon"></span>
-				</button>
-				<button class="menu toggle" aria-label="Toggle Menu">
-					<span class="axicon render" data-name="Menu"></span>
-				</button>
-			</div>
-		</nav>
-	</header>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <main><section><div class="container">
-        <header>
-            <h1>AI Chat</h1>
-            <p class="text-muted">Axiom01's AI chat component provides a sophisticated interface for AI-powered conversations. Features real-time messaging, typing indicators, conversation history, and seamless AI integration support.</p>
-        </header>
+<header class="main" data-component="mobile-navbar">
+	<nav role="navigation" aria-label="Main Navigation">
+		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
+		<ul class="links">
+			<li><a href="../../index.html#get-started">Get Started</a></li>
+			<li><a href="../components-overview.html" aria-current="page">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+		<div class="actions">
+			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+		</div>
+	</nav>
+</header>
 
-        <div class="component-section">
+<main id="main-content">
 
-            <section>
-                <h2>Live Examples</h2>
-
-                <h3>AI Chat Interface</h3>
-                <div class="ai-chat-demo">
-                    <div class="ai-chat-header">
-                        <div class="ai-title-text">
-                            <div class="ai-title">
-                                <div class="ai-avatar">
-                                    <span class="axicon render" data-name="Sparkles"></span>
-                                </div>
-                                <div>
-                                    <h3>Assistant</h3>
-                                    <p>Always ready to help</p>
-                                </div>
-                        <button class="component-section">
-                            <span class="axicon render" data-name="X"></span>
-                        </button>
-                    </div>
-                    
-                    <div class="ai-messages" id="aiMessages">
-                        <div class="ai-message">
-                            <div class="ai-message-bubble ai">Welcome! I'm here to help with any questions you have. What can I do for you today?</div>
-                        </div>
-                        
-                        <div class="ai-message user">
-                            <div class="ai-message-bubble user">How do I use the Axiom01 framework?</div>
-                        </div>
-                        
-                        <div class="ai-message">
-                            <div class="ai-message-bubble ai">
-                                Axiom01 is a comprehensive semantic web framework. You can:
-                                <br>• Explore the 74 pre-built components
-                                <br>• Customize using CSS variables
-                                <br>• Use semantic HTML5 throughout
-                                <br>• Access full accessibility support
-                            </div>
-                        </div>
-                        
-                        <div class="ai-message user">
-                            <div class="ai-message-bubble user">That's helpful! Can you show me an example?</div>
-                        </div>
-                        
-                        <div class="ai-message">
-                            <div class="ai-typing">
-                                <div class="ai-typing-dot"></div>
-                                <div class="ai-typing-dot"></div>
-                                <div class="ai-typing-dot"></div>
-                    </div>
-                    
-                    <div class="ai-input-area">
-                        <textarea class="ai-input" placeholder="Ask me anything..." aria-label="Chat message input"></textarea>
-                        <button class="ai-send-btn" aria-label="Send message">
-                            <span class="axicon render" data-name="Send"></span>
-                        </button>
-                    </div>
-                </div>
-
-                <h3>AI Features Showcase</h3>
-                <div class="ai-features-grid">
-                    <div class="ai-feature">
-                        <h4 class="ai-feature-title">
-                            <span class="axicon render" data-name="Brain"></span>
-                            Natural Language Processing
-                        </h4>
-                        <p class="ai-feature-desc">Understands context and maintains conversation history for better responses.</p>
-                    </div>
-                    <div class="ai-feature">
-                        <h4 class="ai-feature-title">
-                            <span class="axicon render" data-name="Zap"></span>
-                            Real-Time Response
-                        </h4>
-                        <p class="ai-feature-desc">Instant message delivery with typing indicators for natural interaction.</p>
-                    </div>
-                    <div class="ai-feature">
-                        <h4 class="ai-feature-title">
-                            <span class="axicon render" data-name="Shield"></span>
-                            Secure Messaging
-                        </h4>
-                        <p class="ai-feature-desc">End-to-end encryption and secure communication protocols.</p>
-                    </div>
-                    <div class="ai-feature">
-                        <h4 class="ai-feature-title">
-                            <span class="axicon render" data-name="Settings"></span>
-                            Configurable AI
-                        </h4>
-                        <p class="ai-feature-desc">Customize AI personality, response style, and behavior settings.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2>HTML Structure</h2>
-                <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="ai-chat-demo"&gt;
-    &lt;div class="ai-chat-header"&gt;
-        &lt;div class="ai-title"&gt;
-            &lt;div class="ai-avatar"&gt;🤖&lt;/div&gt;
-            &lt;div&gt;
-                &lt;h3&gt;Assistant&lt;/h3&gt;
-                &lt;p&gt;Status&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    
-    &lt;div class="ai-messages"&gt;
-        &lt;div class="ai-message"&gt;
-            &lt;div class="ai-message-bubble ai"&gt;AI message&lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="ai-message user"&gt;
-            &lt;div class="ai-message-bubble user"&gt;User message&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    
-    &lt;div class="ai-input-area"&gt;
-        &lt;textarea class="ai-input"&gt;&lt;/textarea&gt;
-        &lt;button class="ai-send-btn"&gt;Send&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Features</h2>
-                <ul>
-                    <li><strong>Real-Time Messaging</strong> - Instant message delivery and updates</li>
-                    <li><strong>Typing Indicators</strong> - Shows when AI is composing response</li>
-                    <li><strong>Conversation History</strong> - Full message history with context</li>
-                    <li><strong>AI Avatars</strong> - Distinct visual identity for AI vs user</li>
-                    <li><strong>Multi-line Input</strong> - Support for longer messages</li>
-                    <li><strong>Rich Formatting</strong> - Support for formatted responses</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Use Cases</h2>
-                <ul>
-                    <li><strong>Customer Support</strong> - AI-powered help desk and FAQ</li>
-                    <li><strong>Virtual Assistant</strong> - Personal AI helper for tasks</li>
-                    <li><strong>Chatbot</strong> - Conversational user interaction</li>
-                    <li><strong>Learning Assistant</strong> - Educational AI tutoring</li>
-                    <li><strong>Code Helper</strong> - Programming assistance and debugging</li>
-                    <li><strong>Creative Writing</strong> - Writing prompts and suggestions</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Accessibility</h2>
-                <ul>
-                    <li>Use semantic HTML for message structure</li>
-                    <li>Include <code>aria-label</code> on input and send button</li>
-                    <li>Announce typing indicators to screen readers</li>
-                    <li>Support keyboard navigation (Tab, Enter to send)</li>
-                    <li>Use <code>role="region"</code> for message area</li>
-                    <li>Provide clear distinction between user and AI messages</li>
-                </ul>
-            </section>
-
-            <section class="section">
-                <h2 class="title">Responsive Behavior</h2>
-                <p>This component automatically adapts to different screen sizes:</p>
-                
-                <h3>Mobile (< 768px)</h3>
-                <p>On mobile devices:</p>
-                <ul>
-                    <li>Optimized for small screens</li>
-                    <li>Touch-friendly spacing maintained (44px minimum)</li>
-                    <li>Text wraps naturally without overflow</li>
-                    <li>Content density optimized for readability</li>
-                </ul>
-
-                <h3>Desktop (1024px+)</h3>
-                <p>On desktop displays:</p>
-                <ul>
-                    <li>Enhanced visual features</li>
-                    <li>Hover states and transitions</li>
-                    <li>Full keyboard navigation support</li>
-                    <li>Optimal spacing and sizing</li>
-                </ul>
-
-                <h3>Framework Integration</h3>
-                <p>Responsive behavior is automatic:</p>
-                <ul>
-                    <li>Framework handles media queries</li>
-                    <li>No custom CSS required</li>
-                    <li>Mobile-first approach applied</li>
-                    <li>Accessibility maintained at all sizes</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Best Practices</h2>
-                <ul>
-                    <li><strong>Clear Identity</strong> - Always show AI vs user distinction</li>
-                    <li><strong>Typing Feedback</strong> - Use typing indicators for better UX</li>
-                    <li><strong>Error Handling</strong> - Show errors gracefully</li>
-                    <li><strong>Message Limits</strong> - Validate input length</li>
-                    <li><strong>Scrolling</strong> - Auto-scroll to latest message</li>
-                    <li><strong>Accessibility</strong> - Full keyboard and screen reader support</li>
-                </ul>
-            </section>
-
-        </div>
-
-    </div></section></main>
-
-    	<!-- FOOTER -->
-	<footer class="footer">
+	<section>
 		<div class="container">
-			<!-- Main Content Grid -->
-			<div class="footer-content">
-				<!-- Brand Section -->
-				<div class="footer-brand">
-					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+
+			<header>
+				<h1>AI Chat</h1>
+				<p>Axiom01's AI chat component provides a sophisticated interface for AI-powered conversations. Features real-time messaging, typing indicators, conversation history, and seamless AI integration support.</p>
+			</header>
+
+			<section>
+				<h2>Live Examples</h2>
+
+				<h3>AI Chat Interface</h3>
+				<div class="ai-chat-demo">
+				<div class="ai-chat-header">
+				<div class="ai-title-text">
+				<div class="ai-title">
+				<div class="ai-avatar">
+				<span class="axicon render" data-name="Sparkles"></span>
+				</div>
+				<h3>Assistant</h3>
+				<p>Always ready to help</p>
+				<button aria-label="Close chat">
+				<span class="axicon render" data-name="X"></span>
+				</button>
 				</div>
 
-				<!-- Product Links -->
-				<div class="footer-column">
-					<h4>Product</h4>
-					<ul>
-						<li><a href="../../docs/components-overview.html">All Components</a></li>
-						<li><a href="../../docs/axicons.html">Icons</a></li>
-						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
-						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
-					</ul>
+				<div class="ai-messages" id="aiMessages">
+				<div class="ai-message">
+				<div class="ai-message-bubble ai">Welcome! I'm here to help with any questions you have. What can I do for you today?</div>
 				</div>
 
-				<!-- Resources Links -->
-				<div class="footer-column">
-					<h4>Resources</h4>
-					<ul>
-						<li><a href="../../README.md" target="_blank">README</a></li>
-						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
-					</ul>
+				<div class="ai-message user">
+				<div class="ai-message-bubble user">How do I use the Axiom01 framework?</div>
 				</div>
 
-				<!-- Community Links -->
-				<div class="footer-column">
-					<h4>Community</h4>
-					<ul>
-						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
-						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
-					</ul>
+				<div class="ai-message">
+				<div class="ai-message-bubble ai">
+				Axiom01 is a comprehensive semantic web framework. You can:
+				<br>• Explore the 74 pre-built components
+				<br>• Customize using CSS variables
+				<br>• Use semantic HTML5 throughout
+				<br>• Access full accessibility support
 				</div>
+				</div>
+
+				<div class="ai-message user">
+				<div class="ai-message-bubble user">That's helpful! Can you show me an example?</div>
+				</div>
+
+				<div class="ai-message">
+				
+
+				<div class="ai-input-area">
+				<textarea class="ai-input" placeholder="Ask me anything..." aria-label="Chat message input"></textarea>
+				<button class="ai-send-btn" aria-label="Send message">
+				<span class="axicon render" data-name="Send"></span>
+				</button>
+				</div>
+				</div>
+
+				<h3>AI Features Showcase</h3>
+				<div class="ai-features-grid">
+				<div class="ai-feature">
+				<h4>
+				<span class="axicon render" data-name="Brain"></span>
+				Natural Language Processing
+				</h4>
+				<p class="ai-feature-desc">Understands context and maintains conversation history for better responses.</p>
+				</div>
+				<div class="ai-feature">
+				<h4>
+				<span class="axicon render" data-name="Zap"></span>
+				Real-Time Response
+				</h4>
+				<p class="ai-feature-desc">Instant message delivery with typing indicators for natural interaction.</p>
+				</div>
+				<div class="ai-feature">
+				<h4>
+				<span class="axicon render" data-name="Shield"></span>
+				Secure Messaging
+				</h4>
+				<p class="ai-feature-desc">End-to-end encryption and secure communication protocols.</p>
+				</div>
+				<div class="ai-feature">
+				<h4>
+				<span class="axicon render" data-name="Settings"></span>
+				Configurable AI
+				</h4>
+				<p class="ai-feature-desc">Customize AI personality, response style, and behavior settings.</p>
+				
+				</div>
+			</section>
+
+			<section>
+				<h2>HTML Structure</h2>
+				<pre><code class="language-html">&lt;div class="ai-chat-demo"&gt;
+				&lt;div class="ai-chat-header"&gt;
+				&lt;div class="ai-title"&gt;
+				&lt;div class="ai-avatar"&gt;🤖&lt;/div&gt;
+				&lt;div&gt;
+				&lt;h3&gt;Assistant&lt;/h3&gt;
+				&lt;p&gt;Status&lt;/p&gt;
+				&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;/div&gt;
+
+				&lt;div class="ai-messages"&gt;
+				&lt;div class="ai-message"&gt;
+				&lt;div class="ai-message-bubble ai"&gt;AI message&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;div class="ai-message user"&gt;
+				&lt;div class="ai-message-bubble user"&gt;User message&lt;/div&gt;
+				&lt;/div&gt;
+				&lt;/div&gt;
+
+				&lt;div class="ai-input-area"&gt;
+				&lt;textarea class="ai-input"&gt;&lt;/textarea&gt;
+				&lt;button class="ai-send-btn"&gt;Send&lt;/button&gt;
+				&lt;/div&gt;
+				&lt;/div&gt;</code></pre>
+			</section>
+
+			<section>
+				<h2>Features</h2>
+				<ul>
+				<li><strong>Real-Time Messaging</strong> - Instant message delivery and updates</li>
+				<li><strong>Typing Indicators</strong> - Shows when AI is composing response</li>
+				<li><strong>Conversation History</strong> - Full message history with context</li>
+				<li><strong>AI Avatars</strong> - Distinct visual identity for AI vs user</li>
+				<li><strong>Multi-line Input</strong> - Support for longer messages</li>
+				<li><strong>Rich Formatting</strong> - Support for formatted responses</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Use Cases</h2>
+				<ul>
+				<li><strong>Customer Support</strong> - AI-powered help desk and FAQ</li>
+				<li><strong>Virtual Assistant</strong> - Personal AI helper for tasks</li>
+				<li><strong>Chatbot</strong> - Conversational user interaction</li>
+				<li><strong>Learning Assistant</strong> - Educational AI tutoring</li>
+				<li><strong>Code Helper</strong> - Programming assistance and debugging</li>
+				<li><strong>Creative Writing</strong> - Writing prompts and suggestions</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+				<li>Use semantic HTML for message structure</li>
+				<li>Include <code>aria-label</code> on input and send button</li>
+				<li>Announce typing indicators to screen readers</li>
+				<li>Support keyboard navigation (Tab, Enter to send)</li>
+				<li>Use <code>role="region"</code> for message area</li>
+				<li>Provide clear distinction between user and AI messages</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Responsive Behavior</h2>
+				<p>This component automatically adapts to different screen sizes:</p>
+
+				<h3>Mobile (< 768px)</h3>
+				<p>On mobile devices:</p>
+				<ul>
+				<li>Optimized for small screens</li>
+				<li>Touch-friendly spacing maintained (44px minimum)</li>
+				<li>Text wraps naturally without overflow</li>
+				<li>Content density optimized for readability</li>
+				</ul>
+
+				<h3>Desktop (1024px+)</h3>
+				<p>On desktop displays:</p>
+				<ul>
+				<li>Enhanced visual features</li>
+				<li>Hover states and transitions</li>
+				<li>Full keyboard navigation support</li>
+				<li>Optimal spacing and sizing</li>
+				</ul>
+
+				<h3>Framework Integration</h3>
+				<p>Responsive behavior is automatic:</p>
+				<ul>
+				<li>Framework handles media queries</li>
+				<li>No custom CSS required</li>
+				<li>Mobile-first approach applied</li>
+				<li>Accessibility maintained at all sizes</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Best Practices</h2>
+				<ul>
+				<li><strong>Clear Identity</strong> - Always show AI vs user distinction</li>
+				<li><strong>Typing Feedback</strong> - Use typing indicators for better UX</li>
+				<li><strong>Error Handling</strong> - Show errors gracefully</li>
+				<li><strong>Message Limits</strong> - Validate input length</li>
+				<li><strong>Scrolling</strong> - Auto-scroll to latest message</li>
+				<li><strong>Accessibility</strong> - Full keyboard and screen reader support</li>
+				</ul>
+			</section>
+
+		</div>
+	</section>
+
+</main>
+
+<footer class="footer">
+	<div class="container">
+		<div class="footer-content">
+			<div class="footer-brand">
+				<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
 			</div>
-
-			<!-- Bottom Section -->
-			<div class="footer-bottom">
-				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
-				<ul class="footer-social">
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
-						<span class="axicon render" data-name="GitHub"></span>
-					</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
-						<span class="axicon render" data-name="Brand-NPM"></span>
-					</a></li>
+			<div class="footer-column">
+				<h4>Documentation</h4>
+				<ul>
+					<li><a href="../components-overview.html">All Components</a></li>
+					<li><a href="../overview-quickstart.html">Get Started</a></li>
+					<li><a href="../colors-advanced.html">Colors &amp; Tokens</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Resources</h4>
+				<ul>
+					<li><a href="../../README.md" target="_blank">README</a></li>
+					<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+					<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Community</h4>
+				<ul>
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
 				</ul>
 			</div>
 		</div>
-	</footer>
+		<div class="footer-bottom">
+			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
+			<ul class="footer-social">
+				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
+				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
 
-            <script>
-        function renderAxicons() {
-            if (typeof axicons === 'undefined') {
-                setTimeout(renderAxicons, 100);
-                return;
-            }
-            
-            document.querySelectorAll('.axicon.render').forEach(el => {
-                const name = el.getAttribute('data-name');
-                if (!name) return;
-                
-                const icon = axicons.find(i => i.name === name);
-                if (icon) {
-                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-                }
-            });
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderAxicons);
-        } else {
-            renderAxicons();
-        }
-
-        setTimeout(renderAxicons, 500);
-    </script>
-    <script src="../../js/index-page-manager.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="../../js/axiom.js"></script>
+<script src="../../js/index-page-manager.js"></script>
+<script>
+function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
 <script src="../../js/axicons-thin-variants.js"></script>
@@ -350,6 +300,5 @@
 <script src="../../js/axicons-color-variants.js"></script>
 <script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
-<script src="../../js/axiom.js"></script>
 </body>
 </html>
