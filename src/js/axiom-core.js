@@ -382,3 +382,50 @@ window.Axiom = {
   showComponentPreview: HubNav.showComponentPreview,
   loadChapter: HubNav.loadChapter,
 };
+
+// ============================================================================
+// COMPONENT SEARCH & FILTER
+// ============================================================================
+
+const ComponentSearch = (() => {
+  let searchQuery = '';
+
+  const init = () => {
+    const searchInput = document.getElementById('component-search');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase();
+      filterComponents();
+    });
+  };
+
+  const filterComponents = () => {
+    const items = document.querySelectorAll('[data-category]');
+    let visibleCount = 0;
+
+    items.forEach((item) => {
+      const h3 = item.querySelector('h3');
+      const p = item.querySelector('p');
+      const text = (h3?.textContent + ' ' + p?.textContent).toLowerCase();
+
+      const matches = !searchQuery || text.includes(searchQuery);
+      item.style.display = matches ? '' : 'none';
+      if (matches) visibleCount++;
+    });
+  };
+
+  const reset = () => {
+    searchQuery = '';
+    const searchInput = document.getElementById('component-search');
+    if (searchInput) searchInput.value = '';
+    filterComponents();
+  };
+
+  return {
+    init,
+    filterComponents,
+    reset,
+  };
+})();
+
