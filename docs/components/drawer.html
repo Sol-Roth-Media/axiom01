@@ -56,23 +56,23 @@
                 <h2 class="title">Basic Usage</h2>
                 <h3>Simple Drawer</h3>
                 <div class="live">
-                    <button onclick="document.querySelector('[data-drawer-demo]').showModal()">Open Drawer</button>
-                    <dialog class="drawer" data-drawer-demo data-side="right">
+                    <button type="button" data-drawer-open="drawer-demo">Open Drawer</button>
+                    <dialog class="drawer" id="drawer-demo" data-side="right">
                         <header>
                             <h2>Drawer Title</h2>
-                            <button onclick="this.closest('dialog').close()" aria-label="Close drawer">✕</button>
+                            <button type="button" data-drawer-close aria-label="Close drawer">✕</button>
                         </header>
                         <main>
                             <p>Drawer content goes here. This modal slides in from the side.</p>
                         </main>
                     </dialog>
                 </div>
-                <pre class="code-block"><code class="language-html">&lt;button onclick="document.querySelector('dialog').showModal()"&gt;Open Drawer&lt;/button&gt;
+                <pre class="code-block"><code class="language-html">&lt;button type="button" data-drawer-open="drawer-demo"&gt;Open Drawer&lt;/button&gt;
 
 &lt;dialog class="drawer" data-side="right"&gt;
     &lt;header&gt;
         &lt;h2&gt;Drawer Title&lt;/h2&gt;
-        &lt;button onclick="this.closest('dialog').close()" aria-label="Close drawer"&gt;✕&lt;/button&gt;
+        &lt;button type="button" data-drawer-close aria-label="Close drawer"&gt;✕&lt;/button&gt;
     &lt;/header&gt;
     &lt;main&gt;
         &lt;p&gt;Drawer content&lt;/p&gt;
@@ -81,11 +81,11 @@
 
                 <h3>Left-Aligned Drawer</h3>
                 <div class="live">
-                    <button onclick="document.querySelector('[data-drawer-left]').showModal()">Open Left Drawer</button>
-                    <dialog class="drawer" data-drawer-left data-side="left">
+                    <button type="button" data-drawer-open="drawer-left">Open Left Drawer</button>
+                    <dialog class="drawer" id="drawer-left" data-side="left">
                         <header>
                             <h2>Left Drawer</h2>
-                            <button onclick="this.closest('dialog').close()" aria-label="Close drawer">✕</button>
+                            <button type="button" data-drawer-close aria-label="Close drawer">✕</button>
                         </header>
                         <main>
                             <p>This drawer slides in from the left side.</p>
@@ -95,7 +95,7 @@
                 <pre class="code-block"><code class="language-html">&lt;dialog class="drawer" data-side="left"&gt;
     &lt;header&gt;
         &lt;h2&gt;Left Drawer&lt;/h2&gt;
-        &lt;button onclick="this.closest('dialog').close()"&gt;✕&lt;/button&gt;
+        &lt;button type="button" data-drawer-close&gt;✕&lt;/button&gt;
     &lt;/header&gt;
     &lt;main&gt;
         &lt;p&gt;Drawer content&lt;/p&gt;
@@ -208,12 +208,12 @@ dialog.drawer header button {
                 <h2 class="title">Integration Examples</h2>
 
                 <h3>Drawer with Form</h3>
-                <pre class="code-block"><code class="language-html">&lt;button onclick="document.querySelector('#form-drawer').showModal()"&gt;Edit Settings&lt;/button&gt;
+                <pre class="code-block"><code class="language-html">&lt;button type="button" data-drawer-open="form-drawer"&gt;Edit Settings&lt;/button&gt;
 
 &lt;dialog class="drawer" id="form-drawer" data-side="right"&gt;
     &lt;header&gt;
         &lt;h2&gt;Edit Settings&lt;/h2&gt;
-        &lt;button onclick="this.closest('dialog').close()"&gt;✕&lt;/button&gt;
+        &lt;button type="button" data-drawer-close&gt;✕&lt;/button&gt;
     &lt;/header&gt;
     &lt;main&gt;
         &lt;form&gt;
@@ -330,7 +330,31 @@ document.querySelectorAll('dialog.drawer').forEach(drawer => {
             renderAxicons();
         }
 
-        setTimeout(renderAxicons, 500);
+        document.querySelectorAll('[data-drawer-open]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const drawer = document.getElementById(button.getAttribute('data-drawer-open'));
+                if (drawer) {
+                    drawer.showModal();
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-drawer-close]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const drawer = button.closest('dialog');
+                if (drawer) {
+                    drawer.close();
+                }
+            });
+        });
+
+        document.querySelectorAll('dialog.drawer').forEach((drawer) => {
+            drawer.addEventListener('click', (event) => {
+                if (event.target === drawer) {
+                    drawer.close();
+                }
+            });
+        });
     </script>
     <script src="../../js/index-page-manager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

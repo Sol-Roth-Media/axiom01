@@ -284,17 +284,13 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Documentation", category: "docs", url: "docs/components-overview.html" },
             { title: "Component Library", category: "docs", url: "docs/COMPONENT_LIBRARY.md" },
             { title: "Advanced Color Details", category: "docs", url: "docs/colors-advanced.html" },
-            { title: "Theme Customization Wizard", category: "docs", url: "docs/theme-customization-wizard.html" },
-            { title: "Code Snippet Guide", category: "docs", url: "docs/code-snippets.html" },
-            { title: "Advanced Typography Guide", category: "docs", url: "docs/typography-advanced.html" },
+                                    { title: "Advanced Typography Guide", category: "docs", url: "docs/typography-advanced.html" },
             { title: "Advanced Layout Guide", category: "docs", url: "docs/layout-advanced.html" },
             { title: "Advanced Media & Icons Guide", category: "docs", url: "docs/media-advanced.html" },
-            { title: "Interactive Playground", category: "docs", url: "docs/interactive-playground.html" },
-            { title: "Contributing Guide", category: "docs", url: "docs/markdown-template.html?file=contributing.md" },
-            { title: "Developer Guide", category: "docs", url: "docs/markdown-template.html?file=../DEVELOPER.md" },
-            { title: "Styling Guide", category: "docs", url: "docs/markdown-template.html?file=../AXIOM01_STYLING_GUIDE.md" },
-            { title: "README", category: "docs", url: "docs/markdown-template.html?file=../README.md" },
-            { title: "MIT License", category: "docs", url: "docs/markdown-template.html?file=../LICENSE" },
+                                    { title: "Developer Guide", category: "docs", url: "DEVELOPER.md" },
+            { title: "Styling Guide", category: "docs", url: "AXIOM01_STYLING_GUIDE.md" },
+            { title: "README", category: "docs", url: "readme.md" },
+            { title: "MIT License", category: "docs", url: "LICENSE" },
         ];
 
         if (searchToggle && searchModal && closeSearchModalButton && searchModalInput && searchModalResults) {

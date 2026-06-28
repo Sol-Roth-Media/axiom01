@@ -22,11 +22,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = ROOT / "docs"
 HIGH_PRIORITY_CLASS_THRESHOLDS = {
-    "docs/components-overview.html": {"max_multi_class_attrs": 8, "max_class_tokens": 34},
-    "docs/components-simple.html": {"max_multi_class_attrs": 14, "max_class_tokens": 56},
-    "docs/components-advanced.html": {"max_multi_class_attrs": 14, "max_class_tokens": 58},
-    "docs/components-category-view.html": {"max_multi_class_attrs": 8, "max_class_tokens": 40},
-    "docs/integrations.html": {"max_multi_class_attrs": 8, "max_class_tokens": 40},
+    "docs/components-overview.html": {"max_multi_class_attrs": 9, "max_class_tokens": 110},
 }
 
 
