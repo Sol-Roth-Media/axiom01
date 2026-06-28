@@ -498,34 +498,104 @@
     });
 
     // ==========================================
-    // 10. NAVBAR MENU TOGGLE
+    // 10. NAVBAR MENU TOGGLE + MOBILE A11Y STATE
     // ==========================================
+    const isMobileMenuViewport = function () {
+      return window.matchMedia('(max-width: 992px)').matches;
+    };
+
+    let menuIdSeed = 0;
+
+    const syncMenuState = function (header, expanded, menuButton) {
+      if (!header || !menuButton) return;
+
+      const links = header.querySelector('ul.links');
+      if (links && !links.id) {
+        menuIdSeed += 1;
+        links.id = `axiom-main-nav-links-${menuIdSeed}`;
+      }
+      if (links?.id) {
+        menuButton.setAttribute('aria-controls', links.id);
+      }
+
+      header.classList.toggle('menu-open', expanded);
+      menuButton.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+
+      const body = document.body;
+      const shouldLockScroll = expanded && isMobileMenuViewport();
+      const hasOpenMobileMenu = isMobileMenuViewport() && document.querySelector('header.main.menu-open');
+
+      if (shouldLockScroll) {
+        if (!body.hasAttribute('data-axiom-scroll-lock')) {
+          body.setAttribute('data-axiom-scroll-lock', 'true');
+          body.setAttribute('data-axiom-scroll-overflow', body.style.overflow || '');
+        }
+        body.style.overflow = 'hidden';
+      } else if (!hasOpenMobileMenu && body.hasAttribute('data-axiom-scroll-lock')) {
+        body.style.overflow = body.getAttribute('data-axiom-scroll-overflow') || '';
+        body.removeAttribute('data-axiom-scroll-overflow');
+        body.removeAttribute('data-axiom-scroll-lock');
+      }
+    };
+
+    const closeMenu = function (header) {
+      if (!header) return;
+      const menuButton = header.querySelector('button.menu');
+      if (!menuButton) return;
+      syncMenuState(header, false, menuButton);
+    };
+
     document.addEventListener('click', function (e) {
       const menuButton = e.target.closest('button.menu');
       if (menuButton) {
         e.preventDefault();
         const header = menuButton.closest('header.main');
-        if (header) {
-          header.classList.toggle('menu-open');
-          menuButton.setAttribute('aria-expanded', header.classList.contains('menu-open') ? 'true' : 'false');
+        if (!header) return;
+        const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+        syncMenuState(header, !expanded, menuButton);
+        if (!expanded) {
+          header.querySelector('ul.links a')?.focus();
         }
+        return;
       }
-    });
 
-    // ==========================================
-    // 11. CLOSE MOBILE MENU ON LINK CLICK
-    // ==========================================
-    document.addEventListener('click', function (e) {
       const navLink = e.target.closest('nav .links a');
       if (navLink) {
         const header = navLink.closest('header.main');
-        if (header && header.classList.contains('menu-open')) {
-          header.classList.remove('menu-open');
-          const menuButton = header.querySelector('button.menu');
-          if (menuButton) {
-            menuButton.setAttribute('aria-expanded', 'false');
-          }
+        closeMenu(header);
+        return;
+      }
+
+      document.querySelectorAll('header.main.menu-open').forEach(function (header) {
+        if (!header.contains(e.target)) {
+          closeMenu(header);
         }
+      });
+    });
+
+    window.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('header.main.menu-open').forEach(function (header) {
+        const menuButton = header.querySelector('button.menu');
+        closeMenu(header);
+        menuButton?.focus();
+      });
+    });
+
+    window.addEventListener('resize', function () {
+      if (isMobileMenuViewport()) return;
+      document.querySelectorAll('header.main.menu-open').forEach(function (header) {
+        closeMenu(header);
+      });
+      document.body.style.overflow = '';
+      document.body.removeAttribute('data-axiom-scroll-overflow');
+      document.body.removeAttribute('data-axiom-scroll-lock');
+    });
+
+    document.querySelectorAll('header.main button.menu').forEach(function (menuButton) {
+      const header = menuButton.closest('header.main');
+      if (header) {
+        syncMenuState(header, false, menuButton);
       }
     });
 

@@ -6,6 +6,12 @@
 
 /* === BASE DOCUMENT === */
 
+:root {
+	--a-doc-shell-gutter: var(--a-space-l);
+	--a-doc-section-space: var(--a-space-xl);
+	--a-doc-touch-target: 2.75rem;
+}
+
 body.component-doc {
 	background: var(--a-color-surface);
 	color: var(--a-color-on-surface);
@@ -16,7 +22,7 @@ body.component-doc {
    ======================================== */
 
 main > section {
-	padding: var(--a-space-xl) 0;
+	padding: var(--a-doc-section-space) 0;
 }
 
 body.component-doc main > section > h1,
@@ -33,9 +39,17 @@ body.component-doc main > section > ul,
 body.component-doc main > section > ol,
 body.component-doc main > section > table,
 body.component-doc main > section > menu {
-	width: min(100%, calc(1200px - (var(--a-space-l) * 2)));
+	width: min(100%, calc(1200px - (var(--a-doc-shell-gutter) * 2)));
 	margin-left: auto;
 	margin-right: auto;
+}
+
+body.component-doc main > section > .container {
+	padding-inline: var(--a-doc-shell-gutter);
+}
+
+body.component-doc main > section > .container > :where(header, nav, article, section, figure, pre, table, ul, ol, p):not(:first-child) {
+	margin-top: var(--a-space-l);
 }
 
 main > section:nth-child(even) {
@@ -356,6 +370,7 @@ stat span {
 
 .quick-categories a {
 	display: block;
+	min-height: var(--a-doc-touch-target);
 	padding: var(--a-space-s) var(--a-space-s);
 	color: var(--a-color-primary);
 	text-decoration: none;
@@ -451,6 +466,7 @@ stat span {
 	color: var(--a-color-on-surface);
 	transition: background 0.2s ease;
 	text-align: left;
+	min-height: var(--a-doc-touch-target);
 }
 
 .category-toggle:hover {
@@ -492,7 +508,9 @@ stat span {
 }
 
 .category-items a {
-	display: block;
+	display: flex;
+	align-items: center;
+	min-height: var(--a-doc-touch-target);
 	padding: var(--a-space-m);
 	text-decoration: none;
 	color: var(--a-color-primary);
@@ -553,6 +571,11 @@ stat span {
 /* === RESPONSIVE === */
 
 @media (max-width: 768px) {
+	:root {
+		--a-doc-shell-gutter: var(--a-space-m);
+		--a-doc-section-space: var(--a-space-l);
+	}
+
 	table {
 		display: block;
 		overflow-x: auto;
@@ -577,6 +600,19 @@ stat span {
 
 	main > section > .container > header h1 {
 		font-size: clamp(1.5rem, 4vw, 2rem);
+	}
+
+	main > section > .container > header p {
+		font-size: var(--a-font-size-base);
+	}
+
+	article.card > figure {
+		padding: var(--a-space-l);
+		min-height: 96px;
+	}
+
+	pre {
+		font-size: 0.8125rem;
 	}
 }
 
