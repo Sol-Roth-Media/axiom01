@@ -27,6 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
     return releaseInfoPromise;
   };
 
+  const resolveSafeAssetUrl = (value) => {
+    if (!value) return null;
+    try {
+      const url = new URL(value, window.location.href);
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') return null;
+      return url.href;
+    } catch (error) {
+      return null;
+    }
+  };
+
   const searchData = [
     { title: "Accordion", cat: "components", url: "docs/components/accordion.html" },
     { title: "Account Menu", cat: "components", url: "docs/components/account-menu.html" },
@@ -515,7 +526,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dialog = document.getElementById(lightboxTrigger.getAttribute('data-lightbox-dialog'));
                 const image = dialog?.querySelector('img');
                 if (dialog && image) {
-                  image.src = lightboxTrigger.getAttribute('data-lightbox-src') || '';
+                  const imageSrc = resolveSafeAssetUrl(lightboxTrigger.getAttribute('data-lightbox-src'));
+                  if (!imageSrc) return;
+                  image.src = imageSrc;
                   image.alt = lightboxTrigger.getAttribute('data-lightbox-alt') || '';
                   openDialog(dialog);
                 }
