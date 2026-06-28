@@ -54,7 +54,7 @@
 					<p>Explore the core component library and supporting guides built around semantic web standards</p>
 					<ul class="stats">
 						<li>
-							<strong data-release-components>67</strong>
+							<strong data-release-components>68</strong>
 							<span>Components</span>
 						</li>
 						<li>
@@ -204,11 +204,12 @@
 						<header>
 							<button class="category-toggle" aria-expanded="true" aria-controls="category-content">
 								<span>Content Display</span>
-								<span>11 components</span>
+								<span>12 components</span>
 								<span aria-hidden="true">▼</span>
 							</button>
 						</header>
 						<nav id="category-content" class="category-items">
+							<a href="components/action-group.html" aria-label="Action Group - Group of related action buttons">Action Group</a>
 							<a href="components/avatar.html" aria-label="Avatar - User profile image">Avatar</a>
 							<a href="components/badge.html" aria-label="Badge - Label or status indicator">Badge</a>
 							<a href="components/button.html" aria-label="Button - Interactive action">Button</a>
@@ -364,6 +365,62 @@
 				</nav>
 			</div>
 		</section>
+
+		<!-- BEHAVIORAL DEBT PHILOSOPHY -->
+		<section id="behavioral-debt">
+			<div class="container">
+				<header>
+					<h2>The Zero Behavioral Debt Advantage</h2>
+					<p>Building interactive UI components out of <code>&lt;div&gt;</code> tags requires massive JavaScript overhead: manual focus trapping, ESC key listeners, ARIA role juggling, and scroll lock management. Axiom01 uses native HTML5 primitives — <code>&lt;dialog&gt;</code>, <code>&lt;details&gt;</code>, <code>&lt;summary&gt;</code> — reducing your Behavioral Debt to absolute zero.</p>
+				</header>
+
+				<div class="grid">
+					<article class="card">
+						<header><h3>Native Primitives</h3></header>
+						<p>Axiom01 modals use <code>&lt;dialog&gt;</code>. Accordions use <code>&lt;details&gt;</code>. The browser handles focus, keyboard navigation, and accessibility — for free.</p>
+						<pre><code class="language-html">&lt;!-- Modal: native dialog, zero JS overhead --&gt;
+&lt;dialog class="modal"&gt;
+  &lt;article class="card"&gt;
+    &lt;header&gt;&lt;h3&gt;Confirm Action&lt;/h3&gt;&lt;/header&gt;
+    &lt;p&gt;Are you sure?&lt;/p&gt;
+    &lt;footer&gt;
+      &lt;button class="primary"&gt;Confirm&lt;/button&gt;
+    &lt;/footer&gt;
+  &lt;/article&gt;
+&lt;/dialog&gt;</code></pre>
+					</article>
+
+					<article class="card">
+						<header><h3>Accordion: Zero Debt</h3></header>
+						<p>Native <code>&lt;details&gt;</code> is accessible, keyboard-navigable, and requires no JavaScript. One semantic element. Complete behavior.</p>
+						<pre><code class="language-html">&lt;details class="accordion"&gt;
+  &lt;summary&gt;Toggle this section&lt;/summary&gt;
+  &lt;p&gt;Content revealed on click — no JS required.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+					</article>
+				</div>
+
+				<details class="accordion">
+					<summary>View the Utility-First JS Alternative (12KB+)</summary>
+					<div>
+						<p class="muted">To rebuild a native modal, you must manually trap focus, lock scroll, and bind ESC keys. This is behavioral debt that accumulates silently across every interactive component in your application.</p>
+						<pre><code class="language-javascript">// Utility-first modal — 40+ lines of behavioral glue
+function openModal(el) {
+  el.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  const focusable = el.querySelectorAll('button, [href], input');
+  focusable[0].focus();
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal(el);
+    if (e.key === 'Tab') trapFocus(e, focusable);
+  });
+}
+// ... dozens more lines for closeModal, trapFocus, etc.</code></pre>
+					</div>
+				</details>
+			</div>
+		</section>
+
     </main>
 
     <footer>

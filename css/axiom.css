@@ -521,6 +521,7 @@ https://dev.to/ynab/a-semantic-color-system-the-theory-hk7
 
 /* --- Base & Reset --- */
 *, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: hidden; } /* iOS Safari: both html + body required to prevent horizontal scroll */
 body { margin: 0; font-family: var(--a-font-family-sans); font-size: var(--a-font-size-base); line-height: var(--a-line-height-base); color: var(--a-color-on-surface); background-color: var(--a-color-surface); overflow-x: hidden; }
 body[data-axiom-scroll-lock="true"] { overscroll-behavior: contain; }
 .axiom-body { } /* Match the new navbar height */
@@ -747,6 +748,32 @@ h6 {
 
 /* Remove actions top spacing - handled by sibling cascade */
 .actions { display: flex; justify-content: center; gap: var(--a-space-m); flex-wrap: wrap; }
+
+/* Core Component: Action Group */
+menu.action-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--a-space-m);
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: var(--a-space-l) 0 0 0;
+  list-style: none;
+}
+
+/* Mobile Relational Geometry: Stack and stretch for a unified silhouette */
+@media (max-width: 640px) {
+  menu.action-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  menu.action-group > * {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
 
 /* Philosophy section styling */
 section > div[style*="max-width: 900px"] { max-width: 900px; text-align: center; }
@@ -1250,6 +1277,13 @@ table {
   min-width: 0;           /* Flex children don't overflow */
   max-width: 100%;        /* Hard limit */
   overflow: hidden;       /* Hide any overflow */
+}
+/* Code blocks inside cards must scroll, not clip */
+.card > pre,
+.card > .doc-code-block {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
 }
 .card:hover { transform: translateY(-5px); box-shadow: var(--a-shadow-large); }
 a.card { text-decoration: none; color: var(--a-color-on-surface); }
@@ -3470,6 +3504,7 @@ table tbody tr:hover {
     padding: var(--a-space-l);
     border-radius: var(--a-border-radius-medium);
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border: 1px solid var(--a-color-code-border);
 }
 
@@ -9053,6 +9088,10 @@ meter:disabled {
   opacity: 0.95;
 }
 
+.card.filled > .axicon:first-child {
+  color: var(--a-color-primary);
+}
+
 .card.filled:hover {
   box-shadow: var(--a-shadow-lg);
   background-color: var(--a-color-primary-light);
@@ -9698,6 +9737,7 @@ pre {
     border-radius: var(--a-border-radius-medium);
     padding: var(--a-space-m);
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     font-family: var(--a-font-family-mono);
     font-size: var(--a-font-size-sm);
     line-height: 1.6;
@@ -11379,21 +11419,22 @@ pre {
     position: relative;
     overflow-x: auto;
     overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
 }
 
 pre code {
     position: relative;
     display: block;
-    word-break: break-word;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    white-space: pre;         /* Preserve formatting; pre parent scrolls */
+    word-break: normal;
+    word-wrap: normal;
 }
 
 /* Ensure Prism tokens don't break layout */
 .token {
     position: static !important;
     display: inline;
-    white-space: pre-wrap;
+    white-space: pre;
     margin: 0;
     padding: 0;
 }
@@ -11414,7 +11455,7 @@ td code {
     position: static;
     display: inline;
     word-wrap: break-word;
-    white-space: pre-wrap;
+    white-space: normal;
 }
 
 /* Mobile: show 2 items per row for stat cards and icon categories */
@@ -11453,6 +11494,12 @@ td code {
 
   footer {
     padding-inline: var(--a-space-m);
+  }
+
+  /* Slightly smaller code blocks on small screens for legibility */
+  pre {
+    font-size: 0.75rem;
+    padding: var(--a-space-s);
   }
 }
 

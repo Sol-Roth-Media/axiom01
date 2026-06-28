@@ -28,7 +28,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
-<body class="axiom-body">
+<body class="axiom-body" style="overflow-x:hidden;max-width:100vw;">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="main" data-component="mobile-navbar">
@@ -61,10 +61,10 @@
 			<h1>Write Less Code.<br>Build Better Interfaces.</h1>
 			<p>Semantic HTML meets beautiful design. No utility chaos. No <abbr title="Block Element Modifier">BEM</abbr> complexity.</p>
 
-			<menu>
-				<a href="docs/overview-quickstart.html" class="button primary large">Get Started Now</a>
-				<a href="https://www.npmjs.com/package/axiom01" class="button secondary large" target="_blank" rel="noopener">View on npm ↗</a>
-				<a href="#components" class="button outline large">Explore Components</a>
+		<menu class="action-group">
+				<a href="docs/overview-quickstart.html" class="button primary">Get Started Now</a>
+				<a href="#components" class="button secondary">Explore Components</a>
+				<a href="https://www.npmjs.com/package/axiom01" class="button outline">View on npm ↗</a>
 			</menu>
 
 			<p>Most frameworks ask: "What does your interface look like?" Axiom01 asks: "What does your interface <em>mean</em>?" Write semantic HTML that describes content structure, not visual presentation. One class per component. Change tokens globally and watch your entire interface transform in perfect symmetry. No utility chaos. No BEM complexity. Just meaningful markup and a framework that respects your code.</p>
@@ -72,7 +72,7 @@
 			<ul class="grid">
 				<li class="stat animate delay-1">
 					<span class="axicon render icon" data-name="Trophy"></span>
-					<div class="value" data-release-components>67</div>
+					<div class="value" data-release-components>68</div>
 					<div class="label">Core Components</div>
 					<p>Button, Card, Modal, Table, Video Player, AI Chat, and more</p>
 				</li>
@@ -132,6 +132,7 @@
 	<section>
 		<div class="container">
 			<article class="card filled">
+				<span class="axicon render" data-name="Layers"></span>
 				<h3>The True Axiom01 Way</h3>
 				<p>Write meaningful markup where class names describe what the element <strong>is</strong> — a card, alert, button — not what it looks like. Components are complete: one semantic class provides display, spacing, interactions, and state. All styling flows from tokens. If a component needs to behave differently, adjust it using variables. Customize everywhere consistently, not just at the surface.</p>
 			</article>
@@ -142,13 +143,14 @@
 	<section>
 		<div class="container">
 			<article class="card">
+				<span class="axicon render" data-name="Compass"></span>
 				<header><h3>Symmetry, Math, and Why Your Spacing is Wrong</h3></header>
 				<blockquote>
 					"We forgot how to use CSS. Modern web development has a hoarding problem. We got scared of the cascade, tried to tame it with naming conventions, then shoved styles into JavaScript. Finally, we gave up and dumped 25 utility classes into a single element."
 				</blockquote>
 				<p>Good design is rooted in mathematics. When spacing is arbitrary, the user notices — it registers as visual noise.</p>
 				<p>Axiom01 establishes a perfect mathematical vertical rhythm across your entire application. Change one variable:</p>
-				<pre><code class="language-css">:root {
+				<pre style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><code class="language-css">:root {
   --a-space-unit: 1rem;
 }</code></pre>
 				<p>That single CSS variable controls everything: padding inside cards, gaps between buttons, margins beneath headers. Your entire interface scales in perfect symmetry. Paragraphs are automatically constrained to <code>65ch</code> for optimal readability — handled by default.</p>
@@ -156,23 +158,32 @@
 		</div>
 	</section>
 
-	<!-- SEMANTIC HTML SECTION -->
-	<section>
+	<!-- HOARDING PROBLEM & CODE COMPARISON -->
+	<section id="hoarding-problem">
 		<div class="container">
-			<article class="card">
-				<header><h3>Writing Meaningful HTML Again</h3></header>
-				<p>Axiom01 forces you to respect your own code. It strips away visual clutter and demands semantic HTML: <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;form&gt;</code>.</p>
-				<blockquote>
-					"When you need a component, you don't describe what it looks like. You declare what it <strong>is</strong>."
-				</blockquote>
-				<p>One framework. One philosophy. One seamless experience.</p>
-			</article>
+			<header>
+				<h2>The Hoarding Problem</h2>
+				<p>Modern web development has a hoarding problem. We became terrified of the cascade and shoved styling instructions directly into our structure, resulting in massive <strong>Class Density</strong>. Axiom01 restores the Semantic Reality.</p>
+			</header>
 
-			<div class="grid">
-				<article class="card">
+			<figure style="display:flex;flex-direction:column;align-items:center;gap:var(--a-space-s);padding:var(--a-space-l);background:var(--a-color-surface-variant);border-radius:var(--a-border-radius-base);margin-bottom:var(--a-space-l);">
+				<span style="color:var(--a-color-text-muted);font-size:var(--a-font-size-s);text-transform:uppercase;letter-spacing:0.1em;">The Class Density Metric</span>
+				<div style="display:flex;align-items:center;gap:var(--a-space-m);font-size:var(--a-font-size-xl);font-weight:bold;">
+					<span>D<sub>c</sub></span>
+					<span>=</span>
+					<div style="display:flex;flex-direction:column;align-items:center;border-left:2px solid var(--a-color-outline);padding-left:var(--a-space-s);">
+						<span style="border-bottom:2px solid currentColor;padding-bottom:2px;">N<sub>classes</sub></span>
+						<span>N<sub>elements</sub></span>
+					</div>
+				</div>
+				<figcaption style="font-size:var(--a-font-size-s);text-align:center;max-width:45ch;margin-top:var(--a-space-s);color:var(--a-color-text-muted);">Utility frameworks scale D<sub>c</sub> exponentially. Axiom01 enforces a strict limit: D<sub>c</sub> ≤ 1.</figcaption>
+			</figure>
+
+			<div style="display:flex;overflow-x:auto;gap:var(--a-space-m);scroll-snap-type:x mandatory;padding-bottom:var(--a-space-s);-webkit-overflow-scrolling:touch;">
+				<article class="card" style="min-width:280px;scroll-snap-align:start;">
 					<header><h3>The Utility-First Absurdity</h3></header>
 					<p class="muted">25 utility classes per element</p>
-					<pre><code class="language-html">&lt;form class="flex flex-col gap-4 p-4"&gt;
+					<pre style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><code class="language-html">&lt;form class="flex flex-col gap-4 p-4"&gt;
   &lt;label class="font-bold text-sm"&gt;Email&lt;/label&gt;
   &lt;input class="px-3 py-2 border rounded"&gt;
   &lt;button class="px-4 py-2 bg-blue-500 text-white"&gt;
@@ -181,10 +192,10 @@
 &lt;/form&gt;</code></pre>
 				</article>
 
-				<article class="card">
+				<article class="card" style="min-width:280px;scroll-snap-align:start;">
 					<header><h3>The Semantic Reality</h3></header>
 					<p class="muted">1 semantic class. Complete behavior.</p>
-					<pre><code class="language-html">&lt;form&gt;
+					<pre style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><code class="language-html">&lt;form&gt;
   &lt;label for="email"&gt;Email&lt;/label&gt;
   &lt;input id="email" type="email" required&gt;
   &lt;button class="primary"&gt;Submit&lt;/button&gt;
@@ -196,6 +207,21 @@
 				<blockquote>
 					"One semantic class provides display, spacing, interactions, and state. This is how you build frameworks where everything works together seamlessly."
 				</blockquote>
+			</article>
+		</div>
+	</section>
+
+	<!-- SEMANTIC HTML SECTION -->
+	<section>
+		<div class="container">
+			<article class="card">
+				<span class="axicon render" data-name="Layout"></span>
+				<header><h3>Writing Meaningful HTML Again</h3></header>
+				<p>Axiom01 forces you to respect your own code. It strips away visual clutter and demands semantic HTML: <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;form&gt;</code>.</p>
+				<blockquote>
+					"When you need a component, you don't describe what it looks like. You declare what it <strong>is</strong>."
+				</blockquote>
+				<p>One framework. One philosophy. One seamless experience.</p>
 			</article>
 		</div>
 	</section>
@@ -221,7 +247,7 @@
 							<h3>Axiom01</h3>
 							<p class="muted">8 lines · 1 class</p>
 						</header>
-						<pre><code>&lt;article class="card"&gt;
+						<pre style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><code>&lt;article class="card"&gt;
   &lt;header&gt;
     &lt;h3&gt;Title&lt;/h3&gt;
   &lt;/header&gt;
@@ -236,7 +262,7 @@
 							<h3>Utility-First</h3>
 							<p class="muted">10 lines · 18 classes</p>
 						</header>
-						<pre><code>&lt;div class="max-w-sm rounded-lg shadow-md bg-white p-6"&gt;
+						<pre style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><code>&lt;div class="max-w-sm rounded-lg shadow-md bg-white p-6"&gt;
   &lt;div class="border-b pb-4 mb-4"&gt;
     &lt;h3 class="text-lg font-bold text-gray-800"&gt;Title&lt;/h3&gt;
   &lt;/div&gt;
@@ -256,7 +282,7 @@
 							<h3>Axiom01</h3>
 							<p class="muted">6 lines · 1 class</p>
 						</header>
-						<pre><code>&lt;form&gt;
+						<pre style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><code>&lt;form&gt;
   &lt;label for="email"&gt;Email&lt;/label&gt;
   &lt;input id="email" type="email" required&gt;
   &lt;label for="password"&gt;Password&lt;/label&gt;
@@ -269,7 +295,7 @@
 							<h3>Utility-First</h3>
 							<p class="muted">8 lines · 25 classes</p>
 						</header>
-						<pre><code>&lt;form class="flex flex-col gap-4 p-4"&gt;
+						<pre style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><code>&lt;form class="flex flex-col gap-4 p-4"&gt;
   &lt;label class="font-bold text-sm"&gt;Email&lt;/label&gt;
   &lt;input class="px-3 py-2 border border-gray-300 rounded"&gt;
   &lt;label class="font-bold text-sm"&gt;Password&lt;/label&gt;
@@ -285,14 +311,14 @@
 							<h3>Axiom01</h3>
 							<p class="muted">1 line · 1 class</p>
 						</header>
-						<pre><code>&lt;button class="primary"&gt;Click Me&lt;/button&gt;</code></pre>
+						<pre style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><code>&lt;button class="primary"&gt;Click Me&lt;/button&gt;</code></pre>
 					</article>
 					<article class="card filled">
 						<header>
 							<h3>Utility-First</h3>
 							<p class="muted">1 line · 12 classes</p>
 						</header>
-						<pre><code>&lt;button class="px-4 py-2 bg-blue-500 text-white rounded font-bold hover:bg-blue-600 focus:ring-2"&gt;Click Me&lt;/button&gt;</code></pre>
+						<pre style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><code>&lt;button class="px-4 py-2 bg-blue-500 text-white rounded font-bold hover:bg-blue-600 focus:ring-2"&gt;Click Me&lt;/button&gt;</code></pre>
 					</article>
 				</div>
 			</div>
@@ -663,8 +689,8 @@
 				<p>Choose from 22 carefully crafted themes, each with unique color palettes. See the changes instantly.</p>
 			</header>
 
-			<div class="grid">
-				<article class="card">
+			<div style="display:flex;overflow-x:auto;gap:var(--a-space-m);scroll-snap-type:x mandatory;padding-bottom:var(--a-space-s);-webkit-overflow-scrolling:touch;">
+				<article class="card" style="min-width:280px;scroll-snap-align:start;">
 					<header><h3>Select a Theme</h3></header>
 					<label for="theme-select">Available Themes</label>
 					<select id="theme-select">
@@ -694,7 +720,7 @@
 					<p class="muted">Your selection is saved and persists on your next visit.</p>
 				</article>
 
-				<article class="card" id="description-display">
+				<article class="card" id="description-display" style="min-width:280px;scroll-snap-align:start;">
 					<header><h3>Theme Description</h3></header>
 					<p>Select a theme to preview the color scheme across the entire page.</p>
 				</article>
@@ -720,7 +746,7 @@
 					<p class="muted">JavaScript</p>
 				</article>
 				<article class="card">
-					<h3 data-release-components>67</h3>
+					<h3 data-release-components>68</h3>
 					<p class="muted">Core Components</p>
 				</article>
 				<article class="card">
@@ -761,7 +787,7 @@
 			<div class="brand">
 				<a href="/">[Ax<span class="primary">01</span>]</a>
 				<p>The Semantic Web, Reimagined.</p>
-				<p class="muted">v<span data-release-version>2.1.2</span> · <span data-release-components>67</span> Components · <span data-release-tokens>149</span> Tokens · <span data-release-css-gzip>13.3 KB</span></p>
+				<p class="muted">v<span data-release-version>2.1.2</span> · <span data-release-components>68</span> Components · <span data-release-tokens>149</span> Tokens · <span data-release-css-gzip>13.3 KB</span></p>
 			</div>
 
 			<nav>
