@@ -314,6 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dialog.addEventListener('click', e => { if (e.target === dialog) close(); });
     };
 
+    initHeaderThemeToggle();
     initSearchModal();
     initCurrentPageNavState();
     initCodeCopying();
