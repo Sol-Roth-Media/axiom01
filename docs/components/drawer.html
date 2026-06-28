@@ -34,122 +34,107 @@
 		<div class="container">
 			<header>
 				<h1>Drawer</h1>
-				<p>Slide-in panel using the native <code>&lt;dialog&gt;</code> element. Full keyboard trap, backdrop, and focus management built in — no JavaScript framework needed.</p>
+				<p>Slide-in panel using native <code>&lt;dialog&gt;</code>. Full keyboard trap, Escape key, and backdrop built in.</p>
 			</header>
 
 			<section>
-				<h2>Open a Drawer</h2>
+				<h2>Right Drawer</h2>
 				<article class="card">
 					<figure>
-						<button class="primary" onclick="document.getElementById('demo-drawer').showModal()">
+						<button class="primary" onclick="document.getElementById('demo-drawer-r').showModal()">
 							<span class="axicon render" data-name="Menu"></span> Open Drawer
 						</button>
-						<dialog class="drawer" id="demo-drawer">
+						<dialog class="drawer" id="demo-drawer-r">
 							<header>
 								<h2>Navigation</h2>
-								<button aria-label="Close drawer" onclick="document.getElementById('demo-drawer').close()">
+								<button aria-label="Close" onclick="document.getElementById('demo-drawer-r').close()">
 									<span class="axicon render" data-name="X"></span>
 								</button>
 							</header>
 							<main>
 								<nav>
 									<ul>
-										<li><a href="#">Dashboard</a></li>
+										<li><a href="#" aria-current="page">Dashboard</a></li>
 										<li><a href="#">Projects</a></li>
 										<li><a href="#">Settings</a></li>
-										<li><a href="#">Profile</a></li>
+										<li><a href="#">Help</a></li>
 									</ul>
 								</nav>
 							</main>
 						</dialog>
 					</figure>
 					<pre><code class="language-html">&lt;button class="primary"
-        onclick="document.getElementById('my-drawer').showModal()"&gt;
+        onclick="document.getElementById('nav-drawer').showModal()"&gt;
   Open Drawer
 &lt;/button&gt;
 
-&lt;dialog class="drawer" id="my-drawer"&gt;
+&lt;dialog class="drawer" id="nav-drawer"&gt;
   &lt;header&gt;
-    &lt;h2&gt;Title&lt;/h2&gt;
-    &lt;button aria-label="Close drawer"
-            onclick="document.getElementById('my-drawer').close()"&gt;
+    &lt;h2&gt;Navigation&lt;/h2&gt;
+    &lt;button aria-label="Close"
+            onclick="document.getElementById('nav-drawer').close()"&gt;
       &lt;span class="axicon render" data-name="X"&gt;&lt;/span&gt;
     &lt;/button&gt;
   &lt;/header&gt;
   &lt;main&gt;
     &lt;nav&gt;&lt;ul&gt;
-      &lt;li&gt;&lt;a href="/dashboard"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/" aria-current="page"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/settings"&gt;Settings&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;&lt;/nav&gt;
   &lt;/main&gt;
 &lt;/dialog&gt;</code></pre>
 				</article>
 			</section>
 			<section>
-				<h2>Left-side Drawer</h2>
-				<pre><code class="language-html">&lt;dialog class="drawer" data-side="left" id="left-drawer"&gt;
+				<h2>Left Drawer</h2>
+				<article class="card">
+					<figure>
+						<button class="secondary" onclick="document.getElementById('demo-drawer-l').showModal()">
+							<span class="axicon render" data-name="PanelLeft"></span> Left Drawer
+						</button>
+						<dialog class="drawer" data-side="left" id="demo-drawer-l">
+							<header>
+								<h2>Filters</h2>
+								<button aria-label="Close" onclick="document.getElementById('demo-drawer-l').close()">
+									<span class="axicon render" data-name="X"></span>
+								</button>
+							</header>
+							<main>
+								<form>
+									<label for="df-cat">Category</label>
+									<select id="df-cat"><option>All</option><option>Design</option><option>Code</option></select>
+								</form>
+							</main>
+						</dialog>
+					</figure>
+					<pre><code class="language-html">&lt;!-- Add data-side="left" for left-side drawer --&gt;
+&lt;dialog class="drawer" data-side="left" id="filter-drawer"&gt;
   &lt;header&gt;...&lt;/header&gt;
   &lt;main&gt;...&lt;/main&gt;
 &lt;/dialog&gt;</code></pre>
+				</article>
 			</section>
 			<section>
 				<h2>Semantic Structure</h2>
-				<table><thead><tr><th>Element</th><th>Role</th><th>Notes</th></tr></thead><tbody><tr><td><code>dialog.drawer</code></td><td>Container</td><td>Slides in from right (or left with <code>data-side="left"</code>)</td></tr><tr><td><code>header</code></td><td>Title row</td><td>Title + close button, flex row</td></tr><tr><td><code>main</code></td><td>Content area</td><td>Scrollable, fills remaining height</td></tr><tr><td><code>footer</code></td><td>Action row (optional)</td><td>Primary/secondary action buttons</td></tr></tbody></table>
+				<table><thead><tr><th>Element</th><th>Role</th></tr></thead><tbody><tr><td><code>dialog.drawer</code></td><td>Container — native modal with backdrop</td></tr><tr><td><code>header</code></td><td>Title + close button row</td></tr><tr><td><code>main</code></td><td>Scrollable content area</td></tr><tr><td><code>footer</code> (optional)</td><td>Action buttons</td></tr><tr><td><code>data-side="left"</code></td><td>Slides from left instead of right</td></tr></tbody></table>
 			</section>
 			<section>
 				<h2>Why Native <code>&lt;dialog&gt;</code>?</h2>
 				<ul>
-<li>Built-in keyboard trap — focus stays inside until closed</li><li><kbd>Escape</kbd> closes automatically — no JS needed</li><li>Native <code>::backdrop</code> — no extra overlay element required</li><li><code>.showModal()</code> and <code>.close()</code> — no framework needed</li><li>Correct <code>role="dialog"</code> and focus management are native</li>
-				</ul>
-			</section>
-			<section>
-				<h2>Accessibility</h2>
-				<ul>
-<li>The trigger button needs <code>aria-haspopup="dialog"</code></li><li>The close button needs <code>aria-label="Close drawer"</code></li><li>Focus returns to the trigger element when closed</li><li>Drawer title should be referenced with <code>aria-labelledby</code></li>
+					<li>Built-in focus trap — keyboard users cannot escape accidentally</li>
+					<li><kbd>Escape</kbd> closes automatically — no JS needed</li>
+					<li>Native <code>::backdrop</code> — no extra overlay element</li>
+					<li>Screen reader announces it as a dialog region</li>
 				</ul>
 			</section>
 		</div>
 	</section>
 </main>
-<footer class="footer">
-	<div class="container">
-		<div class="footer-content">
-			<div class="footer-brand">
-				<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
-			</div>
-			<div class="footer-column">
-				<h4>Documentation</h4>
-				<ul>
-					<li><a href="../components-overview.html">All Components</a></li>
-					<li><a href="../overview-quickstart.html">Get Started</a></li>
-					<li><a href="../colors-advanced.html">Colors &amp; Tokens</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Resources</h4>
-				<ul>
-					<li><a href="../../README.md" target="_blank">README</a></li>
-					<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-					<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Community</h4>
-				<ul>
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="footer-bottom">
-			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
-			<ul class="footer-social">
-				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
-				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
-			</ul>
-		</div>
-	</div>
-</footer>
+<footer class="footer"><div class="container"><div class="footer-content">
+<div class="footer-brand"><a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a><p class="footer-tagline">The Semantic Web, Reimagined.</p></div>
+<div class="footer-column"><h4>Documentation</h4><ul><li><a href="../components-overview.html">All Components</a></li></ul></div>
+<div class="footer-column"><h4>Community</h4><ul><li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li></ul></div>
+</div><div class="footer-bottom"><p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p></div></div></footer>
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
 <script>function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);</script>
@@ -159,7 +144,6 @@
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
 <script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
 
 </body>

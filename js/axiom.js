@@ -12,6 +12,35 @@
   // GLOBAL AXIOM API NAMESPACE
   // ==========================================
   window.Axiom = {
+  components: {},
+  componentRegistry: {},
+  componentInstances: new WeakMap(),
+  componentPathOverrides: {
+    'account-menu': 'account-menu',
+    'advanced-table': 'advanced-table',
+    accordion: 'accordion',
+    'audio-player': 'audio-player',
+    autocomplete: 'autocomplete',
+    'component-browser': 'component-browser',
+    'data-list': 'data-list',
+    dropdown: 'dropdown',
+    editor: 'editor',
+    'file-display-download': 'filedisplay',
+    masonry: 'masonry',
+    'mobile-navbar': 'mobile-navbar',
+    'multimedia-picker': 'multimediapicker',
+    playlist: 'playlist',
+    'pull-to-refresh': 'pullrefresh',
+    rating: 'rating',
+    search: 'search',
+    'spacing-demo': 'spacing-demo',
+    'stopwatch-countdown': 'timer',
+    'story-view': 'storyview',
+    'swiping-card-interface': 'swipecards',
+    tooltip: 'tooltip',
+    'touch-components': 'touch',
+    'video-player': 'video-player'
+  },
     /**
      * Dismisses an alert callout node with a scale and fade-out animation.
      * @param {HTMLElement} element - The alert container to dismiss.
@@ -115,6 +144,127 @@
       });
     },
 
+  /**
+   * Registers a component definition or path override for the runtime loader.
+   * @param {string} componentName
+   * @param {object|string} definitionOrPath
+   * @returns {object|string|null}
+   */
+  registerComponent: function (componentName, definitionOrPath) {
+    if (!componentName || !definitionOrPath) return null;
+
+    if (typeof definitionOrPath === 'string') {
+    this.componentRegistry[componentName] = definitionOrPath;
+    return definitionOrPath;
+    }
+
+    this.components[componentName] = definitionOrPath;
+    return definitionOrPath;
+  },
+
+  /**
+   * Loads a component module definition and caches it.
+   * @param {string} componentName
+   * @param {string} componentPath
+   * @returns {Promise<object|null>}
+   */
+  loadComponent: async function (componentName, componentPath) {
+    if (this.components[componentName]) {
+    return this.components[componentName];
+    }
+
+    try {
+    const module = await import(componentPath);
+    const definition = module && module.default;
+
+    if (!definition || typeof definition.init !== 'function') {
+      console.error(`Axiom: Component ${componentName} does not have a valid default export.`);
+      return null;
+    }
+
+    this.components[componentName] = definition;
+    return definition;
+    } catch (error) {
+    console.error(`Axiom: Failed to load component ${componentName}.`, error);
+    return null;
+    }
+  },
+
+  resolveComponentPath: function (componentName) {
+    const moduleName = this.componentPathOverrides[componentName] || componentName;
+    const scriptUrl = document.currentScript && document.currentScript.src
+    ? new URL(document.currentScript.src, window.location.href)
+    : new URL('js/axiom.js', window.location.href);
+    return new URL(`./components/${moduleName}.js`, scriptUrl).href;
+  },
+
+  initializeComponent: function (element, componentName, definition) {
+    if (!element || !componentName || !definition || typeof definition.init !== 'function') {
+    return null;
+    }
+
+    if (this.componentInstances.has(element)) {
+    return this.componentInstances.get(element);
+    }
+
+    const instance = definition.init(element) || null;
+    this.componentInstances.set(element, instance);
+    return instance;
+  },
+
+  /**
+   * Destroys a single initialized component instance.
+   * @param {HTMLElement} element
+   */
+  destroyComponent: function (element) {
+    if (!element || !this.componentInstances.has(element)) return;
+    const instance = this.componentInstances.get(element);
+    if (instance && typeof instance.destroy === 'function') {
+    instance.destroy();
+    }
+    this.componentInstances.delete(element);
+  },
+
+  /**
+   * Destroys all initialized runtime-loader component instances.
+   */
+  destroyAllComponents: function () {
+    document.querySelectorAll('[data-component]').forEach((element) => {
+    this.destroyComponent(element);
+    });
+  },
+
+  /**
+   * Loads and initializes runtime-loader components under a root node.
+   * Opt-in: call manually if component modules should be activated.
+   * @param {ParentNode} root
+   * @returns {Promise<void>}
+   */
+  init: async function (root) {
+    const scope = root || document;
+    const components = Array.from(scope.querySelectorAll('[data-component]')).filter((element) => {
+    const componentName = element.getAttribute('data-component');
+    return Boolean(componentName && this.componentPathOverrides[componentName]);
+    });
+
+    const loadPromises = [];
+    components.forEach((element) => {
+    const componentName = element.getAttribute('data-component');
+    const componentPath = this.componentRegistry[componentName] || this.resolveComponentPath(componentName);
+    loadPromises.push(this.loadComponent(componentName, componentPath));
+    });
+
+    await Promise.all(loadPromises);
+
+    components.forEach((element) => {
+    const componentName = element.getAttribute('data-component');
+    const definition = this.components[componentName];
+    if (definition) {
+      this.initializeComponent(element, componentName, definition);
+    }
+    });
+  },
+
     /**
      * Simple state management for component state.
      */
@@ -157,6 +307,20 @@
         timeout = setTimeout(later, wait);
       };
     }
+  };
+
+  window.Axiom.registerComponent = function registerComponent(componentName, definitionOrPath) {
+    return window.Axiom.componentRegistry && window.Axiom.components
+    ? (typeof definitionOrPath === 'string'
+      ? (window.Axiom.componentRegistry[componentName] = definitionOrPath)
+      : (window.Axiom.components[componentName] = definitionOrPath))
+    : null;
+  };
+
+  window.Axiom.destroyAllComponents = function destroyAllComponents() {
+    document.querySelectorAll('[data-component]').forEach((element) => {
+    window.Axiom.destroyComponent(element);
+    });
   };
 
   // ==========================================

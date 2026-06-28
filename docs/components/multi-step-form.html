@@ -14,7 +14,6 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body class="axiom-body component-doc">
-
 <header class="main" data-component="mobile-navbar">
 	<nav role="navigation" aria-label="Main Navigation">
 		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
@@ -24,199 +23,151 @@
 			<li><a href="../../index.html#axicons">Axicons</a></li>
 		</ul>
 		<div class="actions">
-				<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
 	</nav>
 </header>
-
 <main id="main-content">
-
 	<section>
-<h2 id="step1-title">Create Account</h2>
-<article class="card">
-<p>Enter your email and password to get started</p>
-
-				<div class="field">
-				<label for="email1">Email Address</label>
-				<input type="email" id="email1" placeholder="your@email.com" required>
-				</div>
-
-				<div class="field">
-				<label for="password1">Password</label>
-				<input type="password" id="password1" placeholder="••••••••" required>
-				</div>
-</article></section>
+		<div class="container">
+			<header>
+				<h1>Multi-Step Form</h1>
+				<p>Wizard form pattern using <code>&lt;ol class="steps"&gt;</code> for progress and semantic <code>&lt;section&gt;</code> elements for each step. Native HTML — no framework needed.</p>
+			</header>
 
 			<section>
-<h2 id="step2-title">Complete Profile</h2>
-<article class="card">
-<p>Tell us about yourself to personalize your experience</p>
+				<h2>Live Example</h2>
+				<article class="card">
+					<figure>
+						<ol class="steps" role="list" aria-label="Registration steps" id="msf-steps">
+							<li data-active="true"><i>1</i> <span>Account</span></li>
+							<li><i>2</i> <span>Profile</span></li>
+							<li><i>3</i> <span>Confirm</span></li>
+						</ol>
 
-				<div class="field">
-				<label for="name">Full Name</label>
-				<input type="text" id="name" placeholder="John Doe" required>
-				</div>
+						<form id="msf-form" novalidate>
+							<section id="msf-step1" aria-label="Account details">
+								<h3>Account Details</h3>
+								<label for="msf-email">Email</label>
+								<input type="email" id="msf-email" required placeholder="you@example.com">
+								<label for="msf-password">Password</label>
+								<input type="password" id="msf-password" required minlength="8" placeholder="At least 8 characters">
+							</section>
 
-				<div class="field">
-				<label for="company">Company</label>
-				<input type="text" id="company" placeholder="Acme Corp">
-				</div>
-</article></section>
+							<section id="msf-step2" aria-label="Profile" hidden>
+								<h3>Profile</h3>
+								<label for="msf-name">Full Name</label>
+								<input type="text" id="msf-name" required placeholder="Jane Smith">
+								<label for="msf-role">Role</label>
+								<select id="msf-role">
+									<option value="">Select a role…</option>
+									<option>Designer</option>
+									<option>Developer</option>
+									<option>Manager</option>
+								</select>
+							</section>
 
-			<section>
-<h2 id="step3-title">Review Information</h2>
-<article class="card">
-<p>Confirm your details before submitting</p>
+							<section id="msf-step3" aria-label="Confirm" hidden>
+								<h3>Confirm &amp; Submit</h3>
+								<div class="alert success" role="status">
+									<span class="axicon render" data-name="Check-Circle"></span>
+									<p>Everything looks good. Submit to create your account.</p>
+								</div>
+								<label>
+									<input type="checkbox" required> I agree to the terms of service
+								</label>
+							</section>
 
-				<div style="padding: var(--a-space-m); background: var(--a-color-background-secondary); border-radius: var(--a-border-radius-base);">
-				<p style="margin: 0 0 var(--a-space-s) 0;"><strong>Email:</strong> <span id="review-email">your@email.com</span></p>
-				<p style="margin: 0 0 var(--a-space-s) 0;"><strong>Name:</strong> <span id="review-name">John Doe</span></p>
-				<p><strong>Company:</strong> <span id="review-company">Acme Corp</span></p>
-				</div>
-</article></section>
+							<nav aria-label="Step navigation">
+								<button type="button" class="secondary" id="msf-prev" disabled>← Previous</button>
+								<button type="button" class="primary" id="msf-next">Next →</button>
+								<button type="submit" class="primary" hidden id="msf-submit">Create Account</button>
+							</nav>
+						</form>
+					</figure>
+					<pre><code class="language-html">&lt;!-- Progress indicator --&gt;
+&lt;ol class="steps" role="list" aria-label="Form steps"&gt;
+  &lt;li data-active="true"&gt;&lt;i&gt;1&lt;/i&gt; &lt;span&gt;Account&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;2&lt;/i&gt; &lt;span&gt;Profile&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;3&lt;/i&gt; &lt;span&gt;Confirm&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-			<section>
-				<h2 id="success-title">Account Created Successfully!</h2>
-				<p>Your account is ready to use. You can now log in and start exploring.</p>
+&lt;!-- Each step is a semantic section --&gt;
+&lt;form novalidate&gt;
+  &lt;section id="step1" aria-label="Account details"&gt;
+    &lt;h3&gt;Account Details&lt;/h3&gt;
+    &lt;label for="email"&gt;Email&lt;/label&gt;
+    &lt;input type="email" id="email" required&gt;
+  &lt;/section&gt;
+
+  &lt;section id="step2" aria-label="Profile" hidden&gt;
+    ...
+  &lt;/section&gt;
+
+  &lt;nav aria-label="Step navigation"&gt;
+    &lt;button type="button" class="secondary" id="prev"&gt;← Previous&lt;/button&gt;
+    &lt;button type="button" class="primary" id="next"&gt;Next →&lt;/button&gt;
+  &lt;/nav&gt;
+&lt;/form&gt;</code></pre>
+				</article>
 			</section>
 
 			<section>
-<h2>HTML Structure</h2>
-<article class="card">
-<pre><code class="language-html">&lt;form&gt;
-				&lt;!-- Progress Indicator --&gt;
-				&lt;ol class="steps-progress" role="tablist"&gt;
-				&lt;li class="step-item" data-active="true" data-step="1" role="tab"&gt;
-				&lt;div class="step-number"&gt;1&lt;/div&gt;
-				&lt;span class="step-label"&gt;Step 1&lt;/span&gt;
-				&lt;/li&gt;
-				&lt;/ol&gt;
+				<h2>Step Navigation JavaScript</h2>
+				<pre><code class="language-js">const steps = document.querySelectorAll('#msf-steps li');
+const sections = document.querySelectorAll('#msf-form section');
+let current = 0;
 
-				&lt;!-- Form Sections --&gt;
-				&lt;div class="form-sections" role="region"&gt;
-				&lt;section class="form-section" data-active="true" id="step1"&gt;
-				&lt;h2&gt;Step 1 Title&lt;/h2&gt;
-				&lt;div class="field"&gt;
-				&lt;label for="input1"&gt;Field Label&lt;/label&gt;
-				&lt;input type="text" id="input1"&gt;
-				&lt;/div&gt;
-				&lt;/section&gt;
-				&lt;/div&gt;
+function goTo(n) {
+  // Hide all, show target
+  sections.forEach((s, i) => s.hidden = i !== n);
+  // Update step indicators
+  steps.forEach((s, i) => {
+    s.removeAttribute('data-active');
+    s.removeAttribute('data-completed');
+    if (i < n) s.dataset.completed = 'true';
+    if (i === n) s.dataset.active = 'true';
+  });
+  current = n;
+  // Show/hide prev/next/submit
+  document.getElementById('msf-prev').disabled = n === 0;
+  document.getElementById('msf-next').hidden = n === steps.length - 1;
+  document.getElementById('msf-submit').hidden = n !== steps.length - 1;
+}
 
-				&lt;!-- Navigation --&gt;
-				&lt;div class="form-controls"&gt;
-				&lt;button type="button" class="button secondary" id="prevBtn"&gt;
-				Previous
-				&lt;/button&gt;
-				&lt;button type="button" class="button primary" id="nextBtn"&gt;
-				Next
-				&lt;/button&gt;
-				&lt;/div&gt;
-				&lt;/form&gt;</code></pre>
-</article></section>
+document.getElementById('msf-next').addEventListener('click', () => goTo(current + 1));
+document.getElementById('msf-prev').addEventListener('click', () => goTo(current - 1));</code></pre>
+			</section>
 
 			<section>
-<h2>Key Features</h2>
-<article class="card">
-<ul>
-				<li><strong>Progress Indicator</strong> - Visual step tracking with completed state</li>
-				<li><strong>Step Navigation</strong> - Previous/Next buttons for movement</li>
-				<li><strong>Data Attributes</strong> - `data-active` for visibility, `data-completed` for state</li>
-				<li><strong>Semantic HTML</strong> - Proper form structure with ARIA roles</li>
-				<li><strong>Success State</strong> - Completion confirmation message</li>
-				<li><strong>Accessible</strong> - Full keyboard and screen reader support</li>
-				</ul>
-</article></section>
+				<h2>Semantic Structure</h2>
+				<table>
+					<thead><tr><th>Element</th><th>Role</th></tr></thead>
+					<tbody>
+						<tr><td><code>ol.steps</code></td><td>Visual progress — <code>data-active</code> and <code>data-completed</code> drive appearance</td></tr>
+						<tr><td><code>form section</code></td><td>Each wizard step — toggled with <code>hidden</code> attribute</td></tr>
+						<tr><td><code>nav</code></td><td>Previous/Next/Submit buttons — scoped to form navigation</td></tr>
+						<tr><td><code>section[aria-label]</code></td><td>Announces current step context to screen readers</td></tr>
+					</tbody>
+				</table>
+			</section>
 
 			<section>
-<h2>Data Attributes</h2>
-<article class="card">
-<ul>
-				<li><strong>`data-active="true"`</strong> - Marks currently displayed step</li>
-				<li><strong>`data-completed="true"`</strong> - Marks completed step in progress</li>
-				<li><strong>`data-step="1|2|3"`</strong> - Step identifier for navigation</li>
-				</ul>
-</article></section>
-
-			<section>
-<h2>ARIA Attributes</h2>
-<article class="card">
-<ul>
-				<li><strong>`role="tablist"`</strong> - Progress indicator is tab list</li>
-				<li><strong>`role="tab"`</strong> - Individual step items</li>
-				<li><strong>`aria-selected="true|false"`</strong> - Current tab indicator</li>
-				<li><strong>`role="region"`</strong> - Form sections container</li>
-				<li><strong>`aria-labelledby`</strong> - Links sections to titles</li>
-				</ul>
-</article></section>
-
-			<section>
-<h2>Use Cases</h2>
-<article class="card">
-<ul>
-				<li><strong>Account Registration</strong> - Multi-step signup flow</li>
-				<li><strong>Checkout</strong> - E-commerce purchase process</li>
-				<li><strong>Onboarding</strong> - Setup wizard for new users</li>
-				<li><strong>Surveys</strong> - Multi-page questionnaires</li>
-				<li><strong>Applications</strong> - Job or grant applications</li>
-				<li><strong>Configuration</strong> - Complex app setup</li>
-				</ul>
-</article></section>
-
-			<section>
-<h2>Responsive Behavior</h2>
-<article class="card">
-<p>This component automatically adapts to different screen sizes:</p>
-
-				<h3>Mobile (< 768px)</h3>
-				<p>On mobile devices:</p>
+				<h2>Accessibility</h2>
 				<ul>
-				<li>Optimized for small screens</li>
-				<li>Touch-friendly spacing maintained (44px minimum)</li>
-				<li>Text wraps naturally without overflow</li>
-				<li>Content density optimized for readability</li>
+					<li>Each step section has <code>aria-label</code> describing its purpose</li>
+					<li>Use <code>aria-live="polite"</code> to announce step changes</li>
+					<li>Focus the first input when advancing to a new step</li>
+					<li>Validate each step before allowing forward navigation</li>
+					<li>Progress indicator must be perceivable without colour — numbers + labels</li>
 				</ul>
+			</section>
 
-				<h3>Desktop (1024px+)</h3>
-				<p>On desktop displays:</p>
-				<ul>
-				<li>Enhanced visual features</li>
-				<li>Hover states and transitions</li>
-				<li>Full keyboard navigation support</li>
-				<li>Optimal spacing and sizing</li>
-				</ul>
-
-				<h3>Framework Integration</h3>
-				<p>Responsive behavior is automatic:</p>
-				<ul>
-				<li>Framework handles media queries</li>
-				<li>No custom CSS required</li>
-				<li>Mobile-first approach applied</li>
-				<li>Accessibility maintained at all sizes</li>
-				</ul>
-</article></section>
-
-			<section>
-<h2>Best Practices</h2>
-<article class="card">
-<ul>
-				<li>Show clear progress indicator at all times</li>
-				<li>Group related fields on the same step</li>
-				<li>Display step titles and descriptions</li>
-				<li>Validate before advancing to next step</li>
-				<li>Allow going back to previous steps</li>
-				<li>Show summary/review before final submission</li>
-				<li>Display success confirmation after submission</li>
-				<li>Support keyboard navigation throughout</li>
-				</ul>
-</article></section>
 		</div>
 	</section>
-
 </main>
-
 <footer class="footer">
 	<div class="container">
 		<div class="footer-content">
@@ -257,22 +208,33 @@
 		</div>
 	</div>
 </footer>
-
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
-<script>
-function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
-</script>
+<script>function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
 <script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
 <script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
+<script>
+(function(){
+const steps = document.querySelectorAll('#msf-steps li');
+const sections = document.querySelectorAll('#msf-form section');
+let current = 0;
+function goTo(n){
+  sections.forEach((s,i)=>s.hidden=i!==n);
+  steps.forEach((s,i)=>{s.removeAttribute('data-active');s.removeAttribute('data-completed');if(i<n)s.dataset.completed='true';if(i===n)s.dataset.active='true';});
+  current=n;
+  document.getElementById('msf-prev').disabled=n===0;
+  document.getElementById('msf-next').hidden=n===steps.length-1;
+  document.getElementById('msf-submit').hidden=n!==steps.length-1;
+}
+document.getElementById('msf-next')?.addEventListener('click',()=>goTo(current+1));
+document.getElementById('msf-prev')?.addEventListener('click',()=>goTo(current-1));
+})();
+</script>
 </body>
 </html>

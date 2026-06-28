@@ -22,7 +22,7 @@
 	<link rel="apple-touch-icon" href="./favicon/axiom_favicon_180.png">
 	<link rel="manifest" href="./favicon/manifest.json">
 	<meta name="theme-color" content="#007bff">
-	<link rel="stylesheet" href="css/axiom.min.css?v=2.2.3">
+	<link rel="stylesheet" href="css/axiom.css">
 	<link rel="stylesheet" href="css/axicons.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,7 +71,7 @@
 			<div class="grid">
 				<div class="stat animate delay-1">
 					<span class="axicon render icon" data-name="Trophy"></span>
-					<div class="value">73</div>
+					<div class="value">79</div>
 					<div class="label">Components</div>
 					<p>Button, Card, Modal, Table, Video Player, AI Chat, and more</p>
 				</div>
@@ -208,11 +208,11 @@
 			</header>
 
 			<div class="tabs">
-				<menu role="tablist">
-					<button role="tab" aria-selected="true" aria-controls="panel-card" id="tab-card">Card Component</button>
-					<button role="tab" aria-selected="false" aria-controls="panel-form" id="tab-form">Form Component</button>
-					<button role="tab" aria-selected="false" aria-controls="panel-button" id="tab-button">Button Component</button>
-				</menu>
+				<ul role="tablist" aria-label="Code comparison examples">
+					<li><button role="tab" aria-selected="true" aria-controls="panel-card" id="tab-card">Card Component</button></li>
+					<li><button role="tab" aria-selected="false" aria-controls="panel-form" id="tab-form">Form Component</button></li>
+					<li><button role="tab" aria-selected="false" aria-controls="panel-button" id="tab-button">Button Component</button></li>
+				</ul>
 
 				<div id="panel-card" role="tabpanel" class="code-comparison-grid">
 					<article class="card filled">
@@ -510,11 +510,11 @@
 				<a href="docs/components/tabs.html" class="card preview">
 					<figure>
 						<div class="tabs">
-							<menu role="tablist">
-								<button role="tab" aria-selected="true">Tab 1</button>
-								<button role="tab" aria-selected="false">Tab 2</button>
-								<button role="tab" aria-selected="false">Tab 3</button>
-							</menu>
+							<ul role="tablist" aria-label="Tabs preview example">
+								<li><button role="tab" aria-selected="true">Tab 1</button></li>
+								<li><button role="tab" aria-selected="false">Tab 2</button></li>
+								<li><button role="tab" aria-selected="false">Tab 3</button></li>
+							</ul>
 						</div>
 					</figure>
 					<div class="content">
@@ -525,7 +525,7 @@
 			</div>
 
 			<div class="actions">
-				<a href="docs/components-overview.html" class="button primary lg">View All 73 Components</a>
+				<a href="docs/components-overview.html" class="button primary lg">View All 79 Components</a>
 			</div>
 		</div>
 	</section>
@@ -706,7 +706,7 @@
 		<div class="container">
 			<header>
 				<h2>Latest Release</h2>
-				<p>v2.0.0 — Released June 15, 2026</p>
+				<p>v2.1.2 — Released January 24, 2025</p>
 			</header>
 
 			<div class="grid">
@@ -719,7 +719,7 @@
 					<p class="muted">JavaScript</p>
 				</article>
 				<article class="card">
-					<h3>73</h3>
+					<h3>79</h3>
 					<p class="muted">Components</p>
 				</article>
 				<article class="card">
@@ -746,7 +746,7 @@
 				<a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" class="button primary lg">
 						<span class="axicon render" data-name="GitHub"></span> Star on GitHub
 					</a>
-					<a href="docs/markdown-template.html?file=../LICENSE" class="button outline lg">Read License</a>
+					<a href="LICENSE" class="button outline lg" target="_blank">Read License</a>
 				</div>
 			</article>
 		</div>
@@ -760,7 +760,7 @@
 			<div class="brand">
 				<a href="/">[Ax<span class="primary">01</span>]</a>
 				<p>The Semantic Web, Reimagined.</p>
-				<p class="muted">v2.0.0 · 73 Components · 149 Tokens · 13.3 KB</p>
+				<p class="muted">v2.1.2 · 79 Components · 149 Tokens · 13.3 KB</p>
 			</div>
 
 			<nav>
@@ -776,9 +776,9 @@
 			<nav>
 				<h4>Resources</h4>
 				<ul>
-					<li><a href="docs/AXIOM01_STYLING_GUIDE.md" target="_blank">Styling Guide</a></li>
+					<li><a href="docs/styling-guide.html">Styling Guide</a></li>
 					<li><a href="DEVELOPER.md" target="_blank">Developer Guide</a></li>
-					<li><a href="README.md" target="_blank">README</a></li>
+					<li><a href="readme.md" target="_blank">README</a></li>
 					<li><a href="LICENSE" target="_blank">MIT License</a></li>
 				</ul>
 			</nav>
@@ -808,7 +808,6 @@
 				<span class="axicon render" data-name="Arrow-Up"></span>
 			</button>
 		</div>
-	</div>
 </footer>
 
 <script src="js/axiom.js"></script>
@@ -821,24 +820,6 @@
 <script src="js/render-icons.js"></script>
 <script src="js/sticky-header.js"></script>
 <script>
-	function renderAxicons() {
-		if (typeof window.axicons !== 'undefined' && Array.isArray(window.axicons)) {
-			document.querySelectorAll('.axicon.render').forEach(el => {
-				const name = el.getAttribute('data-name');
-				const icon = window.axicons.find(i => i && i.name && i.name.toLowerCase() === name.toLowerCase());
-				if (icon && icon.svgContent) {
-					el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-				}
-			});
-		} else {
-			setTimeout(renderAxicons, 100);
-		}
-	}
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', renderAxicons);
-	} else {
-		setTimeout(renderAxicons, 100);
-	}
 
 	const scrollTopBtn = document.getElementById('scroll-to-top');
 	if (scrollTopBtn) {

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story View Component - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.min.css">
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="stylesheet" href="../../css/docs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body class="axiom-body component-doc">
+    	<!-- HEADER NAVIGATION -->
+	<header class="main" data-component="mobile-navbar">
+		<nav role="navigation" aria-label="Main Navigation">
+			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+			<ul class="links">
+				<li><a href="../../index.html#get-started">Get Started</a></li>
+				<li><a href="../components-overview.html">Docs</a></li>
+				<li><a href="../../index.html#axicons">Axicons</a></li>
+			</ul>
+
+			<div class="actions">
+				<button class="search toggle" aria-label="Open Search">
+					<span class="axicon render" data-name="Search"></span>
+				</button>
+				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+					<span class="axicon render" data-name="GitHub"></span>
+					<span>GitHub</span>
+				</a>
+				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+					<span class="axicon render" data-name="Moon"></span>
+				</button>
+				<button class="menu toggle" aria-label="Toggle Menu">
+					<span class="axicon render" data-name="Menu"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+
+    <main><section><div class="container">
+        <header>
+            <h1>Story View</h1>
+            <p class="text-muted">Story or carousel viewing component.</p>
+        </header>
+
+        <div class="component-section">
+<section>
+      <div class="container">
+        <h2>Basic Usage</h2>
+        <p>Sequential media frames with timed progression and manual controls.</p>
+        <section class="storyview" data-component="storyview" data-interval="5000" aria-label="Story viewer">
+          <header>
+            <progress value="100" max="100">frame 1</progress>
+            <progress value="0" max="100">frame 2</progress>
+            <progress value="0" max="100">frame 3</progress>
+          </header>
+          <article data-role="frame">
+            <h2>Morning Update</h2>
+            <p>Usage metrics opened with strong engagement from mobile readers.</p>
+          </article>
+          <article data-role="frame" hidden>
+            <h2>Launch Notes</h2>
+            <p>New interaction components now share lifecycle contracts and docs.</p>
+          </article>
+          <article data-role="frame" hidden>
+            <h2>Next Milestone</h2>
+            <p>Focus moves to integration fixtures and gesture regression tests.</p>
+          </article>
+          <nav aria-label="Story controls">
+            <button type="button" data-action="prev">Previous</button>
+            <button type="button" data-action="next">Next</button>
+          </nav>
+          <p role="status" aria-live="polite"></p>
+        </section>
+
+        <section>
+          <h2>Production data binding pattern</h2>
+          <p>Bind story frames from API payloads before component startup so the same semantic structure works for SSR and hydrated clients.</p>
+          <pre><code>const story = document.querySelector('[data-component="storyview"]');
+const payload = await fetch('/api/stories/today').then((res) =&gt; res.json());
+
+const frames = story.querySelectorAll('[data-role="frame"]');
+const bars = story.querySelectorAll('progress');
+
+frames.forEach((frame, index) =&gt; {
+  const item = payload.items[index];
+  if (!item) return;
+  frame.querySelector('h2').textContent = item.title;
+  frame.querySelector('p').textContent = item.summary;
+  bars[index].textContent = item.title;
+});
+</code></pre>
+        </section>
+
+        <h3>Required Markup Contract</h3>
+        <ul>
+          <li>Use <code>data-component="storyview"</code> on the root element.</li>
+          <li>Include frame elements marked with <code>data-role="frame"</code>.</li>
+          <li>Provide optional controls with <code>data-action="prev"</code> and <code>data-action="next"</code>.</li>
+          <li>Use a status element with <code>role="status"</code> for current frame announcements.</li>
+        </ul>
+      </div>
+    </section>
+        </div>
+
+    </div></section></main>
+
+    	<!-- FOOTER -->
+	<footer class="footer">
+		<div class="container">
+			<!-- Main Content Grid -->
+			<div class="footer-content">
+				<!-- Brand Section -->
+				<div class="footer-brand">
+					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+				</div>
+
+				<!-- Product Links -->
+				<div class="footer-column">
+					<h4>Product</h4>
+					<ul>
+						<li><a href="../../docs/components-overview.html">All Components</a></li>
+						<li><a href="../../docs/axicons.html">Icons</a></li>
+						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
+						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+					</ul>
+				</div>
+
+				<!-- Resources Links -->
+				<div class="footer-column">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="../../README.md" target="_blank">README</a></li>
+						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+					</ul>
+				</div>
+
+				<!-- Community Links -->
+				<div class="footer-column">
+					<h4>Community</h4>
+					<ul>
+						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Bottom Section -->
+			<div class="footer-bottom">
+				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+				<ul class="footer-social">
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+						<span class="axicon render" data-name="GitHub"></span>
+					</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+						<span class="axicon render" data-name="Brand-NPM"></span>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+
+            <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
+    <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="../../js/axicons-loader.js"></script>
+<script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-thin-variants.js"></script>
+<script src="../../js/axicons-inverted-variants.js"></script>
+<script src="../../js/axicons-color-variants.js"></script>
+<script src="../../js/axicons-premium-variants.js"></script>
+<script src="../../js/render-icons.js"></script>
+<script src="../../js/axiom.js"></script>
+</body>
+</html>

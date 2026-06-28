@@ -1,0 +1,34 @@
+# Transient States & Tooltips
+Manage loading states and tooltips without importing massive React/Vue libraries.
+## The Semantic Reality
+Modern web development has a bad habit of creating completely separate DOM nodes for loading states (e.g., <SkeletonCard />) and mounting heavy tooltip libraries (like Popper.js) just to show a tiny string of text on hover.
+Axiom01 ties transient UI states directly to **accessibility attributes**.
+## Zero-JS Tooltips
+Use the data-tooltip attribute. Axiom01 injects a beautifully styled, animated tooltip via the ::after pseudo-element. It automatically parses the text from the attribute itself.
+```html
+<button class="secondary" data-tooltip="Ctrl + Shift + S">
+  Save as Copy
+</button>
+
+```
+This ensures the tooltip is tightly coupled to the element, requires zero JavaScript lifecycle management, and uses hardware-accelerated CSS animations for entry.
+## Accessible Loading States (Skeletons)
+When fetching data, developers typically swap out their UI component for a "Skeleton" component. This causes DOM layout thrashing and forces you to maintain two separate HTML structures.
+In Axiom01, you keep your exact DOM structure and simply apply aria-busy="true".
+```html
+<!-- When fetching data, simply add aria-busy -->
+<article class="card" aria-busy="true">
+  <header>
+    <h3 aria-busy="true">Loading Title...</h3>
+  </header>
+  <main>
+    <p aria-busy="true">Loading content description that takes up space...</p>
+  </main>
+</article>
+
+```
+### How it works:
+ 1. **Accessibility First:** Screen readers hear aria-busy and inform the user the UI is updating.
+ 2. **Visual Masking:** Axiom01 intercepts this attribute and generates an animated, shimmering pseudo-element overlay over the exact bounding box of the element.
+ 3. **No Layout Shift:** Because your actual text content is still there (just rendered transparently by the framework), the skeleton perfectly matches the size of the final content. Zero layout shift.
+This is the power of a framework that respects semantic meaning.

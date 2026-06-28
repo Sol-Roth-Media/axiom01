@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Colors & Design Tokens - Axiom01</title>
+    <link rel="stylesheet" href="../css/axiom.min.css">
+    <link rel="stylesheet" href="../css/axicons.css">
+    <link rel="stylesheet" href="../css/docs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .color-swatch {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: var(--a-border-radius-medium);
+            border: 1px solid var(--a-color-outline);
+            margin-right: var(--a-space-m);
+            vertical-align: middle;
+        }
+        
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--a-space-l);
+            margin: var(--a-space-l) 0;
+        }
+        
+        .color-card {
+            border: 1px solid var(--a-color-outline);
+            border-radius: var(--a-border-radius-medium);
+            overflow: hidden;
+            background: var(--a-color-surface);
+        }
+        
+        .color-sample {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: var(--a-font-weight-bold);
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .color-info {
+            padding: var(--a-space-m);
+            font-size: var(--a-font-size-sm);
+        }
+        
+        .color-name {
+            font-weight: var(--a-font-weight-bold);
+            color: var(--a-color-on-surface);
+            margin-bottom: var(--a-space-xs);
+        }
+        
+        .color-code {
+            font-family: var(--a-font-family-mono);
+            color: var(--a-color-on-surface-variant);
+            word-break: break-all;
+        }
+        
+        .color-description {
+            margin-top: var(--a-space-s);
+            font-size: var(--a-font-size-xs);
+            color: var(--a-color-on-surface-variant);
+            line-height: 1.4;
+        }
+        
+        .token-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--a-space-l) 0;
+        }
+        
+        .token-table th {
+            background: var(--a-color-surface-variant);
+            padding: var(--a-space-m);
+            text-align: left;
+            font-weight: var(--a-font-weight-bold);
+            border-bottom: 2px solid var(--a-color-outline);
+        }
+        
+        .token-table td {
+            padding: var(--a-space-m);
+            border-bottom: 1px solid var(--a-color-outline);
+        }
+        
+        .token-table tr:hover {
+            background: var(--a-color-surface-variant);
+        }
+        
+        .usage-example {
+            background: var(--a-color-surface-variant);
+            border-left: 4px solid var(--a-color-primary);
+            padding: var(--a-space-m);
+            margin: var(--a-space-m) 0;
+            border-radius: var(--a-border-radius-small);
+        }
+    </style>
+</head>
+<body class="axiom-body component-doc">
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="../index.html#get-started">Get Started</a></li>
+                <li><a href="components-overview.html">Docs</a></li>
+                <li><a href="../index.html#axicons">Axicons</a></li>
+            </ul>
+
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="GitHub"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="axicon render" data-name="Moon"></span>
+                </button>
+                <button class="menu toggle" aria-label="Toggle Menu">
+                    <span class="axicon render" data-name="Menu"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main><section><div class="container">
+        <header>
+            <h1>Advanced Colors & Design Tokens</h1>
+            <p class="text-muted">Complete guide to AXIOM01's semantic color system, design tokens, and how to use them effectively in your components.</p>
+        </header>
+
+        <div class="component-section">
+
+            <section>
+                <h2>Color System Overview</h2>
+                <p>AXIOM01 uses a semantic color naming system based on Material Design 3 principles. Colors are organized into functional categories rather than literal names (red, blue, green), making them meaningful and maintainable across themes.</p>
+                
+                <div class="usage-example">
+                    <strong>Why Semantic Colors?</strong><br>
+                    Instead of "use red for errors", we define "use error" — which adapts automatically whether your theme is light or dark, and works for users with color blindness.
+                </div>
+            </section>
+
+            <section>
+                <h2>Primary Color Family</h2>
+                <p>The primary color is your brand color — used for the most important actions and states.</p>
+                
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-primary);">
+                            Primary
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-primary</div>
+                            <div class="color-code">Main brand color</div>
+                            <div class="color-description">Primary action buttons, links, focus states</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-on-primary); color: var(--a-color-primary);">
+                            On Primary
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-on-primary</div>
+                            <div class="color-code">Text ON primary</div>
+                            <div class="color-description">Text color when placed on primary backgrounds</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-primary-container); color: var(--a-color-primary);">
+                            Container
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-primary-container</div>
+                            <div class="color-code">Light primary</div>
+                            <div class="color-description">Backgrounds for primary-related content, badges, cards</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-on-primary-container); color: var(--a-color-primary);">
+                            On Container
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-on-primary-container</div>
+                            <div class="color-code">Text on light primary</div>
+                            <div class="color-description">Text when placed on primary-container backgrounds</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="usage-example">
+                    <strong>Usage Example:</strong><br>
+                    <code style="background: var(--a-color-surface); padding: 2px 6px; border-radius: 3px;">.button.primary { background: var(--a-color-primary); color: var(--a-color-on-primary); }</code>
+                </div>
+            </section>
+
+            <section>
+                <h2>Secondary & Tertiary Colors</h2>
+                <p>Secondary and tertiary colors provide complementary accent colors for less critical actions and supporting UI elements.</p>
+                
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-secondary);">
+                            Secondary
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-secondary</div>
+                            <div class="color-code">Secondary action</div>
+                            <div class="color-description">Secondary buttons, alternative actions</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-secondary-container); color: var(--a-color-on-secondary-container);">
+                            Secondary Container
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-secondary-container</div>
+                            <div class="color-code">Light secondary</div>
+                            <div class="color-description">Secondary badges, backgrounds</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-tertiary);">
+                            Tertiary
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-tertiary</div>
+                            <div class="color-code">Accent color</div>
+                            <div class="color-description">Accent elements, highlights, special actions</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-tertiary-container); color: var(--a-color-on-tertiary-container);">
+                            Tertiary Container
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-tertiary-container</div>
+                            <div class="color-code">Light accent</div>
+                            <div class="color-description">Accent backgrounds</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Semantic Status Colors</h2>
+                <p>Status colors communicate state and feedback to users. These include success, warning, error, and info states.</p>
+                
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-success);">
+                            Success
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-success</div>
+                            <div class="color-code">Positive state</div>
+                            <div class="color-description">Successful actions, confirmations</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-success-container); color: var(--a-color-on-success-container);">
+                            Success Container
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-success-container</div>
+                            <div class="color-code">Light success</div>
+                            <div class="color-description">Success alerts, backgrounds</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-warning);">
+                            Warning
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-warning</div>
+                            <div class="color-code">Cautionary state</div>
+                            <div class="color-description">Warnings, caution messages</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-warning-container); color: var(--a-color-on-warning-container);">
+                            Warning Container
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-warning-container</div>
+                            <div class="color-code">Light warning</div>
+                            <div class="color-description">Warning alerts, backgrounds</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-error);">
+                            Error
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-error</div>
+                            <div class="color-code">Negative state</div>
+                            <div class="color-description">Errors, destructive actions</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-error-container); color: var(--a-color-on-error-container);">
+                            Error Container
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-error-container</div>
+                            <div class="color-code">Light error</div>
+                            <div class="color-description">Error alerts, backgrounds</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-info);">
+                            Info
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-info</div>
+                            <div class="color-code">Informational state</div>
+                            <div class="color-description">Information, hints, tips</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-info-container); color: var(--a-color-on-info-container);">
+                            Info Container
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-info-container</div>
+                            <div class="color-code">Light info</div>
+                            <div class="color-description">Info alerts, backgrounds</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Surface & Neutral Colors</h2>
+                <p>Surface colors define the background hierarchy and neutral text colors for readability and contrast.</p>
+                
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-surface); border: 2px solid var(--a-color-outline);">
+                            Surface
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-surface</div>
+                            <div class="color-code">Primary background</div>
+                            <div class="color-description">Main background color for pages and containers</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-surface-variant);">
+                            Surface Variant
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-surface-variant</div>
+                            <div class="color-code">Secondary background</div>
+                            <div class="color-description">Hover states, alt backgrounds, subtle separations</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-on-surface); color: var(--a-color-surface);">
+                            On Surface
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-on-surface</div>
+                            <div class="color-code">Primary text</div>
+                            <div class="color-description">Main text color on surface backgrounds</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-on-surface-variant); color: var(--a-color-surface);">
+                            On Surface Variant
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-on-surface-variant</div>
+                            <div class="color-code">Secondary text</div>
+                            <div class="color-description">Muted text, labels, helper text</div>
+                        </div>
+                    </div>
+                    
+                    <div class="color-card">
+                        <div class="color-sample" style="background: var(--a-color-outline); border: 2px solid var(--a-color-on-surface);">
+                            Outline
+                        </div>
+                        <div class="color-info">
+                            <div class="color-name">--a-color-outline</div>
+                            <div class="color-code">Borders & dividers</div>
+                            <div class="color-description">Borders, lines, separators between elements</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Understanding "On" Colors</h2>
+                <p>The "On" prefix indicates text or foreground content that goes ON TOP of the named background color. This ensures proper contrast and readability.</p>
+                
+                <div class="usage-example">
+                    <strong>Pattern:</strong> <code>var(--a-color-on-[background])</code><br><br>
+                    If background is <code>var(--a-color-primary)</code> → text should be <code>var(--a-color-on-primary)</code><br>
+                    If background is <code>var(--a-color-error-container)</code> → text should be <code>var(--a-color-on-error-container)</code>
+                </div>
+
+                <p><strong>Example CSS:</strong></p>
+                <pre><code class="language-css">.button.primary {
+    background-color: var(--a-color-primary);
+    color: var(--a-color-on-primary);  /* Text ON this background */
+}
+
+.alert.error {
+    background-color: var(--a-color-error-container);
+    color: var(--a-color-on-error-container);  /* Text ON this background */
+}</code></pre>
+            </section>
+
+            <section>
+                <h2>Understanding "Container" Colors</h2>
+                <p>Container colors are lighter, tinted versions of their parent colors, used for backgrounds and less-emphasized UI elements.</p>
+                
+                <div class="usage-example">
+                    <strong>Container Purpose:</strong><br>
+                    <code>var(--a-color-primary)</code> is bold and used for buttons and actions<br>
+                    <code>var(--a-color-primary-container)</code> is subtle and used for badges, cards, and backgrounds
+                </div>
+
+                <p><strong>Example HTML/CSS:</strong></p>
+                <pre><code class="language-html"><!-- Button uses main color -->
+&lt;button class="primary"&gt;Click Me&lt;/button&gt;
+
+<!-- Badge uses container color -->
+&lt;span class="badge"&gt;New&lt;/span&gt;</code></pre>
+                <pre><code class="language-css">.button.primary {
+    background: var(--a-color-primary);      /* Bold primary color */
+}
+
+.badge {
+    background: var(--a-color-primary-container);  /* Soft, tinted version */
+}</code></pre>
+            </section>
+
+            <section>
+                <h2>Complete Color Token Reference</h2>
+                
+                <table class="token-table">
+                    <thead>
+                        <tr>
+                            <th>Token Name</th>
+                            <th>Purpose</th>
+                            <th>Typical Use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>--a-color-primary</code></td>
+                            <td>Brand color</td>
+                            <td>Main action buttons, important elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-on-primary</code></td>
+                            <td>Text ON primary</td>
+                            <td>Text inside primary-colored elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-primary-container</code></td>
+                            <td>Light primary</td>
+                            <td>Badge backgrounds, card accents</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-on-primary-container</code></td>
+                            <td>Text ON container</td>
+                            <td>Text inside primary-container elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-secondary</code></td>
+                            <td>Secondary action</td>
+                            <td>Secondary buttons, less important actions</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-on-secondary</code></td>
+                            <td>Text ON secondary</td>
+                            <td>Text inside secondary-colored elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-success</code></td>
+                            <td>Positive status</td>
+                            <td>Success messages, confirmations</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-on-success</code></td>
+                            <td>Text ON success</td>
+                            <td>Text inside success-colored elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-error</code></td>
+                            <td>Error status</td>
+                            <td>Error messages, destructive actions</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-on-error</code></td>
+                            <td>Text ON error</td>
+                            <td>Text inside error-colored elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-warning</code></td>
+                            <td>Warning status</td>
+                            <td>Warning messages, cautions</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-on-warning</code></td>
+                            <td>Text ON warning</td>
+                            <td>Text inside warning-colored elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-info</code></td>
+                            <td>Info status</td>
+                            <td>Informational messages, hints</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-on-info</code></td>
+                            <td>Text ON info</td>
+                            <td>Text inside info-colored elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-surface</code></td>
+                            <td>Primary background</td>
+                            <td>Page backgrounds, containers</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-surface-variant</code></td>
+                            <td>Secondary background</td>
+                            <td>Hover states, subtle backgrounds</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-on-surface</code></td>
+                            <td>Primary text</td>
+                            <td>Main body text</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-on-surface-variant</code></td>
+                            <td>Secondary text</td>
+                            <td>Labels, helper text, muted text</td>
+                        </tr>
+                        <tr>
+                            <td><code>--a-color-outline</code></td>
+                            <td>Borders & dividers</td>
+                            <td>Borders, lines, separators</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>How to Use in Your CSS</h2>
+                
+                <p><strong>Always use design tokens, never hardcoded colors:</strong></p>
+                
+                <div class="usage-example">
+                    <strong>✅ Correct:</strong><br>
+                    <code style="background: var(--a-color-surface); padding: 2px 6px; border-radius: 3px;">.button { background: var(--a-color-primary); }</code>
+                </div>
+                
+                <div class="usage-example" style="border-left-color: var(--a-color-error);">
+                    <strong>❌ Incorrect:</strong><br>
+                    <code style="background: var(--a-color-surface); padding: 2px 6px; border-radius: 3px; color: var(--a-color-error);">.button { background: #2563eb; }</code>
+                </div>
+
+                <p><strong>Real-world component example:</strong></p>
+                <pre><code class="language-css">/* Alert component using semantic colors */
+.alert {
+    padding: var(--a-space-m);
+    border-radius: var(--a-border-radius-medium);
+}
+
+.alert.success {
+    background: var(--a-color-success-container);
+    color: var(--a-color-on-success-container);
+    border-left: 4px solid var(--a-color-success);
+}
+
+.alert.error {
+    background: var(--a-color-error-container);
+    color: var(--a-color-on-error-container);
+    border-left: 4px solid var(--a-color-error);
+}</code></pre>
+            </section>
+
+            <section>
+                <h2>Dark Mode Support</h2>
+                <p>AXIOM01's color tokens automatically adapt for dark mode. Simply add <code>data-theme="dark"</code> to your HTML element and all colors adjust automatically.</p>
+                
+                <pre><code class="language-html">&lt;html data-theme="dark"&gt;
+    &lt;!-- Your content automatically uses dark mode colors --&gt;
+&lt;/html&gt;</code></pre>
+                
+                <p>The same CSS works in both light and dark modes — tokens handle the adaptation!</p>
+            </section>
+
+        </div>
+
+    </div></section></main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+                    <p class="footer-tagline">The Semantic Web, Reimagined.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="components-overview.html">All Components</a></li>
+                        <li><a href="axicons.html">Icons</a></li>
+                        <li><a href="colors-advanced.html">Colors & Tokens</a></li>
+                        <li><a href="overview-quickstart.html">Get Started</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../README.md" target="_blank">README</a></li>
+                        <li><a href="../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+                        <li><a href="../LICENSE" target="_blank">MIT License</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+                <ul class="footer-social">
+                    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+                        <span class="axicon render" data-name="GitHub"></span>
+                    </a></li>
+                    <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+                        <span class="axicon render" data-name="Brand-NPM"></span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
+    <script src="../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="../js/axicons-loader.js"></script>
+    <script src="../js/axicons-base.js"></script>
+    <script src="../js/axicons-thin-variants.js"></script>
+    <script src="../js/axicons-inverted-variants.js"></script>
+    <script src="../js/axicons-color-variants.js"></script>
+    <script src="../js/axicons-premium-variants.js"></script>
+    <script src="../js/render-icons.js"></script>
+    <script src="../js/axiom.js"></script>
+</body>
+</html>

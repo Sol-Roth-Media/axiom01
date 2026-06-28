@@ -1,0 +1,36 @@
+# Carousels (Sliders)
+Smooth, touch-native horizontal scrolling without JavaScript dependencies.
+## The Semantic Reality
+When a client asks for a carousel, most developers sigh, run npm install swiper, and add 130KB of JavaScript to their bundle. They then spend hours fighting the slider library's custom CSS classes just to make it match their design system.
+Axiom01 asks: *Why are you using JavaScript to scroll a div?*
+### Axiom01 Approach
+```html
+<!-- HTML: Semantic | Classes: 1 | JS: 0 -->
+<ul class="carousel">
+  <li class="card">
+    <header><h3>Item 1</h3></header>
+  </li>
+  <li class="card">
+    <header><h3>Item 2</h3></header>
+  </li>
+  <li class="card">
+    <header><h3>Item 3</h3></header>
+  </li>
+</ul>
+
+```
+## Native CSS Scroll-Snap
+The .carousel component uses the native CSS scroll-snap-type property. It delegates physics, momentum, and touch interactions directly to the browser's C++ rendering engine.
+ * **Mobile Perfection:** On iOS and Android, the carousel feels identical to native OS swiping because *it is*.
+ * **Zero Layout Shift:** Because there is no JavaScript waiting to execute and calculate dimensions, your carousel renders perfectly on the first frame.
+ * **Container Queries:** Notice we didn't use media queries. If you put .carousel in a narrow sidebar, it shows 1 item at a time. If you put that exact same HTML in a full-width section, the container query automatically shifts it to show 3 items at a time.
+## Customizing The Axiom Way
+Want the items to snap slightly off-center so the user *sees* the next item peeking out? Adjust the width inline:
+```html
+<ul class="carousel">
+  <!-- This overrides the internal container math, forcing items to be 85% wide -->
+  <li class="card" style="width: 85%;">...</li>
+  <li class="card" style="width: 85%;">...</li>
+</ul>
+
+```

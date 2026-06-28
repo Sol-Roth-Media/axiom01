@@ -1,0 +1,27 @@
+# Accordions (Disclosure)
+Expandable content panels requiring absolutely zero JavaScript.
+## The Semantic Reality
+Building an accordion in React with utility classes usually looks like this: importing a Chevron icon component, writing an isOpen boolean state, writing a click handler, passing dynamic template literals into a utility class string className={isOpen ? 'block' : 'hidden'}, and wrapping it all in multiple divs.
+Axiom01 asks: *Did you know HTML has this built-in?*
+### Axiom01 Approach
+```html
+<!-- HTML: Semantic | Classes: 1 | JS: 0 -->
+<details class="accordion">
+  <summary>How does billing work?</summary>
+  <p>You are billed automatically on the 1st of every month based on your active usage. You can cancel at any time from your billing dashboard.</p>
+</details>
+
+<details class="accordion">
+  <summary>Can I upgrade my plan later?</summary>
+  <p>Yes, all plans are prorated automatically when you upgrade.</p>
+</details>
+
+```
+## Native Browser Accessibility
+By using <details> and <summary>, we inherit decades of browser engineering for free:
+ 1. **Keyboard Navigation:** Users can tab to the <summary> and press Space or Enter to toggle it.
+ 2. **Screen Readers:** Automatically announce the element as a "disclosure triangle" and correctly report its expanded/collapsed state.
+ 3. **Find in Page:** In modern browsers, using Ctrl+F (or Cmd+F) will automatically expand a <details> element if the searched text is hidden inside it! *No JS framework can do this natively.*
+## The CSS Magic
+Axiom01 strips out the default, ugly browser marker and replaces it with a pure CSS chevron mask. When the native open attribute is present on the <details> tag (which the browser adds automatically on click), Axiom01 uses CSS to rotate the chevron and fade in the content.
+No state management. No onClick handlers. Just native HTML styling.

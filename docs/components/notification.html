@@ -24,7 +24,7 @@
 			<li><a href="../../index.html#axicons">Axicons</a></li>
 		</ul>
 		<div class="actions">
-				<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -32,146 +32,219 @@
 </header>
 
 <main id="main-content">
-
 	<section>
-<h2>Live Examples</h2>
-<article class="card">
-<h3>Success Notification</h3>
-				<div role="alert" data-variant="success">
-				<span class="axicon render" data-name="CheckCircle"></span>
-				<strong>Success!</strong> Your changes have been saved.
-				<button aria-label="Close notification">&times;</button>
-				</div>
+		<div class="container">
 
-				<h3>Error Notification</h3>
-				<div role="alert" data-variant="error">
-				<span class="axicon render" data-name="AlertCircle"></span>
-				<strong>Error!</strong> Something went wrong. Please try again.
-				<button aria-label="Close notification">&times;</button>
-				</div>
+			<header>
+				<h1>Notification</h1>
+				<p>Toast-style notifications using the <code>alert</code> component class with semantic type modifiers. Colours, icons, and dismiss are all handled by the framework — one class does it all.</p>
+			</header>
 
-				<h3>Warning Notification</h3>
-				<div role="alert" data-variant="warning">
-				<span class="axicon render" data-name="AlertTriangle"></span>
-				<strong>Warning!</strong> This action cannot be undone.
-				<button aria-label="Close notification">&times;</button>
-				</div>
-
-				<h3>Info Notification</h3>
-				<div role="alert" data-variant="info">
-				<span class="axicon render" data-name="Info"></span>
-				<strong>Note:</strong> New features are now available.
-				<button aria-label="Close notification">&times;</button>
-				</div>
-</article></section>
-
+			<!-- All four types -->
 			<section>
-<h2>Markup</h2>
-<article class="card">
-<figure>
-<p>Notifications use semantic HTML with data-variant for type styling:</p>
-</figure>
-<pre><code class="language-html">&lt;div role="alert" data-variant="success"&gt;
-				&lt;span class="axicon render" data-name="CheckCircle"&gt;&lt;/span&gt;
-				&lt;div&gt;
-				&lt;strong&gt;Success!&lt;/strong&gt; Your action completed.
-				&lt;/div&gt;
-				&lt;button aria-label="Close notification"&gt;&amp;times;&lt;/button&gt;
-				&lt;/div&gt;
+				<h2>All Variants</h2>
+				<article class="card">
+					<figure>
+						<div class="alert info" role="status" id="notif-info">
+							<span class="axicon render" data-name="Info"></span>
+							<div>
+								<strong>New features available</strong>
+								<p>Version 2.0 has been released with improved performance.</p>
+							</div>
+							<button class="close" aria-label="Dismiss" onclick="this.closest('.alert').remove()">
+								<span class="axicon render" data-name="X"></span>
+							</button>
+						</div>
 
-				&lt;!-- Variants: success, error, warning, info --&gt;</code></pre>
-</article></section>
+						<div class="alert success" role="status" id="notif-success">
+							<span class="axicon render" data-name="Check-Circle"></span>
+							<div>
+								<strong>Changes saved</strong>
+								<p>Your profile has been updated successfully.</p>
+							</div>
+							<button class="close" aria-label="Dismiss" onclick="this.closest('.alert').remove()">
+								<span class="axicon render" data-name="X"></span>
+							</button>
+						</div>
 
+						<div class="alert warning" role="alert" id="notif-warning">
+							<span class="axicon render" data-name="Alert-Triangle"></span>
+							<div>
+								<strong>Storage almost full</strong>
+								<p>You have used 90% of your storage quota.</p>
+							</div>
+							<button class="close" aria-label="Dismiss" onclick="this.closest('.alert').remove()">
+								<span class="axicon render" data-name="X"></span>
+							</button>
+						</div>
+
+						<div class="alert error" role="alert" id="notif-error">
+							<span class="axicon render" data-name="Alert-Circle"></span>
+							<div>
+								<strong>Upload failed</strong>
+								<p>The file could not be uploaded. Please try again.</p>
+							</div>
+							<button class="close" aria-label="Dismiss" onclick="this.closest('.alert').remove()">
+								<span class="axicon render" data-name="X"></span>
+							</button>
+						</div>
+					</figure>
+					<pre><code class="language-html">&lt;!-- Info — role="status" for polite announcement --&gt;
+&lt;div class="alert info" role="status"&gt;
+  &lt;span class="axicon render" data-name="Info"&gt;&lt;/span&gt;
+  &lt;div&gt;
+    &lt;strong&gt;New features available&lt;/strong&gt;
+    &lt;p&gt;Version 2.0 has been released.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;button class="close" aria-label="Dismiss"&gt;
+    &lt;span class="axicon render" data-name="X"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Success --&gt;
+&lt;div class="alert success" role="status"&gt;...&lt;/div&gt;
+
+&lt;!-- Warning — role="alert" for immediate announcement --&gt;
+&lt;div class="alert warning" role="alert"&gt;...&lt;/div&gt;
+
+&lt;!-- Error --&gt;
+&lt;div class="alert error" role="alert"&gt;...&lt;/div&gt;</code></pre>
+				</article>
+			</section>
+
+			<!-- Toast-style triggered notifications -->
 			<section>
-<h2>Data Attributes</h2>
-<article class="card">
-<ul>
-				<li><strong>`data-variant="success|error|warning|info"`</strong> - Notification type (colors and icons)</li>
-				</ul>
-</article></section>
+				<h2>Triggered Toast Notifications</h2>
+				<p>Click the buttons to trigger live notifications in the corner:</p>
+				<article class="card">
+					<figure>
+						<div class="actions">
+							<button class="primary" onclick="showToast('success','File uploaded','Your document has been saved.')">
+								<span class="axicon render" data-name="Check-Circle"></span> Success Toast
+							</button>
+							<button class="secondary" onclick="showToast('info','Tip','You can drag items to reorder them.')">
+								<span class="axicon render" data-name="Info"></span> Info Toast
+							</button>
+							<button onclick="showToast('warning','Session expiring','You will be logged out in 5 minutes.')">
+								<span class="axicon render" data-name="Alert-Triangle"></span> Warning Toast
+							</button>
+							<button class="danger" onclick="showToast('error','Upload failed','Max file size is 10 MB.')">
+								<span class="axicon render" data-name="Alert-Circle"></span> Error Toast
+							</button>
+						</div>
+					</figure>
+					<pre><code class="language-js">function showToast(type, title, message) {
+  const toast = document.createElement('div');
+  toast.className = `alert ${type}`;
+  toast.setAttribute('role', type === 'error' || type === 'warning' ? 'alert' : 'status');
+  toast.innerHTML = `
+    &lt;div&gt;
+      &lt;strong&gt;${title}&lt;/strong&gt;
+      &lt;p&gt;${message}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;button class="close" aria-label="Dismiss"
+            onclick="this.closest('.alert').remove()"&gt;✕&lt;/button&gt;
+  `;
+  document.getElementById('toast-region').appendChild(toast);
+  // Auto-dismiss after 5s
+  setTimeout(() => toast.remove(), 5000);
+}</code></pre>
+				</article>
 
+				<!-- Toast region — positioned fixed -->
+				<div id="toast-region" aria-label="Notifications" aria-live="polite"></div>
+			</section>
+
+			<!-- Simple text-only -->
 			<section>
-<h2>ARIA Attributes</h2>
-<article class="card">
-<ul>
-				<li><strong>`role="alert"`</strong> - Announces notification to screen readers immediately</li>
-				<li><strong>`aria-label`</strong> - Describes close button purpose</li>
-				</ul>
-</article></section>
+				<h2>Text-Only (No Icon)</h2>
+				<article class="card">
+					<figure>
+						<div class="alert success" role="status">
+							<p>Your password has been changed successfully.</p>
+						</div>
+						<div class="alert error" role="alert">
+							<p>Your session has expired. Please sign in again.</p>
+						</div>
+					</figure>
+					<pre><code class="language-html">&lt;!-- Minimal — no icon, just message --&gt;
+&lt;div class="alert success" role="status"&gt;
+  &lt;p&gt;Your password has been changed.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+				</article>
+			</section>
 
+			<!-- Variants reference -->
 			<section>
-<h2>Features</h2>
-<article class="card">
-<ul>
-				<li><strong>Semantic HTML</strong> - Uses <code>&lt;div&gt;</code> with <code>role="alert"</code></li>
-				<li><strong>Icon Support</strong> - Include icons for visual clarity</li>
-				<li><strong>Close Button</strong> - Allow users to dismiss</li>
-				<li><strong>Type Variants</strong> - Four semantic notification types</li>
-				<li><strong>Token-Based Colors</strong> - Uses design tokens for styling</li>
-				<li><strong>Accessibility</strong> - ARIA roles for screen readers</li>
-				</ul>
-</article></section>
+				<h2>Variants Reference</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Class</th>
+							<th>Colour token</th>
+							<th>Use for</th>
+							<th>ARIA role</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>alert info</code></td>
+							<td><code>--a-color-info-container</code></td>
+							<td>Tips, announcements, neutral notices</td>
+							<td><code>role="status"</code></td>
+						</tr>
+						<tr>
+							<td><code>alert success</code></td>
+							<td><code>--a-color-success-container</code></td>
+							<td>Completed actions, confirmations</td>
+							<td><code>role="status"</code></td>
+						</tr>
+						<tr>
+							<td><code>alert warning</code></td>
+							<td><code>--a-color-warning-container</code></td>
+							<td>Potential issues, upcoming deadlines</td>
+							<td><code>role="alert"</code></td>
+						</tr>
+						<tr>
+							<td><code>alert error</code></td>
+							<td><code>--a-color-error-container</code></td>
+							<td>Failed actions, validation errors</td>
+							<td><code>role="alert"</code></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
 
+			<!-- Dismiss JavaScript -->
 			<section>
-<h2>Accessibility</h2>
-<article class="card">
-<ul>
-				<li><strong>`role="alert"`</strong> - Announces notification to screen readers immediately on load</li>
-				<li><strong>`aria-label`</strong> - Labels close button for keyboard users</li>
-				<li><strong>Color + Icon</strong> - Never rely on color alone to convey type</li>
-				<li><strong>Focus Management</strong> - Close button is always keyboard accessible</li>
-				<li><strong>Clear Text</strong> - Use descriptive, actionable messages</li>
-				</ul>
-</article></section>
+				<h2>Dismiss Behaviour</h2>
+				<p>The dismiss button uses <code>onclick="this.closest('.alert').remove()"</code> — no library needed. For animated dismiss:</p>
+				<pre><code class="language-js">// Animated dismiss
+document.addEventListener('click', e => {
+  const closeBtn = e.target.closest('.alert .close');
+  if (!closeBtn) return;
+  const alert = closeBtn.closest('.alert');
+  alert.style.opacity = '0';
+  alert.style.transform = 'translateX(100%)';
+  alert.style.transition = 'all 0.3s ease';
+  setTimeout(() => alert.remove(), 300);
+});</code></pre>
+			</section>
 
+			<!-- Accessibility -->
 			<section>
-<h2>Responsive Behavior</h2>
-<article class="card">
-<p>This component automatically adapts to different screen sizes:</p>
-
-				<h3>Mobile (< 768px)</h3>
-				<p>On mobile devices:</p>
+				<h2>Accessibility</h2>
 				<ul>
-				<li>Optimized for small screens</li>
-				<li>Touch-friendly spacing maintained (44px minimum)</li>
-				<li>Text wraps naturally without overflow</li>
-				<li>Content density optimized for readability</li>
+					<li>Use <code>role="alert"</code> for errors and warnings — announced immediately by screen readers</li>
+					<li>Use <code>role="status"</code> for success and info — announced politely without interrupting</li>
+					<li>Never rely on colour alone — always include an icon and text</li>
+					<li>The dismiss button needs <code>aria-label="Dismiss"</code> — the × icon alone is not accessible</li>
+					<li>For dynamically injected toasts, inject into a container with <code>aria-live="polite"</code></li>
 				</ul>
+			</section>
 
-				<h3>Desktop (1024px+)</h3>
-				<p>On desktop displays:</p>
-				<ul>
-				<li>Enhanced visual features</li>
-				<li>Hover states and transitions</li>
-				<li>Full keyboard navigation support</li>
-				<li>Optimal spacing and sizing</li>
-				</ul>
-
-				<h3>Framework Integration</h3>
-				<p>Responsive behavior is automatic:</p>
-				<ul>
-				<li>Framework handles media queries</li>
-				<li>No custom CSS required</li>
-				<li>Mobile-first approach applied</li>
-				<li>Accessibility maintained at all sizes</li>
-				</ul>
-</article></section>
-
-			<section>
-<h2>Best Practices</h2>
-<article class="card">
-<ul>
-				<li>Keep messages concise and actionable</li>
-				<li>Use appropriate type for the message content</li>
-				<li>Include icons to reinforce the message type</li>
-				<li>Allow users to dismiss notifications</li>
-				<li>Position consistently on the page</li>
-				<li>Use color with icon/text, not color alone</li>
-				</ul>
-</article></section>
 		</div>
 	</section>
-
 </main>
 
 <footer class="footer">
@@ -220,16 +293,54 @@
 <script>
 function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
+
+function showToast(type, title, message) {
+	const icons = {success:'Check-Circle', info:'Info', warning:'Alert-Triangle', error:'Alert-Circle'};
+	const region = document.getElementById('toast-region');
+	const toast = document.createElement('div');
+	toast.className = `alert ${type}`;
+	toast.setAttribute('role', type === 'error' || type === 'warning' ? 'alert' : 'status');
+	toast.innerHTML = `<div><strong>${title}</strong><p>${message}</p></div><button class="close" aria-label="Dismiss" onclick="this.closest('.alert').remove()"><span class="axicon render" data-name="X"></span></button>`;
+	region.appendChild(toast);
+	if(typeof renderAxicons === 'function') setTimeout(renderAxicons, 0);
+	setTimeout(() => { if(toast.parentNode) toast.remove(); }, 5000);
+}
+
+// Animated dismiss
+document.addEventListener('click', e => {
+	const btn = e.target.closest('.alert .close');
+	if (!btn) return;
+	const alert = btn.closest('.alert');
+	if (!alert) return;
+	alert.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+	alert.style.opacity = '0';
+	alert.style.transform = 'translateX(20px)';
+	setTimeout(() => alert.remove(), 250);
+});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
 <script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
 <script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
+
+<style>
+#toast-region {
+	position: fixed;
+	bottom: var(--a-space-l);
+	right: var(--a-space-l);
+	width: min(380px, calc(100vw - var(--a-space-2xl)));
+	display: flex;
+	flex-direction: column;
+	gap: var(--a-space-s);
+	z-index: 9000;
+}
+#toast-region .alert {
+	box-shadow: var(--a-shadow-large);
+}
+</style>
 </body>
 </html>

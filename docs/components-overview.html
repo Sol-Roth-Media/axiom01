@@ -79,8 +79,7 @@
 					<h2>Quick Access</h2>
 					<p>Jump to popular components or learning paths</p>
 				</header>
-				
-
+				<div class="quick-categories">
 					<nav>
 						<h3>Most Popular</h3>
 						<ul>
@@ -109,7 +108,7 @@
 							<li><a href="components/multimedia-picker.html" aria-label="Multimedia Picker - Media selection">Multimedia Picker</a></li>
 						</ul>
 					</nav>
-				
+				</div>
 
 			</div>
 		</section>
@@ -121,7 +120,7 @@
 					<input 
 						type="search" 
 						id="component-search" 
-						placeholder="Search 77 components..."
+						placeholder="Search 79 components..."
 						aria-label="Search components by name or keyword"
 					>
 					<span id="search-results" role="status" aria-live="polite"></span>
@@ -358,9 +357,8 @@
 							</button>
 						</header>
 						<nav id="category-resources" class="category-items">
-							<a href="../README.md" target="_blank" rel="noopener" aria-label="README - Project overview">README</a>
+							<a href="../readme.md" target="_blank" rel="noopener" aria-label="README - Project overview">README</a>
 							<a href="../DEVELOPER.md" target="_blank" rel="noopener" aria-label="Developer Guide - Development documentation">Developer Guide</a>
-							<a href="../CONTRIBUTING.md" target="_blank" rel="noopener" aria-label="Contributing Guide - How to contribute">Contributing Guide</a>
 							<a href="../LICENSE" target="_blank" rel="noopener" aria-label="MIT License - License information">License</a>
 						</nav>
 					</section>
@@ -393,7 +391,7 @@
                 <nav>
                     <h4>Resources</h4>
                     <ul>
-                        <li><a href="AXIOM01_STYLING_GUIDE.md" target="_blank">Styling Guide</a></li>
+						<li><a href="styling-guide.html">Styling Guide</a></li>
                         <li><a href="../DEVELOPER.md" target="_blank">Developer Guide</a></li>
                     </ul>
                 </nav>
@@ -415,14 +413,12 @@
                         &copy; 2024 Sol Roth Media. Released under MIT License.
                     </p>
                 
-                <div style="display: flex; gap: var(--a-space-m); align-items: center;">
-                    <ul class="legal">
-                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub Repository">
-                            <span class="axicon render" data-name="GitHub"></span>
-                        </a></li>
-                    </ul>
-                </div>
-            
+				<ul class="legal">
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub Repository">
+						<span class="axicon render" data-name="GitHub"></span>
+					</a></li>
+				</ul>
+
 </article>
         </div>
     </footer>
@@ -430,26 +426,6 @@
     <script src="../js/axiom.js"></script>
     <script src="../js/index-page-manager.js"></script>
     <script>
-        function renderAxicons() {
-            if (typeof axicons === 'undefined') {
-                setTimeout(renderAxicons, 100);
-                return;
-            }
-            document.querySelectorAll('.axicon.render').forEach(el => {
-                const name = el.getAttribute('data-name');
-                if (!name) return;
-                const icon = axicons.find(i => i.name === name);
-                if (icon) {
-                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
-                }
-            });
-        }
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderAxicons);
-        } else {
-            renderAxicons();
-        }
-        setTimeout(renderAxicons, 500);
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
@@ -552,7 +528,7 @@
 		if (window.innerWidth < 768) {
 			categoryToggles.forEach(toggle => {
 				const category = toggle.closest('.component-category');
-				if (!category.dataset.category === 'feedback') {
+				if (category.dataset.category !== 'feedback') {
 					toggle.setAttribute('aria-expanded', 'false');
 					const controlsId = toggle.getAttribute('aria-controls');
 					const content = document.getElementById(controlsId);

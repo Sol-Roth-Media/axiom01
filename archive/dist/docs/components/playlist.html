@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Component - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.min.css">
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="stylesheet" href="../../css/docs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body class="axiom-body component-doc">
+    	<!-- HEADER NAVIGATION -->
+	<header class="main" data-component="mobile-navbar">
+		<nav role="navigation" aria-label="Main Navigation">
+			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+			<ul class="links">
+				<li><a href="../../index.html#get-started">Get Started</a></li>
+				<li><a href="../components-overview.html">Docs</a></li>
+				<li><a href="../../index.html#axicons">Axicons</a></li>
+			</ul>
+
+			<div class="actions">
+				<button class="search toggle" aria-label="Open Search">
+					<span class="axicon render" data-name="Search"></span>
+				</button>
+				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+					<span class="axicon render" data-name="GitHub"></span>
+					<span>GitHub</span>
+				</a>
+				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+					<span class="axicon render" data-name="Moon"></span>
+				</button>
+				<button class="menu toggle" aria-label="Toggle Menu">
+					<span class="axicon render" data-name="Menu"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+
+    <main><section><div class="container">
+        <header>
+            <h1>Playlist</h1>
+            <p class="text-muted">Organize and display media playlists.</p>
+        </header>
+
+        <div class="component-section">
+<h1 class="title">Playlist Component</h1>
+        <p class="description">
+            A fully-featured playlist manager that works alongside audio and video players. Features drag-to-reorder, shuffle mode,
+            search, and seamless integration with media players.
+        </p>
+
+        <section class="section">
+            <h2 class="title">Features</h2>
+            <ul>
+                <li>Display and manage track queues</li>
+                <li>Drag-and-drop reordering</li>
+                <li>Shuffle mode for randomized playback</li>
+                <li>Built-in search to filter tracks</li>
+                <li>Add and remove items dynamically</li>
+                <li>Track duration display</li>
+                <li>Next/Previous navigation</li>
+                <li>Visual feedback for currently playing track</li>
+            </ul>
+        </section>
+
+        <div class="component-section">
+
+        <section class="section">
+            <h2 class="title">Data Format</h2>
+            <p>Each track object in the playlist should have:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>id</td>
+                        <td>Number/String</td>
+                        <td>Yes</td>
+                        <td>Unique track identifier</td>
+                    </tr>
+                    <tr>
+                        <td>title</td>
+                        <td>String</td>
+                        <td>Yes</td>
+                        <td>Track title</td>
+                    </tr>
+                    <tr>
+                        <td>artist</td>
+                        <td>String</td>
+                        <td>Yes</td>
+                        <td>Artist or creator name</td>
+                    </tr>
+                    <tr>
+                        <td>duration</td>
+                        <td>Number</td>
+                        <td>No</td>
+                        <td>Duration in seconds</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="component-section">
+
+        <section class="section">
+            <h2 class="title">JavaScript API</h2>
+            <p>The playlist component provides a comprehensive API:</p>
+            <ul>
+                <li><code>addItem(item)</code> - Add track to playlist</li>
+                <li><code>removeItem(index)</code> - Remove track by index</li>
+                <li><code>setItems(items)</code> - Replace all tracks</li>
+                <li><code>getItems()</code> - Get all tracks</li>
+                <li><code>clear()</code> - Clear entire playlist</li>
+                <li><code>playNext()</code> - Move to next track</li>
+                <li><code>playPrevious()</code> - Move to previous track</li>
+                <li><code>getCurrentItem()</code> - Get current track</li>
+            </ul>
+        </section>
+
+        <div class="component-section">
+
+        <section class="section">
+            <h2 class="title">Events</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Detail</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>playlist-item-selected</td>
+                        <td>{ item, index }</td>
+                        <td>User clicked a track</td>
+                    </tr>
+                    <tr>
+                        <td>playlist-updated</td>
+                        <td>{ items }</td>
+                        <td>Playlist contents changed</td>
+                    </tr>
+                    <tr>
+                        <td>shuffle-toggled</td>
+                        <td>{ shuffled: boolean }</td>
+                        <td>Shuffle mode toggled</td>
+                    </tr>
+                    <tr>
+                        <td>add-item-requested</td>
+                        <td>{}</td>
+                        <td>Add button clicked</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="component-section">
+
+        <section class="section">
+            <h2 class="title">Integration with Audio Player</h2>
+            <p>Connect playlist to an audio player:</p>
+            <ul>
+                <li>Listen to 'playlist-item-selected' events</li>
+                <li>Call audio player's setSource() method</li>
+                <li>Update playlist UI when audio playback changes</li>
+                <li>Implement next/previous buttons using playNext/playPrevious</li>
+            </ul>
+        </section>
+
+        <div class="component-section">
+
+        <section class="section">
+            <h2 class="title">Best Practices</h2>
+            <ul>
+                <li><strong>Track Duration:</strong> Always provide accurate duration for progress display</li>
+                <li><strong>Unique IDs:</strong> Use consistent, unique identifiers for tracks</li>
+                <li><strong>Performance:</strong> Virtual scrolling recommended for playlists with 500+ tracks</li>
+                <li><strong>UI Feedback:</strong> Highlight currently playing track with visual indicator</li>
+            </ul>
+        </section>
+
+        <div class="component-section">
+
+        <section class="section">
+            <h2 class="title">Browser Support</h2>
+            <ul>
+                <li>Chrome 90+</li>
+                <li>Firefox 88+</li>
+                <li>Safari 14+</li>
+                <li>Edge 90+</li>
+            </ul>
+        </section>
+
+        <div class="component-section">
+        </div>
+
+    </div></section></main>
+
+    	<!-- FOOTER -->
+	<footer class="footer">
+		<div class="container">
+			<!-- Main Content Grid -->
+			<div class="footer-content">
+				<!-- Brand Section -->
+				<div class="footer-brand">
+					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+				</div>
+
+				<!-- Product Links -->
+				<div class="footer-column">
+					<h4>Product</h4>
+					<ul>
+						<li><a href="../../docs/components-overview.html">All Components</a></li>
+						<li><a href="../../docs/axicons.html">Icons</a></li>
+						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
+						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+					</ul>
+				</div>
+
+				<!-- Resources Links -->
+				<div class="footer-column">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="../../README.md" target="_blank">README</a></li>
+						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+					</ul>
+				</div>
+
+				<!-- Community Links -->
+				<div class="footer-column">
+					<h4>Community</h4>
+					<ul>
+						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Bottom Section -->
+			<div class="footer-bottom">
+				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+				<ul class="footer-social">
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+						<span class="axicon render" data-name="GitHub"></span>
+					</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+						<span class="axicon render" data-name="Brand-NPM"></span>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+
+            <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
+    <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="../../js/axicons-loader.js"></script>
+<script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-thin-variants.js"></script>
+<script src="../../js/axicons-inverted-variants.js"></script>
+<script src="../../js/axicons-color-variants.js"></script>
+<script src="../../js/axicons-premium-variants.js"></script>
+<script src="../../js/render-icons.js"></script>
+<script src="../../js/axiom.js"></script>
+</body>
+</html>

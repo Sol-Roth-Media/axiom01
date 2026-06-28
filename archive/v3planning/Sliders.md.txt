@@ -1,0 +1,27 @@
+# Progress & Sliders
+Single-element data visualization.
+## The Semantic Reality
+How do you build a progress bar in a utility framework? You use two div elements and inline styles:
+<div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-blue-600 h-2.5 rounded-full" style="width: 45%"></div></div>
+This is completely inaccessible to screen readers unless you manually add role="progressbar", aria-valuenow, aria-valuemin, and aria-valuemax.
+### Axiom01 Approach
+```html
+<!-- HTML: 1 line | Classes: 1 -->
+<progress class="progress" value="45" max="100">45%</progress>
+
+```
+## <progress> is the Standard
+Axiom01 applies complex cross-browser CSS (targeting ::-webkit-progress-bar and ::-moz-progress-bar) to normalize the appearance of the native <progress> element.
+The result is a beautifully styled, perfectly semantic element. Screen readers automatically understand it, and you don't need to write inline CSS to change the width—you just update the HTML value attribute.
+## Range Sliders
+The <input type="range"> element is notoriously the hardest HTML element to style across browsers. Utility frameworks usually ignore it entirely, forcing developers to download bulky JS slider libraries.
+Axiom01 normalizes it with a single class.
+```html
+<label for="volume">Volume</label>
+<input type="range" id="volume" class="range" min="0" max="100" value="70">
+
+```
+The .range class perfectly styles the track and thumb, applies hover interactions, and supports keyboard navigation natively.
+### Customizing The Axiom Way
+Want a red slider for a dangerous setting? Override the primary token inline:
+<input type="range" class="range" style="--a-primary: var(--a-error);">

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Overview - Axiom01</title>
+	<!-- FOUC Prevention: Set theme before rendering -->
+	<script>
+		(function () {
+			const theme = localStorage.getItem("theme");
+			if (theme) {
+				document.documentElement.setAttribute("data-theme", theme);
+			} else {
+				const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+				document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+			}
+		})();
+	</script>
+    <link rel="stylesheet" href="../css/axiom.min.css">
+    <link rel="stylesheet" href="../css/axicons.css">
+    <link rel="stylesheet" href="../css/docs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body class="axiom-body docs-overview">
+	<!-- Accessibility: Skip to main content -->
+	<a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+				<li><a href="../index.html#get-started">Get Started</a></li>
+				<li><a href="components-overview.html" aria-current="page">Docs</a></li>
+				<li><a href="../index.html#axicons">Axicons</a></li>
+			</ul>
+
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="GitHub"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+                <button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+		<!-- Hero Section with Framework Statistics -->
+		<section class="component-hero">
+			<div class="container">
+				<header>
+					<h1>Component Library</h1>
+					<p>Explore 77 production-ready components designed for semantic web standards</p>
+					<div class="stats">
+						<stat>
+							<strong>77</strong>
+							<span>Components</span>
+						</stat>
+						<stat>
+							<strong>100%</strong>
+							<span>Accessible</span>
+						</stat>
+						<stat>
+							<strong>0</strong>
+							<span>Dependencies</span>
+						</stat>
+					</div>
+				</header>
+			</div>
+		</section>
+
+		<!-- Quick Access Section -->
+		<section class="quick-access">
+			<div class="container">
+				<header>
+					<h2>Quick Access</h2>
+					<p>Jump to popular components or learning paths</p>
+				</header>
+				<div class="quick-categories">
+					<nav>
+						<h3>Most Popular</h3>
+						<ul>
+							<li><a href="components/button.html" aria-label="Button component - Click action">Button</a></li>
+							<li><a href="components/card.html" aria-label="Card component - Content container">Card</a></li>
+							<li><a href="components/alert.html" aria-label="Alert component - Status messages">Alert</a></li>
+							<li><a href="components/forms.html" aria-label="Forms component - Input handling">Forms</a></li>
+							<li><a href="components/modal.html" aria-label="Modal component - Overlay dialog">Modal</a></li>
+						</ul>
+					</nav>
+					<nav>
+						<h3>Getting Started</h3>
+						<ul>
+							<li><a href="overview-quickstart.html" aria-label="Overview and quickstart guide">Overview & Quickstart</a></li>
+							<li><a href="styling-guide.html" aria-label="Styling guide documentation">Styling Guide</a></li>
+							<li><a href="colors-advanced.html" aria-label="Color system documentation">Color System</a></li>
+							<li><a href="typography-advanced.html" aria-label="Typography guide">Typography</a></li>
+						</ul>
+					</nav>
+					<nav>
+						<h3>Advanced</h3>
+						<ul>
+							<li><a href="components/ai-chat.html" aria-label="AI Chat component - Conversational interface">AI Chat</a></li>
+							<li><a href="components/advanced-table.html" aria-label="Advanced Table component - Complex data">Advanced Table</a></li>
+							<li><a href="components/swiping-card-interface.html" aria-label="Swiping Card component - Touch interactions">Swiping Cards</a></li>
+							<li><a href="components/multimedia-picker.html" aria-label="Multimedia Picker - Media selection">Multimedia Picker</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</section>
+
+		<!-- Search Section -->
+		<section class="search-section">
+			<div class="container">
+				<div class="search-box">
+					<input 
+						type="search" 
+						id="component-search" 
+						placeholder="Search 77 components..."
+						aria-label="Search components by name or keyword"
+					>
+					<span id="search-results" role="status" aria-live="polite"></span>
+				</div>
+			</div>
+		</section>
+
+		<!-- Main Components Navigation -->
+		<section class="components-section">
+			<div class="container">
+				<header>
+					<h2>All Components</h2>
+					<p>Complete catalog organized by category</p>
+				</header>
+				<nav class="components-nav" aria-label="Components by category">
+					<!-- Feedback & Status Category -->
+					<section class="component-category" data-category="feedback">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-feedback">
+								<span class="category-title">Feedback & Status</span>
+								<span class="category-count">5 components</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-feedback" class="category-items">
+							<a href="components/alert.html" aria-label="Alert - Display notification messages to users">Alert</a>
+							<a href="components/notification.html" aria-label="Notification - Toast-style messages">Notification</a>
+							<a href="components/progress.html" aria-label="Progress - Linear or circular progress indicators">Progress</a>
+							<a href="components/empty-state.html" aria-label="Empty State - Placeholder for empty data">Empty State</a>
+							<a href="components/skeleton.html" aria-label="Skeleton - Loading placeholder content">Skeleton</a>
+						</nav>
+					</section>
+
+					<!-- Forms & Inputs Category -->
+					<section class="component-category" data-category="forms">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-forms">
+								<span class="category-title">Forms & Inputs</span>
+								<span class="category-count">9 components</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-forms" class="category-items">
+							<a href="components/forms.html" aria-label="Forms - Complete form structure">Forms</a>
+							<a href="components/field-validation.html" aria-label="Field Validation - Input validation states">Field Validation</a>
+							<a href="components/editor.html" aria-label="Editor - Rich text editing">Editor</a>
+							<a href="components/datepicker.html" aria-label="Datepicker - Date selection">Datepicker</a>
+							<a href="components/file-upload.html" aria-label="File Upload - File input handling">File Upload</a>
+							<a href="components/multi-step-form.html" aria-label="Multi-Step Form - Wizard form flows">Multi-Step Form</a>
+							<a href="components/slider.html" aria-label="Slider - Range input">Slider</a>
+							<a href="components/toggle.html" aria-label="Toggle - Switch component">Toggle</a>
+							<a href="components/chip-input.html" aria-label="Chip Input - Multi-value input">Chip Input</a>
+						</nav>
+					</section>
+
+					<!-- Navigation & Layout Category -->
+					<section class="component-category" data-category="navigation">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-navigation">
+								<span class="category-title">Navigation & Layout</span>
+								<span class="category-count">12 components</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-navigation" class="category-items">
+							<a href="components/accordion.html" aria-label="Accordion - Expandable sections">Accordion</a>
+							<a href="components/breadcrumb.html" aria-label="Breadcrumb - Navigation path">Breadcrumb</a>
+							<a href="components/dropdown.html" aria-label="Dropdown - Menu selector">Dropdown</a>
+							<a href="components/hierarchy.html" aria-label="Hierarchy - Nested tree navigation">Hierarchy</a>
+							<a href="components/popover.html" aria-label="Popover - Contextual overlay">Popover</a>
+							<a href="components/steps.html" aria-label="Steps - Wizard progression">Steps</a>
+							<a href="components/mobile-navbar.html" aria-label="Mobile Navbar - Mobile navigation">Mobile Navbar</a>
+							<a href="components/navigation.html" aria-label="Navigation - Main navigation bar">Navigation</a>
+							<a href="components/pagination.html" aria-label="Pagination - Page navigation">Pagination</a>
+							<a href="components/sidebar.html" aria-label="Sidebar - Side navigation panel">Sidebar</a>
+							<a href="components/tabs.html" aria-label="Tabs - Tabbed interface">Tabs</a>
+							<a href="components/timeline.html" aria-label="Timeline - Sequential events">Timeline</a>
+						</nav>
+					</section>
+
+					<!-- Content Display Category -->
+					<section class="component-category" data-category="content">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-content">
+								<span class="category-title">Content Display</span>
+								<span class="category-count">11 components</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-content" class="category-items">
+							<a href="components/avatar.html" aria-label="Avatar - User profile image">Avatar</a>
+							<a href="components/badge.html" aria-label="Badge - Label or status indicator">Badge</a>
+							<a href="components/button.html" aria-label="Button - Interactive action">Button</a>
+							<a href="components/card.html" aria-label="Card - Content container">Card</a>
+							<a href="components/adaptive-media-card.html" aria-label="Adaptive Media Card - Responsive card">Adaptive Media Card</a>
+							<a href="components/carousel.html" aria-label="Carousel - Image slider">Carousel</a>
+							<a href="components/chat.html" aria-label="Chat - Chat message interface">Chat</a>
+							<a href="components/commerce.html" aria-label="Commerce - E-commerce components">Commerce</a>
+							<a href="components/table.html" aria-label="Table - Data table">Table</a>
+							<a href="components/advanced-table.html" aria-label="Advanced Table - Complex data table">Advanced Table</a>
+							<a href="components/rating.html" aria-label="Rating - Star rating component">Rating</a>
+						</nav>
+					</section>
+
+					<!-- Advanced Interactions Category -->
+					<section class="component-category" data-category="advanced">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-advanced">
+								<span class="category-title">Advanced Interactions</span>
+								<span class="category-count">9 components</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-advanced" class="category-items">
+							<a href="components/swiping-card-interface.html" aria-label="Swiping Card - Card swiping interaction">Swiping Card Interface</a>
+							<a href="components/pull-to-refresh.html" aria-label="Pull to Refresh - Refresh gesture">Pull to Refresh</a>
+							<a href="components/story-view.html" aria-label="Story View - Story viewer interface">Story View</a>
+							<a href="components/multimedia-picker.html" aria-label="Multimedia Picker - Media selection">Multimedia Picker</a>
+							<a href="components/autocomplete.html" aria-label="Autocomplete - Auto-completing input">Autocomplete</a>
+							<a href="components/stopwatch-countdown.html" aria-label="Stopwatch and Countdown - Timer component">Stopwatch and Countdown</a>
+							<a href="components/shapes-paths.html" aria-label="Shapes and Paths - SVG shapes">Shapes and Paths</a>
+							<a href="components/touch-components.html" aria-label="Touch Components - Touch event handlers">Touch Components</a>
+							<a href="components/file-display-download.html" aria-label="File Display and Download - File viewer">File Display and Download</a>
+						</nav>
+					</section>
+
+					<!-- Utilities & Overlays Category -->
+					<section class="component-category" data-category="utilities">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-utilities">
+								<span class="category-title">Utilities & Overlays</span>
+								<span class="category-count">5 components</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-utilities" class="category-items">
+							<a href="components/drawer.html" aria-label="Drawer - Slide-out panel">Drawer</a>
+							<a href="components/modal.html" aria-label="Modal - Dialog overlay">Modal</a>
+							<a href="components/tooltip.html" aria-label="Tooltip - Hover information">Tooltip</a>
+							<a href="components/paywall.html" aria-label="Paywall - Payment wall">Paywall</a>
+							<a href="components/settings.html" aria-label="Settings - Settings panel">Settings</a>
+						</nav>
+					</section>
+
+					<!-- Media & Players Category -->
+					<section class="component-category" data-category="media">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-media">
+								<span class="category-title">Media & Players</span>
+								<span class="category-count">3 components</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-media" class="category-items">
+							<a href="components/audio-player.html" aria-label="Audio Player - Audio playback">Audio Player</a>
+							<a href="components/video-player.html" aria-label="Video Player - Video playback">Video Player</a>
+							<a href="components/playlist.html" aria-label="Playlist - Media playlist">Playlist</a>
+						</nav>
+					</section>
+
+					<!-- AI Integrations Category -->
+					<section class="component-category" data-category="ai">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-ai">
+								<span class="category-title">AI Integrations</span>
+								<span class="category-count">2 components</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-ai" class="category-items">
+							<a href="components/ai-chat.html" aria-label="AI Chat - Conversational AI interface">AI Chat</a>
+							<a href="components/ai-image-generator.html" aria-label="AI Image Generator - Image generation">AI Image Generator</a>
+						</nav>
+					</section>
+
+					<!-- Miscellaneous Category -->
+					<section class="component-category" data-category="misc">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-misc">
+								<span class="category-title">Miscellaneous</span>
+								<span class="category-count">20 components</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-misc" class="category-items">
+							<a href="components/account-menu.html" aria-label="Account Menu - User account menu">Account Menu</a>
+							<a href="components/page-header.html" aria-label="Page Header - Page title section">Page Header</a>
+							<a href="components/button-variants.html" aria-label="Button Variants - Button style variants">Button Variants</a>
+							<a href="components/queue.html" aria-label="Queue - Drag and drop queue">Queue (Drag & Drop)</a>
+							<a href="components/segmented-control.html" aria-label="Segmented Control - Toggle group">Segmented Control</a>
+							<a href="components/list.html" aria-label="List - Animated list">List (Animated)</a>
+							<a href="components/backlit.html" aria-label="Backlit - Backlit effect">Backlit</a>
+							<a href="components/cta.html" aria-label="Call-to-Action - CTA button section">Call-to-Action</a>
+							<a href="components/data-list.html" aria-label="Data List - Data display list">Data List</a>
+							<a href="components/feature-grid.html" aria-label="Feature Grid - Feature showcase">Feature Grid</a>
+							<a href="components/footer.html" aria-label="Footer - Page footer">Footer</a>
+							<a href="components/hero.html" aria-label="Hero - Hero section">Hero</a>
+							<a href="components/masonry.html" aria-label="Masonry Layout - Masonry grid">Masonry Layout</a>
+							<a href="components/media.html" aria-label="Media & Icons - Media utilities">Media & Icons</a>
+							<a href="components/stats.html" aria-label="Stats/Metrics - Statistics display">Stats/Metrics</a>
+							<a href="components/testimonial.html" aria-label="Testimonial - User testimonial">Testimonial</a>
+							<a href="components/spacing-demo.html" aria-label="Spacing Demo - Spacing showcase">Spacing Demo</a>
+							<a href="components/component-browser.html" aria-label="Component Browser - Component explorer">Component Browser</a>
+							<a href="components/axicons.html" aria-label="Axicons - Icon library browser">Browse All Axicons</a>
+							<a href="form-elements.html" aria-label="Form Elements - Form element documentation">Form Elements</a>
+						</nav>
+					</section>
+
+					<!-- Core Concepts Links -->
+					<section class="component-category" data-category="concepts">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-concepts">
+								<span class="category-title">Core Concepts</span>
+								<span class="category-count">5 guides</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-concepts" class="category-items">
+							<a href="colors-advanced.html" aria-label="Color System - Design token colors">Color System</a>
+							<a href="typography-advanced.html" aria-label="Typography - Font and text styling">Typography</a>
+							<a href="layout-advanced.html" aria-label="Layout & Grid - Layout system">Layout & Grid</a>
+							<a href="media-advanced.html" aria-label="Media & Icons - Media utilities">Media & Icons</a>
+							<a href="form-elements.html" aria-label="Form Elements - Form field reference">Form Elements</a>
+						</nav>
+					</section>
+
+					<!-- Developer Resources Links -->
+					<section class="component-category" data-category="resources">
+						<header>
+							<button class="category-toggle" aria-expanded="true" aria-controls="category-resources">
+								<span class="category-title">Developer Resources</span>
+								<span class="category-count">4 links</span>
+								<span class="axicon-chevron" aria-hidden="true">▼</span>
+							</button>
+						</header>
+						<nav id="category-resources" class="category-items">
+							<a href="../README.md" target="_blank" rel="noopener" aria-label="README - Project overview">README</a>
+							<a href="../DEVELOPER.md" target="_blank" rel="noopener" aria-label="Developer Guide - Development documentation">Developer Guide</a>
+							<a href="../CONTRIBUTING.md" target="_blank" rel="noopener" aria-label="Contributing Guide - How to contribute">Contributing Guide</a>
+							<a href="../LICENSE" target="_blank" rel="noopener" aria-label="MIT License - License information">License</a>
+						</nav>
+					</section>
+				</nav>
+			</div>
+		</section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <!-- Main Content Grid -->
+            <div class="footer-content">
+                <!-- Brand Section -->
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+                    <p class="footer-tagline">The Semantic Web, Reimagined.</p>
+                </div>
+
+                <!-- Documentation Links -->
+                <div class="footer-column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="components-overview.html" aria-current="page">Component Overview</a></li>
+                        <li><a href="overview-quickstart.html">Get Started</a></li>
+                        <li><a href="colors-advanced.html">Colors & Tokens</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Links -->
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../README.md" target="_blank">README</a></li>
+                        <li><a href="../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+                        <li><a href="../LICENSE" target="_blank">MIT License</a></li>
+                    </ul>
+                </div>
+
+                <!-- Community Links -->
+                <div class="footer-column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+                <ul class="footer-social">
+                    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+                        <span class="axicon render" data-name="GitHub"></span>
+                    </a></li>
+                    <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+                        <span class="axicon render" data-name="Brand-NPM"></span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/axiom.js"></script>
+    <script src="../js/index-page-manager.js"></script>
+    <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+        setTimeout(renderAxicons, 500);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="../js/axicons-loader.js"></script>
+    <script src="../js/axicons-base.js"></script>
+    <script src="../js/axicons-thin-variants.js"></script>
+    <script src="../js/axicons-inverted-variants.js"></script>
+    <script src="../js/axicons-color-variants.js"></script>
+    <script src="../js/axicons-premium-variants.js"></script>
+    <script src="../js/render-icons.js"></script>
+
+	<!-- Component Overview Functionality -->
+	<script>
+		/**
+		 * AXIOM01 Components Overview - Search and Collapse Functionality
+		 * Minimal. Semantic. No dependencies. Token-based only.
+		 */
+
+		// Category Toggle Functionality
+		document.querySelectorAll('.category-toggle').forEach(button => {
+			button.addEventListener('click', function() {
+				const expanded = this.getAttribute('aria-expanded') === 'true';
+				this.setAttribute('aria-expanded', !expanded);
+				
+				const controlsId = this.getAttribute('aria-controls');
+				const content = document.getElementById(controlsId);
+				if (content) {
+					content.hidden = expanded;
+				}
+			});
+		});
+
+		// Search Functionality
+		const searchInput = document.getElementById('component-search');
+		const searchResults = document.getElementById('search-results');
+		const allComponentLinks = document.querySelectorAll('a[href*="components/"]');
+		const categoryToggles = document.querySelectorAll('.category-toggle');
+		
+		if (searchInput) {
+			searchInput.addEventListener('input', function() {
+				const query = this.value.toLowerCase().trim();
+				let visibleCount = 0;
+				let visibleCategories = new Set();
+
+				// Filter component links
+				allComponentLinks.forEach(link => {
+					const text = link.textContent.toLowerCase();
+					const label = link.getAttribute('aria-label')?.toLowerCase() || '';
+					const matches = text.includes(query) || label.includes(query) || query === '';
+
+					if (matches && query !== '') {
+						link.style.display = '';
+						visibleCount++;
+						
+						// Track which categories have visible items
+						const category = link.closest('.component-category');
+						if (category) {
+							visibleCategories.add(category);
+						}
+					} else if (query === '') {
+						link.style.display = '';
+					} else {
+						link.style.display = 'none';
+					}
+				});
+
+				// Expand categories with matches, collapse others
+				categoryToggles.forEach(toggle => {
+					const controlsId = toggle.getAttribute('aria-controls');
+					const content = document.getElementById(controlsId);
+					const category = toggle.closest('.component-category');
+
+					if (query === '') {
+						// Reset to all expanded
+						toggle.setAttribute('aria-expanded', 'true');
+						if (content) content.hidden = false;
+					} else if (visibleCategories.has(category)) {
+						// Show categories with matches
+						toggle.setAttribute('aria-expanded', 'true');
+						if (content) content.hidden = false;
+					} else {
+						// Hide categories without matches
+						toggle.setAttribute('aria-expanded', 'false');
+						if (content) content.hidden = true;
+					}
+				});
+
+				// Update search results text
+				if (query) {
+					searchResults.textContent = `Found ${visibleCount} component${visibleCount !== 1 ? 's' : ''}`;
+				} else {
+					searchResults.textContent = '';
+				}
+			});
+		}
+
+		// Mobile Responsive: Collapse on small screens by default (except popular)
+		if (window.innerWidth < 768) {
+			categoryToggles.forEach(toggle => {
+				const category = toggle.closest('.component-category');
+				if (!category.dataset.category === 'feedback') {
+					toggle.setAttribute('aria-expanded', 'false');
+					const controlsId = toggle.getAttribute('aria-controls');
+					const content = document.getElementById(controlsId);
+					if (content) content.hidden = true;
+				}
+			});
+		}
+
+		// Handle window resize for responsive behavior
+		let resizeTimeout;
+		window.addEventListener('resize', function() {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(function() {
+				if (window.innerWidth < 768) {
+					// Mobile: collapse most categories
+					categoryToggles.forEach(toggle => {
+						const category = toggle.closest('.component-category');
+						if (category.dataset.category !== 'feedback') {
+							toggle.setAttribute('aria-expanded', 'false');
+							const controlsId = toggle.getAttribute('aria-controls');
+							const content = document.getElementById(controlsId);
+							if (content) content.hidden = true;
+						}
+					});
+				} else {
+					// Desktop: expand all categories
+					categoryToggles.forEach(toggle => {
+						toggle.setAttribute('aria-expanded', 'true');
+						const controlsId = toggle.getAttribute('aria-controls');
+						const content = document.getElementById(controlsId);
+						if (content) content.hidden = false;
+					});
+				}
+			}, 250);
+		});
+	</script>
+</body>
+</html>

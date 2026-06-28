@@ -12,6 +12,142 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+	<style>
+		/* Form demos sit directly in article.card — no figure wrapper
+		   so they get proper form spacing, not media preview spacing */
+		article.card > form {
+			padding: var(--a-space-l);
+			background: var(--a-color-surface-variant);
+			border-radius: var(--a-border-radius-base);
+			margin-bottom: var(--a-space-m);
+		}
+
+		/* Inputs inside forms need proper vertical rhythm */
+		article.card form label {
+			display: block;
+			margin-bottom: var(--a-space-xs);
+			font-weight: var(--a-font-weight-medium);
+			color: var(--a-color-on-surface);
+		}
+
+		article.card form input,
+		article.card form select,
+		article.card form textarea {
+			width: 100%;
+			margin-bottom: var(--a-space-m);
+			box-sizing: border-box;
+		}
+
+		article.card form textarea {
+			resize: vertical;
+			min-height: 100px;
+		}
+
+		article.card form fieldset {
+			border: 1px solid var(--a-color-outline);
+			border-radius: var(--a-border-radius-base);
+			padding: var(--a-space-m);
+			margin-bottom: var(--a-space-m);
+		}
+
+		article.card form legend {
+			font-weight: var(--a-font-weight-bold);
+			padding: 0 var(--a-space-xs);
+		}
+
+		article.card form fieldset label {
+			display: flex;
+			align-items: center;
+			gap: var(--a-space-s);
+			font-weight: var(--a-font-weight-normal);
+			margin-bottom: var(--a-space-s);
+			cursor: pointer;
+		}
+
+		article.card form fieldset input[type="checkbox"],
+		article.card form fieldset input[type="radio"] {
+			width: auto;
+			margin: 0;
+			flex-shrink: 0;
+		}
+
+		/* Two-column form grid */
+		.form-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 0 var(--a-space-l);
+		}
+
+		@media (max-width: 600px) {
+			.form-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		.form-grid label {
+			display: block;
+			margin-bottom: var(--a-space-xs);
+		}
+
+		.form-grid > * {
+			/* Let full-width items span both columns */
+		}
+
+		.form-grid .span-2 {
+			grid-column: 1 / -1;
+		}
+
+		/* Error state */
+		.input-error input,
+		.input-error textarea,
+		.input-error select {
+			border-color: var(--a-color-error) !important;
+			background-color: var(--a-color-error-container);
+		}
+
+		.input-error small {
+			color: var(--a-color-error);
+			display: flex;
+			align-items: center;
+			gap: var(--a-space-xs);
+			margin-top: calc(var(--a-space-m) * -0.75);
+			margin-bottom: var(--a-space-m);
+			font-size: var(--a-font-size-sm);
+		}
+
+		/* Success state */
+		.input-success input {
+			border-color: var(--a-color-success) !important;
+		}
+
+		.input-success small {
+			color: var(--a-color-success);
+			display: flex;
+			align-items: center;
+			gap: var(--a-space-xs);
+			margin-top: calc(var(--a-space-m) * -0.75);
+			margin-bottom: var(--a-space-m);
+			font-size: var(--a-font-size-sm);
+		}
+
+		/* Helper text */
+		article.card form .hint {
+			font-size: var(--a-font-size-sm);
+			color: var(--a-color-on-surface-variant);
+			margin-top: calc(var(--a-space-m) * -0.75);
+			margin-bottom: var(--a-space-m);
+			display: block;
+		}
+
+		/* Character count */
+		article.card form .char-count {
+			font-size: var(--a-font-size-sm);
+			color: var(--a-color-on-surface-variant);
+			text-align: right;
+			margin-top: calc(var(--a-space-m) * -0.75);
+			margin-bottom: var(--a-space-m);
+		}
+	</style>
 </head>
 <body class="axiom-body component-doc">
 
@@ -24,7 +160,7 @@
 			<li><a href="../../index.html#axicons">Axicons</a></li>
 		</ul>
 		<div class="actions">
-				<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -32,239 +168,516 @@
 </header>
 
 <main id="main-content">
-
 	<section>
 		<div class="container">
 
 			<header>
 				<h1>Forms</h1>
-				<p>Semantic form component for collecting user input. Uses native HTML form elements with minimal styling and proper accessibility attributes.</p>
+				<p>Native HTML form elements styled automatically — no extra classes on inputs, labels, or textareas. The framework handles spacing, focus states, validation, and dark mode.</p>
 			</header>
 
+			<!-- ── CONTACT FORM ─────────────────────────────────────────── -->
 			<section>
-				<h2>Basic Form</h2>
+				<h2>Complete Contact Form</h2>
 				<article class="card">
-					<figure>
+					<form novalidate>
+						<label for="contact-name">Full Name <span aria-hidden="true">*</span></label>
+						<input type="text" id="contact-name" name="name" placeholder="Jane Smith" autocomplete="name" required>
 
-						<form>
-						<div class="field">
-						<label for="email">Email Address</label>
-						<input type="email" id="email" name="email" required>
-						</div>
+						<label for="contact-email">Email Address <span aria-hidden="true">*</span></label>
+						<input type="email" id="contact-email" name="email" placeholder="jane@example.com" autocomplete="email" required>
 
-						<div class="field">
-						<label for="message">Message</label>
-						<textarea id="message" name="message"></textarea>
-						</div>
-
-						<button type="submit" class="button primary">Submit</button>
-						<button type="reset" class="button secondary">Clear</button>
-						</form>
-
-					</figure>
-					<pre><code class="language-html">&lt;form&gt;
-				&lt;div class="field"&gt;
-				&lt;label for="email"&gt;Email Address&lt;/label&gt;
-				&lt;input type="email" id="email" name="email" required&gt;
-				&lt;/div&gt;
-
-				&lt;div class="field"&gt;
-				&lt;label for="message"&gt;Message&lt;/label&gt;
-				&lt;textarea id="message" name="message"&gt;&lt;/textarea&gt;
-				&lt;/div&gt;
-
-				&lt;div&gt;
-				&lt;button type="submit" class="button primary"&gt;Submit&lt;/button&gt;
-				&lt;button type="reset" class="button secondary"&gt;Clear&lt;/button&gt;
-				&lt;/div&gt;
-				&lt;/form&gt;</code></pre>
-				</article>
-			</section>
-
-			<section>
-				<h2>Form Fields</h2>
-				<article class="card">
-					<figure>
-
-						<div class="field">
-						<label for="text-input">Text Input</label>
-						<input type="text" id="text-input" placeholder="Enter text">
-						</div>
-
-						<div class="field">
-						<label for="email-input">Email</label>
-						<input type="email" id="email-input" placeholder="your@email.com">
-						</div>
-
-						<div class="field">
-						<label for="password-input">Password</label>
-						<input type="password" id="password-input">
-						</div>
-
-						<div class="field">
-						<label for="select-input">Choose Option</label>
-						<select id="select-input">
-						<option>Option 1</option>
-						<option>Option 2</option>
-						<option>Option 3</option>
+						<label for="contact-subject">Subject</label>
+						<select id="contact-subject" name="subject">
+							<option value="">Choose a subject…</option>
+							<option value="support">Support</option>
+							<option value="sales">Sales</option>
+							<option value="feedback">Feedback</option>
+							<option value="other">Other</option>
 						</select>
+
+						<label for="contact-message">Message <span aria-hidden="true">*</span></label>
+						<textarea id="contact-message" name="message" rows="5"
+							placeholder="Your message here…"
+							oninput="document.getElementById('msg-count').textContent = this.value.length + '/500'"
+							maxlength="500" required></textarea>
+						<span class="char-count" id="msg-count">0/500</span>
+
+						<div class="actions">
+							<button type="submit" class="primary">
+								<span class="axicon render" data-name="Send"></span> Send Message
+							</button>
+							<button type="reset" class="secondary">Clear</button>
 						</div>
+					</form>
+					<pre><code class="language-html">&lt;form&gt;
+  &lt;label for="name"&gt;Full Name &lt;span aria-hidden="true"&gt;*&lt;/span&gt;&lt;/label&gt;
+  &lt;input type="text" id="name" name="name" autocomplete="name" required&gt;
 
-						<div class="field">
-						<label for="textarea-input">Message</label>
-						<textarea id="textarea-input" rows="4"></textarea>
+  &lt;label for="email"&gt;Email &lt;span aria-hidden="true"&gt;*&lt;/span&gt;&lt;/label&gt;
+  &lt;input type="email" id="email" name="email" autocomplete="email" required&gt;
+
+  &lt;label for="subject"&gt;Subject&lt;/label&gt;
+  &lt;select id="subject" name="subject"&gt;
+    &lt;option value=""&gt;Choose a subject…&lt;/option&gt;
+    &lt;option value="support"&gt;Support&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;label for="message"&gt;Message&lt;/label&gt;
+  &lt;textarea id="message" name="message" rows="5" required&gt;&lt;/textarea&gt;
+
+  &lt;button type="submit" class="primary"&gt;Send&lt;/button&gt;
+  &lt;button type="reset" class="secondary"&gt;Clear&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+			</article>
+			</section>
+
+			<!-- ── TWO-COLUMN LAYOUT ─────────────────────────────────────── -->
+			<section>
+				<h2>Two-Column Layout</h2>
+				<p>Use CSS grid on the form for responsive two-column layouts. Fields span both columns using a modifier on the label's parent:</p>
+				<article class="card">
+					<form class="form-grid" novalidate>
+						<div>
+							<label for="fn">First Name</label>
+							<input type="text" id="fn" autocomplete="given-name" placeholder="Jane">
 						</div>
+						<div>
+							<label for="ln">Last Name</label>
+							<input type="text" id="ln" autocomplete="family-name" placeholder="Smith">
+						</div>
+						<div class="span-2">
+							<label for="grid-email">Email Address</label>
+							<input type="email" id="grid-email" autocomplete="email" placeholder="jane@example.com">
+						</div>
+						<div>
+							<label for="city">City</label>
+							<input type="text" id="city" autocomplete="address-level2" placeholder="London">
+						</div>
+						<div>
+							<label for="postcode">Post Code</label>
+							<input type="text" id="postcode" autocomplete="postal-code" placeholder="SW1A 1AA">
+						</div>
+						<div class="span-2">
+							<div class="actions">
+								<button type="submit" class="primary">Save Address</button>
+							</div>
+						</div>
+					</form>
+					<pre><code class="language-css">/* Two-column responsive grid */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--a-space-l);
+}
 
-					</figure>
-					<pre><code class="language-html">&lt;div class="field"&gt;
-				&lt;label for="input-id"&gt;Label&lt;/label&gt;
-				&lt;input type="text" id="input-id" name="input-name"&gt;
-				&lt;/div&gt;
+@media (max-width: 600px) {
+  form { grid-template-columns: 1fr; }
+}
 
-				&lt;div class="field"&gt;
-				&lt;label for="select-id"&gt;Select&lt;/label&gt;
-				&lt;select id="select-id" name="select-name"&gt;
-				&lt;option&gt;Option 1&lt;/option&gt;
-				&lt;option&gt;Option 2&lt;/option&gt;
-				&lt;/select&gt;
-				&lt;/div&gt;
-
-				&lt;div class="field"&gt;
-				&lt;label for="textarea-id"&gt;Textarea&lt;/label&gt;
-				&lt;textarea id="textarea-id" name="textarea-name"&gt;&lt;/textarea&gt;
-				&lt;/div&gt;</code></pre>
+/* Full-width field */
+.span-full {
+  grid-column: 1 / -1;
+}</code></pre>
 				</article>
 			</section>
 
+			<!-- ── ALL INPUT TYPES ───────────────────────────────────────── -->
 			<section>
-				<h2>Form Markup Structure</h2>
-				<p>Forms use semantic HTML with `.field` container for grouping:</p>
-					<pre><code class="language-html">&lt;form&gt;
-				&lt;!-- Field group: label + input --&gt;
-				&lt;div class="field"&gt;
-				&lt;label for="input-id"&gt;Label Text&lt;/label&gt;
-				&lt;input type="email" id="input-id" name="input-name" required&gt;
-				&lt;/div&gt;
+				<h2>All Input Types</h2>
+				<article class="card">
+					<form novalidate>
+						<label for="t-text">Text</label>
+						<input type="text" id="t-text" placeholder="Plain text">
 
-				&lt;!-- Multiple fields --&gt;
-				&lt;div class="field"&gt;
-				&lt;label for="message-id"&gt;Message&lt;/label&gt;
-				&lt;textarea id="message-id" name="message"&gt;&lt;/textarea&gt;
-				&lt;/div&gt;
+						<label for="t-email">Email</label>
+						<input type="email" id="t-email" placeholder="user@example.com">
 
-				&lt;!-- Action buttons --&gt;
-				&lt;div&gt;
-				&lt;button type="submit" class="button primary"&gt;Submit&lt;/button&gt;
-				&lt;button type="reset" class="button secondary"&gt;Reset&lt;/button&gt;
-				&lt;/div&gt;
-				&lt;/form&gt;</code></pre>
+						<label for="t-password">Password</label>
+						<input type="password" id="t-password" placeholder="••••••••">
+
+						<label for="t-tel">Phone</label>
+						<input type="tel" id="t-tel" placeholder="+44 20 1234 5678" autocomplete="tel">
+
+						<label for="t-url">URL</label>
+						<input type="url" id="t-url" placeholder="https://example.com">
+
+						<label for="t-number">Number</label>
+						<input type="number" id="t-number" min="0" max="100" step="1" placeholder="42">
+
+						<label for="t-date">Date</label>
+						<input type="date" id="t-date">
+
+						<label for="t-time">Time</label>
+						<input type="time" id="t-time">
+
+						<label for="t-color">Colour</label>
+						<input type="color" id="t-color" value="#2563eb">
+
+						<label for="t-range">Range (0–100): <output id="t-range-out">50</output></label>
+						<input type="range" id="t-range" min="0" max="100" value="50"
+							   oninput="document.getElementById('t-range-out').value=this.value">
+
+						<label for="t-search">Search</label>
+						<input type="search" id="t-search" placeholder="Search…">
+
+						<label for="t-file">File Upload</label>
+						<input type="file" id="t-file" accept=".pdf,.doc,.docx">
+					</form>
+					<pre><code class="language-html">&lt;!-- All types are styled automatically — no classes needed --&gt;
+&lt;label for="date"&gt;Date&lt;/label&gt;
+&lt;input type="date" id="date"&gt;
+
+&lt;label for="time"&gt;Time&lt;/label&gt;
+&lt;input type="time" id="time"&gt;
+
+&lt;label for="vol"&gt;Volume: &lt;output id="vol-out"&gt;50&lt;/output&gt;&lt;/label&gt;
+&lt;input type="range" id="vol" min="0" max="100" value="50"
+       oninput="document.getElementById('vol-out').value=this.value"&gt;
+
+&lt;label for="file"&gt;File Upload&lt;/label&gt;
+&lt;input type="file" id="file" accept=".pdf,.doc"&gt;</code></pre>
+				</article>
 			</section>
 
+			<!-- ── TEXTAREA ──────────────────────────────────────────────── -->
 			<section>
-				<h2>Form Control Types</h2>
+				<h2>Textarea</h2>
+				<p>Set <code>rows</code> for initial height. The browser allows vertical resize via <code>resize: vertical</code> (applied by default). Use <code>maxlength</code> + <code>&lt;output&gt;</code> for character counts:</p>
+				<article class="card">
+					<form novalidate>
+						<label for="ta-sm">Short note (3 rows)</label>
+						<textarea id="ta-sm" rows="3" placeholder="Brief note…"></textarea>
+
+						<label for="ta-lg">Long description (8 rows)</label>
+						<textarea id="ta-lg" rows="8" placeholder="Full description with plenty of space to write…"></textarea>
+
+						<label for="ta-count">Bio (max 280 characters)</label>
+						<textarea id="ta-count" rows="4" maxlength="280" placeholder="Tell us about yourself…"
+							oninput="document.getElementById('ta-count-n').textContent=this.value.length"></textarea>
+						<span class="char-count"><span id="ta-count-n">0</span>/280</span>
+					</form>
+					<pre><code class="language-html">&lt;label for="bio"&gt;Bio&lt;/label&gt;
+&lt;textarea id="bio" rows="4"
+          maxlength="280"
+          oninput="charCount.textContent=this.value.length"&gt;&lt;/textarea&gt;
+&lt;span&gt;&lt;span id="charCount"&gt;0&lt;/span&gt;/280&lt;/span&gt;</code></pre>
+				</article>
+			</section>
+
+			<!-- ── SELECT ────────────────────────────────────────────────── -->
+			<section>
+				<h2>Select &amp; Option Groups</h2>
+				<article class="card">
+					<form novalidate>
+						<label for="s-basic">Single select</label>
+						<select id="s-basic">
+							<option value="">Choose a plan…</option>
+							<option value="free">Free</option>
+							<option value="pro">Pro — $12/mo</option>
+							<option value="enterprise">Enterprise</option>
+						</select>
+
+						<label for="s-grouped">Grouped options</label>
+						<select id="s-grouped">
+							<optgroup label="Frontend">
+								<option>React</option>
+								<option>Vue</option>
+								<option>Svelte</option>
+							</optgroup>
+							<optgroup label="Backend">
+								<option>Node.js</option>
+								<option>Python</option>
+								<option>Go</option>
+							</optgroup>
+						</select>
+
+						<label for="s-multi">Multiple select (hold Ctrl/⌘)</label>
+						<select id="s-multi" multiple size="5">
+							<option>HTML</option>
+							<option>CSS</option>
+							<option>JavaScript</option>
+							<option>TypeScript</option>
+							<option>Accessibility</option>
+						</select>
+					</form>
+					<pre><code class="language-html">&lt;label for="plan"&gt;Plan&lt;/label&gt;
+&lt;select id="plan"&gt;
+  &lt;option value=""&gt;Choose…&lt;/option&gt;
+  &lt;option value="free"&gt;Free&lt;/option&gt;
+  &lt;option value="pro"&gt;Pro&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- Grouped options --&gt;
+&lt;select id="stack"&gt;
+  &lt;optgroup label="Frontend"&gt;
+    &lt;option&gt;React&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="Backend"&gt;
+    &lt;option&gt;Node.js&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre>
+				</article>
+			</section>
+
+			<!-- ── CHECKBOXES & RADIOS ───────────────────────────────────── -->
+			<section>
+				<h2>Checkboxes &amp; Radio Buttons</h2>
+				<article class="card">
+					<form novalidate>
+						<fieldset>
+							<legend>Notification preferences</legend>
+							<label>
+								<input type="checkbox" name="notify" value="email" checked>
+								Email notifications
+							</label>
+							<label>
+								<input type="checkbox" name="notify" value="sms">
+								SMS notifications
+							</label>
+							<label>
+								<input type="checkbox" name="notify" value="push">
+								Push notifications
+							</label>
+							<label>
+								<input type="checkbox" name="notify" value="weekly" disabled>
+								Weekly digest (unavailable)
+							</label>
+						</fieldset>
+
+						<fieldset>
+							<legend>Account type</legend>
+							<label>
+								<input type="radio" name="account-type" value="personal" checked>
+								Personal — for individuals
+							</label>
+							<label>
+								<input type="radio" name="account-type" value="team">
+								Team — for up to 10 people
+							</label>
+							<label>
+								<input type="radio" name="account-type" value="enterprise">
+								Enterprise — unlimited seats
+							</label>
+						</fieldset>
+					</form>
+					<pre><code class="language-html">&lt;!-- Always wrap in fieldset + legend --&gt;
+&lt;fieldset&gt;
+  &lt;legend&gt;Notifications&lt;/legend&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox" name="notify" value="email" checked&gt;
+    Email notifications
+  &lt;/label&gt;
+  &lt;label&gt;
+    &lt;input type="checkbox" name="notify" value="sms"&gt;
+    SMS notifications
+  &lt;/label&gt;
+&lt;/fieldset&gt;
+
+&lt;fieldset&gt;
+  &lt;legend&gt;Account type&lt;/legend&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="type" value="personal" checked&gt;
+    Personal
+  &lt;/label&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="type" value="team"&gt;
+    Team
+  &lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+				</article>
+			</section>
+
+			<!-- ── VALIDATION STATES ─────────────────────────────────────── -->
+			<section>
+				<h2>Validation States</h2>
+				<p>Use <code>aria-invalid</code> + <code>aria-describedby</code> for accessible error states. A helper <code>&lt;small&gt;</code> element provides context text:</p>
+				<article class="card">
+					<form novalidate>
+						<!-- Error state -->
+						<div class="input-error">
+							<label for="v-error">Email Address</label>
+							<input type="email" id="v-error" value="not-an-email"
+								   aria-invalid="true" aria-describedby="v-error-msg">
+							<small id="v-error-msg">
+								<span class="axicon render" data-name="Alert-Circle"></span>
+								Please enter a valid email address.
+							</small>
+						</div>
+
+						<!-- Success state -->
+						<div class="input-success">
+							<label for="v-success">Username</label>
+							<input type="text" id="v-success" value="jane_smith"
+								   aria-describedby="v-success-msg">
+							<small id="v-success-msg">
+								<span class="axicon render" data-name="Check-Circle"></span>
+								Username is available.
+							</small>
+						</div>
+
+						<!-- With helper text -->
+						<div>
+							<label for="v-helper">Password</label>
+							<input type="password" id="v-helper" aria-describedby="v-helper-hint">
+							<span class="hint" id="v-helper-hint">
+								Minimum 8 characters. Include a number and a symbol.
+							</span>
+						</div>
+
+						<!-- Disabled -->
+						<div>
+							<label for="v-disabled">Account ID</label>
+							<input type="text" id="v-disabled" value="USR-001-2024" disabled
+								   aria-describedby="v-disabled-hint">
+							<span class="hint" id="v-disabled-hint">
+								Account IDs cannot be changed after creation.
+							</span>
+						</div>
+					</form>
+					<pre><code class="language-html">&lt;!-- Error state --&gt;
+&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input type="email" id="email" value="bad-email"
+       aria-invalid="true"
+       aria-describedby="email-error"&gt;
+&lt;small id="email-error"&gt;
+  &lt;span class="axicon render" data-name="Alert-Circle"&gt;&lt;/span&gt;
+  Please enter a valid email address.
+&lt;/small&gt;
+
+&lt;!-- With helper text --&gt;
+&lt;label for="pw"&gt;Password&lt;/label&gt;
+&lt;input type="password" id="pw" aria-describedby="pw-hint"&gt;
+&lt;span id="pw-hint"&gt;Minimum 8 characters.&lt;/span&gt;</code></pre>
+				</article>
+			</section>
+
+			<!-- ── REQUIRED FIELDS PATTERN ──────────────────────────────── -->
+			<section>
+				<h2>Required Fields Pattern</h2>
+				<article class="card">
+					<form novalidate>
+						<p><small>Fields marked <span aria-hidden="true">*</span> are required.</small></p>
+
+						<label for="req-name">Name <span aria-hidden="true">*</span></label>
+						<input type="text" id="req-name" required autocomplete="name">
+
+						<label for="req-email">Email <span aria-hidden="true">*</span></label>
+						<input type="email" id="req-email" required autocomplete="email">
+
+						<label for="req-company">Company</label>
+						<input type="text" id="req-company" autocomplete="organization">
+
+						<label>
+							<input type="checkbox" required>
+							I agree to the <a href="#">terms of service</a> <span aria-hidden="true">*</span>
+						</label>
+
+						<div class="actions">
+							<button type="submit" class="primary">Create Account</button>
+						</div>
+					</form>
+					<pre><code class="language-html">&lt;p&gt;&lt;small&gt;Fields marked * are required.&lt;/small&gt;&lt;/p&gt;
+
+&lt;label for="name"&gt;Name &lt;span aria-hidden="true"&gt;*&lt;/span&gt;&lt;/label&gt;
+&lt;input type="text" id="name" required&gt;
+
+&lt;!-- The * is aria-hidden — required attr does the accessible work --&gt;</code></pre>
+				</article>
+			</section>
+
+			<!-- ── INLINE / HORIZONTAL ──────────────────────────────────── -->
+			<section>
+				<h2>Inline Search Form</h2>
+				<p>For single-line inline forms, wrap input + button in a <code>&lt;div class="actions"&gt;</code>:</p>
+				<article class="card">
+					<form>
+						<label for="inline-search">Search documentation</label>
+						<div class="actions">
+							<input type="search" id="inline-search" placeholder="Search…" autocomplete="off">
+							<button type="submit" class="primary">
+								<span class="axicon render" data-name="Search"></span> Search
+							</button>
+						</div>
+					</form>
+					<pre><code class="language-html">&lt;label for="search"&gt;Search documentation&lt;/label&gt;
+&lt;div class="actions"&gt;
+  &lt;input type="search" id="search" placeholder="Search…"&gt;
+  &lt;button type="submit" class="primary"&gt;
+    &lt;span class="axicon render" data-name="Search"&gt;&lt;/span&gt; Search
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+				</article>
+			</section>
+
+			<!-- ── NATIVE FORM VALIDATION ────────────────────────────────── -->
+			<section>
+				<h2>Native Validation with JavaScript</h2>
+				<pre><code class="language-js">const form = document.querySelector('form');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  // Validate all fields
+  const fields = form.querySelectorAll('input, select, textarea');
+  let firstInvalid = null;
+
+  fields.forEach(field => {
+    const valid = field.checkValidity();
+    field.setAttribute('aria-invalid', !valid);
+
+    // Show/hide associated error message
+    const errorId = field.getAttribute('aria-describedby');
+    if (errorId) {
+      const errorEl = document.getElementById(errorId);
+      if (errorEl) errorEl.hidden = valid;
+    }
+
+    if (!valid && !firstInvalid) firstInvalid = field;
+  });
+
+  if (firstInvalid) {
+    firstInvalid.focus(); // Move focus to first error
+    return;
+  }
+
+  // All valid — submit
+  const data = new FormData(form);
+  console.log(Object.fromEntries(data));
+});</code></pre>
+			</section>
+
+			<!-- ── PHILOSOPHY ────────────────────────────────────────────── -->
+			<section>
+				<h2>Design Philosophy</h2>
 				<ul>
-				<li><strong>Text Input</strong> - `<input type="text">` for general text</li>
-				<li><strong>Email Input</strong> - `<input type="email">` with built-in validation</li>
-				<li><strong>Password Input</strong> - `<input type="password">` for secure entry</li>
-				<li><strong>Number Input</strong> - `<input type="number">` for numeric entry</li>
-				<li><strong>Date Input</strong> - `<input type="date">` for date selection</li>
-				<li><strong>Select/Dropdown</strong> - `<select>` for choosing from options</li>
-				<li><strong>Textarea</strong> - `<textarea>` for multi-line text</li>
-				<li><strong>Checkbox</strong> - `<input type="checkbox">` for multiple selection</li>
-				<li><strong>Radio Button</strong> - `<input type="radio">` for single selection</li>
+					<li><strong>No extra classes on inputs</strong> — all types styled via <code>input[type="..."]</code> element selectors</li>
+					<li><strong>Label always paired</strong> — use <code>for</code>/<code>id</code> or wrap the input inside the label</li>
+					<li><strong>fieldset + legend</strong> — always group related checkboxes and radios</li>
+					<li><strong>Native validation first</strong> — <code>required</code>, <code>type</code>, <code>min</code>, <code>max</code>, <code>pattern</code></li>
+					<li><strong>aria-describedby</strong> — connect error/helper text to the input by <code>id</code></li>
+					<li><strong>autocomplete</strong> — always set for common fields (name, email, address)</li>
+					<li><strong>No .form-control, .form-group, .input-wrapper</strong> — these are anti-patterns in Axiom01</li>
 				</ul>
 			</section>
 
-			<section>
-				<h2>Key Features</h2>
-				<ul>
-				<li><strong>Semantic HTML</strong> - Uses native form elements only</li>
-				<li><strong>Minimal Classes</strong> - Only `.field` for grouping</li>
-				<li><strong>No Form-Specific Classes</strong> - No `.form-group`, `.form-row`, `.form-label`</li>
-				<li><strong>Label Association</strong> - Always use `<label>` with `for` attribute</li>
-				<li><strong>HTML5 Validation</strong> - Use `required`, `type="email"`, etc.</li>
-				<li><strong>Button Variants</strong> - Use button component with `data-variant`</li>
-				<li><strong>Natural Structure</strong> - Wrapping divs for grouping only</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Form Grouping</h2>
-				<p>Use simple `` containers (with optional `.field` class) to group related inputs:</p>
-				<ul>
-				<li>`<div class="field">` - Groups label with single input</li>
-				<li>`<fieldset>` - Groups related inputs (radio buttons, checkboxes)</li>
-				<li>`
-` - Generic wrapper for button groups</li>
-				</ul>
-			</section>
-
+			<!-- ── ACCESSIBILITY ─────────────────────────────────────────── -->
 			<section>
 				<h2>Accessibility</h2>
 				<ul>
-				<li>Use `<label>` for all inputs with `for` attribute</li>
-				<li>Associate labels with inputs using `id`</li>
-				<li>Use `<fieldset>` and `<legend>` for grouped inputs</li>
-				<li>Use `required` attribute for mandatory fields</li>
-				<li>Use semantic input types: `type="email"`, `type="number"`, etc.</li>
-				<li>Provide clear error messages</li>
-				<li>Support keyboard navigation</li>
-				<li>Test with screen readers</li>
+					<li>Every input must have a visible <code>&lt;label&gt;</code> — placeholder text disappears and is not a label</li>
+					<li>Required fields: use <code>required</code> attribute (not CSS-only asterisks)</li>
+					<li>Error messages: use <code>aria-invalid="true"</code> on the input + <code>aria-describedby</code> pointing to the error text</li>
+					<li>Error text container should have <code>role="alert"</code> for immediate announcement</li>
+					<li>Disabled fields use the <code>disabled</code> attribute — never CSS <code>pointer-events: none</code> only</li>
+					<li>Group related controls in <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code></li>
+					<li>Touch targets minimum 44×44px — the framework ensures this for all inputs</li>
+					<li>Focus styles are always visible — never suppress <code>:focus-visible</code></li>
 				</ul>
 			</section>
 
-			<section>
-				<h2>Responsive Behavior</h2>
-				<p>Form components stack intelligently across screen sizes:</p>
-
-				<h3>Mobile (< 768px)</h3>
-				<p>On mobile, forms display single-column layout:</p>
-				<ul>
-				<li><strong>1 column layout</strong> - All inputs stack vertically</li>
-				<li>Labels positioned above inputs</li>
-				<li>Full-width inputs for touch interaction</li>
-				<li>Touch-friendly spacing (44px minimum tap targets)</li>
-				<li>Buttons stack vertically</li>
-				</ul>
-
-				<h3>Desktop (1024px+)</h3>
-				<p>Desktop forms use flexible multi-column layout:</p>
-				<ul>
-				<li>2-4 column layout possible</li>
-				<li>Related fields align horizontally</li>
-				<li>Buttons inline or in footer</li>
-				<li>Labels can be side-by-side</li>
-				</ul>
-
-				<h3>Framework Integration</h3>
-				<p>Forms inherit responsive behavior from containers:</p>
-				<ul>
-				<li>Use `.grid` for multi-column on desktop</li>
-				<li>Grid auto-stacks to 1 column on mobile</li>
-				<li>Form groups maintain semantic structure</li>
-				<li>No custom CSS required for responsiveness</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Best Practices</h2>
-				<ul>
-				<li>Always use semantic `<label>` elements</li>
-				<li>Link labels to inputs with `for` and `id` attributes</li>
-				<li>Use appropriate input types for validation</li>
-				<li>Group related inputs in `<fieldset>` elements</li>
-				<li>Provide helpful placeholder text</li>
-				<li>Clear visual distinction between required/optional fields</li>
-				<li>Logical tab order (top to bottom, left to right)</li>
-				<li>Test forms with keyboard navigation only</li>
-				<li>Validate both client-side and server-side</li>
-				<li>Provide clear error messages</li>
-				</ul>
-			</section>
-		
-
+		</div>
 	</section>
-
 </main>
 
 <footer class="footer">
@@ -273,7 +686,7 @@
 			<div class="footer-brand">
 				<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
 				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
-			
+			</div>
 			<div class="footer-column">
 				<h4>Documentation</h4>
 				<ul>
@@ -317,12 +730,11 @@ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded'
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
 <script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
 <script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
 </body>
 </html>

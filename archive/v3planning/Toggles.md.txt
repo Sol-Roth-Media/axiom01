@@ -1,0 +1,26 @@
+# Toggles (Switches)
+Animated boolean controls from a single native input.
+## The Semantic Reality
+Look at the code for a Toggle/Switch in any major component library (MUI, Headless UI, Radix). You will find complex React state, event listeners, accessibility aria-mapping, and a deeply nested div > button > span > span structure.
+Axiom01 asks: *Why are we inventing a new element for a boolean state? HTML has had this since 1995. It's called a checkbox.*
+### Axiom01 Approach
+```html
+<!-- HTML: 1 line | Classes: 1 | JS: 0 -->
+<input type="checkbox" class="switch" id="notifications">
+<label for="notifications">Enable Email Alerts</label>
+
+```
+## Native Accessibility
+Because the Axiom01 Switch is just an <input type="checkbox">, it requires exactly zero extra work to make accessible:
+ * **Keyboard Navigation:** You can tab to it and press Space to toggle it natively.
+ * **Form Submission:** It works perfectly inside a standard HTML <form> submission without needing hidden inputs or JS state extraction.
+ * **Screen Readers:** It is announced correctly as a checkbox, and its checked/unchecked state is natively reported to the user.
+## The CSS Magic
+We use appearance: none; to strip away the browser's default checkbox styling. We then style the <input> itself as the track, and use the ::before pseudo-element to create the animated thumb.
+When the input enters the :checked pseudo-state, CSS transforms the thumb to the right and shifts the background color to your --a-primary token.
+## Customizing The Axiom Way
+Need a specific switch to use a success color instead of the primary color? Use an inline variable override:
+```html
+<input type="checkbox" class="switch" style="--a-primary: var(--a-success);">
+
+```

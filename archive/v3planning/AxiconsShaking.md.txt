@@ -1,0 +1,27 @@
+# Axicons Taxonomy & Delivery Architecture
+To manage 3,941 icons without bloating the user's application, we must enforce strict semantic organization and provide modern delivery pipelines.
+## 1. The Semantic Taxonomy
+Icons must no longer be a flat alphabetical list. They must be categorized by *semantic intent*, allowing developers to intuitively find what they need based on what the UI *is doing*.
+ * **Core UI:** Menu, Close, Search, More-Horizontal, Settings. *(Always loaded in the 450 Base)*
+ * **Navigation:** Arrow-Up, Chevron-Right, Enter, Return.
+ * **Status & Feedback:** Check-Circle, Alert-Triangle, Info, X-Octagon.
+ * **Actions:** Edit, Trash, Save, Download, Share.
+ * **Media & Documents:** Image, Video, File-Text, Folder, Archive.
+ * **Objects & Brands:** *(The heavy tail - only load on demand)*.
+## 2. Delivery & Tree-Shaking (The CLI Approach)
+Sending an 89KB JS file for base icons is acceptable for a quick CDN prototype, but it is unacceptable for production. Axiom01 will introduce a Vite/Rollup plugin and a CLI tool.
+### The Axiom01 Icon Extractor
+Instead of loading axicons-base.js, developers will run the Axiom build step.
+ 1. The Axiom CLI scans the developer's .html, .js, and .jsx files.
+ 2. It uses regex to find every instance of data-axicon="IconName".
+ 3. It extracts *only* those specific SVG paths from the master 3,941 dictionary.
+ 4. It compiles a micro-dictionary (e.g., axicons-compiled.js) containing only the 15 icons the project actually uses.
+**Result:** The 89KB base file becomes a 1.2KB file, perfectly tailored to the project.
+## 3. The <i> Tag vs <svg> Tag Pattern
+We will support both, but with semantic rules:
+**The Structural SVG:**
+Use when the icon is a standalone graphic or needs custom CSS classes.
+<svg data-axicon="Database" class="w-8 h-8 text-primary"></svg>
+**The Inline <i> (Axiom Shorthand):**
+Use when the icon is strictly decorative text-level UI (inside buttons, badges, links). The JS engine automatically converts this into a perfectly formed SVG upon intersection.
+<button class="primary"><i data-axicon="Download"></i> Save File</button>

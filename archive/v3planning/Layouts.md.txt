@@ -1,0 +1,44 @@
+# Layouts & Media
+Build app shells, navbars, and rich media containers intuitively.
+## The Semantic Reality
+Building a responsive navbar with user profiles is the ultimate test of a CSS framework. In utility-first systems, your nav element becomes an unreadable block of flex items-center justify-between px-4 py-2 border-b bg-white dark:bg-gray-900.
+Worse, generating fallback initials for user avatars usually requires importing a JavaScript library to split strings and conditionally render DOM nodes.
+Axiom01 asks: *Why not let CSS do the work?*
+## Semantic Navbars
+A single <nav class="navbar"> establishes a perfectly spaced, flex-driven layout.
+```html
+<nav class="navbar">
+  <a href="/" class="navbar-brand">Ax01</a>
+  <ul>
+    <li><a href="/products">Products</a></li>
+    <!-- aria-current="page" automatically applies active state styling -->
+    <li><a href="/docs" aria-current="page">Docs</a></li> 
+  </ul>
+  <div class="navbar-actions">
+    <button class="primary">Sign In</button>
+  </div>
+</nav>
+
+```
+## Zero-JS Avatar Fallbacks
+Using the CSS attr() function combined with the relational :has() selector, Axiom01 provides automatic initials for user avatars.
+If the image fails to load or isn't provided, CSS reads the data-initials attribute and renders it instantly in the center of the circle.
+```html
+<!-- Renders the user's photo -->
+<figure class="avatar">
+  <img src="user.jpg" alt="Jane Doe">
+</figure>
+
+<!-- Image missing? Renders "JD" perfectly centered, zero JS -->
+<figure class="avatar" data-initials="JD"></figure>
+
+```
+## Modern Aspect Ratios
+We have eradicated the old "padding-bottom" hack for embedding videos and images. Axiom01 uses the native aspect-ratio property to create perfectly responsive media shells.
+```html
+<!-- Always remains 16:9, scaling fluidly with its container -->
+<div class="media-box video">
+  <iframe src="[https://youtube.com/](https://youtube.com/)..." allowfullscreen></iframe>
+</div>
+
+```

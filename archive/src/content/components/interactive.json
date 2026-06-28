@@ -1,0 +1,78 @@
+{
+  "category": "interactive",
+  "categoryLabel": "Interactive & Feedback",
+  "components": [
+    {
+      "id": "modal-dialog",
+      "name": "Modal Dialog",
+      "description": "Overlay dialog for important information or actions.",
+      "html": "<dialog open>\n  <h2>Dialog Title</h2>\n  <p>Dialog content goes here.</p>\n  <footer>\n    <button>Cancel</button>\n    <button class=\"primary\">Confirm</button>\n  </footer>\n</dialog>",
+      "css": "dialog {\n  border: none;\n  border-radius: var(--a-radius-lg);\n  padding: var(--a-space-2xl);\n  max-width: 500px;\n  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);\n}\n\ndialog::backdrop {\n  background: rgba(0, 0, 0, 0.5);\n  backdrop-filter: blur(4px);\n}\n\ndialog footer {\n  display: flex;\n  gap: var(--a-space-md);\n  justify-content: flex-end;\n  margin-top: var(--a-space-lg);\n}",
+      "usage": "Confirmations, forms, important announcements. Use semantic <dialog>.",
+      "accessibility": "Native <dialog> element. Trap focus automatically."
+    },
+    {
+      "id": "tooltip",
+      "name": "Tooltip",
+      "description": "Additional information on hover.",
+      "html": "<button data-tooltip=\"Click to save your changes\">Save</button>",
+      "css": "button[data-tooltip]::after {\n  content: attr(data-tooltip);\n  position: absolute;\n  bottom: 100%;\n  left: 50%;\n  transform: translateX(-50%);\n  padding: var(--a-space-xs) var(--a-space-sm);\n  background: var(--a-text-main);\n  color: var(--a-surface-base);\n  border-radius: var(--a-radius-sm);\n  font-size: var(--a-text-xs);\n  white-space: nowrap;\n  opacity: 0;\n  pointer-events: none;\n  transition: opacity var(--a-transition-base);\n}\n\nbutton[data-tooltip]:hover::after {\n  opacity: 1;\n}",
+      "usage": "Extra help text, clarifications. Keyboard-accessible.",
+      "accessibility": "Use title attribute as fallback for keyboard users."
+    },
+    {
+      "id": "popover",
+      "name": "Popover",
+      "description": "Clickable popover for detailed information.",
+      "html": "<button popovertarget=\"my-popover\">Show Info</button>\n<div popover id=\"my-popover\">\n  <h3>Information</h3>\n  <p>Detailed information goes here.</p>\n  <button popovertarget=\"my-popover\" popovertargetaction=\"hide\">Close</button>\n</div>",
+      "css": "div[popover] {\n  background: var(--a-surface-raised);\n  border: 1px solid var(--a-border);\n  border-radius: var(--a-radius-md);\n  padding: var(--a-space-lg);\n  box-shadow: var(--a-shadow-lg);\n  max-width: 300px;\n}\n\n:popover-open {\n  border-color: var(--a-primary);\n}",
+      "usage": "Rich information, multi-line content. HTML Popover API.",
+      "accessibility": "Native popover element. Keyboard accessible with API."
+    },
+    {
+      "id": "spinner-loading",
+      "name": "Loading Spinner",
+      "description": "Animated loading indicator.",
+      "html": "<div class=\"spinner\" role=\"status\" aria-label=\"Loading...\"></div>",
+      "css": ".spinner {\n  width: 40px;\n  height: 40px;\n  border: 4px solid var(--a-surface-overlay);\n  border-top-color: var(--a-primary);\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n\n@keyframes spin {\n  to { transform: rotate(360deg); }\n}",
+      "usage": "Async operations, data loading, processing.",
+      "accessibility": "role=\"status\" announces to screen readers."
+    },
+    {
+      "id": "progress-bar",
+      "name": "Progress Bar",
+      "description": "Visual progress indicator.",
+      "html": "<progress value=\"65\" max=\"100\" aria-label=\"Upload progress\"></progress>",
+      "css": "progress {\n  width: 100%;\n  height: 8px;\n  border-radius: var(--a-radius-sm);\n  border: none;\n  background: var(--a-surface-overlay);\n  overflow: hidden;\n}\n\nprogress::-webkit-progress-bar {\n  background: var(--a-surface-overlay);\n}\n\nprogress::-webkit-progress-value {\n  background: var(--a-primary);\n  border-radius: var(--a-radius-sm);\n}\n\nprogress::-moz-progress-bar {\n  background: var(--a-primary);\n  border-radius: var(--a-radius-sm);\n}",
+      "usage": "File uploads, multi-step forms, downloads.",
+      "accessibility": "Semantic <progress> element. Accessible API."
+    },
+    {
+      "id": "accordion",
+      "name": "Accordion",
+      "description": "Expandable/collapsible content sections.",
+      "html": "<details>\n  <summary>Section Title</summary>\n  <p>Hidden content revealed on click.</p>\n</details>",
+      "css": "details {\n  border: 1px solid var(--a-border);\n  border-radius: var(--a-radius-md);\n  padding: var(--a-space-md);\n  margin-bottom: var(--a-space-md);\n}\n\nsummary {\n  cursor: pointer;\n  font-weight: var(--a-font-weight-semibold);\n  user-select: none;\n  color: var(--a-primary);\n}\n\nsummary::marker {\n  color: var(--a-primary);\n}\n\ndetails[open] {\n  background: var(--a-surface-overlay);\n}\n\ndetails > p {\n  margin-top: var(--a-space-md);\n}",
+      "usage": "FAQs, collapsible documentation, space-saving content.",
+      "accessibility": "Semantic <details> and <summary>. Keyboard accessible."
+    },
+    {
+      "id": "dropdown-select",
+      "name": "Dropdown Select",
+      "description": "Standard HTML select element.",
+      "html": "<label>\n  Choose an option:\n  <select>\n    <option>Option 1</option>\n    <option>Option 2</option>\n    <option>Option 3</option>\n  </select>\n</label>",
+      "css": "select {\n  width: 100%;\n  padding: var(--a-space-sm) var(--a-space-md);\n  background: var(--a-surface-raised);\n  color: var(--a-text-main);\n  border: 1px solid var(--a-border);\n  border-radius: var(--a-radius-md);\n  font-size: var(--a-text-base);\n  cursor: pointer;\n  transition: all var(--a-transition-base);\n}\n\nselect:focus {\n  outline: none;\n  border-color: var(--a-primary);\n  box-shadow: 0 0 0 3px color-mix(in oklch, var(--a-primary) 20%, transparent);\n}",
+      "usage": "Option selection. Use native element when possible.",
+      "accessibility": "Native <select> element. Fully accessible by default."
+    },
+    {
+      "id": "toggle-switch",
+      "name": "Toggle Switch",
+      "description": "On/off toggle control.",
+      "html": "<label class=\"toggle\">\n  <input type=\"checkbox\">\n  <span>Enable feature</span>\n</label>",
+      "css": ".toggle {\n  display: flex;\n  align-items: center;\n  gap: var(--a-space-md);\n  cursor: pointer;\n}\n\n.toggle input[type=\"checkbox\"] {\n  appearance: none;\n  width: 48px;\n  height: 24px;\n  background: var(--a-surface-overlay);\n  border-radius: 12px;\n  border: none;\n  cursor: pointer;\n  transition: background var(--a-transition-base);\n  position: relative;\n}\n\n.toggle input[type=\"checkbox\"]::after {\n  content: '';\n  position: absolute;\n  width: 20px;\n  height: 20px;\n  background: white;\n  border-radius: 50%;\n  top: 2px;\n  left: 2px;\n  transition: left var(--a-transition-base);\n}\n\n.toggle input[type=\"checkbox\"]:checked {\n  background: var(--a-primary);\n}\n\n.toggle input[type=\"checkbox\"]:checked::after {\n  left: 26px;\n}",
+      "usage": "Boolean settings, feature toggles, on/off controls.",
+      "accessibility": "Semantic <input type=\"checkbox\">. Label clickable."
+    }
+  ]
+}

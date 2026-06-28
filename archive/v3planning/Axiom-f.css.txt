@@ -1,0 +1,155 @@
+```css
+/* ==========================================================================
+   AXIOM01 - BATCH F: COMPLEX INTERACTIVITY (Accordions, Progress, Range)
+   Philosophy: Zero-JS disclosure widgets; single-element data visualization.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. SEMANTIC ACCORDIONS (ZERO JS) --- */
+  /* Axiom uses the native <details> and <summary> tags exclusively. */
+  details.accordion {
+    background: var(--a-surface-base);
+    border-bottom: 1px solid var(--a-border);
+    /* Smooth height transitions via modern CSS allow-discrete */
+    transition: all var(--a-transition);
+  }
+
+  /* Target the first element inside details for consistent top borders if grouped */
+  details.accordion:first-of-type {
+    border-top: 1px solid var(--a-border);
+  }
+
+  details.accordion > summary {
+    list-style: none; /* Hide default browser arrow */
+    cursor: pointer;
+    padding: var(--a-space-md) 0;
+    font-weight: 600;
+    font-size: var(--a-text-base);
+    color: var(--a-text-main);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color var(--a-transition);
+  }
+
+  details.accordion > summary::-webkit-details-marker {
+    display: none; /* Hide Safari default arrow */
+  }
+
+  /* Custom animated chevron using CSS pseudo-elements */
+  details.accordion > summary::after {
+    content: "";
+    width: 1em;
+    height: 1em;
+    background-color: currentColor;
+    /* Standard SVG chevron masked into the background */
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat center;
+    mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat center;
+    transition: transform var(--a-transition);
+  }
+
+  /* Open State */
+  details.accordion[open] > summary {
+    color: var(--a-primary);
+  }
+
+  details.accordion[open] > summary::after {
+    transform: rotate(180deg);
+  }
+
+  /* Animate content entry */
+  details.accordion[open] > :not(summary) {
+    animation: accordionFadeIn var(--a-transition) ease-out forwards;
+    padding-bottom: var(--a-space-md);
+    color: var(--a-text-muted);
+  }
+
+  @keyframes accordionFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+
+  /* --- 2. NATIVE PROGRESS BARS --- */
+  /* Replaces nested <div> structures with a single semantic <progress> tag */
+  progress.progress {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: calc(var(--a-space-sm) * 1.5);
+    border: none;
+    background-color: transparent;
+  }
+
+  /* WebKit/Blink (Chrome, Safari, Edge) */
+  progress.progress::-webkit-progress-bar {
+    background-color: var(--a-surface-raised);
+    border-radius: calc(var(--a-radius) * 2);
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.05);
+  }
+
+  progress.progress::-webkit-progress-value {
+    background-color: var(--a-primary);
+    border-radius: calc(var(--a-radius) * 2);
+    transition: width var(--a-transition);
+  }
+
+  /* Firefox */
+  progress.progress::-moz-progress-bar {
+    background-color: var(--a-primary);
+    border-radius: calc(var(--a-radius) * 2);
+  }
+
+  /* Semantic State Overrides */
+  progress.progress.success::-webkit-progress-value { background-color: var(--a-success); }
+  progress.progress.success::-moz-progress-bar { background-color: var(--a-success); }
+  
+  progress.progress.error::-webkit-progress-value { background-color: var(--a-error); }
+  progress.progress.error::-moz-progress-bar { background-color: var(--a-error); }
+
+
+  /* --- 3. NATIVE RANGE SLIDERS --- */
+  /* Axiom normalizes the notoriously difficult <input type="range"> */
+  input[type="range"].range {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+  }
+
+  input[type="range"].range:focus {
+    outline: none;
+  }
+
+  /* Track */
+  input[type="range"].range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    background: var(--a-surface-raised);
+    border-radius: var(--a-radius);
+    border: 1px solid var(--a-border);
+  }
+
+  /* Thumb */
+  input[type="range"].range::-webkit-slider-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: var(--a-surface-base);
+    border: 2px solid var(--a-primary);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8px; /* Center thumb on track */
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+    transition: transform var(--a-transition), background var(--a-transition);
+  }
+
+  input[type="range"].range:focus-visible::-webkit-slider-thumb,
+  input[type="range"].range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: var(--a-primary);
+  }
+}
+
+```

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete Component - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.min.css">
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="stylesheet" href="../../css/docs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .field[data-type="autocomplete"] {
+            position: relative;
+        }
+
+        .field[data-type="autocomplete"] input {
+            width: 100%;
+        }
+
+        [role="listbox"] {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 320px;
+            overflow-y: auto;
+            border: 1px solid var(--a-color-border);
+            border-radius: var(--a-border-radius-base);
+            background: var(--a-color-background);
+            list-style: none;
+            margin: var(--a-space-s) 0 0 0;
+            padding: 0;
+            display: none;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        [role="listbox"][data-open="true"] {
+            display: block;
+        }
+
+        [role="option"] {
+            padding: var(--a-space-m);
+            cursor: pointer;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        [role="option"]:hover,
+        [role="option"][data-active="true"] {
+            background: var(--a-color-background-secondary);
+        }
+
+        .no-results {
+            padding: var(--a-space-m);
+            color: var(--a-color-text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .help-text {
+            font-size: 0.85rem;
+            color: var(--a-color-text-muted);
+            margin-top: var(--a-space-s);
+        }
+    </style>
+</head>
+<body class="axiom-body component-doc">
+    <!-- HEADER NAVIGATION -->
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="../../index.html#get-started">Get Started</a></li>
+                <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../../index.html#axicons">Axicons</a></li>
+            </ul>
+
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="GitHub"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="axicon render" data-name="Moon"></span>
+                </button>
+                <button class="menu toggle" aria-label="Toggle Menu">
+                    <span class="axicon render" data-name="Menu"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main><section><div class="container">
+        <header>
+            <h1>Autocomplete</h1>
+            <p class="text-muted">Semantic autocomplete component for intelligent text input suggestions. Filters options dynamically with full keyboard navigation and accessibility support.</p>
+        </header>
+
+        <div class="component-section">
+
+            <section>
+                <h2>Live Examples</h2>
+
+                <h3>Country Selection</h3>
+                <div class="field" data-type="autocomplete">
+                    <label for="country">Country</label>
+                    <input 
+                        type="text" 
+                        id="country"
+                        placeholder="Type a country name..."
+                        autocomplete="off"
+                        aria-label="Country selection"
+                        aria-autocomplete="list"
+                        aria-controls="country-options"
+                    >
+                    <ul id="country-options" role="listbox" aria-label="Country options">
+                        <li role="option">Afghanistan</li>
+                        <li role="option">Albania</li>
+                        <li role="option">Algeria</li>
+                        <li role="option">Andorra</li>
+                        <li role="option">Argentina</li>
+                        <li role="option">Australia</li>
+                        <li role="option">Austria</li>
+                        <li role="option">Azerbaijan</li>
+                        <li role="option">Bahamas</li>
+                        <li role="option">Bangladesh</li>
+                    </ul>
+                    <p class="help-text">Start typing to filter countries</p>
+                </div>
+
+                <h3>Technology Stack Search</h3>
+                <div class="field" data-type="autocomplete">
+                    <label for="tech">Technology</label>
+                    <input 
+                        type="text" 
+                        id="tech"
+                        placeholder="Search technologies..."
+                        autocomplete="off"
+                        aria-label="Technology selection"
+                        aria-autocomplete="list"
+                        aria-controls="tech-options"
+                    >
+                    <ul id="tech-options" role="listbox" aria-label="Technology options">
+                        <li role="option">JavaScript</li>
+                        <li role="option">TypeScript</li>
+                        <li role="option">React</li>
+                        <li role="option">Vue.js</li>
+                        <li role="option">Angular</li>
+                        <li role="option">Node.js</li>
+                        <li role="option">Python</li>
+                        <li role="option">Go</li>
+                        <li role="option">Rust</li>
+                        <li role="option">Docker</li>
+                    </ul>
+                    <p class="help-text">Try typing 'react' or 'node'</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;div class="field" data-type="autocomplete"&gt;
+    &lt;label for="search"&gt;Search&lt;/label&gt;
+    
+    &lt;input 
+        type="text" 
+        id="search"
+        placeholder="Start typing..."
+        aria-autocomplete="list"
+        aria-controls="dropdown"
+    &gt;
+    
+    &lt;ul id="dropdown" role="listbox"&gt;
+        &lt;li role="option"&gt;Option 1&lt;/li&gt;
+        &lt;li role="option"&gt;Option 2&lt;/li&gt;
+        &lt;li role="option"&gt;Option 3&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Data Attributes</h2>
+                <ul>
+                    <li><strong>`data-type="autocomplete"`</strong> - Container for autocomplete field</li>
+                    <li><strong>`data-open="true"`</strong> - Controls listbox visibility</li>
+                    <li><strong>`data-active="true"`</strong> - Marks highlighted option</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>ARIA Attributes</h2>
+                <ul>
+                    <li><strong>`aria-autocomplete="list"`</strong> - Input provides autocomplete list</li>
+                    <li><strong>`aria-controls`</strong> - Links input to listbox</li>
+                    <li><strong>`role="listbox"`</strong> - Container for autocomplete options</li>
+                    <li><strong>`role="option"`</strong> - Individual selectable items</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>Real-time Filtering</strong> - Options filter as user types</li>
+                    <li><strong>Keyboard Navigation</strong> - Arrow keys, Enter, Escape support</li>
+                    <li><strong>Mouse Support</strong> - Click to select options</li>
+                    <li><strong>No Results Feedback</strong> - Message when nothing matches</li>
+                    <li><strong>Accessible</strong> - Full screen reader support with ARIA</li>
+                    <li><strong>Semantic HTML</strong> - Native `<ul>`, `<li>` elements</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Country/Region Selection</strong> - Geographic filtering</li>
+                    <li><strong>User Search</strong> - Finding team members or contacts</li>
+                    <li><strong>Product Search</strong> - E-commerce product discovery</li>
+                    <li><strong>Technology Stack</strong> - Selecting technologies or skills</li>
+                    <li><strong>Tag Input</strong> - Adding tags or categories</li>
+                    <li><strong>Address Autocomplete</strong> - Street and location completion</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>JavaScript Implementation</h2>
+                <div class="code-block">
+                    <pre><code class="language-javascript">function setupAutocomplete(inputId, listboxId) {
+    const input = document.getElementById(inputId);
+    const listbox = document.getElementById(listboxId);
+    const options = listbox.querySelectorAll('[role="option"]');
+    const allText = Array.from(options).map(o => o.textContent);
+    let activeIndex = -1;
+
+    input.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const matches = query 
+            ? allText.filter(t => t.toLowerCase().includes(query))
+            : [];
+
+        listbox.innerHTML = '';
+        
+        if (query && matches.length) {
+            matches.forEach(text => {
+                const li = document.createElement('li');
+                li.setAttribute('role', 'option');
+                li.textContent = text;
+                li.addEventListener('click', () => {
+                    input.value = text;
+                    listbox.setAttribute('data-open', 'false');
+                });
+                listbox.appendChild(li);
+            });
+            listbox.setAttribute('data-open', 'true');
+        } else if (query) {
+            const none = document.createElement('li');
+            none.className = 'no-results';
+            none.textContent = 'No results';
+            listbox.appendChild(none);
+            listbox.setAttribute('data-open', 'true');
+        } else {
+            listbox.setAttribute('data-open', 'false');
+        }
+        activeIndex = -1;
+    });
+
+    input.addEventListener('keydown', (e) => {
+        const visible = listbox.querySelectorAll('[role="option"]');
+        
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            activeIndex = Math.min(activeIndex + 1, visible.length - 1);
+            updateActive(visible);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            activeIndex = Math.max(activeIndex - 1, -1);
+            updateActive(visible);
+        } else if (e.key === 'Enter' && activeIndex >= 0) {
+            e.preventDefault();
+            input.value = visible[activeIndex].textContent;
+            listbox.setAttribute('data-open', 'false');
+        } else if (e.key === 'Escape') {
+            listbox.setAttribute('data-open', 'false');
+        }
+    });
+
+    function updateActive(visible) {
+        visible.forEach((opt, i) => {
+            opt.setAttribute('data-active', i === activeIndex ? 'true' : 'false');
+        });
+    }
+}
+
+setupAutocomplete('country', 'country-options');
+setupAutocomplete('tech', 'tech-options');</code></pre>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="title">Responsive Behavior</h2>
+                <p>This component automatically adapts to different screen sizes:</p>
+                
+                <h3>Mobile (< 768px)</h3>
+                <p>On mobile devices:</p>
+                <ul>
+                    <li>Optimized for small screens</li>
+                    <li>Touch-friendly spacing maintained (44px minimum)</li>
+                    <li>Text wraps naturally without overflow</li>
+                    <li>Content density optimized for readability</li>
+                </ul>
+
+                <h3>Desktop (1024px+)</h3>
+                <p>On desktop displays:</p>
+                <ul>
+                    <li>Enhanced visual features</li>
+                    <li>Hover states and transitions</li>
+                    <li>Full keyboard navigation support</li>
+                    <li>Optimal spacing and sizing</li>
+                </ul>
+
+                <h3>Framework Integration</h3>
+                <p>Responsive behavior is automatic:</p>
+                <ul>
+                    <li>Framework handles media queries</li>
+                    <li>No custom CSS required</li>
+                    <li>Mobile-first approach applied</li>
+                    <li>Accessibility maintained at all sizes</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Debounce</strong> - For large datasets, debounce input filtering</li>
+                    <li><strong>Case Insensitive</strong> - Match regardless of case</li>
+                    <li><strong>Partial Match</strong> - Match anywhere in string, not just start</li>
+                    <li><strong>Min Characters</strong> - Optionally wait for 2-3 chars before filtering</li>
+                    <li><strong>Clear Feedback</strong> - Show "no results" when nothing matches</li>
+                    <li><strong>Max Results</strong> - Limit displayed options (e.g., 10) for performance</li>
+                    <li><strong>Keyboard Only</strong> - Full navigation without mouse</li>
+                </ul>
+            </section>
+
+        </div>
+
+    </div></section></main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Main Content Grid -->
+            <div class="footer-content">
+                <!-- Brand Section -->
+                <div class="footer-brand">
+                    <a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+                    <p class="footer-tagline">The Semantic Web, Reimagined.</p>
+                </div>
+
+                <!-- Documentation Links -->
+                <div class="footer-column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../components-overview.html">Component Overview</a></li>
+                        <li><a href="../overview-quickstart.html">Get Started</a></li>
+                        <li><a href="../colors-advanced.html">Colors & Tokens</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Links -->
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../../README.md" target="_blank">README</a></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+                        <li><a href="../../LICENSE" target="_blank">License</a></li>
+                    </ul>
+                </div>
+
+                <!-- Community Links -->
+                <div class="footer-column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+                <ul class="footer-social">
+                    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+                        <span class="axicon render" data-name="GitHub"></span>
+                    </a></li>
+                    <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+                        <span class="axicon render" data-name="Brand-NPM"></span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/index-page-manager.js"></script>
+    <script>
+        function setupAutocomplete(inputId, listboxId) {
+            const input = document.getElementById(inputId);
+            const listbox = document.getElementById(listboxId);
+            const options = listbox.querySelectorAll('[role="option"]');
+            const allText = Array.from(options).map(o => o.textContent);
+            let activeIndex = -1;
+
+            input.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const matches = query 
+                    ? allText.filter(t => t.toLowerCase().includes(query))
+                    : [];
+
+                listbox.innerHTML = '';
+                
+                if (query && matches.length) {
+                    matches.forEach(text => {
+                        const li = document.createElement('li');
+                        li.setAttribute('role', 'option');
+                        li.textContent = text;
+                        li.addEventListener('click', () => {
+                            input.value = text;
+                            listbox.setAttribute('data-open', 'false');
+                        });
+                        listbox.appendChild(li);
+                    });
+                    listbox.setAttribute('data-open', 'true');
+                } else if (query) {
+                    const none = document.createElement('li');
+                    none.className = 'no-results';
+                    none.textContent = 'No results found';
+                    listbox.appendChild(none);
+                    listbox.setAttribute('data-open', 'true');
+                } else {
+                    listbox.setAttribute('data-open', 'false');
+                }
+                activeIndex = -1;
+            });
+
+            input.addEventListener('keydown', (e) => {
+                const visible = listbox.querySelectorAll('[role="option"]');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    activeIndex = Math.min(activeIndex + 1, visible.length - 1);
+                    updateActive(visible);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    activeIndex = Math.max(activeIndex - 1, -1);
+                    updateActive(visible);
+                } else if (e.key === 'Enter' && activeIndex >= 0) {
+                    e.preventDefault();
+                    input.value = visible[activeIndex].textContent;
+                    listbox.setAttribute('data-open', 'false');
+                } else if (e.key === 'Escape') {
+                    listbox.setAttribute('data-open', 'false');
+                }
+            });
+
+            function updateActive(visible) {
+                visible.forEach((opt, i) => {
+                    opt.setAttribute('data-active', i === activeIndex ? 'true' : 'false');
+                });
+            }
+        }
+
+        setupAutocomplete('country', 'country-options');
+        setupAutocomplete('tech', 'tech-options');
+
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
+</body>
+</html>

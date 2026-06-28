@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Navbar Component - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.min.css">
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="stylesheet" href="../../css/docs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body class="axiom-body component-doc">
+    	<!-- HEADER NAVIGATION -->
+	<header class="main" data-component="mobile-navbar">
+		<nav role="navigation" aria-label="Main Navigation">
+			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+			<ul class="links">
+				<li><a href="../../index.html#get-started">Get Started</a></li>
+				<li><a href="../components-overview.html">Docs</a></li>
+				<li><a href="../../index.html#axicons">Axicons</a></li>
+			</ul>
+
+			<div class="actions">
+				<button class="search toggle" aria-label="Open Search">
+					<span class="axicon render" data-name="Search"></span>
+				</button>
+				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+					<span class="axicon render" data-name="GitHub"></span>
+					<span>GitHub</span>
+				</a>
+				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+					<span class="axicon render" data-name="Moon"></span>
+				</button>
+				<button class="menu toggle" aria-label="Toggle Menu">
+					<span class="axicon render" data-name="Menu"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+
+    <main><section><div class="container">
+        <header>
+            <h1>Mobile Navbar</h1>
+            <p class="text-muted">The **Mobile Navbar** component in Axiom01 provides a responsive, accessible navigation solution for smaller screens. It...</p>
+        </header>
+
+        <div class="component-section">
+
+        <div class="section">
+            <h2 class="title">Live Example</h2>
+            <div class="live">
+                <p>To best experience the mobile navbar, please view this page on a smaller screen or use your browser's developer tools to simulate a mobile viewport.</p>
+                <div class="mobile-navbar-demo-container">
+                    	<!-- HEADER NAVIGATION -->
+	<header class="main" data-component="mobile-navbar">
+		<nav role="navigation" aria-label="Main Navigation">
+			<a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+			<ul class="links">
+				<li><a href="../../index.html#get-started">Get Started</a></li>
+				<li><a href="../components-overview.html">Docs</a></li>
+				<li><a href="../../index.html#axicons">Axicons</a></li>
+			</ul>
+
+			<div class="actions">
+				<button class="search toggle" aria-label="Open Search">
+					<span class="axicon render" data-name="Search"></span>
+				</button>
+				<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+					<span class="axicon render" data-name="GitHub"></span>
+					<span>GitHub</span>
+				</a>
+				<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+					<span class="axicon render" data-name="Moon"></span>
+				</button>
+				<button class="menu toggle" aria-label="Toggle Menu">
+					<span class="axicon render" data-name="Menu"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
+                    <div class="mobile-navbar-demo-content">
+                        <p>Scroll down to see content behind the fixed header.</p>
+                    </div>
+        </div>
+
+        <div class="section">
+            <h2 class="title">Usage Guidelines</h2>
+            <p>To implement the Mobile Navbar, use the following semantic HTML structure within your main site header:</p>
+            <ul>
+                <li>The main header element should have the class <code>.main</code> and the attribute <code>data-component="mobile-navbar"</code>. This attribute is crucial for Axiom01's JavaScript to initialize the mobile toggle functionality.</li>
+                <li>Include a logo or site title (e.g., <code>&lt;a href="#" class="brand"&gt;</code>).</li>
+                <li>A <code>&lt;button class="menu toggle"&gt;</code> is required to trigger the mobile menu. It should include <code>aria-label</code> and <code>aria-expanded="false"</code> for accessibility. An icon (e.g., Font Awesome's <code>&lt;i class="fas fa-bars"&gt;&lt;/i&gt;</code>) is recommended.</li>
+                <li>The navigation links should be wrapped in a <code>&lt;nav&gt;&lt;ul class="links"&gt;</code> structure.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 class="title">JavaScript Integration</h2>
+            <p>The mobile navbar's interactive behavior (toggling the menu open/closed) is handled by <code>js/components/mobile-navbar.js</code>. This script:</p>
+            <ul>
+                <li>Listens for clicks on the <code>.menu toggle</code> button.</li>
+                <li>Toggles the <code>.menu-open</code> class on the main <code>&lt;header class="main"&gt;</code> element.</li>
+                <li>Updates the <code>aria-expanded</code> attribute on the <code>.menu toggle</code> button and <code>aria-hidden</code> on the navigation links.</li>
+                <li>Automatically assigns unique IDs to the toggle button and navigation links for accessibility.</li>
+            </ul>
+            <p>Additionally, the component now returns a <code>destroy()</code> method. This method cleans up event listeners and resets ARIA attributes, preventing memory leaks when the mobile navbar is dynamically removed from the DOM or when a page transition occurs in a Single Page Application (SPA).</p>
+        </div>
+
+        <div class="section">
+            <h2 class="title">Accessibility</h2>
+            <p>Axiom01's Mobile Navbar is built with accessibility in mind:</p>
+            <ul>
+                <li><strong>Semantic HTML:</strong> Uses native <code>&lt;button&gt;</code> for toggling and standard <code>&lt;nav&gt;</code> and <code>&lt;ul&gt;</code> for navigation.</li>
+                <li><strong>ARIA Attributes:</strong>
+                    <ul>
+                        <li><code>aria-label="Toggle navigation"</code> on the button provides a clear description for screen readers.</li>
+                        <li><code>aria-expanded="true|false"</code> on the button indicates the current state of the menu.</li>
+                        <li><code>aria-controls="[auto-generated-id]"</code> links the toggle button to its controlled navigation links.</li>
+                        <li><code>aria-hidden="true|false"</code> on the navigation links indicates their visibility state to assistive technologies.</li>
+                        <li>Unique IDs are dynamically assigned to the toggle button and navigation links to ensure proper ARIA linking.</li>
+                    </ul>
+                </li>
+                <li><strong>Keyboard Navigation:</strong> The toggle button is keyboard focusable, and navigation links are accessible via Tab key when the menu is open.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 class="title">Customization</h2>
+            <p>You can customize the Mobile Navbar's appearance by overriding the following CSS variables in your <code>site.css</code> or a custom theme file. Most of the styling is applied directly to <code>header.main</code> and its descendants in <code>css/axiom.css</code>.</p>
+            <ul>
+                <li><code>--a-color-surface-variant</code>: Background color of the header.</li>
+                <li><code>--a-color-on-surface-variant</code>: Text/icon color in the header.</li>
+                <li><code>--a-color-primary</code>, <code>--a-color-primary-variant</code>: For link hover states.</li>
+                <li><code>--a-space-s</code>, <code>--a-space-m</code>, <code>--a-space-l</code>, <code>--a-space-xl</code>: For padding and spacing.</li>
+                <li><code>--a-shadow-medium</code>: For the header's shadow.</li>
+                <li><code>--header-height</code>: (If defined) for consistent header height.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3 class="title">Code Example</h3>
+            <div class="code-block">
+                <pre><code class="language-html">&lt;header class="main" data-component="mobile-navbar"&gt;
+&lt;a href="#" class="brand"&gt;Your Logo&lt;/a&gt;
+&lt;div class="actions"&gt;
+    &lt;button class="menu toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="[auto-generated-id]"&gt;
+        &lt;i class="fas fa-bars" aria-hidden="true"&gt;&lt;/i&gt;
+    &lt;/button&gt;
+&lt;/div&gt;
+&lt;nav&gt;
+    &lt;ul class="links" aria-hidden="true" aria-labelledby="[auto-generated-id]"&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+            </div>
+
+    </div></section></main>
+
+    	<!-- FOOTER -->
+	<footer class="footer">
+		<div class="container">
+			<!-- Main Content Grid -->
+			<div class="footer-content">
+				<!-- Brand Section -->
+				<div class="footer-brand">
+					<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+					<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+				</div>
+
+				<!-- Product Links -->
+				<div class="footer-column">
+					<h4>Product</h4>
+					<ul>
+						<li><a href="../../docs/components-overview.html">All Components</a></li>
+						<li><a href="../../docs/axicons.html">Icons</a></li>
+						<li><a href="../../docs/colors-advanced.html">Colors & Tokens</a></li>
+						<li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+					</ul>
+				</div>
+
+				<!-- Resources Links -->
+				<div class="footer-column">
+					<h4>Resources</h4>
+					<ul>
+						<li><a href="../../README.md" target="_blank">README</a></li>
+						<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+						<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+					</ul>
+				</div>
+
+				<!-- Community Links -->
+				<div class="footer-column">
+					<h4>Community</h4>
+					<ul>
+						<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+						<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Bottom Section -->
+			<div class="footer-bottom">
+				<p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+				<ul class="footer-social">
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+						<span class="axicon render" data-name="GitHub"></span>
+					</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+						<span class="axicon render" data-name="Brand-NPM"></span>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+
+            <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+    </script>
+    <script src="../../js/index-page-manager.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="../../js/axicons-loader.js"></script>
+<script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-thin-variants.js"></script>
+<script src="../../js/axicons-inverted-variants.js"></script>
+<script src="../../js/axicons-color-variants.js"></script>
+<script src="../../js/axicons-premium-variants.js"></script>
+<script src="../../js/render-icons.js"></script>
+<script src="../../js/axiom.js"></script>
+</body>
+</html>

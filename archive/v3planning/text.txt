@@ -1,0 +1,52 @@
+# Axicons
+3,941 intelligent, multi-variant SVG icons built specifically for the Axiom01 rendering engine.
+## The Semantic Reality
+Most icon libraries are terrible for performance. You either use Font Icons (which cause render-blocking, CORS issues, and horrific accessibility), or you copy-paste massive <svg> blocks directly into your HTML, destroying the readability of your code.
+Axiom01 asks: *Why shouldn't icons be declarative?*
+### Axiom01 Approach
+```html
+<!-- HTML: 1 line | DOM Bloat: 0 -->
+<button class="primary">
+  <i data-axicon="Save"></i> Save Document
+</button>
+
+```
+## Workflows: Prototyping vs. Production
+Axiom01 respects your time during development, and respects your users' bandwidth in production. We offer two paths for using Axicons.
+### 1. Rapid Prototyping (Zero Config)
+When you are rapidly building interfaces, you shouldn't have to fight with build tools. Drop the Axicons Base script into your HTML. You instantly get access to the 450 most common UI icons.
+```html
+<!-- Put this in your <head> -->
+<script src="[https://cdn.axiom01.com/axicons-base.js](https://cdn.axiom01.com/axicons-base.js)" defer></script>
+
+<!-- Start using icons immediately -->
+<i data-axicon="Menu"></i>
+
+```
+*Note: The base script is highly optimized (89KB) and uses IntersectionObserver to ensure it doesn't freeze the main thread, but it contains icons you might not use.*
+### 2. Production Ready (Automated Tree-Shaking)
+When it's time to deploy, shipping 450 icons when you only used 12 is unacceptable. Use the Axiom01 CLI to extract exactly what you need.
+```bash
+# 1. Run the extractor in your project folder
+npx axiom01 extract-icons
+
+# 2. Axiom scans your HTML/JS/JSX files
+# 3. It generates an `axicons-compiled.js` file (usually < 2KB)
+
+```
+Simply swap your CDN link for your compiled local file. Maximum performance, zero dead code.
+## Zero Layout Shift (CLS)
+When you write data-axicon="Save", the Axiom01 CSS engine instantly reserves a mathematically perfect 1em x 1em square block.
+Our JavaScript engine uses IntersectionObserver to monitor the page. The exact millisecond that square enters the viewport, the SVG paths are injected.
+**The text does not jump. The page does not shift. Unseen icons are never rendered.**
+## Multi-Color OKLCH Integration
+If you use the color or premium variants, you don't need to pass a dozen CSS properties to the SVG to make it match your theme. The Axicons are designed to map directly to Axiom01's internal CSS variables (var(--a-primary), var(--a-surface-raised)).
+When your user toggles Dark Mode, or when you switch the --a-hue-primary from Blue to Green, every multi-color Axicon recalculates its internal fills and strokes instantly.
+```html
+<!-- The icon automatically pulls from your OKLCH tokens -->
+<svg data-axicon="Shield" data-variant="color" aria-label="Secure Connection"></svg>
+
+```
+## Automatic Accessibility
+If you place an icon in your HTML without an aria-label, the Axiom engine intelligently assumes it is decorative (like an arrow inside a button) and automatically injects aria-hidden="true".
+If you provide an aria-label, Axiom upgrades the SVG with role="img", ensuring screen readers announce it perfectly. Axiom respects your users, even when you forget to.

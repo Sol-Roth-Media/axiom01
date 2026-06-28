@@ -1,0 +1,1074 @@
+/* Styles for component live examples in documentation
+   These rules replace the inline <style> blocks that used to appear
+   on each component page. */
+
+/* ── Shared component-doc body layout ───────────────────────── */
+.component-doc {
+    display: block !important;
+    padding: 0 !important;
+}
+
+.component-doc > .content {
+    display: block;
+    min-height: 0;
+    padding-top: var(--a-space-m);
+}
+
+.component-doc main.content {
+    display: block;
+    width: min(100%, 72rem);
+    margin: 0 auto;
+    min-height: 0;
+    padding: 80px var(--a-space-xl) var(--a-space-xl) var(--a-space-xl);
+}
+
+.component-doc main.content > .hero,
+.component-doc main.content > .hero.small {
+    padding: var(--a-space-xxl) var(--a-space-xl);
+    text-align: left;
+    position: relative;
+    z-index: 1;
+}
+
+.component-doc main.content > .hero .content,
+.component-doc main.content > .hero.small .content {
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+.component-doc main.content > .hero h1,
+.component-doc main.content > .hero.small h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    margin-bottom: var(--a-space-s);
+    color: var(--a-color-on-surface);
+}
+
+.component-doc main.content > .hero p,
+.component-doc main.content > .hero.small p {
+    font-size: 1.05rem;
+    max-width: 60rem;
+    margin-bottom: 0;
+    color: var(--a-color-on-surface);
+}
+/* Override axiom.css hero colors for component documentation pages */
+.component-doc section.hero h1,
+.component-doc .component-section section.hero h1 {
+    color: var(--a-color-on-surface) !important;
+}
+
+.component-doc section.hero p,
+.component-doc .component-section section.hero p {
+    color: var(--a-color-on-surface) !important;
+}
+
+.component-doc footer.main {
+    padding: var(--a-space-l) 0;
+}
+
+.component-doc footer.main .content {
+    min-height: 0;
+    padding: 0 var(--a-space-xl);
+    align-items: flex-start;
+    gap: var(--a-space-m);
+}
+
+.component-doc footer.main .tagline {
+    margin: var(--a-space-xs) 0 0;
+}
+
+.component-doc footer.main .column h4 {
+    margin-bottom: var(--a-space-s);
+}
+
+.component-doc footer.main .bottom {
+    margin-top: var(--a-space-l);
+    padding: var(--a-space-m) var(--a-space-xl) 0;
+}
+
+.component-doc main.content > .component-section,
+.component-doc main.content > section:not(.hero) {
+    width: min(100%, 72rem);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.component-doc .alert-group {
+    display: grid;
+    gap: var(--a-space-m);
+}
+
+@media (min-width: 960px) {
+    .component-doc .alert-group {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .component-doc .alert-group > .alert:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 767px) {
+    .component-doc main.content {
+        padding: 80px var(--a-space-m) var(--a-space-l) var(--a-space-m);
+    }
+
+    .component-doc main.content > .hero.small {
+        padding: var(--a-space-s) 0;
+    }
+}
+
+.doc-navbar-preview {
+    position: static !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+/* ── Shared component-section + code block styles ────────────
+   Replaces the per-page inline <style> blocks that all component
+   doc pages previously duplicated. */
+
+.component-doc .component-section {
+    background-color: var(--a-color-surface-variant);
+    padding: var(--a-space-xl);
+    border-radius: var(--a-border-radius-large);
+    border: 1px solid var(--a-color-outline);
+    margin-bottom: var(--a-space-l);
+}
+
+.component-doc .component-section h2 {
+    margin-top: 0;
+    color: var(--a-color-primary);
+    margin-bottom: var(--a-space-l);
+}
+
+.component-doc pre {
+    background-color: var(--a-color-code-bg, #1e1e2e);
+    color: var(--a-color-code-text, #cdd6f4);
+    padding: var(--a-space-m);
+    border-radius: var(--a-border-radius-medium);
+    overflow-x: auto;
+    border: 1px solid var(--a-color-code-border, var(--a-color-outline));
+    margin-bottom: var(--a-space-m);
+    white-space: pre;
+    line-height: 1.5;
+    tab-size: 2;
+}
+
+.component-doc code {
+    font-family: var(--a-font-family-mono, monospace);
+    font-size: var(--a-font-size-small, 0.875rem);
+}
+
+/* Specific styles for Multi-Step Form demo */
+.multi-step-form-container {
+    max-width: 600px;
+    margin: 0 auto var(--a-space-l);
+    background-color: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-large);
+    padding: var(--a-space-xl);
+    box-shadow: var(--a-shadow-medium);
+}
+
+.progress-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--a-space-xl);
+    position: relative;
+}
+
+.progress-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--a-color-outline);
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.progress-indicator .step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--a-color-surface-variant);
+    color: var(--a-color-on-surface-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--a-font-weight-bold);
+    border: 2px solid var(--a-color-outline);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.progress-indicator .step.active {
+    background-color: var(--a-color-primary);
+    color: var(--a-color-on-primary);
+    border-color: var(--a-color-primary);
+}
+
+.multi-step-form .form-step {
+    display: none;
+}
+
+.multi-step-form .form-step.active {
+    display: block;
+}
+
+.multi-step-form h3 {
+    margin-top: 0;
+    margin-bottom: var(--a-space-l);
+    color: var(--a-color-primary);
+}
+
+.multi-step-form label {
+    display: block;
+    margin-bottom: var(--a-space-xs);
+    font-weight: var(--a-font-weight-bold);
+    margin-top: var(--a-space-m);
+}
+
+.multi-step-form label:first-of-type {
+    margin-top: 0;
+}
+
+.multi-step-form input[type="text"],
+.multi-step-form input[type="email"],
+.multi-step-form input[type="tel"] {
+    width: 100%;
+    padding: var(--a-space-s) var(--a-space-m);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    font-size: var(--a-font-size-base);
+    color: var(--a-color-on-surface);
+    background-color: var(--a-color-surface);
+}
+
+.multi-step-form .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--a-space-xl);
+    gap: var(--a-space-m);
+}
+
+.multi-step-form .form-actions button {
+    flex-grow: 1;
+}
+
+.multi-step-form .review-details p {
+    margin-bottom: var(--a-space-s);
+}
+
+.multi-step-form .review-details strong {
+    color: var(--a-color-on-surface);
+}
+
+/* Specific styles for Alert demo */
+.alert-examples {
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-m);
+    margin-bottom: var(--a-space-l);
+}
+
+/* Specific styles for Notification demo */
+.notification-container {
+    position: fixed;
+    top: var(--a-space-xl);
+    right: var(--a-space-xl);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-m);
+    max-width: 350px;
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    gap: var(--a-space-m);
+    padding: var(--a-space-m);
+    border-radius: var(--a-border-radius-medium);
+    box-shadow: var(--a-shadow-medium);
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface);
+    border-left: 4px solid;
+    animation: slideInFromRight 0.3s ease-out forwards;
+}
+
+.notification.success {
+    border-color: var(--a-color-success);
+    background-color: var(--a-color-success-container);
+    color: var(--a-color-on-success-container);
+}
+
+.notification.warning {
+    border-color: var(--a-color-warning);
+    background-color: var(--a-color-warning-container);
+    color: var(--a-color-on-warning-container);
+}
+
+.notification.error {
+    border-color: var(--a-color-error);
+    background-color: var(--a-color-error-container);
+    color: var(--a-color-on-error-container);
+}
+
+.notification i {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.notification .close-notification {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--a-color-on-surface-variant);
+    margin-left: auto;
+    line-height: 1;
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Specific styles for Progress demo */
+.progress-examples {
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-m);
+    margin-bottom: var(--a-space-l);
+}
+
+progress {
+    width: 100%;
+    height: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    border-radius: var(--a-border-radius-small);
+    background-color: var(--a-color-surface-variant);
+    margin-bottom: var(--a-space-s);
+}
+
+/* Style for Webkit browsers */
+progress::-webkit-progress-bar {
+    background-color: var(--a-color-surface-variant);
+    border-radius: var(--a-border-radius-small);
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--a-color-primary);
+    border-radius: var(--a-border-radius-small);
+    transition: width 0.3s ease-in-out;
+}
+
+/* Style for Firefox */
+progress::-moz-progress-bar {
+    background-color: var(--a-color-primary);
+    border-radius: var(--a-border-radius-small);
+}
+
+/* Indeterminate progress animation */
+progress:not([value]) {
+    animation: indeterminate-progress 1s infinite linear;
+    background-image: linear-gradient(to right, var(--a-color-surface-variant) 30%, var(--a-color-primary) 50%, var(--a-color-surface-variant) 70%);
+    background-size: 200% 100%;
+}
+
+@keyframes indeterminate-progress {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
+.progress-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--a-space-m);
+}
+
+.progress-item label {
+    font-weight: var(--a-font-weight-medium);
+    margin-bottom: var(--a-space-xs);
+    color: var(--a-color-on-surface);
+}
+
+.progress-item span {
+    font-size: var(--a-font-size-small);
+    color: var(--a-color-on-surface-variant);
+    margin-top: var(--a-space-xs);
+}
+
+/* Specific styles for Empty State demo */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--a-space-xxl);
+    border: 2px dashed var(--a-color-outline);
+    border-radius: var(--a-border-radius-large);
+    background-color: var(--a-color-surface);
+    color: var(--a-color-on-surface-variant);
+    margin-bottom: var(--a-space-l);
+}
+.empty-state i {
+    font-size: var(--a-font-size-xxl, 2rem);
+    color: var(--a-color-primary);
+    margin-bottom: var(--a-space-l);
+}
+.empty-state h3 {
+    margin-top: 0;
+    margin-bottom: var(--a-space-s);
+    color: var(--a-color-on-surface);
+}
+.empty-state p {
+    max-width: 400px;
+    margin-bottom: var(--a-space-l);
+}
+.empty-state .actions { /* Added for button grouping */
+    display: flex;
+    gap: var(--a-space-m);
+    justify-content: center;
+}
+
+/* Specific styles for Skeleton demo */
+.skeleton-card {
+    background-color: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-large);
+    padding: var(--a-space-l);
+    margin-bottom: var(--a-space-l);
+    max-width: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+.skeleton-image {
+    width: 100%;
+    height: 150px;
+    background-color: var(--a-color-surface-variant);
+    border-radius: var(--a-border-radius-medium);
+    margin-bottom: var(--a-space-l);
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-line {
+    height: 16px;
+    background-color: var(--a-color-surface-variant);
+    border-radius: var(--a-border-radius-small);
+    margin-bottom: var(--a-space-s);
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-line.short {
+    width: 60%;
+}
+
+.skeleton-line.medium {
+    width: 85%;
+}
+
+.skeleton-line.long {
+    width: 100%;
+}
+
+.skeleton-line.full {
+    width: 100%;
+}
+
+.skeleton-text-block {
+    background-color: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-large);
+    padding: var(--a-space-l);
+    margin-bottom: var(--a-space-l);
+    max-width: 500px;
+    overflow: hidden;
+    position: relative;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* Specific styles for Forms demo */
+form {
+    max-width: 500px;
+    margin-bottom: var(--a-space-l);
+    padding: var(--a-space-l);
+    background-color: var(--a-color-surface);
+    border-radius: var(--a-border-radius-medium);
+    border: 1px solid var(--a-color-outline);
+}
+form label {
+    display: block;
+    margin-bottom: var(--a-space-xs);
+    font-weight: var(--a-font-weight-bold);
+    margin-top: var(--a-space-m);
+}
+form label:first-child {
+    margin-top: 0;
+}
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select,
+form textarea {
+    width: 100%;
+    padding: var(--a-space-s) var(--a-space-m);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    font-size: var(--a-font-size-base);
+    color: var(--a-color-on-surface);
+    background-color: var(--a-color-surface);
+}
+form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+.checkbox.group,
+.radio.group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-s);
+    margin-top: var(--a-space-m);
+}
+.checkbox.group label,
+.radio.group label {
+    display: flex;
+    align-items: center;
+    gap: var(--a-space-s);
+    font-weight: var(--a-font-weight-normal);
+    margin-top: 0;
+}
+.checkbox.group input,
+.radio.group input {
+    margin-top: 0;
+}
+form button[type="submit"] {
+    margin-top: var(--a-space-l);
+}
+
+/* Specific styles for Avatar demo */
+.avatar-group {
+    display: flex;
+    gap: var(--a-space-m);
+    align-items: center;
+    margin-bottom: var(--a-space-l);
+}
+.avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--a-color-primary-container);
+    color: var(--a-color-on-primary-container);
+    font-weight: var(--a-font-weight-bold);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.avatar i {
+    font-size: 1.2em; /* Relative to avatar size */
+}
+.avatar.small {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+}
+.avatar.medium {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+}
+.avatar.large {
+    width: 64px;
+    height: 64px;
+    font-size: 1.2rem;
+}
+.avatar.xlarge {
+    width: 96px;
+    height: 96px;
+    font-size: 1.5rem;
+}
+
+/* Specific styles for Badge demo */
+.badge-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--a-space-m);
+    margin-bottom: var(--a-space-l);
+    align-items: center;
+}
+
+/* Specific styles for Card demo */
+.card-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--a-space-l);
+    margin-bottom: var(--a-space-l);
+}
+.card {
+    background-color: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    overflow: hidden;
+    box-shadow: var(--a-shadow-small, var(--a-shadow-medium));
+    display: flex;
+    flex-direction: column;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card header {
+    padding: var(--a-space-m);
+    border-bottom: 1px solid var(--a-color-outline);
+}
+
+.card header h3 {
+    margin: 0;
+    color: var(--a-color-on-surface);
+    font-size: var(--a-font-size-h4);
+}
+
+.card main {
+    padding: var(--a-space-m);
+    flex-grow: 1;
+}
+
+.card main p {
+    margin-bottom: var(--a-space-m);
+    color: var(--a-color-on-surface-variant);
+}
+
+.card footer {
+    padding: var(--a-space-m);
+    border-top: 1px solid var(--a-color-outline);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--a-space-s);
+}
+
+/* Specific styles for Carousel demo */
+.carousel-demo {
+    max-width: 600px;
+    margin: 0 auto var(--a-space-l);
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--a-border-radius-medium);
+    box-shadow: var(--a-shadow-medium);
+}
+
+.carousel {
+    position: relative;
+}
+
+.carousel .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel .slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.carousel .slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.carousel .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--a-space-m);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+}
+
+.carousel .caption h5 {
+    margin-top: 0;
+    margin-bottom: var(--a-space-xs);
+    color: white;
+}
+
+.carousel .caption p {
+    margin-bottom: 0;
+    font-size: var(--a-font-size-small);
+}
+
+.carousel .controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.carousel .controls button {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: var(--a-space-s) var(--a-space-m);
+    cursor: pointer;
+    font-size: var(--a-font-size-large, 1.125rem);
+    border-radius: var(--a-border-radius-small);
+    margin: 0 var(--a-space-s);
+}
+
+.carousel .indicators {
+    position: absolute;
+    bottom: var(--a-space-s);
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.carousel .indicators li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 var(--a-space-xs);
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.carousel .indicators li.active {
+    background-color: white;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Specific styles for AI Chat demo */
+.ai-chat-demo-container {
+    position: relative;
+    height: 400px; /* Fixed height for demo */
+    margin-bottom: var(--a-space-l);
+}
+
+/* Specific styles for AI Image Generator demo */
+.image-generator-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-m);
+    margin-bottom: var(--a-space-l);
+}
+.image-preview {
+    border: 1px dashed var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--a-color-on-surface-variant);
+    margin-top: var(--a-space-m);
+}
+.image-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--a-border-radius-small);
+}
+
+/* Specific styles for Datepicker demo */
+.datepicker-container {
+    margin-bottom: var(--a-space-l);
+}
+.datepicker-container input {
+    padding: var(--a-space-s) var(--a-space-m);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    font-size: var(--a-font-size-base);
+    color: var(--a-color-on-surface);
+    background-color: var(--a-color-surface);
+}
+
+/* Specific styles for Drawer demo */
+.drawer-container {
+    position: relative;
+    height: 300px;
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    overflow: hidden;
+    margin-bottom: var(--a-space-l);
+}
+.drawer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: var(--a-color-surface);
+    border-right: 1px solid var(--a-color-outline);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 10;
+    padding: var(--a-space-m);
+    box-shadow: var(--a-shadow-lg);
+}
+.drawer.is-open {
+    transform: translateX(0);
+}
+.drawer-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 5;
+}
+.drawer-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+.drawer-content {
+    padding: var(--a-space-m);
+}
+
+/* Specific styles for Tooltip demo */
+.tooltip-demo-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: var(--a-space-xl);
+}
+
+/* Specific styles for Editor demo */
+.doc-live-example label[for="rich-text-editor"] {
+    display: block;
+    margin-bottom: var(--a-space-xs);
+}
+.doc-live-example p {
+    font-size: var(--a-font-size-small);
+    color: var(--a-color-on-surface-variant);
+    margin-top: var(--a-space-s);
+}
+
+/* Specific styles for File Upload demo */
+.file-upload-container {
+    margin-bottom: var(--a-space-l);
+    border: 2px dashed var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    padding: var(--a-space-xl);
+    text-align: center;
+    background-color: var(--a-color-surface);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.file-upload-container:hover {
+    background-color: var(--a-color-surface-variant);
+}
+.file-upload-container input[type="file"] {
+    display: none;
+}
+.file-upload-container label {
+    cursor: pointer;
+    display: block;
+    font-weight: var(--a-font-weight-bold);
+    color: var(--a-color-primary);
+}
+.file-upload-container p {
+    margin-top: var(--a-space-s);
+    color: var(--a-color-on-surface-variant);
+}
+.file-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--a-space-m);
+    text-align: left;
+}
+.file-list li {
+    background-color: var(--a-color-surface);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-small);
+    padding: var(--a-space-s);
+    margin-bottom: var(--a-space-s);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.file-list li .file-name {
+    font-weight: var(--a-font-weight-medium);
+}
+.file-list li .remove-file {
+    background: none;
+    border: none;
+    color: var(--a-color-error);
+    cursor: pointer;
+    font-size: var(--a-font-size-base);
+}
+
+/* Specific styles for Forms demo */
+form {
+    max-width: 500px;
+    margin-bottom: var(--a-space-l);
+    padding: var(--a-space-l);
+    background-color: var(--a-color-surface);
+    border-radius: var(--a-border-radius-medium);
+    border: 1px solid var(--a-color-outline);
+}
+form label {
+    display: block;
+    margin-bottom: var(--a-space-xs);
+    font-weight: var(--a-font-weight-bold);
+    margin-top: var(--a-space-m);
+}
+form label:first-child {
+    margin-top: 0;
+}
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select,
+form textarea {
+    width: 100%;
+    padding: var(--a-space-s) var(--a-space-m);
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    font-size: var(--a-font-size-base);
+    color: var(--a-color-on-surface);
+    background-color: var(--a-color-surface);
+}
+form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+div.checkbox.group, /* Updated selector */
+div.radio.group { /* Updated selector */
+    display: flex;
+    flex-direction: column;
+    gap: var(--a-space-s);
+    margin-top: var(--a-space-m);
+}
+div.checkbox.group label, /* Updated selector */
+div.radio.group label { /* Updated selector */
+    display: flex;
+    align-items: center;
+    gap: var(--a-space-s);
+    font-weight: var(--a-font-weight-normal);
+    margin-top: 0;
+}
+div.checkbox.group input, /* Updated selector */
+div.radio.group input { /* Updated selector */
+    margin-top: 0;
+}
+form button[type="submit"] {
+    margin-top: var(--a-space-l);
+}
+
+/* Specific styles for Hero demo */
+.hero-demo {
+    margin-bottom: var(--a-space-l);
+    border-radius: var(--a-border-radius-large);
+    overflow: hidden;
+}
+.hero {
+    background: var(--a-gradient-hero);
+    color: var(--a-color-on-gradient);
+    text-align: center;
+    padding: var(--a-space-xxl) var(--a-space-xl);
+}
+.hero h1 {
+    font-size: var(--a-font-size-h1);
+    font-weight: var(--a-font-weight-black);
+    margin: 0 0 var(--a-space-m);
+    line-height: 1.1;
+}
+.hero p {
+    font-size: var(--a-font-size-l, 1.25rem);
+    max-width: 700px;
+    margin: 0 auto var(--a-space-l) auto;
+    opacity: 0.9;
+}
+.hero .actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--a-space-m);
+}
+.hero .button.primary {
+    background-color: var(--a-color-on-gradient);
+    color: var(--a-color-primary);
+}
+.hero .button.secondary {
+    background-color: transparent;
+    border-color: var(--a-color-on-gradient);
+    color: var(--a-color-on-gradient);
+}
+
+/* Specific styles for Infinite Scroll demo */
+.infinite-scroll-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--a-color-outline);
+    border-radius: var(--a-border-radius-medium);
+    margin-bottom: var(--a-space-l);
+    background-color: var(--a-color-surface);
+}
+.infinite-scroll-item {
+    padding: var(--a-space-m);
+    border-bottom: 1px solid var(--a-color-outline);
+}
+.infinite-scroll-item:last-child {
+    border-bottom: none;
+}
+.loading-indicator {
+    text-align: center;
+    padding: var(--a-space-m);
+    color: var(--a-color-primary);
+    font-weight: var(--a-font-weight-bold);
+}

@@ -1,0 +1,114 @@
+```css
+/* ==========================================================================
+   AXIOM01 - BATCH E: LAYOUT & MEDIA (Navbars, Avatars, Media Shells)
+   Philosophy: Native aspect ratios, zero-JS fallbacks, semantic hierarchies.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. SEMANTIC NAVBAR --- */
+  /* Replaces 30+ utility classes with a single <nav class="navbar"> */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--a-space-sm) var(--a-space-md);
+    background: var(--a-surface-base);
+    border-bottom: 1px solid var(--a-border);
+    gap: var(--a-space-md);
+  }
+
+  .navbar-brand {
+    font-size: var(--a-text-lg);
+    font-weight: 700;
+    color: var(--a-text-main);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  /* Internal navigation lists */
+  .navbar ul {
+    display: flex;
+    align-items: center;
+    gap: var(--a-space-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar a {
+    text-decoration: none;
+    color: var(--a-text-muted);
+    font-weight: 500;
+    font-size: var(--a-text-sm);
+    transition: color var(--a-transition);
+  }
+
+  /* Accessible Active States */
+  .navbar a:hover,
+  .navbar a[aria-current="page"] {
+    color: var(--a-text-main);
+  }
+
+  /* --- 2. ZERO-JS AVATARS --- */
+  .avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Default size, easily overridden via variable scaling */
+    width: clamp(2rem, 2.5vw + 1rem, 3.5rem);
+    height: clamp(2rem, 2.5vw + 1rem, 3.5rem);
+    
+    border-radius: 50%;
+    background: var(--a-surface-raised);
+    border: 1px solid var(--a-border);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* The Magic Fallback:
+     If the avatar does NOT have an image, read the data-initials attribute 
+     and render it via CSS. No JS string manipulation needed! */
+  .avatar:not(:has(img))::before {
+    content: attr(data-initials);
+    font-size: var(--a-text-sm);
+    font-weight: 600;
+    color: var(--a-text-main);
+    letter-spacing: 0.05em;
+  }
+
+  /* --- 3. RESPONSIVE MEDIA CONTAINERS (NATIVE) --- */
+  /* Replaces old padding-bottom hacks with the native aspect-ratio property */
+  .media-box {
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--a-radius);
+    background: var(--a-surface-raised);
+    border: 1px solid var(--a-border);
+  }
+
+  /* Standard aspect ratios driven by semantic classes */
+  .media-box.video { aspect-ratio: 16 / 9; }
+  .media-box.square { aspect-ratio: 1 / 1; }
+  .media-box.portrait { aspect-ratio: 3 / 4; }
+
+  .media-box img,
+  .media-box video,
+  .media-box iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    display: block;
+  }
+}
+
+```

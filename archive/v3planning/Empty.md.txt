@@ -1,0 +1,34 @@
+# CSS-Driven Empty States
+Automatically render fallback UI when your containers have no data—without writing JavaScript logic.
+## The Semantic Reality
+If you are building an application with a modern JS framework (React, Vue, Svelte), your codebase is likely littered with conditional rendering logic like this:
+```jsx
+{/* The Utility / JS Way */}
+<div className="data-container">
+  {items.length > 0 ? (
+    items.map(item => <Card data={item} />)
+  ) : (
+    <div className="flex flex-col items-center justify-center p-8 border-dashed border-2 rounded">
+      <p className="text-gray-500">No projects found.</p>
+    </div>
+  )}
+</div>
+
+```
+Axiom01 asks: *Why is your JavaScript micro-managing the DOM's layout states?*
+## The CSS :empty Pseudo-Class
+In Axiom01, you write your list or table. If your backend returns zero items, the DOM element will be empty. Axiom01 intercepts the CSS :empty state and renders a beautiful dashed container automatically.
+### Axiom01 Approach
+```html
+<!-- If this list is empty, CSS automatically takes over -->
+<ul class="data-list" data-empty-message="No active projects. Click 'New' to begin.">
+  <!-- Items injected here by your framework -->
+</ul>
+
+```
+### How it works:
+ 1. When your framework maps over an empty array, the <ul> or <tbody> is rendered without children.
+ 2. The CSS engine detects the :empty state.
+ 3. It converts the element into a flex container, applies a minimum height, and adds dashed borders.
+ 4. It reads the data-empty-message attribute and renders the text via the ::after pseudo-element.
+You just eliminated thousands of lines of conditional ternary operators from your frontend codebase. This is the power of semantic CSS.

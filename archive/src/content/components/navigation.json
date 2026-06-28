@@ -1,0 +1,69 @@
+{
+  "category": "navigation",
+  "categoryLabel": "Navigation & Menus",
+  "components": [
+    {
+      "id": "nav-horizontal",
+      "name": "Horizontal Navigation",
+      "description": "Main horizontal navigation bar with semantic nav element.",
+      "html": "<nav>\n  <ul>\n    <li><a href=\"#\">Home</a></li>\n    <li><a href=\"#\">About</a></li>\n    <li><a href=\"#\">Services</a></li>\n    <li><a href=\"#\">Contact</a></li>\n  </ul>\n</nav>",
+      "css": "nav {\n  background: var(--a-surface-raised);\n  border-bottom: 1px solid var(--a-border);\n  padding: var(--a-space-md) 0;\n}\n\nnav ul {\n  list-style: none;\n  display: flex;\n  gap: var(--a-space-lg);\n  padding: 0 var(--a-space-md);\n  margin: 0;\n}\n\nnav a {\n  color: var(--a-text-main);\n  text-decoration: none;\n  padding: var(--a-space-sm) var(--a-space-md);\n  transition: all var(--a-transition-base);\n}\n\nnav a:hover {\n  color: var(--a-primary);\n  border-bottom: 2px solid var(--a-primary);\n}",
+      "usage": "Main site navigation. Responsive: stack on mobile.",
+      "accessibility": "Semantic <nav> element. Links have sufficient contrast."
+    },
+    {
+      "id": "nav-vertical",
+      "name": "Vertical Navigation",
+      "description": "Vertical sidebar navigation for nested sections.",
+      "html": "<nav>\n  <ul>\n    <li><a href=\"#\">Getting Started</a></li>\n    <li><a href=\"#\">Installation</a></li>\n    <li><a href=\"#\">Configuration</a></li>\n    <li><a href=\"#\">Troubleshooting</a></li>\n  </ul>\n</nav>",
+      "css": "nav {\n  background: var(--a-surface-overlay);\n  padding: var(--a-space-md);\n  border-radius: var(--a-radius-md);\n}\n\nnav ul {\n  list-style: none;\n  display: flex;\n  flex-direction: column;\n  gap: var(--a-space-sm);\n  padding: 0;\n  margin: 0;\n}\n\nnav a {\n  display: block;\n  padding: var(--a-space-sm) var(--a-space-md);\n  color: var(--a-text-main);\n  text-decoration: none;\n  border-radius: var(--a-radius-sm);\n  transition: all var(--a-transition-base);\n  border-left: 3px solid transparent;\n}\n\nnav a:hover {\n  background: var(--a-surface-base);\n  color: var(--a-primary);\n  border-left-color: var(--a-primary);\n  padding-left: calc(var(--a-space-md) + 3px);\n}",
+      "usage": "Sidebar navigation, documentation menus.",
+      "accessibility": "Semantic structure. Active state clearly indicated."
+    },
+    {
+      "id": "nav-breadcrumb",
+      "name": "Breadcrumb Navigation",
+      "description": "Hierarchical breadcrumb trail showing current location.",
+      "html": "<nav aria-label=\"Breadcrumb\">\n  <ol>\n    <li><a href=\"#\">Home</a></li>\n    <li><a href=\"#\">Products</a></li>\n    <li><span aria-current=\"page\">Details</span></li>\n  </ol>\n</nav>",
+      "css": "nav ol {\n  list-style: none;\n  display: flex;\n  gap: var(--a-space-sm);\n  padding: 0;\n  margin: var(--a-space-md) 0;\n}\n\nnav li::after {\n  content: ' / ';\n  color: var(--a-text-muted);\n  margin-left: var(--a-space-sm);\n}\n\nnav li:last-child::after {\n  content: '';\n}\n\nnav a {\n  color: var(--a-primary);\n  text-decoration: none;\n}\n\nnav [aria-current=\"page\"] {\n  color: var(--a-text-main);\n  font-weight: var(--a-font-weight-medium);\n}",
+      "usage": "Show location within site hierarchy. Help user orientation.",
+      "accessibility": "aria-current marks current page. Semantic <ol> element."
+    },
+    {
+      "id": "nav-tabs",
+      "name": "Tab Navigation",
+      "description": "Tabbed interface for switching between content sections.",
+      "html": "<div role=\"tablist\">\n  <button role=\"tab\" aria-selected=\"true\" aria-controls=\"panel-1\">Tab 1</button>\n  <button role=\"tab\" aria-selected=\"false\" aria-controls=\"panel-2\">Tab 2</button>\n</div>\n<section id=\"panel-1\" role=\"tabpanel\">Content 1</section>\n<section id=\"panel-2\" role=\"tabpanel\" hidden>Content 2</section>",
+      "css": "button[role=\"tab\"] {\n  padding: var(--a-space-md) var(--a-space-lg);\n  background: var(--a-surface-overlay);\n  border: 1px solid var(--a-border);\n  border-bottom: none;\n  cursor: pointer;\n  transition: all var(--a-transition-base);\n}\n\nbutton[role=\"tab\"][aria-selected=\"true\"] {\n  background: var(--a-surface-base);\n  border-bottom: 3px solid var(--a-primary);\n}\n\nsection[role=\"tabpanel\"] {\n  padding: var(--a-space-lg);\n  border: 1px solid var(--a-border);\n  border-top: none;\n}",
+      "usage": "Organize related content. Allow user selection.",
+      "accessibility": "ARIA roles for keyboard navigation. aria-selected indicates active."
+    },
+    {
+      "id": "nav-pagination",
+      "name": "Pagination",
+      "description": "Navigate between pages of content or results.",
+      "html": "<nav aria-label=\"Pagination\">\n  <ul>\n    <li><button aria-label=\"Previous page\">←</button></li>\n    <li><a aria-current=\"page\" href=\"#\">1</a></li>\n    <li><a href=\"#\">2</a></li>\n    <li><a href=\"#\">3</a></li>\n    <li><button aria-label=\"Next page\">→</button></li>\n  </ul>\n</nav>",
+      "css": "nav ul {\n  list-style: none;\n  display: flex;\n  gap: var(--a-space-xs);\n  padding: 0;\n  margin: var(--a-space-lg) 0;\n}\n\nnav a, nav button {\n  padding: var(--a-space-sm) var(--a-space-md);\n  border: 1px solid var(--a-border);\n  border-radius: var(--a-radius-md);\n  text-decoration: none;\n  cursor: pointer;\n  transition: all var(--a-transition-base);\n}\n\nnav a:hover, nav button:hover {\n  border-color: var(--a-primary);\n  color: var(--a-primary);\n}\n\nnav a[aria-current=\"page\"] {\n  background: var(--a-primary);\n  color: var(--a-on-primary);\n  border-color: var(--a-primary);\n}",
+      "usage": "Multi-page results, archives, content galleries.",
+      "accessibility": "aria-current marks active page. Clear button labels."
+    },
+    {
+      "id": "nav-mobile-menu",
+      "name": "Mobile Menu Drawer",
+      "description": "Hamburger menu for mobile navigation.",
+      "html": "<button id=\"menu-toggle\" aria-label=\"Toggle menu\" aria-expanded=\"false\">≡</button>\n<aside id=\"mobile-menu\" class=\"hidden\">\n  <nav>\n    <ul>\n      <li><a href=\"#\">Home</a></li>\n      <li><a href=\"#\">About</a></li>\n      <li><a href=\"#\">Services</a></li>\n    </ul>\n  </nav>\n</aside>",
+      "css": "button#menu-toggle {\n  background: transparent;\n  border: none;\n  font-size: var(--a-text-lg);\n  cursor: pointer;\n  padding: var(--a-space-sm);\n}\n\naside#mobile-menu {\n  position: fixed;\n  top: 60px;\n  right: 0;\n  width: 300px;\n  height: calc(100vh - 60px);\n  background: var(--a-surface-raised);\n  border-left: 1px solid var(--a-border);\n  transform: translateX(100%);\n  transition: transform var(--a-transition-base);\n}\n\naside#mobile-menu:not(.hidden) {\n  transform: translateX(0);\n}",
+      "usage": "Mobile responsive navigation. Hide on desktop.",
+      "accessibility": "aria-expanded indicates menu state. Keyboard closable."
+    },
+    {
+      "id": "nav-footer",
+      "name": "Footer Navigation",
+      "description": "Multiple column footer navigation layout.",
+      "html": "<footer>\n  <nav>\n    <div>\n      <h3>Product</h3>\n      <ul>\n        <li><a href=\"#\">Features</a></li>\n        <li><a href=\"#\">Pricing</a></li>\n      </ul>\n    </div>\n    <div>\n      <h3>Company</h3>\n      <ul>\n        <li><a href=\"#\">About</a></li>\n        <li><a href=\"#\">Blog</a></li>\n      </ul>\n    </div>\n  </nav>\n</footer>",
+      "css": "footer nav {\n  display: grid;\n  gap: var(--a-space-2xl);\n  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n  padding: var(--a-space-lg);\n}\n\nfooter h3 {\n  margin: 0 0 var(--a-space-md) 0;\n}\n\nfooter ul {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n}\n\nfooter li {\n  margin: 0 0 var(--a-space-sm) 0;\n}",
+      "usage": "Footer link organization. Responsive columns.",
+      "accessibility": "Semantic structure. Multiple nav sections for screen readers."
+    }
+  ]
+}

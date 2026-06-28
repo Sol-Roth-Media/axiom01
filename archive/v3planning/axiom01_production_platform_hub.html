@@ -1,0 +1,2618 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-spacing="spacious">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axiom01 — Reclaiming the Semantic Web</title>
+  
+  <!-- Premium Typography Engines -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Serif:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       AXIOM01 CASCADE LAYERS (CORE ENGINE)
+       ========================================================================== */
+    @layer axiom.reset, axiom.tokens, axiom.base, axiom.layout, axiom.components, axiom.utilities;
+
+    @layer axiom.tokens {
+      :root {
+        /* --- COLOR SYSTEM (OKLCH) --- */
+        --a-hue-primary: 250; /* Indigo */
+        --a-hue-success: 140; /* Green */
+        --a-hue-error: 25;    /* Red */
+        --a-hue-surface: 220; /* Slate/Cool */
+        --a-hue-accent: calc(var(--a-hue-primary) + 180); /* Autocalculated Complementary Accent */
+
+        /* Primary Colors */
+        --a-primary: oklch(60% 0.15 var(--a-hue-primary));
+        --a-primary-hover: color-mix(in oklch, var(--a-primary) 85%, black);
+        --a-primary-subtle: color-mix(in oklch, var(--a-primary) 8%, transparent);
+        
+        /* Accent Colors */
+        --a-accent: oklch(65% 0.2 var(--a-hue-accent));
+        --a-accent-hover: color-mix(in oklch, var(--a-accent) 85%, black);
+        --a-accent-subtle: color-mix(in oklch, var(--a-accent) 15%, transparent);
+
+        /* Semantic Colors */
+        --a-success: oklch(65% 0.15 var(--a-hue-success));
+        --a-error: oklch(60% 0.18 var(--a-hue-error));
+        
+        /* Surfaces & Text */
+        --a-surface-base: oklch(99% 0.01 var(--a-hue-surface));
+        --a-surface-raised: oklch(100% 0 var(--a-hue-surface));
+        --a-text-main: oklch(25% 0.02 var(--a-hue-surface));
+        --a-text-muted: oklch(45% 0.01 var(--a-hue-surface));
+        --a-border: oklch(90% 0.02 var(--a-hue-surface));
+        --a-code-bg: oklch(95% 0.01 var(--a-hue-surface));
+
+        /* --- MATHEMATICAL FLUID SCALING --- */
+        --a-ratio: 1.414; /* Augmented Fourth */
+        
+        /* Typography Rhythm */
+        --a-text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+        --a-text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+        --a-text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+        --a-text-lg: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+        --a-text-xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+        --a-text-xxl: clamp(2rem, 1.6rem + 2vw, 3rem);
+        
+        /* Spacing Units */
+        --a-space-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
+        --a-space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+        --a-space-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+        --a-space-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+        --a-space-xl: clamp(2rem, 1.6rem + 2vw, 3rem);
+
+        /* --- INTERACTIONS --- */
+        --a-radius: calc(var(--a-space-md) * 0.5);
+        --a-transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        --a-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+
+        --a-font-sans: "Noto Sans", system-ui, -apple-system, sans-serif;
+        --a-font-serif: "Noto Serif", Georgia, serif;
+        --a-font-mono: "JetBrains Mono", monospace;
+      }
+
+      /* Dark Theme Variable Autoloading */
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --a-surface-base: oklch(15% 0.01 var(--a-hue-surface));
+          --a-surface-raised: oklch(20% 0.01 var(--a-hue-surface));
+          --a-text-main: oklch(95% 0.01 var(--a-hue-surface));
+          --a-text-muted: oklch(75% 0.01 var(--a-hue-surface));
+          --a-border: oklch(25% 0.02 var(--a-hue-surface));
+          --a-code-bg: oklch(10% 0.015 var(--a-hue-surface));
+          --a-primary: oklch(65% 0.15 var(--a-hue-primary)); 
+        }
+      }
+
+      :root[data-theme="dark"] {
+        --a-surface-base: oklch(15% 0.01 var(--a-hue-surface));
+        --a-surface-raised: oklch(20% 0.01 var(--a-hue-surface));
+        --a-text-main: oklch(95% 0.01 var(--a-hue-surface));
+        --a-text-muted: oklch(75% 0.01 var(--a-hue-surface));
+        --a-border: oklch(25% 0.02 var(--a-hue-surface));
+        --a-code-bg: oklch(10% 0.015 var(--a-hue-surface));
+        --a-primary: oklch(65% 0.15 var(--a-hue-primary)); 
+      }
+
+      :root[data-spacing="compact"] {
+        --a-space-unit: clamp(0.75rem, 0.6rem + 0.5vw, 0.95rem);
+        --a-space-xs: calc(var(--a-space-unit) * 0.25);
+        --a-space-sm: calc(var(--a-space-unit) * 0.5);
+        --a-space-md: var(--a-space-unit);
+        --a-space-lg: calc(var(--a-space-unit) * 1.5);
+        --a-space-xl: calc(var(--a-space-unit) * 2.5);
+        --a-radius: 4px;
+        --a-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+      }
+    }
+
+    @layer axiom.base {
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        background: var(--a-surface-base);
+        color: var(--a-text-main);
+        font-family: var(--a-font-sans);
+        font-size: var(--a-text-base);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      p { max-width: 65ch; margin-block-end: var(--a-space-md); }
+      :focus-visible {
+        outline: 2px solid var(--a-primary);
+        outline-offset: 2px;
+      }
+    }
+
+    /* --- BATCHES B - J: CORE COMPONENT RULES --- */
+    @layer axiom.components {
+
+      /* --- FOUNDATIONS (BATCH A) --- */
+      h1, h2, h3, h4, h5, h6 {
+        color: var(--a-text-main);
+        font-weight: 600;
+        line-height: 1.2;
+        margin-block-end: var(--a-space-sm);
+      }
+      h1 { font-size: var(--a-text-xl); letter-spacing: -0.02em; }
+      h2 { font-size: var(--a-text-lg); letter-spacing: -0.01em; }
+      h3 { font-size: var(--a-text-base); }
+      
+      blockquote {
+        border-inline-start: 4px solid var(--a-primary);
+        padding-inline-start: var(--a-space-md);
+        margin-block: var(--a-space-md);
+        font-style: italic;
+        color: var(--a-text-muted);
+      }
+
+      .grid {
+        display: grid;
+        gap: var(--a-space-md);
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--a-space-md);
+      }
+      .form fieldset {
+        border: 1px solid var(--a-border);
+        border-radius: var(--a-radius);
+        padding: var(--a-space-md);
+        display: flex;
+        flex-direction: column;
+        gap: var(--a-space-sm);
+      }
+      .form legend {
+        padding: 0 var(--a-space-xs);
+        font-weight: 600;
+        font-size: var(--a-text-sm);
+      }
+      .form input, .form select, .form textarea {
+        width: 100%;
+        padding: var(--a-space-sm) var(--a-space-md);
+        background: var(--a-surface-raised);
+        border: 1px solid var(--a-border);
+        border-radius: var(--a-radius);
+        color: var(--a-text-main);
+        transition: all var(--a-transition);
+      }
+      .form input:focus-visible, .form textarea:focus-visible {
+        outline: none;
+        border-color: var(--a-primary);
+        box-shadow: 0 0 0 3px var(--a-primary-subtle);
+      }
+      .form:has(:focus-visible) {
+        border-left: 2px solid var(--a-primary);
+        padding-left: calc(var(--a-space-md) - 2px);
+      }
+      .form fieldset:has(:invalid:not(:placeholder-shown)) {
+        border-color: var(--a-error);
+      }
+      .form:has(:invalid:not(:placeholder-shown)) button[type="submit"] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* Native Card Structural Padding Mapping (Batch A) */
+      .card {
+        container-type: inline-size;
+        container-name: card;
+        display: flex;
+        flex-direction: column;
+        background: var(--a-surface-raised);
+        border: 1px solid var(--a-border);
+        border-radius: var(--a-radius);
+        overflow: hidden;
+        transition: transform var(--a-transition), box-shadow var(--a-transition);
+      }
+      .card > header, .card > main, .card > footer { padding: var(--a-space-md); }
+      .card:has(> img:first-child) > header { padding-top: var(--a-space-sm); }
+      .card > img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-bottom: 1px solid var(--a-border);
+      }
+      .card > footer {
+        margin-top: auto;
+        border-top: 1px solid var(--a-border);
+        background: var(--a-surface-base);
+      }
+      @container card (min-width: 480px) {
+        .card:has(> img) { flex-direction: row; }
+        .card > img {
+          width: 40%;
+          border-bottom: none;
+          border-right: 1px solid var(--a-border);
+        }
+        .card:has(> img) > header, 
+        .card:has(> img) > main, 
+        .card:has(> img) > footer {
+          flex: 1;
+          width: 60%;
+        }
+      }
+
+      /* --- BUTTONS & GROUPS (BATCH B) --- */
+      button, .button, .primary, .secondary, .accent {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--a-space-sm);
+        padding: var(--a-space-sm) var(--a-space-md);
+        font-size: calc(var(--a-text-base) * 0.9);
+        font-weight: 600;
+        border-radius: var(--a-radius);
+        border: 1px solid var(--a-border);
+        background: var(--a-surface-raised);
+        color: var(--a-text-main);
+        cursor: pointer;
+        transition: all var(--a-transition);
+        font-family: var(--a-font-sans);
+        white-space: nowrap;
+        width: auto;
+      }
+      button:hover, .button:hover {
+        background: var(--a-surface-base);
+        border-color: var(--a-text-muted);
+        transform: translateY(-1px);
+      }
+      button:active, .button:active {
+        transform: translateY(1px);
+      }
+
+      .primary {
+        background: var(--a-primary);
+        color: oklch(100% 0 0);
+        border-color: transparent;
+      }
+      .primary:hover { background: var(--a-primary-hover); }
+
+      .accent {
+        background: var(--a-accent);
+        color: oklch(100% 0 0);
+        border-color: transparent;
+      }
+      .accent:hover { background: var(--a-accent-hover); }
+
+      .button-group {
+        display: inline-flex;
+        align-items: stretch;
+      }
+      .button-group button, .button-group .button {
+        border-radius: 0;
+        margin-left: -1px; 
+      }
+      .button-group > :first-child {
+        border-top-left-radius: var(--a-radius);
+        border-bottom-left-radius: var(--a-radius);
+        margin-left: 0;
+      }
+      .button-group > :last-child {
+        border-top-right-radius: var(--a-radius);
+        border-bottom-right-radius: var(--a-radius);
+      }
+      .button-group:has(.primary) .secondary {
+        background: transparent;
+        border-color: var(--a-border);
+        color: var(--a-text-main);
+      }
+      .button-group:has(.primary) .secondary:hover {
+        background: var(--a-surface-raised);
+      }
+
+      /* --- DROPDOWNS (BATCH B) --- */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .dropdown-menu {
+        position: absolute;
+        top: calc(100% + var(--a-space-xs));
+        left: 0;
+        min-width: 200px;
+        background: var(--a-surface-raised);
+        border: 1px solid var(--a-border);
+        border-radius: var(--a-radius);
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        padding: var(--a-space-xs) 0;
+        z-index: 50;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all var(--a-transition);
+      }
+      .dropdown:has([aria-expanded="true"]) .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .dropdown-menu a, .dropdown-menu button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: var(--a-space-sm) var(--a-space-md);
+        color: var(--a-text-main);
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        font-size: var(--a-text-sm);
+      }
+      .dropdown-menu a:hover, .dropdown-menu button:hover {
+        background: var(--a-surface-base);
+        color: var(--a-primary);
+      }
+
+      /* --- TABS (BATCH B) --- */
+      .tabs { display: flex; flex-direction: column; }
+      .tab-list {
+        display: flex;
+        border-bottom: 1px solid var(--a-border);
+        gap: var(--a-space-md);
+      }
+      .tabs input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .tabs label {
+        padding: var(--a-space-sm) 0;
+        color: var(--a-text-muted);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        transition: all var(--a-transition);
+        font-weight: 500;
+      }
+      .tabs label:hover { color: var(--a-text-main); }
+      .tab-panels { padding: var(--a-space-md) 0; }
+      .tab-panel { display: none; }
+      
+      .tabs:has(input[value="tab1"]:checked) #panel-tab1,
+      .tabs:has(input[value="tab2"]:checked) #panel-tab2,
+      .tabs:has(input[value="tab3"]:checked) #panel-tab3 {
+        display: block;
+        animation: tabFadeIn var(--a-transition);
+      }
+      .tabs:has(input[value="tab1"]:checked) label[for="tab1"],
+      .tabs:has(input[value="tab2"]:checked) label[for="tab2"],
+      .tabs:has(input[value="tab3"]:checked) label[for="tab3"] {
+        color: var(--a-primary);
+        border-bottom-color: var(--a-primary);
+      }
+      @keyframes tabFadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* --- TABLES, SKELETONS, TOOLTIPS (BATCH D) --- */
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: var(--a-text-sm);
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+        background: var(--a-surface-base);
+        border-radius: var(--a-radius);
+        border: 1px solid var(--a-border);
+      }
+      .table caption {
+        padding: var(--a-space-sm);
+        font-weight: 600;
+        color: var(--a-text-muted);
+        text-align: left;
+      }
+      .table th, .table td {
+        padding: var(--a-space-sm) var(--a-space-md);
+        border-bottom: 1px solid var(--a-border);
+      }
+      .table thead th {
+        background: var(--a-surface-raised);
+        color: var(--a-text-main);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: var(--a-text-xs);
+      }
+      .table tbody tr:nth-child(even) {
+        background: color-mix(in oklch, var(--a-surface-raised) 50%, transparent);
+      }
+      .table tbody tr:hover { background: var(--a-primary-subtle); }
+      .table tbody tr:last-child td { border-bottom: none; }
+
+      [data-tooltip] {
+        position: relative;
+        cursor: help;
+      }
+      [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: calc(100% + var(--a-space-xs));
+        left: 50%;
+        transform: translateX(-50%) translateY(5px);
+        background: var(--a-text-main);
+        color: var(--a-surface-base);
+        padding: calc(var(--a-space-xs) * 0.5) var(--a-space-sm);
+        border-radius: calc(var(--a-radius) * 0.5);
+        font-size: var(--a-text-xs);
+        font-weight: 500;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--a-transition), transform var(--a-transition);
+        z-index: 100;
+      }
+      [data-tooltip]:hover::after,
+      [data-tooltip]:focus-visible::after {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      [aria-busy="true"] {
+        position: relative;
+        pointer-events: none;
+        user-select: none;
+        overflow: hidden;
+      }
+      [aria-busy="true"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        background: var(--a-surface-raised);
+        background-image: linear-gradient(
+          90deg, 
+          transparent, 
+          color-mix(in oklch, var(--a-surface-base) 40%, transparent), 
+          transparent
+        );
+        background-size: 200% 100%;
+        animation: axiomShimmer 1.5s infinite linear;
+        border-radius: inherit;
+      }
+      p[aria-busy="true"], h1[aria-busy="true"], h2[aria-busy="true"], span[aria-busy="true"] {
+        color: transparent !important;
+        border-radius: var(--a-radius);
+      }
+      @keyframes axiomShimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      /* --- NAVBAR, AVATARS, MEDIA (BATCH E) --- */
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--a-space-sm) var(--a-space-md);
+        background: var(--a-surface-base);
+        border-bottom: 1px solid var(--a-border);
+        gap: var(--a-space-md);
+        height: 80px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .navbar-brand {
+        font-size: var(--a-text-lg);
+        font-weight: 700;
+        color: var(--a-text-main);
+        text-decoration: none;
+        letter-spacing: -0.02em;
+        display: flex;
+        align-items: center;
+        gap: var(--a-space-sm);
+      }
+      .navbar ul {
+        display: flex;
+        align-items: center;
+        gap: var(--a-space-md);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .navbar a {
+        text-decoration: none;
+        color: var(--a-text-muted);
+        font-weight: 500;
+        font-size: var(--a-text-sm);
+        transition: color var(--a-transition);
+      }
+      .navbar a:hover,
+      .navbar a[aria-current="page"] {
+        color: var(--a-text-main);
+      }
+
+      .avatar {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(2rem, 2.5vw + 1rem, 3.5rem);
+        height: clamp(2rem, 2.5vw + 1rem, 3.5rem);
+        border-radius: 50%;
+        background: var(--a-surface-raised);
+        border: 1px solid var(--a-border);
+        overflow: hidden;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .avatar:not(:has(img))::before {
+        content: attr(data-initials);
+        font-size: var(--a-text-sm);
+        font-weight: 600;
+        color: var(--a-text-main);
+        letter-spacing: 0.05em;
+      }
+
+      .media-box {
+        width: 100%;
+        overflow: hidden;
+        border-radius: var(--a-radius);
+        background: var(--a-surface-raised);
+        border: 1px solid var(--a-border);
+      }
+      .media-box.video { aspect-ratio: 16 / 9; }
+      .media-box.square { aspect-ratio: 1 / 1; }
+      .media-box.portrait { aspect-ratio: 3 / 4; }
+      .media-box img,
+      .media-box video,
+      .media-box iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: none;
+        display: block;
+      }
+
+      /* --- ACCORDIONS, PROGRESS, RANGE (BATCH F) --- */
+      details.accordion {
+        background: var(--a-surface-base);
+        border-bottom: 1px solid var(--a-border);
+        transition: all var(--a-transition);
+      }
+      details.accordion:first-of-type {
+        border-top: 1px solid var(--a-border);
+      }
+      details.accordion > summary {
+        list-style: none;
+        cursor: pointer;
+        padding: var(--a-space-md) 0;
+        font-weight: 600;
+        font-size: var(--a-text-base);
+        color: var(--a-text-main);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: color var(--a-transition);
+      }
+      details.accordion > summary::-webkit-details-marker { display: none; }
+      details.accordion > summary::after {
+        content: "";
+        width: 1em;
+        height: 1em;
+        background-color: currentColor;
+        -webkit-mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat center;
+        mask: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat center;
+        transition: transform var(--a-transition);
+      }
+      details.accordion[open] > summary { color: var(--a-primary); }
+      details.accordion[open] > summary::after { transform: rotate(180deg); }
+      details.accordion[open] > :not(summary) {
+        animation: accordionFadeIn var(--a-transition) ease-out forwards;
+        padding-bottom: var(--a-space-md);
+        color: var(--a-text-muted);
+      }
+      @keyframes accordionFadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      progress.progress {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 100%;
+        height: calc(var(--a-space-sm) * 1.5);
+        border: none;
+        background-color: transparent;
+      }
+      progress.progress::-webkit-progress-bar {
+        background-color: var(--a-surface-raised);
+        border-radius: calc(var(--a-radius) * 2);
+        box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.05);
+      }
+      progress.progress::-webkit-progress-value {
+        background-color: var(--a-primary);
+        border-radius: calc(var(--a-radius) * 2);
+        transition: width var(--a-transition);
+      }
+      progress.progress::-moz-progress-bar {
+        background-color: var(--a-primary);
+        border-radius: calc(var(--a-radius) * 2);
+      }
+      progress.progress.success::-webkit-progress-value { background-color: var(--a-success); }
+      progress.progress.success::-moz-progress-bar { background-color: var(--a-success); }
+      progress.progress.error::-webkit-progress-value { background-color: var(--a-error); }
+      progress.progress.error::-moz-progress-bar { background-color: var(--a-error); }
+
+      input[type="range"].range {
+        -webkit-appearance: none;
+        width: 100%;
+        background: transparent;
+      }
+      input[type="range"].range:focus { outline: none; }
+      input[type="range"].range::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 6px;
+        cursor: pointer;
+        background: var(--a-surface-raised);
+        border-radius: var(--a-radius);
+        border: 1px solid var(--a-border);
+      }
+      input[type="range"].range::-webkit-slider-thumb {
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        background: var(--a-surface-base);
+        border: 2px solid var(--a-primary);
+        cursor: pointer;
+        -webkit-appearance: none;
+        margin-top: -8px;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+        transition: transform var(--a-transition), background var(--a-transition);
+      }
+      input[type="range"].range:focus-visible::-webkit-slider-thumb,
+      input[type="range"].range::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+        background: var(--a-primary);
+      }
+
+      /* --- SWITCHES, CONDITIONAL STATES (BATCH G) --- */
+      input[type="checkbox"].switch {
+        appearance: none;
+        -webkit-appearance: none;
+        width: clamp(2.5rem, 3vw, 3rem);
+        height: clamp(1.25rem, 1.5vw, 1.5rem);
+        background: var(--a-surface-raised);
+        border: 1px solid var(--a-border);
+        border-radius: 2rem;
+        position: relative;
+        cursor: pointer;
+        vertical-align: middle;
+        transition: background-color var(--a-transition), border-color var(--a-transition);
+      }
+      input[type="checkbox"].switch:focus-visible {
+        outline: 2px solid var(--a-primary);
+        outline-offset: 2px;
+      }
+      input[type="checkbox"].switch::before {
+        content: "";
+        position: absolute;
+        width: calc(clamp(1.25rem, 1.5vw, 1.5rem) - 4px);
+        height: calc(clamp(1.25rem, 1.5vw, 1.5rem) - 4px);
+        border-radius: 50%;
+        background: var(--a-text-muted);
+        top: 1px;
+        left: 1px;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 0.2);
+        transition: transform var(--a-transition), background-color var(--a-transition);
+      }
+      input[type="checkbox"].switch:checked {
+        background: var(--a-primary);
+        border-color: var(--a-primary);
+      }
+      input[type="checkbox"].switch:checked::before {
+        background: oklch(100% 0 0);
+        transform: translateX(calc(100% + 2px));
+      }
+      input[type="checkbox"].switch:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .data-list:empty,
+      .table tbody:empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 150px;
+        width: 100%;
+        background: var(--a-surface-raised);
+        border: 2px dashed var(--a-border);
+        border-radius: var(--a-radius);
+        position: relative;
+      }
+      .data-list:empty::after,
+      .table tbody:empty::after {
+        content: attr(data-empty-message);
+        color: var(--a-text-muted);
+        font-size: var(--a-text-sm);
+        font-weight: 500;
+      }
+      .data-list:empty:not([data-empty-message])::after,
+      .table tbody:empty:not([data-empty-message])::after {
+        content: "No data available.";
+      }
+
+      .pagination {
+        display: inline-flex;
+        list-style: none;
+        border: 1px solid var(--a-border);
+        border-radius: var(--a-radius);
+        overflow: hidden;
+      }
+      .pagination li:not(:last-child) { border-right: 1px solid var(--a-border); }
+      .pagination a, .pagination button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2.5rem;
+        height: 2.5rem;
+        padding: 0 var(--a-space-sm);
+        background: var(--a-surface-base);
+        color: var(--a-text-main);
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color var(--a-transition), color var(--a-transition);
+        border: none;
+        border-radius: 0;
+      }
+      .pagination a:hover:not([aria-current="page"]),
+      .pagination button:hover:not(:disabled) {
+        background: var(--a-surface-raised);
+      }
+      .pagination a[aria-current="page"] {
+        background: var(--a-primary);
+        color: oklch(100% 0 0);
+      }
+      .pagination button:disabled {
+        color: var(--a-text-muted);
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* --- TIMELINES, POPOVERS, FILE UPLOADS (BATCH H) --- */
+      ol.timeline {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        counter-reset: axiom-step; 
+        display: flex;
+        flex-direction: column;
+        gap: var(--a-space-md);
+      }
+      ol.timeline > li {
+        position: relative;
+        padding-left: calc(var(--a-space-xl) + var(--a-space-xs));
+        counter-increment: axiom-step; 
+      }
+      ol.timeline > li::before {
+        content: counter(axiom-step);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: var(--a-space-xl);
+        height: var(--a-space-xl);
+        border-radius: 50%;
+        background: var(--a-surface-raised);
+        border: 2px solid var(--a-border);
+        color: var(--a-text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--a-text-sm);
+        font-weight: 700;
+        z-index: 2;
+        transition: all var(--a-transition);
+      }
+      ol.timeline > li:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        left: calc(var(--a-space-xl) / 2 - 1px);
+        top: var(--a-space-xl);
+        bottom: calc(var(--a-space-md) * -1);
+        width: 2px;
+        background: var(--a-border);
+        z-index: 1;
+      }
+      ol.timeline > li.completed::before,
+      ol.timeline > li:has([checked])::before {
+        background: var(--a-primary);
+        border-color: var(--a-primary);
+        color: oklch(100% 0 0);
+      }
+      ol.timeline > li.completed::after,
+      ol.timeline > li:has([checked])::after {
+        background: var(--a-primary);
+      }
+
+      [popover] {
+        padding: 0;
+        border: none;
+        background: transparent;
+        color: inherit;
+        overflow: visible;
+        margin: auto;
+      }
+      [popover].card {
+        display: flex;
+        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity var(--a-transition), transform var(--a-transition), display var(--a-transition) allow-discrete;
+      }
+      [popover]:popover-open {
+        opacity: 1;
+        transform: scale(1);
+        @starting-style {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+      }
+      [popover]::backdrop {
+        background: rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(2px);
+        opacity: 0;
+        transition: opacity var(--a-transition) allow-discrete;
+      }
+      [popover]:popover-open::backdrop {
+        opacity: 1;
+        @starting-style { opacity: 0; }
+      }
+
+      input[type="file"].file {
+        font-family: inherit;
+        color: var(--a-text-main);
+        padding: 0;
+        background: transparent;
+        border: none;
+      }
+      input[type="file"].file::file-selector-button {
+        margin-right: var(--a-space-md);
+        padding: var(--a-space-sm) var(--a-space-md);
+        background: var(--a-surface-raised);
+        border: 1px solid var(--a-border);
+        border-radius: var(--a-radius);
+        color: var(--a-text-main);
+        font-weight: 500;
+        font-size: var(--a-text-sm);
+        cursor: pointer;
+        transition: all var(--a-transition);
+      }
+      input[type="file"].file::file-selector-button:hover {
+        background: var(--a-primary-subtle);
+        border-color: var(--a-primary);
+        color: var(--a-primary);
+      }
+
+      /* --- BREADCRUMBS, INPUT GROUPS, TREES (BATCH I) --- */
+      nav[aria-label="breadcrumb"] ol,
+      nav[aria-label="Breadcrumb"] ol {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: var(--a-text-sm);
+      }
+      nav[aria-label^="breadcrumb" i] li { display: flex; align-items: center; }
+      nav[aria-label^="breadcrumb" i] a {
+        color: var(--a-text-muted);
+        text-decoration: none;
+        transition: color var(--a-transition);
+      }
+      nav[aria-label^="breadcrumb" i] a:hover {
+        color: var(--a-primary);
+        text-decoration: underline;
+      }
+      nav[aria-label^="breadcrumb" i] li:not(:last-child)::after {
+        content: "/";
+        margin: 0 var(--a-space-sm);
+        color: var(--a-border);
+        font-weight: 300;
+      }
+      nav[aria-label^="breadcrumb" i] li:last-child {
+        color: var(--a-text-main);
+        font-weight: 500;
+      }
+      nav[aria-label^="breadcrumb" i] a[aria-current="page"] {
+        color: var(--a-text-main);
+        font-weight: 500;
+        pointer-events: none;
+        text-decoration: none;
+      }
+
+      label.input-group {
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+        border-radius: var(--a-radius);
+        border: 1px solid var(--a-border);
+        background: var(--a-surface-raised);
+        overflow: hidden;
+        transition: border-color var(--a-transition), box-shadow var(--a-transition);
+      }
+      label.input-group input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: var(--a-space-sm) var(--a-space-md);
+        min-width: 0;
+      }
+      label.input-group input:focus-visible {
+        outline: none;
+        box-shadow: none;
+      }
+      label.input-group > span {
+        display: flex;
+        align-items: center;
+        padding: 0 var(--a-space-md);
+        background: var(--a-surface-base);
+        color: var(--a-text-muted);
+        font-size: var(--a-text-sm);
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      label.input-group > span:first-child { border-right: 1px solid var(--a-border); }
+      label.input-group > span:last-child { border-left: 1px solid var(--a-border); }
+      label.input-group:has(input:focus-visible) {
+        border-color: var(--a-primary);
+        box-shadow: 0 0 0 3px var(--a-primary-subtle);
+      }
+      label.input-group:has(input:invalid:not(:placeholder-shown)) {
+        border-color: var(--a-error);
+      }
+
+      ul.tree, ul.tree ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      ul.tree { font-size: var(--a-text-sm); }
+      ul.tree ul {
+        padding-left: var(--a-space-lg);
+        border-left: 1px solid var(--a-border);
+        margin-left: calc(var(--a-space-md) / 2);
+      }
+      ul.tree li { margin: 2px 0; }
+      ul.tree a,
+      ul.tree details > summary {
+        display: flex;
+        align-items: center;
+        padding: calc(var(--a-space-xs) * 0.5) var(--a-space-sm);
+        color: var(--a-text-muted);
+        text-decoration: none;
+        border-radius: calc(var(--a-radius) * 0.5);
+        transition: all var(--a-transition);
+        cursor: pointer;
+      }
+      ul.tree a:hover,
+      ul.tree details > summary:hover {
+        background: var(--a-surface-raised);
+        color: var(--a-text-main);
+      }
+      ul.tree details > summary {
+        font-weight: 500;
+        color: var(--a-text-main);
+        list-style: none;
+      }
+      ul.tree details > summary::-webkit-details-marker { display: none; }
+      ul.tree details > summary::before {
+        content: "▸";
+        display: inline-block;
+        width: 1.2em;
+        font-size: 0.9em;
+        transition: transform var(--a-transition);
+      }
+      ul.tree details[open] > summary::before { transform: rotate(90deg); }
+
+      /* --- CAROUSELS & MASONRY (BATCH J) --- */
+      .carousel {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: var(--a-space-md);
+        padding-bottom: var(--a-space-md);
+        scrollbar-width: none;
+        container-type: inline-size;
+      }
+      .carousel::-webkit-scrollbar { display: none; }
+      .carousel > * {
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        flex: 0 0 auto;
+        width: 100%;
+        transition: transform var(--a-transition), opacity var(--a-transition);
+      }
+      @container (min-width: 500px) {
+        .carousel > * { 
+          width: calc(50% - (var(--a-space-md) / 2)); 
+          scroll-snap-align: start;
+        }
+      }
+      @container (min-width: 900px) {
+        .carousel > * { 
+          width: calc(33.333% - (var(--a-space-md) * 2 / 3)); 
+        }
+      }
+
+      .masonry {
+        column-count: 1;
+        column-gap: var(--a-space-md);
+        container-type: inline-size;
+      }
+      @container (min-width: 600px) { .masonry { column-count: 2; } }
+      @container (min-width: 900px) { .masonry { column-count: 3; } }
+      @container (min-width: 1200px) { .masonry { column-count: 4; } }
+      .masonry > * {
+        break-inside: avoid;
+        -webkit-column-break-inside: avoid;
+        page-break-inside: avoid;
+        margin-bottom: var(--a-space-md);
+        display: block; 
+        transform: translateZ(0); 
+      }
+
+      /* --- AXICONS PRE-RENDER SPACE RESERVATION --- */
+      svg[data-axicon], 
+      i[data-axicon],
+      .axicon {
+        display: inline-block;
+        vertical-align: middle;
+        width: 1.25em !important;
+        height: 1.25em !important;
+        aspect-ratio: 1 / 1;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0 !important;
+        overflow: hidden;
+      }
+      i[data-axicon] svg {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+      }
+      [data-variant="color"] {
+        --ax-fill: var(--a-primary-subtle);
+        --ax-stroke: var(--a-primary);
+      }
+      [data-variant="inverted"] {
+        fill: currentColor;
+        stroke: none;
+      }
+      .button.primary [data-axicon],
+      .badge.primary [data-axicon] {
+        --ax-fill: oklch(100% 0 0 / 0.2);
+        --ax-stroke: oklch(100% 0 0);
+      }
+    }
+
+    /* --- SPECIFIC STRUCTURAL CORE CLASSES --- */
+    @layer axiom.layout {
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin-inline: auto;
+        padding-inline: var(--a-space-md);
+      }
+      .hub-layout {
+        display: grid;
+        grid-template-columns: 280px 1fr 240px;
+        min-height: calc(100vh - 80px);
+        border-top: 1px solid var(--a-border);
+      }
+      .hub-sidebar {
+        background: var(--a-surface-raised);
+        border-right: 1px solid var(--a-border);
+        padding: var(--a-space-md);
+        overflow-y: auto;
+        height: calc(100vh - 80px);
+        position: sticky;
+        top: 80px;
+        display: flex;
+        flex-direction: column;
+        gap: var(--a-space-md);
+      }
+      .hub-content {
+        padding: var(--a-space-xl) var(--a-space-lg);
+        overflow-y: auto;
+        touch-action: pan-y;
+      }
+      .hub-toc {
+        background: var(--a-surface-raised);
+        border-left: 1px solid var(--a-border);
+        padding: var(--a-space-md);
+        overflow-y: auto;
+        height: calc(100vh - 80px);
+        position: sticky;
+        top: 80px;
+      }
+      .hero {
+        padding: var(--a-space-xl) 0;
+        text-align: center;
+        background: radial-gradient(circle at top, var(--a-primary-subtle) 0%, transparent 70%);
+      }
+      .hero-container {
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        gap: var(--a-space-md);
+        align-items: center;
+        margin-inline: auto;
+      }
+      .hero-title {
+        font-family: var(--a-font-serif);
+        font-size: clamp(2.5rem, 5vw, 4.2rem);
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+        font-weight: 800;
+        margin-bottom: var(--a-space-sm);
+      }
+      .hero-lead {
+        font-size: var(--a-text-lg);
+        font-weight: 300;
+        line-height: 1.6;
+        text-wrap: balance;
+        color: var(--a-text-muted);
+      }
+      .hero-actions {
+        display: flex;
+        gap: var(--a-space-sm);
+        margin-top: var(--a-space-sm);
+        justify-content: center;
+      }
+    }
+
+    @layer axiom.utilities {
+      .text-center { text-align: center; }
+      .text-muted { color: var(--a-text-muted); }
+      .w-full { width: 100%; }
+      .margin-top-lg { margin-top: var(--a-space-lg); }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: var(--a-space-md);
+      }
+
+      /* Desktop hide of sidebar when on the landing page view */
+      @media (min-width: 993px) {
+        body:not(.layout-active-subpage) .hub-sidebar {
+          display: none !important;
+        }
+        body:not(.layout-active-subpage) .hub-toc {
+          display: none !important;
+        }
+        body:not(.layout-active-subpage) .hub-layout {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      /* Responsive adaptations */
+      @media (max-width: 992px) {
+        .hub-layout {
+          grid-template-columns: 1fr !important;
+        }
+        /* Absolute floating navigation drawer for mobile and tablets */
+        .hub-sidebar {
+          position: fixed !important;
+          left: 0;
+          top: 80px;
+          bottom: 0;
+          z-index: 1001 !important;
+          width: 280px !important;
+          transform: translateX(-100%) !important;
+          visibility: hidden; /* Prevent focus tracking when closed */
+          transition: transform var(--a-transition), visibility var(--a-transition);
+          box-shadow: 10px 0 35px -5px rgba(0, 0, 0, 0.15);
+          display: flex !important;
+        }
+        .hub-toc {
+          display: none;
+        }
+        .mobile-hamburger-btn {
+          display: inline-flex !important;
+        }
+        body:has(#mobile-nav-toggle:checked) .hub-sidebar {
+          transform: translateX(0) !important;
+          visibility: visible !important;
+        }
+        
+        /* Mobile-only control elements show inside sidebar when drawer is active */
+        .mobile-only-control {
+          display: block !important;
+        }
+      }
+
+      @media (min-width: 993px) {
+        .mobile-hamburger-btn {
+          display: none !important;
+        }
+      }
+
+      /* Mobile Layout Shield: Protects structural boundaries against Safari overflow bugs */
+      @media (max-width: 580px) {
+        .navbar > .container {
+          padding-inline: var(--a-space-xs);
+        }
+        .navbar-brand span:not(.avatar) {
+          display: none !important; /* Collapse text logotype to avoid crowding */
+        }
+        .navbar-controllers {
+          gap: var(--a-space-xs) !important;
+        }
+        .navbar-controllers .button {
+          padding: var(--a-space-xs) var(--a-space-sm);
+          font-size: 0.8rem;
+        }
+        .navbar-theme-gate {
+          padding-left: var(--a-space-xs) !important;
+        }
+        
+        /* Fix landing page button sizes stretching or wrapping poorly */
+        .hero-actions {
+          flex-direction: column;
+          width: 100%;
+        }
+        .hero-actions .button {
+          width: 100% !important;
+        }
+        
+        /* Direct continuous layout fix: When inside subpages on mobile,
+           immediately prioritize reading workspace */
+        .route-view:not(.active) {
+          display: none !important;
+        }
+        .route-view.active .hub-layout {
+          grid-template-columns: 1fr;
+        }
+        .route-view.active .hub-content {
+          padding-top: var(--a-space-sm); /* Keep top space thin like page margins */
+        }
+      }
+
+      /* Backdrop Overlay for closing mobile sidebar easily */
+      .sidebar-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(2px);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--a-transition), visibility var(--a-transition);
+      }
+      body:has(#mobile-nav-toggle:checked) .sidebar-backdrop {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* CSS-based brand badge styling for the hero */
+      .brand-lockup {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--a-space-xs);
+        margin-bottom: var(--a-space-md);
+      }
+      .brand-logo-geometry {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        border-radius: var(--a-radius);
+        background: linear-gradient(135deg, var(--a-primary) 0%, var(--a-accent) 100%);
+        box-shadow: var(--a-shadow);
+        color: oklch(100% 0 0);
+        font-family: var(--a-font-mono);
+        font-weight: 700;
+        font-size: var(--a-text-xl);
+        letter-spacing: -0.05em;
+        border: 2px solid var(--a-border);
+      }
+      .brand-badge {
+        font-family: var(--a-font-sans);
+        font-weight: 700;
+        font-size: var(--a-text-xs);
+        color: var(--a-primary);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progressive Scroll Tracker -->
+  <div class="scroll-progress" id="progressBar"></div>
+
+  <!-- Mobile Sidebar Checkbox Proxy -->
+  <input type="checkbox" id="mobile-nav-toggle" style="display: none;">
+
+  <!-- Label representing backdrop background. Tapping it unchecks mobile menu -->
+  <label for="mobile-nav-toggle" class="sidebar-backdrop"></label>
+
+  <!-- NATIVE COMPONENT: NAVBAR -->
+  <header class="navbar">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%;">
+      
+      <!-- Hamburger & Logo Segment -->
+      <div class="navbar-brand" style="display: flex; align-items: center; gap: var(--a-space-sm);">
+        <!-- Label acting as mobile toggle trigger - removed click blockers -->
+        <label for="mobile-nav-toggle" class="button mobile-hamburger-btn" style="display: none; cursor: pointer; padding: var(--a-space-xs);" onclick="Navigation.toggleMobileSidebar(event)">
+          <i data-axicon="Menu"></i>
+        </label>
+        
+        <a href="#" onclick="Navigation.view('hero')" class="navbar-brand" style="display: flex; align-items: center; gap: var(--a-space-sm);">
+          <span class="avatar" data-initials="AX" style="width: 38px; height: 38px; font-size: 1rem; border-radius: 8px; background: var(--a-primary); color: white;"></span>
+          <span>Axiom01</span>
+        </a>
+      </div>
+
+      <!-- Action & Config Controllers -->
+      <nav class="navbar-controllers" style="display: flex; align-items: center; gap: var(--a-space-md);">
+        <button onclick="Navigation.view('docs')" class="button">Docs Hub</button>
+        <button onclick="Navigation.view('book')" class="button primary">The Book</button>
+        
+        <div class="navbar-theme-gate" style="display: flex; align-items: center; border-left: 1px solid var(--a-border); padding-left: var(--a-space-md); gap: var(--a-space-sm);">
+          <button onclick="Config.toggleTheme()" aria-label="Toggle Theme" style="padding: var(--a-space-xs);">
+            <i data-axicon="Sun"></i>
+          </button>
+          <button onclick="Config.toggleSpacing()" aria-label="Toggle Spacing Density" style="padding: var(--a-space-xs);">
+            <i data-axicon="Layers"></i>
+          </button>
+        </div>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- UNIFIED PORTAL GRID SHELL -->
+  <div class="hub-layout">
+    
+    <!-- GLOBAL SIDEBAR DIRECTORY PANEL -->
+    <aside class="hub-sidebar" id="global-sidebar">
+      <div class="input-group">
+        <span>🔍</span>
+        <input type="search" id="global-search" placeholder="Search index..." oninput="Content.searchFilter(this.value)">
+      </div>
+
+      <!-- Consolidated Navigation Trees matching core Batch I and J properties -->
+      <nav class="tree">
+        <ul class="tree">
+          <li><a href="#" onclick="Navigation.view('hero')"><i data-axicon="Home"></i> Home Gateway</a></li>
+          
+          <li class="mobile-only-control" style="border-bottom: 1px solid var(--a-border); padding-bottom: var(--a-space-sm); margin-bottom: var(--a-space-sm); display: none;">
+            <div style="display: flex; flex-direction: column; gap: var(--a-space-xs); margin-top: var(--a-space-xs);">
+              <button onclick="Navigation.view('docs')" class="button w-full">Go to Docs Hub</button>
+              <button onclick="Navigation.view('book')" class="button primary w-full">Go to The Book</button>
+              <div style="display: flex; gap: var(--a-space-xs); margin-top: var(--a-space-xs);">
+                <button onclick="Config.toggleTheme()" class="button w-full"><i data-axicon="Sun"></i> Theme</button>
+                <button onclick="Config.toggleSpacing()" class="button w-full"><i data-axicon="Layers"></i> Spacing</button>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <details class="tree-node" id="nav-details-docs" open>
+              <summary>Documentation Hub</summary>
+              <ul class="tree-list" id="docs-sidebar-links">
+                <!-- Dynamically populated -->
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details class="tree-node" id="nav-details-book" open>
+              <summary>The Book Chapters</summary>
+              <ul class="tree-list" id="book-sidebar-links">
+                <!-- Dynamically populated -->
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- VIEWPORT CONTENTS -->
+    <div style="width: 100%; display: flex; flex-direction: column; overflow: hidden;">
+      
+      <!-- VIEW 1: HERO HOMEPAGE -->
+      <main id="view-hero" class="route-view active">
+        <!-- HERO SEGMENT (Using Core Component Classes) -->
+        <section class="hero">
+          <div class="hero-container">
+            <!-- Full Custom CSS Logo & Typography lockup replacement -->
+            <div class="brand-lockup">
+              <div class="brand-logo-geometry">AX01</div>
+              <span class="brand-badge">The Semantic Design Standard</span>
+            </div>
+            <h1 class="hero-title">The Semantic Reality</h1>
+            <p class="hero-lead">
+              Banish the class-hoarding of utility frameworks. Axiom01 delegates layout geometry, color contrast, and interface actions natively to the browser engine.
+            </p>
+            <div class="hero-actions">
+              <button onclick="Navigation.view('book')" class="button primary accent" style="max-width: 100%;"><i data-axicon="BookOpen"></i> Read "The Semantic Reality"</button>
+              <button onclick="Navigation.view('docs')" class="button" style="max-width: 100%;"><i data-axicon="Terminal"></i> Explore Components & Docs</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- LIVE CONFIGURATOR SANDBOX -->
+        <section style="padding: var(--a-space-lg) 0; border-top: 1px solid var(--a-border); background: var(--a-surface-raised);">
+          <div class="container" style="max-width: 900px;">
+            <div class="card" style="border-color: var(--a-primary); padding: var(--a-space-lg);">
+              <header style="text-align: center; margin-bottom: var(--a-space-md);">
+                <span class="badge">Dynamic Parameter Playground</span>
+                <h2 style="margin-top: var(--a-space-xs);">Recalculate the Entire Design System Live</h2>
+                <p class="text-muted" style="font-size: calc(var(--a-text-base) * 0.9);">Slide the tokens. Watch the entire application adjust its OKLCH color spaces and spatial margins in real-time.</p>
+              </header>
+              
+              <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--a-space-md);">
+                <div>
+                  <label style="font-weight: 600; font-size: calc(var(--a-text-base) * 0.85); display: block; margin-bottom: var(--a-space-xs);">
+                    Primary Hue Angle: <span id="hue-display" style="color: var(--a-primary);">250</span>°
+                  </label>
+                  <input type="range" class="range" min="0" max="360" value="250" oninput="Config.updateHue(this.value)">
+                  <span class="text-muted" style="font-size: 0.75rem; display: block; margin-top: calc(var(--a-space-xs) * 0.5);">Autocalculates accent pop color at <span id="complement-display">70</span>° dynamically.</span>
+                </div>
+                <div>
+                  <label style="font-weight: 600; font-size: calc(var(--a-text-base) * 0.85); display: block; margin-bottom: var(--a-space-xs);">
+                    System Spacing Unit: <span id="spacing-display" style="color: var(--a-primary);">1.25</span>rem
+                  </label>
+                  <input type="range" class="range" min="0.6" max="2" step="0.05" value="1.25" oninput="Config.updateSpacing(this.value)">
+                  <span class="text-muted" style="font-size: 0.75rem; display: block; margin-top: calc(var(--a-space-xs) * 0.5);">Adjusts paddings, card widths, and grids universally.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- DETAILED SCROLL-DOWN EXPOSURE SECTION -->
+        <section style="padding: var(--a-space-xl) 0; background: var(--a-surface-base); border-top: 1px solid var(--a-border);">
+          <div class="container">
+            <h2 class="text-center" style="font-size: var(--a-text-xl); margin-bottom: var(--a-space-sm);">The Semantic Rebellion</h2>
+            <p class="text-center text-muted" style="max-width: 600px; margin-inline: auto; margin-bottom: var(--a-space-lg);">
+              Why are we loading hundreds of kilobytes of third-party JS runtimes and maintaining thousands of brittle CSS utility variables simply to align elements? Axiom01 trusts the platform.
+            </p>
+
+            <div class="grid" style="margin-bottom: var(--a-space-xl);">
+              <div class="card">
+                <header>
+                  <span class="badge success">01 / SPECIFICITY GONE</span>
+                  <h3>Native Cascade Isolation</h3>
+                </header>
+                <main>
+                  <p class="text-muted">
+                    We bundle framework structures under native <code>@layer</code> constraints. Your application-level custom overrides always succeed cleanly without needing raw specificity combat or the <code>!important</code> emergency break.
+                  </p>
+                </main>
+              </div>
+              <div class="card">
+                <header>
+                  <span class="badge success">02 / FLUID GEOMETRY</span>
+                  <h3>Breakpoint-Free Ratios</h3>
+                </header>
+                <main>
+                  <p class="text-muted">
+                    Margins, container query card pivots, and editorial columns automatically scale using mathematical proportions driven by <code>clamp()</code> formulas and Container Queries.
+                  </p>
+                </main>
+              </div>
+              <div class="card">
+                <header>
+                  <span class="badge success">03 / SEMANTIC FORMS</span>
+                  <h3>Zero-JS Input Proxies</h3>
+                </header>
+                <main>
+                  <p class="text-muted">
+                    By nesting inputs inside semantic <code>&lt;label&gt;</code> blocks, focus rings, invalid error inputs, and contextual offsets are computed natively in the browser layout pipeline using <code>:has()</code>.
+                  </p>
+                </main>
+              </div>
+            </div>
+
+            <!-- COMPARATIVE CODE PANEL -->
+            <div class="card" style="border-color: var(--a-border); margin-bottom: var(--a-space-xl);">
+              <header>
+                <span class="badge">Efficiency Metrics</span>
+                <h2>Class Density: Utility-First vs Axiom01</h2>
+                <p class="text-muted">We describe layout semantics ($D_c \le 1.0$), not explicit values ($D_c \gg 10$).</p>
+              </header>
+              <main class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div>
+                  <h4 style="margin-bottom: var(--a-space-xs);">Brittle Utility-First Card ($D_c \approx 12.0$)</h4>
+                  <pre><code>&lt;div class="flex flex-col bg-white border border-gray-200 rounded-lg p-4 md:p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow duration-200 gap-4"&gt;
+  &lt;h3 class="text-base md:text-lg lg:text-xl font-semibold text-gray-900"&gt;Card&lt;/h3&gt;
+  &lt;p class="text-sm md:text-base text-gray-500 max-w-prose"&gt;Bloated.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div>
+                  <h4 style="margin-bottom: var(--a-space-xs);">The Axiom01 Responsive Card ($D_c = 1.0$)</h4>
+                  <pre><code>&lt;article class="card"&gt;
+  &lt;header&gt;
+    &lt;h3&gt;The Autonomous Card&lt;/h3&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;p&gt;Clean, structured, responsive.&lt;/p&gt;
+  &lt;/main&gt;
+&lt;/article&gt;</code></pre>
+                </div>
+              </main>
+            </div>
+
+            <!-- CORE POSTULATES GRID -->
+            <h3 class="text-center" style="font-size: var(--a-text-lg); margin-bottom: var(--a-space-md);">Interactive Feature Blueprints</h3>
+            <div class="grid">
+              <div class="card">
+                <header>
+                  <span class="badge">Batch F Component</span>
+                  <h3>Accordion Details</h3>
+                </header>
+                <main>
+                  <details class="accordion">
+                    <summary>Natively Interactive Summary</summary>
+                    <p class="text-muted" style="margin-top: var(--a-space-sm);">
+                      This card utilizes native <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> tags to expand and capture user events cleanly without a single byte of custom React state or Javascript handlers.
+                    </p>
+                  </details>
+                  <details class="accordion">
+                    <summary>Focus & Transitions</summary>
+                    <p class="text-muted" style="margin-top: var(--a-space-sm);">
+                      Keyboard navigation works naturally. The transitions are managed directly at the rendering engine layout layer.
+                    </p>
+                  </details>
+                </main>
+              </div>
+
+              <div class="card">
+                <header>
+                  <span class="badge accent">Batch I / Batch D Components</span>
+                  <h3>Relational State Validators</h3>
+                </header>
+                <main>
+                  <form class="form" onsubmit="event.preventDefault(); Helper.notify('Form Verified', 'Gateway open.');">
+                    <fieldset>
+                      <legend>Input Validation Group</legend>
+                      <label class="input-group">
+                        <span>API KEY</span>
+                        <input type="text" pattern=".{8,8}" placeholder="Enter 8 chars" required>
+                      </label>
+                      <button class="primary w-full" type="submit" style="margin-top: var(--a-space-xs);">Submit Credentials</button>
+                    </fieldset>
+                  </form>
+                </main>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </main>
+
+      <!-- VIEW 2: DOCS PORTAL -->
+      <main id="view-docs" class="route-view">
+        <div class="hub-layout" style="border-top: none;">
+          <!-- VIEWPORT STAGE -->
+          <article class="hub-content" id="docs-swipe-zone">
+            <div id="docs-stage" class="prose">
+              <!-- Dynamically populated -->
+            </div>
+            
+            <div class="pager-footer" id="docs-pager"></div>
+          </article>
+
+          <!-- TOC NAV LINKS -->
+          <aside class="hub-toc">
+            <h4 style="font-size: calc(var(--a-text-base) * 0.75); text-transform: uppercase; color: var(--a-text-muted); letter-spacing: 0.05em; margin-bottom: var(--a-space-sm);">On This Page</h4>
+            <div id="docs-toc-links"></div>
+          </aside>
+        </div>
+      </main>
+
+      <!-- VIEW 3: THE BOOK READER (THE SEMANTIC REALITY) -->
+      <main id="view-book" class="route-view">
+        <div class="hub-layout" style="border-top: none;">
+          <!-- CHAPTER VIEWPORT -->
+          <article class="hub-content" id="book-swipe-zone">
+            <div id="book-stage" class="prose"></div>
+            <div class="pager-footer" id="book-pager"></div>
+          </article>
+
+          <!-- SECTIONS INDEX -->
+          <aside class="hub-toc">
+            <h4 style="font-size: calc(var(--a-text-base) * 0.75); text-transform: uppercase; color: var(--a-text-muted); letter-spacing: 0.05em; margin-bottom: var(--a-space-sm);">Chapter Sections</h4>
+            <div id="book-toc-links"></div>
+          </aside>
+        </div>
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- SYSTEM MODAL -->
+  <dialog id="alert-modal">
+    <h3 id="alert-title" style="margin-bottom: var(--a-space-xs);">Action Confirmed</h3>
+    <p id="alert-message" class="text-muted" style="font-size: calc(var(--a-text-base) * 0.9); margin-bottom: var(--a-space-md);"></p>
+    <button class="primary" onclick="document.getElementById('alert-modal').close()">Dismiss</button>
+  </dialog>
+
+  <!-- DYNAMIC ENGINES & SWIPES -->
+  <script>
+    // System Glyphs - Custom SVG definitions structured exactly for the AxiconsEngine.
+    window.AxiconsData = {
+      base: {
+        Sun: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>',
+        Layers: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polygon points="2 17 12 22 22 17"></polygon><polygon points="2 12 12 17 22 12"></polygon></svg>',
+        BookOpen: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>',
+        Terminal: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>',
+        ArrowLeft: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
+        ArrowRight: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>',
+        Copy: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',
+        Menu: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>',
+        Check: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>',
+        Activity: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>',
+        Cpu: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M9 9h6v6H9z"></path><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"></path></svg>',
+        HardDrive: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect><line x1="2" y1="14" x2="22" y2="14"></line><line x1="6" y1="18" x2="6" y2="18.01"></line><line x1="10" y1="18" x2="10" y2="18.01"></line></svg>',
+        Users: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+        Settings: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>',
+        Search: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+        Grid: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>',
+        Home: '<svg viewBox="0 0 24 24" width="100%" height="100%" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 22 9 12 15 12 15 22"></polyline><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>'
+      }
+    };
+
+    const AXICONS = window.AxiconsData.base;
+
+    /**
+     * AXICONS CORE ENGINE
+     * Zero Layout Shift, Lazy Rendered, Auto-Accessible.
+     */
+    class AxiconsEngine {
+      constructor(iconLibrary = window.AxiconsData || {}) {
+        this.icons = iconLibrary;
+        this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
+          rootMargin: '50px 0px',
+        });
+        this.init();
+      }
+
+      init() {
+        const placeholders = document.querySelectorAll('svg[data-axicon], i[data-axicon]');
+        placeholders.forEach(el => this.observer.observe(el));
+      }
+
+      handleIntersection(entries, observer) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.injectIcon(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }
+
+      injectIcon(element) {
+        const iconName = element.getAttribute('data-axicon');
+        const variant = element.getAttribute('data-variant') || 'base';
+        
+        if (!this.icons[variant] || !this.icons[variant][iconName]) {
+          console.warn(`Axicon missing: ${iconName} (${variant})`);
+          return;
+        }
+
+        if (!element.hasAttribute('aria-label') && !element.hasAttribute('aria-labelledby')) {
+          element.setAttribute('aria-hidden', 'true');
+        } else {
+          element.setAttribute('role', 'img');
+        }
+
+        requestAnimationFrame(() => {
+          if (element.tagName.toLowerCase() === 'i') {
+            element.innerHTML = this.icons[variant][iconName];
+          } else {
+            element.innerHTML = this.icons[variant][iconName];
+            element.setAttribute('viewBox', '0 0 24 24');
+            element.classList.add('axicon');
+          }
+        });
+      }
+    }
+
+    // Client Parameter Recalculator
+    const Config = {
+      toggleTheme: () => {
+        const root = document.documentElement;
+        const current = root.getAttribute('data-theme');
+        root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+      },
+      toggleSpacing: () => {
+        const root = document.documentElement;
+        const current = root.getAttribute('data-spacing');
+        root.setAttribute('data-spacing', current === 'compact' ? 'spacious' : 'compact');
+      },
+      updateHue: (val) => {
+        document.documentElement.style.setProperty('--a-hue-primary', val);
+        document.getElementById('hue-display').innerText = val;
+        document.getElementById('complement-display').innerText = (parseInt(val) + 180) % 360;
+      },
+      updateSpacing: (val) => {
+        document.documentElement.style.setProperty('--a-space-unit', `${val}rem`);
+        document.getElementById('spacing-display').innerText = val;
+      }
+    };
+
+    // Routing System
+    const Navigation = {
+      view: (id) => {
+        const toggleBtn = document.getElementById('mobile-nav-toggle');
+        if (toggleBtn) toggleBtn.checked = false;
+
+        document.querySelectorAll('.route-view').forEach(el => el.classList.remove('active'));
+        const activeView = document.getElementById(`view-${id}`);
+        if (activeView) activeView.classList.add('active');
+        
+        // Hide sidebar layout rules on hero page specifically
+        if (id === 'hero') {
+          document.body.classList.remove('layout-active-subpage');
+        } else {
+          document.body.classList.add('layout-active-subpage');
+        }
+
+        if (id === 'docs') Content.initDocs();
+        if (id === 'book') Content.initBook();
+        window.scrollTo(0, 0);
+      },
+      toggleMobileSidebar: (e) => {
+        const toggleBtn = document.getElementById('mobile-nav-toggle');
+        if (toggleBtn) {
+          setTimeout(() => {
+            const activeViewId = document.querySelector('.route-view.active').id;
+            const targetNavId = 'global-sidebar';
+            document.querySelectorAll('.hub-sidebar').forEach(el => {
+              el.style.visibility = (el.id === targetNavId && toggleBtn.checked) ? 'visible' : 'hidden';
+            });
+          }, 50);
+        }
+      }
+    };
+
+    // Full Framework Documentation Mapping with Sub-Navigation Welcome Cards
+    const DB_DOCS = {
+      'docs-hub': {
+        title: 'Documentation Hub',
+        content: `
+          <h1>Documentation Hub</h1>
+          <p class="lead">Welcome to the Axiom01 Core Documentation Hub. Reclaim the native browser engine and strip away styling abstractions.</p>
+          <p>This workspace serves as your programmatic cockpit. Click through the sidebar directory or tap any welcome module below to explore cascade structures, dynamic responsive containers, interactive states, and copying semantic blueprint templates.</p>
+          <hr style="border: 0; border-top: 1px solid var(--a-border); margin: var(--a-space-lg) 0;">
+          <div class="grid">
+            <div class="card" onclick="Content.load('docs-intro', this)">
+              <header>
+                <span class="badge success">Start Learning</span>
+                <h3>Getting Started</h3>
+              </header>
+              <main>
+                <p class="text-muted">Master framework setups, OKLCH design variables, and the Vite PostCSS optimization stack.</p>
+              </main>
+            </div>
+            <div class="card" onclick="Content.load('docs-layers', this)">
+              <header>
+                <span class="badge">Core Engine</span>
+                <h3>Core Specifications</h3>
+              </header>
+              <main>
+                <p class="text-muted">Explore Cascade Layers (@layer), container queries, relational selectors, and editorial text.</p>
+              </main>
+            </div>
+            <div class="card" onclick="Content.load('docs-blueprints', this)">
+              <header>
+                <span class="badge accent">Blueprints</span>
+                <h3>UI Blueprint Library</h3>
+              </header>
+              <main>
+                <p class="text-muted">View live component previews and copy clean semantic HTML cards, tables, and validation inputs.</p>
+              </main>
+            </div>
+          </div>
+        `,
+        prev: null,
+        next: 'docs-intro'
+      },
+      'docs-intro': {
+        title: 'System Introduction',
+        content: `
+          <h1>Framework Introduction</h1>
+          <p class="lead">Reclaim the native capabilities of the browser. Build faster, lighter, and cleaner interfaces.</p>
+          <p>Axiom01 is a modern CSS design platform designed to eliminate the class hoarding associated with utility-first frameworks. Rather than describing layout metrics inside your HTML, you structure semantic documents and allow our OKLCH token grids to resolve aesthetics automatically.</p>
+          <hr style="border: 0; border-top: 1px solid var(--a-border); margin: var(--a-space-lg) 0;">
+          <h2>Architectural Goals</h2>
+          <p>We designed Axiom01 specifically to solve the performance and maintenance debt of modern frontend development: no massive npm dependency pipelines, perfect container fluid grids out-of-the-box, and access compatibility calculated natively by the browser rendering engine.</p>
+        `,
+        prev: 'docs-hub',
+        next: 'docs-tokens'
+      },
+      'docs-tokens': {
+        title: 'OKLCH Design Tokens',
+        content: `
+          <h1>OKLCH Design Tokens</h1>
+          <p class="lead">Perceptual uniformity and color mixing coordinates rendered natively inside the browser layer.</p>
+          <p>Traditional RGB and HSL colors calculate saturation and light along dimensions that fail to map human optical perception correctly. Yellow and Blue colors with the exact same lightness metrics look wildly different to the eye, causing compliance failures in accessibility checks.</p>
+          <h2>The OKLCH Blueprint</h2>
+          <p>Axiom01 resolves this by building completely on OKLCH. This ensures that brand color transformations preserve high contrast safety automatically. You can change your seed brand hue at any time, and the contrast parameters remain perfectly WCAG-aligned.</p>
+          <pre><code>:root {
+  --a-hue-primary: 250; /* Indigo Seed */
+  --a-primary: oklch(62% 0.16 var(--a-hue-primary));
+}</code><button class="button primary copy-btn" onclick="Helper.copyCode(this)"><i data-axicon="Copy"></i> Copy</button></pre>
+        `,
+        prev: 'docs-intro',
+        next: 'docs-installation'
+      },
+      'docs-installation': {
+        title: 'Installation & Build',
+        content: `
+          <h1>Installation & Build Pipeline</h1>
+          <p class="lead">Vite and PostCSS: Future-proofing without legacy Sass complexity.</p>
+          <p>Axiom01 leverages raw, native modern web standard APIs. Because of this, it is entirely free from heavy preprocessors or compilation steps. We recommend <strong>Vite</strong> paired with <strong>PostCSS</strong> to polyfill modern parameters purely for legacy corporate browsers.</p>
+          <h2>Quick Start Template</h2>
+          <p>Create a simple <code>postcss.config.js</code> file to automate fallback mappings:</p>
+          <pre><code>module.exports = {
+  plugins: {
+    'postcss-preset-env': {
+      stage: 2,
+      features: { 'cascade-layers': true }
+    }
+  }
+}</code></pre>
+        `,
+        prev: 'docs-tokens',
+        next: 'docs-layers'
+      },
+      'docs-layers': {
+        title: 'Cascade Layers',
+        content: `
+          <h1>Cascade Layers (@layer)</h1>
+          <p class="lead">Harness Cascade Layers natively to eliminate specificity wars permanently.</p>
+          <p>By registering our design rules under strict layers, we ensure utilities and components remain isolated, preventing external libraries from overriding core system semantics.</p>
+        `,
+        prev: 'docs-installation',
+        next: 'docs-containers'
+      },
+      'docs-containers': {
+        title: 'Container Queries',
+        content: `
+          <h1>Container Queries</h1>
+          <p class="lead">Design fluid elements that adjust their visual layouts based on available width, rather than global viewports.</p>
+          <p>Viewport media queries are brittle. If you move a responsive widget into a small sidebar on a wide screen, the viewport trigger forces it into its desktop configuration, breaking the grid boundaries.</p>
+          <h2>Container Contexts</h2>
+          <p>Axiom01 structures responsive grids from the inside out. By establishing a container-type layout layer, every card queries its immediate parent, adjusting column wraps and padding perfectly whether displayed inside sidebar trays or primary workspace windows.</p>
+        `,
+        prev: 'docs-layers',
+        next: 'docs-has'
+      },
+      'docs-has': {
+        title: 'Interactive State (:has)',
+        content: `
+          <h1>Interactive State (:has)</h1>
+          <p class="lead">Eliminate thousands of lines of fragile JavaScript state toggles by letting CSS query parents natively.</p>
+          <p>For decades, styling a form block or a container card based on the focus state of an internal input required registering event listeners and managing state variables in JS. The CSS selector engine was blind to upward child structures.</p>
+          <h2>Relational Queries</h2>
+          <p>By leveraging the native CSS <code>:has()</code> selector, Axiom01 enables parent components to automatically calculate their border rings, warning indicators, and structural alignments based on child inputs natively. No state code, no DOM thrashing, perfect accessibility tracking.</p>
+        `,
+        prev: 'docs-containers',
+        next: 'docs-typography'
+      },
+      'docs-typography': {
+        title: 'Editorial Typography',
+        content: `
+          <h1>Editorial Typography</h1>
+          <p class="lead">Bring the precision of classic print to the digital screen.</p>
+          <p>Axiom01 implements optical line balancing (<code>text-wrap: balance</code>), hanging punctuation markers, and automatic orphan control natively inside the rendering loop, offering book-grade reading aesthetics automatically.</p>
+        `,
+        prev: 'docs-has',
+        next: 'docs-motion'
+      },
+      'docs-motion': {
+        title: 'Reduced Motion & Contrast',
+        content: `
+          <h1>Reduced Motion & Contrast Overrides</h1>
+          <p class="lead">System-level accessibility configurations respected automatically by the design engine.</p>
+          <p>If a user checks 'Reduce Motion' inside Windows or macOS preferences, Axiom01 natively shuts down all transitions, view-morphs, and animations universally, ensuring visual comfort by default.</p>
+        `,
+        prev: 'docs-typography',
+        next: 'docs-toasts'
+      },
+      'docs-toasts': {
+        title: 'Toasts & Popovers',
+        content: `
+          <h1>Toasts & Popovers (Popover API)</h1>
+          <p class="lead">Reclaim overlays into the browser's top rendering layer without JS positioning calculations.</p>
+          <p>We leverage the native <code>popover</code> specification to render system notifications and menus, bypassing z-index stack collisions natively.</p>
+        `,
+        prev: 'docs-motion',
+        next: 'docs-print'
+      },
+      'docs-print': {
+        title: 'Print Styles',
+        content: `
+          <h1>Zero-Config Print Styles (@media print)</h1>
+          <p class="lead">Clean up, sanitize, and format PDF exports natively when a user prints.</p>
+          <p>Axiom01 detects print directives natively, automatically stripping navbars, interactive controls, and dark background fills, and expanding prose link URLs next to their anchors.</p>
+        `,
+        prev: 'docs-toasts',
+        next: 'docs-blueprints'
+      },
+      'docs-blueprints': {
+        title: 'The Card Component',
+        content: `
+          <h1>Component Blueprints: The Card</h1>
+          <p class="lead">Preview components, evaluate layout performance, and extract semantic markup.</p>
+          
+          <div style="padding: var(--a-space-md); background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius); margin-bottom: var(--a-space-md);">
+            <article class="card" style="max-width: 380px; margin: 0 auto;">
+              <header>
+                <span class="badge success" style="width: fit-content;">System Operational</span>
+                <h3>Primary Storage Cluster</h3>
+              </header>
+              <main>
+                <p class="text-muted" style="font-size: calc(var(--a-text-base) * 0.85); line-height: 1.5;">All data partitions are active and mirroring across local edge storage points.</p>
+              </main>
+              <footer>
+                <div style="display: flex; gap: var(--a-space-xs); flex-wrap: wrap;">
+                  <button class="primary" onclick="Helper.notify('Cluster Trigger', 'Core storage synced.')">Sync Cluster</button>
+                  <button class="secondary" onclick="Helper.notify('Database Archiver', 'Parsing historical nodes...')">Inspect Logs</button>
+                </div>
+              </footer>
+            </article>
+          </div>
+
+          <pre><code>&lt;article class="card"&gt;
+  &lt;header&gt;
+    &lt;span class="badge success"&gt;System Operational&lt;/span&gt;
+    &lt;h3&gt;Primary Storage Cluster&lt;/h3&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;p class="text-muted"&gt;All data partitions are active.&lt;/p&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;
+    &lt;div style="display: flex; gap: var(--a-space-xs);"&gt;
+      &lt;button class="primary"&gt;Sync Cluster&lt;/button&gt;
+      &lt;button class="secondary"&gt;Inspect Logs&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;</code><button class="button primary copy-btn" onclick="Helper.copyCode(this)"><i data-axicon="Copy"></i> Copy</button></pre>
+        `,
+        prev: 'docs-print',
+        next: 'docs-blueprint-form'
+      },
+      'docs-blueprint-form': {
+        title: 'The Validation Form',
+        content: `
+          <h1>Component Blueprints: Validation Form</h1>
+          <p class="lead">Pure CSS state tracking and validation using relational \`:has()\` selectors.</p>
+          
+          <div style="padding: var(--a-space-md); background: var(--a-surface-base); border: 1px solid var(--a-border); border-radius: var(--a-radius); margin-bottom: var(--a-space-md);">
+            <form class="form" onsubmit="event.preventDefault(); Helper.notify('Auth Guard', 'Authentication payload compiled.')" style="max-width: 400px; margin: 0 auto;">
+              <fieldset>
+                <legend>Security System Lock</legend>
+                <label>
+                  Security API Key (Must be 8 characters)
+                  <input type="text" pattern=".{8,8}" placeholder="8 character code" required>
+                </label>
+                <button class="primary accent" type="submit">Verify Gateway</button>
+              </fieldset>
+            </form>
+          </div>
+
+          <pre><code>&lt;form class="form"&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Security System Lock&lt;/legend&gt;
+    &lt;label&gt;
+      Security API Key
+      &lt;input type="text" pattern=".{8,8}" placeholder="8 characters" required&gt;
+    &lt;/label&gt;
+    &lt;button class="primary accent"&gt;Verify Gateway&lt;/button&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;</code><button class="button primary copy-btn" onclick="Helper.copyCode(this)"><i data-axicon="Copy"></i> Copy</button></pre>
+        `,
+        prev: 'docs-blueprints',
+        next: 'docs-blueprint-table'
+      },
+      'docs-blueprint-table': {
+        title: 'The Compact Table',
+        content: `
+          <h1>Component Blueprints: Compact Table</h1>
+          <p class="lead">A clean data grid displaying proportional alignment and tabular numerals natively.</p>
+          
+          <div class="table-wrapper" style="margin-bottom: var(--a-space-md);">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Instance</th>
+                  <th>Location</th>
+                  <th>Activity State</th>
+                  <th>Core Latency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>US-West-2</td>
+                  <td>Oregon, USA</td>
+                  <td><span class="badge success">Active</span></td>
+                  <td><strong>12 ms</strong></td>
+                </tr>
+                <tr>
+                  <td>EU-Central-1</td>
+                  <td>Frankfurt, GER</td>
+                  <td><span class="badge">Standby</span></td>
+                  <td><strong>48 ms</strong></td>
+                </tr>
+                <tr>
+                  <td>AP-Northeast-1</td>
+                  <td>Tokyo, JPN</td>
+                  <td><span class="badge accent">Throttled</span></td>
+                  <td><strong>312 ms</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <pre><code>&lt;div class="table-wrapper"&gt;
+  &lt;table class="table"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Instance&lt;/th&gt;
+        &lt;th&gt;Latency&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;US-West-2&lt;/td&gt;
+        &lt;td&gt;&lt;strong&gt;12 ms&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code><button class="button primary copy-btn" onclick="Helper.copyCode(this)"><i data-axicon="Copy"></i> Copy</button></pre>
+        `,
+        prev: 'docs-blueprint-form',
+        next: null
+      }
+    };
+
+    // Complete Book Chapters with double escaped math backslashes to resolve compilation errors
+    const DB_BOOK = {
+      'book-hub': {
+        title: 'The Book Frontispiece',
+        content: `
+          <h1>The Semantic Reality</h1>
+          <p class="lead">Designing the Modern Web with Axiom01 — A treatise on engineering restraint, geometry, and hypermedia recovery.</p>
+          <p>Most frameworks teach developers syntax, but completely fail to guide them on what or how to design. This book represents a complete blueprint on both. Select any section below to start reading the full editorial monograph:</p>
+          <hr style="border: 0; border-top: 1px solid var(--a-border); margin: var(--a-space-lg) 0;">
+          <div class="grid">
+            <div class="card" onclick="Content.loadChapter('ch-1', this)">
+              <header>
+                <span class="badge success">Part I / Philosophy</span>
+                <h3>The Hoarding Problem</h3>
+              </header>
+              <main>
+                <p class="text-muted">Chapter 1: The genealogy of avoidance, class density metrics, and the death of utility frameworks.</p>
+              </main>
+            </div>
+            <div class="card" onclick="Content.loadChapter('ch-2', this)">
+              <header>
+                <span class="badge success">Part I / Philosophy</span>
+                <h3>Document vs. Canvas</h3>
+              </header>
+              <main>
+                <p class="text-muted">Chapter 2: Shifting from virtual DOM coordinate tracking to standard browser native disclosure elements.</p>
+              </main>
+            </div>
+            <div class="card" onclick="Content.loadChapter('ch-3', this)">
+              <header>
+                <span class="badge">Part II / Theory</span>
+                <h3>Symmetry & Spacing</h3>
+              </header>
+              <main>
+                <p class="text-muted">Chapter 3: Exploring visual order, the Swiss Grid system, and dynamic modular token scales.</p>
+              </main>
+            </div>
+            <div class="card" onclick="Content.loadChapter('ch-5', this)">
+              <header>
+                <span class="badge">Part II / Theory</span>
+                <h3>Fashion & OKLCH</h3>
+              </header>
+              <main>
+                <p class="text-muted">Chapter 5: Absolute color restraint, visual silence, and perceptual luminance invariances.</p>
+              </main>
+            </div>
+          </div>
+        `,
+        prev: null,
+        next: 'ch-1'
+      },
+      'ch-1': {
+        title: '1. The Hoarding Problem',
+        content: `
+          <p class="lead">We have a hoarding problem on the web.</p>
+          <p class="drop-cap">If you open the source code of almost any modern web application built today, you will not find a document. You will find a sprawling, dense, and ultimately unreadable matrix of visual instructions. You will see elements buried under ten, twenty, or sometimes forty inline classes, each shouting a tiny, isolated command at the browser.</p>
+          <p>This is not markup; it is a confession. It is the visual equivalent of a room packed to the ceiling with old newspapers, broken furniture, and boxes of unsorted wires. We have hoarded our styling instructions directly inside our structure because we became terrified of the very feature that makes the web elegant: <strong>the cascade</strong>.</p>
+          <h2>The Genealogy of Avoidance</h2>
+          <p>The history of frontend architecture is a series of reactionary steps taken to avoid writing raw, semantic CSS. Each step was designed to solve a problem created by the previous step, compounding our technical debt until we broke the relationship between HTML and CSS entirely.</p>
+          <p>To protect ourselves from the cascade, we invented naming conventions. The most popular was BEM (Block, Element, Modifier). BEM successfully isolated our styles, but it introduced a heavy tax: cognitive load and massive markup bloat. Developers spent more time debating whether a button inside a card inside a modal was a <code>modal__card-button</code> than they did writing actual code.</p>
+          <h2>The Metric of Class Density</h2>
+          <p>To mathematically visualize the weight of this architectural shift, let us establish a metric: <strong>Class Density ($D_c$)</strong>. Let $N_{\\text{classes}}$ represent the total number of class declarations in a given block of markup, and let $N_{\\text{elements}}$ represent the number of semantic HTML elements within that same block:</p>
+          <p style="text-align: center; font-weight: bold; font-family: var(--a-font-sans); font-size: var(--a-text-lg); margin: var(--a-space-md) 0;">$D_c = \\frac{N_{\\text{classes}}}{N_{\\text{elements}}}$</p>
+          <p>Under a utility-first paradigm, every visual property requires its own dedicated class. Thus, $D_c$ scales linearly or worse with the visual complexity of the design, often reaching $D_c \\gg 10$. Axiom01 enforces a strict architectural limit of $D_c \\le 1$. One semantic class represents one complete, self-governing component.</p>
+        `,
+        prev: 'book-hub',
+        next: 'ch-2'
+      },
+      'ch-2': {
+        title: '2. HTML is a Document, Not a Canvas',
+        content: `
+          <p class="lead">In 1993, Tim Berners-Lee and the pioneers of the Internet Engineering Task Force (IETF) designed HTML with a specific paradigm in mind: it was to be a structured hypermedia document.</p>
+          <p class="drop-cap">It was never designed to be an empty canvas.</p>
+          <p>Yet, if you look at the modern single-page application (SPA), we have demoted HTML to exactly that: a low-level, blank graphics buffer. We write index files that contain a single, empty tag, and we use massive JavaScript runtimes to programmatically draw our UI onto this empty coordinate space.</p>
+          <h2>The Behavioral Debt of Reinvention</h2>
+          <p>Every time you build an interactive component—a modal, an accordion, or a custom progress bar—out of generic nested divs instead of native HTML primitives, you incur behavioral debt. Native primitives like <code>&lt;dialog&gt;</code> handle keyboard navigation, rendering layers, and screen-reader announcements natively at the C++ browser level, requiring zero custom JS controllers.</p>
+          <p>By letting the platform manage disclosure natively via elements like <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code>, your code remains clean, screen readers parse structural hierarchy automatically, and search engines index collapsed text perfectly without waiting for hydration scripts.</p>
+        `,
+        prev: 'ch-1',
+        next: 'ch-3'
+      },
+      'ch-3': {
+        title: '3. Symmetry and Relational Spacing',
+        content: `
+          <p class="lead">An exceptional layout is not accidental; it is the manifestation of silent geometry.</p>
+          <p class="drop-cap">If you ask an untrained developer to build a layout, they will construct it like a bricklayer without a level. They will look at a button and say, "Let’s add a 10px margin on the right." They will look at a card and say, "This feels tight, let’s add 24px of padding on the bottom."</p>
+          <p>This is the arbitrary value trap—a process of guess-and-check styling that leaves an application cluttered with fragmented, hardcoded measurements. Axiom01 operates on a different spatial thesis: <strong>All elements should exhibit mathematical symmetry and even relative spacing unless you have a specific, calculated, and functional reason to break it.</strong></p>
+          <h2>The Philosophy of Systematic Order</h2>
+          <p>By connecting all margins, paddings, and grid gaps to a single spatial root token computed as a relative multiple of the viewport width, your entire application expands and contracts in perfect proportional symmetry, guaranteeing clean spatial alignment out of the box.</p>
+        `,
+        prev: 'ch-2',
+        next: 'ch-4'
+      },
+      'ch-4': {
+        title: '4. The Golden Ratio & Scaling Objects',
+        content: `
+          <h1>4. The Golden Ratio & Scaling Objects</h1>
+          <p class="lead">Automating object proportions based on universal geometric scaling constants.</p>
+          <p>We configure spacing and typographic sizing curves dynamically using modular ratios ($1.414$ or $1.618$), ensuring headings, cards, and text scale in absolute optical proportion on all viewports.</p>
+          <p style="text-align: center; font-weight: bold; font-family: var(--a-font-sans); font-size: var(--a-text-lg); margin: var(--a-space-md) 0;">$H(n) = \\text{Base} \\cdot R^n$</p>
+          <p>By utilizing modular variables universally, we ensure that elements are always entangled with the typography. If you scale the paragraph base unit, the headers and card containers follow the growth spiral natively.</p>
+        `,
+        prev: 'ch-3',
+        next: 'ch-5'
+      },
+      'ch-5': {
+        title: '5. Fashion, Contrast, and Color Theory',
+        content: `
+          <p class="lead">A great interface demands absolute restraint: a single, highly tailored base canvas, clean structural silhouettes, and exactly one accent color to command focus.</p>
+          <p class="drop-cap">If you use more than one pop of color, you have diluted the effect of both.</p>
+          <p>This philosophy of clean lines was perfectly summarized by the legendary fashion icon Coco Chanel: <em>"Before you leave the house, look in the mirror and take one thing off."</em> Applied to interface design, this means we must strip away the background blocks, the colored borders, and the arbitrary gradients, letting our accent color carry the entire visual interaction weight.</p>
+          <h2>The Perceptual Lightness of OKLCH</h2>
+          <p>Axiom01 maps all design tokens onto the OKLCH color space. Because OKLCH calculates saturation and lightness along dimensions that map directly to the human visual cortex, contrast parameters remain constant across different hue angles, protecting visual accessibility natively without writing custom color tracking scripts.</p>
+          <p style="text-align: center; font-weight: bold; font-family: var(--a-font-sans); font-size: var(--a-text-lg); margin: var(--a-space-md) 0;">$\\frac{\\partial L_{\\text{perceptual}}}{\\partial H} = 0$</p>
+          <p>Because the partial derivative of lightness with respect to hue is zero inside our uniform coordinate space, contrast AA compliance is guaranteed universally.</p>
+        `,
+        prev: 'ch-4',
+        next: 'ch-6'
+      },
+      'ch-6': {
+        title: '6. The Logic of :has()',
+        content: `
+          <h1>6. The Logic of :has()</h1>
+          <p class="lead">Transition state tracking back to the browser CSS engine.</p>
+          <p>With <code>:has()</code>, components calculate active focus rings, invalid error inputs, and state alignments natively. No external JS state managers required.</p>
+        `,
+        prev: 'ch-5',
+        next: 'ch-7'
+      },
+      'ch-7': {
+        title: '7. Container Queries Over Media Queries',
+        content: `
+          <h1>7. Container Queries Over Media Queries</h1>
+          <p class="lead">Decoupling components from arbitrary screen-width constraints.</p>
+          <p>A card adapts its layout horizontally or vertically depending strictly on its parent element column boundaries, not the viewport width.</p>
+        `,
+        prev: 'ch-6',
+        next: 'ch-8'
+      },
+      'ch-8': {
+        title: '8. Symbols, Semiotics, and Axicons',
+        content: `
+          <h1>8. Symbols, Semiotics, and Axicons</h1>
+          <p class="lead">Treating iconography as a native typographic glyph system.</p>
+          <p>We render clean vector assets that scale fluidly with cap-height configurations, using zero-CLS spacer allocations natively.</p>
+          <p style="text-align: center; font-weight: bold; font-family: var(--a-font-sans); font-size: var(--a-text-lg); margin: var(--a-space-md) 0;">$P_{\\text{speed}} = K \\cdot \\frac{S_{\\text{semantic}}}{W_{\\text{visual}}}$</p>
+          <p>By mathematically minimizing vector visual weight, semantic processing speed is maximized.</p>
+        `,
+        prev: 'ch-7',
+        next: 'ch-9'
+      },
+      'ch-9': {
+        title: '9. Deep Typography',
+        content: `
+          <h1>9. Deep Typography</h1>
+          <p class="lead">Implementing optical balance, hanging punctuation, and lining numerals.</p>
+          <p>Banish jagged headings using native balanced wraps, and lock columns using relative character limits.</p>
+        `,
+        prev: 'ch-8',
+        next: 'ch-10'
+      },
+      'ch-10': {
+        title: '10. The MPA that feels like an SPA',
+        content: `
+          <h1>10. The MPA that feels like an SPA</h1>
+          <p class="lead">Reclaiming hypermedia and representational server-rendered HTML delivery.</p>
+          <p>We swap clean document fragments over-the-wire, bypassing the CPU parsing penalties of massive framework bundles.</p>
+        `,
+        prev: 'ch-9',
+        next: 'ch-11'
+      },
+      'ch-11': {
+        title: '11. Seamless Navigation',
+        content: `
+          <h1>11. Seamless Navigation</h1>
+          <p class="lead">Zero-JS route cross-fades and page morphs using View Transitions.</p>
+          <p>The browser automatically cross-fades layouts on navigation clicks, removing the jarring white screen flash natively.</p>
+          <p style="text-align: center; font-weight: bold; font-family: var(--a-font-sans); font-size: var(--a-text-lg); margin: var(--a-space-md) 0;">$E_{\\text{cognitive_transition}} = (1 - S_{\\text{morph}}) \\cdot \\left( C_{\\text{reset}} + \\sum_{i=1}^{N} \\Delta P_i \\right)$</p>
+          <p>Continuity eliminates cognitive layout re-indexing.</p>
+        `,
+        prev: 'ch-10',
+        next: 'ch-12'
+      },
+      'ch-12': {
+        title: '12. Production & Optimization',
+        content: `
+          <h1>12. Production & Optimization</h1>
+          <p class="lead">Vite setups and automated icon tree-shaking toolchains.</p>
+          <p>Ship clean, compiled production payloads under 2KB, caching documents universally at the static CDN edge.</p>
+          <p style="text-align: center; font-weight: bold; font-family: var(--a-font-sans); font-size: var(--a-text-lg); margin: var(--a-space-md) 0;">$E_{\\text{tte}} = \\frac{U_{\\text{used}}}{S_{\\text{total}} \\cdot \\log(D_{\\text{depth}} + 1)}$</p>
+          <p>Eliminate dependency depth to achieve maximum execution efficiency.</p>
+        `,
+        prev: 'ch-11',
+        next: 'ch-13'
+      },
+      'ch-13': {
+        title: '13. The Praxis Methodology',
+        content: `
+          <h1>13. The Praxis Methodology: Think, Organize, Build</h1>
+          <p class="lead">Transitioning from passive concepts to active structural design.</p>
+          <p>Learn our three-step implementation model to build accessible, balanced markup using zero inline assets.</p>
+        `,
+        prev: 'ch-12',
+        next: 'ch-14'
+      },
+      'ch-14': {
+        title: '14. Project I - Link-in-Bio Landing Page',
+        content: `
+          <h1>14. Project I — The "Link-in-Bio" Page</h1>
+          <p class="lead">Building a conversion-optimized, mobile-first utility landing view.</p>
+          <p>Apply our single complementary pop color rule to design an ultra-fast, high-converting social media gateway.</p>
+        `,
+        prev: 'ch-13',
+        next: 'ch-15'
+      },
+      'ch-15': {
+        title: '15. Project II - SaaS Dashboard Shell',
+        content: `
+          <h1>15. Project II — The SaaS Dashboard Shell</h1>
+          <p class="lead">Constructing compact, data-dense workspaces with zero layout JS.</p>
+          <p>Grid alignments are controlled natively via details trees and CSS checkbox toggle proxies.</p>
+        `,
+        prev: 'ch-14',
+        next: 'ch-16'
+      },
+      'ch-16': {
+        title: '16. Project III - The Full-Stack Journal',
+        content: `
+          <h1>16. Project III — The Full-Stack Journal (Blog + CMS)</h1>
+          <p class="lead">A complete cloud-connected publication engine backed by secure database containment rules.</p>
+          <p>Build a secure, client-side editor locked behind custom Firestore rules, rendering static pages in milliseconds.</p>
+        `,
+        prev: 'ch-15',
+        next: 'ch-17'
+      },
+      'ch-17': {
+        title: '17. The Open-Source Frontier',
+        content: `
+          <h1>17. The Open-Source Frontier (Future & Contributions)</h1>
+          <p class="lead">The future of semantic development and emerging platform APIs.</p>
+          <p>Help us audit native elements, expand specific components libraries, and test next-generation CSS masonry grids.</p>
+        `,
+        prev: 'ch-16',
+        next: 'ch-appendix'
+      },
+      'ch-appendix': {
+        title: 'Appendix: Resources & References',
+        content: `
+          <h1>Appendix: Resources & References</h1>
+          <p class="lead">A curated compilation of research, books, and specifications that form the backbone of the Axiom01 philosophy.</p>
+          
+          <h2>I. Grid Systems & Spatial Geometry</h2>
+          <p><strong>Müller-Brockmann, Josef (1981).</strong> <em>Grid Systems in Graphic Design</em>. Arthur Niggli Ltd. Defines the baseline-interval organization structures mapped directly to the CSS custom property tree inside Axiom01.</p>
+          
+          <h2>II. Color Space Physics</h2>
+          <p><strong>Ottosson, Björn (2020).</strong> <em>A Perceptually Uniform Color Space (Oklab)</em>. Solves the lightness-distortion bugs of legacy HSL/RGB, forming the mathematical foundation of our OKLCH color palettes.</p>
+          
+          <h2>III. Hypermedia Architectures</h2>
+          <p><strong>Fielding, Roy Thomas (2000).</strong> <em>Architectural Styles and the Design of Network-based Software Architectures</em>. Doctoral dissertation. Establishes the foundational constraints of HATEOAS and REST hypermedia state machines.</p>
+        `,
+        prev: 'ch-17',
+        next: null
+      }
+    };
+
+    // Client Navigator Routing State
+    const Content = {
+      activeDocsKey: 'docs-intro',
+      activeBookKey: 'ch-1',
+
+      initDocs: () => {
+        // Build sub-nav tree link index dynamically to guarantee core classes
+        const linksContainer = document.getElementById('docs-sidebar-links');
+        linksContainer.innerHTML = Object.keys(DB_DOCS).map(key => `
+          <li><button onclick="Content.load('${key}', this)">${DB_DOCS[key].title}</button></li>
+        `).join('');
+        Content.load('docs-hub');
+      },
+
+      initBook: () => {
+        const toc = document.getElementById('book-toc-list');
+        toc.innerHTML = `<li><button id="btn-book-hub" onclick="Content.loadChapter('book-hub')">Book Frontispiece</button></li>` + 
+          Object.keys(DB_BOOK).filter(key => key !== 'book-hub').map(key => `
+            <li><button id="btn-${key}" onclick="Content.loadChapter('${key}')">${DB_BOOK[key].title}</button></li>
+          `).join('');
+        
+        // Also build global sidebar links to keep elements perfectly aligned
+        const sidebarLinks = document.getElementById('book-sidebar-links');
+        sidebarLinks.innerHTML = `<li><button onclick="Content.loadChapter('book-hub')">Frontispiece Cover</button></li>` + 
+          Object.keys(DB_BOOK).filter(key => key !== 'book-hub').map(key => `
+            <li><button onclick="Content.loadChapter('${key}')">${DB_BOOK[key].title}</button></li>
+          `).join('');
+
+        Content.loadChapter('book-hub');
+      },
+
+      load: (key) => {
+        Content.activeDocsKey = key;
+        const entry = DB_DOCS[key];
+        if (!entry) return;
+
+        // Sync both global sidebar and mobile navigation drawer states
+        document.querySelectorAll('.tree-list button').forEach(b => b.classList.remove('active'));
+        const activeButtons = Array.from(document.querySelectorAll('.tree-list button')).filter(b => b.getAttribute('onclick')?.includes(key));
+        activeButtons.forEach(b => {
+          b.classList.add('active');
+          const detailsNode = b.closest('details');
+          if (detailsNode) detailsNode.open = true;
+        });
+
+        document.getElementById('docs-stage').innerHTML = entry.content;
+        
+        const pager = document.getElementById('docs-pager');
+        pager.innerHTML = `
+          <div>${entry.prev ? `<button class="button" onclick="Content.load('${entry.prev}')"><i data-axicon="ArrowLeft"></i> Previous</button>` : ''}</div>
+          <div>${entry.next ? `<button class="button primary" onclick="Content.load('${entry.next}')">Next <i data-axicon="ArrowRight"></i></button>` : ''}</div>
+        `;
+
+        Content.generateTOC('docs-stage', 'docs-toc-links');
+        Helper.renderIconsInContainer('docs-stage');
+        Helper.renderIconsInContainer('docs-pager');
+        
+        const toggleBtn = document.getElementById('mobile-nav-toggle');
+        if (toggleBtn) toggleBtn.checked = false;
+        
+        window.scrollTo(0, 0);
+      },
+
+      loadChapter: (key) => {
+        Content.activeBookKey = key;
+        const entry = DB_BOOK[key];
+        if (!entry) return;
+
+        document.querySelectorAll('#book-sidebar-links button, #book-toc-list button').forEach(b => b.classList.remove('active'));
+        const activeButtons = Array.from(document.querySelectorAll('.tree-list button')).filter(b => b.getAttribute('onclick')?.includes(key));
+        activeButtons.forEach(b => {
+          b.classList.add('active');
+          const detailsNode = b.closest('details');
+          if (detailsNode) detailsNode.open = true;
+        });
+
+        document.getElementById('book-stage').innerHTML = entry.content;
+
+        const pager = document.getElementById('book-pager');
+        pager.innerHTML = `
+          <div>${entry.prev ? `<button class="button" onclick="Content.loadChapter('${entry.prev}')"><i data-axicon="ArrowLeft"></i> Previous</button>` : ''}</div>
+          <div>${entry.next ? `<button class="button primary" onclick="Content.loadChapter('${entry.next}')">Next <i data-axicon="ArrowRight"></i></button>` : ''}</div>
+        `;
+
+        Content.generateTOC('book-stage', 'book-toc-links');
+        Helper.renderIconsInContainer('book-stage');
+        Helper.renderIconsInContainer('book-pager');
+
+        const toggleBtn = document.getElementById('mobile-nav-toggle');
+        if (toggleBtn) toggleBtn.checked = false;
+
+        window.scrollTo(0, 0);
+      },
+
+      generateTOC: (stageId, tocLinksId) => {
+        const stage = document.getElementById(stageId);
+        const tocLinks = document.getElementById(tocLinksId);
+        const headings = stage.querySelectorAll('h2, h3');
+        
+        if (headings.length === 0) {
+          tocLinks.innerHTML = '<p class="text-muted" style="font-size: 0.8rem;">No subsections on this page.</p>';
+          return;
+        }
+
+        tocLinks.innerHTML = Array.from(headings).map((heading, i) => {
+          const id = `heading-index-${i}`;
+          heading.setAttribute('id', id);
+          const indent = heading.tagName === 'H3' ? 'margin-left: var(--a-space-sm);' : '';
+          return `
+            <a href="#${id}" class="toc-link" style="${indent}" onclick="Content.highlightTOC(this)">${heading.textContent}</a>
+          `;
+        }).join('');
+      },
+
+      highlightTOC: (link) => {
+        document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      },
+
+      searchFilter: (query) => {
+        const q = query.toLowerCase();
+        document.querySelectorAll('.tree-list li').forEach(li => {
+          const btn = li.querySelector('button');
+          if (btn) {
+            const match = btn.innerText.toLowerCase().includes(q);
+            li.style.display = match ? 'block' : 'none';
+          }
+        });
+      }
+    };
+
+    // Client Helper Utility Engine
+    const Helper = {
+      copyCode: (btn) => {
+        const code = btn.previousElementSibling.innerText;
+        const temp = document.createElement('textarea');
+        temp.value = code;
+        document.body.appendChild(temp);
+        temp.select();
+        try {
+          document.execCommand('copy');
+          const orig = btn.innerHTML;
+          btn.innerHTML = `<svg viewBox="0 0 24 24" style="width: 1.1em; height: 1.1em; stroke: var(--a-success); stroke-width: 2.2; fill: none;"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!`;
+          setTimeout(() => btn.innerHTML = orig, 2000);
+        } catch (err) {
+          Helper.notify('Copy Failed', 'Please manually highlight and copy the code snippet.');
+        }
+        document.body.removeChild(temp);
+      },
+
+      notify: (title, message) => {
+        const modal = document.getElementById('alert-modal');
+        document.getElementById('alert-title').innerText = title;
+        document.getElementById('alert-message').innerText = message;
+        modal.showModal();
+      },
+
+      renderIconsInContainer: (containerId) => {
+        document.querySelectorAll(`#${containerId} [data-axicon]`).forEach(el => {
+          const name = el.getAttribute('data-axicon');
+          if (AXICONS[name]) el.innerHTML = AXICONS[name];
+        });
+      }
+    };
+
+    // Mobile Swipe Navigator
+    const TouchEngine = {
+      startX: 0,
+      endX: 0,
+      threshold: 80,
+
+      bind: (elementId, prevFn, nextFn) => {
+        const target = document.getElementById(elementId);
+        if (!target) return;
+
+        target.addEventListener('touchstart', (e) => {
+          TouchEngine.startX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        target.addEventListener('touchend', (e) => {
+          TouchEngine.endX = e.changedTouches[0].screenX;
+          TouchEngine.process(prevFn, nextFn);
+        }, { passive: true });
+      },
+
+      process: (prevFn, nextFn) => {
+        const deltaX = TouchEngine.endX - TouchEngine.startX;
+        if (Math.abs(deltaX) < TouchEngine.threshold) return;
+
+        if (deltaX > 0) {
+          if (prevFn) {
+            const key = prevFn();
+            if (key) {
+              if (typeof key === 'string' && key.startsWith('ch-')) Content.loadChapter(key);
+              else if (typeof key === 'string' && key === 'book-hub') Content.loadChapter(key);
+              else if (typeof key === 'string') Content.load(key);
+            }
+          }
+        } else {
+          if (nextFn) {
+            const key = nextFn();
+            if (key) {
+              if (typeof key === 'string' && key.startsWith('ch-')) Content.loadChapter(key);
+              else if (typeof key === 'string' && key === 'book-hub') Content.loadChapter(key);
+              else if (typeof key === 'string') Content.load(key);
+            }
+          }
+        }
+      }
+    };
+
+    // DOM Hydration init processes
+    window.addEventListener('DOMContentLoaded', () => {
+      // Auto-populate sidebar links on load to match core framework
+      const docsLinksContainer = document.getElementById('docs-sidebar-links');
+      docsLinksContainer.innerHTML = Object.keys(DB_DOCS).map(key => `
+        <li><button onclick="Content.load('${key}', this)">${DB_DOCS[key].title}</button></li>
+      `).join('');
+
+      const sidebarLinks = document.getElementById('book-sidebar-links');
+      sidebarLinks.innerHTML = `<li><button onclick="Content.loadChapter('book-hub')">Frontispiece Cover</button></li>` + 
+        Object.keys(DB_BOOK).filter(key => key !== 'book-hub').map(key => `
+          <li><button onclick="Content.loadChapter('${key}')">${DB_BOOK[key].title}</button></li>
+        `).join('');
+
+      // Instantiate Axicons Engine natively
+      window.Axicons = new AxiconsEngine();
+
+      const progressBar = document.getElementById('progressBar');
+      window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = height > 0 ? (winScroll / height) : 0;
+        progressBar.style.transform = `scaleX(${winScroll / height})`;
+      });
+
+      TouchEngine.bind('docs-swipe-zone', 
+        () => DB_DOCS[Content.activeDocsKey]?.prev, 
+        () => DB_DOCS[Content.activeDocsKey]?.next
+      );
+
+      TouchEngine.bind('book-swipe-zone', 
+        () => DB_BOOK[Content.activeBookKey]?.prev, 
+        () => DB_BOOK[Content.activeBookKey]?.next
+      );
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+# Axiom01 Developer Guide
+Welcome to the future of CSS. This guide explains how to install, bundle, and extend the Axiom01 framework in your modern build pipeline.
+## 1. Installation
+Axiom01 is distributed as a highly optimized, layer-driven CSS engine.
+```bash
+npm install axiom01
+
+```
+## 2. Integration (Vite / Next.js / Nuxt)
+Because Axiom01 uses standard, bleeding-edge CSS (Container Queries, :has(), @layer, OKLCH), you do not need complex pre-processors like Sass or Less.
+Simply import the core file at the root of your application (main.js, _app.tsx, etc.):
+```javascript
+// main.js
+import 'axiom01/dist/axiom.css';
+import 'axiom01/dist/axiom.js'; // Optional: Only required for Dark Mode persistence
+
+```
+### PostCSS Configuration (Optional but Recommended)
+Axiom01 relies on modern features (like color-mix() and oklch). While 95%+ of browsers support these globally, you can use PostCSS to polyfill for legacy enterprise environments.
+```js
+// postcss.config.js
+module.exports = {
+  plugins: {
+    'postcss-preset-env': {
+      stage: 2,
+      features: {
+        'oklab-function': true,
+        'cascade-layers': true
+      }
+    }
+  }
+}
+
+```
+## 3. The Architecture (Cascade Layers)
+If you are coming from Tailwind, you are used to fighting specificity with !important or complex plugins. Axiom01 solves this natively using **CSS Cascade Layers**.
+When you import Axiom, we define the following layers in order of precedence:
+@layer axiom.reset, axiom.tokens, axiom.base, axiom.layout, axiom.components, axiom.utilities;
+### Overriding Axiom the Right Way
+If you want to write a custom CSS class that overrides an Axiom component, do not use !important. Simply put your CSS into an unlayered block, or a layer that comes *after* Axiom.
+```css
+/* style.css */
+@import 'axiom01/dist/axiom.css';
+
+/* Because this is unlayered, the browser guarantees it will OVERRIDE 
+   the axiom component, even if the specificity is lower! */
+.card.premium-tier {
+  background: var(--a-primary);
+  color: white;
+}
+
+```
+## 4. Theme & Token Customization
+Axiom01 does not use a massive tailwind.config.js file. We believe configuration belongs in CSS.
+To change the core theme of your application, simply override the root OKLCH tokens in your own stylesheet:
+```css
+/* your-theme.css */
+@layer axiom.tokens {
+  :root {
+    /* Change the primary color from Indigo to Crimson */
+    --a-hue-primary: 350; 
+    
+    /* Change the fluid scaling ratio from 1.414 to 1.2 for tighter typography */
+    --a-ratio: 1.2;
+    
+    /* Adjust base rounding */
+    --a-radius: 4px;
+  }
+}
+
+```
+Because Axiom uses color-mix() internally, **changing that single --a-hue-primary variable mathematically recalculates every hover state, focus ring, shadow, and badge background in the entire framework.** Welcome to mathematically entangled CSS.

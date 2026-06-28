@@ -1,0 +1,143 @@
+```css
+/* ==========================================================================
+   AXIOM01 - BATCH G: MICRO-INTERACTIONS & STATES
+   Philosophy: Zero-JS conditional rendering; single-element form controls.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. ZERO-JS TOGGLES (SWITCHES) --- */
+  /* Replaces massive Headless UI Toggle components with a single input tag */
+  input[type="checkbox"].switch {
+    appearance: none;
+    -webkit-appearance: none;
+    width: clamp(2.5rem, 3vw, 3rem);
+    height: clamp(1.25rem, 1.5vw, 1.5rem);
+    background: var(--a-surface-raised);
+    border: 1px solid var(--a-border);
+    border-radius: 2rem;
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: background-color var(--a-transition), border-color var(--a-transition);
+  }
+
+  /* Accessible Focus */
+  input[type="checkbox"].switch:focus-visible {
+    outline: 2px solid var(--a-primary);
+    outline-offset: 2px;
+  }
+
+  /* The Switch Thumb */
+  input[type="checkbox"].switch::before {
+    content: "";
+    position: absolute;
+    width: calc(clamp(1.25rem, 1.5vw, 1.5rem) - 4px);
+    height: calc(clamp(1.25rem, 1.5vw, 1.5rem) - 4px);
+    border-radius: 50%;
+    background: var(--a-text-muted);
+    top: 1px;
+    left: 1px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.2);
+    transition: transform var(--a-transition), background-color var(--a-transition);
+  }
+
+  /* Checked State */
+  input[type="checkbox"].switch:checked {
+    background: var(--a-primary);
+    border-color: var(--a-primary);
+  }
+
+  input[type="checkbox"].switch:checked::before {
+    background: oklch(100% 0 0); /* Pure White */
+    transform: translateX(calc(100% + 2px));
+  }
+
+  /* Disabled State */
+  input[type="checkbox"].switch:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+
+  /* --- 2. CSS-DRIVEN EMPTY STATES --- */
+  /* Axiom catches empty containers and automatically renders fallback UIs */
+  .data-list:empty,
+  .table tbody:empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    width: 100%;
+    background: var(--a-surface-raised);
+    border: 2px dashed var(--a-border);
+    border-radius: var(--a-radius);
+    position: relative;
+  }
+
+  /* Render the text from the data attribute natively */
+  .data-list:empty::after,
+  .table tbody:empty::after {
+    content: attr(data-empty-message);
+    color: var(--a-text-muted);
+    font-size: var(--a-text-sm);
+    font-weight: 500;
+  }
+  
+  /* Fallback if no attribute is provided */
+  .data-list:empty:not([data-empty-message])::after,
+  .table tbody:empty:not([data-empty-message])::after {
+    content: "No data available.";
+  }
+
+
+  /* --- 3. SEMANTIC PAGINATION --- */
+  .pagination {
+    display: inline-flex;
+    list-style: none;
+    border: 1px solid var(--a-border);
+    border-radius: var(--a-radius);
+    overflow: hidden;
+  }
+
+  .pagination li:not(:last-child) {
+    border-right: 1px solid var(--a-border);
+  }
+
+  .pagination a,
+  .pagination button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0 var(--a-space-sm);
+    background: var(--a-surface-base);
+    color: var(--a-text-main);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color var(--a-transition), color var(--a-transition);
+    border: none;
+    border-radius: 0;
+  }
+
+  .pagination a:hover:not([aria-current="page"]),
+  .pagination button:hover:not(:disabled) {
+    background: var(--a-surface-raised);
+  }
+
+  /* Active Page */
+  .pagination a[aria-current="page"] {
+    background: var(--a-primary);
+    color: oklch(100% 0 0); /* White */
+  }
+
+  /* Disabled buttons (Prev/Next) */
+  .pagination button:disabled {
+    color: var(--a-text-muted);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+```

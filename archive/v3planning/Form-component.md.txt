@@ -1,0 +1,34 @@
+# Forms & Validation
+Consistent, accessible inputs with zero-class state management.
+## The Semantic Reality
+Most UI libraries require JavaScript to evaluate input length, check validity, and then append .is-invalid or border-red-500 classes to your DOM elements.
+Axiom01 asks: *Why are you recreating native browser behavior in JavaScript?*
+### Axiom01 Approach
+```html
+<!-- HTML: 7 lines | Classes: 1 | JS: 0 -->
+<form class="form">
+  <fieldset>
+    <legend>Account Details</legend>
+    <label for="email">Email Address</label>
+    <input id="email" type="email" required placeholder="you@domain.com">
+  </fieldset>
+  <button type="submit" class="primary">Create Account</button>
+</form>
+
+```
+## Zero-Class Validation Magic
+Axiom01 leverages the CSS :has() selector combined with native HTML validation attributes (required, type="email", pattern).
+Because we use :has(), the CSS engine looks *up* the DOM tree. If an <input> is invalid (and the user has started typing, handled via :not(:placeholder-shown)), the framework automatically:
+ 1. Outlines the parent <fieldset> in the --a-error color.
+ 2. Visually demotes the <button type="submit"> by lowering its opacity.
+*No event listeners. No state mapping. Just CSS reacting to native HTML semantics.*
+## Customizing The Axiom Way
+Need a specific form to utilize a different surface color (perhaps it sits on a dark modal)? You don't need utility classes. Override the local variables.
+### Example: High-Contrast Form
+```html
+<form class="form" style="--a-surface-raised: var(--a-surface-base); --a-border: var(--a-text-muted);">
+  <!-- Inputs inside this form will now have a darker background and stronger borders -->
+  <input type="text" placeholder="Search...">
+</form>
+
+```

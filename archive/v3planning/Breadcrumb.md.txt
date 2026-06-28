@@ -1,0 +1,23 @@
+# Breadcrumbs
+Semantic navigation trails built entirely from accessibility attributes.
+## The Semantic Reality
+Look at a utility-first breadcrumb component. You will find that every single / separator is manually added as a generic <span> or an SVG icon, surrounded by padding and color utility classes. If you miss one, the layout breaks.
+Axiom01 asks: *Why are you polluting the DOM with decorative slashes?*
+### Axiom01 Approach
+```html
+<!-- HTML: Semantic | Classes: 0 -->
+<nav aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/settings">Settings</a></li>
+    <li><a href="/settings/billing" aria-current="page">Billing</a></li>
+  </ol>
+</nav>
+
+```
+## How it works
+Axiom01 targets the native accessibility attribute nav[aria-label="breadcrumb"]. You don't even need to add an Axiom class!
+ 1. **Zero-DOM Separators:** Axiom01 uses the ::after pseudo-element on the list items to automatically inject and space the / separators. The last item is smartly ignored.
+ 2. **Current Page Detection:** By utilizing the native aria-current="page" attribute, Axiom automatically applies the active text color, drops the underline hover effect, and disables pointer events.
+ 3. **Perfect Accessibility:** Screen readers will announce this as a navigation landmark named "Breadcrumb", and read it as an ordered list of links.
+This is the definition of writing less code to build better interfaces.

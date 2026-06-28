@@ -1,0 +1,36 @@
+# Popovers
+Rich overlays and floating elements using the native 2026 Web Platform API.
+## The Semantic Reality
+For the last decade, developers have relied on z-index, position: absolute, and heavy positioning engines (like Floating UI or Popper.js) to build custom dropdowns, mega-menus, and rich tooltips.
+In 2026, HTML introduced the native popover API. Axiom01 is designed from the ground up to support it seamlessly.
+### Axiom01 Approach
+```html
+<!-- The Trigger Button -->
+<button class="primary" popovertarget="userCard">
+  View Profile
+</button>
+
+<!-- The Popover Content (can be placed anywhere in the DOM) -->
+<div id="userCard" popover class="card">
+  <header>
+    <figure class="avatar" data-initials="SR"></figure>
+    <h3>Sol Roth</h3>
+  </header>
+  <main>
+    <p>Creator of Axiom01.</p>
+  </main>
+</div>
+
+```
+## The Power of the Platform
+By leveraging the popover attribute natively, Axiom01 hands complex logic back to the browser:
+ 1. **Top Layer:** Popovers completely escape your div nesting and overflow: hidden restrictions. They always render above everything else.
+ 2. **Light Dismiss:** Clicking outside the popover automatically closes it. *Zero JavaScript required.*
+ 3. **Keyboard Navigation:** Pressing Esc closes the popover. *Zero JavaScript required.*
+## Entangled Architecture
+Notice how we combine popover with our standard .card class?
+```html
+<div popover class="card">...</div>
+
+```
+Axiom01 components are composable. The framework automatically detects that a card is acting as a popover. It applies entrance and exit animations using modern @starting-style CSS, and even generates a subtle blurred ::backdrop behind it. You get a fully animated, accessible floating card without a single line of JS state.

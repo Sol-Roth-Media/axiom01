@@ -15,6 +15,14 @@
 (function(window) {
   'use strict';
 
+  const loaderScript = document.currentScript && document.currentScript.src
+    ? new URL(document.currentScript.src, window.location.href)
+    : new URL('js/axicons-loader.js', window.location.href);
+
+  function resolveAssetUrl(fileName) {
+    return new URL(`./${fileName}`, loaderScript).href;
+  }
+
   window.AxiconsLoader = {
     // Track loaded icon sets
     loaded: {
@@ -42,7 +50,7 @@
         }
         
         // Dynamically load base icons
-        const response = await fetch('js/axicons-base.js');
+        const response = await fetch(resolveAssetUrl('axicons-base.js'));
         const script = await response.text();
         eval(script);
         this.loaded.base = true;
@@ -67,7 +75,7 @@
       }
 
       try {
-        const response = await fetch('js/axicons-thin-variants.js');
+        const response = await fetch(resolveAssetUrl('axicons-thin-variants.js'));
         const script = await response.text();
         eval(script);
         this.loaded.thin = true;
@@ -92,7 +100,7 @@
       }
 
       try {
-        const response = await fetch('js/axicons-inverted-variants.js');
+        const response = await fetch(resolveAssetUrl('axicons-inverted-variants.js'));
         const script = await response.text();
         eval(script);
         this.loaded.inverted = true;
@@ -117,7 +125,7 @@
       }
 
       try {
-        const response = await fetch('js/axicons-color-variants.js');
+        const response = await fetch(resolveAssetUrl('axicons-color-variants.js'));
         const script = await response.text();
         eval(script);
         this.loaded.color = true;
@@ -142,7 +150,7 @@
       }
 
       try {
-        const response = await fetch('js/axicons-premium-variants.js');
+        const response = await fetch(resolveAssetUrl('axicons-premium-variants.js'));
         const script = await response.text();
         eval(script);
         this.loaded.premium = true;

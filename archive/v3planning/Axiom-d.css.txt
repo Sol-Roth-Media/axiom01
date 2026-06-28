@@ -1,0 +1,142 @@
+```css
+/* ==========================================================================
+   AXIOM01 - BATCH D: DATA & STATES (Tables, Tooltips, Loading Skeletons)
+   Philosophy: Maximize native HTML tags; utilize aria-attributes for state.
+   ========================================================================== */
+
+@layer axiom.components {
+
+  /* --- 1. THE SEMANTIC DATA TABLE --- */
+  /* A single class on the <table> element styles the entire nested tree. */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: var(--a-text-sm);
+    /* Make the table scrollable horizontally without a wrapper div */
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    
+    background: var(--a-surface-base);
+    border-radius: var(--a-radius);
+    border: 1px solid var(--a-border);
+  }
+
+  .table caption {
+    padding: var(--a-space-sm);
+    font-weight: 600;
+    color: var(--a-text-muted);
+    text-align: left;
+  }
+
+  .table th, 
+  .table td {
+    padding: var(--a-space-sm) var(--a-space-md);
+    border-bottom: 1px solid var(--a-border);
+  }
+
+  .table thead th {
+    background: var(--a-surface-raised);
+    color: var(--a-text-main);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: var(--a-text-xs);
+  }
+
+  /* Striping based on DOM index, not classes */
+  .table tbody tr:nth-child(even) {
+    background: color-mix(in oklch, var(--a-surface-raised) 50%, transparent);
+  }
+
+  /* Interactive rows */
+  .table tbody tr:hover {
+    background: var(--a-primary-subtle);
+  }
+
+  .table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* --- 2. ZERO-JS TOOLTIPS --- */
+  /* Axiom uses the data-tooltip attribute. No JS positioning libraries needed. */
+  [data-tooltip] {
+    position: relative;
+    cursor: help;
+  }
+
+  [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + var(--a-space-xs));
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    background: var(--a-text-main);
+    color: var(--a-surface-base);
+    padding: calc(var(--a-space-xs) * 0.5) var(--a-space-sm);
+    border-radius: calc(var(--a-radius) * 0.5);
+    font-size: var(--a-text-xs);
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+    
+    /* Animation states */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--a-transition), transform var(--a-transition);
+    z-index: 100;
+  }
+
+  [data-tooltip]:hover::after,
+  [data-tooltip]:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* --- 3. ACCESSIBLE LOADING STATES (SKELETONS) --- */
+  /* Instead of rendering <Skeleton /> components, Axiom intercepts aria-busy="true" 
+     and masks the existing content. */
+  
+  [aria-busy="true"] {
+    position: relative;
+    pointer-events: none;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  /* We use a pseudo-element to create a shimmering overlay that perfectly 
+     matches the shape of the component it is masking. */
+  [aria-busy="true"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    background: var(--a-surface-raised);
+    background-image: linear-gradient(
+      90deg, 
+      transparent, 
+      color-mix(in oklch, var(--a-surface-base) 40%, transparent), 
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: axiomShimmer 1.5s infinite linear;
+    border-radius: inherit;
+  }
+
+  /* For text elements, color the text transparent and round the background */
+  p[aria-busy="true"], h1[aria-busy="true"], h2[aria-busy="true"], span[aria-busy="true"] {
+    color: transparent !important;
+    border-radius: var(--a-radius);
+  }
+
+  @keyframes axiomShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+}
+
+```

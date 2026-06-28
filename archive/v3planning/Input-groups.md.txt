@@ -1,0 +1,27 @@
+# Input Groups
+Complex input affixes managed natively by flexbox and relational pseudo-classes.
+## The Semantic Reality
+When you need to build an input field with a prefix (like a $) or a suffix (like .com), utility frameworks require you to build a complex wrapper div. But there is a massive problem: **when the user focuses the input, the wrapper div doesn't know about it.** To fix this, developers have to write JavaScript to detect the onFocus event on the input, and then append a ring-blue-500 class to the parent wrapper.
+Axiom01 fixes this natively with CSS.
+### Axiom01 Approach
+```html
+<!-- HTML: Semantic | Classes: 1 | JS: 0 -->
+<label class="input-group">
+  <span>https://</span>
+  <input type="url" placeholder="your-domain">
+  <span>.com</span>
+</label>
+
+```
+## The Focus Proxy (:has())
+By wrapping everything inside a standard HTML <label>, we maintain perfect accessibility (clicking the prefix/suffix spans automatically focuses the input).
+Then, Axiom01 uses the CSS :has() selector to pass states upwards:
+```css
+/* Axiom Engine Logic */
+label.input-group:has(input:focus-visible) {
+  border-color: var(--a-primary);
+  box-shadow: 0 0 0 3px var(--a-primary-subtle);
+}
+
+```
+When the deeply nested <input> receives focus, the parent <label> *instantly* reacts, rendering a beautiful focus ring around the entire group. It also works for validation: if the input fails HTML validation, the entire group border turns red. Zero JavaScript.

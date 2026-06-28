@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Hierarchy Component - AXIOM01</title>
+	<link rel="stylesheet" href="../../css/axiom.min.css">
+	<link rel="stylesheet" href="../../css/axicons.css">
+</head>
+<body>
+
+<header class="main">
+	<nav role="navigation" aria-label="Main Navigation">
+		<a href="index.html" class="brand">AXIOM<span class="primary">01</span></a>
+		<ul class="links">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="components-overview.html">Components</a></li>
+		</ul>
+		<div class="actions">
+			<button class="search" aria-label="Search" title="Search"><span class="axicon render" data-name="Search"></span></button>
+			<button class="theme" aria-label="Toggle theme" title="Toggle theme"><span class="axicon render" data-name="Moon"></span></button>
+			<button class="menu toggle" aria-label="Toggle menu" title="Toggle menu"><span class="axicon render" data-name="Menu"></span></button>
+		</div>
+	</nav>
+</header>
+
+<main>
+	<article class="container">
+		<header>
+			<h1>Hierarchy Component</h1>
+			<p>Hierarchical tree lists for displaying nested data structures, organizational charts, and nested navigation. Uses native HTML `&lt;details&gt;` and `&lt;summary&gt;` for accessibility.</p>
+		</header>
+
+		<section>
+			<h2>Basic Hierarchy</h2>
+			<ul class="hierarchy">
+				<li>
+					<details>
+						<summary>Organization</summary>
+						<ul>
+							<li>
+								<details>
+									<summary>Engineering</summary>
+									<ul>
+										<li><a href="#backend">Backend Team</a></li>
+										<li><a href="#frontend">Frontend Team</a></li>
+										<li><a href="#devops">DevOps Team</a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details>
+									<summary>Product</summary>
+									<ul>
+										<li><a href="#pm">Product Management</a></li>
+										<li><a href="#design">Design Team</a></li>
+										<li><a href="#research">Research</a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details>
+									<summary>Operations</summary>
+									<ul>
+										<li><a href="#finance">Finance</a></li>
+										<li><a href="#hr">Human Resources</a></li>
+									</ul>
+								</details>
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>File Tree Example</h2>
+			<ul class="hierarchy">
+				<li>
+					<details open>
+						<summary>src/</summary>
+						<ul>
+							<li>
+								<details open>
+									<summary>components/</summary>
+									<ul>
+										<li><a href="#button">button.jsx</a></li>
+										<li><a href="#card">card.jsx</a></li>
+										<li><a href="#modal">modal.jsx</a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details>
+									<summary>styles/</summary>
+									<ul>
+										<li><a href="#base">base.css</a></li>
+										<li><a href="#theme">theme.css</a></li>
+									</ul>
+								</details>
+							</li>
+							<li>
+								<details>
+									<summary>utils/</summary>
+									<ul>
+										<li><a href="#helpers">helpers.js</a></li>
+										<li><a href="#constants">constants.js</a></li>
+									</ul>
+								</details>
+							</li>
+							<li><a href="#index">index.js</a></li>
+						</ul>
+					</details>
+				</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>HTML Structure</h2>
+			<p>Uses semantic HTML with nested `&lt;details&gt;` and `&lt;summary&gt;` elements:</p>
+			<pre><code>&lt;ul class="hierarchy"&gt;
+  &lt;li&gt;
+    &lt;details&gt;
+      &lt;summary&gt;Parent Item&lt;/summary&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Child Item&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;
+          &lt;details&gt;
+            &lt;summary&gt;Nested Parent&lt;/summary&gt;
+            &lt;ul&gt;
+              &lt;li&gt;&lt;a href="#"&gt;Nested Child&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/details&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/details&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+		</section>
+
+		<section>
+			<h2>Accessibility</h2>
+			<p>The hierarchy component uses native `&lt;details&gt;` and `&lt;summary&gt;` elements, providing:</p>
+			<ul>
+				<li>Native keyboard navigation (Enter/Space to expand/collapse)</li>
+				<li>Screen reader support out of the box</li>
+				<li>No JavaScript required for basic functionality</li>
+				<li>Enhanced keyboard support with arrow keys available via <code>window.Axiom.initHierarchyAccessibility()</code></li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>JavaScript Enhancement</h2>
+			<p>Enable arrow-key navigation for improved keyboard accessibility:</p>
+			<pre><code>// Initialize arrow-key navigation
+const hierarchyContainer = document.querySelector('.hierarchy');
+window.Axiom.initHierarchyAccessibility(hierarchyContainer);
+
+// Keyboard controls:
+// - Arrow Down: Focus next item
+// - Arrow Up: Focus previous item
+// - Arrow Right: Expand current details
+// - Arrow Left: Collapse current details</code></pre>
+		</section>
+
+		<section>
+			<h2>Design Tokens Used</h2>
+			<ul>
+				<li><code>--a-space-l</code> - Indentation per level</li>
+				<li><code>--a-space-m</code> - Vertical padding between items</li>
+				<li><code>--a-space-s</code> - Gap between toggle and text</li>
+				<li><code>--a-color-outline</code> - Tree lines color</li>
+				<li><code>--a-color-primary</code> - Hover state color</li>
+				<li><code>--a-font-weight-medium</code> - Summary text weight</li>
+				<li><code>--a-transition-base</code> - Smooth toggle animation</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>CSS Classes</h2>
+			<ul>
+				<li><code>.hierarchy</code> - Root container for tree list</li>
+				<li>Uses native `<details>` and `<summary>` elements (no additional classes needed)</li>
+				<li>Semantic `<ul>`, `<li>`, `<a>` elements for nesting</li>
+			</ul>
+		</section>
+
+	</article>
+</main>
+
+<footer class="footer">
+	<div class="container">
+		<div class="footer-content">
+			<div class="footer-brand">
+				<a href="index.html" class="footer-brand-logo">AXIOM<span class="primary">01</span></a>
+				<p class="footer-tagline">Semantic-first UI framework for modern web applications.</p>
+			</div>
+			<div class="footer-column">
+				<h4>Components</h4>
+				<ul>
+					<li><a href="components-overview.html">All Components</a></li>
+					<li><a href="components/steps.html">Steps</a></li>
+					<li><a href="components/hierarchy.html">Hierarchy</a></li>
+					<li><a href="components/popover.html">Popover</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Documentation</h4>
+				<ul>
+					<li><a href="styling-guide.html">Styling Guide</a></li>
+					<li><a href="layout-advanced.html">Layout</a></li>
+					<li><a href="accessibility.html">Accessibility</a></li>
+				</ul>
+			</div>
+			<div class="footer-column">
+				<h4>Resources</h4>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="index.html#icons">Icons</a></li>
+					<li><a href="index.html#tokens">Design Tokens</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p class="footer-copyright">&copy; 2024 AXIOM01. All rights reserved.</p>
+			<ul class="footer-social">
+				<li><a href="index.html" aria-label="GitHub">→</a></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+
+<script src="../../js/axiom.min.js"></script>
+<script src="../../js/axicons-loader.js"></script>
+<script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-thin-variants.js"></script>
+<script src="../../js/axicons-inverted-variants.js"></script>
+<script src="../../js/axicons-color-variants.js"></script>
+<script src="../../js/axicons-premium-variants.js"></script>
+<script src="../../js/render-icons.js"></script>
+<script>
+  function renderAxicons() {
+    if (typeof axicons === 'undefined') {
+      setTimeout(renderAxicons, 100);
+      return;
+    }
+    document.querySelectorAll('.axicon.render').forEach(el => {
+      const name = el.getAttribute('data-name');
+      if (!name) return;
+      const icon = axicons.find(i => i.name === name);
+      if (icon) {
+        el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderAxicons);
+  } else {
+    renderAxicons();
+  }
+  setTimeout(renderAxicons, 500);
+</script>
+</body>
+</html>

@@ -34,106 +34,88 @@
 		<div class="container">
 			<header>
 				<h1>Video Player</h1>
-				<p>Native <code>&lt;video&gt;</code> element. Built-in browser controls, no third-party dependencies, full accessibility support.</p>
+				<p>Native <code>&lt;video&gt;</code> element. Built-in controls, captions support, zero dependencies.</p>
 			</header>
 
 			<section>
 				<h2>Basic Video</h2>
 				<article class="card">
 					<figure>
-						<video controls width="100%" style="border-radius:var(--a-border-radius-base);">
-							<source src="video.mp4" type="video/mp4">
-							 Your browser does not support video.
-						</video>
+						<figure>
+							<video controls width="100%" style="border-radius:var(--a-border-radius-base);">
+								<source src="video.mp4" type="video/mp4">
+								<source src="video.webm" type="video/webm">
+								Your browser does not support video.
+							</video>
+							<figcaption>Video: Product walkthrough</figcaption>
+						</figure>
 					</figure>
-					<pre><code class="language-html">&lt;video controls width="100%"&gt;
-  &lt;source src="video.mp4" type="video/mp4"&gt;
-  &lt;source src="video.webm" type="video/webm"&gt;
-  Your browser does not support video.
-&lt;/video&gt;</code></pre>
+					<pre><code class="language-html">&lt;figure&gt;
+  &lt;video controls width="100%"&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    &lt;source src="video.webm" type="video/webm"&gt;
+    Your browser does not support video.
+  &lt;/video&gt;
+  &lt;figcaption&gt;Video description&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
 				</article>
 			</section>
 			<section>
 				<h2>With Poster and Captions</h2>
-				<pre><code class="language-html">&lt;video controls poster="thumbnail.jpg"&gt;
+				<article class="card">
+					<figure>
+						<video controls poster="thumbnail.jpg" width="100%" style="border-radius:var(--a-border-radius-base);">
+							<source src="video.mp4" type="video/mp4">
+							<track kind="captions" src="captions.vtt" srclang="en" label="English" default>
+						</video>
+					</figure>
+					<pre><code class="language-html">&lt;video controls poster="thumbnail.jpg"&gt;
   &lt;source src="video.mp4" type="video/mp4"&gt;
-  &lt;track kind="captions" src="captions.vtt" srclang="en" label="English" default&gt;
+  &lt;!-- Captions for accessibility --&gt;
+  &lt;track kind="captions"
+         src="captions.vtt"
+         srclang="en"
+         label="English"
+         default&gt;
 &lt;/video&gt;</code></pre>
+				</article>
 			</section>
 			<section>
-				<h2>Responsive 16:9</h2>
-				<pre><code class="language-html">&lt;figure&gt;
-  &lt;video controls width="100%"
-         style="aspect-ratio:16/9;object-fit:cover"&gt;
-    &lt;source src="video.mp4" type="video/mp4"&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;Video description for accessibility&lt;/figcaption&gt;
-&lt;/figure&gt;</code></pre>
+				<h2>Attributes Reference</h2>
+				<table><thead><tr><th>Attribute</th><th>Effect</th></tr></thead><tbody><tr><td><code>controls</code></td><td>Show browser UI (required)</td></tr><tr><td><code>poster</code></td><td>Image shown before playback</td></tr><tr><td><code>muted autoplay</code></td><td>Autoplay only when muted</td></tr><tr><td><code>loop</code></td><td>Repeat playback</td></tr><tr><td><code>playsinline</code></td><td>Play inline on iOS (not fullscreen)</td></tr></tbody></table>
 			</section>
 			<section>
 				<h2>Accessibility</h2>
 				<ul>
 					<li>Always include <code>controls</code> — hidden video controls fail WCAG</li>
-					<li>Add <code>&lt;track kind="captions"&gt;</code> for all spoken content</li>
-					<li>Use <code>poster</code> to show a representative frame before playback</li>
-					<li>Never autoplay video with sound</li>
+					<li>Include <code>&lt;track kind="captions"&gt;</code> for all speech content</li>
+					<li>Use <code>poster</code> — shows a meaningful image before playback</li>
+					<li>Never autoplay video with sound — violates WCAG SC 1.4.2</li>
 				</ul>
 			</section>
-
 		</div>
 	</section>
 </main>
 <footer class="footer">
 	<div class="container">
 		<div class="footer-content">
-			<div class="footer-brand">
-				<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
-			</div>
-			<div class="footer-column">
-				<h4>Documentation</h4>
-				<ul>
-					<li><a href="../components-overview.html">All Components</a></li>
-					<li><a href="../overview-quickstart.html">Get Started</a></li>
-					<li><a href="../colors-advanced.html">Colors &amp; Tokens</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Resources</h4>
-				<ul>
-					<li><a href="../../README.md" target="_blank">README</a></li>
-					<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-					<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Community</h4>
-				<ul>
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
-				</ul>
-			</div>
+			<div class="footer-brand"><a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a><p class="footer-tagline">The Semantic Web, Reimagined.</p></div>
+			<div class="footer-column"><h4>Documentation</h4><ul><li><a href="../components-overview.html">All Components</a></li><li><a href="../overview-quickstart.html">Get Started</a></li></ul></div>
+			<div class="footer-column"><h4>Community</h4><ul><li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li></ul></div>
 		</div>
-		<div class="footer-bottom">
-			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
-			<ul class="footer-social">
-				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
-				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
-			</ul>
-		</div>
+		<div class="footer-bottom"><p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p></div>
 	</div>
 </footer>
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
-<script>
-function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
-</script>
+<script>function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-thin-variants.js"></script>
+<script src="../../js/axicons-color-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
 </body>
 </html>

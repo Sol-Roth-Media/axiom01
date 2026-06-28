@@ -14,7 +14,6 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body class="axiom-body component-doc">
-
 <header class="main" data-component="mobile-navbar">
 	<nav role="navigation" aria-label="Main Navigation">
 		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
@@ -30,132 +29,92 @@
 		</div>
 	</nav>
 </header>
-
 <main id="main-content">
-
 	<section>
 		<div class="container">
-
 			<header>
 				<h1>Menu</h1>
-				<p>Context menu using the native <code>&lt;menu&gt;</code> element and <code>role="menu"</code>. Semantic, keyboard-accessible, zero JS framework needed.</p>
+				<p>Context and action menus using <code>&lt;menu role="menu"&gt;</code>. Keyboard navigable, ARIA-compliant.</p>
 			</header>
 
 			<section>
 				<h2>Context Menu</h2>
 				<article class="card">
 					<figure>
-						<p>Right-click the button or use the toggle:</p>
 						<menu role="menu" data-open="true" aria-label="Item actions">
-							<button role="menuitem">
-								<span class="axicon render" data-name="Edit"></span> Edit
-							</button>
-							<button role="menuitem">
-								<span class="axicon render" data-name="Copy"></span> Duplicate
-							</button>
+							<button role="menuitem"><span class="axicon render" data-name="Edit"></span> Edit</button>
+							<button role="menuitem"><span class="axicon render" data-name="Copy"></span> Duplicate</button>
+							<button role="menuitem"><span class="axicon render" data-name="Share"></span> Share</button>
 							<hr>
-							<button role="menuitem" data-variant="danger">
-								<span class="axicon render" data-name="Trash"></span> Delete
-							</button>
+							<button role="menuitem" data-variant="danger"><span class="axicon render" data-name="Trash"></span> Delete</button>
 						</menu>
 					</figure>
 					<pre><code class="language-html">&lt;menu role="menu" data-open="true" aria-label="Item actions"&gt;
   &lt;button role="menuitem"&gt;
     &lt;span class="axicon render" data-name="Edit"&gt;&lt;/span&gt; Edit
   &lt;/button&gt;
-  &lt;button role="menuitem"&gt;
-    &lt;span class="axicon render" data-name="Copy"&gt;&lt;/span&gt; Duplicate
-  &lt;/button&gt;
-  &lt;hr&gt;
   &lt;button role="menuitem" data-variant="danger"&gt;
     &lt;span class="axicon render" data-name="Trash"&gt;&lt;/span&gt; Delete
   &lt;/button&gt;
 &lt;/menu&gt;</code></pre>
 				</article>
 			</section>
-
 			<section>
 				<h2>Toggle Visibility</h2>
 				<pre><code class="language-js">// Show
 menu.dataset.open = 'true';
-
 // Hide
 delete menu.dataset.open;
-// or:
-menu.dataset.open = 'false';</code></pre>
-			</section>
 
+// Close on outside click
+document.addEventListener('click', e => {
+  if (!menu.contains(e.target) && !trigger.contains(e.target)) {
+    delete menu.dataset.open;
+  }
+});</code></pre>
+			</section>
+			<section>
+				<h2>Keyboard Navigation</h2>
+				<pre><code class="language-js">menu.addEventListener('keydown', e => {
+  const items = [...menu.querySelectorAll('[role="menuitem"]')];
+  const idx = items.indexOf(document.activeElement);
+  if (e.key === 'ArrowDown') items[(idx + 1) % items.length].focus();
+  if (e.key === 'ArrowUp') items[(idx - 1 + items.length) % items.length].focus();
+  if (e.key === 'Escape') { delete menu.dataset.open; trigger.focus(); }
+});</code></pre>
+			</section>
 			<section>
 				<h2>Accessibility</h2>
 				<ul>
-					<li>The trigger button needs <code>aria-haspopup="menu"</code> and <code>aria-expanded</code></li>
-					<li>Arrow keys should navigate between <code>menuitem</code> buttons</li>
-					<li><code>Escape</code> should close the menu and return focus to trigger</li>
-					<li>Use <code>&lt;hr&gt;</code> to separate groups — avoid extra wrapper divs</li>
+					<li>Trigger button needs <code>aria-haspopup="menu"</code> and <code>aria-expanded</code></li>
+					<li>Arrow keys navigate between <code>menuitem</code> buttons</li>
+					<li><kbd>Escape</kbd> closes and returns focus to trigger</li>
+					<li>Use <code>&lt;hr&gt;</code> to separate groups — not wrapper divs</li>
 				</ul>
 			</section>
-
 		</div>
 	</section>
-
 </main>
-
 <footer class="footer">
 	<div class="container">
 		<div class="footer-content">
-			<div class="footer-brand">
-				<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
-			</div>
-			<div class="footer-column">
-				<h4>Documentation</h4>
-				<ul>
-					<li><a href="../components-overview.html">All Components</a></li>
-					<li><a href="../overview-quickstart.html">Get Started</a></li>
-					<li><a href="../colors-advanced.html">Colors &amp; Tokens</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Resources</h4>
-				<ul>
-					<li><a href="../../README.md" target="_blank">README</a></li>
-					<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-					<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Community</h4>
-				<ul>
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
-				</ul>
-			</div>
+			<div class="footer-brand"><a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a><p class="footer-tagline">The Semantic Web, Reimagined.</p></div>
+			<div class="footer-column"><h4>Documentation</h4><ul><li><a href="../components-overview.html">All Components</a></li><li><a href="../overview-quickstart.html">Get Started</a></li></ul></div>
+			<div class="footer-column"><h4>Community</h4><ul><li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li></ul></div>
 		</div>
-		<div class="footer-bottom">
-			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
-			<ul class="footer-social">
-				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
-				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
-			</ul>
-		</div>
+		<div class="footer-bottom"><p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p></div>
 	</div>
 </footer>
-
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
-<script>
-function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
-</script>
+<script>function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
 <script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
 <script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
 </body>
 </html>

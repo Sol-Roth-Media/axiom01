@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datepicker Component - Axiom01</title>
+    <link rel="stylesheet" href="../../css/axiom.min.css">
+    <link rel="stylesheet" href="../../css/axicons.css">
+    <link rel="stylesheet" href="../../css/docs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .field[data-type="date"] {
+            display: flex;
+            flex-direction: column;
+            gap: var(--a-space-m);
+        }
+
+        input[type="date"] {
+            padding: var(--a-space-m);
+            border: 1px solid var(--a-color-border);
+            border-radius: var(--a-border-radius-s);
+            font-family: inherit;
+        }
+
+        .help-text {
+            font-size: 0.85rem;
+            color: var(--a-color-text-muted);
+            margin: 0;
+        }
+
+        .date-range {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--a-space-l);
+        }
+
+        @media (max-width: 640px) {
+            .date-range {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        [role="grid"] {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            padding: var(--a-space-m);
+            border: 1px solid var(--a-color-border);
+            border-radius: var(--a-border-radius-base);
+            background: var(--a-color-background);
+            max-width: 400px;
+        }
+
+        [role="grid"] button {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--a-space-m);
+            background: var(--a-color-background-secondary);
+            border: none;
+            border-radius: var(--a-border-radius-s);
+            margin-bottom: var(--a-space-m);
+        }
+
+        [role="grid"] button:first-child,
+        [role="grid"] button:last-child {
+            grid-column: auto;
+        }
+
+        [role="columnheader"] {
+            text-align: center;
+            font-weight: 600;
+            color: var(--a-color-text-muted);
+            font-size: 0.85rem;
+            padding: var(--a-space-s);
+        }
+
+        [role="gridcell"] {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--a-space-m);
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: var(--a-border-radius-s);
+            min-height: 40px;
+            transition: all 0.2s ease;
+        }
+
+        [role="gridcell"]:hover {
+            background: var(--a-color-background-secondary);
+        }
+
+        [role="gridcell"][data-other-month="true"] {
+            color: var(--a-color-text-muted);
+            opacity: 0.5;
+        }
+
+        [role="gridcell"][data-today="true"] {
+            border-color: var(--a-color-primary);
+            font-weight: 600;
+        }
+
+        [role="gridcell"][data-selected="true"] {
+            background: var(--a-color-primary);
+            color: var(--a-color-on-primary);
+        }
+    </style>
+</head>
+<body class="axiom-body component-doc">
+    <!-- HEADER NAVIGATION -->
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="../../index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="../../index.html#get-started">Get Started</a></li>
+                <li><a href="../components-overview.html">Docs</a></li>
+                <li><a href="../../index.html#axicons">Axicons</a></li>
+            </ul>
+
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="GitHub"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="axicon render" data-name="Moon"></span>
+                </button>
+                <button class="menu toggle" aria-label="Toggle Menu">
+                    <span class="axicon render" data-name="Menu"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main><section><div class="container">
+        <header>
+            <h1>Datepicker</h1>
+            <p class="text-muted">Semantic datepicker component with calendar grid interface. Supports single date selection, date ranges, and HTML5 date inputs with full keyboard navigation and accessibility.</p>
+        </header>
+
+        <div class="component-section">
+
+            <section>
+                <h2>Single Date Selection</h2>
+
+                <div class="field" data-type="date">
+                    <label for="date1">Select Date</label>
+                    <input type="date" id="date1" aria-label="Select a date">
+                    <p class="help-text">Click the input to select a date from the calendar</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Date Range Selection</h2>
+
+                <div class="field" data-type="date">
+                    <label>Date Range</label>
+                    <div class="date-range">
+                        <div class="field" data-type="date">
+                            <label for="startDate">Start Date</label>
+                            <input type="date" id="startDate" aria-label="Start date of range">
+                        </div>
+                        <div class="field" data-type="date">
+                            <label for="endDate">End Date</label>
+                            <input type="date" id="endDate" aria-label="End date of range">
+                        </div>
+                    </div>
+                    <p class="help-text">Select a range for date filtering or reporting</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Calendar Grid</h2>
+
+                <div role="grid" aria-label="Calendar">
+                    <div style="grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; padding: var(--a-space-m); background: var(--a-color-background-secondary); border-radius: var(--a-border-radius-s); margin-bottom: var(--a-space-m);">
+                        <button type="button" class="button" data-variant="secondary" aria-label="Previous month" style="flex: 0;">
+                            <span class="axicon render" data-name="ChevronLeft"></span>
+                        </button>
+                        <strong id="monthYear">January 2024</strong>
+                        <button type="button" class="button" data-variant="secondary" aria-label="Next month" style="flex: 0;">
+                            <span class="axicon render" data-name="ChevronRight"></span>
+                        </button>
+                    </div>
+
+                    <div role="columnheader">Sun</div>
+                    <div role="columnheader">Mon</div>
+                    <div role="columnheader">Tue</div>
+                    <div role="columnheader">Wed</div>
+                    <div role="columnheader">Thu</div>
+                    <div role="columnheader">Fri</div>
+                    <div role="columnheader">Sat</div>
+
+                    <!-- Previous month days -->
+                    <button role="gridcell" data-other-month="true" tabindex="-1">31</button>
+
+                    <!-- Current month days -->
+                    <button role="gridcell" tabindex="0">1</button>
+                    <button role="gridcell" tabindex="-1">2</button>
+                    <button role="gridcell" tabindex="-1">3</button>
+                    <button role="gridcell" tabindex="-1">4</button>
+                    <button role="gridcell" tabindex="-1">5</button>
+                    <button role="gridcell" tabindex="-1">6</button>
+
+                    <button role="gridcell" tabindex="-1">7</button>
+                    <button role="gridcell" tabindex="-1">8</button>
+                    <button role="gridcell" tabindex="-1">9</button>
+                    <button role="gridcell" tabindex="-1">10</button>
+                    <button role="gridcell" tabindex="-1">11</button>
+                    <button role="gridcell" data-today="true" tabindex="0">12</button>
+                    <button role="gridcell" data-selected="true" tabindex="-1">13</button>
+
+                    <button role="gridcell" tabindex="-1">14</button>
+                    <button role="gridcell" tabindex="-1">15</button>
+                    <button role="gridcell" tabindex="-1">16</button>
+                    <button role="gridcell" tabindex="-1">17</button>
+                    <button role="gridcell" tabindex="-1">18</button>
+                    <button role="gridcell" tabindex="-1">19</button>
+                    <button role="gridcell" tabindex="-1">20</button>
+
+                    <button role="gridcell" tabindex="-1">21</button>
+                    <button role="gridcell" tabindex="-1">22</button>
+                    <button role="gridcell" tabindex="-1">23</button>
+                    <button role="gridcell" tabindex="-1">24</button>
+                    <button role="gridcell" tabindex="-1">25</button>
+                    <button role="gridcell" tabindex="-1">26</button>
+                    <button role="gridcell" tabindex="-1">27</button>
+
+                    <button role="gridcell" tabindex="-1">28</button>
+                    <button role="gridcell" tabindex="-1">29</button>
+                    <button role="gridcell" tabindex="-1">30</button>
+                    <button role="gridcell" tabindex="-1">31</button>
+
+                    <!-- Next month days -->
+                    <button role="gridcell" data-other-month="true" tabindex="-1">1</button>
+                    <button role="gridcell" data-other-month="true" tabindex="-1">2</button>
+                    <button role="gridcell" data-other-month="true" tabindex="-1">3</button>
+                </div>
+            </section>
+
+            <section>
+                <h2>HTML Structure</h2>
+                <div class="code-block">
+                    <pre><code class="language-html">&lt;!-- Simple date input --&gt;
+&lt;div class="field" data-type="date"&gt;
+    &lt;label for="date"&gt;Select Date&lt;/label&gt;
+    &lt;input type="date" id="date"&gt;
+&lt;/div&gt;
+
+&lt;!-- Date range --&gt;
+&lt;div class="field" data-type="date"&gt;
+    &lt;label&gt;Date Range&lt;/label&gt;
+    &lt;div class="date-range"&gt;
+        &lt;div class="field" data-type="date"&gt;
+            &lt;label for="start"&gt;Start Date&lt;/label&gt;
+            &lt;input type="date" id="start"&gt;
+        &lt;/div&gt;
+        &lt;div class="field" data-type="date"&gt;
+            &lt;label for="end"&gt;End Date&lt;/label&gt;
+            &lt;input type="date" id="end"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Calendar grid --&gt;
+&lt;div role="grid" aria-label="Calendar"&gt;
+    &lt;div role="columnheader"&gt;Sun&lt;/div&gt;
+    &lt;button role="gridcell" data-today="true"&gt;12&lt;/button&gt;
+    &lt;button role="gridcell" data-selected="true"&gt;13&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Data Attributes</h2>
+                <ul>
+                    <li><strong>`data-type="date"`</strong> - Container for date field</li>
+                    <li><strong>`data-today="true"`</strong> - Marks today's date in calendar</li>
+                    <li><strong>`data-selected="true"`</strong> - Marks selected date</li>
+                    <li><strong>`data-other-month="true"`</strong> - Days from adjacent months</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>ARIA Attributes</h2>
+                <ul>
+                    <li><strong>`role="grid"`</strong> - Calendar container</li>
+                    <li><strong>`role="columnheader"`</strong> - Day of week headers</li>
+                    <li><strong>`role="gridcell"`</strong> - Individual calendar dates</li>
+                    <li><strong>`tabindex`</strong> - Keyboard navigation in calendar</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>HTML5 Date Input</strong> - Native browser support with fallback</li>
+                    <li><strong>Single Date Selection</strong> - Pick one date easily</li>
+                    <li><strong>Date Range</strong> - Select start and end dates</li>
+                    <li><strong>Calendar Grid</strong> - Visual calendar interface</li>
+                    <li><strong>Today Highlight</strong> - Current date marked with data-today</li>
+                    <li><strong>Month Navigation</strong> - Navigate between months</li>
+                    <li><strong>Keyboard Navigation</strong> - Full keyboard support</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Use Cases</h2>
+                <ul>
+                    <li><strong>Booking Systems</strong> - Hotel, flight, appointment booking</li>
+                    <li><strong>Event Registration</strong> - Conference or event date selection</li>
+                    <li><strong>Date Range Filters</strong> - Analytics and reporting date ranges</li>
+                    <li><strong>Birthday Selection</strong> - User profile and account forms</li>
+                    <li><strong>Project Timelines</strong> - Project start and end dates</li>
+                    <li><strong>Leave Request</strong> - Time off and vacation requests</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="title">Responsive Behavior</h2>
+                <p>This component automatically adapts to different screen sizes:</p>
+                
+                <h3>Mobile (< 768px)</h3>
+                <p>On mobile devices:</p>
+                <ul>
+                    <li>Optimized for small screens</li>
+                    <li>Touch-friendly spacing maintained (44px minimum)</li>
+                    <li>Text wraps naturally without overflow</li>
+                    <li>Content density optimized for readability</li>
+                </ul>
+
+                <h3>Desktop (1024px+)</h3>
+                <p>On desktop displays:</p>
+                <ul>
+                    <li>Enhanced visual features</li>
+                    <li>Hover states and transitions</li>
+                    <li>Full keyboard navigation support</li>
+                    <li>Optimal spacing and sizing</li>
+                </ul>
+
+                <h3>Framework Integration</h3>
+                <p>Responsive behavior is automatic:</p>
+                <ul>
+                    <li>Framework handles media queries</li>
+                    <li>No custom CSS required</li>
+                    <li>Mobile-first approach applied</li>
+                    <li>Accessibility maintained at all sizes</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Best Practices</h2>
+                <ul>
+                    <li><strong>Use Native Input</strong> - Let browsers handle date picking when possible</li>
+                    <li><strong>Consistent Format</strong> - Always use YYYY-MM-DD format internally</li>
+                    <li><strong>Today Button</strong> - Quick access to today's date</li>
+                    <li><strong>Range Validation</strong> - Ensure end date is after start date</li>
+                    <li><strong>Full Keyboard Support</strong> - Navigate calendar with arrows</li>
+                    <li><strong>Mobile Friendly</strong> - Native date picker on mobile devices</li>
+                </ul>
+            </section>
+
+        </div>
+
+    </div></section></main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Main Content Grid -->
+            <div class="footer-content">
+                <!-- Brand Section -->
+                <div class="footer-brand">
+                    <a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+                    <p class="footer-tagline">The Semantic Web, Reimagined.</p>
+                </div>
+
+                <!-- Documentation Links -->
+                <div class="footer-column">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../components-overview.html">Component Overview</a></li>
+                        <li><a href="../overview-quickstart.html">Get Started</a></li>
+                        <li><a href="../colors-advanced.html">Colors & Tokens</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Links -->
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../../README.md" target="_blank">README</a></li>
+                        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+                        <li><a href="../../LICENSE" target="_blank">License</a></li>
+                    </ul>
+                </div>
+
+                <!-- Community Links -->
+                <div class="footer-column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+                <ul class="footer-social">
+                    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+                        <span class="axicon render" data-name="GitHub"></span>
+                    </a></li>
+                    <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+                        <span class="axicon render" data-name="Brand-NPM"></span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/axiom.js"></script>
+    <script src="../../js/index-page-manager.js"></script>
+    <script>
+        function renderAxicons() {
+            if (typeof axicons === 'undefined') {
+                setTimeout(renderAxicons, 100);
+                return;
+            }
+            
+            document.querySelectorAll('.axicon.render').forEach(el => {
+                const name = el.getAttribute('data-name');
+                if (!name) return;
+                
+                const icon = axicons.find(i => i.name === name);
+                if (icon) {
+                    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+                }
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAxicons);
+        } else {
+            renderAxicons();
+        }
+
+        setTimeout(renderAxicons, 500);
+
+        // Calendar keyboard navigation demo
+        const grid = document.querySelector('[role="grid"]');
+        const cells = grid.querySelectorAll('[role="gridcell"]');
+        let focusedIndex = 5; // Start on first actual date
+
+        cells.forEach((cell, idx) => {
+            cell.addEventListener('click', () => {
+                if (!cell.getAttribute('data-other-month')) {
+                    cells.forEach(c => c.setAttribute('data-selected', 'false'));
+                    cell.setAttribute('data-selected', 'true');
+                }
+            });
+
+            cell.addEventListener('keydown', (e) => {
+                let newIndex = focusedIndex;
+                
+                if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    newIndex = Math.min(focusedIndex + 1, cells.length - 1);
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    newIndex = Math.max(focusedIndex - 1, 0);
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    newIndex = Math.min(focusedIndex + 7, cells.length - 1);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    newIndex = Math.max(focusedIndex - 7, 0);
+                } else if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    cells[focusedIndex].click();
+                    return;
+                } else {
+                    return;
+                }
+
+                focusedIndex = newIndex;
+                cells[focusedIndex].focus();
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="../../js/axicons-loader.js"></script>
+    <script src="../../js/axicons-base.js"></script>
+    <script src="../../js/axicons-thin-variants.js"></script>
+    <script src="../../js/axicons-inverted-variants.js"></script>
+    <script src="../../js/axicons-color-variants.js"></script>
+    <script src="../../js/axicons-premium-variants.js"></script>
+    <script src="../../js/render-icons.js"></script>
+</body>
+</html>

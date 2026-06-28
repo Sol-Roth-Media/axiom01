@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Axiom01 - Semantic-First UI Framework</title>
+	<!-- FOUC Prevention: Set theme before rendering -->
+	<script>
+		(function () {
+			const theme = localStorage.getItem("theme");
+			if (theme) {
+				document.documentElement.setAttribute("data-theme", theme);
+			} else {
+				const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+				document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+			}
+		})();
+	</script>
+	<meta name="description" content="Craft beautiful interfaces with less markup. Axiom01 is a semantic-first UI framework that prioritizes accessibility, flexibility and clean code.">
+	<!-- Favicon links -->
+	<link rel="icon" type="image/x-icon" href="./favicon/favicon.ico">
+	<link rel="icon" type="image/png" sizes="32x32" href="./favicon/axiom_favicon_32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./favicon/axiom_favicon_16.png">
+	<link rel="apple-touch-icon" href="./favicon/axiom_favicon_180.png">
+	<link rel="manifest" href="./favicon/manifest.json">
+	<meta name="theme-color" content="#007bff">
+
+	<link rel="stylesheet" href="css/axiom.css?v=2.2.2">
+	<link rel="stylesheet" href="css/axicons.css">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+	<style>
+		/* FOOTER COMPONENT STYLES */
+		footer.footer {
+			background: var(--ax-surface);
+			color: var(--ax-text);
+			border-top: 2px solid var(--ax-border);
+			padding: var(--a-space-3xl) var(--a-space-l);
+			margin-top: var(--a-space-4xl);
+			transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
+		}
+
+		footer.footer .container {
+			max-width: var(--ax-max-width);
+			margin: 0 auto;
+		}
+
+		footer.footer .footer-content {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: var(--a-space-2xl);
+			margin-bottom: var(--a-space-2xl);
+			padding-bottom: var(--a-space-2xl);
+			border-bottom: 1px solid var(--ax-border);
+			transition: gap var(--a-transition-base);
+		}
+
+		footer.footer .footer-brand {
+			display: flex;
+			flex-direction: column;
+			gap: var(--a-space-m);
+		}
+
+		footer.footer .footer-brand-logo {
+			font-family: var(--a-font-family-mono);
+			font-size: var(--a-font-size-l);
+			font-weight: var(--a-font-weight-bold);
+			color: var(--a-color-on-surface);
+			text-decoration: none;
+			transition: all var(--a-transition-base);
+			display: inline-block;
+			max-width: fit-content;
+			position: relative;
+		}
+
+		footer.footer .footer-brand-logo::before {
+			content: '';
+			position: absolute;
+			inset: -4px -8px;
+			background: var(--a-color-primary);
+			border-radius: var(--a-border-radius-sm);
+			opacity: 0;
+			z-index: -1;
+			transition: opacity var(--a-transition-base);
+		}
+
+		footer.footer .footer-brand-logo:hover {
+			color: var(--a-color-primary);
+		}
+
+		footer.footer .footer-brand-logo:hover::before {
+			opacity: 0.1;
+		}
+
+		footer.footer .footer-brand-logo .primary {
+			color: var(--a-color-primary);
+		}
+
+		footer.footer .footer-tagline {
+			font-size: var(--a-font-size-s);
+			color: var(--a-color-text-muted);
+			margin: 0;
+			line-height: var(--a-line-height-base);
+		}
+
+		footer.footer .footer-column {
+			display: flex;
+			flex-direction: column;
+			gap: var(--a-space-m);
+		}
+
+		footer.footer .footer-column h4 {
+			font-size: var(--a-font-size-base);
+			font-weight: var(--a-font-weight-semibold);
+			color: var(--a-color-on-surface);
+			margin: 0;
+			padding: 0;
+			line-height: var(--a-line-height-heading);
+			letter-spacing: -0.01em;
+		}
+
+		footer.footer .footer-column ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			gap: var(--a-space-s);
+		}
+
+		footer.footer .footer-column li {
+			margin: 0;
+			padding: 0;
+		}
+
+		footer.footer .footer-column a {
+			color: var(--a-color-text-secondary);
+			text-decoration: none;
+			font-size: var(--a-font-size-s);
+			font-weight: var(--a-font-weight-normal);
+			transition: color var(--a-transition-base), text-decoration var(--a-transition-base);
+			line-height: var(--a-line-height-base);
+			position: relative;
+		}
+
+		footer.footer .footer-column a::after {
+			content: '';
+			position: absolute;
+			bottom: -2px;
+			left: 0;
+			width: 0;
+			height: 2px;
+			background: var(--a-color-primary);
+			transition: width var(--a-transition-base);
+		}
+
+		footer.footer .footer-column a:hover {
+			color: var(--a-color-primary);
+		}
+
+		footer.footer .footer-column a:hover::after {
+			width: 100%;
+		}
+
+		footer.footer .footer-bottom {
+			display: flex;
+			flex-direction: column;
+			gap: var(--a-space-l);
+			align-items: flex-start;
+		}
+
+		@media (min-width: 640px) {
+			footer.footer .footer-bottom {
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+			}
+		}
+
+		footer.footer .footer-copyright {
+			font-size: var(--a-font-size-xs);
+			color: var(--a-color-text-muted);
+			margin: 0;
+			line-height: var(--a-line-height-base);
+			flex: 1;
+		}
+
+		footer.footer .footer-copyright a {
+			color: var(--a-color-text-secondary);
+			text-decoration: none;
+			transition: color var(--a-transition-base);
+		}
+
+		footer.footer .footer-copyright a:hover {
+			color: var(--a-color-primary);
+			text-decoration: underline;
+		}
+
+		footer.footer .footer-social {
+			display: flex;
+			gap: var(--a-space-m);
+			align-items: center;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		footer.footer .footer-social li {
+			margin: 0;
+			padding: 0;
+		}
+
+		footer.footer .footer-social a {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 36px;
+			height: 36px;
+			border-radius: var(--a-border-radius-md);
+			background-color: var(--a-color-primary-container);
+			color: var(--a-color-primary);
+			text-decoration: none;
+			transition: background-color var(--a-transition-base), color var(--a-transition-base), transform var(--a-transition-base);
+			font-size: var(--a-font-size-base);
+		}
+
+		footer.footer .footer-social a:hover {
+			background-color: var(--a-color-primary);
+			color: var(--a-color-on-primary);
+			transform: translateY(-2px);
+		}
+
+		footer.footer .footer-scroll-top {
+			display: inline-flex !important;
+			align-items: center;
+			justify-content: center;
+			width: 36px;
+			height: 36px;
+			border-radius: var(--a-border-radius-md);
+			background-color: var(--a-color-success-container);
+			color: var(--a-color-success);
+			border: none;
+			cursor: pointer;
+			transition: all var(--a-transition-base);
+			font-size: var(--a-font-size-base);
+			padding: 0;
+		}
+
+		footer.footer .footer-scroll-top:hover {
+			background-color: var(--a-color-success);
+			color: var(--a-color-on-success);
+			transform: translateY(-2px);
+		}
+
+		footer.footer .footer-scroll-top:active {
+			transform: translateY(0);
+		}
+
+		@media (max-width: 640px) {
+			footer.footer {
+				padding: var(--a-space-2xl) var(--a-space-m);
+				margin-top: var(--a-space-3xl);
+			}
+
+			footer.footer .footer-content {
+				grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+				gap: var(--a-space-xl);
+				margin-bottom: var(--a-space-xl);
+				padding-bottom: var(--a-space-xl);
+			}
+
+			footer.footer .footer-column h4 {
+				font-size: var(--a-font-size-s);
+			}
+
+			footer.footer .footer-column a {
+				font-size: var(--a-font-size-xs);
+			}
+
+			footer.footer .footer-bottom {
+				gap: var(--a-space-m);
+			}
+		}
+	</style>
+
+</head>
+<body class="axiom-body">
+
+<header class="main" data-component="mobile-navbar">
+	<nav role="navigation" aria-label="Main Navigation">
+		<a href="/" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+		<ul class="links">
+			<li><a href="docs/overview-quickstart.html">Get Started</a></li>
+			<li><a href="docs/components-overview.html">Docs</a></li>
+			<li><a href="#axicons">Axicons</a></li>
+		</ul>
+
+		<div class="actions">
+			<button class="search toggle" aria-label="Open Search">
+				<span class="axicon render" data-name="Search"></span>
+			</button>
+			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+				<span class="axicon render" data-name="GitHub"></span>
+				<span>GitHub</span>
+			</a>
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+				<span class="axicon render" data-name="Moon"></span>
+			</button>
+			<button class="menu toggle" aria-label="Toggle Menu">
+				<span class="axicon render" data-name="Menu"></span>
+			</button>
+		</div>
+	</nav>
+</header>
+
+<main>
+	<!-- HERO COMPONENT -->
+	<section class="hero">
+		<div class="container">
+			<h1>Write Less Code.<br>Build Better Interfaces.</h1>
+			<p class="tagline">Semantic HTML meets beautiful design. No utility chaos. No <abbr title="BEM">BEM</abbr> complexity.</p>
+
+			<div class="actions">
+				<a href="docs/overview-quickstart.html" class="button primary lg">Get Started Now</a>
+				<a href="https://www.npmjs.com/package/axiom01" class="button secondary lg" target="_blank" rel="noopener">View on npm ↗</a>
+				<a href="#components" class="button outline lg">Explore Components</a>
+			</div>
+
+			<p>Most frameworks ask: "What does your interface look like?" Axiom01 asks: "What does your interface mean?" Write semantic HTML that describes content structure, not visual presentation. Use one semantic class per component. Change tokens globally and watch your entire interface transform in perfect symmetry. Everything is calculated—spacing, color harmony, typography rhythm. No utility chaos. No BEM complexity. Just meaningful markup and a framework that respects your code.</p>
+
+			<div class="grid">
+				<div class="stat animate delay-1">
+					<span class="axicon render icon" data-name="Trophy"></span>
+					<div class="value">73</div>
+					<div class="label">Components</div>
+					<p>Button, Card, Modal, Table, Video Player, AI Chat, and more</p>
+				</div>
+				<div class="stat animate delay-2">
+					<span class="axicon render icon" data-name="Lightbulb-Color"></span>
+					<div class="value">149</div>
+					<div class="label">Tokens</div>
+					<p>Colors, Spacing, Typography, Shadows, Animations</p>
+				</div>
+				<div class="stat animate delay-3">
+					<span class="axicon render icon" data-name="Zap"></span>
+					<div class="value">20+</div>
+					<div class="label">Animations</div>
+					<p>Fade, Slide, Scale, Bounce, GPU-accelerated</p>
+				</div>
+				<div class="stat animate delay-4">
+					<span class="axicon render icon" data-name="Cloud"></span>
+					<div class="value">13.3</div>
+					<div class="label">KB CSS GZIPPED</div>
+					<p>Everything included. Total: 14.3 KB</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- QUICK FACTS -->
+	<section id="quick-facts">
+		<div class="container">
+			<header>
+				<h2>Why Axiom01 is Different</h2>
+				<p>While other frameworks add complexity, Axiom subtracts it.</p>
+			</header>
+			<div class="grid">
+				<article class="card animate">
+					<span class="axicon render" data-name="Brain"></span>
+					<h3>Semantic-First</h3>
+					<p>Write meaningful HTML using <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;header&gt;</code>. Axiom understands your content.</p>
+					<footer><span class="badge success">Not Utility Classes</span></footer>
+				</article>
+				<article class="card animate delay-1">
+					<span class="axicon render" data-name="Minimize"></span>
+					<h3>Minimal Classes</h3>
+					<p>One class per component. <code>class="card"</code> instead of <code>class="max-w-sm rounded shadow-lg bg-white p-6"</code>.</p>
+					<footer><span class="badge success">1-2 vs 10-15</span></footer>
+				</article>
+				<article class="card animate delay-2">
+					<span class="axicon render" data-name="Lock"></span>
+					<h3>Accessible by Default</h3>
+					<p>WCAG 2.1 AA out of the box. Keyboard navigation, focus states, color contrast all handled.</p>
+					<footer><span class="badge success">No Extra Work</span></footer>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<!-- AXIOM PHILOSOPHY -->
+	<section>
+		<div class="container">
+			<article class="card" style="background: linear-gradient(135deg, var(--a-color-primary-container) 0%, var(--a-color-secondary-container) 100%);">
+				<main style="padding: var(--a-space-2xl);">
+					<h3 style="font-size: 1.5rem; margin-bottom: var(--a-space-m);">The True Axiom01 Way</h3>
+					<p style="font-size: 1.1rem; line-height: 1.8; font-weight: 500; margin: 0;">
+						Write meaningful markup where class names describe what the element <strong>is</strong> (a card, alert, button), not what it looks like (blue, large, padded). Components are complete—one semantic class provides display, spacing, interactions, and state. All styling flows from tokens. Don't separate concerns across different classes; keep behaviors entangled by design. If a component needs to behave differently, adjust the component itself using variables—customize everywhere consistently, not just the surface. This is how you build frameworks that respect your code.
+					</p>
+				</main>
+			</article>
+		</div>
+	</section>
+
+	<!-- SYMMETRY & SPACING -->
+	<section>
+		<div class="container">
+			<article class="card">
+				<header><h3>Symmetry, Math, and Why Your Spacing is Wrong</h3></header>
+				<main>
+					<blockquote style="font-style: italic; color: var(--a-color-text-secondary); border-left: 3px solid var(--a-color-primary); padding-left: var(--a-space-m); margin: var(--a-space-l) 0; line-height: 1.8;">
+						"We forgot how to use CSS. Modern web development has a hoarding problem. We got scared of the cascade, tried to tame it with naming conventions, then shoved styles into JavaScript. Finally, we gave up and dumped 25 utility classes into a single element."
+					</blockquote>
+					<p>Good design is deeply rooted in mathematics. When spacing is arbitrary, the user notices—it registers as visual noise.</p>
+					<p>Axiom01 establishes a perfect mathematical vertical rhythm across your entire application. Everything scales proportionally. Change one variable:</p>
+					<pre><code class="language-css">:root {
+  --a-space-unit: 1rem;
+}</code></pre>
+					<p>That single CSS variable controls everything: padding inside cards, gaps between buttons, margins beneath headers. Your entire interface scales in perfect symmetry. And readability? Axiom automatically constrains paragraphs to <code>65ch</code> (characters). A good design system handles this by default.</p>
+				</main>
+			</article>
+		</div>
+	</section>
+
+	<!-- SEMANTIC HTML VS UTILITY CHAOS -->
+	<section>
+		<div class="container">
+			<article class="card">
+				<header><h3>Writing Meaningful HTML Again</h3></header>
+				<main>
+					<p>Axiom01 forces you to respect your own code. It strips away visual clutter and demands semantic HTML: <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;form&gt;</code>.</p>
+					<blockquote style="font-style: italic; color: var(--a-color-text-secondary); border-left: 3px solid var(--a-color-primary); padding-left: var(--a-space-m); margin: var(--a-space-m) 0; font-size: var(--a-font-size-s);">
+						"When you need a component, you don't describe what it looks like. You declare what it <strong>is</strong>."
+					</blockquote>
+					<p style="margin-top: var(--a-space-m);">You don't need overlapping, fragmented dependency trees of component libraries and utility sheets that weren't designed to talk to each other. One framework. One philosophy. One seamless experience.</p>
+				</main>
+			</article>
+
+			<div class="grid">
+				<article class="card">
+					<header><h3>The Utility-First Absurdity</h3></header>
+					<main>
+						<p class="muted sm">25 utility classes per element</p>
+						<pre><code class="language-html">&lt;form class="flex flex-col gap-4 p-4"&gt;
+  &lt;label class="font-bold text-sm"&gt;Email&lt;/label&gt;
+  &lt;input class="px-3 py-2 border rounded"&gt;
+  &lt;label class="font-bold text-sm"&gt;Password&lt;/label&gt;
+  &lt;input class="px-3 py-2 border rounded" type="password"&gt;
+  &lt;button class="px-4 py-2 bg-blue-500 text-white"&gt;
+    Submit
+  &lt;/button&gt;
+&lt;/form&gt;</code></pre>
+					</main>
+			</article>
+
+			<article class="card">
+				<header><h3>The Semantic Reality</h3></header>
+				<main>
+					<p class="muted sm">1 semantic class. Complete behavior.</p>
+					<pre><code class="language-html">&lt;form class="form"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input id="email" type="email" required&gt;
+  
+  &lt;label for="password"&gt;Password&lt;/label&gt;
+  &lt;input id="password" type="password" required&gt;
+  
+  &lt;button class="primary"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+				</main>
+			</article>
+			</div>
+
+			<article class="card">
+				<main>
+					<blockquote style="font-style: italic; color: var(--a-color-text-secondary); border-left: 3px solid var(--a-color-primary); padding-left: var(--a-space-m); margin: 0; font-size: var(--a-font-size-s);">
+						"One semantic class provides display, spacing, interactions, and state. This is how you build frameworks where everything works together seamlessly."
+					</blockquote>
+				</main>
+			</article>
+		</div>
+	</section>
+
+
+
+
+	<!-- VISUAL CODE COMPARISON -->
+	<section id="visual-code-comparison">
+		<div class="container">
+			<header>
+				<h2>Why Axiom01's Approach is Different</h2>
+				<p>See the difference semantic-first development makes to your codebase.</p>
+			</header>
+
+			<div class="tabs">
+				<menu role="tablist">
+					<button role="tab" aria-selected="true" aria-controls="panel-card" id="tab-card">Card Component</button>
+					<button role="tab" aria-selected="false" aria-controls="panel-form" id="tab-form">Form Component</button>
+					<button role="tab" aria-selected="false" aria-controls="panel-button" id="tab-button">Button Component</button>
+				</menu>
+
+				<!-- Tab 1: Card Component -->
+				<div id="panel-card" role="tabpanel" class="code-comparison-grid">
+					<article class="card filled">
+						<header>
+							<h3>Axiom01 Approach</h3>
+						</header>
+						<div>
+							<div class="code-example-header">
+								<p class="muted">HTML: 8 lines | Classes: 1</p>
+								<div class="actions">
+									<button class="button icon-only" aria-label="Copy code" data-copy-snippet><span class="axicon render primary" data-name="Copy"></span></button>
+								</div>
+							</div>
+							<pre><code>&lt;article class="card"&gt;
+  &lt;header&gt;
+    &lt;h3&gt;Title&lt;/h3&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;p&gt;Content here.&lt;/p&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;
+    &lt;button class="primary"&gt;Action&lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;</code></pre>
+						</div>
+					</article>
+					<article class="card filled">
+						<header>
+							<h3>Utility-First Approach</h3>
+						</header>
+						<div>
+							<div class="code-example-header">
+								<p class="muted">HTML: 10 lines | Classes: 18</p>
+								<div class="actions">
+									<button class="button icon-only" aria-label="Copy code" data-copy-snippet><span class="axicon render warning" data-name="Copy"></span></button>
+								</div>
+							</div>
+							<pre><code>&lt;div class="max-w-sm rounded-lg shadow-md bg-white p-6"&gt;
+  &lt;div class="border-b pb-4 mb-4"&gt;
+    &lt;h3 class="text-lg font-bold text-gray-800"&gt;Title&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="mb-4"&gt;
+    &lt;p class="text-gray-600 text-sm"&gt;Content here.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="flex justify-end gap-2"&gt;
+    &lt;button class="px-4 py-2 bg-blue-500 text-white rounded"&gt;
+      Action
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+						</div>
+					</article>
+				</div>
+
+				<!-- Tab 2: Form Component -->
+				<div id="panel-form" role="tabpanel" class="code-comparison-grid" hidden>
+					<article class="card filled">
+						<header><h3>Axiom01 Approach</h3></header>
+						<div>
+							<div class="code-example-header">
+								<p class="muted">HTML: 7 lines | Classes: 1</p>
+								<div class="actions">
+									<button class="button icon-only" aria-label="Copy code" data-copy-snippet><span class="axicon render primary" data-name="Copy"></span></button>
+								</div>
+							</div>
+							<pre><code>&lt;form class="form"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input id="email" type="email" required&gt;
+  &lt;label for="password"&gt;Password&lt;/label&gt;
+  &lt;input id="password" type="password" required&gt;
+  &lt;button class="primary"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+						</div>
+					</article>
+					<article class="card filled">
+						<header><h3>Utility-First Approach</h3></header>
+						<div>
+							<div class="code-example-header">
+								<p class="muted">HTML: 10 lines | Classes: 25</p>
+								<div class="actions">
+									<button class="button icon-only" aria-label="Copy code" data-copy-snippet><span class="axicon render warning" data-name="Copy"></span></button>
+								</div>
+							</div>
+							<pre><code>&lt;form class="flex flex-col gap-4 p-4"&gt;
+  &lt;label class="font-bold text-sm"&gt;Email&lt;/label&gt;
+  &lt;input class="px-3 py-2 border border-gray-300 rounded"&gt;
+  &lt;label class="font-bold text-sm"&gt;Password&lt;/label&gt;
+  &lt;input class="px-3 py-2 border border-gray-300 rounded type="password"&gt;
+  &lt;button class="px-4 py-2 bg-blue-500 text-white rounded font-bold"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+						</div>
+					</article>
+				</div>
+
+				<!-- Tab 3: Button Component -->
+				<div id="panel-button" role="tabpanel" class="code-comparison-grid" hidden>
+					<article class="card filled">
+						<header><h3>Axiom01 Approach</h3></header>
+						<div>
+							<div class="code-example-header">
+								<p class="muted">HTML: 1 line | Classes: 1</p>
+								<div class="actions">
+									<button class="button icon-only" aria-label="Copy code" data-copy-snippet><span class="axicon render primary" data-name="Copy"></span></button>
+								</div>
+							</div>
+							<pre><code>&lt;button class="primary"&gt;Click Me&lt;/button&gt;</code></pre>
+						</div>
+					</article>
+					<article class="card filled">
+						<header><h3>Utility-First Approach</h3></header>
+						<div>
+							<div class="code-example-header">
+								<p class="muted">HTML: 1 line | Classes: 12</p>
+								<div class="actions">
+									<button class="button icon-only" aria-label="Copy code" data-copy-snippet><span class="axicon render warning" data-name="Copy"></span></button>
+								</div>
+							</div>
+							<pre><code>&lt;button class="px-4 py-2 bg-blue-500 text-white rounded font-bold hover:bg-blue-600 focus:ring-2"&gt;Click Me&lt;/button&gt;</code></pre>
+						</div>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- NATIVE AXICONS SHOWCASE -->
+	<section id="axicons">
+		<div class="container">
+			<header>
+				<h2>3,941 Modular SVG Icons - Pick Your Variant</h2>
+				<p>Ultra-lightweight by default (89KB base), mix-and-match variants, scale up only as needed. No bloat, full flexibility.</p>
+			</header>
+
+			<div class="grid tight">
+				<article class="card axicons-starter-card">
+					<header><h3>⚡ Start Ultra-Minimal</h3></header>
+					<main>
+						<div class="axicons-size-badge">
+							<p class="axicons-size-value">89KB</p>
+							<p class="axicons-size-label">Base icons only</p>
+						</div>
+						<p>Start with 450 base icons. Add variants only when needed:</p>
+						<ul class="axicons-list">
+							<li>✓ Base: 89KB (450 icons)</li>
+							<li>✓ + Thin: +170KB (760 icons)</li>
+							<li>✓ + Inverted: +243KB (758 icons)</li>
+							<li>✓ + Color: +440KB (1,351 icons)</li>
+						</ul>
+					</main>
+				</article>
+
+				<article class="card">
+					<header><h3>All Icon Variants</h3></header>
+					<main>
+						<p class="muted">Every icon is available in 5 responsive variants. Click any icon to copy its name.</p>
+						<div class="grid tight">
+							<div class="axicon-variant-item">
+								<span class="axicon render axicon-variant-icon" data-name="Check"></span>
+								<p class="axicon-variant-label">Base (450)</p>
+								<p class="axicon-variant-description">Clean outline style, perfect for primary actions and status indicators</p>
+								<code class="axicon-variant-code">Check</code>
+							</div>
+							<div class="axicon-variant-item">
+								<span class="axicon render axicon-variant-icon" data-name="Minimize"></span>
+								<p class="axicon-variant-label">Thin (760)</p>
+								<p class="axicon-variant-description">Ultra-thin 0.5px strokes for elegant, minimal interfaces</p>
+								<code class="axicon-variant-code">Minimize</code>
+							</div>
+							<div class="axicon-variant-item">
+								<span class="axicon render axicon-variant-icon" data-name="Zap"></span>
+								<p class="axicon-variant-label">Inverted (758)</p>
+								<p class="axicon-variant-description">Solid with transparent cutouts, high visual impact</p>
+								<code class="axicon-variant-code">Zap</code>
+							</div>
+							<div class="axicon-variant-item">
+								<span class="axicon render axicon-variant-icon" data-name="Check-Color"></span>
+								<p class="axicon-variant-label">Color (1,351)</p>
+								<p class="axicon-variant-description">Gradients & multi-color fills for vibrant, playful designs</p>
+								<code class="axicon-variant-code">Check-Color</code>
+							</div>
+							<div class="axicon-variant-item">
+								<span class="axicon render axicon-variant-icon" data-name="Check-Premium"></span>
+								<p class="axicon-variant-label">Premium (650)</p>
+								<p class="axicon-variant-description">Advanced effects like shadows, glows, and 3D transformations</p>
+								<code class="axicon-variant-code">Check-Premium</code>
+							</div>
+						</div>
+					</main>
+				</article>
+			</div>
+
+			<article class="card axicons-how-it-works">
+				<header class="axicons-how-step"><h3>💡 How It Works</h3></header>
+				<div class="axicons-how-step">
+					<p>1. Start Minimal</p>
+					<code class="axicons-how-code">&lt;script src="axicons-base.js"&gt;</code>
+					<p class="axicons-how-detail">Load 450 base icons (89KB)</p>
+				</div>
+				<div class="axicons-how-step">
+					<p>2. Mix Variants</p>
+					<code class="axicons-how-code">&lt;script src="axicons-thin..."&gt;</code>
+					<p class="axicons-how-detail">Add thin icons (+170KB)</p>
+				</div>
+				<div class="axicons-how-step">
+					<p>3. Lazy Load</p>
+					<code class="axicons-how-code">await AxiconsLoader...</code>
+					<p class="axicons-how-detail">Load on-demand later</p>
+				</div>
+			</article>
+
+			<article class="card">
+				<div class="grid tight">
+					<div class="card ghost">
+						<span class="axicon render primary" data-name="Code"></span>
+						<h4>Code & Dev</h4>
+						<p>Terminal, Git, Database</p>
+					</div>
+					<div class="card ghost">
+						<span class="axicon render secondary" data-name="GitHub"></span>
+						<h4>Social & Brands</h4>
+						<p>GitHub, Twitter, Links</p>
+					</div>
+					<div class="card ghost">
+						<span class="axicon render success" data-name="Check-Circle"></span>
+						<h4>Status</h4>
+						<p>Alerts, Success, Errors</p>
+					</div>
+					<div class="card ghost">
+						<span class="axicon render warning" data-name="File-Text"></span>
+						<h4>Files</h4>
+						<p>Documents, PDFs, Archives</p>
+					</div>
+				</div>
+			</article>
+
+			<div class="actions">
+				<a href="docs/AXICONS_VARIANTS_GUIDE.md" class="button primary lg"><span class="axicon render" data-name="File-Text"></span>Variants Guide</a>
+				<a href="docs/axicons.html" class="button secondary lg">Browse Icons</a>
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- COMPONENT SHOWCASE -->
+	<section id="components">
+		<div class="container">
+			<header>
+				<h2>Explore Our Components</h2>
+				<p>Axiom includes 73 production-ready components with comprehensive variants, all built with accessibility, dark mode support, and semantic HTML at its core. With our design token system and animations, you have everything needed for professional interfaces.</p>
+			</header>
+
+			<div class="grid">
+				<a href="docs/components/alert.html" class="card preview">
+					<div class="preview">
+						<div class="alert success">
+							<span class="axicon render" data-name="Check-Circle"></span>
+							<div>
+								<strong>Success message!</strong>
+								<p>Operation completed successfully.</p>
+							</div>
+						</div>
+					</div>
+					<div class="content">
+						<h3>Alerts</h3>
+						<p>Provide contextual feedback with accessible, theme-aware alerts.</p>
+					</div>
+				</a>
+
+				<a href="docs/components/button.html" class="card preview">
+					<div class="preview">
+						<div class="actions">
+							<button class="button primary">Primary</button>
+							<button class="button secondary">Secondary</button>
+							<button class="button outline">Outline</button>
+						</div>
+					</div>
+					<div class="content">
+						<h3>Buttons</h3>
+						<p>Clear, semantic calls to action with various styles and sizes.</p>
+					</div>
+				</a>
+
+				<a href="docs/components/card.html" class="card preview">
+					<div class="preview">
+						<article class="card">
+							<header><h3>Card Title</h3></header>
+							<main><p>Short description here.</p></main>
+						</article>
+					</div>
+					<div class="content">
+						<h3>Cards</h3>
+						<p>Flexible content containers for grouping related information.</p>
+					</div>
+				</a>
+
+				<a href="docs/components/badge.html" class="card preview">
+					<div class="preview">
+						<div class="actions" style="flex-wrap: wrap;">
+							<span class="badge primary">Primary</span>
+							<span class="badge success">Success</span>
+							<span class="badge warning">Warning</span>
+							<span class="badge error">Error</span>
+						</div>
+					</div>
+					<div class="content">
+						<h3>Badges</h3>
+						<p>Small, colored indicators for status, labels, and metadata.</p>
+					</div>
+				</a>
+
+				<a href="docs/components/form.html" class="card preview">
+					<div class="preview">
+						<form class="form">
+							<label for="email-demo">Email</label>
+							<input id="email-demo" type="email" placeholder="you@example.com" disabled>
+							<button class="button primary">Submit</button>
+						</form>
+					</div>
+					<div class="content">
+						<h3>Forms</h3>
+						<p>Accessible and consistently styled input fields and textareas.</p>
+					</div>
+				</a>
+
+				<a href="docs/components/table.html" class="card preview">
+					<div class="preview">
+						<table>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Alice Smith</td>
+									<td><span class="badge success">Active</span></td>
+								</tr>
+								<tr>
+									<td>Bob Jones</td>
+									<td><span class="badge warning">Away</span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="content">
+						<h3>Tables</h3>
+						<p>Striped, sortable tables for displaying structured data.</p>
+					</div>
+				</a>
+
+				<a href="docs/components/dropdown.html" class="card preview">
+					<div class="preview">
+						<div class="actions">
+							<button class="button secondary">Menu <span class="axicon render" data-name="Arrow-Down"></span></button>
+						</div>
+					</div>
+					<div class="content">
+						<h3>Dropdowns</h3>
+						<p>Context menus and action dropdowns.</p>
+					</div>
+				</a>
+
+				<a href="docs/components/tabs.html" class="card preview">
+					<div class="preview">
+						<div class="tabs">
+							<menu role="tablist">
+								<button role="tab" aria-selected="true" class="active">Tab 1</button>
+								<button role="tab" aria-selected="false">Tab 2</button>
+								<button role="tab" aria-selected="false">Tab 3</button>
+							</menu>
+							<div class="tab-content">Tab 1 content</div>
+						</div>
+					</div>
+					<div class="content">
+						<h3>Tabs</h3>
+						<p>Organize content into labeled tabs for better navigation.</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="actions" style="display: flex; justify-content: center; gap: var(--a-space-m); margin-top: var(--a-space-2xl);">
+				<a href="docs/components-overview.html" class="button primary lg">View All 73 Components</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- TYPOGRAPHY & RHYTHM -->
+	<section id="typography">
+		<div class="container">
+			<header>
+				<h2>Typography & Vertical Rhythm</h2>
+				<blockquote style="font-style: italic; color: var(--a-color-text-secondary); border-left: 3px solid var(--a-color-primary); padding-left: var(--a-space-m); margin: var(--a-space-m) 0 var(--a-space-l) 0; font-size: 1.05rem; line-height: 1.8;">
+					"Typography and rhythm aren't decorative—they're functional. Perfect mathematical spacing reduces cognitive load and establishes trust. Axiom handles this automatically."
+				</blockquote>
+			</header>
+
+			<div class="grid tight">
+				<article class="card">
+					<header><h3>Semantic Headings</h3></header>
+					<main class="typography-content">
+						<h1>Heading 1</h1>
+						<h2>Heading 2</h2>
+						<h3>Heading 3</h3>
+						<h4>Heading 4</h4>
+						<p class="muted sm">Headers automatically scale based on the <code>--a-heading-scale</code> token (default 1.15x).</p>
+					</main>
+				</article>
+
+				<div class="typography-side">
+					<article class="card">
+						<header><h3>Readability Limits</h3></header>
+						<main>
+							<p>Paragraphs are automatically constrained to <code>65ch</code> (characters). This prevents lines from stretching too wide on large monitors, guaranteeing optimal readability without complex layout hacks.</p>
+						</main>
+					</article>
+					<article class="card">
+						<header><h3>Native Blockquotes</h3></header>
+						<main>
+							<blockquote>
+								"The best design is the one you don't notice. It just works, letting the content speak for itself."
+							</blockquote>
+						</main>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- COLOR HARMONY -->
+	<section id="color-harmony-visual">
+		<div class="container">
+			<header>
+				<h2>Color Harmony at Your Fingertips</h2>
+				<p>Color is not guesswork. Every color in Axiom01 is mathematically calculated using color theory. Every token works together beautifully across 22 live themes.</p>
+			</header>
+
+			<div class="grid tight">
+				<article class="card">
+					<header><h3>Analogous Harmony</h3></header>
+					<main>
+						<p>Colors that sit next to each other on the color wheel create calm cohesion.</p>
+						<div class="swatches">
+							<div class="swatch info-container" data-label="--a-color-info-container"></div>
+							<div class="swatch primary-container" data-label="--a-color-primary-container"></div>
+							<div class="swatch secondary-container" data-label="--a-color-secondary-container"></div>
+						</div>
+					</main>
+					<footer class="card-footer">
+						<p class="use-case">Use for: Related features, sequential steps</p>
+					</footer>
+				</article>
+
+				<article class="card">
+					<header><h3>Complementary</h3></header>
+					<main>
+						<p>Opposite colors create maximum contrast and striking visual impact.</p>
+						<div class="swatches">
+							<div class="swatch info-container" data-label="--a-color-info-container"></div>
+							<div class="swatch error" data-label="--a-color-error"></div>
+						</div>
+					</main>
+					<footer class="card-footer">
+						<p class="use-case">Use for: CTAs, warnings, important triggers</p>
+					</footer>
+				</article>
+
+				<article class="card">
+					<header><h3>Semantic Pairing</h3></header>
+					<main>
+						<p>Semantic colors convey meaning and reinforce user expectations.</p>
+						<div class="swatches">
+							<div class="swatch success" data-label="--a-color-success"></div>
+							<div class="swatch warning" data-label="--a-color-warning"></div>
+							<div class="swatch error" data-label="--a-color-error"></div>
+						</div>
+					</main>
+					<footer class="card-footer">
+						<p class="use-case">Use for: Status feedback, system messages</p>
+					</footer>
+				</article>
+			</div>
+			
+			<div class="actions">
+				<a href="docs/colors-advanced.html" class="button primary lg">Explore Colors & Tokens</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- THEME SWITCHER -->
+	<section id="theme-explorer">
+		<div class="container">
+			<header>
+				<h2>Live Theme Explorer</h2>
+				<p>Choose from 22 carefully crafted themes, each with unique color palettes and personalities. See the changes instantly.</p>
+			</header>
+
+			<div class="grid">
+				<article class="card">
+					<header><h3>Select a Theme</h3></header>
+					<main>
+						<label for="theme-select" class="theme-selector-label">Available Themes:</label>
+						<select id="theme-select" class="theme-select">
+							<option value="light">Light</option>
+							<option value="dark">Dark</option>
+							<option value="corporate-clean">Corporate Clean</option>
+							<option value="synthwave-84">Synthwave 84</option>
+							<option value="nordic-calm">Nordic Calm</option>
+							<option value="vintage-paper">Vintage Paper</option>
+							<option value="dracula">Dracula</option>
+							<option value="solarized-light">Solarized Light</option>
+							<option value="solarized-dark">Solarized Dark</option>
+							<option value="luxe-black">Luxe Black</option>
+							<option value="minty-fresh">Minty Fresh</option>
+							<option value="desert-sunset">Desert Sunset</option>
+							<option value="deep-ocean">Deep Ocean</option>
+							<option value="gruvbox-dark">Gruvbox Dark</option>
+							<option value="sakura-blossom">Sakura Blossom</option>
+							<option value="matcha-green">Matcha Green</option>
+							<option value="monokai-pro">Monokai Pro</option>
+							<option value="slate-gray">Slate Gray</option>
+							<option value="tropical-splash">Tropical Splash</option>
+							<option value="candy-pop">Candy Pop</option>
+							<option value="rose-pine">Rose Pine</option>
+							<option value="midnight-moss">Midnight Moss</option>
+						</select>
+						<p class="theme-note">Your selection is saved and will persist on your next visit.</p>
+					</main>
+				</article>
+
+				<article class="card" id="description-display">
+					<header><h3>Theme Description</h3></header>
+					<main>
+						<p>Select a theme to see its description and instantly preview the color scheme across the entire page.</p>
+					</main>
+				</article>
+			</div>
+
+			
+		</div>
+
+	</section>
+
+	<!-- LATEST RELEASE -->
+	<section id="release-info">
+		<div class="container" style="max-width: 900px;">
+			<header>
+				<h2>Latest Release</h2>
+			</header>
+
+			<div style="margin-bottom: var(--a-space-m);">
+				<span class="muted sm">v2.0.0</span><br>
+				<span style="font-weight: 500;">Axiom01 2.0.0</span><br>
+				<span class="muted sm">Released June 15, 2026</span>
+			</div>
+
+			<article class="card release-card">
+				<div class="release-metric">
+					<p class="release-metric-label">CSS Bundle</p>
+					<p class="release-metric-value">13.3 KB gzipped</p>
+				</div>
+				<div class="release-metric">
+					<p class="release-metric-label">JavaScript</p>
+					<p class="release-metric-value">1.0 KB gzipped</p>
+				</div>
+				<div class="release-metric">
+					<p class="release-metric-label">Components</p>
+					<p class="release-metric-value">73</p>
+				</div>
+				<div class="release-metric">
+					<p class="release-metric-label">Design Tokens</p>
+					<p class="release-metric-value">149</p>
+				</div>
+			</article>
+
+			<div class="actions" style="justify-content: flex-end;">
+				<a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" class="button primary">View on npm</a>
+				<a href="https://github.com/Sol-Roth-Media/axiom01/releases" target="_blank" rel="noopener" class="button secondary">Release Notes</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- OPEN SOURCE CTA -->
+	<section id="open-source">
+		<div class="container open-source-cta">
+			<span class="axicon render primary open-source-icon" data-name="Unlock"></span>
+			<h2>Free and Open Source</h2>
+			<p>Axiom01 is released under the permissive <strong>MIT License</strong>. It is completely free to use for personal, commercial, and enterprise projects. No strings attached.</p>
+
+			<div class="open-source-buttons">
+				<a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" class="button primary lg">
+					<span class="axicon render" data-name="GitHub"></span> Star on GitHub
+				</a>
+				<a href="docs/markdown-template.html?file=../LICENSE" class="button outline lg">Read License</a>
+			</div>
+		</div>
+	</section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+<script src="js/axiom.js"></script>
+<script src="js/axicons-loader.js"></script>
+<script src="js/axicons-base.js"></script>
+	<script src="js/axicons-thin-variants.js"></script>
+	<script src="js/axicons-inverted-variants.js"></script>
+	<script src="js/axicons-color-variants.js"></script>
+	<script src="js/axicons-premium-variants.js"></script>
+<script src="js/render-icons.js"></script>
+<script src="js/sticky-header.js"></script>
+
+<script>
+	function renderAxicons() {
+		if (typeof window.axicons !== 'undefined' && Array.isArray(window.axicons)) {
+			document.querySelectorAll('.axicon.render').forEach(el => {
+				const name = el.getAttribute('data-name');
+				const icon = window.axicons.find(i => i && i.name && i.name.toLowerCase() === name.toLowerCase());
+				if (icon && icon.svgContent) {
+					el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+				}
+			});
+		} else if (document.readyState === 'loading') {
+			setTimeout(renderAxicons, 100);
+		}
+	}
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', renderAxicons);
+	} else {
+		setTimeout(renderAxicons, 100);
+	}
+</script>
+<script src="js/release-loader.js"></script>
+<script src="js/index-page-manager.js"></script>
+
+<footer class="footer">
+	<div class="container">
+		<!-- Main Content Grid -->
+		<div class="footer-content">
+			<!-- Brand Section -->
+			<div class="footer-brand">
+				<a href="/" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
+				<p style="font-size: var(--a-font-size-xs); color: var(--a-color-text-muted); margin: var(--a-space-m) 0 0 0; line-height: var(--a-line-height-base);">v2.0.0 · 73 Components · 149 Tokens · 13.3 KB</p>
+			</div>
+
+			<!-- Product Links -->
+			<div class="footer-column">
+				<h4>Product</h4>
+				<ul>
+					<li><a href="docs/components-overview.html">All Components</a></li>
+					<li><a href="docs/axicons.html">3,941+ Icons</a></li>
+					<li><a href="docs/colors-advanced.html">Colors & Tokens</a></li>
+					<li><a href="docs/overview-quickstart.html">Get Started</a></li>
+				</ul>
+			</div>
+
+			<!-- Resources Links -->
+			<div class="footer-column">
+				<h4>Resources</h4>
+				<ul>
+					<li><a href="docs/AXIOM01_STYLING_GUIDE.md" target="_blank">Styling Guide</a></li>
+					<li><a href="DEVELOPER.md" target="_blank">Developer Guide</a></li>
+					<li><a href="README.md" target="_blank">README</a></li>
+					<li><a href="LICENSE" target="_blank">MIT License</a></li>
+				</ul>
+			</div>
+
+			<!-- Community Links -->
+			<div class="footer-column">
+				<h4>Community</h4>
+				<ul>
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01/issues" target="_blank" rel="noopener">Report Issues</a></li>
+					<li><a href="https://www.solroth.com" target="_blank" rel="noopener">Creator: Sol Roth</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Bottom Section with Copyright & Social -->
+		<div class="footer-bottom">
+			<div style="flex: 1;">
+				<p class="footer-copyright">
+					&copy; 2024 <strong>Sol Roth Media</strong>. Released under <strong>MIT License</strong>.
+					<br>
+					<span style="font-size: var(--a-font-size-xs); opacity: 0.8;">Built with Axiom01 · <a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" style="color: inherit;">Open Source</a></span>
+				</p>
+			</div>
+			<div style="display: flex; gap: var(--a-space-m); align-items: center;">
+				<ul class="footer-social">
+					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub Repository">
+						<span class="axicon render" data-name="GitHub"></span>
+					</a></li>
+					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM Package">
+						<span class="axicon render" data-name="Brand-NPM"></span>
+					</a></li>
+				</ul>
+				<button id="scroll-to-top" class="footer-scroll-top" aria-label="Scroll to top" style="display: none; margin-left: var(--a-space-s);">
+					<span class="axicon render" data-name="Arrow-Up"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script>
+	// Scroll to Top Button Functionality
+	const scrollTopBtn = document.getElementById('scroll-to-top');
+	
+	if (scrollTopBtn) {
+		// Show/hide button based on scroll position
+		window.addEventListener('scroll', () => {
+			if (window.pageYOffset > 300) {
+				scrollTopBtn.style.display = 'inline-flex';
+			} else {
+				scrollTopBtn.style.display = 'none';
+			}
+		});
+		
+		// Scroll to top when clicked
+		scrollTopBtn.addEventListener('click', () => {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		});
+	}
+</script>
+</body>
+</html>

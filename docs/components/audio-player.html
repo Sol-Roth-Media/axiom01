@@ -34,96 +34,92 @@
 		<div class="container">
 			<header>
 				<h1>Audio Player</h1>
-				<p>Native <code>&lt;audio&gt;</code> element with built-in browser controls. Zero custom classes needed — the framework styles it automatically.</p>
+				<p>Native <code>&lt;audio&gt;</code> element. Browser provides controls — zero JavaScript, fully accessible.</p>
 			</header>
 
 			<section>
-				<h2>Basic Audio Player</h2>
+				<h2>Basic</h2>
 				<article class="card">
 					<figure>
-						<audio controls>
-							<source src="audio.mp3" type="audio/mpeg">
-							 Your browser does not support audio.
-						</audio>
+						<figure>
+							<figcaption>Sample Track — Axiomatic (Demo)</figcaption>
+							<audio controls preload="none">
+								<source src="audio.mp3" type="audio/mpeg">
+								<source src="audio.ogg" type="audio/ogg">
+								Your browser does not support audio.
+							</audio>
+						</figure>
 					</figure>
-					<pre><code class="language-html">&lt;audio controls&gt;
-  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
-  &lt;source src="audio.ogg" type="audio/ogg"&gt;
-  Your browser does not support audio.
-&lt;/audio&gt;</code></pre>
+					<pre><code class="language-html">&lt;figure&gt;
+  &lt;figcaption&gt;Track title&lt;/figcaption&gt;
+  &lt;audio controls preload="none"&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    &lt;source src="audio.ogg" type="audio/ogg"&gt;
+    Your browser does not support audio.
+  &lt;/audio&gt;
+&lt;/figure&gt;</code></pre>
 				</article>
 			</section>
 			<section>
-				<h2>With Autoplay and Loop</h2>
-				<pre><code class="language-html">&lt;!-- Muted autoplay (browsers allow muted autoplay) --&gt;
-&lt;audio controls autoplay muted loop&gt;
-  &lt;source src="ambient.mp3" type="audio/mpeg"&gt;
-&lt;/audio&gt;</code></pre>
+				<h2>Multiple Tracks</h2>
+				<article class="card">
+					<figure>
+						<ul>
+							<li>
+								<strong>Track 1 — Intro</strong>
+								<audio controls preload="none">
+									<source src="track1.mp3" type="audio/mpeg">
+								</audio>
+							</li>
+							<li>
+								<strong>Track 2 — Main Theme</strong>
+								<audio controls preload="none">
+									<source src="track2.mp3" type="audio/mpeg">
+								</audio>
+							</li>
+						</ul>
+					</figure>
+					<pre><code class="language-html">&lt;ul&gt;
+  &lt;li&gt;
+    &lt;strong&gt;Track 1&lt;/strong&gt;
+    &lt;audio controls preload="none"&gt;
+      &lt;source src="track1.mp3" type="audio/mpeg"&gt;
+    &lt;/audio&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+				</article>
+			</section>
+			<section>
+				<h2>Attributes</h2>
+				<table><thead><tr><th>Attribute</th><th>Effect</th></tr></thead><tbody><tr><td><code>controls</code></td><td>Show browser playback UI (always include)</td></tr><tr><td><code>preload="none"</code></td><td>Don't preload — saves bandwidth</td></tr><tr><td><code>autoplay muted</code></td><td>Autoplay only allowed when muted</td></tr><tr><td><code>loop</code></td><td>Repeat playback</td></tr></tbody></table>
 			</section>
 			<section>
 				<h2>Accessibility</h2>
 				<ul>
-					<li>Always include <code>controls</code> — hidden audio is a WCAG failure</li>
-					<li>Provide a visible title or <code>&lt;figure&gt;</code> + <code>&lt;figcaption&gt;</code> for context</li>
+					<li>Always include <code>controls</code> — hidden audio controls fail WCAG SC 1.4.2</li>
+					<li>Wrap in <code>&lt;figure&gt;</code> with <code>&lt;figcaption&gt;</code> for title context</li>
+					<li>Provide a transcript link for speech or music with lyrics</li>
 					<li>Never use <code>autoplay</code> without <code>muted</code></li>
-					<li>Provide a transcript for audio content</li>
 				</ul>
 			</section>
-
 		</div>
 	</section>
 </main>
-<footer class="footer">
-	<div class="container">
-		<div class="footer-content">
-			<div class="footer-brand">
-				<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
-			</div>
-			<div class="footer-column">
-				<h4>Documentation</h4>
-				<ul>
-					<li><a href="../components-overview.html">All Components</a></li>
-					<li><a href="../overview-quickstart.html">Get Started</a></li>
-					<li><a href="../colors-advanced.html">Colors &amp; Tokens</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Resources</h4>
-				<ul>
-					<li><a href="../../README.md" target="_blank">README</a></li>
-					<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-					<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Community</h4>
-				<ul>
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="footer-bottom">
-			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
-			<ul class="footer-social">
-				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
-				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
-			</ul>
-		</div>
-	</div>
-</footer>
+<footer class="footer"><div class="container"><div class="footer-content">
+<div class="footer-brand"><a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a><p class="footer-tagline">The Semantic Web, Reimagined.</p></div>
+<div class="footer-column"><h4>Documentation</h4><ul><li><a href="../components-overview.html">All Components</a></li></ul></div>
+<div class="footer-column"><h4>Community</h4><ul><li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li></ul></div>
+</div><div class="footer-bottom"><p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p></div></div></footer>
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
-<script>
-function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
-</script>
+<script>function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-thin-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
+
 </body>
 </html>

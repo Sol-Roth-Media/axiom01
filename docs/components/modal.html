@@ -14,7 +14,6 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body class="axiom-body component-doc">
-
 <header class="main" data-component="mobile-navbar">
 	<nav role="navigation" aria-label="Main Navigation">
 		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
@@ -24,219 +23,150 @@
 			<li><a href="../../index.html#axicons">Axicons</a></li>
 		</ul>
 		<div class="actions">
-				<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
 	</nav>
 </header>
-
 <main id="main-content">
-
 	<section>
 		<div class="container">
-
 			<header>
 				<h1>Modal</h1>
-				<p>Semantic modal dialog component for focused user interactions. Single `.modal` class with proper ARIA roles and keyboard management.</p>
+				<p>Focused dialog overlay using the native <code>&lt;dialog&gt;</code> element. Built-in keyboard trap, backdrop, and Escape key handling — no JavaScript framework needed.</p>
 			</header>
 
 			<section>
-				<h2>Live Example</h2>
+				<h2>Basic Modal</h2>
 				<article class="card">
 					<figure>
-
-						<button class="button primary" onclick="document.getElementById('demo-modal').style.display='flex'">
-						Open Modal
+						<button class="primary" onclick="document.getElementById('demo-modal').showModal()">
+							<span class="axicon render" data-name="Layout"></span> Open Modal
 						</button>
 
-						<div class="modal" id="demo-modal" aria-modal="true" role="dialog" aria-labelledby="modal-title">
-						<header>
-						<h2 id="modal-title">Modal Title</h2>
-						<button aria-label="Close modal" onclick="document.getElementById('demo-modal').style.display='none'">&times;</button>
-						</header>
-
-						<footer>
-						<button class="button secondary" onclick="document.getElementById('demo-modal').style.display='none'">Cancel</button>
-						<button class="button primary" onclick="document.getElementById('demo-modal').style.display='none'">Confirm</button>
-						</footer>
-						</div>
-
+						<dialog id="demo-modal" aria-labelledby="demo-modal-title">
+							<header>
+								<h2 id="demo-modal-title">Confirm Action</h2>
+								<button aria-label="Close" onclick="document.getElementById('demo-modal').close()">
+									<span class="axicon render" data-name="X"></span>
+								</button>
+							</header>
+							<p>Are you sure you want to delete this item? This action cannot be undone.</p>
+							<footer>
+								<button class="secondary" onclick="document.getElementById('demo-modal').close()">Cancel</button>
+								<button class="danger" onclick="document.getElementById('demo-modal').close()">Delete</button>
+							</footer>
+						</dialog>
 					</figure>
-					<pre><code class="language-html">&lt;div class="modal" aria-modal="true" role="dialog" aria-labelledby="modal-title"&gt;
-				&lt;div&gt;
-				&lt;header&gt;
-				&lt;h2 id="modal-title"&gt;Modal Title&lt;/h2&gt;
-				&lt;button aria-label="Close modal"&gt;&times;&lt;/button&gt;
-				&lt;/header&gt;
-				&lt;p&gt;Modal content here.&lt;/p&gt;
-				&lt;footer&gt;
-				&lt;button class="button secondary"&gt;Cancel&lt;/button&gt;
-				&lt;button class="button primary"&gt;Confirm&lt;/button&gt;
-				&lt;/footer&gt;
-				&lt;/div&gt;
-				&lt;/div&gt;</code></pre>
+					<pre><code class="language-html">&lt;!-- Trigger --&gt;
+&lt;button class="primary"
+  onclick="document.getElementById('my-modal').showModal()"&gt;
+  Open Modal
+&lt;/button&gt;
+
+&lt;!-- Native dialog --&gt;
+&lt;dialog id="my-modal" aria-labelledby="modal-title"&gt;
+  &lt;header&gt;
+    &lt;h2 id="modal-title"&gt;Modal Title&lt;/h2&gt;
+    &lt;button aria-label="Close"
+            onclick="document.getElementById('my-modal').close()"&gt;
+      &lt;span class="axicon render" data-name="X"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/header&gt;
+  &lt;p&gt;Modal body content here.&lt;/p&gt;
+  &lt;footer&gt;
+    &lt;button class="secondary"
+            onclick="document.getElementById('my-modal').close()"&gt;Cancel&lt;/button&gt;
+    &lt;button class="primary"&gt;Confirm&lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/dialog&gt;</code></pre>
 				</article>
 			</section>
 
 			<section>
-				<h2>Markup Structure</h2>
-				<p>Modal uses semantic HTML with single `.modal` class:</p>
-					<pre><code class="language-html">&lt;div class="modal" aria-modal="true" role="dialog" aria-labelledby="modal-title"&gt;
-				&lt;!-- Centered container div --&gt;
-				&lt;div&gt;
-				&lt;!-- Header section --&gt;
-				&lt;header&gt;
-				&lt;h2 id="modal-title"&gt;Title&lt;/h2&gt;
-				&lt;button aria-label="Close modal"&gt;&times;&lt;/button&gt;
-				&lt;/header&gt;
+				<h2>Variants</h2>
+				<div class="grid">
+					<article class="card">
+						<header><h3>Confirmation</h3></header>
+						<p>Destructive action confirmation. Use <code>button.danger</code> for the primary action.</p>
+						<button class="outline" onclick="document.getElementById('demo-confirm').showModal()">Open Example</button>
+						<dialog id="demo-confirm" aria-labelledby="confirm-title">
+							<header>
+								<h2 id="confirm-title">Delete Account</h2>
+								<button aria-label="Close" onclick="document.getElementById('demo-confirm').close()"><span class="axicon render" data-name="X"></span></button>
+							</header>
+							<p>This will permanently delete your account and all data. This cannot be undone.</p>
+							<footer>
+								<button class="secondary" onclick="document.getElementById('demo-confirm').close()">Cancel</button>
+								<button class="danger" onclick="document.getElementById('demo-confirm').close()">Yes, Delete</button>
+							</footer>
+						</dialog>
+					</article>
 
-				&lt;!-- Main content --&gt;
-				&lt;p&gt;Modal body content...&lt;/p&gt;
-
-				&lt;!-- Footer with actions --&gt;
-				&lt;footer&gt;
-				&lt;button class="button secondary"&gt;Cancel&lt;/button&gt;
-				&lt;button class="button primary"&gt;Confirm&lt;/button&gt;
-				&lt;/footer&gt;
-				&lt;/div&gt;
-				&lt;/div&gt;</code></pre>
+					<article class="card">
+						<header><h3>Information</h3></header>
+						<p>Read-only content like terms, help text, or previews.</p>
+						<button class="outline" onclick="document.getElementById('demo-info').showModal()">Open Example</button>
+						<dialog id="demo-info" aria-labelledby="info-title">
+							<header>
+								<h2 id="info-title">Keyboard Shortcuts</h2>
+								<button aria-label="Close" onclick="document.getElementById('demo-info').close()"><span class="axicon render" data-name="X"></span></button>
+							</header>
+							<table>
+								<thead><tr><th>Key</th><th>Action</th></tr></thead>
+								<tbody>
+									<tr><td><kbd>Escape</kbd></td><td>Close modal</td></tr>
+									<tr><td><kbd>Tab</kbd></td><td>Move focus forward</td></tr>
+									<tr><td><kbd>Shift+Tab</kbd></td><td>Move focus back</td></tr>
+								</tbody>
+							</table>
+							<footer>
+								<button class="primary" onclick="document.getElementById('demo-info').close()">Got it</button>
+							</footer>
+						</dialog>
+					</article>
+				</div>
 			</section>
 
 			<section>
-				<h2>Key Features</h2>
+				<h2>Semantic Structure</h2>
+				<table>
+					<thead><tr><th>Element</th><th>Role</th><th>Notes</th></tr></thead>
+					<tbody>
+						<tr><td><code>dialog</code></td><td>Container</td><td>Native modal — <code>showModal()</code> activates it with backdrop</td></tr>
+						<tr><td><code>header</code></td><td>Title row</td><td>Contains <code>h2</code> + close button</td></tr>
+						<tr><td><code>p</code></td><td>Body</td><td>Main message or content</td></tr>
+						<tr><td><code>footer</code></td><td>Actions</td><td>Cancel/confirm buttons — cancel always first</td></tr>
+						<tr><td><code>aria-labelledby</code></td><td>Label</td><td>Points to the <code>h2</code> id — required</td></tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<h2>Why Native <code>&lt;dialog&gt;</code>?</h2>
 				<ul>
-				<li><strong>Semantic Structure</strong> - Uses `<header>`, `<footer>` for organization</li>
-				<li><strong>Single Class</strong> - Only `.modal` class on container</li>
-				<li><strong>ARIA Attributes</strong> - Full accessibility: `role="dialog"`, `aria-modal="true"`, `aria-labelledby`</li>
-				<li><strong>Focus Management</strong> - Modal receives and traps focus</li>
-				<li><strong>Dismissal Options</strong> - Close button, cancel button, or escape key</li>
-				<li><strong>Responsive Design</strong> - Adapts to all screen sizes</li>
-				<li><strong>No BEM Classes</strong> - No `.modal-header`, `.modal-body`, `.modal-footer`</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>JavaScript Implementation</h2>
-				<p>Control modal visibility with simple JavaScript:</p>
-					<pre><code class="language-javascript">// Open modal
-				const openModal = (modalId) => {
-				const modal = document.getElementById(modalId);
-				modal.style.display = 'flex';
-				// Set focus to modal or first focusable element
-				modal.focus();
-				};
-
-				// Close modal
-				const closeModal = (modalId) => {
-				document.getElementById(modalId).style.display = 'none';
-				};
-
-				// Close on escape key
-				document.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape') {
-				const modal = document.querySelector('.modal[style*="flex"]');
-				if (modal) closeModal(modal.id);
-				}
-				});
-
-				// Close on outside click
-				const modal = document.getElementById('modal-id');
-				modal.addEventListener('click', (e) => {
-				if (e.target === modal) {
-				closeModal('modal-id');
-				}
-				});</code></pre>
-			</section>
-
-			<section>
-				<h2>Semantic Structure Details</h2>
-				<ul>
-				<li>**`.modal`** - Main container with single class</li>
-				<li>**Centered `
-`** - Child div for centering content</li>
-				<li>**`<header>`** - Title and close button (semantic)</li>
-				<li>**Content** - Any semantic elements (paragraphs, forms, etc.)</li>
-				<li>**`<footer>`** - Action buttons (semantic)</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>ARIA Attributes</h2>
-				<ul>
-				<li>`role="dialog"` - Identifies as dialog/modal</li>
-				<li>`aria-modal="true"` - Indicates modal behavior</li>
-				<li>`aria-labelledby="modal-title"` - Links to modal title</li>
-				<li>`aria-label` on close button - Describes purpose</li>
+					<li>Focus is trapped inside — keyboard users cannot escape accidentally</li>
+					<li><kbd>Escape</kbd> closes the modal automatically — no JS needed</li>
+					<li><code>::backdrop</code> provides the overlay — no extra HTML element</li>
+					<li>Screen readers announce it as a dialog with the heading as label</li>
+					<li>Focus returns to the trigger element when closed</li>
 				</ul>
 			</section>
 
 			<section>
 				<h2>Accessibility</h2>
 				<ul>
-				<li>Use semantic `<header>` and `<footer>` elements</li>
-				<li>Include proper ARIA roles and attributes</li>
-				<li>Trap focus within modal (don't allow tab outside)</li>
-				<li>Support escape key to close</li>
-				<li>Restore focus to triggering element after close</li>
-				<li>Use descriptive button labels</li>
-				<li>Ensure sufficient color contrast</li>
-				<li>Test with keyboard and screen readers</li>
+					<li>Always include <code>aria-labelledby</code> on <code>&lt;dialog&gt;</code> pointing to the <code>h2</code></li>
+					<li>Close button needs <code>aria-label="Close"</code> — the icon alone is not accessible</li>
+					<li>Cancel action should always appear before destructive actions</li>
+					<li>Avoid auto-opening modals — they must be triggered by user action</li>
 				</ul>
 			</section>
 
-			<section>
-				<h2>Responsive Behavior</h2>
-				<p>Modal dialogs adapt to all screen sizes:</p>
-
-				<h3>Mobile (< 768px)</h3>
-				<p>On mobile, modals occupy most of the screen:</p>
-				<ul>
-				<li>Modal width: 90vw (90% viewport width)</li>
-				<li>Max-height: 90vh (fits within viewport)</li>
-				<li>Close button clearly visible</li>
-				<li>Content scrolls if needed</li>
-				<li>Touch-friendly close targets (44px+)</li>
-				</ul>
-
-				<h3>Desktop (1024px+)</h3>
-				<p>Desktop modals use optimal sizing:</p>
-				<ul>
-				<li>Fixed width (typically 500px-800px)</li>
-				<li>Centered on screen</li>
-				<li>Semi-transparent backdrop</li>
-				<li>Keyboard navigation (ESC to close)</li>
-				</ul>
-
-				<h3>Framework Integration</h3>
-				<p>Modals use semantic HTML with responsive CSS:</p>
-				<ul>
-				<li>Framework handles viewport constraints</li>
-				<li>Backdrop layer automatic</li>
-				<li>Focus trap and keyboard handling built-in</li>
-				<li>Responsive sizing based on media queries</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Best Practices</h2>
-				<ul>
-				<li>Use modals for critical user actions only</li>
-				<li>Keep modal content focused and relevant</li>
-				<li>Include clear action buttons (Primary + Secondary)</li>
-				<li>Always provide a close button</li>
-				<li>Use semantic HTML structure</li>
-				<li>Implement keyboard support (Escape, Tab trap)</li>
-				<li>Use single `.modal` class with semantic elements</li>
-				<li>Test focus management thoroughly</li>
-				</ul>
-			</section>
-		
-
+		</div>
 	</section>
-
 </main>
-
 <footer class="footer">
 	<div class="container">
 		<div class="footer-content">
@@ -277,22 +207,17 @@
 		</div>
 	</div>
 </footer>
-
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
-<script>
-function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
-</script>
+<script>function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
 <script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
 <script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
+
 </body>
 </html>

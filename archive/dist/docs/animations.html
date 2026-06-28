@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Animations - Axiom01 UI Framework</title>
+	<meta name="description" content="Explore Axiom01's comprehensive animation system. 20+ GPU-accelerated animations with live examples, code snippets, and accessibility best practices.">
+	
+	<link rel="stylesheet" href="../css/axiom.min.css">
+	<link rel="stylesheet" href="../css/axicons.css">
+    <link rel="stylesheet" href="../css/docs.css">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+	
+	<style>
+		/* Section background styles */
+		#accessibility {
+			background: var(--a-color-info-container);
+		}
+
+		.animation-checklist {
+			background: var(--a-color-success-container);
+		}
+
+		/* Margin resets */
+		.demo-section-header h2,
+		#accessibility h2,
+		.animation-checklist h2 {
+			margin-top: 0;
+		}
+
+		.demo-button-interactive {
+			transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+		}
+
+		.demo-button-interactive:hover {
+			transform: translateY(-2px);
+		}
+
+		.demo-button-interactive:active {
+			transform: translateY(0);
+		}
+
+		.animation-demo {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 200px;
+			background: var(--a-color-surface);
+			border: 1px solid var(--a-color-outline);
+			border-radius: var(--a-border-radius-large);
+			padding: var(--a-space-xl);
+			margin-bottom: var(--a-space-l);
+		}
+
+		.animation-box {
+			width: 80px;
+			height: 80px;
+			background: linear-gradient(135deg, var(--a-color-primary), var(--a-color-secondary));
+			border-radius: var(--a-border-radius-base);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-weight: bold;
+			font-size: 2rem;
+			box-shadow: var(--a-shadow-medium);
+		}
+
+		.animation-controls {
+			display: flex;
+			gap: var(--a-space-m);
+			margin-bottom: var(--a-space-l);
+			flex-wrap: wrap;
+		}
+
+		.animation-controls button {
+			margin: 0;
+		}
+
+		.animation-info {
+			background: var(--a-color-info-container);
+			border-left: 4px solid var(--a-color-info);
+			padding: var(--a-space-m) var(--a-space-l);
+			border-radius: var(--a-border-radius-base);
+			margin-bottom: var(--a-space-l);
+		}
+
+		.animation-info p {
+			margin: 0;
+			font-size: 0.95rem;
+			line-height: 1.5;
+		}
+
+		.animation-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: var(--a-space-xl);
+			margin-bottom: var(--a-space-2xl);
+		}
+
+		.animation-card {
+			background: var(--a-color-surface);
+			border: 1px solid var(--a-color-outline);
+			border-radius: var(--a-border-radius-large);
+			padding: var(--a-space-l);
+			overflow: hidden;
+		}
+
+		.animation-card h3 {
+			margin: 0 0 var(--a-space-s) 0;
+			font-size: 1.1rem;
+		}
+
+		.animation-card-preview {
+			height: 150px;
+			background: var(--a-color-info-container);
+			border-radius: var(--a-border-radius-base);
+			margin-bottom: var(--a-space-m);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+		}
+
+		.animation-card-preview .animation-box {
+			margin: 0;
+			width: 60px;
+			height: 60px;
+			font-size: 1.5rem;
+		}
+
+		.animation-card p {
+			margin: 0;
+			font-size: 0.9rem;
+			color: var(--a-color-text-muted);
+			line-height: 1.5;
+		}
+
+		.badge-animation {
+			display: inline-block;
+			background: var(--a-color-primary);
+			color: white;
+			padding: 4px 8px;
+			border-radius: 4px;
+			font-size: 0.75rem;
+			font-weight: bold;
+			margin-top: var(--a-space-s);
+		}
+
+		/* Live animation examples */
+		.demo-reveal-fade { animation: fadeIn 1s ease-out; }
+		.demo-fade-out { animation: fadeOut 1s ease-in; }
+		.demo-reveal-fade-up { animation: fadeInUp 1s ease-out; }
+		.demo-reveal-fade-down { animation: fadeInDown 1s ease-out; }
+		.demo-reveal-fade-left { animation: fadeInLeft 1s ease-out; }
+		.demo-reveal-fade-right { animation: fadeInRight 1s ease-out; }
+		.demo-reveal-slide-up { animation: slideUp 1s ease-out; }
+		.demo-slide-down { animation: slideDown 1s ease-out; }
+		.demo-slide-left { animation: slideLeft 1s ease-out; }
+		.demo-slide-right { animation: slideRight 1s ease-out; }
+		.demo-reveal-scale { animation: scaleIn 1s ease-out; }
+		.demo-reveal-scale-out { animation: scaleOut 1s ease-in; }
+		.demo-status-spin { animation: spin 2s linear infinite; }
+		.demo-status-pulse { animation: pulse 2s ease-in-out infinite; }
+		.demo-status-bounce { animation: bounce 1s ease-in-out infinite; }
+		.demo-status-bounce-in { animation: bounceIn 1s ease-out; }
+		.demo-reveal-flip-in { animation: flipIn 1s ease-out; }
+		.demo-status-heartbeat { animation: heartbeat 1.3s ease-in-out infinite; }
+
+		.animation-subtitle {
+			color: var(--a-color-text-muted);
+			font-size: 0.9rem;
+			margin-top: var(--a-space-s);
+		}
+
+		.animation-gallery {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			gap: var(--a-space-m);
+			margin-bottom: var(--a-space-2xl);
+		}
+
+		.animation-gallery-item {
+			aspect-ratio: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: var(--a-color-info-container);
+			border: 1px solid var(--a-color-outline);
+			border-radius: var(--a-border-radius-base);
+			cursor: pointer;
+			transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+		}
+
+		.animation-gallery-item:hover {
+			transform: translateY(-4px);
+			box-shadow: var(--a-shadow-medium);
+		}
+
+		.animation-gallery-item.active {
+			background: var(--a-color-primary-container);
+			border-color: var(--a-color-primary);
+		}
+
+		@keyframes fadeIn {
+			from { opacity: 0; }
+			to { opacity: 1; }
+		}
+		@keyframes fadeOut {
+			from { opacity: 1; }
+			to { opacity: 0; }
+		}
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(0.5rem);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+		@keyframes fadeInDown {
+			from {
+				opacity: 0;
+				transform: translateY(-0.5rem);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+		@keyframes fadeInLeft {
+			from {
+				opacity: 0;
+				transform: translateX(-0.5rem);
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+		@keyframes fadeInRight {
+			from {
+				opacity: 0;
+				transform: translateX(0.5rem);
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+		@keyframes slideUp {
+			from { transform: translateY(1rem); }
+			to { transform: translateY(0); }
+		}
+		@keyframes slideDown {
+			from { transform: translateY(-1rem); }
+			to { transform: translateY(0); }
+		}
+		@keyframes slideLeft {
+			from { transform: translateX(1rem); }
+			to { transform: translateX(0); }
+		}
+		@keyframes slideRight {
+			from { transform: translateX(-1rem); }
+			to { transform: translateX(0); }
+		}
+		@keyframes scaleIn {
+			from {
+				opacity: 0;
+				transform: scale(0.95);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+		@keyframes scaleOut {
+			from {
+				opacity: 1;
+				transform: scale(1);
+			}
+			to {
+				opacity: 0;
+				transform: scale(0.95);
+			}
+		}
+		@keyframes spin {
+			from { transform: rotate(0deg); }
+			to { transform: rotate(360deg); }
+		}
+		@keyframes pulse {
+			0%, 100% { opacity: 1; }
+			50% { opacity: 0.5; }
+		}
+		@keyframes bounce {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(-0.5rem); }
+		}
+		@keyframes bounceIn {
+			0% {
+				opacity: 0;
+				transform: scale(0.3);
+			}
+			50% {
+				opacity: 1;
+				transform: scale(1.05);
+			}
+			70% {
+				transform: scale(0.9);
+			}
+			100% {
+				transform: scale(1);
+			}
+		}
+		@keyframes flipIn {
+			from {
+				opacity: 0;
+				transform: perspective(400px) rotateY(-180deg);
+			}
+			to {
+				opacity: 1;
+				transform: perspective(400px) rotateY(0);
+			}
+		}
+		@keyframes heartbeat {
+			0%, 100% { transform: scale(1); }
+			10%, 30% { transform: scale(0.9); }
+			20%, 50%, 80% { transform: scale(1.1); }
+			40% { transform: scale(1.05); }
+			60%, 70% { transform: scale(1.05); }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			[class^="demo-"] {
+				animation: none !important;
+			}
+		}
+	</style>
+</head>
+<body class="axiom-body">
+
+    <header class="main" data-component="mobile-navbar">
+        <nav role="navigation" aria-label="Main Navigation">
+            <a href="index.html" class="brand" aria-label="Axiom01 Framework Home">[Ax<span class="primary">01</span>]</a>
+            <ul class="links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="components-overview.html">Components</a></li>
+                <li><a href="overview-quickstart.html">Get Started</a></li>
+            </ul>
+
+            <div class="actions">
+                <button class="search toggle" aria-label="Open Search">
+                    <span class="axicon render" data-name="Search"></span>
+                </button>
+                <a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="View on GitHub">
+                    <span class="axicon render" data-name="GitHub"></span>
+                    <span>GitHub</span>
+                </a>
+                <button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="axicon render" data-name="Moon"></span>
+                </button>
+                <button class="menu toggle" aria-label="Toggle Menu">
+                    <span class="axicon render" data-name="Menu"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+<main>
+	<!-- ANIMATION PHILOSOPHY -->
+	<section>
+		<div class="container">
+			<header>
+				<h2>Animation Philosophy</h2>
+				<p>Animation in Axiom01 is intentional, never decorative.</p>
+			</header>
+
+			<div class="grid grid-cols-3">
+				<article class="card">
+					<span class="axicon render primary"  data-name="Zap"></span>
+					<h3>Purposeful</h3>
+					<p>Every animation communicates state, guides focus, or improves perceived performance. Decoration is never the goal.</p>
+				</article>
+				<article class="card">
+					<span class="axicon render secondary"  data-name="Gauge"></span>
+					<h3>Performant</h3>
+					<p>All animations use GPU-accelerated properties (transform, opacity) and complete in 150–500ms for snappy responsiveness.</p>
+				</article>
+				<article class="card">
+					<span class="axicon render success"  data-name="Shield-Check"></span>
+					<h3>Accessible</h3>
+					<p>Respects user preferences with prefers-reduced-motion. No animation blocks interaction or harms usability.</p>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<!-- COMPONENT DEFAULTS - THE AXIOM WAY -->
+	<section class="demo-section-header">
+		<div class="container">
+			<header>
+				<h2>Add Animation with One Class: `.animate`</h2>
+				<p>Axiom01's semantic approach. Just add `.animate` to any component for intelligent, automatic animations.</p>
+			</header>
+
+			<article class="card filled" >
+				<header>
+					<h3>The Pattern</h3>
+				</header>
+				<div class="component-grid">
+					<div>
+						<p><strong>Default (one class):</strong></p>
+						<pre><code class="language-html">&lt;!-- Card animates with fadeInUp --&gt;
+&lt;article class="card animate"&gt;
+  Card content
+&lt;/article&gt;
+
+&lt;!-- Button animates with scaleIn --&gt;
+&lt;button class="animate"&gt;
+  Click me
+&lt;/button&gt;
+
+&lt;!-- Modal animates with slideUp --&gt;
+&lt;div class="modal animate"&gt;
+  Modal content
+&lt;/div&gt;</code></pre>
+					</article>
+					<div>
+						<p><strong>Override (add animation class):</strong></p>
+						<pre><code class="language-html">&lt;!-- Card with custom animation --&gt;
+&lt;article class="card  animation-demo reveal-fade"&gt;
+  Content
+&lt;/article&gt;
+
+&lt;!-- Staggered sequence --&gt;
+&lt;article class="card  animation-demo delay-1"&gt;&lt;/article&gt;
+&lt;article class="card  animation-demo delay-2"&gt;&lt;/article&gt;
+&lt;article class="card  animation-demo delay-3"&gt;&lt;/article&gt;</code></pre>
+					</div>
+				</div>
+			</article>
+
+			<div class="grid grid-cols-2" >
+				<article class="card">
+					<h3>Why Component Defaults?</h3>
+					<p>Each component serves a different purpose and appears in different contexts. Rather than one-size-fits-all animations, Axiom01 gives each component the animation that best communicates its role:</p>
+					<ul >
+						<li><strong>Cards</strong> need gentle, content-focused entrance (fadeInUp)</li>
+						<li><strong>Buttons</strong> need attention-grabbing emphasis (scaleIn)</li>
+						<li><strong>Modals</strong> need clear state change emphasis (slideUp)</li>
+						<li><strong>Alerts</strong> need top-down warning signal (fadeInDown)</li>
+						<li><strong>Tooltips</strong> need quick, subtle reveal (fadeIn)</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h3>What Does `.animate` Do?</h3>
+					<p>Adding <code class="demo-code-inline">.animate</code> to a component triggers its intelligent default animation:</p>
+					<ul >
+						<li>Framework detects component type</li>
+						<li>Applies best animation for that type</li>
+						<li>Sets optimal timing (300–500ms)</li>
+						<li>Uses professional easing curves</li>
+						<li>Respects prefers-reduced-motion</li>
+					</ul>
+					<p><strong>No thinking required—just add `.animate`.</strong></p>
+				</article>
+			</div>
+
+			<article class="card filled" >
+				<header>
+					<h3>Which Components Support `.animate`?</h3>
+				</header>
+				<p>Not every component benefits from animation. Axiom01 provides defaults for the 10 UI components where animation enhances meaning and user experience. Use `.animate` on these elements:</p>
+			</article>
+
+			<div class="grid grid-cols-2" >
+				<article class="card">
+					<h3>Component Defaults</h3>
+					<table class="striped demo-table-small">
+						<tbody>
+							<tr>
+								<td><code>.card</code></td>
+								<td>fadeInUp</td>
+							</tr>
+							<tr>
+								<td><code>.button</code></td>
+								<td>scaleIn</td>
+							</tr>
+							<tr>
+								<td><code>.modal</code></td>
+								<td>slideUp</td>
+							</tr>
+							<tr>
+								<td><code>.alert</code></td>
+								<td>fadeInDown</td>
+							</tr>
+							<tr>
+								<td><code>.badge</code></td>
+								<td>scaleIn</td>
+							</tr>
+							<tr>
+								<td><code>[role="tooltip"]</code></td>
+								<td>fadeIn</td>
+							</tr>
+							<tr>
+								<td><code>[role="menu"]</code></td>
+								<td>slideDown</td>
+							</tr>
+							<tr>
+								<td><code>[role="tabpanel"]</code></td>
+								<td>fadeIn</td>
+							</tr>
+							<tr>
+								<td><code>table</code></td>
+								<td>fadeInUp</td>
+							</tr>
+							<tr>
+								<td><code>.toast</code></td>
+								<td>slideUp</td>
+							</tr>
+						</tbody>
+					</table>
+				</article>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- ANIMATION CATEGORIES -->
+	<section id="fade-animations">
+		<div class="container">
+			<header>
+				<h2>Fade Animations</h2>
+				<p>Gentle opacity changes for introductions and transitions.</p>
+			</header>
+
+			<div class="animation-info">
+				<p><strong>Use Case:</strong> Page loads, modal entries, content reveals, focus states.</p>
+			</div>
+
+			<div class="animation-gallery">
+				<div class="animation-gallery-item demo-reveal-fade" title="Fade In">
+					<span class="axicon render" data-name="Zap"></span>
+				</div>
+				<div class="animation-gallery-item demo-reveal-fade-up" title="Fade In Up">
+					<span class="axicon render" data-name="Arrow-Up"></span>
+				</div>
+				<div class="animation-gallery-item demo-reveal-fade-down" title="Fade In Down">
+					<span class="axicon render" data-name="Arrow-Down"></span>
+				</div>
+				<div class="animation-gallery-item demo-reveal-fade-left" title="Fade In Left">
+					<span class="axicon render" data-name="Arrow-Left"></span>
+				</div>
+				<div class="animation-gallery-item demo-reveal-fade-right" title="Fade In Right">
+					<span class="axicon render" data-name="Arrow-Right"></span>
+				</div>
+			</div>
+
+			<article class="card filled">
+				<header>
+					<h3>CSS Usage</h3>
+				</header>
+				<div>
+					<pre><code class="language-css">.reveal-fade {
+  animation: fadeIn 300ms ease-out;
+}
+
+.reveal-fade-up {
+  animation: fadeInUp 300ms ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}</code></pre>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!-- SLIDE ANIMATIONS -->
+	<section id="slide-animations">
+		<div class="container">
+			<header>
+				<h2>Slide Animations</h2>
+				<p>Transform-based directional movements for entrances and exits.</p>
+			</header>
+
+			<div class="animation-info">
+				<p><strong>Use Case:</strong> Dropdowns, sidebars, drawer menus, list items, directional reveals.</p>
+			</div>
+
+			<div class="animation-gallery">
+				<div class="animation-gallery-item demo-reveal-slide-up" title="Slide Up">
+					<span class="axicon render" data-name="Arrow-Up"></span>
+				</div>
+				<div class="animation-gallery-item demo-slide-down" title="Slide Down">
+					<span class="axicon render" data-name="Arrow-Down"></span>
+				</div>
+				<div class="animation-gallery-item demo-slide-left" title="Slide Left">
+					<span class="axicon render" data-name="Arrow-Left"></span>
+				</div>
+				<div class="animation-gallery-item demo-slide-right" title="Slide Right">
+					<span class="axicon render" data-name="Arrow-Right"></span>
+				</div>
+			</div>
+
+			<article class="card filled">
+				<header>
+					<h3>CSS Usage</h3>
+				</header>
+				<div>
+					<pre><code class="language-css">.reveal-slide-up {
+  animation: slideUp 300ms ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(1rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}</code></pre>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!-- SCALE ANIMATIONS -->
+	<section id="scale-animations">
+		<div class="container">
+			<header>
+				<h2>Scale Animations</h2>
+				<p>Size transitions for emphasis and focus.</p>
+			</header>
+
+			<div class="animation-info">
+				<p><strong>Use Case:</strong> Modal opens/closes, button presses, zoom effects, focus highlights.</p>
+			</div>
+
+			<div class="animation-gallery">
+				<div class="animation-gallery-item demo-reveal-scale" title="Scale In">
+					<span class="axicon render" data-name="Maximize"></span>
+				</div>
+				<div class="animation-gallery-item demo-reveal-scale-out" title="Scale Out">
+					<span class="axicon render" data-name="Minimize"></span>
+				</div>
+			</div>
+
+			<article class="card filled">
+				<header>
+					<h3>CSS Usage</h3>
+				</header>
+				<div>
+					<pre><code class="language-css">.reveal-scale {
+  animation: scaleIn 300ms ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}</code></pre>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!-- SPIN & PULSE ANIMATIONS -->
+	<section id="load-animations">
+		<div class="container">
+			<header>
+				<h2>Loading & Status Animations</h2>
+				<p>Continuous loops for loading states and feedback.</p>
+			</header>
+
+			<div class="animation-info">
+				<p><strong>Use Case:</strong> Loading spinners, progress indicators, status updates, background processes.</p>
+			</div>
+
+			<div class="animation-gallery">
+				<div class="animation-gallery-item demo-status-spin" title="Spin">
+					<span class="axicon render" data-name="Loader"></span>
+				</div>
+				<div class="animation-gallery-item demo-status-pulse" title="Pulse">
+					<span class="axicon render" data-name="Lightbulb"></span>
+				</div>
+				<div class="animation-gallery-item demo-status-bounce" title="Bounce">
+					<span class="axicon render" data-name="Download"></span>
+				</div>
+			</div>
+
+			<article class="card filled">
+				<header>
+					<h3>CSS Usage</h3>
+				</header>
+				<div>
+					<pre><code class="language-css">.status-spin {
+  animation: spin 1s linear infinite;
+}
+
+.status-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}</code></pre>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!-- ENTRANCE ANIMATIONS -->
+	<section id="entrance-animations">
+		<div class="container">
+			<header>
+				<h2>Entrance & Elastic Animations</h2>
+				<p>Dynamic introductions with emphasis.</p>
+			</header>
+
+			<div class="animation-info">
+				<p><strong>Use Case:</strong> Modal reveals, prominent CTAs, celebration moments, attention-grabbing elements.</p>
+			</div>
+
+			<div class="animation-gallery">
+				<div class="animation-gallery-item demo-status-bounce-in" title="Bounce In">
+					<span class="axicon render" data-name="Zap"></span>
+				</div>
+				<div class="animation-gallery-item demo-reveal-flip-in" title="Flip In">
+					<span class="axicon render" data-name="RefreshCw"></span>
+				</div>
+				<div class="animation-gallery-item demo-status-heartbeat" title="Heartbeat">
+					<span class="axicon render" data-name="Heart"></span>
+				</div>
+			</div>
+
+			<article class="card filled">
+				<header>
+					<h3>CSS Usage</h3>
+				</header>
+				<div>
+					<pre><code class="language-css">.status-bounce-in {
+  animation: bounceIn 500ms ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}</code></pre>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!-- TIMING & EASING -->
+	<section id="timing">
+		<div class="container">
+			<header>
+				<h2>Timing & Easing Guidelines</h2>
+				<p>Choose the right duration and easing for your animation type.</p>
+			</header>
+
+			<div class="grid grid-cols-2">
+				<article class="card">
+					<header>
+						<h3>Recommended Durations</h3>
+					</header>
+					<div>
+						<table class="striped">
+							<tbody>
+								<tr>
+									<td><strong>0–100ms</strong></td>
+									<td>Instant feedback</td>
+								</tr>
+								<tr>
+									<td><strong>150–200ms</strong></td>
+									<td>Quick, snappy</td>
+								</tr>
+								<tr>
+									<td><strong>300ms</strong></td>
+									<td>Standard transitions</td>
+								</tr>
+								<tr>
+									<td><strong>500ms</strong></td>
+									<td>Important, deliberate</td>
+								</tr>
+								<tr>
+									<td><strong>800ms+</strong></td>
+									<td>Entrance, emphasis</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</article>
+
+				<article class="card">
+					<header>
+						<h3>Common Easing Functions</h3>
+					</header>
+					<div>
+						<table class="striped">
+							<tbody>
+								<tr>
+									<td><code>ease-out</code></td>
+									<td>Arrivals, entrances</td>
+								</tr>
+								<tr>
+									<td><code>ease-in</code></td>
+									<td>Departures, exits</td>
+								</tr>
+								<tr>
+									<td><code>ease-in-out</code></td>
+									<td>State changes</td>
+								</tr>
+								<tr>
+									<td><code>linear</code></td>
+									<td>Continuous (spinners)</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<!-- ACCESSIBILITY -->
+	<section id="accessibility">
+		<div class="container">
+			<header>
+				<h2>Accessibility & prefers-reduced-motion</h2>
+				<p>Animations must respect user preferences.</p>
+			</header>
+
+			<article class="card filled">
+				<header>
+					<h3>CSS Pattern</h3>
+				</header>
+				<div>
+					<pre><code class="language-css">/* Default: With animation */
+.element {
+  animation: fadeIn 300ms ease-out;
+}
+
+/* User prefers reduced motion: Disable all animations */
+@media (prefers-reduced-motion: reduce) {
+  .element {
+    animation: none !important;
+    opacity: 1;  /* Ensure element is visible */
+  }
+}</code></pre>
+				</div>
+			</article>
+
+			<div class="grid grid-cols-2" >
+				<article class="card">
+					<h3>Testing prefers-reduced-motion</h3>
+					<p><strong>macOS:</strong> System Preferences → Accessibility → Display → Reduce Motion</p>
+					<p><strong>Windows:</strong> Settings → Ease of Access → Display → Show animations</p>
+					<p><strong>Firefox:</strong> about:config → ui.prefersReducedMotion → 1</p>
+				</article>
+
+				<article class="card">
+					<h3>JavaScript Detection</h3>
+					<pre><code class="language-javascript">const prefersReduced = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
+
+if (!prefersReduced) {
+  // Apply animation
+} else {
+  // Use fallback
+}</code></pre>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<!-- PERFORMANCE -->
+	<section id="performance">
+		<div class="container">
+			<header>
+				<h2>Performance Best Practices</h2>
+				<p>Ensure animations run smoothly at 60 FPS.</p>
+			</header>
+
+			<div class="grid">
+				<article class="card">
+					<span class="axicon render success"  data-name="Check-Circle"></span>
+					<h3>GPU-Accelerated Properties</h3>
+					<p><strong>Safe to animate:</strong></p>
+					<ul class="demo-list-compact">
+						<li><code>opacity</code></li>
+						<li><code>transform</code> (translate, scale, rotate)</li>
+						<li><code>filter</code></li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<span class="axicon render error"  data-name="Alert-Circle"></span>
+					<h3>Never Animate These</h3>
+					<p><strong>Causes layout recalculation:</strong></p>
+					<ul class="demo-list-compact">
+						<li><code>width</code>, <code>height</code></li>
+						<li><code>left</code>, <code>top</code>, <code>right</code>, <code>bottom</code></li>
+						<li><code>margin</code>, <code>padding</code></li>
+						<li><code>font-size</code></li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<span class="axicon render warning"  data-name="AlertTriangle"></span>
+					<h3>Good Example</h3>
+					<p>Use GPU-accelerated transform:</p>
+					<pre><code class="language-css">.dropdown.menu {
+  transform: scaleY(0);
+  transition: transform 300ms;
+}
+
+.dropdown.is-open .dropdown.menu {
+  transform: scaleY(1);
+}</code></pre>
+				</article>
+
+				<article class="card">
+					<span class="axicon render error"  data-name="X-Circle"></span>
+					<h3>Bad Example</h3>
+					<p>Don't animate expensive properties:</p>
+					<pre><code class="language-css">/* ❌ WRONG: Triggers layout recalc */
+.dropdown.menu {
+  max-height: 0;
+  transition: max-height 300ms;
+}
+
+.dropdown.is-open .dropdown.menu {
+  max-height: 500px;
+}</code></pre>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<!-- REAL-WORLD EXAMPLES -->
+	<section id="examples">
+		<div class="container">
+			<header>
+				<h2>Real-World Component Examples</h2>
+				<p>See animations in practical use cases.</p>
+			</header>
+
+			<div class="tabs">
+				<menu role="tablist">
+					<button role="tab" aria-selected="true" aria-controls="panel-button" id="tab-button">Button Hover</button>
+					<button role="tab" aria-selected="false" aria-controls="panel-modal" id="tab-modal">Modal Entrance</button>
+					<button role="tab" aria-selected="false" aria-controls="panel-form" id="tab-form">Form Validation</button>
+				</menu>
+
+				<article id="panel-button" role="tabpanel" class="grid grid-cols-2">
+					<article class="card filled">
+						<header>
+							<h3>Live Example</h3>
+						</header>
+						<div class="component-section">
+							<button class="primary lg demo-button-interactive">Hover Me</button>
+							<p class="muted sm" >Lifts on hover, clicks with press</p>
+						</div>
+					</article>
+
+					<article class="card filled">
+						<header>
+							<h3>Code</h3>
+						</header>
+						<div>
+							<pre><code class="language-css">.button {
+  transition: 
+    transform 150ms ease-in-out,
+    box-shadow 150ms ease-in-out;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.button:active {
+  transform: translateY(0);
+}</code></pre>
+						</div>
+					</article>
+				</article>
+
+				<article id="panel-modal" role="tabpanel" class="grid grid-cols-2" hidden>
+					<article class="card filled">
+						<header>
+							<h3>Live Example</h3>
+						</header>
+						<div class="component-section">
+							<button class="primary" onclick="alert('Modal would appear with smooth scale-in animation')">Open Modal</button>
+							<p class="muted sm" >Click to see modal entrance animation</p>
+						</div>
+					</article>
+
+					<article class="card filled">
+						<header>
+							<h3>Code</h3>
+						</header>
+						<div>
+							<pre><code class="language-css">.modal {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: 
+    opacity 300ms ease-out,
+    transform 300ms ease-out;
+}
+
+.modal.is-open {
+  opacity: 1;
+  transform: scale(1);
+}</code></pre>
+						</div>
+					</article>
+				</article>
+
+				<article id="panel-form" role="tabpanel" class="grid grid-cols-2" hidden>
+					<article class="card filled">
+						<header>
+							<h3>Live Example</h3>
+						</header>
+						<div class="component-section">
+							<label>Email</label>
+							<input type="email" placeholder="Enter email" >
+							<p class="muted sm">Type to see validation feedback</p>
+						</div>
+					</article>
+
+					<article class="card filled">
+						<header>
+							<h3>Code</h3>
+						</header>
+						<div>
+							<pre><code class="language-css">@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30% { transform: translateX(-4px); }
+  20%, 40% { transform: translateX(4px); }
+}
+
+.input.error {
+  animation: shake 300ms ease-in-out;
+}</code></pre>
+						</div>
+					</article>
+				</div>
+	</section>
+
+	<!-- ANIMATION CHECKLIST -->
+	<section class="animation-checklist">
+		<div class="container">
+			<header>
+				<h2>Animation Quality Checklist</h2>
+				<p>Before shipping an animated component, verify these points.</p>
+			</header>
+
+			<div class="grid grid-cols-2">
+				<article class="card">
+					<h3>Design & Purpose</h3>
+					<ul class="demo-list-compact">
+						<li>Animation communicates state change</li>
+						<li>Improves UX, not decoration</li>
+						<li>Doesn't distract from content</li>
+						<li>Speed appropriate (150–500ms)</li>
+						<li>Doesn't move elements under cursor</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h3>Implementation</h3>
+					<ul class="demo-list-compact">
+						<li>Uses GPU-accelerated properties</li>
+						<li>CSS animations, not JavaScript</li>
+						<li>Professional easing</li>
+						<li>Uses CSS variables</li>
+						<li>No hardcoded values</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h3>Accessibility</h3>
+					<ul class="demo-list-compact">
+						<li>Respects prefers-reduced-motion</li>
+						<li>Doesn't block keyboard access</li>
+						<li>Focus still visible without animation</li>
+						<li>Content actionable if animation fails</li>
+						<li>Tested with screen readers</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<h3>Performance</h3>
+					<ul class="demo-list-compact">
+						<li>No layout thrashing</li>
+						<li>No excessive stacking</li>
+						<li>60 FPS verified in DevTools</li>
+						<li>Minimal bundle impact</li>
+						<li>Doesn't block interaction</li>
+					</ul>
+				</article>
+			</div>
+		</div>
+	</section>
+
+</main>
+
+    <footer class="footer">
+        <div class="container">
+            <!-- Main Content Grid -->
+            <div class="footer-content">
+                <!-- Brand Section -->
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
+                    <p class="footer-tagline">The Semantic Web, Reimagined.</p>
+                </div>
+
+                <!-- Product Links -->
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="components-overview.html">All Components</a></li>
+                        <li><a href="axicons.html">3,941+ Icons</a></li>
+                        <li><a href="colors-advanced.html">Colors & Tokens</a></li>
+                        <li><a href="overview-quickstart.html">Get Started</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Links -->
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="AXIOM01_STYLING_GUIDE.md" target="_blank">Styling Guide</a></li>
+                        <li><a href="../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+                        <li><a href="../README.md" target="_blank">README</a></li>
+                        <li><a href="../LICENSE" target="_blank">MIT License</a></li>
+                    </ul>
+                </div>
+
+                <!-- Community Links -->
+                <div class="footer-column">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+                        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2024 Sol Roth Media. Released under MIT License.</p>
+                <ul class="footer-social">
+                    <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub">
+                        <span class="axicon render" data-name="GitHub"></span>
+                    </a></li>
+                    <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM">
+                        <span class="axicon render" data-name="Brand-NPM"></span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+<script src="../js/axiom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+
+<script>
+	// Render axicons
+	function renderAxicons() {
+		if (typeof axicons !== 'undefined') {
+			document.querySelectorAll('.axicon.render').forEach(el => {
+				const name = el.getAttribute('data-name');
+				const icon = axicons.find(i => i.name.toLowerCase() === name.toLowerCase());
+				if (icon) {
+					el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icon.svgContent}</svg>`;
+				}
+			});
+		}
+	}
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', renderAxicons);
+	} else {
+		renderAxicons();
+	}
+
+	// Restart animations when clicking gallery items
+	document.querySelectorAll('.animation-gallery-item').forEach(item => {
+		item.addEventListener('click', function() {
+			const clone = this.cloneNode(true);
+			this.parentNode.replaceChild(clone, this);
+			clone.click = function() {};
+		});
+	});
+
+	// Tab functionality
+	const tabs = document.querySelectorAll('[role="tab"]');
+	const panels = document.querySelectorAll('[role="tabpanel"]');
+
+	tabs.forEach(tab => {
+		tab.addEventListener('click', function() {
+			tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+			panels.forEach(p => p.hidden = true);
+			
+			this.setAttribute('aria-selected', 'true');
+			const panelId = this.getAttribute('aria-controls');
+			document.getElementById(panelId).hidden = false;
+		});
+	});
+</script>
+
+<script src="../js/index-page-manager.js"></script>
+<script src="../js/axiom.js"></script>
+<script src="../js/axicons-loader.js"></script>
+<script src="../js/axicons-base.js"></script>
+<script src="../js/axicons-thin-variants.js"></script>
+<script src="../js/axicons-inverted-variants.js"></script>
+<script src="../js/axicons-color-variants.js"></script>
+<script src="../js/axicons-premium-variants.js"></script>
+<script src="../js/render-icons.js"></script>
+</body>
+</html>
