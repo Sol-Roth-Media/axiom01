@@ -430,7 +430,7 @@ stat span {
 
 .quick-categories {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
 	gap: var(--a-space-l);
 }
 
@@ -686,11 +686,13 @@ stat span {
 		display: block;
 		overflow-x: auto;
 		white-space: nowrap;
+		-webkit-overflow-scrolling: touch;
 	}
 
 	body.component-doc pre,
 	body.docs-overview pre {
 		font-size: 0.8125rem;
+		-webkit-overflow-scrolling: touch;
 	}
 }
 
@@ -721,6 +723,32 @@ stat span {
 
 	body.component-doc article.card > .grid {
 		grid-template-columns: 1fr;
+	}
+}
+
+/* ULTRA-SMALL MOBILE: 320px */
+@media (max-width: 320px) {
+	.component-hero h1 {
+		font-size: clamp(1.25rem, 8vw, 2rem);
+	}
+
+	.stats {
+		gap: var(--a-space-s);
+	}
+
+	.category-toggle {
+		padding: var(--a-space-s);
+	}
+
+	body.component-doc pre,
+	body.docs-overview pre {
+		font-size: 0.7rem;
+		padding: var(--a-space-s);
+	}
+
+	body.component-doc article.card > figure {
+		padding: var(--a-space-m);
+		min-height: 80px;
 	}
 }
 
