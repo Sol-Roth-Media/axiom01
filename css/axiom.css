@@ -904,6 +904,10 @@ section.hero
 
 /* MOBILE: 768px and down */
 @media (max-width: 768px) {
+    main > section:first-child {
+        padding-top: max(var(--a-space-2xl), calc(60px + var(--a-space-m)));
+    }
+
     section.hero {
         padding: var(--a-space-xl) var(--a-space-m);
     }
@@ -952,8 +956,12 @@ section.hero
 
 /* MOBILE: 480px and down (iPhone, small devices) */
 @media (max-width: 480px) {
+    main > section:first-child {
+        padding-top: max(var(--a-space-2xl), calc(60px + var(--a-space-l)));
+    }
+
     section.hero {
-        padding: var(--a-space-lg) var(--a-space-m);
+        padding: var(--a-space-xl) var(--a-space-m);
     }
 
     section.hero h1 {
@@ -8403,6 +8411,10 @@ main > section:nth-child(even) {
   background-color: var(--ax-background-secondary);
 }
 
+main > section:first-child {
+  scroll-margin-top: calc(60px + var(--a-space-s));
+}
+
 main > section > .container > header {
   text-align: center;
   margin-bottom: var(--a-space-xl); /* Tightened gap between section header and content */
@@ -8527,6 +8539,8 @@ main > section > .container > header p {
 }
 
 .tabs > menu[role="tablist"],
+.tabs > ul[role="tablist"],
+.tabs > ol[role="tablist"],
 .tab-list {
   display: inline-flex;
   background-color: var(--a-color-surface-variant);
@@ -8541,6 +8555,8 @@ main > section > .container > header p {
 }
 
 .tabs > menu > button[role="tab"],
+.tabs > ul[role="tablist"] > li > button[role="tab"],
+.tabs > ol[role="tablist"] > li > button[role="tab"],
 .tab-item {
   background: transparent;
   border: none;
@@ -8555,11 +8571,15 @@ main > section > .container > header p {
 }
 
 .tabs > menu > button[role="tab"]:hover,
+.tabs > ul[role="tablist"] > li > button[role="tab"]:hover,
+.tabs > ol[role="tablist"] > li > button[role="tab"]:hover,
 .tab-item:hover {
   color: var(--a-color-on-surface);
 }
 
 .tabs > menu > button[role="tab"][aria-selected="true"],
+.tabs > ul[role="tablist"] > li > button[role="tab"][aria-selected="true"],
+.tabs > ol[role="tablist"] > li > button[role="tab"][aria-selected="true"],
 .tab-item.active {
   background-color: var(--a-color-secondary);
   color: var(--a-color-on-secondary);
@@ -9822,6 +9842,8 @@ details.popover nav button:hover {
 /* RESPONSIVE TABS FIX - Mobile Support */
 @media (max-width: 768px) {
   .tabs > menu[role="tablist"],
+  .tabs > ul[role="tablist"],
+  .tabs > ol[role="tablist"],
   .tab-list {
     display: flex;
     flex-wrap: wrap;
@@ -9832,6 +9854,8 @@ details.popover nav button:hover {
   }
   
   .tabs > menu[role="tablist"] a,
+  .tabs > ul[role="tablist"] a,
+  .tabs > ol[role="tablist"] a,
   .tab-list a {
     white-space: nowrap;
     flex-shrink: 0;
@@ -9840,16 +9864,34 @@ details.popover nav button:hover {
 
 @media (max-width: 480px) {
   .tabs > menu[role="tablist"],
+  .tabs > ul[role="tablist"],
+  .tabs > ol[role="tablist"],
   .tab-list {
     width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+    padding-inline-start: max(var(--a-space-xs), env(safe-area-inset-left, 0px));
+    padding-inline-end: max(var(--a-space-xs), env(safe-area-inset-right, 0px));
+    gap: var(--a-space-xs);
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
   }
   
   .tabs > menu[role="tablist"] a,
+  .tabs > ul[role="tablist"] a,
+  .tabs > ol[role="tablist"] a,
   .tab-list a {
     padding: var(--a-space-s) var(--a-space-m);
     font-size: var(--a-font-size-s);
+  }
+
+  .tabs > menu > button[role="tab"],
+  .tabs > ul[role="tablist"] > li > button[role="tab"],
+  .tabs > ol[role="tablist"] > li > button[role="tab"],
+  .tab-item {
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }
 
@@ -12443,4 +12485,3 @@ dialog#search-modal input[type="search"]::placeholder {
     color: var(--a-color-on-surface-variant);
     margin: 0;
 }
-
