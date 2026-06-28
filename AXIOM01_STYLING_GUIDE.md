@@ -19,7 +19,10 @@ Axiom01 embraces the **Semantic Web** — where markup is meaningful, styles fol
 ### Core Principles
 
 - **Semantic HTML First**: Use proper semantic elements (`<button>`, `<nav>`, `<article>`, etc.)
-- **CSS Variables**: Leverage CSS custom properties for theming and consistency
+- **One Root Component Class**: Reach for one component class (`card`, `form`, `button`) before adding extra hooks
+- **Theme Through Tokens**: Leverage CSS custom properties for theming and consistency instead of one-off inline overrides
+- **Respect Element Order**: Let `<header>`, `<main>`, `<footer>`, lists, and labels describe the component structure
+- **No BEM or Utility Chains**: Prefer semantic component APIs over long presentational class strings
 - **Accessible by Default**: WCAG 2.1 AA compliance built into every component
 - **Responsive Design**: Mobile-first, scales to any screen size
 - **Minimal Dependencies**: Pure HTML, CSS, and SVG (no external icon libraries)
@@ -251,16 +254,16 @@ Axiom01 uses a consistent 4px-based spacing system for predictable, harmonious l
 
 ```html
 <!-- Primary button -->
-<button class="btn btn-primary">Primary Action</button>
+<button class="button primary">Primary Action</button>
 
 <!-- Secondary button -->
-<button class="btn btn-secondary">Secondary Action</button>
+<button class="button secondary">Secondary Action</button>
 
 <!-- Disabled state -->
-<button class="btn btn-primary" disabled>Disabled</button>
+<button class="button primary" disabled>Disabled</button>
 
 <!-- With icon -->
-<button class="btn btn-primary">
+<button class="button primary">
   <span class="axicon render" data-name="Check"></span>
   Save
 </button>
@@ -291,50 +294,39 @@ Axiom01 uses a consistent 4px-based spacing system for predictable, harmonious l
 ### Card Component
 
 ```html
-<div class="card">
-  <div class="card-header">
+<article class="card">
+  <header>
     <h3>Card Title</h3>
-  </div>
-  <div class="card-body">
+  </header>
+  <main>
     <p>Card content goes here.</p>
-  </div>
-  <div class="card-footer">
-    <button class="btn btn-secondary">Learn More</button>
-  </div>
-</div>
+  </main>
+  <footer>
+    <button class="button secondary">Learn More</button>
+  </footer>
+</article>
 ```
 
 ### Form Elements
 
 ```html
-<!-- Text input -->
-<div class="form-group">
+<form class="form">
   <label for="name">Full Name</label>
-  <input type="text" id="name" class="form-control" placeholder="Enter your name">
-</div>
+  <input type="text" id="name" placeholder="Enter your name">
 
-<!-- Select -->
-<div class="form-group">
   <label for="category">Category</label>
-  <select id="category" class="form-control">
+  <select id="category">
     <option>Option 1</option>
     <option>Option 2</option>
   </select>
-</div>
 
-<!-- Checkbox -->
-<div class="form-group">
-  <input type="checkbox" id="agree" class="form-check">
-  <label for="agree">I agree to the terms</label>
-</div>
+  <label>
+    <input type="checkbox" id="agree">
+    I agree to the terms
+  </label>
 
-<!-- Toggle Switch -->
-<div class="form-group">
-  <div class="toggle-switch">
-    <input type="checkbox" id="notifications">
-    <label for="notifications">Enable Notifications</label>
-  </div>
-</div>
+  <button class="button primary">Submit</button>
+</form>
 ```
 
 ---
@@ -392,9 +384,9 @@ All interactive elements should be keyboard accessible:
 <button>Click Me</button>
 <a href="/">Link</a>
 
-<!-- Custom interactive elements need tabindex -->
-<div tabindex="0" role="button" onclick="doSomething()">
-  Custom Button
+<!-- If you must build a custom control, keep the semantics explicit -->
+<div tabindex="0" role="button" aria-label="Open filters">
+  Open Filters
 </div>
 ```
 
@@ -532,8 +524,8 @@ color: #333;
 }
 
 /* Minimize specificity */
-.btn { /* Good */ }
-.container .card .btn { /* Avoid - too specific */ }
+.button { /* Good */ }
+.container .card .button { /* Avoid - too specific */ }
 
 /* Use transitions instead of animations when possible */
 .button {
@@ -545,17 +537,20 @@ color: #333;
 
 ```html
 <!-- Create flexible, reusable components -->
-<div class="card">
-  <img src="..." alt="...">
-  <h3>Card Title</h3>
-  <p>Description</p>
-  <button class="btn">Action</button>
-</div>
-
-<!-- Use CSS modifier classes for variations -->
-<div class="card card-elevated">...</div>
-<div class="card card-outlined">...</div>
+<article class="card">
+  <header>
+    <h3>Card Title</h3>
+  </header>
+  <main>
+    <p>Description</p>
+  </main>
+  <footer>
+    <button class="button primary">Action</button>
+  </footer>
+</article>
 ```
+
+Prefer token adjustments or documented component variants over inventing BEM-style modifier classes.
 
 ---
 
@@ -564,6 +559,7 @@ color: #333;
 When creating components, ensure:
 
 - [ ] Semantic HTML structure
+- [ ] One root component class before adding any extra hooks
 - [ ] Accessible (WCAG 2.1 AA)
 - [ ] Keyboard navigation support
 - [ ] Focus indicators visible
