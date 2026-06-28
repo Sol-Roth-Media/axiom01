@@ -33,11 +33,11 @@ Rules:
 
 ## 3) Deferred set
 
-Deferred until post-major-release unless directly required by the Drupal starter theme:
+Deferred until post-major-release unless directly required by the current stable surface:
 
 - New standalone component categories not already represented in current JS modules.
 - New build-system complexity beyond the single release quality lane.
-- Additional platform integrations beyond Drupal 11 starter-theme delivery.
+- Additional platform integrations beyond the core framework and docs.
 
 ## 4) Breaking-change policy for the major release
 
@@ -45,4 +45,4 @@ Breaking changes are allowed only if they reduce long-term maintenance load for 
 
 1. Why the change lowers maintenance cost.
 2. A migration note in changelog/docs.
-3. A compatibility note for the Drupal starter theme.
+3. A migration note in changelog/docs when consumers need one.

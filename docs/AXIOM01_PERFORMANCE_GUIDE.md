@@ -3,7 +3,7 @@
 ## Framework Performance Metrics
 
 ### Build Sizes (v2.0.0)
-- **CSS (minified & gzipped)**: 13.3 KB
+- **CSS (minified & gzipped)**: 37.2 KB
 - **CSS (unminified)**: 13,370 lines / ~200 KB
 - **JavaScript (minified & gzipped)**: 1.0 KB
 - **Axicons (base, minified & gzipped)**: 89 KB
@@ -12,7 +12,7 @@
 ### Performance Characteristics
 - **CSS Compression Ratio**: 45.1% (minification + gzip)
 - **Token Coverage**: 2,643 token uses across framework (19.8% token ratio)
-- **Component Count**: 77 production-ready components
+- **Component Count**: 80 production-ready components
 - **Design Tokens**: 149 CSS custom properties
 - **CSS Animations**: 20+ GPU-accelerated transitions
 - **Accessibility**: WCAG 2.1 AA compliant by default
@@ -159,7 +159,7 @@ if (window.innerWidth < 768) {
 ### Current Token Usage
 - **Total Tokens Defined**: 149
 - **Tokens Used**: 2,643 instances
-- **Coverage Ratio**: 19.8% (2,643 uses / 77 components = ~34 uses per component)
+- **Coverage Ratio**: 19.8% (2,643 uses / 80 components = ~34 uses per component)
 
 ### Guidelines for Framework Developers
 

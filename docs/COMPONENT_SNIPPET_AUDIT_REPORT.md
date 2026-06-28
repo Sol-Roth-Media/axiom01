@@ -2,7 +2,7 @@
 
 **Date:** January 25, 2025  
 **Status:** Audit Complete - Fixes Pending  
-**Severity:** Critical - All 77 components affected
+**Severity:** Critical - All 80 components affected
 
 ---
 
@@ -182,7 +182,7 @@ All 77 component documentation pages contain code snippets that violate AXIOM01 
 
 ## Priority Fix List
 
-### **Critical (All 77 components)**
+### **Critical (All 80 components)**
 
 1. **Fix BEM-like element classes**
    - Remove `.card-header`, `.card-body`, `.card-footer`

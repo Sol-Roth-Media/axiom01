@@ -282,7 +282,6 @@ ALL new components MUST:
 - Add "Copy Code" buttons
 - Show component variants with visual preview
 - Add "Real-world Examples" section
-- Link to Drupal starter theme usage
 
 ### 4. Theme Engine Enhancement
 - Visual theme generator GUI (planned for v1.1)

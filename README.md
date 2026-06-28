@@ -5,7 +5,7 @@ Semantic-first UI framework for building accessible interfaces with minimal mark
 ## Current status
 
 - **Published package:** `2.1.2`
-- **Framework state:** v2 framework, docs, audits, and starter themes are in release-hardening for the first stable v2 launch
+- **Framework state:** v2 framework, docs, and audits are in release-hardening for the first stable v2 launch
 - **Philosophy:** semantic markup first, no BEM, no extra wrapper classes, one root component class, theme through tokens and element order
 - **Accessibility:** WCAG-minded defaults with audit and smoke-test coverage in the repository
 - **Distribution:** zero-dependency CSS framework with optional JavaScript component runtime and static docs site
@@ -15,7 +15,6 @@ Semantic-first UI framework for building accessible interfaces with minimal mark
 - `css/` — core framework CSS, tokens, docs styles, and release-ready minified assets
 - `js/` — runtime loader, page scripts, and component modules
 - `docs/` — public documentation site and component reference pages
-- `starter-themes/` — starter themes and integration assets, including Drupal work
 - `scripts/` — build, sync, audit, and smoke-test tooling used by release workflows
 - `src/` — structured content and source material that feeds framework/docs work
 - `archive/` — historical reports, session notes, and older release artifacts kept for reference
@@ -35,7 +34,6 @@ axiom01/
 ├── docs/
 │   └── components/
 ├── scripts/
-├── starter-themes/
 ├── src/
 ├── archive/
 ├── assets/
@@ -49,6 +47,7 @@ axiom01/
 - One root component class instead of BEM trees
 - Design-token driven theming and dark-mode support
 - Release-ready docs site with broad component coverage
+- 80 component docs, 24 runtime modules, 3,969 Axicons variants, and 22 keyframe animations
 - Optional JavaScript runtime for interactive components
 - Build, parity, philosophy, and accessibility audit gates in `npm test`
 
@@ -81,15 +80,17 @@ Open `/home/runner/work/axiom01/axiom01/index.html` or serve the repository root
 
 - `docs/overview-quickstart.html`
 - `docs/components-overview.html`
+- `docs/axicons.html`
 - `docs/styling-guide.html`
 - `AXIOM01_STYLING_GUIDE.md`
 - `DEVELOPER.md`
 
 ## Release workflow commands
 
-- `npm run build` — rebuild CSS, JS, starter-theme synced assets, and `dist/` artifacts
-- `npm test` — run asset parity, pre-release, philosophy, Twig, runtime-loader, interaction, gesture, and accessibility checks
+- `npm run build` — rebuild CSS, JS, and `dist/` artifacts
+- `npm test` — run pre-release, philosophy, runtime-loader, interaction, gesture, and accessibility checks
 
 ## Stable v2 release focus
 
-The repo is currently centered on final cleanup, documentation accuracy, audit hardening, and starter-theme parity so the first stable v2 release ships with a clean public structure and reliable release gates.
+CMS and framework integrations still exist, including Drupal in the public `dbase` repo, but they were removed from this repository to keep concerns separated.
+The repo is currently centered on final cleanup, documentation accuracy, and audit hardening so the first stable v2 release ships with a clean public structure and reliable release gates.

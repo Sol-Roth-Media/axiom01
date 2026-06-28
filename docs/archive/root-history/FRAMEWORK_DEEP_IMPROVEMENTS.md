@@ -42,4 +42,4 @@ Prioritized for solo-maintainer + AI-agent sustainability.
 - [x] Add a targeted docs smoke gate that enforces one-root-class examples for selected flagship component pages before broad rollout.
 - [x] Add an audit check that flags class attributes with more than two tokens in component examples to reduce wrapper-class drift.
 - [x] Add a migration backlog map for top 20 docs component pages with the highest semantic debt and class-density.
-- [ ] Add starter-theme Twig fixture checks that block new BEM-style (`__` / `--`) and multi-dash utility classes.
+- [ ] Add fixture checks that block new BEM-style (`__` / `--`) and multi-dash utility classes.

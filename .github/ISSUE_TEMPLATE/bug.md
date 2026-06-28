@@ -16,6 +16,5 @@ assignees: ""
 
 - [ ] core runtime
 - [ ] docs
-- [ ] drupal starter theme
 
 ## Validation notes

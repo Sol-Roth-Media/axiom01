@@ -8,7 +8,6 @@
 - [ ] bug
 - [ ] docs
 - [ ] component-parity
-- [ ] drupal-integration
 
 ## Semantic compliance
 
@@ -21,7 +20,6 @@
 
 - [ ] No migration note needed (no compatibility-impacting behavior changed).
 - [ ] Runtime-loader migration note updated (`RUNTIME_LOADER_MIGRATION_TEMPLATE.md`).
-- [ ] Drupal compatibility migration note updated (`starter-themes/axiom01-drupal11-starter-theme/CHANGELOG_MIGRATION_TEMPLATE.md`).
 
 ## Validation
 

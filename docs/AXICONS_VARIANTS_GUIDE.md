@@ -27,7 +27,7 @@ Instead of loading everything, start with just what you need and mix-and-match:
 | **axicons-inverted-variants.js** | 243KB | 758 | Light on dark backgrounds |
 | **axicons-color-variants.js** | 440KB | 1,351 | Gradients and colors |
 | **axicons-premium-variants.js** | 185KB | 622 | Exclusive premium effects |
-| **Full Library** | 1.0MB | 3,941 | All variants combined |
+| **Full Library** | 1.0MB | 3,969 | All variants combined |
 
 ## Usage Scenarios
 
@@ -132,7 +132,7 @@ await window.AxiconsLoader.loadPremium();
 ```
 
 #### `loadAll()`
-Loads entire library (all 3,941 icons)
+Loads entire library (all 3,969 icons)
 ```javascript
 await window.AxiconsLoader.loadAll();
 ```
@@ -249,7 +249,7 @@ Heart-Premium
   window.AxiconsLoader.loadAll();
 </script>
 ```
-**Icons:** 3,941 icons
+**Icons:** 3,969 icons
 **Use when:** You need all options available
 
 ---
@@ -280,7 +280,7 @@ Heart-Premium
 | Minimal | 89KB | 450 | ~50ms |
 | Base + Thin | 259KB | 1,210 | ~120ms |
 | Base + Inverted | 332KB | 1,208 | ~140ms |
-| Full Library | 1.0MB | 3,941 | ~350ms |
+| Full Library | 1.0MB | 3,969 | ~350ms |
 
 ### Render Performance (5 Icons)
 All configs render icons instantly (~5-10ms) after load

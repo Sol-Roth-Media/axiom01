@@ -4,7 +4,7 @@
 
 Axiom01 features a comprehensive icon system with **2,900+ icons** organized into a modular, lazy-loadable architecture for optimal performance.
 
-**Total Icons: 2,931**
+**Total Icons: 3,969**
 - Standard Icons: 2,142
 - Premium Icons: 789
 
@@ -187,7 +187,7 @@ Premium icons include:
 
 ## Categories
 
-All 2,931 icons are organized into 33 categories:
+All 3,969 icons are organized into 33 categories:
 
 ### Top Categories by Count
 - **General** (738) - Common, everyday icons
@@ -268,7 +268,7 @@ No changes needed to your HTML markup - the API remains the same!
 - Premium icons: Loaded on demand (192KB)
 
 **Full Library (when everything loads):**
-- Total icons: 2,931
+- Total icons: 3,969
 - Standard: 2,142
 - Premium: 789
 - Styles: Standard, Thin, Inverted, Premium

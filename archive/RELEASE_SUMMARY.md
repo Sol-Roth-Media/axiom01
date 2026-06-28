@@ -109,7 +109,6 @@ Axiom01 v2.1.2 is fully prepared and ready to publish to NPM and deploy to GitHu
 
 ### Rebuilt/Generated (automatically)
 - **dist/** directory - Complete release artifacts
-- **starter-themes/axiom01/dist/** - Starter theme files
 
 ---
 

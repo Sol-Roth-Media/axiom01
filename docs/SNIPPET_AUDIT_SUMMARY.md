@@ -31,7 +31,7 @@ Should: Single `.card` class with semantic HTML structure
 **Impact:** Most fundamental AXIOM01 violation
 
 ### 2. Multi-Class Variants (CRITICAL)
-**Scope:** All 77 components
+**Scope:** All 80 components
 
 Current: `class="primary"`, `class="secondary"`, `class="outlined"`  
 Should: `data-variant="primary"`, `data-variant="secondary"`, `data-variant="outlined"`

@@ -222,7 +222,6 @@ This is **unmaintainable and contradicts the framework's philosophy**.
 ### 📋 **OPTIONAL** (Future releases)
 - [ ] Implement theme generation tool (mentioned in DEVELOPER.md)
 - [ ] Add Tailwind integration guide (for users who want utility classes anyway)
-- [ ] Create Drupal theme (starter-themes/drupal exists but needs documentation)
 - [ ] Add CSS-in-JS framework integration examples (Vue, React, Svelte)
 
 ---
@@ -453,7 +452,6 @@ document.addEventListener('click', (e) => {
    - `docs/components-simple.html` (beginner-friendly component list)
    - `docs/components-advanced.html` (complex interactive components)
    - `docs/components-category-view.html` (searchable component directory)
-   - `docs/integrations.html` (Drupal, WordPress, React, Vue examples)
    - Estimated effort: 12-16 hours
 
 3. **Developer Tooling**
@@ -535,10 +533,8 @@ Browser Support:         Latest 2 versions ✅
 npm run test
 
 # Results should show:
-# ✅ audit:drupal-assets PASS
 # ✅ audit:pre-release PASS
 # ✅ audit:philosophy PASS
-# ✅ audit:drupal-twig PASS
 # ✅ audit:runtime-loader PASS
 # ✅ audit:runtime-loader-failures PASS
 # ✅ audit:critical-interactions PASS
@@ -584,9 +580,7 @@ npm run audit:philosophy
 npm run test
 
 # Run individual audits
-npm run audit:drupal-assets
 npm run audit:pre-release
-npm run audit:drupal-twig
 npm run audit:runtime-loader
 npm run audit:runtime-loader-failures
 npm run audit:critical-interactions

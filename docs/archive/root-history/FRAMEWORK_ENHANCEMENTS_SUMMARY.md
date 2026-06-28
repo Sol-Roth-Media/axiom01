@@ -261,7 +261,7 @@ A comprehensive guide documenting:
     - Changelog, release notes, migration guide
 
 11. **Package & Distribution** (9 items)
-    - npm package, CDN, Drupal integration
+    - npm package and CDN distribution
 
 12. **Final Verification** (3 items)
     - Automation, manual sign-off

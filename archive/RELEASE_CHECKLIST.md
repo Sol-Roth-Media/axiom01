@@ -52,10 +52,8 @@
 
 - [ ] Run: `npm run test`
 - [ ] Fix any failures in order:
-  - [ ] `audit:drupal-assets` PASS
   - [ ] `audit:pre-release` PASS
   - [ ] `audit:philosophy` PASS
-  - [ ] `audit:drupal-twig` PASS
   - [ ] `audit:runtime-loader` PASS
   - [ ] `audit:runtime-loader-failures` PASS
   - [ ] `audit:critical-interactions` PASS
@@ -78,7 +76,6 @@
   - [ ] `docs/components-simple.html` (beginner components)
   - [ ] `docs/components-advanced.html` (complex components)
   - [ ] `docs/components-category-view.html` (searchable directory)
-  - [ ] `docs/integrations.html` (Drupal, WordPress, React, Vue)
 
 ---
 
