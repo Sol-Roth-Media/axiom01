@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: "Advanced Media & Icons Guide", category: "docs", url: "docs/media-advanced.html" },
                                     { title: "Developer Guide", category: "docs", url: "DEVELOPER.md" },
             { title: "Styling Guide", category: "docs", url: "AXIOM01_STYLING_GUIDE.md" },
-            { title: "README", category: "docs", url: "readme.md" },
+            { title: "README", category: "docs", url: "README.md" },
             { title: "MIT License", category: "docs", url: "LICENSE" },
         ];
 

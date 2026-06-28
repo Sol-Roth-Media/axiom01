@@ -59,7 +59,7 @@ def main() -> int:
         copy_required(ROOT / "css" / "axiom.min.css", DIST / "css" / "axiom.min.css")
         copy_required(ROOT / "js" / "axiom.min.js", DIST / "js" / "axiom.min.js")
 
-        readme_src = ROOT / "readme.md"
+        readme_src = ROOT / "README.md"
         readme_dst = DIST / "README.md"
         copy_required(readme_src, readme_dst)
 
