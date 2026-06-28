@@ -7,7 +7,6 @@ Each issue/PR should map to exactly one primary bucket:
 - `bug`: regressions, broken behavior, accessibility defects.
 - `docs`: documentation correctness, missing examples, guidance updates.
 - `component-parity`: mismatch between documented component behavior and shipped runtime/component code.
-- `drupal-integration`: work related to `axiom01-drupal11-starter-theme` compatibility and templates.
 
 Optional secondary tags:
 - `core-supported`
@@ -30,13 +29,6 @@ Optional secondary tags:
 - [ ] Guidance matches current shipped code.
 - [ ] Links resolve locally.
 - [ ] `npm test` passes.
-
-### C) Drupal integration DoD
-
-- [ ] Compatibility contract updated when Axiom01 surface changes.
-- [ ] Menu/header/footer templates render expected semantic structure.
-- [ ] Core pages/forms/status messages verified.
-- [ ] Cross-repo validation checklist updated/passed.
 
 ## 3) Release cadence
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide explains how to systematically add responsive behavior documentation to all 77 AXIOM01 components, ensuring consistency and helping developers understand how the framework handles responsive design automatically.
+This guide explains how to systematically add responsive behavior documentation to all 80 AXIOM01 components, ensuring consistency and helping developers understand how the framework handles responsive design automatically.
 
 ## Quick Facts
 

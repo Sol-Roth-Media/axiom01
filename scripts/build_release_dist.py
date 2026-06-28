@@ -59,9 +59,14 @@ def main() -> int:
         copy_required(ROOT / "css" / "axiom.min.css", DIST / "css" / "axiom.min.css")
         copy_required(ROOT / "js" / "axiom.min.js", DIST / "js" / "axiom.min.js")
 
-        readme_src = ROOT / "readme.md"
+        readme_src = ROOT / "README.md"
         readme_dst = DIST / "README.md"
         copy_required(readme_src, readme_dst)
+        copy_required(ROOT / "DEVELOPER.md", DIST / "DEVELOPER.md")
+        copy_required(ROOT / "LICENSE", DIST / "LICENSE")
+        copy_required(ROOT / "AXIOM01_STYLING_GUIDE.md", DIST / "AXIOM01_STYLING_GUIDE.md")
+        copy_required(ROOT / "release-info.json", DIST / "release-info.json")
+        copy_required(ROOT / "CNAME", DIST / "CNAME")
 
         version = package_version()
         (DIST / "version.txt").write_text(f"{version}\n", encoding="utf-8")
@@ -70,15 +75,18 @@ def main() -> int:
         copy_required(ROOT / "index.html", DIST / "index.html")
         copy_required(ROOT / "index.js", DIST / "index.js")
         copy_tree_required(ROOT / "assets", DIST / "assets")
+        copy_tree_required(ROOT / "favicon", DIST / "favicon")
         copy_tree_required(ROOT / "docs", DIST / "docs")
         copy_tree_required(ROOT / "css", DIST / "css")
         copy_tree_required(ROOT / "js", DIST / "js")
+        copy_required(ROOT / "AXIOM01_STYLING_GUIDE.md", DIST / "docs" / "AXIOM01_STYLING_GUIDE.md")
 
         print("Built release dist artifacts:")
         print(f"- {DIST / 'index.html'}")
         print(f"- {DIST / 'css' / 'axiom.min.css'}")
         print(f"- {DIST / 'js' / 'axiom.min.js'}")
         print(f"- {DIST / 'docs'}")
+        print(f"- {DIST / 'release-info.json'}")
         print(f"- {DIST / 'README.md'}")
         print(f"- {DIST / 'version.txt'}")
         return 0
@@ -89,4 +97,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

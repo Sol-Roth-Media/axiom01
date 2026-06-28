@@ -2,12 +2,13 @@
 
 ## The 30-Second Overview
 
-Axiom01 includes **2,931 icons** in 4 styles across 33 categories.
+Axiom01 includes **3,969 icons** across 5 variants and 33 categories.
 
 **File Sizes:**
-- **axicons-core.js** (818KB) → Load this by default
-- **axicons-premium.js** (192KB) → Load on demand for premium icons
-- **axicons-loader.js** (4.8KB) → Handles smart loading
+- **axicons-base.js** (89KB) → Start here for 450 essentials
+- **axicons-core.js** (818KB) → Load the main 2,142-icon core set
+- **axicons-premium.js** (192KB) → Load on demand for 789 premium icons
+- **axicons-loader.js** (7.1KB) → Handles smart loading
 
 ## Basic Usage
 
@@ -75,7 +76,7 @@ const dev = window.AxiconsLoader.search('', 'development');
 
 ## Performance Tips
 
-✓ Use **core** by default (2,142 standard icons)  
+✓ Use **base** by default (450 icons) or **core** for the 2,142-icon main set  
 ✓ Load **premium** only when needed (789 icons)  
 ✓ Load by **category** if you need a specific set  
 ✓ Icons are **cached** once loaded  
@@ -89,8 +90,9 @@ const dev = window.AxiconsLoader.search('', 'development');
 ---
 
 **Current Stats:**
-- Total: 2,931 icons
-- Standard: 2,142
+- Total: 3,969 icons
+- Base: 450
+- Core: 2,142
 - Premium: 789
-- Styles: 4 (Standard, Thin, Inverted, Premium)
+- Styles: 5 (Base, Thin, Inverted, Color, Premium)
 - Categories: 33

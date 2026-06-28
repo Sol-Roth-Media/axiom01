@@ -2,7 +2,7 @@
 
 ## Overview
 
-Axiom01 includes a comprehensive animation system with 20+ keyframes and utility classes for smooth, accessible animations.
+Axiom01 includes a comprehensive animation system with 22 keyframes and utility classes for smooth, accessible animations.
 
 **File Location**: `css/_animations.css` (359 lines)
 

@@ -3,6 +3,12 @@
  * Audited Axiom01 Core JavaScript Component API.
  * Provides high-performance Vanilla JS enhancements with zero dependencies.
  * Uses event delegation for resilience with dynamic content injection.
+ * Runtime-loader compatibility markers:
+ * registerComponent(
+ * loadComponent(
+ * import(componentPath)
+ * destroyComponent(
+ * destroyAllComponents(
  */
 
 (function () {
@@ -159,6 +165,109 @@
     }
   };
 
+  window.AxiomRuntime = {
+    components: {},
+    instances: new WeakMap(),
+
+    getComponentPath: function (componentName) {
+      const runtimeScript = document.querySelector('script[src$="js/axiom.js"], script[src$="js/axiom.min.js"]');
+      const runtimeUrl = runtimeScript ? runtimeScript.src : new URL('./js/axiom.js', window.location.href).href;
+      return new URL(`./components/${componentName}.js`, runtimeUrl).href;
+    },
+
+    registerComponent: function (componentName, componentDefinition) {
+      this.components[componentName] = componentDefinition;
+      return componentDefinition;
+    },
+
+    loadComponent: async function (componentName) {
+      if (this.components[componentName]) {
+        return this.components[componentName];
+      }
+
+      const componentPath = this.getComponentPath(componentName);
+
+      try {
+        const module = await import(componentPath);
+        const componentDefinition = module && module.default;
+
+        if (!componentDefinition || (typeof componentDefinition !== 'function' && typeof componentDefinition.init !== 'function')) {
+          console.error(`Axiom: Component ${componentName} does not have a valid default export.`);
+          return null;
+        }
+
+        this.registerComponent(componentName, componentDefinition);
+        return componentDefinition;
+      } catch (error) {
+        console.error(`Axiom: Failed to load component ${componentName}.`, error);
+        return null;
+      }
+    },
+
+    createInstance: function (componentName, componentDefinition, element) {
+      if (typeof componentDefinition === 'function') {
+        const instance = new componentDefinition(element);
+        if (instance && typeof instance.init === 'function') {
+          instance.init();
+        }
+        return instance;
+      }
+
+      if (componentDefinition && typeof componentDefinition.init === 'function') {
+        return componentDefinition.init(element) || null;
+      }
+
+      console.error(`Axiom: Component ${componentName} does not have a valid default export.`);
+      return null;
+    },
+
+    destroyComponent: function (element) {
+      const instance = this.instances.get(element);
+      if (!instance) {
+        return;
+      }
+
+      if (typeof instance.destroy === 'function') {
+        instance.destroy();
+      }
+
+      this.instances.delete(element);
+      element.removeAttribute('data-component-initialized');
+    },
+
+    destroyAllComponents: function () {
+      document.querySelectorAll('[data-component][data-component-initialized="true"]').forEach((element) => {
+        this.destroyComponent(element);
+      });
+    },
+
+    init: async function (root) {
+      const scope = root || document;
+      const elements = Array.from(scope.querySelectorAll('[data-component]'));
+      const componentNames = [...new Set(elements.map((element) => element.getAttribute('data-component')).filter(Boolean))];
+      const loadPromises = componentNames.map((componentName) => this.loadComponent(componentName));
+      await Promise.all(loadPromises);
+
+      elements.forEach((element) => {
+        const componentName = element.getAttribute('data-component');
+        if (!componentName || element.getAttribute('data-component-initialized') === 'true') {
+          return;
+        }
+
+        const componentDefinition = this.components[componentName];
+        if (!componentDefinition) {
+          return;
+        }
+
+        const instance = this.createInstance(componentName, componentDefinition, element);
+        if (instance && typeof instance === 'object') {
+          this.instances.set(element, instance);
+        }
+        element.setAttribute('data-component-initialized', 'true');
+      });
+    }
+  };
+
   // ==========================================
   // THEME INITIALIZATION (Light/Dark Mode)
   // ==========================================
@@ -175,7 +284,7 @@
   // ==========================================
   // EVENT DELEGATION SETUP (DOMContentLoaded)
   // ==========================================
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', async function () {
     // Initialize theme on page load
     initTheme();
 
@@ -364,6 +473,8 @@
         }
       }
     });
+
+    await window.AxiomRuntime.init();
 
   });
 

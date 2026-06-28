@@ -115,7 +115,6 @@ axiom01/
 ├── js/                         (JavaScript)
 │   └── axiom.min.js
 ├── scripts/                    (Build scripts)
-├── starter-themes/             (Theme templates)
 ├── templates/                  (HTML templates)
 ├── AXIOM01_STYLING_GUIDE.md   (Developer guide)
 ├── CHANGELOG.md               (Version history)

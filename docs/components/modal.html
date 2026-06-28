@@ -51,7 +51,7 @@
 
             <section>
                 <h2>Live Example</h2>
-                <button class="button primary" onclick="document.getElementById('demo-modal').style.display='flex'">
+                <button class="button primary" type="button" data-modal-open="demo-modal">
                     Open Modal
                 </button>
 
@@ -59,27 +59,29 @@
                     <div>
                         <header>
                             <h2 id="modal-title">Modal Title</h2>
-                            <button aria-label="Close modal" onclick="document.getElementById('demo-modal').style.display='none'">&times;</button>
+                            <button type="button" aria-label="Close modal" data-modal-close>&times;</button>
                         </header>
                         <p>Modal content goes here. This is a semantic modal using single `.modal` class.</p>
                         <footer>
-                            <button class="button secondary" onclick="document.getElementById('demo-modal').style.display='none'">Cancel</button>
-                            <button class="button primary" onclick="document.getElementById('demo-modal').style.display='none'">Confirm</button>
+                            <button class="button secondary" type="button" data-modal-close>Cancel</button>
+                            <button class="button primary" type="button" data-modal-close>Confirm</button>
                         </footer>
                     </div>
                 </div>
 
                 <div class="code-block">
-                    <pre><code class="language-html">&lt;div class="modal" aria-modal="true" role="dialog" aria-labelledby="modal-title"&gt;
+                    <pre><code class="language-html">&lt;button class="button primary" type="button" data-modal-open="demo-modal"&gt;Open Modal&lt;/button&gt;
+
+&lt;div class="modal" id="demo-modal" aria-modal="true" role="dialog" aria-labelledby="modal-title" style="display:none;"&gt;
     &lt;div&gt;
         &lt;header&gt;
             &lt;h2 id="modal-title"&gt;Modal Title&lt;/h2&gt;
-            &lt;button aria-label="Close modal"&gt;&times;&lt;/button&gt;
+            &lt;button type="button" aria-label="Close modal" data-modal-close&gt;&times;&lt;/button&gt;
         &lt;/header&gt;
         &lt;p&gt;Modal content here.&lt;/p&gt;
         &lt;footer&gt;
-            &lt;button class="button secondary"&gt;Cancel&lt;/button&gt;
-            &lt;button class="button primary"&gt;Confirm&lt;/button&gt;
+            &lt;button class="button secondary" type="button" data-modal-close&gt;Cancel&lt;/button&gt;
+            &lt;button class="button primary" type="button" data-modal-close&gt;Confirm&lt;/button&gt;
         &lt;/footer&gt;
     &lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -126,32 +128,42 @@
             <section>
                 <h2>JavaScript Implementation</h2>
                 <p>Control modal visibility with simple JavaScript:</p>
-                <pre><code class="language-javascript">// Open modal
-const openModal = (modalId) => {
-    const modal = document.getElementById(modalId);
+                <pre><code class="language-javascript">const openModal = (modal) => {
     modal.style.display = 'flex';
-    // Set focus to modal or first focusable element
-    modal.focus();
+    modal.setAttribute('aria-hidden', 'false');
+    modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')?.focus();
 };
 
-// Close modal
-const closeModal = (modalId) => {
-    document.getElementById(modalId).style.display = 'none';
+const closeModal = (modal) => {
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
 };
 
-// Close on escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+document.querySelectorAll('[data-modal-open]').forEach((button) => {
+    button.addEventListener('click', () => {
+        const modal = document.getElementById(button.getAttribute('data-modal-open'));
+        if (modal) openModal(modal);
+    });
+});
+
+document.querySelectorAll('[data-modal-close]').forEach((button) => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        if (modal) closeModal(modal);
+    });
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
         const modal = document.querySelector('.modal[style*="flex"]');
-        if (modal) closeModal(modal.id);
+        if (modal) closeModal(modal);
     }
 });
 
-// Close on outside click
-const modal = document.getElementById('modal-id');
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        closeModal('modal-id');
+const modal = document.getElementById('demo-modal');
+modal?.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        closeModal(modal);
     }
 });</code></pre>
             </section>
@@ -320,7 +332,53 @@ modal.addEventListener('click', (e) => {
         } else {
             renderAxicons();
         }
-        setTimeout(renderAxicons, 500);
+        const openModal = (modal) => {
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+            modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')?.focus();
+        };
+
+        const closeModal = (modal) => {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        };
+
+        document.querySelectorAll('[data-modal-open]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const modal = document.getElementById(button.getAttribute('data-modal-open'));
+                if (modal) {
+                    openModal(modal);
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-modal-close]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const modal = button.closest('.modal');
+                if (modal) {
+                    closeModal(modal);
+                }
+            });
+        });
+
+        const modal = document.getElementById('demo-modal');
+        if (modal) {
+            modal.setAttribute('aria-hidden', 'true');
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    closeModal(modal);
+                }
+            });
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                const activeModal = document.querySelector('.modal[style*="flex"]');
+                if (activeModal) {
+                    closeModal(activeModal);
+                }
+            }
+        });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
