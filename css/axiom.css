@@ -1,4 +1,4 @@
-@layer axiom.reset, axiom.tokens, axiom.base, axiom.layout, axiom.components, axiom.utilities;
+@layer axiom.reset, axiom.tokens, axiom.base, axiom.layout, axiom.components, axiom.utilities, axiom.docs;
 
 /* Design Token System - Comprehensive CSS Variables */
 @import url("/css/_variables.css") layer(axiom.tokens);
@@ -9,8 +9,8 @@
 /* Utility Classes - 100+ optional helper classes */
 @import url("/css/_utilities.css") layer(axiom.utilities);
 
-/* Component Variants - Button, Card, Badge, Alert systems */
-@import url("/css/_component-docs.css") layer(axiom.components);
+/* Documentation Layer - doc page layout, code blocks, overview page */
+@import url("/css/_docs.css") layer(axiom.docs);
 
 /* Framework Configuration */
 @import url("/css/axiom_config.css") layer(axiom.tokens);
@@ -754,7 +754,7 @@ section:has(> div > article.card:first-child) { background: linear-gradient(135d
 section:has(> div > article.card:first-child) article.card main { padding: var(--a-space-2xl); }
 
 /* Hero actions - handled by sibling cascade for margin */
-section.hero .actions { margin: var(--a-space-l) 0 0 0; }
+section.hero menu, section.hero .actions { margin: var(--a-space-l) 0 0 0; }
 .button, button {
     padding: var(--a-space-s) var(--a-space-m); /* Default (medium) padding */
     font-size: var(--a-font-size-base); /* Default (medium) font size */
@@ -841,6 +841,7 @@ section.hero {
     box-sizing: border-box;
 }
 
+section.hero > .container,
 section.hero .content {
     display: flex;
     flex-direction: column;
@@ -864,7 +865,7 @@ section.hero h1 {
     max-width: 100%;
 }
 
-section.hero .tagline {
+section.hero h1 + p, section.hero .tagline {
     font-size: var(--a-font-size-lg);
     max-width: 100%;
     margin: 0 auto var(--a-space-m) auto;
@@ -872,17 +873,19 @@ section.hero .tagline {
     color: rgba(255, 255, 255, 0.92);
 }
 
-section.hero .actions {
+section.hero menu, section.hero .actions {
     display: flex;
     justify-content: center;
     gap: var(--a-space-m);
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
+    list-style: none;
     width: 100%;
     max-width: 100%;
 }
 
+section.hero > .container > p:not(:first-of-type),
 section.hero > .content > p:not(.tagline) {
     font-size: var(--a-font-size-base);
     max-width: 700px;
@@ -904,8 +907,6 @@ section.hero .button.secondary {
     color: var(--a-color-on-gradient);
 }
 
-section.hero 
-
 /* MOBILE: 768px and down */
 @media (max-width: 768px) {
     main > section:first-child {
@@ -925,13 +926,13 @@ section.hero
         line-height: 1.2;
     }
 
-    section.hero .tagline {
+    section.hero h1 + p, section.hero .tagline {
         font-size: var(--a-font-size-base);
         max-width: 100%;
         margin: 0 auto var(--a-space-m) auto;
     }
 
-    section.hero .actions {
+    section.hero menu, section.hero .actions {
         flex-direction: column;
         gap: var(--a-space-s);
         margin: var(--a-space-m) 0 0 0;
@@ -951,7 +952,8 @@ section.hero
         padding: var(--a-space-m) var(--a-space-l) !important;
     }
 
-    section.hero > .content > p:not(.tagline) {
+    section.hero > .container > p:not(:first-of-type),
+section.hero > .content > p:not(.tagline) {
         font-size: var(--a-font-size-sm);
         margin: var(--a-space-l) auto 0 auto;
         max-width: 100%;
@@ -976,13 +978,13 @@ section.hero
         font-weight: var(--a-font-weight-bold);
     }
 
-    section.hero .tagline {
+    section.hero h1 + p, section.hero .tagline {
         font-size: var(--a-font-size-sm);
         max-width: 100%;
         margin: 0 auto var(--a-space-m) auto;
     }
 
-    section.hero .actions {
+    section.hero menu, section.hero .actions {
         gap: var(--a-space-xs);
         margin: var(--a-space-m) auto 0 auto;
         max-width: 100%;
@@ -1000,7 +1002,8 @@ section.hero
         padding: var(--a-space-s) var(--a-space-m) !important;
     }
 
-    section.hero > .content > p:not(.tagline) {
+    section.hero > .container > p:not(:first-of-type),
+section.hero > .content > p:not(.tagline) {
         font-size: var(--a-font-size-base);
         margin: var(--a-space-m) auto 0 auto;
         max-width: 100%;
@@ -1034,12 +1037,12 @@ section.hero
         line-height: 1.25;
     }
     
-    section.hero .tagline {
+    section.hero h1 + p, section.hero .tagline {
         font-size: var(--a-font-size-xs);
         margin: 0 auto var(--a-space-s) auto;
     }
     
-    section.hero .actions {
+    section.hero menu, section.hero .actions {
         gap: var(--a-space-xs);
         margin: var(--a-space-m) auto 0 auto;
         padding: 0 var(--a-space-xs);
@@ -1053,7 +1056,8 @@ section.hero
         text-overflow: ellipsis;
     }
     
-    section.hero > .content > p:not(.tagline) {
+    section.hero > .container > p:not(:first-of-type),
+section.hero > .content > p:not(.tagline) {
         font-size: 0.9rem;
         margin: var(--a-space-m) auto 0 auto;
     }
@@ -1294,16 +1298,11 @@ button.card:hover {
     display: block;
 }
 
-/* If a card has a footer, push it to the bottom automatically */
-.card {
-    display: flex;
-    flex-direction: column;
-}
-
+/* Card footer is automatically pushed to bottom via flex column layout */
 .card > footer {
     margin-top: auto; /* Pushes footer to the bottom */
     padding-top: var(--a-space-m);
-    border-top: none; /* Override default card footer border if desired */
+    border-top: none;
     background: transparent;
 }
 
@@ -2695,6 +2694,7 @@ form > div input { /* Target inputs within the div */
 
 /* Dark hero buttons use tokens — white surface inverted against dark gradient */
 [data-theme="dark"] section.hero .button.primary,
+[data-theme="dark"] section.hero menu .button.primary,
 [data-theme="dark"] section.hero .actions .button.primary {
     background-color: var(--a-color-on-gradient);
     color: var(--a-color-primary);
@@ -2702,8 +2702,10 @@ form > div input { /* Target inputs within the div */
 }
 
 [data-theme="dark"] section.hero .button.secondary,
+[data-theme="dark"] section.hero menu .button.secondary,
 [data-theme="dark"] section.hero .actions .button.secondary,
 [data-theme="dark"] section.hero .button.outline,
+[data-theme="dark"] section.hero menu .button.outline,
 [data-theme="dark"] section.hero .actions .button.outline {
     background-color: transparent;
     border-color: var(--a-color-on-gradient);
@@ -3210,10 +3212,13 @@ form > div input { /* Target inputs within the div */
     color: var(--a-color-on-info-container, #0c4a6e);
     border-color: var(--a-color-info, #3b82f6);
 }
-.alert.dismissible {
+.alert.dismissible,
+.alert:has(> button) {
     justify-content: space-between;
 }
-.alert .close, .alert [data-alert-close] {
+.alert > button:last-child,
+.alert .close,
+.alert [data-alert-close] {
     background: none;
     border: none;
     font-size: 1.5rem;
@@ -3223,7 +3228,9 @@ form > div input { /* Target inputs within the div */
     padding: 0;
     margin: 0;
 }
-.alert .close:hover, .alert [data-alert-close]:hover {
+.alert > button:last-child:hover,
+.alert .close:hover,
+.alert [data-alert-close]:hover {
     opacity: 1;
 }
 
@@ -4033,7 +4040,7 @@ section.hero .stat .axicon {
 /* Feature Grid Component */
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: var(--a-space-large);
     margin: var(--a-space-large) 0;
 }
@@ -4074,7 +4081,7 @@ section.hero .stat .axicon {
 /* Component Grid Styling for Components List */
 .component-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: var(--a-space-l);
     padding: var(--a-space-xl) 0;
 }
@@ -6389,6 +6396,7 @@ details.bordered + details.bordered {
 }
 
 /* Accessible Alert Close Buttons */
+.alert > button:last-child,
 .alert button.close,
 .alert [data-dismiss="alert"] {
   min-width: 44px;
@@ -6404,6 +6412,7 @@ details.bordered + details.bordered {
   transition: opacity 0.2s ease;
 }
 
+.alert > button:last-child:hover,
 .alert button.close:hover,
 .alert [data-dismiss="alert"]:hover {
   opacity: 0.7;
@@ -6456,397 +6465,6 @@ details.bordered + details.bordered {
 .field[data-invalid="true"] select {
   border-color: var(--a-color-error);
   background-color: var(--a-color-error-container);
-}
-
-/* ========================================
-   COMPONENT OVERVIEW PAGE STYLES
-   All component overview page styling
-   Minimal. Token-based only. Framework semantic.
-   ======================================== */
-
-/* Accessibility: Skip Link */
-
-/* Component Overview Context */
-body.docs-overview {
-	--overview-transition: all var(--a-transition-base);
-}
-
-/* Hero Section */
-.component-hero {
-	padding: var(--a-space-xl) 0;
-	background: linear-gradient(135deg, var(--a-color-surface) 0%, var(--a-color-surface-variant) 100%);
-}
-
-.component-hero header {
-	text-align: center;
-	max-width: 800px;
-	margin: 0 auto;
-}
-
-.component-hero h1 {
-	font-size: clamp(2rem, 5vw, 3.5rem);
-	font-weight: var(--a-font-weight-bold);
-	margin-bottom: var(--a-space-l);
-	color: var(--a-color-on-surface);
-}
-
-.component-hero > .container > header > p {
-	font-size: 1.25rem;
-	color: var(--a-color-on-surface-variant);
-	margin-bottom: var(--a-space-xl);
-	line-height: 1.6;
-}
-
-.stats {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-	gap: var(--a-space-l);
-	margin-top: var(--a-space-xl);
-}
-
-stat {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: var(--a-space-m);
-	border-radius: var(--a-border-radius-base);
-	background: var(--a-color-surface-variant);
-	border: 1px solid var(--a-color-outline);
-}
-
-stat strong {
-	font-size: 2rem;
-	color: var(--a-color-primary);
-	line-height: 1;
-	margin-bottom: var(--a-space-s);
-}
-
-stat span {
-	font-size: 0.875rem;
-	color: var(--a-color-on-surface-variant);
-}
-
-/* Quick Access Section */
-.quick-access {
-	padding: var(--a-space-xl) 0;
-}
-
-.quick-access header {
-	text-align: center;
-	margin-bottom: var(--a-space-xl);
-}
-
-.quick-access h2 {
-	font-size: 1.75rem;
-	margin-bottom: var(--a-space-m);
-}
-
-.quick-categories {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	gap: var(--a-space-l);
-}
-
-.quick-categories nav {
-	border: 1px solid var(--a-color-outline);
-	border-radius: var(--a-border-radius-base);
-	padding: var(--a-space-m);
-	background: var(--a-color-surface);
-}
-
-.quick-categories h3 {
-	font-size: 1rem;
-	font-weight: var(--a-font-weight-bold);
-	margin-bottom: var(--a-space-m);
-	color: var(--a-color-on-surface);
-}
-
-.quick-categories ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-.quick-categories li {
-	margin-bottom: var(--a-space-s);
-}
-
-.quick-categories a {
-	display: block;
-	padding: var(--a-space-s) 0;
-	color: var(--a-color-primary);
-	text-decoration: none;
-	transition: var(--overview-transition);
-	border-radius: var(--a-border-radius-base);
-	padding-left: var(--a-space-s);
-}
-
-.quick-categories a:hover {
-	background: var(--a-color-surface-variant);
-	transform: translateX(var(--a-space-xs));
-}
-
-.quick-categories a:focus-visible {
-	outline: 2px solid var(--a-color-primary);
-	outline-offset: 2px;
-}
-
-/* Search Section */
-.search-section {
-	padding: var(--a-space-xl) 0;
-	background: var(--a-color-surface-variant);
-}
-
-.search-box {
-	max-width: 600px;
-	margin: 0 auto;
-}
-
-.search-box input {
-	width: 100%;
-	padding: var(--a-space-m);
-	font-size: 1rem;
-	border: 2px solid var(--a-color-outline);
-	border-radius: var(--a-border-radius-base);
-	background: var(--a-color-surface);
-	color: var(--a-color-on-surface);
-	transition: var(--overview-transition);
-}
-
-.search-box input:focus {
-	border-color: var(--a-color-primary);
-	outline: none;
-	box-shadow: 0 0 0 3px var(--a-color-primary-transparent, rgba(var(--a-color-primary-rgb, 66 133 244), 0.1));
-}
-
-#search-results {
-	display: block;
-	margin-top: var(--a-space-s);
-	font-size: 0.875rem;
-	color: var(--a-color-on-surface-variant);
-}
-
-/* Components Section */
-.components-section {
-	padding: var(--a-space-xl) 0;
-}
-
-.components-section header {
-	text-align: center;
-	margin-bottom: var(--a-space-xl);
-}
-
-.components-section h2 {
-	font-size: 1.75rem;
-	margin-bottom: var(--a-space-m);
-}
-
-.components-nav {
-	display: flex;
-	flex-direction: column;
-	gap: var(--a-space-l);
-}
-
-/* Component Category */
-.component-category {
-	border: 1px solid var(--a-color-outline);
-	border-radius: var(--a-border-radius-base);
-	background: var(--a-color-surface);
-	overflow: hidden;
-	transition: var(--overview-transition);
-}
-
-.component-category:hover {
-	border-color: var(--a-color-primary);
-	box-shadow: 0 2px 8px rgba(var(--a-color-on-surface-rgb, 0 0 0), 0.08);
-}
-
-.component-category header {
-	margin: 0;
-}
-
-.category-toggle {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: var(--a-space-m);
-	background: transparent;
-	border: none;
-	cursor: pointer;
-	font-size: 1rem;
-	font-weight: var(--a-font-weight-bold);
-	color: var(--a-color-on-surface);
-	transition: var(--overview-transition);
-}
-
-.category-toggle:hover {
-	background: var(--a-color-surface-variant);
-}
-
-.category-toggle:focus-visible {
-	outline: 2px solid var(--a-color-primary);
-	outline-offset: -2px;
-}
-
-.category-title {
-	flex: 1;
-	text-align: left;
-}
-
-.category-count {
-	font-size: 0.875rem;
-	font-weight: var(--a-font-weight-normal);
-	color: var(--a-color-on-surface-variant);
-	margin-right: var(--a-space-m);
-}
-
-.axicon-chevron {
-	display: inline-block;
-	transition: transform var(--a-transition-base);
-	font-size: 0.75rem;
-}
-
-.category-toggle[aria-expanded="false"] .axicon-chevron {
-	transform: rotate(-90deg);
-}
-
-.category-items {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: var(--a-space-m);
-	padding: var(--a-space-m);
-	border-top: 1px solid var(--a-color-outline);
-}
-
-.category-items[hidden] {
-	display: none;
-}
-
-.category-items a {
-	display: block;
-	padding: var(--a-space-m);
-	text-decoration: none;
-	color: var(--a-color-primary);
-	border-radius: var(--a-border-radius-base);
-	border: 1px solid var(--a-color-outline);
-	background: var(--a-color-surface-variant);
-	transition: var(--overview-transition);
-	font-weight: 500;
-}
-
-.category-items a:hover {
-	background: var(--a-color-primary);
-	color: var(--a-color-on-primary);
-	transform: translateY(-2px);
-}
-
-.category-items a:focus-visible {
-	outline: 2px solid var(--a-color-primary);
-	outline-offset: 2px;
-}
-
-/* Component Overview Responsive: Mobile */
-@media (max-width: 768px) {
-	.component-hero h1 {
-		font-size: 1.75rem;
-	}
-
-	.stats {
-		grid-template-columns: 1fr;
-		gap: var(--a-space-m);
-	}
-
-	.quick-categories {
-		grid-template-columns: 1fr;
-	}
-
-	.category-items {
-		grid-template-columns: 1fr;
-	}
-
-	.category-toggle {
-		padding: var(--a-space-m);
-	}
-}
-
-@media (max-width: 480px) {
-	.component-hero > .container > header > p {
-		font-size: 1rem;
-	}
-
-	.category-toggle {
-		flex-wrap: wrap;
-		padding: var(--a-space-s);
-	}
-
-	.category-count {
-		font-size: 0.8rem;
-		margin-right: var(--a-space-s);
-	}
-}
-
-/* Component Overview Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-	.component-hero {
-		background: linear-gradient(135deg, var(--a-color-surface-variant) 0%, var(--a-color-surface) 100%);
-	}
-
-	.quick-categories nav {
-		background: var(--a-color-surface-variant);
-	}
-
-	.search-box input {
-		background: var(--a-color-surface);
-	}
-}
-
-/* Component Overview Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
-	.category-items a,
-	.quick-categories a,
-	.category-toggle {
-		transition: none;
-	}
-
-	.category-items a:hover {
-		transform: none;
-	}
-
-	.quick-categories a:hover {
-		transform: none;
-	}
-
-	.axicon-chevron {
-		transition: none;
-	}
-}
-
-/* Component Overview Forced Colors Mode (Windows High Contrast) */
-@media (forced-colors: active) {
-	.component-category {
-		border: 1px solid CanvasText;
-	}
-
-	.category-items a {
-		border: 1px solid CanvasText;
-	}
-
-	.category-toggle:focus-visible,
-	.category-items a:focus-visible {
-		outline: 2px solid Highlight;
-	}
-}
-
-/* Component Overview High Contrast Mode */
-@media (prefers-contrast: more) {
-	.category-items a {
-		border: 2px solid var(--a-color-primary);
-	}
-
-	.component-category {
-		border: 2px solid var(--a-color-outline);
-	}
 }
 
 /* ========================================
@@ -6931,6 +6549,7 @@ stat span {
 	color: var(--a-color-on-primary-container);
 }
 
+.notification > button:last-child,
 .notification-close {
 	margin-left: auto;
 	background: none;
@@ -6938,8 +6557,11 @@ stat span {
 	cursor: pointer;
 	padding: var(--a-space-s);
 	color: inherit;
+	min-height: 44px;
+	min-width: 44px;
 }
 
+.notification > button:last-child:focus-visible,
 .notification-close:focus-visible {
 	outline: 2px solid currentColor;
 	outline-offset: 2px;
@@ -8175,16 +7797,18 @@ section > ul > li, section > ol > li,
   margin: 0 auto var(--a-space-l);
 }
 
-section.hero .actions {
+section.hero menu, section.hero .actions {
   display: flex;
   gap: var(--a-space-m);
   justify-content: center;
   flex-wrap: wrap;
   margin-top: var(--a-space-xl) !important;
   margin-bottom: var(--a-space-xl) !important;
+  list-style: none;
+  padding: 0;
 }
 
-section.hero .actions .button {
+section.hero menu .button, section.hero .actions .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -8199,48 +7823,81 @@ section.hero .actions .button {
   text-decoration: none;
 }
 
-section.hero .actions .button.primary {
+section.hero menu .button.primary, section.hero .actions .button.primary {
   background: white;
   color: var(--a-color-primary, #2563eb);
   border-color: white;
 }
 
-section.hero .actions .button.primary:hover {
+section.hero menu .button.primary:hover, section.hero .actions .button.primary:hover {
   background: rgba(255, 255, 255, 0.9);
   color: var(--a-color-primary, #2563eb);
 }
 
-section.hero .actions .button.outline {
+section.hero menu .button.outline, section.hero .actions .button.outline {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.6);
   color: white;
   transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
 }
 
-section.hero .actions .button.outline:hover {
+section.hero menu .button.outline:hover, section.hero .actions .button.outline:hover {
   background: rgba(255, 255, 255, 0.2);
   border-color: white;
 }
 
-section.hero .actions .button.secondary {
+section.hero menu .button.secondary, section.hero .actions .button.secondary {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.4);
   color: white;
   transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
 }
 
-section.hero .actions .button.secondary:hover {
+section.hero menu .button.secondary:hover, section.hero .actions .button.secondary:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: white;
 }
 
-section.hero .actions + p {
+section.hero menu + p, section.hero .actions + p {
   margin-top: var(--a-space-xl);
   margin-bottom: var(--a-space-2xl);
 }
 
 .hero .grid {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ========================================
+   CODE COMPARISON GRID
+   Two-column side-by-side on desktop,
+   single column on mobile
+   ======================================== */
+.code-comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--a-space-l);
+  margin-top: var(--a-space-m);
+}
+
+@media (max-width: 640px) {
+  .code-comparison-grid {
+    grid-template-columns: 1fr;
+    gap: var(--a-space-m);
+  }
+}
+
+@media (max-width: 360px) {
+  .code-comparison-grid {
+    gap: var(--a-space-s);
+  }
+
+  .code-comparison-grid pre {
+    font-size: 0.75rem;
+    padding: var(--a-space-s);
+  }
 }
 
 /* ========================================
@@ -8647,7 +8304,8 @@ main > section > .container > header p {
   display: inline-block;
 }
 
-.tooltip-text {
+.tooltip-text,
+.tooltip [role="tooltip"] {
   visibility: hidden;
   width: 120px;
   background-color: var(--a-color-surface-variant);
@@ -8664,7 +8322,8 @@ main > section > .container > header p {
   transition: opacity var(--a-transition-base);
 }
 
-.tooltip:hover .tooltip-text {
+.tooltip:hover .tooltip-text,
+.tooltip:hover [role="tooltip"] {
   visibility: visible;
   opacity: 1;
 }
@@ -8874,399 +8533,179 @@ DOCS: COLOR PALETTE
   margin: var(--a-space-m) 0 0 0;
   line-height: 1.5;
 }
-/* ========================================
-   FOOTER CONTENT - Main Grid Layout
-   Auto-fits columns based on content width
-   Mobile: 1 column | Tablet: 2 columns | Desktop: 4+ columns
-   ======================================== */
-footer.footer .footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--a-space-2xl);
-  margin-bottom: var(--a-space-2xl);
-  padding-bottom: var(--a-space-2xl);
-  border-bottom: 1px solid var(--ax-border);
-}
 
 /* ========================================
-   FOOTER BRAND SECTION
-   Logo, company name, and tagline
+   PILL / TAG COMPONENT
+   Inline label with semantic element: <span class="pill">
+   Variants: default, primary, outline, success, error, warning, info
    ======================================== */
-footer.footer .footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: var(--a-space-m);
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--a-space-xs);
+  padding: var(--a-space-xs) var(--a-space-m);
+  border-radius: var(--a-border-radius-pill);
+  font-size: var(--a-font-size-xs);
+  font-weight: var(--a-font-weight-medium);
+  line-height: 1;
+  background-color: var(--a-color-surface-variant);
+  color: var(--a-color-on-surface-variant);
+  border: 1px solid transparent;
 }
 
-footer.footer .footer-brand-logo {
-  font-family: var(--a-font-family-mono);
-  font-size: var(--a-font-size-l);
-  font-weight: var(--a-font-weight-bold);
+.pill.primary {
+  background-color: var(--a-color-primary-container);
+  color: var(--a-color-primary);
+}
+
+.pill.success {
+  background-color: var(--a-color-success-container);
+  color: var(--a-color-on-success-container);
+}
+
+.pill.error {
+  background-color: var(--a-color-error-container);
+  color: var(--a-color-on-error-container);
+}
+
+.pill.warning {
+  background-color: var(--a-color-warning-container);
+  color: var(--a-color-on-warning-container);
+}
+
+.pill.info {
+  background-color: var(--a-color-info-container);
+  color: var(--a-color-on-info-container);
+}
+
+.pill.outline {
+  background-color: transparent;
   color: var(--a-color-on-surface);
+  border-color: var(--a-color-outline);
+}
+
+a.pill,
+button.pill {
+  cursor: pointer;
   text-decoration: none;
-  transition: color var(--a-transition-base);
-  display: inline-block;
-  max-width: fit-content;
+  transition: all var(--a-transition-fast);
 }
 
-footer.footer .footer-brand-logo:hover {
-  color: var(--a-color-primary);
+a.pill:hover,
+button.pill:hover {
+  filter: brightness(0.92);
 }
 
-footer.footer .footer-brand-logo .primary {
-  color: var(--a-color-primary);
-}
-
-footer.footer .footer-tagline {
-  font-size: var(--a-font-size-s);
-  font-weight: var(--a-font-weight-normal);
-  color: var(--a-color-text-muted);
-  line-height: var(--a-line-height-base);
-  margin: 0;
-  max-width: 200px;
-}
-
-/* ========================================
-   FOOTER COLUMN - Navigation Groups
-   Groups related links (Product, Community, Legal, etc.)
-   ======================================== */
-footer.footer .footer-column {
-  display: flex;
-  flex-direction: column;
-  gap: var(--a-space-m);
-}
-
-footer.footer .footer-column h4 {
-  font-size: var(--a-font-size-base);
-  font-weight: var(--a-font-weight-semibold);
-  color: var(--a-color-on-surface);
-  margin: 0;
-  padding: 0;
-  line-height: var(--a-line-height-heading);
-  letter-spacing: -0.01em;
-}
-
-footer.footer .footer-column ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--a-space-s);
-}
-
-footer.footer .footer-column li {
-  margin: 0;
-  padding: 0;
-}
-
-footer.footer .footer-column a {
-  color: var(--a-color-text-secondary);
-  text-decoration: none;
-  font-size: var(--a-font-size-s);
-  font-weight: var(--a-font-weight-normal);
-  transition: color var(--a-transition-base),
-              text-decoration var(--a-transition-base);
-  line-height: var(--a-line-height-base);
-}
-
-footer.footer .footer-column a:hover {
-  color: var(--a-color-primary);
-  text-decoration: underline;
-}
-
-footer.footer .footer-column a:focus-visible {
+a.pill:focus-visible,
+button.pill:focus-visible {
   outline: var(--focus-outline-width) solid var(--focus-outline-color);
   outline-offset: var(--focus-outline-offset);
-  border-radius: var(--a-border-radius-sm);
 }
 
 /* ========================================
-   FOOTER BOTTOM - Copyright & Social
-   Sticky information and social media icons
+   SIZING API
+   .small / .large modifiers for badge, avatar
    ======================================== */
-footer.footer .footer-bottom {
-  display: flex;
-  flex-direction: column;
-  gap: var(--a-space-l);
-  align-items: flex-start;
+
+.badge.small {
+  padding: 0.125rem var(--a-space-xs);
+  font-size: 0.65rem;
 }
 
-@media (min-width: var(--breakpoint-md)) {
-  footer.footer .footer-bottom {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+.badge.large {
+  padding: var(--a-space-s) var(--a-space-m);
+  font-size: var(--a-font-size-s);
+}
+
+.avatar.small {
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: var(--a-font-size-xs);
+}
+
+.avatar.large {
+  width: 4rem;
+  height: 4rem;
+  font-size: var(--a-font-size-l);
+}
+
+/* ========================================
+   TABS — SEMANTIC SELECTOR IMPROVEMENTS
+   Support [role="tablist"] on any container element
+   ======================================== */
+.tabs > [role="tablist"] {
+  display: inline-flex;
+  background-color: var(--a-color-surface-variant);
+  border: 1px solid var(--a-color-outline);
+  border-radius: var(--a-border-radius-base);
+  padding: var(--a-space-xs);
+  margin: 0 0 var(--a-space-xl) 0;
+  list-style: none;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .tabs > [role="tablist"] {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding-bottom: var(--a-space-2xs);
   }
 }
 
-/* ========================================
-   FOOTER COPYRIGHT
-   Copyright notice and meta information
-   ======================================== */
-footer.footer .footer-copyright {
-  font-size: var(--a-font-size-xs);
-  color: var(--a-color-text-muted);
-  margin: 0;
-  line-height: var(--a-line-height-base);
-  flex: 1;
-}
-
-footer.footer .footer-copyright a {
-  color: var(--a-color-text-secondary);
-  text-decoration: none;
-  transition: color var(--a-transition-base);
-}
-
-footer.footer .footer-copyright a:hover {
-  color: var(--a-color-primary);
-  text-decoration: underline;
-}
-
-/* ========================================
-   FOOTER SOCIAL ICONS
-   Social media and external links
-   ======================================== */
-footer.footer .footer-social {
-  display: flex;
-  gap: var(--a-space-m);
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-footer.footer .footer-social li {
-  margin: 0;
-  padding: 0;
-}
-
-footer.footer .footer-social a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--touch-target-min-desktop);
-  height: var(--touch-target-min-desktop);
-  border-radius: var(--a-border-radius-md);
-  background-color: var(--a-color-primary-container);
-  color: var(--a-color-primary);
-  text-decoration: none;
-  transition: background-color var(--a-transition-base),
-              color var(--a-transition-base),
-              transform var(--a-transition-base);
-  font-size: var(--a-font-size-base);
-}
-
-footer.footer .footer-social a:hover {
-  background-color: var(--a-color-primary);
-  color: var(--a-color-on-primary);
-  transform: translateY(-2px);
-}
-
-footer.footer .footer-social a:focus-visible {
-  outline: var(--focus-outline-width) solid var(--focus-outline-color);
-  outline-offset: var(--focus-outline-offset);
-}
-
-/* ========================================
-   FOOTER LANGUAGE/LOCALE SELECTOR
-   Optional language or locale switcher
-   ======================================== */
-footer.footer .footer-locale {
-  display: flex;
-  gap: var(--a-space-s);
-  align-items: center;
-}
-
-footer.footer .footer-locale select {
-  font-size: var(--a-font-size-xs);
-  color: var(--a-color-on-surface);
-  background-color: var(--a-color-surface-variant);
-  border: 1px solid var(--ax-border);
-  padding: var(--a-space-xs) var(--a-space-s);
-  border-radius: var(--a-border-radius-base);
+.tabs > [role="tablist"] > button[role="tab"],
+.tabs > [role="tablist"] > li > button[role="tab"] {
+  background: transparent;
+  border: none;
+  border-radius: var(--a-border-radius-sm);
+  padding: var(--a-space-s) var(--a-space-l);
   cursor: pointer;
-  transition: border-color var(--a-transition-base),
-              background-color var(--a-transition-base);
+  color: var(--a-color-on-surface-variant);
+  font-weight: var(--a-font-weight-semibold);
+  font-family: inherit;
+  font-size: 0.95rem;
+  min-height: 44px;
+  scroll-snap-align: start;
+  white-space: nowrap;
+  transition: all var(--a-transition-fast) var(--a-ease-out);
 }
 
-footer.footer .footer-locale select:hover {
-  border-color: var(--a-color-text-secondary);
+.tabs > [role="tablist"] > button[role="tab"]:hover,
+.tabs > [role="tablist"] > li > button[role="tab"]:hover {
+  color: var(--a-color-on-surface);
 }
 
-footer.footer .footer-locale select:focus {
-  outline: none;
-  border-color: var(--a-color-primary);
-  background-color: var(--a-color-surface);
-}
-
-/* ========================================
-   FOOTER VARIANT: MINIMAL
-   Simplified footer with copyright + social only
-   Usage: <footer class="footer minimal">
-   ======================================== */
-footer.footer.minimal .footer-content {
-  display: none;
-}
-
-footer.footer.minimal .footer-bottom {
-  border-top: 1px solid var(--ax-border);
-  padding-top: var(--a-space-xl);
+.tabs > [role="tablist"] > button[role="tab"][aria-selected="true"],
+.tabs > [role="tablist"] > li > button[role="tab"][aria-selected="true"] {
+  background-color: var(--a-color-secondary);
+  color: var(--a-color-on-secondary);
+  box-shadow: var(--a-shadow-sm);
 }
 
 /* ========================================
-   FOOTER VARIANT: DARK
-   Optional dark background for emphasis
-   Usage: <footer class="footer dark">
+   FOOTER — MOBILE RESPONSIVE IMPROVEMENTS
    ======================================== */
-footer.footer.dark {
-  background-color: var(--a-color-surface-variant);
-}
+@media (max-width: 768px) {
+  footer > .container > section {
+    grid-template-columns: 1fr;
+    gap: var(--a-space-xl);
+  }
 
-/* ========================================
-   FOOTER VARIANT: COMPACT
-   Reduced spacing for constrained layouts
-   Usage: <footer class="footer compact">
-   ======================================== */
-footer.footer.compact {
-  padding: var(--a-space-2xl) var(--a-space-l);
-  margin-top: var(--a-space-2xl);
-}
-
-footer.footer.compact .footer-content {
-  gap: var(--a-space-xl);
-  margin-bottom: var(--a-space-xl);
-  padding-bottom: var(--a-space-xl);
-}
-
-footer.footer.compact .footer-column h4 {
-  font-size: var(--a-font-size-s);
-}
-
-footer.footer.compact .footer-column a {
-  font-size: var(--a-font-size-xs);
-}
-
-/* ========================================
-   FOOTER VARIANT: WIDE
-   Full-width footer without max-width constraint
-   Usage: <footer class="footer wide">
-   ======================================== */
-footer.footer.wide .container {
-  max-width: 100%;
-  padding: 0 var(--a-space-l);
-}
-
-/* ========================================
-   RESPONSIVE ADJUSTMENTS
-   Mobile-first approach with breakpoints
-   ======================================== */
-@media (max-width: var(--breakpoint-md)) {
-  footer.footer {
+  footer {
     padding: var(--a-space-2xl) var(--a-space-m);
     margin-top: var(--a-space-3xl);
   }
-
-  footer.footer .footer-content {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: var(--a-space-xl);
-    margin-bottom: var(--a-space-xl);
-    padding-bottom: var(--a-space-xl);
-  }
-
-  footer.footer .footer-column h4 {
-    font-size: var(--a-font-size-s);
-  }
-
-  footer.footer .footer-column a {
-    font-size: var(--a-font-size-xs);
-  }
-
-  footer.footer .footer-bottom {
-    gap: var(--a-space-m);
-  }
 }
 
-@media (max-width: var(--breakpoint-sm)) {
-  footer.footer {
+@media (max-width: 480px) {
+  footer {
     padding: var(--a-space-xl) var(--a-space-m);
   }
-
-  footer.footer .footer-content {
-    grid-template-columns: 1fr;
-    gap: var(--a-space-l);
-    margin-bottom: var(--a-space-l);
-    padding-bottom: var(--a-space-l);
-  }
-
-  footer.footer .footer-social {
-    width: 100%;
-  }
-}
-
-/* ========================================
-   DARK MODE THEME SUPPORT
-   Automatically inherits theme via CSS variables
-   ======================================== */
-:root[data-theme='dark'] footer.footer {
-  /* Automatically inherits from --ax-surface, --ax-text, --ax-border */
-}
-
-:root[data-theme='dark'] footer.footer .footer-column a:hover {
-  color: var(--a-color-primary);
-}
-
-/* ========================================
-   ACCESSIBILITY ENHANCEMENTS
-   Focus states, high contrast, touch targets
-   ======================================== */
-@media (prefers-reduced-motion) {
-  footer.footer,
-  footer.footer * {
-    transition: none !important;
-  }
-}
-
-@media (prefers-contrast: more) {
-  footer.footer .footer-column a {
-    text-decoration: underline;
-  }
-
-  footer.footer .footer-column a:hover {
-    font-weight: var(--a-font-weight-semibold);
-  }
-}
-
-/* ========================================
-   FOOTER UTILITIES
-   Optional helper classes for common patterns
-   ======================================== */
-.footer-section-title {
-  font-size: var(--a-font-size-base);
-  font-weight: var(--a-font-weight-bold);
-  color: var(--a-color-on-surface);
-  margin-bottom: var(--a-space-m);
-}
-
-.footer-link-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.footer-link-list li {
-  margin-bottom: var(--a-space-s);
-}
-
-.footer-link-list a {
-  color: var(--a-color-text-secondary);
-  text-decoration: none;
-  transition: color var(--a-transition-base);
-}
-
-.footer-link-list a:hover {
-  color: var(--a-color-primary);
-  text-decoration: underline;
 }
 
 /* ========================================
@@ -10558,7 +9997,7 @@ table[data-variant="compact"] td {
 /* Card Grid */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
     gap: var(--a-space-l);
 }
 
@@ -10992,7 +10431,10 @@ hr {
     background-color: var(--a-color-surface-variant);
 }
 
-/* Mobile Navbar Component */
+/* Responsive video/media embed wrapper */
+.video-embed,
+.media-embed {
+    position: relative;
     padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
@@ -11935,7 +11377,8 @@ dialog footer {
 /* Prism.js syntax highlighting fix */
 pre {
     position: relative;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: visible;
 }
 
 pre code {
@@ -12301,17 +11744,20 @@ section.hero > .container > h1 {
 }
 
 /* tagline: directly after h1 — tight */
+section.hero > .container > h1 + p,
 section.hero > .container > .tagline {
     margin: 0 0 var(--a-space-m) 0;
     text-align: center;
 }
 
 /* Actions row: sits immediately under tagline */
+section.hero > .container > menu,
 section.hero > .container > .actions {
     margin: 0 0 var(--a-space-m) 0;
 }
 
 /* Paragraph: after actions — constrained width, centered */
+section.hero > .container > p:not(:first-of-type),
 section.hero > .container > p:not(.tagline) {
     max-width: 680px;
     text-align: center;
@@ -12385,7 +11831,7 @@ button.outline:focus-visible,
 
 /* Hero context — outline adapts to gradient background */
 section.hero button.outline,
-section.hero .button.outline {
+section.hero menu .button.outline, section.hero .button.outline {
     border-color: var(--a-color-on-gradient);
     color: var(--a-color-on-gradient);
 }
@@ -12555,6 +12001,7 @@ a.skip-link:focus-visible {
 }
 
 @media (max-width: 768px) {
+    section.hero > .container > menu,
     section.hero > .container > .actions {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -12563,6 +12010,7 @@ a.skip-link:focus-visible {
         gap: var(--a-space-s);
     }
 
+    section.hero > .container > menu > .button,
     section.hero > .container > .actions > .button {
         width: 100%;
         min-height: 44px;
@@ -12570,6 +12018,7 @@ a.skip-link:focus-visible {
         white-space: normal;
     }
 
+    section.hero > .container > menu > .button:last-child,
     section.hero > .container > .actions > .button:last-child {
         grid-column: 1 / -1;
         justify-self: center;
@@ -12578,10 +12027,12 @@ a.skip-link:focus-visible {
 }
 
 @media (max-width: 380px) {
+    section.hero > .container > menu,
     section.hero > .container > .actions {
         grid-template-columns: 1fr;
     }
 
+    section.hero > .container > menu > .button:last-child,
     section.hero > .container > .actions > .button:last-child {
         max-width: 100%;
     }
@@ -12621,11 +12072,13 @@ a.skip-link:focus-visible {
         margin-bottom: var(--a-space-m);
     }
 
+    section.hero > .container > h1 + p,
     section.hero > .container > .tagline {
         font-size: var(--a-font-size-m);
         max-width: 42ch;
     }
 
+    section.hero > .container > p:not(:first-of-type),
     section.hero > .container > p:not(.tagline) {
         font-size: var(--a-font-size-base);
         line-height: 1.65;
@@ -12642,15 +12095,18 @@ a.skip-link:focus-visible {
         font-size: clamp(2rem, 9.8vw, 2.7rem);
     }
 
+    section.hero > .container > h1 + p,
     section.hero > .container > .tagline {
         font-size: var(--a-font-size-base);
         margin-bottom: var(--a-space-s);
     }
 
+    section.hero > .container > p:not(:first-of-type),
     section.hero > .container > p:not(.tagline) {
         font-size: var(--a-font-size-sm);
     }
 
+    section.hero > .container > menu > .button,
     section.hero > .container > .actions > .button {
         font-size: var(--a-font-size-sm);
     }
@@ -12688,5 +12144,64 @@ a.skip-link:focus-visible {
         min-height: 44px;
         display: inline-flex;
         align-items: center;
+    }
+}
+
+/* ============================================================================
+   ULTRA-SMALL MOBILE: 390px – iPhone 14 standard / Galaxy S22
+   ============================================================================ */
+
+@media (max-width: 390px) {
+    section.hero {
+        padding: var(--a-space-l) var(--a-space-s);
+    }
+
+    section.hero > .container > menu,
+    section.hero > .container > .actions {
+        gap: var(--a-space-xs);
+    }
+
+    section.hero > .container > menu > .button,
+    section.hero > .container > .actions > .button {
+        padding: var(--a-space-s) var(--a-space-m);
+    }
+}
+
+/* ============================================================================
+   ULTRA-SMALL MOBILE: 320px – iPhone SE 1st gen / smallest phones
+   ============================================================================ */
+
+@media (max-width: 320px) {
+    html, body {
+        overflow-x: hidden;
+    }
+
+    section.hero {
+        padding: var(--a-space-m) var(--a-space-xs);
+    }
+
+    section.hero > .container > h1 {
+        font-size: clamp(1.25rem, 8vw, 1.85rem);
+    }
+
+    section.hero > .container > h1 + p,
+    section.hero > .container > .tagline {
+        font-size: var(--a-font-size-sm);
+    }
+
+    section.hero > .container > menu > .button,
+    section.hero > .container > .actions > .button {
+        padding: var(--a-space-xs) var(--a-space-s);
+        font-size: var(--a-font-size-sm);
+    }
+
+    footer section {
+        gap: var(--a-space-m);
+        margin-bottom: var(--a-space-m);
+        padding-bottom: var(--a-space-m);
+    }
+
+    footer {
+        padding: var(--a-space-xl) var(--a-space-s);
     }
 }
