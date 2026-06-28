@@ -25,8 +25,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body class="axiom-body docs-overview">
-	<!-- Accessibility: Skip to main content -->
-	
+	<a class="skip-link" href="#main-content">Skip to main content</a>
 
     <header class="main" data-component="mobile-navbar">
         <nav role="navigation" aria-label="Main Navigation">
@@ -47,27 +46,27 @@
         </nav>
     </header>
 
-    <main id="main-content">
+    <main id="main-content" data-component="components-overview">
 		<!-- Hero Section with Framework Statistics -->
 		<section class="component-hero">
 			<div class="container">
 				<header>
 					<h1>Component Library</h1>
-					<p>Explore 79 production-ready components designed for semantic web standards</p>
-					<div class="stats">
-						<stat>
-							<strong>79</strong>
+					<p>Explore the core component library and supporting guides built around semantic web standards</p>
+					<ul class="stats">
+						<li>
+							<strong data-release-components>67</strong>
 							<span>Components</span>
-						</stat>
-						<stat>
+						</li>
+						<li>
 							<strong>100%</strong>
-							<span>Accessible</span>
-						</stat>
-						<stat>
+							<span>Semantic-first</span>
+						</li>
+						<li>
 							<strong>0</strong>
 							<span>Dependencies</span>
-						</stat>
-					</div>
+						</li>
+					</ul>
 				</header>
 			</div>
 		</section>
@@ -120,7 +119,7 @@
 					<input 
 						type="search" 
 						id="component-search" 
-						placeholder="Search 79 components..."
+						placeholder="Search component docs..."
 						aria-label="Search components by name or keyword"
 					>
 					<span id="search-results" role="status" aria-live="polite"></span>
@@ -410,7 +409,7 @@
 
                 
                     <p class="copyright">
-                        &copy; 2024 Sol Roth Media. Released under MIT License.
+                        &copy; <span data-current-year></span> Sol Roth Media. Released under MIT License.
                     </p>
                 
 				<ul class="legal">
@@ -425,8 +424,6 @@
 
     <script src="../js/axiom.js"></script>
     <script src="../js/index-page-manager.js"></script>
-    <script>
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
@@ -439,131 +436,6 @@
     <script src="../js/axicons-premium-variants.js"></script>
     <script src="../js/render-icons.js"></script>
 
-	<!-- Component Overview Functionality -->
-	<script>
-		/**
-		 * AXIOM01 Components Overview - Search and Collapse Functionality
-		 * Minimal. Semantic. No dependencies. Token-based only.
-		 */
 
-		// Category Toggle Functionality
-		document.querySelectorAll('.category-toggle').forEach(button => {
-			button.addEventListener('click', function() {
-				const expanded = this.getAttribute('aria-expanded') === 'true';
-				this.setAttribute('aria-expanded', !expanded);
-				
-				const controlsId = this.getAttribute('aria-controls');
-				const content = document.getElementById(controlsId);
-				if (content) {
-					content.hidden = expanded;
-				}
-			});
-		});
-
-		// Search Functionality
-		const searchInput = document.getElementById('component-search');
-		const searchResults = document.getElementById('search-results');
-		const allComponentLinks = document.querySelectorAll('a[href*="components/"]');
-		const categoryToggles = document.querySelectorAll('.category-toggle');
-		
-		if (searchInput) {
-			searchInput.addEventListener('input', function() {
-				const query = this.value.toLowerCase().trim();
-				let visibleCount = 0;
-				let visibleCategories = new Set();
-
-				// Filter component links
-				allComponentLinks.forEach(link => {
-					const text = link.textContent.toLowerCase();
-					const label = link.getAttribute('aria-label')?.toLowerCase() || '';
-					const matches = text.includes(query) || label.includes(query) || query === '';
-
-					if (matches && query !== '') {
-						link.style.display = '';
-						visibleCount++;
-						
-						// Track which categories have visible items
-						const category = link.closest('.component-category');
-						if (category) {
-							visibleCategories.add(category);
-						}
-					} else if (query === '') {
-						link.style.display = '';
-					} else {
-						link.style.display = 'none';
-					}
-				});
-
-				// Expand categories with matches, collapse others
-				categoryToggles.forEach(toggle => {
-					const controlsId = toggle.getAttribute('aria-controls');
-					const content = document.getElementById(controlsId);
-					const category = toggle.closest('.component-category');
-
-					if (query === '') {
-						// Reset to all expanded
-						toggle.setAttribute('aria-expanded', 'true');
-						if (content) content.hidden = false;
-					} else if (visibleCategories.has(category)) {
-						// Show categories with matches
-						toggle.setAttribute('aria-expanded', 'true');
-						if (content) content.hidden = false;
-					} else {
-						// Hide categories without matches
-						toggle.setAttribute('aria-expanded', 'false');
-						if (content) content.hidden = true;
-					}
-				});
-
-				// Update search results text
-				if (query) {
-					searchResults.textContent = `Found ${visibleCount} component${visibleCount !== 1 ? 's' : ''}`;
-				} else {
-					searchResults.textContent = '';
-				}
-			});
-		}
-
-		// Mobile Responsive: Collapse on small screens by default (except popular)
-		if (window.innerWidth < 768) {
-			categoryToggles.forEach(toggle => {
-				const category = toggle.closest('.component-category');
-				if (category.dataset.category !== 'feedback') {
-					toggle.setAttribute('aria-expanded', 'false');
-					const controlsId = toggle.getAttribute('aria-controls');
-					const content = document.getElementById(controlsId);
-					if (content) content.hidden = true;
-				}
-			});
-		}
-
-		// Handle window resize for responsive behavior
-		let resizeTimeout;
-		window.addEventListener('resize', function() {
-			clearTimeout(resizeTimeout);
-			resizeTimeout = setTimeout(function() {
-				if (window.innerWidth < 768) {
-					// Mobile: collapse most categories
-					categoryToggles.forEach(toggle => {
-						const category = toggle.closest('.component-category');
-						if (category.dataset.category !== 'feedback') {
-							toggle.setAttribute('aria-expanded', 'false');
-							const controlsId = toggle.getAttribute('aria-controls');
-							const content = document.getElementById(controlsId);
-							if (content) content.hidden = true;
-						}
-					});
-				} else {
-					// Desktop: expand all categories
-					categoryToggles.forEach(toggle => {
-						toggle.setAttribute('aria-expanded', 'true');
-						const controlsId = toggle.getAttribute('aria-controls');
-						const content = document.getElementById(controlsId);
-						if (content) content.hidden = false;
-					});
-				}
-			}, 250);
-		});
-	</script>
 </body>
 </html>

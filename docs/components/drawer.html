@@ -41,17 +41,17 @@
 				<h2>Right Drawer</h2>
 				<article class="card">
 					<figure>
-						<button class="primary" onclick="document.getElementById('demo-drawer-r').showModal()">
+						<button class="primary" data-dialog-open="demo-drawer-r">
 							<span class="axicon render" data-name="Menu"></span> Open Drawer
 						</button>
 						<dialog class="drawer" id="demo-drawer-r">
 							<header>
 								<h2>Navigation</h2>
-								<button aria-label="Close" onclick="document.getElementById('demo-drawer-r').close()">
+								<button aria-label="Close" data-dialog-close="demo-drawer-r">
 									<span class="axicon render" data-name="X"></span>
 								</button>
 							</header>
-							<main>
+							<div>
 								<nav>
 									<ul>
 										<li><a href="#" aria-current="page">Dashboard</a></li>
@@ -60,11 +60,11 @@
 										<li><a href="#">Help</a></li>
 									</ul>
 								</nav>
-							</main>
+							</div>
 						</dialog>
 					</figure>
 					<pre><code class="language-html">&lt;button class="primary"
-        onclick="document.getElementById('nav-drawer').showModal()"&gt;
+        data-dialog-open="nav-drawer"&gt;
   Open Drawer
 &lt;/button&gt;
 
@@ -72,16 +72,16 @@
   &lt;header&gt;
     &lt;h2&gt;Navigation&lt;/h2&gt;
     &lt;button aria-label="Close"
-            onclick="document.getElementById('nav-drawer').close()"&gt;
+            data-dialog-close="nav-drawer"&gt;
       &lt;span class="axicon render" data-name="X"&gt;&lt;/span&gt;
     &lt;/button&gt;
   &lt;/header&gt;
-  &lt;main&gt;
+  &lt;div&gt;
     &lt;nav&gt;&lt;ul&gt;
       &lt;li&gt;&lt;a href="/" aria-current="page"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href="/settings"&gt;Settings&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;&lt;/nav&gt;
-  &lt;/main&gt;
+  &lt;/div&gt;
 &lt;/dialog&gt;</code></pre>
 				</article>
 			</section>
@@ -89,34 +89,34 @@
 				<h2>Left Drawer</h2>
 				<article class="card">
 					<figure>
-						<button class="secondary" onclick="document.getElementById('demo-drawer-l').showModal()">
+						<button class="secondary" data-dialog-open="demo-drawer-l">
 							<span class="axicon render" data-name="PanelLeft"></span> Left Drawer
 						</button>
 						<dialog class="drawer" data-side="left" id="demo-drawer-l">
 							<header>
 								<h2>Filters</h2>
-								<button aria-label="Close" onclick="document.getElementById('demo-drawer-l').close()">
+								<button aria-label="Close" data-dialog-close="demo-drawer-l">
 									<span class="axicon render" data-name="X"></span>
 								</button>
 							</header>
-							<main>
+							<div>
 								<form>
 									<label for="df-cat">Category</label>
 									<select id="df-cat"><option>All</option><option>Design</option><option>Code</option></select>
 								</form>
-							</main>
+							</div>
 						</dialog>
 					</figure>
 					<pre><code class="language-html">&lt;!-- Add data-side="left" for left-side drawer --&gt;
 &lt;dialog class="drawer" data-side="left" id="filter-drawer"&gt;
   &lt;header&gt;...&lt;/header&gt;
-  &lt;main&gt;...&lt;/main&gt;
+  &lt;div&gt;...&lt;/div&gt;
 &lt;/dialog&gt;</code></pre>
 				</article>
 			</section>
 			<section>
 				<h2>Semantic Structure</h2>
-				<table><thead><tr><th>Element</th><th>Role</th></tr></thead><tbody><tr><td><code>dialog.drawer</code></td><td>Container — native modal with backdrop</td></tr><tr><td><code>header</code></td><td>Title + close button row</td></tr><tr><td><code>main</code></td><td>Scrollable content area</td></tr><tr><td><code>footer</code> (optional)</td><td>Action buttons</td></tr><tr><td><code>data-side="left"</code></td><td>Slides from left instead of right</td></tr></tbody></table>
+				<table><thead><tr><th>Element</th><th>Role</th></tr></thead><tbody><tr><td><code>dialog.drawer</code></td><td>Container — native modal with backdrop</td></tr><tr><td><code>header</code></td><td>Title + close button row</td></tr><tr><td><code>div</code></td><td>Scrollable content area inside the dialog</td></tr><tr><td><code>footer</code> (optional)</td><td>Action buttons</td></tr><tr><td><code>data-side="left"</code></td><td>Slides from left instead of right</td></tr></tbody></table>
 			</section>
 			<section>
 				<h2>Why Native <code>&lt;dialog&gt;</code>?</h2>
@@ -134,7 +134,7 @@
 <div class="footer-brand"><a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a><p class="footer-tagline">The Semantic Web, Reimagined.</p></div>
 <div class="footer-column"><h4>Documentation</h4><ul><li><a href="../components-overview.html">All Components</a></li></ul></div>
 <div class="footer-column"><h4>Community</h4><ul><li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li></ul></div>
-</div><div class="footer-bottom"><p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p></div></div></footer>
+</div><div class="footer-bottom"><p class="footer-copyright">&copy; <span data-current-year></span> Sol Roth Media. MIT License.</p></div></div></footer>
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
 <script>function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);</script>
