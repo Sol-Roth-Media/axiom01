@@ -281,6 +281,7 @@ table {
     --a-layout-max-width: 1200px;
     --a-layout-gutter: clamp(var(--a-space-s), 4vw, var(--a-space-l));
     --a-grid-min-column: min(100%, 18rem);
+    --a-grid-min-column-mobile: min(100%, 14rem);
 
     /** Form Specific */
     --a-min-input-size: 260px;
@@ -521,6 +522,7 @@ https://dev.to/ynab/a-semantic-color-system-the-theory-hk7
 /* --- Base & Reset --- */
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; font-family: var(--a-font-family-sans); font-size: var(--a-font-size-base); line-height: var(--a-line-height-base); color: var(--a-color-on-surface); background-color: var(--a-color-surface); overflow-x: hidden; }
+body[data-axiom-scroll-lock="true"] { overscroll-behavior: contain; }
 .axiom-body { } /* Match the new navbar height */
 a { color: var(--a-color-primary); text-decoration: none; transition: color 0.2s ease; }
 a:hover { text-decoration: underline; color: var(--a-color-primary); filter: brightness(85%); }
@@ -1804,13 +1806,17 @@ button.card:hover {
         display: flex !important; /* Added !important */
         flex-direction: column;
         position: absolute;
-        top: 60px; /* Adjusted from 80px to 60px */
-        left: 0;
-        right: 0;
+        top: calc(100% + var(--a-space-xs));
+        left: var(--a-space-s);
+        right: var(--a-space-s);
         background: var(--a-color-surface);
-        padding: var(--a-space-l);
-        border-bottom: 1px solid var(--a-color-outline);
+        padding: var(--a-space-m);
+        border: 1px solid var(--a-color-outline);
+        border-radius: var(--a-border-radius-large);
         box-shadow: var(--a-shadow-large);
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+        gap: var(--a-space-m);
         z-index: 999; /* Below fixed header (z-index: 1000) but above content */
     }
 }
@@ -11971,37 +11977,39 @@ td code {
 /* Mobile: show 2 items per row for stat cards and icon categories */
 @media (max-width: 768px) {
   .grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(var(--a-grid-min-column-mobile, var(--a-grid-min-column)), 1fr));
   }
   
   .grid.tight {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(var(--a-grid-min-column-mobile, var(--a-grid-min-column)), 1fr));
   }
-}
-
-/* Hero grid: 2 columns on mobile */
-@media (max-width: 768px) {
   .hero .grid {
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   }
-}
 
-/* Code comparison grid: 1 column on mobile */
-@media (max-width: 768px) {
-  
-}
-
-/* Component preview cards: 1 column on mobile (larger cards with code) */
-@media (max-width: 768px) {
   #components .grid {
     grid-template-columns: 1fr;
   }
-}
 
-/* Large code-containing cards: 1 column on mobile */
-@media (max-width: 768px) {
   .grid:has(> .card pre) {
     grid-template-columns: 1fr;
+  }
+
+  footer section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--a-space-l);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid,
+  .grid.tight,
+  .hero .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  footer {
+    padding-inline: var(--a-space-m);
   }
 }
 
