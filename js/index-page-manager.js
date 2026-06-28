@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchData = [
     { title: "Accordion", cat: "components", url: "docs/components/accordion.html" },
     { title: "Account Menu", cat: "components", url: "docs/components/account-menu.html" },
+    { title: "Action Group", cat: "components", url: "docs/components/action-group.html" },
     { title: "Advanced Table", cat: "components", url: "docs/components/advanced-table.html" },
     { title: "AI Chat", cat: "components", url: "docs/components/ai-chat.html" },
     { title: "AI Image Generator", cat: "components", url: "docs/components/ai-image-generator.html" },
