@@ -1402,13 +1402,6 @@ button.card:hover {
 /* Dark mode support */
 [data-theme="dark"] .card.adaptive-media {
     background: var(--a-color-surface);
-    /* Darker hero gradient in dark mode */
-    --a-gradient-primary: linear-gradient(
-        135deg,
-        color-mix(in srgb, var(--a-color-primary) 70%, black) 0%,
-        color-mix(in srgb, var(--a-color-primary) 40%, #020617) 100%
-    );
-
 }
 
 [data-theme="dark"] .card.adaptive-media > figure img,
@@ -2641,19 +2634,31 @@ form > div input { /* Target inputs within the div */
     box-shadow: 0 0 20px rgba(129, 140, 248, 0.15); /* A subtle glow effect */
 }
 
-/* Ensure hero text and buttons remain high-contrast and vibrant */
-[data-theme="dark"] section.hero {
-    color: #f8fafc; /* Force a bright white for hero text */
+/* Dark mode: gradient darkens mathematically via color-mix
+   color-mix(in oklch) preserves perceptual hue while reducing lightness */
+[data-theme="dark"] {
+    --a-gradient-primary: linear-gradient(
+        135deg,
+        color-mix(in oklch, var(--a-color-primary) 55%, black) 0%,
+        color-mix(in oklch, var(--a-color-primary) 35%, black) 100%
+    );
 }
 
-[data-theme="dark"] section.hero .button.primary {
-    background-color: #f8fafc;
-    color: #4f46e5; /* Use the light-mode primary for a high-contrast pop */
+/* Dark hero buttons use tokens — white surface inverted against dark gradient */
+[data-theme="dark"] section.hero .button.primary,
+[data-theme="dark"] section.hero .actions .button.primary {
+    background-color: var(--a-color-on-gradient);
+    color: var(--a-color-primary);
+    border-color: var(--a-color-on-gradient);
 }
 
-[data-theme="dark"] section.hero .button.secondary {
-    border-color: #f8fafc;
-    color: #f8fafc;
+[data-theme="dark"] section.hero .button.secondary,
+[data-theme="dark"] section.hero .actions .button.secondary,
+[data-theme="dark"] section.hero .button.outline,
+[data-theme="dark"] section.hero .actions .button.outline {
+    background-color: transparent;
+    border-color: var(--a-color-on-gradient);
+    color: var(--a-color-on-gradient);
 }
 
 /* Ensure search modal and component browser respect dark mode */
