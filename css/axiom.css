@@ -279,6 +279,8 @@ table {
 
     /** Layout */
     --a-layout-max-width: 1200px;
+    --a-layout-gutter: clamp(var(--a-space-s), 4vw, var(--a-space-l));
+    --a-grid-min-column: min(100%, 18rem);
 
     /** Form Specific */
     --a-min-input-size: 260px;
@@ -1175,8 +1177,43 @@ section header h2 { font-size: 2.2rem; font-weight: var(--a-font-weight-bold); m
 }
 
 /* --- Containers & Grids --- */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 var(--a-space-l); }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--a-space-l); }
+.container {
+    max-width: var(--a-layout-max-width);
+    margin: 0 auto;
+    padding-inline: var(--a-layout-gutter);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--a-grid-min-column), 1fr));
+    gap: var(--a-space-l);
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+    max-width: 100%;
+}
+
+pre,
+table {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        gap: var(--a-space-m);
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
 
 /* --- Cards --- */
 .card {
