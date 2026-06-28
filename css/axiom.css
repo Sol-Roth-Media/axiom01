@@ -5865,7 +5865,7 @@ main section h2 {
 p {
     /* margin: 0 0 var(--a-space-m) 0; */
     line-height: 1.6;
-    color: var(--ax-text);
+    /* color inherits from parent — section.hero sets on-gradient, body sets ax-text */
 }
 
 /* Remove bottom margin on last paragraph in containers */
@@ -8127,8 +8127,8 @@ section > ul > li, section > ol > li,
    HERO COMPONENT
    ======================================== */
 .hero {
-  background: var(--a-gradient-primary, linear-gradient(135deg, #2563eb 0%, #06b6d4 100%));
-  color: white;
+  background: var(--a-gradient-primary);
+  color: var(--a-color-on-gradient);
   padding: var(--a-space-xxl) 0;
   text-align: center;
 }
@@ -8141,7 +8141,7 @@ section > ul > li, section > ol > li,
 }
 
 .hero h1 {
-  color: var(--a-color-text-primary);
+  color: inherit; /* inherits from .hero which sets on-gradient */
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: var(--a-font-weight-bold);
   margin-bottom: var(--a-space-m);
@@ -8149,9 +8149,10 @@ section > ul > li, section > ol > li,
 }
 
 .hero p {
-  color: var(--a-color-text-muted);
+  color: inherit; /* inherits from .hero which sets on-gradient */
   max-width: var(--ax-reading-width, 65ch);
   margin: 0 auto var(--a-space-l);
+  opacity: 0.92;
 }
 
 section.hero .actions {
