@@ -5,7 +5,7 @@ Semantic-first UI framework for building accessible interfaces with minimal mark
 ## Current status
 
 - **Published package:** `2.1.2`
-- **Framework state:** v2 framework, docs, and audits are in release-hardening for the first stable v2 launch
+- **Framework state:** v2 framework, docs, and audits are stable-release ready for developer use
 - **Philosophy:** semantic markup first, no BEM, no extra wrapper classes, one root component class, theme through tokens and element order
 - **Accessibility:** WCAG-minded defaults with audit and smoke-test coverage in the repository
 - **Distribution:** zero-dependency CSS framework with optional JavaScript component runtime and static docs site
@@ -93,4 +93,4 @@ Open `/home/runner/work/axiom01/axiom01/index.html` or serve the repository root
 ## Stable v2 release focus
 
 CMS and framework integrations still exist, including Drupal in the public `dbase` repo, but they were removed from this repository to keep concerns separated.
-The repo is currently centered on final cleanup, documentation accuracy, and audit hardening so the first stable v2 release ships with a clean public structure and reliable release gates.
+The repo is now centered on documentation accuracy, deployment integrity, and audit enforcement so the stable v2 release stays clean, predictable, and safe for developers to build with.
