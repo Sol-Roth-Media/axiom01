@@ -27,7 +27,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -41,13 +40,60 @@
 
 			<header>
 				<h1>Sidebar</h1>
-				<p>Collapsible side navigation panel perfect for app layouts and responsive design.</p>
+				<p>Vertical navigation panel. Semantic <code>&lt;aside&gt;</code> element with optional <code>data-open</code> for responsive toggling.</p>
 			</header>
 
+
 			<section>
-				<h2>Overview</h2>
-				<p>The Sidebar component provides a collapsible navigation panel for app layouts. It uses semantic `<aside>` elements with `data-open` state toggling and smooth transitions.</p>
+				<h2>Basic Sidebar</h2>
+				<article class="card">
+					<figure>
+						<aside class="sidebar" style="position:static;width:200px;height:auto;border:1px solid var(--a-color-outline);border-radius:var(--a-border-radius-base);">
+							<nav>
+								<ul>
+									<li><a href="#" aria-current="page">Dashboard</a></li>
+									<li><a href="#">Settings</a></li>
+									<li><a href="#">Profile</a></li>
+									<li><a href="#">Log Out</a></li>
+								</ul>
+							</nav>
+						</aside>
+					</figure>
+					<pre><code class="language-html">&lt;aside class="sidebar"&gt;
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="/dashboard" aria-current="page"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/settings"&gt;Settings&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="/profile"&gt;Profile&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/aside&gt;</code></pre>
+				</article>
 			</section>
+
+			<section>
+				<h2>Responsive Toggle</h2>
+				<p>Set <code>data-open="false"</code> to hide on mobile. Use a toggle button to open it.</p>
+				<pre><code class="language-html">&lt;aside class="sidebar" data-open="false" id="nav-sidebar"&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/aside&gt;
+&lt;button onclick="document.getElementById('nav-sidebar').dataset.open='true'"
+        aria-expanded="false"
+        aria-controls="nav-sidebar"&gt;
+  Open Menu
+&lt;/button&gt;</code></pre>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+					<li>Use <code>&lt;aside&gt;</code> — it has landmark role <code>complementary</code></li>
+					<li>Add <code>aria-label</code> to distinguish multiple asides on a page</li>
+					<li>Use <code>aria-current="page"</code> on the active link</li>
+					<li>Toggle button must update <code>aria-expanded</code> to match <code>data-open</code></li>
+				</ul>
+			</section>
+
 		</div>
 	</section>
 

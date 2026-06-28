@@ -27,7 +27,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -41,28 +40,65 @@
 
 			<header>
 				<h1>Steps</h1>
-				<p>Visual step indicator for sequential processes</p>
+				<p>Multi-step wizard progress indicator. Semantic <code>&lt;ol&gt;</code> with ARIA roles for accessible step navigation.</p>
 			</header>
 
-<article class="card">
-				<header>
-				<h3>Basic Steps (3 steps, step 2 active)</h3>
-				</header>
-				<main>
-				<ol role="tablist">
-				<li role="tab" data-completed="true">
-				<span>1</span>
-				<span>Start</span>
-				</li>
-				<li role="tab" data-active="true">
-				<span>2</span>
-				<span>Process</span>
-				</li>
-				<li role="tab">
-				<span>3</span>
-				<span>Complete</span>
-				</li>
-				</ol>
+
+			<section>
+				<h2>Basic Steps</h2>
+				<article class="card">
+					<figure>
+						<ol class="steps" role="list" aria-label="Order progress">
+							<li data-completed="true"><span class="axicon render" data-name="Check"></span> Account</li>
+							<li data-active="true"><span class="axicon render" data-name="Circle"></span> Shipping</li>
+							<li><span class="axicon render" data-name="Circle"></span> Payment</li>
+							<li><span class="axicon render" data-name="Circle"></span> Confirm</li>
+						</ol>
+					</figure>
+					<pre><code class="language-html">&lt;ol class="steps" role="list" aria-label="Order progress"&gt;
+  &lt;li data-completed="true"&gt;Account&lt;/li&gt;
+  &lt;li data-active="true"&gt;Shipping&lt;/li&gt;
+  &lt;li&gt;Payment&lt;/li&gt;
+  &lt;li&gt;Confirm&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+				</article>
+			</section>
+
+			<section>
+				<h2>State Attributes</h2>
+				<table>
+					<thead>
+						<tr><th>Attribute</th><th>State</th><th>Visual</th></tr>
+					</thead>
+					<tbody>
+						<tr><td><code>data-completed="true"</code></td><td>Done</td><td>Success color + check</td></tr>
+						<tr><td><code>data-active="true"</code></td><td>Current</td><td>Primary color + filled</td></tr>
+						<tr><td>(none)</td><td>Upcoming</td><td>Muted / outline</td></tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<h2>JavaScript Navigation</h2>
+				<pre><code class="language-js">function goToStep(n) {
+  const steps = document.querySelectorAll('.steps li');
+  steps.forEach((step, i) => {
+    step.removeAttribute('data-active');
+    step.removeAttribute('data-completed');
+    if (i &lt; n) step.dataset.completed = 'true';
+    if (i === n) step.dataset.active = 'true';
+  });
+}</code></pre>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+					<li>Use <code>aria-label</code> on the <code>&lt;ol&gt;</code> to describe the process</li>
+					<li>Include <code>aria-current="step"</code> on the active item</li>
+					<li>Announce step changes with <code>aria-live="polite"</code> on a nearby element</li>
+				</ul>
+			</section>
 
 		</div>
 	</section>

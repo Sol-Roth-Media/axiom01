@@ -27,7 +27,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -41,22 +40,63 @@
 
 			<header>
 				<h1>Menu</h1>
-				<p>Semantic dropdown menu with keyboard and accessibility support</p>
+				<p>Context menu using the native <code>&lt;menu&gt;</code> element and <code>role="menu"</code>. Semantic, keyboard-accessible, zero JS framework needed.</p>
 			</header>
 
-<article class="card">
-				<header><h3>Basic Menu</h3></header>
-				<main>
-				<button class="button secondary" aria-haspopup="menu" aria-expanded="false" aria-controls="menu-1">
-				File <span class="axicon render" data-name="Arrow-Down"></span>
-				</button>
-				<menu id="menu-1" role="menu" data-open="false">
-				<button role="menuitem">New</button>
-				<button role="menuitem">Open</button>
-				<button role="menuitem">Save</button>
-				<hr>
-				<button role="menuitem">Exit</button>
-				</menu>
+
+			<section>
+				<h2>Context Menu</h2>
+				<article class="card">
+					<figure>
+						<p>Right-click the button or use the toggle:</p>
+						<menu role="menu" data-open="true" aria-label="Item actions">
+							<button role="menuitem">
+								<span class="axicon render" data-name="Edit"></span> Edit
+							</button>
+							<button role="menuitem">
+								<span class="axicon render" data-name="Copy"></span> Duplicate
+							</button>
+							<hr>
+							<button role="menuitem" data-variant="danger">
+								<span class="axicon render" data-name="Trash"></span> Delete
+							</button>
+						</menu>
+					</figure>
+					<pre><code class="language-html">&lt;menu role="menu" data-open="true" aria-label="Item actions"&gt;
+  &lt;button role="menuitem"&gt;
+    &lt;span class="axicon render" data-name="Edit"&gt;&lt;/span&gt; Edit
+  &lt;/button&gt;
+  &lt;button role="menuitem"&gt;
+    &lt;span class="axicon render" data-name="Copy"&gt;&lt;/span&gt; Duplicate
+  &lt;/button&gt;
+  &lt;hr&gt;
+  &lt;button role="menuitem" data-variant="danger"&gt;
+    &lt;span class="axicon render" data-name="Trash"&gt;&lt;/span&gt; Delete
+  &lt;/button&gt;
+&lt;/menu&gt;</code></pre>
+				</article>
+			</section>
+
+			<section>
+				<h2>Toggle Visibility</h2>
+				<pre><code class="language-js">// Show
+menu.dataset.open = 'true';
+
+// Hide
+delete menu.dataset.open;
+// or:
+menu.dataset.open = 'false';</code></pre>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+					<li>The trigger button needs <code>aria-haspopup="menu"</code> and <code>aria-expanded</code></li>
+					<li>Arrow keys should navigate between <code>menuitem</code> buttons</li>
+					<li><code>Escape</code> should close the menu and return focus to trigger</li>
+					<li>Use <code>&lt;hr&gt;</code> to separate groups — avoid extra wrapper divs</li>
+				</ul>
+			</section>
 
 		</div>
 	</section>

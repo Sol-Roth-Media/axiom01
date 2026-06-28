@@ -27,7 +27,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -41,20 +40,75 @@
 
 			<header>
 				<h1>Segmented Control</h1>
-				<p>Grouped buttons for mutually exclusive options</p>
+				<p>Mutually-exclusive toggle group. One class on the container — <code>segmented-control</code> — with semantic <code>&lt;button&gt;</code> children.</p>
 			</header>
 
-<article class="card">
-				<header>
-				<h3>Basic Segmented Control</h3>
-				</header>
-				<main>
-				<fieldset class="segmented-control">
-				<legend>View Options</legend>
-				<button data-selected="true">List</button>
-				<button>Grid</button>
-				<button>Table</button>
-				</fieldset>
+
+			<section>
+				<h2>Basic Segmented Control</h2>
+				<article class="card">
+					<figure>
+						<fieldset class="segmented-control" role="group" aria-label="View">
+							<legend class="sr-only">View preference</legend>
+							<button type="button" aria-pressed="true">List</button>
+							<button type="button" aria-pressed="false">Grid</button>
+							<button type="button" aria-pressed="false">Map</button>
+						</fieldset>
+					</figure>
+					<pre><code class="language-html">&lt;fieldset class="segmented-control" role="group" aria-label="View"&gt;
+  &lt;legend class="sr-only"&gt;View preference&lt;/legend&gt;
+  &lt;button type="button" aria-pressed="true"&gt;List&lt;/button&gt;
+  &lt;button type="button" aria-pressed="false"&gt;Grid&lt;/button&gt;
+  &lt;button type="button" aria-pressed="false"&gt;Map&lt;/button&gt;
+&lt;/fieldset&gt;</code></pre>
+				</article>
+			</section>
+
+			<section>
+				<h2>With Icons</h2>
+				<article class="card">
+					<figure>
+						<fieldset class="segmented-control" role="group" aria-label="Layout">
+							<legend class="sr-only">Layout</legend>
+							<button type="button" aria-pressed="true">
+								<span class="axicon render" data-name="List"></span> List
+							</button>
+							<button type="button" aria-pressed="false">
+								<span class="axicon render" data-name="Grid"></span> Grid
+							</button>
+						</fieldset>
+					</figure>
+					<pre><code class="language-html">&lt;fieldset class="segmented-control" role="group" aria-label="Layout"&gt;
+  &lt;button type="button" aria-pressed="true"&gt;
+    &lt;span class="axicon render" data-name="List"&gt;&lt;/span&gt; List
+  &lt;/button&gt;
+  &lt;button type="button" aria-pressed="false"&gt;
+    &lt;span class="axicon render" data-name="Grid"&gt;&lt;/span&gt; Grid
+  &lt;/button&gt;
+&lt;/fieldset&gt;</code></pre>
+				</article>
+			</section>
+
+			<section>
+				<h2>JavaScript Toggle</h2>
+				<pre><code class="language-js">document.querySelectorAll('.segmented-control button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.segmented-control')
+      .querySelectorAll('button')
+      .forEach(b => b.setAttribute('aria-pressed', 'false'));
+    btn.setAttribute('aria-pressed', 'true');
+  });
+});</code></pre>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+					<li>Use <code>role="group"</code> + <code>aria-label</code> on the container</li>
+					<li>Toggle <code>aria-pressed</code> on each button to reflect state</li>
+					<li>Never rely on visual styling alone to show selection</li>
+				</ul>
+			</section>
 
 		</div>
 	</section>

@@ -27,7 +27,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -41,13 +40,74 @@
 
 			<header>
 				<h1>Drawer</h1>
-				<p>Modal slide-out drawer component for displaying additional content in a modal overlay.</p>
+				<p>Slide-in panel using the native <code>&lt;dialog&gt;</code> element. Full keyboard trap, focus management, and backdrop built in.</p>
 			</header>
 
+
 			<section>
-				<h2>Overview</h2>
-				<p>The Drawer component is a semantic modal slide-out panel that overlays content. Built on native HTML5 `&lt;dialog&gt;` element with smooth slide animations and proper focus management.</p>
+				<h2>Open a Drawer</h2>
+				<article class="card">
+					<figure>
+						<button class="primary" onclick="document.getElementById('demo-drawer').showModal()">
+							 Open Drawer
+						</button>
+
+						<dialog class="drawer" id="demo-drawer">
+							<header>
+								<h2>Drawer Title</h2>
+								<button aria-label="Close drawer" onclick="document.getElementById('demo-drawer').close()">
+									<span class="axicon render" data-name="X"></span>
+								</button>
+							</header>
+							<main>
+								<p>Drawer content goes here. Navigation links, settings, or any supplementary content.</p>
+								<nav>
+									<ul>
+										<li><a href="#">Dashboard</a></li>
+										<li><a href="#">Settings</a></li>
+										<li><a href="#">Profile</a></li>
+									</ul>
+								</nav>
+							</main>
+						</dialog>
+					</figure>
+					<pre><code class="language-html">&lt;button class="primary" onclick="document.getElementById('my-drawer').showModal()"&gt;
+  Open Drawer
+&lt;/button&gt;
+
+&lt;dialog class="drawer" id="my-drawer"&gt;
+  &lt;header&gt;
+    &lt;h2&gt;Drawer Title&lt;/h2&gt;
+    &lt;button aria-label="Close drawer"
+            onclick="document.getElementById('my-drawer').close()"&gt;
+      &lt;span class="axicon render" data-name="X"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;p&gt;Content here.&lt;/p&gt;
+  &lt;/main&gt;
+&lt;/dialog&gt;</code></pre>
+				</article>
 			</section>
+
+			<section>
+				<h2>Left Side Drawer</h2>
+				<pre><code class="language-html">&lt;dialog class="drawer" data-side="left" id="left-drawer"&gt;
+  ...
+&lt;/dialog&gt;</code></pre>
+			</section>
+
+			<section>
+				<h2>Why Native <code>&lt;dialog&gt;</code>?</h2>
+				<ul>
+					<li>Built-in keyboard trap — focus stays inside until closed</li>
+					<li><code>Escape</code> key closes it automatically</li>
+					<li>Automatic <code>::backdrop</code> for overlay</li>
+					<li>No JavaScript needed for basic open/close — use <code>.showModal()</code> and <code>.close()</code></li>
+					<li>Proper ARIA: <code>role="dialog"</code> and focus management are native</li>
+				</ul>
+			</section>
+
 		</div>
 	</section>
 

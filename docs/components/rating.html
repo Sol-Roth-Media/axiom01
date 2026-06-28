@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Rating / Meter - Axiom01</title>
+	<title>Rating - Axiom01</title>
 	<script>(function(){const t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();</script>
 	<link rel="stylesheet" href="../../css/axiom.min.css">
 	<link rel="stylesheet" href="../../css/axicons.css">
@@ -27,7 +27,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -40,18 +39,84 @@
 		<div class="container">
 
 			<header>
-				<h1>Rating / Meter</h1>
-				<p>Native HTML5 meter element for scalar measurements</p>
+				<h1>Rating</h1>
+				<p>Star rating component using native <code>&lt;input type="radio"&gt;</code>. Accessible, keyboard-navigable, zero JS required.</p>
 			</header>
 
-<article class="card">
-				<header>
-				<h3>Star Rating (4/5)</h3>
-				</header>
-				<main>
-				<label for="rating-4">Product Rating</label>
-				<meter id="rating-4" min="0" max="5" value="4" low="2" high="4" optimum="5"></meter>
-				<p>4 out of 5 stars</p>
+
+			<section>
+				<h2>Star Rating</h2>
+				<article class="card">
+					<figure>
+						<fieldset class="rating">
+							<legend>Rate this product</legend>
+							<label>
+								<input type="radio" name="stars" value="1">
+								<span aria-label="1 star">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="2">
+								<span aria-label="2 stars">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="3" checked>
+								<span aria-label="3 stars">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="4">
+								<span aria-label="4 stars">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="5">
+								<span aria-label="5 stars">★</span>
+							</label>
+						</fieldset>
+					</figure>
+					<pre><code class="language-html">&lt;fieldset class="rating"&gt;
+  &lt;legend&gt;Rate this product&lt;/legend&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="stars" value="1"&gt;
+    &lt;span aria-label="1 star"&gt;★&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="stars" value="2"&gt;
+    &lt;span aria-label="2 stars"&gt;★&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="stars" value="3" checked&gt;
+    &lt;span aria-label="3 stars"&gt;★&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="stars" value="4"&gt;
+    &lt;span aria-label="4 stars"&gt;★&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label&gt;
+    &lt;input type="radio" name="stars" value="5"&gt;
+    &lt;span aria-label="5 stars"&gt;★&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+				</article>
+			</section>
+
+			<section>
+				<h2>Read-Only Display</h2>
+				<p>For displaying a rating without interaction, use <code>aria-label</code> on the container:</p>
+				<article class="card">
+					<pre><code class="language-html">&lt;p aria-label="Rated 4 out of 5 stars"&gt;
+  ★★★★☆
+&lt;/p&gt;</code></pre>
+				</article>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+					<li>Use <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code> — groups the radio buttons semantically</li>
+					<li>Each <code>&lt;input type="radio"&gt;</code> is keyboard navigable (arrow keys)</li>
+					<li>Label text <code>aria-label</code> on <code>&lt;span&gt;</code> provides screen reader context</li>
+					<li>Never rely on star emoji alone — always include numeric aria-labels</li>
+				</ul>
+			</section>
 
 		</div>
 	</section>

@@ -14,7 +14,9 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body class="axiom-body component-doc">
+
 <a href="#main-content" class="skip-link">Skip to main content</a>
+
 <header class="main" data-component="mobile-navbar">
 	<nav role="navigation" aria-label="Main Navigation">
 		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
@@ -25,57 +27,101 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
 	</nav>
 </header>
+
 <main id="main-content">
+
 	<section>
 		<div class="container">
+
 			<header>
 				<h1>Carousel</h1>
-				<p>Scrollable image gallery with navigation controls</p>
+				<p>Image and content carousel. One class — <code>carousel</code> — on the container. Semantic <code>&lt;figure&gt;</code> children.</p>
 			</header>
+
+
 			<section>
-				<h2>Examples</h2>
-<article class="card">
-				<header>
-				<h3>Basic Carousel</h3>
-				</header>
-				<main>
-
-				<figure>
-
-						<figcaption>Slide 1</figcaption>
-
+				<h2>Basic Carousel</h2>
+				<article class="card">
+					<figure>
+						<div class="carousel" id="demo-carousel">
+							<div class="carousel-viewport">
+								<div class="carousel-track" id="carousel-track">
+									<figure style="background:var(--a-color-primary-container);min-height:160px;display:flex;align-items:center;justify-content:center;">
+										<figcaption>Slide 1</figcaption>
+									</figure>
+									<figure style="background:var(--a-color-secondary-container);min-height:160px;display:flex;align-items:center;justify-content:center;">
+										<figcaption>Slide 2</figcaption>
+									</figure>
+									<figure style="background:var(--a-color-success-container);min-height:160px;display:flex;align-items:center;justify-content:center;">
+										<figcaption>Slide 3</figcaption>
+									</figure>
+								</div>
+							</div>
+							<button class="carousel-control prev" aria-label="Previous slide" onclick="moveCarousel(-1)">‹</button>
+							<button class="carousel-control next" aria-label="Next slide" onclick="moveCarousel(1)">›</button>
+						</div>
 					</figure>
-				<figure>
-
-						<figcaption>Slide 2</figcaption>
-
-					</figure>
-				<figure>
-
-						<figcaption>Slide 3</figcaption>
-
-					</figure>
-
-				<button class="carousel-control prev" aria-label="Previous slide">
-				<span class="axicon render" data-name="ChevronLeft"></span>
-				</button>
-				<button class="carousel-control next" aria-label="Next slide">
-				<span class="axicon render" data-name="ChevronRight"></span>
-				</button>
-
-				<button data-active="true" aria-label="Go to slide 1"></button>
-				<button aria-label="Go to slide 2"></button>
-				<button aria-label="Go to slide 3"></button>
+					<pre><code class="language-html">&lt;div class="carousel"&gt;
+  &lt;div class="carousel-viewport"&gt;
+    &lt;div class="carousel-track"&gt;
+      &lt;figure&gt;
+        &lt;img src="slide1.jpg" alt="Description of slide 1"&gt;
+        &lt;figcaption&gt;Slide 1&lt;/figcaption&gt;
+      &lt;/figure&gt;
+      &lt;figure&gt;
+        &lt;img src="slide2.jpg" alt="Description of slide 2"&gt;
+        &lt;figcaption&gt;Slide 2&lt;/figcaption&gt;
+      &lt;/figure&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="carousel-control prev" aria-label="Previous slide"&gt;‹&lt;/button&gt;
+  &lt;button class="carousel-control next" aria-label="Next slide"&gt;›&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+				</article>
 			</section>
+
+			<section>
+				<h2>JavaScript Control</h2>
+				<pre><code class="language-js">let current = 0;
+function moveCarousel(dir) {
+  const track = document.getElementById('carousel-track');
+  const slides = track.children.length;
+  current = (current + dir + slides) % slides;
+  track.style.transform = `translateX(-${current * 100}%)`;
+}</code></pre>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+					<li>Add <code>role="region"</code> + <code>aria-label="Image carousel"</code> on the outer container</li>
+					<li>Each <code>&lt;figure&gt;</code> with an image needs a meaningful <code>alt</code> text</li>
+					<li>Pause auto-play on focus or hover — never auto-advance without user control</li>
+					<li>Provide visible slide count: "Slide 1 of 3" via <code>aria-live="polite"</code></li>
+				</ul>
+			</section>
+
+<script>
+let current = 0;
+function moveCarousel(dir) {
+  const track = document.getElementById('carousel-track');
+  if (!track) return;
+  const slides = track.children.length;
+  current = (current + dir + slides) % slides;
+  track.style.transform = \`translateX(-\${current * 100}%)\`;
+}
+</script>
+
 		</div>
 	</section>
+
 </main>
+
 <footer class="footer">
 	<div class="container">
 		<div class="footer-content">
@@ -116,6 +162,7 @@
 		</div>
 	</div>
 </footer>
+
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
 <script>

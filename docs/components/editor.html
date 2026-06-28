@@ -25,7 +25,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -36,57 +35,55 @@
 		<div class="container">
 			<header>
 				<h1>Editor</h1>
-				<p>Axiom01's editor component provides a rich text editing interface with toolbar controls, formatting options, and real-time word count. Perfect for content creation, notes, and rich text input.</p>
+				<p>Rich text editor using the native <code>contenteditable</code> attribute. Semantic, accessible, no dependencies.</p>
 			</header>
-<section>
-				<h2>Live Examples</h2>
 
-				<h3>Basic Rich Text Editor</h3>
-				<div class="editor-demo">
-				<div class="editor-container" id="editor1">
-				<div class="editor-toolbar">
-				<div class="toolbar-group">
-				<button class="toolbar-button" title="Bold" data-format="bold">
-				<strong>B</strong>
-				</button>
-				<button class="toolbar-button" title="Italic" data-format="italic">
-				<em>I</em>
-				</button>
-				<button class="toolbar-button" title="Underline" data-format="underline">
-				<u>U</u>
-				</button>
-				</div>
-				<div class="toolbar-group">
-				<button class="toolbar-button" title="List" data-format="insertUnorderedList">
-				<span class="axicon render" data-name="List"></span>
-				</button>
-				<button class="toolbar-button" title="Quote" data-format="formatBlock" data-value="blockquote">
-				<span class="axicon render" data-name="Quote"></span>
-				</button>
-				</div>
-				<div class="toolbar-group">
-				<button class="toolbar-button" title="Clear Formatting" data-format="removeFormat">
-				<span class="axicon render" data-name="X"></span>
-				</button>
-				</div>
-				</div>
+			<section>
+				<h2>Basic Rich Text Editor</h2>
+				<article class="card">
+					<figure>
+						<div role="textbox" aria-label="Rich text editor" aria-multiline="true"
+							 contenteditable="true"
+							 style="min-height:120px;padding:var(--a-space-m);border:1px solid var(--a-color-outline);border-radius:var(--a-border-radius-base);outline:none;">
+							<p>Type here to edit…</p>
+						</div>
+					</figure>
+					<pre><code class="language-html">&lt;div role="textbox"
+     aria-label="Message"
+     aria-multiline="true"
+     contenteditable="true"&gt;
+  &lt;p&gt;Initial content…&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+				</article>
+			</section>
+			<section>
+				<h2>Toolbar Actions</h2>
+				<article class="card">
+					<figure>
+						<fieldset class="segmented-control" role="group" aria-label="Text formatting">
+							<legend class="sr-only">Formatting</legend>
+							<button type="button" onclick="document.execCommand('bold')" aria-label="Bold"><strong>B</strong></button>
+							<button type="button" onclick="document.execCommand('italic')" aria-label="Italic"><em>I</em></button>
+							<button type="button" onclick="document.execCommand('underline')" aria-label="Underline"><u>U</u></button>
+						</fieldset>
+					</figure>
+					<pre><code class="language-html">&lt;fieldset class="segmented-control" role="group" aria-label="Formatting"&gt;
+  &lt;button type="button" onclick="document.execCommand('bold')" aria-label="Bold"&gt;&lt;b&gt;B&lt;/b&gt;&lt;/button&gt;
+  &lt;button type="button" onclick="document.execCommand('italic')" aria-label="Italic"&gt;&lt;i&gt;I&lt;/i&gt;&lt;/button&gt;
+&lt;/fieldset&gt;
+&lt;div role="textbox" contenteditable="true" aria-multiline="true"&gt;…&lt;/div&gt;</code></pre>
+				</article>
+			</section>
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+					<li>Use <code>role="textbox"</code> + <code>aria-multiline="true"</code> on the editable element</li>
+					<li>Add <code>aria-label</code> — there is no native label association for contenteditable</li>
+					<li>Announce formatting state changes with <code>aria-pressed</code> on toolbar buttons</li>
+					<li>For production use, consider a dedicated accessible editor library</li>
+				</ul>
+			</section>
 
-				<div class="editor-content" id="editorContent1" contenteditable="true" role="textbox" aria-label="Rich text editor" placeholder="Start typing...">Start typing your content here. Use the toolbar buttons above to format your text.</div>
-
-				<div class="editor-footer">
-				<div class="editor-word-count">
-				<span>Words: <strong id="wordCount1">0</strong></span>
-				<span>Characters: <strong id="charCount1">0</strong></span>
-				</div>
-				<div class="editor-actions">
-				<button class="cancel">Cancel</button>
-				<button class="save">Save</button>
-				</div>
-				</div>
-
-				<h3>Formatted Content Preview</h3>
-				<div class="format-preview">
-				<p>The editor supports formatting like <strong>bold text</strong>, <em>italic text</em>, and more. You can also create lists and block quotes.</p>
 		</div>
 	</section>
 </main>
@@ -141,10 +138,6 @@ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded'
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
 </body>
 </html>

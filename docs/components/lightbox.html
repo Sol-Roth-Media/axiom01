@@ -25,7 +25,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -36,27 +35,60 @@
 		<div class="container">
 			<header>
 				<h1>Lightbox</h1>
-				<p>Full-screen modal for viewing images with keyboard and gesture support</p>
+				<p>Full-screen image viewer using the native <code>&lt;dialog&gt;</code> element. Native focus trap, backdrop, and keyboard support.</p>
 			</header>
-			<section>
-				<h2>Examples</h2>
-<article class="card">
-				<header>
-				<h3>Basic Image Gallery</h3>
-				</header>
-				<main>
-				<p>Click any image to open in lightbox:</p>
 
-				<a href="#" class="lightbox-trigger" data-image="1" role="button" aria-label="View image 1">
-				<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23667eea' width='100' height='100'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' font-size='24' fill='white'%3E1%3C/text%3E%3C/svg%3E" alt="Image 1" style="width: 100%; aspect-ratio: 1; border-radius: var(--a-border-radius-base); cursor: pointer; border: 1px solid var(--a-color-border);">
-				</a>
-				<a href="#" class="lightbox-trigger" data-image="2" role="button" aria-label="View image 2">
-				<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23f093fb' width='100' height='100'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' font-size='24' fill='white'%3E2%3C/text%3E%3C/svg%3E" alt="Image 2" style="width: 100%; aspect-ratio: 1; border-radius: var(--a-border-radius-base); cursor: pointer; border: 1px solid var(--a-color-border);">
-				</a>
-				<a href="#" class="lightbox-trigger" data-image="3" role="button" aria-label="View image 3">
-				<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%234facfe' width='100' height='100'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' font-size='24' fill='white'%3E3%3C/text%3E%3C/svg%3E" alt="Image 3" style="width: 100%; aspect-ratio: 1; border-radius: var(--a-border-radius-base); cursor: pointer; border: 1px solid var(--a-color-border);">
-				</a>
+			<section>
+				<h2>Gallery with Lightbox</h2>
+				<article class="card">
+					<figure>
+						<div class="grid">
+							<button onclick="openLightbox('https://picsum.photos/800/600?1')" aria-label="Open image 1">
+								<img src="https://picsum.photos/200/150?1" alt="Gallery image 1" width="200">
+							</button>
+							<button onclick="openLightbox('https://picsum.photos/800/600?2')" aria-label="Open image 2">
+								<img src="https://picsum.photos/200/150?2" alt="Gallery image 2" width="200">
+							</button>
+						</div>
+						<dialog class="lightbox" id="demo-lightbox">
+							<button class="lightbox-close" aria-label="Close" onclick="document.getElementById('demo-lightbox').close()">
+								<span class="axicon render" data-name="X"></span>
+							</button>
+							<figure>
+								<img id="lightbox-img" src="" alt="">
+							</figure>
+						</dialog>
+					</figure>
+					<pre><code class="language-html">&lt;button onclick="document.getElementById('lb').showModal()"&gt;
+  &lt;img src="thumb.jpg" alt="Image description"&gt;
+&lt;/button&gt;
+
+&lt;dialog class="lightbox" id="lb"&gt;
+  &lt;button class="lightbox-close" aria-label="Close"
+          onclick="document.getElementById('lb').close()"&gt;✕&lt;/button&gt;
+  &lt;figure&gt;
+    &lt;img src="full.jpg" alt="Image description"&gt;
+    &lt;figcaption&gt;Caption text&lt;/figcaption&gt;
+  &lt;/figure&gt;
+&lt;/dialog&gt;</code></pre>
+				</article>
 			</section>
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+					<li>Native <code>&lt;dialog&gt;</code> traps focus and closes on Escape automatically</li>
+					<li>The trigger must be a <code>&lt;button&gt;</code> — not a plain <code>&lt;img&gt;</code></li>
+					<li>Always include <code>alt</code> text on the full-size image</li>
+					<li>Close button needs <code>aria-label="Close"</code></li>
+				</ul>
+			</section>
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('demo-lightbox').showModal();
+}
+</script>
+
 		</div>
 	</section>
 </main>
@@ -111,10 +143,6 @@ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded'
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
 </body>
 </html>

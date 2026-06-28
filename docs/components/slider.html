@@ -27,7 +27,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -41,23 +40,56 @@
 
 			<header>
 				<h1>Slider</h1>
-				<p>Semantic range slider component for numeric input. Built on native HTML5 `` with full keyboard support and accessibility.</p>
+				<p>Native <code>&lt;input type="range"&gt;</code>. No custom JS needed — fully styled by the framework.</p>
 			</header>
 
+
 			<section>
-				<h2>Live Examples</h2>
-				</header>
-
+				<h2>Basic Slider</h2>
 				<article class="card">
-				<header>
-				<h3>Basic Slider (0-100)</h3>
-				</header>
-				<main>
-				<label for="slider-basic">Value: <span id="value-basic">50</span></label>
-				<input type="range" id="slider-basic" min="0" max="100" value="50">
-
-		</div>
+					<figure>
+						<label for="demo-slider">Volume: <output id="slider-out">50</output>%</label>
+						<input type="range" id="demo-slider" min="0" max="100" value="50"
+							 oninput="document.getElementById('slider-out').value=this.value">
+					</figure>
+					<pre><code class="language-html">&lt;label for="volume"&gt;Volume: &lt;output id="vol-out"&gt;50&lt;/output&gt;%&lt;/label&gt;
+&lt;input type="range" id="volume" min="0" max="100" value="50"
+  oninput="document.getElementById('vol-out').value=this.value"&gt;</code></pre>
+				</article>
 			</section>
+
+			<section>
+				<h2>Step Control</h2>
+				<article class="card">
+					<figure>
+						<label for="demo-step">Rating (steps of 1): <output id="step-out">3</output></label>
+						<input type="range" id="demo-step" min="1" max="5" step="1" value="3"
+							 oninput="document.getElementById('step-out').value=this.value">
+					</figure>
+					<pre><code class="language-html">&lt;input type="range" min="1" max="5" step="1" value="3"&gt;</code></pre>
+				</article>
+			</section>
+
+			<section>
+				<h2>Disabled</h2>
+				<article class="card">
+					<figure>
+						<input type="range" value="40" disabled>
+					</figure>
+					<pre><code class="language-html">&lt;input type="range" value="40" disabled&gt;</code></pre>
+				</article>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+					<li>Always include a visible <code>&lt;label&gt;</code> with the current value</li>
+					<li>Use <code>&lt;output&gt;</code> to display the live value — it announces to screen readers</li>
+					<li>Keyboard: arrow keys adjust value; Home/End jump to min/max</li>
+					<li>Add <code>aria-valuemin</code>, <code>aria-valuemax</code>, <code>aria-valuenow</code> for custom implementations</li>
+				</ul>
+			</section>
+
 		</div>
 	</section>
 

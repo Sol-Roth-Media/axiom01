@@ -25,7 +25,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -36,86 +35,56 @@
 		<div class="container">
 			<header>
 				<h1>Touch Components</h1>
-				<p>Axiom01's touch components provide mobile-optimized interactions including tap, swipe, pinch, and long-press gestures. Essential for responsive mobile and tablet experiences.</p>
+				<p>Gesture-aware components using pointer events. Semantic HTML with <code>data-*</code> attributes for gesture state.</p>
 			</header>
-<section>
-				<h2>Live Examples</h2>
 
-				<h3>Touch Tap Detection</h3>
-				<div class="touch-demo">
-				<div class="touch-target" id="tapTarget">
-				<div class="touch-icon">
-				<span class="axicon render" data-name="Hand-Pointer"></span>
-				</div>
-				<div class="touch-label">Tap to activate</div>
-				<div class="touch-info">Single or double tap</div>
-				</div>
-				</div>
+			<section>
+				<h2>Touch Detection</h2>
+				<article class="card">
+					<figure>
+						<div role="button" tabindex="0" id="touch-pad" aria-label="Touch detection pad"
+							style="min-height:120px;display:flex;align-items:center;justify-content:center;border:2px dashed var(--a-color-outline);border-radius:var(--a-border-radius-base);cursor:pointer;touch-action:none;">
+							<p id="touch-output">Tap or click here</p>
+						</div>
+					</figure>
+					<pre><code class="language-html">&lt;div role="button" tabindex="0"
+     aria-label="Interactive area"
+     style="touch-action:none"&gt;
+  Touch or click to interact
+&lt;/div&gt;</code></pre>
+				</article>
+			</section>
+			<section>
+				<h2>Swipe Detection</h2>
+				<pre><code class="language-js">let startX = 0;
 
-				<h3>Swipe Gestures</h3>
-				<div class="touch-demo">
-				<div class="swipe-detector" id="swipeTarget">
-				<div class="swipe-message">
-				<span class="axicon render" data-name="Arrow-Right"></span>
-				Swipe left or right
-				</div>
-				</div>
-				</div>
+el.addEventListener('pointerdown', e => { startX = e.clientX; });
+el.addEventListener('pointerup', e => {
+  const delta = e.clientX - startX;
+  if (Math.abs(delta) &gt; 50) {
+    console.log(delta &gt; 0 ? 'Swiped right' : 'Swiped left');
+  }
+});</code></pre>
+			</section>
+			<section>
+				<h2>Best Practices</h2>
+				<ul>
+					<li>Use <code>pointer events</code> not touch events — covers mouse, touch, and pen</li>
+					<li>Set <code>touch-action: none</code> only on elements that need custom gesture handling</li>
+					<li>Always provide keyboard alternatives for all touch interactions</li>
+					<li>Minimum 44×44px touch target size (WCAG 2.5.5)</li>
+					<li>Never block default scrolling unless intentional</li>
+				</ul>
+			</section>
+<script>
+const pad = document.getElementById('touch-pad');
+const out = document.getElementById('touch-output');
+if (pad) {
+  pad.addEventListener('click', () => { out.textContent = 'Clicked! ✓'; });
+  pad.addEventListener('touchstart', () => { out.textContent = 'Touch detected! ✓'; });
+}
+</script>
 
-				<h3>Pinch to Zoom</h3>
-				<div class="touch-demo">
-				<div class="pinch-area" id="pinchArea">
-				<div class="pinch-scale">
-				<span class="axicon render" data-name="Image"></span>
-				</div>
-				</div>
-				</div>
-
-				<h3>Touch Gesture Reference</h3>
-				<div class="touch-demo">
-				<div class="gesture-list">
-				<div class="gesture-item">
-				<div class="gesture-icon">
-				<span class="axicon render" data-name="Hand-Pointer"></span>
-				</div>
-				<h4>Tap</h4>
-				<p class="gesture-description">Single finger press and release. Primary interaction.</p>
-				</div>
-				<div class="gesture-item">
-				<div class="gesture-icon">
-				<span class="axicon render" data-name="Click"></span>
-				</div>
-				<h4>Double Tap</h4>
-				<p class="gesture-description">Two rapid taps. Common for zoom on photos.</p>
-				</div>
-				<div class="gesture-item">
-				<div class="gesture-icon">
-				<span class="axicon render" data-name="Clock"></span>
-				</div>
-				<h4>Long Press</h4>
-				<p class="gesture-description">Hold finger down for 500ms+. Context menus.</p>
-				</div>
-				<div class="gesture-item">
-				<div class="gesture-icon">
-				<span class="axicon render" data-name="Arrow-Right"></span>
-				</div>
-				<h4>Swipe</h4>
-				<p class="gesture-description">Fast directional drag. Navigation between views.</p>
-				</div>
-				<div class="gesture-item">
-				<div class="gesture-icon">
-				<span class="axicon render" data-name="Maximize"></span>
-				</div>
-				<h4>Pinch</h4>
-				<p class="gesture-description">Two fingers moving apart/together. Zoom control.</p>
-				</div>
-				<div class="gesture-item">
-				<div class="gesture-icon">
-				<span class="axicon render" data-name="Rotate-Cw"></span>
-				</div>
-				<h4>Rotate</h4>
-				<p class="gesture-description">Two fingers rotating. Image/map rotation.</p>
-				</div>
 		</div>
 	</section>
 </main>
@@ -170,10 +139,6 @@ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded'
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
 </body>
 </html>

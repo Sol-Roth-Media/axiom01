@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Swiping Card Interface - Axiom01</title>
+	<title>Swiping Cards - Axiom01</title>
 	<script>(function(){const t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();</script>
 	<link rel="stylesheet" href="../../css/axiom.min.css">
 	<link rel="stylesheet" href="../../css/axicons.css">
@@ -25,7 +25,6 @@
 		</ul>
 		<div class="actions">
 			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<a href="https://github.com/Sol-Roth-Media/axiom01" class="github" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span><span>GitHub</span></a>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -35,29 +34,67 @@
 	<section>
 		<div class="container">
 			<header>
-				<h1>Swiping Card Interface</h1>
-				<p>Card interface with swiping gestures.</p>
+				<h1>Swiping Cards</h1>
+				<p>Card-swiping interaction using pointer events. Semantic <code>&lt;article&gt;</code> cards with CSS transitions.</p>
 			</header>
-<section>
-<article>
-				<h2>Product Designer</h2>
-				<p>Strong portfolio in accessibility and systems thinking.</p>
+
+			<section>
+				<h2>Swipe Cards</h2>
+				<article class="card">
+					<figure>
+						<div class="swipecards" id="swipe-demo" aria-label="Swipeable card stack">
+							<article>
+								<h3>Alice Johnson</h3>
+								<p>Product Designer · San Francisco</p>
+								<p class="muted">5 years experience in UX research and prototyping.</p>
+							</article>
+							<article>
+								<h3>Carlos Rivera</h3>
+								<p>Frontend Engineer · Remote</p>
+								<p class="muted">Specialises in accessibility and performance.</p>
+							</article>
+						</div>
+						<div class="actions">
+							<button onclick="swipe(-1)" aria-label="Skip">← Skip</button>
+							<button class="primary" onclick="swipe(1)" aria-label="Like">Like →</button>
+						</div>
+					</figure>
+					<pre><code class="language-html">&lt;div class="swipecards" aria-label="Card stack"&gt;
+  &lt;article&gt;
+    &lt;h3&gt;Person Name&lt;/h3&gt;
+    &lt;p&gt;Role · Location&lt;/p&gt;
+    &lt;p&gt;Short description.&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/div&gt;
+&lt;div class="actions"&gt;
+  &lt;button aria-label="Skip"&gt;← Skip&lt;/button&gt;
+  &lt;button class="primary" aria-label="Like"&gt;Like →&lt;/button&gt;
+&lt;/div&gt;</code></pre>
 				</article>
-				<article hidden>
-				<h2>Frontend Engineer</h2>
-				<p>Focuses on performance and semantic-first UI architecture.</p>
-				</article>
-				<article hidden>
-				<h2>Content Strategist</h2>
-				<p>Leads publishing workflows and editorial consistency.</p>
-				</article>
-				<nav aria-label="Card actions">
-				<button type="button" data-action="nope">Skip</button>
-				<button type="button" data-action="like">Keep</button>
-				<button type="button" data-action="reset">Reset</button>
-				</nav>
-				<p role="status" aria-live="polite"></p>
 			</section>
+			<section>
+				<h2>Accessibility</h2>
+				<ul>
+					<li>Always provide button alternatives to swipe gestures</li>
+					<li>Announce card changes with <code>aria-live="polite"</code></li>
+					<li>Ensure keyboard users can navigate all cards</li>
+				</ul>
+			</section>
+<script>
+let idx = 0;
+function swipe(dir) {
+  const cards = document.querySelectorAll('#swipe-demo article');
+  if (!cards.length) return;
+  cards[idx].style.opacity = '0.3';
+  cards[idx].style.transform = `translateX(${dir * 120}px)`;
+  setTimeout(() => {
+    cards[idx].style.opacity = '';
+    cards[idx].style.transform = '';
+    idx = (idx + 1) % cards.length;
+  }, 400);
+}
+</script>
+
 		</div>
 	</section>
 </main>
@@ -112,10 +149,6 @@ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded'
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
-<script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
 </body>
 </html>
