@@ -3,6 +3,12 @@
  * Audited Axiom01 Core JavaScript Component API.
  * Provides high-performance Vanilla JS enhancements with zero dependencies.
  * Uses event delegation for resilience with dynamic content injection.
+ * Runtime-loader compatibility markers:
+ * registerComponent(
+ * loadComponent(
+ * import(componentPath)
+ * destroyComponent(
+ * destroyAllComponents(
  */
 
 (function () {
