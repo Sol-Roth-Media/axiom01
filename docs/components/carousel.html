@@ -59,8 +59,8 @@
 									</figure>
 								</div>
 							</div>
-							<button class="carousel-control prev" aria-label="Previous slide" onclick="moveCarousel(-1)">‹</button>
-							<button class="carousel-control next" aria-label="Next slide" onclick="moveCarousel(1)">›</button>
+							<button class="carousel-control prev" aria-label="Previous slide" aria-controls="carousel-track" data-carousel-step="-1">‹</button>
+							<button class="carousel-control next" aria-label="Next slide" aria-controls="carousel-track" data-carousel-step="1">›</button>
 						</div>
 					</figure>
 					<code class="language-html">&lt;div class="carousel"&gt;
@@ -76,8 +76,10 @@
       &lt;/figure&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-  &lt;button class="carousel-control prev" aria-label="Previous slide"&gt;‹&lt;/button&gt;
-  &lt;button class="carousel-control next" aria-label="Next slide"&gt;›&lt;/button&gt;
+  &lt;button class="carousel-control prev" aria-label="Previous slide"
+          aria-controls="carousel-track" data-carousel-step="-1"&gt;‹&lt;/button&gt;
+  &lt;button class="carousel-control next" aria-label="Next slide"
+          aria-controls="carousel-track" data-carousel-step="1"&gt;›&lt;/button&gt;
 &lt;/div&gt;</code></pre>
 				</article>
 			</section>
@@ -85,12 +87,15 @@
 			<section>
 				<h2>JavaScript Control</h2>
 				<pre><code class="language-js">let current = 0;
-function moveCarousel(dir) {
-  const track = document.getElementById('carousel-track');
-  const slides = track.children.length;
-  current = (current + dir + slides) % slides;
-  track.style.transform = `translateX(-${current * 100}%)`;
-}</code></pre>
+document.querySelectorAll('[data-carousel-step]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const track = document.getElementById(button.getAttribute('aria-controls'));
+    const slides = track ? track.children.length : 0;
+    if (!track || !slides) return;
+    current = (current + Number(button.getAttribute('data-carousel-step')) + slides) % slides;
+    track.style.transform = `translateX(-${current * 100}%)`;
+  });
+});</code></pre>
 			</section>
 
 			<section>
@@ -103,16 +108,6 @@ function moveCarousel(dir) {
 				</ul>
 			</section>
 
-<script>
-let current = 0;
-function moveCarousel(dir) {
-  const track = document.getElementById('carousel-track');
-  if (!track) return;
-  const slides = track.children.length;
-  current = (current + dir + slides) % slides;
-  track.style.transform = \`translateX(-\${current * 100}%)\`;
-}
-</script>
 
 		</div>
 	</section>
@@ -151,7 +146,7 @@ function moveCarousel(dir) {
 			</div>
 		</div>
 		<div class="footer-bottom">
-			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
+			<p class="footer-copyright">&copy; <span data-current-year></span> Sol Roth Media. MIT License.</p>
 			<ul class="footer-social">
 				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
 				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>

@@ -42,18 +42,18 @@
 				<article class="card">
 					<figure>
 						<div class="grid">
-							<button onclick="openLb('https://picsum.photos/800/500?1','Mountain landscape')" aria-label="View: Mountain landscape">
+							<button data-lightbox-dialog="lb-demo" data-lightbox-src="https://picsum.photos/800/500?1" data-lightbox-alt="Mountain landscape" aria-label="View: Mountain landscape">
 								<img src="https://picsum.photos/200/130?1" alt="Mountain landscape" loading="lazy" style="border-radius:var(--a-border-radius-base);display:block;width:100%;">
 							</button>
-							<button onclick="openLb('https://picsum.photos/800/500?2','Ocean view')" aria-label="View: Ocean view">
+							<button data-lightbox-dialog="lb-demo" data-lightbox-src="https://picsum.photos/800/500?2" data-lightbox-alt="Ocean view" aria-label="View: Ocean view">
 								<img src="https://picsum.photos/200/130?2" alt="Ocean view" loading="lazy" style="border-radius:var(--a-border-radius-base);display:block;width:100%;">
 							</button>
-							<button onclick="openLb('https://picsum.photos/800/500?3','Forest path')" aria-label="View: Forest path">
+							<button data-lightbox-dialog="lb-demo" data-lightbox-src="https://picsum.photos/800/500?3" data-lightbox-alt="Forest path" aria-label="View: Forest path">
 								<img src="https://picsum.photos/200/130?3" alt="Forest path" loading="lazy" style="border-radius:var(--a-border-radius-base);display:block;width:100%;">
 							</button>
 						</div>
 						<dialog class="lightbox" id="lb-demo">
-							<button class="lightbox-close" aria-label="Close lightbox" onclick="document.getElementById('lb-demo').close()">
+							<button class="lightbox-close" aria-label="Close lightbox" data-dialog-close="lb-demo">
 								<span class="axicon render" data-name="X"></span>
 							</button>
 							<figure>
@@ -62,14 +62,14 @@
 						</dialog>
 					</figure>
 					<pre><code class="language-html">&lt;!-- Thumbnail triggers --&gt;
-&lt;button onclick="openLb('full.jpg', 'Alt text')" aria-label="View: Alt text"&gt;
+&lt;button data-lightbox-dialog="lb" data-lightbox-src="full.jpg" data-lightbox-alt="Alt text" aria-label="View: Alt text"&gt;
   &lt;img src="thumb.jpg" alt="Alt text" loading="lazy"&gt;
 &lt;/button&gt;
 
 &lt;!-- Native dialog lightbox --&gt;
 &lt;dialog class="lightbox" id="lb"&gt;
   &lt;button class="lightbox-close" aria-label="Close lightbox"
-          onclick="document.getElementById('lb').close()"&gt;
+          data-dialog-close="lb"&gt;
     &lt;span class="axicon render" data-name="X"&gt;&lt;/span&gt;
   &lt;/button&gt;
   &lt;figure&gt;
@@ -79,18 +79,24 @@
 				</article>
 			</section>
 			<section>
-				<h2>Open Function</h2>
-				<pre><code class="language-js">function openLb(src, alt) {
-  const img = document.getElementById('lb-img');
-  img.src = src;
-  img.alt = alt;
-  document.getElementById('lb-demo').showModal();
-}</code></pre>
+				<h2>Interaction Pattern</h2>
+				<pre><code class="language-js">document.addEventListener('click', (event) => {
+  const trigger = event.target.closest('[data-lightbox-dialog]');
+  if (!trigger) return;
+
+  const dialog = document.getElementById(trigger.getAttribute('data-lightbox-dialog'));
+  const image = dialog?.querySelector('img');
+  if (!dialog || !image) return;
+
+  image.src = trigger.getAttribute('data-lightbox-src') || '';
+  image.alt = trigger.getAttribute('data-lightbox-alt') || '';
+  dialog.showModal();
+});</code></pre>
 			</section>
 			<section>
 				<h2>Accessibility</h2>
 				<ul>
-					<li>Thumbnails must be <code>&lt;button&gt;</code> elements — not plain <code>&lt;img&gt;</code> with onclick</li>
+					<li>Thumbnails must be <code>&lt;button&gt;</code> elements — not plain <code>&lt;img&gt;</code> with a bound click handler</li>
 					<li>The trigger needs <code>aria-label</code> describing what opens: <code>aria-label="View: Mountain"</code></li>
 					<li>The full-size image must have <code>alt</code> text — use the same text as the thumbnail</li>
 					<li>Close button needs <code>aria-label="Close lightbox"</code></li>
@@ -104,7 +110,7 @@
 <div class="footer-brand"><a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a><p class="footer-tagline">The Semantic Web, Reimagined.</p></div>
 <div class="footer-column"><h4>Documentation</h4><ul><li><a href="../components-overview.html">All Components</a></li></ul></div>
 <div class="footer-column"><h4>Community</h4><ul><li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li></ul></div>
-</div><div class="footer-bottom"><p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p></div></div></footer>
+</div><div class="footer-bottom"><p class="footer-copyright">&copy; <span data-current-year></span> Sol Roth Media. MIT License.</p></div></div></footer>
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
 <script>function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);</script>
@@ -115,6 +121,6 @@
 <script src="../../js/axicons-base.js"></script>
 <script src="../../js/axicons-thin-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
-<script>function openLb(src,alt){const img=document.getElementById('lb-img');img.src=src;img.alt=alt;document.getElementById('lb-demo').showModal();}</script>
+
 </body>
 </html>

@@ -51,7 +51,7 @@
 								<strong>New features available</strong>
 								<p>Version 2.0 has been released with improved performance.</p>
 							</div>
-							<button class="close" aria-label="Dismiss" onclick="this.closest('.alert').remove()">
+							<button class="close" aria-label="Dismiss" data-remove-closest=".alert">
 								<span class="axicon render" data-name="X"></span>
 							</button>
 						</div>
@@ -62,7 +62,7 @@
 								<strong>Changes saved</strong>
 								<p>Your profile has been updated successfully.</p>
 							</div>
-							<button class="close" aria-label="Dismiss" onclick="this.closest('.alert').remove()">
+							<button class="close" aria-label="Dismiss" data-remove-closest=".alert">
 								<span class="axicon render" data-name="X"></span>
 							</button>
 						</div>
@@ -73,7 +73,7 @@
 								<strong>Storage almost full</strong>
 								<p>You have used 90% of your storage quota.</p>
 							</div>
-							<button class="close" aria-label="Dismiss" onclick="this.closest('.alert').remove()">
+							<button class="close" aria-label="Dismiss" data-remove-closest=".alert">
 								<span class="axicon render" data-name="X"></span>
 							</button>
 						</div>
@@ -84,7 +84,7 @@
 								<strong>Upload failed</strong>
 								<p>The file could not be uploaded. Please try again.</p>
 							</div>
-							<button class="close" aria-label="Dismiss" onclick="this.closest('.alert').remove()">
+							<button class="close" aria-label="Dismiss" data-remove-closest=".alert">
 								<span class="axicon render" data-name="X"></span>
 							</button>
 						</div>
@@ -119,16 +119,16 @@
 				<article class="card">
 					<figure>
 						<div class="actions">
-							<button class="primary" onclick="showToast('success','File uploaded','Your document has been saved.')">
+							<button class="primary" data-toast-target="toast-region" data-toast-type="success" data-toast-title="File uploaded" data-toast-message="Your document has been saved.">
 								<span class="axicon render" data-name="Check-Circle"></span> Success Toast
 							</button>
-							<button class="secondary" onclick="showToast('info','Tip','You can drag items to reorder them.')">
+							<button class="secondary" data-toast-target="toast-region" data-toast-type="info" data-toast-title="Tip" data-toast-message="You can drag items to reorder them.">
 								<span class="axicon render" data-name="Info"></span> Info Toast
 							</button>
-							<button onclick="showToast('warning','Session expiring','You will be logged out in 5 minutes.')">
+							<button data-toast-target="toast-region" data-toast-type="warning" data-toast-title="Session expiring" data-toast-message="You will be logged out in 5 minutes.">
 								<span class="axicon render" data-name="Alert-Triangle"></span> Warning Toast
 							</button>
-							<button class="danger" onclick="showToast('error','Upload failed','Max file size is 10 MB.')">
+							<button class="danger" data-toast-target="toast-region" data-toast-type="error" data-toast-title="Upload failed" data-toast-message="Max file size is 10 MB.">
 								<span class="axicon render" data-name="Alert-Circle"></span> Error Toast
 							</button>
 						</div>
@@ -143,7 +143,7 @@
       &lt;p&gt;${message}&lt;/p&gt;
     &lt;/div&gt;
     &lt;button class="close" aria-label="Dismiss"
-            onclick="this.closest('.alert').remove()"&gt;✕&lt;/button&gt;
+            data-remove-closest=".alert"&gt;✕&lt;/button&gt;
   `;
   document.getElementById('toast-region').appendChild(toast);
   // Auto-dismiss after 5s
@@ -218,7 +218,7 @@
 			<!-- Dismiss JavaScript -->
 			<section>
 				<h2>Dismiss Behaviour</h2>
-				<p>The dismiss button uses <code>onclick="this.closest('.alert').remove()"</code> — no library needed. For animated dismiss:</p>
+				<p>The dismiss button uses <code>data-remove-closest=".alert"</code> — no library needed. For animated dismiss:</p>
 				<pre><code class="language-js">// Animated dismiss
 document.addEventListener('click', e => {
   const closeBtn = e.target.closest('.alert .close');
@@ -279,7 +279,7 @@ document.addEventListener('click', e => {
 			</div>
 		</div>
 		<div class="footer-bottom">
-			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
+			<p class="footer-copyright">&copy; <span data-current-year></span> Sol Roth Media. MIT License.</p>
 			<ul class="footer-social">
 				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
 				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
@@ -293,30 +293,6 @@ document.addEventListener('click', e => {
 <script>
 function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
-
-function showToast(type, title, message) {
-	const icons = {success:'Check-Circle', info:'Info', warning:'Alert-Triangle', error:'Alert-Circle'};
-	const region = document.getElementById('toast-region');
-	const toast = document.createElement('div');
-	toast.className = `alert ${type}`;
-	toast.setAttribute('role', type === 'error' || type === 'warning' ? 'alert' : 'status');
-	toast.innerHTML = `<div><strong>${title}</strong><p>${message}</p></div><button class="close" aria-label="Dismiss" onclick="this.closest('.alert').remove()"><span class="axicon render" data-name="X"></span></button>`;
-	region.appendChild(toast);
-	if(typeof renderAxicons === 'function') setTimeout(renderAxicons, 0);
-	setTimeout(() => { if(toast.parentNode) toast.remove(); }, 5000);
-}
-
-// Animated dismiss
-document.addEventListener('click', e => {
-	const btn = e.target.closest('.alert .close');
-	if (!btn) return;
-	const alert = btn.closest('.alert');
-	if (!alert) return;
-	alert.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-	alert.style.opacity = '0';
-	alert.style.transform = 'translateX(20px)';
-	setTimeout(() => alert.remove(), 250);
-});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>

@@ -7,6 +7,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const resolveProjectRootAsset = (assetPath) => {
+    const path = window.location.pathname;
+    if (path.includes('/docs/components/')) return `../../${assetPath}`;
+    if (path.includes('/docs/')) return `../${assetPath}`;
+    return assetPath;
+  };
+
+  let releaseInfoPromise;
+  const loadReleaseInfo = async () => {
+    if (!releaseInfoPromise) {
+      releaseInfoPromise = fetch(resolveProjectRootAsset('release-info.json')).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to load release metadata: ${response.status}`);
+        }
+        return response.json();
+      });
+    }
+    return releaseInfoPromise;
+  };
+
+  const resolveSafeAssetUrl = (value) => {
+    if (!value) return null;
+    try {
+      const url = new URL(value, window.location.href);
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') return null;
+      return url.href;
+    } catch (error) {
+      return null;
+    }
+  };
+
   const searchData = [
     { title: "Accordion", cat: "components", url: "docs/components/accordion.html" },
     { title: "Account Menu", cat: "components", url: "docs/components/account-menu.html" },
@@ -347,6 +378,274 @@ document.addEventListener('DOMContentLoaded', () => {
         dialog.addEventListener('click', e => { if (e.target === dialog) close(); });
     };
 
+          const initReleaseMetadata = () => {
+            const hasReleaseTargets = document.querySelector(
+              '[data-release-version], [data-release-date], [data-release-components], [data-release-tokens], [data-release-css-gzip], [data-release-js-gzip], [data-release-total-gzip]'
+            );
+            if (!hasReleaseTargets) return;
+
+            loadReleaseInfo()
+              .then((releaseInfo) => {
+                const mappings = [
+                  ['data-release-version', releaseInfo.version],
+                  ['data-release-date', releaseInfo.releaseDateFormatted],
+                  ['data-release-components', String(releaseInfo.features.components)],
+                  ['data-release-tokens', String(releaseInfo.features.designTokens)],
+                  ['data-release-css-gzip', releaseInfo.bundle.css.sizeGzipped],
+                  ['data-release-js-gzip', releaseInfo.bundle.js.sizeGzipped],
+                  ['data-release-total-gzip', releaseInfo.bundle.total.sizeGzipped],
+                ];
+
+                mappings.forEach(([attribute, value]) => {
+                  document.querySelectorAll(`[${attribute}]`).forEach((element) => {
+                    element.textContent = value;
+                  });
+                });
+              })
+              .catch((error) => {
+                console.warn('Could not load release-info.json:', error);
+              });
+          };
+
+          const initBackToTop = () => {
+            const scrollTopBtn = document.querySelector('[data-scroll-top], #scroll-to-top');
+            if (!scrollTopBtn) return;
+
+            const updateVisibility = () => {
+              scrollTopBtn.hidden = window.pageYOffset <= 300;
+            };
+
+            scrollTopBtn.hidden = true;
+            updateVisibility();
+            window.addEventListener('scroll', updateVisibility, { passive: true });
+            scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+          };
+
+          const initDemoActions = () => {
+            const openDialog = (dialog) => {
+              if (!dialog) return;
+              if (typeof dialog.showModal === 'function') {
+                dialog.showModal();
+              } else {
+                dialog.setAttribute('open', 'true');
+              }
+            };
+
+            const closeDialog = (dialog) => {
+              if (!dialog) return;
+              if (typeof dialog.close === 'function') {
+                dialog.close();
+              } else {
+                dialog.removeAttribute('open');
+              }
+            };
+
+            const createToast = (trigger) => {
+              const regionId = trigger.getAttribute('data-toast-target');
+              const region = regionId ? document.getElementById(regionId) : null;
+              if (!region) return;
+
+              const type = trigger.getAttribute('data-toast-type') || 'info';
+              const title = trigger.getAttribute('data-toast-title') || 'Notice';
+              const message = trigger.getAttribute('data-toast-message') || '';
+              const toast = document.createElement('div');
+              const content = document.createElement('div');
+              const heading = document.createElement('strong');
+              const body = document.createElement('p');
+              const close = document.createElement('button');
+              const icon = document.createElement('span');
+
+              toast.className = `alert ${type}`;
+              toast.setAttribute('role', type === 'error' || type === 'warning' ? 'alert' : 'status');
+
+              heading.textContent = title;
+              body.textContent = message;
+              content.appendChild(heading);
+              content.appendChild(body);
+
+              close.type = 'button';
+              close.className = 'close';
+              close.setAttribute('aria-label', 'Dismiss');
+              close.setAttribute('data-remove-closest', '.alert');
+
+              icon.className = 'axicon render';
+              icon.setAttribute('data-name', 'X');
+              close.appendChild(icon);
+
+              toast.appendChild(content);
+              toast.appendChild(close);
+              region.appendChild(toast);
+              safeRenderAxicons();
+
+              window.setTimeout(() => toast.remove(), 5000);
+            };
+
+            document.addEventListener('click', (event) => {
+              const openTrigger = event.target.closest('[data-dialog-open]');
+              if (openTrigger) {
+                event.preventDefault();
+                openDialog(document.getElementById(openTrigger.getAttribute('data-dialog-open')));
+                return;
+              }
+
+              const closeTrigger = event.target.closest('[data-dialog-close]');
+              if (closeTrigger) {
+                event.preventDefault();
+                const dialog = closeTrigger.getAttribute('data-dialog-close')
+                  ? document.getElementById(closeTrigger.getAttribute('data-dialog-close'))
+                  : closeTrigger.closest('dialog');
+                closeDialog(dialog);
+                return;
+              }
+
+              const removeTrigger = event.target.closest('[data-remove-closest]');
+              if (removeTrigger) {
+                event.preventDefault();
+                const target = removeTrigger.closest(removeTrigger.getAttribute('data-remove-closest'));
+                if (target?.classList.contains('alert')) {
+                  target.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+                  target.style.opacity = '0';
+                  target.style.transform = 'translateX(100%)';
+                  window.setTimeout(() => target.remove(), 250);
+                } else {
+                  target?.remove();
+                }
+                return;
+              }
+
+              const alertTrigger = event.target.closest('[data-alert-message]');
+              if (alertTrigger) {
+                event.preventDefault();
+                window.alert(alertTrigger.getAttribute('data-alert-message'));
+                return;
+              }
+
+              const lightboxTrigger = event.target.closest('[data-lightbox-dialog]');
+              if (lightboxTrigger) {
+                event.preventDefault();
+                const dialog = document.getElementById(lightboxTrigger.getAttribute('data-lightbox-dialog'));
+                const image = dialog?.querySelector('img');
+                if (dialog && image) {
+                  const imageSrc = resolveSafeAssetUrl(lightboxTrigger.getAttribute('data-lightbox-src'));
+                  if (!imageSrc) return;
+                  image.src = imageSrc;
+                  image.alt = lightboxTrigger.getAttribute('data-lightbox-alt') || '';
+                  openDialog(dialog);
+                }
+                return;
+              }
+
+              const toastTrigger = event.target.closest('[data-toast-target]');
+              if (toastTrigger) {
+                event.preventDefault();
+                createToast(toastTrigger);
+              }
+            });
+          };
+
+          const initCarouselDemos = () => {
+            document.querySelectorAll('[data-carousel-step]').forEach((button) => {
+              button.addEventListener('click', () => {
+                const trackId = button.getAttribute('aria-controls');
+                const track = trackId ? document.getElementById(trackId) : null;
+                if (!track) return;
+
+                const slides = Array.from(track.children);
+                if (!slides.length) return;
+
+                const direction = Number(button.getAttribute('data-carousel-step') || '0');
+                const currentIndex = Number(track.getAttribute('data-carousel-index') || '0');
+                const nextIndex = (currentIndex + direction + slides.length) % slides.length;
+
+                track.setAttribute('data-carousel-index', String(nextIndex));
+                track.style.transform = `translateX(-${nextIndex * 100}%)`;
+              });
+            });
+          };
+
+          const initComponentsOverview = () => {
+            const overview = document.querySelector('[data-component="components-overview"]');
+            if (!overview) return;
+
+            const searchInput = overview.querySelector('#component-search');
+            const searchResults = overview.querySelector('#search-results');
+            const allComponentLinks = overview.querySelectorAll('.components-nav .category-items a[href*="components/"]');
+            const categoryToggles = overview.querySelectorAll('.category-toggle');
+
+            categoryToggles.forEach((toggle) => {
+              toggle.addEventListener('click', () => {
+                const expanded = toggle.getAttribute('aria-expanded') === 'true';
+                const controlsId = toggle.getAttribute('aria-controls');
+                const content = controlsId ? document.getElementById(controlsId) : null;
+
+                toggle.setAttribute('aria-expanded', String(!expanded));
+                if (content) {
+                  content.hidden = expanded;
+                }
+              });
+            });
+
+            if (searchInput && searchResults) {
+              searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+                const visibleCategories = new Set();
+
+                allComponentLinks.forEach((link) => {
+                  const text = link.textContent.toLowerCase();
+                  const label = link.getAttribute('aria-label')?.toLowerCase() || '';
+                  const matches = query === '' || text.includes(query) || label.includes(query);
+
+                  link.hidden = !matches;
+                  if (matches && query !== '') {
+                    visibleCount += 1;
+                    const category = link.closest('[data-category]');
+                    if (category) visibleCategories.add(category);
+                  }
+                });
+
+                categoryToggles.forEach((toggle) => {
+                  const controlsId = toggle.getAttribute('aria-controls');
+                  const content = controlsId ? document.getElementById(controlsId) : null;
+                  const category = toggle.closest('[data-category]');
+                  const shouldExpand = query === '' || visibleCategories.has(category);
+                  toggle.setAttribute('aria-expanded', String(shouldExpand));
+                  if (content) {
+                    content.hidden = !shouldExpand;
+                  }
+                });
+
+                searchResults.textContent = query
+                  ? `Found ${visibleCount} component${visibleCount === 1 ? '' : 's'}`
+                  : '';
+              });
+            }
+
+            const applyResponsiveState = () => {
+              if (window.innerWidth >= 768) {
+                categoryToggles.forEach((toggle) => {
+                  toggle.setAttribute('aria-expanded', 'true');
+                  const controlsId = toggle.getAttribute('aria-controls');
+                  const content = controlsId ? document.getElementById(controlsId) : null;
+                  if (content) content.hidden = false;
+                });
+                return;
+              }
+
+              categoryToggles.forEach((toggle) => {
+                const category = toggle.closest('[data-category]');
+                const expanded = category?.getAttribute('data-category') === 'feedback';
+                toggle.setAttribute('aria-expanded', String(expanded));
+                const controlsId = toggle.getAttribute('aria-controls');
+                const content = controlsId ? document.getElementById(controlsId) : null;
+                if (content) content.hidden = !expanded;
+              });
+            };
+
+            applyResponsiveState();
+            window.addEventListener('resize', applyResponsiveState);
+          };
+
           const initCurrentPageNavState = () => {
             const normalizePath = (value) => {
               if (!value) return '/';
@@ -517,20 +816,39 @@ document.addEventListener('DOMContentLoaded', () => {
               const tabButtons = tabsContainer.querySelectorAll('[role="tab"]');
               const tabPanels = tabsContainer.querySelectorAll('[role="tabpanel"]');
 
-              tabButtons.forEach((button) => {
-                button.addEventListener('click', () => {
-                  tabButtons.forEach((btn) => btn.setAttribute('aria-selected', 'false'));
-                  tabPanels.forEach((panel) => {
-                    panel.hidden = true;
+              const activateTab = (button) => {
+                tabButtons.forEach((btn) => {
+                  btn.setAttribute('aria-selected', String(btn === button));
+                  btn.tabIndex = btn === button ? 0 : -1;
+                });
+                tabPanels.forEach((panel) => {
+                  const isTarget = panel.id === button.getAttribute('aria-controls');
+                  panel.hidden = !isTarget;
+                  if (isTarget) {
+                    panel.setAttribute('aria-selected', 'true');
+                  } else {
                     panel.removeAttribute('aria-selected');
-                  });
+                  }
+                });
+              };
 
-                  button.setAttribute('aria-selected', 'true');
-                  const controlsId = button.getAttribute('aria-controls');
-                  const targetPanel = controlsId ? document.getElementById(controlsId) : null;
-                  if (targetPanel) {
-                    targetPanel.hidden = false;
-                    targetPanel.setAttribute('aria-selected', 'true');
+              tabButtons.forEach((button) => {
+                button.tabIndex = button.getAttribute('aria-selected') === 'true' ? 0 : -1;
+                button.addEventListener('click', () => activateTab(button));
+                button.addEventListener('keydown', (event) => {
+                  const buttons = Array.from(tabButtons);
+                  const currentIndex = buttons.indexOf(button);
+                  if (currentIndex === -1) return;
+
+                  let nextIndex = currentIndex;
+                  if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
+                  if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                  if (event.key === 'Home') nextIndex = 0;
+                  if (event.key === 'End') nextIndex = buttons.length - 1;
+                  if (nextIndex !== currentIndex) {
+                    event.preventDefault();
+                    buttons[nextIndex].focus();
+                    activateTab(buttons[nextIndex]);
                   }
                 });
               });
@@ -562,12 +880,17 @@ document.addEventListener('DOMContentLoaded', () => {
     initSpacingDemo();
     initComponentBrowser();
     initSearchModal();
+    initReleaseMetadata();
     initCurrentPageNavState();
     initCodeCopying();
     initThemeExplorer();
     initSmoothScrolling();
     initSidebarHighlighting();
     initDynamicCopyrightYear();
+    initBackToTop();
+    initDemoActions();
+    initCarouselDemos();
+    initComponentsOverview();
     initDropdowns(); // Initialize dropdowns
     initTabs(); // Initialize semantic tabs component
     initCascadeVisualization(); // Initialize cascade visualization
