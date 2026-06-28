@@ -936,7 +936,7 @@ section.hero > .content > p:not(.tagline) {
     opacity: 0.95;
     color: var(--a-color-on-gradient);
     line-height: 1.6;
-    text-align: justify;
+    text-align: center;
 }
 
 section.hero .button.primary {
@@ -950,7 +950,22 @@ section.hero .button.secondary {
     color: var(--a-color-on-gradient);
 }
 
-section.hero .button.outline {
+section.hero 
+/* button.outline — works both as <button class="outline"> and <a class="button outline"> */
+button.outline,
+.button.outline {
+  background-color: transparent;
+  border: 2px solid var(--a-color-primary);
+  color: var(--a-color-primary);
+}
+
+button.outline:hover,
+.button.outline:hover {
+  background-color: var(--a-color-primary);
+  color: var(--a-color-on-primary);
+}
+
+.button.outline {
     background-color: transparent;
     border-color: var(--a-color-on-gradient);
     color: var(--a-color-on-gradient);
@@ -5928,7 +5943,7 @@ main section h2 {
 
 /* ===== PARAGRAPH STYLES ===== */
 p {
-    margin: 0 0 var(--a-space-m) 0;
+    /* margin: 0 0 var(--a-space-m) 0; */
     line-height: 1.6;
     color: var(--ax-text);
 }
@@ -5977,7 +5992,11 @@ h3 { font-size: clamp(1.3rem, 3.5vw, 1.85rem); line-height: 1.25; }
 
 /* ===== ADJACENT SIBLING CASCADE ===== */
 main > * + *, section > * + *, article > * + *, .stack > * + * { margin-top: var(--a-space-l, 1.85rem); }
-h1 + p, h2 + p, h3 + p, header + p, header + .group, header + .grid, header + .swatch { margin-top: var(--a-space-m, 1rem); }
+h1 + p, h2 + p, h3 + p, header + p, header + .group, header + .grid, header + .swatch {
+    margin-top: var(--a-space-m, 1rem);
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /* ===== CLASSLESS SWATCH COMPONENT ===== */
 .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: var(--a-space-l); width: 100%; margin-bottom: var(--a-space-xl); }
@@ -8635,6 +8654,25 @@ dialog.drawer main {
         transform: translateX(-100%);
         opacity: 0;
     }
+}
+
+/* ============================================================================
+   LIST RESTORATION — reset strips all bullets globally, restore for content
+   ============================================================================ */
+article ul, article ol,
+.container > ul, .container > ol,
+section > ul, section > ol,
+.card > ul, .card > ol {
+    list-style: revert;
+    padding-left: var(--a-space-l);
+    margin-bottom: var(--a-space-m);
+}
+article li,
+.container > ul > li, .container > ol > li,
+section > ul > li, section > ol > li,
+.card > ul > li, .card > ol > li {
+    margin-bottom: var(--a-space-s);
+    line-height: var(--a-line-height-normal);
 }
 
 @layer axiom.components {
