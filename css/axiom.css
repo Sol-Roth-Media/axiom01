@@ -754,7 +754,7 @@ section:has(> div > article.card:first-child) { background: linear-gradient(135d
 section:has(> div > article.card:first-child) article.card main { padding: var(--a-space-2xl); }
 
 /* Hero actions - handled by sibling cascade for margin */
-section.hero .actions { margin: var(--a-space-l) 0 0 0; }
+section.hero menu, section.hero .actions { margin: var(--a-space-l) 0 0 0; }
 .button, button {
     padding: var(--a-space-s) var(--a-space-m); /* Default (medium) padding */
     font-size: var(--a-font-size-base); /* Default (medium) font size */
@@ -841,6 +841,7 @@ section.hero {
     box-sizing: border-box;
 }
 
+section.hero > .container,
 section.hero .content {
     display: flex;
     flex-direction: column;
@@ -864,7 +865,7 @@ section.hero h1 {
     max-width: 100%;
 }
 
-section.hero .tagline {
+section.hero h1 + p, section.hero .tagline {
     font-size: var(--a-font-size-lg);
     max-width: 100%;
     margin: 0 auto var(--a-space-m) auto;
@@ -872,17 +873,19 @@ section.hero .tagline {
     color: rgba(255, 255, 255, 0.92);
 }
 
-section.hero .actions {
+section.hero menu, section.hero .actions {
     display: flex;
     justify-content: center;
     gap: var(--a-space-m);
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
+    list-style: none;
     width: 100%;
     max-width: 100%;
 }
 
+section.hero > .container > p:not(:first-of-type),
 section.hero > .content > p:not(.tagline) {
     font-size: var(--a-font-size-base);
     max-width: 700px;
@@ -904,8 +907,6 @@ section.hero .button.secondary {
     color: var(--a-color-on-gradient);
 }
 
-section.hero 
-
 /* MOBILE: 768px and down */
 @media (max-width: 768px) {
     main > section:first-child {
@@ -925,13 +926,13 @@ section.hero
         line-height: 1.2;
     }
 
-    section.hero .tagline {
+    section.hero h1 + p, section.hero .tagline {
         font-size: var(--a-font-size-base);
         max-width: 100%;
         margin: 0 auto var(--a-space-m) auto;
     }
 
-    section.hero .actions {
+    section.hero menu, section.hero .actions {
         flex-direction: column;
         gap: var(--a-space-s);
         margin: var(--a-space-m) 0 0 0;
@@ -951,7 +952,8 @@ section.hero
         padding: var(--a-space-m) var(--a-space-l) !important;
     }
 
-    section.hero > .content > p:not(.tagline) {
+    section.hero > .container > p:not(:first-of-type),
+section.hero > .content > p:not(.tagline) {
         font-size: var(--a-font-size-sm);
         margin: var(--a-space-l) auto 0 auto;
         max-width: 100%;
@@ -976,13 +978,13 @@ section.hero
         font-weight: var(--a-font-weight-bold);
     }
 
-    section.hero .tagline {
+    section.hero h1 + p, section.hero .tagline {
         font-size: var(--a-font-size-sm);
         max-width: 100%;
         margin: 0 auto var(--a-space-m) auto;
     }
 
-    section.hero .actions {
+    section.hero menu, section.hero .actions {
         gap: var(--a-space-xs);
         margin: var(--a-space-m) auto 0 auto;
         max-width: 100%;
@@ -1000,7 +1002,8 @@ section.hero
         padding: var(--a-space-s) var(--a-space-m) !important;
     }
 
-    section.hero > .content > p:not(.tagline) {
+    section.hero > .container > p:not(:first-of-type),
+section.hero > .content > p:not(.tagline) {
         font-size: var(--a-font-size-base);
         margin: var(--a-space-m) auto 0 auto;
         max-width: 100%;
@@ -1034,12 +1037,12 @@ section.hero
         line-height: 1.25;
     }
     
-    section.hero .tagline {
+    section.hero h1 + p, section.hero .tagline {
         font-size: var(--a-font-size-xs);
         margin: 0 auto var(--a-space-s) auto;
     }
     
-    section.hero .actions {
+    section.hero menu, section.hero .actions {
         gap: var(--a-space-xs);
         margin: var(--a-space-m) auto 0 auto;
         padding: 0 var(--a-space-xs);
@@ -1053,7 +1056,8 @@ section.hero
         text-overflow: ellipsis;
     }
     
-    section.hero > .content > p:not(.tagline) {
+    section.hero > .container > p:not(:first-of-type),
+section.hero > .content > p:not(.tagline) {
         font-size: 0.9rem;
         margin: var(--a-space-m) auto 0 auto;
     }
@@ -1294,16 +1298,11 @@ button.card:hover {
     display: block;
 }
 
-/* If a card has a footer, push it to the bottom automatically */
-.card {
-    display: flex;
-    flex-direction: column;
-}
-
+/* Card footer is automatically pushed to bottom via flex column layout */
 .card > footer {
     margin-top: auto; /* Pushes footer to the bottom */
     padding-top: var(--a-space-m);
-    border-top: none; /* Override default card footer border if desired */
+    border-top: none;
     background: transparent;
 }
 
@@ -2695,6 +2694,7 @@ form > div input { /* Target inputs within the div */
 
 /* Dark hero buttons use tokens — white surface inverted against dark gradient */
 [data-theme="dark"] section.hero .button.primary,
+[data-theme="dark"] section.hero menu .button.primary,
 [data-theme="dark"] section.hero .actions .button.primary {
     background-color: var(--a-color-on-gradient);
     color: var(--a-color-primary);
@@ -2702,8 +2702,10 @@ form > div input { /* Target inputs within the div */
 }
 
 [data-theme="dark"] section.hero .button.secondary,
+[data-theme="dark"] section.hero menu .button.secondary,
 [data-theme="dark"] section.hero .actions .button.secondary,
 [data-theme="dark"] section.hero .button.outline,
+[data-theme="dark"] section.hero menu .button.outline,
 [data-theme="dark"] section.hero .actions .button.outline {
     background-color: transparent;
     border-color: var(--a-color-on-gradient);
@@ -3210,10 +3212,13 @@ form > div input { /* Target inputs within the div */
     color: var(--a-color-on-info-container, #0c4a6e);
     border-color: var(--a-color-info, #3b82f6);
 }
-.alert.dismissible {
+.alert.dismissible,
+.alert:has(> button) {
     justify-content: space-between;
 }
-.alert .close, .alert [data-alert-close] {
+.alert > button:last-child,
+.alert .close,
+.alert [data-alert-close] {
     background: none;
     border: none;
     font-size: 1.5rem;
@@ -3223,7 +3228,9 @@ form > div input { /* Target inputs within the div */
     padding: 0;
     margin: 0;
 }
-.alert .close:hover, .alert [data-alert-close]:hover {
+.alert > button:last-child:hover,
+.alert .close:hover,
+.alert [data-alert-close]:hover {
     opacity: 1;
 }
 
@@ -6389,6 +6396,7 @@ details.bordered + details.bordered {
 }
 
 /* Accessible Alert Close Buttons */
+.alert > button:last-child,
 .alert button.close,
 .alert [data-dismiss="alert"] {
   min-width: 44px;
@@ -6404,6 +6412,7 @@ details.bordered + details.bordered {
   transition: opacity 0.2s ease;
 }
 
+.alert > button:last-child:hover,
 .alert button.close:hover,
 .alert [data-dismiss="alert"]:hover {
   opacity: 0.7;
@@ -6540,6 +6549,7 @@ details.bordered + details.bordered {
 	color: var(--a-color-on-primary-container);
 }
 
+.notification > button:last-child,
 .notification-close {
 	margin-left: auto;
 	background: none;
@@ -6547,8 +6557,11 @@ details.bordered + details.bordered {
 	cursor: pointer;
 	padding: var(--a-space-s);
 	color: inherit;
+	min-height: 44px;
+	min-width: 44px;
 }
 
+.notification > button:last-child:focus-visible,
 .notification-close:focus-visible {
 	outline: 2px solid currentColor;
 	outline-offset: 2px;
@@ -7784,16 +7797,18 @@ section > ul > li, section > ol > li,
   margin: 0 auto var(--a-space-l);
 }
 
-section.hero .actions {
+section.hero menu, section.hero .actions {
   display: flex;
   gap: var(--a-space-m);
   justify-content: center;
   flex-wrap: wrap;
   margin-top: var(--a-space-xl) !important;
   margin-bottom: var(--a-space-xl) !important;
+  list-style: none;
+  padding: 0;
 }
 
-section.hero .actions .button {
+section.hero menu .button, section.hero .actions .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -7808,42 +7823,42 @@ section.hero .actions .button {
   text-decoration: none;
 }
 
-section.hero .actions .button.primary {
+section.hero menu .button.primary, section.hero .actions .button.primary {
   background: white;
   color: var(--a-color-primary, #2563eb);
   border-color: white;
 }
 
-section.hero .actions .button.primary:hover {
+section.hero menu .button.primary:hover, section.hero .actions .button.primary:hover {
   background: rgba(255, 255, 255, 0.9);
   color: var(--a-color-primary, #2563eb);
 }
 
-section.hero .actions .button.outline {
+section.hero menu .button.outline, section.hero .actions .button.outline {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.6);
   color: white;
   transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
 }
 
-section.hero .actions .button.outline:hover {
+section.hero menu .button.outline:hover, section.hero .actions .button.outline:hover {
   background: rgba(255, 255, 255, 0.2);
   border-color: white;
 }
 
-section.hero .actions .button.secondary {
+section.hero menu .button.secondary, section.hero .actions .button.secondary {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.4);
   color: white;
   transition: background-color var(--a-transition-base), border-color var(--a-transition-base);
 }
 
-section.hero .actions .button.secondary:hover {
+section.hero menu .button.secondary:hover, section.hero .actions .button.secondary:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: white;
 }
 
-section.hero .actions + p {
+section.hero menu + p, section.hero .actions + p {
   margin-top: var(--a-space-xl);
   margin-bottom: var(--a-space-2xl);
 }
@@ -8289,7 +8304,8 @@ main > section > .container > header p {
   display: inline-block;
 }
 
-.tooltip-text {
+.tooltip-text,
+.tooltip [role="tooltip"] {
   visibility: hidden;
   width: 120px;
   background-color: var(--a-color-surface-variant);
@@ -8306,7 +8322,8 @@ main > section > .container > header p {
   transition: opacity var(--a-transition-base);
 }
 
-.tooltip:hover .tooltip-text {
+.tooltip:hover .tooltip-text,
+.tooltip:hover [role="tooltip"] {
   visibility: visible;
   opacity: 1;
 }
@@ -11727,17 +11744,20 @@ section.hero > .container > h1 {
 }
 
 /* tagline: directly after h1 — tight */
+section.hero > .container > h1 + p,
 section.hero > .container > .tagline {
     margin: 0 0 var(--a-space-m) 0;
     text-align: center;
 }
 
 /* Actions row: sits immediately under tagline */
+section.hero > .container > menu,
 section.hero > .container > .actions {
     margin: 0 0 var(--a-space-m) 0;
 }
 
 /* Paragraph: after actions — constrained width, centered */
+section.hero > .container > p:not(:first-of-type),
 section.hero > .container > p:not(.tagline) {
     max-width: 680px;
     text-align: center;
@@ -11811,7 +11831,7 @@ button.outline:focus-visible,
 
 /* Hero context — outline adapts to gradient background */
 section.hero button.outline,
-section.hero .button.outline {
+section.hero menu .button.outline, section.hero .button.outline {
     border-color: var(--a-color-on-gradient);
     color: var(--a-color-on-gradient);
 }
@@ -11981,6 +12001,7 @@ a.skip-link:focus-visible {
 }
 
 @media (max-width: 768px) {
+    section.hero > .container > menu,
     section.hero > .container > .actions {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -11989,6 +12010,7 @@ a.skip-link:focus-visible {
         gap: var(--a-space-s);
     }
 
+    section.hero > .container > menu > .button,
     section.hero > .container > .actions > .button {
         width: 100%;
         min-height: 44px;
@@ -11996,6 +12018,7 @@ a.skip-link:focus-visible {
         white-space: normal;
     }
 
+    section.hero > .container > menu > .button:last-child,
     section.hero > .container > .actions > .button:last-child {
         grid-column: 1 / -1;
         justify-self: center;
@@ -12004,10 +12027,12 @@ a.skip-link:focus-visible {
 }
 
 @media (max-width: 380px) {
+    section.hero > .container > menu,
     section.hero > .container > .actions {
         grid-template-columns: 1fr;
     }
 
+    section.hero > .container > menu > .button:last-child,
     section.hero > .container > .actions > .button:last-child {
         max-width: 100%;
     }
@@ -12047,11 +12072,13 @@ a.skip-link:focus-visible {
         margin-bottom: var(--a-space-m);
     }
 
+    section.hero > .container > h1 + p,
     section.hero > .container > .tagline {
         font-size: var(--a-font-size-m);
         max-width: 42ch;
     }
 
+    section.hero > .container > p:not(:first-of-type),
     section.hero > .container > p:not(.tagline) {
         font-size: var(--a-font-size-base);
         line-height: 1.65;
@@ -12068,15 +12095,18 @@ a.skip-link:focus-visible {
         font-size: clamp(2rem, 9.8vw, 2.7rem);
     }
 
+    section.hero > .container > h1 + p,
     section.hero > .container > .tagline {
         font-size: var(--a-font-size-base);
         margin-bottom: var(--a-space-s);
     }
 
+    section.hero > .container > p:not(:first-of-type),
     section.hero > .container > p:not(.tagline) {
         font-size: var(--a-font-size-sm);
     }
 
+    section.hero > .container > menu > .button,
     section.hero > .container > .actions > .button {
         font-size: var(--a-font-size-sm);
     }
@@ -12126,10 +12156,12 @@ a.skip-link:focus-visible {
         padding: var(--a-space-l) var(--a-space-s);
     }
 
+    section.hero > .container > menu,
     section.hero > .container > .actions {
         gap: var(--a-space-xs);
     }
 
+    section.hero > .container > menu > .button,
     section.hero > .container > .actions > .button {
         padding: var(--a-space-s) var(--a-space-m);
     }
@@ -12152,10 +12184,12 @@ a.skip-link:focus-visible {
         font-size: clamp(1.25rem, 8vw, 1.85rem);
     }
 
+    section.hero > .container > h1 + p,
     section.hero > .container > .tagline {
         font-size: var(--a-font-size-sm);
     }
 
+    section.hero > .container > menu > .button,
     section.hero > .container > .actions > .button {
         padding: var(--a-space-xs) var(--a-space-s);
         font-size: var(--a-font-size-sm);
