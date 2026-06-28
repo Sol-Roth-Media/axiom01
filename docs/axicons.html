@@ -21,6 +21,13 @@
 			margin: var(--a-space-l) 0;
 		}
 
+		@media (max-width: 360px) {
+			#icon-grid {
+				grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+				gap: var(--a-space-s);
+			}
+		}
+
 		#icon-grid button {
 			display: flex;
 			flex-direction: column;
@@ -34,6 +41,14 @@
 			transition: all 0.2s ease;
 			text-align: center;
 			min-height: 90px;
+			min-width: 44px;
+		}
+
+		@media (max-width: 360px) {
+			#icon-grid button {
+				min-height: 76px;
+				padding: var(--a-space-s);
+			}
 		}
 
 		#icon-grid button:hover {
@@ -371,14 +386,51 @@ button {
 			btn.innerHTML = `<svg viewBox="${vb}" aria-hidden="true">${clean}</svg><span>${ic.name}</span>`;
 
 			btn.addEventListener('click', () => {
-				navigator.clipboard.writeText(ic.name).then(() => {
+				const nameText = ic.name;
+				const labelSpan = btn.querySelector('span');
+
+				function showCopied() {
 					btn.classList.add('copied');
-					btn.querySelector('span').textContent = 'Copied!';
+					labelSpan.textContent = 'Copied!';
 					setTimeout(() => {
 						btn.classList.remove('copied');
-						btn.querySelector('span').textContent = ic.name;
+						labelSpan.textContent = nameText;
 					}, 1500);
-				});
+				}
+
+				if (navigator.clipboard && navigator.clipboard.writeText) {
+					navigator.clipboard.writeText(nameText).then(showCopied).catch(() => {
+						/* Fallback for restricted clipboard environments */
+						try {
+							const ta = document.createElement('textarea');
+							ta.value = nameText;
+							ta.style.position = 'fixed';
+							ta.style.opacity = '0';
+							document.body.appendChild(ta);
+							ta.select();
+							document.execCommand('copy');
+							document.body.removeChild(ta);
+							showCopied();
+						} catch (_) {
+							labelSpan.textContent = nameText;
+						}
+					});
+				} else {
+					/* No Clipboard API — use execCommand fallback */
+					try {
+						const ta = document.createElement('textarea');
+						ta.value = nameText;
+						ta.style.position = 'fixed';
+						ta.style.opacity = '0';
+						document.body.appendChild(ta);
+						ta.select();
+						document.execCommand('copy');
+						document.body.removeChild(ta);
+						showCopied();
+					} catch (_) {
+						labelSpan.textContent = nameText;
+					}
+				}
 			});
 
 			frag.appendChild(btn);
