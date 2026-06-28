@@ -128,7 +128,7 @@
 
     // 3.1. Alert Dismissals (.alert)
     document.addEventListener('click', function (e) {
-      const closeBtn = e.target.closest('.alert .close, .alert [data-dismiss="alert"]');
+      const closeBtn = e.target.closest('.alert .close, .alert [data-dismiss="alert"], .alert [data-alert-close]');
       if (closeBtn) {
         e.preventDefault();
         const alert = closeBtn.closest('.alert');
