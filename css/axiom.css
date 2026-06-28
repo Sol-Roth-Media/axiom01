@@ -255,7 +255,7 @@ table {
     --a-font-size-small: calc(var(--a-font-size-base) * 0.875); /* Common small size (14px if base is 16px) */
     --a-line-height-base: 1.6;
     --a-line-height-heading: 1.3;
-    --a-heading-scale: 1.15; /* Current scale: H1=~2.44rem, H2=~1.95rem, H3=~1.56rem, H4=~1.25rem, H5=1rem, H6=0.8rem */
+    --a-heading-scale: var(--a-ratio, 1.15); /* Driven by --a-ratio theme token; Current scale: H1=~2.44rem, H2=~1.95rem, H3=~1.56rem, H4=~1.25rem, H5=1rem, H6=0.8rem */
     --a-font-weight-normal: 400;
     --a-font-weight-medium: 500;
     --a-font-weight-bold: 700;
@@ -275,7 +275,7 @@ table {
     --a-border-style-base: solid;
     --a-border-radius-small: 3px;
     --a-border-radius-base: 5px;
-    --a-border-radius-large: 8px;
+    --a-border-radius-large: var(--a-radius, 8px);
 
     /** Layout */
     --a-layout-max-width: 1200px;
@@ -2775,46 +2775,40 @@ form > div input { /* Target inputs within the div */
     --a-color-error: #de350b;
 }
 
-/* === THEME 2: Synthwave '84 === */
-/* A retro-futuristic theme with neon colors and a monospace font. */
+/* =========================================
+   EXTENDED AXIOM01 THEMES 
+   (Upgraded with Scale, Space, and Radius)
+   ========================================= */
+
+/* 1. Synthwave 84 (High-Contrast Retro/Cyberpunk) */
+/* Silhouette: Sharp & Brutalist | Scale: Dramatic | Density: Normal */
 [data-theme="synthwave-84"] {
-    --a-font-family-sans: 'JetBrains Mono', monospace;
-    --a-space-unit: 1rem;
-    --a-border-radius-medium: 0.2rem;
-    --a-border-radius-large: 0.2rem;
-    --a-shadow-medium: 0 0 15px rgba(255, 45, 195, 0.2);
-    --a-shadow-large: 0 0 30px rgba(255, 45, 195, 0.3);
-    --a-color-primary: #ff2dc3;
-    --a-color-on-primary: #ffffff;
-    --a-color-secondary: #00c5ec;
-    --a-color-surface: #2d2a54;
-    --a-color-on-surface: #ffffff;
-    --a-color-surface-variant: #232043;
-    --a-color-on-surface-variant: #a59ecb;
-    --a-color-outline: #4a467c;
-    --a-color-success: #00f9a3;
-    --a-color-warning: #fede5d;
-    --a-color-error: #ff5370;
+  --a-hue-primary: 320; /* Neon Pink */
+  --a-hue-surface: 260; /* Deep Purple/Indigo */
+  
+  --a-surface-base: oklch(15% 0.05 var(--a-hue-surface));
+  --a-surface-raised: oklch(20% 0.06 var(--a-hue-surface));
+  --a-text-main: oklch(95% 0.02 var(--a-hue-surface));
+  --a-primary: oklch(65% 0.25 var(--a-hue-primary)); /* Max chroma pop */
+
+  --a-radius: 0px; /* Sharp, digital edges */
+  --a-ratio: 1.414; /* Augmented Fourth for aggressive heading sizes */
+  --a-space-unit: clamp(0.875rem, 0.8rem + 0.5vw, 1.125rem);
 }
 
-/* === THEME 3: Nordic Calm === */
-/* A spacious, minimalist theme with cool, muted colors. */
+/* 2. Nordic Calm (Scandinavian Minimalist) */
+/* Silhouette: Soft | Scale: Balanced | Density: Spacious & Airy */
 [data-theme="nordic-calm"] {
-    --a-font-family-sans: 'Lexend', sans-serif;
-    --a-space-unit: 1.125rem; /* 18px base - spacious */
-    --a-border-radius-medium: 0.5rem;
-    --a-border-radius-large: 1rem;
-    --a-color-primary: #5e81ac;
-    --a-color-on-primary: #eceff4;
-    --a-color-secondary: #81a1c1;
-    --a-color-surface: #eceff4;
-    --a-color-on-surface: #2e3440;
-    --a-color-surface-variant: #e5e9f0;
-    --a-color-on-surface-variant: #4c566a;
-    --a-color-outline: #d8dee9;
-    --a-color-success: #a3be8c;
-    --a-color-warning: #ebcb8b;
-    --a-color-error: #bf616a;
+  --a-hue-primary: 200; /* Muted Fjord Blue */
+  --a-hue-surface: 70; /* Warm Off-White/Sand */
+  
+  --a-surface-base: oklch(98% 0.01 var(--a-hue-surface));
+  --a-surface-raised: oklch(100% 0 0); /* Pure white cards */
+  --a-primary: oklch(55% 0.08 var(--a-hue-primary)); /* Low chroma, subtle */
+
+  --a-radius: 8px; /* Approachable, soft corners */
+  --a-ratio: 1.25; /* Major Third for calm, readable hierarchy */
+  --a-space-unit: clamp(1.125rem, 1rem + 1vw, 1.5rem); /* Extra breathing room */
 }
 
 /* === THEME 4: Vintage Paper === */
@@ -2877,24 +2871,20 @@ form > div input { /* Target inputs within the div */
     --a-color-error: #dc322f;
 }
 
-/* === THEME 7: Solarized Dark === */
-/* The dark counterpart to Solarized Light. */
+/* 3. Solarized Dark (Classic Developer Tooling) */
+/* Silhouette: Technical | Scale: Dense | Density: Compact */
 [data-theme="solarized-dark"] {
-    --a-font-family-sans: 'Inter', sans-serif;
-    --a-space-unit: 1rem;
-    --a-border-radius-medium: 0.3rem;
-    --a-border-radius-large: 0.5rem;
-    --a-color-primary: #268bd2;
-    --a-color-on-primary: #002b36;
-    --a-color-secondary: #2aa198;
-    --a-color-surface: #002b36;
-    --a-color-on-surface: #839496;
-    --a-color-surface-variant: #073642;
-    --a-color-on-surface-variant: #586e75;
-    --a-color-outline: #073642;
-    --a-color-success: #859900;
-    --a-color-warning: #b58900;
-    --a-color-error: #dc322f;
+  --a-hue-primary: 180; /* Cyan/Teal */
+  --a-hue-surface: 250; /* Base03 Dark Blue/Green */
+  
+  --a-surface-base: oklch(25% 0.02 var(--a-hue-surface));
+  --a-surface-raised: oklch(30% 0.02 var(--a-hue-surface));
+  --a-text-main: oklch(85% 0.01 90); /* Warm gray text */
+  --a-primary: oklch(65% 0.12 var(--a-hue-primary));
+
+  --a-radius: 4px; /* Standard structural borders */
+  --a-ratio: 1.2; /* Minor Third for maximum data density */
+  --a-space-unit: clamp(0.75rem, 0.6rem + 0.5vw, 1rem); /* Tight UI padding */
 }
 
 /* === THEME 8: Luxe Black === */
@@ -2938,224 +2928,176 @@ form > div input { /* Target inputs within the div */
     --a-color-error: #ef4444;
 }
 
-/* === THEME 10: Desert Sunset === */
-/* Warm, earthy tones inspired by a desert landscape. */
+/* 12. Desert Sunset (Warm Editorial) */
+/* Silhouette: Classic | Scale: Dramatic | Density: Wide */
 [data-theme="desert-sunset"] {
-    --a-font-family-sans: 'Roboto Slab', serif;
-    --a-space-unit: 1rem;
-    --a-border-radius-medium: 0.2rem;
-    --a-border-radius-large: 0.4rem;
-    --a-color-primary: #d95f27;
-    --a-color-on-primary: #fff8f0;
-    --a-color-secondary: #e88c4d;
-    --a-color-surface: #fff8f0;
-    --a-color-on-surface: #4d3d33;
-    --a-color-surface-variant: #fcefe4;
-    --a-color-on-surface-variant: #8c7a6b;
-    --a-color-outline: #e6dcd1;
-    --a-color-success: #5a8c4a;
-    --a-color-warning: #d95f27;
-    --a-color-error: #c74343;
+  --a-hue-primary: 30; /* Terracotta Orange */
+  --a-hue-surface: 50; /* Sand */
+  
+  --a-surface-base: oklch(95% 0.02 var(--a-hue-surface));
+  --a-surface-raised: oklch(99% 0.01 var(--a-hue-surface));
+  --a-text-main: oklch(30% 0.04 40); /* Deep warm brown text */
+  --a-primary: oklch(60% 0.16 var(--a-hue-primary));
+
+  --a-radius: 4px; 
+  --a-ratio: 1.618; /* Golden Ratio - huge cinematic headings */
+  --a-space-unit: clamp(1.25rem, 1rem + 1vw, 2rem);
 }
 
-/* === THEME 11: Deep Ocean === */
-/* A dark, aquatic theme with deep blues and teals. */
+/* 13. Deep Ocean (Technical Dark Mode) */
+/* Silhouette: Standard | Scale: Balanced | Density: Tight */
 [data-theme="deep-ocean"] {
-    --a-font-family-sans: 'Inter', sans-serif;
-    --a-space-unit: 1rem;
-    --a-border-radius-medium: 1rem;
-    --a-border-radius-large: 2rem;
-    --a-color-primary: #00bcd4;
-    --a-color-on-primary: #001f24;
-    --a-color-secondary: #0097a7;
-    --a-color-surface: #001f24;
-    --a-color-on-surface: #b2ebf2;
-    --a-color-surface-variant: #00373d;
-    --a-color-on-surface-variant: #80deea;
-    --a-color-outline: #004e55;
-    --a-color-success: #4db6ac;
-    --a-color-warning: #ffc107;
-    --a-color-error: #ff5252;
+  --a-hue-primary: 190; /* Cyan */
+  --a-hue-surface: 240; /* Very Dark Blue */
+  
+  --a-surface-base: oklch(16% 0.04 var(--a-hue-surface));
+  --a-surface-raised: oklch(22% 0.05 var(--a-hue-surface));
+  --a-text-main: oklch(95% 0.02 200); /* Cyan-tinted white text */
+  --a-primary: oklch(70% 0.14 var(--a-hue-primary));
+
+  --a-radius: 6px; 
+  --a-ratio: 1.25; 
+  --a-space-unit: clamp(0.875rem, 0.8rem + 0.5vw, 1.125rem);
 }
 
-/* === THEME 12: Gruvbox Dark === */
-/* The popular retro groove theme for developers. */
+/* 9. Gruvbox Dark (Retro Terminal / Warm) */
+/* Silhouette: Brutalist | Scale: Standard | Density: Standard */
 [data-theme="gruvbox-dark"] {
-    --a-font-family-sans: 'JetBrains Mono', monospace;
-    --a-space-unit: 1rem;
-    --a-border-radius-medium: 0.1rem;
-    --a-border-radius-large: 0.2rem;
-    --a-color-primary: #fabd2f;
-    --a-color-on-primary: #282828;
-    --a-color-secondary: #83a598;
-    --a-color-surface: #282828;
-    --a-color-on-surface: #ebdbb2;
-    --a-color-surface-variant: #3c3836;
-    --a-color-on-surface-variant: #a89984;
-    --a-color-outline: #504945;
-    --a-color-success: #b8bb26;
-    --a-color-warning: #fe8019;
-    --a-color-error: #cc241d;
+  --a-hue-primary: 35; /* Retro Orange */
+  --a-hue-surface: 45; /* Heavy Warm Brown */
+  
+  --a-surface-base: oklch(23% 0.02 var(--a-hue-surface));
+  --a-surface-raised: oklch(28% 0.03 var(--a-hue-surface));
+  --a-text-main: oklch(90% 0.03 80); /* Yellow-tinted text */
+  --a-primary: oklch(70% 0.15 var(--a-hue-primary));
+
+  --a-radius: 0px; /* Zero radius - pure retro terminal blockiness */
+  --a-ratio: 1.25; /* Major Third */
+  --a-space-unit: clamp(0.875rem, 0.8rem + 0.5vw, 1.125rem);
 }
 
-/* === THEME 13: Sakura Blossom === */
-/* A light and soft theme inspired by cherry blossoms. */
+/* 4. Sakura Blossom (Elegant & Editorial) */
+/* Silhouette: Pill-like | Scale: Editorial | Density: Spacious */
 [data-theme="sakura-blossom"] {
-    --a-font-family-sans: 'Poppins', sans-serif;
-    --a-space-unit: 1rem;
-    --a-border-radius-medium: 0.5rem;
-    --a-border-radius-large: 1rem;
-    --a-color-primary: #ffb7c5;
-    --a-color-on-primary: #5c2c35;
-    --a-color-secondary: #d6aab1;
-    --a-color-surface: #fff0f3;
-    --a-color-on-surface: #5c2c35;
-    --a-color-surface-variant: #ffffff;
-    --a-color-on-surface-variant: #8c6b71;
-    --a-color-outline: #ffe0e5;
-    --a-color-success: #a3d6a3;
-    --a-color-warning: #ffd699;
-    --a-color-error: #ff8a8a;
+  --a-hue-primary: 350; /* Cherry Blossom Pink */
+  --a-hue-surface: 350; /* Extremely subtle warm tint */
+  
+  --a-surface-base: oklch(99% 0.005 var(--a-hue-surface));
+  --a-surface-raised: oklch(100% 0 0);
+  
+  --a-radius: 24px; /* Ultra-soft, sweeping curves */
+  --a-ratio: 1.5; /* Perfect Fifth - High drama between body and display type */
+  --a-space-unit: clamp(1rem, 0.9rem + 1vw, 1.375rem);
 }
 
-/* === THEME 14: Matcha Green === */
-/* A soothing, earthy theme inspired by green tea. */
+/* 8. Matcha Green (Organic & Zen) */
+/* Silhouette: Sweeping | Scale: Editorial | Density: Highly Spacious */
 [data-theme="matcha-green"] {
-    --a-font-family-sans: 'Lexend', sans-serif;
-    --a-space-unit: 0.9rem;
-    --a-border-radius-medium: 0.4rem;
-    --a-border-radius-large: 0.8rem;
-    --a-color-primary: #6b9080;
-    --a-color-on-primary: #f6fff8;
-    --a-color-secondary: #a4c3b2;
-    --a-color-surface: #f6fff8;
-    --a-color-on-surface: #333d29;
-    --a-color-surface-variant: #eaf4f4;
-    --a-color-on-surface-variant: #6b9080;
-    --a-color-outline: #cce3de;
-    --a-color-success: #6b9080;
-    --a-color-warning: #e6b800;
-    --a-color-error: #c94f4f;
+  --a-hue-primary: 135; /* Earthy Tea Green */
+  --a-hue-surface: 100; /* Warm Paper/Canvas */
+  
+  --a-surface-base: oklch(97% 0.01 var(--a-hue-surface));
+  --a-surface-raised: oklch(100% 0 0);
+  --a-text-main: oklch(35% 0.02 var(--a-hue-primary)); /* Deep green text instead of black */
+  --a-primary: oklch(65% 0.11 var(--a-hue-primary));
+
+  --a-radius: 16px; /* Organic, pebble-like corners */
+  --a-ratio: 1.5; /* Perfect Fifth - elegant and airy */
+  --a-space-unit: clamp(1.25rem, 1rem + 1vw, 1.75rem); /* Deep breathing room */
 }
 
-/* === THEME 15: Monokai Pro === */
-/* Inspired by the iconic, high-contrast code editor theme. */
+/* 7. Monokai Pro (Vibrant Developer Aesthetic) */
+/* Silhouette: Sharp | Scale: Tight/Technical | Density: Compact */
 [data-theme="monokai-pro"] {
-    --a-font-family-sans: 'Source Code Pro', monospace;
-    --a-space-unit: 0.95rem;
-    --a-border-radius-medium: 0.25rem;
-    --a-border-radius-large: 0.25rem;
-    --a-color-primary: #ffd866;
-    --a-color-on-primary: #2d2a2e;
-    --a-color-secondary: #ab9df2;
-    --a-color-surface: #2d2a2e;
-    --a-color-on-surface: #fcfcfa;
-    --a-color-surface-variant: #403e41;
-    --a-color-on-surface-variant: #9e9e9e;
-    --a-color-outline: #5b595c;
-    --a-color-success: #a9dc76;
-    --a-color-warning: #ffd866;
-    --a-color-error: #ff6188;
+  --a-hue-primary: 70; /* Vibrant Yellow/Orange */
+  --a-hue-surface: 60; /* Warm Dark Brown/Gray */
+  
+  --a-surface-base: oklch(25% 0.01 var(--a-hue-surface));
+  --a-surface-raised: oklch(30% 0.015 var(--a-hue-surface));
+  --a-text-main: oklch(95% 0 0); /* Pure white text for high contrast */
+  --a-primary: oklch(75% 0.18 var(--a-hue-primary));
+
+  --a-radius: 4px; /* Standard editor tabs */
+  --a-ratio: 1.2; /* Minor Third - tight scale for dense code viewing */
+  --a-space-unit: clamp(0.75rem, 0.6rem + 0.5vw, 1rem); /* High density */
 }
 
-/* === THEME 16: Slate Gray === */
-/* A modern, monochromatic theme for a serious, focused UI. */
+/* 11. Slate Gray (Ultra-Corporate / Legal / Fintech) */
+/* Silhouette: Sharp | Scale: Dense | Density: Compact */
 [data-theme="slate-gray"] {
-    --a-font-family-sans: 'Inter', sans-serif;
-    --a-space-unit: 0.8rem; /* Compact */
-    --a-border-radius-medium: 0.2rem;
-    --a-border-radius-large: 0.2rem;
-    --a-color-primary: #4a5568;
-    --a-color-on-primary: #ffffff;
-    --a-color-secondary: #718096;
-    --a-color-surface: #f7fafc;
-    --a-color-on-surface: #1a202c;
-    --a-color-surface-variant: #edf2f7;
-    --a-color-on-surface-variant: #4a5568;
-    --a-color-outline: #e2e8f0;
-    --a-color-success: #38a169;
-    --a-color-warning: #dd6b20;
-    --a-color-error: #e53e3e;
+  --a-hue-primary: 220; /* Steel Blue */
+  --a-hue-surface: 240; /* Cold Gray */
+  
+  --a-surface-base: oklch(96% 0.005 var(--a-hue-surface));
+  --a-surface-raised: oklch(100% 0 0);
+  --a-text-main: oklch(25% 0.01 var(--a-hue-surface));
+  --a-primary: oklch(50% 0.08 var(--a-hue-primary)); /* Muted, serious primary */
+
+  --a-radius: 2px; /* Very slight softening, but mostly sharp */
+  --a-ratio: 1.2; /* Minor third for scanning dense financial ledgers */
+  --a-space-unit: clamp(0.75rem, 0.6rem + 0.5vw, 0.875rem); /* Highly compact */
 }
 
-/* === THEME 17: Tropical Splash === */
-/* A vibrant, high-energy theme with bright, sunny colors. */
+/* 14. Tropical Splash (High Energy Summer) */
+/* Silhouette: Soft | Scale: Bouncy | Density: Standard */
 [data-theme="tropical-splash"] {
-    --a-font-family-sans: 'Poppins', sans-serif;
-    --a-space-unit: 1.1rem; /* Airy */
-    --a-border-radius-medium: 2rem;
-    --a-border-radius-large: 4rem;
-    --a-color-primary: #ff6b6b;
-    --a-color-on-primary: #ffffff;
-    --a-color-secondary: #48dbfb;
-    --a-color-surface: #fefeff;
-    --a-color-on-surface: #1a1a1a;
-    --a-color-surface-variant: #f0faff;
-    --a-color-on-surface-variant: #575757;
-    --a-color-outline: #e0f5ff;
-    --a-color-success: #1dd1a1;
-    --a-color-warning: #feca57;
-    --a-color-error: #ff6b6b;
+  --a-hue-primary: 150; /* Vibrant Seafoam/Teal */
+  --a-hue-surface: 80; /* Pale Sun Yellow */
+  
+  --a-surface-base: oklch(96% 0.03 var(--a-hue-surface));
+  --a-surface-raised: oklch(99% 0.01 var(--a-hue-surface));
+  --a-primary: oklch(65% 0.20 var(--a-hue-primary));
+
+  --a-radius: 12px; 
+  --a-ratio: 1.414; 
+  --a-space-unit: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
 }
 
-/* === THEME 18: Candy Pop === */
-/* A playful, sweet theme with soft pastels and rounded corners. */
+/* 10. Candy Pop (Playful / Gen-Z Consumer App) */
+/* Silhouette: Max Pill | Scale: Bouncy | Density: Spacious */
 [data-theme="candy-pop"] {
-    --a-font-family-sans: 'Lexend', sans-serif;
-    --a-space-unit: 1rem;
-    --a-border-radius-medium: 1rem;
-    --a-border-radius-large: 2rem;
-    --a-color-primary: #ff85a1;
-    --a-color-on-primary: #ffffff;
-    --a-color-secondary: #a2d2ff;
-    --a-color-surface: #fff5f7;
-    --a-color-on-surface: #4b2a32;
-    --a-color-surface-variant: #ffffff;
-    --a-color-on-surface-variant: #8c6b71;
-    --a-color-outline: #ffe0e5;
-    --a-color-success: #bde0fe;
-    --a-color-warning: #ffc8dd;
-    --a-color-error: #ff85a1;
+  --a-hue-primary: 290; /* Bubblegum Purple */
+  --a-hue-surface: 320; /* Very faint pink tint */
+  
+  --a-surface-base: oklch(98% 0.01 var(--a-hue-surface));
+  --a-surface-raised: oklch(100% 0 0);
+  --a-primary: oklch(65% 0.22 var(--a-hue-primary)); /* Hyper-saturated */
+
+  --a-radius: 9999px; /* Max pill-shape for everything */
+  --a-ratio: 1.414; /* Augmented Fourth - high energy pop */
+  --a-space-unit: clamp(1rem, 0.9rem + 0.75vw, 1.5rem);
 }
 
-/* === THEME 19: Rosé Pine === */
-/* A soft, warm, and elegant theme. */
+/* 6. Rosé Pine (Warm, Cozy Dark Mode) */
+/* Silhouette: Soft | Scale: Balanced | Density: Comfortable */
 [data-theme="rose-pine"] {
-    --a-font-family-sans: 'Inter', sans-serif;
-    --a-space-unit: 0.9rem;
-    --a-border-radius-medium: 0.5rem;
-    --a-border-radius-large: 0.75rem;
-    --a-color-primary: #eb6f92;
-    --a-color-on-primary: #191724;
-    --a-color-secondary: #9ccfd8;
-    --a-color-surface: #191724;
-    --a-color-on-surface: #e0def4;
-    --a-color-surface-variant: #26233a;
-    --a-color-on-surface-variant: #6e6a86;
-    --a-color-outline: #403d52;
-    --a-color-success: #31748f;
-    --a-color-warning: #f6c177;
-    --a-color-error: #eb6f92;
+  --a-hue-primary: 345; /* Soft Rose */
+  --a-hue-surface: 275; /* Muted Purple/Navy Base */
+  
+  --a-surface-base: oklch(22% 0.03 var(--a-hue-surface));
+  --a-surface-raised: oklch(27% 0.04 var(--a-hue-surface));
+  --a-text-main: oklch(90% 0.02 300); /* Warm off-white text */
+  --a-primary: oklch(70% 0.12 var(--a-hue-primary));
+
+  --a-radius: 12px; /* Friendly, soft edges */
+  --a-ratio: 1.333; /* Perfect Fourth - classic web balance */
+  --a-space-unit: clamp(0.875rem, 0.8rem + 0.5vw, 1.25rem);
 }
 
-/* === THEME 20: Midnight Moss === */
-/* A dark, nature-inspired theme with deep greens and earthy tones. */
+/* 5. Midnight Moss (Earthy Dark Mode) */
+/* Silhouette: Standard | Scale: Balanced | Density: Comfortable */
 [data-theme="midnight-moss"] {
-    --a-font-family-sans: 'Roboto Slab', serif;
-    --a-space-unit: 1rem;
-    --a-border-radius-medium: 0.3rem;
-    --a-border-radius-large: 0.6rem;
-    --a-color-primary: #588157;
-    --a-color-on-primary: #f1faee;
-    --a-color-secondary: #a3b18a;
-    --a-color-surface: #1b263b;
-    --a-color-on-surface: #e0e1dd;
-    --a-color-surface-variant: #2a3b52;
-    --a-color-on-surface-variant: #a3b18a;
-    --a-color-outline: #415a77;
-    --a-color-success: #588157;
-    --a-color-warning: #dda15e;
-    --a-color-error: #bc4749;
+  --a-hue-primary: 120; /* Vibrant Forest Green */
+  --a-hue-surface: 140; /* Deep Mossy Black */
+  
+  --a-surface-base: oklch(18% 0.02 var(--a-hue-surface));
+  --a-surface-raised: oklch(23% 0.03 var(--a-hue-surface));
+  --a-text-main: oklch(90% 0.01 var(--a-hue-surface));
+  --a-primary: oklch(70% 0.15 var(--a-hue-primary));
+
+  --a-radius: 6px; 
+  --a-ratio: 1.333; 
+  --a-space-unit: clamp(0.875rem, 0.8rem + 0.5vw, 1.125rem);
 }
 
 /* --- Theme Explorer Section --- */

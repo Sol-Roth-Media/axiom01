@@ -87,9 +87,24 @@
   --chroma-secondary: 0.05;
 
   /* ========================================
+     4a. STRUCTURAL TOKENS (Theme Architecture)
+     --a-radius    silhouette / border-radius
+     --a-ratio     typographic scale
+     --a-space-unit  vertical rhythm base
+     These are overridden per-theme to reshape
+     the entire layout without changing markup.
+     ======================================== */
+  --a-radius: 0.5rem;
+  --a-ratio: 1.333;
+  --a-space-unit: 1rem;
+
+  /* ========================================
      5. BASE COLOR PALETTE (OKLCH)
      ======================================== */
-  --a-color-primary: oklch(60% var(--chroma-primary) var(--a-hue-primary));
+  /* --a-primary / --a-surface-base / --a-surface-raised / --a-text-main
+     are theme-injected overrides; the fallbacks below keep the default
+     light-mode OKLCH system active when no theme overrides them. */
+  --a-color-primary: var(--a-primary, oklch(60% var(--chroma-primary) var(--a-hue-primary)));
   --a-color-on-primary: oklch(100% 0 0);
   --a-color-primary-light: oklch(85% 0.05 var(--a-hue-primary));
   --a-color-primary-dark: oklch(40% 0.15 var(--a-hue-primary));
@@ -141,9 +156,9 @@
   --ax-text: oklch(var(--lightness-text) 0.02 var(--a-hue-surface));
   --ax-border: oklch(90% 0.01 var(--a-hue-surface));
 
-  --a-color-surface: var(--ax-surface);
-  --a-color-on-surface: var(--ax-text);
-  --a-color-surface-variant: var(--ax-background-secondary);
+  --a-color-surface: var(--a-surface-base, var(--ax-surface));
+  --a-color-on-surface: var(--a-text-main, var(--ax-text));
+  --a-color-surface-variant: var(--a-surface-raised, var(--ax-background-secondary));
   --a-color-on-surface-variant: oklch(40% 0.02 var(--a-hue-surface));
   --a-color-outline: var(--ax-border);
 
@@ -162,6 +177,8 @@
   --a-border-radius-xl: 1.5rem;
   --a-border-radius-pill: 50rem;
   --a-border-radius-full: 9999px;
+  /* Bridge for framework components that use the legacy medium/large names */
+  --a-border-radius-medium: var(--a-radius);
 
   /* ========================================
      9. TRANSITIONS
