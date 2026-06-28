@@ -60,6 +60,7 @@
 		}
 
 		/* Variant tabs — semantic menu styling */
+		/* Variant nav — higher specificity to beat global button reset */
 		nav.variant-nav {
 			display: flex;
 			gap: var(--a-space-s);
@@ -67,22 +68,29 @@
 			margin-bottom: var(--a-space-l);
 		}
 
-		nav.variant-nav button {
+		/* Use :where() to layer and id to raise specificity cleanly */
+		#main-content nav.variant-nav button {
 			padding: var(--a-space-s) var(--a-space-m);
 			background: var(--a-color-surface);
+			color: var(--a-color-on-surface);
 			border: 1px solid var(--a-color-outline);
 			border-radius: var(--a-border-radius-base);
 			cursor: pointer;
 			font-size: var(--a-font-size-s);
+			font-weight: var(--a-font-weight-medium);
 			transition: all 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			gap: var(--a-space-xs);
 		}
 
-		nav.variant-nav button:hover {
+		#main-content nav.variant-nav button:hover {
 			border-color: var(--a-color-primary);
 			color: var(--a-color-primary);
+			background: var(--a-color-primary-container);
 		}
 
-		nav.variant-nav button[aria-current="true"] {
+		#main-content nav.variant-nav button[aria-current="true"] {
 			background: var(--a-color-primary);
 			color: var(--a-color-on-primary);
 			border-color: var(--a-color-primary);
@@ -125,8 +133,6 @@
 	</style>
 </head>
 <body class="axiom-body">
-
-<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header class="main" data-component="mobile-navbar">
 	<nav role="navigation" aria-label="Main Navigation">
