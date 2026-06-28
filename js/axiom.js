@@ -520,7 +520,22 @@
 
       header.classList.toggle('menu-open', expanded);
       menuButton.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      document.body.style.overflow = expanded && isMobileMenuViewport() ? 'hidden' : '';
+
+      const body = document.body;
+      const shouldLockScroll = expanded && isMobileMenuViewport();
+      const hasOpenMobileMenu = isMobileMenuViewport() && document.querySelector('header.main.menu-open');
+
+      if (shouldLockScroll) {
+        if (!body.hasAttribute('data-axiom-scroll-lock')) {
+          body.setAttribute('data-axiom-scroll-lock', 'true');
+          body.setAttribute('data-axiom-scroll-overflow', body.style.overflow || '');
+        }
+        body.style.overflow = 'hidden';
+      } else if (!hasOpenMobileMenu && body.hasAttribute('data-axiom-scroll-lock')) {
+        body.style.overflow = body.getAttribute('data-axiom-scroll-overflow') || '';
+        body.removeAttribute('data-axiom-scroll-overflow');
+        body.removeAttribute('data-axiom-scroll-lock');
+      }
     };
 
     const closeMenu = function (header) {
@@ -573,6 +588,15 @@
         closeMenu(header);
       });
       document.body.style.overflow = '';
+      document.body.removeAttribute('data-axiom-scroll-overflow');
+      document.body.removeAttribute('data-axiom-scroll-lock');
+    });
+
+    document.querySelectorAll('header.main button.menu').forEach(function (menuButton) {
+      const header = menuButton.closest('header.main');
+      if (header) {
+        syncMenuState(header, false, menuButton);
+      }
     });
 
   });
