@@ -524,7 +524,7 @@ https://dev.to/ynab/a-semantic-color-system-the-theory-hk7
 html { overflow-x: hidden; } /* iOS Safari: both html + body required to prevent horizontal scroll */
 body { margin: 0; font-family: var(--a-font-family-sans); font-size: var(--a-font-size-base); line-height: var(--a-line-height-base); color: var(--a-color-on-surface); background-color: var(--a-color-surface); overflow-x: hidden; }
 body[data-axiom-scroll-lock="true"] { overscroll-behavior: contain; }
-.axiom-body { } /* Match the new navbar height */
+.axiom-body { overflow-x: hidden; max-width: 100vw; } /* Prevent horizontal scroll on body */
 a { color: var(--a-color-primary); text-decoration: none; transition: color 0.2s ease; }
 a:hover { text-decoration: underline; color: var(--a-color-primary); filter: brightness(85%); }
 
@@ -905,7 +905,7 @@ section.hero menu, section.hero .actions {
     justify-content: center;
     gap: var(--a-space-m);
     flex-wrap: wrap;
-    margin: 0;
+    margin: var(--a-space-l) 0 0 0;
     padding: 0;
     list-style: none;
     width: 100%;
@@ -923,6 +923,10 @@ section.hero > .content > p:not(.tagline) {
     text-align: center;
 }
 
+section.hero menu + p {
+    margin-bottom: var(--a-space-xl);
+}
+
 section.hero .button.primary {
     background-color: var(--a-color-on-gradient);
     color: var(--a-color-primary);
@@ -932,6 +936,11 @@ section.hero .button.secondary {
     background-color: transparent;
     border-color: var(--a-color-on-gradient);
     color: var(--a-color-on-gradient);
+}
+
+section.hero .button.outline {
+    color: #ffffff;
+    border-color: rgba(255,255,255,0.5);
 }
 
 /* MOBILE: 768px and down */
@@ -3944,6 +3953,8 @@ section.hero .stat {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 100%;
+    max-width: 340px;
 }
 
 section.hero .stat:hover {
@@ -7841,7 +7852,9 @@ section.hero menu + p, section.hero .actions + p {
 }
 
 .hero .grid {
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--a-space-l);
+  justify-items: center;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -7875,6 +7888,124 @@ section.hero menu + p, section.hero .actions + p {
     font-size: 0.75rem;
     padding: var(--a-space-s);
   }
+}
+
+/* ========================================
+   INDEX PAGE — HOARDING PROBLEM SECTION
+   Class density formula diagram and
+   horizontal scroll code comparison strip
+   ======================================== */
+#hoarding-problem > .container > figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--a-space-s);
+  padding: var(--a-space-l);
+  background: var(--a-color-surface-variant);
+  border-radius: var(--a-border-radius-base);
+  margin-bottom: var(--a-space-l);
+}
+#hoarding-problem > .container > figure > span {
+  color: var(--a-color-text-muted);
+  font-size: var(--a-font-size-s);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+#hoarding-problem > .container > figure > div {
+  display: flex;
+  align-items: center;
+  gap: var(--a-space-m);
+  font-size: var(--a-font-size-xl);
+  font-weight: bold;
+}
+#hoarding-problem > .container > figure > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: 2px solid var(--a-color-outline);
+  padding-left: var(--a-space-s);
+}
+#hoarding-problem > .container > figure > div > div > span:first-child {
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 2px;
+}
+#hoarding-problem > .container > figure > figcaption {
+  font-size: var(--a-font-size-s);
+  text-align: center;
+  max-width: 45ch;
+  margin-top: var(--a-space-s);
+  color: var(--a-color-text-muted);
+}
+
+/* Horizontal scroll strips: hoarding-problem code comparison & theme explorer */
+#hoarding-problem .container > div,
+#theme-explorer .container > div {
+  display: flex;
+  overflow-x: auto;
+  gap: var(--a-space-m);
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--a-space-s);
+  -webkit-overflow-scrolling: touch;
+}
+#hoarding-problem .container > div > .card,
+#theme-explorer .container > div > .card {
+  min-width: 280px;
+  scroll-snap-align: start;
+}
+
+/* ========================================
+   INDEX PAGE — AXICONS SECTION
+   Icon categories grid: tighter columns for
+   mobile 2-per-row layout
+   ======================================== */
+#axicons .card > .grid:not(.tight) {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--a-space-m);
+  text-align: center;
+}
+
+/* ========================================
+   COLORS ADVANCED DOC — OKLCH COMPARISON
+   Side-by-side HSL vs OKLCH demo blocks
+   ======================================== */
+#oklch-lightness > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--a-space-m);
+  margin-top: var(--a-space-m);
+}
+#oklch-lightness > div > div {
+  padding: var(--a-space-l);
+  border-radius: var(--a-border-radius-base);
+  color: white;
+  text-align: center;
+}
+#oklch-lightness > div > div:first-child { background: hsl(60, 100%, 50%); }
+#oklch-lightness > div > div:last-child { background: hsl(240, 100%, 50%); }
+#oklch-lightness > div > div > span { font-size: var(--a-font-size-s); }
+#oklch-lightness > div + p {
+  margin-top: var(--a-space-m);
+  font-size: var(--a-font-size-s);
+  text-align: center;
+  color: var(--a-color-text-muted);
+}
+
+/* ========================================
+   TYPOGRAPHY ADVANCED DOC — SACCADIC VISION
+   Reading-width diagram figure
+   ======================================== */
+#saccadic-vision > figure {
+  background: var(--a-color-surface-variant);
+  padding: var(--a-space-l);
+  border-radius: var(--a-border-radius-base);
+  margin: var(--a-space-l) 0;
+  text-align: center;
+}
+#saccadic-vision figure svg { max-width: 400px; }
+#saccadic-vision figure figcaption {
+  margin-top: var(--a-space-s);
+  font-size: var(--a-font-size-s);
+  color: var(--a-color-text-muted);
 }
 
 /* ========================================
