@@ -1,250 +1,405 @@
-# AXIOM01 v3 - The Semantic Rebellion: The Mathematics of Design
+# Axiom01
 
-A complete semantic-first design framework and unified portal for exploring AXIOM01 philosophy, components, and documentation.
+**Semantic-first UI framework. Write meaningful HTML — Axiom handles the CSS.**
 
-## Quick Facts
-
-- **Total Size**: 37.6 KB uncompressed (~9.5 KB gzipped)
-- **Philosophy**: Semantic-first HTML + framework-level CSS + minimal JavaScript
-- **Accessibility**: WCAG 2.1 AA compliant
-- **Responsive**: Mobile-first from 320px to 1920px+
-- **Dark Mode**: Automatic via OKLCH color space
-- **Components**: 20+ UI components with zero BEM classes
-- **No Build Tools**: Direct source, no compilation needed
-
-## Core Files
-
-```
-src/
-├── index.html         (278 lines) - Semantic HTML portal
-├── css/
-│   └── axiom.css      (1,578 lines) - Complete CSS framework
-└── js/
-    └── axiom-core.js  (338 lines) - SPA + hub navigation
-```
-
-## The Philosophy
-
-### One Semantic Class Per COMPONENT
-
-Write meaningful semantic HTML where class names describe WHAT elements ARE (hero, card, button), NOT their structure or children.
+No utility classes. No BEM complexity. No build tools required. Just clean semantic HTML and a framework that respects your code.
 
 ```html
-<!-- ✅ DO -->
-<article class="hero">
-  <h1>Title</h1>
-  <p>Description</p>
+<!-- ✅ Axiom01 — one semantic class -->
+<article class="card">
+  <header><h3>Title</h3></header>
+  <p>Content here.</p>
+  <footer><button class="primary">Action</button></footer>
 </article>
 
-<!-- ❌ DON'T -->
-<div class="hero-container">
-  <div class="hero-content">
-    <h1 class="hero-title">Title</h1>
-    <p class="hero-description">Description</p>
+<!-- ❌ Utility-first — 18 classes -->
+<div class="max-w-sm rounded-lg shadow-md bg-white p-6">
+  <div class="border-b pb-4 mb-4">
+    <h3 class="text-lg font-bold text-gray-800">Title</h3>
+  </div>
+  <p class="text-gray-600 text-sm">Content here.</p>
+  <div class="flex justify-end">
+    <button class="px-4 py-2 bg-blue-500 text-white rounded">Action</button>
   </div>
 </div>
 ```
 
-### Framework Responsibility: CSS
-### Developer Responsibility: HTML
+## Installation
 
-```css
-/* ✅ Framework styles semantic elements */
-.hero { background: linear-gradient(...); }
-header nav button { color: var(--a-primary); }
-.card:hover { box-shadow: var(--a-shadow-md); }
-
-/* ❌ Not element-specific classes */
-.hero-background { }
-.nav-button { }
-.card-hover { }
-```
-
-## Key Features
-
-### Design System
-- **OKLCH Color Space** - Perceptually uniform colors with automatic dark mode
-- **30+ Design Tokens** - Colors, typography, spacing, effects
-- **Fluid Scaling** - Typography and spacing scale with `clamp()`
-- **6-Layer @layer Cascade** - Reset → Tokens → Base → Layout → Components → Utilities
-
-### Components (20+)
-- Header/Navbar with sticky positioning
-- Hero section with gradient background
-- Card component with hover effects
-- Responsive grid layout (auto-fit)
-- Forms with native validation
-- Alerts (info, success, warning, error)
-- Tables with semantic styling
-- Badges and labels
-- Code blocks and blockquotes
-- Lists (ordered/unordered)
-- Emphasis (strong, em, mark, etc)
-- Callout boxes (note, tip, warning, danger)
-
-### Sections
-- **Hero View** - Landing page with philosophy cards and CTAs
-- **Docs View** - Component library with 3-column hub layout
-- **Book View** - Book reader with table of contents and chapters
-
-### Hub Layout
-- **Left Sidebar** - Category/chapter navigation
-- **Center Main** - Component grid or book content
-- **Right Sidebar** - Component preview or chapter metadata
-- **Responsive** - Full 3-column on desktop, single column on mobile
-
-### Responsive Design
-- **Mobile (320px)** - Single column, stacked navigation
-- **Tablet (768px)** - Two columns, sidebars visible
-- **Desktop (1024px)** - Full 3-column hub layout
-- **Large (1200px+)** - Optimized spacing and sticky sidebars
-
-### Accessibility
-- Semantic HTML for screen readers
-- ARIA attributes (aria-current, aria-label)
-- Keyboard navigation (Tab, Enter)
-- Focus visible states (2px outline)
-- High contrast mode support
-- Reduced motion support
-- Skip links for keyboard users
-
-### Performance
-- No framework dependencies
-- Direct CSS styling (no PostCSS)
-- Minimal JavaScript (10.5 KB)
-- Fast view switching (no page reload)
-- No external libraries
-
-## Getting Started
-
-### Local Development
-
-1. Clone the repository:
 ```bash
-cd /Users/solroth/Sites/axiom01
-git checkout version3
+npm install axiom01
 ```
 
-2. Open in a browser:
-```bash
-open src/index.html
-# or
-python3 -m http.server 8000  # if you prefer a local server
+```html
+<!-- CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axiom01/css/axiom.min.css">
+<script src="https://cdn.jsdelivr.net/npm/axiom01/js/axicons-base.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axiom01/js/render-icons.js"></script>
 ```
 
-3. Test responsive design:
-- Mobile: 320px width
-- Tablet: 768px width
-- Desktop: 1024px+ width
+## Quick Start
 
-### Customization
+```html
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <link rel="stylesheet" href="axiom.min.css">
+</head>
+<body>
 
-Edit design tokens in `src/css/axiom.css`:
+  <!-- Hero section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Your Page Title</h1>
+      <p class="tagline">Your tagline here.</p>
+      <div class="actions">
+        <a href="/start" class="button primary">Get Started</a>
+        <a href="/docs" class="button secondary">View Docs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card grid -->
+  <section>
+    <div class="container">
+      <div class="grid">
+        <article class="card">
+          <header><h3>Card Title</h3></header>
+          <p>Card content here.</p>
+          <footer><button class="primary">Action</button></footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
+```
+
+## Core Philosophy
+
+### One Class Per Component
+Each component uses a single semantic class. The framework styles everything inside it automatically via element selectors.
+
+| Axiom01 | Utility-first |
+|---------|--------------|
+| `class="card"` | `class="flex flex-col rounded shadow p-6 bg-white"` |
+| `class="primary"` | `class="bg-blue-500 text-white px-4 py-2 rounded"` |
+| `class="alert success"` | `class="bg-green-100 text-green-800 border border-green-300 p-4 rounded"` |
+
+### Semantic HTML
+Write HTML that describes meaning, not appearance:
+
+```html
+<!-- Theming on semantic elements — no sub-classes -->
+<article class="card">
+  <header>...</header>  <!-- not .card-header -->
+  <figure>...</figure>  <!-- not .card-image -->
+  <footer>...</footer>  <!-- not .card-footer -->
+</article>
+```
+
+### Design Tokens
+All values are CSS custom properties — change one to update everything:
 
 ```css
 :root {
-  --a-hue-primary: 250;           /* Change primary color hue */
-  --a-space-md: clamp(...);       /* Adjust spacing */
-  --a-text-base: clamp(...);      /* Adjust typography */
+  --a-color-primary: #2563eb;
+  --a-space-unit: 1rem;
+  --a-heading-scale: 1.15;
+  --a-border-radius-base: 5px;
 }
 ```
 
-The entire color system updates automatically from the primary hue.
+## Components
 
-## Architecture
+73 production-ready components:
 
-### HTML Structure
-- Pure semantic elements (header, nav, main, section, article, aside, footer)
-- Zero class hierarchies (no `.navbar-nav-item-button`)
-- One semantic class per component (`.hero`, `.card`, `.grid`)
-- Data attributes for state (data-nav, data-category, data-chapter)
-- ARIA attributes for accessibility
+| Category | Components |
+|----------|-----------|
+| **Actions** | Button, Link Button, Button Group |
+| **Content** | Card, Alert, Badge, Avatar |
+| **Forms** | Input, Select, Textarea, Checkbox, Radio, Toggle, Slider, Rating |
+| **Navigation** | Navbar, Sidebar, Tabs, Breadcrumb, Pagination, Steps |
+| **Overlays** | Modal, Drawer, Tooltip, Popover |
+| **Data** | Table, List, Timeline, Progress |
+| **Media** | Video Player, Audio Player, Carousel, Gallery, Lightbox |
+| **Advanced** | AI Chat, Data List, Masonry, Swiping Cards, Autocomplete |
 
-### CSS Architecture
+### Buttons
+
+```html
+<button class="primary">Primary Action</button>
+<button class="secondary">Secondary</button>
+<button class="outline">Outline</button>
+<button class="danger">Destructive</button>
+<button disabled>Disabled</button>
+
+<!-- Link as button -->
+<a href="/start" class="button primary">Get Started</a>
+
+<!-- Sizes -->
+<button class="primary small">Small</button>
+<button class="primary">Default</button>
+<button class="primary large">Large</button>
 ```
-@layer axiom.reset      → Browser normalization
-@layer axiom.tokens     → Design tokens (OKLCH, spacing, etc)
-@layer axiom.base       → HTML element defaults
-@layer axiom.layout     → Layout patterns (grid, container)
-@layer axiom.components → Component styling (.hero, .card)
-@layer axiom.utilities  → Responsive, dark mode, accessibility
+
+### Cards
+
+```html
+<!-- Basic card — framework styles header/footer/figure automatically -->
+<article class="card">
+  <header><h3>Title</h3></header>
+  <p>Content here.</p>
+  <footer>
+    <button class="primary">Action</button>
+  </footer>
+</article>
+
+<!-- Card with media -->
+<article class="card">
+  <figure>
+    <img src="image.jpg" alt="Description">
+  </figure>
+  <header><h3>Media Card</h3></header>
+  <p>Image bleeds edge-to-edge automatically.</p>
+</article>
+
+<!-- Ghost card (transparent, no border) -->
+<div class="card ghost">
+  <span class="axicon render" data-name="Zap"></span>
+  <h4>Feature</h4>
+  <p>Description</p>
+</div>
+
+<!-- Clickable card -->
+<a href="/details" class="card">
+  <header><h3>Click me →</h3></header>
+  <p>The entire card is the link.</p>
+</a>
 ```
 
-### JavaScript
-- **Navigation** - SPA routing with browser history
-- **Config** - Theme/spacing management with localStorage
-- **HubNav** - Category filtering, chapter loading, component preview
-- **CodeSnippet** - Copy-to-clipboard for code blocks
+### Alerts
 
-## Philosophy Compliance
+```html
+<div class="alert info" role="status">
+  <p>Informational message.</p>
+</div>
 
-| Principle | Status |
-|-----------|--------|
-| One semantic class per component | ✅ 100% |
-| Zero BEM classes | ✅ 100% |
-| No class hierarchies | ✅ 100% |
-| Element-based CSS styling | ✅ 100% |
-| Framework handles CSS | ✅ 100% |
-| Design tokens only | ✅ 100% |
-| Mobile-first responsive | ✅ 100% |
-| Dark mode automatic | ✅ 100% |
-| Accessibility (WCAG 2.1 AA) | ✅ 100% |
+<div class="alert success" role="status">
+  <span class="axicon render" data-name="Check-Circle"></span>
+  <div>
+    <strong>Saved!</strong>
+    <p>Your changes have been saved.</p>
+  </div>
+</div>
 
-## Build Status
+<div class="alert warning" role="alert">
+  <span class="axicon render" data-name="Alert-Triangle"></span>
+  <div><p>Please review before continuing.</p></div>
+</div>
 
-**Phase 1: Foundation** ✅ COMPLETE
-- CSS framework with @layer cascade
-- Design tokens (30+ OKLCH variables)
-- Semantic HTML structure
-- Core JavaScript (routing, theming)
-- Mobile-first responsive
+<div class="alert error" role="alert">
+  <span class="axicon render" data-name="Alert-Circle"></span>
+  <div><p>An error occurred.</p></div>
+</div>
+```
 
-**Phase 2: Components** ✅ COMPLETE
-- 20+ UI components fully styled
-- Hub layout (3-column pattern)
-- Navigation and routing system
-- Theme/spacing toggles
-- Full accessibility support
+### Forms
 
-**Phase 3: Content** 🔄 IN PROGRESS
-- Component documentation (77 components)
-- Book chapters (17 chapters)
-- Component preview functionality
-- Search/filtering system
-- Live configurator
+```html
+<!-- Labels wrap inputs — no extra classes needed -->
+<form>
+  <label for="email">Email Address</label>
+  <input type="email" id="email" required>
+
+  <label for="message">Message</label>
+  <textarea id="message" rows="5"></textarea>
+
+  <label for="country">Country</label>
+  <select id="country">
+    <option value="">Choose…</option>
+    <option value="us">United States</option>
+  </select>
+
+  <button type="submit" class="primary">Send</button>
+</form>
+```
+
+### Badges
+
+```html
+<span class="badge primary">Primary</span>
+<span class="badge success">Success</span>
+<span class="badge warning">Warning</span>
+<span class="badge error">Error</span>
+<span class="badge info">Info</span>
+```
+
+### Tables
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Alice Smith</td>
+      <td><span class="badge success">Active</span></td>
+      <td>Admin</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Striped -->
+<table data-variant="striped">...</table>
+```
+
+## Axicons — 3,969 SVG Icons
+
+Five variants: Base (450), Thin (760), Inverted (758), Color (1,351), Premium (650).
+
+```html
+<!-- Load scripts -->
+<script src="js/axicons-base.js"></script>
+<script src="js/render-icons.js"></script>
+
+<!-- Use icons -->
+<span class="axicon render" data-name="Check"></span>
+<span class="axicon render" data-name="Check-Color"></span>
+<span class="axicon render" data-name="Check-Premium"></span>
+
+<!-- In buttons -->
+<button class="primary">
+  <span class="axicon render" data-name="Plus"></span> Add Item
+</button>
+```
+
+## Theming
+
+### Dark Mode
+
+```html
+<!-- Set on html element -->
+<html data-theme="light">
+<html data-theme="dark">
+```
+
+```js
+// Toggle
+document.documentElement.setAttribute('data-theme',
+  document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+);
+```
+
+### Custom Theme
+
+```css
+/* Override any tokens in your own stylesheet */
+:root {
+  --a-color-primary: #7c3aed;        /* Your brand color */
+  --a-color-secondary: #0ea5e9;
+  --a-border-radius-base: 8px;       /* More rounded */
+  --a-font-family-sans: 'Inter', sans-serif;
+  --a-heading-scale: 1.2;            /* Larger heading scale */
+}
+
+[data-theme="dark"] {
+  --a-color-surface: #0f172a;
+  --a-color-on-surface: #f8fafc;
+}
+```
+
+## Grid System
+
+```html
+<!-- Auto-responsive grid -->
+<div class="grid">
+  <article class="card">Column 1</article>
+  <article class="card">Column 2</article>
+  <article class="card">Column 3</article>
+</div>
+
+<!-- Tight grid (smaller min-width) -->
+<div class="grid tight">...</div>
+```
+
+## Layout
+
+```html
+<!-- Max-width container with responsive padding -->
+<div class="container">
+  <!-- Your content -->
+</div>
+```
+
+## Typography
+
+Paragraphs are automatically constrained to `65ch` for optimal readability.
+
+```html
+<!-- All text elements — no classes needed -->
+<h1>Page Title</h1>
+<p>Body paragraph, auto-constrained to 65ch.</p>
+<p class="muted">Secondary text using muted class.</p>
+
+<ul>
+  <li>List item one</li>
+  <li>List item two</li>
+</ul>
+
+<ol>
+  <li>Step one</li>
+  <li>Step two</li>
+</ol>
+
+<blockquote>
+  "A quote here."
+  <cite>— Source</cite>
+</blockquote>
+```
+
+## Accessibility
+
+All components are WCAG 2.1 AA compliant out of the box:
+
+- Native semantic elements (`<button>`, `<nav>`, `<dialog>`, `<progress>`)
+- Keyboard navigation on all interactive components
+- Focus visible states on every focusable element
+- ARIA attributes where HTML semantics are insufficient
+- Sufficient color contrast in all built-in themes
+- `prefers-reduced-motion` respected for all animations
 
 ## Browser Support
 
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
+All modern browsers — Chrome, Firefox, Safari, Edge (latest 2 versions).
+
+## Stats
+
+| Metric | Value |
+|--------|-------|
+| CSS bundle (gzipped) | **13.3 KB** |
+| JS bundle (gzipped) | **1.0 KB** |
+| Components | **73** |
+| Design tokens | **149** |
+| Icons (base) | **450** |
+| Icons (all variants) | **3,969** |
+| Dependencies | **0** |
+
+## Documentation
+
+Full documentation, live demos, and component reference at:
+**[https://github.com/Sol-Roth-Media/axiom01](https://github.com/Sol-Roth-Media/axiom01)**
 
 ## License
 
-MIT License - Free for personal and commercial use.
-
-## Design Principles
-
-1. **Semantic First** - HTML describes meaning, not presentation
-2. **Framework Responsibility** - Framework handles CSS styling
-3. **Developer Responsibility** - Developer writes semantic HTML
-4. **No Build Tools** - Direct source, no compilation
-5. **No External Dependencies** - Pure HTML/CSS/JavaScript
-6. **Accessibility Built-In** - WCAG 2.1 AA from the start
-7. **Mobile First** - Optimized for all screen sizes
-8. **Dark Mode Automatic** - OKLCH color space handles it
-
-## Resources
-
-- **Repository**: `/Users/solroth/Sites/axiom01/` (version3 branch)
-- **Main Files**: `src/index.html`, `src/css/axiom.css`, `src/js/axiom-core.js`
-- **Documentation**: `V3_PROGRESS.md`, `AXIOM01_PHILOSOPHY_FIX.md`
+MIT — free for personal and commercial use.
 
 ---
 
-**Status**: Phase 2 Complete, Phase 3 In Progress
-**Version**: 3.0
-**Last Updated**: June 2024
-
-The semantic rebellion against class-based frameworks starts here. 🎉
+*Axiom01 — The Semantic Rebellion against utility-class chaos.*

@@ -9018,7 +9018,7 @@ section.hero .actions + p {
 }
 
 .hero .grid {
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
 /* ========================================
@@ -12732,7 +12732,7 @@ td code {
 /* Hero grid: 2 columns on mobile */
 @media (max-width: 768px) {
   .hero .grid {
-    grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   }
 }
 
@@ -12925,34 +12925,11 @@ footer .scroll-top:hover {
   color: var(--a-color-on-primary);
 }
 
-/* ============================================================================
-   HERO SECTION — container-direct child targeting
-   (index.html uses section.hero > div.container > p, not .content > p)
-   ============================================================================ */
-
 section.hero .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-}
-
-section.hero .container h1 {
-    text-align: center;
-    margin-bottom: var(--a-space-m);
-}
-
-section.hero .container .tagline {
-    text-align: center;
-}
-
-section.hero .container > p:not(.tagline) {
-    text-align: center;
-    max-width: 700px;
-    margin: var(--a-space-m) auto 0 auto;
-    line-height: 1.6;
-    color: var(--a-color-on-gradient);
-    opacity: 0.95;
 }
 
 /* ============================================================================
@@ -12979,12 +12956,6 @@ section.hero .container > p:not(.tagline) {
 /* 1. HERO PARAGRAPH — centered with reading-width constraint
       Overrides the justify/left-align from earlier rules.
       Applies to both section.hero .container > p and .hero p patterns. */
-section.hero .container > p:not(.tagline),
-.hero > .container > p:not(.tagline) {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
 
 /* 2. HEADER NAV — ensure li elements are vertically centered */
 header.main ul.links li {
@@ -13015,6 +12986,115 @@ header.main ul.links a {
     }
     header.main.menu-open ul.links {
         display: flex !important;
+    }
+}
+
+/* ── NAV LINK VERTICAL CENTERING ──────────────────────────────────────── */
+header.main ul.links li {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+header.main ul.links a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    line-height: 1;
+}
+
+/* ============================================================================
+   LIST BULLET RESTORATION — ensure content lists have bullets
+   Component-specific lists (nav, footer, tabs) have explicit list-style:none
+   ============================================================================ */
+article > ul,
+article > ol,
+.card > ul,
+.card > ol,
+section > .container > ul,
+section > .container > ol {
+    list-style: revert;
+    padding-left: var(--a-space-l);
+    margin-bottom: var(--a-space-m);
+}
+article > ul > li,
+article > ol > li,
+.card > ul > li,
+.card > ol > li {
+    margin-bottom: var(--a-space-s);
+    line-height: var(--a-line-height-base);
+}
+
+/* ============================================================================
+   HERO SECTION — COMPLETE LAYOUT FIX
+   section.hero > div.container (NOT .content — that class isn't used)
+   ============================================================================ */
+
+/* Container: flex column, centered */
+section.hero > .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+/* h1: tight bottom spacing */
+section.hero > .container > h1 {
+    margin: 0 0 var(--a-space-s) 0;
+    text-align: center;
+}
+
+/* tagline: directly after h1 — tight */
+section.hero > .container > .tagline {
+    margin: 0 0 var(--a-space-m) 0;
+    text-align: center;
+}
+
+/* Actions row: sits immediately under tagline */
+section.hero > .container > .actions {
+    margin: 0 0 var(--a-space-m) 0;
+}
+
+/* Paragraph: after actions — constrained width, centered */
+section.hero > .container > p:not(.tagline) {
+    max-width: 680px;
+    text-align: center;
+    margin: 0 auto var(--a-space-l) auto;
+    line-height: 1.6;
+    opacity: 0.95;
+    color: var(--a-color-on-gradient);
+}
+
+/* Stat grid inside hero */
+section.hero > .container > .grid {
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--a-space-m);
+    margin-top: 0;
+}
+
+/* .actions "view all" buttons inside section containers — consistent spacing */
+.container > .grid + .actions,
+.container > .grid ~ .actions {
+    margin-top: var(--a-space-m);
+}
+
+/* Reduce the * + * cascade inside .container to avoid double spacing */
+.container > * + .actions {
+    margin-top: var(--a-space-m);
+}
+
+/* Mobile: 2 columns for stat cards */
+@media (max-width: 768px) {
+    section.hero > .container > .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Very small: 2 columns still (don't go to 1) */
+@media (max-width: 420px) {
+    section.hero > .container > .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--a-space-s);
     }
 }
 
