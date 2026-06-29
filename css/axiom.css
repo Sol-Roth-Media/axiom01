@@ -752,13 +752,15 @@ ul.tree ul { padding-left: var(--a-space-l); border-left: 1px solid var(--a-colo
 ul.tree li { margin-bottom: var(--a-space-s); }
 
 /* --- Mobile Swiping Tabs (menu.tabs) --- */
-menu.tabs, nav.tabs { display: flex; gap: var(--a-space-m); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 0; border-bottom: 2px solid var(--a-color-outline); list-style: none; margin: 0 0 var(--a-space-l) 0; padding-left: 0; scroll-snap-type: x proximity; }
+menu.tabs, nav.tabs { display: flex; gap: var(--a-space-m); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 0; border-bottom: 2px solid var(--a-color-outline); list-style: none; margin: 0 0 var(--a-space-l) 0; padding-left: 0; scroll-snap-type: x proximity;  scrollbar-width: none; }
+menu.tabs::-webkit-scrollbar, nav.tabs::-webkit-scrollbar { display: none; }
 menu.tabs > button, menu.tabs > a { scroll-snap-align: start; background: transparent; border: none; border-bottom: 2px solid transparent; border-radius: 0; padding: 0.375rem 0.875rem; margin-bottom: -2px; color: var(--a-color-on-surface-variant); font-weight: var(--a-font-weight-medium); transition: all 0.2s ease; box-shadow: none; }
 menu.tabs > button:hover, menu.tabs > a:hover { background: color-mix(in oklch, var(--a-color-surface-variant) 50%, transparent); color: var(--a-color-on-surface); transform: none; box-shadow: none; }
 menu.tabs > button[aria-selected="true"], menu.tabs > a[data-active="true"] { color: var(--a-color-primary); border-bottom-color: var(--a-color-primary); font-weight: var(--a-font-weight-bold); }
 
 /* --- CSS Swipe Containers & Stories --- */
-.swipe-container { display: flex; gap: var(--a-space-m); overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: var(--a-space-s); width: 100%; }
+.swipe-container { display: flex; gap: var(--a-space-m); overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: var(--a-space-s); width: 100%;  scrollbar-width: none; }
+.swipe-container::-webkit-scrollbar { display: none; }
 .swipe-container > * { scroll-snap-align: center; flex: 0 0 85%; max-width: 400px; }
 
 .story-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; width: 100%; height: 80vh; border-radius: var(--a-border-radius-large); gap: var(--a-space-m); }
@@ -1288,3 +1290,38 @@ code[class*="language-"] .tag {
 }
 /* Docs Specific Helpers */
 .demo-bg-sunset { padding: var(--a-space-3xl); margin-bottom: var(--a-space-xl); border-radius: var(--a-border-radius-large); background: var(--a-gradient-sunset); }
+
+/* --- Pagination (.pager) --- */
+menu.pager, nav.pager > ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--a-space-xs);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
+menu.pager > li > a, menu.pager > li > button, nav.pager > ul > li > a, nav.pager > ul > li > button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0 var(--a-space-s);
+    border-radius: var(--a-border-radius-base);
+    color: var(--a-color-on-surface);
+    font-weight: var(--a-font-weight-medium);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    gap: var(--a-space-xs);
+    border: 1px solid transparent;
+}
+menu.pager > li > a:hover:not([aria-current="page"]), menu.pager > li > button:hover, nav.pager > ul > li > a:hover:not([aria-current="page"]), nav.pager > ul > li > button:hover {
+    background: var(--a-color-surface-variant);
+}
+menu.pager > li > a[aria-current="page"], nav.pager > ul > li > a[aria-current="page"] {
+    background: var(--a-color-primary);
+    color: var(--a-color-on-primary);
+    font-weight: var(--a-font-weight-bold);
+}
