@@ -7505,6 +7505,90 @@ dialog.drawer main {
 }
 
 /* ============================================================================
+   ZERO-JS DRAWER — aside.drawer + :has() checkbox proxy
+   ============================================================================ */
+aside.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 400px;
+    height: 100dvh;
+    background: var(--a-color-surface);
+    border-left: 1px solid var(--a-color-outline);
+    transform: translateX(110%);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--a-shadow-large);
+}
+
+aside.drawer[data-side="left"] {
+    right: auto;
+    left: 0;
+    border-left: none;
+    border-right: 1px solid var(--a-color-outline);
+    transform: translateX(-110%);
+}
+
+aside.drawer > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--a-space-m);
+    border-bottom: 1px solid var(--a-color-outline);
+    flex-shrink: 0;
+}
+
+aside.drawer > header > h2 {
+    margin: 0;
+    font-size: var(--a-font-size-h3);
+    color: var(--a-color-on-surface);
+}
+
+aside.drawer > header > label {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--a-color-on-surface);
+    transition: color 0.2s ease;
+    border-radius: var(--a-border-radius-small);
+}
+
+aside.drawer > header > label:hover {
+    color: var(--a-color-primary);
+}
+
+aside.drawer > div {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--a-space-m);
+}
+
+label[data-backdrop] {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: none;
+    cursor: default;
+}
+
+/* :has() checkbox proxy — open state */
+figure:has(input[type="checkbox"][data-drawer]:checked) aside.drawer {
+    transform: translateX(0);
+}
+
+figure:has(input[type="checkbox"][data-drawer]:checked) label[data-backdrop] {
+    display: block;
+}
+
+/* ============================================================================
    LIST RESTORATION — reset strips all bullets globally, restore for content
    ============================================================================ */
 article ul, article ol,
