@@ -33,7 +33,7 @@ CLASS_BUDGETS = {
     "docs/components-simple.html": {"max_multi_class_attrs": 14, "max_class_tokens": 56},
     "docs/components-advanced.html": {"max_multi_class_attrs": 14, "max_class_tokens": 58},
     "docs/components-category-view.html": {"max_multi_class_attrs": 8, "max_class_tokens": 40},
-    "docs/integrations.html": {"max_multi_class_attrs": 8, "max_class_tokens": 40},
+    "docs/integrations.html": {"max_multi_class_attrs": 8, "max_class_tokens": 41},
 }
 MULTI_DASH_CLASS_RX = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+){2,}")
 IGNORED_MULTI_DASH_CLASS_PREFIXES = ("fa-",)

@@ -570,78 +570,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const searchInput = overview.querySelector('#component-search');
             const searchResults = overview.querySelector('#search-results');
-            const allComponentLinks = overview.querySelectorAll('.components-nav .category-items a[href*="components/"]');
-            const categoryToggles = overview.querySelectorAll('.category-toggle');
+            const categoryDetails = Array.from(overview.querySelectorAll('details.accordion[data-category]'));
+            const allComponentLinks = overview.querySelectorAll('details.accordion[data-category] a[href*="components/"]');
 
-            categoryToggles.forEach((toggle) => {
-              toggle.addEventListener('click', () => {
-                const expanded = toggle.getAttribute('aria-expanded') === 'true';
-                const controlsId = toggle.getAttribute('aria-controls');
-                const content = controlsId ? document.getElementById(controlsId) : null;
+            function applyResponsiveState() {
+              if (searchInput?.value.trim()) return;
 
-                toggle.setAttribute('aria-expanded', String(!expanded));
-                if (content) {
-                  content.hidden = expanded;
-                }
+              if (window.innerWidth >= 768) {
+                categoryDetails.forEach((details) => {
+                  details.hidden = false;
+                  details.open = true;
+                });
+                return;
+              }
+
+              categoryDetails.forEach((details) => {
+                details.hidden = false;
+                details.open = details.getAttribute('data-category') === 'feedback-and-status';
               });
-            });
+            }
 
             if (searchInput && searchResults) {
               searchInput.addEventListener('input', () => {
                 const query = searchInput.value.toLowerCase().trim();
+
+                if (query === '') {
+                  allComponentLinks.forEach((link) => {
+                    const listItem = link.closest('li') || link;
+                    listItem.hidden = false;
+                  });
+                  searchResults.textContent = '';
+                  applyResponsiveState();
+                  return;
+                }
+
                 let visibleCount = 0;
                 const visibleCategories = new Set();
 
                 allComponentLinks.forEach((link) => {
                   const text = link.textContent.toLowerCase();
                   const label = link.getAttribute('aria-label')?.toLowerCase() || '';
-                  const matches = query === '' || text.includes(query) || label.includes(query);
+                  const matches = text.includes(query) || label.includes(query);
+                  const listItem = link.closest('li') || link;
 
-                  link.hidden = !matches;
-                  if (matches && query !== '') {
+                  listItem.hidden = !matches;
+                  if (matches) {
                     visibleCount += 1;
-                    const category = link.closest('[data-category]');
+                    const category = link.closest('details[data-category]');
                     if (category) visibleCategories.add(category);
                   }
                 });
 
-                categoryToggles.forEach((toggle) => {
-                  const controlsId = toggle.getAttribute('aria-controls');
-                  const content = controlsId ? document.getElementById(controlsId) : null;
-                  const category = toggle.closest('[data-category]');
-                  const shouldExpand = query === '' || visibleCategories.has(category);
-                  toggle.setAttribute('aria-expanded', String(shouldExpand));
-                  if (content) {
-                    content.hidden = !shouldExpand;
-                  }
+                categoryDetails.forEach((details) => {
+                  const hasVisibleLinks = Array.from(details.querySelectorAll('li')).some((item) => !item.hidden);
+                  details.hidden = !hasVisibleLinks;
+                  details.open = visibleCategories.has(details);
                 });
 
-                searchResults.textContent = query
-                  ? `Found ${visibleCount} component${visibleCount === 1 ? '' : 's'}`
-                  : '';
+                searchResults.textContent = `Found ${visibleCount} component${visibleCount === 1 ? '' : 's'}`;
               });
             }
-
-            const applyResponsiveState = () => {
-              if (window.innerWidth >= 768) {
-                categoryToggles.forEach((toggle) => {
-                  toggle.setAttribute('aria-expanded', 'true');
-                  const controlsId = toggle.getAttribute('aria-controls');
-                  const content = controlsId ? document.getElementById(controlsId) : null;
-                  if (content) content.hidden = false;
-                });
-                return;
-              }
-
-              categoryToggles.forEach((toggle) => {
-                const category = toggle.closest('[data-category]');
-                const expanded = category?.getAttribute('data-category') === 'feedback';
-                toggle.setAttribute('aria-expanded', String(expanded));
-                const controlsId = toggle.getAttribute('aria-controls');
-                const content = controlsId ? document.getElementById(controlsId) : null;
-                if (content) content.hidden = !expanded;
-              });
-            };
 
             applyResponsiveState();
             window.addEventListener('resize', applyResponsiveState);
