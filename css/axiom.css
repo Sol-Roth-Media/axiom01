@@ -565,12 +565,14 @@ form label, .field label, .form-label { display: block; font-weight: var(--a-fon
 input[type="text"], input[type="password"], input[type="email"], input[type="search"], input[type="number"], input[type="tel"], input[type="url"], select, textarea {
     display: block; width: 100%; padding: var(--a-space-m); font-size: var(--a-font-size-base); font-family: inherit;
     color: var(--a-color-on-surface); background-color: var(--a-color-surface); border: 1px solid var(--a-color-outline); border-radius: var(--a-border-radius-medium);
-    transition: border-color var(--a-transition-fast) ease, box-shadow var(--a-transition-fast) ease;
+    transition: border-color var(--a-transition-fast) ease, box-shadow var(--a-transition-fast) ease, background-color var(--a-transition-fast) ease;
     margin-bottom: var(--a-space-m);
 }
-input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a-color-primary); box-shadow: 0 0 0 4px color-mix(in oklch, var(--a-color-primary) 15%, transparent); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a-color-primary); box-shadow: 0 0 0 3px color-mix(in oklch, var(--a-color-primary) 25%, transparent); }
+input:invalid:not(:placeholder-shown), textarea:invalid:not(:placeholder-shown), select:invalid:not(:placeholder-shown) { border-color: var(--a-color-error); }
+input:invalid:not(:placeholder-shown):focus, textarea:invalid:not(:placeholder-shown):focus, select:invalid:not(:placeholder-shown):focus { box-shadow: 0 0 0 3px color-mix(in oklch, var(--a-color-error) 25%, transparent); }
 textarea { resize: vertical; min-height: 100px; }
-input:disabled, select:disabled, textarea:disabled { background-color: var(--a-color-surface-variant); color: var(--a-color-text-muted); cursor: not-allowed; }
+input:disabled, select:disabled, textarea:disabled { background-color: var(--a-color-surface-variant); color: var(--a-color-text-muted); cursor: not-allowed; opacity: 0.7; }
 
 /* Range Slider */
 input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; background: var(--a-color-outline); border-radius: var(--a-border-radius-pill); outline: none; cursor: pointer; }
@@ -617,9 +619,20 @@ meter::-webkit-meter-even-less-good-value { background: var(--a-color-error); bo
 
 /* --- Modals --- */
 dialog { border: 1px solid var(--a-color-outline); border-radius: var(--a-border-radius-large); box-shadow: var(--a-shadow-xl); padding: var(--a-space-l); max-width: 90vw; width: 500px; background: var(--a-color-surface); color: var(--a-color-on-surface); }
-dialog::backdrop { background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: opacity 0.3s ease; }
+dialog[open] { animation: modalFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards; }
+dialog::backdrop { background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+dialog[open]::backdrop { animation: backdropFadeIn 0.3s ease-out forwards; }
 dialog header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--a-space-l); padding-bottom: var(--a-space-m); border-bottom: 1px solid var(--a-color-outline); }
 dialog footer { display: flex; justify-content: flex-end; gap: var(--a-space-m); margin-top: var(--a-space-l); padding-top: var(--a-space-m); border-top: 1px solid var(--a-color-outline); }
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes backdropFadeIn {
+    from { opacity: 0; backdrop-filter: blur(0px); }
+    to { opacity: 1; backdrop-filter: blur(8px); }
+}
 
 /* --- Accordion (Native HTML5 Details) --- */
 details { border: 1px solid var(--a-color-outline); border-radius: var(--a-border-radius-medium); overflow: hidden; margin-bottom: var(--a-space-s); transition: box-shadow 0.2s ease; }
@@ -667,9 +680,9 @@ table[data-variant="striped"] tbody tr:nth-child(even) td { background-color: va
 .badge.outline, .pill.outline, .tag.outline { background-color: transparent; color: var(--a-color-on-surface); border-color: var(--a-color-outline); }
 
 /* --- Avatars --- */
-.avatar { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: var(--a-color-surface-variant); color: var(--a-color-on-surface-variant); font-weight: var(--a-font-weight-bold); font-size: var(--a-font-size-sm); overflow: hidden; }
+.avatar { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background-color: var(--a-color-surface-variant); color: var(--a-color-on-surface-variant); font-weight: var(--a-font-weight-bold); font-size: var(--a-font-size-sm); overflow: hidden; box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--a-color-on-surface) 10%, transparent); }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
-.avatar.primary { background-color: var(--a-color-primary); color: var(--a-color-on-primary); }
+.avatar.primary { background-color: var(--a-color-primary); color: var(--a-color-on-primary); box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--a-color-on-primary) 20%, transparent); }
 .avatar.small { width: 32px; height: 32px; font-size: var(--a-font-size-xs); }
 .avatar.large { width: 64px; height: 64px; font-size: var(--a-font-size-l); }
 
@@ -694,8 +707,8 @@ nav.breadcrumb li:not(:last-child)::after { content: "/"; margin-left: var(--a-s
 
 /* --- Tooltips --- */
 .tooltip { position: relative; display: inline-block; cursor: help; }
-.tooltip::after { content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background-color: var(--a-color-on-surface); color: var(--a-color-surface); padding: var(--a-space-s) var(--a-space-m); border-radius: var(--a-border-radius-medium); font-size: var(--a-font-size-sm); white-space: nowrap; z-index: 1000; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; box-shadow: var(--a-shadow-medium); }
-.tooltip:hover::after { opacity: 1; visibility: visible; }
+.tooltip::after { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(0); background-color: var(--a-color-on-surface); color: var(--a-color-surface); padding: var(--a-space-xs) var(--a-space-s); border-radius: var(--a-border-radius-base); font-size: var(--a-font-size-xs); font-weight: var(--a-font-weight-bold); white-space: nowrap; z-index: 1000; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease; box-shadow: var(--a-shadow-medium); margin-bottom: var(--a-space-s); }
+.tooltip:hover::after, .tooltip:focus::after { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-4px); }
 
 /* --- Zero-JS Drawer --- */
 aside.drawer { position: fixed; top: 0; right: 0; width: 100%; max-width: 400px; height: 100dvh; background: var(--a-color-surface); border-left: 1px solid var(--a-color-outline); transform: translateX(110%); transition: transform 0.3s ease; z-index: 1001; display: flex; flex-direction: column; box-shadow: var(--a-shadow-large); }
