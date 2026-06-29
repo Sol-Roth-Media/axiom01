@@ -12,142 +12,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-	<style>
-		/* Form demos sit directly in article.card — no figure wrapper
-		   so they get proper form spacing, not media preview spacing */
-		article.card > form {
-			padding: var(--a-space-l);
-			background: var(--a-color-surface-variant);
-			border-radius: var(--a-border-radius-base);
-			margin-bottom: var(--a-space-m);
-		}
-
-		/* Inputs inside forms need proper vertical rhythm */
-		article.card form label {
-			display: block;
-			margin-bottom: var(--a-space-xs);
-			font-weight: var(--a-font-weight-medium);
-			color: var(--a-color-on-surface);
-		}
-
-		article.card form input,
-		article.card form select,
-		article.card form textarea {
-			width: 100%;
-			margin-bottom: var(--a-space-m);
-			box-sizing: border-box;
-		}
-
-		article.card form textarea {
-			resize: vertical;
-			min-height: 100px;
-		}
-
-		article.card form fieldset {
-			border: 1px solid var(--a-color-outline);
-			border-radius: var(--a-border-radius-base);
-			padding: var(--a-space-m);
-			margin-bottom: var(--a-space-m);
-		}
-
-		article.card form legend {
-			font-weight: var(--a-font-weight-bold);
-			padding: 0 var(--a-space-xs);
-		}
-
-		article.card form fieldset label {
-			display: flex;
-			align-items: center;
-			gap: var(--a-space-s);
-			font-weight: var(--a-font-weight-normal);
-			margin-bottom: var(--a-space-s);
-			cursor: pointer;
-		}
-
-		article.card form fieldset input[type="checkbox"],
-		article.card form fieldset input[type="radio"] {
-			width: auto;
-			margin: 0;
-			flex-shrink: 0;
-		}
-
-		/* Two-column form grid */
-		.form-grid {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 0 var(--a-space-l);
-		}
-
-		@media (max-width: 600px) {
-			.form-grid {
-				grid-template-columns: 1fr;
-			}
-		}
-
-		.form-grid label {
-			display: block;
-			margin-bottom: var(--a-space-xs);
-		}
-
-		.form-grid > * {
-			/* Let full-width items span both columns */
-		}
-
-		.form-grid .span-2 {
-			grid-column: 1 / -1;
-		}
-
-		/* Error state */
-		.input-error input,
-		.input-error textarea,
-		.input-error select {
-			border-color: var(--a-color-error) !important;
-			background-color: var(--a-color-error-container);
-		}
-
-		.input-error small {
-			color: var(--a-color-error);
-			display: flex;
-			align-items: center;
-			gap: var(--a-space-xs);
-			margin-top: calc(var(--a-space-m) * -0.75);
-			margin-bottom: var(--a-space-m);
-			font-size: var(--a-font-size-sm);
-		}
-
-		/* Success state */
-		.input-success input {
-			border-color: var(--a-color-success) !important;
-		}
-
-		.input-success small {
-			color: var(--a-color-success);
-			display: flex;
-			align-items: center;
-			gap: var(--a-space-xs);
-			margin-top: calc(var(--a-space-m) * -0.75);
-			margin-bottom: var(--a-space-m);
-			font-size: var(--a-font-size-sm);
-		}
-
-		/* Helper text */
-		article.card form .hint {
-			font-size: var(--a-font-size-sm);
-			color: var(--a-color-on-surface-variant);
-			margin-top: calc(var(--a-space-m) * -0.75);
-			margin-bottom: var(--a-space-m);
-			display: block;
-		}
-
-		/* Character count */
-		article.card form .char-count {
-			font-size: var(--a-font-size-sm);
-			color: var(--a-color-on-surface-variant);
-			text-align: right;
-			margin-top: calc(var(--a-space-m) * -0.75);
-			margin-bottom: var(--a-space-m);
-		}
-	</style>
+	
 </head>
 <body class="axiom-body">
 
@@ -199,9 +64,7 @@
 						<label for="contact-message">Message <span aria-hidden="true">*</span></label>
 						<textarea id="contact-message" name="message" rows="5"
 							placeholder="Your message here…"
-							oninput="document.getElementById('msg-count').textContent = this.value.length + '/500'"
 							maxlength="500" required></textarea>
-						<span class="char-count" id="msg-count">0/500</span>
 
 						<div class="actions">
 							<button type="submit" class="primary">
@@ -232,55 +95,7 @@
 			</article>
 			</section>
 
-			<!-- ── TWO-COLUMN LAYOUT ─────────────────────────────────────── -->
-			<section>
-				<h2>Two-Column Layout</h2>
-				<p>Use CSS grid on the form for responsive two-column layouts. Fields span both columns using a modifier on the label's parent:</p>
-				<article class="card">
-					<form class="form-grid" novalidate>
-						<div>
-							<label for="fn">First Name</label>
-							<input type="text" id="fn" autocomplete="given-name" placeholder="Jane">
-						</div>
-						<div>
-							<label for="ln">Last Name</label>
-							<input type="text" id="ln" autocomplete="family-name" placeholder="Smith">
-						</div>
-						<div class="span-2">
-							<label for="grid-email">Email Address</label>
-							<input type="email" id="grid-email" autocomplete="email" placeholder="jane@example.com">
-						</div>
-						<div>
-							<label for="city">City</label>
-							<input type="text" id="city" autocomplete="address-level2" placeholder="London">
-						</div>
-						<div>
-							<label for="postcode">Post Code</label>
-							<input type="text" id="postcode" autocomplete="postal-code" placeholder="SW1A 1AA">
-						</div>
-						<div class="span-2">
-							<div class="actions">
-								<button type="submit" class="primary">Save Address</button>
-							</div>
-						</div>
-					</form>
-					<pre><code class="language-css">/* Two-column responsive grid */
-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 var(--a-space-l);
-}
 
-@media (max-width: 600px) {
-  form { grid-template-columns: 1fr; }
-}
-
-/* Full-width field */
-.span-full {
-  grid-column: 1 / -1;
-}</code></pre>
-				</article>
-			</section>
 
 			<!-- ── ALL INPUT TYPES ───────────────────────────────────────── -->
 			<section>
@@ -314,9 +129,8 @@ form {
 						<label for="t-color">Colour</label>
 						<input type="color" id="t-color" value="#2563eb">
 
-						<label for="t-range">Range (0–100): <output id="t-range-out">50</output></label>
-						<input type="range" id="t-range" min="0" max="100" value="50"
-							   oninput="document.getElementById('t-range-out').value=this.value">
+						<label for="t-range">Range (0–100)</label>
+						<input type="range" id="t-range" min="0" max="100" value="50">
 
 						<label for="t-search">Search</label>
 						<input type="search" id="t-search" placeholder="Search…">
@@ -331,9 +145,8 @@ form {
 &lt;label for="time"&gt;Time&lt;/label&gt;
 &lt;input type="time" id="time"&gt;
 
-&lt;label for="vol"&gt;Volume: &lt;output id="vol-out"&gt;50&lt;/output&gt;&lt;/label&gt;
-&lt;input type="range" id="vol" min="0" max="100" value="50"
-       oninput="document.getElementById('vol-out').value=this.value"&gt;
+&lt;label for="vol"&gt;Volume&lt;/label&gt;
+&lt;input type="range" id="vol" min="0" max="100" value="50"&gt;
 
 &lt;label for="file"&gt;File Upload&lt;/label&gt;
 &lt;input type="file" id="file" accept=".pdf,.doc"&gt;</code></pre>
@@ -351,17 +164,9 @@ form {
 
 						<label for="ta-lg">Long description (8 rows)</label>
 						<textarea id="ta-lg" rows="8" placeholder="Full description with plenty of space to write…"></textarea>
-
-						<label for="ta-count">Bio (max 280 characters)</label>
-						<textarea id="ta-count" rows="4" maxlength="280" placeholder="Tell us about yourself…"
-							oninput="document.getElementById('ta-count-n').textContent=this.value.length"></textarea>
-						<span class="char-count"><span id="ta-count-n">0</span>/280</span>
 					</form>
 					<pre><code class="language-html">&lt;label for="bio"&gt;Bio&lt;/label&gt;
-&lt;textarea id="bio" rows="4"
-          maxlength="280"
-          oninput="charCount.textContent=this.value.length"&gt;&lt;/textarea&gt;
-&lt;span&gt;&lt;span id="charCount"&gt;0&lt;/span&gt;/280&lt;/span&gt;</code></pre>
+&lt;textarea id="bio" rows="4" maxlength="280"&gt;&lt;/textarea&gt;</code></pre>
 				</article>
 			</section>
 

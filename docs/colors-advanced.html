@@ -7,7 +7,6 @@
 	<script>(function(){const t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();</script>
 	<link rel="stylesheet" href="../css/axiom.css">
 	<link rel="stylesheet" href="../css/axicons.css">
-	<!-- doc-styles.css merged into axiom.css -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -24,7 +23,7 @@
 			<li><a href="../index.html#axicons">Axicons</a></li>
 		</ul>
 		<div class="actions">
-				<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
 			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
 			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
 		</div>
@@ -32,216 +31,101 @@
 </header>
 
 <main id="main-content">
-
-	<section>
+	<section class="hero">
 		<div class="container">
-
 			<header>
 				<h1>Colors &amp; Design Tokens</h1>
-				<p>Axiom01 uses a semantic color system based on Material Design 3 principles. Colors are named by their <em>role</em>, not their hue — so they adapt automatically across themes and dark mode.</p>
+				<p>Axiom01 enforces a semantic color system powered by OKLCH math. Colors are assigned by their <em>structural role</em>, rather than hardcoded hex values, ensuring perfect contrast and automatic dark mode scaling without class hoarding.</p>
 			</header>
-
-			<section>
-				<h2>Color System Overview</h2>
-				<p>Rather than naming colors <em>red</em> or <em>blue</em>, Axiom01 defines colors by purpose: <code>primary</code>, <code>error</code>, <code>surface</code>. This makes them meaningful, maintainable, and theme-ready.</p>
-
-				<blockquote>Instead of "use red for errors", define "use <code>--a-color-error</code>" — which adapts automatically for dark mode and respects users with color blindness when paired with text.</blockquote>
-			</section>
-
-			<section>
-				<h2>Primary Color Family</h2>
-				<p>Your brand color — used for the most important actions and states.</p>
-
-				<article class="card">
-					<div class="swatches">
-						<div class="swatch primary" data-label="--a-color-primary"></div>
-						<div class="swatch secondary-container" data-label="--a-color-on-primary"></div>
-						<div class="swatch primary-container" data-label="--a-color-primary-container"></div>
-					</div>
-				</article>
-
-				<table>
-					<thead>
-						<tr><th>Token</th><th>Role</th><th>Use for</th></tr>
-					</thead>
-					<tbody>
-						<tr><td><code>--a-color-primary</code></td><td>Brand color</td><td>Action buttons, links, focus rings</td></tr>
-						<tr><td><code>--a-color-on-primary</code></td><td>Text on primary</td><td>Text inside primary-colored elements</td></tr>
-						<tr><td><code>--a-color-primary-container</code></td><td>Light primary</td><td>Badge backgrounds, card accents, chips</td></tr>
-						<tr><td><code>--a-color-on-primary-container</code></td><td>Text on container</td><td>Text inside primary-container elements</td></tr>
-					</tbody>
-				</table>
-
-				<pre><code class="language-css">button.primary {
-  background: var(--a-color-primary);
-  color: var(--a-color-on-primary);
-}
-
-.badge {
-  background: var(--a-color-primary-container);
-  color: var(--a-color-on-primary-container);
-}</code></pre>
-			</section>
-
-			<section>
-				<h2>Semantic Status Colors</h2>
-				<p>Status colors communicate state. Use the container variants for alert backgrounds; use the base variants for borders and icons.</p>
-
-				<article class="card">
-					<div class="swatches">
-						<div class="swatch success" data-label="--a-color-success"></div>
-						<div class="swatch warning" data-label="--a-color-warning"></div>
-						<div class="swatch error" data-label="--a-color-error"></div>
-						<div class="swatch info-container" data-label="--a-color-info-container"></div>
-					</div>
-				</article>
-
-				<table>
-					<thead>
-						<tr><th>Token</th><th>Role</th><th>Use for</th></tr>
-					</thead>
-					<tbody>
-						<tr><td><code>--a-color-success</code></td><td>Positive state</td><td>Confirmations, completed actions</td></tr>
-						<tr><td><code>--a-color-success-container</code></td><td>Light success</td><td>Alert backgrounds, subtle badges</td></tr>
-						<tr><td><code>--a-color-warning</code></td><td>Cautionary state</td><td>Warnings before irreversible actions</td></tr>
-						<tr><td><code>--a-color-warning-container</code></td><td>Light warning</td><td>Warning alert backgrounds</td></tr>
-						<tr><td><code>--a-color-error</code></td><td>Negative state</td><td>Validation errors, destructive actions</td></tr>
-						<tr><td><code>--a-color-error-container</code></td><td>Light error</td><td>Error alert backgrounds</td></tr>
-						<tr><td><code>--a-color-info</code></td><td>Informational</td><td>Tips, hints, neutral notices</td></tr>
-						<tr><td><code>--a-color-info-container</code></td><td>Light info</td><td>Info alert backgrounds</td></tr>
-					</tbody>
-				</table>
-
-				<pre><code class="language-css">.alert.success {
-  background: var(--a-color-success-container);
-  color: var(--a-color-on-success-container);
-  border-left: 4px solid var(--a-color-success);
-}
-
-.alert.error {
-  background: var(--a-color-error-container);
-  color: var(--a-color-on-error-container);
-  border-left: 4px solid var(--a-color-error);
-}</code></pre>
-			</section>
-
-			<section>
-				<h2>Surface &amp; Neutral Colors</h2>
-				<p>Surface colors define the background hierarchy. Neutral text colors provide readable contrast at every level.</p>
-
-				<table>
-					<thead>
-						<tr><th>Token</th><th>Role</th><th>Use for</th></tr>
-					</thead>
-					<tbody>
-						<tr><td><code>--a-color-surface</code></td><td>Primary background</td><td>Page backgrounds, cards, containers</td></tr>
-						<tr><td><code>--a-color-surface-variant</code></td><td>Secondary background</td><td>Hover states, striped rows, input fills</td></tr>
-						<tr><td><code>--a-color-on-surface</code></td><td>Primary text</td><td>Main body text, headings</td></tr>
-						<tr><td><code>--a-color-on-surface-variant</code></td><td>Secondary text</td><td>Labels, helper text, captions</td></tr>
-						<tr><td><code>--a-color-outline</code></td><td>Borders &amp; dividers</td><td>Card borders, input borders, <code>&lt;hr&gt;</code></td></tr>
-					</tbody>
-				</table>
-			</section>
-
-			<section>
-				<h2>Understanding "On" Colors</h2>
-				<p>Any token prefixed with <code>on-</code> is the foreground color that goes <em>on top of</em> the named background. This pairing guarantees WCAG contrast compliance.</p>
-
-				<blockquote>
-					Background <code>var(--a-color-primary)</code> → text uses <code>var(--a-color-on-primary)</code><br>
-					Background <code>var(--a-color-error-container)</code> → text uses <code>var(--a-color-on-error-container)</code>
-				</blockquote>
-			</section>
-
-			<section>
-				<h2>Understanding "Container" Colors</h2>
-				<p>Container colors are lighter, tinted versions of their parent. Use them for backgrounds when the full-strength color would be too heavy.</p>
-
-				<article class="card">
-					<div class="grid">
-						<div class="alert success">
-							<span class="axicon render" data-name="Check-Circle"></span>
-							<p><strong>Success</strong> — uses <code>success-container</code> background</p>
-						</div>
-						<div class="alert error">
-							<span class="axicon render" data-name="Alert-Circle"></span>
-							<p><strong>Error</strong> — uses <code>error-container</code> background</p>
-						</div>
-					</div>
-				</article>
-
-				<pre><code class="language-css">/* Full-strength: prominent actions */
-button.primary { background: var(--a-color-primary); }
-
-/* Container: subtle backgrounds */
-.badge        { background: var(--a-color-primary-container); }</code></pre>
-			</section>
-
-			<section>
-				<h2>Always Use Tokens, Never Hardcode</h2>
-
-				<div class="grid">
-					<article class="card">
-						<header><h3><span class="badge success">✓ Correct</span></h3></header>
-						<pre><code class="language-css">button {
-  background: var(--a-color-primary);
-  color: var(--a-color-on-primary);
-  border-color: var(--a-color-outline);
-}</code></pre>
-					</article>
-					<article class="card">
-						<header><h3><span class="badge error">✗ Avoid</span></h3></header>
-						<pre><code class="language-css">button {
-  background: #2563eb;
-  color: #ffffff;
-  border-color: #e2e8f0;
-}</code></pre>
-					</article>
-				</div>
-
-				<p>Hardcoded colors break dark mode, break custom themes, and create maintenance debt. Tokens are automatic.</p>
-			</section>
-
-			<section>
-				<h2>Dark Mode</h2>
-				<p>All tokens adapt automatically. Add <code>data-theme="dark"</code> and every color responds:</p>
-
-				<pre><code class="language-html">&lt;!-- Light mode --&gt;
-&lt;html data-theme="light"&gt;
-
-&lt;!-- Dark mode --&gt;
-&lt;html data-theme="dark"&gt;</code></pre>
-
-				<p>Toggle it via JavaScript:</p>
-				<pre><code class="language-js">const toggle = () => {
-  const current = document.documentElement.getAttribute('data-theme');
-  document.documentElement.setAttribute('data-theme',
-    current === 'dark' ? 'light' : 'dark'
-  );
-};</code></pre>
-			</section>
-
-		<section id="oklch-lightness">
-			<h2>The Illusion of Lightness: Why HSL is Broken</h2>
-			<p>HSL color math has a fundamental flaw: the human eye perceives different hues as having different brightness, even at the same "Lightness" value. Yellow at <code>hsl(60, 100%, 50%)</code> appears nearly white and unreadable with white text. Blue at <code>hsl(240, 100%, 50%)</code> at the same lightness appears dark and readable. Contrast ratios silently fail when theming with HSL.</p>
-			<p>Axiom01 uses <strong>OKLCH</strong> — a perceptually uniform color space — to guarantee that color tokens maintain consistent visual contrast across all hues and themes, delivering WCAG AAA compliance natively at the framework root.</p>
-
-			<div>
-				<div>
-					<strong>Yellow (HSL 50% L)</strong><br>
-					<span>Appears ~89% Light — white text is unreadable</span>
-				</div>
-				<div>
-					<strong>Blue (HSL 50% L)</strong><br>
-					<span>Appears ~30% Light — white text is readable</span>
-				</div>
-			</div>
-			<p>Both blocks are at 50% HSL Lightness — yet the perceived brightness is completely different. Axiom01's OKLCH foundation fixes this discrepancy natively at the framework root.</p>
-		</section>
-
 		</div>
 	</section>
 
+	<section>
+		<div class="container">
+			<section>
+				<h2>The OKLCH Advantage</h2>
+				<p>Axiom01 uses <strong>OKLCH</strong> — a perceptually uniform color space. Unlike HSL or RGB, OKLCH guarantees that color tokens maintain consistent visual brightness and contrast across all hues and themes, delivering WCAG AAA compliance natively at the framework root.</p>
+				
+				<div class="grid">
+					<article class="card">
+						<header><h3>The Flaw with HSL</h3></header>
+						<p>Yellow and Blue at 50% HSL Lightness appear drastically different in perceptual brightness, causing contrast failures when theming.</p>
+					</article>
+					<article class="card">
+						<header><h3>The OKLCH Fix</h3></header>
+						<p>Axiom01's mathematically calculated OKLCH tokens lock lightness scaling, ensuring that swapping the primary hue variable preserves contrast perfectly.</p>
+					</article>
+				</div>
+			</section>
+
+			<section>
+				<h2>Core Token Families</h2>
+				<p>Never hardcode a color. Instead, use these semantic CSS variables across your stylesheets to inherit the theme perfectly.</p>
+
+				<article class="card">
+					<header><h3>Primary</h3></header>
+					<table>
+						<thead><tr><th>Token</th><th>Description</th></tr></thead>
+						<tbody>
+							<tr><td><code>--a-color-primary</code></td><td>The brand color. Use for core actions, buttons, and active states.</td></tr>
+							<tr><td><code>--a-color-on-primary</code></td><td>Text color guaranteed to be readable on top of primary backgrounds.</td></tr>
+							<tr><td><code>--a-color-primary-container</code></td><td>A tinted background variant for badges, selected items, and soft highlights.</td></tr>
+							<tr><td><code>--a-color-on-primary-container</code></td><td>Text color readable on top of primary container backgrounds.</td></tr>
+						</tbody>
+					</table>
+				</article>
+
+				<article class="card">
+					<header><h3>Surface &amp; Neutral</h3></header>
+					<table>
+						<thead><tr><th>Token</th><th>Description</th></tr></thead>
+						<tbody>
+							<tr><td><code>--a-color-surface</code></td><td>The default background for the page and main structural cards.</td></tr>
+							<tr><td><code>--a-color-surface-variant</code></td><td>A secondary background used for alternating rows, nested cards, or input fields.</td></tr>
+							<tr><td><code>--a-color-on-surface</code></td><td>The primary text color.</td></tr>
+							<tr><td><code>--a-color-on-surface-variant</code></td><td>Muted text for metadata, captions, and secondary information.</td></tr>
+							<tr><td><code>--a-color-outline</code></td><td>The structural border color for dividers and inputs.</td></tr>
+						</tbody>
+					</table>
+				</article>
+
+				<article class="card">
+					<header><h3>Status Families</h3></header>
+					<p>Available status variations follow the exact same <code>base</code>, <code>on-base</code>, <code>container</code>, and <code>on-container</code> pattern:</p>
+					<ul>
+						<li><strong>Success</strong>: <code>--a-color-success</code>, <code>--a-color-success-container</code>, etc.</li>
+						<li><strong>Warning</strong>: <code>--a-color-warning</code>, <code>--a-color-warning-container</code>, etc.</li>
+						<li><strong>Error</strong>: <code>--a-color-error</code>, <code>--a-color-error-container</code>, etc.</li>
+						<li><strong>Info</strong>: <code>--a-color-info</code>, <code>--a-color-info-container</code>, etc.</li>
+					</ul>
+				</article>
+			</section>
+
+			<section>
+				<h2>Creating Custom Themes</h2>
+				<p>Since the entire color system is built on dynamic OKLCH variables driven by a master hue token, creating a custom theme (like an "ocean" theme) requires only a few lines of CSS applied to a root selector.</p>
+
+				<article class="card">
+					<header><h3>Defining a Theme</h3></header>
+					<p>Simply override the root hue and structural tokens for your theme selector.</p>
+					<pre><code class="language-css">/* Apply via &lt;html data-theme="ocean"&gt; */
+[data-theme="ocean"] {
+  /* Shift the primary brand color to a deep teal */
+  --a-hue-primary: 180;
+  
+  /* Give the surface a subtle blue tint */
+  --a-hue-surface: 190;
+  --chroma-surface: 0.05;
+
+  /* Reshape structural tokens to feel softer */
+  --a-radius: 1.5rem;
+}</code></pre>
+				</article>
+				<p>Axiom01's internal math will automatically calculate every container, outline, and contrast color based on these base tokens.</p>
+			</section>
+
+		</div>
+	</section>
 </main>
 
 <footer class="main">
@@ -250,47 +134,16 @@ button.primary { background: var(--a-color-primary); }
       <a href="../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
       <p class="tagline">The Semantic Web, Reimagined.</p>
     </div>
-    <div class="column">
-      <h4>Documentation</h4>
-      <ul>
-        <li><a href="../docs/components-overview.html">All Components</a></li>
-        <li><a href="../docs/overview-quickstart.html">Get Started</a></li>
-        <li><a href="../docs/colors-advanced.html">Colors &amp; Tokens</a></li>
-      </ul>
-    </div>
-    <div class="column">
-      <h4>Resources</h4>
-      <ul>
-        <li><a href="../docs/styling-guide.html">Styling Guide</a></li>
-        <li><a href="../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-        <li><a href="../LICENSE" target="_blank">MIT License</a></li>
-      </ul>
-    </div>
-    <div class="column">
-      <h4>Community</h4>
-      <ul>
-        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
-      </ul>
-    </div>
   </div>
   <div class="content">
     <div class="bottom">
       <p class="copyright">&copy; <span data-current-year></span> Sol Roth Media. MIT License.</p>
-      <ul class="legal">
-        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub Repository"><span class="axicon render" data-name="GitHub"></span></a></li>
-        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM Package"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
-      </ul>
     </div>
   </div>
 </footer>
 
 <script src="../js/axiom.js"></script>
 <script src="../js/index-page-manager.js"></script>
-<script>
-function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
