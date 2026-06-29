@@ -308,7 +308,12 @@ p { line-height: var(--a-line-height-base); text-wrap: pretty; margin: 0 0 var(-
 p:last-child { margin-bottom: 0; }
 strong, b { font-weight: var(--a-font-weight-bold); }
 em, i { font-style: italic; }
+ul {list-style: disc; padding-left: var(--a-space-l); margin: var(--a-space-m) 0; }
+ol {list-style: decimal; padding-left: var(--a-space-l); margin: var(--a-space-m) 0; }
+li { margin-bottom: var(--a-space-s); }
 
+
+/** legacy, we probably want to remove these */
 .text-muted { color: var(--a-color-on-surface-variant); }
 .text-center { text-align: center; }
 
@@ -326,13 +331,15 @@ a:hover { text-decoration: underline; color: var(--a-color-primary); filter: bri
    LAYOUTS & GRIDS
    ============================================================================ */
 .container { width: 100%; max-width: var(--a-layout-max-width); margin: 0 auto; padding-inline: var(--a-layout-gutter); }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(var(--a-grid-min-column), 1fr)); gap: var(--a-space-l); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(var(--a-grid-min-column), 1fr)); gap: var(--a-space-l); width: 100%; }
 .grid.tight { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--a-space-m); }
 .grid-mini { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--a-space-m); }
+.grid-mini .card > .axicon{ margin-left: auto; margin-right: auto;}
 .split { display: flex; flex-wrap: wrap; gap: var(--a-space-l); }
 .split > * { flex: 1 1 300px; min-width: 0; }
 
 main > section { margin-top: var(--a-space-xl); margin-bottom: var(--a-space-xl); }
+main > section:first-of-type {margin-top: 0;} /* Tightened gap between section header and content */
 main > section > .container > header {
     text-align: center;
     margin-bottom: var(--a-space-xl);
@@ -343,7 +350,7 @@ main > section > .container > header {
     align-items: center;
 }
 main > section > .container > header h2 { margin-bottom: var(--a-space-s); }
-main > section > .container > header p { color: var(--a-color-on-surface-variant); font-size: var(--a-font-size-l); margin: 0; }
+main > section > .container > header p { }
 section > .container > .actions { margin-top: var(--a-space-xl); display: flex; justify-content: center; gap: var(--a-space-m); flex-wrap: wrap; }
 
 /* Skip Link */
@@ -371,6 +378,14 @@ section > .container > .actions { margin-top: var(--a-space-xl); display: flex; 
 /* ============================================================================
    GLOBAL HEADER & NAVIGATION
    ============================================================================ */
+
+header {
+    width: 100%;
+    max-width: var(--a-layout-max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
 header.main {
     background-color: var(--a-color-surface);
     border-bottom: 1px solid var(--a-color-outline);
@@ -572,7 +587,7 @@ meter::-webkit-meter-even-less-good-value { background: var(--a-color-error); bo
 .card h3 { margin: 0 0 var(--a-space-s) 0; font-size: var(--a-font-size-l); font-weight: var(--a-font-weight-bold); }
 .card > footer { margin-top: auto; padding-top: var(--a-space-m); display: flex; align-items: center; gap: var(--a-space-m); background: transparent; border: none; }
 .card:hover { transform: translateY(-4px); box-shadow: var(--a-shadow-large); }
-.card.ghost { background: transparent; border: none; box-shadow: none; padding: 0; text-align: center; }
+.card.ghost { background: transparent; border: none; box-shadow: none; text-align: center; }
 .card.ghost:hover { transform: none; box-shadow: none; }
 .card > figure { margin: calc(var(--a-space-l) * -1) calc(var(--a-space-l) * -1) var(--a-space-m); display: block; overflow: hidden; }
 .card > figure img { width: 100%; height: auto; display: block; object-fit: cover; }
@@ -858,7 +873,6 @@ section.hero h1 {
     color: white;
 }
 section.hero p, section.hero .tagline {
-    font-size: var(--a-font-size-l);
     max-width: 680px;
     margin: 0 auto var(--a-space-m) auto;
     color: rgba(255, 255, 255, 0.92);
@@ -918,6 +932,10 @@ section.hero .button.secondary:hover, section.hero .button.outline:hover { backg
 .content {
     flex-grow: 1;
     padding: var(--a-space-xl) 0;
+}
+
+.content .bottom{
+    width: 100%;
 }
 
 .doc-live-example {
@@ -1141,4 +1159,13 @@ footer.main .legal a:hover {
     /* Ensure action menus stretch fully on small phones */
     menu.action-group { flex-direction: column; align-items: stretch; }
     menu.action-group > * { width: 100%; }
+}
+
+/** Tweak for third party libraries */
+/* Reset Axiom .tag styles when they appear inside a Prism code block */
+pre[class*="language-"] .tag,
+code[class*="language-"] .tag {
+    all: unset; /* Resets all inherited Axiom styles */
+    color: #e2777a; /* Restore Prism's intended tag color */
+    display: inline; /* Ensure it stays inline with other text */
 }
