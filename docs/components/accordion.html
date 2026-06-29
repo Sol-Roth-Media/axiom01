@@ -37,187 +37,109 @@
 
 			<header>
 				<h1>Accordion</h1>
-				<p>Semantic accordion component for organizing expandable content sections. Single `.accordion` class with semantic HTML and ARIA attributes.</p>
+				<p>Native HTML5 disclosure element. Zero JavaScript. The browser's built-in rendering engine handles open/close state, keyboard navigation, and accessibility.</p>
 			</header>
 
 			<section>
 				<h2>Live Example</h2>
 				<article class="card">
 					<figure>
-
-						<div class="accordion" role="region">
-						<button class="accordion-button" aria-expanded="true" aria-controls="panel-1">
-						<span class="axicon render" data-name="ChevronDown"></span>
-						Section 1: Getting Started
-						</button>
-
-						<button class="accordion-button" aria-expanded="false" aria-controls="panel-2">
-						<span class="axicon render" data-name="ChevronDown"></span>
-						Section 2: Features
-						</button>
-
-						<button class="accordion-button" aria-expanded="false" aria-controls="panel-3">
-						<span class="axicon render" data-name="ChevronDown"></span>
-						Section 3: Configuration
-						</button>
-
-						</div>
-
+						<details class="accordion" open>
+							<summary>Is JavaScript required for this?</summary>
+							<div>
+								<p>No. The browser's native C++ rendering engine handles the disclosure state. No event listeners, no aria toggling, no framework needed.</p>
+							</div>
+						</details>
+						<details class="accordion">
+							<summary>How does keyboard navigation work?</summary>
+							<div>
+								<p><kbd>Enter</kbd> or <kbd>Space</kbd> toggles the panel. <kbd>Tab</kbd> moves focus naturally between summaries. All handled natively.</p>
+							</div>
+						</details>
+						<details class="accordion">
+							<summary>Can multiple panels be open at once?</summary>
+							<div>
+								<p>Yes. Each <code>&lt;details&gt;</code> element manages its own open state independently. Remove the <code>open</code> attribute to start collapsed.</p>
+							</div>
+						</details>
 					</figure>
-					<pre><code class="language-html">&lt;div class="accordion" role="region"&gt;
-				&lt;button class="accordion-button" aria-expanded="true" aria-controls="panel-1"&gt;
-				&lt;span class="axicon render" data-name="ChevronDown"&gt;&lt;/span&gt;
-				Section 1
-				&lt;/button&gt;
-				&lt;div id="panel-1" class="accordion-panel"&gt;
-				&lt;p&gt;Content here...&lt;/p&gt;
-				&lt;/div&gt;
+					<pre><code class="language-html">&lt;details class="accordion" open&gt;
+  &lt;summary&gt;Is JavaScript required?&lt;/summary&gt;
+  &lt;div&gt;
+    &lt;p&gt;No. The browser handles disclosure state natively.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
 
-				&lt;button class="accordion-button" aria-expanded="false" aria-controls="panel-2"&gt;
-				&lt;span class="axicon render" data-name="ChevronDown"&gt;&lt;/span&gt;
-				Section 2
-				&lt;/button&gt;
-				&lt;div id="panel-2" class="accordion-panel" hidden&gt;
-				&lt;p&gt;Content here...&lt;/p&gt;
-				&lt;/div&gt;
-				&lt;/div&gt;</code></pre>
+&lt;details class="accordion"&gt;
+  &lt;summary&gt;How does keyboard navigation work?&lt;/summary&gt;
+  &lt;div&gt;
+    &lt;p&gt;Enter or Space toggles the panel. Tab moves focus between summaries.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;</code></pre>
 				</article>
 			</section>
 
 			<section>
 				<h2>Markup Structure</h2>
-				<p>Accordion uses semantic buttons and divs with ARIA attributes:</p>
-					<pre><code class="language-html">&lt;div class="accordion" role="region"&gt;
-				&lt;!-- Button to toggle panel --&gt;
-				&lt;button class="accordion-button"
-				aria-expanded="true|false"
-				aria-controls="panel-id"&gt;
-				&lt;span class="axicon render" data-name="ChevronDown"&gt;&lt;/span&gt;
-				Section Title
-				&lt;/button&gt;
+				<p>One class on the <code>&lt;details&gt;</code> element. The <code>&lt;summary&gt;</code> is the trigger — no extra classes needed.</p>
+				<pre><code class="language-html">&lt;details class="accordion"&gt;
+  &lt;summary&gt;Section Title&lt;/summary&gt;
+  &lt;div&gt;
+    &lt;p&gt;Panel content goes here.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;</code></pre>
+			</section>
 
-				&lt;!-- Content panel --&gt;
-				&lt;div id="panel-id" class="accordion-panel"&gt;
-				&lt;p&gt;Panel content...&lt;/p&gt;
-				&lt;/div&gt;
-
-				&lt;!-- Repeat button/panel pairs --&gt;
-				&lt;/div&gt;</code></pre>
+			<section>
+				<h2>Open by Default</h2>
+				<article class="card">
+					<figure>
+						<details class="accordion" open>
+							<summary>This panel starts open</summary>
+							<div>
+								<p>Add the boolean <code>open</code> attribute to <code>&lt;details&gt;</code> to start expanded.</p>
+							</div>
+						</details>
+					</figure>
+					<pre><code class="language-html">&lt;details class="accordion" open&gt;
+  &lt;summary&gt;This panel starts open&lt;/summary&gt;
+  &lt;div&gt;
+    &lt;p&gt;Content visible on load.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;</code></pre>
+				</article>
 			</section>
 
 			<section>
 				<h2>Key Features</h2>
 				<ul>
-				<li><strong>Semantic Structure</strong> - Uses `<button>` and `
-` elements</li>
-				<li><strong>Single Class</strong> - `.accordion` container, `.accordion-button` and `.accordion-panel`</li>
-				<li><strong>ARIA Attributes</strong> - `aria-expanded`, `aria-controls` for accessibility</li>
-				<li><strong>Icon Rotation</strong> - Chevron rotates to show expanded state</li>
-				<li><strong>Keyboard Navigation</strong> - Tab to buttons, Space/Enter to toggle</li>
-				<li><strong>Hidden State</strong> - Uses native `hidden` attribute</li>
-				<li><strong>No BEM Classes</strong> - No `.accordion-header`, `.accordion-content`</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>JavaScript Implementation</h2>
-				<p>Simple JavaScript for accordion functionality:</p>
-					<pre><code class="language-javascript">// Accordion toggle functionality
-				document.querySelectorAll('.accordion-button').forEach(button => {
-				button.addEventListener('click', function() {
-				const expanded = this.getAttribute('aria-expanded') === 'true';
-				const panelId = this.getAttribute('aria-controls');
-				const panel = document.getElementById(panelId);
-
-				// Toggle button state
-				this.setAttribute('aria-expanded', !expanded);
-
-				// Toggle panel visibility
-				if (expanded) {
-				panel.setAttribute('hidden', '');
-				} else {
-				panel.removeAttribute('hidden');
-				}
-
-				// Optional: Close other panels (single open at a time)
-				// document.querySelectorAll('.accordion-button').forEach(btn => {
-				//     if (btn !== this) {
-				//         btn.setAttribute('aria-expanded', 'false');
-				//         document.getElementById(btn.getAttribute('aria-controls')).setAttribute('hidden', '');
-				//     }
-				// });
-				});
-				});</code></pre>
-			</section>
-
-			<section>
-				<h2>ARIA Attributes</h2>
-				<ul>
-				<li>`role="region"` - Container identifies as a region</li>
-				<li>`aria-expanded="true|false"` - Shows if section is expanded</li>
-				<li>`aria-controls="panel-id"` - Links button to controlled panel</li>
-				<li>`hidden` attribute - Hides collapsed panels semantically</li>
+					<li><strong>Zero JavaScript</strong> — browser disclosure state is handled natively in C++</li>
+					<li><strong>One class</strong> — <code>class="accordion"</code> on <code>&lt;details&gt;</code>, nothing else</li>
+					<li><strong>Keyboard navigation</strong> — <kbd>Enter</kbd>/<kbd>Space</kbd> to toggle, <kbd>Tab</kbd> between summaries</li>
+					<li><strong>Screen reader support</strong> — <code>&lt;summary&gt;</code> is announced with expanded/collapsed state automatically</li>
+					<li><strong>Multiple open panels</strong> — each <code>&lt;details&gt;</code> is independent</li>
+					<li><strong>Open state via attribute</strong> — set or remove the boolean <code>open</code> attribute</li>
 				</ul>
 			</section>
 
 			<section>
 				<h2>Accessibility</h2>
 				<ul>
-				<li>Use `<button>` elements for toggle buttons</li>
-				<li>Include `aria-expanded` to show state</li>
-				<li>Link buttons to panels with `aria-controls`</li>
-				<li>Use `hidden` attribute for collapsed content</li>
-				<li>Support keyboard: Tab navigation, Space/Enter to toggle</li>
-				<li>Icon rotates to show expanded state</li>
-				<li>Sufficient color contrast</li>
-				<li>Test with screen readers</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Responsive Behavior</h2>
-				<p>This component automatically adapts to different screen sizes:</p>
-
-				<h3>Mobile (< 768px)</h3>
-				<p>On mobile devices:</p>
-				<ul>
-				<li>Optimized for small screens</li>
-				<li>Touch-friendly spacing maintained (44px minimum)</li>
-				<li>Text wraps naturally without overflow</li>
-				<li>Content density optimized for readability</li>
-				</ul>
-
-				<h3>Desktop (1024px+)</h3>
-				<p>On desktop displays:</p>
-				<ul>
-				<li>Enhanced visual features</li>
-				<li>Hover states and transitions</li>
-				<li>Full keyboard navigation support</li>
-				<li>Optimal spacing and sizing</li>
-				</ul>
-
-				<h3>Framework Integration</h3>
-				<p>Responsive behavior is automatic:</p>
-				<ul>
-				<li>Framework handles media queries</li>
-				<li>No custom CSS required</li>
-				<li>Mobile-first approach applied</li>
-				<li>Accessibility maintained at all sizes</li>
+					<li>The <code>&lt;summary&gt;</code> element has implicit <code>role="button"</code> — no ARIA needed</li>
+					<li>Expanded/collapsed state is exposed to assistive technology automatically</li>
+					<li>No <code>aria-expanded</code>, <code>aria-controls</code>, or <code>hidden</code> attributes required</li>
+					<li>Focus management is handled by the browser</li>
+					<li>Minimum 44×44px touch target maintained on mobile</li>
 				</ul>
 			</section>
 
 			<section>
 				<h2>Best Practices</h2>
 				<ul>
-				<li>Use semantic `<button>` elements</li>
-				<li>Include clear section titles</li>
-				<li>Use icons to reinforce expand/collapse state</li>
-				<li>Implement keyboard navigation</li>
-				<li>Use `hidden` attribute for collapsed state</li>
-				<li>Update `aria-expanded` when toggling</li>
-				<li>Test with keyboard-only navigation</li>
-				<li>Test with screen readers</li>
-				<li>Consider allowing multiple open sections or single open</li>
+					<li>Write clear, descriptive <code>&lt;summary&gt;</code> text — it is the only visible label</li>
+					<li>Wrap body content in a single <code>&lt;div&gt;</code> for consistent padding</li>
+					<li>Use <code>open</code> on the first panel if the content is critical on load</li>
+					<li>Avoid nesting accordions more than one level deep</li>
 				</ul>
 			</section>
 		

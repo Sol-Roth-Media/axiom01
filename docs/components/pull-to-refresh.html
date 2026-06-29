@@ -30,68 +30,90 @@
 </header>
 <main id="main-content">
 	<section>
-<h2>HTML Structure</h2>
-<article class="card">
-<figure>
-<p>Pull-to-refresh requires a specific markup structure:</p>
-</figure>
-<pre><code class="language-html">&lt;section class="pullrefresh" data-component="pullrefresh" aria-label="Pull to refresh demo"&gt;
-				&lt;output aria-live="polite"&gt;Pull down to refresh&lt;/output&gt;
-				&lt;section data-role="surface" tabindex="0" aria-label="Refresh surface"&gt;
-				&lt;h2&gt;Feed&lt;/h2&gt;
-				&lt;p&gt;Your content here...&lt;/p&gt;
-				&lt;/section&gt;
-				&lt;/section&gt;</code></pre>
-</article></section>
+		<div class="container">
+
+			<header>
+				<h1>Pull to Refresh</h1>
+				<p>Native pull-to-refresh interaction using touch events. Works inside a scrollable container without affecting the page scroll.</p>
+			</header>
 
 			<section>
-<h2>Required Markup Contract</h2>
-<article class="card">
-<ul>
-				<li>Use <code>data-component="pullrefresh"</code> on the root container</li>
-				<li>Include an indicator element (e.g., <code>&lt;output&gt;</code>) with <code>aria-live</code> for status updates</li>
-				<li>Provide a refresh surface marked with <code>data-role="surface"</code></li>
-				<li>Make the surface focusable with <code>tabindex="0"</code></li>
-				<li>Refresh events dispatch as <code>axiom:refresh</code> custom event</li>
-				</ul>
-</article></section>
+				<h2>Live Demo</h2>
+				<article class="card" id="refreshZone" style="height: 400px; overflow-y: auto; overscroll-behavior-y: contain; position: relative;">
+					<div id="refreshIndicator" hidden aria-live="polite">
+						<span class="axicon render" data-name="Loader"></span> Updating...
+					</div>
+					<ul id="feedList">
+						<li class="card">Feed Item 1</li>
+						<li class="card">Feed Item 2</li>
+						<li class="card">Feed Item 3</li>
+					</ul>
+				</article>
+			</section>
 
 			<section>
-<h2>JavaScript Integration</h2>
-<article class="card">
-<figure>
-<p>Listen for refresh events to update your content:</p>
-</figure>
-<pre><code class="language-javascript">document.addEventListener('axiom:refresh', async (event) => {
-				console.log('Refreshing content...');
-				// Fetch new data
-				// Update DOM
-				// Reset indicator
-				});</code></pre>
-</article></section>
+				<h2>HTML Structure</h2>
+				<article class="card">
+					<pre><code class="language-html">&lt;section class="pullrefresh" data-component="pullrefresh" aria-label="Pull to refresh demo"&gt;
+  &lt;output aria-live="polite"&gt;Pull down to refresh&lt;/output&gt;
+  &lt;section data-role="surface" tabindex="0" aria-label="Refresh surface"&gt;
+    &lt;h2&gt;Feed&lt;/h2&gt;
+    &lt;p&gt;Your content here...&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/section&gt;</code></pre>
+				</article>
+			</section>
 
 			<section>
-<h2>Use Cases</h2>
-<article class="card">
-<ul>
-				<li>Mobile feeds and timelines</li>
-				<li>Real-time notification centers</li>
-				<li>Chat or messaging interfaces</li>
-				<li>Data-heavy dashboards</li>
-				<li>Social media feeds</li>
-				</ul>
-</article></section>
+				<h2>Required Markup Contract</h2>
+				<article class="card">
+					<ul>
+						<li>Use <code>data-component="pullrefresh"</code> on the root container</li>
+						<li>Include an indicator element (e.g., <code>&lt;output&gt;</code>) with <code>aria-live</code> for status updates</li>
+						<li>Provide a refresh surface marked with <code>data-role="surface"</code></li>
+						<li>Make the surface focusable with <code>tabindex="0"</code></li>
+						<li>Refresh events dispatch as <code>axiom:refresh</code> custom event</li>
+					</ul>
+				</article>
+			</section>
 
 			<section>
-<h2>Accessibility</h2>
-<article class="card">
-<ul>
-				<li>Uses <code>aria-live</code> to announce status updates</li>
-				<li>Surface is keyboard accessible with <code>tabindex="0"</code></li>
-				<li>Clear visual and textual feedback</li>
-				<li>Works with screen readers</li>
-				</ul>
-</article></section>
+				<h2>JavaScript Integration</h2>
+				<article class="card">
+					<pre><code class="language-javascript">document.addEventListener('axiom:refresh', async (event) => {
+  console.log('Refreshing content...');
+  // Fetch new data
+  // Update DOM
+  // Reset indicator
+});</code></pre>
+				</article>
+			</section>
+
+			<section>
+				<h2>Use Cases</h2>
+				<article class="card">
+					<ul>
+						<li>Mobile feeds and timelines</li>
+						<li>Real-time notification centers</li>
+						<li>Chat or messaging interfaces</li>
+						<li>Data-heavy dashboards</li>
+						<li>Social media feeds</li>
+					</ul>
+				</article>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<article class="card">
+					<ul>
+						<li>Uses <code>aria-live</code> to announce status updates</li>
+						<li>Surface is keyboard accessible with <code>tabindex="0"</code></li>
+						<li>Clear visual and textual feedback</li>
+						<li>Works with screen readers</li>
+					</ul>
+				</article>
+			</section>
+
 		</div>
 	</section>
 </main>
@@ -147,5 +169,31 @@
 <script src="../../js/axicons-color-variants.js"></script>
 <script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
+<!-- Minimal Vanilla JS for Docs Demo Only -->
+<script>
+(function () {
+  const zone = document.getElementById('refreshZone');
+  const indicator = document.getElementById('refreshIndicator');
+  if (!zone || !indicator) return;
+  let startY = 0;
+
+  zone.addEventListener('touchstart', function (e) {
+    startY = e.touches[0].clientY;
+  });
+
+  zone.addEventListener('touchend', function (e) {
+    if (zone.scrollTop === 0 && (e.changedTouches[0].clientY - startY) > 50) {
+      indicator.hidden = false;
+      setTimeout(function () {
+        indicator.hidden = true;
+        const list = document.getElementById('feedList');
+        if (list) {
+          list.insertAdjacentHTML('afterbegin', '<li class="card">New Feed Item</li>');
+        }
+      }, 1500);
+    }
+  });
+}());
+</script>
 </body>
 </html>
