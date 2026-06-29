@@ -5,797 +5,797 @@
 if (!window.axicons) window.axicons = [];
 
 window.axicons = [
-    { id: 1, name: "Activity", category: "health", svgContent: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>' },
-    { id: 4, name: "Activity-Color", category: "ui", svgContent: '<defs><linearGradient id="actGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff1744"/><stop offset="100%" stop-color="#d50000"/></linearGradient></defs><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" fill="none" stroke="url(#actGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' },
-    { id: 7, name: "Adjustments", category: "ui", svgContent: '<polygon points="4 6 4 2 8 6 8 10 4 6Z"/><polygon points="10 6 10 2 14 6 14 10 10 6Z"/><polygon points="16 6 16 2 20 6 20 10 16 6Z"/><line x1="4" y1="14" x2="20" y2="14"/>' },
-    { id: 10, name: "AI", category: "ai", svgContent: '<circle cx="8" cy="8" r="2" fill="currentColor" opacity="0.9"/><circle cx="16" cy="8" r="2" fill="currentColor" opacity="0.9"/><path d="M12 2v8M8 12c0 2.21 1.79 4 4 4s4-1.79 4-4M6 20h12M8 20v2M16 20v2"/>' },
-    { id: 13, name: "Airplane-Color", category: "ai", svgContent: '<defs><linearGradient id="airGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#eceff1"/><stop offset="100%" stop-color="#b0bec5"/></linearGradient></defs><g><path d="M20 12l-10-6v4l-6-2v2l6 2v4l-6 2v2l6-2z" fill="url(#airGrad)" stroke="#546e7a" stroke-width="1.5"/></g>' },
-    { id: 16, name: "Placeholder-Fill-1", category: "general", svgContent: '<rect width="24" height="24" fill="#eeeeee"/>' },
-    { id: 17, name: "AirPods", category: "media", svgContent: '<circle cx="7" cy="11" r="2"/><circle cx="17" cy="11" r="2"/><path d="M7 8V4a1 1 0 0 1 2 0v4M17 8V4a1 1 0 0 0-2 0v4M5 16c0 2-1 4-1 6a3 3 0 0 0 3 3M19 16c0 2 1 4 1 6a3 3 0 0 1-3 3"/>' },
-    { id: 20, name: "Alert-Circle", category: "ui", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>' },
-    { id: 23, name: "Alert-Octagon-Color", category: "ui", svgContent: '<defs><linearGradient id="octRed" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ef5350"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2" fill="url(#octRed)"/><line x1="12" y1="7" x2="12" y2="13" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/><circle cx="12" cy="17" r="1.25" fill="#ffffff"/></g>' },
-    { id: 26, name: "Alert-Triangle", category: "ui", svgContent: '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>' },
-    { id: 29, name: "AlertBell", category: "ui", svgContent: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><circle cx="19" cy="4" r="2" fill="currentColor" opacity="0.9"/>' },
-    { id: 32, name: "AlertCircle", category: "ui", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="0.5" fill="currentColor" opacity="0.9"/>' },
-    { id: 35, name: "AlertCircleSolid", category: "ui", svgContent: '<circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.9"/><line x1="12" y1="8" x2="12" y2="12" stroke="white"/><circle cx="12" cy="16" r="0.8" fill="white"/>' },
-    { id: 38, name: "AlertDot", category: "ui", svgContent: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.9"/>' },
-    { id: 41, name: "Algorithm", category: "development", svgContent: '<path d="M6 3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z"/><path d="M9 8v8M15 8v8M9 12h6"/>' },
-    { id: 44, name: "Amazon", category: "brands", svgContent: '<path d="M2 18c0 1 .5 2 1.5 2h17c1 0 1.5-1 1.5-2V8h-20v10z"/><path d="M22 8H2v-2c0-1 .5-2 1.5-2h17c1 0 1.5 1 1.5 2v2z"/>' },
-    { id: 47, name: "Amazon-Color", category: "brands", svgContent: '<defs><linearGradient id="amzBox" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#37474f"/><stop offset="100%" stop-color="#212121"/></linearGradient></defs><g><path d="M2 18c0 1 .5 2 1.5 2h17c1 0 1.5-1 1.5-2V8h-20v10z" fill="url(#amzBox)"/><path d="M22 8H2v-2c0-1 .5-2 1.5-2h17c1 0 1.5 1 1.5 2v2z" fill="#455a64"/><path d="M6 14s2 2 6 2 6-2 6-2" fill="none" stroke="#ff9800" stroke-width="2" stroke-linecap="round"/><polygon points="18 14 19 12 16 13" fill="#ff9800"/></g>' },
-    { id: 48, name: "Ambulance-Color", category: "general", svgContent: '<defs><linearGradient id="ambGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><rect x="2" y="10" width="16" height="8" rx="2" fill="url(#ambGrad)" stroke="#455a64" stroke-width="1.5"/><rect x="8" y="12" width="4" height="4" fill="#ef5350"/></g>' },
-    { id: 51, name: "AmEx", category: "brands", svgContent: '<rect x="2" y="4" width="20" height="16" rx="2"/><text x="12" y="14" font-size="8">AMEX</text>' },
-    { id: 54, name: "Anchor", category: "objects", svgContent: '<circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/>' },
-    { id: 57, name: "Anchor-Chain-Color", category: "ai", svgContent: '<defs><linearGradient id="chnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#9e9e9e"/><stop offset="100%" stop-color="#616161"/></linearGradient></defs><g><path d="M12 2v6m-4 4a4 4 0 1 0 8 0 4 4 0 1 0-8 0z" fill="none" stroke="#616161" stroke-width="3" stroke-linecap="round"/><circle cx="12" cy="2" r="2" fill="#616161"/></g>' },
-    { id: 60, name: "Placeholder-Fill-2", category: "general", svgContent: '<rect width="24" height="24" fill="#eeeeee"/>' },
-    { id: 61, name: "Anchor-Color", category: "objects", svgContent: '<defs><linearGradient id="ancGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#90a4ae"/><stop offset="100%" stop-color="#455a64"/></linearGradient></defs><g fill="none" stroke="url(#ancGrad)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="18"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><circle cx="12" cy="5" r="2.5" stroke-width="2"/></g>' },
-    { id: 64, name: "Anonymous", category: "ui", svgContent: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>' },
-    { id: 67, name: "Anthropic", category: "brands", svgContent: '<path d="M12 2L4 6v10l8 4 8-4V6l-8-4zm0 3l5 2.5v7L12 15l-5-2.5v-7L12 5z"/>' },
-    { id: 70, name: "Apple", category: "brands", svgContent: '<path d="M12 2c1 0 2 .5 2 1v2c0 1-.5 1-1 1s-1-.5-1-1V3c0-.5 0-1 1-1z"/><path d="M6 5C4 5 2 7 2 9v8c0 2 2 4 4 4h12c2 0 4-2 4-4V9c0-2-2-4-4-4H6zm6 2c1 0 2 1 2 2s-1 2-2 2-2-1-2-2 1-2 2-2z"/>' },
-    { id: 73, name: "Apple-Color", category: "brands", svgContent: '<defs><linearGradient id="appleGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff5252"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><path d="M12 2c1 0 2 .5 2 1v2c0 1-.5 1-1 1s-1-.5-1-1V3c0-.5 0-1 1-1z" fill="#4caf50"/><path d="M6 5C4 5 2 7 2 9v8c0 2 2 4 4 4h12c2 0 4-2 4-4V9c0-2-2-4-4-4z" fill="url(#appleGrad)"/><path d="M18 5c1.5 0 3 1.5 3 3.5V11c0-3-1.5-6-3-6z" fill="#ffffff" opacity="0.25"/></g>' },
-    { id: 74, name: "Archive", category: "development", svgContent: '<polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/>' },
-    { id: 77, name: "Arm", category: "iot", svgContent: '<path d="M4 8h6v8H4zM10 8h8v2M18 8c2 0 2 2 2 4m-2-4c-2 0-2 2-2 4"/><line x1="14" y1="8" x2="14" y2="16"/>' },
-    { id: 80, name: "Armchair-Color", category: "ai", svgContent: '<defs><linearGradient id="armGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4db6ac"/><stop offset="100%" stop-color="#004d40"/></linearGradient></defs><g><path d="M4 11V7a3 3 0 0 1 6 0v2h4V7a3 3 0 0 1 6 0v4" fill="none" stroke="url(#armGrad)" stroke-width="2.5"/><rect x="2" y="11" width="20" height="8" rx="2" fill="url(#armGrad)"/><line x1="6" y1="19" x2="6" y2="22" stroke="#004d40" stroke-width="2.5"/><line x1="18" y1="19" x2="18" y2="22" stroke="#004d40" stroke-width="2.5"/></g>' },
-    { id: 83, name: "Arrow-Down", category: "ui", svgContent: '<line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>' },
-    { id: 86, name: "Arrow-Left", category: "ui", svgContent: '<line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 12"/>' },
-    { id: 89, name: "Arrow-Right", category: "ui", svgContent: '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>' },
-    { id: 92, name: "Arrow-Up", category: "ui", svgContent: '<line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>' },
-    { id: 95, name: "ArrowDownSmall", category: "ui", svgContent: '<polyline points="6 10 12 16 18 10"/>' },
-    { id: 98, name: "ArrowLeftSmall", category: "ui", svgContent: '<polyline points="14 6 8 12 14 18"/>' },
-    { id: 101, name: "ArrowRightSmall", category: "ui", svgContent: '<polyline points="10 6 16 12 10 18"/>' },
-    { id: 104, name: "ArrowUpSmall", category: "ui", svgContent: '<polyline points="18 14 12 8 6 14"/>' },
-    { id: 107, name: "Aspect-Ratio-Color", category: "general", svgContent: '<defs><linearGradient id="arGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#90caf9"/><stop offset="100%" stop-color="#1565c0"/></linearGradient></defs><g><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="url(#arGrad)" stroke-width="2"/><path d="M7 8H5v2M17 16h2v-2M5 14v2h2M19 10V8h-2" fill="none" stroke="#1565c0" stroke-width="1.5"/></g>' },
-    { id: 110, name: "AtSymbol", category: "ui", svgContent: '<circle cx="12" cy="12" r="9"/><path d="M15 11a3 3 0 1 0-3 3m0 0v2.5"/>' },
-    { id: 113, name: "Automation", category: "ai", svgContent: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M15.5 9.5L12 13l-3.5-3.5"/>' },
-    { id: 116, name: "Avatar", category: "ui", svgContent: '<circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6v1H6v-1z"/>' },
-    { id: 119, name: "AvatarFemale", category: "ui", svgContent: '<circle cx="12" cy="6" r="3.5"/><path d="M6 20c0-2.21 2.91-4 6-4s6 1.79 6 4v2M12 16l-3-2 6 0-3 2z" opacity="0.7"/>' },
-    { id: 122, name: "AvatarMale", category: "ui", svgContent: '<circle cx="12" cy="7" r="3.5"/><path d="M6 20c0-2.21 2.91-4 6-4s6 1.79 6 4v2H6v-2z"/>' },
-    { id: 125, name: "Award", category: "media", svgContent: '<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.89"/>' },
-    { id: 128, name: "Award-Color", category: "ui", svgContent: '<defs><linearGradient id="awdGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#f57f17"/></linearGradient></defs><g><circle cx="12" cy="8" r="7" fill="url(#awdGold)"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" fill="none" stroke="#f57f17" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="8" r="4" fill="none" stroke="#ffffff" stroke-width="1.5"/></g>' },
-    { id: 131, name: "AWS", category: "brands", svgContent: '<path d="M3 10l3-2 3 2v4l-3 2-3-2v-4zm8 0l3-2 3 2v4l-3 2-3-2v-4zm8 0l3-2 3 2v4l-3 2-3-2v-4z"/>' },
-    { id: 134, name: "Azure", category: "brands", svgContent: '<path d="M3 3h6v6H3zM11 3h6v6h-6zM3 11h6v6H3zM11 11h6v6h-6z"/>' },
-    { id: 137, name: "Backpack-Color", category: "general", svgContent: '<defs><linearGradient id="bckGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8d6e63"/><stop offset="100%" stop-color="#5d4037"/></linearGradient></defs><g><rect x="6" y="8" width="12" height="12" rx="2" fill="url(#bckGrad)" stroke="#5d4037" stroke-width="1.5"/><rect x="8" y="4" width="8" height="4" rx="2" fill="#5d4037"/><rect x="9" y="11" width="6" height="4" fill="#4e342e"/></g>' },
-    { id: 140, name: "BackSolid", category: "ui", svgContent: '<polyline points="19 12 5 12 11 6" fill="currentColor" opacity="0.9" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round"/>' },
-    { id: 143, name: "Badge2", category: "ui", svgContent: '<path d="M3.85 8.75a4.84 4.84 0 0 1 7.3-7.3l8.6 8.6a4.84 4.84 0 0 1-6.84 6.84l-8.6-8.6z" fill="currentColor" opacity="0.9" opacity="0.5"/><circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.9"/>' },
-    { id: 146, name: "BadgeCheck", category: "ui", svgContent: '<path d="M3.85 8.75a4.84 4.84 0 0 1 7.45-4.3 4.84 4.84 0 0 1 7.45 4.3 4.83 4.83 0 0 1 .3 7.48 4.84 4.84 0 0 1-7.45 4.31 4.84 4.84 0 0 1-7.45-4.3 4.83 4.83 0 0 1-.3-7.49 4.84 4.84 0 0 1 .33-0.4"/><polyline points="10 13 13 16 18 9"/>' },
-    { id: 149, name: "BadgeX", category: "ui", svgContent: '<path d="M3.85 8.75a4.84 4.84 0 0 1 7.45-4.3 4.84 4.84 0 0 1 7.45 4.3 4.83 4.83 0 0 1 .3 7.48 4.84 4.84 0 0 1-7.45 4.31 4.84 4.84 0 0 1-7.45-4.3 4.83 4.83 0 0 1-.3-7.49"/><line x1="10" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="10" y2="15"/>' },
-    { id: 152, name: "Balloon-Color", category: "general", svgContent: '<defs><linearGradient id="blnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ef5350"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><ellipse cx="12" cy="10" rx="6" ry="8" fill="url(#blnGrad)" stroke="#b71c1c" stroke-width="1.5"/><path d="M12 18v4M10 22h4" stroke="#ffeb3b" stroke-width="2" stroke-linecap="round"/><path d="M12 18l-1-2" stroke="#b71c1c" stroke-width="1.5"/></g>' },
-    { id: 155, name: "Banana", category: "food", svgContent: '<path d="M4 16c8.5 0 12-8.5 12-12"/><path d="M4 16c0 4 4 6 12 6s8-4 8-8c0-8-12-8-12-8-8 0-8 8-8 8z"/>' },
-    { id: 158, name: "Bandwidth", category: "development", svgContent: '<path d="M2 12c0 1 2 3 10 3s10-2 10-3M2 12c0-1 2-3 10-3s10 2 10 3M12 3v18M6 9h12"/>' },
-    { id: 161, name: "Bank", category: "finance", svgContent: '<path d="M3 21h18"/><path d="M6 21V10"/><path d="M18 21V10"/><path d="M2 10h20"/><path d="M12 2l10 8H2z"/>' },
-    { id: 164, name: "Barbecue", category: "food", svgContent: '<path d="M12 21v-4"/><path d="M16 21v-4"/><path d="M8 21v-4"/><path d="M3 13h18"/><path d="M2 13a10 10 0 0 0 20 0H2z"/><path d="M4 13a8 8 0 0 1 16 0"/>' },
-    { id: 167, name: "BarChart", category: "general", svgContent: '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>' },
-    { id: 170, name: "Bars", category: "ui", svgContent: '<line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>' },
-    { id: 173, name: "Basket", category: "objects", svgContent: '<path d="M6 10h12v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><path d="M6 10L2 6M18 10l4-4"/><path d="M6 10l6 6 6-6"/>' },
-    { id: 176, name: "Battery", category: "iot", svgContent: '<rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/>' },
-    { id: 179, name: "Battery-Charging", category: "iot", svgContent: '<path d="M5 18H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.19M15 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.19"/><line x1="23" y1="13" x2="23" y2="11"/><polyline points="11 6 7 12 13 12 9 18"/>' },
-    { id: 182, name: "Battery-Charging-Color", category: "ui", svgContent: '<g><rect x="1" y="6" width="18" height="12" rx="2" fill="none" stroke="#78909c" stroke-width="2"/><polygon points="11 7 6 13 10 13 9 17 14 11 10 11" fill="#ffeb3b"/><line x1="22" y1="11" x2="22" y2="13" stroke="#78909c" stroke-width="2"/></g>' },
-    { id: 185, name: "Battery-Color", category: "ui", svgContent: '<defs><linearGradient id="batGreen" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#66bb6a"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient></defs><g><rect x="1" y="6" width="18" height="12" rx="2" fill="none" stroke="#78909c" stroke-width="2"/><rect x="3" y="8" width="11" height="8" rx="1" fill="url(#batGreen)"/><line x1="22" y1="11" x2="22" y2="13" stroke="#78909c" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 188, name: "Beach-Ball-Color", category: "general", svgContent: '<defs><linearGradient id="bchGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffcc80"/><stop offset="100%" stop-color="#ff9800"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#bchGrad)" stroke="#e65100" stroke-width="1.5"/><path d="M12 2v10l8 5M12 12l-8 5" stroke="#ffffff" stroke-width="2"/></g>' },
-    { id: 191, name: "Beaker", category: "general", svgContent: '<path d="M9 3h6v2H9V3zm0 2h6v12a3 3 0 0 1-6 0V5zm-1 13a4 4 0 0 0 8 0h1v2H7v-2z"/>' },
-    { id: 194, name: "Beauty", category: "general", svgContent: '<circle cx="12" cy="10" r="4"/><path d="M18 5l1-2M6 5L5 3M12 16s-2 2-4 2-4-2-4-2M20 15s-2 2-4 2-4-2-4-2"/>' },
-    { id: 197, name: "Beer", category: "food", svgContent: '<path d="M17 11h1a3 3 0 0 1 0 6h-1"/><path d="M9 12v6"/><path d="M13 12v6"/><path d="M17 11V7a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4v-4z"/>' },
-    { id: 200, name: "Beer-Color", category: "food", svgContent: '<defs><linearGradient id="beerGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ffb74d"/><stop offset="100%" stop-color="#ffa726"/></linearGradient></defs><g><path d="M17 9h2a3 3 0 0 1 0 6h-2" fill="none" stroke="#f57c00" stroke-width="2.5"/><path d="M5 22l1-14h10l1 14H5z" fill="url(#beerGrad)"/><path d="M4 8c0-2 2-3 4-3s4 1 5-1 3 1 4 1a3 3 0 0 1 0 3H4z" fill="#eceff1"/></g>' },
-    { id: 203, name: "Bell", category: "ui", svgContent: '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>' },
-    { id: 206, name: "Bell-Color", category: "ui", svgContent: '<defs><linearGradient id="bellGold" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="50%" stop-color="#fbc02d"/><stop offset="100%" stop-color="#f57f17"/></linearGradient></defs><g><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" fill="url(#bellGold)"/><path d="M13.73 21a2 2 0 0 1-3.46 0" fill="#f57f17"/><circle cx="10" cy="7" r="1" fill="#fff" opacity="0.5"/></g>' },
-    { id: 207, name: "Bell-Off", category: "ui", svgContent: '<path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M18.63 13A17.89 17.89 0 0 1 18 8"/><path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"/><path d="M18 8a6 6 0 0 0-9.33-5"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 210, name: "Bell2", category: "ui", svgContent: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><circle cx="19" cy="5" r="3" fill="currentColor" opacity="0.9"/>' },
-    { id: 213, name: "BellOff", category: "ui", svgContent: '<path d="M13.73 21a2 2 0 0 1-3.46 0M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h2m14 0h2M1 1l22 22"/><path d="M9.89 9.89A6 6 0 0 1 21 8c0 7-3 9-3 9H3"/>' },
-    { id: 216, name: "BellRinging", category: "ui", svgContent: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M18.88 8a1 1 0 0 1 1.34-.34l1.58.79a1 1 0 0 1 .35 1.34M5.12 8a1 1 0 0 0-1.34-.34l-1.58.79a1 1 0 0 0-.35 1.34"/>' },
-    { id: 219, name: "Bicycle-Color", category: "general", svgContent: '<defs><linearGradient id="bicGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ef5350"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g stroke="#b71c1c" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="18" r="4" fill="none"/><circle cx="18" cy="18" r="4" fill="none"/><path d="M10 18l4-8h4"/></g>' },
-    { id: 222, name: "Bicycle-Road-Color", category: "general", svgContent: '<defs><linearGradient id="birGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4caf50"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient></defs><g stroke="#2e7d32" stroke-width="2"><circle cx="6" cy="18" r="4" fill="none"/><circle cx="18" cy="18" r="4" fill="none"/><path d="M10 18h8v-6" fill="none"/></g>' },
-    { id: 225, name: "Binoculars-Color", category: "general", svgContent: '<defs><linearGradient id="binGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#607d8b"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g><circle cx="7" cy="12" r="4" fill="url(#binGrad)" stroke="#37474f" stroke-width="1.5"/><circle cx="17" cy="12" r="4" fill="url(#binGrad)" stroke="#37474f" stroke-width="1.5"/><path d="M7 8l10-4M7 16l10 4" stroke="#37474f" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 228, name: "Binoculars-Nav-Color", category: "general", svgContent: '<defs><linearGradient id="binNGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#607d8b"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g><circle cx="8" cy="12" r="5" fill="url(#binNGrad)" stroke="#37474f" stroke-width="1.5"/><circle cx="16" cy="12" r="5" fill="url(#binNGrad)" stroke="#37474f" stroke-width="1.5"/><line x1="8" y1="12" x2="16" y2="12" stroke="#37474f" stroke-width="1"/></g>' },
-    { id: 231, name: "Bitcoin", category: "brands", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M12 7v10M9 9h6c1 0 1.5.5 1.5 1.5S16 12 15 12H9M9 12h6c1 0 1.5.5 1.5 1.5S16 15 15 15H9"/>' },
-    { id: 234, name: "Blocks-Color", category: "development", svgContent: '<defs><linearGradient id="blkGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff5252"/><stop offset="100%" stop-color="#ff7043"/></linearGradient></defs><g><rect x="3" y="11" width="8" height="10" rx="1" fill="url(#blkGrad)"/><rect x="13" y="11" width="8" height="10" rx="1" fill="#42a5f5"/><rect x="3" y="3" width="18" height="6" rx="1" fill="#ffca28"/></g>' },
-    { id: 237, name: "Bluetooth", category: "development", svgContent: '<polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"/>' },
-    { id: 240, name: "Bluetooth-Color", category: "ui", svgContent: '<defs><linearGradient id="btGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#29b6f6"/><stop offset="100%" stop-color="#01579b"/></linearGradient></defs><polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5" fill="none" stroke="url(#btGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' },
-    { id: 243, name: "Blur", category: "general", svgContent: '<path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><circle cx="9" cy="9" r="1.5" opacity="0.5"/><circle cx="15" cy="9" r="1.5" opacity="0.3"/><circle cx="12" cy="15" r="1.5" opacity="0.4"/>' },
-    { id: 246, name: "Blur-Color", category: "general", svgContent: '<defs><linearGradient id="blurGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e0e0e0"/><stop offset="100%" stop-color="#9e9e9e"/></linearGradient></defs><g fill="url(#blurGrad)"><circle cx="12" cy="12" r="9" opacity="0.3"/><circle cx="12" cy="12" r="6" opacity="0.6"/><circle cx="12" cy="12" r="3"/></g>' },
-    { id: 249, name: "Boat-Color", category: "general", svgContent: '<defs><linearGradient id="botGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><path d="M2 14l20 2-4 6H6z" fill="url(#botGrad)" stroke="#455a64" stroke-width="1.5"/><path d="M12 14V4l6 6z" fill="#ef5350"/></g>' },
-    { id: 252, name: "Book", category: "objects", svgContent: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>' },
-    { id: 255, name: "Book-Color", category: "objects", svgContent: '<defs><linearGradient id="bookCover" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0288d1"/><stop offset="100%" stop-color="#01579b"/></linearGradient></defs><g><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v4H6.5A2.5 2.5 0 0 1 4 19.5z" fill="#eceff1"/><path d="M6.5 2H20v15H6.5A2.5 2.5 0 0 0 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" fill="url(#bookCover)"/><line x1="8" y1="6" x2="16" y2="6" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/></g>' },
-    { id: 258, name: "Book-Open", category: "objects", svgContent: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>' },
-    { id: 261, name: "Bookmark", category: "objects", svgContent: '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>' },
-    { id: 264, name: "Bookmark-Color", category: "objects", svgContent: '<defs><linearGradient id="bmkGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#66bb6a"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient></defs><g><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" fill="url(#bmkGrad)" stroke="#2e7d32" stroke-width="1.5"/></g>' },
-    { id: 267, name: "BookmarkPlus", category: "objects", svgContent: '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z M12 7v6M9 10h6"/>' },
-    { id: 270, name: "Bottle", category: "food", svgContent: '<path d="M10 2h4v5h-4z"/><path d="M12 7v15"/><path d="M8 7h8v15H8z"/>' },
-    { id: 273, name: "Bowl", category: "food", svgContent: '<path d="M22 12a10 10 0 0 1-20 0z"/><path d="M6 12a6 6 0 0 0 12 0z"/>' },
-    { id: 276, name: "Box", category: "objects", svgContent: '<polygon points="12 2 22 7.5 22 16.5 12 22 2 16.5 2 7.5 12 2"/><line x1="2" y1="7.5" x2="12" y2="13"/><line x1="22" y1="7.5" x2="12" y2="13"/><line x1="12" y1="22" x2="12" y2="13"/><line x1="12" y1="2" x2="12" y2="13"/>' },
-    { id: 279, name: "Brackets-Color", category: "general", svgContent: '<defs><linearGradient id="brkGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff7043"/><stop offset="100%" stop-color="#f4511e"/></linearGradient></defs><g fill="none" stroke="url(#brkGrad)" stroke-width="2.5" stroke-linecap="round"><path d="M16 4h3v16h-3M8 4H5v16h3"/></g>' },
-    { id: 282, name: "Brain", category: "ai", svgContent: '<path d="M9.5 2A3.5 3.5 0 0 1 13 5.5v.006h.02a3.5 3.5 0 0 1 3.37 5.477A5.5 5.5 0 1 1 9.5 2z"/><circle cx="9" cy="9" r="1" fill="currentColor" opacity="0.9"/><circle cx="15" cy="9" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 285, name: "Brand-Instagram", category: "brands", svgContent: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>' },
-    { id: 286, name: "Briefcase", category: "finance", svgContent: '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>' },
-    { id: 289, name: "Briefcase-Color", category: "objects", svgContent: '<defs><linearGradient id="caseGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8d6e63"/><stop offset="100%" stop-color="#4e342e"/></linearGradient></defs><g><rect x="2" y="7" width="20" height="14" rx="2" fill="url(#caseGrad)"/><path d="M16 7V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v3" fill="none" stroke="#4e342e" stroke-width="2"/><rect x="11" y="12" width="2" height="3" rx="0.5" fill="#ffd54f"/></g>' },
-    { id: 292, name: "Brightness-Color", category: "general", svgContent: '<defs><linearGradient id="brtGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#f57f17"/></linearGradient></defs><g stroke="url(#brtGrad)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5" fill="url(#brtGrad)"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></g>' },
-    { id: 295, name: "Brush", category: "general", svgContent: '<path d="M19.4 7.34c.66-1.05.69-2.4 0-3.53-1.14-1.84-3.26-1.84-4.4 0L2 16c-.63.75-.63 1.92 0 2.64.9 1.32 2.67 1.84 4.29.84l.87-.52L21.47 6l-.87.52c-.72.43-1.79.22-2.2-.56z"/>' },
-    { id: 298, name: "Brush-Color", category: "general", svgContent: '<defs><linearGradient id="brshGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ba68c8"/><stop offset="100%" stop-color="#7b1fa2"/></linearGradient></defs><g><path d="M18 3l3 3-11 11H7v-3L18 3z" fill="url(#brshGrad)"/><path d="M7 14l-4 4v3h3l4-4" fill="#8d6e63"/><path d="M21 3c-1.5-1.5-4 1-4 1l3 3s2.5-2.5 1-4z" fill="#ff4081"/></g>' },
-    { id: 301, name: "Bucket-Color", category: "general", svgContent: '<defs><linearGradient id="bktGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><path d="M5 6h14l-2 14H7L5 6z" fill="url(#bktGrad)" stroke="#f57f17" stroke-width="1.5"/><path d="M4 6c0-3 16-3 16 0" fill="none" stroke="#cfd8dc" stroke-width="2.5"/></g>' },
-    { id: 304, name: "Bug", category: "development", svgContent: '<path d="M12 14s3-2 3-6c0-2-1-4-3-4s-3 2-3 4c0 4 3 6 3 6zM9 9h6M6 14h12M12 20v2M8 22h8"/>' },
-    { id: 307, name: "Bug-Color", category: "objects", svgContent: '<defs><linearGradient id="bugRed" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e53935"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g fill="none" stroke="#37474f" stroke-width="2" stroke-linecap="round"><rect x="6" y="7" width="12" height="11" rx="6" fill="url(#bugRed)" stroke="none"/><circle cx="12" cy="5" r="2" fill="#37474f" stroke="none"/><line x1="6" y1="10" x2="2" y2="9"/><line x1="6" y1="13" x2="2" y2="13"/><line x1="6" y1="16" x2="2" y2="17"/><line x1="18" y1="10" x2="22" y2="9"/><line x1="18" y1="13" x2="22" y2="13"/><line x1="18" y1="16" x2="22" y2="17"/><path d="M10 2c0 0-1-1-2-1m6 2c0 0 1-1 2-1"/></g>' },
-    { id: 310, name: "Bulldozer-Color", category: "general", svgContent: '<defs><linearGradient id="bldGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#607d8b"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g><rect x="4" y="12" width="12" height="6" fill="url(#bldGrad)" stroke="#37474f" stroke-width="1.5"/><rect x="16" y="10" width="4" height="10" fill="#37474f"/></g>' },
-    { id: 313, name: "Burger", category: "food", svgContent: '<path d="M3 12h18"/><path d="M3 16h18"/><path d="M3 8h18"/><path d="M2 12a10 10 0 0 0 20 0H2z"/><path d="M4 12a8 8 0 0 1 16 0"/>' },
-    { id: 316, name: "Burger-Off", category: "food", svgContent: '<path d="M3 12h18"/><path d="M3 16h18"/><path d="M3 8h18"/><path d="M2 12a10 10 0 0 0 20 0H2z"/><path d="M4 12a8 8 0 0 1 16 0"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 319, name: "Bus-Color", category: "general", svgContent: '<defs><linearGradient id="busGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffeb3b"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><rect x="4" y="6" width="16" height="12" rx="2" fill="url(#busGrad)" stroke="#f57f17" stroke-width="1.5"/><rect x="6" y="8" width="12" height="4" fill="#ffffff"/><circle cx="8" cy="18" r="2" fill="#455a64"/><circle cx="16" cy="18" r="2" fill="#455a64"/></g>' },
-    { id: 322, name: "Bus-School-Color", category: "general", svgContent: '<defs><linearGradient id="bsGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff9800"/><stop offset="100%" stop-color="#f57c00"/></linearGradient></defs><g><rect x="2" y="8" width="18" height="10" rx="2" fill="url(#bsGrad)" stroke="#f57c00" stroke-width="1.5"/><rect x="4" y="10" width="14" height="4" fill="#ffffff"/></g>' },
-    { id: 325, name: "Cable-Car-Color", category: "general", svgContent: '<defs><linearGradient id="cblGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#795548"/><stop offset="100%" stop-color="#4e342e"/></linearGradient></defs><g><rect x="6" y="8" width="12" height="10" rx="2" fill="url(#cblGrad)" stroke="#4e342e" stroke-width="1.5"/><line x1="12" y1="4" x2="12" y2="8" stroke="#4e342e" stroke-width="3"/></g>' },
-    { id: 328, name: "Cake", category: "food", svgContent: '<path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16h16"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/>' },
-    { id: 331, name: "Cake-Color", category: "food", svgContent: '<defs><linearGradient id="cakeGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e8eaed"/><stop offset="100%" stop-color="#b0bec5"/></linearGradient></defs><g><rect x="3" y="11" width="18" height="10" rx="2" fill="url(#cakeGrad)"/><path d="M3 14c2 0 3-1 5-1s3 1 5 1 3-1 5-1 3 1 4 1" fill="none" stroke="#e91e63" stroke-width="2"/><line x1="12" y1="11" x2="12" y2="5" stroke="#ffb300" stroke-width="2"/><path d="M12 5c1-1 0-3 0-3s-1 2 0 3z" fill="#ff5252"/></g>' },
-    { id: 334, name: "Calculator", category: "finance", svgContent: '<rect x="4" y="2" width="16" height="20" rx="2"/><rect x="6" y="4" width="12" height="6"/><line x1="6" y1="11" x2="18" y2="11"/><line x1="6" y1="15" x2="18" y2="15"/><line x1="6" y1="19" x2="18" y2="19"/>' },
-    { id: 337, name: "Calculator-Color", category: "general", svgContent: '<defs><linearGradient id="clcGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#eceff1"/><stop offset="100%" stop-color="#b0bec5"/></linearGradient></defs><g><rect x="5" y="3" width="14" height="18" rx="2" fill="url(#clcGrad)" stroke="#b0bec5" stroke-width="1.5"/><rect x="7" y="5" width="10" height="4" fill="#37474f"/><g fill="#546e7a"><rect x="7" y="11" width="2" height="2"/><rect x="11" y="11" width="2" height="2"/><rect x="15" y="11" width="2" height="2"/><rect x="7" y="15" width="2" height="2"/><rect x="11" y="15" width="2" height="2"/><rect x="15" y="15" width="2" height="2"/></g></g>' },
-    { id: 340, name: "Calendar", category: "objects", svgContent: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>' },
-    { id: 343, name: "Calendar-Color", category: "general", svgContent: '<defs><linearGradient id="calHeader" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e53935"/><stop offset="100%" stop-color="#c62828"/></linearGradient></defs><g><rect x="3" y="4" width="18" height="16" rx="2" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="1"/><path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4H3V6z" fill="url(#calHeader)"/><line x1="16" y1="2" x2="16" y2="6" stroke="#cfd8dc" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="#cfd8dc" stroke-width="2" stroke-linecap="round"/><circle cx="7" cy="13" r="1.5" fill="#e53935"/><circle cx="12" cy="13" r="1.5" fill="#78909c"/><circle cx="17" cy="13" r="1.5" fill="#78909c"/><circle cx="7" cy="17" r="1.5" fill="#78909c"/><circle cx="12" cy="17" r="1.5" fill="#78909c"/><circle cx="17" cy="17" r="1.5" fill="#78909c"/></g>' },
-    { id: 344, name: "Calendar-Event-Color", category: "general", svgContent: '<defs><linearGradient id="calEvGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff5252"/><stop offset="100%" stop-color="#c62828"/></linearGradient></defs><g><rect x="3" y="4" width="18" height="17" rx="2" fill="none" stroke="url(#calEvGrad)" stroke-width="2"/><line x1="3" y1="9" x2="21" y2="9" stroke="url(#calEvGrad)" stroke-width="1.5"/><line x1="8" y1="2" x2="8" y2="5" stroke="#c62828" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="2" x2="16" y2="5" stroke="#c62828" stroke-width="2" stroke-linecap="round"/><rect x="7" y="12" width="4" height="4" rx="1" fill="#ff5252"/></g>' },
-    { id: 347, name: "Camera", category: "media", svgContent: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>' },
-    { id: 350, name: "Camera-Color", category: "media", svgContent: '<defs><linearGradient id="camBody" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#78909c"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2v10z" fill="url(#camBody)"/><circle cx="12" cy="13" r="4" fill="#263238" stroke="#ffffff" stroke-width="1.5"/><circle cx="12" cy="13" r="1.5" fill="#29b6f6"/></g>' },
-    { id: 353, name: "Campfire-Color", category: "general", svgContent: '<defs><linearGradient id="cmpfGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff9800"/><stop offset="100%" stop-color="#bf360c"/></linearGradient></defs><g><path d="M12 22l-4-4 4-8 4 8z" fill="#795548" stroke="#5d4037" stroke-width="1.5"/><path d="M12 12c0-6-6-10-6-16a6 6 0 1 0 12 0c0-6-6-10-6-16z" fill="url(#cmpfGrad)" stroke="#bf360c" stroke-width="1.5"/></g>' },
-    { id: 356, name: "Candy", category: "food", svgContent: '<path d="M12 12L2 2M12 12l10-10M12 12L2 22M12 12l10 10"/><path d="M7 7l10 10"/><path d="M17 7l-10 10"/><circle cx="12" cy="12" r="3"/>' },
-    { id: 359, name: "Car-Color", category: "general", svgContent: '<defs><linearGradient id="carGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#29b6f6"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><path d="M4 14l2-6h12l2 6z" fill="url(#carGrad)" stroke="#0288d1" stroke-width="1.5"/><rect x="6" y="8" width="12" height="4" fill="#ffffff" stroke="#0288d1" stroke-width="1.5"/><circle cx="8" cy="18" r="2" fill="#455a64"/><circle cx="16" cy="18" r="2" fill="#455a64"/></g>' },
-    { id: 362, name: "Card-Game-Color", category: "general", svgContent: '<defs><linearGradient id="crdGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#eceff1"/></linearGradient></defs><g><rect x="4" y="3" width="16" height="18" rx="2" fill="url(#crdGrad)" stroke="#455a64" stroke-width="1.5"/><path d="M12 7c-2 0-3 2-3 3s1 3 3 3 3-2 3-3-1-3-3-3z" fill="#ff5252"/></g>' },
-    { id: 365, name: "Carrot", category: "food", svgContent: '<path d="M2.5 12.5l7 7L21 8l-7-7-11.5 11.5z"/><path d="M2 13l4-4"/><path d="M15 9l-4 4"/>' },
-    { id: 368, name: "Cast", category: "media", svgContent: '<path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6M2 20h.01"/>' },
-    { id: 371, name: "Cast-Color", category: "communication", svgContent: '<defs><linearGradient id="castGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#90caf9"/><stop offset="100%" stop-color="#1e88e5"/></linearGradient></defs><g fill="none" stroke="url(#castGrad)" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2" stroke="#b0bec5"/><path d="M2 20a4 4 0 0 1 4-4M2 16a8 8 0 0 1 8 8" stroke-width="2.5"/><circle cx="2" cy="20" r="1" fill="#1e88e5" stroke="none"/></g>' },
-    { id: 374, name: "Castle-Block-Color", category: "communication", svgContent: '<defs><linearGradient id="blkGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffab91"/><stop offset="100%" stop-color="#d84315"/></linearGradient></defs><g><rect x="6" y="8" width="12" height="12" rx="1" fill="url(#blkGrad)" stroke="#bf360c" stroke-width="1.5"/><path d="M7 8V5h2v3M15 8V5h2v3" stroke="#bf360c" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 377, name: "Chart-Bar", category: "finance", svgContent: '<path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/><path d="M2 20h20"/>' },
-    { id: 380, name: "Chart-Pie", category: "finance", svgContent: '<path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>' },
-    { id: 383, name: "ChatGPT", category: "ai", svgContent: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 7c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z" fill="currentColor" opacity="0.9"/>' },
-    { id: 386, name: "Check", category: "ui", svgContent: '<polyline points="20 6 9 17 4 12"/>' },
-    { id: 389, name: "Check-Circle", category: "ui", svgContent: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>' },
-    { id: 392, name: "Check-Circle-Color", category: "ui", svgContent: '<defs><linearGradient id="chkCirc" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#81c784"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#chkCirc)"/><polyline points="16 9 11 14 8 11" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>' },
-    { id: 393, name: "Check-Color", category: "ui", svgContent: '<defs><linearGradient id="chkGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#81c784"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient></defs><polyline points="20 6 9 17 4 12" fill="none" stroke="url(#chkGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' },
-    { id: 394, name: "Check-Square", category: "ui", svgContent: '<polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>' },
-    { id: 397, name: "CheckBold", category: "ui", svgContent: '<polyline points="20 6 9 17 4 12"/>' },
-    { id: 400, name: "CheckboxOff", category: "ui", svgContent: '<rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>' },
-    { id: 403, name: "CheckboxOn", category: "ui", svgContent: '<rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><polyline points="8 12 11 15 16 8"/>' },
-    { id: 406, name: "CheckCircle", category: "ui", svgContent: '<circle cx="12" cy="12" r="10"/><polyline points="16 8 10 14 8 12"/>' },
-    { id: 409, name: "CheckCircleSolid", category: "ui", svgContent: '<circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.9"/><polyline points="16 8 10 14 8 12" stroke="white"/>' },
-    { id: 412, name: "CheckDouble", category: "ui", svgContent: '<polyline points="2 12 8 18 14 12M8 12 14 18 20 12"/>' },
-    { id: 415, name: "Chef-Hat", category: "food", svgContent: '<path d="M6 13.85A4 4 0 0 1 7.4 6a8 8 0 0 1 13.4 4a4 4 0 0 1 0 7.85"/><path d="M6 14h12a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3z"/>' },
-    { id: 418, name: "Chess-Piece-Color", category: "general", svgContent: '<defs><linearGradient id="chsGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><path d="M12 3a3 3 0 0 0-3 3c0 2 2 3 2 5h4c0-2 2-3 2-5a3 3 0 0 0-3-3z" fill="url(#chsGrad)" stroke="#455a64" stroke-width="1.5"/><rect x="7" y="16" width="10" height="4" fill="#455a64"/></g>' },
-    { id: 421, name: "Chevron-Down", category: "ui", svgContent: '<polyline points="6 9 12 15 18 9"/>' },
-    { id: 424, name: "Chevron-Left", category: "ui", svgContent: '<polyline points="15 18 9 12 15 6"/>' },
-    { id: 427, name: "Chevron-Right", category: "ui", svgContent: '<polyline points="9 18 15 12 9 6"/>' },
-    { id: 430, name: "Chevron-Up", category: "ui", svgContent: '<polyline points="18 15 12 9 6 15"/>' },
-    { id: 433, name: "Chip", category: "ai", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0zM6 9H3M6 15H3M18 9h3M18 15h3M9 6V3M15 6V3M9 21v-3M15 21v-3"/>' },
-    { id: 436, name: "Chrome-Color", category: "brands", svgContent: '<defs><linearGradient id="chRed" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ea4335"/><stop offset="100%" stop-color="#c5221f"/></linearGradient><linearGradient id="chGreen" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#34a853"/><stop offset="100%" stop-color="#137333"/></linearGradient><linearGradient id="chYellow" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fabc05"/><stop offset="100%" stop-color="#e37400"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#chYellow)"/><path d="M12 2a10 10 0 0 1 8.66 5H12z" fill="url(#chRed)"/><path d="M12 22a10 10 0 0 1-8.66-15L7.5 13z" fill="url(#chGreen)"/><circle cx="12" cy="12" r="4" fill="#ffffff"/><circle cx="12" cy="12" r="3" fill="#1a73e8"/></g>' },
-    { id: 439, name: "Claude", category: "ai", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="7" cy="9" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="17" cy="9" r="1.5" fill="currentColor" opacity="0.9"/><path d="M7 15c2 1 6 1 8 0"/>' },
-    { id: 442, name: "Clipboard", category: "ui", svgContent: '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>' },
-    { id: 445, name: "Clipboard-Color", category: "general", svgContent: '<defs><linearGradient id="clipGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#607d8b"/></linearGradient></defs><g><rect x="4" y="4" width="16" height="16" rx="2" fill="#fff8e1" stroke="url(#clipGrad)" stroke-width="1.5"/><path d="M16 4h-2V3a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1H8a2 2 0 0 0-2 2v1h12V6a2 2 0 0 0-2-2z" fill="#ffb300"/><line x1="9" y1="10" x2="15" y2="10" stroke="#b0bec5" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 448, name: "Clock", category: "objects", svgContent: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' },
-    { id: 451, name: "Cloud", category: "development", svgContent: '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>' },
-    { id: 454, name: "Cloud-Color", category: "iot", svgContent: '<defs><linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3a7bd5"/><stop offset="100%" stop-color="#3a6073"/></linearGradient><filter id="cloudShadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="1" stdDeviation="1" flood-opacity="0.15"/></filter></defs><g filter="url(#cloudShadow)"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" fill="url(#cloudGrad)"/><path d="M15.5 10.5c.3 0 .5.2.5.5a3.5 3.5 0 0 1-3.5 3.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5a2.5 2.5 0 0 0 2.5-2.5c0-.3.2-.5.5-.5z" fill="#ffffff" opacity="0.2"/></g>' },
-    { id: 457, name: "Cloud-Drizzle", category: "development", svgContent: '<line x1="8" y1="19" x2="8" y2="21"/><line x1="8" y1="13" x2="8" y2="15"/><line x1="16" y1="19" x2="16" y2="21"/><line x1="16" y1="13" x2="16" y2="15"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="12" y1="15" x2="12" y2="17"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/>' },
-    { id: 460, name: "Cloud-Fog", category: "development", svgContent: '<path d="M4 14.89A5 5 0 1 1 9 5h7.5a4 4 0 0 1 0 8H4"/><line x1="4" y1="18" x2="20" y2="18"/><line x1="8" y1="22" x2="16" y2="22"/>' },
-    { id: 463, name: "Cloud-Hail", category: "development", svgContent: '<path d="M16 13h.01M12 13h.01M8 13h.01M16 17h.01M12 17h.01M8 17h.01M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/>' },
-    { id: 466, name: "Cloud-Lightning", category: "development", svgContent: '<path d="M19 16.9A5 5 0 0 0 18 7h-1.26a8 8 0 1 0-11.62 9"/><polyline points="13 11 9 17 15 17 11 23"/>' },
-    { id: 469, name: "Cloud-Lightning-Color", category: "iot", svgContent: '<defs><linearGradient id="cloudGradL" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#90a4ae"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g><path d="M19 11a4.5 4.5 0 0 0-8.5-1.5A6 6 0 0 0 3 14a4 4 0 0 0 4 4h3" fill="url(#cloudGradL)"/><polygon points="13 12 9 18 12 18 10 23 16 16 13 16" fill="#ffeb3b"/></g>' },
-    { id: 472, name: "Cloud-Rain", category: "development", svgContent: '<path d="M16 13v8M8 13v8M12 15v8M2 14.82A5 5 0 1 1 7 5h.09A7 7 0 0 1 22 12a7 7 0 0 1-7 7H2"/>' },
-    { id: 475, name: "Cloud-Rain-Color", category: "ai", svgContent: '<defs><linearGradient id="cldRain" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#90a4ae"/></linearGradient></defs><g><path d="M19 11a4.5 4.5 0 0 0-8.5-1.5A6 6 0 0 0 3 14a4 4 0 0 0 4 4h10a4.5 4.5 0 0 0 2-8.5z" fill="url(#cldRain)"/><line x1="8" y1="20" x2="6" y2="23" stroke="#29b6f6" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="20" x2="10" y2="23" stroke="#29b6f6" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="20" x2="14" y2="23" stroke="#29b6f6" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 478, name: "Cloud-Snow", category: "development", svgContent: '<path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="12" y1="16" x2="12.01" y2="16"/><line x1="16" y1="16" x2="16.01" y2="16"/><line x1="10" y1="20" x2="10.01" y2="20"/><line x1="14" y1="20" x2="14.01" y2="20"/>' },
-    { id: 481, name: "Cloud-Snow-Color", category: "iot", svgContent: '<defs><linearGradient id="cldSnow" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e1f5fe"/><stop offset="100%" stop-color="#b3e5fc"/></linearGradient></defs><g><path d="M19 11a4.5 4.5 0 0 0-8.5-1.5A6 6 0 0 0 3 14a4 4 0 0 0 4 4h10a4.5 4.5 0 0 0 2-8.5z" fill="url(#cldSnow)"/><circle cx="8" cy="21" r="1" fill="#ffffff"/><circle cx="12" cy="21" r="1" fill="#ffffff"/><circle cx="16" cy="21" r="1" fill="#ffffff"/></g>' },
-    { id: 484, name: "Cloud-Sun", category: "development", svgContent: '<path d="M12 2v2"/><path d="M12 22v-2"/><path d="M4.9 4.9l1.4 1.4"/><path d="M17.7 17.7l1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.3 17.7l-1.4 1.4"/><path d="M17.7 6.3l-1.4-1.4"/><path d="M16 13a4 4 0 0 0-4-4 4 4 0 0 0-3.1 1.5"/><path d="M16 13a4 4 0 0 1 0 8H6a5 5 0 0 1-1.8-9.6"/>' },
-    { id: 487, name: "Cloud3", category: "development", svgContent: '<path d="M20 17a5 5 0 0 0-8-4 4 4 0 0 0-4.5 7 5 5 0 0 0 10 2z"/>' },
-    { id: 490, name: "CloudOff", category: "development", svgContent: '<path d="M17 16.5V13a4 4 0 0 0-4-4 4 4 0 0 0-3.5 2M2 2l20 20M5.64 5.64A8 8 0 0 1 17 12"/>' },
-    { id: 493, name: "Cloudy", category: "development", svgContent: '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="M4.9 4.9l1.4 1.4"/><path d="M17.7 17.7l1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.3 17.7l-1.4 1.4"/><path d="M17.7 6.3l-1.4-1.4"/>' },
-    { id: 496, name: "Cocktail", category: "general", svgContent: '<path d="M4 2L20 2"/><path d="M12 2l4 19"/><path d="M12 2l-4 19"/><path d="M10 2l2 19M14 2l-2 19"/>' },
-    { id: 499, name: "Code", category: "development", svgContent: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>' },
-    { id: 502, name: "Code-Color", category: "development", svgContent: '<defs><linearGradient id="codeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00e676"/><stop offset="100%" stop-color="#00b0ff"/></linearGradient></defs><g fill="none" stroke="url(#codeGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></g>' },
-    { id: 505, name: "Code-Square-Color", category: "development", svgContent: '<defs><linearGradient id="codeSqGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7e57c2"/><stop offset="100%" stop-color="#4527a0"/></linearGradient></defs><g><rect x="3" y="3" width="18" height="18" rx="3" fill="url(#codeSqGrad)"/><polyline points="8 10 6 12 8 14" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="16 10 18 12 16 14" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="13" y1="9" x2="11" y2="15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 508, name: "Coffee", category: "food", svgContent: '<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>' },
-    { id: 511, name: "Coffee-Color", category: "food", svgContent: '<defs><linearGradient id="cupGradC" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4e342e"/><stop offset="100%" stop-color="#3e2723"/></linearGradient></defs><g><path d="M4 9h13v5c0 3.3-2.7 6-6 6H10c-3.3 0-6-2.7-6-6V9z" fill="url(#cupGradC)"/><path d="M17 11h2a2 2 0 0 1 0 4h-2v-4z" fill="none" stroke="#4e342e" stroke-width="2"/><path d="M7 2h1v3H7zm4 0h1v3h-1zm4 0h1v3h-1z" fill="#cfd8dc" opacity="0.6"/><line x1="2" y1="22" x2="20" y2="22" stroke="#d7ccc8" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 514, name: "Cog", category: "general", svgContent: '<circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/>' },
-    { id: 517, name: "Cog2", category: "general", svgContent: '<circle cx="12" cy="12" r="1.5" fill="currentColor" opacity="0.9"/><path d="M12.5 2.5L11 8.5M12.5 21.5L11 15.5M21.5 12.5L15.5 13M2.5 12.5L8.5 13M19.07 4.93L14.65 9.35M9.35 14.65L4.93 19.07M19.07 19.07L14.65 14.65M9.35 9.35L4.93 4.93"/>' },
-    { id: 520, name: "Collapse", category: "general", svgContent: '<polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="4" y2="20"/><line x1="10" y1="14" x2="20" y2="4"/>' },
-    { id: 523, name: "CollapseAlt", category: "general", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="8" y1="12" x2="16" y2="12"/>' },
-    { id: 526, name: "Columns", category: "general", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/>' },
-    { id: 529, name: "Columns-Color", category: "development", svgContent: '<defs><linearGradient id="colGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="url(#colGrad)" stroke-width="2"/><rect x="5" y="5" width="6" height="14" fill="#78909c" opacity="0.25"/><rect x="13" y="5" width="6" height="14" fill="#78909c" opacity="0.25"/></g>' },
-    { id: 532, name: "Command", category: "ui", svgContent: '<path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 6 0v-3a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v3a3 3 0 0 0 6 0V6a3 3 0 0 0-6 0v3a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"/>' },
-    { id: 535, name: "Compass", category: "objects", svgContent: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>' },
-    { id: 538, name: "Compass-Color", category: "iot", svgContent: '<defs><linearGradient id="compRim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="#f5f7fa" stroke="url(#compRim)" stroke-width="2"/><polygon points="12 12 14 7 17 7 12 12" fill="#ff5252"/><polygon points="12 12 10 17 7 17 12 12" fill="#cfd8dc"/><circle cx="12" cy="12" r="1.5" fill="#37474f"/></g>' },
-    { id: 541, name: "Compass-Tool-Color", category: "iot", svgContent: '<defs><linearGradient id="cmptGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#455a64"/></linearGradient></defs><g><path d="M12 2l-4 18h8l-4-18z" fill="url(#cmptGrad)" stroke="#455a64" stroke-width="1.5"/><circle cx="12" cy="2" r="1.5" fill="#455a64"/></g>' },
-    { id: 544, name: "Component-Color", category: "development", svgContent: '<defs><linearGradient id="compGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#29b6f6"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g fill="url(#compGrad)" stroke="#0288d1" stroke-width="1.5"><polygon points="12 2 22 7 12 12 2 7"/><polygon points="12 12 22 17 12 22 2 17" opacity="0.6"/><line x1="12" y1="12" x2="12" y2="22" stroke="#ffffff" opacity="0.4"/></g>' },
-    { id: 547, name: "Confetti-Color", category: "general", svgContent: '<g><rect x="4" y="4" width="3" height="3" fill="#ff5252" transform="rotate(20 5.5 5.5)"/><rect x="18" y="5" width="4" height="2" fill="#29b6f6" transform="rotate(-30 20 6)"/><rect x="10" y="18" width="3" height="4" fill="#ffeb3b" transform="rotate(45 11.5 20)"/><circle cx="16" cy="12" r="1.5" fill="#66bb6a"/></g>' },
-    { id: 550, name: "Contrast", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20 10 10 0 0 0 0-20zm0 2v16a8 8 0 0 1 0-16z"/>' },
-    { id: 553, name: "Contrast-Color", category: "general", svgContent: '<defs><linearGradient id="cntGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#78909c"/><stop offset="100%" stop-color="#263238"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="none" stroke="url(#cntGrad)" stroke-width="2"/><path d="M12 2a10 10 0 0 1 0 20V2z" fill="url(#cntGrad)"/></g>' },
-    { id: 556, name: "Copy", category: "ui", svgContent: '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="4" y="4" width="12" height="12" rx="1"/>' },
-    { id: 559, name: "Copy2", category: "ui", svgContent: '<polyline points="20 8 4 8 4 20 20 20 20 8"/><polyline points="4 4 4 8 20 8 20 4"/>' },
-    { id: 562, name: "CopyCheck", category: "ui", svgContent: '<rect x="9" y="9" width="13" height="13" rx="1"/><rect x="2" y="2" width="13" height="13" rx="1" opacity="0.5"/><polyline points="14 10 16 12 19 9"/>' },
-    { id: 565, name: "CopyError", category: "ui", svgContent: '<rect x="9" y="9" width="13" height="13" rx="1"/><rect x="2" y="2" width="13" height="13" rx="1" opacity="0.5"/><line x1="16" y1="9" x2="18" y2="13"/><line x1="18" y1="9" x2="16" y2="13"/>' },
-    { id: 568, name: "Cpu", category: "development", svgContent: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>' },
-    { id: 571, name: "CPU-Color", category: "development", svgContent: '<defs><linearGradient id="cpuBody" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#37474f"/><stop offset="100%" stop-color="#212121"/></linearGradient><linearGradient id="cpuCore" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffb300"/><stop offset="100%" stop-color="#ff6f00"/></linearGradient></defs><g><rect x="4" y="4" width="16" height="16" rx="2" fill="url(#cpuBody)"/><rect x="9" y="9" width="6" height="6" rx="1" fill="url(#cpuCore)"/><path d="M9 1v3M12 1v3M15 1v3M9 20v3M12 20v3M15 20v3M1 9h3M1 12h3M1 15h3M20 9h3M20 12h3M20 15h3" stroke="#ffb300" stroke-width="1.5" stroke-linecap="round"/></g>' },
-    { id: 574, name: "Cpu2", category: "development", svgContent: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/>' },
-    { id: 577, name: "Crane-Color", category: "general", svgContent: '<defs><linearGradient id="crnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff9800"/><stop offset="100%" stop-color="#e65100"/></linearGradient></defs><g><path d="M2 22h20M12 22V6l8 4" fill="none" stroke="#e65100" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 580, name: "Credit-Card", category: "finance", svgContent: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>' },
-    { id: 583, name: "Credit-Card-Color", category: "ui", svgContent: '<defs><linearGradient id="cardGradC" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#673ab7"/><stop offset="100%" stop-color="#432278"/></linearGradient></defs><g><rect x="2" y="5" width="20" height="14" rx="2" fill="url(#cardGradC)"/><rect x="2" y="8" width="20" height="3" fill="#212121"/><rect x="4" y="14" width="4" height="2" fill="#ffd54f" rx="0.5"/><line x1="16" y1="15" x2="19" y2="15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 586, name: "CreditCard", category: "finance", svgContent: '<rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>' },
-    { id: 589, name: "Crop-Color", category: "general", svgContent: '<defs><linearGradient id="crpGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff7043"/><stop offset="100%" stop-color="#bf360c"/></linearGradient></defs><g fill="none" stroke="url(#crpGrad)" stroke-width="2.5" stroke-linecap="round"><path d="M6 1H6v17h17M18 23v-5H1v0"/></g>' },
-    { id: 592, name: "Crown-Color", category: "general", svgContent: '<defs><linearGradient id="crnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffca28"/><stop offset="100%" stop-color="#ff6f00"/></linearGradient></defs><g><polygon points="2 18 5 7 12 12 19 7 22 18" fill="url(#crnGrad)" stroke="#ff6f00" stroke-width="1.5" stroke-linejoin="round"/><circle cx="5" cy="6" r="1" fill="#ffca28"/><circle cx="12" cy="11" r="1" fill="#ffca28"/><circle cx="19" cy="6" r="1" fill="#ffca28"/></g>' },
-    { id: 595, name: "Crypto", category: "general", svgContent: '<circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.9"/><path d="M6 8h12M6 16h12M8 6v12M16 6v12"/>' },
-    { id: 598, name: "Cup-Straw", category: "food", svgContent: '<path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M6 8h12v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8z"/><path d="M6 8l4-6"/><path d="M10 2l4 4"/>' },
-    { id: 601, name: "Cutlery", category: "general", svgContent: '<path d="M6 2v14a2 2 0 0 0 4 0V2"/><path d="M14 2v14a2 2 0 0 0 4 0V2"/><path d="M6 22h12"/></g>' },
-    { id: 604, name: "Database", category: "development", svgContent: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>' },
-    { id: 607, name: "Database-Color", category: "development", svgContent: '<defs><linearGradient id="dbGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4eafec"/><stop offset="100%" stop-color="#1a73e8"/></linearGradient></defs><g fill="url(#dbGrad)"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 11v6c0 1.66 4 3 9 3s9-1.34 9-3v-6"/><ellipse cx="12" cy="11" rx="9" ry="3" fill="#64b5f6" opacity="0.5"/><ellipse cx="12" cy="17" rx="9" ry="3" fill="#64b5f6" opacity="0.5"/></g>' },
-    { id: 610, name: "Dice-Color", category: "general", svgContent: '<defs><linearGradient id="dceGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><rect x="4" y="4" width="16" height="16" rx="2" fill="url(#dceGrad)" stroke="#455a64" stroke-width="1.5"/><circle cx="8" cy="8" r="1" fill="#455a64"/><circle cx="16" cy="16" r="1" fill="#455a64"/><circle cx="12" cy="12" r="1" fill="#455a64"/></g>' },
-    { id: 613, name: "Disc-Color", category: "media", svgContent: '<defs><linearGradient id="discGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#b0ff00"/><stop offset="50%" stop-color="#00e676"/><stop offset="100%" stop-color="#00b0ff"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#discGrad)"/><circle cx="12" cy="12" r="3" fill="#ffffff"/><circle cx="12" cy="12" r="1" fill="#212121"/></g>' },
-    { id: 616, name: "Discord", category: "brands", svgContent: '<path d="M18 1H2v20h16l3-4V1zm-5.5 10c1.33 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5zm-7 0c1.33 0 2.5 1.12 2.5 2.5S7.33 16 6 16s-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5z"/>' },
-    { id: 619, name: "Disney", category: "general", svgContent: '<path d="M12 2L7 5v6l5 3 5-3V5l-5-3z"/><path d="M9 9l3 2 3-2M9 13l3 2 3-2"/>' },
-    { id: 622, name: "Docker", category: "brands", svgContent: '<rect x="2" y="6" width="4" height="4"/><rect x="8" y="6" width="4" height="4"/><rect x="14" y="6" width="4" height="4"/><rect x="2" y="12" width="4" height="4"/><rect x="8" y="12" width="4" height="4"/><rect x="14" y="12" width="4" height="4"/>' },
-    { id: 625, name: "Docker-Color", category: "brands", svgContent: '<defs><linearGradient id="dockBlue" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0298f3"/><stop offset="100%" stop-color="#01579b"/></linearGradient></defs><g fill="url(#dockBlue)"><path d="M2 13.5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2zM7 9.5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z"/><path d="M23 14c-1.5 0-3.5 1-4.5 2.5C17 14 14 13 11 13H1v3c0 3 2.5 5 5.5 5h10c3 0 5.5-2 6-5 .5-.5.5-2 .5-2z"/></g>' },
-    { id: 626, name: "DocumentCheck", category: "development", svgContent: '<path d="M9 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9l-6-7z"/><polyline points="16 12 12 16 10 14"/>' },
-    { id: 629, name: "DocumentMinus", category: "development", svgContent: '<path d="M9 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9l-6-7z"/><line x1="10" y1="15" x2="16" y2="15"/>' },
-    { id: 632, name: "DocumentText", category: "development", svgContent: '<path d="M9 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9l-6-7z"/><line x1="7" y1="13" x2="17" y2="13"/><line x1="7" y1="17" x2="13" y2="17"/><line x1="9" y1="9" x2="12" y2="6"/>' },
-    { id: 635, name: "Dollar-Sign", category: "finance", svgContent: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>' },
-    { id: 638, name: "DollarSign", category: "finance", svgContent: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>' },
-    { id: 641, name: "Door-Color", category: "objects", svgContent: '<defs><linearGradient id="dorGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#a1887f"/><stop offset="100%" stop-color="#795548"/></linearGradient></defs><g><rect x="4" y="2" width="16" height="20" rx="1" fill="url(#dorGrad)"/><circle cx="16" cy="12" r="1" fill="#ffb300"/><line x1="2" y1="22" x2="22" y2="22" stroke="#4e342e" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 644, name: "DoorLock", category: "objects", svgContent: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/>' },
-    { id: 647, name: "Dot", category: "ui", svgContent: '<circle cx="12" cy="12" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 650, name: "Download", category: "ui", svgContent: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>' },
-    { id: 653, name: "Download-Color", category: "ui", svgContent: '<defs><linearGradient id="downArrow" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#29b6f6"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4" fill="none" stroke="#78909c" stroke-width="2.5" stroke-linecap="round"/><polyline points="7 10 12 15 17 10" fill="none" stroke="url(#downArrow)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="url(#downArrow)" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 654, name: "Drone", category: "iot", svgContent: '<rect x="9" y="11" width="6" height="2"/><circle cx="6" cy="11" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="18" cy="11" r="1.5" fill="currentColor" opacity="0.9"/><path d="M5 5l2 6M19 5l-2 6M12 1v4m0 10v4"/>' },
-    { id: 657, name: "Drone-Color", category: "general", svgContent: '<defs><linearGradient id="drnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#607d8b"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g stroke="#37474f" stroke-width="2"><path d="M4 4l4 4M20 4l-4 4M4 20l4-4M20 20l-4-4"/><rect x="8" y="8" width="8" height="8" rx="2" fill="url(#drnGrad)"/></g>' },
-    { id: 660, name: "Droplet", category: "weather", svgContent: '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>' },
-    { id: 663, name: "Droplet-Color", category: "general", svgContent: '<defs><linearGradient id="drpGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><path d="M12 2s-7 6.5-7 11.5a7 7 0 0 0 14 0C19 8.5 12 2 12 2z" fill="url(#drpGrad)"/><path d="M9 12c0-2 1.5-4 1.5-4" fill="none" stroke="#ffffff" opacity="0.4" stroke-width="1.5" stroke-linecap="round"/></g>' },
-    { id: 666, name: "Drum-Color", category: "general", svgContent: '<defs><linearGradient id="drmGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffb74d"/><stop offset="100%" stop-color="#f57c00"/></linearGradient></defs><g><ellipse cx="12" cy="6" rx="8" ry="3" fill="#cfd8dc" stroke="#455a64" stroke-width="1.5"/><rect x="4" y="6" width="16" height="12" fill="url(#drmGrad)" stroke="#455a64" stroke-width="1.5"/><ellipse cx="12" cy="18" rx="8" ry="3" fill="#cfd8dc" stroke="#455a64" stroke-width="1.5"/></g>' },
-    { id: 669, name: "Drumstick", category: "food", svgContent: '<path d="M20.2 12.2L12.8 4.8a4 4 0 0 0-5.6 0L2 10l8 8 2.2-2.2a2 2 0 0 1 3.2 0l3 3c1 1 3.8 0 5-1.2s2.2-4 1.2-5z"/><path d="M2 10l4 4"/>' },
-    { id: 672, name: "Duplicate", category: "general", svgContent: '<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 3"/>' },
-    { id: 675, name: "Earbuds", category: "media", svgContent: '<circle cx="8" cy="10" r="3"/><circle cx="16" cy="10" r="3"/><path d="M8 7V4a2 2 0 0 1 2-2M16 7V4a2 2 0 0 1-2-2"/><path d="M6 14c-1 2-2 4-2 6a4 4 0 0 0 4 4M18 14c1 2 2 4 2 6a4 4 0 0 1-4 4"/>' },
-    { id: 678, name: "Edit", category: "ui", svgContent: '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>' },
-    { id: 681, name: "Edit-2", category: "ui", svgContent: '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>' },
-    { id: 684, name: "Edit-Color", category: "ui", svgContent: '<defs><linearGradient id="penBody" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffb74d"/><stop offset="70%" stop-color="#f57c00"/><stop offset="100%" stop-color="#d84315"/></linearGradient></defs><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" fill="none" stroke="#b0bec5" stroke-width="2" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z" fill="url(#penBody)"/><path d="M12 15l3-3 1 1-3 3-1-1z" fill="#cfd8dc"/></g>' },
-    { id: 685, name: "EditCircle", category: "ui", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M12 8l3 3M9 15h6"/>' },
-    { id: 688, name: "EditSquare", category: "ui", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8l4 4M8 16h8"/>' },
-    { id: 691, name: "Efficiency", category: "general", svgContent: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H17a2 2 0 0 1 2 2v.5a2.5 2.5 0 0 1-2.5 2.5H7a2 2 0 0 1-2-2v-.5a2.5 2.5 0 0 1 1-2M6 11l6-6 6 6"/>' },
-    { id: 694, name: "Egg", category: "food", svgContent: '<path d="M12 2a6 6 0 0 0-6 6v8a6 6 0 0 0 12 0V8a6 6 0 0 0-6-6z"/>' },
-    { id: 697, name: "EmojiSad", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5-2 4-2 4 2 4 2M9 9h.01M15 9h.01"/>' },
-    { id: 700, name: "EmojiSmile", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>' },
-    { id: 703, name: "Eraser", category: "objects", svgContent: '<path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/><path d="M9 9h6v6H9z"/>' },
-    { id: 706, name: "Eraser-Color", category: "general", svgContent: '<defs><linearGradient id="ersGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff8a80"/><stop offset="100%" stop-color="#ff5252"/></linearGradient></defs><g><path d="M20 11l-7 7H2v-4L9 7l11 4z" fill="url(#ersGrad)" stroke="#ff5252" stroke-width="1.5"/><path d="M13 11L9 7M2 18h20" stroke="#ff5252" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 709, name: "Ethereum", category: "brands", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M12 5L8 10L12 13L8 16L12 19L16 16L12 13L16 10L12 5M12 5L8 8L12 11L8 14L12 17L16 14L12 11L16 8L12 5" stroke-width="0.5"/>' },
-    { id: 712, name: "Euro-Sign", category: "finance", svgContent: '<path d="M4 10h12"/><path d="M4 14h12"/><path d="M16 6a8 8 0 0 1 0 12"/>' },
-    { id: 715, name: "Excavator-Color", category: "ui", svgContent: '<defs><linearGradient id="excGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffeb3b"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><rect x="2" y="12" width="12" height="6" fill="url(#excGrad)" stroke="#fbc02d" stroke-width="1.5"/><path d="M14 14l8-6v4l-4 4z" fill="#fbc02d" stroke="#fbc02d" stroke-width="1.5"/></g>' },
-    { id: 718, name: "ExclamationTriangle", category: "general", svgContent: '<path d="M12 2L2 20h20L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="0.5" fill="currentColor" opacity="0.9"/>' },
-    { id: 721, name: "Expand", category: "general", svgContent: '<polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="3" y2="21"/>' },
-    { id: 724, name: "ExpandAlt", category: "general", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>' },
-    { id: 727, name: "External-Link", category: "ui", svgContent: '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>' },
-    { id: 730, name: "Eye", category: "ui", svgContent: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>' },
-    { id: 733, name: "Eye-Color", category: "iot", svgContent: '<defs><radialGradient id="irisBlue" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></radialGradient></defs><g><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" fill="#ffffff" stroke="#b0bec5" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="url(#irisBlue)"/><circle cx="12" cy="12" r="1.5" fill="#212121"/><circle cx="13.5" cy="10.5" r="0.75" fill="#ffffff"/></g>' },
-    { id: 736, name: "Eye-Off", category: "ui", svgContent: '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 739, name: "Eye-Off-Color", category: "iot", svgContent: '<defs><radialGradient id="irisBlueO" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></radialGradient></defs><g><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" fill="#ffffff" stroke="#b0bec5" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="url(#irisBlueO)" opacity="0.4"/><line x1="2" y1="2" x2="22" y2="22" stroke="#ef5350" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 742, name: "Eye-Off2-Color", category: "iot", svgContent: '<defs><linearGradient id="eyeSlash" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ef5350"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" fill="none" stroke="#b0bec5" stroke-width="1.5"/><path d="M10 10a3 3 0 0 1 4 4" fill="none" stroke="#0288d1" stroke-width="2"/><line x1="1" y1="1" x2="23" y2="23" stroke="url(#eyeSlash)" stroke-width="2.5"/></g>' },
-    { id: 745, name: "EyeOff", category: "ui", svgContent: '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 748, name: "Fast-Forward", category: "media", svgContent: '<polygon points="13 19 22 12 13 5 13 19"/><polygon points="2 19 11 12 2 5 2 19"/>' },
-    { id: 751, name: "Figma", category: "brands", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2.5" fill="currentColor" opacity="0.9"/><path d="M14 9c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5-2.5 1.12-2.5 2.5z"/>' },
-    { id: 754, name: "File", category: "development", svgContent: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>' },
-    { id: 757, name: "File-Color", category: "objects", svgContent: '<defs><linearGradient id="filePage" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#eceff1"/></linearGradient></defs><g><polygon points="14 2 6 2 6 22 18 22 18 6 14 2" fill="url(#filePage)" stroke="#b0bec5" stroke-width="1"/><polygon points="14 2 14 6 18 6" fill="#cfd8dc"/><line x1="9" y1="11" x2="15" y2="11" stroke="#90a4ae" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="15" x2="15" y2="15" stroke="#90a4ae" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 758, name: "File-Minus", category: "development", svgContent: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/>' },
-    { id: 761, name: "File-Plus", category: "development", svgContent: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>' },
-    { id: 764, name: "File-Text", category: "development", svgContent: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>' },
-    { id: 767, name: "File-Text-Color", category: "ui", svgContent: '<defs><linearGradient id="fltGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#eceff1"/></linearGradient></defs><g><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="url(#fltGrad)" stroke="#546e7a" stroke-width="1.5"/><path d="M14 2v6h6M8 12h8M8 16h8" stroke="#546e7a" stroke-width="1.5" stroke-linecap="round"/></g>' },
-    { id: 770, name: "Film", category: "media", svgContent: '<rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/>' },
-    { id: 773, name: "Film-Roll-Color", category: "general", svgContent: '<defs><linearGradient id="flmGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#455a64"/><stop offset="100%" stop-color="#263238"/></linearGradient></defs><g><circle cx="12" cy="12" r="8" fill="url(#flmGrad)" stroke="#263238" stroke-width="1.5"/><rect x="10" y="4" width="4" height="2" fill="#263238"/><rect x="10" y="18" width="4" height="2" fill="#263238"/></g>' },
-    { id: 776, name: "Filter", category: "ui", svgContent: '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/><circle cx="12" cy="10" r="2" fill="currentColor" opacity="0.9"/>' },
-    { id: 779, name: "FilterActive", category: "ui", svgContent: '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/><circle cx="14" cy="8" r="2" fill="currentColor" opacity="0.9"/>' },
-    { id: 782, name: "FilterClear", category: "ui", svgContent: '<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/><line x1="2" y1="2" x2="22" y2="22"/>' },
-    { id: 785, name: "Fingerprint", category: "general", svgContent: '<path d="M2 12a10 10 0 1 1 20 0"/><path d="M5 15a7 7 0 1 1 14 0"/><path d="M8 18a4 4 0 1 1 8 0"/><path d="M12 21v-2"/><path d="M12 18v-2"/><path d="M12 15v-2"/><path d="M12 12v-2"/>' },
-    { id: 788, name: "Fire", category: "weather", svgContent: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.144-.22-4.098 3-5 1 0 3 1 3 3 0 1.25-.5 2-1 3-1.072 2.144-.22 4.098 3 5-1.5 2-4 3-6 3-3.333 0-5-2-5-5z"/>' },
-    { id: 791, name: "Fire-Color", category: "general", svgContent: '<defs><linearGradient id="fireOuter" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#e65100"/><stop offset="50%" stop-color="#f57c00"/><stop offset="100%" stop-color="#ffcc80"/></linearGradient><linearGradient id="fireInner" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#ff3d00"/><stop offset="100%" stop-color="#ffea00"/></linearGradient></defs><g><path d="M18.5 14.5c-1.5 2-4 3-6 3-3.33 0-5-2-5-5 0-1.38.5-2 1-3 1.07-2.14.22-4.1 3-5-1 0-3 1-3 3 0 1.25.5 2 1 3 1.07 2.14.22 4.1-3 5z" fill="url(#fireOuter)"/><path d="M15 15.5c-.8 1.2-2.2 1.8-3.3 1.8-1.8 0-2.7-1.2-2.7-3 0-.8.3-1.2.5-1.8.6-1.3.1-2.5 1.6-3-.5 0-1.6.6-1.6 1.8 0 .8.3 1.2.5 1.8.6 1.3.1 2.5-1.6 3z" fill="url(#fireInner)" opacity="0.9"/></g>' },
-    { id: 794, name: "Fire-Truck-Color", category: "general", svgContent: '<defs><linearGradient id="ftkGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#f44336"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><rect x="2" y="10" width="16" height="8" rx="2" fill="url(#ftkGrad)" stroke="#b71c1c" stroke-width="1.5"/><path d="M18 12h4v2h-4z" fill="#ffffff"/></g>' },
-    { id: 797, name: "Firebase", category: "brands", svgContent: '<polygon points="12 2 6 6 8 14 12 18 16 14 18 6 12 2"/><path d="M12 6v8M8 8l4 4M16 8l-4 4"/>' },
-    { id: 800, name: "Fireworks-Color", category: "general", svgContent: '<g stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="6" stroke="#ffeb3b"/><line x1="12" y1="18" x2="12" y2="22" stroke="#ffeb3b"/><line x1="2" y1="12" x2="6" y2="12" stroke="#ffeb3b"/><line x1="18" y1="12" x2="22" y2="12" stroke="#ffeb3b"/><circle cx="12" cy="12" r="3" fill="#ff5252"/></g>' },
-    { id: 803, name: "Fish", category: "food", svgContent: '<path d="M6 12h12"/><path d="M12 12c-4 0-8 4-8 4V8s4 4 8 4z"/><path d="M12 12c4 0 8 4 8 4V8s-4 4-8 4z"/><path d="M22 12h-4"/><path d="M18 12l2-2M18 12l2 2"/>' },
-    { id: 806, name: "Fishing-Rod-Color", category: "general", svgContent: '<defs><linearGradient id="rodGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8d6e63"/><stop offset="100%" stop-color="#5d4037"/></linearGradient></defs><g><path d="M22 2L2 22M15 2h5v5" fill="none" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 809, name: "Fitness", category: "health", svgContent: '<path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M9 9h6M9 13h6M9 17h2"/>' },
-    { id: 812, name: "FitnessTracker", category: "health", svgContent: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" opacity="0.9"/><circle cx="12" cy="12" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="18" cy="12" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 815, name: "Flag", category: "objects", svgContent: '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>' },
-    { id: 818, name: "Flag-Color", category: "ui", svgContent: '<defs><linearGradient id="flagBlue" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#29b6f6"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" fill="url(#flagBlue)"/><line x1="4" y1="22" x2="4" y2="15" stroke="#455a64" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 821, name: "Flame", category: "weather", svgContent: '<path d="M12 2c1 0 2 .5 2 1.5 0 2-2 4-2 7s2 3 2 5-1 3-3 3-3-1-3-3 2-3 2-5c0-3-2-5-2-7 0-1 1-1.5 2-1.5z"/>' },
-    { id: 824, name: "Flame-Color", category: "general", svgContent: '<defs><linearGradient id="flmGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff9100"/><stop offset="100%" stop-color="#ff3d00"/></linearGradient></defs><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3.5-.5 1.5-2 2.5-2 4a1.5 1.5 0 0 0 1.5 1.5z" fill="#ffea00"/><path d="M12 2c0 0-4 4.5-4 8.5a4 4 0 0 0 8 0c0-3-4-6.5-4-8.5z" fill="url(#flmGrad)" opacity="0.85"/>' },
-    { id: 827, name: "Flame-Kindling-Color", category: "general", svgContent: '<defs><linearGradient id="fkGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffb74d"/><stop offset="100%" stop-color="#e65100"/></linearGradient></defs><g><path d="M5 20l14-4M19 20l-14-4" stroke="#8d6e63" stroke-width="2.5" stroke-linecap="round"/><path d="M12 3c0 0-3.5 4-3.5 7s1.5 5 3.5 5 3.5-2 3.5-5-3.5-7-3.5-7z" fill="url(#fkGrad)"/></g>' },
-    { id: 830, name: "Flash-Color", category: "general", svgContent: '<g fill="none" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#ffeb3b" stroke="#fbc02d" stroke-width="1.5"/></g>' },
-    { id: 833, name: "Flashlight", category: "iot", svgContent: '<path d="M15 2H9v3l-3 4v4h12V9l-3-3V2z"/><path d="M9 13v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-6"/>' },
-    { id: 836, name: "Flashlight-Color", category: "iot", svgContent: '<defs><linearGradient id="flshGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#78909c"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g><path d="M18 2H6v4l3 3v11a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V9l3-3V2z" fill="url(#flshGrad)"/><ellipse cx="12" cy="2" rx="6" ry="1" fill="#fff59d"/><circle cx="12" cy="13" r="1" fill="#00e676"/></g>' },
-    { id: 839, name: "Flashlight2", category: "iot", svgContent: '<path d="M6 9l6-6 6 6v3H6V9z"/><rect x="8" y="13" width="8" height="8" rx="1"/><line x1="12" y1="13" x2="12" y2="21"/>' },
-    { id: 842, name: "Flower-Color", category: "general", svgContent: '<defs><linearGradient id="flwGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff4081"/><stop offset="100%" stop-color="#c2185b"/></linearGradient></defs><g fill="url(#flwGrad)"><circle cx="12" cy="7" r="3.5"/><circle cx="12" cy="17" r="3.5"/><circle cx="7" cy="12" r="3.5"/><circle cx="17" cy="12" r="3.5"/><circle cx="12" cy="12" r="3" fill="#ffeb3b"/></g>' },
-    { id: 845, name: "Flower-Small-Color", category: "general", svgContent: '<defs><linearGradient id="flsGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#f8bbd0"/><stop offset="100%" stop-color="#e91e63"/></linearGradient></defs><g><circle cx="12" cy="12" r="3" fill="#ffeb3b" stroke="#fbc02d" stroke-width="1.5"/><path d="M12 2a4 4 0 0 1 0 8 4 4 0 0 1 0-8zM12 14a4 4 0 0 1 0 8 4 4 0 0 1 0-8zM2 12a4 4 0 0 1 8 0 4 4 0 0 1-8 0zM14 12a4 4 0 0 1 8 0 4 4 0 0 1-8 0z" fill="url(#flsGrad)" stroke="#e91e63" stroke-width="1.5"/></g>' },
-    { id: 848, name: "Folder", category: "development", svgContent: '<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>' },
-    { id: 851, name: "Folder-Color", category: "objects", svgContent: '<defs><linearGradient id="fldGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffb74d"/><stop offset="100%" stop-color="#f57c00"/></linearGradient></defs><g><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" fill="url(#fldGrad)" stroke="#e65100" stroke-width="1.5"/></g>' },
-    { id: 854, name: "Folder-Minus", category: "development", svgContent: '<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="9" y1="14" x2="15" y2="14"/>' },
-    { id: 857, name: "Folder-Minus-Color", category: "ui", svgContent: '<defs><linearGradient id="foldBaseM" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffe082"/><stop offset="100%" stop-color="#ffa000"/></linearGradient></defs><g><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" fill="url(#foldBaseM)"/><path d="M2 8h20v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8z" fill="#ffb300"/><line x1="9" y1="14" x2="15" y2="14" stroke="#f44336" stroke-width="2.5" stroke-linecap="round"/></g>' },
-    { id: 858, name: "Folder-Plus", category: "development", svgContent: '<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/>' },
-    { id: 861, name: "Folder-Plus-Color", category: "ui", svgContent: '<defs><linearGradient id="foldBase" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffe082"/><stop offset="100%" stop-color="#ffa000"/></linearGradient></defs><g><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" fill="url(#foldBase)"/><path d="M2 8h20v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8z" fill="#ffb300"/><line x1="12" y1="11" x2="12" y2="17" stroke="#4caf50" stroke-width="2.5" stroke-linecap="round"/><line x1="9" y1="14" x2="15" y2="14" stroke="#4caf50" stroke-width="2.5" stroke-linecap="round"/></g>' },
-    { id: 862, name: "FolderOpen", category: "development", svgContent: '<path d="M20 6a2 2 0 0 0-2-2H8l-2-2H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2z"/>' },
-    { id: 865, name: "Fork", category: "general", svgContent: '<path d="M18 2v10a4 4 0 0 1-8 0V2"/><path d="M14 2v10"/><path d="M6 2v10a2 2 0 0 0 4 0V2"/><path d="M18 22H6"/>' },
-    { id: 868, name: "Forklift-Color", category: "general", svgContent: '<defs><linearGradient id="frkGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff9800"/><stop offset="100%" stop-color="#f57c00"/></linearGradient></defs><g><rect x="4" y="12" width="8" height="6" fill="url(#frkGrad)" stroke="#f57c00" stroke-width="1.5"/><path d="M12 10h4v10h-2v-8h-2z" fill="#f57c00" stroke="#f57c00" stroke-width="1.5"/></g>' },
-    { id: 871, name: "ForwardSolid", category: "ui", svgContent: '<polyline points="5 12 19 12 13 6" fill="currentColor" opacity="0.9" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round"/>' },
-    { id: 874, name: "Frown", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
-    { id: 877, name: "Frown-Color", category: "ui", svgContent: '<defs><linearGradient id="faceSad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffb74d"/><stop offset="100%" stop-color="#f57c00"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#faceSad)"/><path d="M16 16s-1.5-2-4-2-4 2-4 2" fill="none" stroke="#5d4037" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="9" r="1.5" fill="#5d4037"/><circle cx="15" cy="9" r="1.5" fill="#5d4037"/></g>' },
-    { id: 878, name: "Frown-Off", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M8 16s1.5-2 4-2 4 2 4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 881, name: "Game-Controller-Color", category: "general", svgContent: '<defs><linearGradient id="conGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#455a64"/><stop offset="100%" stop-color="#263238"/></linearGradient></defs><g><path d="M20 8h-4l-2-3h-4l-2 3H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2z" fill="url(#conGrad)" stroke="#263238" stroke-width="1.5"/><circle cx="16" cy="13" r="1.5" fill="#ff5252"/></g>' },
-    { id: 884, name: "Gauge2", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><polyline points="12 16 12 12 9 9"/><line x1="12" y1="6" x2="12" y2="2"/>' },
-    { id: 887, name: "GCP", category: "general", svgContent: '<circle cx="12" cy="12" r="9"/><path d="M12 5a7 7 0 0 1 7 7M12 19a7 7 0 0 1-7-7"/>' },
-    { id: 890, name: "Gear", category: "general", svgContent: '<circle cx="12" cy="12" r="1" fill="currentColor" opacity="0.9"/><path d="M12 1v2m0 16v2M23 12h-2M3 12H1M20.49 3.51l-1.41 1.41M4.93 19.07l-1.41 1.41M20.49 20.49l-1.41-1.41M4.93 4.93l-1.41-1.41"/><circle cx="12" cy="12" r="4"/>' },
-    { id: 893, name: "Gemini", category: "ai", svgContent: '<path d="M12 2L2 7v10l10 5 10-5V7l-10-5zm0 3l7 3.5v7L12 17l-7-3.5v-7L12 5z"/><circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.9"/>' },
-    { id: 896, name: "Gift", category: "objects", svgContent: '<polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>' },
-    { id: 899, name: "Gift-Color", category: "finance", svgContent: '<defs><linearGradient id="giftRed" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ef5350"/><stop offset="100%" stop-color="#d32f2f"/></linearGradient></defs><g><rect x="3" y="9" width="18" height="12" rx="1" fill="url(#giftRed)"/><rect x="2" y="7" width="20" height="3" fill="#e53935" rx="1"/><path d="M12 7c-2-3-5-2-5 0s3 2 5 0c2 2 5 0 5-2s-3-3-5 0z" fill="#fff176"/><line x1="12" y1="7" x2="12" y2="21" stroke="#fff176" stroke-width="2.5"/></g>' },
-    { id: 902, name: "GitHub", category: "brands", svgContent: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>' },
-    { id: 905, name: "GitHub-Color", category: "brands", svgContent: '<defs><linearGradient id="gitHubGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#333333"/><stop offset="100%" stop-color="#111111"/></linearGradient></defs><g><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.7 9.7 0 0 1 5.1 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.6 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z" fill="url(#gitHubGrad)"/><path d="M6.4 17.7c-.1 0-.2-.1-.2-.2s.1-.2.2-.2.2.1.2.2-.1.2-.2.2zm-.4-.4c0-.1 0-.2-.1-.2s-.2 0-.2.1 0 .2.1.2.2 0 .2-.1z" fill="#ffffff" opacity="0.5"/></g>' },
-    { id: 908, name: "GitLab", category: "brands", svgContent: '<path d="M12 2L3 8l2 7-2 7 9 5 9-5-2-7 2-7-9-6z"/>' },
-    { id: 911, name: "Glass-Water", category: "food", svgContent: '<path d="M5 2h14l-2 20H7L5 2z"/><path d="M5 2h14"/><path d="M7 6h10"/>' },
-    { id: 914, name: "Glasses", category: "food", svgContent: '<circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><line x1="9" y1="12" x2="15" y2="12"/><path d="M6 8v8M18 8v8"/>' },
-    { id: 917, name: "Globe", category: "development", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' },
-    { id: 920, name: "Globe-Color", category: "iot", svgContent: '<defs><linearGradient id="globeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g fill="none" stroke="#b0bec5" stroke-width="1.5"><circle cx="12" cy="12" r="10" fill="url(#globeGrad)" stroke="url(#globeGrad)" stroke-width="2"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 0 0 20" stroke="#ffffff" opacity="0.4"/></g>' },
-    { id: 923, name: "Glue-Color", category: "general", svgContent: '<defs><linearGradient id="gluGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><rect x="7" y="6" width="10" height="14" rx="2" fill="url(#gluGrad)" stroke="#546e7a" stroke-width="1.5"/><rect x="9" y="3" width="6" height="3" fill="#ff5252"/></g>' },
-    { id: 926, name: "Google", category: "brands", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 1 0 8 0M12 8V4M12 20v-4"/>' },
-    { id: 929, name: "Graph-Bar-Color", category: "general", svgContent: '<defs><linearGradient id="grbGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4caf50"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient></defs><g><rect x="4" y="14" width="4" height="6" fill="url(#grbGrad)"/><rect x="10" y="10" width="4" height="10" fill="url(#grbGrad)"/><rect x="16" y="6" width="4" height="14" fill="url(#grbGrad)"/><path d="M2 22h20" stroke="#37474f" stroke-width="2"/></g>' },
-    { id: 932, name: "GraphQL", category: "finance", svgContent: '<polygon points="12 2 20.5 8.5 20.5 15.5 12 22 3.5 15.5 3.5 8.5 12 2"/><circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.9"/><circle cx="18.5" cy="5.75" r="1" fill="currentColor" opacity="0.9"/><circle cx="18.5" cy="18.25" r="1" fill="currentColor" opacity="0.9"/><circle cx="5.5" cy="18.25" r="1" fill="currentColor" opacity="0.9"/><circle cx="5.5" cy="5.75" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 935, name: "GraphQL-Color", category: "brands", svgContent: '<defs><linearGradient id="gqlPink" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e10098"/><stop offset="100%" stop-color="#800056"/></linearGradient></defs><g stroke="url(#gqlPink)" stroke-width="1.5" fill="none"><polygon points="12 2 21 7 21 17 12 22 3 17 3 7" stroke-width="2"/><polygon points="12 22 12 2"/><polygon points="3 7 21 17"/><polygon points="3 17 21 7"/><circle cx="12" cy="2" r="2" fill="#e10098" stroke="none"/><circle cx="21" cy="7" r="2" fill="#e10098" stroke="none"/><circle cx="21" cy="17" r="2" fill="#e10098" stroke="none"/><circle cx="12" cy="22" r="2" fill="#e10098" stroke="none"/><circle cx="3" cy="17" r="2" fill="#e10098" stroke="none"/><circle cx="3" cy="7" r="2" fill="#e10098" stroke="none"/></g>' },
-    { id: 936, name: "Grayscale", category: "general", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="16" cy="8" r="1.5" fill="currentColor" opacity="0.9"/><path d="M8 14a4 4 0 0 0 8 0"/>' },
-    { id: 939, name: "Grid", category: "ui", svgContent: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>' },
-    { id: 942, name: "Grid-Color", category: "development", svgContent: '<defs><linearGradient id="gridGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ab47bc"/><stop offset="100%" stop-color="#7b1fa2"/></linearGradient></defs><g><rect x="3" y="3" width="7" height="7" rx="1" fill="url(#gridGrad)"/><rect x="14" y="3" width="7" height="7" rx="1" fill="url(#gridGrad)"/><rect x="3" y="14" width="7" height="7" rx="1" fill="url(#gridGrad)"/><rect x="14" y="14" width="7" height="7" rx="1" fill="url(#gridGrad)"/></g>' },
-    { id: 945, name: "Grill", category: "general", svgContent: '<path d="M3 14h18"/><path d="M3 10h18"/><path d="M3 6h18"/><path d="M2 14a10 10 0 0 0 20 0H2z"/><path d="M4 14a8 8 0 0 1 16 0"/>' },
-    { id: 948, name: "Group", category: "ui", svgContent: '<circle cx="5" cy="7" r="2" fill="currentColor" opacity="0.9"/><circle cx="19" cy="7" r="2" fill="currentColor" opacity="0.9"/><circle cx="12" cy="6" r="2.5" fill="currentColor" opacity="0.9"/><path d="M3 18c0-2 1-4 3-5M18 13c2 1 3 3 3 5M8 21h8M12 18v3"/>' },
-    { id: 951, name: "Guitar-Color", category: "general", svgContent: '<defs><linearGradient id="gtrGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#a1887f"/><stop offset="100%" stop-color="#5d4037"/></linearGradient></defs><g><path d="M12 2c-5 0-8 3-8 8s3 8 8 8 8-3 8-8-3-8-8-8z" fill="url(#gtrGrad)" stroke="#5d4037" stroke-width="1.5"/><rect x="11" y="10" width="2" height="12" fill="#5d4037"/><circle cx="12" cy="10" r="1.5" fill="#121212"/></g>' },
-    { id: 954, name: "Hand-Stop", category: "objects", svgContent: '<path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>' },
-    { id: 957, name: "Hard-Drive", category: "development", svgContent: '<line x1="22" y1="12" x2="2" y2="12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" y1="16" x2="6.01" y2="16"/><line x1="10" y1="16" x2="10.01" y2="16"/>' },
-    { id: 960, name: "Hard-Drive-Color", category: "development", svgContent: '<defs><linearGradient id="hdGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><rect x="3" y="2" width="18" height="20" rx="2" fill="url(#hdGrad)"/><line x1="3" y1="16" x2="21" y2="16" stroke="#455a64" stroke-width="1.5"/><circle cx="6" cy="19" r="1" fill="#4caf50"/><circle cx="12" cy="9" r="4" fill="#cfd8dc" stroke="#455a64" stroke-width="1.5"/><circle cx="12" cy="9" r="1" fill="#455a64"/></g>' },
-    { id: 963, name: "Hashtag", category: "ui", svgContent: '<line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/>' },
-    { id: 966, name: "HBO", category: "general", svgContent: '<rect x="2" y="2" width="20" height="20" rx="2"/><path d="M6 8h2v8H6zM10 8h2v8h-2zM14 8h4v2h-4zM14 12h4v2h-4zM14 14h4v2h-4z"/>' },
-    { id: 969, name: "Heading1", category: "general", svgContent: '<line x1="4" y1="9" x2="4" y2="21"/><line x1="4" y1="9" x2="12" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/><line x1="12" y1="15" x2="20" y2="9"/><line x1="20" y1="9" x2="20" y2="21"/>' },
-    { id: 972, name: "Heading2", category: "general", svgContent: '<line x1="4" y1="12" x2="4" y2="18"/><path d="M4 9c0-1 .895-2 2-2s2 .895 2 2c0 1-.895 2-2 2s-2-.895-2-2"/><path d="M10 9h8c0 4-4 8-4 8s-4-4-4-8z"/><line x1="18" y1="12" x2="18" y2="18"/>' },
-    { id: 975, name: "Headphone", category: "general", svgContent: '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>' },
-    { id: 978, name: "Headphones", category: "media", svgContent: '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>' },
-    { id: 981, name: "Headphones-Color", category: "communication", svgContent: '<defs><linearGradient id="hpGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ec407a"/><stop offset="100%" stop-color="#9c27b0"/></linearGradient></defs><g><path d="M3 18v-6c0-5 4-9 9-9s9 4 9 9v6" fill="none" stroke="url(#hpGrad)" stroke-width="2.5" stroke-linecap="round"/><rect x="2" y="14" width="4" height="6" rx="1.5" fill="#212121"/><rect x="18" y="14" width="4" height="6" rx="1.5" fill="#212121"/></g>' },
-    { id: 984, name: "Headset", category: "communication", svgContent: '<path d="M3 9l2 12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2l2-12M3 9h18M7 9a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4"/><line x1="9" y1="6" x2="9" y2="4"/><line x1="15" y1="6" x2="15" y2="4"/>' },
-    { id: 987, name: "Heart", category: "media", svgContent: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>' },
-    { id: 990, name: "Heart-Broken-Color", category: "ui", svgContent: '<defs><linearGradient id="hbRed" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff5252"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><path d="M12 6.2v10.3l1.45 1.32C18.6 13.14 22 10.06 22 6.28 22 3.2 19.58.78 16.5.78c-1.74 0-3.41.81-4.5 2.09V6.2z" fill="url(#hbRed)"/><path d="M12 6.2L10 9l3 3-2 3.5 1 1.5v-1.7L4.5 12C1.4 8.6 1 5.4 1 3c0-1.5 1.5-3 4.5-3 1.7 0 3.4.8 4.5 2.1V6.2z" fill="#e53935"/><path d="M12 6.2L10 9l3 3-2 3.5 1 1.5V6.2z" fill="none" stroke="#ffffff" stroke-width="1.25"/></g>' },
-    { id: 993, name: "Heart-Color", category: "ui", svgContent: '<defs><linearGradient id="heartRed" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff5252"/><stop offset="100%" stop-color="#c62828"/></linearGradient></defs><g><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#heartRed)"/><path d="M7.5 5c-2 0-3.5 1.5-3.5 3.5 0 2.5 2.5 5 6.5 8.5V6.2C10 5.4 8.8 5 7.5 5z" fill="#ff8a80" opacity="0.3"/></g>' },
-    { id: 996, name: "Helicopter-Color", category: "general", svgContent: '<defs><linearGradient id="hlcGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><ellipse cx="12" cy="12" rx="8" ry="4" fill="url(#hlcGrad)" stroke="#78909c" stroke-width="1.5"/><line x1="12" y1="8" x2="12" y2="4" stroke="#455a64" stroke-width="2"/><line x1="4" y1="4" x2="20" y2="4" stroke="#455a64" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 999, name: "Help-Circle", category: "ui", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>' },
-    { id: 1002, name: "Help-Circle-Color", category: "ui", svgContent: '<defs><linearGradient id="helpCirc" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#64b5f6"/><stop offset="100%" stop-color="#1565c0"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#helpCirc)"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/><circle cx="12" cy="17" r="1.25" fill="#ffffff"/></g>' },
-    { id: 1003, name: "Highlighter", category: "general", svgContent: '<path d="M17 3a2.828 2.828 0 1 1 4 4l-7.07 7.07-4-4L17 3z"/><path d="M2 21h20M3 21l3-9h12l3 9"/>' },
-    { id: 1006, name: "Home", category: "ui", svgContent: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>' },
-    { id: 1009, name: "Home-Color", category: "iot", svgContent: '<defs><linearGradient id="roofGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e53935"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient><linearGradient id="wallGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff8e1"/><stop offset="100%" stop-color="#ffe082"/></linearGradient></defs><g><polygon points="12 2 2 11 4 11 4 22 20 22 20 11 22 11" fill="url(#wallGrad)"/><polygon points="12 2 1 11 3 13 12 5 21 13 23 11" fill="url(#roofGrad)"/><rect x="10" y="14" width="4" height="8" fill="#795548"/><circle cx="11" cy="18" r="0.5" fill="#ffd54f"/></g>' },
-    { id: 1010, name: "HomeSolid", category: "ui", svgContent: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="currentColor" opacity="0.9"/><rect x="9" y="12" width="6" height="10" fill="currentColor" opacity="0.9" opacity="0.2"/>' },
-    { id: 1013, name: "Hot-Air-Balloon-Color", category: "ai", svgContent: '<defs><linearGradient id="habGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#f44336"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><path d="M12 2a6 6 0 0 0-6 6c0 4 2 6 6 6s6-2 6-6a6 6 0 0 0-6-6z" fill="url(#habGrad)" stroke="#b71c1c" stroke-width="1.5"/><rect x="10" y="14" width="4" height="4" fill="#795548"/></g>' },
-    { id: 1016, name: "Hot-Dog", category: "general", svgContent: '<path d="M22 13H2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z"/><path d="M20 13V8a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v5"/>' },
-    { id: 1019, name: "Hulu", category: "general", svgContent: '<rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="9" cy="12" r="3" fill="currentColor" opacity="0.9"/>' },
-    { id: 1022, name: "Hurricane", category: "general", svgContent: '<path d="M4 12a8 8 0 0 1 16 0 8 8 0 0 1-16 0z"/><path d="M6.34 6.34l2.83 2.83M14.83 14.83l2.83 2.83M17.66 6.34l-2.83 2.83M9.17 14.83l-2.83 2.83"/>' },
-    { id: 1025, name: "Image", category: "general", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polygon points="21 15 16 10 5 21"/>' },
-    { id: 1028, name: "ImageAdd", category: "general", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/><line x1="12" y1="5" x2="12" y2="11"/><line x1="9" y1="8" x2="15" y2="8"/>' },
-    { id: 1031, name: "ImageRemove", category: "general", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/><line x1="19" y1="5" x2="5" y2="19"/>' },
-    { id: 1034, name: "Inbox", category: "communication", svgContent: '<polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>' },
-    { id: 1037, name: "Inbox2", category: "communication", svgContent: '<polyline points="22 12 18 12 15 21 9 21 6 12 2 12"/><line x1="6" y1="5" x2="18" y2="5"/>' },
-    { id: 1040, name: "Info", category: "ui", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>' },
-    { id: 1043, name: "Info-Color", category: "ui", svgContent: '<defs><linearGradient id="infoCirc" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4db6ac"/><stop offset="100%" stop-color="#00695c"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#infoCirc)"/><line x1="12" y1="16" x2="12" y2="12" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/><line x1="12" y1="8" x2="12.01" y2="8" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 1044, name: "InfoAlt", category: "ui", svgContent: '<path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12z"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.8" fill="currentColor" opacity="0.9"/>' },
-    { id: 1047, name: "InfoSolid", category: "ui", svgContent: '<circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.9" opacity="0.1"/><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r="0.8" fill="currentColor" opacity="0.9"/>' },
-    { id: 1050, name: "Ink-Color", category: "general", svgContent: '<defs><linearGradient id="inkGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#455a64"/><stop offset="100%" stop-color="#1a237e"/></linearGradient></defs><g><path d="M12 2C7 2 5 7 5 11c0 4 3 7 7 11 4-4 7-7 7-11 0-4-2-9-7-9z" fill="url(#inkGrad)"/><path d="M12 5c-2 0-4 2.5-4 5.5" fill="none" stroke="#ffffff" opacity="0.3" stroke-width="1.5" stroke-linecap="round"/></g>' },
-    { id: 1053, name: "Instagram", category: "brands", svgContent: '<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 1056, name: "Jenkins", category: "general", svgContent: '<rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="6" cy="6" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="12" cy="6" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="18" cy="6" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="12" cy="12" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="18" cy="12" r="1.5" fill="currentColor" opacity="0.9"/>' },
-    { id: 1059, name: "Juice", category: "general", svgContent: '<path d="M2 13h20v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><path d="M7 13V9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4"/><path d="M12 2v5"/>' },
-    { id: 1062, name: "Kanban-Color", category: "development", svgContent: '<defs><linearGradient id="kbGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#26a69a"/><stop offset="100%" stop-color="#00695c"/></linearGradient></defs><g fill="url(#kbGrad)"><rect x="3" y="3" width="4" height="18" rx="1" opacity="0.4"/><rect x="10" y="3" width="4" height="18" rx="1" opacity="0.7"/><rect x="17" y="3" width="4" height="18" rx="1"/><rect x="11" y="5" width="2" height="4" fill="#ffffff"/><rect x="18" y="5" width="2" height="7" fill="#ffffff"/></g>' },
-    { id: 1065, name: "Key", category: "ui", svgContent: '<path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.778-7.778z"/><line x1="14.34" y1="8.34" x2="18.34" y2="12.34"/><line x1="24" y1="0" x2="21" y2="3"/>' },
-    { id: 1068, name: "Key-Color", category: "iot", svgContent: '<defs><linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffe082"/><stop offset="50%" stop-color="#ffb300"/><stop offset="100%" stop-color="#ff8f00"/></linearGradient></defs><g fill="url(#goldGrad)"><path d="M21 2h-6a1 1 0 0 0-1 1v3h-2v2h-2v2H8a7 7 0 1 0 6 6v-4h2v-2h2V6h3a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zm-13 16a3 3 0 1 1 3-3 3 3 0 0 1-3 3z"/><circle cx="8" cy="15" r="1" fill="#fff" opacity="0.5"/></g>' },
-    { id: 1071, name: "Keyhole-Color", category: "iot", svgContent: '<defs><linearGradient id="khGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#90a4ae"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#khGrad)"/><path d="M12 7a2.5 2.5 0 0 0-1.5 4.5l-1 4.5h5l-1-4.5A2.5 2.5 0 0 0 12 7z" fill="#212121"/></g>' },
-    { id: 1074, name: "Keypad", category: "ui", svgContent: '<rect x="3" y="3" width="4" height="4" rx="1"/><rect x="10" y="3" width="4" height="4" rx="1"/><rect x="17" y="3" width="4" height="4" rx="1"/><rect x="3" y="10" width="4" height="4" rx="1"/><rect x="10" y="10" width="4" height="4" rx="1"/><rect x="17" y="10" width="4" height="4" rx="1"/><rect x="3" y="17" width="4" height="4" rx="1"/><rect x="10" y="17" width="4" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/>' },
-    { id: 1077, name: "Kite-Color", category: "general", svgContent: '<defs><linearGradient id="ktGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#80cbc4"/><stop offset="100%" stop-color="#00695c"/></linearGradient></defs><g><path d="M12 2l8 8-8 12-8-12z" fill="url(#ktGrad)" stroke="#00695c" stroke-width="1.5"/><line x1="12" y1="2" x2="12" y2="22" stroke="#00695c" stroke-width="1"/><path d="M12 22l3 2" stroke="#00695c" stroke-width="1"/></g>' },
-    { id: 1080, name: "Knife", category: "food", svgContent: '<path d="M12 2v20"/><path d="M15 2v14a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V2z"/><path d="M12 2l3 0"/>' },
-    { id: 1083, name: "Kubernetes", category: "brands", svgContent: '<circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.9"/><path d="M12 4v3M12 17v3M6 12H3M21 12h-3M6.5 6.5l-2.1-2.1M19.6 19.6l-2.1-2.1M17.5 6.5l2.1-2.1M4.4 19.6l2.1-2.1"/>' },
-    { id: 1086, name: "Kubernetes-Color", category: "brands", svgContent: '<defs><linearGradient id="k8sBlue" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#326ce5"/><stop offset="100%" stop-color="#1f4087"/></linearGradient></defs><g fill="url(#k8sBlue)"><polygon points="12 2 22 6.5 22 17.5 12 22 2 17.5 2 6.5"/><polygon points="12 5 19 8.2 19 15.8 12 19 5 15.8 5 8.2" fill="#ffffff" opacity="0.2"/><circle cx="12" cy="12" r="3" fill="#ffffff"/></g>' },
-    { id: 1087, name: "Laptop", category: "development", svgContent: '<polyline points="4 18 1 18 1 20 23 20 23 18 20 18"/><rect x="4" y="4" width="16" height="14" rx="2"/>' },
-    { id: 1090, name: "Layers", category: "ui", svgContent: '<polygon points="12 2 2 7 12 12 22 7"/><polygon points="2 17 12 22 22 17"/><polygon points="2 12 12 17 22 12"/>' },
-    { id: 1093, name: "Layers-3-Color", category: "development", svgContent: '<defs><linearGradient id="lay3Grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7e57c2"/><stop offset="100%" stop-color="#512da8"/></linearGradient></defs><g fill="none" stroke="url(#lay3Grad)" stroke-width="2" stroke-linejoin="round"><polygon points="12 2 21 6 12 10 3 6" fill="url(#lay3Grad)" stroke="none"/><path d="M3 11l9 4 9-4M3 16l9 4 9-4"/></g>' },
-    { id: 1096, name: "Layers-Color", category: "development", svgContent: '<defs><linearGradient id="layGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4db6ac"/><stop offset="100%" stop-color="#00695c"/></linearGradient></defs><g fill="none" stroke="url(#layGrad)" stroke-width="2"><polygon points="12 2 22 7 12 12 2 7" fill="url(#layGrad)" stroke="none"/><path d="M2 12l10 5 10-5M2 17l10 5 10-5" stroke-linecap="round"/></g>' },
-    { id: 1099, name: "Layout", category: "general", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>' },
-    { id: 1102, name: "Layout-Color", category: "development", svgContent: '<defs><linearGradient id="layGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#90caf9"/><stop offset="100%" stop-color="#1e88e5"/></linearGradient></defs><g><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="url(#layGrad)" stroke-width="2"/><rect x="5" y="5" width="14" height="4" fill="#1e88e5" opacity="0.3"/><rect x="5" y="11" width="6" height="8" fill="#1e88e5" opacity="0.15"/><rect x="13" y="11" width="6" height="8" fill="#1e88e5" opacity="0.15"/></g>' },
-    { id: 1105, name: "Leaf-Color", category: "general", svgContent: '<defs><linearGradient id="lefGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#66bb6a"/><stop offset="100%" stop-color="#1b5e20"/></linearGradient></defs><g><path d="M2 22c0-5.52 4.48-10 10-10H22V2c0 5.52-4.48 10-10 10H2v10z" fill="url(#lefGrad)"/><line x1="2" y1="22" x2="22" y2="2" stroke="#ffffff" opacity="0.3" stroke-width="1.5"/></g>' },
-    { id: 1108, name: "Leaf-Small-Color", category: "general", svgContent: '<defs><linearGradient id="lfsGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#81c784"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient></defs><g><path d="M12 2a10 10 0 0 1 10 10c0 10-10 10-10 10S2 22 2 12A10 10 0 0 1 12 2z" fill="url(#lfsGrad)" stroke="#2e7d32" stroke-width="1.5"/><path d="M12 2v20" stroke="#2e7d32" stroke-width="1.5"/></g>' },
-    { id: 1111, name: "Lightbulb-Color", category: "general", svgContent: '<defs><linearGradient id="blbGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><path d="M12 2a7 7 0 0 1 7 7c0 4-3 6-3 6v2a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2s-3-2-3-6a7 7 0 0 1 7-7z" fill="url(#blbGrad)" stroke="#fbc02d" stroke-width="1.5"/><line x1="10" y1="20" x2="14" y2="20" stroke="#fbc02d" stroke-width="2"/></g>' },
-    { id: 1114, name: "Lightbulb4", category: "objects", svgContent: '<path d="M9 21H3v-2h.75a3 3 0 0 1 3-3h.5a3 3 0 0 1 3 3h.75v2zm0-4h-6V9a6 6 0 0 1 6-6 6 6 0 0 1 6 6v8zm0 4h6v2H9v-2z"/>' },
-    { id: 1117, name: "LightBulbSmart", category: "objects", svgContent: '<path d="M9 21H3v-2h.75a3 3 0 0 1 3-3h.5a3 3 0 0 1 3 3h.75v2zm0-4H3V9a6 6 0 0 1 6-6 6 6 0 0 1 6 6v8zm0 4h6v2H9v-2z"/><path d="M12 3v2M15 5l-1.4 1.4M9 5L10.4 6.4"/>' },
-    { id: 1120, name: "Lighthouse-Color", category: "general", svgContent: '<defs><linearGradient id="lghGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><path d="M9 22h6l-1-18h-4z" fill="url(#lghGrad)" stroke="#455a64" stroke-width="1.5"/><rect x="10" y="4" width="4" height="4" fill="#ef5350"/></g>' },
-    { id: 1123, name: "Lightning", category: "objects", svgContent: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>' },
-    { id: 1126, name: "Lightning-Color", category: "iot", svgContent: '<defs><linearGradient id="ltgGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="url(#ltgGrad)" stroke="#f57f17" stroke-width="1.5"/></g>' },
-    { id: 1129, name: "LineChart", category: "general", svgContent: '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>' },
-    { id: 1132, name: "Link", category: "ui", svgContent: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
-    { id: 1135, name: "Link-2", category: "ui", svgContent: '<path d="M15 7h3a5 5 0 0 1 5 5s0 5-5 5h-3m-6 0H6a5 5 0 0 1-5-5s0-5 5-5h3m3 5h6"/>' },
-    { id: 1138, name: "LinkedIn", category: "brands", svgContent: '<rect x="2" y="2" width="20" height="20" rx="2"/><path d="M6 8v10M10 8v10M10 11c0-1 1-2 2-2s2 1 2 2v7M6 6v.01"/>' },
-    { id: 1141, name: "LinkExternal", category: "ui", svgContent: '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>' },
-    { id: 1144, name: "Loader2", category: "general", svgContent: '<path d="M21 12a9 9 0 1 1-9-9m9 0a9 9 0 0 0-9 9"/>' },
-    { id: 1147, name: "Loader3", category: "general", svgContent: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 2c5.52 0 10 4.48 10 10" stroke-dasharray="15.7 15.7" stroke-dashoffset="-15.7"/>' },
-    { id: 1150, name: "Location-Pin-Color", category: "iot", svgContent: '<defs><linearGradient id="pinGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ef5350"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z" fill="url(#pinGrad)" stroke="#b71c1c" stroke-width="1.5"/><circle cx="12" cy="9" r="2" fill="#ffffff"/></g>' },
-    { id: 1153, name: "Lock", category: "ui", svgContent: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>' },
-    { id: 1156, name: "Lock-Color", category: "iot", svgContent: '<defs><linearGradient id="lockBody" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffd54f"/><stop offset="100%" stop-color="#ffb300"/></linearGradient><linearGradient id="shackleGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="50%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="url(#shackleGrad)" stroke-width="3" stroke-linecap="round" fill="none"/><rect x="3" y="11" width="18" height="11" rx="2" fill="url(#lockBody)"/><circle cx="12" cy="16" r="2" fill="#5d4037"/><path d="M12 18v2" stroke="#5d4037" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="14" r="1" fill="#fff" opacity="0.4"/></g>' },
-    { id: 1159, name: "LockClosed", category: "ui", svgContent: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2" fill="currentColor" opacity="0.9" opacity="0.1"/><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 1162, name: "LockOpen", category: "ui", svgContent: '<path d="M3 11v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V11M7 11V7a5 5 0 0 1 10 0" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 1165, name: "LogIn", category: "general", svgContent: '<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 12 15 12 12 9"/><polyline points="10 12 15 12 12 15"/>' },
-    { id: 1168, name: "LogOut", category: "general", svgContent: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 12 9 12 12 15"/><polyline points="16 12 9 12 12 9"/>' },
-    { id: 1171, name: "Magic", category: "ai", svgContent: '<path d="M15 4v7a3 3 0 1 1-6 0V4m3-2v2M6 20h12M9 20v2M15 20v2M3 16h18M3 8h18M6 4h12M9 2h6"/>' },
-    { id: 1174, name: "Magic-Wand-Color", category: "general", svgContent: '<defs><linearGradient id="wndGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7e57c2"/><stop offset="100%" stop-color="#311b92"/></linearGradient></defs><g><path d="M18 3l3 3L6 21H3v-3L18 3z" fill="url(#wndGrad)"/><path d="M18 3l3 3-3-3z" fill="#ffeb3b"/><circle cx="5" cy="5" r="1" fill="#ffeb3b"/><circle cx="12" cy="4" r="1.5" fill="#ffeb3b"/><circle cx="19" cy="11" r="1" fill="#ffeb3b"/></g>' },
-    { id: 1177, name: "Magnet-Color", category: "general", svgContent: '<defs><linearGradient id="magGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff5252"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><path d="M4 3h4v8a4 4 0 0 0 8 0V3h4v8a8 8 0 0 1-16 0V3z" fill="url(#magGrad)"/><rect x="4" y="3" width="4" height="3" fill="#cfd8dc"/><rect x="16" y="3" width="4" height="3" fill="#cfd8dc"/></g>' },
-    { id: 1180, name: "Magnifying-Glass-Color", category: "food", svgContent: '<defs><linearGradient id="mngGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#546e7a"/></linearGradient></defs><g><circle cx="10" cy="10" r="7" fill="none" stroke="#546e7a" stroke-width="3"/><line x1="15" y1="15" x2="21" y2="21" stroke="#546e7a" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 1183, name: "Mail", category: "communication", svgContent: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>' },
-    { id: 1186, name: "Mail-Color", category: "ai", svgContent: '<defs><linearGradient id="mailBack" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#90caf9"/><stop offset="100%" stop-color="#42a5f5"/></linearGradient></defs><g><rect x="2" y="4" width="20" height="16" rx="2" fill="url(#mailBack)"/><polygon points="22 4 12 12 2 4" fill="#bbdefb" opacity="0.85"/><polygon points="2 20 10 12 2 4" fill="#64b5f6" opacity="0.3"/><polygon points="22 20 14 12 22 4" fill="#64b5f6" opacity="0.3"/></g>' },
-    { id: 1187, name: "Makeup", category: "general", svgContent: '<path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><circle cx="12" cy="8" r="1.5" fill="currentColor" opacity="0.9"/><line x1="10" y1="13" x2="14" y2="13"/><path d="M8 18h8"/>' },
-    { id: 1190, name: "Map", category: "objects", svgContent: '<polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>' },
-    { id: 1193, name: "Map-Color", category: "iot", svgContent: '<defs><linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#a5d6a7"/><stop offset="50%" stop-color="#81c784"/><stop offset="100%" stop-color="#66bb6a"/></linearGradient></defs><g><polygon points="1 6 8 2 16 6 23 2 23 18 16 22 8 18 1 22" fill="url(#mapGrad)" stroke="#4caf50" stroke-width="1"/><line x1="8" y1="2" x2="8" y2="18" stroke="#ffffff" stroke-width="1.5"/><line x1="16" y1="6" x2="16" y2="22" stroke="#ffffff" stroke-width="1.5"/></g>' },
-    { id: 1196, name: "Map-Folded-Color", category: "iot", svgContent: '<defs><linearGradient id="mapFGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#d7ccc8"/><stop offset="100%" stop-color="#a1887f"/></linearGradient></defs><g><path d="M4 4l8 2 8-2v16l-8-2-8 2z" fill="url(#mapFGrad)" stroke="#a1887f" stroke-width="1.5"/><line x1="12" y1="4" x2="12" y2="20" stroke="#ffffff" stroke-width="1.5"/></g>' },
-    { id: 1199, name: "Map-Pin", category: "objects", svgContent: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>' },
-    { id: 1202, name: "Map-Pin-Color", category: "iot", svgContent: '<defs><linearGradient id="pinRed" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff5252"/><stop offset="100%" stop-color="#d50000"/></linearGradient></defs><g><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" fill="url(#pinRed)"/><circle cx="12" cy="10" r="3" fill="#ffffff"/><ellipse cx="12" cy="22" rx="4" ry="1" fill="#000000" opacity="0.2"/></g>' },
-    { id: 1205, name: "Martini", category: "general", svgContent: '<path d="M21 21H3"/><path d="M12 21V10"/><path d="M19 3L5 10"/><path d="M19 3H5"/><path d="M12 10l7-7M12 10L5 3"/>' },
-    { id: 1208, name: "MasterCard", category: "brands", svgContent: '<circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/><circle cx="12" cy="12" r="3"/>' },
-    { id: 1211, name: "Maximize", category: "ui", svgContent: '<path d="M15 3h6v6m-6 6h6v-6M9 21H3v-6m6-6H3v6"/>' },
-    { id: 1214, name: "Maximize2", category: "ui", svgContent: '<polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="15" y1="9" x2="3" y2="21"/>' },
-    { id: 1217, name: "Mechanical", category: "general", svgContent: '<circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="18" x2="16" y2="18"/><line x1="6" y1="8" x2="6" y2="16"/><line x1="18" y1="8" x2="18" y2="16"/>' },
-    { id: 1220, name: "Medal-Color", category: "general", svgContent: '<defs><linearGradient id="mdlGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffeb3b"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><circle cx="12" cy="14" r="7" fill="url(#mdlGrad)" stroke="#f57f17" stroke-width="1.5"/><path d="M10 2l2 4-2 2h4l-2-2 2-4" fill="#fbc02d" stroke="#f57f17" stroke-width="1.5"/></g>' },
-    { id: 1223, name: "Meh", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
-    { id: 1226, name: "Meh-Off", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 1229, name: "Menu", category: "ui", svgContent: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>' },
-    { id: 1232, name: "Menu-Color", category: "ui", svgContent: '<defs><linearGradient id="barGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#78909c"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g stroke="url(#barGrad)" stroke-width="3" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></g>' },
-    { id: 1233, name: "MenuAlt", category: "ui", svgContent: '<line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>' },
-    { id: 1236, name: "MenuDots", category: "ui", svgContent: '<circle cx="5" cy="12" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="12" cy="12" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="19" cy="12" r="1.5" fill="currentColor" opacity="0.9"/>' },
-    { id: 1239, name: "MenuExpand", category: "ui", svgContent: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/><circle cx="12" cy="12" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 1242, name: "MenuIcon", category: "ui", svgContent: '<line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/>' },
-    { id: 1245, name: "MessageSquare2", category: "communication", svgContent: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="14" y2="14"/>' },
-    { id: 1248, name: "Messenger", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M8 11.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm8 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>' },
-    { id: 1251, name: "Meta", category: "general", svgContent: '<path d="M7 3a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4zm10 0a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4zM7 15c0-2.2 1.8-4 4-4s4 1.8 4 4v4H7v-4z"/>' },
-    { id: 1254, name: "Mic", category: "communication", svgContent: '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/>' },
-    { id: 1257, name: "Mic-Color", category: "communication", svgContent: '<defs><linearGradient id="micBody" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#78909c"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g><rect x="9" y="2" width="6" height="12" rx="3" fill="url(#micBody)"/><path d="M19 10v1a7 7 0 0 1-14 0v-1" fill="none" stroke="#455a64" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="18" x2="12" y2="22" stroke="#455a64" stroke-width="2"/><line x1="8" y1="22" x2="16" y2="22" stroke="#455a64" stroke-width="2" stroke-linecap="round"/><rect x="10" y="4" width="4" height="3" rx="1" fill="#cfd8dc" opacity="0.3"/></g>' },
-    { id: 1258, name: "Mic-Off", category: "communication", svgContent: '<line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 11a7 7 0 0 1-12 0v-1M19 10v1a6.93 6.93 0 0 1-.46 2.5"/><line x1="12" y1="18" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>' },
-    { id: 1261, name: "Microphone", category: "communication", svgContent: '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2m14 0H5m7 11v4m-4 0h8"/>' },
-    { id: 1264, name: "Microphone-Color", category: "communication", svgContent: '<defs><linearGradient id="micGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><path d="M12 2a4 4 0 0 0-4 4v6a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z" fill="url(#micGrad)" stroke="#546e7a" stroke-width="1.5"/><line x1="12" y1="16" x2="12" y2="22" stroke="#546e7a" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 1267, name: "Microsoft", category: "brands", svgContent: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>' },
-    { id: 1270, name: "Milk", category: "general", svgContent: '<path d="M8 2h8v20H8z"/><path d="M16 4h4v18h-4z"/><path d="M4 4h4v18H4z"/>' },
-    { id: 1273, name: "Minimize", category: "ui", svgContent: '<path d="M4 14h6v6m10-6h-6v6M4 10h6V4m10 6h-6V4"/>' },
-    { id: 1276, name: "Minus", category: "ui", svgContent: '<line x1="5" y1="12" x2="19" y2="12"/>' },
-    { id: 1279, name: "Monero", category: "general", svgContent: '<path d="M12 2L4 8v8l8 4 8-4v-8l-8-6zm0 4l4 2v4l-4 2-4-2v-4l4-2z"/>' },
-    { id: 1282, name: "Monitor", category: "media", svgContent: '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>' },
-    { id: 1285, name: "Monitor-Color", category: "general", svgContent: '<defs><linearGradient id="monGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#37474f"/><stop offset="100%" stop-color="#212121"/></linearGradient></defs><g><rect x="2" y="3" width="20" height="14" rx="2" fill="url(#monGrad)"/><line x1="8" y1="21" x2="16" y2="21" stroke="#455a64" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="17" x2="12" y2="21" stroke="#455a64" stroke-width="3"/><rect x="4" y="5" width="16" height="10" fill="#00b0ff" opacity="0.15"/></g>' },
-    { id: 1288, name: "Moon", category: "ui", svgContent: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>' },
-    { id: 1291, name: "Moon-Cloud", category: "ui", svgContent: '<path d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79z"/><path d="M16 13a4 4 0 0 1 0 8H6a5 5 0 0 1-1.8-9.6"/>' },
-    { id: 1294, name: "Moon-Color", category: "iot", svgContent: '<defs><linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff59d"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="url(#moonGrad)"/><circle cx="12" cy="8" r="1" fill="#f57f17" opacity="0.3"/><circle cx="16" cy="14" r="1.5" fill="#f57f17" opacity="0.3"/></g>' },
-    { id: 1297, name: "Moon-Full-Color", category: "iot", svgContent: '<defs><linearGradient id="monFGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#90a4ae"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#monFGrad)" stroke="#546e7a" stroke-width="1.5"/></g>' },
-    { id: 1300, name: "Moon-Stars", category: "ui", svgContent: '<path d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79z"/><path d="M18 3l2 4 4 2-4 2-2 4-2-4-4-2 4-2z"/>' },
-    { id: 1303, name: "MoreHorizontal", category: "general", svgContent: '<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>' },
-    { id: 1306, name: "MoreVertical", category: "general", svgContent: '<circle cx="12" cy="5" r="1" fill="currentColor" opacity="0.9"/><circle cx="12" cy="12" r="1" fill="currentColor" opacity="0.9"/><circle cx="12" cy="19" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 1309, name: "Motorbike-Color", category: "general", svgContent: '<defs><linearGradient id="mtbGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#455a64"/><stop offset="100%" stop-color="#263238"/></linearGradient></defs><g stroke="#263238" stroke-width="2"><circle cx="6" cy="18" r="4" fill="none"/><circle cx="18" cy="18" r="4" fill="none"/><path d="M10 18h4v-4l4-2" fill="none"/></g>' },
-    { id: 1312, name: "Motorcycle-Color", category: "general", svgContent: '<defs><linearGradient id="motGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#455a64"/><stop offset="100%" stop-color="#263238"/></linearGradient></defs><g stroke="#263238" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="18" r="4" fill="none"/><circle cx="18" cy="18" r="4" fill="none"/><path d="M10 18h4v-4l4-2"/></g>' },
-    { id: 1315, name: "Mountain-Color", category: "ai", svgContent: '<defs><linearGradient id="mtnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#78909c"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g><polygon points="12 4 2 20 22 20" fill="url(#mtnGrad)"/><polygon points="12 4 9 9 12 11 14 9" fill="#ffffff"/><polygon points="17 11 13 18 21 18" fill="#455a64" opacity="0.7"/></g>' },
-    { id: 1318, name: "Mountain-Small-Color", category: "ai", svgContent: '<defs><linearGradient id="mtsGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#546e7a"/></linearGradient></defs><g><path d="M2 22l8-15 5 5 7 10z" fill="url(#mtsGrad)" stroke="#546e7a" stroke-width="1.5"/><path d="M10 7l5 5 3-3" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 1321, name: "Mug", category: "food", svgContent: '<path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>' },
-    { id: 1324, name: "Music", category: "media", svgContent: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>' },
-    { id: 1327, name: "Music-Note-Color", category: "media", svgContent: '<defs><linearGradient id="mscGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#2979ff"/><stop offset="100%" stop-color="#1565c0"/></linearGradient></defs><g><path d="M9 18V5l10-2v13" fill="none" stroke="url(#mscGrad)" stroke-width="3" stroke-linecap="round"/><circle cx="7" cy="18" r="2" fill="#1565c0"/><circle cx="17" cy="16" r="2" fill="#1565c0"/></g>' },
-    { id: 1330, name: "Music-Score-Color", category: "media", svgContent: '<defs><linearGradient id="mscSGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><rect x="4" y="3" width="16" height="18" rx="1" fill="url(#mscSGrad)" stroke="#455a64" stroke-width="1.5"/><path d="M6 7h12M6 11h12M6 15h12M6 19h12" stroke="#455a64" stroke-width="1.5" stroke-linecap="round"/></g>' },
-    { id: 1333, name: "Mute", category: "general", svgContent: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>' },
-    { id: 1336, name: "Navigation", category: "iot", svgContent: '<polygon points="3 11 22 2 13 21 11 13 3 11"/>' },
-    { id: 1339, name: "Netflix", category: "brands", svgContent: '<rect x="2" y="2" width="20" height="20" rx="2"/><path d="M6 6h3v12H6zM11 6h3v12h-3zM16 6h3v12h-3z"/>' },
-    { id: 1342, name: "Newspaper", category: "general", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="6" y1="9" x2="18" y2="9"/><line x1="6" y1="13" x2="18" y2="13"/><line x1="6" y1="17" x2="14" y2="17"/>' },
-    { id: 1345, name: "NoSymbol", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M4 4l16 16"/>' },
-    { id: 1348, name: "Note-Color", category: "general", svgContent: '<defs><linearGradient id="notGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff59d"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><path d="M3 3h12l6 6v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3z" fill="url(#notGrad)"/><path d="M15 3v4a2 2 0 0 0 2 2h4" fill="#f57f17" opacity="0.3"/></g>' },
-    { id: 1351, name: "Notebook-Color", category: "objects", svgContent: '<defs><linearGradient id="ntbGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffcc80"/><stop offset="100%" stop-color="#f57c00"/></linearGradient></defs><g><rect x="6" y="3" width="14" height="18" rx="1" fill="url(#ntbGrad)" stroke="#f57c00" stroke-width="1.5"/><path d="M6 3h2v18H6z" fill="#f57c00"/><path d="M10 7h8M10 11h8M10 15h8" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/></g>' },
-    { id: 1354, name: "Notion", category: "general", svgContent: '<path d="M3 3h18v18H3z"/><circle cx="6" cy="6" r="1" fill="currentColor" opacity="0.9"/><circle cx="12" cy="6" r="1" fill="currentColor" opacity="0.9"/><path d="M3 10h18M3 14h18M3 18h18"/>' },
-    { id: 1357, name: "Oil-Platform-Color", category: "general", svgContent: '<defs><linearGradient id="oilGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffcc80"/><stop offset="100%" stop-color="#d84315"/></linearGradient></defs><g><rect x="4" y="6" width="16" height="4" fill="url(#oilGrad)" stroke="#d84315" stroke-width="1.5"/><path d="M6 10v12M18 10v12" stroke="#d84315" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 1360, name: "OpenAI", category: "general", svgContent: '<circle cx="12" cy="12" r="9"/><path d="M12 4a8 8 0 0 1 0 16 8 8 0 0 1 0-16z" fill="currentColor" opacity="0.9" opacity="0.3"/><circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.9"/>' },
-    { id: 1363, name: "Optimize", category: "general", svgContent: '<circle cx="12" cy="12" r="1" fill="currentColor" opacity="0.9"/><path d="M12 1v4m0 10v4M23 12h-4M5 12H1M19.07 4.93l-2.83 2.83M7.76 17.24l-2.83 2.83M19.07 19.07l-2.83-2.83M7.76 7.76l-2.83-2.83"/>' },
-    { id: 1366, name: "Package-Color", category: "development", svgContent: '<defs><linearGradient id="pkgGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffb74d"/><stop offset="100%" stop-color="#a1887f"/></linearGradient></defs><g fill="url(#pkgGrad)" stroke="#5d4037" stroke-width="1.5"><polygon points="12 2 22 7 12 12 2 7"/><polygon points="2 7 12 12 12 22 2 17"/><polygon points="22 7 12 12 12 22 22 17"/><line x1="12" y1="2" x2="12" y2="12" stroke="#ffffff" opacity="0.5"/></g>' },
-    { id: 1369, name: "Paint-Can-Color", category: "ai", svgContent: '<defs><linearGradient id="pntCGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#eceff1"/><stop offset="100%" stop-color="#90a4ae"/></linearGradient></defs><g><rect x="6" y="8" width="12" height="12" rx="1" fill="url(#pntCGrad)" stroke="#546e7a" stroke-width="1.5"/><path d="M6 8h12M7 5h10l-1 3H8z" fill="#cfd8dc" stroke="#546e7a" stroke-width="1.5"/><path d="M12 11l-2 4 4-2z" fill="#ff5252"/></g>' },
-    { id: 1372, name: "Paintbrush", category: "general", svgContent: '<path d="M6 9c0-1 1-2 2-2s2 1 2 2-1 2-2 2-2-1-2-2z"/><path d="M12.5 9a5.5 5.5 0 0 1 5.5 5.5v2a5 5 0 0 1-5 5h-1a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h-1a5 5 0 0 0-5 5v2a5.5 5.5 0 0 0 5.5 5.5z"/>' },
-    { id: 1375, name: "Paintbrush-Color", category: "ai", svgContent: '<defs><linearGradient id="pntGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#546e7a"/></linearGradient></defs><g><rect x="11" y="10" width="2" height="12" fill="#8d6e63"/><path d="M10 10h4l1-6-6-2-1 8z" fill="url(#pntGrad)" stroke="#546e7a" stroke-width="1.5"/><path d="M9 4l-2-2M11 3l-2-2M13 3l-2-2" stroke="#ff5252" stroke-width="1.5" stroke-linecap="round"/></g>' },
-    { id: 1378, name: "Palette", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><circle cx="7" cy="7" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="17" cy="7" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="17" cy="17" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="7" cy="17" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="12" cy="12" r="1.5" fill="currentColor" opacity="0.9"/>' },
-    { id: 1381, name: "Palette-Artist-Color", category: "general", svgContent: '<defs><linearGradient id="artGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#f8bbd0"/><stop offset="100%" stop-color="#c2185b"/></linearGradient></defs><g><path d="M22 12c0 5-4 9-9 9h-7l3-3 2-2z" fill="url(#artGrad)" stroke="#c2185b" stroke-width="1.5"/><circle cx="10" cy="10" r="2" fill="#ff5252"/><circle cx="16" cy="10" r="2" fill="#29b6f6"/></g>' },
-    { id: 1384, name: "Palette-Color", category: "general", svgContent: '<defs><linearGradient id="palGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffb74d"/><stop offset="100%" stop-color="#ff8f00"/></linearGradient></defs><g><path d="M12 2A10 10 0 0 0 2 12c0 5.52 4.48 10 10 10a3 3 0 0 0 3-3c0-.38-.07-.75-.21-1.09.43.06.87.09 1.32.09 4.97 0 9-4.03 9-9 0-4.97-4.03-9-9-9z" fill="url(#palGrad)"/><circle cx="6.5" cy="11.5" r="1.5" fill="#e91e63"/><circle cx="9.5" cy="6.5" r="1.5" fill="#2196f3"/><circle cx="14.5" cy="6.5" r="1.5" fill="#4caf50"/><circle cx="18.5" cy="11.5" r="1.5" fill="#ffeb3b"/></g>' },
-    { id: 1387, name: "Pan", category: "general", svgContent: '<path d="M17.5 17.5L21 21"/><circle cx="12" cy="12" r="7"/><path d="M12 5V2h4"/><path d="M17 12l2 2"/>' },
-    { id: 1390, name: "Paperclip", category: "communication", svgContent: '<path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>' },
-    { id: 1393, name: "Paperclip-Color", category: "general", svgContent: '<g fill="none" stroke="#78909c" stroke-width="3" stroke-linecap="round"><path d="M14 2a3 3 0 0 1 3 3v12a5 5 0 0 1-10 0V5a2 2 0 1 1 4 0v10"/></g>' },
-    { id: 1396, name: "Parachute-Color", category: "general", svgContent: '<defs><linearGradient id="prcGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#9c27b0"/><stop offset="100%" stop-color="#7b1fa2"/></linearGradient></defs><g><path d="M2 12a10 10 0 0 1 20 0H2z" fill="url(#prcGrad)" stroke="#7b1fa2" stroke-width="1.5"/><path d="M4 12l2 8h12l2-8" fill="none" stroke="#7b1fa2" stroke-width="1.5"/></g>' },
-    { id: 1399, name: "Party-Hat-Color", category: "general", svgContent: '<defs><linearGradient id="hatGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ba68c8"/><stop offset="100%" stop-color="#4a148c"/></linearGradient></defs><g><polygon points="12 3 4 21 20 21" fill="url(#hatGrad)" stroke="#4a148c" stroke-width="1.5"/><circle cx="12" cy="3" r="1.5" fill="#ffeb3b"/><path d="M6 18l12-4" stroke="#ffeb3b" stroke-width="1.5"/></g>' },
-    { id: 1402, name: "Paste", category: "general", svgContent: '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="9" y="2" width="6" height="4" rx="1"/>' },
-    { id: 1405, name: "Pause", category: "media", svgContent: '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>' },
-    { id: 1408, name: "PauseSolid", category: "media", svgContent: '<rect x="6" y="4" width="3" height="16" fill="currentColor" opacity="0.9"/><rect x="15" y="4" width="3" height="16" fill="currentColor" opacity="0.9"/>' },
-    { id: 1411, name: "PayPal", category: "brands", svgContent: '<path d="M3 12c0-2 2-3 4-3h4c2 0 4 1 4 3s-2 3-4 3H7c-2 0-4-1-4-3zm4 4c0-2 2-3 4-3h2c2 0 4 1 4 3s-2 3-4 3h-2c-2 0-4-1-4-3z"/>' },
-    { id: 1414, name: "Pen", category: "objects", svgContent: '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>' },
-    { id: 1417, name: "Pen-Color", category: "general", svgContent: '<defs><linearGradient id="penGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><rect x="11" y="2" width="2" height="16" fill="url(#penGrad)" stroke="#546e7a" stroke-width="1.5"/><path d="M12 18l-2 4h4l-2-4z" fill="#121212"/></g>' },
-    { id: 1420, name: "Pencil", category: "objects", svgContent: '<path d="M12 3l9 9-12 9H3v-6l9-12z"/><line x1="9" y1="9" x2="15" y2="15"/>' },
-    { id: 1423, name: "Pencil-Color", category: "general", svgContent: '<defs><linearGradient id="pclGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><path d="M18 2l4 4-13 13-4-4 13-13z" fill="url(#pclGrad)" stroke="#fbc02d" stroke-width="1.5"/><polygon points="5 18 8 21 5 21" fill="#121212"/><line x1="21" y1="5" x2="19" y2="3" stroke="#fbc02d" stroke-width="1.5"/></g>' },
-    { id: 1426, name: "Pendant", category: "objects", svgContent: '<circle cx="12" cy="8" r="2" fill="currentColor" opacity="0.9"/><path d="M12 10v6a3 3 0 0 1-3 3v0a3 3 0 0 0 3 3 3 3 0 0 0 3-3v0a3 3 0 0 1-3-3v-6"/>' },
-    { id: 1429, name: "People", category: "general", svgContent: '<circle cx="8" cy="9" r="2.5"/><circle cx="16" cy="9" r="2.5"/><path d="M6 20c0-1.66 1.79-3 4-3s4 1.34 4 3M14 20c0-1.66 1.79-3 4-3s4 1.34 4 3"/>' },
-    { id: 1432, name: "Pepper", category: "general", svgContent: '<path d="M12 2v3"/><path d="M12 19v3"/><path d="M22 12h-3"/><path d="M5 12H2"/><path d="M18.36 5.64L16.24 7.76"/><path d="M7.76 16.24L5.64 18.36"/><path d="M18.36 18.36l-2.12-2.12"/><path d="M7.76 7.76L5.64 5.64"/><circle cx="12" cy="12" r="5"/>' },
-    { id: 1435, name: "Percent", category: "general", svgContent: '<line x1="19" y1="5" x2="5" y2="19"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/>' },
-    { id: 1438, name: "Performance", category: "general", svgContent: '<path d="M13 2H9c-1 0-2 1-2 2v16c0 1 1 2 2 2h4c1 0 2-1 2-2V4c0-1-1-2-2-2z"/><rect x="6" y="9" width="12" height="9" rx="1"/>' },
-    { id: 1441, name: "PersonCheck", category: "general", svgContent: '<circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6v1H6v-1z"/><polyline points="14 12 16 14 20 10"/>' },
-    { id: 1444, name: "PersonPlus", category: "general", svgContent: '<circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6v1H6v-1z"/><line x1="16" y1="10" x2="16" y2="14"/><line x1="14" y1="12" x2="18" y2="12"/>' },
-    { id: 1447, name: "PersonX", category: "general", svgContent: '<circle cx="12" cy="8" r="4"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6v1H6v-1z"/><line x1="14" y1="10" x2="18" y2="14"/><line x1="18" y1="10" x2="14" y2="14"/>' },
-    { id: 1450, name: "Phone", category: "communication", svgContent: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/>' },
-    { id: 1453, name: "PhoneCall", category: "communication", svgContent: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><polyline points="23 7 23 1 17 1" stroke-linecap="round" stroke-linejoin="round"/>' },
-    { id: 1456, name: "PhoneIncoming", category: "communication", svgContent: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><polyline points="17 1 23 1 23 7" stroke-linecap="round" stroke-linejoin="round"/>' },
-    { id: 1459, name: "PhoneOff", category: "communication", svgContent: '<path d="M10.68 13.31a16 16 0 0 0 5.02 5.02m2.11-2.11l1.27 1.27a2 2 0 0 0 2.11.45 12.84 12.84 0 0 0 2.81-.7 2 2 0 0 0 1.72-2v-3a2 2 0 0 0-2.18-2 19.79 19.79 0 0 1-8.63 3.07" stroke-linecap="round"/><line x1="1" y1="1" x2="23" y2="23" stroke-linecap="round" stroke-linejoin="round"/>' },
-    { id: 1462, name: "Photo-Frame-Color", category: "general", svgContent: '<defs><linearGradient id="frmGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8d6e63"/><stop offset="100%" stop-color="#5d4037"/></linearGradient></defs><g><rect x="4" y="4" width="16" height="16" rx="1" fill="url(#frmGrad)" stroke="#5d4037" stroke-width="1.5"/><rect x="7" y="7" width="10" height="10" fill="#ffffff"/><circle cx="15" cy="9" r="1.5" fill="#4fc3f7"/></g>' },
-    { id: 1465, name: "Piano-Keys-Color", category: "iot", svgContent: '<defs><linearGradient id="pnoGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#e0e0e0"/></linearGradient></defs><g><rect x="3" y="6" width="18" height="12" rx="2" fill="url(#pnoGrad)" stroke="#424242" stroke-width="1.5"/><path d="M7 6v8M11 6v8M15 6v8M19 6v8" stroke="#424242" stroke-width="1.5"/><rect x="6" y="6" width="2" height="6" fill="#212121"/><rect x="10" y="6" width="2" height="6" fill="#212121"/><rect x="14" y="6" width="2" height="6" fill="#212121"/></g>' },
-    { id: 1468, name: "Pie-Chart-Color", category: "general", svgContent: '<defs><linearGradient id="pieGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff9800"/><stop offset="100%" stop-color="#f57c00"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#pieGrad)" stroke="#f57c00" stroke-width="1.5"/><path d="M12 12l8-6a10 10 0 0 1 2 6z" fill="#ffffff"/></g>' },
-    { id: 1471, name: "PieChart", category: "food", svgContent: '<path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>' },
-    { id: 1474, name: "Pin-Color", category: "iot", svgContent: '<defs><linearGradient id="pinGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff5252"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><path d="M12 2a5 5 0 0 0-5 5c0 3.5 5 11 5 11s5-7.5 5-5a5 5 0 0 0-5-5z" fill="url(#pinGrad)"/><circle cx="12" cy="7" r="2" fill="#ffffff"/></g>' },
-    { id: 1477, name: "Pizza", category: "food", svgContent: '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>' },
-    { id: 1480, name: "Placeholder-Fill-3", category: "general", svgContent: '<rect width="24" height="24" fill="#eeeeee"/>' },
-    { id: 1481, name: "Placeholder-Fill-4", category: "general", svgContent: '<rect width="24" height="24" fill="#eeeeee"/>' },
-    { id: 1482, name: "Placeholder-Fill-5", category: "general", svgContent: '<rect width="24" height="24" fill="#eeeeee"/>' },
-    { id: 1483, name: "Planet-Color", category: "general", svgContent: '<defs><linearGradient id="plnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffcc80"/><stop offset="100%" stop-color="#e65100"/></linearGradient></defs><g><circle cx="12" cy="12" r="7" fill="url(#plnGrad)" stroke="#e65100" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="10" ry="3" fill="none" stroke="#ffcc80" stroke-width="1.5" transform="rotate(20 12 12)"/></g>' },
-    { id: 1486, name: "Plate", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20"/><path d="M12 5a7 7 0 0 0 0 14"/>' },
-    { id: 1489, name: "Play", category: "media", svgContent: '<polygon points="5 3 19 12 5 21 5 3"/>' },
-    { id: 1492, name: "PlaySolid", category: "media", svgContent: '<polygon points="5 3 19 12 5 21 5 3" fill="currentColor" opacity="0.9"/>' },
-    { id: 1495, name: "Plug", category: "iot", svgContent: '<circle cx="12" cy="13" r="1" fill="currentColor" opacity="0.9"/><path d="M12 1v4m0 8v4M6 12h-2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2v8zm8-8h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2V4z"/>' },
-    { id: 1498, name: "Plus", category: "ui", svgContent: '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>' },
-    { id: 1501, name: "Pocket-Knife", category: "general", svgContent: '<path d="M12 18h8"/><path d="M12 15h8"/><path d="M12 12h8"/><path d="M12 9h8"/><path d="M12 6h8"/><path d="M12 3h8"/><path d="M3 21h18a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"/>' },
-    { id: 1504, name: "Police-Car-Color", category: "general", svgContent: '<defs><linearGradient id="polGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#eceff1"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><rect x="2" y="10" width="16" height="8" rx="2" fill="url(#polGrad)" stroke="#455a64" stroke-width="1.5"/><rect x="8" y="12" width="4" height="2" fill="#2196f3"/></g>' },
-    { id: 1507, name: "Pot", category: "general", svgContent: '<path d="M17 14h3a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h3"/><path d="M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/><path d="M12 2v4"/>' },
-    { id: 1510, name: "Pound-Sign", category: "finance", svgContent: '<path d="M18 16a6 6 0 0 1-6 6H6"/><path d="M6 16h12"/><path d="M6 10h12"/><path d="M12 2a4 4 0 0 1 4 4v4"/>' },
-    { id: 1513, name: "Power", category: "iot", svgContent: '<path d="M18.36 6.64a9 9 0 1 1-12.73 0M12 2v10"/>' },
-    { id: 1516, name: "Present-Color", category: "general", svgContent: '<defs><linearGradient id="pstGrad2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#f44336"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><rect x="4" y="8" width="16" height="12" rx="1" fill="url(#pstGrad2)" stroke="#b71c1c" stroke-width="1.5"/><rect x="11" y="8" width="2" height="12" fill="#ffeb3b"/><rect x="4" y="13" width="16" height="2" fill="#ffeb3b"/><path d="M12 8l-2-4h2a2 2 0 0 1 2 2" fill="none" stroke="#ffeb3b" stroke-width="2"/></g>' },
-    { id: 1519, name: "PrimeVideo", category: "general", svgContent: '<path d="M2 4h20v16H2z"/><polygon points="8 10 8 14 12 12 8 10M14 9h4v6h-4z"/>' },
-    { id: 1522, name: "Processor", category: "development", svgContent: '<rect x="6" y="4" width="12" height="16" rx="1"/><rect x="8" y="6" width="3" height="3"/><rect x="13" y="6" width="3" height="3"/><rect x="8" y="11" width="3" height="3"/><rect x="13" y="11" width="3" height="3"/><rect x="8" y="16" width="3" height="2"/><rect x="13" y="16" width="3" height="2"/>' },
-    { id: 1525, name: "Profile", category: "ui", svgContent: '<circle cx="12" cy="10" r="3"/><path d="M7 20c0-2.76 2.24-5 5-5s5 2.24 5 5"/>' },
-    { id: 1528, name: "Puzzle-Color", category: "development", svgContent: '<defs><linearGradient id="puzGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#26a69a"/><stop offset="100%" stop-color="#00796b"/></linearGradient></defs><path d="M11.5 5.5a2.5 2.5 0 0 1 5 0V7h2.5A1.5 1.5 0 0 1 20.5 8.5V11h-1.5a2.5 2.5 0 0 0 0 5h1.5v2.5a1.5 1.5 0 0 1-1.5 1.5H16.5v-1.5a2.5 2.5 0 0 0-5 0v1.5H9a1.5 1.5 0 0 1-1.5-1.5V16.5H9a2.5 2.5 0 0 0 0-5H7.5V8.5A1.5 1.5 0 0 1 9 7h2.5V5.5z" fill="url(#puzGrad)"/>' },
-    { id: 1531, name: "Puzzle-Piece-Color", category: "development", svgContent: '<defs><linearGradient id="pzlGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><path d="M16 11a3 3 0 0 0-3-3H8a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h4v-4h-4z" fill="url(#pzlGrad)" stroke="#0288d1" stroke-width="1.5"/></g>' },
-    { id: 1534, name: "QuestionMark", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M12 8a2.5 2.5 0 0 0-2.5 2.5c0 1.5 1 2 1.5 3M12 18h.01"/>' },
-    { id: 1537, name: "Radio", category: "media", svgContent: '<circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/>' },
-    { id: 1540, name: "Radio-Color", category: "media", svgContent: '<defs><linearGradient id="radBody" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffb74d"/><stop offset="100%" stop-color="#f57c00"/></linearGradient></defs><g><rect x="2" y="6" width="20" height="15" rx="2" fill="url(#radBody)"/><line x1="6" y1="6" x2="18" y2="1" stroke="#78909c" stroke-width="2" stroke-linecap="round"/><circle cx="7" cy="13.5" r="4.5" fill="#37474f"/><circle cx="7" cy="13.5" r="1.5" fill="#cfd8dc"/><rect x="14" y="9" width="5" height="3" fill="#212121" rx="0.5"/><circle cx="15.5" cy="16" r="1" fill="#212121"/><circle cx="18.5" cy="16" r="1" fill="#212121"/></g>' },
-    { id: 1543, name: "RadioOff", category: "media", svgContent: '<circle cx="12" cy="12" r="10"/>' },
-    { id: 1546, name: "RadioOn", category: "media", svgContent: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5" fill="currentColor" opacity="0.9"/>' },
-    { id: 1549, name: "Rain", category: "weather", svgContent: '<path d="M16 13v8M8 13v8M12 15v8M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/>' },
-    { id: 1552, name: "Rain-Color", category: "ai", svgContent: '<defs><linearGradient id="rnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><path d="M18 10a5 5 0 0 0-9-3 4 4 0 0 0-4 4 4 4 0 0 0 2 8h11a4 4 0 0 0 0-8z" fill="#eceff1" stroke="#455a64" stroke-width="1.5"/><path d="M8 18l1 3M12 18l1 3M16 18l1 3" stroke="url(#rnGrad)" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 1555, name: "Rain-Drop-Color", category: "ai", svgContent: '<defs><linearGradient id="rdrGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><path d="M12 2a8 8 0 0 0-8 8c0 4 8 12 8 12s8-8 8-12a8 8 0 0 0-8-8z" fill="url(#rdrGrad)" stroke="#0288d1" stroke-width="1.5"/></g>' },
-    { id: 1558, name: "Reddit", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><circle cx="8" cy="10" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="16" cy="10" r="1.5" fill="currentColor" opacity="0.9"/><path d="M8 14c1 1 3 2 4 2s3-1 4-2"/>' },
-    { id: 1561, name: "REST", category: "general", svgContent: '<rect x="3" y="4" width="18" height="2"/><rect x="3" y="9" width="18" height="2"/><rect x="3" y="14" width="18" height="2"/><rect x="3" y="19" width="18" height="2"/>' },
-    { id: 1564, name: "Rewind", category: "media", svgContent: '<polygon points="11 19 2 12 11 5 11 19"/><polygon points="22 19 13 12 22 5 22 19"/>' },
-    { id: 1567, name: "Ring", category: "general", svgContent: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="16" cy="8" r="1.5" fill="currentColor" opacity="0.9"/>' },
-    { id: 1570, name: "Ripple", category: "brands", svgContent: '<circle cx="12" cy="12" r="1" fill="currentColor" opacity="0.9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="7"/>' },
-    { id: 1573, name: "Robot", category: "ai", svgContent: '<rect x="3" y="4" width="18" height="14" rx="2"/><rect x="5" y="2" width="3" height="4"/><rect x="16" y="2" width="3" height="4"/><circle cx="7" cy="10" r="1" fill="currentColor" opacity="0.9"/><circle cx="17" cy="10" r="1" fill="currentColor" opacity="0.9"/><path d="M9 14h6M7 16h10"/>' },
-    { id: 1576, name: "Rocket", category: "general", svgContent: '<path d="M4.5 16.5c-1.5-1-2-2.5-2-4s.5-3 2-4l7-12 7 12c1.5 1 2 2.5 2 4s-.5 3-2 4l-7 4-7-4z"/><circle cx="12" cy="9" r="2" fill="currentColor" opacity="0.9"/>' },
-    { id: 1579, name: "Rocket-Color", category: "general", svgContent: '<defs><linearGradient id="rockBody" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eceff1"/><stop offset="100%" stop-color="#b0bec5"/></linearGradient></defs><g><path d="M12 2C9 6 9 13 9 17h6c0-4 0-11-3-15z" fill="url(#rockBody)"/><path d="M9 14c-2 1-4 4-4 6h4v-6zm6 0c2 1 4 4 4 6h-4v-6z" fill="#ef5350"/><polygon points="10 17 12 23 14 17" fill="#ff9800"/><circle cx="12" cy="8" r="2" fill="#29b6f6"/></g>' },
-    { id: 1582, name: "Rocket-Launch-Color", category: "general", svgContent: '<defs><linearGradient id="rlcGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffcc80"/><stop offset="100%" stop-color="#f4511e"/></linearGradient></defs><g><path d="M12 2l3 7v10a2 2 0 0 1-4 0V9z" fill="url(#rlcGrad)" stroke="#bf360c" stroke-width="1.5"/><path d="M9 19l-3 4M15 19l3 4" stroke="#f4511e" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 1585, name: "Rocket-Mini-Color", category: "general", svgContent: '<defs><linearGradient id="rkmGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#eceff1"/><stop offset="100%" stop-color="#b0bec5"/></linearGradient></defs><g><path d="M12 2l4 8v10a2 2 0 0 1-4 0 2 2 0 0 1-4 0V10z" fill="url(#rkmGrad)" stroke="#546e7a" stroke-width="1.5"/><path d="M6 18l-2 4h4l-2-4z" fill="#ff5252"/></g>' },
-    { id: 1588, name: "Roller-Skate-Color", category: "general", svgContent: '<defs><linearGradient id="rlsGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e91e63"/><stop offset="100%" stop-color="#ad1457"/></linearGradient></defs><g><path d="M4 14h16v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="url(#rlsGrad)" stroke="#ad1457" stroke-width="1.5"/><circle cx="8" cy="20" r="2" fill="#ad1457"/><circle cx="16" cy="20" r="2" fill="#ad1457"/></g>' },
-    { id: 1591, name: "Router", category: "general", svgContent: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" opacity="0.9"/><circle cx="12" cy="12" r="1" fill="currentColor" opacity="0.9"/><circle cx="18" cy="12" r="1" fill="currentColor" opacity="0.9"/><path d="M12 18l-2-2m4 0l2-2M8 18l1-1m6 0l1 1"/>' },
-    { id: 1594, name: "Rows-Color", category: "development", svgContent: '<defs><linearGradient id="rowsGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="url(#rowsGrad)" stroke-width="2"/><rect x="5" y="5" width="14" height="6" fill="#78909c" opacity="0.25"/><rect x="5" y="13" width="14" height="6" fill="#78909c" opacity="0.25"/></g>' },
-    { id: 1597, name: "Ruler-Color", category: "general", svgContent: '<defs><linearGradient id="rlrGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><rect x="2" y="8" width="20" height="8" rx="1" fill="url(#rlrGrad)" stroke="#fbc02d" stroke-width="1.5"/><path d="M4 12h1M8 12h1M12 12h1M16 12h1M20 12h1" stroke="#37474f" stroke-width="1.5" stroke-linecap="round"/></g>' },
-    { id: 1600, name: "Salt", category: "general", svgContent: '<path d="M10 2l4 4"/><path d="M12 2l4 4"/><path d="M14 2l4 4"/><path d="M20 22V10a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12h16z"/>' },
-    { id: 1603, name: "Sandwich", category: "general", svgContent: '<path d="M21 16H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2z"/><path d="M1 8h22M1 12h22"/><path d="M6 2L3 6M12 2L9 6M18 2L15 6"/>' },
-    { id: 1606, name: "Satelite-Color", category: "general", svgContent: '<defs><linearGradient id="satGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#90a4ae"/></linearGradient></defs><g><rect x="8" y="8" width="8" height="8" fill="url(#satGrad)" stroke="#455a64" stroke-width="1.5"/><rect x="2" y="11" width="6" height="2" fill="#455a64"/><rect x="16" y="11" width="6" height="2" fill="#455a64"/></g>' },
-    { id: 1609, name: "Saturation", category: "general", svgContent: '<circle cx="12" cy="12" r="1" fill="currentColor" opacity="0.9"/><path d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0-4a9 9 0 1 1 0 18 9 9 0 0 1 0-18z"/>' },
-    { id: 1612, name: "Saturation-Color", category: "general", svgContent: '<defs><linearGradient id="satGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff4081"/><stop offset="100%" stop-color="#f50057"/></linearGradient></defs><g><path d="M12 22a10 10 0 0 0 10-10C22 6 12 2 12 2S2 6 2 12a10 10 0 0 0 10 10z" fill="none" stroke="url(#satGrad)" stroke-width="2"/><path d="M12 22a10 10 0 0 0 10-10C22 6 12 2V22z" fill="url(#satGrad)"/></g>' },
-    { id: 1615, name: "Save", category: "general", svgContent: '<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>' },
-    { id: 1618, name: "Saxophone-Color", category: "ui", svgContent: '<defs><linearGradient id="saxGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff9c4"/><stop offset="100%" stop-color="#ffd600"/></linearGradient></defs><g><path d="M20 16c0 3-3 5-6 5s-6-2-6-5V8c0-3 2-6 5-6h2" fill="none" stroke="url(#saxGrad)" stroke-width="4" stroke-linecap="round"/><circle cx="18" cy="16" r="3" fill="none" stroke="#ffd600" stroke-width="3"/></g>' },
-    { id: 1621, name: "Scissors", category: "objects", svgContent: '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/>' },
-    { id: 1624, name: "Scissors-Color", category: "objects", svgContent: '<defs><linearGradient id="scisGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff5252"/><stop offset="100%" stop-color="#ff1744"/></linearGradient></defs><g fill="none" stroke="#78909c" stroke-width="2"><circle cx="6" cy="6" r="3" fill="url(#scisGrad)" stroke="none"/><circle cx="6" cy="18" r="3" fill="url(#scisGrad)" stroke="none"/><line x1="9.8" y1="8.2" x2="22" y2="14.3" stroke-linecap="round"/><line x1="9.8" y1="15.8" x2="22" y2="9.7" stroke-linecap="round"/></g>' },
-    { id: 1627, name: "Scissors-Off", category: "objects", svgContent: '<circle cx="6" cy="6" r="3"/><path d="M8.12 8.12L12 12"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 1630, name: "Scooter-Color", category: "general", svgContent: '<defs><linearGradient id="sctGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b71c1c"/><stop offset="100%" stop-color="#8e0000"/></linearGradient></defs><g stroke="#8e0000" stroke-width="2"><circle cx="6" cy="20" r="3" fill="none"/><circle cx="18" cy="20" r="3" fill="none"/><path d="M9 20h6M12 20V10h4l2-4" fill="none"/></g>' },
-    { id: 1633, name: "Sculpture-Color", category: "general", svgContent: '<defs><linearGradient id="sclGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffcc80"/><stop offset="100%" stop-color="#795548"/></linearGradient></defs><g><rect x="8" y="18" width="8" height="4" fill="#5d4037"/><path d="M12 4c-3 0-5 2-5 5v5h10V9c0-3-2-5-5-5z" fill="url(#sclGrad)" stroke="#795548" stroke-width="1.5"/></g>' },
-    { id: 1636, name: "Search", category: "ui", svgContent: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>' },
-    { id: 1639, name: "Search-Color", category: "ui", svgContent: '<defs><linearGradient id="glassRim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#90caf9"/><stop offset="100%" stop-color="#1e88e5"/></linearGradient><linearGradient id="handleGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8d6e63"/><stop offset="100%" stop-color="#4e342e"/></linearGradient></defs><g><circle cx="11" cy="11" r="7" fill="#e3f2fd" stroke="url(#glassRim)" stroke-width="3"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="url(#handleGrad)" stroke-width="4" stroke-linecap="round"/><circle cx="9" cy="9" r="4" fill="#ffffff" opacity="0.4"/></g>' },
-    { id: 1640, name: "SearchMinus", category: "ui", svgContent: '<circle cx="10" cy="10" r="6"/><path d="M14 14l4 4"/><line x1="6" y1="10" x2="14" y2="10"/>' },
-    { id: 1643, name: "SearchPlus", category: "ui", svgContent: '<circle cx="10" cy="10" r="6"/><path d="M14 14l4 4"/><line x1="10" y1="7" x2="10" y2="13"/><line x1="7" y1="10" x2="13" y2="10"/>' },
-    { id: 1646, name: "Send", category: "communication", svgContent: '<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>' },
-    { id: 1649, name: "SendSolid", category: "communication", svgContent: '<path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.9429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.01449263 C3.34915502,0.9 2.40734225,0.9 1.77946707,1.4429026 C0.994623095,2.10604706 0.837654326,3.0486314 1.15159189,3.98722009 L3.03521743,10.4282132 C3.03521743,10.5853106 3.19218622,10.7424081 3.50612381,10.7424081 L16.6915026,11.5278949 C16.6915026,11.5278949 17.1624089,11.5278949 17.1624089,12.0011027 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z" fill="currentColor" opacity="0.9"/>' },
-    { id: 1652, name: "Sensor", category: "iot", svgContent: '<circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 16v2M23 12h-2M3 12H1M6.22 6.22l1.41 1.41M16.37 16.37l1.41 1.41M6.22 17.78l1.41-1.41M16.37 7.63l1.41-1.41"/>' },
-    { id: 1655, name: "Sepia", category: "general", svgContent: '<rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="16" cy="8" r="1.5" fill="currentColor" opacity="0.9"/><path d="M8 14c2 2 4 2 8 0" opacity="0.7"/>' },
-    { id: 1658, name: "Server", category: "development", svgContent: '<rect x="2" y="2" width="20" height="8" rx="1" ry="1"/><rect x="2" y="14" width="20" height="8" rx="1" ry="1"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>' },
-    { id: 1661, name: "Settings", category: "ui", svgContent: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>' },
-    { id: 1664, name: "Settings-Color", category: "ui", svgContent: '<defs><linearGradient id="gearGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="50%" stop-color="#78909c"/><stop offset="100%" stop-color="#455a64"/></linearGradient></defs><g fill="url(#gearGrad)"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.48.48 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.48.48 0 0 0-.59.22L1.99 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.48.48 0 0 0-.12-.61l-2.03-1.58zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></g>' },
-    { id: 1665, name: "Settings2", category: "ui", svgContent: '<circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 16v2M4.22 4.22l1.41 1.41m9.74 9.74l1.41 1.41M1 12h2m16 0h2M4.22 19.78l1.41-1.41m9.74-9.74l1.41-1.41"/>' },
-    { id: 1668, name: "SettingsAdvanced", category: "ui", svgContent: '<circle cx="12" cy="12" r="2.5" fill="currentColor" opacity="0.9"/><path d="M12 1v2m0 16v2M23 12h-2M3 12H1M20.49 3.51l-1.41 1.41M4.93 19.07l-1.41 1.41M20.49 20.49l-1.41-1.41M4.93 4.93l-1.41-1.41"/><circle cx="12" cy="12" r="5" opacity="0.5"/>' },
-    { id: 1671, name: "SettingsOff", category: "ui", svgContent: '<circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 16v2M23 12h-2M3 12H1M20.49 3.51l-1.41 1.41M4.93 19.07l-1.41 1.41M20.49 20.49l-1.41-1.41M4.93 4.93l-1.41-1.41"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 1674, name: "Share", category: "ui", svgContent: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>' },
-    { id: 1677, name: "Share-Color", category: "ui", svgContent: '<defs><linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="#b0bec5" stroke-width="2"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="#b0bec5" stroke-width="2"/><circle cx="18" cy="5" r="3" fill="url(#nodeGrad)"/><circle cx="6" cy="12" r="3" fill="url(#nodeGrad)"/><circle cx="18" cy="19" r="3" fill="url(#nodeGrad)"/></g>' },
-    { id: 1678, name: "ShareCircle", category: "ui", svgContent: '<circle cx="12" cy="12" r="10"/><circle cx="16" cy="8" r="2"/><circle cx="16" cy="16" r="2"/><line x1="14.5" y1="9.5" x2="13.5" y2="14.5"/>' },
-    { id: 1681, name: "Sharpen", category: "general", svgContent: '<path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M10 8h4M8 10h8M9 14h6"/>' },
-    { id: 1684, name: "Shield", category: "ui", svgContent: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' },
-    { id: 1687, name: "Shield-Alert", category: "ui", svgContent: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>' },
-    { id: 1690, name: "Shield-Alert-Color", category: "ui", svgContent: '<defs><linearGradient id="shdAlert" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ef5350"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="url(#shdAlert)"/><line x1="12" y1="8" x2="12" y2="13" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1.25" fill="#ffffff"/></g>' },
-    { id: 1693, name: "Shield-Check", category: "ui", svgContent: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>' },
-    { id: 1696, name: "Shield-Check-Color", category: "ui", svgContent: '<defs><linearGradient id="shdCheck" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#66bb6a"/><stop offset="100%" stop-color="#1b5e20"/></linearGradient></defs><g><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="url(#shdCheck)"/><polyline points="9 11 11 13 15 9" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>' },
-    { id: 1699, name: "Shield-Color", category: "general", svgContent: '<defs><linearGradient id="shieldLeft" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></linearGradient><linearGradient id="shieldRight" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0288d1"/><stop offset="100%" stop-color="#01579b"/></linearGradient></defs><g><path d="M12 22s8-4 8-10V5l-8-3v20z" fill="url(#shieldRight)"/><path d="M12 22V2L4 5v7c0 6 8 10 8 10z" fill="url(#shieldLeft)"/><path d="M12 5l2.5 5h5.5l-4 4 1.5 5.5-5.5-3.5-5.5 3.5 1.5-5.5-4-4h5.5z" fill="#ffffff" opacity="0.25"/></g>' },
-    { id: 1702, name: "Shield-Off", category: "ui", svgContent: '<path d="M19.69 14a6.9 6.9 0 0 0 .31-2V5l-8-3-3.16 1.18"/><path d="M4.73 4.73L4 5v7c0 6 8 10 8 10a15.29 15.29 0 0 0 3.72-1.5"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 1705, name: "Shield-Off-Color", category: "general", svgContent: '<defs><linearGradient id="shdOff" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="url(#shdOff)" opacity="0.4"/><line x1="1" y1="1" x2="23" y2="23" stroke="#ef5350" stroke-width="2.5"/></g>' },
-    { id: 1708, name: "Shield-Off-Duplicate", category: "ui", svgContent: '<path d="M19.69 14a6.9 6.9 0 0 0 .31-2V5l-8-3-3.16 1.18"/><path d="M4.73 4.73L4 5v7c0 6 8 10 8 10a15.29 15.29 0 0 0 3.72-1.5"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 1711, name: "ShieldCheck", category: "ui", svgContent: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="16 12 12 16 8 12"/>' },
-    { id: 1714, name: "ShieldQuestion", category: "ui", svgContent: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="0.5" fill="currentColor" opacity="0.9"/>' },
-    { id: 1717, name: "ShieldX", category: "ui", svgContent: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9.5" y1="9.5" x2="14.5" y2="14.5"/><line x1="14.5" y1="9.5" x2="9.5" y2="14.5"/>' },
-    { id: 1720, name: "Ship-Color", category: "general", svgContent: '<defs><linearGradient id="shpGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#eceff1"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><path d="M2 16l20 2-2 6H4z" fill="url(#shpGrad)" stroke="#455a64" stroke-width="1.5"/><rect x="8" y="10" width="8" height="6" fill="#455a64"/><rect x="10" y="6" width="4" height="4" fill="#455a64"/></g>' },
-    { id: 1723, name: "Shopify", category: "general", svgContent: '<path d="M12 2c1 0 2 .5 2 1.5V8h-4V3.5C10 2.5 11 2 12 2zm-2 6h4v12c0 1-1 2-2 2s-2-1-2-2v-12z"/>' },
-    { id: 1726, name: "Shopping-Bag", category: "finance", svgContent: '<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>' },
-    { id: 1729, name: "Shopping-Cart", category: "finance", svgContent: '<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>' },
-    { id: 1732, name: "Shopping-Cart-Color", category: "finance", svgContent: '<defs><linearGradient id="cartMet" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0288d1"/><stop offset="100%" stop-color="#01579b"/></linearGradient></defs><g><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" fill="none" stroke="url(#cartMet)" stroke-width="2" stroke-linecap="round"/><circle cx="9.5" cy="20.5" r="1.5" fill="#37474f"/><circle cx="19.5" cy="20.5" r="1.5" fill="#37474f"/></g>' },
-    { id: 1735, name: "ShoppingBag", category: "finance", svgContent: '<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>' },
-    { id: 1738, name: "ShoppingCart", category: "finance", svgContent: '<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>' },
-    { id: 1741, name: "Sidebar", category: "general", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/>' },
-    { id: 1744, name: "Sidebar-Color", category: "development", svgContent: '<defs><linearGradient id="sideGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="url(#sideGrad)" stroke-width="2"/><rect x="5" y="5" width="5" height="14" fill="#78909c" opacity="0.3"/></g>' },
-    { id: 1747, name: "Signal", category: "iot", svgContent: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 4c-1.88 0-3.5-1.12-3.5-2.5h7c0 1.38-1.62 2.5-3.5 2.5z"/>' },
-    { id: 1750, name: "SignIn", category: "general", svgContent: '<polyline points="15 3 21 3 21 9"/><path d="M3 21c1.66-2.5 2.66-4 2.66-4v-4c0-1 1-2 2-2h13V3M21 3v18M3 6h8"/>' },
-    { id: 1753, name: "Skateboard-Color", category: "general", svgContent: '<defs><linearGradient id="skbGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8bc34a"/><stop offset="100%" stop-color="#558b2f"/></linearGradient></defs><g><rect x="3" y="12" width="18" height="4" rx="2" fill="url(#skbGrad)" stroke="#558b2f" stroke-width="1.5"/><circle cx="6" cy="18" r="2" fill="#558b2f"/><circle cx="18" cy="18" r="2" fill="#558b2f"/></g>' },
-    { id: 1756, name: "Skip-Back", category: "general", svgContent: '<polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="5" x2="5" y2="19"/>' },
-    { id: 1759, name: "Skip-Forward", category: "general", svgContent: '<polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>' },
-    { id: 1762, name: "Slack", category: "brands", svgContent: '<circle cx="5" cy="5" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="19" cy="5" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="5" cy="19" r="1.5" fill="currentColor" opacity="0.9"/><circle cx="19" cy="19" r="1.5" fill="currentColor" opacity="0.9"/><line x1="5" y1="6.5" x2="5" y2="17.5"/><line x1="19" y1="6.5" x2="19" y2="17.5"/><line x1="6.5" y1="5" x2="17.5" y2="5"/><line x1="6.5" y1="19" x2="17.5" y2="19"/>' },
-    { id: 1765, name: "Slack2", category: "brands", svgContent: '<path d="M6 2a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4zm12 0a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h2z"/>' },
-    { id: 1768, name: "Slash", category: "ui", svgContent: '<line x1="19" y1="4" x2="5" y2="20"/>' },
-    { id: 1771, name: "Sliders", category: "general", svgContent: '<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>' },
-    { id: 1774, name: "Sliders-Color", category: "ui", svgContent: '<defs><linearGradient id="sldGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#78909c"/><stop offset="100%" stop-color="#37474f"/></linearGradient></defs><g fill="none" stroke="url(#sldGrad)" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><circle cx="4" cy="12" r="2" fill="#00e676" stroke="none"/><circle cx="12" cy="10" r="2" fill="#00e676" stroke="none"/><circle cx="20" cy="14" r="2" fill="#00e676" stroke="none"/></g>' },
-    { id: 1777, name: "SmartHome", category: "general", svgContent: '<path d="M2 12l10-10 10 10v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8z"/><path d="M9 21v-10h6v10M12 3v4"/><circle cx="15" cy="15" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 1780, name: "Smartphone", category: "communication", svgContent: '<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/>' },
-    { id: 1783, name: "Smartphone-Color", category: "communication", svgContent: '<defs><linearGradient id="phoneGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#212121"/><stop offset="100%" stop-color="#000000"/></linearGradient></defs><g><rect x="5" y="2" width="14" height="20" rx="3" fill="url(#phoneGrad)"/><circle cx="12" cy="19" r="1" fill="#ffffff" opacity="0.8"/><rect x="7" y="4" width="10" height="13" fill="#64b5f6" opacity="0.15"/></g>' },
-    { id: 1786, name: "Smartphone2", category: "communication", svgContent: '<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><line x1="8" y1="5" x2="16" y2="5"/><line x1="8" y1="22" x2="16" y2="22"/>' },
-    { id: 1789, name: "Smartwatch", category: "iot", svgContent: '<rect x="4" y="2" width="16" height="20" rx="3"/><circle cx="12" cy="12" r="6"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="12" x2="14" y2="12"/>' },
-    { id: 1792, name: "Smile", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
-    { id: 1795, name: "Smile-Color", category: "ui", svgContent: '<defs><linearGradient id="faceHappy" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#faceHappy)"/><path d="M8 14s1.5 2 4 2 4-2 4-2" fill="none" stroke="#5d4037" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="9" r="1.5" fill="#5d4037"/><circle cx="15" cy="9" r="1.5" fill="#5d4037"/></g>' },
-    { id: 1796, name: "Snow", category: "weather", svgContent: '<path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="12" y1="18" x2="12" y2="18"/><line x1="16" y1="16" x2="16" y2="16"/><line x1="10" y1="20" x2="10" y2="20"/><line x1="14" y1="20" x2="14" y2="20"/>' },
-    { id: 1799, name: "Snow-Color", category: "iot", svgContent: '<defs><linearGradient id="snwGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e1f5fe"/><stop offset="100%" stop-color="#81d4fa"/></linearGradient></defs><g stroke="#0288d1" stroke-width="2"><path d="M12 2v20M2 12h20M5 5l14 14M5 19l14-14"/></g>' },
-    { id: 1802, name: "Snowboard-Color", category: "iot", svgContent: '<defs><linearGradient id="snbGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#03a9f4"/><stop offset="100%" stop-color="#0277bd"/></linearGradient></defs><g><path d="M4 4l16 16" stroke="#0277bd" stroke-width="6" stroke-linecap="round"/><rect x="8" y="8" width="4" height="2" fill="#ffffff"/><rect x="12" y="14" width="4" height="2" fill="#ffffff"/></g>' },
-    { id: 1805, name: "Snowflake", category: "weather", svgContent: '<line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="5.64" y1="5.64" x2="18.36" y2="18.36"/><line x1="5.64" y1="18.36" x2="18.36" y2="5.64"/><line x1="12" y1="2" x2="15" y2="6"/><line x1="12" y1="2" x2="9" y2="6"/><line x1="22" y1="12" x2="18" y2="15"/><line x1="22" y1="12" x2="18" y2="9"/><line x1="12" y1="22" x2="9" y2="18"/><line x1="12" y1="22" x2="15" y2="18"/><line x1="2" y1="12" x2="6" y2="9"/><line x1="2" y1="12" x2="6" y2="15"/>' },
-    { id: 1808, name: "Snowflake-Color", category: "iot", svgContent: '<defs><linearGradient id="snwGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e0f7fa"/><stop offset="100%" stop-color="#4dd0e1"/></linearGradient></defs><g stroke="url(#snwGrad)" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="19.07" y2="4.93"/><polyline points="10 5 12 3 14 5"/><polyline points="19 10 21 12 19 14"/></g>' },
-    { id: 1811, name: "Soda", category: "general", svgContent: '<path d="M17 2v20H7V2z"/><path d="M17 2h-5h-5"/><path d="M17 22h-5h-5"/>' },
-    { id: 1814, name: "Spaceship-Color", category: "general", svgContent: '<defs><linearGradient id="spcGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><path d="M12 2l8 16-8-4-8 4z" fill="url(#spcGrad)" stroke="#455a64" stroke-width="1.5"/><circle cx="12" cy="10" r="2" fill="#455a64"/></g>' },
-    { id: 1817, name: "Spade-Color", category: "general", svgContent: '<defs><linearGradient id="spdGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#90a4ae"/></linearGradient></defs><g><path d="M12 2l-6 10 2 2h8l2-2-6-10z" fill="url(#spdGrad)" stroke="#546e7a" stroke-width="1.5"/><line x1="12" y1="14" x2="12" y2="22" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 1820, name: "Sparkle", category: "general", svgContent: '<path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.41 1.41M16.95 16.95l1.41 1.41M16.95 7.05l-1.41 1.41M7.05 16.95L5.64 15.54"/><circle cx="12" cy="12" r="2"/>' },
-    { id: 1823, name: "Sparkles", category: "ai", svgContent: '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" opacity="0.5"/>' },
-    { id: 1826, name: "Sparkles-Color", category: "general", svgContent: '<defs><linearGradient id="spGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff59d"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g fill="url(#spGrad)"><path d="M10 2l2 4 4 2-4 2-2 4-2-4-4-2 4-2z"/><path d="M19 13l1 2 2 1-2 1-1 2-1-2-2-1 2-1z" opacity="0.75"/><path d="M4 14l1 2 2 1-2 1-1 2-1-2-2-1 2-1z" opacity="0.6"/></g>' },
-    { id: 1829, name: "Speaker", category: "communication", svgContent: '<rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><circle cx="12" cy="13" r="5"/><circle cx="12" cy="13" r="2"/>' },
-    { id: 1832, name: "Speaker-Color", category: "media", svgContent: '<defs><linearGradient id="spkGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#455a64"/></linearGradient></defs><g><rect x="6" y="4" width="12" height="16" rx="2" fill="url(#spkGrad)" stroke="#455a64" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="#37474f"/><circle cx="12" cy="12" r="1.5" fill="#cfd8dc"/></g>' },
-    { id: 1835, name: "Speedometer", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M12 7v8M12 15l3 0m-6 0l3 0"/><path d="M7 12a5 5 0 0 1 10 0"/>' },
-    { id: 1838, name: "Spoon", category: "food", svgContent: '<path d="M16.1 4.1l3.8 3.8"/><path d="M12.9 7.3L7.3 12.9a2 2 0 0 0 0 2.8l2.8 2.8a2 2 0 0 0 2.8 0l5.6-5.6"/><path d="M10 20l4-4M10 20l-2-2"/>' },
-    { id: 1841, name: "Spotify", category: "brands", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M7 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm3-3a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm3 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/>' },
-    { id: 1844, name: "Square", category: "ui", svgContent: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>' },
-    { id: 1847, name: "Stapler-Color", category: "general", svgContent: '<defs><linearGradient id="stpGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#455a64"/></linearGradient></defs><g><path d="M4 14l16-2v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="url(#stpGrad)" stroke="#455a64" stroke-width="1.5"/><rect x="14" y="8" width="4" height="6" fill="#37474f"/></g>' },
-    { id: 1850, name: "Star", category: "media", svgContent: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>' },
-    { id: 1853, name: "Star-Color", category: "ui", svgContent: '<defs><linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff59d"/><stop offset="60%" stop-color="#ffca28"/><stop offset="100%" stop-color="#ff8f00"/></linearGradient></defs><g><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="url(#starGold)"/><polygon points="12 2 8.91 8.26 2 9.27 7 14.14 5.82 21.02 12 17.77" fill="#ffe082" opacity="0.4"/></g>' },
-    { id: 1856, name: "Star-Fill-Color", category: "ui", svgContent: '<defs><linearGradient id="strFGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><path d="M12 2l3 7h8l-6 5 2 7-6-4-6 4 2-7-6-5h8z" fill="url(#strFGrad)" stroke="#f57f17" stroke-width="1.5"/></g>' },
-    { id: 1859, name: "Star-Mini-Color", category: "ui", svgContent: '<defs><linearGradient id="stmGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><path d="M12 2l3 7h8l-6 5 2 7-6-4-6 4 2-7-6-5h8z" fill="url(#stmGrad)" stroke="#f57f17" stroke-width="1.5"/></g>' },
-    { id: 1862, name: "StarHalf", category: "media", svgContent: '<path d="M12 18l3.79 2.01-0.88-4.66L19 10.3H14.2l-2.2-4.6v13.3z"/><path d="M12 2v14.5"/>' },
-    { id: 1865, name: "StatusDnd", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/>' },
-    { id: 1868, name: "StatusOffline", category: "general", svgContent: '<circle cx="18" cy="18" r="4"/><path d="M12 2a10 10 0 1 0 10 10M12 6v6l4 2"/>' },
-    { id: 1871, name: "Steering-Wheel-Color", category: "general", svgContent: '<defs><linearGradient id="stgGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8d6e63"/><stop offset="100%" stop-color="#5d4037"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="none" stroke="#5d4037" stroke-width="3"/><path d="M12 2v4m0 12v4m-10-10h4m12 0h4" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/><circle cx="12" cy="12" r="2" fill="#5d4037"/></g>' },
-    { id: 1874, name: "Stop", category: "media", svgContent: '<rect x="6" y="6" width="12" height="12"/>' },
-    { id: 1877, name: "StopSolid", category: "media", svgContent: '<rect x="5" y="5" width="14" height="14" fill="currentColor" opacity="0.9"/>' },
-    { id: 1880, name: "Stripe", category: "brands", svgContent: '<path d="M2 8c0-1 1-2 2-2h16c1 0 2 1 2 2v8c0 1-1 2-2 2H4c-1 0-2-1-2-2V8z"/><line x1="6" y1="12" x2="10" y2="12"/>' },
-    { id: 1883, name: "Stripe2", category: "brands", svgContent: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 10h12M6 14h8"/>' },
-    { id: 1886, name: "Submarine-Color", category: "general", svgContent: '<defs><linearGradient id="submGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#78909c"/><stop offset="100%" stop-color="#455a64"/></linearGradient></defs><g><path d="M2 12a10 4 0 1 0 20 0 10 4 0 1 0-20 0z" fill="url(#submGrad)" stroke="#455a64" stroke-width="1.5"/><rect x="10" y="6" width="4" height="4" fill="#455a64"/></g>' },
-    { id: 1889, name: "Subway-Color", category: "general", svgContent: '<defs><linearGradient id="subGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#9e9e9e"/><stop offset="100%" stop-color="#616161"/></linearGradient></defs><g><rect x="4" y="6" width="16" height="12" rx="2" fill="url(#subGrad)" stroke="#212121" stroke-width="1.5"/><rect x="6" y="8" width="4" height="4" fill="#ffffff"/><rect x="14" y="8" width="4" height="4" fill="#ffffff"/></g>' },
-    { id: 1892, name: "Sun", category: "ui", svgContent: '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>' },
-    { id: 1895, name: "Sun-Cloud", category: "ui", svgContent: '<path d="M16 13a4 4 0 0 0-4-4 4 4 0 0 0-3.1 1.5M12 2v2M12 22v-2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M17.7 6.3l-1.4-1.4"/><path d="M16 13a4 4 0 0 1 0 8H6a5 5 0 0 1-1.8-9.6"/>' },
-    { id: 1898, name: "Sun-Cloud-Color", category: "iot", svgContent: '<defs><linearGradient id="scGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#cfd8dc"/></linearGradient></defs><g><circle cx="16" cy="9" r="4" fill="#ffb300"/><path d="M19 13h-1.2A5.5 5.5 0 1 0 9 19h10a4 4 0 0 0 0-8z" fill="url(#scGrad)"/></g>' },
-    { id: 1901, name: "Sun-Color", category: "iot", svgContent: '<defs><radialGradient id="sunGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffeb3b"/><stop offset="85%" stop-color="#ff9800"/><stop offset="100%" stop-color="#e65100"/></radialGradient></defs><g><circle cx="12" cy="12" r="6" fill="url(#sunGrad)"/><path d="M12 2v2m0 16v2M4 12H2m20 0h-2m-2.12-7.88l-1.42 1.42m-8.96 8.96l-1.42 1.42m0-11.8l1.42 1.42m8.96 8.96l1.42 1.42" stroke="#ff9800" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 1904, name: "Sunglasses-Color", category: "food", svgContent: '<defs><linearGradient id="sunGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#263238"/><stop offset="100%" stop-color="#121212"/></linearGradient></defs><g><rect x="3" y="10" width="8" height="6" rx="1" fill="url(#sunGrad)" stroke="#121212" stroke-width="1.5"/><rect x="13" y="10" width="8" height="6" rx="1" fill="url(#sunGrad)" stroke="#121212" stroke-width="1.5"/><path d="M11 13h2" stroke="#121212" stroke-width="2"/></g>' },
-    { id: 1907, name: "Surfboard-Color", category: "general", svgContent: '<defs><linearGradient id="srfGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff9800"/><stop offset="100%" stop-color="#f57c00"/></linearGradient></defs><g><path d="M12 2c-4 0-8 2-8 8v8c0 4 4 6 8 6s8-2 8-6V10c0-6-4-8-8-8z" fill="url(#srfGrad)" stroke="#f57c00" stroke-width="1.5"/><path d="M8 10h8" stroke="#ffffff" stroke-width="2"/></g>' },
-    { id: 1910, name: "Table-Color", category: "development", svgContent: '<defs><linearGradient id="tblGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#90caf9"/><stop offset="100%" stop-color="#42a5f5"/></linearGradient></defs><g><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="url(#tblGrad)" stroke-width="2"/><line x1="3" y1="9" x2="21" y2="9" stroke="#42a5f5" stroke-width="1.5"/><line x1="3" y1="15" x2="21" y2="15" stroke="#42a5f5" stroke-width="1.5"/><line x1="9" y1="3" x2="9" y2="21" stroke="#42a5f5" stroke-width="1.5"/></g>' },
-    { id: 1913, name: "Tablet", category: "iot", svgContent: '<rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/>' },
-    { id: 1916, name: "Tag", category: "ui", svgContent: '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12a2 2 0 0 1 0-2.83l7.17-7.17a2 2 0 0 1 2.83 0L20.59 9.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>' },
-    { id: 1919, name: "Tag-Color", category: "general", svgContent: '<defs><linearGradient id="tagGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00e676"/><stop offset="100%" stop-color="#00c853"/></linearGradient></defs><g><path d="M21.4 11.6l-9-9A2 2 0 0 0 11 2H3a2 2 0 0 0-2 2v8a2 2 0 0 0 .6 1.4l9 9a2 2 0 0 0 2.8 0l8-8a2 2 0 0 0 0-2.8z" fill="url(#tagGrad)"/><circle cx="6" cy="6" r="1.5" fill="#ffffff"/></g>' },
-    { id: 1922, name: "Tags", category: "ui", svgContent: '<path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v0a2 2 0 0 1 2-2m7 8h.01"/>' },
-    { id: 1925, name: "Tape-Color", category: "general", svgContent: '<defs><linearGradient id="tpeGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffeb3b"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><circle cx="12" cy="12" r="8" fill="url(#tpeGrad)" stroke="#fbc02d" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="#ffffff"/><path d="M12 12l8-8" stroke="#fbc02d" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 1928, name: "Target", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>' },
-    { id: 1931, name: "Target-Color", category: "ui", svgContent: '<defs><linearGradient id="tgtGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff5252"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="none" stroke="url(#tgtGrad)" stroke-width="2"/><circle cx="12" cy="12" r="6" fill="none" stroke="#b0bec5" stroke-width="1.5"/><circle cx="12" cy="12" r="2.5" fill="url(#tgtGrad)"/></g>' },
-    { id: 1934, name: "Target-Cross", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/>' },
-    { id: 1937, name: "Taxi-Color", category: "ui", svgContent: '<defs><linearGradient id="txiGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffeb3b"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><rect x="2" y="10" width="16" height="8" rx="2" fill="url(#txiGrad)" stroke="#fbc02d" stroke-width="1.5"/><rect x="6" y="8" width="8" height="2" fill="#000000"/></g>' },
-    { id: 1940, name: "Tea", category: "general", svgContent: '<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><path d="M12 21v-4"/><path d="M8 21v-4"/><path d="M16 21v-4"/>' },
-    { id: 1943, name: "Team", category: "ui", svgContent: '<circle cx="6" cy="8" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="12" cy="5" r="2.5"/><path d="M4 18c0-1.5 1.5-3 3-3M16 18c0-1.5-1.5-3-3-3M12 18c0-2 2-3 3-3s3 1 3 3"/>' },
-    { id: 1946, name: "Telegram", category: "brands", svgContent: '<path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm9-4l-4 6 5 3 4-8-5 3z"/>' },
-    { id: 1949, name: "Telephone", category: "general", svgContent: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/>' },
-    { id: 1952, name: "Telescope-Color", category: "general", svgContent: '<defs><linearGradient id="telGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#455a64"/><stop offset="100%" stop-color="#263238"/></linearGradient></defs><g><rect x="3" y="10" width="18" height="6" rx="1" fill="url(#telGrad)" stroke="#263238" stroke-width="1.5"/><path d="M21 11l2 1-2 1z" fill="#263238"/><line x1="3" y1="13" x2="18" y2="13" stroke="#546e7a" stroke-width="1"/></g>' },
-    { id: 1955, name: "Telescope-View-Color", category: "general", svgContent: '<defs><linearGradient id="telVGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#263238"/><stop offset="100%" stop-color="#121212"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#telVGrad)" stroke="#121212" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="#ffeb3b"/></g>' },
-    { id: 1958, name: "Tent-Color", category: "general", svgContent: '<defs><linearGradient id="tntGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ef5350"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><path d="M12 3l-9 18h18z" fill="url(#tntGrad)" stroke="#b71c1c" stroke-width="1.5"/><path d="M12 3l2 18M12 3l-2 18" stroke="#b71c1c" stroke-width="1.5"/></g>' },
-    { id: 1961, name: "Terminal", category: "ui", svgContent: '<polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>' },
-    { id: 1964, name: "Terminal-Color", category: "brands", svgContent: '<defs><linearGradient id="termBg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#2d3748"/><stop offset="100%" stop-color="#1a202c"/></linearGradient></defs><g><rect x="2" y="3" width="20" height="18" rx="3" fill="url(#termBg)"/><polyline points="6 8 10 11 6 14" fill="none" stroke="#48bb78" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="14" x2="18" y2="14" stroke="#48bb78" stroke-width="2.5" stroke-linecap="round"/></g>' },
-    { id: 1967, name: "Tesla", category: "general", svgContent: '<path d="M3 12h18M6 8h12v8H6zM9 3v4M15 3v4M6 18v2M18 18v2"/>' },
-    { id: 1970, name: "TextColor", category: "general", svgContent: '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12a2 2 0 0 1 0-2.83l7.17-7.17a2 2 0 0 1 2.83 0L20.59 9.59a2 2 0 0 1 0 2.82z"/><line x1="5" y1="5" x2="19" y2="19"/>' },
-    { id: 1973, name: "Theater-Masks-Color", category: "general", svgContent: '<defs><linearGradient id="mskGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff9c4"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><path d="M7 6a4 4 0 0 0-4 4v4a4 4 0 0 0 8 0v-4a4 4 0 0 0-4-4z" fill="url(#mskGrad)" stroke="#f57c00" stroke-width="1.5"/><path d="M17 10a4 4 0 0 0-4 4v4a4 4 0 0 0 8 0v-4a4 4 0 0 0-4-4z" fill="url(#mskGrad)" stroke="#f57c00" stroke-width="1.5"/></g>' },
-    { id: 1976, name: "Thermometer", category: "health", svgContent: '<path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>' },
-    { id: 1979, name: "Thermometer-Cold", category: "health", svgContent: '<path d="M2 12.5a5 5 0 1 0 10 0V3a3 3 0 1 0-6 0v9.5"/><line x1="6" y1="3" x2="6" y2="3"/><line x1="8" y1="5" x2="8" y2="5"/><line x1="4" y1="5" x2="4" y2="5"/><line x1="9" y1="8" x2="9" y2="8"/><line x1="3" y1="8" x2="3" y2="8"/>' },
-    { id: 1982, name: "Thermometer-Color", category: "general", svgContent: '<defs><linearGradient id="thmGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ef5350"/><stop offset="100%" stop-color="#c62828"/></linearGradient></defs><g><path d="M14 4v10a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z" fill="url(#thmGrad)" stroke="#b71c1c" stroke-width="1.5"/><line x1="12" y1="4" x2="12" y2="10" stroke="#ffffff" stroke-width="2"/></g>' },
-    { id: 1985, name: "Thermometer-Hot", category: "health", svgContent: '<path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/><path d="M12 9V5"/><path d="M12 12v1"/><line x1="12" y1="16" x2="12" y2="16"/>' },
-    { id: 1988, name: "Thermostat", category: "general", svgContent: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 6V3m0 18v-3"/><path d="M18 12h3M3 12h3"/>' },
-    { id: 1991, name: "Thumbs-Down", category: "general", svgContent: '<path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zM17 2h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"/>' },
-    { id: 1994, name: "Thumbs-Up", category: "general", svgContent: '<path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>' },
-    { id: 1997, name: "ThumbsDown", category: "general", svgContent: '<path d="M10 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4M10 1h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/><path d="M21 21h2a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z"/>' },
-    { id: 2000, name: "ThumbsUp", category: "general", svgContent: '<path d="M14 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5.5a2.5 2.5 0 0 0-2.5-2.5z"/><path d="M3 21h2a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z"/>' },
-    { id: 2003, name: "Ticket-Color", category: "finance", svgContent: '<defs><linearGradient id="tktGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffb74d"/><stop offset="100%" stop-color="#f57c00"/></linearGradient></defs><g><path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2 2 2 0 0 0 0 10 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 0 0-10z" fill="url(#tktGrad)"/><line x1="6" y1="8" x2="6" y2="16" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="2 2"/></g>' },
-    { id: 2006, name: "TikTok", category: "brands", svgContent: '<path d="M9 2v15M9 10a5 5 0 0 0 5 5 5 5 0 0 0 5-5M15 2a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3"/>' },
-    { id: 2009, name: "Timeline-Color", category: "development", svgContent: '<defs><linearGradient id="tlGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff7043"/><stop offset="100%" stop-color="#d84315"/></linearGradient></defs><g><line x1="2" y1="12" x2="22" y2="12" stroke="url(#tlGrad)" stroke-width="2.5" stroke-linecap="round"/><circle cx="6" cy="12" r="3" fill="#ff7043"/><circle cx="14" cy="12" r="4" fill="#d84315"/><rect x="12" y="4" width="4" height="4" rx="1" fill="#ff7043"/></g>' },
-    { id: 2012, name: "Toggle-Left", category: "iot", svgContent: '<rect x="1" y="5" width="22" height="14" rx="7" ry="7"/><circle cx="8" cy="12" r="3"/>' },
-    { id: 2015, name: "Toggle-Right", category: "iot", svgContent: '<rect x="1" y="5" width="22" height="14" rx="7" ry="7"/><circle cx="16" cy="12" r="3"/>' },
-    { id: 2018, name: "ToggleOff", category: "iot", svgContent: '<rect x="1" y="5" width="22" height="14" rx="7"/><circle cx="8" cy="12" r="5" fill="currentColor" opacity="0.9"/>' },
-    { id: 2021, name: "ToggleOn", category: "iot", svgContent: '<rect x="1" y="5" width="22" height="14" rx="7"/><circle cx="16" cy="12" r="5" fill="currentColor" opacity="0.9"/>' },
-    { id: 2024, name: "Tool", category: "development", svgContent: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>' },
-    { id: 2027, name: "Tool-Color", category: "objects", svgContent: '<defs><linearGradient id="toolGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#546e7a"/></linearGradient></defs><g><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l4.3-4.3a4.2 4.2 0 0 0-5.9-5.9l-4.3 4.3z" fill="url(#toolGrad)"/><path d="M14.7 6.3L2 19a2.1 2.1 0 0 0 3 3l12.7-12.7" fill="none" stroke="#546e7a" stroke-width="2.5" stroke-linecap="round"/><rect x="2" y="19" width="3" height="3" rx="0.5" fill="#ffb300"/></g>' },
-    { id: 2030, name: "Tornado", category: "general", svgContent: '<path d="M21 4H3"/><path d="M18 8H6"/><path d="M19.5 12H4.5"/><path d="M16 16H8"/><path d="M12 20h-4"/><path d="M14 20h2"/>' },
-    { id: 2033, name: "Tractor-Color", category: "general", svgContent: '<defs><linearGradient id="trcGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4caf50"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient></defs><g><rect x="4" y="10" width="8" height="6" fill="url(#trcGrad)" stroke="#2e7d32" stroke-width="1.5"/><circle cx="6" cy="20" r="3" fill="#37474f"/><circle cx="16" cy="20" r="3" fill="#37474f"/></g>' },
-    { id: 2036, name: "Train-Color", category: "ai", svgContent: '<defs><linearGradient id="trnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#f44336"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g><rect x="4" y="8" width="16" height="10" rx="2" fill="url(#trnGrad)" stroke="#b71c1c" stroke-width="1.5"/><rect x="6" y="10" width="4" height="4" fill="#ffffff"/><circle cx="8" cy="20" r="2" fill="#455a64"/><circle cx="16" cy="20" r="2" fill="#455a64"/></g>' },
-    { id: 2039, name: "Tram-Color", category: "general", svgContent: '<defs><linearGradient id="trmGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#2196f3"/><stop offset="100%" stop-color="#1565c0"/></linearGradient></defs><g><rect x="4" y="6" width="16" height="12" rx="2" fill="url(#trmGrad)" stroke="#1565c0" stroke-width="1.5"/><line x1="4" y1="12" x2="20" y2="12" stroke="#ffffff" stroke-width="2"/></g>' },
-    { id: 2042, name: "Transmission", category: "general", svgContent: '<circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="18" x2="16" y2="18"/><line x1="6" y1="8" x2="6" y2="16"/><line x1="18" y1="8" x2="18" y2="16"/><path d="M12 10v4"/>' },
-    { id: 2045, name: "Trash", category: "ui", svgContent: '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>' },
-    { id: 2048, name: "Trash-2", category: "ui", svgContent: '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>' },
-    { id: 2051, name: "Trash-Color", category: "ui", svgContent: '<defs><linearGradient id="trashGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e53935"/><stop offset="100%" stop-color="#b71c1c"/></linearGradient></defs><g fill="none" stroke="url(#trashGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></g>' },
-    { id: 2054, name: "Trash2", category: "ui", svgContent: '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>' },
-    { id: 2057, name: "TrashSolid", category: "ui", svgContent: '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>' },
-    { id: 2060, name: "Tree-Color", category: "general", svgContent: '<defs><linearGradient id="treGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#81c784"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient></defs><g><rect x="11" y="16" width="2" height="6" fill="#5d4037"/><path d="M12 2A6 6 0 0 0 6 8c0 3 3 5 6 9 3-4 6-6 6-9a6 6 0 0 0-6-6z" fill="url(#treGrad)"/></g>' },
-    { id: 2063, name: "Tree-Small-Color", category: "general", svgContent: '<defs><linearGradient id="trsGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#66bb6a"/><stop offset="100%" stop-color="#1b5e20"/></linearGradient></defs><g><path d="M12 2l7 10h-3l5 8H3l5-8H5z" fill="url(#trsGrad)" stroke="#1b5e20" stroke-width="1.5"/><rect x="11" y="20" width="2" height="2" fill="#5d4037"/></g>' },
-    { id: 2066, name: "Trending-Down", category: "finance", svgContent: '<polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/>' },
-    { id: 2069, name: "Trending-Up", category: "finance", svgContent: '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>' },
-    { id: 2072, name: "TrendingDown", category: "finance", svgContent: '<polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/>' },
-    { id: 2075, name: "TrendingUp", category: "finance", svgContent: '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>' },
-    { id: 2078, name: "Trophy", category: "media", svgContent: '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6m12 5h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16m-8-7v7m6-18H6v7a6 6 0 0 0 12 0V2z"/>' },
-    { id: 2081, name: "Trophy-Color", category: "ui", svgContent: '<defs><linearGradient id="goldTr" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="60%" stop-color="#fbc02d"/><stop offset="100%" stop-color="#f57f17"/></linearGradient></defs><g><path d="M6 4h12v5c0 3.3-2.7 6-6 6s-6-2.7-6-6V4z" fill="url(#goldTr)"/><path d="M6 6H3v2c0 2 1.5 3 3 3V6zm12 0h3v2c0 2-1.5 3-3 3V6z" fill="#fbc02d"/><path d="M12 15v4m-4 3h8" stroke="#fbc02d" stroke-width="2" fill="none"/><rect x="7" y="20" width="10" height="2" rx="0.5" fill="#5d4037"/></g>' },
-    { id: 2084, name: "Truck-Delivery-Color", category: "general", svgContent: '<defs><linearGradient id="trkGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#78909c"/><stop offset="100%" stop-color="#455a64"/></linearGradient></defs><g><rect x="2" y="10" width="16" height="8" rx="2" fill="url(#trkGrad)" stroke="#455a64" stroke-width="1.5"/><rect x="18" y="12" width="4" height="6" rx="1" fill="#455a64"/><circle cx="6" cy="20" r="2" fill="#37474f"/><circle cx="14" cy="20" r="2" fill="#37474f"/></g>' },
-    { id: 2087, name: "Trumpet-Color", category: "general", svgContent: '<defs><linearGradient id="trpGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#fff176"/><stop offset="100%" stop-color="#fbc02d"/></linearGradient></defs><g><path d="M4 14l16-8 2 2-16 8z" fill="url(#trpGrad)" stroke="#fbc02d" stroke-width="1.5"/><rect x="8" y="9" width="3" height="3" fill="#ffeb3b"/><rect x="12" y="7" width="3" height="3" fill="#ffeb3b"/></g>' },
-    { id: 2090, name: "Tv", category: "media", svgContent: '<rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/>' },
-    { id: 2093, name: "Twitch", category: "brands", svgContent: '<rect x="3" y="2" width="18" height="20" rx="2"/><rect x="6" y="5" width="3" height="10"/><rect x="12" y="5" width="3" height="10"/>' },
-    { id: 2096, name: "Twitch2", category: "brands", svgContent: '<rect x="3" y="2" width="4" height="16"/><rect x="9" y="2" width="4" height="16"/><rect x="15" y="7" width="4" height="11"/>' },
-    { id: 2099, name: "Twitch2-Color", category: "brands", svgContent: '<defs><linearGradient id="twitchPurple" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#a970ff"/><stop offset="100%" stop-color="#6441a5"/></linearGradient></defs><g><path d="M3 2th16l4 4v12h-6l-4 4h-4l-4-4H3V2z" fill="url(#twitchPurple)"/><rect x="16" y="7" width="2" height="6" fill="#ffffff"/><rect x="11" y="7" width="2" height="6" fill="#ffffff"/></g>' },
-    { id: 2102, name: "Twitter", category: "brands", svgContent: '<path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 7-7 7-7z"/>' },
-    { id: 2105, name: "Type", category: "general", svgContent: '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20 x2="15 y2="20"/><line x1="12" y1="4 x2="12 y2="20"/>' },
-    { id: 2108, name: "Type2", category: "general", svgContent: '<polyline points="4 7h16M9 20h6M12 3v14"/><line x1="3" y1="20" x2="21" y2="20"/>' },
-    { id: 2111, name: "UFO-Color", category: "general", svgContent: '<defs><linearGradient id="ufoGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#81d4fa"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><ellipse cx="12" cy="12" rx="10" ry="4" fill="url(#ufoGrad)" stroke="#0288d1" stroke-width="1.5"/><circle cx="12" cy="10" r="3" fill="#ffffff" stroke="#0288d1" stroke-width="1.5"/></g>' },
-    { id: 2114, name: "UFO-Mini-Color", category: "general", svgContent: '<defs><linearGradient id="ufmGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#81d4fa"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><ellipse cx="12" cy="12" rx="10" ry="4" fill="url(#ufmGrad)" stroke="#0288d1" stroke-width="1.5"/><circle cx="12" cy="10" r="3" fill="#ffffff" stroke="#0288d1" stroke-width="1.5"/></g>' },
-    { id: 2117, name: "Umbrella", category: "objects", svgContent: '<path d="M23 12a11.05 11.05 0 0 0-22 0zm-7 7a3 3 0 0 1-5 0"/><line x1="12" y1="12" x2="12" y2="19"/>' },
-    { id: 2120, name: "Umbrella-Color", category: "iot", svgContent: '<defs><linearGradient id="umbGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ab47bc"/><stop offset="100%" stop-color="#7b1fa2"/></linearGradient></defs><g><path d="M23 12a11 11 0 0 0-22 0h22z" fill="url(#umbGrad)"/><path d="M12 12v7a2 2 0 0 0 4 0" fill="none" stroke="#4e342e" stroke-width="2.5" stroke-linecap="round"/><line x1="12" y1="12" x2="12" y2="2" stroke="#4e342e" stroke-width="2.5"/></g>' },
-    { id: 2123, name: "Umbrella-Off", category: "objects", svgContent: '<path d="M23 12a11.05 11.05 0 0 0-22 0zm-7 7a3 3 0 0 1-5 0"/><line x1="12" y1="12" x2="12" y2="19"/><line x1="2" y1="2" x2="22" y2="22"/>' },
-    { id: 2126, name: "Umbrella-Rain", category: "objects", svgContent: '<path d="M23 12a11.05 11.05 0 0 0-22 0zm-7 7a3 3 0 0 1-5 0"/><line x1="12" y1="12" x2="12" y2="19"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="16" y1="3" x2="16" y2="5"/><line x1="8" y1="3" x2="8" y2="5"/>' },
-    { id: 2129, name: "Umbrellas", category: "objects", svgContent: '<path d="M22 12a10.05 10.05 0 0 0-20 0zm-6 6a3 3 0 0 1-5 0"/><line x1="12" y1="12" x2="12" y2="19"/><path d="M15 8l-2-4 2-4-2 4-2-4 2 4z"/>' },
-    { id: 2132, name: "Unlink", category: "general", svgContent: '<path d="M10 14l-2-2M14 10l2-2M6 3h4M14 3h4M18 9v4M6 13v4"/><circle cx="12" cy="12" r="1" fill="currentColor" opacity="0.9"/>' },
-    { id: 2135, name: "Unlock", category: "ui", svgContent: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/>' },
-    { id: 2138, name: "Unlock-Color", category: "iot", svgContent: '<defs><linearGradient id="lockBodyUn" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffd54f"/><stop offset="100%" stop-color="#ffb300"/></linearGradient><linearGradient id="shackleGradUn" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="50%" stop-color="#b0bec5"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><path d="M7 11V7a5 5 0 0 1 9.9-1" stroke="url(#shackleGradUn)" stroke-width="3" stroke-linecap="round" fill="none"/><rect x="3" y="11" width="18" height="11" rx="2" fill="url(#lockBodyUn)"/><circle cx="12" cy="16" r="2" fill="#5d4037"/><path d="M12 18v2" stroke="#5d4037" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="14" r="1" fill="#fff" opacity="0.4"/></g>' },
-    { id: 2141, name: "Upload", category: "ui", svgContent: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 9 12 4 7 9"/><line x1="12" y1="4" x2="12" y2="15"/>' },
-    { id: 2144, name: "Upload-Color", category: "ui", svgContent: '<defs><linearGradient id="upArrow" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#0288d1"/><stop offset="100%" stop-color="#29b6f6"/></linearGradient></defs><g><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4" fill="none" stroke="#78909c" stroke-width="2.5" stroke-linecap="round"/><polyline points="17 8 12 3 7 8" fill="none" stroke="url(#upArrow)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="3" x2="12" y2="15" stroke="url(#upArrow)" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 2145, name: "User", category: "ui", svgContent: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>' },
-    { id: 2148, name: "User-Check", category: "ui", svgContent: '<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/>' },
-    { id: 2151, name: "User-Minus", category: "ui", svgContent: '<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/>' },
-    { id: 2154, name: "User-Plus", category: "ui", svgContent: '<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>' },
-    { id: 2157, name: "User-X", category: "ui", svgContent: '<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/>' },
-    { id: 2160, name: "UserBlock", category: "ui", svgContent: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="2"/><path d="M7 18c0-2 2-4 5-4s5 2 5 4M16 8l4 4M20 8l-4 4"/>' },
-    { id: 2163, name: "UserCircle", category: "ui", svgContent: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="9" r="2.5"/><path d="M7 18c0-2.21 2.24-4 5-4s5 1.79 5 4"/>' },
-    { id: 2166, name: "Users", category: "ui", svgContent: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>' },
-    { id: 2169, name: "Video", category: "media", svgContent: '<polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>' },
-    { id: 2172, name: "Video-Off", category: "media", svgContent: '<path d="M10.66 6H14a2 2 0 0 1 2 2v3.34l1 1L23 7v10l-3.33-2.5"/><path d="M16 16a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h1.34"/><line x1="1" y1="1" x2="23" y2="23"/>' },
-    { id: 2175, name: "Vimeo", category: "general", svgContent: '<circle cx="12" cy="12" r="10"/><path d="M9 9l4 3-4 3v-6zM18 7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-1"/>' },
-    { id: 2178, name: "Violin-Color", category: "general", svgContent: '<defs><linearGradient id="vlnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#d7ccc8"/><stop offset="100%" stop-color="#5d4037"/></linearGradient></defs><g><path d="M12 2c-3 0-5 2-5 5v10c0 3 2 5 5 5s5-2 5-5V7c0-3-2-5-5-5z" fill="url(#vlnGrad)" stroke="#5d4037" stroke-width="1.5"/><path d="M12 7v10M10 5l4 1" stroke="#3e2723" stroke-width="1.5"/></g>' },
-    { id: 2181, name: "VirtualReality", category: "general", svgContent: '<path d="M23 11.5a1.5 1.5 0 0 1-3 0v-1a6 6 0 0 0-12 0v1a1.5 1.5 0 0 1-3 0v-1A9 9 0 0 1 23 12.5v-1z"/><circle cx="9" cy="13" r="2"/><circle cx="15" cy="13" r="2"/>' },
-    { id: 2184, name: "Visa", category: "brands", svgContent: '<rect x="2" y="4" width="20" height="16" rx="2"/><rect x="4" y="14" width="16" height="2"/>' },
-    { id: 2187, name: "Volume", category: "media", svgContent: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>' },
-    { id: 2190, name: "Volume-1", category: "media", svgContent: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>' },
-    { id: 2193, name: "Volume-2", category: "media", svgContent: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>' },
-    { id: 2196, name: "Volume-2-Color", category: "ui", svgContent: '<g><path d="M11 5L6 9H2v6h4l5 4V5z" fill="#78909c"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="#29b6f6" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 2199, name: "Volume-Color", category: "ui", svgContent: '<defs><linearGradient id="volGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#78909c"/><stop offset="100%" stop-color="#455a64"/></linearGradient></defs><g><path d="M11 5L6 9H2v6h4l5 4V5z" fill="url(#volGrad)"/></g>' },
-    { id: 2202, name: "Volume-Down", category: "media", svgContent: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="21" y1="12" x2="15" y2="12"/>' },
-    { id: 2205, name: "Volume-Up", category: "media", svgContent: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>' },
-    { id: 2208, name: "Volume-X", category: "media", svgContent: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>' },
-    { id: 2211, name: "Volume-X-Color", category: "ui", svgContent: '<g><path d="M11 5L6 9H2v6h4l5 4V5z" fill="#78909c"/><line x1="23" y1="9" x2="17" y2="15" stroke="#ef5350" stroke-width="2.5" stroke-linecap="round"/><line x1="17" y1="9" x2="23" y2="15" stroke="#ef5350" stroke-width="2.5" stroke-linecap="round"/></g>' },
-    { id: 2214, name: "Wallet", category: "finance", svgContent: '<path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-8H4z"/><circle cx="18" cy="15" r="1"/>' },
-    { id: 2217, name: "Wallet-Color", category: "finance", svgContent: '<defs><linearGradient id="walletBody" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8d6e63"/><stop offset="100%" stop-color="#4e342e"/></linearGradient></defs><g><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4" fill="#a1887f"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-8H4z" fill="url(#walletBody)"/><path d="M15 10h6v6h-6z" fill="#5d4037" rx="1"/><circle cx="18" cy="13" r="1.5" fill="#ffd54f"/></g>' },
-    { id: 2218, name: "Wallet2", category: "finance", svgContent: '<rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22M20 10v8"/>' },
-    { id: 2221, name: "Wand2", category: "general", svgContent: '<path d="M15 4V2m0 2a2 2 0 1 0 0 4m0-4a2 2 0 0 1 0 4m6-11l-3.5 3.5m3.5-3.5a2 2 0 1 0-3.5 3.5m3.5-3.5a2 2 0 0 1-3.5 3.5M9 11l3.5-3.5m-3.5 3.5a2 2 0 1 1 3.5-3.5m-3.5 3.5a2 2 0 0 0 3.5-3.5m-9 1l-3.5 3.5m3.5-3.5a2 2 0 1 0-3.5 3.5m3.5-3.5a2 2 0 0 1-3.5 3.5M3 11l3.5 3.5m-3.5-3.5a2 2 0 1 1 3.5 3.5m-3.5-3.5a2 2 0 0 0 3.5 3.5m18 11l-3.5-3.5m3.5 3.5a2 2 0 1 0-3.5-3.5m3.5 3.5a2 2 0 0 1-3.5-3.5m-9-1l3.5-3.5m-3.5 3.5a2 2 0 1 1 3.5-3.5m-3.5 3.5a2 2 0 0 0 3.5-3.5"/>' },
-    { id: 2224, name: "Watch", category: "iot", svgContent: '<circle cx="12" cy="12" r="7"/><polyline points="12 9 12 12 14 13"/><path d="M12 5V1m0 22v-4"/>' },
-    { id: 2227, name: "Water-Color", category: "general", svgContent: '<defs><linearGradient id="wtrGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><path d="M2 14c4-4 8 4 10 0s6-8 10 0" fill="none" stroke="#0288d1" stroke-width="3" stroke-linecap="round"/><path d="M2 18c4-4 8 4 10 0s6-8 10 0" fill="none" stroke="#0288d1" stroke-width="3" stroke-linecap="round"/></g>' },
-    { id: 2230, name: "Water-Drop-Color", category: "general", svgContent: '<defs><linearGradient id="drpGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><path d="M12 2a8 8 0 0 0-8 8c0 4 8 12 8 12s8-8 8-12a8 8 0 0 0-8-8z" fill="url(#drpGrad)" stroke="#0288d1" stroke-width="1.5"/></g>' },
-    { id: 2233, name: "WeChat", category: "general", svgContent: '<path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.33 3 .9 4.32L2 22l6.26-2.36C10.6 20.97 11.29 21 12 21c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.06 0-2.09-.18-3.08-.5l-.98-.32-3.68 1.39 1.04-3.8-.32-.98C4.18 14.09 4 13.06 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>' },
-    { id: 2236, name: "WhatsApp", category: "brands", svgContent: '<circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8 14s1 2 4 3 4-1 4-1M7 7c.5-2.5 2-4 5-4 3 0 4 1.5 4.5 4" stroke-width="1.5" stroke="white" stroke-linecap="round"/>' },
-    { id: 2239, name: "Wifi", category: "development", svgContent: '<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>' },
-    { id: 2242, name: "Wifi-Color", category: "ui", svgContent: '<defs><linearGradient id="wifiGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#66bb6a"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient></defs><g fill="none" stroke="url(#wifiGrad)" stroke-width="2.5" stroke-linecap="round"><path d="M5 8.55a12 12 0 0 1 14 0M1.42 4.97a17 17 0 0 1 21.16 0M8.53 12.11a7 7 0 0 1 6.94 0"/><circle cx="12" cy="17" r="1" fill="#2e7d32" stroke="none"/></g>' },
-    { id: 2245, name: "Wifi-Off-Color", category: "ui", svgContent: '<g fill="none" stroke="#b0bec5" stroke-width="2.5" stroke-linecap="round"><path d="M1 1l22 22" stroke="#ef5350"/><path d="M16.72 11.06A7 7 0 0 0 8.53 12.1M5 8.55a12 12 0 0 1 11.33-1.55"/></g>' },
-    { id: 2248, name: "Wind", category: "weather", svgContent: '<path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>' },
-    { id: 2251, name: "Wind-Color", category: "iot", svgContent: '<defs><linearGradient id="wndGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e0f7fa"/><stop offset="100%" stop-color="#00acc1"/></linearGradient></defs><g fill="none" stroke="url(#wndGrad)" stroke-width="2.5" stroke-linecap="round"><path d="M9.5 8H2m16.5 0A2.5 2.5 0 1 0 16 5.5M6 12h16M14 16h-12m17 0a2.5 2.5 0 1 1-2 4.5"/></g>' },
-    { id: 2254, name: "Window-Color", category: "iot", svgContent: '<defs><linearGradient id="winGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4fc3f7"/><stop offset="100%" stop-color="#0288d1"/></linearGradient></defs><g><rect x="3" y="3" width="18" height="18" rx="2" fill="url(#winGrad)" stroke="#455a64" stroke-width="2"/><line x1="12" y1="3" x2="12" y2="21" stroke="#455a64" stroke-width="2"/><line x1="3" y1="12" x2="21" y2="12" stroke="#455a64" stroke-width="2"/></g>' },
-    { id: 2257, name: "Window-Maximize-Color", category: "ui", svgContent: '<defs><linearGradient id="wmxGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="url(#wmxGrad)" stroke-width="2"/><path d="M3 8h18" stroke="#78909c" stroke-width="1.5"/><rect x="6" y="11" width="7" height="4" fill="#42a5f5"/><polygon points="18 10 18 13 15 10" fill="#78909c"/></g>' },
-    { id: 2260, name: "Window-Minimize-Color", category: "ui", svgContent: '<defs><linearGradient id="wmnGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#78909c"/></linearGradient></defs><g><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="url(#wmnGrad)" stroke-width="2"/><path d="M3 8h18" stroke="#78909c" stroke-width="1.5"/><line x1="6" y1="15" x2="12" y2="15" stroke="#ff7043" stroke-width="2" stroke-linecap="round"/></g>' },
-    { id: 2263, name: "Window-Restore-Color", category: "iot", svgContent: '<defs><linearGradient id="wrGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#90caf9"/><stop offset="100%" stop-color="#42a5f5"/></linearGradient></defs><g stroke="#42a5f5" fill="none" stroke-width="1.5"><rect x="7" y="7" width="14" height="14" rx="1" stroke="url(#wrGrad)" stroke-width="2"/><path d="M7 11H3v10h10v-4" opacity="0.6"/></g>' },
-    { id: 2266, name: "WindowMaximize", category: "objects", svgContent: '<rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="8" x2="21" y2="8"/><polyline points="15 3 21 3 21 9"/>' },
-    { id: 2269, name: "WindowMinimize", category: "objects", svgContent: '<rect x="2" y="2" width="20" height="20" rx="2"/><line x1="2" y1="7" x2="22" y2="7"/><line x1="7" y1="16" x2="17" y2="16"/>' },
-    { id: 2272, name: "Wine", category: "food", svgContent: '<path d="M21 21H3"/><path d="M12 21V10"/><path d="M19 10H5"/><path d="M18 10L12 2 6 10z"/>' },
-    { id: 2275, name: "Wine-Color", category: "food", svgContent: '<defs><linearGradient id="wineGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ff1744"/><stop offset="100%" stop-color="#880e4f"/></linearGradient></defs><g><path d="M12 15v7M8 22h8" stroke="#880e4f" stroke-width="2" stroke-linecap="round"/><path d="M6 3h12v6c0 3.3-2.7 6-6 6s-6-2.7-6-6V3z" fill="url(#wineGrad)"/><path d="M6 7h12" stroke="#ffffff" opacity="0.4" stroke-width="1.5"/></g>' },
-    { id: 2278, name: "Wine-Glass", category: "food", svgContent: '<path d="M8 22h8"/><path d="M12 22V10"/><path d="M20 10c0-4.42-3.58-8-8-8s-8 3.58-8 8c0 2.5 1.2 4.7 3 6.1"/>' },
-    { id: 2281, name: "X", category: "brands", svgContent: '<path d="M4 4l16 16M20 4L4 20" stroke-linecap="round"/>' },
-    { id: 2284, name: "X-Circle", category: "brands", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>' },
-    { id: 2287, name: "X-Circle-Color", category: "ui", svgContent: '<defs><linearGradient id="xCirc" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e57373"/><stop offset="100%" stop-color="#c62828"/></linearGradient></defs><g><circle cx="12" cy="12" r="10" fill="url(#xCirc)"/><line x1="15" y1="9" x2="9" y2="15" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/></g>' },
-    { id: 2288, name: "X-Color", category: "ui", svgContent: '<defs><linearGradient id="xGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e57373"/><stop offset="100%" stop-color="#c62828"/></linearGradient></defs><g stroke="url(#xGrad)" stroke-width="4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></g>' },
-    { id: 2289, name: "XBold", category: "brands", svgContent: '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>' },
-    { id: 2292, name: "XCircle", category: "brands", svgContent: '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>' },
-    { id: 2295, name: "Yen-Sign", category: "finance", svgContent: '<path d="M12 11V2M8 11l4-4 4 4"/><path d="M8 15h8"/><path d="M8 19h8"/>' },
-    { id: 2298, name: "YouTube", category: "brands", svgContent: '<rect x="2" y="3" width="20" height="18" rx="2"/><polygon points="9 9 9 15 15 12 9 9"/>' },
-    { id: 2301, name: "Youtube-Color", category: "brands", svgContent: '<defs><linearGradient id="ytGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff4b4b"/><stop offset="100%" stop-color="#cc0000"/></linearGradient></defs><g><rect x="2" y="4" width="20" height="16" rx="5" fill="url(#ytGrad)"/><polygon points="10 9 16 12 10 15" fill="#ffffff"/><path d="M2 9c0-2 2-3 5-3h10c3 0 5 1 5 3" fill="#ffffff" opacity="0.15"/></g>' },
-    { id: 2304, name: "Zap", category: "ui", svgContent: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>' },
-    { id: 2307, name: "Zap3", category: "ui", svgContent: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/><path d="M12 8l0 6M15 11l-6 0"/>' },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 ];
