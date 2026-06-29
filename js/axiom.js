@@ -374,28 +374,57 @@
     });
 
     // ==========================================
-    // 3. TAB SWITCHING (.tabs)
+        // ==========================================
+    // 3. TAB SWITCHING (.tabs or [role="tablist"])
     // ==========================================
     document.addEventListener('click', function (e) {
-      const tabLink = e.target.closest('.tabs nav a, .tabs nav button');
+      const tabLink = e.target.closest('.tabs nav a, .tabs nav button, [role="tab"]');
       if (tabLink) {
         e.preventDefault();
-        const parent = tabLink.closest('.tabs');
-        if (!parent) return;
+        
+        // Find parent tab container (could be .tabs, or a [role="tablist"] or its parent)
+        let parent = tabLink.closest('.tabs');
+        if (!parent) {
+            const tablist = tabLink.closest('[role="tablist"]');
+            if (tablist) parent = tablist.parentElement;
+        }
+        if (!parent) parent = document.body; // Fallback if no container found
 
-        parent.querySelectorAll('nav a, nav button').forEach(a => a.removeAttribute('data-active'));
-        parent.querySelectorAll('main > section').forEach(s => s.removeAttribute('data-active'));
+        const isSemantic = tabLink.hasAttribute('role');
+        const targetId = tabLink.getAttribute('href')?.replace('#', '') || 
+                         tabLink.getAttribute('data-target') || 
+                         tabLink.getAttribute('aria-controls');
 
-        tabLink.setAttribute('data-active', 'true');
-        const targetId = tabLink.getAttribute('href')?.replace('#', '') || tabLink.getAttribute('data-target');
-        const targetSection = parent.querySelector(`#${targetId}`);
-        if (targetSection) {
-          targetSection.setAttribute('data-active', 'true');
+        if (!targetId) return;
+
+        if (isSemantic) {
+            // Semantic ARIA Tab Logic
+            const tablist = tabLink.closest('[role="tablist"]');
+            if (tablist) {
+                tablist.querySelectorAll('[role="tab"]').forEach(t => t.setAttribute('aria-selected', 'false'));
+                tabLink.setAttribute('aria-selected', 'true');
+            }
+            
+            // Find panels (assuming they share a parent or are within the component)
+            parent.querySelectorAll('[role="tabpanel"]').forEach(p => p.setAttribute('hidden', ''));
+            const targetPanel = document.getElementById(targetId);
+            if (targetPanel) {
+                targetPanel.removeAttribute('hidden');
+            }
+        } else {
+            // Legacy data-active logic
+            parent.querySelectorAll('nav a, nav button').forEach(a => a.removeAttribute('data-active'));
+            parent.querySelectorAll('main > section').forEach(s => s.removeAttribute('data-active'));
+
+            tabLink.setAttribute('data-active', 'true');
+            const targetSection = parent.querySelector(`#${targetId}`);
+            if (targetSection) {
+              targetSection.setAttribute('data-active', 'true');
+            }
         }
       }
     });
 
-    // ==========================================
     // 4. INPUT FOCUS STATE (data-focused)
     // ==========================================
     document.addEventListener('focusin', function (e) {
