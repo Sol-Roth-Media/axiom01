@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: "Breadcrumb", cat: "components", url: "docs/components/breadcrumb.html" },
     { title: "Button", cat: "components", url: "docs/components/button.html" },
     { title: "Card", cat: "components", url: "docs/components/card.html" },
+    { title: "Card Filter", cat: "components", url: "docs/components/card-filter.html" },
+    { title: "Code Block", cat: "components", url: "docs/components/code-block.html" },
     { title: "Carousel", cat: "components", url: "docs/components/carousel.html" },
     { title: "Chat", cat: "components", url: "docs/components/chat.html" },
     { title: "Chip Input", cat: "components", url: "docs/components/chip-input.html" },
@@ -131,18 +133,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper function to update the theme toggle button icon
     const updateThemeToggleButtonIcon = (themeName) => {
+        // CSS handles moon/sun visibility for inline SVG icons (no data-name needed).
+        // This function is kept for backward compatibility with JS-rendered icons.
         const themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle) {
-            const icon = themeToggle.querySelector('.axicon');
-            if (icon) {
-                if (themeName === 'dark') {
-                    icon.setAttribute('data-name', 'Sun');
-                } else {
-                    icon.setAttribute('data-name', 'Moon');
-                }
-                safeRenderAxicons();
-            }
+        if (!themeToggle) return;
+        const icon = themeToggle.querySelector('.axicon[data-name]');
+        if (!icon) return; // Inline SVG handled by CSS via [data-theme] attribute
+        if (themeName === 'dark') {
+            icon.setAttribute('data-name', 'Sun');
+        } else {
+            icon.setAttribute('data-name', 'Moon');
         }
+        safeRenderAxicons();
     };
 
 // 2. Theme Toggling (Header Toggle Button)
@@ -803,20 +805,26 @@ document.addEventListener('DOMContentLoaded', () => {
           const initTabs = () => {
             document.querySelectorAll('.tabs').forEach((tabsContainer) => {
               const tabButtons = tabsContainer.querySelectorAll('[role="tab"]');
-              const tabPanels = tabsContainer.querySelectorAll('[role="tabpanel"]');
+
+              // Panels live outside the <menu class="tabs"> — find them by aria-controls ID
+              const getPanelForButton = (button) => {
+                const panelId = button.getAttribute('aria-controls');
+                return panelId ? document.getElementById(panelId) : null;
+              };
 
               const activateTab = (button) => {
                 tabButtons.forEach((btn) => {
-                  btn.setAttribute('aria-selected', String(btn === button));
-                  btn.tabIndex = btn === button ? 0 : -1;
-                });
-                tabPanels.forEach((panel) => {
-                  const isTarget = panel.id === button.getAttribute('aria-controls');
-                  panel.hidden = !isTarget;
-                  if (isTarget) {
-                    panel.setAttribute('aria-selected', 'true');
-                  } else {
-                    panel.removeAttribute('aria-selected');
+                  const isTarget = btn === button;
+                  btn.setAttribute('aria-selected', String(isTarget));
+                  btn.tabIndex = isTarget ? 0 : -1;
+                  const panel = getPanelForButton(btn);
+                  if (panel) {
+                    panel.hidden = !isTarget;
+                    if (isTarget) {
+                      panel.setAttribute('aria-selected', 'true');
+                    } else {
+                      panel.removeAttribute('aria-selected');
+                    }
                   }
                 });
               };

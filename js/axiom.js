@@ -36,6 +36,7 @@
     autocomplete: 'autocomplete',
     'component-browser': 'component-browser',
     'card-filter': 'card-filter',
+    'code-block': 'code-block',
     'data-list': 'data-list',
     dropdown: 'dropdown',
     editor: 'editor',
@@ -642,6 +643,13 @@
       if (header) {
         syncMenuState(header, false, menuButton);
       }
+    });
+
+    document.querySelectorAll('pre').forEach(function (pre) {
+      if (pre.getAttribute('data-component')) return;
+      const code = pre.querySelector('code');
+      if (!code) return;
+      pre.setAttribute('data-component', 'code-block');
     });
 
       window.Axiom.init().catch(function (error) {

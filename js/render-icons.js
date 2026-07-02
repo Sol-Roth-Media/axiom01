@@ -16,6 +16,10 @@
         return iconSet.flatMap(entry => Array.isArray(entry) ? entry : [entry]).filter(isIconObject);
     }
 
+    function isPremiumIconName(name) {
+        return typeof name === 'string' && /(?:-Premium|Premium$)/i.test(name);
+    }
+
     function renderAllAxicons() {
         // Wait for axicons to be loaded
         if (typeof window.axicons === 'undefined' || !Array.isArray(window.axicons)) {
@@ -40,6 +44,8 @@
             const icon = [...icons].reverse().find(i => i.name.toLowerCase() === name.toLowerCase());
 
             if (!icon || !icon.svgContent) return;
+
+            el.classList.toggle('premium', isPremiumIconName(icon.name));
 
             // Extract viewBox from icon's svgContent, otherwise default to 24x24
             const viewBoxMatch = icon.svgContent.match(/viewBox="([^"]+)"/);

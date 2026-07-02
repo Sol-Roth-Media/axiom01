@@ -44,6 +44,15 @@ For framework-maintained interactive modules (`js/components/*.js` excluding hel
 
 This contract is now enforced by pre-release and smoke audits, so new component work should follow the same structure from the start.
 
+### Class Naming Policy (Framework-Owned)
+
+Axiom01 is semantic-first and intentionally avoids BEM-style class naming in public docs and examples.
+
+- Prefer single, semantic component classes (`card`, `alert`, `filter-toolbar`).
+- Helper classes should stay short and dashed (`filter-toolbar-row`, `code-block-copy`).
+- Double-underscore (`__`) and modifier (`--`) class tokens are reserved only for rare internal migration shims and should not be introduced in new markup.
+- If a temporary exception is required, document it in this guide before release and include a removal task in the audit checklist.
+
 **Example Component Structure:**
 
 ```javascript

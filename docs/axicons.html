@@ -11,13 +11,12 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
 <body class="axiom-body">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="main" data-component="mobile-navbar">
 	<nav role="navigation" aria-label="Main Navigation">
-		<a href="../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
+		<a href="../index.html" class="brand" aria-label="Axiom01 Home">Axiom</a>
 		<ul class="links">
 			<li><a href="overview-quickstart.html">Get Started</a></li>
 			<li><a href="components-overview.html" aria-current="page">Docs</a></li>
@@ -36,7 +35,7 @@
 	<section class="hero">
 		<div class="container">
 			<h1>Axicons</h1>
-			<p>Base + premium icon sets for Axiom01. Click any icon to copy its name.</p>
+			<p>Base + premium icon sets for Axiom01. Click any icon to copy its full SVG.</p>
 		</div>
 	</section>
 
@@ -89,6 +88,45 @@ button {
 			</div>
 
 			<section>
+				<h2>Icon Color &amp; Theme Adaptation</h2>
+				<p>Base icons use <code>currentColor</code> for all strokes and fills — they automatically inherit the text color of their parent and adapt to light/dark themes with zero extra CSS.</p>
+				<div class="grid">
+					<article class="card">
+						<header><h3>How It Works</h3></header>
+						<p>Every base icon is drawn with <code>stroke="currentColor"</code>. Setting <code>color</code> on a parent element is all you need — the icon follows automatically, including when Axiom switches between light and dark themes.</p>
+						<pre><code class="language-css">/* Icon inherits button's text color */
+.my-button {
+  color: var(--a-color-primary);
+}
+
+/* Dark theme: icons go light automatically */
+[data-theme="dark"] .axicon { /* no extra work needed */ }</code></pre>
+					</article>
+					<article class="card">
+						<header><h3>Semantic Color Classes</h3></header>
+						<p>Apply Axiom color modifier classes directly on the <code>.axicon</code> to use a design-token color.</p>
+						<pre><code class="language-html">&lt;!-- Primary brand color --&gt;
+&lt;span class="axicon render primary" data-name="Check"&gt;&lt;/span&gt;
+
+&lt;!-- Success green --&gt;
+&lt;span class="axicon render success" data-name="Check"&gt;&lt;/span&gt;
+
+&lt;!-- Error red --&gt;
+&lt;span class="axicon render error" data-name="Alert"&gt;&lt;/span&gt;</code></pre>
+					</article>
+					<article class="card">
+						<header><h3>Premium Icons</h3></header>
+						<p>Premium icons use hardcoded gradients for rich visual moments — they intentionally <strong>do not</strong> respond to <code>currentColor</code>. Use them as accent or hero elements, not inline with body text.</p>
+						<pre><code class="language-html">&lt;!-- Always renders its gradient --&gt;
+&lt;span class="axicon render" data-name="AX10M-Premium"&gt;&lt;/span&gt;
+
+&lt;!-- Adapts to theme automatically --&gt;
+&lt;span class="axicon render" data-name="Axiom-System"&gt;&lt;/span&gt;</code></pre>
+					</article>
+				</div>
+			</section>
+
+			<section>
 				<h2>Variants</h2>
 				<div class="grid">
 					<article class="card">
@@ -110,7 +148,7 @@ button {
 
 			<header>
 				<h2>Browse Icons</h2>
-				<p>The live filter below is powered by the <a href="components/card-filter.html">Card Filter component</a>, so you can reuse the same pattern in docs, galleries, and resource grids.</p>
+				<p>The live filter below uses the Card Filter component pattern, so you can reuse the same approach in docs, galleries, and resource grids.</p>
 			</header>
 
 			<nav class="variant-nav" aria-label="Icon variants">
@@ -118,16 +156,16 @@ button {
 				<button class="outline" data-variant="premium" aria-current="false">Premium</button>
 			</nav>
 
-															<section class="filter-toolbar" data-component="card-filter" aria-label="Icon filters">
-																<div class="filter-toolbar__row">
-																	<label class="filter-toolbar__search" for="icon-search">
-																		<span class="sr-only">Search icons</span>
-																		<input type="search" id="icon-search" data-filter-search placeholder="Search icons… e.g. check, arrow, user" aria-label="Search icons">
-																	</label>
-																	<p id="icon-count" class="filter-toolbar__summary" data-filter-summary aria-live="polite"></p>
-																</div>
+								<section class="filter" data-component="card-filter" aria-label="Icon filters">
+																			<div class="toolbar">
+																				<label for="icon-search">
+																	<span class="sr-only">Search icons</span>
+																	<input type="search" id="icon-search" data-filter-search placeholder="Search icons… e.g. check, arrow, user" aria-label="Search icons">
+																</label>
+																				<p id="icon-count" data-filter-summary aria-live="polite"></p>
+															</div>
 
-																<nav id="icon-category-nav" class="filter-toolbar__categories" data-filter-category-nav aria-label="Icon categories"></nav>
+																			<nav id="icon-category-nav" class="categories" data-filter-category-nav aria-label="Icon categories"></nav>
 
 																<div id="icon-grid" class="grid" data-filter-items>
 																	<p id="icon-grid-loading">Loading icons…</p>
@@ -142,7 +180,7 @@ button {
 <footer class="main">
   <div class="content">
     <div class="brand">
-      <a href="../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
+      <a href="../index.html" class="logo">Axiom</a>
       <p class="tagline">The Semantic Web, Reimagined.</p>
     </div>
     <div class="column">
@@ -174,19 +212,17 @@ button {
       <p class="copyright">&copy; <span data-current-year></span> Sol Roth Media. MIT License.</p>
       <ul class="legal">
         <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub Repository"><span class="axicon render" data-name="GitHub"></span></a></li>
-			<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM Package"><span class="axicon render" data-name="Package"></span></a></li>
+			<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM Package"><span class="axicon render" data-name="NPM"></span></a></li>
       </ul>
     </div>
   </div>
 </footer>
 
 <script src="../js/axiom.js"></script>
+<script src="../js/index-page-manager.js"></script>
 <script src="../js/axicons-base.js"></script>
 <script src="../js/axicons-premium.js"></script>
 <script src="../js/render-icons.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script>
 (function () {
 	'use strict';
@@ -234,6 +270,10 @@ button {
 		return iconCatalog[currentVariant] || iconCatalog.base || [];
 	}
 
+	function isPremiumIconName(name) {
+		return typeof name === 'string' && /-Premium|Premium$/i.test(name);
+	}
+
 	function copyToClipboard(text, onSuccess, onFailure) {
 		if (navigator.clipboard && navigator.clipboard.writeText) {
 			navigator.clipboard.writeText(text).then(onSuccess).catch(onFailure);
@@ -263,19 +303,19 @@ button {
 		const categoryLabel = formatCategoryLabel(category);
 
 		const card = document.createElement('article');
-		card.className = 'card card-filter__item';
+		card.className = 'card card-filter-item';
 		card.dataset.filterItem = 'true';
 		card.dataset.filterCategory = category;
 		card.dataset.filterSearch = [icon.name, categoryLabel, category].filter(Boolean).join(' ');
 
 		const button = document.createElement('button');
 		button.type = 'button';
-		button.className = 'card-filter__copy';
-		button.setAttribute('aria-label', `Copy icon name: ${icon.name}`);
-		button.title = icon.name;
+		button.className = 'card-filter-copy';
+		button.setAttribute('aria-label', `Copy SVG: ${icon.name}`);
+		button.title = `Copy SVG — ${icon.name}`;
 
 		const iconSpan = document.createElement('span');
-		iconSpan.className = 'axicon';
+		iconSpan.className = isPremiumIconName(icon.name) ? 'axicon premium' : 'axicon';
 		iconSpan.setAttribute('aria-hidden', 'true');
 		iconSpan.innerHTML = `<svg viewBox="${vb}">${clean}</svg>`;
 
@@ -292,14 +332,18 @@ button {
 		card.appendChild(badge);
 
 		button.addEventListener('click', () => {
-			const nameText = icon.name;
+			// Build a complete, standalone SVG string for pasting anywhere
+			let svgText = icon.svgContent;
+			if (!svgText.includes('xmlns')) {
+				svgText = svgText.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+			}
 			const originalText = label.textContent;
 
 			copyToClipboard(
-				nameText,
+				svgText,
 				() => {
-					label.textContent = 'Copied!';
-					setTimeout(() => { label.textContent = originalText; }, 1200);
+					label.textContent = 'SVG Copied!';
+					setTimeout(() => { label.textContent = originalText; }, 1400);
 				},
 				() => { label.textContent = originalText; }
 			);

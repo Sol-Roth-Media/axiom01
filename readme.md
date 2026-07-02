@@ -113,7 +113,7 @@ All values are CSS custom properties — change one to update everything:
 
 ## Components
 
-73 production-ready components:
+68 production-ready components:
 
 | Category | Components |
 |----------|-----------|
@@ -260,9 +260,9 @@ All values are CSS custom properties — change one to update everything:
 <table data-variant="striped">...</table>
 ```
 
-## Axicons — 3,969 SVG Icons
+## Axicons — 1,700+ SVG Icons
 
-Five variants: Base (450), Thin (760), Inverted (758), Color (1,351), Premium (650).
+The active distribution ships with two focused sets: Base (1,100+) and Premium (600+). Premium icons are reserved for richer color, accent, and brand treatments.
 
 ```html
 <!-- Load scripts -->
@@ -286,8 +286,8 @@ Five variants: Base (450), Thin (760), Inverted (758), Color (1,351), Premium (6
 
 ```html
 <!-- Set on html element -->
-<html data-theme="light">
-<html data-theme="dark">
+<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 ```
 
 ```js
@@ -385,10 +385,10 @@ All modern browsers — Chrome, Firefox, Safari, Edge (latest 2 versions).
 |--------|-------|
 | CSS bundle (gzipped) | **13.3 KB** |
 | JS bundle (gzipped) | **1.0 KB** |
-| Components | **73** |
+| Components | **68** |
 | Design tokens | **149** |
-| Icons (base) | **450** |
-| Icons (all variants) | **3,969** |
+| Icons (base) | **1,100+** |
+| Icons (active library) | **1,700+** |
 | Dependencies | **0** |
 
 ## Documentation
