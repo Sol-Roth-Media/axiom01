@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Card Filter - Axiom01</title>
+	<script>(function(){const t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();</script>
+	<link rel="stylesheet" href="../../css/axiom.css">
+	<link rel="stylesheet" href="../../css/axicons.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+</head>
+<body class="axiom-body">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="main" data-component="mobile-navbar">
+	<nav role="navigation" aria-label="Main Navigation">
+		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
+		<ul class="links">
+			<li><a href="../overview-quickstart.html">Get Started</a></li>
+			<li><a href="../components-overview.html" aria-current="page">Docs</a></li>
+			<li><a href="../../index.html#axicons">Axicons</a></li>
+		</ul>
+		<div class="actions">
+			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
+			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+		</div>
+	</nav>
+</header>
+
+<main id="main-content">
+	<section>
+		<div class="container">
+			<header>
+				<h1>Card Filter</h1>
+				<p>Searchable, category-aware card collections powered by semantic data attributes. Use it for component browsers, icon galleries, resource directories, and any grid where users need to narrow results quickly.</p>
+			</header>
+
+			<section>
+				<h2>Live Example</h2>
+				<p>This is the same filtering pattern used in the Axicons browser. Categories are generated from the cards automatically, while search matches card metadata and visible text.</p>
+				<article class="card">
+					<figure>
+						<section class="filter-toolbar" data-component="card-filter" data-filter-all-label="All patterns" aria-label="Component pattern filters">
+							<div class="filter-toolbar__row">
+								<label class="filter-toolbar__search" for="pattern-search">
+									<span class="sr-only">Search patterns</span>
+									<input type="search" id="pattern-search" data-filter-search placeholder="Search cards… e.g. docs, UI, accessibility" aria-label="Search patterns">
+								</label>
+								<p class="filter-toolbar__summary" data-filter-summary aria-live="polite"></p>
+							</div>
+
+							<nav class="filter-toolbar__categories" data-filter-category-nav aria-label="Filter categories"></nav>
+
+							<div class="grid tight" data-filter-items>
+								<article class="card card-filter__item" data-filter-item data-filter-category="development|docs" data-filter-search="component documentation code snippets implementation guidance examples">
+									<span class="axicon render" data-name="Code-Snippet"></span>
+									<h3>Implementation Notes</h3>
+									<p>Surface code-driven patterns, recipes, and component examples.</p>
+									<span class="badge outline">Development</span>
+								</article>
+								<article class="card card-filter__item" data-filter-item data-filter-category="accessibility|docs" data-filter-search="wcag focus keyboard contrast semantic accessibility guidance">
+									<span class="axicon render" data-name="Access"></span>
+									<h3>Accessibility Reviews</h3>
+									<p>Group guidance for focus, semantics, and keyboard support.</p>
+									<span class="badge outline">Accessibility</span>
+								</article>
+								<article class="card card-filter__item" data-filter-item data-filter-category="ui|catalog" data-filter-search="design system catalog components cards badges filters ui browsing">
+									<span class="axicon render" data-name="Layer-Stack"></span>
+									<h3>Component Catalog</h3>
+									<p>Let users browse grouped UI patterns without endless scrolling.</p>
+									<span class="badge outline">UI</span>
+								</article>
+								<article class="card card-filter__item" data-filter-item data-filter-category="release|catalog" data-filter-search="release package npm bundle distribution library package manager">
+									<span class="axicon render" data-name="Package"></span>
+									<h3>Release Assets</h3>
+									<p>Filter downloadable bundles, starter kits, and package references.</p>
+									<span class="badge outline">Release</span>
+								</article>
+								<article class="card card-filter__item" data-filter-item data-filter-category="media|gallery" data-filter-search="visual gallery highlights previews animated showcase sparkles">
+									<span class="axicon render" data-name="Sparkles"></span>
+									<h3>Showcase Highlights</h3>
+									<p>Keep featured examples visible while still letting users search deeply.</p>
+									<span class="badge outline">Media</span>
+								</article>
+								<article class="card card-filter__item" data-filter-item data-filter-category="delivery|release" data-filter-search="download bundle performance delivery optimization shipping gzip cloud">
+									<span class="axicon render" data-name="Cloud-Download"></span>
+									<h3>Delivery Metrics</h3>
+									<p>Highlight performance-focused content like bundle size and shipping paths.</p>
+									<span class="badge outline">Delivery</span>
+								</article>
+							</div>
+
+							<div class="alert info" data-filter-empty hidden>
+								<span class="axicon render" data-name="Search"></span>
+								<div>
+									<strong>No matching cards.</strong>
+									<p>Try a broader search term or switch back to the All filter.</p>
+								</div>
+							</div>
+						</section>
+					</figure>
+					<pre><code class="language-html">&lt;section class="filter-toolbar" data-component="card-filter"&gt;
+  &lt;div class="filter-toolbar__row"&gt;
+    &lt;label class="filter-toolbar__search" for="card-search"&gt;
+      &lt;span class="sr-only"&gt;Search cards&lt;/span&gt;
+      &lt;input id="card-search" type="search" data-filter-search&gt;
+    &lt;/label&gt;
+    &lt;p data-filter-summary aria-live="polite"&gt;&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;nav class="filter-toolbar__categories" data-filter-category-nav&gt;&lt;/nav&gt;
+
+  &lt;div class="grid" data-filter-items&gt;
+    &lt;article class="card" data-filter-item data-filter-category="docs|ui" data-filter-search="component docs"&gt;
+      ...
+    &lt;/article&gt;
+  &lt;/div&gt;
+
+  &lt;div class="alert info" data-filter-empty hidden&gt;No matching cards.&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+				</article>
+			</section>
+
+			<section>
+				<h2>How It Works</h2>
+				<table>
+					<thead>
+						<tr><th>Attribute</th><th>Purpose</th><th>Notes</th></tr>
+					</thead>
+					<tbody>
+						<tr><td><code>data-component="card-filter"</code></td><td>Initializes the component</td><td>Add it to the wrapper element around the search, category nav, and items.</td></tr>
+						<tr><td><code>data-filter-search</code></td><td>Search input</td><td>The component listens for input events and filters cards in real time.</td></tr>
+						<tr><td><code>data-filter-category-nav</code></td><td>Category chip container</td><td>Buttons are generated automatically from the categories found on your cards.</td></tr>
+						<tr><td><code>data-filter-items</code></td><td>Items container</td><td>Point this at the element that contains the filterable cards.</td></tr>
+						<tr><td><code>data-filter-item</code></td><td>Filterable card marker</td><td>Each matching card gets hidden with the native <code>hidden</code> attribute when it does not match.</td></tr>
+						<tr><td><code>data-filter-category</code></td><td>Category key(s)</td><td>Use pipe, comma, or whitespace-separated values like <code>docs|ui</code>.</td></tr>
+						<tr><td><code>data-filter-search</code> on cards</td><td>Search metadata</td><td>Include extra keywords so searches work even when the exact text is not visible in the card body.</td></tr>
+						<tr><td><code>data-filter-summary</code> / <code>data-filter-empty</code></td><td>Result messaging</td><td>Optional helpers for “Showing x of y” copy and empty states.</td></tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<h2>Best Practices</h2>
+				<ul>
+					<li>Keep category keys short and machine-friendly, such as <code>docs</code>, <code>ui</code>, or <code>accessibility</code>.</li>
+					<li>Use the card body for human-readable labels and <code>data-filter-search</code> for synonyms or related keywords.</li>
+					<li>Pair the component with Axiom cards so search results remain visually consistent across docs and galleries.</li>
+					<li>Provide a visible summary and empty state so users always understand why results changed.</li>
+					<li>For large dynamic datasets, append cards into the <code>data-filter-items</code> container and call <code>Axiom.init()</code> again if needed.</li>
+				</ul>
+			</section>
+		</div>
+	</section>
+</main>
+
+<footer class="main">
+  <div class="content">
+    <div class="brand">
+      <a href="../../index.html" class="logo">[Ax<span class="primary">01</span>]</a>
+      <p class="tagline">The Semantic Web, Reimagined.</p>
+    </div>
+    <div class="column">
+      <h4>Documentation</h4>
+      <ul>
+        <li><a href="../../docs/components-overview.html">All Components</a></li>
+        <li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+        <li><a href="../../docs/colors-advanced.html">Colors &amp; Tokens</a></li>
+      </ul>
+    </div>
+    <div class="column">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../docs/styling-guide.html">Styling Guide</a></li>
+        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+        <li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+      </ul>
+    </div>
+    <div class="column">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="content">
+    <div class="bottom">
+      <p class="copyright">&copy; <span data-current-year></span> Sol Roth Media. MIT License.</p>
+      <ul class="legal">
+        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub Repository"><span class="axicon render" data-name="GitHub"></span></a></li>
+        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM Package"><span class="axicon render" data-name="Package"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="../../js/axiom.js"></script>
+<script src="../../js/index-page-manager.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+<script src="../../js/axicons-base.js"></script>
+<script src="../../js/axicons-premium.js"></script>
+<script src="../../js/render-icons.js"></script>
+</body>
+</html>
+
+

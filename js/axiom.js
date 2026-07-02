@@ -8,6 +8,19 @@
 (function () {
   'use strict';
 
+  const axiomScriptUrl = (function () {
+    if (document.currentScript && document.currentScript.src) {
+      return new URL(document.currentScript.src, window.location.href);
+    }
+
+    const script = document.querySelector('script[src$="/js/axiom.js"], script[src$="js/axiom.js"]');
+    if (script && script.src) {
+      return new URL(script.src, window.location.href);
+    }
+
+    return null;
+  }());
+
   // ==========================================
   // GLOBAL AXIOM API NAMESPACE
   // ==========================================
@@ -22,6 +35,7 @@
     'audio-player': 'audio-player',
     autocomplete: 'autocomplete',
     'component-browser': 'component-browser',
+    'card-filter': 'card-filter',
     'data-list': 'data-list',
     dropdown: 'dropdown',
     editor: 'editor',
@@ -192,9 +206,7 @@
 
   resolveComponentPath: function (componentName) {
     const moduleName = this.componentPathOverrides[componentName] || componentName;
-    const scriptUrl = document.currentScript && document.currentScript.src
-    ? new URL(document.currentScript.src, window.location.href)
-    : new URL('js/axiom.js', window.location.href);
+    const scriptUrl = axiomScriptUrl || new URL('/js/axiom.js', window.location.href);
     return new URL(`./components/${moduleName}.js`, scriptUrl).href;
   },
 
@@ -204,7 +216,11 @@
     }
 
     if (this.componentInstances.has(element)) {
-    return this.componentInstances.get(element);
+    const existingInstance = this.componentInstances.get(element);
+    if (existingInstance && typeof existingInstance.refresh === 'function') {
+      existingInstance.refresh();
+    }
+    return existingInstance;
     }
 
     const instance = definition.init(element) || null;
@@ -627,6 +643,10 @@
         syncMenuState(header, false, menuButton);
       }
     });
+
+      window.Axiom.init().catch(function (error) {
+        console.error('Axiom: Failed to initialize runtime components.', error);
+      });
 
   });
 

@@ -7,9 +7,24 @@
 (function() {
     'use strict';
 
+    function isIconObject(icon) {
+        return Boolean(icon && typeof icon.name === 'string' && typeof icon.svgContent === 'string');
+    }
+
+    function flattenIconSets(iconSet) {
+        if (!Array.isArray(iconSet)) return [];
+        return iconSet.flatMap(entry => Array.isArray(entry) ? entry : [entry]).filter(isIconObject);
+    }
+
     function renderAllAxicons() {
         // Wait for axicons to be loaded
         if (typeof window.axicons === 'undefined' || !Array.isArray(window.axicons)) {
+            setTimeout(renderAllAxicons, 50);
+            return;
+        }
+
+        const icons = flattenIconSets(window.axicons);
+        if (!icons.length) {
             setTimeout(renderAllAxicons, 50);
             return;
         }
@@ -21,10 +36,8 @@
             const name = el.getAttribute('data-name');
             if (!name) return;
 
-            // Find the icon (case-insensitive)
-            const icon = window.axicons.find(i => 
-                i && i.name && i.name.toLowerCase() === name.toLowerCase()
-            );
+            // Prefer the most recently loaded icon set when names overlap.
+            const icon = [...icons].reverse().find(i => i.name.toLowerCase() === name.toLowerCase());
 
             if (!icon || !icon.svgContent) return;
 

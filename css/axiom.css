@@ -305,6 +305,8 @@
     input:invalid { box-shadow: none; }
 }
 
+[hidden] { display: none !important; }
+
 /* ============================================================================
    TYPOGRAPHY
    ============================================================================ */
@@ -711,8 +713,35 @@ nav.breadcrumb li:not(:last-child)::after { content: "/"; margin-left: var(--a-s
 /* --- Chips / Tags (Interactive) --- */
 .chip { display: inline-flex; align-items: center; gap: var(--a-space-xs); padding: 0.125rem 0.5rem; background-color: var(--a-color-primary-container); color: var(--a-color-on-primary-container); border-radius: 999px; font-size: var(--a-font-size-sm); border: 1px solid var(--a-color-primary); transition: all 0.2s ease; }
 .chip:hover { background-color: var(--a-color-primary); color: var(--a-color-on-primary); }
+.chip[aria-pressed="true"], .chip.is-active { background-color: var(--a-color-primary); color: var(--a-color-on-primary); border-color: var(--a-color-primary); }
 .chip-remove { background: none; border: none; cursor: pointer; color: inherit; font-size: 1.2rem; opacity: 0.7; padding: 0; display: flex; }
 .chip-remove:hover { opacity: 1; }
+
+/* --- Card Filter Toolbar --- */
+.filter-toolbar { display: grid; gap: var(--a-space-m); margin-bottom: var(--a-space-l); }
+.filter-toolbar__row { display: flex; flex-wrap: wrap; gap: var(--a-space-m); align-items: end; justify-content: space-between; }
+.filter-toolbar__search { flex: 1 1 24rem; min-width: min(100%, 24rem); }
+.filter-toolbar__summary { margin: 0; color: var(--a-color-on-surface-variant); font-size: var(--a-font-size-sm); }
+.filter-toolbar__categories { display: flex; flex-wrap: wrap; gap: var(--a-space-s); }
+.filter-toolbar__categories:empty { display: none; }
+.filter-toolbar__categories .chip:focus-visible { outline: 2px solid var(--a-color-primary); outline-offset: 2px; }
+@media (max-width: 768px) {
+  .filter-toolbar__row { align-items: stretch; }
+  .filter-toolbar__search { flex-basis: 100%; min-width: 0; }
+}
+
+/* --- Axicons Variant Switch --- */
+.variant-nav { display: flex; flex-wrap: wrap; gap: var(--a-space-s); margin: var(--a-space-m) 0; }
+.variant-nav button { min-width: 8rem; }
+.variant-nav button[aria-current="true"] { background-color: var(--a-color-primary); color: var(--a-color-on-primary); border-color: var(--a-color-primary); }
+
+/* --- Icon Filter Cards --- */
+.card-filter__item { align-items: center; text-align: center; gap: var(--a-space-m); }
+.card-filter__item .card-filter__copy { width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--a-space-m); background: transparent; border: none; color: inherit; padding: 0; font: inherit; cursor: pointer; box-shadow: none; }
+.card-filter__item .card-filter__copy:hover { transform: none; box-shadow: none; opacity: 1; }
+.card-filter__item .card-filter__copy .axicon { font-size: 3.5rem; }
+.card-filter__item code { width: 100%; font-family: var(--a-font-family-mono); font-size: var(--a-font-size-xs); word-break: break-all; }
+.card-filter__item .badge { margin: 0 auto; }
 
 /* --- Tooltips --- */
 .tooltip { position: relative; display: inline-block; cursor: help; }
