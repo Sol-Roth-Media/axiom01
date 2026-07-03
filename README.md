@@ -4,12 +4,12 @@ Semantic-first UI framework for teams that want clean HTML, accessible defaults,
 
 ## Why Axiom01
 
-- Semantic HTML first — components are styled by structure, not class soup
-- 79 production-ready components
-- 149 design tokens
-- Built-in dark mode and WCAG 2.1 AA-minded defaults
-- Zero runtime dependencies
-- Optional JavaScript enhancements instead of a required framework runtime
+- Pure Semantic HTML first — completely devoid of utility-class soup and BEM styling conventions.
+- 79 production-ready layout and UI components.
+- 149 design tokens (colors, spacing, shadows).
+- 3-Tier Icon System: Base (1,100+ standard), Premium (600+ contextual), and the all-new Luxe (324 ultra-detailed 3D illustrative icons).
+- Built-in dark mode and WCAG 2.1 AA-minded defaults.
+- Zero runtime dependencies, purely optional JavaScript enhancements.
 
 ```html
 <article class="card">
