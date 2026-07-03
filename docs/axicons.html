@@ -149,6 +149,10 @@ button {
 						<h3>Premium <span class="badge error" id="premium-count-badge">-</span></h3>
 						<p>Enhanced visual treatment for richer UI moments.</p>
 					</article>
+					<article class="card">
+						<h3>Luxe <span class="badge accent" id="luxe-count-badge">-</span></h3>
+						<p>Ultra-detailed 3D icons for special features.</p>
+					</article>
 				</div>
 			</section>
 
@@ -166,6 +170,7 @@ button {
 			<nav class="variant-nav" aria-label="Icon variants">
 				<button class="outline" data-variant="base" aria-current="true">Base</button>
 				<button class="outline" data-variant="premium" aria-current="false">Premium</button>
+				<button class="outline" data-variant="luxe" aria-current="false">Luxe</button>
 			</nav>
 
 								<section class="filter" data-component="card-filter" aria-label="Icon filters">
@@ -244,6 +249,8 @@ button {
 <script src="../js/index-page-manager.js"></script>
 <script src="../js/axicons-base.js"></script>
 <script src="../js/axicons-premium.js"></script>
+<script src="../js/axicons-premium-variants.js"></script>
+<script src="../js/axicons-luxe.js"></script>
 <script src="../js/render-icons.js"></script>
 <script>
 (function () {
@@ -253,16 +260,17 @@ button {
 	const variantBtns = document.querySelectorAll('.variant-nav button');
 	const baseCountBadge = document.getElementById('base-count-badge');
 	const premiumCountBadge = document.getElementById('premium-count-badge');
+	const luxeCountBadge = document.getElementById('luxe-count-badge');
 
 	let currentVariant = 'base';
-	let iconCatalog = { base: [], premium: [] };
+	let iconCatalog = { base: [], premium: [], luxe: [] };
 
 	function isIconObject(icon) {
 		return Boolean(icon && typeof icon.name === 'string' && typeof icon.svgContent === 'string');
 	}
 
 	function normalizeCatalog(rawIcons) {
-		const catalog = { base: [], premium: [] };
+		const catalog = { base: [], premium: [], luxe: [] };
 
 		if (!Array.isArray(rawIcons) || rawIcons.length === 0) return catalog;
 
@@ -275,8 +283,9 @@ button {
 		};
 
 		const flat = dedupeByName(rawIcons.flatMap(entry => Array.isArray(entry) ? entry : [entry]));
-		catalog.base = flat.filter(icon => !icon.name.includes('-Premium') && !icon.name.endsWith('Premium'));
+		catalog.base = flat.filter(icon => !icon.name.includes('-Premium') && !icon.name.endsWith('Premium') && !icon.name.includes('-Luxe') && !icon.name.endsWith('Luxe'));
 		catalog.premium = flat.filter(icon => icon.name.includes('-Premium') || icon.name.endsWith('Premium'));
+		catalog.luxe = flat.filter(icon => icon.name.includes('-Luxe') || icon.name.endsWith('Luxe'));
 		return catalog;
 	}
 
@@ -400,6 +409,7 @@ button {
 		});
 		baseCountBadge.textContent = String(iconCatalog.base.length);
 		premiumCountBadge.textContent = String(iconCatalog.premium.length);
+		if (luxeCountBadge) luxeCountBadge.textContent = String(iconCatalog.luxe.length);
 	}
 
 	function bootstrapComponents() {
@@ -411,7 +421,7 @@ button {
 	function init() {
 		if (typeof window.axicons !== 'undefined' && Array.isArray(window.axicons) && window.axicons.length) {
 			iconCatalog = normalizeCatalog(window.axicons);
-			if (!iconCatalog.base.length && !iconCatalog.premium.length) {
+			if (!iconCatalog.base.length && !iconCatalog.premium.length && !iconCatalog.luxe.length) {
 				setTimeout(init, 100);
 				return;
 			}

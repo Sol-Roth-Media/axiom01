@@ -865,7 +865,155 @@ const formattedLuxeIcons = Object.entries(rawLuxe).map(([key, svg], index) => {
         name: name,
         category: 'luxe',
         svgContent: svg.trim() // ensure it's a clean string
-    };
+    
+  ,
+  // 26. CLOCK (Time, History, Schedule, Watch)
+  clock: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="clRim" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="50%" stop-color="#0284C7" />
+          <stop offset="100%" stop-color="#0F172A" />
+        </linearGradient>
+        <linearGradient id="clFace" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#E2E8F0" />
+        </linearGradient>
+        <filter id="clDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.25"/>
+        </filter>
+        <filter id="clInner" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0284C7" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="url(#clRim)" filter="url(#clDrop)" />
+      <circle cx="60" cy="60" r="35" fill="url(#clFace)" filter="url(#clInner)" />
+      <path d="M60,28 L60,32 M60,88 L60,92 M28,60 L32,60 M88,60 L92,60" stroke="#0F172A" stroke-width="4" stroke-linecap="round" />
+      <path d="M42,42 L45,45 M78,42 L75,45 M42,78 L45,75 M78,78 L75,75" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" />
+      <line x1="60" y1="60" x2="60" y2="35" stroke="#0F172A" stroke-width="5" stroke-linecap="round" filter="url(#clDrop)" />
+      <line x1="60" y1="60" x2="75" y2="75" stroke="#475569" stroke-width="5" stroke-linecap="round" filter="url(#clDrop)" />
+      <line x1="60" y1="60" x2="45" y2="70" stroke="#EF4444" stroke-width="2" stroke-linecap="round" filter="url(#clDrop)" />
+      <circle cx="60" cy="60" r="4" fill="#EF4444" />
+      <circle cx="60" cy="60" r="2" fill="#FFFFFF" />
+      <path d="M35,45 C45,35 65,30 75,35" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.6" />
+    </svg>
+  `,
+
+  // 27. LIGHTNING (Energy, Fast, Flash, Power)
+  lightning: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="ltGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FEF08A" />
+          <stop offset="50%" stop-color="#F59E0B" />
+          <stop offset="100%" stop-color="#9A3412" />
+        </linearGradient>
+        <filter id="ltGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#F59E0B" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <polygon points="70,10 25,65 55,65 40,110 95,50 60,50" fill="url(#ltGold)" filter="url(#ltGlow)" stroke="#FCD34D" stroke-width="2" stroke-linejoin="round" />
+      <polygon points="70,10 25,65 55,65 40,110 95,50 60,50" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.6" />
+      <path d="M60,25 L38,60 L50,60 M80,60 L62,80 L70,70" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.8" />
+    </svg>
+  `,
+
+  // 28. GLOBE (World, Web, Languages, Network)
+  globe: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="glWater" cx="40%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="60%" stop-color="#2563EB" />
+          <stop offset="100%" stop-color="#1E3A8A" />
+        </radialGradient>
+        <linearGradient id="glLand" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#A3E635" />
+          <stop offset="50%" stop-color="#16A34A" />
+          <stop offset="100%" stop-color="#064E3B" />
+        </linearGradient>
+        <filter id="glDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#1E3A8A" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="url(#glWater)" filter="url(#glDrop)" />
+      <!-- Grid Lines -->
+      <path d="M15,60 C35,80 85,80 105,60" fill="none" stroke="#60A5FA" stroke-width="2" opacity="0.4" />
+      <path d="M15,60 C35,40 85,40 105,60" fill="none" stroke="#60A5FA" stroke-width="2" opacity="0.4" />
+      <path d="M60,15 C40,35 40,85 60,105" fill="none" stroke="#60A5FA" stroke-width="2" opacity="0.4" />
+      <path d="M60,15 C80,35 80,85 60,105" fill="none" stroke="#60A5FA" stroke-width="2" opacity="0.4" />
+      <line x1="15" y1="60" x2="105" y2="60" stroke="#60A5FA" stroke-width="2" opacity="0.3" />
+      <line x1="60" y1="15" x2="60" y2="105" stroke="#60A5FA" stroke-width="2" opacity="0.3" />
+      <!-- Landmasses -->
+      <path d="M40,25 C45,20 55,20 60,25 C65,30 65,40 55,45 C45,50 35,45 35,35 C35,30 38,28 40,25 Z" fill="url(#glLand)" opacity="0.9" />
+      <path d="M75,35 C85,35 90,45 85,55 C80,65 70,75 60,75 C50,75 55,65 65,55 C70,50 72,45 75,35 Z" fill="url(#glLand)" opacity="0.9" />
+      <path d="M45,65 C55,60 55,80 45,90 C35,100 25,85 30,75 C35,65 40,68 45,65 Z" fill="url(#glLand)" opacity="0.9" />
+      <path d="M30,35 C45,25 60,22 75,25" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.6" />
+    </svg>
+  `,
+
+  // 29. KEY (Security, Access, Unlock, Authentication)
+  key: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="kyGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="50%" stop-color="#D97706" />
+          <stop offset="100%" stop-color="#78350F" />
+        </linearGradient>
+        <filter id="kyDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="kyInner" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
+        </filter>
+      </defs>
+      <path d="M85,35 C95,25 110,35 105,45 L45,105 L35,95 L40,90 L30,80 L40,70 L30,60 L45,45 Z" fill="url(#kyGold)" filter="url(#kyDrop)" />
+      <circle cx="85" cy="35" r="22" fill="url(#kyGold)" filter="url(#kyDrop)" />
+      <circle cx="85" cy="35" r="10" fill="#1E293B" filter="url(#kyInner)" />
+      <path d="M72,25 C82,18 95,20 102,28" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.5" />
+      <line x1="45" y1="105" x2="35" y2="95" stroke="#FFFFFF" stroke-width="2" opacity="0.4" />
+      <line x1="40" y1="90" x2="30" y2="80" stroke="#FFFFFF" stroke-width="2" opacity="0.4" />
+    </svg>
+  `,
+
+  // 30. SUN (Light, Morning, Theme, Brightness)
+  sun: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="snCore" cx="40%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#FEF08A" />
+          <stop offset="70%" stop-color="#F59E0B" />
+          <stop offset="100%" stop-color="#B45309" />
+        </radialGradient>
+        <linearGradient id="snRay" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#D97706" />
+        </linearGradient>
+        <filter id="snGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#F59E0B" flood-opacity="0.8"/>
+        </filter>
+      </defs>
+      <!-- Rays -->
+      <g stroke="url(#snRay)" stroke-width="8" stroke-linecap="round" filter="url(#snGlow)">
+        <line x1="60" y1="15" x2="60" y2="25" />
+        <line x1="60" y1="95" x2="60" y2="105" />
+        <line x1="15" y1="60" x2="25" y2="60" />
+        <line x1="95" y1="60" x2="105" y2="60" />
+        <line x1="28" y1="28" x2="35" y2="35" />
+        <line x1="85" y1="85" x2="92" y2="92" />
+        <line x1="28" y1="92" x2="35" y2="85" />
+        <line x1="85" y1="28" x2="92" y2="35" />
+      </g>
+      <!-- Core -->
+      <circle cx="60" cy="60" r="28" fill="url(#snCore)" filter="url(#snGlow)" />
+      <!-- Highlight -->
+      <path d="M42,42 C50,34 65,34 72,42" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.6" />
+      <circle cx="48" cy="48" r="3" fill="#FFFFFF" opacity="0.8" />
+    </svg>
+  `
+};
 });
 
 if (!window.axicons) window.axicons = [];
