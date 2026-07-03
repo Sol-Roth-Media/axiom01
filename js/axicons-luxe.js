@@ -9,40 +9,33 @@
 
   Object.assign(window.AxiconsLuxe, {
 
-  // 1. ROCKET (Launch, Startup, Fast Performance)
+  // 1. ROCKET (Innovation, Launch, Speed, Deployment)
   rocket: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="rBody" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFFFF" />
-                  <stop offset="100%" stop-color="#94A3B8" />
-                </linearGradient>
-                <linearGradient id="rWindow" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#7DD3FC" />
-                  <stop offset="100%" stop-color="#0284C7" />
-                </linearGradient>
-                <linearGradient id="rFire" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#FCD34D" />
-                  <stop offset="50%" stop-color="#F97316" />
-                  <stop offset="100%" stop-color="#DC2626" />
-                </linearGradient>
-                <filter id="rGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#EA580C" flood-opacity="0.5"/>
-                </filter>
-              </defs>
-              <!-- Exhaust Flame -->
-              <path d="M45,85 C45,100 60,115 60,115 C60,115 75,100 75,85 Z" fill="url(#rFire)" filter="url(#rGlow)" />
-              <!-- Left Fin -->
-              <path d="M45,65 L25,85 L45,85 Z" fill="#EF4444" />
-              <!-- Right Fin -->
-              <path d="M75,65 L95,85 L75,85 Z" fill="#DC2626" />
-              <!-- Main Hull -->
-              <path d="M60,15 C35,45 45,85 45,85 L75,85 C75,85 85,45 60,15 Z" fill="url(#rBody)" />
-              <!-- Window -->
-              <circle cx="60" cy="50" r="10" fill="url(#rWindow)" stroke="#475569" stroke-width="3" />
-              <!-- Highlight -->
-              <path d="M55,25 C45,40 50,60 50,60" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.6" />
-            </svg>
+      <defs>
+        <linearGradient id="rkBody" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#E2E8F0" />
+        </linearGradient>
+        <linearGradient id="rkFlame" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FACC15" />
+          <stop offset="50%" stop-color="#F97316" />
+          <stop offset="100%" stop-color="#EF4444" />
+        </linearGradient>
+        <filter id="rkDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="rkGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#EF4444" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <path d="M60,10 L75,70 L60,85 L45,70 Z" fill="url(#rkBody)" filter="url(#rkDrop)" />
+      <path d="M45,70 L30,95 L45,85 Z" fill="#94A3B8" />
+      <path d="M75,70 L90,95 L75,85 Z" fill="#94A3B8" />
+      <path d="M50,85 L60,110 L70,85 C65,95 55,95 50,85 Z" fill="url(#rkFlame)" filter="url(#rkGlow)" />
+      <circle cx="60" cy="45" r="6" fill="#334155" />
+      <circle cx="60" cy="45" r="3" fill="#38BDF8" />
+    </svg>
   `,
 
   // 2. SHIELD (Security, Privacy, Trust)
@@ -105,73 +98,55 @@
             </svg>
   `,
 
-  // 4. PLANET (Global, Network, Open Source)
+  // 4. PLANET (Space, Universe, Global, Discovery)
   planet: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="pSphere" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#C084FC" />
-                  <stop offset="100%" stop-color="#6B21A8" />
-                </linearGradient>
-                <linearGradient id="pRing" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#F472B6" />
-                  <stop offset="100%" stop-color="#38BDF8" />
-                </linearGradient>
-                <filter id="pGlow" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#C084FC" flood-opacity="0.6"/>
-                </filter>
-              </defs>
-              <!-- Back of Ring -->
-              <ellipse cx="60" cy="60" rx="55" ry="15" fill="none" stroke="url(#pRing)" stroke-width="8" opacity="0.4" transform="rotate(-20 60 60)" />
-              <!-- Planet Sphere -->
-              <circle cx="60" cy="60" r="35" fill="url(#pSphere)" filter="url(#pGlow)" />
-              <!-- Craters -->
-              <circle cx="45" cy="50" r="6" fill="#4C1D95" opacity="0.4" />
-              <circle cx="70" cy="70" r="4" fill="#4C1D95" opacity="0.4" />
-              <circle cx="75" cy="45" r="8" fill="#4C1D95" opacity="0.4" />
-              <!-- Front of Ring -->
-              <path d="M 8 50 A 55 15 0 0 0 112 88" fill="none" stroke="url(#pRing)" stroke-width="8" stroke-linecap="round" transform="rotate(-20 60 60)" filter="url(#pGlow)" />
-              <!-- Gloss Highlight -->
-              <path d="M40,35 C50,25 65,25 75,35" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.5" />
-            </svg>
+      <defs>
+        <radialGradient id="plGrad" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#C084FC" />
+          <stop offset="100%" stop-color="#6B21A8" />
+        </radialGradient>
+        <linearGradient id="plRing" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="plDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <ellipse cx="60" cy="60" rx="55" ry="15" fill="none" stroke="url(#plRing)" stroke-width="8" transform="rotate(-20 60 60)" filter="url(#plDrop)" />
+      <circle cx="60" cy="60" r="35" fill="url(#plGrad)" filter="url(#plDrop)" />
+      <path d="M25,50 A35,35 0 0,0 95,70" fill="none" stroke="url(#plRing)" stroke-width="8" transform="rotate(-20 60 60)" />
+      <circle cx="50" cy="45" r="5" fill="#D8B4FE" opacity="0.6" />
+      <circle cx="70" cy="65" r="8" fill="#D8B4FE" opacity="0.4" />
+    </svg>
   `,
 
-  // 5. DIAMOND (Premium, Gem, Quality, Rich, Jewelry)
+  // 5. DIAMOND (Premium, Gem, Quality, VIP)
   diamond: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
-        <linearGradient id="dmBase" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="100%" stop-color="#0284C7" />
+        <linearGradient id="dmCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#67E8F9" />
+          <stop offset="100%" stop-color="#0891B2" />
         </linearGradient>
-        <linearGradient id="dmLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#7DD3FC" />
-          <stop offset="100%" stop-color="#0369A1" />
+        <linearGradient id="dmDark" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#06B6D4" />
+          <stop offset="100%" stop-color="#164E63" />
         </linearGradient>
-        <linearGradient id="dmRight" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E0F2FE" />
-          <stop offset="100%" stop-color="#0EA5E9" />
-        </linearGradient>
-        <filter id="dmDrop" x="-15%" y="-15%" width="130%" height="130%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0369A1" flood-opacity="0.4"/>
+        <filter id="dmDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
         <filter id="dmGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#7DD3FC" flood-opacity="0.7"/>
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#67E8F9" flood-opacity="0.6"/>
         </filter>
       </defs>
-      <g filter="url(#dmDrop)">
-        <polygon points="60,105 20,45 100,45" fill="url(#dmBase)" />
-        <polygon points="60,105 20,45 60,45" fill="url(#dmLeft)" />
-        <polygon points="20,45 40,20 80,20 100,45" fill="url(#dmBase)" filter="url(#dmGlow)" />
-        <polygon points="20,45 40,20 60,45" fill="url(#dmLeft)" />
-        <polygon points="60,45 80,20 100,45" fill="url(#dmRight)" />
-        <polygon points="40,20 80,20 60,45" fill="#F0F9FF" opacity="0.8" />
-        <!-- Facet lines -->
-        <line x1="20" y1="45" x2="100" y2="45" stroke="#FFFFFF" stroke-width="2" opacity="0.6" />
-        <line x1="60" y1="45" x2="60" y2="105" stroke="#FFFFFF" stroke-width="2" opacity="0.6" />
-        <line x1="40" y1="20" x2="60" y2="45" stroke="#FFFFFF" stroke-width="2" opacity="0.6" />
-        <line x1="80" y1="20" x2="60" y2="45" stroke="#FFFFFF" stroke-width="2" opacity="0.6" />
-      </g>
+      <polygon points="60,100 20,45 40,20 80,20 100,45" fill="url(#dmDark)" filter="url(#dmDrop)" />
+      <polygon points="60,100 20,45 60,45" fill="url(#dmCyan)" filter="url(#dmGlow)" />
+      <polygon points="60,100 100,45 60,45" fill="#0891B2" />
+      <polygon points="20,45 40,20 60,45" fill="#22D3EE" />
+      <polygon points="100,45 80,20 60,45" fill="#0E7490" />
+      <polygon points="40,20 80,20 60,45" fill="#CFFAFE" />
     </svg>
   `,
 
@@ -203,102 +178,72 @@
             </svg>
   `,
 
-  // 7. HEART (Social Media, Like, Love, Favorite)
+  // 7. HEART (Health, Love, Favorite, Life)
   heart: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
         <linearGradient id="htRed" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FCA5A5" />
-          <stop offset="50%" stop-color="#EF4444" />
+          <stop offset="0%" stop-color="#F87171" />
           <stop offset="100%" stop-color="#991B1B" />
         </linearGradient>
-        <filter id="htDrop" x="-15%" y="-15%" width="130%" height="130%">
-          <feDropShadow dx="0" dy="10" stdDeviation="6" flood-color="#7F1D1D" flood-opacity="0.5" />
+        <filter id="htDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
-        <filter id="htInner" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.3" />
+        <filter id="htGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#EF4444" flood-opacity="0.6"/>
         </filter>
       </defs>
-      <path d="M60,105 C60,105 15,70 15,35 C15,15 40,10 60,35 C80,10 105,15 105,35 C105,70 60,105 60,105 Z" fill="url(#htRed)" filter="url(#htDrop)" />
-      <!-- Volumetric 3D highlight -->
-      <path d="M25,35 C25,25 35,22 45,28 C35,28 30,35 25,45 Z" fill="#FFFFFF" opacity="0.6" filter="blur(1px)" />
+      <path d="M60,100 C60,100 15,65 15,35 C15,20 30,10 45,15 C52,18 60,30 60,30 C60,30 68,18 75,15 C90,10 105,20 105,35 C105,65 60,100 60,100 Z" fill="url(#htRed)" filter="url(#htGlow)" />
+      <path d="M30,30 A10,10 0 0,1 45,25" fill="none" stroke="#FCA5A5" stroke-width="4" stroke-linecap="round" />
     </svg>
   `,
 
-  // 8. WALLET (Billing, Checkout, Account Balance, Finance)
+  // 8. WALLET (Finance, Payment, Money, Cards)
   wallet: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="wLeather" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#1E293B" />
-                  <stop offset="100%" stop-color="#0F172A" />
-                </linearGradient>
-                <linearGradient id="wFlap" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#334155" />
-                  <stop offset="100%" stop-color="#1E293B" />
-                </linearGradient>
-                <linearGradient id="wCard" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#F472B6" />
-                  <stop offset="100%" stop-color="#BE185D" />
-                </linearGradient>
-                <filter id="wDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
-                </filter>
-              </defs>
-              <!-- Peeking Credit Card -->
-              <rect x="35" y="20" width="50" height="30" rx="6" fill="url(#wCard)" transform="rotate(-5 60 35)" filter="url(#wDrop)" />
-              <rect x="42" y="24" width="10" height="8" rx="1" fill="#FDE047" transform="rotate(-5 60 35)" opacity="0.8" />
-              <!-- Main Wallet Body -->
-              <rect x="15" y="38" width="90" height="66" rx="12" fill="url(#wLeather)" filter="url(#wDrop)" />
-              <!-- Inner Fold Accent Line -->
-              <path d="M15,48 L105,48" stroke="#334155" stroke-width="2" />
-              <!-- Locking Flap -->
-              <path d="M70,55 L105,55 C108,55 110,57 110,60 L110,78 C110,81 108,83 105,83 L70,83 C64,83 60,78 60,69 C60,60 64,55 70,55 Z" fill="url(#wFlap)" filter="url(#wDrop)" />
-              <!-- Metallic Badge / Snap Button -->
-              <circle cx="72" cy="69" r="5" fill="#E2E8F0" />
-              <circle cx="72" cy="69" r="2.5" fill="#94A3B8" />
-              <!-- Decorative Stitching Effect -->
-              <rect x="19" y="42" width="82" height="58" rx="9" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" />
-            </svg>
+      <defs>
+        <linearGradient id="waLeather" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#A16207" />
+          <stop offset="100%" stop-color="#422006" />
+        </linearGradient>
+        <linearGradient id="waCard" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#60A5FA" />
+          <stop offset="100%" stop-color="#1D4ED8" />
+        </linearGradient>
+        <filter id="waDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <rect x="25" y="30" width="70" height="40" rx="4" fill="url(#waCard)" filter="url(#waDrop)" transform="rotate(-10 60 50)" />
+      <path d="M20,50 L100,50 L100,90 C100,95 95,100 90,100 L30,100 C25,100 20,95 20,90 Z" fill="url(#waLeather)" filter="url(#waDrop)" />
+      <path d="M20,50 L100,50 C100,45 95,40 90,40 L30,40 C25,40 20,45 20,50 Z" fill="#713F12" />
+      <path d="M75,65 L100,65 L100,80 L75,80 Z" fill="#422006" />
+      <circle cx="85" cy="72" r="4" fill="#FDE047" />
+    </svg>
   `,
 
-  // 9. TROPHY (Gamification, Rewards, Achievement, Milestones)
+  // 9. TROPHY (Winner, Achievement, Reward, Champion)
   trophy: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="tGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FEF08A" />
-                  <stop offset="30%" stop-color="#FDE047" />
-                  <stop offset="70%" stop-color="#EAB308" />
-                  <stop offset="100%" stop-color="#CA8A04" />
-                </linearGradient>
-                <linearGradient id="tBase" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#475569" />
-                  <stop offset="50%" stop-color="#64748B" />
-                  <stop offset="100%" stop-color="#334155" />
-                </linearGradient>
-                <filter id="tGlow" x="-15%" y="-15%" width="130%" height="130%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#EAB308" flood-opacity="0.35"/>
-                </filter>
-              </defs>
-              <!-- Left Handle -->
-              <path d="M35,35 C15,35 15,60 35,65 L35,55 C25,52 25,43 35,42 Z" fill="url(#tGold)" filter="url(#tGlow)" />
-              <!-- Right Handle -->
-              <path d="M85,35 C105,35 105,60 85,65 L85,55 C95,52 95,43 85,42 Z" fill="url(#tGold)" filter="url(#tGlow)" />
-              <!-- Main Cup Body -->
-              <path d="M35,20 L85,20 C85,20 90,55 80,70 C70,82 60,85 60,85 C60,85 50,82 40,70 C30,55 35,20 35,20 Z" fill="url(#tGold)" filter="url(#tGlow)" />
-              <!-- Cup Stem -->
-              <path d="M52,82 L68,82 L64,100 L56,100 Z" fill="url(#tGold)" />
-              <!-- Heavy Pedestal Base -->
-              <rect x="40" y="98" width="40" height="10" rx="3" fill="url(#tBase)" />
-              <rect x="36" y="106" width="48" height="6" rx="2" fill="#1E293B" />
-              <!-- High-Gloss Rim Highlight -->
-              <ellipse cx="60" cy="21" rx="24" ry="3" fill="#FFFFFF" opacity="0.5" />
-              <!-- Interior Cup Depth Shadow -->
-              <ellipse cx="60" cy="22" rx="22" ry="2" fill="#A16207" opacity="0.6" />
-              <!-- Star Sparkle Accent -->
-              <path d="M82,30 L85,22 L88,30 L96,33 L88,36 L85,44 L82,36 L74,33 Z" fill="#FFFFFF" />
-            </svg>
+      <defs>
+        <linearGradient id="trGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="trDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="trGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#FDE047" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <path d="M35,20 L85,20 L80,60 C75,80 45,80 40,60 Z" fill="url(#trGold)" filter="url(#trGlow)" />
+      <path d="M35,30 A15,15 0 0,0 35,60" fill="none" stroke="url(#trGold)" stroke-width="6" stroke-linecap="round" filter="url(#trDrop)" />
+      <path d="M85,30 A15,15 0 0,1 85,60" fill="none" stroke="url(#trGold)" stroke-width="6" stroke-linecap="round" filter="url(#trDrop)" />
+      <rect x="55" y="70" width="10" height="25" fill="#B45309" />
+      <rect x="40" y="95" width="40" height="15" rx="2" fill="#1E293B" filter="url(#trDrop)" />
+      <ellipse cx="60" cy="20" rx="25" ry="5" fill="#FEF08A" />
+    </svg>
   `,
 
   // 10. BELL (Notifications, Alerts, Dynamic Updates)
@@ -420,34 +365,20 @@
     </svg>
   `,
 
-  // 17. STAR (Favorites, Ratings, Premium, Featured)
+  // 17. STAR (Favorite, Priority, Milestone, Quality)
   star: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="stGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FEF08A" />
-                  <stop offset="40%" stop-color="#FACC15" />
-                  <stop offset="80%" stop-color="#CA8A04" />
-                  <stop offset="100%" stop-color="#854D0E" />
-                </linearGradient>
-                <linearGradient id="stLight" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8" />
-                  <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
-                </linearGradient>
-                <filter id="stGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#CA8A04" flood-opacity="0.4"/>
-                </filter>
-              </defs>
-              <path d="M60,10 L75,45 L112,45 L82,67 L94,102 L60,80 L26,102 L38,67 L8,45 L45,45 Z" fill="url(#stGold)" filter="url(#stGlow)" stroke="#CA8A04" stroke-width="1" stroke-linejoin="round" />
-              <path d="M60,10 L75,45 L60,55 Z" fill="#FFFFFF" opacity="0.4" />
-              <path d="M112,45 L82,67 L60,55 Z" fill="#FFFFFF" opacity="0.3" />
-              <path d="M60,80 L26,102 L60,55 Z" fill="#FFFFFF" opacity="0.1" />
-              <path d="M8,45 L45,45 L60,55 Z" fill="#FFFFFF" opacity="0.5" />
-              <line x1="60" y1="10" x2="60" y2="55" stroke="#FFFFFF" stroke-width="2" opacity="0.6" stroke-linecap="round" />
-              <line x1="112" y1="45" x2="60" y2="55" stroke="#FFFFFF" stroke-width="2" opacity="0.4" stroke-linecap="round" />
-              <line x1="8" y1="45" x2="60" y2="55" stroke="#FFFFFF" stroke-width="2" opacity="0.7" stroke-linecap="round" />
-              <circle cx="60" cy="55" r="4" fill="#FFFFFF" opacity="0.9" />
-            </svg>
+      <defs>
+        <linearGradient id="stGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="stDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M60,10 L75,45 L110,45 L82,65 L95,100 L60,80 L25,100 L38,65 L10,45 L45,45 Z" fill="url(#stGrad)" filter="url(#stDrop)" />
+    </svg>
   `,
 
   // 18. CHAT / BUBBLES (Messages, AI Chat, Communication, Support)
@@ -517,45 +448,27 @@
     </svg>
   `,
 
-  // 20. MAIL / ENVELOPE (Email, Contact, Newsletter, Invites)
+  // 20. MAIL (Email, Envelope, Letter, Send)
   mail: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="mlBack" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#E2E8F0" />
-                  <stop offset="100%" stop-color="#94A3B8" />
-                </linearGradient>
-                <linearGradient id="mlFront" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFFFF" />
-                  <stop offset="100%" stop-color="#F1F5F9" />
-                </linearGradient>
-                <linearGradient id="mlFlap" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stop-color="#FFFFFF" />
-                  <stop offset="100%" stop-color="#E2E8F0" />
-                </linearGradient>
-                <linearGradient id="mlWax" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#EF4444" />
-                  <stop offset="100%" stop-color="#991B1B" />
-                </linearGradient>
-                <filter id="mlDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.2"/>
-                </filter>
-                <filter id="mlShadowInner" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.15"/>
-                </filter>
-              </defs>
-              <rect x="10" y="30" width="100" height="65" rx="4" fill="url(#mlBack)" filter="url(#mlDrop)" />
-              <rect x="18" y="15" width="84" height="40" rx="2" fill="#FFFFFF" />
-              <line x1="28" y1="25" x2="60" y2="25" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" />
-              <line x1="28" y1="35" x2="92" y2="35" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" />
-              <path d="M10,95 L60,65 L110,95 Z" fill="url(#mlFront)" />
-              <path d="M10,30 L60,65 L10,95 Z" fill="url(#mlFront)" filter="url(#mlShadowInner)" />
-              <path d="M110,30 L60,65 L110,95 Z" fill="url(#mlFront)" filter="url(#mlShadowInner)" />
-              <path d="M10,30 L60,65 L110,30 C105,25 15,25 10,30 Z" fill="url(#mlFlap)" filter="url(#mlShadowInner)" />
-              <circle cx="60" cy="63" r="10" fill="url(#mlWax)" filter="url(#mlDrop)" />
-              <circle cx="60" cy="63" r="6" fill="none" stroke="#7F1D1D" stroke-width="1.5" />
-              <path d="M57,60 L63,66 M63,60 L57,66" stroke="#7F1D1D" stroke-width="2" stroke-linecap="round" />
-            </svg>
+      <defs>
+        <linearGradient id="mlEnv" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#E2E8F0" />
+        </linearGradient>
+        <linearGradient id="mlFlap" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F1F5F9" />
+          <stop offset="100%" stop-color="#CBD5E1" />
+        </linearGradient>
+        <filter id="mlDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="15" y="35" width="90" height="60" rx="4" fill="url(#mlEnv)" filter="url(#mlDrop)" />
+      <path d="M15,35 L60,65 L105,35 Z" fill="url(#mlFlap)" filter="url(#mlDrop)" />
+      <path d="M15,95 L45,70 M105,95 L75,70" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round" />
+      <circle cx="60" cy="65" r="8" fill="#EF4444" />
+    </svg>
   `,
 
   // 21. COMPASS (Navigation, Direction, Explore, Guidance)
@@ -704,79 +617,50 @@
     </svg>
   `,
 
-  // 25. GIFT (Rewards, Entertainment, Bonuses, Promotions)
+  // 25. GIFT (Present, Reward, Bonus, Celebration)
   gift: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="gfBox" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FDE047" />
-                  <stop offset="50%" stop-color="#EAB308" />
-                  <stop offset="100%" stop-color="#A16207" />
-                </linearGradient>
-                <linearGradient id="gfRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FCA5A5" />
-                  <stop offset="50%" stop-color="#EF4444" />
-                  <stop offset="100%" stop-color="#7F1D1D" />
-                </linearGradient>
-                <filter id="gfDrop" x="-10%" y="-10%" width="125%" height="125%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
-                </filter>
-                <filter id="gfInnerShadow" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.4"/>
-                </filter>
-              </defs>
-              <!-- Base Box -->
-              <rect x="25" y="55" width="70" height="50" rx="4" fill="url(#gfBox)" filter="url(#gfDrop)" />
-              <!-- Vertical Ribbon -->
-              <rect x="52" y="55" width="16" height="50" fill="url(#gfRibbon)" />
-              <!-- Lid Structure -->
-              <rect x="20" y="40" width="80" height="15" rx="3" fill="url(#gfBox)" filter="url(#gfInnerShadow)" />
-              <path d="M22,42 L98,42" stroke="#FEF08A" stroke-width="2" stroke-linecap="round" opacity="0.7" />
-              <!-- Lid Ribbon -->
-              <rect x="52" y="40" width="16" height="15" fill="url(#gfRibbon)" />
-              <!-- Intricate Bow -->
-              <path d="M60,40 C50,20 25,20 35,35 C40,42 55,40 60,40 Z" fill="url(#gfRibbon)" filter="url(#gfInnerShadow)" />
-              <path d="M60,40 C70,20 95,20 85,35 C80,42 65,40 60,40 Z" fill="url(#gfRibbon)" filter="url(#gfInnerShadow)" />
-              <!-- Bow Highlights -->
-              <path d="M40,28 C35,28 32,32 35,35" fill="none" stroke="#FCA5A5" stroke-width="2" stroke-linecap="round" />
-              <path d="M80,28 C85,28 88,32 85,35" fill="none" stroke="#FCA5A5" stroke-width="2" stroke-linecap="round" />
-              <!-- Center Knot -->
-              <circle cx="60" cy="38" r="6" fill="url(#gfRibbon)" filter="url(#gfInnerShadow)" />
-              <circle cx="59" cy="37" r="2" fill="#FCA5A5" opacity="0.6" />
-            </svg>
+      <defs>
+        <linearGradient id="gfBox" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8B5CF6" />
+          <stop offset="100%" stop-color="#4C1D95" />
+        </linearGradient>
+        <linearGradient id="gfRibbon" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FCD34D" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="gfDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="25" y="45" width="70" height="60" rx="4" fill="url(#gfBox)" filter="url(#gfDrop)" />
+      <rect x="20" y="35" width="80" height="15" rx="2" fill="url(#gfBox)" filter="url(#gfDrop)" />
+      <rect x="52" y="35" width="16" height="70" fill="url(#gfRibbon)" />
+      <!-- Bow -->
+      <path d="M60,35 C40,10 20,30 45,35" fill="none" stroke="url(#gfRibbon)" stroke-width="8" stroke-linecap="round" />
+      <path d="M60,35 C80,10 100,30 75,35" fill="none" stroke="url(#gfRibbon)" stroke-width="8" stroke-linecap="round" />
+      <circle cx="60" cy="35" r="5" fill="#F59E0B" />
+    </svg>
   `,
 
-  // 26. CLOCK (Time, History, Schedule, Watch)
+  // 26. CLOCK (Time, Schedule, Performance, Deadlines)
   clock: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="clRim" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#38BDF8" />
-                  <stop offset="50%" stop-color="#0284C7" />
-                  <stop offset="100%" stop-color="#0F172A" />
-                </linearGradient>
-                <linearGradient id="clFace" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFFFF" />
-                  <stop offset="100%" stop-color="#E2E8F0" />
-                </linearGradient>
-                <filter id="clDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.25"/>
-                </filter>
-                <filter id="clInner" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0284C7" flood-opacity="0.4"/>
-                </filter>
-              </defs>
-              <circle cx="60" cy="60" r="45" fill="url(#clRim)" filter="url(#clDrop)" />
-              <circle cx="60" cy="60" r="35" fill="url(#clFace)" filter="url(#clInner)" />
-              <path d="M60,28 L60,32 M60,88 L60,92 M28,60 L32,60 M88,60 L92,60" stroke="#0F172A" stroke-width="4" stroke-linecap="round" />
-              <path d="M42,42 L45,45 M78,42 L75,45 M42,78 L45,75 M78,78 L75,75" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" />
-              <line x1="60" y1="60" x2="60" y2="35" stroke="#0F172A" stroke-width="5" stroke-linecap="round" filter="url(#clDrop)" />
-              <line x1="60" y1="60" x2="75" y2="75" stroke="#475569" stroke-width="5" stroke-linecap="round" filter="url(#clDrop)" />
-              <line x1="60" y1="60" x2="45" y2="70" stroke="#EF4444" stroke-width="2" stroke-linecap="round" filter="url(#clDrop)" />
-              <circle cx="60" cy="60" r="4" fill="#EF4444" />
-              <circle cx="60" cy="60" r="2" fill="#FFFFFF" />
-              <path d="M35,45 C45,35 65,30 75,35" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.6" />
-            </svg>
+      <defs>
+        <linearGradient id="clRim" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="clDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="none" stroke="url(#clRim)" stroke-width="8" filter="url(#clDrop)" />
+      <circle cx="60" cy="60" r="38" fill="#FFFFFF" />
+      <line x1="60" y1="60" x2="60" y2="30" stroke="#1E293B" stroke-width="6" stroke-linecap="round" />
+      <line x1="60" y1="60" x2="85" y2="60" stroke="#1E293B" stroke-width="6" stroke-linecap="round" />
+      <circle cx="60" cy="60" r="4" fill="#B45309" />
+    </svg>
   `,
 
   // 27. LIGHTNING / BOLT (Energy, Action, Speed, Power)
@@ -843,195 +727,121 @@
     </svg>
   `,
 
-  // 29. KEY (Access, Authentication, Security, Passwords)
+  // 29. KEY (Access, Security, Credentials, Authentication)
   key: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="kyGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FEF08A" />
-                  <stop offset="40%" stop-color="#FACC15" />
-                  <stop offset="75%" stop-color="#EAB308" />
-                  <stop offset="100%" stop-color="#854D0E" />
-                </linearGradient>
-                <linearGradient id="kyHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8" />
-                  <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
-                </linearGradient>
-                <filter id="kyDrop" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#854D0E" flood-opacity="0.35"/>
-                </filter>
-              </defs>
-              <g transform="rotate(-45 60 60)" filter="url(#kyDrop)">
-                <rect x="52" y="45" width="45" height="12" rx="2" fill="url(#kyGold)" />
-                <path d="M82,57 L82,72 L88,72 L88,57 Z M91,57 L91,68 L97,68 L97,57 Z" fill="url(#kyGold)" />
-                <circle cx="35" cy="51" r="22" fill="url(#kyGold)" />
-                <circle cx="35" cy="51" r="10" fill="#1e293b" /> 
-                <circle cx="35" cy="43" r="3" fill="#1e293b" />
-                <circle cx="28" cy="55" r="3" fill="#1e293b" />
-                <circle cx="42" cy="55" r="3" fill="#1e293b" />
-                <path d="M15,51 C15,35 30,29 45,40 L95,46" fill="none" stroke="url(#kyHighlight)" stroke-width="1.5" opacity="0.6" />
-              </g>
-            </svg>
+      <defs>
+        <linearGradient id="kyBody" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E2E8F0" />
+          <stop offset="100%" stop-color="#64748B" />
+        </linearGradient>
+        <filter id="kyDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="35" cy="35" r="25" fill="none" stroke="url(#kyBody)" stroke-width="12" filter="url(#kyDrop)" />
+      <path d="M55,35 L100,35 L100,45 L80,45 L80,65 L70,65 L70,45 L55,45 Z" fill="url(#kyBody)" filter="url(#kyDrop)" />
+    </svg>
   `,
 
-  // 30. SUN (Light, Morning, Theme, Brightness)
+  // 30. SUN (Weather, Morning, Brightness, Light)
   sun: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <radialGradient id="snCore" cx="40%" cy="40%" r="60%">
-                  <stop offset="0%" stop-color="#FEF08A" />
-                  <stop offset="70%" stop-color="#F59E0B" />
-                  <stop offset="100%" stop-color="#B45309" />
-                </radialGradient>
-                <linearGradient id="snRay" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FDE047" />
-                  <stop offset="100%" stop-color="#D97706" />
-                </linearGradient>
-                <filter id="snGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#F59E0B" flood-opacity="0.8"/>
-                </filter>
-              </defs>
-              <!-- Rays -->
-              <g stroke="url(#snRay)" stroke-width="8" stroke-linecap="round" filter="url(#snGlow)">
-                <line x1="60" y1="15" x2="60" y2="25" />
-                <line x1="60" y1="95" x2="60" y2="105" />
-                <line x1="15" y1="60" x2="25" y2="60" />
-                <line x1="95" y1="60" x2="105" y2="60" />
-                <line x1="28" y1="28" x2="35" y2="35" />
-                <line x1="85" y1="85" x2="92" y2="92" />
-                <line x1="28" y1="92" x2="35" y2="85" />
-                <line x1="85" y1="28" x2="92" y2="35" />
-              </g>
-              <!-- Core -->
-              <circle cx="60" cy="60" r="28" fill="url(#snCore)" filter="url(#snGlow)" />
-              <!-- Highlight -->
-              <path d="M42,42 C50,34 65,34 72,42" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.6" />
-              <circle cx="48" cy="48" r="3" fill="#FFFFFF" opacity="0.8" />
-            </svg>
+      <defs>
+        <radialGradient id="snCore" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FEF08A" />
+          <stop offset="100%" stop-color="#F59E0B" />
+        </radialGradient>
+        <filter id="snGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#F59E0B" flood-opacity="0.8"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="25" fill="url(#snCore)" filter="url(#snGlow)" />
+      <line x1="60" y1="10" x2="60" y2="25" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" filter="url(#snGlow)" />
+      <line x1="60" y1="95" x2="60" y2="110" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" filter="url(#snGlow)" />
+      <line x1="10" y1="60" x2="25" y2="60" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" filter="url(#snGlow)" />
+      <line x1="95" y1="60" x2="110" y2="60" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" filter="url(#snGlow)" />
+      <line x1="25" y1="25" x2="35" y2="35" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" filter="url(#snGlow)" />
+      <line x1="85" y1="85" x2="95" y2="95" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" filter="url(#snGlow)" />
+      <line x1="25" y1="95" x2="35" y2="85" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" filter="url(#snGlow)" />
+      <line x1="85" y1="35" x2="95" y2="25" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" filter="url(#snGlow)" />
+    </svg>
   `,
 
-  // 31. LAPTOP (Desktop, Software, Workstation, Programming)
+  // 31. LAPTOP (Computer, Device, Code, Work)
   laptop: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
-        <linearGradient id="lpSilver" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#F8FAFC" />
-          <stop offset="50%" stop-color="#CBD5E1" />
-          <stop offset="100%" stop-color="#94A3B8" />
+        <linearGradient id="lpScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#1E293B" />
+          <stop offset="100%" stop-color="#020617" />
         </linearGradient>
-        <linearGradient id="lpScreen" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#0284C7" />
-          <stop offset="100%" stop-color="#1E3A8A" />
+        <linearGradient id="lpBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#CBD5E1" />
+          <stop offset="100%" stop-color="#64748B" />
         </linearGradient>
         <filter id="lpDrop" x="-10%" y="-10%" width="120%" height="120%">
           <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
-        <filter id="lpScreenGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#38BDF8" flood-opacity="0.6"/>
-        </filter>
       </defs>
-      <rect x="15" y="20" width="90" height="60" rx="4" fill="#64748B" filter="url(#lpDrop)" />
-      <rect x="18" y="23" width="84" height="54" rx="2" fill="url(#lpScreen)" />
-      <rect x="25" y="30" width="40" height="30" rx="2" fill="#0F172A" filter="url(#lpScreenGlow)" />
-      <line x1="28" y1="35" x2="45" y2="35" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
-      <line x1="28" y1="42" x2="60" y2="42" stroke="#34D399" stroke-width="2" stroke-linecap="round" />
-      <line x1="28" y1="49" x2="50" y2="49" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" />
-      <rect x="70" y="35" width="25" height="40" rx="2" fill="#FFFFFF" opacity="0.9" />
-      <rect x="74" y="55" width="4" height="15" fill="#8B5CF6" />
-      <rect x="80" y="48" width="4" height="22" fill="#3B82F6" />
-      <rect x="86" y="40" width="4" height="30" fill="#10B981" />
-      <path d="M10,80 L110,80 L116,92 L4,92 Z" fill="url(#lpSilver)" filter="url(#lpDrop)" />
-      <rect x="50" y="85" width="20" height="5" rx="1" fill="#94A3B8" />
-      <path d="M20,82 L100,82 L102,84 L18,84 Z" fill="#475569" />
-      <path d="M6,93 L114,93 L114,95 L6,95 Z" fill="#64748B" />
-      <path d="M10,80 L110,80" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.8" />
+      <rect x="25" y="25" width="70" height="50" rx="4" fill="#94A3B8" filter="url(#lpDrop)" />
+      <rect x="30" y="30" width="60" height="40" fill="url(#lpScreen)" />
+      <path d="M15,80 L105,80 L115,95 L5,95 Z" fill="url(#lpBody)" filter="url(#lpDrop)" />
+      <rect x="45" y="85" width="30" height="5" rx="2" fill="#475569" />
+      <circle cx="60" cy="27" r="1.5" fill="#34D399" />
     </svg>
   `,
 
-  // 32. SMARTPHONE (Mobile, App Development, Devices, Communication)
+  // 32. SMARTPHONE (Mobile, Phone, Call, Device)
   smartphone: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
-        <linearGradient id="smRim" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E2E8F0" />
-          <stop offset="50%" stop-color="#94A3B8" />
-          <stop offset="100%" stop-color="#475569" />
+        <linearGradient id="mpBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#475569" />
+          <stop offset="100%" stop-color="#1E293B" />
         </linearGradient>
-        <linearGradient id="smScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id="mpScreen" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="#0F172A" />
-          <stop offset="50%" stop-color="#1E293B" />
           <stop offset="100%" stop-color="#020617" />
         </linearGradient>
-        <linearGradient id="smApp1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#38BDF8" /><stop offset="100%" stop-color="#0284C7" />
-        </linearGradient>
-        <linearGradient id="smApp2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#F472B6" /><stop offset="100%" stop-color="#BE185D" />
-        </linearGradient>
-        <filter id="smDrop" x="-15%" y="-15%" width="130%" height="130%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
-        </filter>
-        <filter id="smGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38BDF8" flood-opacity="0.5"/>
+        <filter id="mpDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
       </defs>
-      <rect x="25" y="10" width="70" height="100" rx="12" fill="url(#smRim)" filter="url(#smDrop)" />
-      <rect x="27" y="12" width="66" height="96" rx="10" fill="#334155" />
-      <rect x="29" y="14" width="62" height="92" rx="8" fill="url(#smScreen)" />
-      <rect x="36" y="35" width="12" height="12" rx="3" fill="url(#smApp1)" filter="url(#smGlow)" />
-      <rect x="54" y="35" width="12" height="12" rx="3" fill="url(#smApp2)" />
-      <rect x="72" y="35" width="12" height="12" rx="3" fill="#FBBF24" />
-      <rect x="36" y="55" width="12" height="12" rx="3" fill="#34D399" />
-      <rect x="54" y="55" width="12" height="12" rx="3" fill="#A78BFA" />
-      <rect x="72" y="55" width="12" height="12" rx="3" fill="url(#smApp1)" />
-      <rect x="34" y="85" width="52" height="16" rx="6" fill="#FFFFFF" opacity="0.1" />
-      <rect x="38" y="87" width="12" height="12" rx="3" fill="#F87171" />
-      <rect x="54" y="87" width="12" height="12" rx="3" fill="#60A5FA" />
-      <rect x="70" y="87" width="12" height="12" rx="3" fill="#34D399" />
-      <rect x="50" y="18" width="20" height="6" rx="3" fill="#000000" />
-      <circle cx="66" cy="21" r="1.5" fill="#1D4ED8" />
-      <path d="M29,45 L91,14 L91,14 L29,14 Z" fill="#FFFFFF" opacity="0.05" />
-      <rect x="23" y="35" width="2" height="12" rx="1" fill="#64748B" />
-      <rect x="23" y="50" width="2" height="12" rx="1" fill="#64748B" />
-      <rect x="95" y="40" width="2" height="18" rx="1" fill="#64748B" />
+      <rect x="35" y="15" width="50" height="90" rx="8" fill="url(#mpBody)" filter="url(#mpDrop)" />
+      <rect x="40" y="25" width="40" height="70" rx="2" fill="url(#mpScreen)" />
+      <rect x="55" y="20" width="10" height="2" rx="1" fill="#94A3B8" />
+      <circle cx="60" cy="100" r="3" fill="#94A3B8" />
+      <rect x="45" y="40" width="10" height="10" rx="2" fill="#3B82F6" opacity="0.8" />
+      <rect x="65" y="40" width="10" height="10" rx="2" fill="#10B981" opacity="0.8" />
+      <rect x="45" y="60" width="10" height="10" rx="2" fill="#F59E0B" opacity="0.8" />
+      <rect x="65" y="60" width="10" height="10" rx="2" fill="#EF4444" opacity="0.8" />
     </svg>
   `,
 
-  // 33. DATABASE (Hosting, Data, Infrastructure)
+  // 33. DATABASE (Backend, Storage, Infrastructure, Reliability)
   database: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="dbBody" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#3B82F6" />
-                  <stop offset="100%" stop-color="#1D4ED8" />
-                </linearGradient>
-                <linearGradient id="dbTop" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#60A5FA" />
-                  <stop offset="100%" stop-color="#2563EB" />
-                </linearGradient>
-                <filter id="dbDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#1D4ED8" flood-opacity="0.3"/>
-                </filter>
-                <filter id="dbGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#A7F3D0" flood-opacity="0.8"/>
-                </filter>
-              </defs>
-              <!-- Bottom Disc -->
-              <path d="M30,70 L30,90 C30,100 90,100 90,90 L90,70" fill="url(#dbBody)" filter="url(#dbDrop)" />
-              <ellipse cx="60" cy="90" rx="30" ry="10" fill="url(#dbTop)" />
-              <!-- Middle Disc -->
-              <path d="M30,45 L30,65 C30,75 90,75 90,65 L90,45" fill="url(#dbBody)" filter="url(#dbDrop)" />
-              <ellipse cx="60" cy="65" rx="30" ry="10" fill="url(#dbTop)" />
-              <!-- Top Disc -->
-              <path d="M30,20 L30,40 C30,50 90,50 90,40 L90,20" fill="url(#dbBody)" filter="url(#dbDrop)" />
-              <ellipse cx="60" cy="40" rx="30" ry="10" fill="url(#dbTop)" />
-              <ellipse cx="60" cy="20" rx="30" ry="10" fill="url(#dbTop)" />
-              <!-- Status Lights -->
-              <circle cx="50" cy="35" r="3" fill="#10B981" filter="url(#dbGlow)" />
-              <circle cx="50" cy="60" r="3" fill="#10B981" filter="url(#dbGlow)" />
-              <circle cx="50" cy="85" r="3" fill="#EF4444" />
-              <path d="M35,25 C40,20 50,15 60,18" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5" />
-            </svg>
+      <defs>
+        <linearGradient id="dbBody" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#475569" />
+          <stop offset="100%" stop-color="#1E293B" />
+        </linearGradient>
+        <radialGradient id="dbTop" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </radialGradient>
+        <filter id="dbDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <ellipse cx="60" cy="25" rx="40" ry="15" fill="url(#dbTop)" filter="url(#dbDrop)" />
+      <path d="M20,25 L20,95 C20,105 40,110 60,110 C80,110 100,105 100,95 L100,25" fill="url(#dbBody)" filter="url(#dbDrop)" />
+      <ellipse cx="60" cy="95" rx="40" ry="15" fill="#1E293B" />
+      <path d="M20,60 L100,60" stroke="#334155" stroke-width="2" />
+      <path d="M20,40 L100,40" stroke="#334155" stroke-width="2" />
+      <path d="M20,80 L100,80" stroke="#334155" stroke-width="2" />
+    </svg>
   `,
 
   // 34. CLOUD (Storage, Cloud Computing, Weather, Sync)
@@ -1093,143 +903,98 @@
             </svg>
   `,
 
-  // 36. GAMEPAD (Gaming, Entertainment, Interactive, Media)
+  // 36. GAMEPAD (Gaming, Entertainment, Console, Play)
   gamepad: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
         <linearGradient id="gpBody" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#4C1D95" />
-          <stop offset="50%" stop-color="#2E1065" />
-          <stop offset="100%" stop-color="#0F172A" />
+          <stop offset="0%" stop-color="#60A5FA" />
+          <stop offset="100%" stop-color="#1E40AF" />
         </linearGradient>
-        <radialGradient id="gpGrip" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#7C3AED" />
-          <stop offset="100%" stop-color="#4C1D95" />
-        </radialGradient>
         <filter id="gpDrop" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
-        </filter>
-        <filter id="gpNeon" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#F472B6" flood-opacity="0.8"/>
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
       </defs>
-      <path d="M25,35 C45,25 75,25 95,35 C105,40 115,60 110,85 C108,95 95,95 85,85 C80,80 75,70 60,70 C45,70 40,80 35,85 C25,95 12,95 10,85 C5,60 15,40 25,35 Z" fill="url(#gpBody)" filter="url(#gpDrop)" />
-      <path d="M25,35 C15,40 5,60 10,85 C12,95 25,95 35,85 C30,75 25,60 25,35 Z" fill="url(#gpGrip)" opacity="0.6" />
-      <path d="M95,35 C105,40 115,60 110,85 C108,95 95,95 85,85 C90,75 95,60 95,35 Z" fill="url(#gpGrip)" opacity="0.6" />
-      <path d="M28,48 L34,48 L34,42 L40,42 L40,48 L46,48 L46,54 L40,54 L40,60 L34,60 L34,54 L28,54 Z" fill="#1E293B" stroke="#0F172A" stroke-width="1.5" />
-      <circle cx="85" cy="45" r="4" fill="#34D399" filter="url(#gpNeon)" />
-      <circle cx="75" cy="55" r="4" fill="#60A5FA" />
-      <circle cx="95" cy="55" r="4" fill="#F87171" />
-      <circle cx="85" cy="65" r="4" fill="#FBBF24" />
-      <circle cx="45" cy="70" r="10" fill="#334155" stroke="#0F172A" stroke-width="2" />
-      <circle cx="45" cy="70" r="6" fill="#1E293B" />
-      <circle cx="75" cy="70" r="10" fill="#334155" stroke="#0F172A" stroke-width="2" />
-      <circle cx="75" cy="70" r="6" fill="#1E293B" />
-      <rect x="52" y="45" width="6" height="3" rx="1" fill="#94A3B8" />
-      <rect x="62" y="45" width="6" height="3" rx="1" fill="#94A3B8" />
-      <circle cx="60" cy="55" r="4" fill="#FFFFFF" opacity="0.8" filter="url(#gpNeon)" />
-      <path d="M25,35 C45,25 75,25 95,35" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+      <path d="M20,40 C20,30 40,30 60,35 C80,30 100,30 100,40 L105,70 C110,90 90,95 80,75 L40,75 C30,95 10,90 15,70 Z" fill="url(#gpBody)" filter="url(#gpDrop)" />
+      <path d="M30,45 L30,65 M20,55 L40,55" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" />
+      <circle cx="85" cy="45" r="5" fill="#EF4444" />
+      <circle cx="75" cy="55" r="5" fill="#FDE047" />
+      <circle cx="95" cy="55" r="5" fill="#34D399" />
+      <circle cx="85" cy="65" r="5" fill="#60A5FA" />
     </svg>
   `,
 
-  // 37. BATTERY (Power, Energy, Status)
+  // 37. BATTERY (Power, Charge, Energy, Mobile)
   battery: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="btCase" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#E2E8F0" />
-                  <stop offset="100%" stop-color="#94A3B8" />
-                </linearGradient>
-                <linearGradient id="btCharge" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#34D399" />
-                  <stop offset="100%" stop-color="#059669" />
-                </linearGradient>
-                <filter id="btDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
-                </filter>
-                <filter id="btGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#10B981" flood-opacity="0.5"/>
-                </filter>
-              </defs>
-              <!-- Battery Terminal -->
-              <path d="M50,15 L70,15 L70,25 L50,25 Z" fill="#475569" filter="url(#btDrop)" />
-              <!-- Main Case -->
-              <rect x="30" y="25" width="60" height="75" rx="8" fill="url(#btCase)" filter="url(#btDrop)" />
-              <rect x="35" y="30" width="50" height="65" rx="4" fill="#0F172A" />
-              <!-- Charge Level -->
-              <rect x="40" y="60" width="40" height="30" rx="2" fill="url(#btCharge)" filter="url(#btGlow)" />
-              <rect x="40" y="45" width="40" height="10" rx="2" fill="#1E293B" />
-              <!-- Lightning Bolt inside Charge -->
-              <polygon points="62,65 52,78 60,78 58,88 68,75 60,75" fill="#FEF08A" />
-              <!-- Glare -->
-              <path d="M35,35 L45,35 L35,85 Z" fill="#FFFFFF" opacity="0.1" />
-            </svg>
+      <defs>
+        <linearGradient id="baBody" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <linearGradient id="baCharge" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#34D399" />
+          <stop offset="100%" stop-color="#059669" />
+        </linearGradient>
+        <filter id="baDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="baGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#34D399" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <rect x="15" y="40" width="80" height="40" rx="4" fill="url(#baBody)" filter="url(#baDrop)" />
+      <rect x="95" y="50" width="10" height="20" rx="2" fill="#94A3B8" filter="url(#baDrop)" />
+      <rect x="20" y="45" width="20" height="30" rx="2" fill="url(#baCharge)" filter="url(#baGlow)" />
+      <rect x="45" y="45" width="20" height="30" rx="2" fill="url(#baCharge)" filter="url(#baGlow)" />
+      <rect x="70" y="45" width="20" height="30" rx="2" fill="#1E293B" />
+    </svg>
   `,
 
-  // 38. HEADPHONES (Music, Audio, Podcast)
+  // 38. HEADPHONES (Music, Audio, Listening, Entertainment)
   headphones: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="hpBand" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#F1F5F9" />
-                  <stop offset="100%" stop-color="#64748B" />
-                </linearGradient>
-                <linearGradient id="hpCushion" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#1E293B" />
-                  <stop offset="100%" stop-color="#000000" />
-                </linearGradient>
-                <filter id="hpDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
-                </filter>
-              </defs>
-              <!-- Headband -->
-              <path d="M25,60 C25,20 95,20 95,60" fill="none" stroke="url(#hpBand)" stroke-width="12" stroke-linecap="round" filter="url(#hpDrop)" />
-              <!-- Ear Cups -->
-              <rect x="15" y="55" width="20" height="40" rx="10" fill="url(#hpCushion)" filter="url(#hpDrop)" />
-              <rect x="85" y="55" width="20" height="40" rx="10" fill="url(#hpCushion)" filter="url(#hpDrop)" />
-              <!-- Ear Cup Accents -->
-              <rect x="10" y="60" width="8" height="30" rx="4" fill="#38BDF8" />
-              <rect x="102" y="60" width="8" height="30" rx="4" fill="#38BDF8" />
-              <circle cx="25" cy="75" r="5" fill="#334155" />
-              <circle cx="95" cy="75" r="5" fill="#334155" />
-              <!-- Highlight -->
-              <path d="M35,32 C45,20 75,20 85,32" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.6" />
-            </svg>
+      <defs>
+        <linearGradient id="hpPad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#334155" />
+          <stop offset="100%" stop-color="#0F172A" />
+        </linearGradient>
+        <filter id="hpDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M25,60 C25,30 95,30 95,60" fill="none" stroke="#94A3B8" stroke-width="12" stroke-linecap="round" filter="url(#hpDrop)" />
+      <rect x="15" y="55" width="20" height="40" rx="8" fill="url(#hpPad)" filter="url(#hpDrop)" />
+      <rect x="85" y="55" width="20" height="40" rx="8" fill="url(#hpPad)" filter="url(#hpDrop)" />
+      <path d="M35,65 L35,85" stroke="#FFFFFF" stroke-width="2" opacity="0.2" />
+      <path d="M85,65 L85,85" stroke="#FFFFFF" stroke-width="2" opacity="0.2" />
+    </svg>
   `,
 
-  // 39. MICROCHIP (Hardware, AI Processing, Speed)
+  // 39. MICROCHIP (Processor, Hardware, CPU, Brain)
   microchip: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="mcBody" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#0F172A" />
-                  <stop offset="100%" stop-color="#334155" />
-                </linearGradient>
-                <linearGradient id="mcTrace" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#10B981" />
-                  <stop offset="100%" stop-color="#047857" />
-                </linearGradient>
-                <filter id="mcDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
-                </filter>
-                <filter id="mcGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#34D399" flood-opacity="0.6"/>
-                </filter>
-              </defs>
-              <!-- Pins -->
-              <path d="M25,35 L15,35 M25,50 L15,50 M25,65 L15,65 M25,80 L15,80 M95,35 L105,35 M95,50 L105,50 M95,65 L105,65 M95,80 L105,80" stroke="#94A3B8" stroke-width="6" stroke-linecap="round" />
-              <path d="M35,25 L35,15 M50,25 L50,15 M65,25 L65,15 M80,25 L80,15 M35,95 L35,105 M50,95 L50,105 M65,95 L65,105 M80,95 L80,105" stroke="#94A3B8" stroke-width="6" stroke-linecap="round" />
-              <!-- Main Die -->
-              <rect x="25" y="25" width="70" height="70" rx="6" fill="url(#mcBody)" filter="url(#mcDrop)" />
-              <!-- Inner Core -->
-              <rect x="40" y="40" width="40" height="40" rx="4" fill="#000000" />
-              <!-- Traces -->
-              <path d="M60,40 L60,30 M40,60 L30,60 M80,60 L90,60 M60,80 L60,90" stroke="url(#mcTrace)" stroke-width="3" filter="url(#mcGlow)" />
-              <circle cx="60" cy="60" r="10" fill="url(#mcTrace)" filter="url(#mcGlow)" />
-              <circle cx="60" cy="60" r="4" fill="#FFFFFF" />
-              <circle cx="33" cy="33" r="3" fill="#64748B" />
-              <circle cx="87" cy="87" r="3" fill="#64748B" />
-            </svg>
+      <defs>
+        <linearGradient id="mcBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1E293B" />
+          <stop offset="100%" stop-color="#020617" />
+        </linearGradient>
+        <linearGradient id="mcPins" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FCD34D" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="mcDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <rect x="25" y="15" width="10" height="90" fill="url(#mcPins)" />
+      <rect x="85" y="15" width="10" height="90" fill="url(#mcPins)" />
+      <rect x="15" y="25" width="90" height="10" fill="url(#mcPins)" />
+      <rect x="15" y="85" width="90" height="10" fill="url(#mcPins)" />
+      <rect x="25" y="25" width="70" height="70" rx="4" fill="url(#mcBody)" filter="url(#mcDrop)" />
+      <rect x="40" y="40" width="40" height="40" rx="2" fill="#0F172A" />
+      <circle cx="60" cy="60" r="10" fill="#38BDF8" opacity="0.8" />
+    </svg>
   `,
 
   // 40. SATELLITE (Space, Transmission, Orbit, Connectivity)
@@ -1538,39 +1303,24 @@
             </svg>
   `,
 
-  // 48. RECEIPT / INVOICE (Billing, Records, Tax)
+  // 48. RECEIPT (Billing, Checkout, Total, Purchase)
   receipt: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="rcPaper" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFFFF" />
-                  <stop offset="100%" stop-color="#E2E8F0" />
-                </linearGradient>
-                <linearGradient id="rcAccent" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#38BDF8" />
-                  <stop offset="100%" stop-color="#2563EB" />
-                </linearGradient>
-                <filter id="rcDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.2"/>
-                </filter>
-              </defs>
-              <!-- Receipt Paper -->
-              <path d="M25,20 L95,20 L95,95 L85,105 L75,95 L65,105 L55,95 L45,105 L35,95 L25,105 Z" fill="url(#rcPaper)" filter="url(#rcDrop)" />
-              <!-- Top Tear -->
-              <path d="M25,20 L35,15 L45,20 L55,15 L65,20 L75,15 L85,20 L95,15 L95,20 L25,20 Z" fill="#CBD5E1" />
-              <!-- Text Lines -->
-              <rect x="35" y="35" width="50" height="4" rx="2" fill="#64748B" />
-              <rect x="35" y="45" width="40" height="4" rx="2" fill="#94A3B8" />
-              <rect x="35" y="55" width="45" height="4" rx="2" fill="#94A3B8" />
-              <!-- Divider -->
-              <line x1="35" y1="65" x2="85" y2="65" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4" />
-              <!-- Total -->
-              <rect x="35" y="75" width="20" height="6" rx="2" fill="#475569" />
-              <rect x="65" y="75" width="20" height="6" rx="2" fill="url(#rcAccent)" />
-              <!-- Checkmark -->
-              <circle cx="80" cy="40" r="8" fill="#10B981" />
-              <path d="M77,40 L79,42 L83,38" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-            </svg>
+      <defs>
+        <linearGradient id="rePaper" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#CBD5E1" />
+        </linearGradient>
+        <filter id="reDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M30,15 L90,15 L90,100 L80,90 L70,100 L60,90 L50,100 L40,90 L30,100 Z" fill="url(#rePaper)" filter="url(#reDrop)" />
+      <line x1="45" y1="35" x2="75" y2="35" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+      <line x1="45" y1="50" x2="75" y2="50" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+      <line x1="45" y1="65" x2="60" y2="65" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+      <circle cx="60" cy="80" r="5" fill="#EF4444" />
+    </svg>
   `,
 
   // 49. DELIVERY BOX (Shipping, Logistics, Mail)
@@ -1936,39 +1686,31 @@
             </svg>
   `,
 
-  // 59. CHECKMARK / BADGE (Verified, Success, Approved)
+  // 59. BADGE (Access, ID, Credentials, Verification)
   badge: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="bgRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#38BDF8" />
-                  <stop offset="100%" stop-color="#0369A1" />
-                </linearGradient>
-                <linearGradient id="bgMedal" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FCD34D" />
-                  <stop offset="50%" stop-color="#F59E0B" />
-                  <stop offset="100%" stop-color="#92400E" />
-                </linearGradient>
-                <filter id="bgDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
-                </filter>
-                <filter id="bgGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#FCD34D" flood-opacity="0.6"/>
-                </filter>
-              </defs>
-              <!-- Ribbons -->
-              <polygon points="35,60 25,105 45,95 60,110 50,60" fill="url(#bgRibbon)" filter="url(#bgDrop)" />
-              <polygon points="85,60 95,105 75,95 60,110 70,60" fill="url(#bgRibbon)" filter="url(#bgDrop)" />
-              <!-- Medal Base -->
-              <circle cx="60" cy="45" r="35" fill="url(#bgMedal)" filter="url(#bgDrop)" />
-              <!-- Inner Ring -->
-              <circle cx="60" cy="45" r="25" fill="#1E293B" filter="url(#bgDrop)" />
-              <!-- Checkmark -->
-              <path d="M45,45 L55,55 L75,35" fill="none" stroke="url(#bgMedal)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#bgGlow)" />
-              <!-- Highlights -->
-              <circle cx="60" cy="45" r="33" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.5" />
-              <path d="M48,42 L55,49 L72,32" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
-            </svg>
+      <defs>
+        <linearGradient id="bdPlastic" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#F1F5F9" />
+          <stop offset="100%" stop-color="#CBD5E1" />
+        </linearGradient>
+        <linearGradient id="bdBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3B82F6" />
+          <stop offset="100%" stop-color="#1D4ED8" />
+        </linearGradient>
+        <filter id="bdDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="30" y="25" width="60" height="80" rx="4" fill="url(#bdPlastic)" filter="url(#bdDrop)" />
+      <rect x="30" y="25" width="60" height="20" fill="url(#bdBlue)" />
+      <rect x="45" y="15" width="30" height="5" rx="2" fill="#64748B" />
+      <circle cx="60" cy="65" r="12" fill="#94A3B8" />
+      <circle cx="60" cy="62" r="4" fill="#E2E8F0" />
+      <path d="M50,75 A12,12 0 0,1 70,75" fill="none" stroke="#E2E8F0" stroke-width="4" />
+      <rect x="40" y="85" width="40" height="4" fill="#94A3B8" />
+      <rect x="40" y="95" width="20" height="4" fill="#94A3B8" />
+    </svg>
   `,
 
   // 60. WARNING / ALERT (Caution, Danger, Notice)
@@ -2041,47 +1783,23 @@
         </svg>
   `,
 
-  // 62. BOOK / JOURNAL (Education, Reading, Knowledge)
+  // 62. BOOK (Reading, Knowledge, Documentation, Reference)
   book: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="bkCover" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#3B82F6" />
-                  <stop offset="100%" stop-color="#1D4ED8" />
-                </linearGradient>
-                <linearGradient id="bkPages" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFFFF" />
-                  <stop offset="100%" stop-color="#E2E8F0" />
-                </linearGradient>
-                <filter id="bkDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
-                </filter>
-                <filter id="bkGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#FCD34D" flood-opacity="0.6"/>
-                </filter>
-              </defs>
-              <!-- Back Cover (Right) -->
-              <path d="M60,15 L105,25 L105,95 L60,85 Z" fill="#1E3A8A" filter="url(#bkDrop)" />
-              <!-- Back Cover (Left) -->
-              <path d="M60,15 L15,25 L15,95 L60,85 Z" fill="url(#bkCover)" filter="url(#bkDrop)" />
-              <!-- Pages (Right) -->
-              <path d="M60,22 L100,30 L100,90 L60,82 Z" fill="url(#bkPages)" />
-              <!-- Pages (Left) -->
-              <path d="M60,22 L20,30 L20,90 L60,82 Z" fill="url(#bkPages)" />
-              <!-- Spine Shadow -->
-              <path d="M58,21 L62,21 L62,83 L58,83 Z" fill="#94A3B8" opacity="0.8" />
-              <path d="M60,15 L60,85" stroke="#0F172A" stroke-width="3" stroke-linecap="round" />
-              <!-- Bookmark -->
-              <path d="M65,23 L75,25 L75,55 L70,50 L65,55 Z" fill="#EF4444" filter="url(#bkDrop)" />
-              <!-- Text Lines (Left) -->
-              <line x1="28" y1="40" x2="52" y2="35" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" />
-              <line x1="28" y1="50" x2="52" y2="45" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" />
-              <line x1="28" y1="60" x2="45" y2="56" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" />
-              <!-- Floating Magic Particles -->
-              <circle cx="35" cy="20" r="3" fill="#FCD34D" filter="url(#bkGlow)" />
-              <circle cx="85" cy="15" r="4" fill="#FCD34D" filter="url(#bkGlow)" />
-              <circle cx="105" cy="40" r="2" fill="#FCD34D" filter="url(#bkGlow)" />
-            </svg>
+      <defs>
+        <linearGradient id="bkCover" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#EF4444" />
+          <stop offset="100%" stop-color="#991B1B" />
+        </linearGradient>
+        <filter id="bkDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M20,20 L60,10 L60,100 L20,90 Z" fill="url(#bkCover)" filter="url(#bkDrop)" />
+      <path d="M60,10 L100,20 L100,110 L60,100 Z" fill="url(#bkCover)" filter="url(#bkDrop)" />
+      <path d="M60,10 L60,100" stroke="#FFFFFF" stroke-width="4" opacity="0.3" />
+      <path d="M30,30 L50,35 M30,45 L50,50 M30,60 L50,65" stroke="#FFFFFF" stroke-width="2" opacity="0.3" />
+    </svg>
   `,
 
   // 63. GRADUATION CAP (Learning, Academy, Success)
@@ -2221,46 +1939,26 @@
     </svg>
   `,
 
-  // 67. CLIPBOARD (Tasks, Management, Survey)
+  // 67. CLIPBOARD (Tasks, ToDo, List, Management)
   clipboard: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="cbBoard" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#94A3B8" />
-                  <stop offset="100%" stop-color="#475569" />
-                </linearGradient>
-                <linearGradient id="cbPaper" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFFFF" />
-                  <stop offset="100%" stop-color="#E2E8F0" />
-                </linearGradient>
-                <linearGradient id="cbClip" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#CBD5E1" />
-                  <stop offset="100%" stop-color="#64748B" />
-                </linearGradient>
-                <filter id="cbDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
-                </filter>
-              </defs>
-              <!-- Board -->
-              <rect x="20" y="20" width="80" height="90" rx="6" fill="url(#cbBoard)" filter="url(#cbDrop)" />
-              <!-- Paper -->
-              <rect x="30" y="35" width="60" height="70" rx="2" fill="url(#cbPaper)" filter="url(#cbDrop)" />
-              <!-- Clip -->
-              <path d="M40,25 L80,25 L85,15 L35,15 Z" fill="url(#cbClip)" filter="url(#cbDrop)" stroke="#334155" stroke-width="2" stroke-linejoin="round" />
-              <circle cx="60" cy="20" r="3" fill="#1E293B" />
-              <!-- Checkmarks & Lines -->
-              <circle cx="42" cy="50" r="5" fill="#10B981" />
-              <path d="M40,50 L42,52 L45,48" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-              <rect x="55" y="48" width="25" height="4" rx="2" fill="#94A3B8" />
-              
-              <circle cx="42" cy="65" r="5" fill="#1E293B" />
-              <rect x="55" y="63" width="20" height="4" rx="2" fill="#94A3B8" />
-        
-              <circle cx="42" cy="80" r="5" fill="#1E293B" />
-              <rect x="55" y="78" width="15" height="4" rx="2" fill="#94A3B8" />
-              <!-- Highlight -->
-              <path d="M25,25 L25,105" stroke="#FFFFFF" stroke-width="3" opacity="0.3" stroke-linecap="round" />
-            </svg>
+      <defs>
+        <linearGradient id="cbBoard" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#B45309" />
+          <stop offset="100%" stop-color="#78350F" />
+        </linearGradient>
+        <filter id="cbDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="20" y="25" width="80" height="85" rx="6" fill="url(#cbBoard)" filter="url(#cbDrop)" />
+      <rect x="30" y="35" width="60" height="65" fill="#F8FAFC" />
+      <rect x="40" y="10" width="40" height="20" rx="4" fill="#94A3B8" filter="url(#cbDrop)" />
+      <rect x="50" y="15" width="20" height="5" fill="#475569" />
+      <line x1="40" y1="50" x2="80" y2="50" stroke="#CBD5E1" stroke-width="4" />
+      <line x1="40" y1="65" x2="70" y2="65" stroke="#CBD5E1" stroke-width="4" />
+      <line x1="40" y1="80" x2="80" y2="80" stroke="#CBD5E1" stroke-width="4" />
+    </svg>
   `,
 
   // 68. PEN / NIB (Writing, Author, Edit)
@@ -2301,44 +1999,28 @@
             </svg>
   `,
 
-  // 69. PRINTER (Documents, Office, Output)
+  // 69. PRINTER (Hardware, Documents, Office, Output)
   printer: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="prBody" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#E2E8F0" />
-                  <stop offset="100%" stop-color="#94A3B8" />
-                </linearGradient>
-                <linearGradient id="prTop" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#334155" />
-                  <stop offset="100%" stop-color="#0F172A" />
-                </linearGradient>
-                <filter id="prDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
-                </filter>
-                <filter id="prGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#10B981" flood-opacity="0.6"/>
-                </filter>
-              </defs>
-              <!-- Top Paper -->
-              <path d="M35,45 L85,45 L80,15 L40,15 Z" fill="#FFFFFF" filter="url(#prDrop)" />
-              <line x1="45" y1="25" x2="75" y2="25" stroke="#CBD5E1" stroke-width="3" />
-              <line x1="45" y1="35" x2="65" y2="35" stroke="#CBD5E1" stroke-width="3" />
-              <!-- Main Printer Body -->
-              <rect x="20" y="45" width="80" height="45" rx="6" fill="url(#prBody)" filter="url(#prDrop)" />
-              <!-- Scanner / Top Lid -->
-              <rect x="15" y="45" width="90" height="15" rx="4" fill="url(#prTop)" />
-              <rect x="85" y="48" width="10" height="4" rx="2" fill="#0EA5E9" />
-              <circle cx="25" cy="52" r="3" fill="#10B981" filter="url(#prGlow)" />
-              <!-- Output Tray Opening -->
-              <rect x="35" y="70" width="50" height="10" rx="3" fill="#1E293B" />
-              <!-- Output Paper -->
-              <path d="M40,75 L80,75 L85,105 L35,105 Z" fill="#F8FAFC" filter="url(#prDrop)" />
-              <line x1="45" y1="85" x2="75" y2="85" stroke="#94A3B8" stroke-width="3" />
-              <line x1="45" y1="95" x2="60" y2="95" stroke="#94A3B8" stroke-width="3" />
-              <!-- Brand Line Highlight -->
-              <path d="M22,63 L98,63" stroke="#FFFFFF" stroke-width="2" opacity="0.6" />
-            </svg>
+      <defs>
+        <linearGradient id="prBody" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#E2E8F0" />
+          <stop offset="100%" stop-color="#94A3B8" />
+        </linearGradient>
+        <filter id="prDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="35" y="15" width="50" height="30" fill="#FFFFFF" filter="url(#prDrop)" />
+      <line x1="45" y1="25" x2="75" y2="25" stroke="#CBD5E1" stroke-width="2" />
+      <line x1="45" y1="35" x2="65" y2="35" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="20" y="45" width="80" height="40" rx="6" fill="url(#prBody)" filter="url(#prDrop)" />
+      <rect x="35" y="75" width="50" height="30" fill="#F8FAFC" filter="url(#prDrop)" />
+      <line x1="45" y1="85" x2="75" y2="85" stroke="#94A3B8" stroke-width="2" />
+      <line x1="45" y1="95" x2="75" y2="95" stroke="#94A3B8" stroke-width="2" />
+      <rect x="25" y="55" width="6" height="6" rx="3" fill="#34D399" />
+      <rect x="35" y="55" width="6" height="6" rx="3" fill="#EF4444" />
+    </svg>
   `,
 
   // 70. COFFEE CUP (Break, Energy, Morning)
@@ -2378,113 +2060,62 @@
             </svg>
   `,
 
-  // 71. MICROSCOPE (Research, Science, Lab)
+  // 71. MICROSCOPE (Research, Zoom, Biology, Inspect)
   microscope: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="msBody" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#E2E8F0" />
-                  <stop offset="100%" stop-color="#94A3B8" />
-                </linearGradient>
-                <linearGradient id="msDark" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#334155" />
-                  <stop offset="100%" stop-color="#0F172A" />
-                </linearGradient>
-                <filter id="msDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
-                </filter>
-                <filter id="msGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#10B981" flood-opacity="0.5"/>
-                </filter>
-              </defs>
-              <!-- Base -->
-              <path d="M25,100 L95,100 L95,90 L85,85 L35,85 L25,90 Z" fill="url(#msDark)" filter="url(#msDrop)" />
-              <!-- Stand / Arm -->
-              <path d="M40,85 C20,65 30,35 45,35 L60,35 C40,45 40,75 55,85 Z" fill="url(#msBody)" filter="url(#msDrop)" />
-              <!-- Eyepiece Tube -->
-              <polygon points="50,35 65,35 80,65 65,65" fill="url(#msBody)" filter="url(#msDrop)" />
-              <polygon points="45,25 60,25 55,35 40,35" fill="url(#msDark)" />
-              <!-- Stage -->
-              <rect x="55" y="65" width="30" height="4" rx="2" fill="url(#msDark)" />
-              <!-- Lenses -->
-              <polygon points="65,65 80,65 75,75 70,75" fill="url(#msDark)" />
-              <!-- Glowing Sample -->
-              <ellipse cx="70" cy="63" rx="8" ry="2" fill="#10B981" filter="url(#msGlow)" />
-              <circle cx="70" cy="63" r="2" fill="#FFFFFF" opacity="0.8" />
-              <!-- Highlight -->
-              <path d="M38,80 C25,65 33,42 45,37" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5" />
-            </svg>
-  `,
-
-  // 72. TELESCOPE (Vision, Future, Discovery, Space)
-  telescope: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
-        <linearGradient id="tlWood" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#9A3412" />
-          <stop offset="100%" stop-color="#431407" />
+        <linearGradient id="msMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
         </linearGradient>
-        <linearGradient id="tlBrass" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#FDE047" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <linearGradient id="tlLens" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0284C7" />
-        </linearGradient>
-        <filter id="tlDrop" x="-10%" y="-10%" width="120%" height="120%">
+        <filter id="msDrop" x="-10%" y="-10%" width="120%" height="120%">
           <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
-        <filter id="tlLensGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38BDF8" flood-opacity="0.6"/>
-        </filter>
       </defs>
-      <g filter="url(#tlDrop)" transform="rotate(-35 60 60)">
-        <rect x="20" y="50" width="20" height="20" fill="url(#tlWood)" />
-        <rect x="40" y="47" width="25" height="26" fill="url(#tlWood)" />
-        <rect x="65" y="43" width="30" height="34" fill="url(#tlWood)" />
-        <!-- Brass Rings -->
-        <rect x="38" y="49" width="4" height="22" fill="url(#tlBrass)" />
-        <rect x="63" y="46" width="4" height="28" fill="url(#tlBrass)" />
-        <rect x="15" y="52" width="6" height="16" rx="1" fill="url(#tlBrass)" />
-        <rect x="95" y="41" width="8" height="38" rx="2" fill="url(#tlBrass)" />
-        <ellipse cx="102" cy="60" rx="3" ry="17" fill="url(#tlLens)" filter="url(#tlLensGlow)" />
-        <!-- Stand mount -->
-        <rect x="55" y="70" width="8" height="15" fill="url(#tlBrass)" />
-        <circle cx="59" cy="85" r="5" fill="#431407" />
-      </g>
+      <path d="M40,105 L90,105 C95,105 100,100 100,95 C100,90 95,85 90,85 L80,85 L70,40 C75,35 80,25 80,20 C80,10 70,10 65,20 L55,45 C50,60 40,70 30,70 C25,70 20,75 20,80 C20,85 25,90 30,90 L30,105 Z" fill="url(#msMetal)" filter="url(#msDrop)" />
+      <path d="M45,35 L60,25 L70,40 L55,50 Z" fill="#1E293B" />
+      <circle cx="85" cy="65" r="8" fill="#F59E0B" />
+      <line x1="35" y1="85" x2="65" y2="85" stroke="#334155" stroke-width="4" />
     </svg>
   `,
 
-  // 73. LEAF / PLANT (Eco, Nature, Growth)
+  // 72. TELESCOPE (Space, Future, Vision, Astronomy)
+  telescope: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="tsBrass" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FCD34D" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="tsDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <polygon points="40,70 90,30 95,40 45,80" fill="url(#tsBrass)" filter="url(#tsDrop)" />
+      <polygon points="30,78 40,70 45,80 35,88" fill="#1E293B" />
+      <polygon points="90,30 100,22 105,32 95,40" fill="#1E293B" />
+      <line x1="65" y1="55" x2="65" y2="100" stroke="#94A3B8" stroke-width="6" />
+      <line x1="65" y1="75" x2="45" y2="105" stroke="#94A3B8" stroke-width="4" />
+      <line x1="65" y1="75" x2="85" y2="105" stroke="#94A3B8" stroke-width="4" />
+    </svg>
+  `,
+
+  // 73. LEAF (Nature, Environment, Eco, Growth)
   leaf: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="lfGreen" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#34D399" />
-                  <stop offset="50%" stop-color="#10B981" />
-                  <stop offset="100%" stop-color="#047857" />
-                </linearGradient>
-                <filter id="lfDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#047857" flood-opacity="0.3"/>
-                </filter>
-                <filter id="lfGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#A7F3D0" flood-opacity="0.5"/>
-                </filter>
-              </defs>
-              <!-- Main Leaf -->
-              <path d="M95,25 C95,25 25,25 25,95 C25,95 95,95 95,25 Z" fill="url(#lfGreen)" filter="url(#lfDrop)" stroke="#065F46" stroke-width="2" />
-              <!-- Leaf Veins -->
-              <path d="M25,95 C45,75 70,45 95,25" fill="none" stroke="#6EE7B7" stroke-width="4" stroke-linecap="round" />
-              <path d="M55,65 Q65,55 75,65" fill="none" stroke="#6EE7B7" stroke-width="3" stroke-linecap="round" />
-              <path d="M40,80 Q50,70 60,80" fill="none" stroke="#6EE7B7" stroke-width="3" stroke-linecap="round" />
-              <path d="M70,50 Q80,40 90,50" fill="none" stroke="#6EE7B7" stroke-width="3" stroke-linecap="round" />
-              <!-- Dew Drop -->
-              <circle cx="80" cy="40" r="5" fill="#E0F2FE" filter="url(#lfGlow)" />
-              <path d="M78,38 C80,35 82,35 83,38" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
-              <!-- Highlight Edge -->
-              <path d="M35,90 C35,50 80,32 90,30" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.3" />
-            </svg>
+      <defs>
+        <linearGradient id="lfGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#34D399" />
+          <stop offset="100%" stop-color="#065F46" />
+        </linearGradient>
+        <filter id="lfDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M60,15 C90,15 105,45 105,75 C105,105 60,105 60,105 C60,105 15,105 15,75 C15,45 30,15 60,15 Z" fill="url(#lfGreen)" filter="url(#lfDrop)" />
+      <path d="M60,105 C60,75 75,45 105,45" fill="none" stroke="#A7F3D0" stroke-width="4" stroke-linecap="round" />
+      <path d="M60,85 L80,75 M60,65 L75,55 M60,45 L70,35" stroke="#A7F3D0" stroke-width="3" stroke-linecap="round" />
+    </svg>
   `,
 
   // 74. WATER DROP (Liquid, Clean, Environment)
@@ -2660,75 +2291,51 @@
             </svg>
   `,
 
-  // 79. ATOM (Physics, React, Core)
+  // 79. ATOM (Physics, React, Nucleus, Core)
   atom: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="atOrbit" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#38BDF8" />
-                  <stop offset="100%" stop-color="#8B5CF6" />
-                </linearGradient>
-                <radialGradient id="atCore" cx="40%" cy="40%" r="60%">
-                  <stop offset="0%" stop-color="#FDE047" />
-                  <stop offset="70%" stop-color="#F59E0B" />
-                  <stop offset="100%" stop-color="#B45309" />
-                </radialGradient>
-                <filter id="atGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#8B5CF6" flood-opacity="0.6"/>
-                </filter>
-                <filter id="atCoreGlow" x="-30%" y="-30%" width="160%" height="160%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#FDE047" flood-opacity="0.8"/>
-                </filter>
-              </defs>
-              <!-- Nucleus -->
-              <circle cx="60" cy="60" r="12" fill="url(#atCore)" filter="url(#atCoreGlow)" />
-              <!-- Orbits -->
-              <ellipse cx="60" cy="60" rx="45" ry="15" fill="none" stroke="url(#atOrbit)" stroke-width="3" filter="url(#atGlow)" />
-              <ellipse cx="60" cy="60" rx="45" ry="15" fill="none" stroke="url(#atOrbit)" stroke-width="3" filter="url(#atGlow)" transform="rotate(60 60 60)" />
-              <ellipse cx="60" cy="60" rx="45" ry="15" fill="none" stroke="url(#atOrbit)" stroke-width="3" filter="url(#atGlow)" transform="rotate(120 60 60)" />
-              <!-- Electrons -->
-              <circle cx="15" cy="60" r="5" fill="#38BDF8" filter="url(#atGlow)" />
-              <circle cx="82" cy="22" r="5" fill="#8B5CF6" filter="url(#atGlow)" />
-              <circle cx="82" cy="98" r="5" fill="#E879F9" filter="url(#atGlow)" />
-              <!-- Core Highlight -->
-              <circle cx="56" cy="56" r="3" fill="#FFFFFF" opacity="0.9" />
-            </svg>
+      <defs>
+        <linearGradient id="atCore" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#F59E0B" />
+        </linearGradient>
+        <filter id="atGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#38BDF8" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <ellipse cx="60" cy="60" rx="45" ry="15" fill="none" stroke="#38BDF8" stroke-width="4" transform="rotate(30 60 60)" filter="url(#atGlow)" />
+      <ellipse cx="60" cy="60" rx="45" ry="15" fill="none" stroke="#38BDF8" stroke-width="4" transform="rotate(90 60 60)" filter="url(#atGlow)" />
+      <ellipse cx="60" cy="60" rx="45" ry="15" fill="none" stroke="#38BDF8" stroke-width="4" transform="rotate(150 60 60)" filter="url(#atGlow)" />
+      <circle cx="60" cy="60" r="10" fill="url(#atCore)" filter="url(#atGlow)" />
+      <circle cx="95" cy="40" r="4" fill="#60A5FA" />
+      <circle cx="60" cy="15" r="4" fill="#60A5FA" />
+      <circle cx="25" cy="80" r="4" fill="#60A5FA" />
+    </svg>
   `,
 
-  // 80. MAGNET (Attraction, Leads, Inbound)
+  // 80. MAGNET (Attraction, Leads, Marketing, Physics)
   magnet: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="mgRed" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#F43F5E" />
-                  <stop offset="100%" stop-color="#9F1239" />
-                </linearGradient>
-                <linearGradient id="mgSteel" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#E2E8F0" />
-                  <stop offset="100%" stop-color="#64748B" />
-                </linearGradient>
-                <filter id="mgDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
-                </filter>
-                <filter id="mgFieldGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#38BDF8" flood-opacity="0.5"/>
-                </filter>
-              </defs>
-              <!-- Main Magnet U-Shape -->
-              <path d="M30,30 L30,65 C30,85 90,85 90,65 L90,30 L70,30 L70,65 C70,75 50,75 50,65 L50,30 Z" fill="url(#mgRed)" filter="url(#mgDrop)" stroke="#BE123C" stroke-width="2" />
-              <!-- Poles (Silver Tips) -->
-              <rect x="29" y="15" width="22" height="15" fill="url(#mgSteel)" filter="url(#mgDrop)" />
-              <rect x="69" y="15" width="22" height="15" fill="url(#mgSteel)" filter="url(#mgDrop)" />
-              <!-- Highlights on Red Body -->
-              <path d="M35,30 L35,65 C35,78 45,85 60,85" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.4" />
-              <!-- Magnetic Field Lines -->
-              <path d="M25,10 Q40,0 60,10" fill="none" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" filter="url(#mgFieldGlow)" />
-              <path d="M15,15 Q40,-10 70,15" fill="none" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" opacity="0.6" filter="url(#mgFieldGlow)" />
-              <path d="M5,20 Q40,-20 80,20" fill="none" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" opacity="0.3" filter="url(#mgFieldGlow)" />
-              <!-- Field Particles -->
-              <circle cx="40" cy="5" r="2" fill="#FFFFFF" filter="url(#mgFieldGlow)" />
-              <circle cx="60" cy="-5" r="3" fill="#FFFFFF" filter="url(#mgFieldGlow)" />
-            </svg>
+      <defs>
+        <linearGradient id="mgRed" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#EF4444" />
+          <stop offset="100%" stop-color="#991B1B" />
+        </linearGradient>
+        <linearGradient id="mgSilver" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#F1F5F9" />
+          <stop offset="100%" stop-color="#94A3B8" />
+        </linearGradient>
+        <filter id="mgDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M30,80 L30,50 C30,30 90,30 90,50 L90,80 L70,80 L70,50 C70,45 50,45 50,50 L50,80 Z" fill="url(#mgRed)" filter="url(#mgDrop)" />
+      <rect x="30" y="80" width="20" height="20" rx="2" fill="url(#mgSilver)" filter="url(#mgDrop)" />
+      <rect x="70" y="80" width="20" height="20" rx="2" fill="url(#mgSilver)" filter="url(#mgDrop)" />
+      <!-- Magnetic field lines -->
+      <path d="M40,110 A30,30 0 0,0 80,110" fill="none" stroke="#60A5FA" stroke-width="2" stroke-dasharray="4 4" />
+      <path d="M30,115 A40,40 0 0,0 90,115" fill="none" stroke="#60A5FA" stroke-width="2" stroke-dasharray="4 4" />
+    </svg>
   `,
 
   // 81. CHECK / SUCCESS (Completed, Verified, Done, Validation)
@@ -2808,33 +2415,24 @@
             </svg>
   `,
 
-  // 83. COFFEE (Community, Dev Culture, Perks, Breaks)
+  // 83. COFFEE (Energy, Break, Drink, Cup)
   coffee: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="cfMug" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#F472B6" />
-                  <stop offset="100%" stop-color="#9D174D" />
-                </linearGradient>
-                <radialGradient id="cfBrew" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#EDE9FE" />
-                  <stop offset="40%" stop-color="#D97706" />
-                  <stop offset="90%" stop-color="#451A03" />
-                  <stop offset="100%" stop-color="#1C0D02" />
-                </radialGradient>
-                <filter id="cfDrop" x="-15%" y="-15%" width="130%" height="130%">
-                  <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.25"/>
-                </filter>
-              </defs>
-              <path d="M40,25 Q35,15 45,5 Q55,15 50,25" fill="none" stroke="#E2E8F0" stroke-width="3" stroke-linecap="round" opacity="0.3" filter="blur(1px)" />
-              <path d="M60,25 Q55,12 65,5 Q75,12 70,25" fill="none" stroke="#E2E8F0" stroke-width="4" stroke-linecap="round" opacity="0.4" filter="blur(1px)" />
-              <path d="M80,50 C100,50 100,85 80,85" fill="none" stroke="url(#cfMug)" stroke-width="12" stroke-linecap="round" filter="url(#cfDrop)" />
-              <path d="M25,45 L85,45 L80,90 C78,102 32,102 30,90 Z" fill="url(#cfMug)" filter="url(#cfDrop)" />
-              <ellipse cx="55" cy="45" rx="30" ry="8" fill="#78113E" />
-              <ellipse cx="55" cy="47" rx="27" ry="6" fill="url(#cfBrew)" />
-              <path d="M45,47 Q55,51 65,46 Q55,44 45,47 Z" fill="#FFFFFF" opacity="0.4" />
-              <path d="M32,58 C32,75 36,88 42,92" fill="none" stroke="#FBCFE8" stroke-width="3" stroke-linecap="round" opacity="0.4" />
-            </svg>
+      <defs>
+        <linearGradient id="cfCup" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FCD34D" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="cfDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M25,45 L85,45 L75,100 C75,105 70,110 60,110 L50,110 C40,110 35,105 35,100 Z" fill="url(#cfCup)" filter="url(#cfDrop)" />
+      <path d="M85,55 A15,15 0 0,1 85,85" fill="none" stroke="url(#cfCup)" stroke-width="8" stroke-linecap="round" filter="url(#cfDrop)" />
+      <ellipse cx="55" cy="45" rx="30" ry="10" fill="#78350F" />
+      <path d="M45,35 Q50,20 55,30 T60,10" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" opacity="0.5" />
+      <path d="M65,35 Q70,20 75,30 T80,10" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" opacity="0.5" />
+    </svg>
   `,
 
   // 84. MEDAL (Award, First Place, Win, Ribbon)
@@ -2870,29 +2468,23 @@
     </svg>
   `,
 
-  // 85. TICKET (Entertainment, Vouchers, Booking, Marketing Coupons)
+  // 85. TICKET (Event, Cinema, Concert, Access)
   ticket: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="tkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#F472B6" />
-                  <stop offset="50%" stop-color="#EC4899" />
-                  <stop offset="100%" stop-color="#BE185D" />
-                </linearGradient>
-                <filter id="tkDrop" x="-15%" y="-15%" width="130%" height="130%">
-                  <feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#BE185D" flood-opacity="0.35"/>
-                </filter>
-              </defs>
-              <g transform="rotate(-15 60 60)" filter="url(#tkDrop)">
-                <path d="M15,35 L105,35 C105,42 110,45 115,45 L115,75 C110,75 105,78 105,85 L15,85 C15,78 10,75 5,75 L5,45 C10,45 15,42 15,35 Z" fill="url(#tkGrad)" />
-                <path d="M19,39 L101,39 C99,45 104,49 109,49 L109,71 C104,71 99,75 101,81 L19,81 C21,75 16,71 11,71 L11,49 C16,49 21,45 19,39 Z" fill="none" stroke="#FBCFE8" stroke-width="1.5" stroke-dasharray="4 2" opacity="0.6" />
-                <line x1="85" y1="35" x2="85" y2="85" stroke="#FFF0F6" stroke-width="3" stroke-dasharray="4 4" opacity="0.8" />
-                <polygon points="45,52 48,58 55,58 50,62 52,69 45,65 38,69 40,62 35,58 42,58" fill="#FFFFFF" opacity="0.9" />
-                <line x1="93" y1="48" x2="93" y2="72" stroke="#FFFFFF" stroke-width="2" opacity="0.7" />
-                <line x1="97" y1="48" x2="97" y2="72" stroke="#FFFFFF" stroke-width="4" opacity="0.7" />
-                <line x1="102" y1="48" x2="102" y2="72" stroke="#FFFFFF" stroke-width="1" opacity="0.7" />
-              </g>
-            </svg>
+      <defs>
+        <linearGradient id="tkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FCA5A5" />
+          <stop offset="100%" stop-color="#B91C1C" />
+        </linearGradient>
+        <filter id="tkDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M20,30 L100,30 L100,45 A10,10 0 0,0 100,65 L100,90 L20,90 L20,65 A10,10 0 0,0 20,45 Z" fill="url(#tkGrad)" filter="url(#tkDrop)" />
+      <line x1="75" y1="35" x2="75" y2="85" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="8 8" opacity="0.6" />
+      <circle cx="45" cy="60" r="12" fill="none" stroke="#FFFFFF" stroke-width="4" opacity="0.6" />
+      <path d="M40,55 L52,60 L40,65 Z" fill="#FFFFFF" opacity="0.8" />
+    </svg>
   `,
 
   // 86. MAX LEVEL (Premium, Completion, Top Tier, End-Game State)
@@ -3395,80 +2987,56 @@
     </svg>
   `,
 
-  // 103. KEYBOARD (Input, Technical Workspace, Interactive Controls, Coding Execution)
+  // 103. KEYBOARD (Typing, Code, Input, Hardware)
   keyboard: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
-        <linearGradient id="kbChassis" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#334155" />
-          <stop offset="100%" stop-color="#0F172A" />
-        </linearGradient>
-        <linearGradient id="kbKey" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id="kbBody" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#64748B" />
-          <stop offset="100%" stop-color="#475569" />
-        </linearGradient>
-        <linearGradient id="kbAccentKey" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0284C7" />
+          <stop offset="100%" stop-color="#1E293B" />
         </linearGradient>
         <filter id="kbDrop" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#000000" flood-opacity="0.35"/>
-        </filter>
-        <filter id="kbNeonGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38BDF8" flood-opacity="0.5"/>
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
       </defs>
-      <path d="M12,42 L108,42 L100,88 L20,88 Z" fill="url(#kbChassis)" filter="url(#kbDrop)" />
-      <path d="M16,46 L104,46 L97,84 L23,84 Z" fill="#0F172A" />
-      <path d="M18,48 L102,48 L95,82 L25,82 Z" fill="none" stroke="#38BDF8" stroke-width="1" filter="url(#kbNeonGlow)" opacity="0.4" />
-      <rect x="23" y="50" width="10" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="36" y="50" width="10" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="49" y="50" width="10" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="62" y="50" width="10" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="75" y="50" width="10" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="88" y="50" width="10" height="8" rx="2" fill="url(#kbAccentKey)" />
-      <rect x="21" y="61" width="12" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="36" y="61" width="10" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="49" y="61" width="10" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="62" y="61" width="10" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="75" y="61" width="10" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="88" y="61" width="9" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="20" y="72" width="14" height="8" rx="2" fill="url(#kbKey)" />
-      <rect x="37" y="72" width="48" height="8" rx="2" fill="url(#kbKey)" /> <rect x="88" y="72" width="7" height="8" rx="2" fill="url(#kbKey)" />
-      <path d="M38,73 L83,73" stroke="#94A3B8" stroke-width="1" opacity="0.4" />
-      <path d="M89,51 L97,51" stroke="#BAE6FD" stroke-width="1" opacity="0.6" />
+      <rect x="15" y="35" width="90" height="50" rx="4" fill="url(#kbBody)" filter="url(#kbDrop)" />
+      <!-- Keys Top Row -->
+      <rect x="22" y="42" width="8" height="8" rx="2" fill="#0F172A" />
+      <rect x="34" y="42" width="8" height="8" rx="2" fill="#0F172A" />
+      <rect x="46" y="42" width="8" height="8" rx="2" fill="#0F172A" />
+      <rect x="58" y="42" width="8" height="8" rx="2" fill="#0F172A" />
+      <rect x="70" y="42" width="8" height="8" rx="2" fill="#0F172A" />
+      <rect x="82" y="42" width="16" height="8" rx="2" fill="#0F172A" />
+      <!-- Keys Middle Row -->
+      <rect x="22" y="56" width="12" height="8" rx="2" fill="#0F172A" />
+      <rect x="38" y="56" width="8" height="8" rx="2" fill="#0F172A" />
+      <rect x="50" y="56" width="8" height="8" rx="2" fill="#0F172A" />
+      <rect x="62" y="56" width="8" height="8" rx="2" fill="#0F172A" />
+      <rect x="74" y="56" width="8" height="8" rx="2" fill="#0F172A" />
+      <rect x="86" y="56" width="12" height="8" rx="2" fill="#0F172A" />
+      <!-- Keys Bottom Row (Spacebar) -->
+      <rect x="22" y="70" width="16" height="8" rx="2" fill="#0F172A" />
+      <rect x="42" y="70" width="36" height="8" rx="2" fill="#3B82F6" />
+      <rect x="82" y="70" width="16" height="8" rx="2" fill="#0F172A" />
     </svg>
   `,
 
-  // 104. MOUSE (Precision Tracking, Navigation, System Interaction, Click Triggers)
+  // 104. MOUSE (Cursor, Hardware, Click, Navigate)
   mouse: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
-        <linearGradient id="msBody" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#475569" />
-          <stop offset="50%" stop-color="#334155" />
-          <stop offset="100%" stop-color="#0F172A" />
+        <linearGradient id="moBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F1F5F9" />
+          <stop offset="100%" stop-color="#94A3B8" />
         </linearGradient>
-        <linearGradient id="msWheel" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#FCD34D" />
-          <stop offset="100%" stop-color="#D97706" />
-        </linearGradient>
-        <filter id="msDrop" x="-15%" y="-15%" width="130%" height="130%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
-        </filter>
-        <filter id="msCoreGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#FBBF24" flood-opacity="0.6"/>
+        <filter id="moDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
       </defs>
-      <path d="M60,15 C40,15 30,35 30,65 C30,95 42,108 60,108 C78,108 90,95 90,65 C90,35 80,15 60,15 Z" fill="url(#msBody)" filter="url(#msDrop)" />
-      <path d="M60,15 L60,52" fill="none" stroke="#1E293B" stroke-width="2" />
-      <path d="M30,58 C40,58 42,65 42,75 C42,85 38,98 60,98 C82,98 78,85 78,75 C78,65 80,58 90,58" fill="none" stroke="#1E293B" stroke-width="1.5" opacity="0.6" />
-      <rect x="56" y="28" width="8" height="16" rx="4" fill="url(#msWheel)" filter="url(#msCoreGlow)" />
-      <line x1="56" y1="32" x2="64" y2="32" stroke="#451A03" stroke-width="1.5" />
-      <line x1="56" y1="36" x2="64" y2="36" stroke="#451A03" stroke-width="1.5" />
-      <line x1="56" y1="40" x2="64" y2="40" stroke="#451A03" stroke-width="1.5" />
-      <path d="M36,50 C34,68 38,82 45,92" fill="none" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round" opacity="0.4" />
-      <rect x="57" y="48" width="6" height="6" rx="1.5" fill="#94A3B8" />
+      <rect x="35" y="20" width="50" height="80" rx="25" fill="url(#moBody)" filter="url(#moDrop)" />
+      <path d="M60,20 L60,50" stroke="#CBD5E1" stroke-width="4" />
+      <rect x="55" y="30" width="10" height="15" rx="5" fill="#3B82F6" />
+      <path d="M35,50 Q60,60 85,50" fill="none" stroke="#CBD5E1" stroke-width="4" />
     </svg>
   `,
 
@@ -3548,73 +3116,49 @@
     </svg>
   `,
 
-  // 107. COIN (Currency, Wealth, Crypto, Transactions)
+  // 107. COIN (Currency, Money, Wealth, Crypto)
   coin: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
-        <radialGradient id="cnGoldOuter" cx="30%" cy="30%" r="70%">
+        <linearGradient id="cnGold" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#EAB308" />
-          <stop offset="100%" stop-color="#854D0E" />
-        </radialGradient>
-        <radialGradient id="cnGoldInner" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#FDE047" />
-          <stop offset="70%" stop-color="#CA8A04" />
-          <stop offset="100%" stop-color="#713F12" />
-        </radialGradient>
-        <filter id="cnDrop" x="-15%" y="-15%" width="130%" height="130%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#713F12" flood-opacity="0.4"/>
-        </filter>
-        <filter id="cnInnerGlow" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#422006" flood-opacity="0.5"/>
+          <stop offset="50%" stop-color="#F59E0B" />
+          <stop offset="100%" stop-color="#92400E" />
+        </linearGradient>
+        <filter id="cnDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
       </defs>
-      <circle cx="60" cy="60" r="45" fill="url(#cnGoldOuter)" filter="url(#cnDrop)" />
-      <circle cx="60" cy="60" r="34" fill="url(#cnGoldInner)" filter="url(#cnInnerGlow)" />
-      <circle cx="60" cy="60" r="39" fill="none" stroke="#FEF08A" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8" />
-      <path d="M60,30 L60,90 M50,42 C65,42 70,50 60,55 C50,60 45,68 60,78" fill="none" stroke="#FFFBEB" stroke-width="8" stroke-linecap="round" filter="url(#cnDrop)" />
-      <path d="M50,42 C65,42 70,50 60,55 C50,60 45,68 60,78" fill="none" stroke="#FBBF24" stroke-width="4" stroke-linecap="round" />
-      <path d="M22,42 C30,24 55,18 78,24 C55,20 32,28 22,42 Z" fill="#FFFFFF" opacity="0.5" />
-      <path d="M30,30 L33,22 L36,30 L44,33 L36,36 L33,44 L30,36 L22,33 Z" fill="#FFFFFF" />
+      <circle cx="60" cy="65" r="45" fill="#78350F" filter="url(#cnDrop)" />
+      <circle cx="60" cy="60" r="45" fill="url(#cnGold)" />
+      <circle cx="60" cy="60" r="35" fill="none" stroke="#FEF08A" stroke-width="2" opacity="0.8" />
+      <path d="M50,40 L70,40 L70,80 L50,80" fill="none" stroke="#78350F" stroke-width="6" stroke-linecap="round" />
+      <line x1="60" y1="30" x2="60" y2="90" stroke="#78350F" stroke-width="6" stroke-linecap="round" />
     </svg>
   `,
 
-  // 108. VAULT (Security, Storage, Banking, Protection)
+  // 108. VAULT (Bank, Secure, Storage, Protection)
   vault: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
-        <linearGradient id="vlSteel" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#94A3B8" />
-          <stop offset="50%" stop-color="#475569" />
-          <stop offset="100%" stop-color="#1E293B" />
+        <linearGradient id="vtSteel" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#CBD5E1" />
+          <stop offset="100%" stop-color="#64748B" />
         </linearGradient>
-        <radialGradient id="vlDoor" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#E2E8F0" />
-          <stop offset="70%" stop-color="#64748B" />
-          <stop offset="100%" stop-color="#334155" />
+        <radialGradient id="vtWheel" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#F1F5F9" />
+          <stop offset="100%" stop-color="#94A3B8" />
         </radialGradient>
-        <linearGradient id="vlGold" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FDE047" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="vlDrop" x="-15%" y="-15%" width="130%" height="130%">
-          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
-        </filter>
-        <filter id="vlInner" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.6"/>
+        <filter id="vtDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
       </defs>
-      <rect x="10" y="10" width="100" height="100" rx="8" fill="url(#vlSteel)" filter="url(#vlDrop)" />
-      <rect x="15" y="15" width="90" height="90" rx="4" fill="none" stroke="#CBD5E1" stroke-width="2" opacity="0.3" />
-      <circle cx="20" cy="20" r="2" fill="#0F172A" /><circle cx="100" cy="20" r="2" fill="#0F172A" />
-      <circle cx="20" cy="100" r="2" fill="#0F172A" /><circle cx="100" cy="100" r="2" fill="#0F172A" />
-      <circle cx="60" cy="60" r="40" fill="#0F172A" filter="url(#vlInner)" />
-      <circle cx="60" cy="60" r="36" fill="url(#vlDoor)" filter="url(#vlDrop)" />
-      <circle cx="60" cy="60" r="34" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.4" />
-      <circle cx="60" cy="60" r="16" fill="url(#vlSteel)" filter="url(#vlDrop)" />
-      <path d="M60,35 L60,85 M35,60 L85,60 M42,42 L78,78 M42,78 L78,42" stroke="url(#vlGold)" stroke-width="5" stroke-linecap="round" filter="url(#vlDrop)" />
-      <circle cx="60" cy="60" r="8" fill="url(#vlGold)" filter="url(#vlDrop)" />
-      <circle cx="60" cy="60" r="4" fill="#713F12" />
+      <circle cx="60" cy="60" r="45" fill="url(#vtSteel)" filter="url(#vtDrop)" />
+      <circle cx="60" cy="60" r="35" fill="none" stroke="#475569" stroke-width="4" />
+      <circle cx="60" cy="60" r="25" fill="url(#vtWheel)" />
+      <line x1="60" y1="25" x2="60" y2="95" stroke="#475569" stroke-width="6" />
+      <line x1="25" y1="60" x2="95" y2="60" stroke="#475569" stroke-width="6" />
+      <circle cx="60" cy="60" r="8" fill="#1E293B" />
     </svg>
   `,
 
@@ -3664,44 +3208,26 @@
     </svg>
   `,
 
-  // 110. BANK (Institutions, Government, Enterprise, Security)
+  // 110. BANK (Institution, Finance, Secure, Trust)
   bank: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
-        <linearGradient id="bkMarble" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#F8FAFC" />
-          <stop offset="100%" stop-color="#94A3B8" />
-        </linearGradient>
-        <linearGradient id="bkGold" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FDE047" />
-          <stop offset="100%" stop-color="#B45309" />
+        <linearGradient id="bkStone" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#F1F5F9" />
+          <stop offset="100%" stop-color="#64748B" />
         </linearGradient>
         <filter id="bkDrop" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.25"/>
-        </filter>
-        <filter id="bkInner" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.4"/>
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
       </defs>
-      <rect x="15" y="45" width="90" height="50" fill="#334155" filter="url(#bkInner)" />
-      <path d="M10,95 L110,95 L115,105 L5,105 Z" fill="url(#bkMarble)" filter="url(#bkDrop)" />
-      <path d="M15,85 L105,85 L110,95 L10,95 Z" fill="url(#bkMarble)" filter="url(#bkDrop)" />
-      <rect x="22" y="45" width="12" height="40" fill="url(#bkMarble)" filter="url(#bkDrop)" />
-      <rect x="44" y="45" width="12" height="40" fill="url(#bkMarble)" filter="url(#bkDrop)" />
-      <rect x="66" y="45" width="12" height="40" fill="url(#bkMarble)" filter="url(#bkDrop)" />
-      <rect x="88" y="45" width="12" height="40" fill="url(#bkMarble)" filter="url(#bkDrop)" />
-      <line x1="26" y1="45" x2="26" y2="85" stroke="#CBD5E1" stroke-width="2" />
-      <line x1="30" y1="45" x2="30" y2="85" stroke="#CBD5E1" stroke-width="2" />
-      <line x1="48" y1="45" x2="48" y2="85" stroke="#CBD5E1" stroke-width="2" />
-      <line x1="52" y1="45" x2="52" y2="85" stroke="#CBD5E1" stroke-width="2" />
-      <line x1="70" y1="45" x2="70" y2="85" stroke="#CBD5E1" stroke-width="2" />
-      <line x1="74" y1="45" x2="74" y2="85" stroke="#CBD5E1" stroke-width="2" />
-      <line x1="92" y1="45" x2="92" y2="85" stroke="#CBD5E1" stroke-width="2" />
-      <line x1="96" y1="45" x2="96" y2="85" stroke="#CBD5E1" stroke-width="2" />
-      <polygon points="60,15 10,45 110,45" fill="url(#bkMarble)" filter="url(#bkDrop)" />
-      <polygon points="60,25 25,40 95,40" fill="#334155" filter="url(#bkInner)" />
-      <circle cx="60" cy="35" r="5" fill="url(#bkGold)" filter="url(#bkDrop)" />
-      <path d="M12,43 L60,17 L108,43" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.7" />
+      <polygon points="60,15 15,45 105,45" fill="url(#bkStone)" filter="url(#bkDrop)" />
+      <rect x="15" y="45" width="90" height="10" fill="#94A3B8" />
+      <rect x="25" y="55" width="10" height="35" fill="url(#bkStone)" filter="url(#bkDrop)" />
+      <rect x="45" y="55" width="10" height="35" fill="url(#bkStone)" filter="url(#bkDrop)" />
+      <rect x="65" y="55" width="10" height="35" fill="url(#bkStone)" filter="url(#bkDrop)" />
+      <rect x="85" y="55" width="10" height="35" fill="url(#bkStone)" filter="url(#bkDrop)" />
+      <rect x="15" y="90" width="90" height="15" fill="url(#bkStone)" filter="url(#bkDrop)" />
+      <circle cx="60" cy="30" r="6" fill="#F59E0B" />
     </svg>
   `,
 
@@ -3744,47 +3270,29 @@
     </svg>
   `,
 
-  // 112. SMARTWATCH (Wearables, Health, Fitness, Notifications)
+  // 112. SMARTWATCH (Wearable, Time, Fitness, Device)
   smartwatch: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
         <linearGradient id="swStrap" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#0284C7" />
-          <stop offset="100%" stop-color="#082F49" />
+          <stop offset="0%" stop-color="#334155" />
+          <stop offset="100%" stop-color="#0F172A" />
         </linearGradient>
-        <linearGradient id="swBezel" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E2E8F0" />
-          <stop offset="50%" stop-color="#94A3B8" />
-          <stop offset="100%" stop-color="#334155" />
-        </linearGradient>
-        <linearGradient id="swScreen" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#0F172A" />
-          <stop offset="100%" stop-color="#000000" />
+        <linearGradient id="swFace" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#CBD5E1" />
+          <stop offset="100%" stop-color="#64748B" />
         </linearGradient>
         <filter id="swDrop" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.35"/>
-        </filter>
-        <filter id="swNeonRing" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#10B981" flood-opacity="0.8"/>
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
         </filter>
       </defs>
-      <path d="M45,35 L45,10 C45,5 50,5 50,5 L70,5 C70,5 75,5 75,10 L75,35 Z" fill="url(#swStrap)" filter="url(#swDrop)" />
-      <path d="M45,85 L45,110 C45,115 50,115 50,115 L70,115 C70,115 75,115 75,110 L75,85 Z" fill="url(#swStrap)" filter="url(#swDrop)" />
-      <circle cx="60" cy="95" r="2" fill="#0F172A" />
-      <circle cx="60" cy="105" r="2" fill="#0F172A" />
-      <rect x="30" y="30" width="60" height="60" rx="16" fill="url(#swBezel)" filter="url(#swDrop)" />
-      <rect x="90" y="50" width="4" height="12" rx="2" fill="#94A3B8" />
-      <rect x="90" y="68" width="3" height="8" rx="1.5" fill="#475569" />
-      <rect x="34" y="34" width="52" height="52" rx="12" fill="url(#swScreen)" />
-      <circle cx="60" cy="60" r="18" fill="none" stroke="#1E293B" stroke-width="4" />
-      <circle cx="60" cy="60" r="18" fill="none" stroke="#EF4444" stroke-width="4" stroke-dasharray="100 13" stroke-linecap="round" transform="rotate(-90 60 60)" />
-      
-      <circle cx="60" cy="60" r="12" fill="none" stroke="#1E293B" stroke-width="4" />
-      <circle cx="60" cy="60" r="12" fill="none" stroke="#10B981" stroke-width="4" stroke-dasharray="60 15" stroke-linecap="round" transform="rotate(-40 60 60)" filter="url(#swNeonRing)" />
-      
-      <circle cx="60" cy="60" r="6" fill="none" stroke="#1E293B" stroke-width="4" />
-      <circle cx="60" cy="60" r="6" fill="none" stroke="#38BDF8" stroke-width="4" stroke-dasharray="30 7" stroke-linecap="round" transform="rotate(20 60 60)" />
-      <path d="M34,46 C45,35 60,34 75,34 L86,34 L86,40 C70,40 50,45 34,55 Z" fill="#FFFFFF" opacity="0.1" />
+      <rect x="45" y="15" width="30" height="90" rx="4" fill="url(#swStrap)" filter="url(#swDrop)" />
+      <rect x="35" y="35" width="50" height="50" rx="10" fill="url(#swFace)" filter="url(#swDrop)" />
+      <rect x="40" y="40" width="40" height="40" rx="6" fill="#020617" />
+      <circle cx="60" cy="60" r="12" fill="none" stroke="#34D399" stroke-width="4" />
+      <circle cx="60" cy="60" r="12" fill="none" stroke="#38BDF8" stroke-width="4" stroke-dasharray="20 40" />
+      <line x1="60" y1="60" x2="60" y2="52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+      <line x1="60" y1="60" x2="68" y2="60" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
     </svg>
   `,
 
@@ -4047,6 +3555,1885 @@
     </svg>
   `,
 
+  // 121. CIRCUIT (Electronics, Logic, Hardware Design, Firmware)
+  circuit: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="ctBoard" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1E293B" />
+          <stop offset="100%" stop-color="#0F172A" />
+        </linearGradient>
+        <linearGradient id="ctTrace" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#CA8A04" />
+        </linearGradient>
+        <filter id="ctDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+        <filter id="ctNeon" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#FDE047" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <rect x="15" y="15" width="90" height="90" rx="8" fill="url(#ctBoard)" filter="url(#ctDrop)" />
+      <path d="M30,30 L60,30 L60,60 L90,60" fill="none" stroke="url(#ctTrace)" stroke-width="4" stroke-linecap="round" filter="url(#ctNeon)" />
+      <path d="M30,90 L60,90 L60,60 L90,30" fill="none" stroke="url(#ctTrace)" stroke-width="4" stroke-linecap="round" filter="url(#ctNeon)" />
+      <circle cx="30" cy="30" r="6" fill="#FDE047" filter="url(#ctNeon)" />
+      <circle cx="60" cy="60" r="6" fill="#FDE047" filter="url(#ctNeon)" />
+      <circle cx="90" cy="60" r="6" fill="#FDE047" filter="url(#ctNeon)" />
+      <circle cx="30" cy="90" r="6" fill="#FDE047" filter="url(#ctNeon)" />
+      <circle cx="90" cy="30" r="6" fill="#FDE047" filter="url(#ctNeon)" />
+      <rect x="20" y="20" width="80" height="80" rx="6" fill="none" stroke="#334155" stroke-width="2" />
+    </svg>
+  `,
+
+  // 122. SHIELD (Security, Encryption, Safety, Protection)
+  shield_1: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="shSteel" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#1E293B" />
+        </linearGradient>
+        <filter id="shDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <path d="M60,15 L105,35 C105,75 80,105 60,115 C40,105 15,75 15,35 Z" fill="url(#shSteel)" filter="url(#shDrop)" />
+      <path d="M60,25 L95,40 C95,70 75,95 60,105 C45,95 25,70 25,40 Z" fill="#334155" />
+      <path d="M40,60 L55,75 L80,45" fill="none" stroke="#34D399" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  `,
+
+  // 123. MESSAGE (Communication, Chat, Feedback, Notifications)
+  message: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="msgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8B5CF6" />
+          <stop offset="100%" stop-color="#4C1D95" />
+        </linearGradient>
+        <filter id="msgDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M20,30 L100,30 C105,30 110,35 110,40 L110,75 C110,80 105,85 100,85 L65,85 L50,105 L50,85 L20,85 C15,85 10,80 10,75 L10,40 C10,35 15,30 20,30 Z" fill="url(#msgGrad)" filter="url(#msgDrop)" />
+      <circle cx="40" cy="57" r="5" fill="#FFFFFF" />
+      <circle cx="60" cy="57" r="5" fill="#FFFFFF" />
+      <circle cx="80" cy="57" r="5" fill="#FFFFFF" />
+    </svg>
+  `,
+
+  // 124. SPEEDOMETER (Performance, Benchmarking, Velocity, Metrics)
+  speedometer: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="smGauge" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#E2E8F0" />
+        </radialGradient>
+        <linearGradient id="smNeedle" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#EF4444" />
+          <stop offset="100%" stop-color="#991B1B" />
+        </linearGradient>
+        <filter id="smDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="#334155" filter="url(#smDrop)" />
+      <circle cx="60" cy="60" r="40" fill="url(#smGauge)" />
+      <path d="M25,85 A40,40 0 0,1 95,85" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+      <line x1="60" y1="60" x2="85" y2="35" stroke="url(#smNeedle)" stroke-width="5" stroke-linecap="round" filter="url(#smDrop)" />
+      <circle cx="60" cy="60" r="6" fill="#1E293B" />
+    </svg>
+  `,
+
+  // 125. LOCK (Security, Authentication, Access, Privacy)
+  lock_1: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="lkShackle" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#CBD5E1" />
+          <stop offset="100%" stop-color="#64748B" />
+        </linearGradient>
+        <linearGradient id="lkBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="lkDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M40,45 L40,30 C40,15 50,5 60,5 C70,5 80,15 80,30 L80,45" fill="none" stroke="url(#lkShackle)" stroke-width="12" stroke-linecap="round" filter="url(#lkDrop)" />
+      <rect x="25" y="45" width="70" height="50" rx="8" fill="url(#lkBody)" filter="url(#lkDrop)" />
+      <circle cx="60" cy="70" r="8" fill="#78350F" />
+      <rect x="58" y="70" width="4" height="10" fill="#FDE047" />
+    </svg>
+  `,
+
+  // 126. CODE (Programming, Logic, Scripts, Development)
+  code: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="cdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#818CF8" />
+        </linearGradient>
+        <filter id="cdDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="15" y="25" width="90" height="70" rx="6" fill="#1E293B" filter="url(#cdDrop)" />
+      <path d="M35,45 L50,60 L35,75" fill="none" stroke="url(#cdGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M85,45 L70,60 L85,75" fill="none" stroke="url(#cdGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+      <line x1="60" y1="40" x2="50" y2="80" stroke="url(#cdGrad)" stroke-width="8" stroke-linecap="round" />
+    </svg>
+  `,
+
+  // 127. GLOBE (Worldwide, Cloud, Connectivity, Distribution)
+  globe_1: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="glBlue" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#1D4ED8" />
+        </radialGradient>
+        <filter id="glDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="url(#glBlue)" filter="url(#glDrop)" />
+      <ellipse cx="60" cy="60" rx="20" ry="45" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.3" />
+      <ellipse cx="60" cy="60" rx="45" ry="20" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.3" />
+      <path d="M30,30 C50,20 70,20 90,30" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.4" />
+      <path d="M30,90 C50,100 70,100 90,90" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.4" />
+    </svg>
+  `,
+
+  // 128. SHIELD (Encryption, Security, Protection, Compliance)
+  shield_2: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="shGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#1E40AF" />
+        </linearGradient>
+        <filter id="shDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M60,15 L105,35 C105,75 80,105 60,115 C40,105 15,75 15,35 Z" fill="url(#shGradient)" filter="url(#shDrop)" />
+      <path d="M40,55 L55,70 L80,40" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  `,
+
+  // 129. WIFI (Signal, Connectivity, Network, Wireless)
+  wifi: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="wfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F59E0B" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="wfDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="95" r="8" fill="url(#wfGrad)" filter="url(#wfDrop)" />
+      <path d="M35,70 A35,35 0 0,1 85,70" fill="none" stroke="url(#wfGrad)" stroke-width="8" stroke-linecap="round" />
+      <path d="M20,55 A55,55 0 0,1 100,55" fill="none" stroke="url(#wfGrad)" stroke-width="8" stroke-linecap="round" />
+    </svg>
+  `,
+
+  // 130. SYNC (Data, Refresh, Update, Circular)
+  sync: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="syGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#10B981" />
+          <stop offset="100%" stop-color="#047857" />
+        </linearGradient>
+        <filter id="syDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M30,60 A30,30 0 1,1 60,90 M90,60 A30,30 0 1,1 60,30" fill="none" stroke="url(#syGrad)" stroke-width="10" stroke-linecap="round" filter="url(#syDrop)" />
+      <polygon points="30,60 20,50 40,50" fill="url(#syGrad)" />
+      <polygon points="90,60 100,70 80,70" fill="url(#syGrad)" />
+    </svg>
+  `,
+
+  // 131. STORAGE (Hard Drive, Data, Capacity, Volume)
+  storage: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="stGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#64748B" />
+          <stop offset="100%" stop-color="#1E293B" />
+        </linearGradient>
+        <filter id="stDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="20" y="30" width="80" height="60" rx="6" fill="url(#stGrad)" filter="url(#stDrop)" />
+      <circle cx="60" cy="60" r="15" fill="#334155" />
+      <circle cx="60" cy="60" r="5" fill="#FFFFFF" />
+      <rect x="30" y="40" width="10" height="5" fill="#CBD5E1" />
+    </svg>
+  `,
+
+  // 132. GLOBE (Worldwide, Cloud, Connectivity)
+  globe_2: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="glGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#1D4ED8" />
+        </linearGradient>
+        <filter id="glDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="url(#glGrad)" filter="url(#glDrop)" />
+      <path d="M60,15 A45,45 0 0,0 60,105 M15,60 A45,45 0 0,0 105,60" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.4" />
+      <ellipse cx="60" cy="60" rx="25" ry="45" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.4" />
+    </svg>
+  `,
+
+  // 133. PENCIL (Design, Writing, Editing, Creation)
+  pencil: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="peBody" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#D97706" />
+        </linearGradient>
+        <linearGradient id="peTip" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#A1A1AA" />
+          <stop offset="100%" stop-color="#52525B" />
+        </linearGradient>
+        <filter id="peDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M15,105 L35,85 L105,15 L85,-5 L15,65 Z" fill="url(#peBody)" filter="url(#peDrop)" />
+      <path d="M15,105 L35,85 L25,75 Z" fill="#FCA5A5" />
+      <path d="M85,-5 L105,15 L95,25 L75,5 Z" fill="url(#peTip)" />
+      <path d="M15,105 L85,-5" stroke="#000000" stroke-width="2" opacity="0.2" />
+    </svg>
+  `,
+
+  // 134. BRUSH (Art, Painting, Graphics, Styling)
+  brush: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="brHandle" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8B5CF6" />
+          <stop offset="100%" stop-color="#5B21B6" />
+        </linearGradient>
+        <linearGradient id="brBristle" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="brDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="50" y="40" width="20" height="70" rx="3" fill="url(#brHandle)" filter="url(#brDrop)" />
+      <path d="M40,40 L80,40 L75,10 L45,10 Z" fill="url(#brBristle)" filter="url(#brDrop)" />
+      <path d="M45,40 L75,40" stroke="#000000" stroke-width="4" opacity="0.2" />
+    </svg>
+  `,
+
+  // 135. DOCUMENT (Text, Files, Reports, Writing)
+  document: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="doPaper" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#E2E8F0" />
+        </linearGradient>
+        <filter id="doDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M30,15 L80,15 L105,40 L105,105 L30,105 Z" fill="url(#doPaper)" filter="url(#doDrop)" />
+      <path d="M80,15 L105,40 L80,40 Z" fill="#CBD5E1" />
+      <line x1="40" y1="55" x2="90" y2="55" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+      <line x1="40" y1="70" x2="90" y2="70" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+      <line x1="40" y1="85" x2="70" y2="85" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+    </svg>
+  `,
+
+  // 136. TOOLS (Repair, Configuration, Management)
+  tools: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="toTool" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <filter id="toDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M30,30 L60,60 L50,70 L20,40 Z" fill="url(#toTool)" filter="url(#toDrop)" />
+      <path d="M80,80 L50,50 L60,40 L90,70 Z" fill="url(#toTool)" filter="url(#toDrop)" />
+      <circle cx="60" cy="60" r="5" fill="#FFFFFF" />
+    </svg>
+  `,
+
+  // 137. COMPASS (Navigation, Strategy, Direction, Exploration)
+  compass_1: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="cpBase" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#334155" />
+          <stop offset="100%" stop-color="#0F172A" />
+        </radialGradient>
+        <linearGradient id="cpNeedle" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#F87171" />
+          <stop offset="100%" stop-color="#B91C1C" />
+        </linearGradient>
+        <filter id="cpDrop" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="50" fill="url(#cpBase)" filter="url(#cpDrop)" />
+      <circle cx="60" cy="60" r="42" fill="none" stroke="#475569" stroke-width="4" />
+      <path d="M60,20 L65,60 L60,100 L55,60 Z" fill="url(#cpNeedle)" filter="url(#cpDrop)" />
+      <path d="M60,20 L55,60 L60,100 L65,60 Z" fill="#FCA5A5" />
+      <circle cx="60" cy="60" r="8" fill="#F1F5F9" />
+    </svg>
+  `,
+
+  // 138. CALENDAR (Scheduling, Time Management, Deadlines)
+  calendar_1: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="caBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="caDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="20" y="25" width="80" height="75" rx="6" fill="url(#caBody)" filter="url(#caDrop)" />
+      <rect x="20" y="25" width="80" height="20" rx="6" fill="#F59E0B" />
+      <circle cx="35" cy="20" r="6" fill="#334155" />
+      <circle cx="85" cy="20" r="6" fill="#334155" />
+      <line x1="35" y1="55" x2="85" y2="55" stroke="#FFFFFF" stroke-width="4" opacity="0.3" />
+      <line x1="35" y1="70" x2="85" y2="70" stroke="#FFFFFF" stroke-width="4" opacity="0.3" />
+      <line x1="35" y1="85" x2="60" y2="85" stroke="#FFFFFF" stroke-width="4" opacity="0.3" />
+    </svg>
+  `,
+
+  // 139. UPLOAD (Sync, Cloud, Data Transfer, Deployment)
+  upload: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="upGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#10B981" />
+          <stop offset="100%" stop-color="#065F46" />
+        </linearGradient>
+        <filter id="upDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M40,70 L60,45 L80,70" fill="none" stroke="url(#upGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" filter="url(#upDrop)" />
+      <line x1="60" y1="45" x2="60" y2="100" stroke="url(#upGrad)" stroke-width="12" stroke-linecap="round" filter="url(#upDrop)" />
+      <rect x="30" y="15" width="60" height="15" rx="2" fill="url(#upGrad)" filter="url(#upDrop)" />
+    </svg>
+  `,
+
+  // 140. CREDIT CARD (Payment, Transaction, Commerce)
+  credit_card: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="ccGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1E293B" />
+          <stop offset="100%" stop-color="#020617" />
+        </linearGradient>
+        <linearGradient id="ccChip" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="ccDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <rect x="15" y="30" width="90" height="60" rx="6" fill="url(#ccGrad)" filter="url(#ccDrop)" />
+      <rect x="25" y="45" width="15" height="12" rx="2" fill="url(#ccChip)" />
+      <circle cx="85" cy="70" r="10" fill="#EF4444" opacity="0.8" />
+      <circle cx="75" cy="70" r="10" fill="#F59E0B" opacity="0.8" />
+      <path d="M25,75 L60,75" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+    </svg>
+  `,
+
+  // 141. SAFE (Security, Wealth, Vault, Protection)
+  safe: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="sfMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#334155" />
+        </linearGradient>
+        <filter id="sfDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <rect x="20" y="20" width="80" height="80" rx="8" fill="url(#sfMetal)" filter="url(#sfDrop)" />
+      <rect x="30" y="30" width="60" height="60" rx="4" fill="#1E293B" />
+      <circle cx="60" cy="60" r="18" fill="#F1F5F9" />
+      <circle cx="60" cy="60" r="10" fill="#64748B" />
+      <line x1="60" y1="35" x2="60" y2="42" stroke="#FFFFFF" stroke-width="4" />
+      <line x1="60" y1="78" x2="60" y2="85" stroke="#FFFFFF" stroke-width="4" />
+      <line x1="35" y1="60" x2="42" y2="60" stroke="#FFFFFF" stroke-width="4" />
+      <line x1="78" y1="60" x2="85" y2="60" stroke="#FFFFFF" stroke-width="4" />
+    </svg>
+  `,
+
+  // 142. PIGGY BANK (Savings, Investment, Wealth, Growth)
+  piggy_bank: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="pbPink" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FBCFE8" />
+          <stop offset="100%" stop-color="#DB2777" />
+        </linearGradient>
+        <filter id="pbDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="65" cy="65" r="35" fill="url(#pbPink)" filter="url(#pbDrop)" />
+      <ellipse cx="35" cy="65" rx="15" ry="10" fill="url(#pbPink)" filter="url(#pbDrop)" />
+      <circle cx="45" cy="45" r="8" fill="url(#pbPink)" />
+      <circle cx="75" cy="35" r="8" fill="url(#pbPink)" />
+      <rect x="55" y="85" width="10" height="15" rx="4" fill="#9D174D" />
+      <rect x="75" y="85" width="10" height="15" rx="4" fill="#9D174D" />
+      <line x1="60" y1="40" x2="70" y2="40" stroke="#FDE047" stroke-width="6" stroke-linecap="round" filter="url(#pbDrop)" />
+      <circle cx="80" cy="55" r="3" fill="#000000" />
+    </svg>
+  `,
+
+  // 143. CHART (Growth, Data, Statistics, Revenue)
+  chart_line: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="clGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#34D399" />
+          <stop offset="100%" stop-color="#059669" />
+        </linearGradient>
+        <filter id="clDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <polyline points="20,80 50,50 75,65 100,25" fill="none" stroke="url(#clGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#clDrop)" />
+      <line x1="15" y1="100" x2="105" y2="100" stroke="#94A3B8" stroke-width="6" stroke-linecap="round" />
+      <line x1="15" y1="100" x2="15" y2="15" stroke="#94A3B8" stroke-width="6" stroke-linecap="round" />
+      <circle cx="50" cy="50" r="6" fill="#FDE047" />
+      <circle cx="75" cy="65" r="6" fill="#FDE047" />
+      <circle cx="100" cy="25" r="6" fill="#FDE047" />
+    </svg>
+  `,
+
+  // 144. BULL (Market, Optimism, Stocks, Trading)
+  bull: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="blGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4ADE80" />
+          <stop offset="100%" stop-color="#14532D" />
+        </linearGradient>
+        <filter id="blDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M20,60 L50,30 L70,40 L100,20 L100,80 L20,80 Z" fill="url(#blGrad)" filter="url(#blDrop)" />
+      <path d="M40,20 Q45,10 55,20" fill="none" stroke="#FDE047" stroke-width="4" stroke-linecap="round" />
+      <path d="M70,30 Q75,20 85,30" fill="none" stroke="#FDE047" stroke-width="4" stroke-linecap="round" />
+    </svg>
+  `,
+
+  // 145. BEAR (Market, Pessimism, Stocks, Trading)
+  bear: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="brGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F87171" />
+          <stop offset="100%" stop-color="#7F1D1D" />
+        </linearGradient>
+        <filter id="brDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M100,40 L70,70 L50,60 L20,80 L20,20 L100,20 Z" fill="url(#brGrad)" filter="url(#brDrop)" />
+      <circle cx="80" cy="50" r="4" fill="#000000" />
+    </svg>
+  `,
+
+  // 146. INVOICE (Billing, Receipt, Payment, Accounting)
+  invoice: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="inPaper" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#E2E8F0" />
+        </linearGradient>
+        <filter id="inDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M25,15 L95,15 L95,105 L80,95 L65,105 L50,95 L35,105 L25,95 Z" fill="url(#inPaper)" filter="url(#inDrop)" />
+      <line x1="40" y1="40" x2="80" y2="40" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+      <line x1="40" y1="55" x2="70" y2="55" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+      <line x1="40" y1="70" x2="80" y2="70" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+      <circle cx="80" cy="30" r="8" fill="#F59E0B" />
+    </svg>
+  `,
+
+  // 147. SERVER (Database, Storage, Hosting, Rack)
+  server_rack: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="srMetal" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#475569" />
+          <stop offset="100%" stop-color="#1E293B" />
+        </linearGradient>
+        <filter id="srDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="25" y="15" width="70" height="90" rx="4" fill="url(#srMetal)" filter="url(#srDrop)" />
+      <rect x="35" y="25" width="50" height="20" rx="2" fill="#0F172A" />
+      <rect x="35" y="55" width="50" height="20" rx="2" fill="#0F172A" />
+      <rect x="35" y="85" width="50" height="10" rx="2" fill="#0F172A" />
+      <circle cx="45" cy="35" r="3" fill="#34D399" />
+      <circle cx="55" cy="35" r="3" fill="#34D399" />
+      <circle cx="45" cy="65" r="3" fill="#34D399" />
+      <circle cx="55" cy="65" r="3" fill="#F87171" />
+    </svg>
+  `,
+
+  // 148. NODE (Network, Hub, Distribution, Graph)
+  node: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="ndGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#A78BFA" />
+          <stop offset="100%" stop-color="#5B21B6" />
+        </linearGradient>
+        <filter id="ndDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <line x1="60" y1="20" x2="30" y2="80" stroke="#94A3B8" stroke-width="4" filter="url(#ndDrop)" />
+      <line x1="60" y1="20" x2="90" y2="80" stroke="#94A3B8" stroke-width="4" filter="url(#ndDrop)" />
+      <line x1="30" y1="80" x2="90" y2="80" stroke="#94A3B8" stroke-width="4" filter="url(#ndDrop)" />
+      <circle cx="60" cy="20" r="15" fill="url(#ndGrad)" filter="url(#ndDrop)" />
+      <circle cx="30" cy="80" r="15" fill="url(#ndGrad)" filter="url(#ndDrop)" />
+      <circle cx="90" cy="80" r="15" fill="url(#ndGrad)" filter="url(#ndDrop)" />
+    </svg>
+  `,
+
+  // 149. CLOUD (Internet, Sync, Backup, Storage)
+  cloud_sync: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="csCloud" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#BAE6FD" />
+        </linearGradient>
+        <filter id="csDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M40,75 C25,75 25,50 40,50 C45,30 75,30 80,50 C95,50 95,75 80,75 Z" fill="url(#csCloud)" filter="url(#csDrop)" />
+      <path d="M60,25 A35,35 0 0,1 95,60" fill="none" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" />
+      <path d="M60,95 A35,35 0 0,1 25,60" fill="none" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" />
+      <polygon points="95,60 105,50 85,50" fill="#38BDF8" />
+      <polygon points="25,60 15,70 35,70" fill="#38BDF8" />
+    </svg>
+  `,
+
+  // 150. EDGE (CDN, Global, Edge Computing, Distribution)
+  edge: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="egGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="egDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="20" y="20" width="80" height="80" fill="none" stroke="#64748B" stroke-width="4" />
+      <line x1="20" y1="60" x2="100" y2="60" stroke="#64748B" stroke-width="4" />
+      <line x1="60" y1="20" x2="60" y2="100" stroke="#64748B" stroke-width="4" />
+      <circle cx="20" cy="20" r="10" fill="url(#egGrad)" filter="url(#egDrop)" />
+      <circle cx="100" cy="20" r="10" fill="url(#egGrad)" filter="url(#egDrop)" />
+      <circle cx="20" cy="100" r="10" fill="url(#egGrad)" filter="url(#egDrop)" />
+      <circle cx="100" cy="100" r="10" fill="url(#egGrad)" filter="url(#egDrop)" />
+    </svg>
+  `,
+
+  // 151. HOSTING (Web, Virtual Machine, VPS, Servers)
+  hosting: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="hsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#1D4ED8" />
+        </linearGradient>
+        <filter id="hsDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="25" y="30" width="70" height="60" rx="8" fill="#1E293B" filter="url(#hsDrop)" />
+      <path d="M40,50 L80,50" stroke="url(#hsGrad)" stroke-width="6" stroke-linecap="round" />
+      <path d="M40,70 L60,70" stroke="url(#hsGrad)" stroke-width="6" stroke-linecap="round" />
+      <circle cx="75" cy="70" r="5" fill="#34D399" />
+      <path d="M60,10 L60,30" stroke="#94A3B8" stroke-width="4" />
+      <path d="M30,10 L90,10" stroke="#94A3B8" stroke-width="4" />
+    </svg>
+  `,
+
+  // 152. CONTAINER (Docker, Kubernetes, Packages, Modules)
+  container: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="ctBox" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3B82F6" />
+          <stop offset="100%" stop-color="#1E3A8A" />
+        </linearGradient>
+        <filter id="ctDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <polygon points="60,20 20,40 20,80 60,100 100,80 100,40" fill="url(#ctBox)" filter="url(#ctDrop)" />
+      <polygon points="60,60 20,40 60,20 100,40" fill="#60A5FA" opacity="0.8" />
+      <polygon points="20,80 60,100 60,60 20,40" fill="#1D4ED8" opacity="0.6" />
+      <line x1="60" y1="60" x2="60" y2="100" stroke="#1E3A8A" stroke-width="4" />
+    </svg>
+  `,
+
+  // 153. GATEWAY (Router, Entry, ISP, Connectivity)
+  gateway: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="gwBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#CBD5E1" />
+          <stop offset="100%" stop-color="#64748B" />
+        </linearGradient>
+        <filter id="gwDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="20" y="45" width="80" height="30" rx="4" fill="url(#gwBody)" filter="url(#gwDrop)" />
+      <rect x="30" y="15" width="4" height="30" fill="#94A3B8" />
+      <rect x="86" y="15" width="4" height="30" fill="#94A3B8" />
+      <circle cx="35" cy="60" r="3" fill="#34D399" />
+      <circle cx="45" cy="60" r="3" fill="#34D399" />
+      <circle cx="55" cy="60" r="3" fill="#FDE047" />
+    </svg>
+  `,
+
+  // 154. API (Endpoints, Hooks, Connect, Software)
+  api: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="apGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F472B6" />
+          <stop offset="100%" stop-color="#BE185D" />
+        </linearGradient>
+        <filter id="apDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="30" cy="60" r="15" fill="url(#apGrad)" filter="url(#apDrop)" />
+      <circle cx="90" cy="60" r="15" fill="url(#apGrad)" filter="url(#apDrop)" />
+      <path d="M45,60 L75,60" fill="none" stroke="#64748B" stroke-width="6" stroke-linecap="round" />
+      <circle cx="60" cy="60" r="8" fill="#FFFFFF" filter="url(#apDrop)" />
+    </svg>
+  `,
+
+  // 155. TERMINAL (Console, CLI, Shell, Commands)
+  terminal: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="tmScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#1E293B" />
+          <stop offset="100%" stop-color="#0F172A" />
+        </linearGradient>
+        <filter id="tmDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="15" y="25" width="90" height="70" rx="4" fill="url(#tmScreen)" filter="url(#tmDrop)" />
+      <rect x="15" y="25" width="90" height="15" fill="#334155" />
+      <circle cx="25" cy="32" r="3" fill="#EF4444" />
+      <circle cx="35" cy="32" r="3" fill="#F59E0B" />
+      <circle cx="45" cy="32" r="3" fill="#10B981" />
+      <path d="M25,55 L40,65 L25,75" fill="none" stroke="#10B981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+      <line x1="50" y1="75" x2="65" y2="75" stroke="#FFFFFF" stroke-width="4" />
+    </svg>
+  `,
+
+  // 156. BUG (Debugging, Issues, Errors, Testing)
+  bug: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="bgBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F87171" />
+          <stop offset="100%" stop-color="#991B1B" />
+        </linearGradient>
+        <filter id="bgDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <!-- Legs -->
+      <path d="M40,50 L20,40 M40,60 L15,60 M40,70 L20,80 M80,50 L100,40 M80,60 L105,60 M80,70 L100,80" fill="none" stroke="#334155" stroke-width="4" stroke-linecap="round" filter="url(#bgDrop)" />
+      <!-- Antennas -->
+      <path d="M50,30 Q40,15 30,20 M70,30 Q80,15 90,20" fill="none" stroke="#334155" stroke-width="4" stroke-linecap="round" filter="url(#bgDrop)" />
+      <!-- Body -->
+      <ellipse cx="60" cy="60" rx="25" ry="35" fill="url(#bgBody)" filter="url(#bgDrop)" />
+      <circle cx="60" cy="30" r="10" fill="#1E293B" />
+      <line x1="60" y1="30" x2="60" y2="95" stroke="#000000" stroke-width="2" opacity="0.3" />
+    </svg>
+  `,
+
+  // 157. PLAY (Video, Music, Media, Start)
+  play: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="plGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#A78BFA" />
+          <stop offset="100%" stop-color="#5B21B6" />
+        </linearGradient>
+        <filter id="plDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="url(#plGrad)" filter="url(#plDrop)" />
+      <polygon points="50,40 50,80 85,60" fill="#FFFFFF" />
+    </svg>
+  `,
+
+  // 158. PAUSE (Wait, Stop, Hold, Media)
+  pause: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="paGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#0284C7" />
+        </linearGradient>
+        <filter id="paDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="url(#paGrad)" filter="url(#paDrop)" />
+      <rect x="40" y="40" width="12" height="40" fill="#FFFFFF" />
+      <rect x="68" y="40" width="12" height="40" fill="#FFFFFF" />
+    </svg>
+  `,
+
+  // 159. RECORD (Video, Audio, Capture, Broadcast)
+  record: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="rcRed" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FCA5A5" />
+          <stop offset="100%" stop-color="#B91C1C" />
+        </radialGradient>
+        <filter id="rcDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="rcGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#EF4444" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="#1E293B" filter="url(#rcDrop)" />
+      <circle cx="60" cy="60" r="20" fill="url(#rcRed)" filter="url(#rcGlow)" />
+    </svg>
+  `,
+
+  // 160. SPEAKER (Audio, Sound, Volume, Megaphone)
+  speaker: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="spGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FCD34D" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="spDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <polygon points="20,45 40,45 70,25 70,95 40,75 20,75" fill="url(#spGrad)" filter="url(#spDrop)" />
+      <path d="M85,40 A30,30 0 0,1 85,80" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" />
+      <path d="M100,25 A50,50 0 0,1 100,95" fill="none" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" opacity="0.5" />
+    </svg>
+  `,
+
+  // 161. VR (Virtual Reality, Metaverse, Headset, 3D)
+  vr_headset: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="vrBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#CBD5E1" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <linearGradient id="vrVisor" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#1E293B" />
+          <stop offset="100%" stop-color="#020617" />
+        </linearGradient>
+        <filter id="vrDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="20" y="35" width="80" height="50" rx="10" fill="url(#vrBody)" filter="url(#vrDrop)" />
+      <rect x="25" y="45" width="70" height="30" rx="6" fill="url(#vrVisor)" />
+      <path d="M25,50 C40,40 80,40 95,50" fill="none" stroke="#38BDF8" stroke-width="2" opacity="0.5" />
+      <circle cx="60" cy="60" r="3" fill="#38BDF8" />
+      <path d="M10,50 C10,40 20,40 20,40 M110,50 C110,40 100,40 100,40" fill="none" stroke="#475569" stroke-width="6" stroke-linecap="round" />
+    </svg>
+  `,
+
+  // 162. VIDEO (Movie, Film, Cinema, Recording)
+  video_film: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="vfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#475569" />
+          <stop offset="100%" stop-color="#0F172A" />
+        </linearGradient>
+        <filter id="vfDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="20" y="20" width="80" height="80" rx="4" fill="url(#vfGrad)" filter="url(#vfDrop)" />
+      <rect x="25" y="25" width="10" height="10" fill="#FFFFFF" />
+      <rect x="25" y="45" width="10" height="10" fill="#FFFFFF" />
+      <rect x="25" y="65" width="10" height="10" fill="#FFFFFF" />
+      <rect x="25" y="85" width="10" height="10" fill="#FFFFFF" />
+      <rect x="85" y="25" width="10" height="10" fill="#FFFFFF" />
+      <rect x="85" y="45" width="10" height="10" fill="#FFFFFF" />
+      <rect x="85" y="65" width="10" height="10" fill="#FFFFFF" />
+      <rect x="85" y="85" width="10" height="10" fill="#FFFFFF" />
+      <rect x="45" y="35" width="30" height="50" fill="#334155" />
+    </svg>
+  `,
+
+  // 163. MICROPHONE (Podcast, Audio, Vocal, Recording)
+  microphone_retro: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="mrMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E2E8F0" />
+          <stop offset="100%" stop-color="#64748B" />
+        </linearGradient>
+        <filter id="mrDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="45" y="20" width="30" height="50" rx="15" fill="#1E293B" filter="url(#mrDrop)" />
+      <path d="M35,45 C35,65 45,75 60,75 C75,75 85,65 85,45" fill="none" stroke="url(#mrMetal)" stroke-width="6" stroke-linecap="round" />
+      <line x1="60" y1="75" x2="60" y2="95" stroke="url(#mrMetal)" stroke-width="6" />
+      <line x1="45" y1="95" x2="75" y2="95" stroke="url(#mrMetal)" stroke-width="6" stroke-linecap="round" />
+      <!-- Grills -->
+      <line x1="45" y1="35" x2="75" y2="35" stroke="url(#mrMetal)" stroke-width="2" />
+      <line x1="45" y1="45" x2="75" y2="45" stroke="url(#mrMetal)" stroke-width="2" />
+      <line x1="45" y1="55" x2="75" y2="55" stroke="url(#mrMetal)" stroke-width="2" />
+    </svg>
+  `,
+
+  // 164. FINGERPRINT (Biometric, Security, Identity, Scan)
+  fingerprint: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="fpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#0369A1" />
+        </linearGradient>
+        <filter id="fpGlow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38BDF8" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <path d="M45,30 A15,15 0 0,1 75,30" fill="none" stroke="url(#fpGrad)" stroke-width="4" stroke-linecap="round" filter="url(#fpGlow)" />
+      <path d="M35,40 A25,25 0 0,1 85,40" fill="none" stroke="url(#fpGrad)" stroke-width="4" stroke-linecap="round" filter="url(#fpGlow)" />
+      <path d="M25,50 A35,35 0 0,1 95,50 M25,60 A45,45 0 0,1 95,60" fill="none" stroke="url(#fpGrad)" stroke-width="4" stroke-linecap="round" filter="url(#fpGlow)" />
+      <path d="M35,70 A25,25 0 0,1 60,45 A25,25 0 0,1 85,70" fill="none" stroke="url(#fpGrad)" stroke-width="4" stroke-linecap="round" filter="url(#fpGlow)" />
+      <path d="M45,80 A15,15 0 0,1 60,65 A15,15 0 0,1 75,80" fill="none" stroke="url(#fpGrad)" stroke-width="4" stroke-linecap="round" filter="url(#fpGlow)" />
+      <line x1="60" y1="85" x2="60" y2="95" stroke="url(#fpGrad)" stroke-width="4" stroke-linecap="round" filter="url(#fpGlow)" />
+    </svg>
+  `,
+
+  // 165. CCTV (Surveillance, Camera, Security, Monitor)
+  cctv: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="ccMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <filter id="ccDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="30" y="25" width="20" height="10" fill="#334155" />
+      <rect x="35" y="35" width="10" height="20" fill="#334155" />
+      <rect x="25" y="55" width="60" height="30" rx="4" fill="url(#ccMetal)" filter="url(#ccDrop)" transform="rotate(15 55 70)" />
+      <path d="M75,65 L95,65 L90,85 L70,85 Z" fill="#0F172A" transform="rotate(15 55 70)" />
+      <circle cx="85" cy="75" r="4" fill="#38BDF8" transform="rotate(15 55 70)" />
+      <circle cx="85" cy="75" r="2" fill="#FFFFFF" transform="rotate(15 55 70)" opacity="0.6"/>
+    </svg>
+  `,
+
+  // 166. FIREWALL (Protection, Network, Guard, Block)
+  firewall: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="fwBrick" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F87171" />
+          <stop offset="100%" stop-color="#B91C1C" />
+        </linearGradient>
+        <filter id="fwDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="15" y="45" width="30" height="15" rx="2" fill="url(#fwBrick)" filter="url(#fwDrop)" />
+      <rect x="50" y="45" width="30" height="15" rx="2" fill="url(#fwBrick)" filter="url(#fwDrop)" />
+      <rect x="25" y="65" width="40" height="15" rx="2" fill="url(#fwBrick)" filter="url(#fwDrop)" />
+      <rect x="70" y="65" width="30" height="15" rx="2" fill="url(#fwBrick)" filter="url(#fwDrop)" />
+      <rect x="15" y="85" width="30" height="15" rx="2" fill="url(#fwBrick)" filter="url(#fwDrop)" />
+      <rect x="50" y="85" width="40" height="15" rx="2" fill="url(#fwBrick)" filter="url(#fwDrop)" />
+      <!-- Fire -->
+      <path d="M60,15 C55,25 45,30 45,40 C45,50 60,50 60,50 C60,50 75,50 75,40 C75,30 65,25 60,15 Z" fill="#FDE047" />
+      <path d="M60,25 C58,30 52,32 52,38 C52,44 60,45 60,45 C60,45 68,44 68,38 C68,32 62,30 60,25 Z" fill="#F97316" />
+    </svg>
+  `,
+
+  // 167. PASSWORD (Authentication, Secure, Secret, Dots)
+  password: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="pwGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#34D399" />
+          <stop offset="100%" stop-color="#065F46" />
+        </linearGradient>
+        <filter id="pwDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="15" y="40" width="90" height="40" rx="8" fill="url(#pwGrad)" filter="url(#pwDrop)" />
+      <circle cx="35" cy="60" r="6" fill="#1E293B" />
+      <circle cx="60" cy="60" r="6" fill="#1E293B" />
+      <circle cx="85" cy="60" r="6" fill="#1E293B" />
+      <path d="M80,60 L90,60 M85,55 L85,65" stroke="#FFFFFF" stroke-width="2" />
+    </svg>
+  `,
+
+  // 168. EYE_OFF (Privacy, Hidden, Secret, Obscured)
+  eye_off: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="eoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <filter id="eoDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M15,60 C30,30 90,30 105,60 C90,90 30,90 15,60 Z" fill="url(#eoGrad)" filter="url(#eoDrop)" />
+      <circle cx="60" cy="60" r="15" fill="#1E293B" />
+      <circle cx="65" cy="55" r="4" fill="#FFFFFF" opacity="0.8" />
+      <line x1="20" y1="20" x2="100" y2="100" stroke="#F87171" stroke-width="8" stroke-linecap="round" filter="url(#eoDrop)" />
+    </svg>
+  `,
+
+  // 169. ENCRYPT (Data, Privacy, Cipher, Code)
+  encrypt: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="enGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8B5CF6" />
+          <stop offset="100%" stop-color="#4C1D95" />
+        </linearGradient>
+        <filter id="enDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="25" y="25" width="70" height="70" rx="8" fill="url(#enGrad)" filter="url(#enDrop)" />
+      <path d="M40,50 L55,50 M65,50 L80,50 M40,70 L50,70 M60,70 L80,70 M50,40 L50,80 M70,40 L70,80" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.8" />
+      <circle cx="60" cy="60" r="8" fill="#FDE047" />
+    </svg>
+  `,
+
+  // 170. POLICE (Guard, Security, Shield, Enforcement)
+  police: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="poBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3B82F6" />
+          <stop offset="100%" stop-color="#1E3A8A" />
+        </linearGradient>
+        <linearGradient id="poGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FEF08A" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="poDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M60,15 L105,35 L100,75 C95,95 75,110 60,115 C45,110 25,95 20,75 L15,35 Z" fill="url(#poBlue)" filter="url(#poDrop)" />
+      <polygon points="60,35 70,55 90,60 75,75 80,95 60,85 40,95 45,75 30,60 50,55" fill="url(#poGold)" filter="url(#poDrop)" />
+    </svg>
+  `,
+
+  // 171. ALARM (Siren, Alert, Warning, Emergency)
+  alarm: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="alRed" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FCA5A5" />
+          <stop offset="100%" stop-color="#B91C1C" />
+        </linearGradient>
+        <filter id="alDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="alGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#EF4444" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <path d="M30,70 C30,30 90,30 90,70 L30,70 Z" fill="url(#alRed)" filter="url(#alDrop)" />
+      <rect x="25" y="70" width="70" height="15" rx="4" fill="#1E293B" filter="url(#alDrop)" />
+      <rect x="45" y="85" width="30" height="10" rx="2" fill="#475569" />
+      <path d="M45,45 A20,20 0 0,1 75,45" fill="none" stroke="#FFFFFF" stroke-width="4" opacity="0.5" filter="url(#alGlow)" />
+    </svg>
+  `,
+
+  // 172. NOTEBOOK (Writing, Diary, Ledger, Pages)
+  notebook: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="nbCover" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#10B981" />
+          <stop offset="100%" stop-color="#047857" />
+        </linearGradient>
+        <filter id="nbDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="30" y="15" width="60" height="90" rx="4" fill="url(#nbCover)" filter="url(#nbDrop)" />
+      <rect x="20" y="15" width="10" height="90" fill="#1E293B" filter="url(#nbDrop)" />
+      <circle cx="25" cy="25" r="3" fill="#E2E8F0" />
+      <circle cx="25" cy="45" r="3" fill="#E2E8F0" />
+      <circle cx="25" cy="65" r="3" fill="#E2E8F0" />
+      <circle cx="25" cy="85" r="3" fill="#E2E8F0" />
+      <rect x="70" y="30" width="10" height="30" fill="#FDE047" />
+    </svg>
+  `,
+
+  // 173. INBOX (Mail, Messages, Drawer, Storage)
+  inbox: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="ibBox" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#60A5FA" />
+          <stop offset="100%" stop-color="#1D4ED8" />
+        </linearGradient>
+        <filter id="ibDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <polygon points="15,40 105,40 90,85 30,85" fill="url(#ibBox)" filter="url(#ibDrop)" />
+      <path d="M30,85 L45,85 L50,95 L70,95 L75,85 L90,85 L90,100 L30,100 Z" fill="#1E3A8A" />
+      <rect x="35" y="25" width="50" height="25" fill="#F8FAFC" />
+      <line x1="45" y1="35" x2="75" y2="35" stroke="#CBD5E1" stroke-width="4" />
+    </svg>
+  `,
+
+  // 174. FLAG (Milestone, Goal, Priority, Important)
+  flag: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="flRed" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F87171" />
+          <stop offset="100%" stop-color="#B91C1C" />
+        </linearGradient>
+        <filter id="flDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <line x1="30" y1="15" x2="30" y2="105" stroke="#94A3B8" stroke-width="6" stroke-linecap="round" filter="url(#flDrop)" />
+      <path d="M30,20 Q60,10 95,25 Q60,40 30,50 Z" fill="url(#flRed)" filter="url(#flDrop)" />
+      <circle cx="30" cy="15" r="5" fill="#F59E0B" />
+    </svg>
+  `,
+
+  // 175. ERASER (Clear, Delete, Remove, Edit)
+  eraser: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="erPink" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F472B6" />
+          <stop offset="100%" stop-color="#BE185D" />
+        </linearGradient>
+        <linearGradient id="erBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#60A5FA" />
+          <stop offset="100%" stop-color="#1E40AF" />
+        </linearGradient>
+        <filter id="erDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <polygon points="20,80 50,110 100,60 70,30" fill="url(#erPink)" filter="url(#erDrop)" />
+      <polygon points="70,30 100,60 100,50 70,20" fill="url(#erBlue)" filter="url(#erDrop)" />
+      <polygon points="50,110 100,60 100,50 50,100" fill="#0F172A" opacity="0.2" />
+    </svg>
+  `,
+
+  // 176. FOLDER_OPEN (Directory, Explore, Documents)
+  folder_open: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="foBack" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#F59E0B" />
+          <stop offset="100%" stop-color="#92400E" />
+        </linearGradient>
+        <linearGradient id="foFront" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="foDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M15,35 L45,35 L55,45 L105,45 L105,95 L15,95 Z" fill="url(#foBack)" filter="url(#foDrop)" />
+      <rect x="25" y="45" width="70" height="40" fill="#F8FAFC" />
+      <polygon points="10,55 110,55 95,95 25,95" fill="url(#foFront)" filter="url(#foDrop)" />
+    </svg>
+  `,
+
+  // 177. PIN (Location, Map, Place, Marker)
+  pin: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="pnRed" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F87171" />
+          <stop offset="100%" stop-color="#B91C1C" />
+        </linearGradient>
+        <filter id="pnDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M60,15 C40,15 25,30 25,50 C25,75 60,110 60,110 C60,110 95,75 95,50 C95,30 80,15 60,15 Z" fill="url(#pnRed)" filter="url(#pnDrop)" />
+      <circle cx="60" cy="45" r="15" fill="#FFFFFF" />
+      <ellipse cx="60" cy="115" rx="15" ry="3" fill="#000000" opacity="0.3" filter="blur(2px)" />
+    </svg>
+  `,
+
+  // 178. SIGNPOST (Direction, Choices, Options, Route)
+  signpost: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="spWood" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#B45309" />
+          <stop offset="100%" stop-color="#78350F" />
+        </linearGradient>
+        <filter id="spDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="55" y="15" width="10" height="95" fill="#475569" filter="url(#spDrop)" />
+      <path d="M20,25 L75,25 L90,35 L75,45 L20,45 Z" fill="url(#spWood)" filter="url(#spDrop)" />
+      <path d="M100,60 L45,60 L30,70 L45,80 L100,80 Z" fill="url(#spWood)" filter="url(#spDrop)" />
+      <circle cx="60" cy="35" r="3" fill="#1E293B" />
+      <circle cx="60" cy="70" r="3" fill="#1E293B" />
+    </svg>
+  `,
+
+  // 179. TASK (Checklist, Done, Productivity, ToDo)
+  task_list: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="tlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F1F5F9" />
+          <stop offset="100%" stop-color="#94A3B8" />
+        </linearGradient>
+        <filter id="tlDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="25" y="15" width="70" height="90" rx="6" fill="url(#tlGrad)" filter="url(#tlDrop)" />
+      <rect x="35" y="30" width="12" height="12" rx="2" fill="#38BDF8" />
+      <line x1="55" y1="36" x2="85" y2="36" stroke="#475569" stroke-width="4" stroke-linecap="round" />
+      <rect x="35" y="55" width="12" height="12" rx="2" fill="#34D399" />
+      <path d="M37,60 L40,63 L45,57" fill="none" stroke="#FFFFFF" stroke-width="2" />
+      <line x1="55" y1="61" x2="80" y2="61" stroke="#475569" stroke-width="4" stroke-linecap="round" />
+      <rect x="35" y="80" width="12" height="12" rx="2" fill="#CBD5E1" />
+      <line x1="55" y1="86" x2="70" y2="86" stroke="#475569" stroke-width="4" stroke-linecap="round" />
+    </svg>
+  `,
+
+  // 180. CART (Shopping, E-Commerce, Checkout, Retail)
+  shopping_cart: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="ctBasket" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3B82F6" />
+          <stop offset="100%" stop-color="#1E3A8A" />
+        </linearGradient>
+        <filter id="ctDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M15,20 L30,20 L45,75 L95,75 L105,35 L40,35" fill="none" stroke="url(#ctBasket)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#ctDrop)" />
+      <line x1="45" y1="55" x2="98" y2="55" stroke="url(#ctBasket)" stroke-width="4" />
+      <circle cx="55" cy="95" r="8" fill="#1E293B" />
+      <circle cx="85" cy="95" r="8" fill="#1E293B" />
+    </svg>
+  `,
+
+  // 181. STORE (Retail, Shop, Market, Business)
+  store: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="stAwning1" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#EF4444" />
+          <stop offset="100%" stop-color="#991B1B" />
+        </linearGradient>
+        <linearGradient id="stAwning2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#94A3B8" />
+        </linearGradient>
+        <filter id="stDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="20" y="55" width="80" height="50" fill="#E2E8F0" />
+      <rect x="40" y="65" width="40" height="25" fill="#38BDF8" opacity="0.3" />
+      <!-- Awning -->
+      <path d="M15,35 L105,35 L100,55 L20,55 Z" fill="url(#stAwning1)" filter="url(#stDrop)" />
+      <polygon points="35,35 50,35 45,55 35,55" fill="url(#stAwning2)" />
+      <polygon points="70,35 85,35 80,55 70,55" fill="url(#stAwning2)" />
+      <!-- Sign -->
+      <rect x="35" y="15" width="50" height="15" rx="2" fill="#1E293B" />
+      <circle cx="60" cy="22.5" r="3" fill="#FDE047" />
+    </svg>
+  `,
+
+  // 182. TAG (Price, Label, Metadata, Discount)
+  price_tag: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="tgRed" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F43F5E" />
+          <stop offset="100%" stop-color="#BE123C" />
+        </linearGradient>
+        <filter id="tgDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M40,20 L80,20 L105,65 L65,105 L20,60 Z" fill="url(#tgRed)" filter="url(#tgDrop)" />
+      <circle cx="45" cy="45" r="6" fill="#F8FAFC" />
+      <circle cx="45" cy="45" r="4" fill="#0F172A" />
+      <line x1="75" y1="50" x2="50" y2="75" stroke="#FDA4AF" stroke-width="4" stroke-linecap="round" />
+      <circle cx="60" cy="50" r="3" fill="#FDA4AF" />
+      <circle cx="65" cy="70" r="3" fill="#FDA4AF" />
+    </svg>
+  `,
+
+  // 183. BOX (Package, Shipping, Delivery, Inventory)
+  package_box: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="bxTop" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE68A" />
+          <stop offset="100%" stop-color="#D97706" />
+        </linearGradient>
+        <linearGradient id="bxSide" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#D97706" />
+          <stop offset="100%" stop-color="#92400E" />
+        </linearGradient>
+        <filter id="bxDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <polygon points="60,20 100,40 60,60 20,40" fill="url(#bxTop)" filter="url(#bxDrop)" />
+      <polygon points="20,40 60,60 60,100 20,80" fill="url(#bxSide)" filter="url(#bxDrop)" />
+      <polygon points="60,60 100,40 100,80 60,100" fill="#B45309" filter="url(#bxDrop)" />
+      <line x1="60" y1="60" x2="60" y2="100" stroke="#78350F" stroke-width="2" />
+      <!-- Tape -->
+      <polygon points="50,25 70,35 60,40 40,30" fill="#FEF3C7" opacity="0.6" />
+      <polygon points="60,60 70,65 70,85 60,80" fill="#FEF3C7" opacity="0.6" />
+    </svg>
+  `,
+
+  // 184. RIBBON (Award, Badge, Recognition, Certification)
+  ribbon: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="rbRed" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#EF4444" />
+          <stop offset="100%" stop-color="#7F1D1D" />
+        </linearGradient>
+        <linearGradient id="rbGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="rbDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M45,60 L30,105 L50,95 L60,105 L55,60 Z" fill="url(#rbRed)" filter="url(#rbDrop)" />
+      <path d="M75,60 L90,105 L70,95 L60,105 L65,60 Z" fill="url(#rbRed)" filter="url(#rbDrop)" />
+      <circle cx="60" cy="45" r="25" fill="url(#rbGold)" filter="url(#rbDrop)" />
+      <circle cx="60" cy="45" r="18" fill="none" stroke="#FEF08A" stroke-width="2" />
+      <circle cx="60" cy="45" r="12" fill="#FEF08A" />
+    </svg>
+  `,
+
+  // 185. BASKET (Shopping, Groceries, E-Commerce)
+  basket: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="bsWeave" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F59E0B" />
+          <stop offset="100%" stop-color="#92400E" />
+        </linearGradient>
+        <filter id="bsDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M25,45 L95,45 L85,95 C85,100 80,105 75,105 L45,105 C40,105 35,100 35,95 Z" fill="url(#bsWeave)" filter="url(#bsDrop)" />
+      <path d="M40,45 C40,20 80,20 80,45" fill="none" stroke="#B45309" stroke-width="8" stroke-linecap="round" />
+      <!-- Weave details -->
+      <line x1="33" y1="65" x2="87" y2="65" stroke="#78350F" stroke-width="4" />
+      <line x1="35" y1="85" x2="85" y2="85" stroke="#78350F" stroke-width="4" />
+      <line x1="45" y1="45" x2="50" y2="105" stroke="#78350F" stroke-width="4" />
+      <line x1="75" y1="45" x2="70" y2="105" stroke="#78350F" stroke-width="4" />
+    </svg>
+  `,
+
+  // 186. DISCOUNT (Sale, Offer, Price Drop, Deal)
+  discount: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="dcRed" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#EF4444" />
+          <stop offset="100%" stop-color="#7F1D1D" />
+        </linearGradient>
+        <filter id="dcDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="url(#dcRed)" filter="url(#dcDrop)" />
+      <path d="M35,85 L85,35" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" />
+      <circle cx="45" cy="45" r="8" fill="#FFFFFF" />
+      <circle cx="75" cy="75" r="8" fill="#FFFFFF" />
+    </svg>
+  `,
+
+  // 187. FLASK (Science, Chemistry, Experiment, Lab)
+  flask: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="fkGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E0F2FE" />
+          <stop offset="100%" stop-color="#93C5FD" />
+        </linearGradient>
+        <linearGradient id="fkLiquid" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#34D399" />
+          <stop offset="100%" stop-color="#059669" />
+        </linearGradient>
+        <filter id="fkDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="fkGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#34D399" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <path d="M50,20 L70,20 L70,45 L95,95 C100,105 90,110 80,110 L40,110 C30,110 20,105 25,95 L50,45 Z" fill="url(#fkGlass)" filter="url(#fkDrop)" opacity="0.6" />
+      <path d="M35,75 L85,75 L90,85 C95,95 85,100 80,100 L40,100 C30,100 25,95 30,85 Z" fill="url(#fkLiquid)" filter="url(#fkGlow)" />
+      <line x1="45" y1="20" x2="75" y2="20" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" />
+      <circle cx="60" cy="85" r="4" fill="#FFFFFF" opacity="0.8" />
+      <circle cx="50" cy="90" r="2" fill="#FFFFFF" opacity="0.8" />
+      <circle cx="70" cy="80" r="3" fill="#FFFFFF" opacity="0.8" />
+    </svg>
+  `,
+
+  // 188. BRAIN (Intelligence, AI, Logic, Mind)
+  brain: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="brPink" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F472B6" />
+          <stop offset="100%" stop-color="#BE185D" />
+        </linearGradient>
+        <filter id="brDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="brGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#F472B6" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <path d="M60,15 C40,15 20,30 20,50 C20,60 25,70 35,80 C30,90 40,100 50,95 C55,100 65,100 70,95 C80,100 90,90 85,80 C95,70 100,60 100,50 C100,30 80,15 60,15 Z" fill="url(#brPink)" filter="url(#brDrop)" />
+      <path d="M60,15 L60,95" stroke="#9D174D" stroke-width="4" />
+      <path d="M35,35 Q45,30 55,45 T35,65" fill="none" stroke="#FCE7F3" stroke-width="4" stroke-linecap="round" />
+      <path d="M85,35 Q75,30 65,45 T85,65" fill="none" stroke="#FCE7F3" stroke-width="4" stroke-linecap="round" />
+      <circle cx="45" cy="45" r="4" fill="#FBCFE8" filter="url(#brGlow)" />
+      <circle cx="75" cy="45" r="4" fill="#FBCFE8" filter="url(#brGlow)" />
+    </svg>
+  `,
+
+  // 189. DNA (Genetics, Core, Biology, Science)
+  dna: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="dnBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#0369A1" />
+        </linearGradient>
+        <linearGradient id="dnPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#C084FC" />
+          <stop offset="100%" stop-color="#7E22CE" />
+        </linearGradient>
+        <filter id="dnDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M40,20 Q60,40 80,60 T40,100" fill="none" stroke="url(#dnBlue)" stroke-width="8" stroke-linecap="round" filter="url(#dnDrop)" />
+      <path d="M80,20 Q60,40 40,60 T80,100" fill="none" stroke="url(#dnPurple)" stroke-width="8" stroke-linecap="round" filter="url(#dnDrop)" />
+      <!-- Bonds -->
+      <line x1="48" y1="35" x2="72" y2="35" stroke="#94A3B8" stroke-width="4" />
+      <line x1="60" y1="60" x2="60" y2="60" stroke="#94A3B8" stroke-width="4" />
+      <line x1="48" y1="85" x2="72" y2="85" stroke="#94A3B8" stroke-width="4" />
+      <circle cx="40" cy="20" r="5" fill="#38BDF8" />
+      <circle cx="80" cy="20" r="5" fill="#C084FC" />
+      <circle cx="40" cy="100" r="5" fill="#0369A1" />
+      <circle cx="80" cy="100" r="5" fill="#7E22CE" />
+    </svg>
+  `,
+
+  // 190. GRADUATION (Education, Learning, Achievement, Degree)
+  graduation_cap: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="grCap" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#1E293B" />
+          <stop offset="100%" stop-color="#020617" />
+        </linearGradient>
+        <filter id="grDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <polygon points="60,25 100,45 60,65 20,45" fill="url(#grCap)" filter="url(#grDrop)" />
+      <polygon points="40,55 40,85 60,95 80,85 80,55 60,65" fill="#334155" filter="url(#grDrop)" />
+      <!-- Tassel -->
+      <circle cx="60" cy="45" r="4" fill="#F59E0B" />
+      <path d="M60,45 Q75,55 85,75" fill="none" stroke="#FCD34D" stroke-width="3" />
+      <polygon points="82,75 88,75 90,95 80,95" fill="#B45309" />
+    </svg>
+  `,
+
+  // 191. LIGHTBULB (Idea, Innovation, Vision, Startup)
+  lightbulb: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="lbGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FEF08A" />
+          <stop offset="100%" stop-color="#F59E0B" />
+        </radialGradient>
+        <linearGradient id="lbBase" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <filter id="lbDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="lbLight" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#FDE047" flood-opacity="0.8"/>
+        </filter>
+      </defs>
+      <path d="M40,75 C25,60 25,25 60,25 C95,25 95,60 80,75 L75,90 L45,90 Z" fill="url(#lbGlow)" filter="url(#lbLight)" />
+      <rect x="45" y="90" width="30" height="15" rx="2" fill="url(#lbBase)" filter="url(#lbDrop)" />
+      <path d="M50,105 L70,105 L65,112 L55,112 Z" fill="#1E293B" />
+      <!-- Filament -->
+      <path d="M50,75 L55,55 L65,55 L70,75" fill="none" stroke="#B45309" stroke-width="4" stroke-linecap="round" />
+      <circle cx="60" cy="50" r="3" fill="#FFFBEB" />
+    </svg>
+  `,
+
+  // 192. FILTER (Sort, Organize, Search, Refine)
+  filter: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="flMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#0369A1" />
+        </linearGradient>
+        <filter id="flDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <polygon points="15,30 105,30 75,65 75,100 45,110 45,65" fill="url(#flMetal)" filter="url(#flDrop)" />
+      <line x1="25" y1="40" x2="95" y2="40" stroke="#BAE6FD" stroke-width="2" opacity="0.5" />
+      <line x1="35" y1="50" x2="85" y2="50" stroke="#BAE6FD" stroke-width="2" opacity="0.5" />
+    </svg>
+  `,
+
+  // 193. SETTINGS (Gears, Configuration, Options, Control)
+  settings_gear: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="sgMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#334155" />
+        </linearGradient>
+        <filter id="sgDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M70,20 L75,32 A30,30 0 0,1 88,45 L100,40 L105,55 L93,60 A30,30 0 0,1 93,70 L105,75 L100,90 L88,85 A30,30 0 0,1 75,98 L70,110 L50,110 L45,98 A30,30 0 0,1 32,85 L20,90 L15,75 L27,70 A30,30 0 0,1 27,60 L15,55 L20,40 L32,45 A30,30 0 0,1 45,32 L50,20 Z" fill="url(#sgMetal)" filter="url(#sgDrop)" />
+      <circle cx="60" cy="65" r="15" fill="#1E293B" />
+      <circle cx="60" cy="65" r="8" fill="#F1F5F9" />
+    </svg>
+  `,
+
+  // 194. SHARE (Network, Forward, Social, Distribute)
+  share: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="shBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#3B82F6" />
+          <stop offset="100%" stop-color="#1E3A8A" />
+        </linearGradient>
+        <filter id="shDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <line x1="45" y1="45" x2="75" y2="30" stroke="url(#shBlue)" stroke-width="8" stroke-linecap="round" filter="url(#shDrop)" />
+      <line x1="45" y1="75" x2="75" y2="90" stroke="url(#shBlue)" stroke-width="8" stroke-linecap="round" filter="url(#shDrop)" />
+      <circle cx="35" cy="60" r="15" fill="#38BDF8" filter="url(#shDrop)" />
+      <circle cx="85" cy="25" r="15" fill="#10B981" filter="url(#shDrop)" />
+      <circle cx="85" cy="95" r="15" fill="#F59E0B" filter="url(#shDrop)" />
+      <circle cx="35" cy="60" r="5" fill="#FFFFFF" />
+      <circle cx="85" cy="25" r="5" fill="#FFFFFF" />
+      <circle cx="85" cy="95" r="5" fill="#FFFFFF" />
+    </svg>
+  `,
+
+  // 195. DOWNLOAD (Save, Get, Fetch, Install)
+  download: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="dlGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#10B981" />
+          <stop offset="100%" stop-color="#065F46" />
+        </linearGradient>
+        <filter id="dlDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M40,55 L60,80 L80,55" fill="none" stroke="url(#dlGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" filter="url(#dlDrop)" />
+      <line x1="60" y1="20" x2="60" y2="80" stroke="url(#dlGrad)" stroke-width="12" stroke-linecap="round" filter="url(#dlDrop)" />
+      <rect x="30" y="95" width="60" height="10" rx="2" fill="url(#dlGrad)" filter="url(#dlDrop)" />
+    </svg>
+  `,
+
+  // 196. LINK (Chain, URL, Connection, Connect)
+  link: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="lnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <filter id="lnDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M45,45 A20,20 0 0,0 45,75 L55,75" fill="none" stroke="url(#lnGrad)" stroke-width="12" stroke-linecap="round" filter="url(#lnDrop)" />
+      <path d="M75,75 A20,20 0 0,0 75,45 L65,45" fill="none" stroke="url(#lnGrad)" stroke-width="12" stroke-linecap="round" filter="url(#lnDrop)" />
+      <line x1="45" y1="60" x2="75" y2="60" stroke="#38BDF8" stroke-width="8" stroke-linecap="round" filter="url(#lnDrop)" />
+    </svg>
+  `,
+
+  // 197. ZOOM_IN (Magnify, Search, Focus, Enlarge)
+  zoom_in: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="ziLens" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E0F2FE" />
+          <stop offset="100%" stop-color="#7DD3FC" />
+        </linearGradient>
+        <linearGradient id="ziFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#0284C7" />
+        </linearGradient>
+        <filter id="ziDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <line x1="75" y1="75" x2="100" y2="100" stroke="#1E293B" stroke-width="12" stroke-linecap="round" filter="url(#ziDrop)" />
+      <circle cx="50" cy="50" r="35" fill="url(#ziLens)" stroke="url(#ziFrame)" stroke-width="8" filter="url(#ziDrop)" />
+      <path d="M35,50 L65,50 M50,35 L50,65" stroke="#0284C7" stroke-width="6" stroke-linecap="round" />
+      <path d="M35,35 A20,20 0 0,1 65,35" fill="none" stroke="#FFFFFF" stroke-width="4" opacity="0.5" />
+    </svg>
+  `,
+
+  // 198. ZOOM_OUT (Minify, Distance, Overview, Shrink)
+  zoom_out: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="zoLens" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E0F2FE" />
+          <stop offset="100%" stop-color="#7DD3FC" />
+        </linearGradient>
+        <linearGradient id="zoFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F472B6" />
+          <stop offset="100%" stop-color="#BE185D" />
+        </linearGradient>
+        <filter id="zoDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <line x1="75" y1="75" x2="100" y2="100" stroke="#1E293B" stroke-width="12" stroke-linecap="round" filter="url(#zoDrop)" />
+      <circle cx="50" cy="50" r="35" fill="url(#zoLens)" stroke="url(#zoFrame)" stroke-width="8" filter="url(#zoDrop)" />
+      <line x1="35" y1="50" x2="65" y2="50" stroke="#BE185D" stroke-width="6" stroke-linecap="round" />
+      <path d="M35,35 A20,20 0 0,1 65,35" fill="none" stroke="#FFFFFF" stroke-width="4" opacity="0.5" />
+    </svg>
+  `,
+
+  // 199. MENU (Hamburger, Navigation, List, Options)
+  hamburger_menu: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="hmGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#8B5CF6" />
+          <stop offset="100%" stop-color="#4C1D95" />
+        </linearGradient>
+        <filter id="hmDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="20" y="30" width="80" height="12" rx="6" fill="url(#hmGrad)" filter="url(#hmDrop)" />
+      <rect x="20" y="55" width="80" height="12" rx="6" fill="url(#hmGrad)" filter="url(#hmDrop)" />
+      <rect x="20" y="80" width="80" height="12" rx="6" fill="url(#hmGrad)" filter="url(#hmDrop)" />
+      <circle cx="30" cy="36" r="3" fill="#FFFFFF" opacity="0.5" />
+      <circle cx="30" cy="61" r="3" fill="#FFFFFF" opacity="0.5" />
+      <circle cx="30" cy="86" r="3" fill="#FFFFFF" opacity="0.5" />
+    </svg>
+  `,
+
+  // 200. LAYOUT (Grid, Dashboard, Panels, Structure)
+  layout: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="lyBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#60A5FA" />
+          <stop offset="100%" stop-color="#1E40AF" />
+        </linearGradient>
+        <linearGradient id="lyGray" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <filter id="lyDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="15" y="15" width="90" height="25" rx="4" fill="url(#lyGray)" filter="url(#lyDrop)" />
+      <rect x="15" y="50" width="25" height="55" rx="4" fill="url(#lyGray)" filter="url(#lyDrop)" />
+      <rect x="50" y="50" width="55" height="55" rx="4" fill="url(#lyBlue)" filter="url(#lyDrop)" />
+      <circle cx="75" cy="75" r="8" fill="#FDE047" />
+    </svg>
+  `,
+
+  // 201. CURSOR (Pointer, Select, Click, Arrow)
+  cursor: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="crWhite" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#CBD5E1" />
+        </linearGradient>
+        <filter id="crDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <polygon points="30,20 85,60 55,65 65,95 50,100 40,70 20,80" fill="url(#crWhite)" filter="url(#crDrop)" stroke="#0F172A" stroke-width="4" stroke-linejoin="round" />
+    </svg>
+  `,
+
+  // 202. PILL (Medicine, Drug, Pharmacy, Health)
+  pill: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="piBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#0284C7" />
+        </linearGradient>
+        <linearGradient id="piWhite" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#E2E8F0" />
+        </linearGradient>
+        <filter id="piDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M20,60 A30,30 0 0,1 60,20 L100,60 A30,30 0 0,1 60,100 Z" fill="url(#piWhite)" filter="url(#piDrop)" />
+      <path d="M20,60 A30,30 0 0,0 60,100 L100,60 A30,30 0 0,0 60,20 Z" fill="url(#piBlue)" filter="url(#piDrop)" />
+      <line x1="20" y1="60" x2="100" y2="60" stroke="#0F172A" stroke-width="4" opacity="0.2" />
+      <circle cx="80" cy="40" r="4" fill="#FFFFFF" opacity="0.6" />
+    </svg>
+  `,
+
+  // 203. STETHOSCOPE (Doctor, Medical, Checkup, Diagnosis)
+  stethoscope: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="stMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#CBD5E1" />
+          <stop offset="100%" stop-color="#64748B" />
+        </linearGradient>
+        <filter id="stDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M30,20 C30,70 90,70 90,20" fill="none" stroke="url(#stMetal)" stroke-width="8" stroke-linecap="round" filter="url(#stDrop)" />
+      <path d="M60,65 L60,100 C60,105 50,110 40,110 C30,110 20,105 20,95 L20,80" fill="none" stroke="#1E293B" stroke-width="8" stroke-linecap="round" filter="url(#stDrop)" />
+      <circle cx="20" cy="80" r="12" fill="url(#stMetal)" filter="url(#stDrop)" />
+      <circle cx="20" cy="80" r="6" fill="#3B82F6" />
+      <circle cx="30" cy="20" r="5" fill="#1E293B" />
+      <circle cx="90" cy="20" r="5" fill="#1E293B" />
+    </svg>
+  `,
+
+  // 204. DUMBBELL (Fitness, Gym, Workout, Strength)
+  dumbbell: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="dbWeight" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1E293B" />
+          <stop offset="100%" stop-color="#020617" />
+        </linearGradient>
+        <linearGradient id="dbBar" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <filter id="dbDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="25" y="55" width="70" height="10" fill="url(#dbBar)" filter="url(#dbDrop)" />
+      <rect x="15" y="30" width="15" height="60" rx="4" fill="url(#dbWeight)" filter="url(#dbDrop)" />
+      <rect x="90" y="30" width="15" height="60" rx="4" fill="url(#dbWeight)" filter="url(#dbDrop)" />
+      <rect x="5" y="40" width="10" height="40" rx="2" fill="url(#dbWeight)" filter="url(#dbDrop)" />
+      <rect x="105" y="40" width="10" height="40" rx="2" fill="url(#dbWeight)" filter="url(#dbDrop)" />
+      <line x1="22" y1="35" x2="22" y2="85" stroke="#FFFFFF" stroke-width="2" opacity="0.2" />
+      <line x1="97" y1="35" x2="97" y2="85" stroke="#FFFFFF" stroke-width="2" opacity="0.2" />
+    </svg>
+  `,
+
+  // 205. APPLE (Food, Health, Fruit, Nutrition)
+  apple: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="apRed" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#FCA5A5" />
+          <stop offset="100%" stop-color="#991B1B" />
+        </radialGradient>
+        <filter id="apDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M60,105 C85,105 100,85 100,55 C100,35 85,30 70,35 C65,37 60,40 60,40 C60,40 55,37 50,35 C35,30 20,35 20,55 C20,85 35,105 60,105 Z" fill="url(#apRed)" filter="url(#apDrop)" />
+      <path d="M60,35 C65,25 75,20 75,20" fill="none" stroke="#166534" stroke-width="6" stroke-linecap="round" />
+      <path d="M75,20 C85,25 80,35 70,35 C60,30 65,20 75,20 Z" fill="#22C55E" filter="url(#apDrop)" />
+      <circle cx="45" cy="45" r="8" fill="#FFFFFF" opacity="0.4" />
+    </svg>
+  `,
+
+  // 206. BED (Sleep, Rest, Hotel, Furniture)
+  bed: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="bdWood" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#B45309" />
+          <stop offset="100%" stop-color="#78350F" />
+        </linearGradient>
+        <linearGradient id="bdMattress" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#CBD5E1" />
+        </linearGradient>
+        <filter id="bdDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="15" y="35" width="10" height="70" rx="2" fill="url(#bdWood)" filter="url(#bdDrop)" />
+      <rect x="95" y="65" width="10" height="40" rx="2" fill="url(#bdWood)" filter="url(#bdDrop)" />
+      <rect x="25" y="70" width="70" height="15" fill="url(#bdWood)" />
+      <rect x="25" y="55" width="70" height="15" rx="4" fill="url(#bdMattress)" filter="url(#bdDrop)" />
+      <rect x="30" y="45" width="25" height="10" rx="5" fill="#BAE6FD" />
+      <rect x="65" y="45" width="25" height="10" rx="5" fill="#BAE6FD" />
+    </svg>
+  `,
+
+  // 207. PLUG (Power, Connectivity, Charging, Hardware)
+  plug: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="pgBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#475569" />
+          <stop offset="100%" stop-color="#1E293B" />
+        </linearGradient>
+        <filter id="pgDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <rect x="40" y="50" width="40" height="40" rx="6" fill="url(#pgBody)" filter="url(#pgDrop)" />
+      <rect x="45" y="25" width="10" height="25" fill="#CBD5E1" filter="url(#pgDrop)" />
+      <rect x="65" y="25" width="10" height="25" fill="#CBD5E1" filter="url(#pgDrop)" />
+      <path d="M60,90 L60,110" stroke="#1E293B" stroke-width="10" stroke-linecap="round" filter="url(#pgDrop)" />
+      <circle cx="50" cy="35" r="2" fill="#0F172A" />
+      <circle cx="70" cy="35" r="2" fill="#0F172A" />
+    </svg>
+  `,
+
+  // 208. ROUTER (Network, Internet, Connectivity, Wifi)
+  router: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="rtBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1E293B" />
+          <stop offset="100%" stop-color="#020617" />
+        </linearGradient>
+        <filter id="rtDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+        <filter id="rtGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#38BDF8" flood-opacity="0.8"/>
+        </filter>
+      </defs>
+      <!-- Antennas -->
+      <path d="M30,55 L20,20 M60,55 L60,15 M90,55 L100,20" stroke="#64748B" stroke-width="6" stroke-linecap="round" filter="url(#rtDrop)" />
+      <circle cx="20" cy="20" r="3" fill="#38BDF8" filter="url(#rtGlow)" />
+      <circle cx="60" cy="15" r="3" fill="#38BDF8" filter="url(#rtGlow)" />
+      <circle cx="100" cy="20" r="3" fill="#38BDF8" filter="url(#rtGlow)" />
+      <!-- Body -->
+      <rect x="15" y="55" width="90" height="35" rx="6" fill="url(#rtBody)" filter="url(#rtDrop)" />
+      <rect x="15" y="85" width="90" height="15" fill="#0F172A" />
+      <!-- Lights -->
+      <circle cx="25" cy="70" r="3" fill="#34D399" />
+      <circle cx="35" cy="70" r="3" fill="#34D399" />
+      <circle cx="45" cy="70" r="3" fill="#34D399" filter="url(#rtGlow)" />
+      <circle cx="55" cy="70" r="3" fill="#EF4444" />
+    </svg>
+  `,
+
   });
 
   // Automatically construct formatted array
@@ -4056,17 +5443,21 @@
     const lowerKey = key.toLowerCase();
     
     // Categorization logic
-    if (lowerKey.includes('brain') || lowerKey.includes('logic') || lowerKey.includes('system') || lowerKey.includes('code') || lowerKey.includes('server') || lowerKey.includes('keyboard')) category = "development";
-    else if (lowerKey.includes('design') || lowerKey.includes('palette') || lowerKey.includes('paint') || lowerKey.includes('brush') || lowerKey.includes('typography')) category = "design";
-    else if (lowerKey.includes('rocket') || lowerKey.includes('launch') || lowerKey.includes('spaceship')) category = "business";
+    if (lowerKey.includes('brain') || lowerKey.includes('logic') || lowerKey.includes('system') || lowerKey.includes('code') || lowerKey.includes('server') || lowerKey.includes('keyboard') || lowerKey.includes('api') || lowerKey.includes('terminal') || lowerKey.includes('bug')) category = "development";
+    else if (lowerKey.includes('design') || lowerKey.includes('palette') || lowerKey.includes('paint') || lowerKey.includes('brush') || lowerKey.includes('typography') || lowerKey.includes('pencil') || lowerKey.includes('eraser')) category = "design";
+    else if (lowerKey.includes('rocket') || lowerKey.includes('launch') || lowerKey.includes('spaceship') || lowerKey.includes('bull') || lowerKey.includes('bear') || lowerKey.includes('invoice') || lowerKey.includes('store')) category = "business";
     else if (lowerKey.includes('crane') || lowerKey.includes('build') || lowerKey.includes('structure')) category = "infrastructure";
-    else if (lowerKey.includes('home') || lowerKey.includes('house') || lowerKey.includes('dashboard') || lowerKey.includes('folder') || lowerKey.includes('settings')) category = "ui";
-    else if (lowerKey.includes('fire') || lowerKey.includes('flame') || lowerKey.includes('hot')) category = "social";
-    else if (lowerKey.includes('shield') || lowerKey.includes('security') || lowerKey.includes('lock') || lowerKey.includes('vault') || lowerKey.includes('bank') || lowerKey.includes('gear')) category = "security";
-    else if (lowerKey.includes('finance') || lowerKey.includes('wealth') || lowerKey.includes('coin') || lowerKey.includes('money') || lowerKey.includes('piggy')) category = "finance";
-    else if (lowerKey.includes('media') || lowerKey.includes('video') || lowerKey.includes('music') || lowerKey.includes('gamepad') || lowerKey.includes('vr') || lowerKey.includes('smartwatch') || lowerKey.includes('laptop') || lowerKey.includes('mouse') || lowerKey.includes('smartphone')) category = "media";
-    else if (lowerKey.includes('chart') || lowerKey.includes('candlestick') || lowerKey.includes('analytics') || lowerKey.includes('graph') || lowerKey.includes('node')) category = "data";
-    else if (lowerKey.includes('verified') || lowerKey.includes('star') || lowerKey.includes('achievement')) category = "entertainment";
+    else if (lowerKey.includes('home') || lowerKey.includes('house') || lowerKey.includes('dashboard') || lowerKey.includes('folder') || lowerKey.includes('settings') || lowerKey.includes('filter') || lowerKey.includes('menu') || lowerKey.includes('layout') || lowerKey.includes('cursor')) category = "ui";
+    else if (lowerKey.includes('fire') || lowerKey.includes('flame') || lowerKey.includes('hot') || lowerKey.includes('share') || lowerKey.includes('heart')) category = "social";
+    else if (lowerKey.includes('shield') || lowerKey.includes('security') || lowerKey.includes('lock') || lowerKey.includes('vault') || lowerKey.includes('bank') || lowerKey.includes('gear') || lowerKey.includes('cctv') || lowerKey.includes('firewall') || lowerKey.includes('password') || lowerKey.includes('police')) category = "security";
+    else if (lowerKey.includes('finance') || lowerKey.includes('wealth') || lowerKey.includes('coin') || lowerKey.includes('money') || lowerKey.includes('piggy') || lowerKey.includes('wallet') || lowerKey.includes('credit')) category = "finance";
+    else if (lowerKey.includes('media') || lowerKey.includes('video') || lowerKey.includes('music') || lowerKey.includes('gamepad') || lowerKey.includes('vr') || lowerKey.includes('smartwatch') || lowerKey.includes('laptop') || lowerKey.includes('mouse') || lowerKey.includes('smartphone') || lowerKey.includes('headphone') || lowerKey.includes('speaker') || lowerKey.includes('microphone')) category = "media";
+    else if (lowerKey.includes('chart') || lowerKey.includes('candlestick') || lowerKey.includes('analytics') || lowerKey.includes('graph') || lowerKey.includes('node') || lowerKey.includes('database')) category = "data";
+    else if (lowerKey.includes('verified') || lowerKey.includes('star') || lowerKey.includes('achievement') || lowerKey.includes('ticket') || lowerKey.includes('gift') || lowerKey.includes('ribbon') || lowerKey.includes('trophy')) category = "entertainment";
+    else if (lowerKey.includes('cart') || lowerKey.includes('discount') || lowerKey.includes('receipt') || lowerKey.includes('basket') || lowerKey.includes('tag')) category = "commerce";
+    else if (lowerKey.includes('flask') || lowerKey.includes('atom') || lowerKey.includes('microscope') || lowerKey.includes('telescope') || lowerKey.includes('dna') || lowerKey.includes('planet') || lowerKey.includes('magnet')) category = "science";
+    else if (lowerKey.includes('pill') || lowerKey.includes('stethoscope') || lowerKey.includes('dumbbell') || lowerKey.includes('coffee') || lowerKey.includes('apple') || lowerKey.includes('leaf') || lowerKey.includes('bed') || lowerKey.includes('sun')) category = "lifestyle";
+    else if (lowerKey.includes('globe') || lowerKey.includes('network') || lowerKey.includes('cloud') || lowerKey.includes('edge') || lowerKey.includes('hosting') || lowerKey.includes('container') || lowerKey.includes('gateway') || lowerKey.includes('router') || lowerKey.includes('plug') || lowerKey.includes('battery') || lowerKey.includes('microchip') || lowerKey.includes('printer')) category = "network";
     else if (lowerKey.includes('search')) category = "general";
     
     let nameToFormat = key;
