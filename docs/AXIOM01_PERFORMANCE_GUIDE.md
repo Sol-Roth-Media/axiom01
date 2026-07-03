@@ -2,17 +2,18 @@
 
 ## Framework Performance Metrics
 
-### Build Sizes (v2.0.0)
-- **CSS (minified & gzipped)**: 13.3 KB
-- **CSS (unminified)**: 13,370 lines / ~200 KB
-- **JavaScript (minified & gzipped)**: 1.0 KB
-- **Axicons (base, minified & gzipped)**: 89 KB
-- **Total Framework Bundle**: ~103 KB (all assets, gzipped)
+### Build Sizes (v2.2.3)
+- **Core CSS (minified & gzipped)**: 15.3 KB
+- **Core CSS (minified)**: 87.8 KB
+- **Optional runtime JS (minified & gzipped)**: 3.9 KB
+- **Axicons Base (minified & gzipped)**: 40.9 KB
+- **Axicons Premium (minified & gzipped)**: 29.4 KB
+- **Core framework bundle (CSS + optional runtime, gzipped)**: 19.3 KB
 
 ### Performance Characteristics
 - **CSS Compression Ratio**: 45.1% (minification + gzip)
 - **Token Coverage**: 2,643 token uses across framework (19.8% token ratio)
-- **Component Count**: 77 production-ready components
+- **Component Count**: 79 production-ready components
 - **Design Tokens**: 149 CSS custom properties
 - **CSS Animations**: 20+ GPU-accelerated transitions
 - **Accessibility**: WCAG 2.1 AA compliant by default
@@ -42,23 +43,22 @@ Cache-Control: public, max-age=31536000, immutable
 Start minimal and load variants on-demand:
 
 ```html
-<!-- Step 1: Load base icons (89KB, 450 icons) -->
+<!-- Step 1: Load base icons -->
 <script src="js/axicons-base.js"></script>
 
-<!-- Step 2: Optionally load additional variants -->
-<script src="js/axicons-thin-variants.js"></script>    <!-- +170KB -->
-<script src="js/axicons-color-variants.js"></script>   <!-- +440KB -->
-<script src="js/axicons-inverted-variants.js"></script> <!-- +243KB -->
-<script src="js/axicons-premium-variants.js"></script>  <!-- +150KB -->
+<!-- Step 2: Optionally load premium icons -->
+<script src="js/axicons-premium.js"></script>
+<!-- or selected premium demo variants -->
+<script src="js/axicons-premium-variants.js"></script>
 
 <!-- Step 3: Load renderer -->
 <script src="js/render-icons.js"></script>
 
-<!-- Step 4: Lazy-load additional variants on demand -->
+<!-- Step 4: Lazy-load optional premium assets on demand -->
 <script>
-  // Load thin variants when user clicks "View Thin Icons"
-  document.getElementById('load-thin').addEventListener('click', async () => {
-    await AxiconsLoader.load('thin-variants');
+  // Load premium icons when your UI reaches a richer section
+  document.getElementById('load-premium').addEventListener('click', async () => {
+    await AxiconsLoader.load('premium');
   });
 </script>
 ```

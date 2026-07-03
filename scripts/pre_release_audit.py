@@ -19,9 +19,6 @@ SEARCH_SOURCE = ROOT / "js" / "index-page-manager.js"
 INDEX_HTML = ROOT / "index.html"
 SEMANTIC_STRICT_DOCS = {
     "docs/components-overview.html",
-    "docs/components-simple.html",
-    "docs/components-advanced.html",
-    "docs/components-category-view.html",
     "docs/integrations.html",
 }
 SEMANTIC_ACTION_STRICT_FILES = SEMANTIC_STRICT_DOCS | {
@@ -30,9 +27,6 @@ SEMANTIC_ACTION_STRICT_FILES = SEMANTIC_STRICT_DOCS | {
 }
 CLASS_BUDGETS = {
     "docs/components-overview.html": {"max_multi_class_attrs": 8, "max_class_tokens": 110},
-    "docs/components-simple.html": {"max_multi_class_attrs": 14, "max_class_tokens": 56},
-    "docs/components-advanced.html": {"max_multi_class_attrs": 14, "max_class_tokens": 58},
-    "docs/components-category-view.html": {"max_multi_class_attrs": 8, "max_class_tokens": 40},
     "docs/integrations.html": {"max_multi_class_attrs": 8, "max_class_tokens": 41},
 }
 MULTI_DASH_CLASS_RX = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+){2,}")

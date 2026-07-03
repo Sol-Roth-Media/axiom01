@@ -57,7 +57,7 @@ Push your branch and create a pull request with:
 
 ### Step 1: Verify the Component Doesn't Exist
 
-Check `docs/components/` directory and the [components overview](./docs/components-overview.html).
+Check `docs/components/` directory and the [components overview](./components-overview.html).
 
 ### Step 2: Plan the Component
 
@@ -432,7 +432,7 @@ Changed to use primary color which has sufficient contrast.
 ## Questions?
 
 - Check [existing issues](https://github.com/Sol-Roth-Media/axiom01/issues)
-- Read [framework philosophy](./docs/FRAMEWORK_AUDIT_2025.md)
+- Read [framework philosophy](./FRAMEWORK_AUDIT_2025.md)
 - Start a [discussion](https://github.com/Sol-Roth-Media/axiom01/discussions)
 
 ---
