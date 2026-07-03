@@ -10,6 +10,42 @@ const premiumIcons =
 
 [
     {
+        "id": 9001,
+        "name": "Brain-Premium",
+        "category": "developer",
+        "svgContent": "<svg viewBox=\"0 0 128 128\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M64 104C40 104 24 88 24 64C24 40 40 24 64 24C88 24 104 40 104 64C104 88 88 104 64 104Z\" fill=\"var(--a-color-primary)\" fill-opacity=\"0.2\"/><path d=\"M64 24C40 24 24 40 24 64C24 88 40 104 64 104\" stroke=\"var(--a-color-primary)\" stroke-width=\"6\" stroke-linecap=\"round\"/><path d=\"M64 24C88 24 104 40 104 64C104 88 88 104 64 104\" stroke=\"var(--a-color-secondary)\" stroke-width=\"6\" stroke-linecap=\"round\"/><path d=\"M48 48C48 48 56 40 64 48C72 40 80 48 80 48\" stroke=\"var(--a-color-primary)\" stroke-width=\"6\" stroke-linecap=\"round\"/><path d=\"M40 64C40 64 56 64 64 80C72 64 88 64 88 64\" stroke=\"var(--a-color-secondary)\" stroke-width=\"6\" stroke-linecap=\"round\"/><circle cx=\"64\" cy=\"48\" r=\"4\" fill=\"var(--a-color-success)\"/><circle cx=\"48\" cy=\"64\" r=\"4\" fill=\"var(--a-color-warning)\"/><circle cx=\"80\" cy=\"64\" r=\"4\" fill=\"var(--a-color-error)\"/><path d=\"M64 104V116\" stroke=\"var(--a-color-primary)\" stroke-width=\"6\" stroke-linecap=\"round\"/><path d=\"M64 116H48M64 116H80\" stroke=\"var(--a-color-primary)\" stroke-width=\"6\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+        "id": 9002,
+        "name": "Rocket-Premium",
+        "category": "developer",
+        "svgContent": "<svg viewBox=\"0 0 128 128\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M40 88L24 104M88 40L104 24\" stroke=\"var(--a-color-primary)\" stroke-width=\"6\" stroke-linecap=\"round\" stroke-opacity=\"0.3\"/><path d=\"M32 96L24 120L48 112L64 96\" fill=\"var(--a-color-warning)\" fill-opacity=\"0.8\"/><path d=\"M24 120L40 104\" stroke=\"var(--a-color-error)\" stroke-width=\"6\" stroke-linecap=\"round\"/><path d=\"M64 16C64 16 96 16 112 32C128 48 112 80 112 80L80 112C80 112 48 128 32 112C16 96 16 64 16 64L48 32C48 32 64 16 64 16Z\" fill=\"var(--a-color-primary)\" fill-opacity=\"0.1\" stroke=\"var(--a-color-primary)\" stroke-width=\"6\" stroke-linejoin=\"round\"/><circle cx=\"72\" cy=\"56\" r=\"16\" fill=\"var(--a-color-secondary)\" fill-opacity=\"0.2\" stroke=\"var(--a-color-secondary)\" stroke-width=\"6\"/><path d=\"M48 32L16 32L32 64M112 80L112 112L80 112\" stroke=\"var(--a-color-primary)\" stroke-width=\"6\" stroke-linejoin=\"round\"/></svg>"
+    },
+    {
+        "id": 9003,
+        "name": "Crane-Premium",
+        "category": "developer",
+        "svgContent": "<svg viewBox=\"0 0 128 128\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M24 120V32L104 32\" stroke=\"var(--a-color-warning)\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M24 64L64 32M24 96L96 32\" stroke=\"var(--a-color-warning)\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-opacity=\"0.5\"/><path d=\"M104 32V80\" stroke=\"var(--a-color-primary)\" stroke-width=\"4\" stroke-dasharray=\"8 8\"/><rect x=\"88\" y=\"80\" width=\"32\" height=\"32\" fill=\"var(--a-color-secondary)\" fill-opacity=\"0.3\" stroke=\"var(--a-color-secondary)\" stroke-width=\"6\" stroke-linejoin=\"round\"/><path d=\"M16 120H32\" stroke=\"var(--a-color-primary)\" stroke-width=\"8\" stroke-linecap=\"round\"/><circle cx=\"24\" cy=\"32\" r=\"8\" fill=\"var(--a-color-error)\"/></svg>"
+    },
+    {
+        "id": 9004,
+        "name": "Lightning-Premium",
+        "category": "developer",
+        "svgContent": "<svg viewBox=\"0 0 128 128\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M64 16L32 72H64L48 120L96 56H64L80 16H64Z\" fill=\"var(--a-color-warning)\" fill-opacity=\"0.3\" stroke=\"var(--a-color-warning)\" stroke-width=\"8\" stroke-linejoin=\"round\"/><circle cx=\"32\" cy=\"40\" r=\"4\" fill=\"var(--a-color-success)\"/><circle cx=\"96\" cy=\"88\" r=\"4\" fill=\"var(--a-color-error)\"/><circle cx=\"88\" cy=\"32\" r=\"4\" fill=\"var(--a-color-primary)\"/><path d=\"M16 64H24M104 64H112\" stroke=\"var(--a-color-warning)\" stroke-width=\"6\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
+        "id": 9005,
+        "name": "Palette-Premium",
+        "category": "developer",
+        "svgContent": "<svg viewBox=\"0 0 128 128\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M112 64C112 88 88 112 64 112C40 112 16 88 16 64C16 40 40 16 64 16C88 16 112 32 112 64Z\" fill=\"var(--a-color-primary)\" fill-opacity=\"0.1\" stroke=\"var(--a-color-primary)\" stroke-width=\"8\" stroke-linecap=\"round\"/><circle cx=\"48\" cy=\"88\" r=\"12\" fill=\"var(--a-color-primary)\"/><circle cx=\"32\" cy=\"56\" r=\"10\" fill=\"var(--a-color-secondary)\"/><circle cx=\"64\" cy=\"32\" r=\"10\" fill=\"var(--a-color-success)\"/><circle cx=\"96\" cy=\"56\" r=\"8\" fill=\"var(--a-color-warning)\"/><path d=\"M80 80L112 112M112 112L120 104\" stroke=\"var(--a-color-error)\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+    },
+    {
+        "id": 9006,
+        "name": "Lightbulb-Premium",
+        "category": "developer",
+        "svgContent": "<svg viewBox=\"0 0 128 128\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M64 16C40 16 24 32 24 56C24 72 40 80 48 96H80C88 80 104 72 104 56C104 32 88 16 64 16Z\" fill=\"var(--a-color-warning)\" fill-opacity=\"0.1\" stroke=\"var(--a-color-warning)\" stroke-width=\"8\" stroke-linejoin=\"round\"/><path d=\"M48 96H80M56 112H72\" stroke=\"var(--a-color-primary)\" stroke-width=\"8\" stroke-linecap=\"round\"/><path d=\"M64 112V120\" stroke=\"var(--a-color-primary)\" stroke-width=\"8\" stroke-linecap=\"round\"/><path d=\"M48 56C48 56 56 40 64 40C72 40 80 56 80 56\" stroke=\"var(--a-color-warning)\" stroke-width=\"6\" stroke-linecap=\"round\"/><path d=\"M64 16V8M32 24L24 16M96 24L104 16M16 56H8M112 56H120\" stroke=\"var(--a-color-warning)\" stroke-width=\"6\" stroke-linecap=\"round\"/></svg>"
+    },
+    {
         "id": 5,
         "name": "Achievements-Premium",
         "category": "entertainment",
