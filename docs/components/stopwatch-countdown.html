@@ -24,9 +24,17 @@
 			<li><a href="../../index.html#axicons">Axicons</a></li>
 		</ul>
 		<div class="actions">
-				<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+			<button class="search toggle" aria-label="Open Search">
+				<span class="axicon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><circle cx="52" cy="52" r="40" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M80 80l32 32" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+			<!-- Moon shown in light mode, Sun shown in dark mode — CSS-driven, no JS needed -->
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+				<span class="axicon moon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><path d="M96 76a40 40 0 1 1-64-32 40 40 0 0 0 64 32z" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+				<span class="axicon sun" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><circle cx="64" cy="64" r="32" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M64 8v16M64 104v16M24 64H8M120 64h-16M32 32l-16-16M112 112l-16-16M32 96l-16 16M112 32l-16-16" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+			<button class="menu toggle" aria-label="Toggle Menu">
+				<span class="axicon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><path d="M16 32h96M16 64h96M16 96h96" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
 		</div>
 	</nav>
 </header>
@@ -36,78 +44,59 @@
 	<section>
 		<div class="container">
 <h2>Live Examples</h2>
-<article class="card">
-<h3>Stopwatch (Elapsed Time)</h3>
-				<div >
-				<div class="timer-display">
-				<p class="timer-value" id="stopwatchValue">00:00.00</p>
-				Stopwatch
-				</div>
-				<div >
-				<button class="timer-button" id="stopwatchStart">
-				<span class="axicon render" data-name="Play"></span>
-				Start
-				</button>
-				<button class="timer-button secondary" id="stopwatchPause">
-				<span class="axicon render" data-name="Pause"></span>
-				Pause
-				</button>
-				<button class="timer-button reset" id="stopwatchReset">
-				<span class="axicon render" data-name="RotateCcw"></span>
-				Reset
-				</button>
-				</div>
-				</div>
-
-				<h3>Countdown Timer</h3>
-				<div >
-				<div class="timer-input">
-				<div >
-				<label >Minutes</label>
-				<input type="number" class="time-input-field" id="countdownMin" value="5" min="0" max="59">
-				</div>
-				<div >
-				<label >Seconds</label>
-				<input type="number" class="time-input-field" id="countdownSec" value="0" min="0" max="59">
-				</div>
-				</div>
-
-				<div class="timer-display">
-				<p class="timer-value" id="countdownValue">05:00</p>
-				<p class="timer-label">Countdown</p>
-				</div>
-
-				<div >
-				<button class="timer-button" id="countdownStart">
-				<span class="axicon render" data-name="Play"></span>
-				Start
-				</button>
-				<button class="timer-button secondary" id="countdownPause">
-				<span class="axicon render" data-name="Pause"></span>
-				Pause
-				</button>
-				<button class="timer-button reset" id="countdownReset">
-				<span class="axicon render" data-name="RotateCcw"></span>
-				Reset
-				</button>
 				
-				</div>
-</article></section>
+				<h3>Stopwatch (Elapsed Time)</h3>
+				<article class="card">
+				<article class="card">
+					<div class="card text-center timer">
+						<samp id="stopwatchValue">00:00.00</samp>
+						<p class="muted" >Stopwatch</p>
+						<menu class="actions">
+							<li><button class="primary" id="stopwatchStart"><span class="axicon render" data-name="Play"></span> Start</button></li>
+							<li><button class="secondary" id="stopwatchPause"><span class="axicon render" data-name="Pause"></span> Pause</button></li>
+							<li><button class="outline" id="stopwatchReset"><span class="axicon render" data-name="RotateCcw"></span> Reset</button></li>
+						</menu>
+					</div>
+					
+					<h3>Countdown Timer</h3>
+					<div class="card text-center timer" >
+						<fieldset>
+							<div>
+								<label>Minutes</label>
+								<input type="number" id="countdownMin" value="5" min="0" max="59">
+							</div>
+							<div>
+								<label>Seconds</label>
+								<input type="number" id="countdownSec" value="0" min="0" max="59">
+							</div>
+						</fieldset>
+						
+						<samp id="countdownValue">05:00</samp>
+						<p class="muted" >Countdown</p>
+						
+						<menu class="actions">
+							<li><button class="primary" id="countdownStart"><span class="axicon render" data-name="Play"></span> Start</button></li>
+							<li><button class="secondary" id="countdownPause"><span class="axicon render" data-name="Pause"></span> Pause</button></li>
+							<li><button class="outline" id="countdownReset"><span class="axicon render" data-name="RotateCcw"></span> Reset</button></li>
+						</menu>
+					</div>
+				</article>
+			</section>
 
 			<section>
-<h2>HTML Structure</h2>
-<article class="card">
-<pre data-component="code-block" class="code-block"><code>&lt;div class="timer-display"&gt;
-				&lt;p class="timer-value" id="timerValue"&gt;00:00.00&lt;/p&gt;
-				&lt;p class="timer-label"&gt;Timer&lt;/p&gt;
-				&lt;/div&gt;
-
-				&lt;div &gt;
-				&lt;button class="timer-button" id="startBtn"&gt;Start&lt;/button&gt;
-				&lt;button class="timer-button secondary" id="pauseBtn"&gt;Pause&lt;/button&gt;
-				&lt;button class="timer-button reset" id="resetBtn"&gt;Reset&lt;/button&gt;
-				&lt;/div&gt;</code></pre></pre>
-</article></section>
+				<h2>HTML Structure</h2>
+				<article class="card">
+					<pre data-component="code-block" class="code-block"><code>&lt;div class="card text-center timer"&gt;
+  &lt;samp id="timerValue"&gt;00:00.00&lt;/samp&gt;
+  &lt;p class="muted"&gt;Timer&lt;/p&gt;
+  &lt;menu class="actions"&gt;
+    &lt;li&gt;&lt;button class="primary" id="startBtn"&gt;Start&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button class="secondary" id="pauseBtn"&gt;Pause&lt;/button&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;button class="outline" id="resetBtn"&gt;Reset&lt;/button&gt;&lt;/li&gt;
+  &lt;/menu&gt;
+&lt;/div&gt;</code></pre>
+				</article>
+			</section>
 
 			<section>
 <h2>Features</h2>
