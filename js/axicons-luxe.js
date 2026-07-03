@@ -1,6 +1,6 @@
 /**
- * Axiom01 - Axicons Luxe Variant (Generated & Extracted)
- * High-fidelity, illustrative UI icons with deep gradients, multi-layered shadows, and 3D lighting effects.
+ * Axiom01 - Axicons Luxe Variant
+ * Ultra-detailed, illustrative SVG icons with rich gradients, shadows, and depth.
  */
 
 (function() {
@@ -332,94 +332,107 @@
             </svg>
   `,
 
-  // 11. SEARCH (Find, Queries, Focus, Filter)
+  // 11. SEARCH (Explore, Find, Focus, Query)
   search: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="schHandle" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#94A3B8" />
-                  <stop offset="100%" stop-color="#334155" />
-                </linearGradient>
-                <linearGradient id="schLens" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#F8FAFC" />
-                  <stop offset="100%" stop-color="#F1F5F9" />
-                </linearGradient>
-                <filter id="schDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#000000" flood-opacity="0.25"/>
-                </filter>
-                <filter id="schReflect" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#FFFFFF" flood-opacity="0.8"/>
-                </filter>
-              </defs>
-              <path d="M100,105 C105,105 110,100 110,95 L110,90 L90,70 C85,65 75,65 70,70 L40,100" fill="url(#schHandle)" filter="url(#schDrop)" />
-              <circle cx="50" cy="50" r="35" fill="url(#schLens)" filter="url(#schReflect)" />
-              <path d="M40,25 C45,20 55,20 60,25 Q50,22 40,25 Z" fill="#FFFFFF" opacity="0.6" />
-              <path d="M52,65 Q65,65 65,52" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.6" />
-            </svg>
+      <defs>
+        <linearGradient id="scLens" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#0284C7" />
+        </linearGradient>
+        <linearGradient id="scHandle" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FEF08A" />
+          <stop offset="50%" stop-color="#FACC15" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="scDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="scGlow" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38BDF8" flood-opacity="0.5"/>
+        </filter>
+      </defs>
+      <circle cx="50" cy="50" r="35" fill="none" stroke="url(#scLens)" stroke-width="12" filter="url(#scDrop)" />
+      <circle cx="50" cy="50" r="32" fill="#BAE6FD" opacity="0.3" />
+      <circle cx="50" cy="50" r="30" fill="url(#scLens)" filter="url(#scGlow)" opacity="0.8"/>
+      <path d="M85,85 L105,105 C110,110 115,105 110,100 L90,80 Z" fill="url(#scHandle)" filter="url(#scDrop)" />
+      <path d="M92,86 L100,94" fill="none" stroke="#A16207" stroke-width="1.5" stroke-linecap="round" />
+      <path d="M30,30 C30,30 40,25 50,25 C60,25 70,30 70,30" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity="0.4" />
+    </svg>
   `,
 
-  // 12. SETTINGS (Preferences, Configuration, Options)
+  // 12. SETTINGS (Configurations, Preferences, Gears, Interweave Gears, Multi-Gears)
   settings: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="stGear" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#94A3B8" />
-                  <stop offset="100%" stop-color="#334155" />
-                </linearGradient>
-                <linearGradient id="stRim" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#F1F5F9" />
-                  <stop offset="100%" stop-color="#CBD5E1" />
-                </linearGradient>
-                <filter id="stDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#000000" flood-opacity="0.25"/>
-                </filter>
-                <filter id="stInnerDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
-                </filter>
-              </defs>
-              <circle cx="60" cy="60" r="45" fill="url(#stGear)" filter="url(#stDrop)" />
-              <circle cx="60" cy="60" r="40" fill="url(#stRim)" filter="url(#stInnerDrop)" />
-              <g transform="rotate(15 60 60)">
-                <path d="M60,15 L66,15 L70,25 L78,28 L86,23 L91,28 L86,36 L89,44 L99,48 L99,54 L89,58 L86,66 L91,74 L86,79 L78,74 L70,77 L66,87 L60,87 L56,77 L48,74 L40,79 L35,74 L40,66 L37,58 L27,54 L27,48 L37,44 L40,36 L35,28 L40,23 L48,28 L56,25 Z" fill="url(#stGear)" filter="url(#stDrop)" />
-              </g>
-              <circle cx="60" cy="60" r="18" fill="url(#stGear)" filter="url(#stInnerDrop)" />
-              <path d="M50,45 L70,45 L70,65 L50,65 Z" fill="#F1F5F9" opacity="0.6" />
-              <path d="M60,50 L60,70" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" />
-            </svg>
+      <defs>
+        <linearGradient id="seGear1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FEF08A" />
+          <stop offset="50%" stop-color="#EAB308" />
+          <stop offset="100%" stop-color="#A16207" />
+        </linearGradient>
+        <linearGradient id="seGear2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FECACA" />
+          <stop offset="50%" stop-color="#EF4444" />
+          <stop offset="100%" stop-color="#991B1B" />
+        </linearGradient>
+        <filter id="seDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="seGearGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#FBBF24" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <g filter="url(#seDrop)">
+        <path d="M50,15 L70,15 L75,25 L85,30 L90,25 L105,35 L100,50 L105,65 L95,75 L105,90 L95,105 L80,100 L65,105 L50,100 L35,105 L25,95 L15,80 L25,65 L15,50 L25,35 L20,20 L35,15 Z" fill="url(#seGear1)" filter="url(#seGearGlow)" />
+        <circle cx="60" cy="60" r="18" fill="#FDE047" stroke="#A16207" stroke-width="2" />
+        <g transform="translate(30, 60)">
+          <path d="M25,0 L35,15 L50,10 L60,25 L75,20 L85,35 L80,50 L85,65 L75,70 L70,85 L55,80 L45,95 L30,90 L20,105 L10,100 L0,115 L-10,105 L-20,110 L-35,100 L-45,115 L-60,110 L-70,100 L-65,85 L-70,70 L-65,55 L-70,40 L-65,25 L-70,10 L-65,0 Z" fill="url(#seGear2)" />
+          <circle cx="25" cy="25" r="12" fill="#FECACA" stroke="#991B1B" stroke-width="1.5" />
+        </g>
+      </g>
+      <circle cx="60" cy="60" r="6" fill="#A16207" />
+      <circle cx="60" cy="60" r="2" fill="#FDE047" />
+      <path d="M30,30 C30,30 40,25 50,25 C60,25 70,30 70,30" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.4" />
+    </svg>
   `,
 
-  // 13. FOLDER (Organization, Storage, Documents)
+  // 13. FOLDER (Organization, Documents, Files, Stacked Folders)
   folder: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="fldBody" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FDE047" />
-                  <stop offset="100%" stop-color="#EAB308" />
-                </linearGradient>
-                <linearGradient id="fldInner" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFBEB" />
-                  <stop offset="100%" stop-color="#E2E8F0" />
-                </linearGradient>
-                <linearGradient id="fldPaper" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFFFF" />
-                  <stop offset="100%" stop-color="#E2E8F0" />
-                </linearGradient>
-                <filter id="fldDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="8" stdDeviation="5" flood-color="#000000" flood-opacity="0.25"/>
-                </filter>
-                <filter id="fldPaperDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#EAB308" flood-opacity="0.4"/>
-                </filter>
-              </defs>
-              <rect x="15" y="30" width="90" height="70" rx="8" fill="url(#fldInner)" filter="url(#fldDrop)" />
-              <path d="M15,40 L40,40 L45,30 L95,30 C100,30 105,35 105,40 L105,100 C105,105 100,110 95,110 L15,110 C10,110 5,105 5,100 L5,45 C5,40 10,40 15,40 Z" fill="url(#fldBody)" filter="url(#fldPaperDrop)" />
-              <g filter="url(#fldPaperDrop)">
-                <rect x="25" y="45" width="70" height="55" rx="4" fill="url(#fldPaper)" />
-              </g>
-              <path d="M35,55 L85,55" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round" />
-              <path d="M35,65 L85,65" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round" />
-              <path d="M35,75 L65,75" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round" />
-            </svg>
+      <defs>
+        <linearGradient id="foBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="50%" stop-color="#F59E0B" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <linearGradient id="foTab" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#BAE6FD" />
+          <stop offset="100%" stop-color="#38BDF8" />
+        </linearGradient>
+        <linearGradient id="foPaper" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="100%" stop-color="#E2E8F0" />
+        </linearGradient>
+        <filter id="foDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="foTabGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38BDF8" flood-opacity="0.5"/>
+        </filter>
+      </defs>
+      <g filter="url(#foDrop)">
+        <rect x="25" y="25" width="80" height="60" rx="3" fill="#A16207" transform="rotate(-5, 60, 60)" />
+        <g filter="url(#foDrop)">
+          <path d="M15,40 L105,40 L100,105 L20,105 Z" fill="url(#foBody)" />
+          <rect x="20" y="30" width="20" height="10" rx="2" fill="url(#foTab)" filter="url(#foTabGlow)" />
+          <rect x="15" y="40" width="90" height="65" rx="3" fill="none" stroke="#FDE047" stroke-width="1.5" opacity="0.6"/>
+        </g>
+      </g>
+      <rect x="35" y="15" width="60" height="40" rx="2" fill="url(#foPaper)" filter="url(#foDrop)" transform="rotate(2, 65, 35)" />
+      <line x1="45" y1="25" x2="85" y2="25" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" />
+      <line x1="45" y1="35" x2="75" y2="35" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round" />
+      <path d="M22,42 C30,35 45,35 60,35 C75,35 90,35 98,42" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.4" />
+    </svg>
   `,
 
   // 14. CALENDAR (Schedule, Time, Events, Planning)
@@ -1031,72 +1044,91 @@
             </svg>
   `,
 
-  // 31. LAPTOP (Code, Workspace, Device)
+  // 31. LAPTOP (Desktop, Software, Workstation, Programming)
   laptop: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="lpScreen" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#0F172A" />
-                  <stop offset="100%" stop-color="#1E293B" />
-                </linearGradient>
-                <linearGradient id="lpChassis" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#E2E8F0" />
-                  <stop offset="100%" stop-color="#94A3B8" />
-                </linearGradient>
-                <filter id="lpDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
-                </filter>
-                <filter id="lpGlow" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38BDF8" flood-opacity="0.5"/>
-                </filter>
-              </defs>
-              <!-- Base Keyboard -->
-              <path d="M10,85 L110,85 C115,85 115,95 110,95 L10,95 C5,95 5,85 10,85 Z" fill="url(#lpChassis)" filter="url(#lpDrop)" />
-              <!-- Screen Backing -->
-              <rect x="25" y="25" width="70" height="58" rx="4" fill="url(#lpChassis)" />
-              <!-- Display -->
-              <rect x="28" y="28" width="64" height="50" rx="2" fill="url(#lpScreen)" />
-              <!-- Screen Glare -->
-              <path d="M28,28 L60,28 L28,60 Z" fill="#FFFFFF" opacity="0.1" />
-              <!-- Code Snippet Glow on Screen -->
-              <rect x="35" y="40" width="20" height="4" rx="2" fill="#38BDF8" filter="url(#lpGlow)" />
-              <rect x="35" y="50" width="40" height="4" rx="2" fill="#F472B6" />
-              <rect x="35" y="60" width="30" height="4" rx="2" fill="#A3E635" />
-              <!-- Trackpad -->
-              <rect x="52" y="87" width="16" height="5" rx="1" fill="#64748B" />
-            </svg>
+      <defs>
+        <linearGradient id="lpSilver" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F8FAFC" />
+          <stop offset="50%" stop-color="#CBD5E1" />
+          <stop offset="100%" stop-color="#94A3B8" />
+        </linearGradient>
+        <linearGradient id="lpScreen" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#0284C7" />
+          <stop offset="100%" stop-color="#1E3A8A" />
+        </linearGradient>
+        <filter id="lpDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="lpScreenGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#38BDF8" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <rect x="15" y="20" width="90" height="60" rx="4" fill="#64748B" filter="url(#lpDrop)" />
+      <rect x="18" y="23" width="84" height="54" rx="2" fill="url(#lpScreen)" />
+      <rect x="25" y="30" width="40" height="30" rx="2" fill="#0F172A" filter="url(#lpScreenGlow)" />
+      <line x1="28" y1="35" x2="45" y2="35" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
+      <line x1="28" y1="42" x2="60" y2="42" stroke="#34D399" stroke-width="2" stroke-linecap="round" />
+      <line x1="28" y1="49" x2="50" y2="49" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" />
+      <rect x="70" y="35" width="25" height="40" rx="2" fill="#FFFFFF" opacity="0.9" />
+      <rect x="74" y="55" width="4" height="15" fill="#8B5CF6" />
+      <rect x="80" y="48" width="4" height="22" fill="#3B82F6" />
+      <rect x="86" y="40" width="4" height="30" fill="#10B981" />
+      <path d="M10,80 L110,80 L116,92 L4,92 Z" fill="url(#lpSilver)" filter="url(#lpDrop)" />
+      <rect x="50" y="85" width="20" height="5" rx="1" fill="#94A3B8" />
+      <path d="M20,82 L100,82 L102,84 L18,84 Z" fill="#475569" />
+      <path d="M6,93 L114,93 L114,95 L6,95 Z" fill="#64748B" />
+      <path d="M10,80 L110,80" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.8" />
+    </svg>
   `,
 
-  // 32. SMARTPHONE (Mobile, App, Communication)
+  // 32. SMARTPHONE (Mobile, App Development, Devices, Communication)
   smartphone: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="spBody" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#334155" />
-                  <stop offset="100%" stop-color="#0F172A" />
-                </linearGradient>
-                <linearGradient id="spScreen" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#0369A1" />
-                  <stop offset="100%" stop-color="#8B5CF6" />
-                </linearGradient>
-                <filter id="spDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.35"/>
-                </filter>
-              </defs>
-              <!-- Phone Body -->
-              <rect x="35" y="15" width="50" height="90" rx="12" fill="url(#spBody)" filter="url(#spDrop)" />
-              <rect x="36" y="16" width="48" height="88" rx="11" fill="none" stroke="#64748B" stroke-width="1.5" />
-              <!-- Screen -->
-              <rect x="39" y="22" width="42" height="76" rx="6" fill="url(#spScreen)" />
-              <!-- Screen Glare -->
-              <path d="M39,22 L81,22 L39,60 Z" fill="#FFFFFF" opacity="0.15" />
-              <!-- Notch / Camera -->
-              <rect x="52" y="24" width="16" height="4" rx="2" fill="#0F172A" />
-              <!-- App Icons (Widgets) -->
-              <rect x="44" y="35" width="12" height="12" rx="3" fill="#FFFFFF" opacity="0.8" />
-              <rect x="64" y="35" width="12" height="12" rx="3" fill="#FDE047" opacity="0.8" />
-              <rect x="44" y="55" width="32" height="18" rx="4" fill="#F472B6" opacity="0.8" />
-            </svg>
+      <defs>
+        <linearGradient id="smRim" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E2E8F0" />
+          <stop offset="50%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <linearGradient id="smScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#0F172A" />
+          <stop offset="50%" stop-color="#1E293B" />
+          <stop offset="100%" stop-color="#020617" />
+        </linearGradient>
+        <linearGradient id="smApp1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" /><stop offset="100%" stop-color="#0284C7" />
+        </linearGradient>
+        <linearGradient id="smApp2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F472B6" /><stop offset="100%" stop-color="#BE185D" />
+        </linearGradient>
+        <filter id="smDrop" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="smGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38BDF8" flood-opacity="0.5"/>
+        </filter>
+      </defs>
+      <rect x="25" y="10" width="70" height="100" rx="12" fill="url(#smRim)" filter="url(#smDrop)" />
+      <rect x="27" y="12" width="66" height="96" rx="10" fill="#334155" />
+      <rect x="29" y="14" width="62" height="92" rx="8" fill="url(#smScreen)" />
+      <rect x="36" y="35" width="12" height="12" rx="3" fill="url(#smApp1)" filter="url(#smGlow)" />
+      <rect x="54" y="35" width="12" height="12" rx="3" fill="url(#smApp2)" />
+      <rect x="72" y="35" width="12" height="12" rx="3" fill="#FBBF24" />
+      <rect x="36" y="55" width="12" height="12" rx="3" fill="#34D399" />
+      <rect x="54" y="55" width="12" height="12" rx="3" fill="#A78BFA" />
+      <rect x="72" y="55" width="12" height="12" rx="3" fill="url(#smApp1)" />
+      <rect x="34" y="85" width="52" height="16" rx="6" fill="#FFFFFF" opacity="0.1" />
+      <rect x="38" y="87" width="12" height="12" rx="3" fill="#F87171" />
+      <rect x="54" y="87" width="12" height="12" rx="3" fill="#60A5FA" />
+      <rect x="70" y="87" width="12" height="12" rx="3" fill="#34D399" />
+      <rect x="50" y="18" width="20" height="6" rx="3" fill="#000000" />
+      <circle cx="66" cy="21" r="1.5" fill="#1D4ED8" />
+      <path d="M29,45 L91,14 L91,14 L29,14 Z" fill="#FFFFFF" opacity="0.05" />
+      <rect x="23" y="35" width="2" height="12" rx="1" fill="#64748B" />
+      <rect x="23" y="50" width="2" height="12" rx="1" fill="#64748B" />
+      <rect x="95" y="40" width="2" height="18" rx="1" fill="#64748B" />
+    </svg>
   `,
 
   // 33. DATABASE (Hosting, Data, Infrastructure)
@@ -1195,42 +1227,43 @@
             </svg>
   `,
 
-  // 36. GAMEPAD (Gaming, Entertainment, Interactive)
+  // 36. GAMEPAD (Gaming, Entertainment, Interactive, Media)
   gamepad: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
-              <defs>
-                <linearGradient id="gpBody" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#475569" />
-                  <stop offset="100%" stop-color="#0F172A" />
-                </linearGradient>
-                <linearGradient id="gpAccent" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#10B981" />
-                  <stop offset="100%" stop-color="#047857" />
-                </linearGradient>
-                <filter id="gpDrop" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
-                </filter>
-                <filter id="gpInner" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
-                </filter>
-              </defs>
-              <!-- Main Controller Body -->
-              <path d="M15,50 C15,25 35,25 50,35 C55,38 65,38 70,35 C85,25 105,25 105,50 C105,80 95,95 80,90 C70,87 65,75 60,75 C55,75 50,87 40,90 C25,95 15,80 15,50 Z" fill="url(#gpBody)" filter="url(#gpDrop)" />
-              <!-- D-Pad -->
-              <path d="M30,45 L36,45 L36,39 L42,39 L42,45 L48,45 L48,51 L42,51 L42,57 L36,57 L36,51 L30,51 Z" fill="#1E293B" filter="url(#gpInner)" />
-              <!-- Buttons -->
-              <circle cx="85" cy="42" r="4" fill="#EF4444" />
-              <circle cx="93" cy="50" r="4" fill="#3B82F6" />
-              <circle cx="77" cy="50" r="4" fill="#F59E0B" />
-              <circle cx="85" cy="58" r="4" fill="url(#gpAccent)" />
-              <!-- Joysticks -->
-              <circle cx="45" cy="65" r="8" fill="#1E293B" filter="url(#gpInner)" />
-              <circle cx="45" cy="65" r="4" fill="#334155" />
-              <circle cx="75" cy="65" r="8" fill="#1E293B" filter="url(#gpInner)" />
-              <circle cx="75" cy="65" r="4" fill="#334155" />
-              <!-- Highlight -->
-              <path d="M25,45 C25,35 35,35 45,40" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.3" />
-            </svg>
+      <defs>
+        <linearGradient id="gpBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4C1D95" />
+          <stop offset="50%" stop-color="#2E1065" />
+          <stop offset="100%" stop-color="#0F172A" />
+        </linearGradient>
+        <radialGradient id="gpGrip" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#7C3AED" />
+          <stop offset="100%" stop-color="#4C1D95" />
+        </radialGradient>
+        <filter id="gpDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+        <filter id="gpNeon" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#F472B6" flood-opacity="0.8"/>
+        </filter>
+      </defs>
+      <path d="M25,35 C45,25 75,25 95,35 C105,40 115,60 110,85 C108,95 95,95 85,85 C80,80 75,70 60,70 C45,70 40,80 35,85 C25,95 12,95 10,85 C5,60 15,40 25,35 Z" fill="url(#gpBody)" filter="url(#gpDrop)" />
+      <path d="M25,35 C15,40 5,60 10,85 C12,95 25,95 35,85 C30,75 25,60 25,35 Z" fill="url(#gpGrip)" opacity="0.6" />
+      <path d="M95,35 C105,40 115,60 110,85 C108,95 95,95 85,85 C90,75 95,60 95,35 Z" fill="url(#gpGrip)" opacity="0.6" />
+      <path d="M28,48 L34,48 L34,42 L40,42 L40,48 L46,48 L46,54 L40,54 L40,60 L34,60 L34,54 L28,54 Z" fill="#1E293B" stroke="#0F172A" stroke-width="1.5" />
+      <circle cx="85" cy="45" r="4" fill="#34D399" filter="url(#gpNeon)" />
+      <circle cx="75" cy="55" r="4" fill="#60A5FA" />
+      <circle cx="95" cy="55" r="4" fill="#F87171" />
+      <circle cx="85" cy="65" r="4" fill="#FBBF24" />
+      <circle cx="45" cy="70" r="10" fill="#334155" stroke="#0F172A" stroke-width="2" />
+      <circle cx="45" cy="70" r="6" fill="#1E293B" />
+      <circle cx="75" cy="70" r="10" fill="#334155" stroke="#0F172A" stroke-width="2" />
+      <circle cx="75" cy="70" r="6" fill="#1E293B" />
+      <rect x="52" y="45" width="6" height="3" rx="1" fill="#94A3B8" />
+      <rect x="62" y="45" width="6" height="3" rx="1" fill="#94A3B8" />
+      <circle cx="60" cy="55" r="4" fill="#FFFFFF" opacity="0.8" filter="url(#gpNeon)" />
+      <path d="M25,35 C45,25 75,25 95,35" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+    </svg>
   `,
 
   // 37. BATTERY (Power, Energy, Status)
@@ -3450,3030 +3483,573 @@
         </svg>
   `,
 
-  // 102. ABSTRACTNEXUS (general)
-  AbstractNexus: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  // 102. SERVER (Hardware Computing, Cloud Nodes, Datacenters, Hosting)
+  server: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
       <defs>
-        <linearGradient id="lx_AbstractNexus_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="svChassis" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#475569" />
+          <stop offset="50%" stop-color="#334155" />
+          <stop offset="100%" stop-color="#1E293B" />
+        </linearGradient>
+        <linearGradient id="svBevel" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <linearGradient id="svGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#10B981" />
+          <stop offset="100%" stop-color="#34D399" />
+        </linearGradient>
+        <filter id="svDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="svLedGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#10B981" flood-opacity="0.7"/>
+        </filter>
+      </defs>
+      <rect x="15" y="15" width="90" height="90" rx="10" fill="url(#svChassis)" filter="url(#svDrop)" />
+      <rect x="18" y="18" width="84" height="84" rx="8" fill="none" stroke="url(#svBevel)" stroke-width="2" opacity="0.6" />
+      <path d="M15,25 L8,25 L8,35 L15,35 Z M15,85 L8,85 L8,95 L15,95 Z" fill="url(#svBevel)" />
+      <path d="M105,25 L112,25 L112,35 L105,35 Z M105,85 L112,85 L112,95 L105,95 Z" fill="url(#svBevel)" />
+      <rect x="25" y="28" width="70" height="14" rx="4" fill="#0F172A" />
+      <rect x="25" y="48" width="70" height="14" rx="4" fill="#0F172A" />
+      <rect x="25" y="68" width="70" height="14" rx="4" fill="#0F172A" />
+      <rect x="29" y="31" width="8" height="8" rx="1" fill="#475569" />
+      <rect x="29" y="51" width="8" height="8" rx="1" fill="#475569" />
+      <rect x="29" y="71" width="8" height="8" rx="1" fill="#475569" />
+      <circle cx="85" cy="35" r="3" fill="url(#svGlow)" filter="url(#svLedGlow)" />
+      <circle cx="85" cy="55" r="3" fill="url(#svGlow)" filter="url(#svLedGlow)" />
+      <circle cx="85" cy="75" r="3" fill="#64748B" />
+      <circle cx="77" cy="35" r="2" fill="#34D399" opacity="0.8" />
+      <circle cx="77" cy="55" r="2" fill="#34D399" opacity="0.8" />
+      <circle cx="82" cy="92" r="4" fill="#EF4444" />
+      <circle cx="90" cy="92" r="2" fill="#3B82F6" />
+    </svg>
+  `,
+
+  // 103. KEYBOARD (Input, Technical Workspace, Interactive Controls, Coding Execution)
+  keyboard: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="kbChassis" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#334155" />
+          <stop offset="100%" stop-color="#0F172A" />
+        </linearGradient>
+        <linearGradient id="kbKey" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#64748B" />
+          <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+        <linearGradient id="kbAccentKey" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#0284C7" />
+        </linearGradient>
+        <filter id="kbDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#000000" flood-opacity="0.35"/>
+        </filter>
+        <filter id="kbNeonGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#38BDF8" flood-opacity="0.5"/>
+        </filter>
+      </defs>
+      <path d="M12,42 L108,42 L100,88 L20,88 Z" fill="url(#kbChassis)" filter="url(#kbDrop)" />
+      <path d="M16,46 L104,46 L97,84 L23,84 Z" fill="#0F172A" />
+      <path d="M18,48 L102,48 L95,82 L25,82 Z" fill="none" stroke="#38BDF8" stroke-width="1" filter="url(#kbNeonGlow)" opacity="0.4" />
+      <rect x="23" y="50" width="10" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="36" y="50" width="10" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="49" y="50" width="10" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="62" y="50" width="10" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="75" y="50" width="10" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="88" y="50" width="10" height="8" rx="2" fill="url(#kbAccentKey)" />
+      <rect x="21" y="61" width="12" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="36" y="61" width="10" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="49" y="61" width="10" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="62" y="61" width="10" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="75" y="61" width="10" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="88" y="61" width="9" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="20" y="72" width="14" height="8" rx="2" fill="url(#kbKey)" />
+      <rect x="37" y="72" width="48" height="8" rx="2" fill="url(#kbKey)" /> <rect x="88" y="72" width="7" height="8" rx="2" fill="url(#kbKey)" />
+      <path d="M38,73 L83,73" stroke="#94A3B8" stroke-width="1" opacity="0.4" />
+      <path d="M89,51 L97,51" stroke="#BAE6FD" stroke-width="1" opacity="0.6" />
+    </svg>
+  `,
+
+  // 104. MOUSE (Precision Tracking, Navigation, System Interaction, Click Triggers)
+  mouse: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="msBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#475569" />
+          <stop offset="50%" stop-color="#334155" />
+          <stop offset="100%" stop-color="#0F172A" />
+        </linearGradient>
+        <linearGradient id="msWheel" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FCD34D" />
+          <stop offset="100%" stop-color="#D97706" />
+        </linearGradient>
+        <filter id="msDrop" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="msCoreGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#FBBF24" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <path d="M60,15 C40,15 30,35 30,65 C30,95 42,108 60,108 C78,108 90,95 90,65 C90,35 80,15 60,15 Z" fill="url(#msBody)" filter="url(#msDrop)" />
+      <path d="M60,15 L60,52" fill="none" stroke="#1E293B" stroke-width="2" />
+      <path d="M30,58 C40,58 42,65 42,75 C42,85 38,98 60,98 C82,98 78,85 78,75 C78,65 80,58 90,58" fill="none" stroke="#1E293B" stroke-width="1.5" opacity="0.6" />
+      <rect x="56" y="28" width="8" height="16" rx="4" fill="url(#msWheel)" filter="url(#msCoreGlow)" />
+      <line x1="56" y1="32" x2="64" y2="32" stroke="#451A03" stroke-width="1.5" />
+      <line x1="56" y1="36" x2="64" y2="36" stroke="#451A03" stroke-width="1.5" />
+      <line x1="56" y1="40" x2="64" y2="40" stroke="#451A03" stroke-width="1.5" />
+      <path d="M36,50 C34,68 38,82 45,92" fill="none" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round" opacity="0.4" />
+      <rect x="57" y="48" width="6" height="6" rx="1.5" fill="#94A3B8" />
+    </svg>
+  `,
+
+  // 105. SHIELD GEAR (Automated Pipeline Compliance, DevSecOps, System Encryption Protection)
+  shieldGear: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="sgGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="50%" stop-color="#EAB308" />
+          <stop offset="100%" stop-color="#854D0E" />
+        </linearGradient>
+        <linearGradient id="sgMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#334155" />
+        </linearGradient>
+        <linearGradient id="sgGlass" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.15" />
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+        </linearGradient>
+        <filter id="sgDrop" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="sgInner" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
+        </filter>
+      </defs>
+      <path d="M60,12 L102,27 C102,72 80,106 60,116 C40,106 18,72 18,27 Z" fill="url(#sgGold)" filter="url(#sgDrop)" stroke="#CA8A04" stroke-width="1" />
+      <path d="M60,20 L94,32 C94,68 76,96 60,106 C44,96 26,68 26,32 Z" fill="#1E293B" filter="url(#sgInner)" />
+      <g filter="url(#sgInner)" transform="translate(60,63)">
+        <path d="M-6,-32 L6,-32 L8,-22 L16,-20 L24,-26 L32,-18 L26,-10 L29,-2 L39,0 L39,12 L29,14 L26,22 L32,30 L24,38 L16,32 L8,34 L6,44 L-6,44 L-8,34 L-16,32 L-24,38 L-32,30 L-26,22 L-29,14 L-39,12 L-39,0 L-29,-2 L-26,-10 L-32,-18 L-24,-26 L-16,-20 L-8,-22 Z" fill="url(#sgMetal)" />
+        <circle cx="0" cy="6" r="14" fill="#0F172A" />
+        <circle cx="0" cy="6" r="6" fill="url(#sgGold)" />
+      </g>
+      <path d="M60,20 L94,32 C94,50 85,72 72,85 C60,62 38,40 26,32 Z" fill="url(#sgGlass)" />
+    </svg>
+  `,
+
+  // 106. GRAPH NODE (Abstract Syntax Trees, Data Structures, Structural Interconnectivity)
+  graphNode: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="gnLine" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#A78BFA" />
+          <stop offset="100%" stop-color="#F472B6" />
+        </linearGradient>
+        <radialGradient id="gnNodeA" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#C4B5FD" />
+          <stop offset="60%" stop-color="#7C3AED" />
+          <stop offset="100%" stop-color="#4C1D95" />
+        </radialGradient>
+        <radialGradient id="gnNodeB" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#FBCFE8" />
+          <stop offset="60%" stop-color="#EC4899" />
+          <stop offset="100%" stop-color="#9D174D" />
+        </radialGradient>
+        <filter id="gnDrop" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="gnNeon" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#EC4899" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <g stroke="url(#gnLine)" stroke-width="6" stroke-linecap="round" filter="url(#gnNeon)">
+        <line x1="30" y1="35" x2="90" y2="45" />
+        <line x1="30" y1="35" x2="50" y2="90" />
+        <line x1="90" y1="45" x2="50" y2="90" />
+      </g>
+      <line x1="30" y1="35" x2="90" y2="45" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="6 12" opacity="0.5" />
+      <line x1="30" y1="35" x2="50" y2="90" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="6 12" opacity="0.5" />
+      <circle cx="30" cy="35" r="16" fill="url(#gnNodeA)" filter="url(#gnDrop)" stroke="#4C1D95" stroke-width="1" />
+      <circle cx="26" cy="31" r="3" fill="#FFFFFF" opacity="0.7" />
+      <circle cx="90" cy="45" r="14" fill="url(#gnNodeB)" filter="url(#gnDrop)" stroke="#9D174D" stroke-width="1" />
+      <circle cx="86" cy="41" r="2.5" fill="#FFFFFF" opacity="0.7" />
+      <circle cx="50" cy="90" r="14" fill="url(#gnNodeB)" filter="url(#gnDrop)" stroke="#9D174D" stroke-width="1" />
+      <circle cx="46" cy="86" r="2.5" fill="#FFFFFF" opacity="0.7" />
+    </svg>
+  `,
+
+  // 107. COIN (Currency, Wealth, Crypto, Transactions)
+  coin: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="cnGoldOuter" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#FEF08A" />
+          <stop offset="50%" stop-color="#EAB308" />
+          <stop offset="100%" stop-color="#854D0E" />
+        </radialGradient>
+        <radialGradient id="cnGoldInner" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="70%" stop-color="#CA8A04" />
+          <stop offset="100%" stop-color="#713F12" />
+        </radialGradient>
+        <filter id="cnDrop" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#713F12" flood-opacity="0.4"/>
+        </filter>
+        <filter id="cnInnerGlow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#422006" flood-opacity="0.5"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="url(#cnGoldOuter)" filter="url(#cnDrop)" />
+      <circle cx="60" cy="60" r="34" fill="url(#cnGoldInner)" filter="url(#cnInnerGlow)" />
+      <circle cx="60" cy="60" r="39" fill="none" stroke="#FEF08A" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8" />
+      <path d="M60,30 L60,90 M50,42 C65,42 70,50 60,55 C50,60 45,68 60,78" fill="none" stroke="#FFFBEB" stroke-width="8" stroke-linecap="round" filter="url(#cnDrop)" />
+      <path d="M50,42 C65,42 70,50 60,55 C50,60 45,68 60,78" fill="none" stroke="#FBBF24" stroke-width="4" stroke-linecap="round" />
+      <path d="M22,42 C30,24 55,18 78,24 C55,20 32,28 22,42 Z" fill="#FFFFFF" opacity="0.5" />
+      <path d="M30,30 L33,22 L36,30 L44,33 L36,36 L33,44 L30,36 L22,33 Z" fill="#FFFFFF" />
+    </svg>
+  `,
+
+  // 108. VAULT (Security, Storage, Banking, Protection)
+  vault: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="vlSteel" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" />
+          <stop offset="50%" stop-color="#475569" />
+          <stop offset="100%" stop-color="#1E293B" />
+        </linearGradient>
+        <radialGradient id="vlDoor" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#E2E8F0" />
+          <stop offset="70%" stop-color="#64748B" />
+          <stop offset="100%" stop-color="#334155" />
+        </radialGradient>
+        <linearGradient id="vlGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#A16207" />
+        </linearGradient>
+        <filter id="vlDrop" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.4"/>
+        </filter>
+        <filter id="vlInner" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <rect x="10" y="10" width="100" height="100" rx="8" fill="url(#vlSteel)" filter="url(#vlDrop)" />
+      <rect x="15" y="15" width="90" height="90" rx="4" fill="none" stroke="#CBD5E1" stroke-width="2" opacity="0.3" />
+      <circle cx="20" cy="20" r="2" fill="#0F172A" /><circle cx="100" cy="20" r="2" fill="#0F172A" />
+      <circle cx="20" cy="100" r="2" fill="#0F172A" /><circle cx="100" cy="100" r="2" fill="#0F172A" />
+      <circle cx="60" cy="60" r="40" fill="#0F172A" filter="url(#vlInner)" />
+      <circle cx="60" cy="60" r="36" fill="url(#vlDoor)" filter="url(#vlDrop)" />
+      <circle cx="60" cy="60" r="34" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.4" />
+      <circle cx="60" cy="60" r="16" fill="url(#vlSteel)" filter="url(#vlDrop)" />
+      <path d="M60,35 L60,85 M35,60 L85,60 M42,42 L78,78 M42,78 L78,42" stroke="url(#vlGold)" stroke-width="5" stroke-linecap="round" filter="url(#vlDrop)" />
+      <circle cx="60" cy="60" r="8" fill="url(#vlGold)" filter="url(#vlDrop)" />
+      <circle cx="60" cy="60" r="4" fill="#713F12" />
+    </svg>
+  `,
+
+  // 109. CANDLESTICK CHART (Trading, Markets, Analytics, Growth)
+  candlestick: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="cdGreen" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#059669" />
+          <stop offset="100%" stop-color="#34D399" />
+        </linearGradient>
+        <linearGradient id="cdRed" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#EF4444" />
+          <stop offset="100%" stop-color="#991B1B" />
+        </linearGradient>
+        <filter id="cdGlowGreen" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#10B981" flood-opacity="0.6"/>
+        </filter>
+        <filter id="cdGlowRed" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#EF4444" flood-opacity="0.6"/>
+        </filter>
+        <filter id="cdDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <path d="M15,20 L15,100 L105,100" fill="none" stroke="#475569" stroke-width="3" stroke-linecap="round" />
+      <line x1="15" y1="40" x2="105" y2="40" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4" />
+      <line x1="15" y1="60" x2="105" y2="60" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4" />
+      <line x1="15" y1="80" x2="105" y2="80" stroke="#334155" stroke-width="1.5" stroke-dasharray="4 4" />
+      
+      <g filter="url(#cdGlowGreen)">
+        <line x1="35" y1="45" x2="35" y2="85" stroke="#34D399" stroke-width="3" stroke-linecap="round" />
+        <rect x="27" y="55" width="16" height="20" rx="2" fill="url(#cdGreen)" filter="url(#cdDrop)" />
+      </g>
+      
+      <g filter="url(#cdGlowRed)">
+        <line x1="60" y1="35" x2="60" y2="75" stroke="#EF4444" stroke-width="3" stroke-linecap="round" />
+        <rect x="52" y="45" width="16" height="25" rx="2" fill="url(#cdRed)" filter="url(#cdDrop)" />
+      </g>
+      
+      <g filter="url(#cdGlowGreen)">
+        <line x1="85" y1="15" x2="85" y2="60" stroke="#34D399" stroke-width="3" stroke-linecap="round" />
+        <rect x="77" y="25" width="16" height="30" rx="2" fill="url(#cdGreen)" filter="url(#cdDrop)" />
+      </g>
+      
+      <path d="M28,56 L42,56 M53,46 L67,46 M78,26 L92,26" stroke="#FFFFFF" stroke-width="1.5" opacity="0.5" />
+    </svg>
+  `,
+
+  // 110. BANK (Institutions, Government, Enterprise, Security)
+  bank: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="bkMarble" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#F8FAFC" />
+          <stop offset="100%" stop-color="#94A3B8" />
+        </linearGradient>
+        <linearGradient id="bkGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FDE047" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <filter id="bkDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.25"/>
+        </filter>
+        <filter id="bkInner" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <rect x="15" y="45" width="90" height="50" fill="#334155" filter="url(#bkInner)" />
+      <path d="M10,95 L110,95 L115,105 L5,105 Z" fill="url(#bkMarble)" filter="url(#bkDrop)" />
+      <path d="M15,85 L105,85 L110,95 L10,95 Z" fill="url(#bkMarble)" filter="url(#bkDrop)" />
+      <rect x="22" y="45" width="12" height="40" fill="url(#bkMarble)" filter="url(#bkDrop)" />
+      <rect x="44" y="45" width="12" height="40" fill="url(#bkMarble)" filter="url(#bkDrop)" />
+      <rect x="66" y="45" width="12" height="40" fill="url(#bkMarble)" filter="url(#bkDrop)" />
+      <rect x="88" y="45" width="12" height="40" fill="url(#bkMarble)" filter="url(#bkDrop)" />
+      <line x1="26" y1="45" x2="26" y2="85" stroke="#CBD5E1" stroke-width="2" />
+      <line x1="30" y1="45" x2="30" y2="85" stroke="#CBD5E1" stroke-width="2" />
+      <line x1="48" y1="45" x2="48" y2="85" stroke="#CBD5E1" stroke-width="2" />
+      <line x1="52" y1="45" x2="52" y2="85" stroke="#CBD5E1" stroke-width="2" />
+      <line x1="70" y1="45" x2="70" y2="85" stroke="#CBD5E1" stroke-width="2" />
+      <line x1="74" y1="45" x2="74" y2="85" stroke="#CBD5E1" stroke-width="2" />
+      <line x1="92" y1="45" x2="92" y2="85" stroke="#CBD5E1" stroke-width="2" />
+      <line x1="96" y1="45" x2="96" y2="85" stroke="#CBD5E1" stroke-width="2" />
+      <polygon points="60,15 10,45 110,45" fill="url(#bkMarble)" filter="url(#bkDrop)" />
+      <polygon points="60,25 25,40 95,40" fill="#334155" filter="url(#bkInner)" />
+      <circle cx="60" cy="35" r="5" fill="url(#bkGold)" filter="url(#bkDrop)" />
+      <path d="M12,43 L60,17 L108,43" stroke="#FFFFFF" stroke-width="2" fill="none" opacity="0.7" />
+    </svg>
+  `,
+
+  // 111. PIGGY BANK (Savings, Micro-transactions, Financial Planning)
+  piggyBank: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="pbPig" cx="40%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#FBCFE8" />
+          <stop offset="50%" stop-color="#F472B6" />
+          <stop offset="100%" stop-color="#BE185D" />
+        </radialGradient>
+        <linearGradient id="pbGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FEF08A" />
+          <stop offset="100%" stop-color="#A16207" />
+        </linearGradient>
+        <filter id="pbDrop" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#9D174D" flood-opacity="0.3"/>
+        </filter>
+        <filter id="pbCoinDrop" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#854D0E" flood-opacity="0.5"/>
+        </filter>
+      </defs>
+      <ellipse cx="60" cy="100" rx="40" ry="8" fill="#000000" opacity="0.15" filter="blur(4px)" />
+      <path d="M35,80 L30,100 L45,100 L45,80 Z" fill="#BE185D" />
+      <path d="M75,80 L70,100 L85,100 L85,80 Z" fill="#BE185D" />
+      <path d="M30,35 L20,20 L40,30 Z" fill="#F472B6" filter="url(#pbDrop)" />
+      <path d="M80,30 L90,20 L90,40 Z" fill="#F472B6" filter="url(#pbDrop)" />
+      <ellipse cx="60" cy="65" rx="45" ry="35" fill="url(#pbPig)" filter="url(#pbDrop)" />
+      <path d="M30,50 C40,35 70,35 85,50" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.5" />
+      <ellipse cx="25" cy="65" rx="12" ry="16" fill="#F9A8D4" filter="url(#pbDrop)" />
+      <circle cx="22" cy="60" r="3" fill="#BE185D" />
+      <circle cx="22" cy="70" r="3" fill="#BE185D" />
+      <circle cx="45" cy="52" r="5" fill="#4C0519" />
+      <circle cx="43" cy="50" r="1.5" fill="#FFFFFF" />
+      <circle cx="65" cy="25" r="14" fill="url(#pbGold)" filter="url(#pbCoinDrop)" />
+      <path d="M65,15 L65,35 M61,25 L69,25 M65,17 C68,17 71,20 71,25" fill="none" stroke="#FFFBEB" stroke-width="2" stroke-linecap="round" />
+      <path d="M50,30 L75,30" fill="none" stroke="#4C0519" stroke-width="6" stroke-linecap="round" />
+      <path d="M50,30 L63,30" fill="none" stroke="#4C0519" stroke-width="6" stroke-linecap="round" />
+    </svg>
+  `,
+
+  // 112. SMARTWATCH (Wearables, Health, Fitness, Notifications)
+  smartwatch: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="swStrap" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#0284C7" />
+          <stop offset="100%" stop-color="#082F49" />
+        </linearGradient>
+        <linearGradient id="swBezel" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E2E8F0" />
+          <stop offset="50%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#334155" />
+        </linearGradient>
+        <linearGradient id="swScreen" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#0F172A" />
+          <stop offset="100%" stop-color="#000000" />
+        </linearGradient>
+        <filter id="swDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.35"/>
+        </filter>
+        <filter id="swNeonRing" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#10B981" flood-opacity="0.8"/>
+        </filter>
+      </defs>
+      <path d="M45,35 L45,10 C45,5 50,5 50,5 L70,5 C70,5 75,5 75,10 L75,35 Z" fill="url(#swStrap)" filter="url(#swDrop)" />
+      <path d="M45,85 L45,110 C45,115 50,115 50,115 L70,115 C70,115 75,115 75,110 L75,85 Z" fill="url(#swStrap)" filter="url(#swDrop)" />
+      <circle cx="60" cy="95" r="2" fill="#0F172A" />
+      <circle cx="60" cy="105" r="2" fill="#0F172A" />
+      <rect x="30" y="30" width="60" height="60" rx="16" fill="url(#swBezel)" filter="url(#swDrop)" />
+      <rect x="90" y="50" width="4" height="12" rx="2" fill="#94A3B8" />
+      <rect x="90" y="68" width="3" height="8" rx="1.5" fill="#475569" />
+      <rect x="34" y="34" width="52" height="52" rx="12" fill="url(#swScreen)" />
+      <circle cx="60" cy="60" r="18" fill="none" stroke="#1E293B" stroke-width="4" />
+      <circle cx="60" cy="60" r="18" fill="none" stroke="#EF4444" stroke-width="4" stroke-dasharray="100 13" stroke-linecap="round" transform="rotate(-90 60 60)" />
+      
+      <circle cx="60" cy="60" r="12" fill="none" stroke="#1E293B" stroke-width="4" />
+      <circle cx="60" cy="60" r="12" fill="none" stroke="#10B981" stroke-width="4" stroke-dasharray="60 15" stroke-linecap="round" transform="rotate(-40 60 60)" filter="url(#swNeonRing)" />
+      
+      <circle cx="60" cy="60" r="6" fill="none" stroke="#1E293B" stroke-width="4" />
+      <circle cx="60" cy="60" r="6" fill="none" stroke="#38BDF8" stroke-width="4" stroke-dasharray="30 7" stroke-linecap="round" transform="rotate(20 60 60)" />
+      <path d="M34,46 C45,35 60,34 75,34 L86,34 L86,40 C70,40 50,45 34,55 Z" fill="#FFFFFF" opacity="0.1" />
+    </svg>
+  `,
+
+  // 113. VR HEADSET (Metaverse, Virtual Reality, Immersive, Future)
+  vrHeadset: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="vrBody" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="50%" stop-color="#F1F5F9" />
+          <stop offset="100%" stop-color="#94A3B8" />
+        </linearGradient>
+        <linearGradient id="vrVisor" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1E293B" />
+          <stop offset="50%" stop-color="#0F172A" />
+          <stop offset="100%" stop-color="#020617" />
+        </linearGradient>
+        <linearGradient id="vrStrap" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#475569" />
+          <stop offset="100%" stop-color="#1E293B" />
+        </linearGradient>
+        <filter id="vrDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.35"/>
+        </filter>
+        <filter id="vrNeon" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#8B5CF6" flood-opacity="0.8"/>
+        </filter>
+      </defs>
+      <path d="M15,55 C5,55 5,65 15,65 L105,65 C115,65 115,55 105,55 Z" fill="url(#vrStrap)" filter="url(#vrDrop)" />
+      <rect x="20" y="50" width="15" height="20" rx="4" fill="#CBD5E1" />
+      <rect x="85" y="50" width="15" height="20" rx="4" fill="#CBD5E1" />
+      <path d="M25,40 L95,40 C105,40 105,80 95,80 L25,80 C15,80 15,40 25,40 Z" fill="url(#vrBody)" filter="url(#vrDrop)" />
+      <path d="M30,45 L90,45 C98,45 98,75 90,75 L30,75 C22,75 22,45 30,45 Z" fill="url(#vrVisor)" />
+      <line x1="45" y1="60" x2="75" y2="60" stroke="#8B5CF6" stroke-width="4" stroke-linecap="round" filter="url(#vrNeon)" />
+      <circle cx="45" cy="60" r="4" fill="#C4B5FD" />
+      <circle cx="75" cy="60" r="4" fill="#C4B5FD" />
+      <path d="M30,45 L80,45 L40,75 L25,75 C22,65 24,50 30,45 Z" fill="#FFFFFF" opacity="0.1" />
+      <path d="M40,35 L80,35" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round" />
+      <path d="M50,85 L70,85" stroke="#64748B" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+    </svg>
+  `,
+
+  // 114. PREMIUM ME VERIFIED (User, Profile, Achievement, Personalized)
+  premium_me_verified: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <radialGradient id="meFace" cx="35%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#E2E8F0" />
+          <stop offset="60%" stop-color="#94A3B8" />
+          <stop offset="100%" stop-color="#475569" />
+        </radialGradient>
+        <linearGradient id="meCrown" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FEF08A" />
+          <stop offset="50%" stop-color="#F59E0B" />
+          <stop offset="100%" stop-color="#B45309" />
+        </linearGradient>
+        <linearGradient id="meShield" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8" />
+          <stop offset="100%" stop-color="#0284C7" />
+        </linearGradient>
+        <filter id="meDrop" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+        </filter>
+        <filter id="meGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#FBBF24" flood-opacity="0.6"/>
+        </filter>
+      </defs>
+      <circle cx="60" cy="60" r="45" fill="url(#meFace)" filter="url(#meDrop)" />
+      <ellipse cx="60" cy="55" rx="18" ry="22" fill="#E2E8F0" />
+      <path d="M48,50 Q60,40 72,50" fill="none" stroke="#000" stroke-width="2" />
+      <path d="M52,65 Q60,75 68,65" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" />
+      <g transform="translate(42, 10)" filter="url(#meDrop)">
+        <path d="M0,20 L36,20 L36,0 L24,10 L18,0 L12,10 L0,0 Z" fill="url(#meCrown)" />
+        <circle cx="18" cy="10" r="2.5" fill="#FDE047" stroke="#CA8A04" />
+      </g>
+      <path d="M85,85 L115,85 L100,115 Z" fill="url(#meShield)" filter="url(#meGlow)" />
+      <path d="M92,92 L98,105 L108,92" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+      <path d="M22,42 C30,24 55,18 78,24 C55,20 32,28 22,42 Z" fill="#FFFFFF" opacity="0.4" />
+    </svg>
+  `,
+
+  // 115. ACHIEVEMENT STAR (Success, Achievement, Goal, Premium achievement)
+  achievement_star: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+      <defs>
+        <linearGradient id="asStarOuter" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#FEF08A" />
           <stop offset="50%" stop-color="#FACC15" />
           <stop offset="100%" stop-color="#A16207" />
         </linearGradient>
-        <filter id="lx_AbstractNexus_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AbstractNexus_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AbstractNexus_grad)" fill="url(#lx_AbstractNexus_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AbstractNexus_drop)">
-        <path d="M32 32l64 64M32 96l64-64"  stroke-width="6" stroke-linecap="round"/><circle cx="64" cy="64" r="8" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AbstractNexus_inner)">
-        <path d="M32 32l64 64M32 96l64-64"  stroke-width="6" stroke-linecap="round"/><circle cx="64" cy="64" r="8" />
-      </g>
-    </svg>
-  `,
-
-  // 103. ACCESS (ui)
-  Access: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Access_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_Access_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Access_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Access_grad)" fill="url(#lx_Access_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Access_drop)">
-        <circle cx="40" cy="88" r="16"  stroke-width="6"/><path d="M52 76l44-44M84 20l24 24"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Access_inner)">
-        <circle cx="40" cy="88" r="16"  stroke-width="6"/><path d="M52 76l44-44M84 20l24 24"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 104. ACCORDION (ui)
-  Accordion: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Accordion_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_Accordion_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Accordion_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Accordion_grad)" fill="url(#lx_Accordion_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Accordion_drop)">
-        <rect x="24" y="32" width="80" height="24" rx="4"  stroke-width="6"/><rect x="24" y="72" width="80" height="24" rx="4"  stroke-width="6"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Accordion_inner)">
-        <rect x="24" y="32" width="80" height="24" rx="4"  stroke-width="6"/><rect x="24" y="72" width="80" height="24" rx="4"  stroke-width="6"/>
-      </g>
-    </svg>
-  `,
-
-  // 105. ACCOUNTINGLEDGER (finance)
-  AccountingLedger: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AccountingLedger_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_AccountingLedger_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AccountingLedger_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AccountingLedger_grad)" fill="url(#lx_AccountingLedger_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AccountingLedger_drop)">
-        <rect x="32" y="24" width="64" height="80" rx="4"  stroke-width="6"/><path d="M48 40h32M48 56h32M48 72h32M48 88h32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AccountingLedger_inner)">
-        <rect x="32" y="24" width="64" height="80" rx="4"  stroke-width="6"/><path d="M48 40h32M48 56h32M48 72h32M48 88h32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 106. ACTION (media)
-  Action: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Action_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_Action_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Action_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Action_grad)" fill="url(#lx_Action_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Action_drop)">
-        <rect x="12" y="32" width="40" height="12" /><path d="M12 32L20 16H44L52 32" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Action_inner)">
-        <rect x="12" y="32" width="40" height="12" /><path d="M12 32L20 16H44L52 32" />
-      </g>
-    </svg>
-  `,
-
-  // 107. ACTIVITY (health)
-  Activity: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Activity_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
+        <linearGradient id="asStarInner" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" />
+          <stop offset="60%" stop-color="#FDE047" />
           <stop offset="100%" stop-color="#A16207" />
         </linearGradient>
-        <filter id="lx_Activity_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
+        <filter id="asStarDrop" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000000" flood-opacity="0.4"/>
         </filter>
-        <filter id="lx_Activity_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
+        <filter id="asStarGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#FBBF24" flood-opacity="0.7"/>
         </filter>
       </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Activity_grad)" fill="url(#lx_Activity_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Activity_drop)">
-        <path d="M 12 64 h 28 l 16 -40 l 24 80 l 16 -40 h 20"   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <g filter="url(#asStarDrop)">
+        <path d="M60,10 L75,45 L110,50 L85,75 L95,110 L60,95 L25,110 L35,75 L10,50 L45,45 Z" fill="url(#asStarOuter)" filter="url(#asStarGlow)" stroke="#CA8A04" stroke-width="2" stroke-linejoin="miter" />
+        <path d="M60,20 L73,43 L102,48 L80,68 L88,98 L60,86 L32,98 L40,68 L18,48 L47,43 Z" fill="url(#asStarInner)" opacity="0.8" stroke="#FDE047" stroke-width="1.5" />
       </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Activity_inner)">
-        <path d="M 12 64 h 28 l 16 -40 l 24 80 l 16 -40 h 20"   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 108. ACTIVITYHEARTWARDS (health)
-  ActivityHeartwards: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ActivityHeartwards_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_ActivityHeartwards_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ActivityHeartwards_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ActivityHeartwards_grad)" fill="url(#lx_ActivityHeartwards_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ActivityHeartwards_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 64h16l12-32 12 64 12-48 12 28 8-12h24"/><path d="M48 24A16 16 0 0 1 80 44a16 16 0 0 1 32-20"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ActivityHeartwards_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 64h16l12-32 12 64 12-48 12 28 8-12h24"/><path d="M48 24A16 16 0 0 1 80 44a16 16 0 0 1 32-20"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 109. ADD (ui)
-  Add: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Add_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_Add_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Add_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Add_grad)" fill="url(#lx_Add_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Add_drop)">
-        <path d="M64 32v64M32 64h64"  stroke-width="8" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Add_inner)">
-        <path d="M64 32v64M32 64h64"  stroke-width="8" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 110. ADJUSTMENTS (ui)
-  Adjustments: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Adjustments_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Adjustments_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Adjustments_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Adjustments_grad)" fill="url(#lx_Adjustments_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Adjustments_drop)">
-        <g   stroke-width="8" stroke-linecap="round"><line x1="24" y1="112" x2="24" y2="72"/><line x1="24" y1="56" x2="24" y2="16"/><line x1="64" y1="112" x2="64" y2="80"/><line x1="64" y1="64" x2="64" y2="16"/><line x1="104" y1="112" x2="104" y2="56"/><line x1="104" y1="40" x2="104" y2="16"/><rect x="8" y="56" width="32" height="16" rx="4" /><rect x="48" y="64" width="32" height="16" rx="4" /><rect x="88" y="40" width="32" height="16" rx="4" /></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Adjustments_inner)">
-        <g   stroke-width="8" stroke-linecap="round"><line x1="24" y1="112" x2="24" y2="72"/><line x1="24" y1="56" x2="24" y2="16"/><line x1="64" y1="112" x2="64" y2="80"/><line x1="64" y1="64" x2="64" y2="16"/><line x1="104" y1="112" x2="104" y2="56"/><line x1="104" y1="40" x2="104" y2="16"/><rect x="8" y="56" width="32" height="16" rx="4" /><rect x="48" y="64" width="32" height="16" rx="4" /><rect x="88" y="40" width="32" height="16" rx="4" /></g>
-      </g>
-    </svg>
-  `,
-
-  // 111. ADVENTURECOMPASS (media)
-  AdventureCompass: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AdventureCompass_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_AdventureCompass_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AdventureCompass_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AdventureCompass_grad)" fill="url(#lx_AdventureCompass_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AdventureCompass_drop)">
-        <circle cx="64" cy="64" r="48"  stroke-width="6"/><path d="M64 32v64M32 64h64"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AdventureCompass_inner)">
-        <circle cx="64" cy="64" r="48"  stroke-width="6"/><path d="M64 32v64M32 64h64"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 112. ADVENTUREEXPEDITION (general)
-  AdventureExpedition: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AdventureExpedition_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_AdventureExpedition_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AdventureExpedition_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AdventureExpedition_grad)" fill="url(#lx_AdventureExpedition_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AdventureExpedition_drop)">
-        <path d="M64 16l48 32-16 48H32L16 48 64 16zM48 48l32 32"  stroke-width="6"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AdventureExpedition_inner)">
-        <path d="M64 16l48 32-16 48H32L16 48 64 16zM48 48l32 32"  stroke-width="6"/>
-      </g>
-    </svg>
-  `,
-
-  // 113. AIRPODS (media)
-  AirPods: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AirPods_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_AirPods_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AirPods_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AirPods_grad)" fill="url(#lx_AirPods_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AirPods_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="36" cy="56" r="12"/><circle cx="92" cy="56" r="12"/><path d="M 36 44 v -16 a 12 12 0 0 1 24 0 v 28 M 92 44 v -16 a 12 12 0 0 0 -24 0 v 28 M 24 80 c 0 12 -6 24 -6 40 M 104 80 c 0 12 6 24 6 40"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AirPods_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="36" cy="56" r="12"/><circle cx="92" cy="56" r="12"/><path d="M 36 44 v -16 a 12 12 0 0 1 24 0 v 28 M 92 44 v -16 a 12 12 0 0 0 -24 0 v 28 M 24 80 c 0 12 -6 24 -6 40 M 104 80 c 0 12 6 24 6 40"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 114. AIRPORTTERMINAL (general)
-  AirportTerminal: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AirportTerminal_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_AirportTerminal_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AirportTerminal_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AirportTerminal_grad)" fill="url(#lx_AirportTerminal_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AirportTerminal_drop)">
-        <rect x="16" y="64" width="96" height="32"  stroke-width="6"/><path d="M64 64V32m-16 0h32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AirportTerminal_inner)">
-        <rect x="16" y="64" width="96" height="32"  stroke-width="6"/><path d="M64 64V32m-16 0h32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 115. ALERTCIRCLE (ui)
-  AlertCircle: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AlertCircle_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_AlertCircle_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AlertCircle_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AlertCircle_grad)" fill="url(#lx_AlertCircle_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AlertCircle_drop)">
-        <g   stroke-width="8"><circle cx="64" cy="64" r="56"/><path d="M64 32v40" stroke-linecap="round"/><circle cx="64" cy="96" r="4" /></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AlertCircle_inner)">
-        <g   stroke-width="8"><circle cx="64" cy="64" r="56"/><path d="M64 32v40" stroke-linecap="round"/><circle cx="64" cy="96" r="4" /></g>
-      </g>
-    </svg>
-  `,
-
-  // 116. ALERTTRIANGLE (ui)
-  AlertTriangle: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AlertTriangle_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_AlertTriangle_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AlertTriangle_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AlertTriangle_grad)" fill="url(#lx_AlertTriangle_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AlertTriangle_drop)">
-        <g   stroke-width="8" stroke-linejoin="round"><path d="M 64 12 L 8 112 h 112 Z"/><path d="M64 44v32" stroke-linecap="round"/><circle cx="64" cy="96" r="4" /></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AlertTriangle_inner)">
-        <g   stroke-width="8" stroke-linejoin="round"><path d="M 64 12 L 8 112 h 112 Z"/><path d="M64 44v32" stroke-linecap="round"/><circle cx="64" cy="96" r="4" /></g>
-      </g>
-    </svg>
-  `,
-
-  // 117. ALGORITHM (development)
-  Algorithm: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Algorithm_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_Algorithm_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Algorithm_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Algorithm_grad)" fill="url(#lx_Algorithm_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Algorithm_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="96" height="96" rx="16"/><path d="M40 40v48 M88 40v48 M40 64h48"/><circle cx="40" cy="40" r="4" /><circle cx="88" cy="88" r="4" /></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Algorithm_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="96" height="96" rx="16"/><path d="M40 40v48 M88 40v48 M40 64h48"/><circle cx="40" cy="40" r="4" /><circle cx="88" cy="88" r="4" /></g>
-      </g>
-    </svg>
-  `,
-
-  // 118. ALGORITHMICFLOW (general)
-  AlgorithmicFlow: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AlgorithmicFlow_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_AlgorithmicFlow_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AlgorithmicFlow_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AlgorithmicFlow_grad)" fill="url(#lx_AlgorithmicFlow_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AlgorithmicFlow_drop)">
-        <path d="M64 16v32M64 80v32M48 48l32 32M48 80l32-32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AlgorithmicFlow_inner)">
-        <path d="M64 16v32M64 80v32M48 48l32 32M48 80l32-32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 119. ALPHALAYER (general)
-  AlphaLayer: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AlphaLayer_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_AlphaLayer_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AlphaLayer_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AlphaLayer_grad)" fill="url(#lx_AlphaLayer_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AlphaLayer_drop)">
-        <circle cx="32" cy="32" r="16"  stroke-width="4" stroke-dasharray="8 8"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AlphaLayer_inner)">
-        <circle cx="32" cy="32" r="16"  stroke-width="4" stroke-dasharray="8 8"/>
-      </g>
-    </svg>
-  `,
-
-  // 120. AMAZON (brands)
-  Amazon: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Amazon_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Amazon_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Amazon_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Amazon_grad)" fill="url(#lx_Amazon_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Amazon_drop)">
-        <g   stroke-width="8"><path d="M8 96c0 8 4 16 16 16h80c12 0 16-8 16-16V40H8v56z"/><path d="M120 40H8v-8c0-8 4-16 16-16h80c12 0 16 8 16 16v8z"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Amazon_inner)">
-        <g   stroke-width="8"><path d="M8 96c0 8 4 16 16 16h80c12 0 16-8 16-16V40H8v56z"/><path d="M120 40H8v-8c0-8 4-16 16-16h80c12 0 16 8 16 16v8z"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 121. AMENDMENT (general)
-  Amendment: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Amendment_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_Amendment_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Amendment_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Amendment_grad)" fill="url(#lx_Amendment_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Amendment_drop)">
-        <path d="M12 20H52M12 32H52M12 44H32"  stroke-width="4"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Amendment_inner)">
-        <path d="M12 20H52M12 32H52M12 44H32"  stroke-width="4"/>
-      </g>
-    </svg>
-  `,
-
-  // 122. AMEX (brands)
-  AmEx: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AmEx_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_AmEx_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AmEx_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AmEx_grad)" fill="url(#lx_AmEx_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AmEx_drop)">
-        <g   stroke-width="8"><rect x="8" y="24" width="112" height="80" rx="16"/><path d="M32 64h64M32 80h64M32 48h64" stroke-linecap="round"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AmEx_inner)">
-        <g   stroke-width="8"><rect x="8" y="24" width="112" height="80" rx="16"/><path d="M32 64h64M32 80h64M32 48h64" stroke-linecap="round"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 123. ANALYZE (ui)
-  Analyze: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Analyze_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_Analyze_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Analyze_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Analyze_grad)" fill="url(#lx_Analyze_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Analyze_drop)">
-        <path d="M24 96l32-48 24 24 40-48"  stroke-width="8" stroke-linecap="round"/><circle cx="24" cy="96" r="8" /><circle cx="120" cy="24" r="8" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Analyze_inner)">
-        <path d="M24 96l32-48 24 24 40-48"  stroke-width="8" stroke-linecap="round"/><circle cx="24" cy="96" r="8" /><circle cx="120" cy="24" r="8" />
-      </g>
-    </svg>
-  `,
-
-  // 124. ANIMATIONTIMELINE (media)
-  AnimationTimeline: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AnimationTimeline_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_AnimationTimeline_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AnimationTimeline_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AnimationTimeline_grad)" fill="url(#lx_AnimationTimeline_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AnimationTimeline_drop)">
-        <path d="M32 64h64M48 48v32M80 48v32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AnimationTimeline_inner)">
-        <path d="M32 64h64M48 48v32M80 48v32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 125. ANONYMOUS (ui)
-  Anonymous: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Anonymous_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Anonymous_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Anonymous_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Anonymous_grad)" fill="url(#lx_Anonymous_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Anonymous_drop)">
-        <path d="M64 12C32 12 8 36 8 64s24 52 56 52 56-24 56-52S96 12 64 12zm0 16c8 0 16 8 16 16s-8 16-16 16-16-8-16-16 8-16 16-16zm0 72c-16 0-28-8-36-20 0-12 20-20 36-20s36 8 36 20c-8 12-20 20-36 20z" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Anonymous_inner)">
-        <path d="M64 12C32 12 8 36 8 64s24 52 56 52 56-24 56-52S96 12 64 12zm0 16c8 0 16 8 16 16s-8 16-16 16-16-8-16-16 8-16 16-16zm0 72c-16 0-28-8-36-20 0-12 20-20 36-20s36 8 36 20c-8 12-20 20-36 20z" />
-      </g>
-    </svg>
-  `,
-
-  // 126. ANTHROPIC (brands)
-  Anthropic: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Anthropic_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_Anthropic_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Anthropic_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Anthropic_grad)" fill="url(#lx_Anthropic_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Anthropic_drop)">
-        <g   stroke-width="8" stroke-linejoin="round"><path d="M64 12L24 36v56l40 24 40-24V36L64 12zm0 20l24 12v32L64 92 40 76V44l24-12z"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Anthropic_inner)">
-        <g   stroke-width="8" stroke-linejoin="round"><path d="M64 12L24 36v56l40 24 40-24V36L64 12zm0 20l24 12v32L64 92 40 76V44l24-12z"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 127. API (ui)
-  API: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_API_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_API_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_API_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_API_grad)" fill="url(#lx_API_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_API_drop)">
-        <path d="M40 48l16 32h16l16-32M56 64h32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_API_inner)">
-        <path d="M40 48l16 32h16l16-32M56 64h32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 128. APIENDPOINT (development)
-  APIEndpoint: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_APIEndpoint_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_APIEndpoint_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_APIEndpoint_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_APIEndpoint_grad)" fill="url(#lx_APIEndpoint_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_APIEndpoint_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="32" width="40" height="64" rx="4"/><rect x="72" y="32" width="40" height="64" rx="4"/><path d="M56 64h16M36 48h8M92 48h8"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_APIEndpoint_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="32" width="40" height="64" rx="4"/><rect x="72" y="32" width="40" height="64" rx="4"/><path d="M56 64h16M36 48h8M92 48h8"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 129. APPLE (brands)
-  Apple: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Apple_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_Apple_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Apple_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Apple_grad)" fill="url(#lx_Apple_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Apple_drop)">
-        <path d="M80 16c-8 0-16 8-20 16-4-8-12-16-20-16-16 0-28 16-28 36 0 28 24 60 52 60 28 0 52-32 52-60 0-20-12-36-28-36zM64 32c8-12 20-16 20-16-4 12-12 20-20 16z" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Apple_inner)">
-        <path d="M80 16c-8 0-16 8-20 16-4-8-12-16-20-16-16 0-28 16-28 36 0 28 24 60 52 60 28 0 52-32 52-60 0-20-12-36-28-36zM64 32c8-12 20-16 20-16-4 12-12 20-20 16z" />
-      </g>
-    </svg>
-  `,
-
-  // 130. ARCHITECT (general)
-  Architect: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Architect_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Architect_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Architect_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Architect_grad)" fill="url(#lx_Architect_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Architect_drop)">
-        <path d="M12 52H52M20 52V20L44 32V52"  stroke-width="4"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Architect_inner)">
-        <path d="M12 52H52M20 52V20L44 32V52"  stroke-width="4"/>
-      </g>
-    </svg>
-  `,
-
-  // 131. ARCHIVE (development)
-  Archive: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Archive_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_Archive_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Archive_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Archive_grad)" fill="url(#lx_Archive_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Archive_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="16" width="104" height="32" rx="4"/><path d="M20 48v64h88V48 M48 72h32"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Archive_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="16" width="104" height="32" rx="4"/><path d="M20 48v64h88V48 M48 72h32"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 132. ARCHIVIST (general)
-  Archivist: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Archivist_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_Archivist_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Archivist_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Archivist_grad)" fill="url(#lx_Archivist_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Archivist_drop)">
-        <path d="M20 12H44V52H20V12Z"  stroke-width="4"/><path d="M28 20V44M36 20V44"  stroke-width="4"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Archivist_inner)">
-        <path d="M20 12H44V52H20V12Z"  stroke-width="4"/><path d="M28 20V44M36 20V44"  stroke-width="4"/>
-      </g>
-    </svg>
-  `,
-
-  // 133. ARM (iot)
-  Arm: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Arm_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_Arm_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Arm_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Arm_grad)" fill="url(#lx_Arm_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Arm_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="32" y="32" width="64" height="64" rx="8"/><rect x="48" y="48" width="32" height="32" rx="2"/><path d="M64 32V12M64 116V99M32 64H12M116 64H96"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Arm_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="32" y="32" width="64" height="64" rx="8"/><rect x="48" y="48" width="32" height="32" rx="2"/><path d="M64 32V12M64 116V99M32 64H12M116 64H96"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 134. ARRAY (ui)
-  Array: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Array_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_Array_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Array_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Array_grad)" fill="url(#lx_Array_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Array_drop)">
-        <path d="M40 40l-16 48M88 40l16 48M24 88h80M24 40h80"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Array_inner)">
-        <path d="M40 40l-16 48M88 40l16 48M24 88h80M24 40h80"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 135. ARROWDOWN (ui)
-  ArrowDown: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowDown_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_ArrowDown_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowDown_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowDown_grad)" fill="url(#lx_ArrowDown_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowDown_drop)">
-        <path d="M64 20v88M32 76l32 32 32-32"   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowDown_inner)">
-        <path d="M64 20v88M32 76l32 32 32-32"   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 136. ARROWDOWNLEFT (ui)
-  ArrowDownLeft: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowDownLeft_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_ArrowDownLeft_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowDownLeft_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowDownLeft_grad)" fill="url(#lx_ArrowDownLeft_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowDownLeft_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M88 40L40 88 M40 40v48h48"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowDownLeft_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M88 40L40 88 M40 40v48h48"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 137. ARROWDOWNRIGHT (ui)
-  ArrowDownRight: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowDownRight_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_ArrowDownRight_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowDownRight_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowDownRight_grad)" fill="url(#lx_ArrowDownRight_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowDownRight_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 40l48 48 M88 88H40V40"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowDownRight_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 40l48 48 M88 88H40V40"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 138. ARROWLEFT (ui)
-  ArrowLeft: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowLeft_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_ArrowLeft_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowLeft_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowLeft_grad)" fill="url(#lx_ArrowLeft_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowLeft_drop)">
-        <path d="M108 64H20M52 32L20 64l32 32"   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowLeft_inner)">
-        <path d="M108 64H20M52 32L20 64l32 32"   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 139. ARROWRIGHT (ui)
-  ArrowRight: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowRight_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_ArrowRight_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowRight_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowRight_grad)" fill="url(#lx_ArrowRight_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowRight_drop)">
-        <path d="M20 64h88M76 32l32 32-32 32"   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowRight_inner)">
-        <path d="M20 64h88M76 32l32 32-32 32"   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 140. ARROWUP (ui)
-  ArrowUp: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowUp_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_ArrowUp_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowUp_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowUp_grad)" fill="url(#lx_ArrowUp_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowUp_drop)">
-        <path d="M64 108V20M32 52l32-32 32 32"   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowUp_inner)">
-        <path d="M64 108V20M32 52l32-32 32 32"   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 141. ARROWUPLEFT (ui)
-  ArrowUpLeft: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowUpLeft_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_ArrowUpLeft_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowUpLeft_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowUpLeft_grad)" fill="url(#lx_ArrowUpLeft_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowUpLeft_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M88 88L40 40 M40 88V40h48"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowUpLeft_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M88 88L40 40 M40 88V40h48"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 142. ARROWUPRIGHT (ui)
-  ArrowUpRight: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowUpRight_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_ArrowUpRight_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowUpRight_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowUpRight_grad)" fill="url(#lx_ArrowUpRight_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowUpRight_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 88l48-48 M88 40H40v48"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowUpRight_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 88l48-48 M88 40H40v48"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 143. ARROWDOWNSMALL (ui)
-  ArrowDownSmall: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowDownSmall_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_ArrowDownSmall_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowDownSmall_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowDownSmall_grad)" fill="url(#lx_ArrowDownSmall_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowDownSmall_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 40v48 M48 72l16 16 16-16"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowDownSmall_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 40v48 M48 72l16 16 16-16"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 144. ARROWLEFTSMALL (ui)
-  ArrowLeftSmall: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowLeftSmall_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_ArrowLeftSmall_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowLeftSmall_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowLeftSmall_grad)" fill="url(#lx_ArrowLeftSmall_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowLeftSmall_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M88 64H40 M56 48l-16 16 16 16"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowLeftSmall_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M88 64H40 M56 48l-16 16 16 16"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 145. ARROWRIGHTSMALL (ui)
-  ArrowRightSmall: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowRightSmall_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_ArrowRightSmall_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowRightSmall_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowRightSmall_grad)" fill="url(#lx_ArrowRightSmall_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowRightSmall_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 64h48 M72 48l16 16-16 16"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowRightSmall_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 64h48 M72 48l16 16-16 16"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 146. ARROWUPSMALL (ui)
-  ArrowUpSmall: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArrowUpSmall_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_ArrowUpSmall_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArrowUpSmall_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArrowUpSmall_grad)" fill="url(#lx_ArrowUpSmall_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowUpSmall_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 88V40 M48 56l16-16 16 16"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArrowUpSmall_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 88V40 M48 56l16-16 16 16"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 147. ARTEXHIBITION (media)
-  ArtExhibition: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ArtExhibition_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_ArtExhibition_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ArtExhibition_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ArtExhibition_grad)" fill="url(#lx_ArtExhibition_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArtExhibition_drop)">
-        <rect x="32" y="32" width="64" height="48"  stroke-width="6"/><path d="M48 80l16-16 16 16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ArtExhibition_inner)">
-        <rect x="32" y="32" width="64" height="48"  stroke-width="6"/><path d="M48 80l16-16 16 16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 148. ASSETALLOCATION (finance)
-  AssetAllocation: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AssetAllocation_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_AssetAllocation_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AssetAllocation_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AssetAllocation_grad)" fill="url(#lx_AssetAllocation_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AssetAllocation_drop)">
-        <circle cx="64" cy="64" r="48"  stroke-width="6"/><path d="M64 64l48-16M64 64l16-48M64 64V16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AssetAllocation_inner)">
-        <circle cx="64" cy="64" r="48"  stroke-width="6"/><path d="M64 64l48-16M64 64l16-48M64 64V16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 149. ATMWITHDRAWAL (finance)
-  ATMWithdrawal: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_ATMWithdrawal_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_ATMWithdrawal_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_ATMWithdrawal_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_ATMWithdrawal_grad)" fill="url(#lx_ATMWithdrawal_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ATMWithdrawal_drop)">
-        <rect x="32" y="32" width="64" height="64" rx="4"  stroke-width="6"/><path d="M64 48v32M48 64h32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_ATMWithdrawal_inner)">
-        <rect x="32" y="32" width="64" height="64" rx="4"  stroke-width="6"/><path d="M64 48v32M48 64h32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 150. ATSYMBOL (ui)
-  AtSymbol: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AtSymbol_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_AtSymbol_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AtSymbol_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AtSymbol_grad)" fill="url(#lx_AtSymbol_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AtSymbol_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="64" r="16"/><path d="M84 64v8a8 8 0 0 0 16 0v-8C100 36 80 16 56 16 28 16 12 40 12 64c0 28 20 48 52 48 16 0 28-8 28-8"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AtSymbol_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="64" r="16"/><path d="M84 64v8a8 8 0 0 0 16 0v-8C100 36 80 16 56 16 28 16 12 40 12 64c0 28 20 48 52 48 16 0 28-8 28-8"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 151. ATTACH (general)
-  Attach: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Attach_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_Attach_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Attach_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Attach_grad)" fill="url(#lx_Attach_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Attach_drop)">
-        <path d="M32 12C24 12 18 18 18 26V46C18 50 22 54 26 54C30 54 34 50 34 46V22C34 18 36 16 38 16C40 16 42 18 42 22V42"  stroke-width="4"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Attach_inner)">
-        <path d="M32 12C24 12 18 18 18 26V46C18 50 22 54 26 54C30 54 34 50 34 46V22C34 18 36 16 38 16C40 16 42 18 42 22V42"  stroke-width="4"/>
-      </g>
-    </svg>
-  `,
-
-  // 152. ATTACHMENT (ui)
-  Attachment: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Attachment_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_Attachment_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Attachment_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Attachment_grad)" fill="url(#lx_Attachment_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Attachment_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 44v44a24 24 0 0 0 48 0V32a16 16 0 0 0-32 0v48a8 8 0 0 0 16 0V44"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Attachment_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 44v44a24 24 0 0 0 48 0V32a16 16 0 0 0-32 0v48a8 8 0 0 0 16 0V44"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 153. AUDIENCEAPPLAUD (media)
-  AudienceApplaud: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AudienceApplaud_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_AudienceApplaud_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AudienceApplaud_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AudienceApplaud_grad)" fill="url(#lx_AudienceApplaud_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AudienceApplaud_drop)">
-        <path d="M48 64l-16-16M80 64l16-16M64 48l16-16M64 48l-16-16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AudienceApplaud_inner)">
-        <path d="M48 64l-16-16M80 64l16-16M64 48l16-16M64 48l-16-16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 154. AUDIO (media)
-  Audio: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Audio_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_Audio_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Audio_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Audio_grad)" fill="url(#lx_Audio_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Audio_drop)">
-        <path d="M16 40V32C16 20 26 10 32 10C38 10 48 20 48 32V40"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Audio_inner)">
-        <path d="M16 40V32C16 20 26 10 32 10C38 10 48 20 48 32V40"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 155. AUDITCOMPLIANCE (finance)
-  AuditCompliance: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AuditCompliance_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_AuditCompliance_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AuditCompliance_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AuditCompliance_grad)" fill="url(#lx_AuditCompliance_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AuditCompliance_drop)">
-        <path d="M48 32l32 32-32 32M96 32v64"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AuditCompliance_inner)">
-        <path d="M48 32l32 32-32 32M96 32v64"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 156. AUTHOR (general)
-  Author: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Author_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_Author_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Author_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Author_grad)" fill="url(#lx_Author_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Author_drop)">
-        <path d="M16 12H48V52H16V12Z"  stroke-width="4"/><path d="M24 24H40M24 32H40"  stroke-width="4"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Author_inner)">
-        <path d="M16 12H48V52H16V12Z"  stroke-width="4"/><path d="M24 24H40M24 32H40"  stroke-width="4"/>
-      </g>
-    </svg>
-  `,
-
-  // 157. AUTHORITY (general)
-  Authority: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Authority_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_Authority_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Authority_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Authority_grad)" fill="url(#lx_Authority_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Authority_drop)">
-        <circle cx="32" cy="32" r="20"  stroke-width="4"/><path d="M32 16V48M16 32H48"  stroke-width="2"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Authority_inner)">
-        <circle cx="32" cy="32" r="20"  stroke-width="4"/><path d="M32 16V48M16 32H48"  stroke-width="2"/>
-      </g>
-    </svg>
-  `,
-
-  // 158. AUTOSCALE (ui)
-  AutoScale: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AutoScale_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_AutoScale_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AutoScale_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AutoScale_grad)" fill="url(#lx_AutoScale_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AutoScale_drop)">
-        <path d="M40 88l24-48 24 48M32 40l16 16-16 16M96 40l-16 16 16 16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AutoScale_inner)">
-        <path d="M40 88l24-48 24 48M32 40l16 16-16 16M96 40l-16 16 16 16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 159. AUTOMATION (ai)
-  Automation: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Automation_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_Automation_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Automation_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Automation_grad)" fill="url(#lx_Automation_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Automation_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="32" width="96" height="64" rx="8"/><circle cx="40" cy="64" r="6"/><path d="M56 64h32 M72 48v32"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Automation_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="32" width="96" height="64" rx="8"/><circle cx="40" cy="64" r="6"/><path d="M56 64h32 M72 48v32"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 160. AVATAR (ui)
-  Avatar: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Avatar_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Avatar_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Avatar_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Avatar_grad)" fill="url(#lx_Avatar_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Avatar_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="40" r="20"/><path d="M24 108c0-24 20-40 40-40s40 16 40 40"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Avatar_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="40" r="20"/><path d="M24 108c0-24 20-40 40-40s40 16 40 40"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 161. AVATARPLACEHOLDER (ui)
-  AvatarPlaceholder: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AvatarPlaceholder_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_AvatarPlaceholder_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AvatarPlaceholder_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AvatarPlaceholder_grad)" fill="url(#lx_AvatarPlaceholder_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AvatarPlaceholder_drop)">
-        <circle cx="64" cy="64" r="48"  stroke-width="6"/><circle cx="64" cy="56" r="16" /><path d="M32 112c0-16 32-16 64 0" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AvatarPlaceholder_inner)">
-        <circle cx="64" cy="64" r="48"  stroke-width="6"/><circle cx="64" cy="56" r="16" /><path d="M32 112c0-16 32-16 64 0" />
-      </g>
-    </svg>
-  `,
-
-  // 162. AVATARFEMALE (ui)
-  AvatarFemale: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AvatarFemale_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_AvatarFemale_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AvatarFemale_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AvatarFemale_grad)" fill="url(#lx_AvatarFemale_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AvatarFemale_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="40" r="20"/><path d="M40 40c-12 8-16 24-16 40 M88 40c12 8 16 24 16 40 M24 108c0-24 20-40 40-40s40 16 40 40"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AvatarFemale_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="40" r="20"/><path d="M40 40c-12 8-16 24-16 40 M88 40c12 8 16 24 16 40 M24 108c0-24 20-40 40-40s40 16 40 40"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 163. AVATARMALE (ui)
-  AvatarMale: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AvatarMale_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_AvatarMale_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AvatarMale_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AvatarMale_grad)" fill="url(#lx_AvatarMale_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AvatarMale_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="40" r="20"/><path d="M32 32c0-12 12-16 32-16s32 4 32 16 M24 108c0-24 20-40 40-40s40 16 40 40"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AvatarMale_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="40" r="20"/><path d="M32 32c0-12 12-16 32-16s32 4 32 16 M24 108c0-24 20-40 40-40s40 16 40 40"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 164. AVIATOR (general)
-  Aviator: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Aviator_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_Aviator_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Aviator_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Aviator_grad)" fill="url(#lx_Aviator_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Aviator_drop)">
-        <path d="M12 32L32 12L52 32L32 52L12 32Z"  stroke-width="4"/><path d="M24 32H40"  stroke-width="4"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Aviator_inner)">
-        <path d="M12 32L32 12L52 32L32 52L12 32Z"  stroke-width="4"/><path d="M24 32H40"  stroke-width="4"/>
-      </g>
-    </svg>
-  `,
-
-  // 165. AWARD (media)
-  Award: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Award_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Award_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Award_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Award_grad)" fill="url(#lx_Award_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Award_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="48" r="28"/><path d="M44 72l-12 40 32-16 32 16-12-40"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Award_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="48" r="28"/><path d="M44 72l-12 40 32-16 32 16-12-40"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 166. AWARDBADGE (media)
-  AwardBadge: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AwardBadge_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_AwardBadge_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AwardBadge_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AwardBadge_grad)" fill="url(#lx_AwardBadge_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AwardBadge_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="44" r="28"/><path d="M48 68l-12 44 28-16 28 16-12-40"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AwardBadge_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="44" r="28"/><path d="M48 68l-12 44 28-16 28 16-12-40"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 167. AWS (brands)
-  AWS: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AWS_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_AWS_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AWS_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AWS_grad)" fill="url(#lx_AWS_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AWS_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M32 64c8 16 24 24 48 24 28 0 40-16 40-32s-16-24-32-24c-24 0-32-8-32-20 0-16 16-20 32-20 16 0 24 8 32 16 M20 100c24 16 52 16 80 8 M84 92l16 16-12 12"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AWS_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M32 64c8 16 24 24 48 24 28 0 40-16 40-32s-16-24-32-24c-24 0-32-8-32-20 0-16 16-20 32-20 16 0 24 8 32 16 M20 100c24 16 52 16 80 8 M84 92l16 16-12 12"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 168. AXIOMSYSTEM (brands)
-  AxiomSystem: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_AxiomSystem_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_AxiomSystem_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_AxiomSystem_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_AxiomSystem_grad)" fill="url(#lx_AxiomSystem_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AxiomSystem_drop)">
-        <path d="M30 104L64 28L98 104"  stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 74h40"  stroke-width="12" stroke-linecap="round"/><path d="M64 4v18M64 106v18M4 64h18M106 64h18"  stroke-width="7" stroke-linecap="round"/><circle cx="64" cy="28" r="6" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_AxiomSystem_inner)">
-        <path d="M30 104L64 28L98 104"  stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M44 74h40"  stroke-width="12" stroke-linecap="round"/><path d="M64 4v18M64 106v18M4 64h18M106 64h18"  stroke-width="7" stroke-linecap="round"/><circle cx="64" cy="28" r="6" />
-      </g>
-    </svg>
-  `,
-
-  // 169. AZURE (brands)
-  Azure: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Azure_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_Azure_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Azure_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Azure_grad)" fill="url(#lx_Azure_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Azure_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 96l32-64 24 24-32 64z M56 48l64 48-40 16L56 48z"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Azure_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 96l32-64 24 24-32 64z M56 48l64 48-40 16L56 48z"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 170. BACKLOG (ui)
-  Backlog: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Backlog_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Backlog_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Backlog_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Backlog_grad)" fill="url(#lx_Backlog_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Backlog_drop)">
-        <path d="M32 40h64M32 64h48M32 88h32"  stroke-width="6" stroke-linecap="round"/><path d="M104 40v48"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Backlog_inner)">
-        <path d="M32 40h64M32 64h48M32 88h32"  stroke-width="6" stroke-linecap="round"/><path d="M104 40v48"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 171. BACKSTAGEPASS (media)
-  BackstagePass: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BackstagePass_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_BackstagePass_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BackstagePass_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BackstagePass_grad)" fill="url(#lx_BackstagePass_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BackstagePass_drop)">
-        <rect x="40" y="32" width="48" height="64" rx="4"  stroke-width="6"/><circle cx="64" cy="64" r="8" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BackstagePass_inner)">
-        <rect x="40" y="32" width="48" height="64" rx="4"  stroke-width="6"/><circle cx="64" cy="64" r="8" />
-      </g>
-    </svg>
-  `,
-
-  // 172. BADGECHECK (ui)
-  BadgeCheck: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BadgeCheck_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_BadgeCheck_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BadgeCheck_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BadgeCheck_grad)" fill="url(#lx_BadgeCheck_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BadgeCheck_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 8l12 16 20 4-4 20 16 12-16 12 4 20-20 4-12 16-12-16-20-4 4-20-16-12 16-12-4-20 20-4 12-16z"/><path d="M44 64l12 12 28-28"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BadgeCheck_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 8l12 16 20 4-4 20 16 12-16 12 4 20-20 4-12 16-12-16-20-4 4-20-16-12 16-12-4-20 20-4 12-16z"/><path d="M44 64l12 12 28-28"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 173. BADGEX (ui)
-  BadgeX: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BadgeX_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_BadgeX_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BadgeX_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BadgeX_grad)" fill="url(#lx_BadgeX_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BadgeX_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 8l12 16 20 4-4 20 16 12-16 12 4 20-20 4-12 16-12-16-20-4 4-20-16-12 16-12-4-20 20-4 12-16z"/><path d="M48 48l32 32 M80 48L48 80"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BadgeX_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 8l12 16 20 4-4 20 16 12-16 12 4 20-20 4-12 16-12-16-20-4 4-20-16-12 16-12-4-20 20-4 12-16z"/><path d="M48 48l32 32 M80 48L48 80"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 174. BADMINTONSHUTTLE (general)
-  BadmintonShuttle: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BadmintonShuttle_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_BadmintonShuttle_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BadmintonShuttle_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BadmintonShuttle_grad)" fill="url(#lx_BadmintonShuttle_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BadmintonShuttle_drop)">
-        <path d="M64 32l32 64H32L64 32z"  stroke-width="6"/><circle cx="64" cy="40" r="8" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BadmintonShuttle_inner)">
-        <path d="M64 32l32 64H32L64 32z"  stroke-width="6"/><circle cx="64" cy="40" r="8" />
-      </g>
-    </svg>
-  `,
-
-  // 175. BAG (ui)
-  Bag: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Bag_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Bag_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Bag_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Bag_grad)" fill="url(#lx_Bag_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Bag_drop)">
-        <rect x="32" y="48" width="64" height="56" rx="4"  stroke-width="6"/><path d="M48 48V32c0-8.8 7.2-16 16-16s16 7.2 16 16v16"  stroke-width="6"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Bag_inner)">
-        <rect x="32" y="48" width="64" height="56" rx="4"  stroke-width="6"/><path d="M48 48V32c0-8.8 7.2-16 16-16s16 7.2 16 16v16"  stroke-width="6"/>
-      </g>
-    </svg>
-  `,
-
-  // 176. BALANCESCALE (general)
-  BalanceScale: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BalanceScale_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_BalanceScale_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BalanceScale_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BalanceScale_grad)" fill="url(#lx_BalanceScale_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BalanceScale_drop)">
-        <path d="M32 64h64M64 32v64M48 32h32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BalanceScale_inner)">
-        <path d="M32 64h64M64 32v64M48 32h32"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 177. BALANCESHEET (general)
-  BalanceSheet: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BalanceSheet_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_BalanceSheet_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BalanceSheet_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BalanceSheet_grad)" fill="url(#lx_BalanceSheet_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BalanceSheet_drop)">
-        <path d="M32 40h64M32 64h64M32 88h64M64 24v80"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BalanceSheet_inner)">
-        <path d="M32 40h64M32 64h64M32 88h64M64 24v80"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 178. BANANA (food)
-  Banana: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Banana_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_Banana_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Banana_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Banana_grad)" fill="url(#lx_Banana_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Banana_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M32 112C16 96 8 72 16 48c8 8 24 16 40 16s40-12 56-32c8 32 0 64-24 80"/><path d="M56 64c16 20 32 24 56 16"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Banana_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M32 112C16 96 8 72 16 48c8 8 24 16 40 16s40-12 56-32c8 32 0 64-24 80"/><path d="M56 64c16 20 32 24 56 16"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 179. BANDWIDTH (development)
-  Bandwidth: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Bandwidth_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_Bandwidth_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Bandwidth_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Bandwidth_grad)" fill="url(#lx_Bandwidth_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Bandwidth_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M32 96v-16a4 4 0 0 1 8 0v16 M80 96v-16a4 4 0 0 1 8 0v16 M16 64h96 M64 48V16"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Bandwidth_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M32 96v-16a4 4 0 0 1 8 0v16 M80 96v-16a4 4 0 0 1 8 0v16 M16 64h96 M64 48V16"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 180. BANK (finance)
-  Bank: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Bank_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Bank_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Bank_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Bank_grad)" fill="url(#lx_Bank_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Bank_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 12L8 48h112L64 12z M16 48v56 M40 48v56 M64 48v56 M88 48v56 M112 48v56 M8 104h112 M8 116h112"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Bank_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 12L8 48h112L64 12z M16 48v56 M40 48v56 M64 48v56 M88 48v56 M112 48v56 M8 104h112 M8 116h112"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 181. BANKBUILDING (finance)
-  BankBuilding: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BankBuilding_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_BankBuilding_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BankBuilding_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BankBuilding_grad)" fill="url(#lx_BankBuilding_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BankBuilding_drop)">
-        <path d="M24 104V56l40-32 40 32v48H24z"  stroke-width="6"/><path d="M40 72h16v32H40V72zM72 72h16v32H72V72z"  stroke-width="6"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BankBuilding_inner)">
-        <path d="M24 104V56l40-32 40 32v48H24z"  stroke-width="6"/><path d="M40 72h16v32H40V72zM72 72h16v32H72V72z"  stroke-width="6"/>
-      </g>
-    </svg>
-  `,
-
-  // 182. BANKINGAPP (general)
-  BankingApp: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BankingApp_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_BankingApp_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BankingApp_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BankingApp_grad)" fill="url(#lx_BankingApp_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BankingApp_drop)">
-        <rect x="40" y="24" width="48" height="80" rx="8"  stroke-width="6"/><path d="M64 96h8"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BankingApp_inner)">
-        <rect x="40" y="24" width="48" height="80" rx="8"  stroke-width="6"/><path d="M64 96h8"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 183. BARBECUE (food)
-  Barbecue: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Barbecue_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_Barbecue_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Barbecue_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Barbecue_grad)" fill="url(#lx_Barbecue_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Barbecue_drop)">
-        view="0 0 128 128" <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 48h96a40 40 0 0 1-96 0z M32 48V32 M64 48V24 M96 48V32 M32 92l-12 24 M96 92l12 24 M64 96v20"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Barbecue_inner)">
-        view="0 0 128 128" <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 48h96a40 40 0 0 1-96 0z M32 48V32 M64 48V24 M96 48V32 M32 92l-12 24 M96 92l12 24 M64 96v20"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 184. BARCHART (general)
-  BarChart: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BarChart_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_BarChart_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BarChart_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BarChart_grad)" fill="url(#lx_BarChart_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BarChart_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 112V16 M16 112h104 M32 112V64h16v48 M64 112V40h16v72 M96 112V80h16v32"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BarChart_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 112V16 M16 112h104 M32 112V64h16v48 M64 112V40h16v72 M96 112V80h16v32"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 185. BARCODE (general)
-  Barcode: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Barcode_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Barcode_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Barcode_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Barcode_grad)" fill="url(#lx_Barcode_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Barcode_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><line x1="24" y1="24" x2="24" y2="104"/><line x1="40" y1="24" x2="40" y2="104"/><line x1="48" y1="24" x2="48" y2="104"/><line x1="64" y1="24" x2="64" y2="104"/><line x1="80" y1="24" x2="80" y2="104"/><line x1="88" y1="24" x2="88" y2="104"/><line x1="104" y1="24" x2="104" y2="104"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Barcode_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><line x1="24" y1="24" x2="24" y2="104"/><line x1="40" y1="24" x2="40" y2="104"/><line x1="48" y1="24" x2="48" y2="104"/><line x1="64" y1="24" x2="64" y2="104"/><line x1="80" y1="24" x2="80" y2="104"/><line x1="88" y1="24" x2="88" y2="104"/><line x1="104" y1="24" x2="104" y2="104"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 186. BARS (ui)
-  Bars: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Bars_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_Bars_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Bars_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Bars_grad)" fill="url(#lx_Bars_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Bars_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 32h96 M16 64h96 M16 96h96"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Bars_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 32h96 M16 64h96 M16 96h96"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 187. BASKET (objects)
-  Basket: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Basket_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_Basket_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Basket_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Basket_grad)" fill="url(#lx_Basket_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Basket_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M24 48l16 64h48l16-64z M12 48h104 M40 48l24-32 24 32"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Basket_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M24 48l16 64h48l16-64z M12 48h104 M40 48l24-32 24 32"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 188. BATTERYALERT (iot)
-  BatteryAlert: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BatteryAlert_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_BatteryAlert_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BatteryAlert_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BatteryAlert_grad)" fill="url(#lx_BatteryAlert_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BatteryAlert_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="36" width="96" height="56" rx="4"/><path d="M108 52h8v24h-8 M60 52v16 M64 80v0" stroke-width="10"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BatteryAlert_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="36" width="96" height="56" rx="4"/><path d="M108 52h8v24h-8 M60 52v16 M64 80v0" stroke-width="10"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 189. BATTERYCHARGING (iot)
-  BatteryCharging: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BatteryCharging_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_BatteryCharging_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BatteryCharging_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BatteryCharging_grad)" fill="url(#lx_BatteryCharging_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BatteryCharging_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="36" width="96" height="56" rx="4"/><path d="M108 52h8v24h-8 M56 64l12-16v16h12l-12 16v-16h-12z"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BatteryCharging_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="36" width="96" height="56" rx="4"/><path d="M108 52h8v24h-8 M56 64l12-16v16h12l-12 16v-16h-12z"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 190. BEAKER (general)
-  Beaker: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Beaker_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_Beaker_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Beaker_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Beaker_grad)" fill="url(#lx_Beaker_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Beaker_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M36 20h56 M48 20v32l-16 48a8 8 0 0 0 8 16h40a8 8 0 0 0 8-16l-16-48V20"/><path d="M36 72h56"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Beaker_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M36 20h56 M48 20v32l-16 48a8 8 0 0 0 8 16h40a8 8 0 0 0 8-16l-16-48V20"/><path d="M36 72h56"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 191. BEAUTY (general)
-  Beauty: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Beauty_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_Beauty_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Beauty_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Beauty_grad)" fill="url(#lx_Beauty_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Beauty_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M48 24c-8-8-24-8-32 0s-8 24 0 32L64 104l48-48c8-8 8-24 0-32s-24-8-32 0L64 40l-16-16z"/><path d="M48 56l32 32"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Beauty_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M48 24c-8-8-24-8-32 0s-8 24 0 32L64 104l48-48c8-8 8-24 0-32s-24-8-32 0L64 40l-16-16z"/><path d="M48 56l32 32"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 192. BEER (food)
-  Beer: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Beer_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_Beer_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Beer_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Beer_grad)" fill="url(#lx_Beer_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Beer_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="32" y="48" width="64" height="72" rx="4"/><path d="M96 64h16a4 4 0 0 1 4 4v24a4 4 0 0 1-4 4h-16 M32 48C24 40 40 24 56 24s16 16 32 16"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Beer_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><rect x="32" y="48" width="64" height="72" rx="4"/><path d="M96 64h16a4 4 0 0 1 4 4v24a4 4 0 0 1-4 4h-16 M32 48C24 40 40 24 56 24s16 16 32 16"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 193. BEHANCE (brands)
-  Behance: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_Behance_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_Behance_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_Behance_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_Behance_grad)" fill="url(#lx_Behance_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Behance_drop)">
-        <path d="M20 20H36V28H20V20Z" /><path d="M20 36H40V44H20V36Z" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_Behance_inner)">
-        <path d="M20 20H36V28H20V20Z" /><path d="M20 36H40V44H20V36Z" />
-      </g>
-    </svg>
-  `,
-
-  // 194. BELLMUTE (ui)
-  BellMute: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BellMute_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_BellMute_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BellMute_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BellMute_grad)" fill="url(#lx_BellMute_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BellMute_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 20a32 32 0 0 1 32 32v32l8 12H24l8-12V48A32 32 0 0 1 64 20z M48 104a16 16 0 0 0 32 0 M12 12l104 104"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BellMute_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 20a32 32 0 0 1 32 32v32l8 12H24l8-12V48A32 32 0 0 1 64 20z M48 104a16 16 0 0 0 32 0 M12 12l104 104"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 195. BELLOFF (ui)
-  BellOff: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BellOff_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_BellOff_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BellOff_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BellOff_grad)" fill="url(#lx_BellOff_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BellOff_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 20a32 32 0 0 1 32 32v32l8 12H68 M48 96H24l8-12V52A32 32 0 0 1 42 26"/><path d="M52 100a12 12 0 0 0 24 0 M12 12l104 104"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BellOff_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M64 20a32 32 0 0 1 32 32v32l8 12H68 M48 96H24l8-12V52A32 32 0 0 1 42 26"/><path d="M52 100a12 12 0 0 0 24 0 M12 12l104 104"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 196. BELLRINGING (ui)
-  BellRinging: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BellRinging_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_BellRinging_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BellRinging_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BellRinging_grad)" fill="url(#lx_BellRinging_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BellRinging_drop)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M96 84A32 32 0 0 0 64 20a32 32 0 0 0-32 64l-8 12h80l-8-12z"/><path d="M52 100a12 12 0 0 0 24 0 M20 48a40 40 0 0 0 0 40 M108 48a40 40 0 0 1 0 40"/></g>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BellRinging_inner)">
-        <g   stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M96 84A32 32 0 0 0 64 20a32 32 0 0 0-32 64l-8 12h80l-8-12z"/><path d="M52 100a12 12 0 0 0 24 0 M20 48a40 40 0 0 0 0 40 M108 48a40 40 0 0 1 0 40"/></g>
-      </g>
-    </svg>
-  `,
-
-  // 197. BEZIERCURVE (general)
-  BezierCurve: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BezierCurve_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FEF08A" />
-          <stop offset="50%" stop-color="#FACC15" />
-          <stop offset="100%" stop-color="#A16207" />
-        </linearGradient>
-        <filter id="lx_BezierCurve_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#854D0E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BezierCurve_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#111827" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BezierCurve_grad)" fill="url(#lx_BezierCurve_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BezierCurve_drop)">
-        <path d="M32 96s32-64 64 0"  stroke-width="6" stroke-linecap="round"/><circle cx="32" cy="96" r="6" /><circle cx="96" cy="96" r="6" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDE047" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BezierCurve_inner)">
-        <path d="M32 96s32-64 64 0"  stroke-width="6" stroke-linecap="round"/><circle cx="32" cy="96" r="6" /><circle cx="96" cy="96" r="6" />
-      </g>
-    </svg>
-  `,
-
-  // 198. BICYCLETOURING (general)
-  BicycleTouring: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BicycleTouring_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#A7F3D0" />
-          <stop offset="50%" stop-color="#34D399" />
-          <stop offset="100%" stop-color="#065F46" />
-        </linearGradient>
-        <filter id="lx_BicycleTouring_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#064E3B" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BicycleTouring_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#022C22" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BicycleTouring_grad)" fill="url(#lx_BicycleTouring_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BicycleTouring_drop)">
-        <circle cx="40" cy="88" r="16"  stroke-width="6"/><circle cx="88" cy="88" r="16"  stroke-width="6"/><path d="M40 88l24-32h32M64 56h16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#6EE7B7" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BicycleTouring_inner)">
-        <circle cx="40" cy="88" r="16"  stroke-width="6"/><circle cx="88" cy="88" r="16"  stroke-width="6"/><path d="M40 88l24-32h32M64 56h16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 199. BILLIARDSCUE (general)
-  BilliardsCue: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BilliardsCue_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FECDD3" />
-          <stop offset="50%" stop-color="#F43F5E" />
-          <stop offset="100%" stop-color="#9F1239" />
-        </linearGradient>
-        <filter id="lx_BilliardsCue_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#881337" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BilliardsCue_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4C0519" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BilliardsCue_grad)" fill="url(#lx_BilliardsCue_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BilliardsCue_drop)">
-        <path d="M32 96l64-64"  stroke-width="6" stroke-linecap="round"/><circle cx="96" cy="32" r="8" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#FDA4AF" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BilliardsCue_inner)">
-        <path d="M32 96l64-64"  stroke-width="6" stroke-linecap="round"/><circle cx="96" cy="32" r="8" />
-      </g>
-    </svg>
-  `,
-
-  // 200. BINARYPULSE (general)
-  BinaryPulse: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BinaryPulse_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#BAE6FD" />
-          <stop offset="50%" stop-color="#38BDF8" />
-          <stop offset="100%" stop-color="#0369A1" />
-        </linearGradient>
-        <filter id="lx_BinaryPulse_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0C4A6E" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BinaryPulse_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#082F49" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BinaryPulse_grad)" fill="url(#lx_BinaryPulse_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BinaryPulse_drop)">
-        <path d="M32 64h16v32h16V32h16v32h16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#7DD3FC" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BinaryPulse_inner)">
-        <path d="M32 64h16v32h16V32h16v32h16"  stroke-width="6" stroke-linecap="round"/>
-      </g>
-    </svg>
-  `,
-
-  // 201. BINARYSEARCH (ui)
-  BinarySearch: `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
-      <defs>
-        <linearGradient id="lx_BinarySearch_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#E9D5FF" />
-          <stop offset="50%" stop-color="#A855F7" />
-          <stop offset="100%" stop-color="#6B21A8" />
-        </linearGradient>
-        <filter id="lx_BinarySearch_drop" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#581C87" flood-opacity="0.5"/>
-        </filter>
-        <filter id="lx_BinarySearch_inner" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#3B0764" flood-opacity="0.6"/>
-        </filter>
-      </defs>
-      
-      <!-- Base 3D Body -->
-      <g stroke="url(#lx_BinarySearch_grad)" fill="url(#lx_BinarySearch_grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BinarySearch_drop)">
-        <path d="M64 16l48 48-48 48-48-48 48-48z"  stroke-width="6"/><circle cx="64" cy="64" r="8" />
-      </g>
-      
-      <!-- Inner Specular Layer -->
-      <g stroke="#C4B5FD" fill="none" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#lx_BinarySearch_inner)">
-        <path d="M64 16l48 48-48 48-48-48 48-48z"  stroke-width="6"/><circle cx="64" cy="64" r="8" />
-      </g>
+      <circle cx="60" cy="65" r="10" fill="#EF4444" filter="url(#asStarGlow)" />
+      <circle cx="58" cy="63" r="3" fill="#FFFFFF" opacity="0.7" />
+      <path d="M42,52 L78,52" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.5" stroke-linecap="round" />
     </svg>
   `,
 
   });
 
-  // Export dynamically with proper categories
+  // Automatically construct formatted array
   const formattedLuxeIcons = Object.keys(window.AxiconsLuxe).map((key, index) => {
     
-    // Attempt to parse category from the comments if possible, but for simplicity, we map based on keywords
     let category = "general";
     const lowerKey = key.toLowerCase();
     
-    if (lowerKey.includes('verified') || lowerKey.includes('star') || lowerKey.includes('status')) category = "general";
-    if (lowerKey.includes('network') || lowerKey.includes('terminal') || lowerKey.includes('code') || lowerKey.includes('database')) category = "development";
-    if (lowerKey.includes('gem') || lowerKey.includes('wallet') || lowerKey.includes('credit')) category = "finance";
-    if (lowerKey.includes('video') || lowerKey.includes('music') || lowerKey.includes('palette') || lowerKey.includes('camera')) category = "media";
-    if (lowerKey.includes('support') || lowerKey.includes('chat') || lowerKey.includes('mail')) category = "social";
-    if (lowerKey.includes('shield') || lowerKey.includes('lock') || lowerKey.includes('key')) category = "security";
-    if (lowerKey.includes('analytics') || lowerKey.includes('chart') || lowerKey.includes('graph')) category = "data";
-    
-    // For the newly generated icons, we can inject their actual base category via a lookup map
-    const categoryMap = {
-      "AbstractNexus": "general",
-      "Access": "ui",
-      "Accordion": "ui",
-      "AccountingLedger": "finance",
-      "Action": "media",
-      "Activity": "health",
-      "ActivityHeartwards": "health",
-      "Add": "ui",
-      "Adjustments": "ui",
-      "AdventureCompass": "media",
-      "AdventureExpedition": "general",
-      "AirPods": "media",
-      "AirportTerminal": "general",
-      "AlertCircle": "ui",
-      "AlertTriangle": "ui",
-      "Algorithm": "development",
-      "AlgorithmicFlow": "general",
-      "AlphaLayer": "general",
-      "Amazon": "brands",
-      "Amendment": "general",
-      "AmEx": "brands",
-      "Analyze": "ui",
-      "AnimationTimeline": "media",
-      "Anonymous": "ui",
-      "Anthropic": "brands",
-      "API": "ui",
-      "APIEndpoint": "development",
-      "Apple": "brands",
-      "Architect": "general",
-      "Archive": "development",
-      "Archivist": "general",
-      "Arm": "iot",
-      "Array": "ui",
-      "ArrowDown": "ui",
-      "ArrowDownLeft": "ui",
-      "ArrowDownRight": "ui",
-      "ArrowLeft": "ui",
-      "ArrowRight": "ui",
-      "ArrowUp": "ui",
-      "ArrowUpLeft": "ui",
-      "ArrowUpRight": "ui",
-      "ArrowDownSmall": "ui",
-      "ArrowLeftSmall": "ui",
-      "ArrowRightSmall": "ui",
-      "ArrowUpSmall": "ui",
-      "ArtExhibition": "media",
-      "AssetAllocation": "finance",
-      "ATMWithdrawal": "finance",
-      "AtSymbol": "ui",
-      "Attach": "general",
-      "Attachment": "ui",
-      "AudienceApplaud": "media",
-      "Audio": "media",
-      "AuditCompliance": "finance",
-      "Author": "general",
-      "Authority": "general",
-      "AutoScale": "ui",
-      "Automation": "ai",
-      "Avatar": "ui",
-      "AvatarPlaceholder": "ui",
-      "AvatarFemale": "ui",
-      "AvatarMale": "ui",
-      "Aviator": "general",
-      "Award": "media",
-      "AwardBadge": "media",
-      "AWS": "brands",
-      "AxiomSystem": "brands",
-      "Azure": "brands",
-      "Backlog": "ui",
-      "BackstagePass": "media",
-      "BadgeCheck": "ui",
-      "BadgeX": "ui",
-      "BadmintonShuttle": "general",
-      "Bag": "ui",
-      "BalanceScale": "general",
-      "BalanceSheet": "general",
-      "Banana": "food",
-      "Bandwidth": "development",
-      "Bank": "finance",
-      "BankBuilding": "finance",
-      "BankingApp": "general",
-      "Barbecue": "food",
-      "BarChart": "general",
-      "Barcode": "general",
-      "Bars": "ui",
-      "Basket": "objects",
-      "BatteryAlert": "iot",
-      "BatteryCharging": "iot",
-      "Beaker": "general",
-      "Beauty": "general",
-      "Beer": "food",
-      "Behance": "brands",
-      "BellMute": "ui",
-      "BellOff": "ui",
-      "BellRinging": "ui",
-      "BezierCurve": "general",
-      "BicycleTouring": "general",
-      "BilliardsCue": "general",
-      "BinaryPulse": "general",
-      "BinarySearch": "ui",
-    };
-    
-    if (categoryMap[key]) {
-      category = categoryMap[key];
-    }
+    // Categorization logic
+    if (lowerKey.includes('brain') || lowerKey.includes('logic') || lowerKey.includes('system') || lowerKey.includes('code') || lowerKey.includes('server') || lowerKey.includes('keyboard')) category = "development";
+    else if (lowerKey.includes('design') || lowerKey.includes('palette') || lowerKey.includes('paint') || lowerKey.includes('brush') || lowerKey.includes('typography')) category = "design";
+    else if (lowerKey.includes('rocket') || lowerKey.includes('launch') || lowerKey.includes('spaceship')) category = "business";
+    else if (lowerKey.includes('crane') || lowerKey.includes('build') || lowerKey.includes('structure')) category = "infrastructure";
+    else if (lowerKey.includes('home') || lowerKey.includes('house') || lowerKey.includes('dashboard') || lowerKey.includes('folder') || lowerKey.includes('settings')) category = "ui";
+    else if (lowerKey.includes('fire') || lowerKey.includes('flame') || lowerKey.includes('hot')) category = "social";
+    else if (lowerKey.includes('shield') || lowerKey.includes('security') || lowerKey.includes('lock') || lowerKey.includes('vault') || lowerKey.includes('bank') || lowerKey.includes('gear')) category = "security";
+    else if (lowerKey.includes('finance') || lowerKey.includes('wealth') || lowerKey.includes('coin') || lowerKey.includes('money') || lowerKey.includes('piggy')) category = "finance";
+    else if (lowerKey.includes('media') || lowerKey.includes('video') || lowerKey.includes('music') || lowerKey.includes('gamepad') || lowerKey.includes('vr') || lowerKey.includes('smartwatch') || lowerKey.includes('laptop') || lowerKey.includes('mouse') || lowerKey.includes('smartphone')) category = "media";
+    else if (lowerKey.includes('chart') || lowerKey.includes('candlestick') || lowerKey.includes('analytics') || lowerKey.includes('graph') || lowerKey.includes('node')) category = "data";
+    else if (lowerKey.includes('verified') || lowerKey.includes('star') || lowerKey.includes('achievement')) category = "entertainment";
+    else if (lowerKey.includes('search')) category = "general";
     
     let nameToFormat = key;
     if (!nameToFormat.endsWith('Luxe') && !nameToFormat.endsWith('-Luxe')) {
