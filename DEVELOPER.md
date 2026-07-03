@@ -1,5 +1,180 @@
-
 # Axiom01 Developer Guide
+
+Welcome to the official Developer Guide for **Axiom01** — the Semantic-First UI Framework. This guide will take you through our core philosophy, performance optimizations, installation methods, and best practices for building beautiful, accessible interfaces with minimal code.
+
+## 🧠 Philosophy: The Semantic Reality
+
+Modern web development suffers from a hoarding problem — massive class density and utility chaos. Axiom01 subtracts complexity by returning to **Semantic HTML**. 
+
+* **Write Meaningful HTML:** Declare what an element *is* (`<article>`, `<section>`, `<header>`, `<form>`), not what it looks like.
+* **Minimal Classes:** We enforce a strict Class Density Metric (D_c ≤ 1). One class per component (e.g., `class="card"` instead of 15 utility classes).
+* **Token-Driven Symmetry:** All styling flows from CSS variables, establishing perfect mathematical vertical rhythm across the entire UI.
+* **Accessible by Default:** WCAG 2.1 AA out of the box with built-in keyboard navigation and focus states.
+
+---
+
+## 🚀 Installation & Setup
+
+### 1. Using NPM (Recommended for Build Pipelines)
+
+To integrate Axiom01 into your Node.js or modern front-end build pipeline:
+
+```bash
+# Install the framework
+npm install axiom01
+
+# Check for outdated packages and update Axiom01
+npm outdated
+npm update axiom01
+```
+
+### 2. Using Git (For Manual Builds & Contributing)
+
+If you prefer to clone the repository for direct development or contributing to the source code:
+
+```bash
+# Clone the repository
+git clone https://github.com/Sol-Roth-Media/axiom01.git
+
+# Navigate into the project
+cd axiom01
+
+# Checkout a specific stable release (e.g., v2.2.3)
+git checkout tags/v2.2.3
+```
+
+---
+
+## 🏗️ How to Start a Website
+
+Starting a website with Axiom01 means writing standard HTML. Notice the complete absence of utility class bloat in the template below.
+
+### Basic `index.html` Template
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Axiom01 Site</title>
+  
+  <link rel="stylesheet" href="node_modules/axiom01/dist/axiom01.min.css">
+</head>
+<body class="axiom-body">
+
+  <header class="main">
+    <nav>
+      <a href="/" class="brand">ax[10]m</a>
+      <ul class="links">
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="container">
+        <h1>Write Less Code.</h1>
+        <p>Build better interfaces with semantic markup.</p>
+        <button class="primary">Get Started</button>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <article class="card">
+          <header>
+            <h3>Accessible by Default</h3>
+          </header>
+          <p>This paragraph is automatically constrained to 65ch for optimal readability. No extra classes needed.</p>
+          <footer>
+            <button class="secondary">Learn More</button>
+          </footer>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="node_modules/axiom01/dist/axiom01.min.js"></script>
+</body>
+</html>
+```
+
+---
+
+## ⚡ Performance & Axicons
+
+Axiom01 is built to be featherweight. The core CSS bundle is only **15.3 KB (Gzipped)** and the JavaScript is **3.9 KB**. Zero dependencies.
+
+### Working with Axicons
+
+Axiom01 comes with a modular library of 1,700+ ultra-lightweight SVG icons. It is deliberately split into variants so you never load what you don't need:
+
+1. **Start Minimal (Base):**
+Include the base script to get 1,100+ core UI icons at just 89KB.
+```html
+<script src="path/to/axicons-base.js"></script>
+```
+
+2. **Add Premium Moments:**
+For richer UI states, optionally load the premium set (600+ icons) and variants (filled, duotone).
+```html
+<script src="path/to/axicons-premium.js"></script>
+<script src="path/to/axicons-premium-variants.js"></script>
+```
+
+3. **Lazy Loading (Best Practice):**
+Load icons on-demand in your JavaScript for maximum performance:
+```javascript
+// Load premium icons only when the UI requires them
+await AxiconsLoader.loadPremium();
+```
+
+---
+
+## 🎨 Global Styling & Customization
+
+Axiom01 components are complete out of the box, but highly customizable. Modify the mathematical rhythm or color harmony by overriding CSS tokens in your `:root`.
+
+**Important:** Axiom01 utilizes OKLCH math for its entire color system. You should override the base hues and chroma, not hardcoded hex values, to ensure automatic dark mode scaling works perfectly.
+
+```css
+:root {
+  /* Scale typography globally */
+  --a-heading-scale: 1.15;
+  
+  /* Adjust global spacing symmetry */
+  --a-space-unit: 1rem;
+  
+  /* Brand colors using OKLCH Hues (0-360) */
+  --a-hue-primary: 250; /* A deep blue/purple */
+  --a-chroma-primary: 0.15; /* Saturation level */
+  
+  --a-hue-secondary: 150; /* A minty green */
+  --a-chroma-secondary: 0.12;
+  
+  /* Muted text color */
+  --a-color-on-surface-variant: oklch(0.55 0 0);
+}
+```
+
+---
+
+## 💡 Tips and Tricks
+
+* **Trust Native HTML:** Let native elements do the heavy lifting. Use `<ul>` and `<ol>` for lists without adding extra classes. Axiom01 automatically styles inline `code`, `keyboard`, and blockquotes flawlessly.
+* **The Forms Rule:** Forms require almost zero classes. Just wrap your `<label>` and `<input>` inside a `<form>` tag (or native fieldsets), and Axiom01 automatically provides accessible, consistently styled inputs with perfect spacing.
+* **Customize via Variables, not Overrides:** If a component needs to behave differently, adjust its behavior using CSS tokens rather than slapping on an `!important` rule or a custom utility class.
+* **Leverage Built-In Themes:** Axiom01 comes with 22 live themes out of the box. Dark mode and system-theme detection are baked in; rely on the semantic color tokens to ensure seamless, automatic transitions between light and dark modes.
+
+---
+
+*Created by Sol Roth Media • Released under the MIT License*
+
+
+
+## Advanced Framework Internals
 
 This guide provides in-depth information for developers looking to understand, extend, or contribute to the Axiom01 UI framework. It covers core architectural decisions, best practices, and future considerations.
 
