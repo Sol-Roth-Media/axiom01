@@ -41,7 +41,7 @@
 
 			<section>
 				<h2>HTML Example</h2>
-				<pre><code class="language-html">&lt;article class="card"&gt;
+				<pre data-component="code-block" class="code-block"><code>&lt;article class="card"&gt;
   &lt;header&gt;
     &lt;h3&gt;Release Notes&lt;/h3&gt;
   &lt;/header&gt;
@@ -51,7 +51,7 @@
 
 			<section>
 				<h2>CSS Example</h2>
-				<pre><code class="language-css">.card {
+				<pre data-component="code-block" class="code-block"><code>.card {
   padding: var(--a-space-l);
   border: 1px solid var(--a-color-outline);
   border-radius: var(--a-border-radius-large);
@@ -61,10 +61,11 @@
 
 			<section>
 				<h2>JavaScript Example</h2>
-				<pre><code class="language-javascript">const blocks = document.querySelectorAll('pre code');
+				<pre data-component="code-block" class="code-block"><code>const blocks = document.querySelectorAll('pre.code-block code');
 blocks.forEach((block) => {
-  if (block.classList.contains('language-javascript')) {
-    console.log('JavaScript sample found');
+  const parent = block.closest('pre[data-component="code-block"]');
+  if (parent) {
+    console.log('Axiom01 code block found');
   }
 });</code></pre>
 			</section>
@@ -73,7 +74,7 @@ blocks.forEach((block) => {
 				<h2>Guidelines</h2>
 				<ul>
 					<li>Use semantic <code>pre</code> and <code>code</code> elements only.</li>
-					<li>Add <code>language-*</code> class names on <code>code</code> for readable language labels.</li>
+					<li>Add <code>data-component="code-block"</code> and <code>class="code-block"</code> on <code>pre</code>.</li>
 					<li>Keep snippets concise and focused on one concept per block.</li>
 					<li>Prefer framework variables and semantic patterns in all examples.</li>
 				</ul>
@@ -130,4 +131,3 @@ blocks.forEach((block) => {
 <script src="../../js/render-icons.js"></script>
 </body>
 </html>
-
