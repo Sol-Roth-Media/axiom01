@@ -7,9 +7,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const resolveProjectRootAsset = (assetPath) => {
+    const path = window.location.pathname;
+    if (path.includes('/docs/components/')) return `../../${assetPath}`;
+    if (path.includes('/docs/')) return `../${assetPath}`;
+    return assetPath;
+  };
+
+  let releaseInfoPromise;
+  const loadReleaseInfo = async () => {
+    if (!releaseInfoPromise) {
+      releaseInfoPromise = fetch(resolveProjectRootAsset('release-info.json')).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to load release metadata: ${response.status}`);
+        }
+        return response.json();
+      });
+    }
+    return releaseInfoPromise;
+  };
+
+  const resolveSafeAssetUrl = (value) => {
+    if (!value) return null;
+    try {
+      const url = new URL(value, window.location.href);
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') return null;
+      return url.href;
+    } catch (error) {
+      return null;
+    }
+  };
+
   const searchData = [
     { title: "Accordion", cat: "components", url: "docs/components/accordion.html" },
     { title: "Account Menu", cat: "components", url: "docs/components/account-menu.html" },
+    { title: "Action Group", cat: "components", url: "docs/components/action-group.html" },
+    { title: "Adaptive Media Card", cat: "components", url: "docs/components/adaptive-media-card.html" },
     { title: "Advanced Table", cat: "components", url: "docs/components/advanced-table.html" },
     { title: "AI Chat", cat: "components", url: "docs/components/ai-chat.html" },
     { title: "AI Image Generator", cat: "components", url: "docs/components/ai-image-generator.html" },
@@ -20,7 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: "Badge", cat: "components", url: "docs/components/badge.html" },
     { title: "Breadcrumb", cat: "components", url: "docs/components/breadcrumb.html" },
     { title: "Button", cat: "components", url: "docs/components/button.html" },
+    { title: "Button Variants", cat: "components", url: "docs/components/button-variants.html" },
+    { title: "Backlit", cat: "components", url: "docs/components/backlit.html" },
     { title: "Card", cat: "components", url: "docs/components/card.html" },
+    { title: "Card Filter", cat: "components", url: "docs/components/card-filter.html" },
+    { title: "Code Block", cat: "components", url: "docs/components/code-block.html" },
     { title: "Carousel", cat: "components", url: "docs/components/carousel.html" },
     { title: "Chat", cat: "components", url: "docs/components/chat.html" },
     { title: "Chip Input", cat: "components", url: "docs/components/chip-input.html" },
@@ -48,17 +85,22 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: "Modal", cat: "components", url: "docs/components/modal.html" },
     { title: "Multi-Step Form", cat: "components", url: "docs/components/multi-step-form.html" },
     { title: "Multimedia Picker", cat: "components", url: "docs/components/multimedia-picker.html" },
+    { title: "Media & Icons", cat: "components", url: "docs/components/media.html" },
     { title: "Navigation", cat: "components", url: "docs/components/navigation.html" },
     { title: "Notification", cat: "components", url: "docs/components/notification.html" },
+    { title: "Page Header", cat: "components", url: "docs/components/page-header.html" },
     { title: "Pagination", cat: "components", url: "docs/components/pagination.html" },
+    { title: "Paywall", cat: "components", url: "docs/components/paywall.html" },
     { title: "Playlist", cat: "components", url: "docs/components/playlist.html" },
     { title: "Popover", cat: "components", url: "docs/components/popover.html" },
     { title: "Progress", cat: "components", url: "docs/components/progress.html" },
     { title: "Pull to Refresh", cat: "components", url: "docs/components/pull-to-refresh.html" },
+    { title: "Queue", cat: "components", url: "docs/components/queue.html" },
     { title: "Rating", cat: "components", url: "docs/components/rating.html" },
     { title: "Search", cat: "components", url: "docs/components/search.html" },
     { title: "Segmented Control", cat: "components", url: "docs/components/segmented-control.html" },
     { title: "Settings", cat: "components", url: "docs/components/settings.html" },
+    { title: "Shapes and Paths", cat: "components", url: "docs/components/shapes-paths.html" },
     { title: "Sidebar", cat: "components", url: "docs/components/sidebar.html" },
     { title: "Skeleton", cat: "components", url: "docs/components/skeleton.html" },
     { title: "Slider", cat: "components", url: "docs/components/slider.html" },
@@ -99,18 +141,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper function to update the theme toggle button icon
     const updateThemeToggleButtonIcon = (themeName) => {
+        // CSS handles moon/sun visibility for inline SVG icons (no data-name needed).
+        // This function is kept for backward compatibility with JS-rendered icons.
         const themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle) {
-            const icon = themeToggle.querySelector('.axicon');
-            if (icon) {
-                if (themeName === 'dark') {
-                    icon.setAttribute('data-name', 'Sun');
-                } else {
-                    icon.setAttribute('data-name', 'Moon');
-                }
-                safeRenderAxicons();
-            }
+        if (!themeToggle) return;
+        const icon = themeToggle.querySelector('.axicon[data-name]');
+        if (!icon) return; // Inline SVG handled by CSS via [data-theme] attribute
+        if (themeName === 'dark') {
+            icon.setAttribute('data-name', 'Sun');
+        } else {
+            icon.setAttribute('data-name', 'Moon');
         }
+        safeRenderAxicons();
     };
 
 // 2. Theme Toggling (Header Toggle Button)
@@ -347,6 +389,262 @@ document.addEventListener('DOMContentLoaded', () => {
         dialog.addEventListener('click', e => { if (e.target === dialog) close(); });
     };
 
+          const initReleaseMetadata = () => {
+            const hasReleaseTargets = document.querySelector(
+              '[data-release-version], [data-release-date], [data-release-components], [data-release-tokens], [data-release-css-gzip], [data-release-js-gzip], [data-release-total-gzip]'
+            );
+            if (!hasReleaseTargets) return;
+
+            loadReleaseInfo()
+              .then((releaseInfo) => {
+                const mappings = [
+                  ['data-release-version', releaseInfo.version],
+                  ['data-release-date', releaseInfo.releaseDateFormatted],
+                  ['data-release-components', String(releaseInfo.features.components)],
+                  ['data-release-tokens', String(releaseInfo.features.designTokens)],
+                  ['data-release-css-gzip', releaseInfo.bundle.css.sizeGzipped],
+                  ['data-release-js-gzip', releaseInfo.bundle.js.sizeGzipped],
+                  ['data-release-total-gzip', releaseInfo.bundle.total.sizeGzipped],
+                ];
+
+                mappings.forEach(([attribute, value]) => {
+                  document.querySelectorAll(`[${attribute}]`).forEach((element) => {
+                    element.textContent = value;
+                  });
+                });
+              })
+              .catch((error) => {
+                console.warn('Could not load release-info.json:', error);
+              });
+          };
+
+          const initBackToTop = () => {
+            const scrollTopBtn = document.querySelector('[data-scroll-top], #scroll-to-top');
+            if (!scrollTopBtn) return;
+
+            const updateVisibility = () => {
+              scrollTopBtn.hidden = window.pageYOffset <= 300;
+            };
+
+            scrollTopBtn.hidden = true;
+            updateVisibility();
+            window.addEventListener('scroll', updateVisibility, { passive: true });
+            scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+          };
+
+          const initDemoActions = () => {
+            const openDialog = (dialog) => {
+              if (!dialog) return;
+              if (typeof dialog.showModal === 'function') {
+                dialog.showModal();
+              } else {
+                dialog.setAttribute('open', 'true');
+              }
+            };
+
+            const closeDialog = (dialog) => {
+              if (!dialog) return;
+              if (typeof dialog.close === 'function') {
+                dialog.close();
+              } else {
+                dialog.removeAttribute('open');
+              }
+            };
+
+            const createToast = (trigger) => {
+              const regionId = trigger.getAttribute('data-toast-target');
+              const region = regionId ? document.getElementById(regionId) : null;
+              if (!region) return;
+
+              const type = trigger.getAttribute('data-toast-type') || 'info';
+              const title = trigger.getAttribute('data-toast-title') || 'Notice';
+              const message = trigger.getAttribute('data-toast-message') || '';
+              const toast = document.createElement('div');
+              const content = document.createElement('div');
+              const heading = document.createElement('strong');
+              const body = document.createElement('p');
+              const close = document.createElement('button');
+              const icon = document.createElement('span');
+
+              toast.className = `alert ${type}`;
+              toast.setAttribute('role', type === 'error' || type === 'warning' ? 'alert' : 'status');
+
+              heading.textContent = title;
+              body.textContent = message;
+              content.appendChild(heading);
+              content.appendChild(body);
+
+              close.type = 'button';
+              close.className = 'close';
+              close.setAttribute('aria-label', 'Dismiss');
+              close.setAttribute('data-remove-closest', '.alert');
+
+              icon.className = 'axicon render';
+              icon.setAttribute('data-name', 'X');
+              close.appendChild(icon);
+
+              toast.appendChild(content);
+              toast.appendChild(close);
+              region.appendChild(toast);
+              safeRenderAxicons();
+
+              window.setTimeout(() => toast.remove(), 5000);
+            };
+
+            document.addEventListener('click', (event) => {
+              const openTrigger = event.target.closest('[data-dialog-open]');
+              if (openTrigger) {
+                event.preventDefault();
+                openDialog(document.getElementById(openTrigger.getAttribute('data-dialog-open')));
+                return;
+              }
+
+              const closeTrigger = event.target.closest('[data-dialog-close]');
+              if (closeTrigger) {
+                event.preventDefault();
+                const dialog = closeTrigger.getAttribute('data-dialog-close')
+                  ? document.getElementById(closeTrigger.getAttribute('data-dialog-close'))
+                  : closeTrigger.closest('dialog');
+                closeDialog(dialog);
+                return;
+              }
+
+              const removeTrigger = event.target.closest('[data-remove-closest]');
+              if (removeTrigger) {
+                event.preventDefault();
+                const target = removeTrigger.closest(removeTrigger.getAttribute('data-remove-closest'));
+                if (target?.classList.contains('alert')) {
+                  target.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+                  target.style.opacity = '0';
+                  target.style.transform = 'translateX(100%)';
+                  window.setTimeout(() => target.remove(), 250);
+                } else {
+                  target?.remove();
+                }
+                return;
+              }
+
+              const alertTrigger = event.target.closest('[data-alert-message]');
+              if (alertTrigger) {
+                event.preventDefault();
+                window.alert(alertTrigger.getAttribute('data-alert-message'));
+                return;
+              }
+
+              const lightboxTrigger = event.target.closest('[data-lightbox-dialog]');
+              if (lightboxTrigger) {
+                event.preventDefault();
+                const dialog = document.getElementById(lightboxTrigger.getAttribute('data-lightbox-dialog'));
+                const image = dialog?.querySelector('img');
+                if (dialog && image) {
+                  const imageSrc = resolveSafeAssetUrl(lightboxTrigger.getAttribute('data-lightbox-src'));
+                  if (!imageSrc) return;
+                  image.src = imageSrc;
+                  image.alt = lightboxTrigger.getAttribute('data-lightbox-alt') || '';
+                  openDialog(dialog);
+                }
+                return;
+              }
+
+              const toastTrigger = event.target.closest('[data-toast-target]');
+              if (toastTrigger) {
+                event.preventDefault();
+                createToast(toastTrigger);
+              }
+            });
+          };
+
+          const initCarouselDemos = () => {
+            document.querySelectorAll('[data-carousel-step]').forEach((button) => {
+              button.addEventListener('click', () => {
+                const trackId = button.getAttribute('aria-controls');
+                const track = trackId ? document.getElementById(trackId) : null;
+                if (!track) return;
+
+                const slides = Array.from(track.children);
+                if (!slides.length) return;
+
+                const direction = Number(button.getAttribute('data-carousel-step') || '0');
+                const currentIndex = Number(track.getAttribute('data-carousel-index') || '0');
+                const nextIndex = (currentIndex + direction + slides.length) % slides.length;
+
+                track.setAttribute('data-carousel-index', String(nextIndex));
+                track.style.transform = `translateX(-${nextIndex * 100}%)`;
+              });
+            });
+          };
+
+          const initComponentsOverview = () => {
+            const overview = document.querySelector('[data-component="components-overview"]');
+            if (!overview) return;
+
+            const searchInput = overview.querySelector('#component-search');
+            const searchResults = overview.querySelector('#search-results');
+            const categoryDetails = Array.from(overview.querySelectorAll('details.accordion[data-category]'));
+            const allComponentLinks = overview.querySelectorAll('details.accordion[data-category] a[href*="components/"]');
+
+            function applyResponsiveState() {
+              if (searchInput?.value.trim()) return;
+
+              if (window.innerWidth >= 768) {
+                categoryDetails.forEach((details) => {
+                  details.hidden = false;
+                  details.open = true;
+                });
+                return;
+              }
+
+              categoryDetails.forEach((details) => {
+                details.hidden = false;
+                details.open = details.getAttribute('data-category') === 'feedback-and-status';
+              });
+            }
+
+            if (searchInput && searchResults) {
+              searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase().trim();
+
+                if (query === '') {
+                  allComponentLinks.forEach((link) => {
+                    const listItem = link.closest('li') || link;
+                    listItem.hidden = false;
+                  });
+                  searchResults.textContent = '';
+                  applyResponsiveState();
+                  return;
+                }
+
+                let visibleCount = 0;
+                const visibleCategories = new Set();
+
+                allComponentLinks.forEach((link) => {
+                  const text = link.textContent.toLowerCase();
+                  const label = link.getAttribute('aria-label')?.toLowerCase() || '';
+                  const matches = text.includes(query) || label.includes(query);
+                  const listItem = link.closest('li') || link;
+
+                  listItem.hidden = !matches;
+                  if (matches) {
+                    visibleCount += 1;
+                    const category = link.closest('details[data-category]');
+                    if (category) visibleCategories.add(category);
+                  }
+                });
+
+                categoryDetails.forEach((details) => {
+                  const hasVisibleLinks = Array.from(details.querySelectorAll('li')).some((item) => !item.hidden);
+                  details.hidden = !hasVisibleLinks;
+                  details.open = visibleCategories.has(details);
+                });
+
+                searchResults.textContent = `Found ${visibleCount} component${visibleCount === 1 ? '' : 's'}`;
+              });
+            }
+
+            applyResponsiveState();
+            window.addEventListener('resize', applyResponsiveState);
+          };
+
           const initCurrentPageNavState = () => {
             const normalizePath = (value) => {
               if (!value) return '/';
@@ -515,22 +813,47 @@ document.addEventListener('DOMContentLoaded', () => {
           const initTabs = () => {
             document.querySelectorAll('.tabs').forEach((tabsContainer) => {
               const tabButtons = tabsContainer.querySelectorAll('[role="tab"]');
-              const tabPanels = tabsContainer.querySelectorAll('[role="tabpanel"]');
+
+              // Panels live outside the <menu class="tabs"> — find them by aria-controls ID
+              const getPanelForButton = (button) => {
+                const panelId = button.getAttribute('aria-controls');
+                return panelId ? document.getElementById(panelId) : null;
+              };
+
+              const activateTab = (button) => {
+                tabButtons.forEach((btn) => {
+                  const isTarget = btn === button;
+                  btn.setAttribute('aria-selected', String(isTarget));
+                  btn.tabIndex = isTarget ? 0 : -1;
+                  const panel = getPanelForButton(btn);
+                  if (panel) {
+                    panel.hidden = !isTarget;
+                    if (isTarget) {
+                      panel.setAttribute('aria-selected', 'true');
+                    } else {
+                      panel.removeAttribute('aria-selected');
+                    }
+                  }
+                });
+              };
 
               tabButtons.forEach((button) => {
-                button.addEventListener('click', () => {
-                  tabButtons.forEach((btn) => btn.setAttribute('aria-selected', 'false'));
-                  tabPanels.forEach((panel) => {
-                    panel.hidden = true;
-                    panel.removeAttribute('aria-selected');
-                  });
+                button.tabIndex = button.getAttribute('aria-selected') === 'true' ? 0 : -1;
+                button.addEventListener('click', () => activateTab(button));
+                button.addEventListener('keydown', (event) => {
+                  const buttons = Array.from(tabButtons);
+                  const currentIndex = buttons.indexOf(button);
+                  if (currentIndex === -1) return;
 
-                  button.setAttribute('aria-selected', 'true');
-                  const controlsId = button.getAttribute('aria-controls');
-                  const targetPanel = controlsId ? document.getElementById(controlsId) : null;
-                  if (targetPanel) {
-                    targetPanel.hidden = false;
-                    targetPanel.setAttribute('aria-selected', 'true');
+                  let nextIndex = currentIndex;
+                  if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
+                  if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                  if (event.key === 'Home') nextIndex = 0;
+                  if (event.key === 'End') nextIndex = buttons.length - 1;
+                  if (nextIndex !== currentIndex) {
+                    event.preventDefault();
+                    buttons[nextIndex].focus();
+                    activateTab(buttons[nextIndex]);
                   }
                 });
               });
@@ -562,12 +885,17 @@ document.addEventListener('DOMContentLoaded', () => {
     initSpacingDemo();
     initComponentBrowser();
     initSearchModal();
+    initReleaseMetadata();
     initCurrentPageNavState();
     initCodeCopying();
     initThemeExplorer();
     initSmoothScrolling();
     initSidebarHighlighting();
     initDynamicCopyrightYear();
+    initBackToTop();
+    initDemoActions();
+    initCarouselDemos();
+    initComponentsOverview();
     initDropdowns(); // Initialize dropdowns
     initTabs(); // Initialize semantic tabs component
     initCascadeVisualization(); // Initialize cascade visualization

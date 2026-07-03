@@ -553,6 +553,24 @@ color: #333;
 <div class="card card-outlined">...</div>
 ```
 
+### 7. Class Naming Policy
+
+- Prefer semantic component classes and short dashed helpers.
+- Avoid BEM-style `__` and `--` tokens in docs and public examples.
+- If an internal exception is unavoidable, document it in `DEVELOPER.md` before release and schedule removal.
+
+### 8. Code Samples Without Prism
+
+Axiom01 now uses a framework-owned code-block enhancement instead of Prism/CDN dependencies.
+
+```html
+<pre>
+  <code class="language-html">&lt;button class="primary"&gt;Save&lt;/button&gt;</code>
+</pre>
+```
+
+The runtime `code-block` component adds language labels and copy-to-clipboard actions while preserving semantic `pre/code` markup.
+
 ---
 
 ## Component Checklist

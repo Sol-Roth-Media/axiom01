@@ -1,0 +1,807 @@
+/* ========================================
+   AXIOM01 DOCUMENTATION LAYER
+   Semantic-first. Token-based only. No BEM. No utility classes.
+   One root class per component. Style by element order.
+   ======================================== */
+
+/* === DOCUMENTATION TOKENS === */
+
+:root {
+	--a-doc-gutter: var(--a-space-l);
+	--a-doc-section-space: var(--a-space-xl);
+	--a-doc-touch-target: 2.75rem;
+	--a-doc-max-prose: 65ch;
+	--a-doc-max-content: 1200px;
+	--a-doc-transition: all var(--a-transition-base);
+}
+
+@media (max-width: 768px) {
+	:root {
+		--a-doc-gutter: var(--a-space-m);
+		--a-doc-section-space: var(--a-space-l);
+	}
+}
+
+/* === SKIP LINK ===
+   Accessibility: visible only on focus. Scoped to semantic anchor.
+   ======================================== */
+
+a.skip-link {
+	position: absolute;
+	top: -40px;
+	left: 0;
+	background: var(--a-color-primary);
+	color: var(--a-color-on-primary);
+	padding: var(--a-space-s) var(--a-space-m);
+	text-decoration: none;
+	border-radius: var(--a-border-radius-base);
+	z-index: 200;
+	transition: top 0.2s;
+	font-weight: var(--a-font-weight-medium);
+}
+
+a.skip-link:focus {
+	top: var(--a-space-s);
+}
+
+/* === DOC PAGE BASE ===
+   body.component-doc — single root context for component documentation pages
+   ======================================== */
+
+body.component-doc {
+	background: var(--a-color-surface);
+	color: var(--a-color-on-surface);
+}
+
+body.component-doc main > section {
+	padding: var(--a-doc-section-space) 0;
+}
+
+body.component-doc main > section:nth-child(even) {
+	background-color: var(--a-color-surface-variant);
+}
+
+/* Direct children of sections are max-width constrained */
+body.component-doc main > section > h1,
+body.component-doc main > section > h2,
+body.component-doc main > section > h3,
+body.component-doc main > section > p,
+body.component-doc main > section > article,
+body.component-doc main > section > div,
+body.component-doc main > section > header,
+body.component-doc main > section > nav,
+body.component-doc main > section > figure,
+body.component-doc main > section > pre,
+body.component-doc main > section > ul,
+body.component-doc main > section > ol,
+body.component-doc main > section > table,
+body.component-doc main > section > menu {
+	width: min(100%, calc(var(--a-doc-max-content) - (var(--a-doc-gutter) * 2)));
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body.component-doc main > section > .container {
+	padding-inline: var(--a-doc-gutter);
+}
+
+/* Spacing between section content children */
+body.component-doc main > section > .container > :where(header, nav, article, section, figure, pre, table, ul, ol, p):not(:first-child) {
+	margin-top: var(--a-space-l);
+}
+
+/* Page title header block */
+body.component-doc main > section > .container > header {
+	margin-bottom: var(--a-space-xl);
+	padding-bottom: var(--a-space-xl);
+	border-bottom: 1px solid var(--a-color-outline);
+}
+
+body.component-doc main > section > .container > header h1 {
+	margin-top: 0;
+	margin-bottom: var(--a-space-s);
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	color: var(--a-color-on-surface);
+}
+
+body.component-doc main > section > .container > header p {
+	margin: 0;
+	font-size: var(--a-font-size-lg);
+	color: var(--a-color-on-surface-variant);
+	line-height: 1.6;
+}
+
+/* Section h2 headings */
+body.component-doc main section h2 {
+	margin-top: 0;
+	margin-bottom: var(--a-space-m);
+	padding-bottom: var(--a-space-s);
+	border-bottom: 1px solid var(--a-color-outline);
+}
+
+/* Container section spacing */
+body.component-doc .container > section {
+	margin-bottom: var(--a-space-2xl);
+}
+
+body.component-doc .container > section:last-child {
+	margin-bottom: 0;
+}
+
+/* === CODE BLOCKS ===
+   Prism.js integration. Dark background regardless of theme.
+   ======================================== */
+
+body.component-doc pre,
+body.docs-overview pre {
+	background-color: #1e1e2e;
+	color: #cdd6f4;
+	padding: var(--a-space-m);
+	border-radius: var(--a-border-radius-base);
+	overflow-x: auto;
+	margin: var(--a-space-m) 0;
+	border: none;
+	line-height: 1.6;
+}
+
+body.component-doc pre code,
+body.docs-overview pre code {
+	font-family: var(--a-font-family-mono);
+	font-size: 0.875rem;
+	background: none;
+	color: inherit;
+	padding: 0;
+}
+
+/* Inline code in prose */
+body.component-doc p code,
+body.component-doc li code,
+body.component-doc td code,
+body.docs-overview p code,
+body.docs-overview li code,
+body.docs-overview td code {
+	font-family: var(--a-font-family-mono);
+	font-size: 0.875em;
+	background-color: var(--a-color-primary-container);
+	color: var(--a-color-on-primary-container);
+	padding: 2px 6px;
+	border-radius: 3px;
+}
+
+/* === DEMO PREVIEW ===
+   article.card > figure = live component preview area
+   ======================================== */
+
+body.component-doc section > article.card {
+	margin-bottom: var(--a-space-l);
+}
+
+body.component-doc article.card > figure {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--a-space-xl);
+	background: var(--a-color-surface-variant);
+	border-radius: var(--a-border-radius-base);
+	margin: 0 0 var(--a-space-m) 0;
+	border: 1px dashed var(--a-color-outline);
+	min-height: 120px;
+	flex-wrap: wrap;
+	gap: var(--a-space-m);
+}
+
+/* === TABLES ===
+   Standard documentation table layout
+   ======================================== */
+
+body.component-doc table,
+body.docs-overview table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: var(--a-space-m) 0;
+	font-size: 0.95rem;
+}
+
+body.component-doc table thead,
+body.docs-overview table thead {
+	background-color: var(--a-color-surface-variant);
+}
+
+body.component-doc table th,
+body.docs-overview table th {
+	padding: var(--a-space-m);
+	text-align: left;
+	font-weight: var(--a-font-weight-bold);
+	border-bottom: 2px solid var(--a-color-outline);
+}
+
+body.component-doc table td,
+body.docs-overview table td {
+	padding: var(--a-space-m);
+	border-bottom: 1px solid var(--a-color-outline);
+	vertical-align: top;
+}
+
+body.component-doc table tbody tr:hover,
+body.docs-overview table tbody tr:hover {
+	background-color: var(--a-color-surface-variant);
+}
+
+/* Color swatch cells */
+td[data-swatch] {
+	width: 3rem;
+	min-width: 3rem;
+}
+
+td[data-swatch="primary"]         { background: var(--a-color-primary); }
+td[data-swatch="secondary"]        { background: var(--a-color-secondary); }
+td[data-swatch="success"]          { background: var(--a-color-success); }
+td[data-swatch="warning"]          { background: var(--a-color-warning); }
+td[data-swatch="error"]            { background: var(--a-color-error); }
+td[data-swatch="info"]             { background: var(--a-color-info); }
+td[data-swatch="surface"]          { background: var(--a-color-surface); box-shadow: inset 0 0 0 1px var(--a-color-outline); }
+td[data-swatch="surface-variant"]  { background: var(--a-color-surface-variant); }
+td[data-swatch="on-surface"]       { background: var(--a-color-on-surface); }
+td[data-swatch="outline"]          { background: var(--a-color-outline); }
+
+/* === LISTS ===
+   Readable list spacing for doc prose
+   ======================================== */
+
+body.component-doc ul,
+body.component-doc ol,
+body.docs-overview ul:not(.links):not(.quick-categories ul) {
+	margin: var(--a-space-m) 0;
+	padding-left: var(--a-space-l);
+	list-style: revert;
+}
+
+body.component-doc li,
+body.docs-overview li {
+	margin-bottom: var(--a-space-s);
+	line-height: 1.6;
+}
+
+/* === PROSE READABILITY ===
+   Limit line length for comfortable reading
+   ======================================== */
+
+body.component-doc article > p,
+body.component-doc section > p {
+	max-width: var(--a-doc-max-prose);
+	line-height: 1.75;
+}
+
+/* === BLOCKQUOTES === */
+
+body.component-doc blockquote {
+	border-left: 3px solid var(--a-color-primary);
+	padding-left: var(--a-space-l);
+	margin: var(--a-space-m) 0;
+	font-style: italic;
+	color: var(--a-color-on-surface-variant);
+	line-height: 1.7;
+}
+
+/* === MEDIA ===
+   Responsive images, video, and media elements in doc pages
+   ======================================== */
+
+body.component-doc main img,
+body.docs-overview main img {
+	max-width: 100%;
+	height: auto;
+}
+
+body.component-doc audio[controls],
+body.docs-overview audio[controls] {
+	width: 100%;
+	display: block;
+}
+
+body.component-doc video,
+body.component-doc iframe,
+body.docs-overview video,
+body.docs-overview iframe {
+	width: 100%;
+	border-radius: var(--a-border-radius-base);
+	display: block;
+}
+
+/* === INLINE ELEMENTS ===
+   Semantic element styling for doc prose
+   ======================================== */
+
+body.component-doc hr,
+body.docs-overview hr {
+	margin: var(--a-space-m) 0;
+	border: none;
+	border-top: 1px solid var(--a-color-outline);
+}
+
+body.component-doc small,
+body.docs-overview small {
+	font-size: var(--a-font-size-sm);
+	color: var(--a-color-on-surface-variant);
+}
+
+body.component-doc code,
+body.docs-overview code {
+	font-family: var(--a-font-family-mono);
+	font-size: 0.875em;
+}
+
+/* === BUTTON GROUP ===
+   .button-group — semantic grouping of related action buttons
+   ======================================== */
+
+.button-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--a-space-m);
+	align-items: center;
+	margin: var(--a-space-l) 0;
+}
+
+/* === COMPONENT OVERVIEW PAGE ===
+   Root class: body.docs-overview
+   Component/section classes: one per component, semantic children
+   ======================================== */
+
+body.docs-overview {
+	--a-doc-transition: all var(--a-transition-base);
+}
+
+/* Hero section */
+.component-hero {
+	padding: var(--a-space-xl) 0;
+	background: linear-gradient(135deg, var(--a-color-surface) 0%, var(--a-color-surface-variant) 100%);
+}
+
+.component-hero > .container > header {
+	text-align: center;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.component-hero h1 {
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	font-weight: var(--a-font-weight-bold);
+	margin-bottom: var(--a-space-l);
+	color: var(--a-color-on-surface);
+}
+
+.component-hero > .container > header > p {
+	font-size: 1.25rem;
+	color: var(--a-color-on-surface-variant);
+	margin-bottom: var(--a-space-xl);
+	line-height: 1.6;
+}
+
+/* Stats — semantic list of stat elements */
+.stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: var(--a-space-l);
+	margin-top: var(--a-space-xl);
+	list-style: none;
+	padding: 0;
+}
+
+.stats > li,
+stat {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: var(--a-space-m);
+	border-radius: var(--a-border-radius-base);
+	background: var(--a-color-surface-variant);
+	border: 1px solid var(--a-color-outline);
+}
+
+.stats > li strong,
+stat strong {
+	font-size: 2rem;
+	color: var(--a-color-primary);
+	line-height: 1;
+	margin-bottom: var(--a-space-s);
+}
+
+.stats > li span,
+stat span {
+	font-size: 0.875rem;
+	color: var(--a-color-on-surface-variant);
+}
+
+/* Quick access navigation */
+.quick-access {
+	padding: var(--a-space-xl) 0;
+}
+
+.quick-access > .container > header {
+	text-align: center;
+	margin-bottom: var(--a-space-xl);
+}
+
+.quick-access h2 {
+	font-size: 1.75rem;
+	margin-bottom: var(--a-space-m);
+}
+
+.quick-categories {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+	gap: var(--a-space-l);
+}
+
+.quick-categories nav {
+	border: 1px solid var(--a-color-outline);
+	border-radius: var(--a-border-radius-base);
+	padding: var(--a-space-m);
+	background: var(--a-color-surface);
+}
+
+.quick-categories h3 {
+	font-size: 1rem;
+	font-weight: var(--a-font-weight-bold);
+	margin: 0 0 var(--a-space-m) 0;
+	color: var(--a-color-on-surface);
+}
+
+.quick-categories ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.quick-categories li {
+	margin-bottom: var(--a-space-s);
+}
+
+.quick-categories a {
+	display: block;
+	min-height: var(--a-doc-touch-target);
+	padding: var(--a-space-s) var(--a-space-s);
+	color: var(--a-color-primary);
+	text-decoration: none;
+	transition: var(--a-doc-transition);
+	border-radius: var(--a-border-radius-base);
+	line-height: var(--a-doc-touch-target);
+}
+
+.quick-categories a:hover {
+	background: var(--a-color-surface-variant);
+	padding-left: var(--a-space-m);
+}
+
+.quick-categories a:focus-visible {
+	outline: 2px solid var(--a-color-primary);
+	outline-offset: 2px;
+}
+
+/* Search section */
+.search-section {
+	padding: var(--a-space-xl) 0;
+	background: var(--a-color-surface-variant);
+}
+
+.search-box {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.search-box input {
+	width: 100%;
+	padding: var(--a-space-m);
+	font-size: 1rem;
+	border: 2px solid var(--a-color-outline);
+	border-radius: var(--a-border-radius-base);
+	background: var(--a-color-surface);
+	color: var(--a-color-on-surface);
+	transition: var(--a-doc-transition);
+}
+
+.search-box input:focus {
+	border-color: var(--a-color-primary);
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(var(--a-color-primary-rgb, 66 133 244), 0.1);
+}
+
+#search-results {
+	display: block;
+	margin-top: var(--a-space-s);
+	font-size: 0.875rem;
+	color: var(--a-color-on-surface-variant);
+}
+
+/* Components section */
+.components-section {
+	padding: var(--a-space-xl) 0;
+}
+
+.components-section > .container > header {
+	text-align: center;
+	margin-bottom: var(--a-space-xl);
+}
+
+.components-section h2 {
+	font-size: 1.75rem;
+	margin-bottom: var(--a-space-m);
+}
+
+.components-nav {
+	display: flex;
+	flex-direction: column;
+	gap: var(--a-space-l);
+}
+
+/* Component category accordion block */
+.component-category {
+	border: 1px solid var(--a-color-outline);
+	border-radius: var(--a-border-radius-base);
+	background: var(--a-color-surface);
+	overflow: hidden;
+	transition: var(--a-doc-transition);
+}
+
+.component-category:hover {
+	border-color: var(--a-color-primary);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.component-category > header {
+	margin: 0;
+	padding: 0;
+}
+
+/* Category toggle button — style children by order, no extra classes */
+.category-toggle {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: var(--a-space-s);
+	padding: var(--a-space-m);
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid var(--a-color-outline);
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: var(--a-font-weight-bold);
+	color: var(--a-color-on-surface);
+	transition: var(--a-doc-transition);
+	text-align: left;
+	min-height: var(--a-doc-touch-target);
+}
+
+.category-toggle:hover {
+	background: var(--a-color-surface-variant);
+}
+
+.category-toggle:focus-visible {
+	outline: 2px solid var(--a-color-primary);
+	outline-offset: -2px;
+}
+
+/* First span = category label */
+.category-toggle > span:first-child {
+	flex: 1;
+	color: var(--a-color-primary);
+}
+
+/* Second span = count badge */
+.category-toggle > span:nth-child(2) {
+	font-size: 0.875rem;
+	font-weight: var(--a-font-weight-normal);
+	color: var(--a-color-on-surface-variant);
+}
+
+/* Last span = chevron indicator */
+.category-toggle > span:last-child {
+	display: inline-block;
+	transition: transform var(--a-transition-base);
+	font-size: 0.75rem;
+	color: var(--a-color-on-surface-variant);
+}
+
+.category-toggle[aria-expanded="false"] > span:last-child {
+	transform: rotate(-90deg);
+}
+
+/* Category items grid */
+.category-items {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: var(--a-space-m);
+	padding: var(--a-space-m);
+}
+
+.category-items[hidden] {
+	display: none;
+}
+
+.category-items a {
+	display: flex;
+	align-items: center;
+	min-height: var(--a-doc-touch-target);
+	padding: var(--a-space-m);
+	text-decoration: none;
+	color: var(--a-color-primary);
+	border-radius: var(--a-border-radius-base);
+	border: 1px solid var(--a-color-outline);
+	background: var(--a-color-surface-variant);
+	transition: var(--a-doc-transition);
+	font-weight: var(--a-font-weight-medium);
+	font-size: 0.9rem;
+}
+
+.category-items a:hover {
+	background: var(--a-color-primary);
+	color: var(--a-color-on-primary);
+	border-color: var(--a-color-primary);
+	transform: translateY(-2px);
+}
+
+.category-items a:focus-visible {
+	outline: 2px solid var(--a-color-primary);
+	outline-offset: 2px;
+}
+
+/* === RESPONSIVE ===
+   Mobile-first overrides for documentation pages
+   ======================================== */
+
+@media (max-width: 768px) {
+	.component-hero h1 {
+		font-size: clamp(1.5rem, 5vw, 2rem);
+	}
+
+	.component-hero > .container > header > p {
+		font-size: var(--a-font-size-base);
+	}
+
+	.stats {
+		grid-template-columns: 1fr 1fr;
+		gap: var(--a-space-m);
+	}
+
+	.quick-categories {
+		grid-template-columns: 1fr;
+	}
+
+	.category-items {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.category-toggle {
+		padding: var(--a-space-m);
+	}
+
+	body.component-doc article.card > figure {
+		padding: var(--a-space-l);
+		min-height: 96px;
+	}
+
+	body.component-doc table,
+	body.docs-overview table {
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	body.component-doc pre,
+	body.docs-overview pre {
+		font-size: 0.8125rem;
+		-webkit-overflow-scrolling: touch;
+	}
+}
+
+@media (max-width: 480px) {
+	.stats {
+		grid-template-columns: 1fr;
+	}
+
+	.category-items {
+		grid-template-columns: 1fr;
+	}
+
+	.category-toggle > span:nth-child(2) {
+		display: none;
+	}
+
+	body.component-doc pre,
+	body.docs-overview pre {
+		font-size: 0.75rem;
+	}
+}
+
+@media (max-width: 360px) {
+	.category-toggle {
+		gap: var(--a-space-xs);
+		padding: var(--a-space-s) var(--a-space-m);
+	}
+
+	body.component-doc article.card > .grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ULTRA-SMALL MOBILE: 320px */
+@media (max-width: 320px) {
+	.component-hero h1 {
+		font-size: clamp(1.25rem, 8vw, 2rem);
+	}
+
+	.stats {
+		gap: var(--a-space-s);
+	}
+
+	.category-toggle {
+		padding: var(--a-space-s);
+	}
+
+	body.component-doc pre,
+	body.docs-overview pre {
+		font-size: 0.7rem;
+		padding: var(--a-space-s);
+	}
+
+	body.component-doc article.card > figure {
+		padding: var(--a-space-m);
+		min-height: 80px;
+	}
+}
+
+/* === ACCESSIBILITY ===
+   Reduced motion, forced colors, high contrast
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	.category-items a,
+	.quick-categories a,
+	.category-toggle,
+	.category-toggle > span:last-child,
+	a.skip-link {
+		transition: none;
+	}
+
+	.category-items a:hover {
+		transform: none;
+	}
+
+	.quick-categories a:hover {
+		transform: none;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.component-hero {
+		background: linear-gradient(135deg, var(--a-color-surface-variant) 0%, var(--a-color-surface) 100%);
+	}
+
+	.quick-categories nav {
+		background: var(--a-color-surface-variant);
+	}
+}
+
+@media (forced-colors: active) {
+	.component-category,
+	.category-items a {
+		border: 1px solid CanvasText;
+	}
+
+	.category-toggle:focus-visible,
+	.category-items a:focus-visible {
+		outline: 2px solid Highlight;
+	}
+}
+
+@media (prefers-contrast: more) {
+	.component-category {
+		border: 2px solid var(--a-color-outline);
+	}
+
+	.category-items a {
+		border: 2px solid var(--a-color-primary);
+	}
+}

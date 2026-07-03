@@ -5,21 +5,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Typography Reference - Axiom01</title>
 	<script>(function(){const t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();</script>
-	<link rel="stylesheet" href="../css/axiom.min.css">
+	<link rel="stylesheet" href="../css/axiom.css">
 	<link rel="stylesheet" href="../css/axicons.css">
-	<link rel="stylesheet" href="../css/docs.css">
+	<!-- doc-styles.css merged into axiom.css -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;family=Lora:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+	<style>
+		.font-serif-sample { font-family: "Lora", Georgia, Cambria, "Times New Roman", serif; }
+		.font-base-sample { font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
+		.font-mono-sample { font-family: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+	</style>
 </head>
-<body class="axiom-body component-doc">
-
+<body class="axiom-body">
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="main" data-component="mobile-navbar">
 	<nav role="navigation" aria-label="Main Navigation">
-		<a href="../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
+		<a href="../index.html" class="brand" aria-label="Axiom01 Home">ax[10]m</a>
 		<ul class="links">
-			<li><a href="../index.html#get-started">Get Started</a></li>
+				  <li><a href="overview-quickstart.html">Get Started</a></li>
 			<li><a href="components-overview.html" aria-current="page">Docs</a></li>
 			<li><a href="../index.html#axicons">Axicons</a></li>
 		</ul>
@@ -32,356 +36,164 @@
 </header>
 
 <main id="main-content">
-
-	<section class="hero">
+	<section class="hero" style="background: var(--a-color-surface-variant); color: var(--a-color-on-surface);">
 		<div class="container">
-			<h1>Typography Reference</h1>
-			<p class="tagline">Every text pattern available in Axiom01 — fully automatic, zero classes needed.</p>
+			<header>
+				<h1 class="font-serif-sample" style="font-size: 4rem; letter-spacing: -0.05em; margin-bottom: 0;">Typography</h1>
+				<p class="font-mono-sample" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--a-color-primary);">System Reference</p>
+				<p style="max-width: 60ch;">Every text pattern available in Axiom01 — fully automatic, zero classes needed. Our typography scales mathematically and adapts to viewport dimensions.</p>
+			</header>
 		</div>
 	</section>
 
 	<section>
 		<div class="container">
+			<h2>Mathematical Type Scale</h2>
+			<p>Headings scale mathematically using <code>--a-heading-scale: 1.15</code> on mobile and <code>1.25</code> on desktop. All sizes are calculated — change one variable in your theme to adjust the entire scale instantly.</p>
 
-			<header>
-				<h2>Headings</h2>
-				<p>Headings scale mathematically using <code>--a-heading-scale: 1.15</code>. All sizes are calculated — change one variable to adjust the entire scale.</p>
-			</header>
-
-			<article class="card">
-				<figure>
-						<h1>Heading 1 — Page Title</h1>
-						<h2>Heading 2 — Section Title</h2>
-						<h3>Heading 3 — Sub-section</h3>
-						<h4>Heading 4 — Card Title</h4>
-						<h5>Heading 5 — Label</h5>
-						<h6>Heading 6 — Caption</h6>
-					</figure>
-				<pre><code class="language-html">&lt;h1&gt;Heading 1 — Page Title&lt;/h1&gt;
-&lt;h2&gt;Heading 2 — Section Title&lt;/h2&gt;
-&lt;h3&gt;Heading 3 — Sub-section&lt;/h3&gt;
-&lt;h4&gt;Heading 4 — Card Title&lt;/h4&gt;
-&lt;h5&gt;Heading 5 — Label&lt;/h5&gt;
-&lt;h6&gt;Heading 6 — Caption&lt;/h6&gt;</code></pre>
-			</article>
-
-			<section>
-				<h2>Paragraphs &amp; Readability</h2>
-
-				<article class="card">
-					<figure>
-						<p>This paragraph is automatically constrained to <code>65ch</code> — the optimal reading length supported by typography research. On large monitors it will not stretch edge-to-edge, preserving comfortable line length without any extra markup.</p>
-						<p>A second paragraph follows with correct vertical spacing via the sibling cascade. No margin classes needed — spacing is calculated automatically from <code>--a-space-m</code>.</p>
-						<p class="muted">This paragraph uses the <code>muted</code> class — the only exception — to apply <code>--a-color-on-surface-variant</code>.</p>
-					</figure>
-					<pre><code class="language-html">&lt;p&gt;Normal paragraph — constrained to 65ch automatically.&lt;/p&gt;
-&lt;p class="muted"&gt;Muted text for secondary information.&lt;/p&gt;</code></pre>
-				</article>
-			</section>
-
-			<section>
-				<h2>Unordered Lists</h2>
-
-				<div class="grid">
-					<article class="card">
-						<header><h3>Default</h3></header>
-						<figure>
-							<ul>
-								<li>Semantic HTML first</li>
-								<li>One class per component</li>
-								<li>Design tokens for all values</li>
-								<li>WCAG 2.1 AA built in</li>
-							</ul>
-						</figure>
-						<pre><code class="language-html">&lt;ul&gt;
-  &lt;li&gt;Semantic HTML first&lt;/li&gt;
-  &lt;li&gt;One class per component&lt;/li&gt;
-  &lt;li&gt;Design tokens for all values&lt;/li&gt;
-&lt;/ul&gt;</code></pre>
-					</article>
-
-					<article class="card">
-						<header><h3>With Icons</h3></header>
-						<figure>
-							<ul>
-								<li><span class="axicon render" data-name="Check-Circle"></span> Accessible by default</li>
-								<li><span class="axicon render" data-name="Zap"></span> 13.3 KB gzipped</li>
-								<li><span class="axicon render" data-name="Shield"></span> Zero dependencies</li>
-								<li><span class="axicon render" data-name="Code"></span> No build step</li>
-							</ul>
-						</figure>
-						<pre><code class="language-html">&lt;ul&gt;
-  &lt;li&gt;
-    &lt;span class="axicon render" data-name="Check-Circle"&gt;&lt;/span&gt;
-    Accessible by default
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;span class="axicon render" data-name="Zap"&gt;&lt;/span&gt;
-    13.3 KB gzipped
-  &lt;/li&gt;
-&lt;/ul&gt;</code></pre>
-					</article>
-
-					<article class="card">
-						<header><h3>Nested</h3></header>
-						<figure>
-							<ul>
-								<li>Components
-									<ul>
-										<li>Button, Card, Alert</li>
-										<li>Modal, Drawer, Tabs</li>
-									</ul>
-								</li>
-								<li>Tokens
-									<ul>
-										<li>Colors, Spacing</li>
-										<li>Typography, Shadows</li>
-									</ul>
-								</li>
-							</ul>
-						</figure>
-						<pre><code class="language-html">&lt;ul&gt;
-  &lt;li&gt;Components
-    &lt;ul&gt;
-      &lt;li&gt;Button, Card, Alert&lt;/li&gt;
-      &lt;li&gt;Modal, Drawer, Tabs&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</code></pre>
-					</article>
+			<div class="card ghost" style="padding: var(--a-space-xl); margin-top: var(--a-space-l); border: 1px solid var(--a-color-outline);">
+				<div style="display: flex; align-items: baseline; gap: var(--a-space-l); border-bottom: 1px solid var(--a-color-outline); padding-bottom: var(--a-space-m); margin-bottom: var(--a-space-m);">
+					<span class="font-mono-sample" style="color: var(--a-color-primary); width: 60px;">h1</span>
+					<h1 style="margin: 0; line-height: 1.1;">The quick brown fox</h1>
 				</div>
-			</section>
-
-			<section>
-				<h2>Ordered Lists</h2>
-
-				<div class="grid">
-					<article class="card">
-						<header><h3>Default</h3></header>
-						<figure>
-							<ol>
-								<li>Install via npm or CDN</li>
-								<li>Write semantic HTML</li>
-								<li>Add one root class per component</li>
-								<li>Customize with CSS tokens</li>
-								<li>Ship — no build needed</li>
-							</ol>
-						</figure>
-						<pre><code class="language-html">&lt;ol&gt;
-  &lt;li&gt;Install via npm or CDN&lt;/li&gt;
-  &lt;li&gt;Write semantic HTML&lt;/li&gt;
-  &lt;li&gt;Add one root class per component&lt;/li&gt;
-  &lt;li&gt;Ship — no build needed&lt;/li&gt;
-&lt;/ol&gt;</code></pre>
-					</article>
-
-					<article class="card">
-						<header><h3>With Icons</h3></header>
-						<figure>
-							<ol>
-								<li><span class="axicon render" data-name="Download"></span> Install Axiom01</li>
-								<li><span class="axicon render" data-name="File-Text"></span> Write your HTML</li>
-								<li><span class="axicon render" data-name="Palette"></span> Customise tokens</li>
-								<li><span class="axicon render" data-name="Globe"></span> Deploy anywhere</li>
-							</ol>
-						</figure>
-						<pre><code class="language-html">&lt;ol&gt;
-  &lt;li&gt;
-    &lt;span class="axicon render" data-name="Download"&gt;&lt;/span&gt;
-    Install Axiom01
-  &lt;/li&gt;
-&lt;/ol&gt;</code></pre>
-					</article>
+				<div style="display: flex; align-items: baseline; gap: var(--a-space-l); border-bottom: 1px solid var(--a-color-outline); padding-bottom: var(--a-space-m); margin-bottom: var(--a-space-m);">
+					<span class="font-mono-sample" style="color: var(--a-color-primary); width: 60px;">h2</span>
+					<h2 style="margin: 0; line-height: 1.2;">The quick brown fox</h2>
 				</div>
-			</section>
-
-			<section>
-				<h2>Blockquotes</h2>
-
-				<div class="grid">
-					<article class="card">
-						<header><h3>Simple</h3></header>
-						<figure>
-							<blockquote>
-								"The best design is the one you don't notice."
-							</blockquote>
-						</figure>
-						<pre><code class="language-html">&lt;blockquote&gt;
-  "The best design is the one you don't notice."
-&lt;/blockquote&gt;</code></pre>
-					</article>
-
-					<article class="card">
-						<header><h3>With Citation</h3></header>
-						<figure>
-							<blockquote>
-								"We got scared of the cascade, tried to tame it with naming conventions, then shoved styles into JavaScript."
-								<cite>— AXIOM01 Philosophy</cite>
-							</blockquote>
-						</figure>
-						<pre><code class="language-html">&lt;blockquote&gt;
-  "Quote text here."
-  &lt;cite&gt;— Author&lt;/cite&gt;
-&lt;/blockquote&gt;</code></pre>
-					</article>
+				<div style="display: flex; align-items: baseline; gap: var(--a-space-l); border-bottom: 1px solid var(--a-color-outline); padding-bottom: var(--a-space-m); margin-bottom: var(--a-space-m);">
+					<span class="font-mono-sample" style="color: var(--a-color-primary); width: 60px;">h3</span>
+					<h3 style="margin: 0; line-height: 1.25;">The quick brown fox</h3>
 				</div>
-			</section>
-
-			<section>
-				<h2>Inline Text Elements</h2>
-
-				<article class="card">
-					<figure>
-						<p><strong>Bold</strong> for importance. <em>Italic</em> for emphasis. <u>Underline</u> for annotation. <mark>Highlighted</mark> for relevance.</p>
-						<p>Inline <code>code</code> for technical terms. <kbd>Ctrl</kbd> + <kbd>C</kbd> for keyboard shortcuts. <abbr title="Cascading Style Sheets">CSS</abbr> for abbreviations.</p>
-						<p><del>Deleted text</del> and <ins>inserted text</ins> for editorial changes.</p>
-						<p><small>Small text for legal notes or captions.</small></p>
-					</figure>
-					<pre><code class="language-html">&lt;strong&gt;Bold&lt;/strong&gt;
-&lt;em&gt;Italic&lt;/em&gt;
-&lt;mark&gt;Highlighted&lt;/mark&gt;
-&lt;code&gt;inline code&lt;/code&gt;
-&lt;kbd&gt;Ctrl&lt;/kbd&gt;
-&lt;abbr title="Cascading Style Sheets"&gt;CSS&lt;/abbr&gt;
-&lt;del&gt;Deleted&lt;/del&gt; &lt;ins&gt;Inserted&lt;/ins&gt;
-&lt;small&gt;Small text&lt;/small&gt;</code></pre>
-				</article>
-			</section>
-
-			<section>
-				<h2>Code Blocks</h2>
-
-				<div class="grid">
-					<article class="card">
-						<header><h3>HTML</h3></header>
-						<pre><code class="language-html">&lt;article class="card"&gt;
-  &lt;header&gt;
-    &lt;h3&gt;Title&lt;/h3&gt;
-  &lt;/header&gt;
-  &lt;p&gt;Content here.&lt;/p&gt;
-  &lt;footer&gt;
-    &lt;button class="primary"&gt;Action&lt;/button&gt;
-  &lt;/footer&gt;
-&lt;/article&gt;</code></pre>
-					</article>
-
-					<article class="card">
-						<header><h3>CSS</h3></header>
-						<pre><code class="language-css">:root {
-  --a-color-primary: #2563eb;
-  --a-space-unit: 1rem;
-  --a-heading-scale: 1.15;
-}
-
-[data-theme="dark"] {
-  --a-color-surface: #0f172a;
-}</code></pre>
-					</article>
+				<div style="display: flex; align-items: baseline; gap: var(--a-space-l); border-bottom: 1px solid var(--a-color-outline); padding-bottom: var(--a-space-m); margin-bottom: var(--a-space-m);">
+					<span class="font-mono-sample" style="color: var(--a-color-primary); width: 60px;">h4</span>
+					<h4 style="margin: 0; line-height: 1.3;">The quick brown fox</h4>
 				</div>
-			</section>
-
-			<section>
-				<h2>Typographic Scale Tokens</h2>
-
-				<table>
-					<thead>
-						<tr><th>Token</th><th>Value</th><th>Usage</th></tr>
-					</thead>
-					<tbody>
-						<tr><td><code>--a-font-size-h1</code></td><td>~2.44rem</td><td>Page titles only</td></tr>
-						<tr><td><code>--a-font-size-h2</code></td><td>~2.12rem</td><td>Section headings</td></tr>
-						<tr><td><code>--a-font-size-h3</code></td><td>~1.84rem</td><td>Card titles, sub-sections</td></tr>
-						<tr><td><code>--a-font-size-h4</code></td><td>~1.60rem</td><td>Labels, smaller titles</td></tr>
-						<tr><td><code>--a-font-size-base</code></td><td>1rem</td><td>Body text</td></tr>
-						<tr><td><code>--a-font-size-small</code></td><td>0.875rem</td><td>Captions, metadata</td></tr>
-						<tr><td><code>--a-line-height-base</code></td><td>1.6</td><td>All body text</td></tr>
-						<tr><td><code>--a-line-height-heading</code></td><td>1.3</td><td>All headings</td></tr>
-					</tbody>
-				</table>
-			</section>
-
-			<section>
-				<h2>Customising the Scale</h2>
-				<p>The entire heading scale is derived from two variables. Change them globally:</p>
-
-				<article class="card">
-					<pre><code class="language-css">:root {
-  /* Base font size — all headings scale from this */
-  --a-font-size-base: 1rem;
-
-  /* Scale multiplier — each heading level is 1.15× the one below */
-  --a-heading-scale: 1.15;
-
-  /* Heading margins */
-  --a-heading-margin-top: var(--a-margin-medium);
-  --a-heading-margin-bottom: var(--a-margin-base);
-
-  /* Reading width for paragraphs */
-  --ax-reading-width: 65ch;
-}</code></pre>
-				</article>
-			</section>
-
+				<div style="display: flex; align-items: baseline; gap: var(--a-space-l); border-bottom: 1px solid var(--a-color-outline); padding-bottom: var(--a-space-m); margin-bottom: var(--a-space-m);">
+					<span class="font-mono-sample" style="color: var(--a-color-primary); width: 60px;">h5</span>
+					<h5 style="margin: 0; line-height: 1.4;">The quick brown fox</h5>
+				</div>
+				<div style="display: flex; align-items: baseline; gap: var(--a-space-l);">
+					<span class="font-mono-sample" style="color: var(--a-color-primary); width: 60px;">h6</span>
+					<h6 style="margin: 0; line-height: 1.5;">The quick brown fox</h6>
+				</div>
+			</div>
 		</div>
 	</section>
 
+	<section>
+		<div class="container">
+			<div class="grid">
+				<article>
+					<h2>Font Families</h2>
+					<p>Axiom01 uses CSS variables to assign three distinct font stacks.</p>
+					<div class="card" style="margin-bottom: var(--a-space-m);">
+						<div class="font-base-sample" style="font-size: 1.5rem; font-weight: bold;">Inter (Base)</div>
+						<p class="text-muted font-mono-sample" style="margin-bottom:0; font-size: 0.8rem;">Inter, system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif</p>
+					</div>
+					<div class="card" style="margin-bottom: var(--a-space-m);">
+						<div class="font-serif-sample" style="font-size: 1.5rem; font-style: italic;">Lora (Serif)</div>
+						<p class="text-muted font-mono-sample" style="margin-bottom:0; font-size: 0.8rem;">&quot;Lora&quot;, Georgia, Cambria, &quot;Times New Roman&quot;, serif</p>
+					</div>
+					<div class="card">
+						<div class="font-mono-sample" style="font-size: 1.5rem;">JetBrains Mono</div>
+						<p class="text-muted font-mono-sample" style="margin-bottom:0; font-size: 0.8rem;">&quot;JetBrains Mono&quot;, &quot;SFMono-Regular&quot;, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, monospace</p>
+					</div>
+				</article>
+				<article>
+					<h2>Paragraphs &amp; Readability</h2>
+					<p>By default, text blocks in Axiom01 are constrained to <code>65ch</code> — the optimal reading length supported by typography research. On large monitors it will not stretch edge-to-edge, preserving comfortable line length without any extra markup.</p>
+					<div class="card ghost" style="background: var(--a-color-surface-variant);">
+						<p style="margin-top:0;">This is a standard paragraph element. It demonstrates the ideal line height and character limits for maximum readability.</p>
+						<p class="text-muted" style="margin-bottom:0;">This paragraph uses the <code>text-muted</code> class — to apply <code>--a-color-on-surface-variant</code> for secondary information.</p>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<h2>Lists</h2>
+			<div class="grid">
+				<article class="card">
+					<header><h3>Unordered Lists</h3></header>
+					<ul>
+						<li>Semantic HTML first</li>
+						<li>One class per component</li>
+						<li>Design tokens for all values</li>
+						<li>WCAG AAA built in</li>
+					</ul>
+				</article>
+
+				<article class="card">
+					<header><h3>Ordered Lists</h3></header>
+					<ol>
+						<li>Define structural role</li>
+						<li>Use semantic tags</li>
+						<li>Let math calculate styling</li>
+						<li>Publish accessible web apps</li>
+					</ol>
+				</article>
+
+				<article class="card">
+					<header><h3>Description Lists</h3></header>
+					<dl>
+						<dt>Semantic Web</dt>
+						<dd>Using HTML markup to reinforce meaning, rather than defining presentation.</dd>
+						<dt>OKLCH</dt>
+						<dd>A perceptually uniform color space used natively for all Axiom01 theming.</dd>
+					</dl>
+				</article>
+			</div>
+		</div>
+	</section>
 </main>
 
-<footer class="footer">
-	<div class="container">
-		<div class="footer-content">
-			<div class="footer-brand">
-				<a href="../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
-			</div>
-			<div class="footer-column">
-				<h4>Documentation</h4>
-				<ul>
-					<li><a href="components-overview.html">All Components</a></li>
-					<li><a href="overview-quickstart.html">Get Started</a></li>
-					<li><a href="colors-advanced.html">Colors &amp; Tokens</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Resources</h4>
-				<ul>
-					<li><a href="../README.md" target="_blank">README</a></li>
-					<li><a href="../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-					<li><a href="../LICENSE" target="_blank">MIT License</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Community</h4>
-				<ul>
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="footer-bottom">
-			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
-			<ul class="footer-social">
-				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
-				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
-			</ul>
-		</div>
-	</div>
+<footer class="main">
+  <div class="content">
+    <div class="brand">
+      <a href="../index.html" class="logo">ax[10]m</a>
+      <p class="tagline">The Semantic Web, Reimagined.</p>
+    </div>
+    <div class="column">
+      <h4>Documentation</h4>
+      <ul>
+        <li><a href="../docs/components-overview.html">All Components</a></li>
+        <li><a href="../docs/overview-quickstart.html">Get Started</a></li>
+        <li><a href="../docs/colors-advanced.html">Colors &amp; Tokens</a></li>
+      </ul>
+    </div>
+    <div class="column">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../docs/styling-guide.html">Styling Guide</a></li>
+        <li><a href="../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+        <li><a href="../LICENSE" target="_blank">MIT License</a></li>
+      </ul>
+    </div>
+    <div class="column">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="content">
+    <div class="bottom">
+      <p class="copyright">&copy; <span data-current-year></span> Sol Roth Media. MIT License.</p>
+      <ul class="legal">
+        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub Repository"><span class="axicon render" data-name="GitHub"></span></a></li>
+        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM Package"><span class="axicon render" data-name="NPM"></span></a></li>
+      </ul>
+    </div>
+  </div>
 </footer>
 
 <script src="../js/axiom.js"></script>
 <script src="../js/index-page-manager.js"></script>
-<script>
-function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-<script src="../js/axicons-loader.js"></script>
 <script src="../js/axicons-base.js"></script>
-<script src="../js/axicons-thin-variants.js"></script>
-<script src="../js/axicons-color-variants.js"></script>
-<script src="../js/axicons-premium-variants.js"></script>
+<script src="../js/axicons-premium.js"></script>
 <script src="../js/render-icons.js"></script>
 </body>
 </html>

@@ -38,6 +38,7 @@ def build_unified_css():
         "_variables.css",
         "_animations.css", 
         "_utilities.css",
+        "_docs.css",
         "axiom_config.css",
     ]
     
@@ -66,6 +67,8 @@ def build_unified_css():
                 layer = 'axiom.tokens'
             elif partial_file in ['_animations.css', '_utilities.css']:
                 layer = 'axiom.utilities'
+            elif partial_file == '_docs.css':
+                layer = 'axiom.docs'
             else:
                 layer = 'axiom.components'
                 
