@@ -3,8 +3,8 @@
 // Gradient, color-rich, and enhanced-detail icons only
 
 (function () {
-if (window.__axiconsPremiumBundleLoaded) return;
-window.__axiconsPremiumBundleLoaded = true;
+if (window.__axiconsPremiumVariantsBundleLoaded) return;
+window.__axiconsPremiumVariantsBundleLoaded = true;
 
 const premiumIcons =
 
