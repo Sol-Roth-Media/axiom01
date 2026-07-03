@@ -59,9 +59,11 @@ def main() -> int:
         copy_required(ROOT / "css" / "axiom.min.css", DIST / "css" / "axiom.min.css")
         copy_required(ROOT / "js" / "axiom.min.js", DIST / "js" / "axiom.min.js")
 
-        readme_src = ROOT / "readme.md"
+        readme_src = ROOT / "README.md"
         readme_dst = DIST / "README.md"
         copy_required(readme_src, readme_dst)
+        copy_required(ROOT / "CHANGELOG.md", DIST / "CHANGELOG.md")
+        copy_required(ROOT / "release-info.json", DIST / "release-info.json")
 
         version = package_version()
         (DIST / "version.txt").write_text(f"{version}\n", encoding="utf-8")
@@ -81,6 +83,8 @@ def main() -> int:
         print(f"- {DIST / 'docs'}")
         print(f"- {DIST / 'README.md'}")
         print(f"- {DIST / 'version.txt'}")
+        print(f"- {DIST / 'CHANGELOG.md'}")
+        print(f"- {DIST / 'release-info.json'}")
         return 0
     except BuildError as error:
         print(f"Build error: {error}", file=sys.stderr)

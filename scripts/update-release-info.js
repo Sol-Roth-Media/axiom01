@@ -11,7 +11,8 @@ const https = require('https');
 const path = require('path');
 
 const PACKAGE_NAME = 'axiom01';
-const VERSION = '2.0.0'; // Update this when releasing new version
+const PACKAGE_JSON_PATH = path.join(__dirname, '../package.json');
+const VERSION = JSON.parse(fs.readFileSync(PACKAGE_JSON_PATH, 'utf8')).version;
 const NPM_API_URL = `https://registry.npmjs.org/${PACKAGE_NAME}`;
 
 function fetchNpmData() {

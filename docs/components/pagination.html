@@ -5,19 +5,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Pagination - Axiom01</title>
 	<script>(function(){const t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();</script>
-	<link rel="stylesheet" href="../../css/axiom.min.css">
+	<link rel="stylesheet" href="../../css/axiom.css">
 	<link rel="stylesheet" href="../../css/axicons.css">
-	<link rel="stylesheet" href="../../css/docs.css">
+	<!-- doc-styles.css merged into axiom.css -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 </head>
-<body class="axiom-body component-doc">
+<body class="axiom-body">
 
 <header class="main" data-component="mobile-navbar">
 	<nav role="navigation" aria-label="Main Navigation">
-		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">[Ax<span class="primary">01</span>]</a>
+		<a href="../../index.html" class="brand" aria-label="Axiom01 Home">ax[10]m</a>
 		<ul class="links">
 			<li><a href="../../index.html#get-started">Get Started</a></li>
 			<li><a href="../components-overview.html" aria-current="page">Docs</a></li>
@@ -43,56 +42,64 @@
 
 			<section>
 				<h2>Live Examples</h2>
-				<h3>Basic Pagination</h3>
-				<nav aria-label="Page navigation example">
-				<ul>
-				<li><a href="#">Previous</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#" data-current="true">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">Next</a></li>
-				</ul>
-				</nav>
+				<article class="card preview">
+					<figure style="flex-direction: column; align-items: stretch; gap: var(--a-space-l);">
+						<div>
+							<h3>Basic Pagination</h3>
+							<nav aria-label="Page navigation example" class="pager">
+								<ul>
+									<li><a href="#" aria-label="Previous">Previous</a></li>
+									<li><a href="#">1</a></li>
+									<li><a href="#" aria-current="page">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#" aria-label="Next">Next</a></li>
+								</ul>
+							</nav>
+						</div>
 
-				<h3>With Icons</h3>
-				<nav aria-label="Page navigation with icons">
-				<ul>
-				<li><a href="#"><span class="axicon render" data-name="ChevronLeft"></span> Previous</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#" data-current="true">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">Next <span class="axicon render" data-name="ChevronRight"></span></a></li>
-				</ul>
-				</nav>
+						<div>
+							<h3>With Icons</h3>
+							<nav aria-label="Page navigation with icons" class="pager">
+								<ul>
+									<li><a href="#" aria-label="Previous"><span class="axicon render" data-name="Arrow-Left"></span> Previous</a></li>
+									<li><a href="#">1</a></li>
+									<li><a href="#" aria-current="page">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#" aria-label="Next">Next <span class="axicon render" data-name="Arrow-Right"></span></a></li>
+								</ul>
+							</nav>
+						</div>
 
-				<h3>Simple Pagination</h3>
-				<nav aria-label="Simple pagination">
-				<ul>
-				<li><a href="#">Back</a></li>
-				<li><a href="#" data-current="true">Page 5 of 12</a></li>
-				<li><a href="#">Next</a></li>
-				</ul>
-				</nav>
+						<div>
+							<h3>Simple Pagination</h3>
+							<nav aria-label="Simple pagination" class="pager">
+								<ul>
+									<li><a href="#" aria-label="Back"><span class="axicon render" data-name="ChevronLeft"></span> Back</a></li>
+									<li><span style="display: flex; align-items: center; padding: 0 var(--a-space-m);">Page 5 of 12</span></li>
+									<li><a href="#" aria-label="Next">Next <span class="axicon render" data-name="ChevronRight"></span></a></li>
+								</ul>
+							</nav>
+						</div>
+					</figure>
+				</article>
 			</section>
 
 			<section>
 				<h2>HTML Structure</h2>
 				<article class="card">
 					<figure>
-
-						<p>Pagination uses semantic `<nav>` with an unordered list and data-current attribute:</p>
-
+						<p>Pagination uses semantic <code>&lt;nav class="pager"&gt;</code> with an unordered list and <code>aria-current="page"</code> attribute for the active state:</p>
 					</figure>
-					<pre><code class="language-html">&lt;nav aria-label="Page navigation"&gt;
-				&lt;ul&gt;
-				&lt;li&gt;&lt;a href="#"&gt;Previous&lt;/a&gt;&lt;/li&gt;
-				&lt;li&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
-				&lt;li&gt;&lt;a href="#" data-current="true"&gt;2&lt;/a&gt;&lt;/li&gt;
-				&lt;li&gt;&lt;a href="#"&gt;3&lt;/a&gt;&lt;/li&gt;
-				&lt;li&gt;&lt;a href="#"&gt;Next&lt;/a&gt;&lt;/li&gt;
-				&lt;/ul&gt;
-				&lt;/nav&gt;</code></pre>
+					<pre><code class="language-html">&lt;nav aria-label="Page navigation" class="pager"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#" aria-label="Previous"&gt;Previous&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" aria-current="page"&gt;2&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;3&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" aria-label="Next"&gt;Next&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
 				</article>
 			</section>
 
@@ -181,52 +188,49 @@
 
 </main>
 
-<footer class="footer">
-	<div class="container">
-		<div class="footer-content">
-			<div class="footer-brand">
-				<a href="../../index.html" class="footer-brand-logo">[Ax<span class="primary">01</span>]</a>
-				<p class="footer-tagline">The Semantic Web, Reimagined.</p>
-			</div>
-			<div class="footer-column">
-				<h4>Documentation</h4>
-				<ul>
-					<li><a href="../components-overview.html">All Components</a></li>
-					<li><a href="../overview-quickstart.html">Get Started</a></li>
-					<li><a href="../colors-advanced.html">Colors &amp; Tokens</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Resources</h4>
-				<ul>
-					<li><a href="../../README.md" target="_blank">README</a></li>
-					<li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
-					<li><a href="../../LICENSE" target="_blank">MIT License</a></li>
-				</ul>
-			</div>
-			<div class="footer-column">
-				<h4>Community</h4>
-				<ul>
-					<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
-					<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="footer-bottom">
-			<p class="footer-copyright">&copy; 2024 Sol Roth Media. MIT License.</p>
-			<ul class="footer-social">
-				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub"><span class="axicon render" data-name="GitHub"></span></a></li>
-				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM"><span class="axicon render" data-name="Brand-NPM"></span></a></li>
-			</ul>
-		</div>
-	</div>
+<footer class="main">
+  <div class="content">
+    <div class="brand">
+      <a href="../../index.html" class="logo">ax[10]m</a>
+      <p class="tagline">The Semantic Web, Reimagined.</p>
+    </div>
+    <div class="column">
+      <h4>Documentation</h4>
+      <ul>
+        <li><a href="../../docs/components-overview.html">All Components</a></li>
+        <li><a href="../../docs/overview-quickstart.html">Get Started</a></li>
+        <li><a href="../../docs/colors-advanced.html">Colors &amp; Tokens</a></li>
+      </ul>
+    </div>
+    <div class="column">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="../../docs/styling-guide.html">Styling Guide</a></li>
+        <li><a href="../../DEVELOPER.md" target="_blank">Developer Guide</a></li>
+        <li><a href="../../LICENSE" target="_blank">MIT License</a></li>
+      </ul>
+    </div>
+    <div class="column">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="content">
+    <div class="bottom">
+      <p class="copyright">&copy; <span data-current-year></span> Sol Roth Media. MIT License.</p>
+      <ul class="legal">
+        <li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub Repository"><span class="axicon render" data-name="GitHub"></span></a></li>
+        <li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM Package"><span class="axicon render" data-name="NPM"></span></a></li>
+      </ul>
+    </div>
+  </div>
 </footer>
 
 <script src="../../js/axiom.js"></script>
 <script src="../../js/index-page-manager.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 <script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
 <script src="../../js/axicons-thin-variants.js"></script>

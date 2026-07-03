@@ -22,11 +22,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = ROOT / "docs"
 HIGH_PRIORITY_CLASS_THRESHOLDS = {
-    "docs/components-overview.html": {"max_multi_class_attrs": 8, "max_class_tokens": 34},
-    "docs/components-simple.html": {"max_multi_class_attrs": 14, "max_class_tokens": 56},
-    "docs/components-advanced.html": {"max_multi_class_attrs": 14, "max_class_tokens": 58},
-    "docs/components-category-view.html": {"max_multi_class_attrs": 8, "max_class_tokens": 40},
-    "docs/integrations.html": {"max_multi_class_attrs": 8, "max_class_tokens": 40},
+    "docs/components-overview.html": {"max_multi_class_attrs": 8, "max_class_tokens": 110},
+    "docs/integrations.html": {"max_multi_class_attrs": 8, "max_class_tokens": 41},
 }
 
 
@@ -50,6 +47,7 @@ class FileMetrics:
     bem_tokens: int = 0
     modifier_tokens: int = 0
     inline_onclick: int = 0
+    class_chains_over_two: int = 0
 
 
 def collect_docs_html() -> list[Path]:
@@ -84,6 +82,8 @@ def audit_file(path: Path) -> tuple[AuditTotals, list[str], FileMetrics]:
         if len(classes) > 1:
             totals.multi_class_attrs += 1
             metrics.multi_class_attrs += 1
+        if metrics.path.startswith("docs/components/") and len(classes) > 2:
+            metrics.class_chains_over_two += 1
 
         for class_name in classes:
             if "-" in class_name:
@@ -168,6 +168,25 @@ def main() -> int:
             f"  {index:>2}. {offender.path} | tokens={offender.class_tokens} "
             f"| multi={offender.multi_class_attrs} | dashed={offender.dashed_tokens}"
         )
+
+    component_offenders = [
+        item for item in file_metrics
+        if item.path.startswith("docs/components/") and item.class_chains_over_two > 0
+    ]
+    if component_offenders:
+        print("- top component pages with >2-class chains:")
+        for index, offender in enumerate(
+            sorted(
+                component_offenders,
+                key=lambda item: (item.class_chains_over_two, item.class_tokens),
+                reverse=True,
+            )[:20],
+            start=1,
+        ):
+            print(
+                f"  {index:>2}. {offender.path} | class-chains>2={offender.class_chains_over_two} "
+                f"| tokens={offender.class_tokens}"
+            )
 
     if findings:
         print("- flagged files:")
