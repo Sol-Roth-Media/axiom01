@@ -24,9 +24,17 @@
 			<li><a href="../../index.html#axicons">Axicons</a></li>
 		</ul>
 		<div class="actions">
-				<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+			<button class="search toggle" aria-label="Open Search">
+				<span class="axicon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><circle cx="52" cy="52" r="40" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M80 80l32 32" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+			<!-- Moon shown in light mode, Sun shown in dark mode — CSS-driven, no JS needed -->
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+				<span class="axicon moon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><path d="M96 76a40 40 0 1 1-64-32 40 40 0 0 0 64 32z" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+				<span class="axicon sun" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><circle cx="64" cy="64" r="32" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M64 8v16M64 104v16M24 64H8M120 64h-16M32 32l-16-16M112 112l-16-16M32 96l-16 16M112 32l-16-16" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+			<button class="menu toggle" aria-label="Toggle Menu">
+				<span class="axicon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><path d="M16 32h96M16 64h96M16 96h96" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
 		</div>
 	</nav>
 </header>
@@ -44,13 +52,13 @@
 <h2>Drag and Drop Upload</h2>
 <article class="card">
 <div class="field" data-type="file">
-				<button type="button" class="upload-zone" id="zone1" aria-label="Drag files here or click to browse">
+				<button type="button" class="dropzone" id="zone1" aria-label="Drag files here or click to browse">
 				<span class="axicon render" data-name="Upload"></span>
 				<p><strong>Click to browse</strong> or drag files here</p>
 				<p>Supported: JPG, PNG, PDF (Max 10MB)</p>
 				</button>
 				<input type="file" id="input1" multiple accept=".jpg,.jpeg,.png,.pdf">
-				<ul class="file-list" id="list1" role="region" aria-label="Uploaded files"></ul>
+				<ul class="files" id="list1" role="region" aria-label="Uploaded files"></ul>
 				</div>
 </article></section>
 
@@ -59,14 +67,14 @@
 <article class="card">
 <div class="field" data-type="file">
 				<label for="input2">Select Document</label>
-				<div class="inline-group">
+				<div class="inline">
 				<input type="file" id="input2" accept=".doc,.docx,.pdf">
 				<button type="button" class="button primary" id="browse2" aria-label="Browse for files">
 				<span class="axicon render" data-name="File"></span>
 				Choose File
 				</button>
 				</div>
-				<ul class="file-list" id="list2" role="region" aria-label="Uploaded files"></ul>
+				<ul class="files" id="list2" role="region" aria-label="Uploaded files"></ul>
 				</div>
 </article></section>
 
@@ -75,7 +83,7 @@
 <article class="card">
 <pre data-component="code-block" class="code-block"><code>&lt;div class="field" data-type="file"&gt;
 				&lt;!-- Drag and drop zone --&gt;
-				&lt;button type="button" class="upload-zone"
+				&lt;button type="button" class="dropzone"
 				aria-label="Upload area"&gt;
 				&lt;span class="axicon render" data-name="Upload"&gt;&lt;/span&gt;
 				&lt;p&gt;&lt;strong&gt;Click to browse&lt;/strong&gt; or drag files&lt;/p&gt;
@@ -83,16 +91,16 @@
 
 				&lt;input type="file" id="file" multiple&gt;
 
-				&lt;ul class="file-list" role="region"&gt;
-				&lt;li class="file-item"&gt;
-				&lt;div class="file-info"&gt;
-				&lt;div class="file-type"&gt;PDF&lt;/div&gt;
-				&lt;div class="file-meta"&gt;
-				&lt;p class="file-name"&gt;Document&lt;/p&gt;
-				&lt;p class="file-size"&gt;2.5 MB&lt;/p&gt;
+				&lt;ul class="files" role="region"&gt;
+				&lt;li class=""&gt;
+				&lt;div class="info"&gt;
+				&lt;div class="type"&gt;PDF&lt;/div&gt;
+				&lt;div class="meta"&gt;
+				&lt;p class="name"&gt;Document&lt;/p&gt;
+				&lt;p class="size"&gt;2.5 MB&lt;/p&gt;
 				&lt;/div&gt;
 				&lt;/div&gt;
-				&lt;button class="file-remove" aria-label="Remove file"&gt;×&lt;/button&gt;
+				&lt;button class="remove" aria-label="Remove file"&gt;×&lt;/button&gt;
 				&lt;/li&gt;
 				&lt;/ul&gt;
 				&lt;/div&gt;</code></pre>
@@ -193,6 +201,34 @@
 </article></section>
 		</div>
 	</section>
+
+
+			<section>
+				<h2>Features</h2>
+				<article class="card">
+					<ul>
+						<li><strong>Semantic Structure</strong> - Built with native HTML5 elements for maximum reliability.</li>
+						<li><strong>Theme Aware</strong> - Automatically adapts to all 22 Axiom01 themes via OKLCH tokens.</li>
+						<li><strong>Fully Responsive</strong> - Scales perfectly from mobile to desktop screens.</li>
+						<li><strong>No JS Dependency</strong> - Core functionality relies on pure CSS for maximum performance.</li>
+						<li><strong>Customizable</strong> - Easily extendable via Axiom01's design tokens and modifiers.</li>
+					</ul>
+				</article>
+			</section>
+
+			<section>
+				<h2>Accessibility</h2>
+				<article class="card">
+					<p>Axiom01 ensures that the File Upload component meets strict WCAG standards out of the box:</p>
+					<ul>
+						<li><strong>Keyboard Navigation</strong> - Fully navigable using standard Tab and Arrow key workflows.</li>
+						<li><strong>Screen Reader Support</strong> - Requires minimal manual ARIA labeling due to semantic HTML roots.</li>
+						<li><strong>Focus Management</strong> - Visible, high-contrast focus indicators without layout shifting.</li>
+						<li><strong>Color Contrast</strong> - OKLCH math guarantees perfect WCAG AAA contrast ratios in both light and dark modes.</li>
+						<li><strong>Reduced Motion</strong> - Respects system-level <code>prefers-reduced-motion</code> settings for any internal animations.</li>
+					</ul>
+				</article>
+			</section>
 
 </main>
 

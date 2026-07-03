@@ -23,9 +23,17 @@
 			<li><a href="../../index.html#axicons">Axicons</a></li>
 		</ul>
 		<div class="actions">
-			<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+			<button class="search toggle" aria-label="Open Search">
+				<span class="axicon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><circle cx="52" cy="52" r="40" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M80 80l32 32" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+			<!-- Moon shown in light mode, Sun shown in dark mode — CSS-driven, no JS needed -->
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+				<span class="axicon moon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><path d="M96 76a40 40 0 1 1-64-32 40 40 0 0 0 64 32z" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+				<span class="axicon sun" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><circle cx="64" cy="64" r="32" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M64 8v16M64 104v16M24 64H8M120 64h-16M32 32l-16-16M112 112l-16-16M32 96l-16 16M112 32l-16-16" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+			<button class="menu toggle" aria-label="Toggle Menu">
+				<span class="axicon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><path d="M16 32h96M16 64h96M16 96h96" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
 		</div>
 	</nav>
 </header>
@@ -43,23 +51,23 @@
 					<figure>
 						<div class="grid">
 							<article class="stat">
-								<span class="stat-value">73</span>
-								<span >Components</span>
+								<span class="value">73</span>
+								<span class="label">Components</span>
 							</article>
 							<article class="stat">
-								<span class="stat-value">149</span>
-								<span >Tokens</span>
+								<span class="value">149</span>
+								<span class="label">Tokens</span>
 							</article>
 							<article class="stat">
-								<span class="stat-value">13.3</span>
-								<span >KB gzipped</span>
+								<span class="value">13.3</span>
+								<span class="label">KB gzipped</span>
 							</article>
 						</div>
 					</figure>
 					<pre data-component="code-block" class="code-block"><code>&lt;article class="stat"&gt;
-  &lt;span class="stat-value"&gt;73&lt;/span&gt;
-  &lt;span class="stat-label"&gt;Components&lt;/span&gt;
-&lt;/article&gt;</code></pre></pre>
+  &lt;span class="value"&gt;73&lt;/span&gt;
+  &lt;span class="label"&gt;Components&lt;/span&gt;
+&lt;/article&gt;</code></pre>
 				</article>
 			</section>
 			<section>
@@ -69,38 +77,66 @@
 						<div class="grid">
 							<article class="stat">
 								<span class="axicon render" data-name="Users"></span>
-								<span class="stat-value">24,891</span>
-								<span >Active Users</span>
-								<p >↑ 12% from last month
+								<span class="value">24,891</span>
+								<span class="label">Active Users</span>
+								<p>↑ 12% from last month</p>
 							</article>
 							<article class="stat">
 								<span class="axicon render" data-name="TrendingUp"></span>
-								<span class="stat-value">$48.2k</span>
-								<span >Revenue</span>
-								<p >This month</p>
+								<span class="value">$48.2k</span>
+								<span class="label">Revenue</span>
+								<p>This month</p>
 							</article>
 						</div>
 					</figure>
 					<pre data-component="code-block" class="code-block"><code>&lt;article class="stat"&gt;
   &lt;span class="axicon render" data-name="Users"&gt;&lt;/span&gt;
-  &lt;span class="stat-value"&gt;24,891&lt;/span&gt;
-  &lt;span class="stat-label"&gt;Active Users&lt;/span&gt;
-  &lt;p class="stat-meta"&gt;↑ 12% from last month&lt;/p&gt;
+  &lt;span class="value"&gt;24,891&lt;/span&gt;
+  &lt;span class="label"&gt;Active Users&lt;/span&gt;
+  &lt;p&gt;↑ 12% from last month&lt;/p&gt;
 &lt;/article&gt;</code></pre>
 				</article>
 			</section>
 			<section>
 				<h2>Semantic Structure</h2>
-				<table><thead><tr><th>Element</th><th>Role</th><th>Use</th></tr></thead><tbody><tr><td><code>article.stat</code></td><td>Root</td><td>Container — use article for self-contained data</td></tr><tr><td><code>span.stat-value</code></td><td>Number</td><td>The main metric — large, prominent</td></tr><tr><td><code>span.stat-label</code></td><td>Label</td><td>What the number represents</td></tr><tr><td><code>p.stat-meta</code></td><td>Context</td><td>Trend, timeframe, comparison</td></tr><tr><td><code>span.axicon</code></td><td>Icon (optional)</td><td>Place before value for visual category</td></tr></tbody></table>
+				<table><thead><tr><th>Element</th><th>Role</th><th>Use</th></tr></thead><tbody><tr><td><code>article.stat</code></td><td>Root</td><td>Container — use article for self-contained data</td></tr><tr><td><code>span.value</code></td><td>Number</td><td>The main metric — large, prominent</td></tr><tr><td><code>span.label</code></td><td>Label</td><td>What the number represents</td></tr><tr><td><code>p</code></td><td>Context</td><td>Trend, timeframe, comparison</td></tr><tr><td><code>span.axicon</code></td><td>Icon (optional)</td><td>Place before value for visual category</td></tr></tbody></table>
 			</section>
 			<section>
 				<h2>Accessibility</h2>
 				<ul>
-<li>Wrap in a <code>&lt;section aria-label="Key Metrics"&gt;</code></li><li>Each <code>article.stat</code> is self-contained — screen readers treat it independently</li><li>Include trend info in the visible <code>stat-meta</code> — don't use color alone</li><li>Consider <code>aria-label</code> on the value if the label follows: <code>&lt;span class="stat-value" aria-label="24891 active users"&gt;</code></li>
+<li>Wrap in a <code>&lt;section aria-label="Key Metrics"&gt;</code></li><li>Each <code>article.stat</code> is self-contained — screen readers treat it independently</li><li>Include trend info in the visible <code>stat-meta</code> — don't use color alone</li><li>Consider <code>aria-label</code> on the value if the label follows: <code>&lt;span class="value" aria-label="24891 active users"&gt;</code></li>
 				</ul>
 			</section>
 		</div>
 	</section>
+
+			<section>
+				<h2>Features</h2>
+				<article class="card">
+					<ul>
+						<li><strong>Semantic Structure</strong> - Built with native HTML5 elements for maximum reliability.</li>
+						<li><strong>Theme Aware</strong> - Automatically adapts to all 22 Axiom01 themes via OKLCH tokens.</li>
+						<li><strong>Fully Responsive</strong> - Scales perfectly from mobile to desktop screens.</li>
+						<li><strong>No JS Dependency</strong> - Core functionality relies on pure CSS for maximum performance.</li>
+						<li><strong>Customizable</strong> - Easily extendable via Axiom01's design tokens and modifiers.</li>
+					</ul>
+				</article>
+			</section>
+
+			<section>
+				<h2>Use Cases</h2>
+				<article class="card">
+					<p>The Stats component is designed for versatile implementation across modern web applications. Ideal scenarios include:</p>
+					<ul>
+						<li><strong>Dashboards & Admin Panels</strong> - Structured data presentation and interface control.</li>
+						<li><strong>Content Management Systems</strong> - Organizing complex information hierarchies and media.</li>
+						<li><strong>E-Commerce Platforms</strong> - Enhancing product discovery and user workflows.</li>
+						<li><strong>Marketing Sites</strong> - Highlighting key product offerings cleanly and effectively.</li>
+						<li><strong>SaaS Applications</strong> - Delivering native-feeling, responsive app experiences.</li>
+					</ul>
+				</article>
+			</section>
+
 </main>
 
 <footer class="main">

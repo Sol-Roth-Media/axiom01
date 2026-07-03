@@ -14,7 +14,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body class="axiom-body">
-<a class="skip-link" href="#main-content">Skip to main content</a>
+<a class="skip" href="#main-content">Skip to main content</a>
 <header class="main" data-component="mobile-navbar">
 	<nav role="navigation" aria-label="Main Navigation">
 		<a href="../index.html" class="brand" aria-label="Axiom01 Home">ax[10]m</a>
@@ -24,9 +24,17 @@
 			<li><a href="../index.html#axicons">Axicons</a></li>
 		</ul>
 		<div class="actions">
-				<button class="search toggle" aria-label="Open Search"><span class="axicon render" data-name="Search"></span></button>
-			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode"><span class="axicon render" data-name="Moon"></span></button>
-			<button class="menu toggle" aria-label="Toggle Menu"><span class="axicon render" data-name="Menu"></span></button>
+			<button class="search toggle" aria-label="Open Search">
+				<span class="axicon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><circle cx="52" cy="52" r="40" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M80 80l32 32" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+			<!-- Moon shown in light mode, Sun shown in dark mode — CSS-driven, no JS needed -->
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+				<span class="axicon moon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><path d="M96 76a40 40 0 1 1-64-32 40 40 0 0 0 64 32z" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+				<span class="axicon sun" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><circle cx="64" cy="64" r="32" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M64 8v16M64 104v16M24 64H8M120 64h-16M32 32l-16-16M112 112l-16-16M32 96l-16 16M112 32l-16-16" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+			<button class="menu toggle" aria-label="Toggle Menu">
+				<span class="axicon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><path d="M16 32h96M16 64h96M16 96h96" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
 		</div>
 	</nav>
 </header>
@@ -83,8 +91,11 @@ button {
   color: var(--a-color-primary);
 }
 
-/* Explicit size */
-.icon-lg .axicon { font-size: 2rem; }</code></pre>
+/* Explicit size using utilities */
+.axicon.axicon-xl { /* scales width/height via CSS */ }
+
+/* Or scale via parent font-size */
+.large-text .axicon { font-size: 2rem; }</code></pre>
 				</article>
 			</div>
 
@@ -160,7 +171,7 @@ button {
 								<section class="filter" data-component="card-filter" aria-label="Icon filters">
 																			<div class="toolbar">
 																				<label for="icon-search">
-																	<span class="sr-only">Search icons</span>
+																	<span class="sr">Search icons</span>
 																	<input type="search" id="icon-search" data-filter-search placeholder="Search icons… e.g. check, arrow, user" aria-label="Search icons">
 																</label>
 																				<p id="icon-count" data-filter-summary aria-live="polite"></p>
@@ -304,19 +315,18 @@ button {
 		const categoryLabel = formatCategoryLabel(category);
 
 		const card = document.createElement('article');
-		card.className = 'card card-filter-item';
+		card.className = 'card ghost';
 		card.dataset.filterItem = 'true';
 		card.dataset.filterCategory = category;
 		card.dataset.filterSearch = [icon.name, categoryLabel, category].filter(Boolean).join(' ');
 
 		const button = document.createElement('button');
 		button.type = 'button';
-		button.className = 'card-filter-copy';
 		button.setAttribute('aria-label', `Copy SVG: ${icon.name}`);
 		button.title = `Copy SVG — ${icon.name}`;
 
 		const iconSpan = document.createElement('span');
-		iconSpan.className = isPremiumIconName(icon.name) ? 'axicon premium' : 'axicon';
+		iconSpan.className = isPremiumIconName(icon.name) ? 'axicon premium axicon-4xl' : 'axicon axicon-4xl';
 		iconSpan.setAttribute('aria-hidden', 'true');
 		iconSpan.innerHTML = `<svg viewBox="${vb}">${clean}</svg>`;
 
