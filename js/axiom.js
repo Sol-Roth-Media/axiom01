@@ -8,6 +8,19 @@
 (function () {
   'use strict';
 
+  const axiomScriptUrl = (function () {
+    if (document.currentScript && document.currentScript.src) {
+      return new URL(document.currentScript.src, window.location.href);
+    }
+
+    const script = document.querySelector('script[src$="/js/axiom.js"], script[src$="js/axiom.js"]');
+    if (script && script.src) {
+      return new URL(script.src, window.location.href);
+    }
+
+    return null;
+  }());
+
   // ==========================================
   // GLOBAL AXIOM API NAMESPACE
   // ==========================================
@@ -22,6 +35,8 @@
     'audio-player': 'audio-player',
     autocomplete: 'autocomplete',
     'component-browser': 'component-browser',
+    'card-filter': 'card-filter',
+    'code-block': 'code-block',
     'data-list': 'data-list',
     dropdown: 'dropdown',
     editor: 'editor',
@@ -192,9 +207,7 @@
 
   resolveComponentPath: function (componentName) {
     const moduleName = this.componentPathOverrides[componentName] || componentName;
-    const scriptUrl = document.currentScript && document.currentScript.src
-    ? new URL(document.currentScript.src, window.location.href)
-    : new URL('js/axiom.js', window.location.href);
+    const scriptUrl = axiomScriptUrl || new URL('/js/axiom.js', window.location.href);
     return new URL(`./components/${moduleName}.js`, scriptUrl).href;
   },
 
@@ -204,7 +217,11 @@
     }
 
     if (this.componentInstances.has(element)) {
-    return this.componentInstances.get(element);
+    const existingInstance = this.componentInstances.get(element);
+    if (existingInstance && typeof existingInstance.refresh === 'function') {
+      existingInstance.refresh();
+    }
+    return existingInstance;
     }
 
     const instance = definition.init(element) || null;
@@ -374,28 +391,57 @@
     });
 
     // ==========================================
-    // 3. TAB SWITCHING (.tabs)
+        // ==========================================
+    // 3. TAB SWITCHING (.tabs or [role="tablist"])
     // ==========================================
     document.addEventListener('click', function (e) {
-      const tabLink = e.target.closest('.tabs nav a, .tabs nav button');
+      const tabLink = e.target.closest('.tabs nav a, .tabs nav button, [role="tab"]');
       if (tabLink) {
         e.preventDefault();
-        const parent = tabLink.closest('.tabs');
-        if (!parent) return;
+        
+        // Find parent tab container (could be .tabs, or a [role="tablist"] or its parent)
+        let parent = tabLink.closest('.tabs');
+        if (!parent) {
+            const tablist = tabLink.closest('[role="tablist"]');
+            if (tablist) parent = tablist.parentElement;
+        }
+        if (!parent) parent = document.body; // Fallback if no container found
 
-        parent.querySelectorAll('nav a, nav button').forEach(a => a.removeAttribute('data-active'));
-        parent.querySelectorAll('main > section').forEach(s => s.removeAttribute('data-active'));
+        const isSemantic = tabLink.hasAttribute('role');
+        const targetId = tabLink.getAttribute('href')?.replace('#', '') || 
+                         tabLink.getAttribute('data-target') || 
+                         tabLink.getAttribute('aria-controls');
 
-        tabLink.setAttribute('data-active', 'true');
-        const targetId = tabLink.getAttribute('href')?.replace('#', '') || tabLink.getAttribute('data-target');
-        const targetSection = parent.querySelector(`#${targetId}`);
-        if (targetSection) {
-          targetSection.setAttribute('data-active', 'true');
+        if (!targetId) return;
+
+        if (isSemantic) {
+            // Semantic ARIA Tab Logic
+            const tablist = tabLink.closest('[role="tablist"]');
+            if (tablist) {
+                tablist.querySelectorAll('[role="tab"]').forEach(t => t.setAttribute('aria-selected', 'false'));
+                tabLink.setAttribute('aria-selected', 'true');
+            }
+            
+            // Find panels (assuming they share a parent or are within the component)
+            parent.querySelectorAll('[role="tabpanel"]').forEach(p => p.setAttribute('hidden', ''));
+            const targetPanel = document.getElementById(targetId);
+            if (targetPanel) {
+                targetPanel.removeAttribute('hidden');
+            }
+        } else {
+            // Legacy data-active logic
+            parent.querySelectorAll('nav a, nav button').forEach(a => a.removeAttribute('data-active'));
+            parent.querySelectorAll('main > section').forEach(s => s.removeAttribute('data-active'));
+
+            tabLink.setAttribute('data-active', 'true');
+            const targetSection = parent.querySelector(`#${targetId}`);
+            if (targetSection) {
+              targetSection.setAttribute('data-active', 'true');
+            }
         }
       }
     });
 
-    // ==========================================
     // 4. INPUT FOCUS STATE (data-focused)
     // ==========================================
     document.addEventListener('focusin', function (e) {
@@ -498,36 +544,117 @@
     });
 
     // ==========================================
-    // 10. NAVBAR MENU TOGGLE
+    // 10. NAVBAR MENU TOGGLE + MOBILE A11Y STATE
     // ==========================================
+    const isMobileMenuViewport = function () {
+      return window.matchMedia('(max-width: 992px)').matches;
+    };
+
+    let menuIdSeed = 0;
+
+    const syncMenuState = function (header, expanded, menuButton) {
+      if (!header || !menuButton) return;
+
+      const links = header.querySelector('ul.links');
+      if (links && !links.id) {
+        menuIdSeed += 1;
+        links.id = `axiom-main-nav-links-${menuIdSeed}`;
+      }
+      if (links?.id) {
+        menuButton.setAttribute('aria-controls', links.id);
+      }
+
+      header.classList.toggle('menu-open', expanded);
+      menuButton.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+
+      const body = document.body;
+      const shouldLockScroll = expanded && isMobileMenuViewport();
+      const hasOpenMobileMenu = isMobileMenuViewport() && document.querySelector('header.main.menu-open');
+
+      if (shouldLockScroll) {
+        if (!body.hasAttribute('data-axiom-scroll-lock')) {
+          body.setAttribute('data-axiom-scroll-lock', 'true');
+          body.setAttribute('data-axiom-scroll-overflow', body.style.overflow || '');
+        }
+        body.style.overflow = 'hidden';
+      } else if (!hasOpenMobileMenu && body.hasAttribute('data-axiom-scroll-lock')) {
+        body.style.overflow = body.getAttribute('data-axiom-scroll-overflow') || '';
+        body.removeAttribute('data-axiom-scroll-overflow');
+        body.removeAttribute('data-axiom-scroll-lock');
+      }
+    };
+
+    const closeMenu = function (header) {
+      if (!header) return;
+      const menuButton = header.querySelector('button.menu');
+      if (!menuButton) return;
+      syncMenuState(header, false, menuButton);
+    };
+
     document.addEventListener('click', function (e) {
       const menuButton = e.target.closest('button.menu');
       if (menuButton) {
         e.preventDefault();
         const header = menuButton.closest('header.main');
-        if (header) {
-          header.classList.toggle('menu-open');
-          menuButton.setAttribute('aria-expanded', header.classList.contains('menu-open') ? 'true' : 'false');
+        if (!header) return;
+        const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+        syncMenuState(header, !expanded, menuButton);
+        if (!expanded) {
+          header.querySelector('ul.links a')?.focus();
         }
+        return;
       }
-    });
 
-    // ==========================================
-    // 11. CLOSE MOBILE MENU ON LINK CLICK
-    // ==========================================
-    document.addEventListener('click', function (e) {
       const navLink = e.target.closest('nav .links a');
       if (navLink) {
         const header = navLink.closest('header.main');
-        if (header && header.classList.contains('menu-open')) {
-          header.classList.remove('menu-open');
-          const menuButton = header.querySelector('button.menu');
-          if (menuButton) {
-            menuButton.setAttribute('aria-expanded', 'false');
-          }
+        closeMenu(header);
+        return;
+      }
+
+      document.querySelectorAll('header.main.menu-open').forEach(function (header) {
+        if (!header.contains(e.target)) {
+          closeMenu(header);
         }
+      });
+    });
+
+    window.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('header.main.menu-open').forEach(function (header) {
+        const menuButton = header.querySelector('button.menu');
+        closeMenu(header);
+        menuButton?.focus();
+      });
+    });
+
+    window.addEventListener('resize', function () {
+      if (isMobileMenuViewport()) return;
+      document.querySelectorAll('header.main.menu-open').forEach(function (header) {
+        closeMenu(header);
+      });
+      document.body.style.overflow = '';
+      document.body.removeAttribute('data-axiom-scroll-overflow');
+      document.body.removeAttribute('data-axiom-scroll-lock');
+    });
+
+    document.querySelectorAll('header.main button.menu').forEach(function (menuButton) {
+      const header = menuButton.closest('header.main');
+      if (header) {
+        syncMenuState(header, false, menuButton);
       }
     });
+
+    document.querySelectorAll('pre').forEach(function (pre) {
+      if (pre.getAttribute('data-component')) return;
+      const code = pre.querySelector('code');
+      if (!code) return;
+      pre.setAttribute('data-component', 'code-block');
+    });
+
+      window.Axiom.init().catch(function (error) {
+        console.error('Axiom: Failed to initialize runtime components.', error);
+      });
 
   });
 

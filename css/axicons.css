@@ -184,9 +184,24 @@
 /**
  * Dark mode support
  * 
- * Icons automatically adapt to dark mode via currentColor
- * Inverted variants also respect dark mode by adjusting --ax-bg-inverse
+ * Icons automatically adapt to dark mode via currentColor.
+ * The CSS rules below override hardcoded stroke="#000" SVG presentation
+ * attributes that ship in the icon data, ensuring all icons respect
+ * the current text color in both light and dark themes.
  */
+
+/* Override hardcoded SVG stroke attributes so base icons follow currentColor.
+   Premium icons keep their authored color treatment. */
+.axicon:not(.premium) svg path,
+.axicon:not(.premium) svg circle,
+.axicon:not(.premium) svg line,
+.axicon:not(.premium) svg rect,
+.axicon:not(.premium) svg polyline,
+.axicon:not(.premium) svg polygon,
+.axicon:not(.premium) svg ellipse,
+.axicon:not(.premium) svg g {
+    stroke: currentColor;
+}
 
 @media (prefers-color-scheme: dark) {
     /* Icons automatically use light text color in dark mode via currentColor */
