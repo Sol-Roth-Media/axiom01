@@ -54,66 +54,62 @@
 				<h3>Lazy Loading</h3>
 				For images below the fold, implement lazy loading to improve initial page load performance. This can be achieved natively with the <code>loading="lazy"</code> attribute or via JavaScript libraries for older browser support.
 					<pre data-component="code-block" class="code-block"><code>&lt;img src="path/to/image.jpg" alt="Description" class="responsive-image" loading="lazy"&gt;</code></pre>
-				<article class="card">
-					<figure>
 
-						</div>
+				<section>
+					<h2>Icons &amp; SVGs</h2>
 
-						<div class="section">
-						<h2>Icons & SVGs</h2>
+					<article class="card">
+						<figure>
+							<div class="live grid">
+								<div class="card ghost">
+									<span class="axicon render" data-name="home"></span>
+									<span>Home</span>
+								</div>
+								<div class="card ghost">
+									<span class="axicon render" data-name="cog"></span>
+									<span>Settings</span>
+								</div>
+								<div class="card ghost">
+									<span class="axicon render" data-name="heart"></span>
+									<span>Favorite</span>
+								</div>
+							</div>
+						</figure>
+						<pre data-component="code-block" class="code-block"><code>&lt;span class="axicon render" data-name="home" aria-hidden="true"&gt;&lt;/span&gt;
+				&lt;button aria-label="Delete item"&gt;&lt;span class="axicon render" data-name="trash" aria-hidden="true"&gt;&lt;/span&gt;&lt;/button&gt;</code></pre>
+					</article>
 
-						<div class="live grid">
-						<div class="card ghost">
-						<span class="axicon render" data-name="home"></span>
-						<span>Home</span>
-						</div>
-						<div class="card ghost">
-						<span class="axicon render" data-name="cog"></span>
-						<span>Settings</span>
-						</div>
-						<div class="card ghost">
-						<span class="axicon render" data-name="heart"></span>
-						<span>Favorite</span>
-						</div>
-						</div>
-
-					</figure>
-					<pre data-component="code-block" class="code-block"><code>&lt;i class="fas fa-home" aria-hidden="true"&gt;&lt;/i&gt;
-				&lt;button aria-label="Delete item"&gt;&lt;i class="fas fa-trash" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;</code></pre>
-				</article>
-				<article class="card">
-					<figure>
-
-						<div class="live grid">
-						<div class="card ghost">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-						<path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 3.99zM11 10h2v7h-2v-7zm0 8h2v2h-2v-2z"/>
-						</svg>
-						<span>Warning</span>
-						</div>
-						<div class="card ghost">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-						<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-						</svg>
-						<span>Check</span>
-						</div>
-						</div>
-
-					</figure>
-					<pre data-component="code-block" class="code-block"><code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"&gt;
+					<article class="card">
+						<figure>
+							<div class="live grid">
+								<div class="card ghost">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+										<path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 3.99zM11 10h2v7h-2v-7zm0 8h2v2h-2v-2z"/>
+									</svg>
+									<span>Warning</span>
+								</div>
+								<div class="card ghost">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+										<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+									</svg>
+									<span>Check</span>
+								</div>
+							</div>
+						</figure>
+						<pre data-component="code-block" class="code-block"><code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"&gt;
 				&lt;path d="..."/&gt;
 				&lt;/svg&gt;</code></pre>
-				</article>
-				</div>
+					</article>
+				</section>
 
-				<div class="section">
+				<section>
 				<h2>Accessibility Considerations</h2>
 				<ul>
 				<li>For decorative images, ensure <code>alt=""</code> or <code>aria-hidden="true"</code>.</li>
 				<li>For meaningful images, provide descriptive <code>alt</code> text.</li>
 				<li>For icons, use <code>aria-hidden="true"</code> if purely decorative. If interactive or conveying meaning, provide a text alternative (e.g., visually hidden text, <code>aria-label</code> on parent element).</li>
 				</ul>
-				</div>
+				</section>
 			</section>
 		</div>
 	</section>
@@ -167,11 +163,7 @@
 function renderAxicons(){if(typeof axicons==='undefined'){setTimeout(renderAxicons,100);return;}document.querySelectorAll('.axicon.render').forEach(el=>{const n=el.getAttribute('data-name');if(!n)return;const i=axicons.find(x=>x.name===n);if(i)el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${i.svgContent}</svg>`;});}
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderAxicons);}else{renderAxicons();}setTimeout(renderAxicons,500);
 </script>
-<script src="../../js/axicons-loader.js"></script>
 <script src="../../js/axicons-base.js"></script>
-<script src="../../js/axicons-thin-variants.js"></script>
-<script src="../../js/axicons-inverted-variants.js"></script>
-<script src="../../js/axicons-color-variants.js"></script>
 <script src="../../js/axicons-premium-variants.js"></script>
 <script src="../../js/render-icons.js"></script>
 </body>
