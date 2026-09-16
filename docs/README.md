@@ -62,7 +62,7 @@ The current public docs set covers **79 production-ready components**.
 
 ## Canonical external links
 
-- Live site: <https://axiom01.com>
+- Live site: <https://sol-roth-media.github.io/axiom01/>
 - npm package: <https://www.npmjs.com/package/axiom01>
 - GitHub repository: <https://github.com/Sol-Roth-Media/axiom01>
 - Root README: [../README.md](../README.md)

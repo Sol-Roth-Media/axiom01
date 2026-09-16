@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Axiom01 override for comments.
+ *
+ * Each comment is a semantic <article> styled as an Axiom01 card.
+ */
+#}
+<article{{ attributes.addClass('card', 'comment') }}>
+  <header>
+    {% if author_picture %}
+      {{ author_picture }}
+    {% endif %}
+    <p class="meta">
+      {{ author_name }}
+      <time datetime="{{ new_indicator_timestamp }}">{{ created }}</time>
+    </p>
+    {{ title_prefix }}
+    {% if subject %}
+      <h4{{ title_attributes }}>{{ subject }}</h4>
+    {% endif %}
+    {{ title_suffix }}
+  </header>
+  <div{{ content_attributes }}>
+    {{ content|without('links') }}
+  </div>
+  {% if content.links %}
+    <footer>
+      {{ content.links }}
+    </footer>
+  {% endif %}
+</article>

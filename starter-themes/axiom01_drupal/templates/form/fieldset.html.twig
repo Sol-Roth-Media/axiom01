@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Axiom01 override for fieldsets.
+ *
+ * Uses semantic <fieldset>/<legend> structure.
+ */
+#}
+<fieldset{{ attributes }}>
+  {% if legend.title %}
+    <legend>
+      {{ legend.title }}
+      {% if required %}
+        <abbr title="{{ 'This field is required.'|t }}">*</abbr>
+      {% endif %}
+    </legend>
+  {% endif %}
+  {% if description.content %}
+    <small>{{ description.content }}</small>
+  {% endif %}
+  {% if errors %}
+    <div class="alert error">
+      <p>{{ errors }}</p>
+    </div>
+  {% endif %}
+  {{ children }}
+</fieldset>

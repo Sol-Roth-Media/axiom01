@@ -312,7 +312,7 @@ A: Coming soon. Core JavaScript is vanilla JS with JSDoc comments.
 
 ### Resources
 
-- [AXIOM01 Docs](https://axiom01.com)
+- [AXIOM01 Docs](https://sol-roth-media.github.io/axiom01/)
 - [GitHub Discussions](https://github.com/Sol-Roth-Media/axiom01/discussions)
 - [Issue Tracker](https://github.com/Sol-Roth-Media/axiom01/issues)
 
