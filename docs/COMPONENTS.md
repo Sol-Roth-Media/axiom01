@@ -506,6 +506,87 @@ All components automatically adapt to dark mode via CSS variables:
 }
 ```
 
+## Stage & Live Performance Components
+
+Engineered for live stage teleprompting, lighting controllers, DJ telemetry, and tactile hardware interfaces while strictly preserving Axiom01's Class Density Metric ($D_c \le 1$) and zero BEM syntax.
+
+### 1. Stage Dock (`<aside class="dock">`)
+Persistent floating telemetry and remote action surface.
+- **Children**: `<header>`, `<nav>`, `<footer>`, `<button>`
+- **Modifiers**: `.dock.compact` (collapsed ribbon), `.dock.bottom` (pinned to bottom)
+- **Example**:
+```html
+<aside class="dock">
+  <header>
+    <h3>Deck 1 Active</h3>
+    <span>128.0 BPM</span>
+  </header>
+  <nav>
+    <button class="primary sm">Chorus Pyro</button>
+    <button class="secondary sm">Drop Strobe</button>
+  </nav>
+  <footer>
+    <small>Sync: Locked</small>
+  </footer>
+</aside>
+```
+
+### 2. Stage Prompter (`<section class="prompter">`)
+Responsive live teleprompter and lyrics stage with mobile portrait auto-reflow.
+- **Children**: `<aside>`, `<main>`, `<article class="card section">`, `<p class="active">`, `<p class="past">`
+- **Example**:
+```html
+<section class="prompter">
+  <aside>
+    <h3>Track Title</h3>
+    <p>Bar 33 &bull; Camelot 8A</p>
+  </aside>
+  <main>
+    <article class="card section">
+      <header><strong>Chorus</strong><span>1:02</span></header>
+      <p class="active">&raquo; Live lyric line</p>
+      <p>Next lyric line</p>
+    </article>
+  </main>
+</section>
+```
+
+### 3. Kinetic Pad Matrix (`<div class="padgrid">`)
+Performance stems, hot cue triggers, and VJ lighting pads.
+- **Modifiers**: `.padgrid.octa` (4x2 layout), `.padgrid.matrix` (4x4 layout)
+- **Stem Attributes**: `data-stem="vocal"`, `data-stem="drums"`, `data-stem="bass"`, `data-stem="inst"`
+- **Example**:
+```html
+<div class="padgrid octa">
+  <button data-stem="vocal" class="active"><span>1</span><small>VOCAL</small></button>
+  <button data-stem="drums" class="active"><span>2</span><small>DRUMS</small></button>
+</div>
+```
+
+### 4. Harmonic Camelot Wheel (`<div class="wheel">`)
+Harmonic key mixing visualizer with SVG circular segments and central key readout.
+- **Children**: `<svg>`, `<div><span>8A</span><small>A MINOR</small></div>`
+- **Example**:
+```html
+<div class="wheel">
+  <svg viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="var(--a-color-outline)" stroke-width="16" />
+    <circle cx="100" cy="100" r="80" fill="none" stroke="var(--a-color-primary)" stroke-width="18" stroke-dasharray="42 460" />
+  </svg>
+  <div>
+    <span>8A</span>
+    <small>A Minor</small>
+  </div>
+</div>
+```
+
+### 5. Performance Card Modifiers
+- `card deck`: DJ deck telemetry, BPM, pitch, active deck glow.
+- `card scene`: VJ lighting scenes and video clip triggers.
+- `card notes`: Performance cue notes with indicator accents.
+- `card harmonic`: Camelot transition and energy boost suggestions.
+- `card section`: Structured lyric/script verses and choruses.
+
 ## Browser Support
 
 All components are fully supported in:

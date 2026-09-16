@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Axiom01 override for the pager (pagination).
+ *
+ * Maps to Axiom01's <nav class="pagination"> component.
+ */
+#}
+{% if items %}
+  <nav class="pagination" aria-label="{{ 'Pagination'|t }}">
+    <ul>
+      {# Previous page link #}
+      {% if items.previous %}
+        <li>
+          <a href="{{ items.previous.href }}" rel="prev" aria-label="{{ 'Previous page'|t }}">
+            <span class="axicon render" data-name="Chevron-Left"></span>
+            {{ 'Previous'|t }}
+          </a>
+        </li>
+      {% endif %}
+
+      {# Page number links #}
+      {% for key, item in items.pages %}
+        <li>
+          {% if current == key %}
+            <a href="{{ item.href }}" aria-current="page" class="active">{{ key }}</a>
+          {% else %}
+            <a href="{{ item.href }}">{{ key }}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+
+      {# Next page link #}
+      {% if items.next %}
+        <li>
+          <a href="{{ items.next.href }}" rel="next" aria-label="{{ 'Next page'|t }}">
+            {{ 'Next'|t }}
+            <span class="axicon render" data-name="Chevron-Right"></span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

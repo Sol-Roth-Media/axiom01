@@ -405,7 +405,7 @@ axiom01/
 
 ## Support & Community
 
-- 📖 [Full Documentation](https://axiom01.com)
+- 📖 [Full Documentation](https://sol-roth-media.github.io/axiom01/)
 - 🐛 [Issue Tracker](https://github.com/Sol-Roth-Media/axiom01/issues)
 - 💬 [Discussions](https://github.com/Sol-Roth-Media/axiom01/discussions)
 - 📦 [NPM Package](https://www.npmjs.com/package/axiom01)

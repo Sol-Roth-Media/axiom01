@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Axiom01 override for Paragraphs.
+ *
+ * Maps Paragraphs entities to clean semantic containers.
+ * Each paragraph type can be further overridden via
+ * paragraph--TYPE.html.twig (e.g. paragraph--text.html.twig).
+ */
+#}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--' ~ paragraph.bundle(),
+    view_mode ? 'paragraph--view-mode--' ~ view_mode,
+  ]
+%}
+{% block paragraph %}
+  <section{{ attributes.addClass(classes) }}>
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </section>
+{% endblock paragraph %}

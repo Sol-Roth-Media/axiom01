@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Theme override for the Account menu block.
+ */
+#}
+{% set attributes = attributes.addClass('account-menu').setAttribute('data-component', 'account-menu') %}
+<div{{ attributes }}>
+  {{ title_prefix }}
+  {# Intentionally omit the block label to prevent 'User account menu' heading #}
+  {{ title_suffix }}
+  
+  {% if logged_in %}
+    <button class="account-button dropdown-toggle" aria-expanded="false" aria-haspopup="menu">
+      <span class="axicon render" data-name="User-Luxe"></span>
+    </button>
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  {% else %}
+    <a href="{{ path('user.login') }}" class="button primary small" style="margin-left: var(--a-space-m);">Login</a>
+  {% endif %}
+</div>

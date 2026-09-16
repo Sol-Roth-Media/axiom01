@@ -103,7 +103,7 @@ If you want the optional framework runtime helpers, add:
         <p class="tagline">A semantic-first framework with polished defaults.</p>
         <div class="actions">
           <a href="#components" class="button primary">Explore Components</a>
-          <a href="https://axiom01.com/docs/overview-quickstart.html" class="button secondary">Read Docs</a>
+          <a href="https://sol-roth-media.github.io/axiom01/docs/overview-quickstart.html" class="button secondary">Read Docs</a>
         </div>
       </div>
     </section>
@@ -228,10 +228,10 @@ Measured from the shipped minified assets in this repository:
 
 ## Documentation
 
-- Live site: <https://axiom01.com>
-- Quickstart: <https://axiom01.com/docs/overview-quickstart.html>
-- Component overview: <https://axiom01.com/docs/components-overview.html>
-- Icon browser: <https://axiom01.com/docs/axicons.html>
+- Live site: <https://sol-roth-media.github.io/axiom01/>
+- Quickstart: <https://sol-roth-media.github.io/axiom01/docs/overview-quickstart.html>
+- Component overview: <https://sol-roth-media.github.io/axiom01/docs/components-overview.html>
+- Icon browser: <https://sol-roth-media.github.io/axiom01/docs/axicons.html>
 - Repository: <https://github.com/Sol-Roth-Media/axiom01>
 
 ## License

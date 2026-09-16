@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Axiom01 override for status messages.
+ *
+ * Maps Drupal message types to Axiom01 alert components:
+ *   status  → alert success
+ *   warning → alert warning
+ *   error   → alert error
+ */
+#}
+{% set status_icon = {
+  'status': 'Checkmark_circle-Luxe',
+  'warning': 'Warning-Luxe',
+  'error': 'Error-Luxe',
+} %}
+{% set status_class = {
+  'status': 'success',
+  'warning': 'warning',
+  'error': 'error',
+} %}
+
+{% for type, messages in message_list %}
+  <div class="alert {{ status_class[type] ?? '' }}" role="{{ type == 'error' ? 'alert' : 'status' }}" aria-label="{{ status_headings[type] }}">
+    <span class="axicon render" data-name="{{ status_icon[type] ?? 'Info-Luxe' }}"></span>
+    {% if messages|length > 1 %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>{{ messages|first }}</p>
+    {% endif %}
+  </div>
+{% endfor %}

@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Axiom01 override for Views mini pager.
+ *
+ * Maps to Axiom01's compact pagination variant.
+ */
+#}
+{% if items %}
+  <nav class="pagination" aria-label="{{ 'Pagination'|t }}">
+    <ul>
+      {% if items.previous %}
+        <li>
+          <a href="{{ items.previous.href }}" rel="prev" aria-label="{{ 'Previous page'|t }}">
+            <span class="axicon render" data-name="Chevron-Left"></span>
+            {{ 'Previous'|t }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if current %}
+        <li><span class="active">{{ 'Page @current'|t({'@current': current}) }}</span></li>
+      {% endif %}
+
+      {% if items.next %}
+        <li>
+          <a href="{{ items.next.href }}" rel="next" aria-label="{{ 'Next page'|t }}">
+            {{ 'Next'|t }}
+            <span class="axicon render" data-name="Chevron-Right"></span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

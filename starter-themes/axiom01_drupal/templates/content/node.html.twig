@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Axiom01 override for node display.
+ *
+ * Maps Drupal nodes to semantic <article> elements with
+ * proper header/footer structure.
+ */
+#}
+{% set classes = [
+  'node',
+  node.isPromoted() ? 'promoted',
+  node.isSticky() ? 'sticky',
+  not node.isPublished() ? 'unpublished',
+  view_mode ? view_mode,
+] %}
+<article{{ attributes.addClass(classes) }}>
+  {% if label and not page %}
+    <header>
+      {{ title_prefix }}
+      <h2>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+      {{ title_suffix }}
+      {% if display_submitted %}
+        <p class="meta">
+          <span class="axicon render" data-name="User-Luxe"></span>
+          {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        </p>
+      {% endif %}
+    </header>
+  {% elseif display_submitted %}
+    <header>
+      <p class="meta">
+        <span class="axicon render" data-name="User-Luxe"></span>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+      </p>
+    </header>
+  {% endif %}
+
+  <div{{ content_attributes }}>
+    {{ content }}
+  </div>
+</article>
