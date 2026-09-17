@@ -40,8 +40,23 @@
             const name = el.getAttribute('data-name');
             if (!name) return;
 
+            // Check window.AxiconsLuxe if Luxe icon is requested
+            if (window.AxiconsLuxe && /(?:-Luxe|Luxe$)/i.test(name)) {
+                const luxeKey = name.replace(/-(?:Luxe)$/i, '').toLowerCase();
+                const luxeSvg = window.AxiconsLuxe[luxeKey] || window.AxiconsLuxe[name.toLowerCase()];
+                if (luxeSvg) {
+                    el.classList.add('luxe');
+                    el.innerHTML = luxeSvg;
+                    return;
+                }
+            }
+
             // Prefer the most recently loaded icon set when names overlap.
-            const icon = [...icons].reverse().find(i => i.name.toLowerCase() === name.toLowerCase());
+            const baseName = name.replace(/-(?:Luxe|Premium)$/i, '');
+            const icon = [...icons].reverse().find(i => 
+                i.name.toLowerCase() === name.toLowerCase() ||
+                i.name.toLowerCase() === baseName.toLowerCase()
+            );
 
             if (!icon || !icon.svgContent) return;
 
