@@ -1,0 +1,617 @@
+/* ==========================================================================
+   @axiom01/audio — Pro Audio & Live Performance Extension Pack
+   Author: Sol Roth Media
+   License: MIT
+   Ethos: Minimal Class Density (Dc <= 1), Pure Semantic HTML, Zero BEM
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. AUDIO TOKENS & SURFACE EXTENSIONS
+   -------------------------------------------------------------------------- */
+:root {
+  --a-audio-led-off: rgba(255, 255, 255, 0.08);
+  --a-audio-led-green: #22c55e;
+  --a-audio-led-yellow: #eab308;
+  --a-audio-led-red: #ef4444;
+  --a-audio-stem-drums: #00f0ff;
+  --a-audio-stem-bass: #a855f7;
+  --a-audio-stem-synth: #ffd700;
+  --a-audio-stem-vocal: #ff1a40;
+  --a-audio-glass-bg: rgba(10, 14, 26, 0.85);
+}
+
+/* --------------------------------------------------------------------------
+   2. PADS & TACTILE MATRICES (<nav class="padgrid"> / <div class="padgrid">)
+   -------------------------------------------------------------------------- */
+.padgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+  gap: var(--a-space-s, 0.75rem);
+  width: 100%;
+}
+
+.padgrid > button {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--a-space-xs, 0.35rem);
+  padding: var(--a-space-xs, 0.5rem);
+  background: var(--a-color-surface-variant, #151d30);
+  border: 1px solid var(--a-color-outline, rgba(255, 255, 255, 0.12));
+  border-radius: var(--a-border-radius-base, 0.5rem);
+  color: var(--a-color-on-surface, #e2e8f0);
+  font-family: var(--a-font-family-mono, monospace);
+  font-size: var(--a-font-size-xs, 0.8rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 70ms ease, border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
+  user-select: none;
+}
+
+.padgrid > button:active {
+  transform: scale(0.95);
+}
+
+.padgrid > button > small {
+  font-size: 0.65rem;
+  opacity: 0.65;
+  text-transform: none;
+}
+
+.padgrid > button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--a-color-outline, rgba(255, 255, 255, 0.15));
+  transition: background 150ms ease;
+}
+
+/* Stem Variants via Semantic Data Attributes */
+.padgrid > button[data-stem="drums"]::before { background: var(--a-audio-stem-drums); }
+.padgrid > button[data-stem="bass"]::before  { background: var(--a-audio-stem-bass); }
+.padgrid > button[data-stem="synth"]::before { background: var(--a-audio-stem-synth); }
+.padgrid > button[data-stem="vocal"]::before { background: var(--a-audio-stem-vocal); }
+
+.padgrid > button[data-state="active"] {
+  background: rgba(0, 240, 255, 0.14);
+  border-color: var(--a-color-primary, #00f0ff);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35), inset 0 0 12px rgba(0, 240, 255, 0.15);
+}
+
+.padgrid > button[data-stem="drums"][data-state="active"] {
+  border-color: var(--a-audio-stem-drums);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+}
+.padgrid > button[data-stem="bass"][data-state="active"] {
+  border-color: var(--a-audio-stem-bass);
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.35);
+}
+.padgrid > button[data-stem="synth"][data-state="active"] {
+  border-color: var(--a-audio-stem-synth);
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.35);
+}
+.padgrid > button[data-stem="vocal"][data-state="active"] {
+  border-color: var(--a-audio-stem-vocal);
+  box-shadow: 0 0 16px rgba(255, 26, 64, 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   3. HARMONIC CAMELOT WHEEL (<div class="wheel">)
+   -------------------------------------------------------------------------- */
+.wheel {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--a-color-surface-variant, #0c1222) 40%, rgba(5, 8, 16, 0.95) 75%);
+  border: 1px solid var(--a-color-outline, rgba(255, 255, 255, 0.15));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wheel > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.wheel > main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  text-align: center;
+}
+
+.wheel > main > strong {
+  font-family: var(--a-font-family-mono, monospace);
+  font-size: var(--a-font-size-2xl, 1.75rem);
+  font-weight: 900;
+  color: var(--a-color-primary, #00f0ff);
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+}
+
+.wheel > main > small {
+  font-size: var(--a-font-size-xs, 0.75rem);
+  color: var(--a-color-text-muted, #94a3b8);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wheel > button {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--a-font-family-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--a-color-surface, #0f172a);
+  border: 1px solid var(--a-color-outline, rgba(255, 255, 255, 0.15));
+  color: var(--a-color-on-surface, #cbd5e1);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.wheel > button:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+  border-color: var(--a-color-primary, #00f0ff);
+  z-index: 10;
+}
+
+.wheel > button[data-state="active"] {
+  background: var(--a-color-primary, #00f0ff);
+  color: #030712;
+  border-color: #ffffff;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.6);
+  z-index: 12;
+}
+
+.wheel > button[data-state="compatible"] {
+  border-color: var(--a-audio-stem-synth, #ffd700);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   4. DECK TELEMETRY CARD (<article class="card deck">)
+   -------------------------------------------------------------------------- */
+.card.deck {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-xs, 0.5rem);
+  padding: var(--a-space-m, 1rem);
+  background: var(--a-audio-glass-bg, rgba(10, 14, 26, 0.85));
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--a-color-outline, rgba(255, 255, 255, 0.12));
+  border-radius: var(--a-border-radius-base, 0.5rem);
+  position: relative;
+}
+
+.card.deck[data-state="master"] {
+  border-left: 4px solid var(--a-color-primary, #00f0ff);
+}
+
+.card.deck > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--a-color-outline, rgba(255, 255, 255, 0.08));
+  padding-bottom: var(--a-space-xs, 0.35rem);
+}
+
+.card.deck > header > h3 {
+  margin: 0;
+  font-size: var(--a-font-size-base, 1rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--a-color-on-surface, #e2e8f0);
+}
+
+.card.deck > header > span {
+  font-family: var(--a-font-family-mono, monospace);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--a-audio-stem-synth, #ffd700);
+}
+
+.card.deck > main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.card.deck > main > h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card.deck > main > p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--a-color-text-muted, #94a3b8);
+}
+
+.card.deck > main > progress {
+  width: 100%;
+  height: 6px;
+  border: none;
+  border-radius: 3px;
+  background: var(--a-audio-led-off);
+  accent-color: var(--a-color-primary, #00f0ff);
+  margin-top: 0.35rem;
+}
+
+.card.deck > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--a-space-xs, 0.5rem);
+  padding-top: var(--a-space-xs, 0.35rem);
+}
+
+.card.deck > footer > small {
+  font-family: var(--a-font-family-mono, monospace);
+  font-size: 0.85rem;
+  color: var(--a-color-text-muted, #94a3b8);
+}
+
+/* --------------------------------------------------------------------------
+   5. STAGE TELEPROMPTER (<section class="prompter">)
+   -------------------------------------------------------------------------- */
+.prompter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  overflow-y: hidden;
+  padding: var(--a-space-xl, 2rem) var(--a-space-m, 1rem);
+  text-align: center;
+  user-select: none;
+  background: radial-gradient(circle at center, rgba(16, 24, 40, 0.6) 0%, transparent 80%);
+}
+
+.prompter > main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--a-space-m, 1.25rem);
+  width: 100%;
+}
+
+.prompter p {
+  margin: 0;
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.85rem);
+  font-weight: 600;
+  color: var(--a-color-on-surface, #e2e8f0);
+  opacity: 0.32;
+  transition: opacity 220ms ease, transform 220ms ease, color 220ms ease;
+  line-height: 1.35;
+}
+
+.prompter p.active {
+  opacity: 1.0;
+  font-size: clamp(1.75rem, 1.4rem + 1.8vw, 3.0rem);
+  font-weight: 900;
+  color: var(--a-color-primary, #00f0ff);
+  text-shadow: 0 0 24px rgba(0, 240, 255, 0.45);
+  transform: scale(1.04);
+}
+
+.prompter p.upcoming {
+  opacity: 0.55;
+}
+
+/* --------------------------------------------------------------------------
+   6. 4-STEM LIVE MIXER & CHANNEL STRIP (<section class="stem-mixer"> / <article class="card mixer">)
+   -------------------------------------------------------------------------- */
+.stem-mixer {
+  display: flex;
+  gap: var(--a-space-s, 0.75rem);
+  width: 100%;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.card.mixer {
+  flex: 1;
+  max-width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--a-space-xs, 0.5rem);
+  padding: var(--a-space-s, 0.75rem) var(--a-space-xs, 0.5rem);
+  background: var(--a-audio-glass-bg, rgba(10, 14, 26, 0.85));
+  border: 1px solid var(--a-color-outline, rgba(255, 255, 255, 0.12));
+  border-radius: var(--a-border-radius-base, 0.5rem);
+}
+
+.card.mixer > header {
+  width: 100%;
+  text-align: center;
+}
+
+.card.mixer > header > strong {
+  display: block;
+  font-family: var(--a-font-family-mono, monospace);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card.mixer input[type="range"] {
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+  width: 28px;
+  height: 160px;
+  cursor: pointer;
+  margin: var(--a-space-xs, 0.5rem) 0;
+}
+
+.card.mixer .vumeter {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2px;
+  width: 12px;
+  height: 160px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.card.mixer .vumeter > span {
+  flex: 1;
+  background: var(--a-audio-led-off);
+  border-radius: 1px;
+  transition: background 40ms ease;
+}
+
+.card.mixer .vumeter > span.green.lit  { background: var(--a-audio-led-green); box-shadow: 0 0 6px rgba(34, 197, 94, 0.5); }
+.card.mixer .vumeter > span.yellow.lit { background: var(--a-audio-led-yellow); box-shadow: 0 0 6px rgba(234, 179, 8, 0.5); }
+.card.mixer .vumeter > span.red.lit    { background: var(--a-audio-led-red); box-shadow: 0 0 8px rgba(239, 68, 68, 0.7); }
+
+.card.mixer > footer {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+}
+
+.card.mixer > footer > button {
+  flex: 1;
+  padding: 4px 2px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-family: var(--a-font-family-mono, monospace);
+  border-radius: 3px;
+}
+
+.card.mixer > footer > button[data-state="solo"] {
+  background: var(--a-audio-stem-synth, #ffd700);
+  color: #050810;
+  border-color: #ffffff;
+}
+
+.card.mixer > footer > button[data-state="mute"] {
+  background: var(--a-audio-stem-vocal, #ff1a40);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   7. STAGE BILLBOARD (<aside class="billboard">)
+   -------------------------------------------------------------------------- */
+.billboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-s, 0.75rem);
+  padding: var(--a-space-m, 1.25rem);
+  background: var(--a-audio-glass-bg, rgba(10, 14, 26, 0.85));
+  border: 1px solid var(--a-color-outline, rgba(255, 255, 255, 0.15));
+  border-radius: var(--a-border-radius-base, 0.5rem);
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.billboard > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.billboard > header > span.badge {
+  font-family: var(--a-font-family-mono, monospace);
+  font-weight: 800;
+}
+
+.billboard > main > h2 {
+  margin: 0 0 0.25rem 0;
+  font-size: var(--a-font-size-xl, 1.5rem);
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.billboard > main > p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--a-color-text-muted, #94a3b8);
+  line-height: 1.4;
+}
+
+.billboard > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--a-color-outline, rgba(255, 255, 255, 0.08));
+  padding-top: var(--a-space-xs, 0.5rem);
+  font-family: var(--a-font-family-mono, monospace);
+  font-size: 0.75rem;
+  color: var(--a-color-primary, #00f0ff);
+}
+
+/* --------------------------------------------------------------------------
+   8. SPECTRUM MONITOR (<aside class="spectrum-monitor">)
+   -------------------------------------------------------------------------- */
+.spectrum-monitor {
+  position: fixed;
+  bottom: var(--a-space-m, 1rem);
+  left: var(--a-space-m, 1rem);
+  padding: 8px 12px;
+  background: var(--a-audio-glass-bg, rgba(10, 14, 26, 0.85));
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--a-color-outline, rgba(255, 255, 255, 0.12));
+  border-radius: var(--a-border-radius-base, 0.5rem);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.spectrum-monitor > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--a-font-family-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--a-color-primary, #00f0ff);
+  letter-spacing: 0.05em;
+}
+
+.spectrum-monitor > canvas {
+  display: block;
+  width: 140px;
+  height: 40px;
+}
+
+/* --------------------------------------------------------------------------
+   9. VJ SCENE CARD (<article class="card scene">)
+   -------------------------------------------------------------------------- */
+.card.scene {
+  display: flex;
+  flex-direction: column;
+  gap: var(--a-space-xs, 0.35rem);
+  padding: var(--a-space-xs, 0.5rem);
+  background: var(--a-color-surface-variant, #151d30);
+  border: 1px solid var(--a-color-outline, rgba(255, 255, 255, 0.10));
+  border-radius: var(--a-border-radius-base, 0.5rem);
+  cursor: pointer;
+  transition: all 150ms ease;
+  user-select: none;
+}
+
+.card.scene:hover {
+  border-color: var(--a-color-primary, #00f0ff);
+  transform: translateY(-2px);
+}
+
+.card.scene[data-state="active"] {
+  border-color: var(--a-color-primary, #00f0ff);
+  background: rgba(0, 240, 255, 0.12);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
+}
+
+.card.scene > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--a-font-family-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.card.scene > header > kbd {
+  padding: 1px 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.65rem;
+}
+
+.card.scene > figure {
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #000000;
+}
+
+.card.scene > figure > img,
+.card.scene > figure > canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card.scene > footer {
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --------------------------------------------------------------------------
+   10. STAGE OVERRIDE & BLACKOUT CARD (<article class="override-card">)
+   -------------------------------------------------------------------------- */
+.override-card {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(12px);
+  z-index: 9999;
+  text-align: center;
+  padding: var(--a-space-xl, 2rem);
+  color: #ffffff;
+}
+
+.override-card > h2 {
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+  font-weight: 900;
+  color: var(--a-audio-stem-vocal, #ff1a40);
+  text-shadow: 0 0 30px rgba(255, 26, 64, 0.6);
+  margin: 0 0 var(--a-space-s, 0.75rem) 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.override-card > p {
+  font-size: var(--a-font-size-l, 1.25rem);
+  color: var(--a-color-text-muted, #94a3b8);
+  max-width: 50ch;
+  margin: 0 0 var(--a-space-m, 1rem) 0;
+}
+
+.override-card > footer {
+  display: flex;
+  gap: var(--a-space-m, 1rem);
+}
