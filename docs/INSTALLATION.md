@@ -24,6 +24,31 @@ npm install
 npm run build
 ```
 
+### Pro Audio Extension Pack (`@axiom01/audio`)
+
+Axiom01 ships with specialized domain extensions (such as `@axiom01/audio` for live performance, tactile pad grids, Camelot harmonic wheels, stem mixers, and stage prompters) included directly inside the official `axiom01` package:
+
+```bash
+npm install axiom01
+```
+
+```html
+<!-- Core Design System -->
+<link rel="stylesheet" href="node_modules/axiom01/css/axiom.min.css">
+
+<!-- Pro Audio Extension Pack -->
+<link rel="stylesheet" href="node_modules/axiom01/css/axiom-audio.min.css">
+<script src="node_modules/axiom01/js/axiom-audio.js"></script>
+```
+
+Or via CDN:
+```html
+<link rel="stylesheet" href="https://sol-roth-media.github.io/axiom01/css/axiom-audio.min.css">
+<script src="https://sol-roth-media.github.io/axiom01/js/axiom-audio.js"></script>
+```
+
+Read the complete [Extensions Architecture Guide](extensions.html) and [Audio Components Suite](audio-components.html).
+
 ---
 
 ## Basic Setup

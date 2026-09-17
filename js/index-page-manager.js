@@ -118,18 +118,26 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: "Tooltip", cat: "components", url: "docs/components/tooltip.html" },
     { title: "Touch Components", cat: "components", url: "docs/components/touch-components.html" },
     { title: "Video Player", cat: "components", url: "docs/components/video-player.html" },
+    { title: "Dock", cat: "components", url: "docs/components/dock.html" },
+    { title: "Pad Grid", cat: "components", url: "docs/components/padgrid.html" },
+    { title: "Camelot Wheel", cat: "components", url: "docs/components/wheel.html" },
+    { title: "Stage Prompter", cat: "components", url: "docs/components/prompter.html" },
     { title: "Axicons", cat: "docs", url: "docs/axicons.html" },
     { title: "Animations", cat: "docs", url: "docs/animations.html" },
+    { title: "Audio Component Suite", cat: "docs", url: "docs/audio-components.html" },
     { title: "Colors & Tokens", cat: "docs", url: "docs/colors-advanced.html" },
     { title: "Components Overview", cat: "docs", url: "docs/components-overview.html" },
+    { title: "Extensions Architecture", cat: "docs", url: "docs/extensions.html" },
     { title: "Form Elements", cat: "docs", url: "docs/form-elements.html" },
     { title: "Integrations", cat: "docs", url: "docs/integrations.html" },
     { title: "Layout", cat: "docs", url: "docs/layout-advanced.html" },
+    { title: "Live Performance Case Study", cat: "docs", url: "docs/case-study-live-performance.html" },
     { title: "Media", cat: "docs", url: "docs/media-advanced.html" },
     { title: "Overview & Quickstart", cat: "docs", url: "docs/overview-quickstart.html" },
     { title: "Responsive Design", cat: "docs", url: "docs/responsive-design-guide.html" },
     { title: "Styling Guide", cat: "docs", url: "docs/styling-guide.html" },
-    { title: "Typography", cat: "docs", url: "docs/typography-advanced.html" }
+    { title: "Typography", cat: "docs", url: "docs/typography-advanced.html" },
+    { title: "Custom Web Fonts", cat: "docs", url: "docs/fonts.html" }
   ];
 
     // Helper function to apply theme
