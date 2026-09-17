@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Extensions &amp; Addons Architecture - Axiom01</title>
+	<script>
+		(function () {
+			const theme = localStorage.getItem("theme");
+			if (theme) {
+				document.documentElement.setAttribute("data-theme", theme);
+			} else {
+				const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+				document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+			}
+		})();
+	</script>
+	<link rel="icon" type="image/x-icon" href="../favicon/favicon.ico">
+	<link rel="stylesheet" href="../css/axiom.css">
+	<link rel="stylesheet" href="../css/axicons.css">
+	<link rel="stylesheet" href="../css/site.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	<!-- doc-styles.css merged into axiom.css -->
+	<style>
+		.arch-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: var(--a-space-l);
+			margin: var(--a-space-l) 0;
+		}
+		pre.code-block {
+			background: #030712;
+			padding: var(--a-space-m);
+			border-radius: var(--a-border-radius-base);
+			border: 1px solid var(--a-color-outline);
+			font-family: var(--a-font-family-mono);
+			font-size: 0.85rem;
+			overflow-x: auto;
+			color: #e2e8f0;
+			line-height: 1.5;
+			margin: var(--a-space-m) 0;
+		}
+	</style>
+</head>
+<body class="axiom-body">
+<a class="skip" href="#main-content">Skip to main content</a>
+
+<header class="main" data-component="mobile-navbar">
+	<nav role="navigation" aria-label="Main Navigation">
+		<a href="../index.html" class="brand" aria-label="Axiom01 Home">ax[10]m</a>
+		<ul class="links">
+			<li><a href="overview-quickstart.html">Get Started</a></li>
+			<li><a href="components-overview.html">Docs</a></li>
+			<li><a href="axicons.html">Axicons</a></li>
+			<li><a href="extensions.html" class="active" aria-current="page">Extensions</a></li>
+			<li><a href="case-study-live-performance.html">Case Study</a></li>
+			<li><a href="fonts.html">Fonts</a></li>
+		</ul>
+		<div class="actions">
+			<button class="search toggle" aria-label="Open Search">
+				<span class="axicon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><circle cx="52" cy="52" r="40" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M80 80l32 32" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+			<button class="theme toggle" id="theme-toggle" aria-label="Toggle dark mode">
+				<span class="axicon moon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><path d="M96 76a40 40 0 1 1-64-32 40 40 0 0 0 64 32z" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+				<span class="axicon sun" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><circle cx="64" cy="64" r="32" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M64 8v16M64 104v16M24 64H8M120 64h-16M32 32l-16-16M112 112l-16-16M32 96l-16 16M112 32l-16-16" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+			<button class="menu toggle" aria-label="Toggle Menu">
+				<span class="axicon" aria-hidden="true"><svg viewBox="0 0 128 128" fill="none"><path d="M16 32h96M16 64h96M16 96h96" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			</button>
+		</div>
+	</nav>
+</header>
+
+<main id="main-content" class="container">
+	<section class="hero">
+		<span class="badge primary">ARCHITECTURE GUIDE</span>
+		<h1>Axiom01 Extensions &amp; Addons</h1>
+		<p style="font-size: 1.15rem; color: var(--a-color-on-surface-variant); max-width: 70ch;">
+			How modular domain-specific extension packs bring specialized hardware, audio, and stage telemetry capabilities to Axiom01 while preserving a featherweight ~15KB core footprint.
+		</p>
+	</section>
+
+	<!-- Section 1: Philosophy -->
+	<section>
+		<h2>1. Why Extensions? The Core vs. Domain Philosophy</h2>
+		<p>
+			Axiom01 is founded on the principle of <strong>Zero Bloat</strong> and minimal class density (<em>D<sub>c</sub> &le; 1</em>). The core framework provides general-purpose semantic primitives (typography, layout grids, buttons, cards, forms, tables, modals) for modern web applications, compressing down to ~15KB gzipped.
+		</p>
+		<p>
+			However, creative and technical industries have specialized interface requirements. For example, live concert systems, synthesizers, and DJ software require polar coordinate Camelot harmonic wheels, ballistic LED peak meters, 16-pad tactile matrices, and live stage teleprompter HUDs.
+		</p>
+		<p>
+			Bundling these niche components directly into Axiom01 Core would penalize general web developers with unneeded CSS and JavaScript bytes. Instead, Axiom01 utilizes a <strong>Modular Extension Pack</strong> architecture:
+		</p>
+		<div class="arch-grid">
+			<article class="card">
+				<header>
+					<h3>Axiom01 Core</h3>
+				</header>
+				<p>Base semantic resets, design tokens, typography, standard components, and layout utilities. Zero external dependencies.</p>
+				<footer>
+					<small style="color: var(--a-color-primary); font-weight: 700;">~15KB Gzipped &middot; General Web</small>
+				</footer>
+			</article>
+			<article class="card">
+				<header>
+					<h3>@axiom01/audio Extension</h3>
+				</header>
+				<p>Pro-audio faders, LED peak meters, Camelot harmonic polar wheel, tactile MPC pad grids, and live teleprompter HUDs.</p>
+				<footer>
+					<small style="color: var(--a-color-secondary); font-weight: 700;">Modular Pack &middot; Live Performance</small>
+				</footer>
+			</article>
+		</div>
+	</section>
+
+	<!-- Section 2: Repository & Monorepo Structure -->
+	<section>
+		<h2>2. Where Do Extensions Live? Monorepo Architecture</h2>
+		<p>
+			Axiom01 is maintained as an open-source <strong>monorepo</strong> hosted on GitHub at <a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener"><strong>github.com/Sol-Roth-Media/axiom01</strong></a>.
+		</p>
+		<p>Inside the repository, modular packages are organized under the <code>packages/</code> directory:</p>
+		<pre class="code-block">axiom01/
+├── css/
+│   ├── axiom.css              # Unified build (Core + Components)
+│   ├── axiom-core.css         # Lightweight standalone core
+│   └── axiom-audio.css        # Pro-audio extension stylesheet
+├── js/
+│   ├── axiom.js               # Core component lifecycle engine
+│   └── axiom-audio.js         # Audio runtime helpers (CamelotWheel, VUMeter)
+└── packages/
+    ├── core/                  # @axiom01/core standalone package
+    │   ├── package.json
+    │   └── css/
+    └── audio/                 # @axiom01/audio standalone extension package
+        ├── package.json
+        ├── css/
+        └── js/</pre>
+	</section>
+
+	<!-- Section 3: Installation & NPM Packages -->
+	<section>
+		<h2>3. How to Get &amp; Install Extensions</h2>
+		<p>All extensions are published and distributed through the official <strong><code>axiom01</code></strong> package on the NPM registry, as well as via CDN and direct Git submodule inclusion.</p>
+
+		<h3>Method A: Via NPM (Recommended)</h3>
+		<p>Install the unified package in your project:</p>
+		<pre class="code-block"><code class="language-bash">npm install axiom01</code></pre>
+
+		<p>In your HTML or application bundler (Vite, Webpack, Next.js), import Core along with the Audio Extension:</p>
+		<pre class="code-block"><code class="language-html">&lt;!-- Include Core Design System --&gt;
+&lt;link rel="stylesheet" href="node_modules/axiom01/css/axiom.min.css"&gt;
+
+&lt;!-- Include Pro Audio Extension --&gt;
+&lt;link rel="stylesheet" href="node_modules/axiom01/css/axiom-audio.min.css"&gt;
+
+&lt;!-- Optional: Include Audio JavaScript Helpers --&gt;
+&lt;script type="module"&gt;
+  import { CamelotWheel, VUMeter } from './node_modules/axiom01/js/axiom-audio.js';
+  
+  // Attach polar harmonic routing to Camelot wheel
+  CamelotWheel.attach(document.querySelector('.wheel'), (key, details) =&gt; {
+    console.log('Harmonic match:', key, details);
+  });
+&lt;/script&gt;</code></pre>
+
+		<h3>Method B: Direct CDN / GitHub Pages</h3>
+		<p>For zero-build environments, load directly from the official CDN:</p>
+		<pre class="code-block"><code class="language-html">&lt;!-- Axiom01 Core CSS --&gt;
+&lt;link rel="stylesheet" href="https://sol-roth-media.github.io/axiom01/css/axiom.min.css"&gt;
+
+&lt;!-- Pro Audio Extension Pack CSS --&gt;
+&lt;link rel="stylesheet" href="https://sol-roth-media.github.io/axiom01/css/axiom-audio.min.css"&gt;
+
+&lt;!-- Audio Extension Runtime Helpers --&gt;
+&lt;script src="https://sol-roth-media.github.io/axiom01/js/axiom-audio.js"&gt;&lt;/script&gt;</code></pre>
+	</section>
+
+	<!-- Section 4: Provenance -->
+	<section>
+		<h2>4. Provenance: Battle-Tested in Live Concert Performance</h2>
+		<p>
+			The <code>@axiom01/audio</code> extension was not conceived as an abstract exercise. It was engineered and forged in production for the <strong>Sol Roth DJ Live Performance &amp; Stage OS</strong>.
+		</p>
+		<p>
+			During live festival and club sets, latency is catastrophic. The live performance system drives:
+		</p>
+		<ul>
+			<li><strong>Stage Prompter HUD:</strong> Auto-scrolling lyrics and live scene prompts locked to 16-bar musical phrasing.</li>
+			<li><strong>Deck Telemetry:</strong> Real-time BPM tracking, Camelot key detection, and waveform meters across 4 active decks.</li>
+			<li><strong>Master 3D Visualizer:</strong> GPU-accelerated Three.js WebGL rendering at a locked 60 FPS on monumental stage LED walls.</li>
+			<li><strong>Multi-Window Sync:</strong> Sub-millisecond state broadcasting across multiple screens and remote mobile VJ controllers.</li>
+		</ul>
+		<p>
+			Read the full breakdown in our <a href="case-study-live-performance.html" style="color: var(--a-color-primary); font-weight: 700;">Live Performance Production Case Study &rarr;</a>
+		</p>
+	</section>
+
+	<!-- Section 5: Authoring Specifications -->
+	<section>
+		<h2>5. Authoring Axiom01 Extensions: The Specification</h2>
+		<p>Community and domain-specific extensions must adhere strictly to the <strong>Axiom01 Design Ethos</strong>:</p>
+		<ol>
+			<li><strong>Minimal Class Density (<em>D<sub>c</sub> &le; 1</em>):</strong> Exactly one class on the component's root semantic element (e.g. <code>&lt;nav class="padgrid"&gt;</code>, <code>&lt;section class="prompter"&gt;</code>, <code>&lt;article class="card deck"&gt;</code>).</li>
+			<li><strong>Native Semantic HTML:</strong> Style directly on native elements: <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;progress&gt;</code>, <code>&lt;kbd&gt;</code>.</li>
+			<li><strong>Zero BEM &amp; Zero Utility Classes:</strong> No <code>axiom-*</code> prefixes, no <code>*-header</code> or <code>*-button</code> suffixes, and zero utility chains.</li>
+			<li><strong>Custom Property Integration:</strong> Use the unified Axiom01 token namespace (<code>--a-color-*</code>, <code>--a-space-*</code>, <code>--a-border-radius-*</code>).</li>
+		</ol>
+		<p style="margin-top: var(--a-space-l);">
+			<a href="audio-components.html" class="button primary">Explore Audio Components Guide &rarr;</a>
+		</p>
+	</section>
+</main>
+
+<footer class="main">
+	<div class="content">
+		<div class="brand">
+			<a href="../index.html" class="logo">ax[10]m</a>
+			<p class="tagline">The Semantic Web, Reimagined.</p>
+			<p class="muted tagline-meta">v<span data-release-version>3.2.1</span> &middot; <span data-release-components>83</span> Components &middot; <span data-release-tokens>149</span> Tokens</p>
+		</div>
+
+		<div class="column">
+			<h4>Product</h4>
+			<ul>
+				<li><a href="components-overview.html">All Components</a></li>
+				<li><a href="axicons.html">Icon Library</a></li>
+				<li><a href="colors-advanced.html">Colors &amp; Tokens</a></li>
+				<li><a href="audio-components.html">Audio Pack</a></li>
+				<li><a href="overview-quickstart.html">Get Started</a></li>
+			</ul>
+		</div>
+
+		<div class="column">
+			<h4>Resources</h4>
+			<ul>
+				<li><a href="extensions.html" aria-current="page">Extensions Guide</a></li>
+				<li><a href="case-study-live-performance.html">Case Study</a></li>
+				<li><a href="styling-guide.html">Styling Guide</a></li>
+				<li><a href="developer-guide.html">Developer Guide</a></li>
+				<li><a href="https://github.com/Sol-Roth-Media/axiom01/blob/main/README.md" target="_blank" rel="noopener">README</a></li>
+			</ul>
+		</div>
+
+		<div class="column">
+			<h4>Community</h4>
+			<ul>
+				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener">GitHub Repository</a></li>
+				<li><a href="https://github.com/Sol-Roth-Media/axiom01/issues" target="_blank" rel="noopener">Report Issues</a></li>
+				<li><a href="https://www.solroth.com" target="_blank" rel="noopener">Creator: Sol Roth</a></li>
+				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener">NPM Package</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="bottom">
+			<p class="copyright">&copy; <span data-current-year>2026</span> <strong>Sol Roth Media</strong>. Released under <strong>MIT License</strong>.</p>
+			<ul class="legal">
+				<li><a href="https://github.com/Sol-Roth-Media/axiom01" target="_blank" rel="noopener" aria-label="GitHub Repository"><span class="axicon render" data-name="GitHub"></span></a></li>
+				<li><a href="https://www.npmjs.com/package/axiom01" target="_blank" rel="noopener" aria-label="NPM Package"><span class="axicon render" data-name="NPM"></span></a></li>
+				<li><button id="scroll-to-top" class="scroll-top" data-scroll-top aria-label="Scroll to top"><span class="axicon render" data-name="Arrow-Up"></span></button></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+
+<script src="../js/axiom.js"></script>
+<script src="../js/index-page-manager.js"></script>
+<script src="../js/axicons-base.js"></script>
+<script src="../js/axicons-premium.js"></script>
+<script src="../js/render-icons.js"></script>
+</body>
+</html>
