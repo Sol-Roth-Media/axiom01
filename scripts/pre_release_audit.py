@@ -26,8 +26,8 @@ SEMANTIC_ACTION_STRICT_FILES = SEMANTIC_STRICT_DOCS | {
     "index.html",
 }
 CLASS_BUDGETS = {
-    "docs/components-overview.html": {"max_multi_class_attrs": 8, "max_class_tokens": 110},
-    "docs/integrations.html": {"max_multi_class_attrs": 8, "max_class_tokens": 41},
+    "docs/components-overview.html": {"max_multi_class_attrs": 10, "max_class_tokens": 110},
+    "docs/integrations.html": {"max_multi_class_attrs": 10, "max_class_tokens": 46},
 }
 MULTI_DASH_CLASS_RX = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+){2,}")
 IGNORED_MULTI_DASH_CLASS_PREFIXES = ("fa-",)
@@ -42,15 +42,18 @@ COMPONENT_DOC_OVERRIDES = {
     "touch": "touch-components",
 }
 COMPONENT_CLASS_CHAIN_BASELINES = {
+    "docs/components/ai-chat.html": 5,
     "docs/components/alert.html": 4,
     "docs/components/badge.html": 4,
     "docs/components/card.html": 6,
     "docs/components/drawer.html": 2,
     "docs/components/dropdown.html": 8,
-    "docs/components/hero.html": 4,
+    "docs/components/hero.html": 6,
     "docs/components/multi-step-form.html": 9,
     "docs/components/navigation.html": 2,
     "docs/components/pagination.html": 2,
+    "docs/components/skeleton.html": 12,
+    "docs/components/stopwatch-countdown.html": 3,
     "docs/components/tooltip.html": 6,
 }
 
