@@ -2,6 +2,27 @@
 
 All notable changes to `axiom01` are documented in this file.
 
+## [3.1.0] - 2026-09-16
+
+### Added
+- **Live Performance Component Suite**: Added official semantic components for stage and live performance environments:
+  - `<aside class="dock">`: Floating, hardware-aligned dock with contextual status pills and action navigation.
+  - `<section class="prompter">`: Ultra-high-contrast teleprompter with auto-scroll, dynamic font sizing, and stage status.
+  - `<div class="padgrid">`: 16-pad hardware performance matrix matching DDJ-FLX10, FLX2, and M-VAVE MIDI controllers.
+  - `<div class="wheel">`: Audio-reactive Camelot musical wheel and pitch telemetry indicator.
+  - `<article class="card deck">` and `<article class="card scene">`: Live performance deck telemetry and VJ scene modifiers adhering to $D_c \le 1$.
+- **Axifonts Web Typography Engine**: High-performance font loader providing zero-layout-shift Cyrillic, Greek, Latin Extended glyphs and JetBrains Mono for telemetry readouts.
+- **Mobile Landscape Telemetry**: Added horizontal momentum-scrollable deck selector and header action bar with split prompter view for live phone and tablet stage workflows.
+- **Web MIDI Transient FX Engine & Pad Safety Protection**:
+  - Configurable pad mode: Transient visual bursts (`fx`), pad hit isolation (`ignore`), and 3-second cooldown scene transitions (`scene`).
+  - Native browser Web MIDI hardware bridge connecting Pioneer DDJ-FLX10, FLX2, and M-VAVE controllers directly to Three.js stage visualizer.
+- **Volumetric Laser Stage Festival Visualizer**:
+  - Overhauled Scene 8 (`Scene8_PrismLasers`) with multi-beam volumetric laser fan projectors, center-stage laser prism cones, architectural FOH barrier with cyan hazard edge glow, and 750 sparkling arena wristband light points.
+
+### Changed
+- Migrated canonical documentation domain from `axiom01.com` to `https://sol-roth-media.github.io/axiom01/` across all documentation and READMEs.
+- Updated total component count to 83 core components.
+
 ## [3.0.0] - 2026-07-03
 
 ### Major Features
