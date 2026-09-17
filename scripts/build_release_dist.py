@@ -71,10 +71,20 @@ def main() -> int:
         # Build static website payload for gh-pages deployment.
         copy_required(ROOT / "index.html", DIST / "index.html")
         copy_required(ROOT / "index.js", DIST / "index.js")
+        if (ROOT / ".nojekyll").exists():
+            copy_required(ROOT / ".nojekyll", DIST / ".nojekyll")
+        else:
+            (DIST / ".nojekyll").write_text("", encoding="utf-8")
         copy_tree_required(ROOT / "assets", DIST / "assets")
         copy_tree_required(ROOT / "docs", DIST / "docs")
         copy_tree_required(ROOT / "css", DIST / "css")
         copy_tree_required(ROOT / "js", DIST / "js")
+        if (ROOT / "packages").exists():
+            copy_tree_required(ROOT / "packages", DIST / "packages")
+        if (ROOT / "favicon").exists():
+            copy_tree_required(ROOT / "favicon", DIST / "favicon")
+        if (ROOT / "fonts").exists():
+            copy_tree_required(ROOT / "fonts", DIST / "fonts")
 
         print("Built release dist artifacts:")
         print(f"- {DIST / 'index.html'}")
