@@ -2,6 +2,16 @@
 
 All notable changes to `axiom01` are documented in this file.
 
+## [3.2.0] - 2026-09-17
+
+### Added
+- **Modular Package Architecture**: Split Axiom01 into standalone packages:
+  - `@axiom01/core`: Minimalist semantic base framework ($D_c \le 1$, zero utility classes, dark-mode native).
+  - `@axiom01/audio`: Dedicated live performance and DJ component suite (`<aside class="dock">`, `<section class="prompter">`, `<div class="padgrid">`, `<div class="wheel">`, Web MIDI transient FX bridge).
+- **Live Concert Audio-Visual Case Study**: Published in-depth engineering case study at `docs/case-study-live-performance.html` detailing Sol Roth headline festival performance OS, 60 FPS WebGL 3D visualizer integration, and hardware MIDI bindings.
+- **Audio Component Documentation**: Published complete reference documentation for all audio components at `docs/audio-components.html`.
+- **Distribution Packaging**: Added `packages/` export to release bundle and automated build pipeline.
+
 ## [3.1.0] - 2026-09-16
 
 ### Added
