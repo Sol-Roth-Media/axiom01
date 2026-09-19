@@ -86,7 +86,7 @@ Reference: [Axiom01 Documentation Site](https://sol-roth-media.github.io/axiom01
 ## 3. Extending Existing Components vs Creating New Ones
 
 1. **Check Existing Components First**:
-   - `axiom01` already provides 79 core components (e.g. `card`, `button`, `badge`, `modal`, `tabs`, `table`, `hero`, `grid`).
+   - `axiom01` already provides 83 core components (e.g. `card`, `button`, `badge`, `modal`, `tabs`, `table`, `hero`, `grid`).
    - If a UI element is conceptually a card, **extend `card` with a single modifier**:
      `<article class="card deck">` or `<article class="card scene">`.
 2. **When Creating a Truly New Component**:

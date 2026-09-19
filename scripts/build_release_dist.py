@@ -70,7 +70,6 @@ def main() -> int:
 
         # Build static website payload for gh-pages deployment.
         copy_required(ROOT / "index.html", DIST / "index.html")
-        copy_required(ROOT / "index.js", DIST / "index.js")
         if (ROOT / ".nojekyll").exists():
             copy_required(ROOT / ".nojekyll", DIST / ".nojekyll")
         else:
@@ -103,4 +102,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

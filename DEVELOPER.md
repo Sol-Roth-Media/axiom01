@@ -59,7 +59,7 @@ Starting a website with Axiom01 means writing standard HTML. Notice the complete
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Axiom01 Site</title>
   
-  <link rel="stylesheet" href="node_modules/axiom01/dist/axiom01.min.css">
+  <link rel="stylesheet" href="node_modules/axiom01/css/axiom.min.css">
 </head>
 <body class="axiom-body">
 
@@ -96,7 +96,7 @@ Starting a website with Axiom01 means writing standard HTML. Notice the complete
     </section>
   </main>
 
-  <script src="node_modules/axiom01/dist/axiom01.min.js"></script>
+  <script src="node_modules/axiom01/js/axiom.min.js"></script>
 </body>
 </html>
 ```
