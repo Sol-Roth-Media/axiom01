@@ -11,8 +11,8 @@ npm install axiom01
 ### Via CDN
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axiom01/dist/css/axiom.min.css">
-<script src="https://cdn.jsdelivr.net/npm/axiom01/dist/js/axiom.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axiom01/css/axiom.min.css">
+<script src="https://cdn.jsdelivr.net/npm/axiom01/js/axiom.min.js"></script>
 ```
 
 ### Via Git
@@ -440,4 +440,3 @@ axiom01/
 ## License
 
 AXIOM01 is released under the MIT License.
-

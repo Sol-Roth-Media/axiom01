@@ -31,7 +31,7 @@ Interactive component demos live in the `docs/components/` folder and are browsa
 
 - [Components Overview](./components-overview.html)
 
-The current public docs set covers **79 production-ready components**.
+The current public docs set covers **83 production-ready components**.
 
 ## Recommended reading paths
 
@@ -54,7 +54,7 @@ The current public docs set covers **79 production-ready components**.
 
 - **Version:** 2.2.3
 - **Release date:** July 2, 2026
-- **Components:** 79
+- **Components:** 83
 - **Design tokens:** 149
 - **Core CSS (`css/axiom.min.css`)**: 87.8 KB minified / 15.3 KB gzipped
 - **Optional runtime (`js/axiom.min.js`)**: 14.6 KB minified / 3.9 KB gzipped
